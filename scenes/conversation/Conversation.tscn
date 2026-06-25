@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://hghqnmbok55t"]
 
+[ext_resource type="Script" uid="uid://bmwx225q8jlsk" path="res://scenes/conversation/conversation.gd" id="1_swh16"]
+
 [node name="Conversation" type="Control" unique_id=393705888]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +9,64 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_swh16")
+
+[node name="Background" type="ColorRect" parent="." unique_id=616402954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainLayout" type="VBoxContainer" parent="." unique_id=1935269617]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeaderBar" type="PanelContainer" parent="MainLayout" unique_id=1330912032]
+layout_mode = 2
+
+[node name="HeaderContent" type="HBoxContainer" parent="MainLayout/HeaderBar" unique_id=1297609347]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MainLayout/HeaderBar/HeaderContent" unique_id=681322488]
+layout_mode = 2
+
+[node name="HeaderTitle" type="Label" parent="MainLayout/HeaderBar/HeaderContent" unique_id=2090702329]
+layout_mode = 2
+text = "Conversation"
+
+[node name="AudioButton" type="Button" parent="MainLayout/HeaderBar/HeaderContent" unique_id=1020383883]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=1131021853]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentLayout" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=1583681460]
+layout_mode = 2
+
+[node name="ConversationImage" type="TextureRect" parent="MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
+layout_mode = 2
+
+[node name="IntroLabel" type="Label" parent="MainLayout/ScrollContainer/ContentLayout" unique_id=1426285093]
+layout_mode = 2
+
+[node name="LinesContainer" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
+layout_mode = 2
+
+[node name="QuestionsSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentLayout" unique_id=1136462616]
+layout_mode = 2
+
+[node name="QuestionsTitle" type="Label" parent="MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=939271501]
+layout_mode = 2
+text = "Think About It"
+
+[node name="QuestionsContainer" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=1386943664]
+layout_mode = 2
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]
