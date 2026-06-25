@@ -53,6 +53,10 @@ corner_radius_top_left = 70
 corner_radius_top_right = 70
 corner_radius_bottom_right = 70
 corner_radius_bottom_left = 70
+expand_margin_left = 30.0
+expand_margin_top = 20.0
+expand_margin_right = 30.0
+expand_margin_bottom = 20.0
 
 [sub_resource type="SystemFont" id="SystemFont_qmweu"]
 font_names = PackedStringArray("2  Farnaz")
@@ -215,7 +219,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_fonts/font = SubResource("SystemFont_wckin")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_6gdku")
 text = " ▶ از اینجا ادامه دهید"
 
