@@ -47,8 +47,8 @@ const SECTION_ACCENT_COLORS := [
 	Color("#0D9488"),  # teal
 ]
 
-@onready var back_button: Button              = $MainLayout/InnerLayout/TopBar/BackButton
-@onready var top_bar_title: Label             = $MainLayout/InnerLayout/TopBar/TopBarTitle
+@onready var back_button: Button              = $PanelContainer/TopBar/BackButton
+@onready var top_bar_title: Label             = $PanelContainer/TopBar/TopBarTitle
 @onready var lesson_subtitle: Label           = $MainLayout/InnerLayout/LessonSubtitle
 @onready var sections_container: VBoxContainer = $MainLayout/InnerLayout/SectionsContainer
 
@@ -59,7 +59,7 @@ func _ready() -> void:
 	var book: int   = Global.current_book
 	var lesson: int = Global.current_lesson
 
-	top_bar_title.text  = "Vision %d  —  Lesson %d" % [book, lesson]
+	top_bar_title.text  = "Lesson %d" % [lesson]
 	lesson_subtitle.text = _get_lesson_title(book, lesson)
 
 	_build_section_buttons()
@@ -105,7 +105,7 @@ func _build_section_buttons() -> void:
 		hover_style.bg_color = SECTION_ACCENT_COLORS[i].lightened(0.75)
 		btn.add_theme_stylebox_override("hover", hover_style)
 
-		btn.add_theme_font_size_override("font_size", 20)
+		btn.add_theme_font_size_override("font_size", 60)
 		btn.add_theme_color_override("font_color", Color("#1E293B"))
 
 		btn.pressed.connect(_on_section_pressed.bind(scene_key))

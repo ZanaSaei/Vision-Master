@@ -42,14 +42,14 @@ const BOOK_BG_COLORS := {
 	3: Color("#FFF7ED"),
 }
 
-@onready var back_button: Button          = $MainLayout/InnerLayout/TopBar/BackButton
-@onready var top_bar_title: Label         = $MainLayout/InnerLayout/TopBar/TopBarTitle
+@onready var back_button: Button          = $PanelContainer/TopBar/BackButton
+@onready var top_bar_title: Label         = $PanelContainer/TopBar/TopBarTitle
 @onready var lessons_container: VBoxContainer = $MainLayout/InnerLayout/LessonsContainer
 
 
 func _ready() -> void:
-	back_button.pressed.connect(_on_back_pressed)
-
+	back_button.button_up.connect(_on_back_button_pressed)
+	
 	var book: int = Global.current_book
 	top_bar_title.text = "Vision %d" % book
 
@@ -83,7 +83,7 @@ func _build_lesson_buttons(book: int) -> void:
 		hover_style.bg_color = accent_color.lightened(0.7)
 		btn.add_theme_stylebox_override("hover", hover_style)
 
-		btn.add_theme_font_size_override("font_size", 20)
+		btn.add_theme_font_size_override("font_size", 55)
 		btn.add_theme_color_override("font_color", Color("#1E293B"))
 
 		# bind(i + 1) so lesson number starts at 1
@@ -96,6 +96,5 @@ func _on_lesson_pressed(lesson_number: int) -> void:
 	Global.current_lesson = lesson_number
 	get_tree().change_scene_to_file(SCENE_LESSON_MENU)
 
-
-func _on_back_pressed() -> void:
+func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file(SCENE_MAIN_MENU)

@@ -1,6 +1,28 @@
 [gd_scene format=3 uid="uid://b3oum2gxq8i63"]
 
 [ext_resource type="Script" uid="uid://de26svg4ih2vq" path="res://scenes/lesson_menu/lesson_menu.gd" id="1_bix6w"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_eo0tv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vrhx"]
+bg_color = Color(0.14509805, 0.3882353, 0.92156863, 1)
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+
+[sub_resource type="SystemFont" id="SystemFont_eo0tv"]
+font_names = PackedStringArray("Times New Roman")
+
+[sub_resource type="LabelSettings" id="LabelSettings_bix6w"]
+font = SubResource("SystemFont_eo0tv")
+font_size = 68
+
+[sub_resource type="SystemFont" id="SystemFont_ln7tq"]
+font_names = PackedStringArray("Times New Roman")
+
+[sub_resource type="LabelSettings" id="LabelSettings_eo0tv"]
+font = SubResource("SystemFont_ln7tq")
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+outline_size = 15
 
 [node name="LessonMenu" type="Control" unique_id=801764532]
 layout_mode = 3
@@ -18,6 +40,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 1, 1, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1246997477]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1vrhx")
+
+[node name="TopBar" type="HBoxContainer" parent="PanelContainer" unique_id=284333027]
+layout_mode = 2
+theme_override_constants/separation = 483
+alignment = 1
+
+[node name="BackButton" type="Button" parent="PanelContainer/TopBar" unique_id=1936001649]
+layout_mode = 2
+icon = ExtResource("2_eo0tv")
+flat = true
+
+[node name="TopBarTitle" type="Label" parent="PanelContainer/TopBar" unique_id=175149507]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_bix6w")
 
 [node name="MainLayout" type="MarginContainer" parent="." unique_id=208491569]
 layout_mode = 1
@@ -26,8 +71,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
+theme_override_constants/margin_top = 240
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
@@ -35,28 +81,16 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="TopBar" type="HBoxContainer" parent="MainLayout/InnerLayout" unique_id=284333027]
-layout_mode = 2
-alignment = 1
-
-[node name="BackButton" type="Button" parent="MainLayout/InnerLayout/TopBar" unique_id=1936001649]
-layout_mode = 2
-text = "Back"
-
-[node name="TopBarSpacer" type="Control" parent="MainLayout/InnerLayout/TopBar" unique_id=2011535715]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TopBarTitle" type="Label" parent="MainLayout/InnerLayout/TopBar" unique_id=175149507]
-layout_mode = 2
-
 [node name="LessonSubtitle" type="Label" parent="MainLayout/InnerLayout" unique_id=444510277]
 layout_mode = 2
 text = "Saving Nature"
+label_settings = SubResource("LabelSettings_eo0tv")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SectionsContainer" type="VBoxContainer" parent="MainLayout/InnerLayout" unique_id=1859764807]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 120
 
 [node name="BottomSpacer" type="Control" parent="MainLayout/InnerLayout" unique_id=1927847907]
 layout_mode = 2
