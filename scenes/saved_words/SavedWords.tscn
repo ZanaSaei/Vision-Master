@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://deve4kxamx2df"]
+
+[ext_resource type="Script" uid="uid://bohbhtc8jn1ln" path="res://scenes/saved_words/saved_words.gd" id="1_cfgum"]
+
+[node name="SavedWords" type="Control" unique_id=1954587360]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cfgum")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1807694606]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EmptyState" type="VBoxContainer" parent="." unique_id=770160139]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EmptyIcon" type="Label" parent="EmptyState" unique_id=1410395118]
+layout_mode = 2
+
+[node name="EmptyTitle" type="Label" parent="EmptyState" unique_id=1872871608]
+layout_mode = 2
+theme_override_font_sizes/font_size = 107
+text = "Empty"
+horizontal_alignment = 1
+
+[node name="EmptySubtitle" type="Label" parent="EmptyState" unique_id=1810149571]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="EmptyState" unique_id=1614558577]
+layout_mode = 2
+theme_override_font_sizes/font_size = 55
+text = "Back"

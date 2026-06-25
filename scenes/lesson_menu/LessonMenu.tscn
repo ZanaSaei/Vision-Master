@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://b3oum2gxq8i63"]
+
+[ext_resource type="Script" uid="uid://de26svg4ih2vq" path="res://scenes/lesson_menu/lesson_menu.gd" id="1_bix6w"]
+
+[node name="LessonMenu" type="Control" unique_id=801764532]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bix6w")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1598437601]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainLayout" type="MarginContainer" parent="." unique_id=208491569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="InnerLayout" type="VBoxContainer" parent="MainLayout" unique_id=1011622441]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TopBar" type="HBoxContainer" parent="MainLayout/InnerLayout" unique_id=284333027]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" type="Button" parent="MainLayout/InnerLayout/TopBar" unique_id=1936001649]
+layout_mode = 2
+text = "Back"
+
+[node name="TopBarSpacer" type="Control" parent="MainLayout/InnerLayout/TopBar" unique_id=2011535715]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopBarTitle" type="Label" parent="MainLayout/InnerLayout/TopBar" unique_id=175149507]
+layout_mode = 2
+
+[node name="LessonSubtitle" type="Label" parent="MainLayout/InnerLayout" unique_id=444510277]
+layout_mode = 2
+text = "Saving Nature"
+
+[node name="SectionsContainer" type="VBoxContainer" parent="MainLayout/InnerLayout" unique_id=1859764807]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="BottomSpacer" type="Control" parent="MainLayout/InnerLayout" unique_id=1927847907]
+layout_mode = 2
+size_flags_vertical = 3

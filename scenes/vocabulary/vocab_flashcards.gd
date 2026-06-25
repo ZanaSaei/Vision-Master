@@ -1,0 +1,411 @@
+extends Control
+
+# ============================================================
+#  VOCAB FLASHCARDS — handles both LESSON and SAVED modes.
+#
+#  LESSON mode (Global.flashcard_mode == "lesson"):
+#    - Loads words from the current lesson's JSON
+#    - Header: back arrow + audio button
+#    - Bottom nav: 📖 home | ☰ lesson list | ⚙ settings
+#    - Heart: toggles save / unsave
+#
+#  SAVED mode (Global.flashcard_mode == "saved"):
+#    - Loads all words from Global.get_saved_words()
+#    - Header: back arrow (audio button hidden)
+#    - Bottom nav: 📖 home | 🗑 Remove Word | 📝 Quiz
+#    - Heart: static filled indicator (word is saved)
+# ============================================================
+
+enum Mode { LESSON, SAVED }
+
+var word_list: Array     = []
+var current_index: int   = 0
+var current_book: int    = 0
+var current_lesson: int  = 0
+var vocab_audio_filename := ""
+var mode: Mode           = Mode.LESSON
+var is_flipped: bool     = false
+var is_animating: bool   = false
+
+# ---------- Dot constants (now ints to avoid narrowing warnings) ----------
+const DOT_ACTIVE_W   := 24
+const DOT_INACTIVE_W := 14
+const DOT_HEIGHT     := 6
+const DOT_RADIUS     := 3
+const DOT_ACTIVE_COLOR   := Color("#2563EB")
+const DOT_INACTIVE_COLOR := Color("#CBD5E1")
+
+
+# ---------- Scene paths ----------
+const SCENE_MAIN_MENU      := "res://scenes/main_menu/MainMenu.tscn"
+const SCENE_LESSON_MENU    := "res://scenes/lesson_menu/LessonMenu.tscn"
+const SCENE_SETTINGS       := "res://scenes/settings/Settings.tscn"
+const SCENE_QUIZ           := "res://scenes/quiz/Quiz.tscn"
+const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
+
+# ---------- Node references ----------
+@onready var progress_dots: HBoxContainer      = $MainLayout/ProgressBackground/ProgressDotsContainer
+@onready var card_panel: PanelContainer        = $MainLayout/CardScrollContainer/CardMargin/CardPanel
+
+@onready var front_face: CenterContainer       = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace
+@onready var front_word_label: Label           = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace/WordLabel
+
+@onready var back_face: VBoxContainer          = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace
+@onready var back_word_label: Label            = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/BackWordLabel
+@onready var meaning_en_label: Label           = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent/MeaningEnLabel
+@onready var meaning_fa_label: Label           = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
+@onready var example_label: Label              = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
+
+@onready var prev_button: Button               = $MainLayout/PanelContainer/BottomControls/PrevButton
+@onready var save_button: Button               = $MainLayout/PanelContainer/BottomControls/SaveButton
+@onready var next_button: Button               = $MainLayout/PanelContainer/BottomControls/NextButton
+
+@onready var audio_button: Button              = $MainLayout/HeaderBar/HeaderContent/AudioButton
+@onready var back_nav_button: Button           = $MainLayout/HeaderBar/HeaderContent/BackButton
+
+@onready var nav_book: TextureButton                  = $MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavBook
+@onready var nav_list: TextureButton                   = $MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavList
+@onready var nav_settings: TextureButton               = $MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavSettings
+
+@onready var save_inactive = preload("res://images/save_button.png")
+@onready var save_active = preload("res://images/saved_button.png")
+
+@onready var audio_player: AudioStreamPlayer   = $AudioPlayer
+
+const FLIP_DURATION := 0.18
+
+
+func _ready() -> void:
+	# Wire static buttons
+	prev_button.pressed.connect(_on_prev_pressed)
+	next_button.pressed.connect(_on_next_pressed)
+	save_button.pressed.connect(_on_save_pressed)
+	audio_button.pressed.connect(_on_audio_pressed)
+	back_nav_button.pressed.connect(_on_back_pressed)
+	nav_book.pressed.connect(_on_nav_book_pressed)
+	card_panel.gui_input.connect(_on_card_input)
+
+	if Global.flashcard_mode == "saved":
+		_enter_saved_mode()
+	else:
+		_enter_lesson_mode()
+
+
+# ----------------------------------------------------------------
+#  MODE ENTRY POINTS
+# ----------------------------------------------------------------
+func _enter_lesson_mode() -> void:
+	mode = Mode.LESSON
+
+	# Header
+	audio_button.visible = true
+
+	# Bottom nav — standard
+	nav_list.pressed.connect(_on_nav_list_lesson_pressed)
+	nav_settings.pressed.connect(_on_nav_settings_lesson_pressed)
+
+	# Load data
+	var book: int   = Global.current_book
+	var lesson: int = Global.current_lesson
+	var lesson_data := Global.load_vocabulary(book, lesson)
+	var vocab_section: Dictionary = lesson_data.get("vocabulary", {})
+	var _lesson_title: String = lesson_data.get("title", "")   # now prefixed with _
+
+	setup(
+		vocab_section.get("words", []),
+		book, lesson,
+		vocab_section.get("audio", ""),
+		Mode.LESSON
+	)
+
+
+func _enter_saved_mode() -> void:
+	mode = Mode.SAVED
+
+	# Header — no audio in saved mode
+	audio_button.visible = false
+
+	# ----- Change nav icons for SAVED mode -----
+	# Replace "Lesson List" with "Remove Word" icon
+	nav_list.texture_normal = load("res://images/delete.png")   # <--- put your icon path
+	nav_list.texture_pressed = load("res://images/delete.png")
+	nav_list.tooltip_text = "Remove current word"
+	
+	# Replace "Settings" with "Quiz" icon
+	nav_settings.texture_normal = load("res://images/quiz.png") # <--- put your icon path
+	nav_settings.texture_pressed = load("res://images/quiz.png")
+	nav_settings.tooltip_text = "Start Quiz"
+
+	# Disconnect old lesson-mode signals (safety)
+	if nav_list.pressed.is_connected(_on_nav_list_lesson_pressed):
+		nav_list.pressed.disconnect(_on_nav_list_lesson_pressed)
+	if nav_settings.pressed.is_connected(_on_nav_settings_lesson_pressed):
+		nav_settings.pressed.disconnect(_on_nav_settings_lesson_pressed)
+
+	# Connect new saved-mode signals
+	nav_list.pressed.connect(_on_remove_word_pressed)
+	nav_settings.pressed.connect(_on_quiz_pressed)
+
+	# Heart becomes a static filled indicator in saved mode
+	save_button.icon    = save_active
+	save_button.modulate = Color("#EF4444")
+	save_button.disabled = true
+
+	var saved_copy = Global.get_saved_words().duplicate()
+	setup(saved_copy, 0, 0, "", Mode.SAVED)
+
+
+# ----------------------------------------------------------------
+#  PUBLIC SETUP
+# ----------------------------------------------------------------
+func setup(
+	words: Array,
+	book: int,
+	lesson: int,
+	audio_filename: String,
+	screen_mode: Mode = Mode.LESSON
+) -> void:
+	word_list            = words
+	current_book         = book
+	current_lesson       = lesson
+	vocab_audio_filename = audio_filename
+	mode                 = screen_mode
+	current_index        = 0
+	is_flipped           = false
+
+	_build_progress_dots()
+	_update_card(false)
+
+
+# ----------------------------------------------------------------
+#  PROGRESS DOTS
+# ----------------------------------------------------------------
+func _build_progress_dots() -> void:
+	for child in progress_dots.get_children():
+		child.queue_free()
+
+	# Cap visible dots so they don't overflow on large saved lists
+	var total: int = word_list.size()
+	var num_dots: int = min(total, 50)   # renamed from 'show'
+
+	for i in num_dots:
+		var dot := Panel.new()
+		var style := StyleBoxFlat.new()
+		style.corner_radius_top_left     = DOT_RADIUS
+		style.corner_radius_top_right    = DOT_RADIUS
+		style.corner_radius_bottom_left  = DOT_RADIUS
+		style.corner_radius_bottom_right = DOT_RADIUS
+		style.bg_color = DOT_ACTIVE_COLOR if i == current_index else DOT_INACTIVE_COLOR
+		dot.add_theme_stylebox_override("panel", style)
+		dot.custom_minimum_size = Vector2(
+			DOT_ACTIVE_W if i == current_index else DOT_INACTIVE_W,
+			DOT_HEIGHT
+		)
+		progress_dots.add_child(dot)
+
+
+func _update_progress_dots() -> void:
+	var dots := progress_dots.get_children()
+	for i in dots.size():
+		var dot: Panel = dots[i]
+		var style := StyleBoxFlat.new()
+		style.corner_radius_top_left     = DOT_RADIUS
+		style.corner_radius_top_right    = DOT_RADIUS
+		style.corner_radius_bottom_left  = DOT_RADIUS
+		style.corner_radius_bottom_right = DOT_RADIUS
+		style.bg_color = DOT_ACTIVE_COLOR if i == current_index else DOT_INACTIVE_COLOR
+		dot.add_theme_stylebox_override("panel", style)
+		dot.custom_minimum_size = Vector2(
+			DOT_ACTIVE_W if i == current_index else DOT_INACTIVE_W,
+			DOT_HEIGHT
+		)
+
+
+# ----------------------------------------------------------------
+#  CARD DISPLAY
+# ----------------------------------------------------------------
+func _update_card(animate: bool = false) -> void:
+	if word_list.is_empty():
+		_handle_empty_list()
+		return
+
+	var entry: Dictionary = word_list[current_index]
+
+	front_word_label.text = entry.get("word", "")
+	back_word_label.text  = entry.get("word", "")
+	meaning_en_label.text = entry.get("meaning_en", "")
+	meaning_fa_label.text = entry.get("meaning_fa", "")
+	example_label.text    = entry.get("example", "")
+
+	is_flipped = false
+
+	if animate:
+		_play_flip(false)
+	else:
+		_show_face(false)
+
+	_update_progress_dots()
+
+	if mode == Mode.LESSON:
+		_refresh_save_button(entry)
+
+
+func _handle_empty_list() -> void:
+	# All words removed from saved list — show the "no saved words" screen
+	if mode == Mode.SAVED:
+		get_tree().change_scene_to_file(SCENE_NO_SAVED_WORDS)
+	else:
+		# For lesson mode, this shouldn't happen, but we can fallback to main menu
+		get_tree().change_scene_to_file(SCENE_MAIN_MENU)
+
+
+func _refresh_save_button(entry: Dictionary) -> void:
+	if mode != Mode.LESSON:
+		return
+	var saved := Global.is_word_saved(
+		entry.get("word", ""), current_book, current_lesson
+	)
+	save_button.icon     = save_active if saved else save_inactive
+	save_button.disabled = false
+
+
+func _show_face(show_back: bool) -> void:
+	front_face.visible = not show_back
+	back_face.visible  = show_back
+
+
+# ----------------------------------------------------------------
+#  FLIP ANIMATION
+# ----------------------------------------------------------------
+func _play_flip(landing_on_back: bool) -> void:
+	if is_animating:
+		return
+	is_animating = true
+
+	card_panel.pivot_offset = Vector2(
+		card_panel.size.x / 2.0,
+		card_panel.size.y / 2.0
+	)
+
+	var tween := create_tween()
+
+	tween.tween_property(card_panel, "scale:x", 0.0, FLIP_DURATION) \
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+
+	tween.tween_callback(func(): _show_face(landing_on_back))
+
+	tween.tween_property(card_panel, "scale:x", 1.0, FLIP_DURATION) \
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+
+	tween.tween_callback(func(): is_animating = false)
+
+
+# ----------------------------------------------------------------
+#  INPUT
+# ----------------------------------------------------------------
+func _on_card_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton \
+			and event.button_index == MOUSE_BUTTON_LEFT \
+			and event.pressed:
+		_flip()
+	elif event is InputEventScreenTouch and event.pressed:
+		_flip()
+
+
+func _flip() -> void:
+	if is_animating or word_list.is_empty():
+		return
+	is_flipped = not is_flipped
+	_play_flip(is_flipped)
+
+
+func _on_prev_pressed() -> void:
+	if is_animating or word_list.is_empty():
+		return
+	current_index = (current_index - 1 + word_list.size()) % word_list.size()
+	_update_card(false)
+
+
+func _on_next_pressed() -> void:
+	if is_animating or word_list.is_empty():
+		return
+	current_index = (current_index + 1) % word_list.size()
+	_update_card(false)
+
+
+# ----------------------------------------------------------------
+#  SAVE / REMOVE (heart button)
+# ----------------------------------------------------------------
+func _on_save_pressed() -> void:
+	if mode != Mode.LESSON or word_list.is_empty():
+		return
+	var entry: Dictionary = word_list[current_index]
+	if Global.is_word_saved(entry.get("word", ""), current_book, current_lesson):
+		Global.remove_word(entry.get("word", ""), current_book, current_lesson)
+	else:
+		var data := entry.duplicate()
+		data["book"]   = current_book
+		data["lesson"] = current_lesson
+		Global.save_word(data)
+	_refresh_save_button(entry)
+
+
+# ----------------------------------------------------------------
+#  DEDICATED REMOVE (SAVED mode — 🗑 nav button)
+# ----------------------------------------------------------------
+func _on_remove_word_pressed() -> void:
+	if word_list.is_empty():
+		return
+	var entry : Dictionary = word_list[current_index]
+	Global.remove_word(
+		entry.get("word", ""),
+		entry.get("book", 0),
+		entry.get("lesson", 0)
+	)
+	word_list.remove_at(current_index)
+	if current_index >= word_list.size():
+		current_index = max(0, word_list.size() - 1)
+	_build_progress_dots()
+	_update_card(false)
+
+
+# ----------------------------------------------------------------
+#  AUDIO
+# ----------------------------------------------------------------
+func _on_audio_pressed() -> void:
+	if vocab_audio_filename == "":
+		return
+	var path := Global.get_audio_path(current_book, current_lesson, vocab_audio_filename)
+	if ResourceLoader.exists(path):
+		audio_player.stream = load(path)
+		audio_player.play()
+	else:
+		push_warning("Audio not found: " + path)
+
+
+# ----------------------------------------------------------------
+#  NAVIGATION
+# ----------------------------------------------------------------
+func _on_back_pressed() -> void:
+	Global.flashcard_mode = "lesson"
+	if mode == Mode.SAVED:
+		get_tree().change_scene_to_file(SCENE_MAIN_MENU)
+	else:
+		get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+
+
+func _on_nav_book_pressed() -> void:
+	Global.flashcard_mode = "lesson"
+	get_tree().change_scene_to_file(SCENE_MAIN_MENU)
+
+
+func _on_nav_list_lesson_pressed() -> void:
+	get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+
+
+func _on_nav_settings_lesson_pressed() -> void:
+	get_tree().change_scene_to_file(SCENE_SETTINGS)
+
+
+func _on_quiz_pressed() -> void:
+	get_tree().change_scene_to_file(SCENE_QUIZ)

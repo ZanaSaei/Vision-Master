@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://diqt2ff8xvv3h"]
+
+[ext_resource type="Script" uid="uid://drvqgo4f36upv" path="res://scripts/vocab_flashcards.gd" id="1_tpk77"]
+
+[sub_resource type="SystemFont" id="SystemFont_7ujfs"]
+font_names = PackedStringArray("2  Nazanin", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+
+[node name="VocabFlashcards" type="Control" unique_id=1932518125]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tpk77")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=506298741]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1285736024]
+layout_mode = 2
+
+[node name="LessonTitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1336574516]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Lesson 1"
+horizontal_alignment = 1
+
+[node name="ActionRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1526556917]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PlayAudioButton" type="Button" parent="MarginContainer/VBoxContainer/ActionRow" unique_id=142000238]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "تلفظ 🔊"
+
+[node name="ProgressLabel" type="Label" parent="MarginContainer/VBoxContainer/ActionRow" unique_id=106258030]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/ActionRow" unique_id=900237186]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "ذخیره کن ⭐"
+
+[node name="CardPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1181669308]
+custom_minimum_size = Vector2(0, 1500)
+layout_mode = 2
+
+[node name="CardContent" type="MarginContainer" parent="MarginContainer/VBoxContainer/CardPanel" unique_id=1839581439]
+layout_mode = 2
+
+[node name="FrontFace" type="CenterContainer" parent="MarginContainer/VBoxContainer/CardPanel/CardContent" unique_id=1035168544]
+layout_mode = 2
+
+[node name="WordLabel" type="Label" parent="MarginContainer/VBoxContainer/CardPanel/CardContent/FrontFace" unique_id=240147812]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Endag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackFace" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CardPanel/CardContent" unique_id=1718119032]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/CardPanel/CardContent/BackFace" unique_id=1420907387]
+layout_mode = 2
+
+[node name="MeaningEnLabel" type="Label" parent="MarginContainer/VBoxContainer/CardPanel/CardContent/BackFace" unique_id=1658305819]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "in danger"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MeaningFaLabel" type="Label" parent="MarginContainer/VBoxContainer/CardPanel/CardContent/BackFace" unique_id=1764280212]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_7ujfs")
+theme_override_font_sizes/font_size = 45
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ExampleLabel" type="Label" parent="MarginContainer/VBoxContainer/CardPanel/CardContent/BackFace" unique_id=1494563684]
+layout_mode = 2
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NavigationRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=863517809]
+layout_mode = 2
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="MarginContainer/VBoxContainer/NavigationRow" unique_id=112945094]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "قبلی ◀"
+
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/NavigationRow" unique_id=1506590208]
+custom_minimum_size = Vector2(2.54, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "▶ بعدی"
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1802794265]

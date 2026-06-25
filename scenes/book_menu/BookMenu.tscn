@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cc5bggnhxrx5e"]
+
+[ext_resource type="Script" uid="uid://bup0mtxrin4q2" path="res://scenes/book_menu/book_menu.gd" id="1_fjcg3"]
+
+[node name="BookMenu" type="Control" unique_id=848591687]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fjcg3")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1506545878]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainLayout" type="MarginContainer" parent="." unique_id=1267984520]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="InnerLayout" type="VBoxContainer" parent="MainLayout" unique_id=1592577916]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TopBar" type="HBoxContainer" parent="MainLayout/InnerLayout" unique_id=1356899270]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" type="Button" parent="MainLayout/InnerLayout/TopBar" unique_id=457065337]
+layout_mode = 2
+text = "Back"
+
+[node name="TopBarSpacer" type="Control" parent="MainLayout/InnerLayout/TopBar" unique_id=418301719]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopBarTitle" type="Label" parent="MainLayout/InnerLayout/TopBar" unique_id=45067173]
+layout_mode = 2
+text = "Vision 1
+"
+
+[node name="HeroLabel" type="Label" parent="MainLayout/InnerLayout" unique_id=1359595524]
+layout_mode = 2
+text = "Select a Lesson"
+horizontal_alignment = 1
+
+[node name="LessonsContainer" type="VBoxContainer" parent="MainLayout/InnerLayout" unique_id=807170019]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="BottomSpacer" type="Control" parent="MainLayout/InnerLayout" unique_id=383772796]
+layout_mode = 2
+size_flags_vertical = 3
