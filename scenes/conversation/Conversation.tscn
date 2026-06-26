@@ -32,6 +32,8 @@ layout_mode = 2
 
 [node name="HeaderContent" type="HBoxContainer" parent="MainLayout/HeaderBar" unique_id=1297609347]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
 [node name="BackButton" type="Button" parent="MainLayout/HeaderBar/HeaderContent" unique_id=681322488]
 layout_mode = 2
