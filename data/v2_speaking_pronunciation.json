@@ -1,0 +1,104 @@
+{
+  "book": 2,
+  "lessons": {
+	"1": {
+	  "lesson_title": "Understanding People",
+	  "points": [
+		{
+		  "title": "Speaking: خرید کردن، پرسیدن درباره قیمت و اعداد",
+		  "explanation": "برای پرسیدن درباره قیمت اجناس از 'how much' و برای پرسیدن درباره تعداد از 'how many' استفاده می‌کنیم. در مکالمه خرید، از الگوهای مشخصی برای درخواست کالا و پرسیدن قیمت استفاده می‌شود.",
+		  "structure": "How much do/does ... cost? / How much is it? / How much are they?\nHow many ... are there? / I need ... / I'm looking for ...",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "May I help you?", "fa": "می‌توانم کمکتان کنم؟" },
+			{ "en": "I'm looking for some birthday candles.", "fa": "من به دنبال چند شمع تولد هستم." },
+			{ "en": "How much are those?", "fa": "قیمت آن‌ها چقدر است؟" },
+			{ "en": "How many candles do you need?", "fa": "چند شمع نیاز دارید؟" }
+		  ],
+		  "tip": "نکته: در فروشگاه‌ها، برای درخواست کمک از 'May I help you?' و برای پرسیدن قیمت از 'How much...?' استفاده کنید."
+		},
+		{
+		  "title": "Pronunciation: استرس در اعداد 'teen' و 'ten'",
+		  "explanation": "اعداد مربوط به دهگان (twenty, thirty, ...) روی بخش اول خود استرس دارند و با صدای بلندتر خوانده می‌شوند. اما اعداد نوجوان (thirteen, fourteen, ...) روی بخش آخر خود یعنی 'teen' استرس دارند. این تفاوت در استرس برای تشخیص این دو نوع عدد در مکالمه بسیار مهم است.",
+		  "structure": "Ten numbers: TWEN-ty, THIR-ty, FOR-ty (Stress on first part)\nTeen numbers: thir-TEEN, four-TEEN, fif-TEEN (Stress on 'teen')",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "She is almost thirTEEN.", "fa": "او تقریباً سیزده ساله است. (تأکید روی 'teen')" },
+			{ "en": "Did you say EIGHty or eightEEN?", "fa": "گفتی هشتاد یا هجده؟ (تأکید روی بخش‌های مختلف)" },
+			{ "en": "TWENty", "fa": "بیست" },
+			{ "en": "THIRty", "fa": "سی" }
+		  ],
+		  "tip": "نکته: فرق بین 'fifteen' (پانزده) و 'fifty' (پنجاه) در استرس آن‌هاست: fifTEEN vs FIFty. این استرس می‌تواند معنی جمله را تغییر دهد."
+		}
+	  ]
+	},
+	"2": {
+	  "lesson_title": "A Healthy Lifestyle",
+	  "points": [
+		{
+		  "title": "Speaking: صحبت درباره تجربیات گذشته",
+		  "explanation": "برای سؤال کردن درباره تجربیات گذشته و اینکه آیا کسی تا به حال کاری را انجام داده است یا نه، از زمان حال کامل (Present Perfect) استفاده می‌کنیم. این زمان برای صحبت درباره تجربیات زندگی به کار می‌رود و زمان دقیق انجام کار مهم نیست.",
+		  "structure": "Have you ever + past participle? \nYes, I have + past participle.\nNo, I haven't + past participle.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Have you ever played the game 'Travel to Mars'?", "fa": "آیا تا به حال بازی 'سفر به مریخ' را بازی کرده‌ای؟" },
+			{ "en": "Yes, I have learned to play it recently.", "fa": "بله، اخیراً یاد گرفته‌ام که آن را بازی کنم." },
+			{ "en": "No, I haven't tried that yet.", "fa": "نه، هنوز آن را امتحان نکرده‌ام." },
+			{ "en": "Has she ever traveled abroad?", "fa": "آیا او تا به حال به خارج از کشور سفر کرده است؟" }
+		  ],
+		  "tip": "نکته: برای سؤال از تجربه‌های کلی از 'ever' استفاده کنید. وقتی می‌خواهید تأکید کنید که کاری تا حالا انجام نشده، از 'yet' در پایان جمله منفی استفاده کنید."
+		},
+		{
+		  "title": "Pronunciation: استرس در شرایط اضطراری",
+		  "explanation": "در شرایط اضطراری و زمانی که همه کلمات جمله مهم هستند، به تمام کلمات جمله استرس داده می‌شود. این برخلاف جمله‌های معمولی است که فقط روی کلمات کلیدی استرس می‌گذاریم. در مواقع ضروری، همه کلمات با قدرت مساوی و بلند گفته می‌شوند.",
+		  "structure": "In emergencies, all words carry stress. All words are equally important.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "WATCH OUT!", "fa": "مواظب باش!" },
+			{ "en": "COME BACK!", "fa": "برگرد!" },
+			{ "en": "HURRY UP!", "fa": "عجله کن!" },
+			{ "en": "GET AWAY!", "fa": "دور شو!" }
+		  ],
+		  "tip": "نکته: در هشدارها و جملات کوتاه اضطراری، هر کلمه را با استرس بالا و واضح بخوانید تا شنونده اهمیت موضوع را درک کند."
+		}
+	  ]
+	},
+	"3": {
+	  "lesson_title": "Art and Culture",
+	  "points": [
+		{
+		  "title": "Speaking: صحبت درباره شرط‌ها و نتایج آینده",
+		  "explanation": "برای صحبت درباره اینکه اگر شرایطی برقرار شود، چه اتفاقی در آینده رخ خواهد داد، از جملات شرطی نوع اول استفاده می‌کنیم. این جملات شامل یک شرط (با 'if') و یک نتیجه در آینده (با 'will') هستند.",
+		  "structure": "If + present tense (condition), + future tense (will + base verb) (result).\nFuture + if + present.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "If everything goes well, we will open the new store in June.", "fa": "اگر همه چیز خوب پیش برود، فروشگاه جدید را در ژوئن باز خواهیم کرد." },
+			{ "en": "If you study hard, you will pass the exam.", "fa": "اگر سخت درس بخوانی، در امتحان قبول خواهی شد." },
+			{ "en": "We will go to the park if it doesn't rain.", "fa": "اگر باران نبارد، به پارک خواهیم رفت." },
+			{ "en": "If our plans work, they will succeed.", "fa": "اگر برنامه‌هایمان کار کند، آن‌ها موفق خواهند شد." }
+		  ],
+		  "tip": "نکته: در جملات شرطی نوع اول، شرط را با زمان حال می‌نویسیم و نتیجه را با 'will'. هرگز در قسمت شرط از 'will' استفاده نکنید."
+		},
+		{
+		  "title": "Pronunciation: آهنگ در جملات شرطی",
+		  "explanation": "در جملات شرطی نوع اول، آهنگ جمله به این صورت است: در قسمت شرط (بعد از 'if') از آهنگ صعودی استفاده می‌کنیم و در قسمت نتیجه از آهنگ نزولی استفاده می‌کنیم. اگر جمله با قسمت نتیجه شروع شود، آهنگ آن نزولی است و در قسمت شرط آهنگ صعودی می‌شود.",
+		  "structure": "Condition (If...) ↗ + result (...will...) ↘.\nResult (...will...) ↘ + condition (if...) ↗.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "If it snows ↗, people will drive carefully. ↘", "fa": "اگر برف ببارد، مردم با احتیاط رانندگی خواهند کرد." },
+			{ "en": "She will pass the exam ↘ if I help her. ↗", "fa": "او در امتحان قبول خواهد شد اگر من به او کمک کنم." },
+			{ "en": "If I earn enough money ↗, I will buy a new car. ↘", "fa": "اگر پول کافی به دست بیاورم، یک ماشین جدید خواهم خرید." },
+			{ "en": "If you eat healthy food ↗, you will live longer. ↘", "fa": "اگر غذای سالم بخوری، عمر طولانی‌تری خواهی داشت." }
+		  ],
+		  "tip": "نکته: همیشه قسمت شرط را با آهنگ بالا و قسمت نتیجه را با آهنگ پایین بخوانید. تمرین کنید تا این الگو برای شما طبیعی شود."
+		}
+	  ]
+	}
+  }
+}

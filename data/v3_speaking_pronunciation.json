@@ -1,0 +1,104 @@
+{
+  "book": 3,
+  "lessons": {
+	"1": {
+	  "lesson_title": "Sense of Appreciation",
+	  "points": [
+		{
+		  "title": "Speaking: جلب موافقت و ابراز تردید (Tag Questions)",
+		  "explanation": "از سوالات ضمیمه‌ای (Tag questions) برای دو هدف اصلی استفاده می‌کنیم: جلب موافقت دیگران (وقتی از صحت چیزی مطمئن هستیم) و ابراز تردید (وقتی کاملاً مطمئن نیستیم). این سوالات در انتهای جمله اضافه می‌شوند و با توجه به مفهوم جمله، معنای متفاوتی دارند.",
+		  "structure": "Positive statement, + negative tag? (e.g., She is happy, isn't she?)\nNegative statement, + positive tag? (e.g., He isn't sad, is he?)",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "He's really generous, isn't he?", "fa": "او واقعاً سخاوتمند است، نیست؟ (جلب موافقت)" },
+			{ "en": "It isn't something serious, is it?", "fa": "چیز جدی‌ای نیست، هست؟ (ابراز تردید)" },
+			{ "en": "They are going to leave here, aren't they?", "fa": "آن‌ها قرار است اینجا را ترک کنند، نه؟ (جلب موافقت)" },
+			{ "en": "This cannot be true, can it?", "fa": "این نمی‌تواند درست باشد، می‌تواند؟ (ابراز تردید)" }
+		  ],
+		  "tip": "نکته: اگر جمله مثبت است، tag منفی می‌آید و اگر جمله منفی است، tag مثبت می‌آید. برای ابراز تردید، با آهنگ صعودی (↗) و برای جلب موافقت، با آهنگ نزولی (↘) بخوانید."
+		},
+		{
+		  "title": "Pronunciation: آهنگ در سوالات ضمیمه‌ای (Tag Questions)",
+		  "explanation": "آهنگ صدا در سوالات ضمیمه‌ای بستگی به هدف گوینده دارد. اگر می‌خواهید موافقت شنونده را جلب کنید و از پاسخ خود مطمئن هستید، از آهنگ نزولی (↘) استفاده کنید. اما اگر واقعاً مطمئن نیستید و می‌خواهید تردید خود را نشان دهید، از آهنگ صعودی (↗) استفاده کنید.",
+		  "structure": "For eliciting agreement: ↘ (Falling intonation)\nFor signaling uncertainty: ↗ (Rising intonation)",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "She is a nurse, isn't she? ↘", "fa": "او پرستار است، نیست؟ (مطمئن هستم و تأیید می‌خواهم - نزولی)" },
+			{ "en": "She is a nurse, isn't she? ↗", "fa": "او پرستار است، نیست؟ (مطمئن نیستم و می‌پرسم - صعودی)" },
+			{ "en": "You've finished your homework, haven't you? ↘", "fa": "تکلیفت را تمام کرده‌ای، نه؟ (تأیید می‌خواهم)" },
+			{ "en": "You've finished your homework, haven't you? ↗", "fa": "تکلیفت را تمام کرده‌ای، نه؟ (شک دارم)" }
+		  ],
+		  "tip": "نکته: این یکی از مهم‌ترین نکات در مکالمه است. آهنگ صدا می‌تواند معنای جمله را کاملاً تغییر دهد. در کلاس تمرین کنید که با هر دو آهنگ، سوالات ضمیمه‌ای را بخوانید."
+		}
+	  ]
+	},
+	"2": {
+	  "lesson_title": "Look it Up!",
+	  "points": [
+		{
+		  "title": "Speaking: صحبت درباره موقعیت‌های خیالی (Conditional Type II)",
+		  "explanation": "برای صحبت درباره موقعیت‌های خیالی، غیرواقعی یا آرزوهایی که در زمان حال برآورده نمی‌شوند، از جملات شرطی نوع دوم استفاده می‌کنیم. این جملات برای بیان 'چه می‌شد اگر...' و شرایطی که در حال حاضر ممکن نیستند، به کار می‌روند.",
+		  "structure": "If + past tense (imaginary condition), + would/could/might + base verb (imaginary result).",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "What would you do if you were me?", "fa": "اگر جای من بودی، چه کار می‌کردی؟" },
+			{ "en": "If I had wings, I would fly.", "fa": "اگر بال داشتم، پرواز می‌کردم." },
+			{ "en": "We could play chess if Sina were home.", "fa": "اگر سینا خانه بود، می‌توانستیم شطرنج بازی کنیم." },
+			{ "en": "If it weren't raining, we would go to the park.", "fa": "اگر باران نمی‌بارید، به پارک می‌رفتیم." }
+		  ],
+		  "tip": "نکته مهم: در جملات شرطی نوع دوم، برای همه ضمایر (حتی I و he/she/it) از 'were' استفاده می‌کنیم. مثال: If I were you... (نه If I was you)."
+		},
+		{
+		  "title": "Pronunciation: آهنگ در سوالات Wh- و جملات خبری",
+		  "explanation": "در این درس، تمرکز روی آهنگ نزولی در جملات خبری و سوالات Wh- است. وقتی اطلاعات جدیدی ارائه می‌دهید یا سوالی با Who, What, Where, Why, How می‌پرسید، صدای شما باید در انتهای جمله پایین برود.",
+		  "structure": "Wh- questions: Falling ↘\nDeclarative sentences: Falling ↘",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "What would you do if you were a university student? ↘", "fa": "اگر دانشجوی دانشگاه بودی، چه کار می‌کردی؟" },
+			{ "en": "Where would you like to go for your vacation? ↘", "fa": "دوست داری برای تعطیلاتت کجا بروی؟" },
+			{ "en": "I would study more effectively. ↘", "fa": "من مؤثرتر درس می‌خواندم." },
+			{ "en": "How would you solve this problem? ↘", "fa": "این مسئله را چطور حل می‌کردی؟" }
+		  ],
+		  "tip": "نکته: در مکالمه، وقتی می‌خواهید یک جمله شرطی نوع دوم بگویید، قسمت شرط (If...) را با آهنگ صعودی و قسمت نتیجه (...would...) را با آهنگ نزولی بخوانید."
+		}
+	  ]
+	},
+	"3": {
+	  "lesson_title": "Renewable Energy",
+	  "points": [
+		{
+		  "title": "Speaking: صحبت درباره فعالیت قبل از فعالیت دیگر در گذشته (Past Perfect)",
+		  "explanation": "برای صحبت درباره دو اتفاق در گذشته که یکی قبل از دیگری رخ داده است، از زمان گذشته کامل (Past Perfect) استفاده می‌کنیم. اتفاق قبل‌تر با گذشته کامل و اتفاق بعدتر با گذشته ساده بیان می‌شود. این زمان به ترتیب زمانی رویدادها کمک می‌کند.",
+		  "structure": "Before + Simple Past, + Past Perfect.\nAfter + Past Perfect, + Simple Past.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Before we played volleyball, we had taken some photos.", "fa": "قبل از اینکه والیبال بازی کنیم، چند عکس گرفته بودیم." },
+			{ "en": "After we had eaten lunch, we flew our kites.", "fa": "بعد از اینکه ناهار خورده بودیم، بادبادک‌هایمان را پرواز دادیم." },
+			{ "en": "I had already finished my homework when my mother came home.", "fa": "وقتی مادرم به خانه آمد، من قبلاً تکلیفم را تمام کرده بودم." },
+			{ "en": "She told me she had worked in Isfahan before.", "fa": "او به من گفت که قبلاً در اصفهان کار کرده بود." }
+		  ],
+		  "tip": "نکته: کلمات کلیدی که نشان‌دهنده گذشته کامل هستند: before, after, already, never, by the time. این کلمات به شما کمک می‌کنند تا تشخیص دهید کدام اتفاق زودتر رخ داده است."
+		},
+		{
+		  "title": "Pronunciation: آهنگ در جملات گذشته کامل",
+		  "explanation": "در جملاتی که شامل گذشته کامل هستند، آهنگ جمله به ترتیب زمانی بستگی دارد. معمولاً بخش اول جمله (که اتفاق قبل‌تر را توصیف می‌کند) با آهنگ صعودی و بخش دوم (اتفاق بعدتر) با آهنگ نزولی خوانده می‌شود تا ترتیب زمانی به شنونده منتقل شود.",
+		  "structure": "Earlier event (Past Perfect) ↗ → Later event (Simple Past) ↘",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Before we played volleyball ↗, we had taken some photos. ↘", "fa": "قبل از والیبال، عکس گرفته بودیم." },
+			{ "en": "After I had finished my homework ↗, I watched TV. ↘", "fa": "بعد از تمام کردن تکلیفم، تلویزیون تماشا کردم." },
+			{ "en": "They had already left ↗ when I arrived. ↘", "fa": "وقتی رسیدم، آن‌ها قبلاً رفته بودند." },
+			{ "en": "She had never seen a bear ↗ before she went to the zoo. ↘", "fa": "قبل از رفتن به باغ‌وحش، هرگز خرس ندیده بود." }
+		  ],
+		  "tip": "نکته: در جملات گذشته کامل، بر روی کلمه 'had' و فعل گذشته کامل (مثل 'taken' یا 'finished') تأکید قرار دهید تا شنونده متوجه شود که این اتفاق قبل از اتفاق دیگر رخ داده است."
+		}
+	  ]
+	}
+  }
+}

@@ -11,7 +11,7 @@ const SCENE_VOCAB        := "res://scenes/vocabulary/VocabFlashcards.tscn"
 const SCENE_CONVERSATION := "res://scenes/conversation/Conversation.tscn"
 const SCENE_READING      := "res://scenes/reading/Reading.tscn"
 const SCENE_GRAMMAR      := "res://scenes/grammar/Grammar.tscn"
-const SCENE_SPEAKING     := "res://scenes/speaking/Speaking.tscn"
+const SCENE_SPEAKING     := "res://scenes/speaking_pronunciation/SpeakingPronunciation.tscn"
 
 # ---------- Font configuration ----------
 # Change these paths to your actual font files

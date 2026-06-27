@@ -1,0 +1,138 @@
+{
+  "book": 1,
+  "lessons": {
+	"1": {
+	  "lesson_title": "Saving Nature",
+	  "points": [
+		{
+		  "title": "Speaking: صحبت درباره برنامه‌ها و زمان‌بندی",
+		  "explanation": "برای پرسیدن درباره برنامه‌های دیگران یا صحبت کردن درباره برنامه‌های خودمان، می‌توانیم از زمان آینده (Future Tense) استفاده کنیم. این کار به ما کمک می‌کند تا برنامه‌ها، قصدها و قرارهای خود را به زبان انگلیسی بیان کنیم.",
+		  "structure": "What are you going to do...? / What will you do...?\nI am going to... / I will...",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "What are you going to do this weekend?", "fa": "این آخر هفته قرار است چه کار کنی؟" },
+			{ "en": "I am going to go to Golestan Forest.", "fa": "من قرار است به جنگل گلستان بروم." },
+			{ "en": "Where will you go for your trip?", "fa": "برای سفرت کجا خواهی رفت؟" },
+			{ "en": "I will visit my relatives.", "fa": "من به دیدار اقوامم خواهم رفت." }
+		  ],
+		  "tip": "نکته: در مکالمه روزمره، وقتی از قبل برنامه‌ای دارید از 'going to' و وقتی در لحظه تصمیم می‌گیرید از 'will' استفاده کنید."
+		},
+		{
+		  "title": "Pronunciation: آهنگ نزولی (Falling Intonation)",
+		  "explanation": "وقتی اطلاعات جدیدی می‌دهیم یا درباره چیزی سؤال می‌کنیم، از آهنگ نزولی استفاده می‌کنیم. در این حالت، صدای ما در انتهای جمله پایین می‌رود. این نوع آهنگ در جملات خبری و سوالات Wh (چی، کجا، کی) استفاده می‌شود.",
+		  "structure": "When you ask for or give new information, use falling intonation.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Where are you going to go?↘", "fa": "کجا قصد داری بروی؟ (صدای آخر پایین می‌رود)" },
+			{ "en": "I am going to go to Bam. ↘", "fa": "من قرار است به بم بروم. (صدای آخر پایین می‌رود)" },
+			{ "en": "What does your brother do? ↘", "fa": "برادرت چه کار می‌کند؟" },
+			{ "en": "He works in a zoo. ↘", "fa": "او در یک باغ‌وحش کار می‌کند." }
+		  ],
+		  "tip": "نکته: در جملات خبری و سوالات با who, what, where, when, why, how، صدای شما در انتهای جمله باید پایین برود."
+		}
+	  ]
+	},
+	"2": {
+	  "lesson_title": "Wonders of Creation",
+	  "points": [
+		{
+		  "title": "Speaking: پرسیدن درباره جزئیات",
+		  "explanation": "برای پرسیدن جزئیات درباره چیزی، مانند کیفیت، اندازه، سن و رنگ، از صفت‌ها استفاده می‌کنیم. با استفاده از الگوهای مشخص می‌توانیم درباره ویژگی‌های یک شیء یا یک تجربه سؤال کنیم و توصیف دقیقی دریافت کنیم.",
+		  "structure": "How is/was...? / What color is...? / Was it...?\nIt is/was + adjective.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "How was the movie?", "fa": "فیلم چطور بود؟" },
+			{ "en": "It was very interesting.", "fa": "خیلی جالب بود." },
+			{ "en": "What color is the sky?", "fa": "آسمان چه رنگی است؟" },
+			{ "en": "It was an old building.", "fa": "این یک ساختمان قدیمی بود." }
+		  ],
+		  "tip": "نکته: وقتی می‌خواهید درباره کیفیت سؤال کنید، از 'How' و وقتی درباره رنگ می‌خواهید بپرسید، از 'What color' استفاده کنید."
+		},
+		{
+		  "title": "Pronunciation: آهنگ صعودی (Rising Intonation)",
+		  "explanation": "وقتی می‌خواهیم اطلاعات را چک کنیم یا از صحت چیزی مطمئن شویم، از آهنگ صعودی استفاده می‌کنیم. در این حالت، صدای ما در انتهای جمله بالا می‌رود. این آهنگ در سوالات بله/خیر (Yes/No questions) به کار می‌رود.",
+		  "structure": "When you check information, use rising intonation.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Is this your new car? ↗", "fa": "این ماشین جدید شماست؟ (صدای آخر بالا می‌رود)" },
+			{ "en": "Was the book interesting? ↗", "fa": "کتاب جالب بود؟" },
+			{ "en": "Is this problem easier than that one? ↗", "fa": "این مسئله از آن یکی آسان‌تر است؟" },
+			{ "en": "Are they the most expensive houses? ↗", "fa": "آن‌ها گران‌ترین خانه‌ها هستند؟" }
+		  ],
+		  "tip": "نکته: سوالات بله/خیر (سوالاتی که با افعال کمکی مثل is, was, do, does, can شروع می‌شوند) همیشه با آهنگ صعودی خوانده می‌شوند."
+		}
+	  ]
+	},
+	"3": {
+	  "lesson_title": "The Value of Knowledge",
+	  "points": [
+		{
+		  "title": "Speaking: نقل داستان (Narrating a Story)",
+		  "explanation": "برای نقل داستان و تعریف اتفاقاتی که در گذشته رخ داده است، می‌توانیم از گذشته ساده و گذشته استمراری با هم استفاده کنیم. گذشته استمراری معمولاً برای توصیف پس‌زمینه یا موقعیت داستان به کار می‌رود و گذشته ساده برای اتفاقات ناگهانی که در آن موقعیت رخ داده‌اند.",
+		  "structure": "Past progressive (was/were doing) for background.\nSimple past (did) for the main events.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Last night at 8, we were sitting in the hall.", "fa": "دیشب ساعت ۸، ما در سالن نشسته بودیم." },
+			{ "en": "Suddenly, we heard a noise.", "fa": "ناگهان صدایی شنیدیم." },
+			{ "en": "What were you doing yesterday at 8?", "fa": "دیروز ساعت ۸ داشتی چه کار می‌کردی؟" },
+			{ "en": "I was reading a book when the phone rang.", "fa": "داشتم کتاب می‌خواندم که تلفن زنگ زد." }
+		  ],
+		  "tip": "نکته: برای شروع یک داستان، ابتدا فضای آن را با گذشته استمراری توصیف کنید ('We were sitting...') و سپس اتفاق اصلی را با گذشته ساده بیان کنید ('We saw a kitty...')."
+		},
+		{
+		  "title": "Pronunciation: تأکید بر کلمات (Emphatic Stress)",
+		  "explanation": "وقتی می‌خواهیم روی کلمه یا بخشی از جمله تأکید ویژه‌ای داشته باشیم، آن کلمه را با صدای قوی‌تری می‌گوییم. این کار برای اصلاح اطلاعات، تأکید روی موضوعات خاص یا نشان دادن اهمیت یک بخش از جمله استفاده می‌شود.",
+		  "structure": "When you want to put special emphasis on something, you say it more strongly.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Were you doing the research? No, Ali WAS.", "fa": "تو داشتی تحقیق می‌کردی؟ نه، علی داشت. (تأکید روی 'Ali' و 'was')" },
+			{ "en": "Who broke the window? It wasn't ME.", "fa": "کی پنجره را شکست؟ من نبودم. (تأکید روی 'me')" },
+			{ "en": "Why were they making noise? The WORKERS were.", "fa": "چرا آن‌ها سر و صدا می‌کردند؟ کارگرها بودند. (تأکید روی 'workers')" },
+			{ "en": "Is it Jim's car? No, his car is WHITE.", "fa": "این ماشین جیم است؟ نه، ماشین او سفید است. (تأکید روی 'white')" }
+		  ],
+		  "tip": "نکته: در جملات کوتاه پاسخ‌دهنده، روی کلمه‌ای که اطلاعات جدید را می‌دهد تأکید بیشتری قرار دهید."
+		}
+	  ]
+	},
+	"4": {
+	  "lesson_title": "Traveling the World",
+	  "points": [
+		{
+		  "title": "Speaking: سؤال درباره الزامات و احتمالات",
+		  "explanation": "برای پرسیدن درباره کارهایی که باید یا نباید انجام دهیم، کارهایی که می‌توانیم انجام دهیم و کارهایی که ممکن است انجام دهیم، از افعال کمکی مدال استفاده می‌کنیم. این افعال کاربردهای مختلفی دارند و در موقعیت‌های مختلفی استفاده می‌شوند.",
+		  "structure": "Can: توانایی / May: اجازه و احتمال / Should: توصیه / Must: اجبار و الزام",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "May I use your camera for my trip?", "fa": "آیا می‌توانم از دوربینت برای سفرم استفاده کنم؟" },
+			{ "en": "Yes, you may.", "fa": "بله، می‌توانی." },
+			{ "en": "Must we drive fast?", "fa": "آیا باید سریع رانندگی کنیم؟" },
+			{ "en": "No, you must not.", "fa": "نه، نباید." },
+			{ "en": "Should they be more careful?", "fa": "آیا باید بیشتر مراقب باشند؟" }
+		  ],
+		  "tip": "نکته: برای درخواست مؤدبانه از 'May I...' استفاده کنید. برای توصیه و پیشنهاد از 'should' و برای اجبار از 'must' استفاده می‌شود."
+		},
+		{
+		  "title": "Pronunciation: تأکید تقابلی (Contrastive Stress)",
+		  "explanation": "وقتی می‌خواهیم بین دو چیز مقایسه یا تقابل ایجاد کنیم، روی هر دو کلمهٔ مورد مقایسه تأکید می‌کنیم. این کار به شنونده کمک می‌کند تا انتخاب‌های موجود را بهتر درک کند.",
+		  "structure": "When you want to contrast two things, you say both of them with emphasis.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Were you doing research or STUDYING? ↗", "fa": "داشتی تحقیق می‌کردی یا مطالعه؟ (تأکید روی 'research' و 'studying')" },
+			{ "en": "Who broke the window? Ali or AMIR? ↗", "fa": "کی پنجره را شکست؟ علی یا امیر؟" },
+			{ "en": "Was Jim's car white or BLUE? ↗", "fa": "ماشین جیم سفید بود یا آبی؟" },
+			{ "en": "Do you leave on Tuesday or THURSDAY? ↗", "fa": "سه‌شنبه می‌روی یا پنج‌شنبه؟" }
+		  ],
+		  "tip": "نکته: در سوالات انتخابی، روی هر دو گزینه تأکید کنید و صدای خود را روی گزینه اول بالا ببرید و روی گزینه دوم پایین بیاورید."
+		}
+	  ]
+	}
+  }
+}
