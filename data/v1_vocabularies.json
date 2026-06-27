@@ -1,0 +1,749 @@
+[
+  {
+	"book": 1,
+	"lesson": 1,
+	"title": "Saving Nature",
+	"vocabulary": {
+	  "audio": "vocab_lesson1.mp3",
+	  "words": [
+		{
+		  "word": "endangered",
+		  "meaning_en": "at risk of extinction; very few left",
+		  "meaning_fa": "در معرض خطر انقراض",
+		  "example": "The Iranian cheetah is an endangered animal.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "alive",
+		  "meaning_en": "living; not dead",
+		  "meaning_fa": "زنده",
+		  "example": "Around 70 cheetahs are still alive.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "increase",
+		  "meaning_en": "to become larger in number or amount",
+		  "meaning_fa": "افزایش یافتن",
+		  "example": "The number of cheetahs will increase.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "plan",
+		  "meaning_en": "a set of actions for achieving something",
+		  "meaning_fa": "برنامه",
+		  "example": "We have some plans to protect animals.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "protect",
+		  "meaning_en": "to keep someone or something safe",
+		  "meaning_fa": "محافظت کردن",
+		  "example": "We must protect animal habitats.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "habitat",
+		  "meaning_en": "the natural home of an animal or plant",
+		  "meaning_fa": "زیستگاه",
+		  "example": "Cutting trees destroys animals’ habitats.",
+		  "source": "reading"
+		},
+		{
+		  "word": "destroy",
+		  "meaning_en": "to damage something completely",
+		  "meaning_fa": "ویران کردن",
+		  "example": "Humans destroy natural homes of animals.",
+		  "source": "reading"
+		},
+		{
+		  "word": "human",
+		  "meaning_en": "a person",
+		  "meaning_fa": "انسان",
+		  "example": "All humans must protect nature.",
+		  "source": "reading"
+		},
+		{
+		  "word": "instead",
+		  "meaning_en": "in place of something",
+		  "meaning_fa": "به جای",
+		  "example": "Would you like tea instead?",
+		  "source": "reading"
+		},
+		{
+		  "word": "future",
+		  "meaning_en": "time after now",
+		  "meaning_fa": "آینده",
+		  "example": "We must think about the future.",
+		  "source": "reading"
+		},
+		{
+		  "word": "a few",
+		  "meaning_en": "a small number",
+		  "meaning_fa": "تعداد کم",
+		  "example": "There are a few cheetahs left.",
+		  "source": "reading"
+		},
+		{
+		  "word": "wild",
+		  "meaning_en": "living in nature, not domesticated",
+		  "meaning_fa": "وحشی",
+		  "example": "A tiger is a wild animal.",
+		  "source": "reading"
+		},
+		{
+		  "word": "forest",
+		  "meaning_en": "a large area of trees",
+		  "meaning_fa": "جنگل",
+		  "example": "Many animals live in the forest.",
+		  "source": "reading"
+		},
+		{
+		  "word": "cheetah",
+		  "meaning_en": "a fast wild cat",
+		  "meaning_fa": "یوزپلنگ",
+		  "example": "The Iranian cheetah is rare.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "leopard",
+		  "meaning_en": "a large wild cat with spots",
+		  "meaning_fa": "پلنگ",
+		  "example": "Is it a leopard?",
+		  "source": "conversation"
+		},
+		{
+		  "word": "wolf",
+		  "meaning_en": "a wild animal related to dogs",
+		  "meaning_fa": "گرگ",
+		  "example": "A wolf lives in the forest.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "panda",
+		  "meaning_en": "a black and white bear from China",
+		  "meaning_fa": "پاندا",
+		  "example": "Pandas are endangered animals.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "elephant",
+		  "meaning_en": "a very large animal with a trunk",
+		  "meaning_fa": "فیل",
+		  "example": "An elephant eats a lot of food.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "whale",
+		  "meaning_en": "a very large sea animal",
+		  "meaning_fa": "نهنگ",
+		  "example": "Whales live in the ocean.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "duck",
+		  "meaning_en": "a water bird",
+		  "meaning_fa": "اردک",
+		  "example": "A duck is swimming in the lake.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "goat",
+		  "meaning_en": "a farm animal",
+		  "meaning_fa": "بز",
+		  "example": "A goat eats grass.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "animal",
+		  "meaning_en": "a living creature (not human or plant)",
+		  "meaning_fa": "حیوان",
+		  "example": "We must protect animals.",
+		  "source": "reading"
+		},
+		{
+		  "word": "nature",
+		  "meaning_en": "the natural world",
+		  "meaning_fa": "طبیعت",
+		  "example": "We should protect nature.",
+		  "source": "reading"
+		},
+		{
+		  "word": "earth",
+		  "meaning_en": "the planet we live on",
+		  "meaning_fa": "زمین",
+		  "example": "We live on Earth.",
+		  "source": "reading"
+		},
+		{
+		  "word": "jungle",
+		  "meaning_en": "a dense tropical forest",
+		  "meaning_fa": "جنگل انبوه",
+		  "example": "They are destroying the jungle.",
+		  "source": "reading"
+		},
+		{
+		  "word": "plain",
+		  "meaning_en": "a large flat area of land",
+		  "meaning_fa": "دشت",
+		  "example": "Animals live in plains.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  },
+  {
+	"book": 1,
+	"lesson": 2,
+	"title": "Wonders of Creation",
+	"vocabulary": {
+	  "audio": "vocab_lesson2.mp3",
+	  "words": [
+		{
+		  "word": "near",
+		  "meaning_en": "close to; not far away",
+		  "meaning_fa": "نزدیک",
+		  "example": "Mercury is near the sun.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "rocky",
+		  "meaning_en": "covered with rocks; hard and uneven surface",
+		  "meaning_fa": "صخره‌ای",
+		  "example": "Mars is a rocky planet.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "orbit",
+		  "meaning_en": "the curved path of an object around a planet or star",
+		  "meaning_fa": "مدار",
+		  "example": "They go around the Sun in different orbits.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "powerful",
+		  "meaning_en": "having great strength or energy",
+		  "meaning_fa": "قدرتمند",
+		  "example": "We see Uranus with powerful telescopes.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "telescope",
+		  "meaning_en": "a tool used to see distant things",
+		  "meaning_fa": "تلسکوپ",
+		  "example": "We see stars with a telescope.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "planet",
+		  "meaning_en": "a large round object in space that moves around a star",
+		  "meaning_fa": "سیاره",
+		  "example": "Jupiter is a very large planet.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "moon",
+		  "meaning_en": "a natural object that goes around a planet",
+		  "meaning_fa": "ماه",
+		  "example": "Saturn has many moons.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "ring",
+		  "meaning_en": "a circular band",
+		  "meaning_fa": "حلقه",
+		  "example": "Saturn has rings around it.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "liquid",
+		  "meaning_en": "a state of matter that is not solid or gas",
+		  "meaning_fa": "مایع",
+		  "example": "Water is a type of liquid.",
+		  "source": "reading"
+		},
+		{
+		  "word": "heart",
+		  "meaning_en": "the organ that pumps blood in the body",
+		  "meaning_fa": "قلب",
+		  "example": "The heart pumps blood around the body.",
+		  "source": "reading"
+		},
+		{
+		  "word": "blood",
+		  "meaning_en": "the red liquid that flows in the body",
+		  "meaning_fa": "خون",
+		  "example": "Blood cells are red and white.",
+		  "source": "reading"
+		},
+		{
+		  "word": "cell",
+		  "meaning_en": "the smallest unit of living matter",
+		  "meaning_fa": "سلول",
+		  "example": "There are millions of cells in a drop of blood.",
+		  "source": "reading"
+		},
+		{
+		  "word": "oxygen",
+		  "meaning_en": "a gas we need to breathe",
+		  "meaning_fa": "اکسیژن",
+		  "example": "Red cells carry oxygen.",
+		  "source": "reading"
+		},
+		{
+		  "word": "microbe",
+		  "meaning_en": "a very small living thing that can cause disease",
+		  "meaning_fa": "میکروب",
+		  "example": "White cells defend against microbes.",
+		  "source": "reading"
+		},
+		{
+		  "word": "drop",
+		  "meaning_en": "a small amount of liquid",
+		  "meaning_fa": "قطره",
+		  "example": "There are drops of paint on his shirt.",
+		  "source": "reading"
+		},
+		{
+		  "word": "thousand",
+		  "meaning_en": "the number 1,000",
+		  "meaning_fa": "هزار",
+		  "example": "About one thousand people live here.",
+		  "source": "reading"
+		},
+		{
+		  "word": "daily",
+		  "meaning_en": "happening or done every day",
+		  "meaning_fa": "روزانه",
+		  "example": "Daily exercise is useful.",
+		  "source": "reading"
+		},
+		{
+		  "word": "observatory",
+		  "meaning_en": "a building with a telescope for watching space",
+		  "meaning_fa": "رصدخانه",
+		  "example": "We visited the observatory.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "microscope",
+		  "meaning_en": "a tool to see tiny things",
+		  "meaning_fa": "میکروسکوپ",
+		  "example": "We use a microscope to see cells.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "healthy",
+		  "meaning_en": "strong and well",
+		  "meaning_fa": "سالم",
+		  "example": "He is a healthy boy.",
+		  "source": "reading"
+		},
+		{
+		  "word": "defend",
+		  "meaning_en": "to protect from danger",
+		  "meaning_fa": "دفاع کردن",
+		  "example": "Soldiers defend the country.",
+		  "source": "reading"
+		},
+		{
+		  "word": "carry",
+		  "meaning_en": "to move something from one place to another",
+		  "meaning_fa": "حمل کردن",
+		  "example": "Monkeys carry their babies.",
+		  "source": "reading"
+		},
+		{
+		  "word": "collect",
+		  "meaning_en": "to go and get someone or something",
+		  "meaning_fa": "جمع آوری کردن",
+		  "example": "The bus collects children.",
+		  "source": "reading"
+		},
+		{
+		  "word": "fact",
+		  "meaning_en": "something true that really happened",
+		  "meaning_fa": "حقیقت",
+		  "example": "It's a fact that Earth is round.",
+		  "source": "reading"
+		},
+		{
+		  "word": "plasma",
+		  "meaning_en": "the clear yellow liquid part of blood",
+		  "meaning_fa": "پلاسما",
+		  "example": "Plasma carries red and white cells.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  },
+  {
+	"book": 1,
+	"lesson": 3,
+	"title": "The Value of Knowledge",
+	"vocabulary": {
+	  "audio": "vocab_lesson3.mp3",
+	  "words": [
+		{
+		  "word": "medicine",
+		  "meaning_en": "the science of treating and preventing disease",
+		  "meaning_fa": "پزشکی",
+		  "example": "Razi taught medicine to many students.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "famous",
+		  "meaning_en": "known by many people",
+		  "meaning_fa": "مشهور",
+		  "example": "He read about famous Iranian scientists.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "build",
+		  "meaning_en": "to make a structure or building",
+		  "meaning_fa": "ساختن",
+		  "example": "Toosi built an observatory.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "science",
+		  "meaning_en": "the study of the natural world",
+		  "meaning_fa": "علم",
+		  "example": "Edison was interested in science.",
+		  "source": "reading"
+		},
+		{
+		  "word": "scientist",
+		  "meaning_en": "a person who studies or does research in science",
+		  "meaning_fa": "دانشمند",
+		  "example": "Scientists try hard to solve problems.",
+		  "source": "reading"
+		},
+		{
+		  "word": "knowledge",
+		  "meaning_en": "facts and information learned",
+		  "meaning_fa": "دانش",
+		  "example": "Human knowledge develops with hard work.",
+		  "source": "reading"
+		},
+		{
+		  "word": "experiment",
+		  "meaning_en": "a scientific test to find something out",
+		  "meaning_fa": "آزمایش",
+		  "example": "Edison did thousands of experiments.",
+		  "source": "reading"
+		},
+		{
+		  "word": "research",
+		  "meaning_en": "careful study to discover new facts",
+		  "meaning_fa": "تحقیق",
+		  "example": "She is doing research on blood cells.",
+		  "source": "reading"
+		},
+		{
+		  "word": "invent",
+		  "meaning_en": "to create something for the first time",
+		  "meaning_fa": "اختراع کردن",
+		  "example": "Edison invented the light bulb.",
+		  "source": "reading"
+		},
+		{
+		  "word": "invention",
+		  "meaning_en": "a thing that has been invented",
+		  "meaning_fa": "اختراع",
+		  "example": "He had more than 1,000 inventions.",
+		  "source": "reading"
+		},
+		{
+		  "word": "solve",
+		  "meaning_en": "to find an answer to a problem",
+		  "meaning_fa": "حل کردن",
+		  "example": "We can solve your problems.",
+		  "source": "reading"
+		},
+		{
+		  "word": "develop",
+		  "meaning_en": "to grow or change into a stronger form",
+		  "meaning_fa": "توسعه دادن",
+		  "example": "This book can develop your skills.",
+		  "source": "reading"
+		},
+		{
+		  "word": "belief",
+		  "meaning_en": "something you believe",
+		  "meaning_fa": "باور",
+		  "example": "Her belief in Allah gave her hope.",
+		  "source": "reading"
+		},
+		{
+		  "word": "quit",
+		  "meaning_en": "to stop doing something",
+		  "meaning_fa": "ترک کردن",
+		  "example": "He quit smoking.",
+		  "source": "reading"
+		},
+		{
+		  "word": "give up",
+		  "meaning_en": "to stop trying to do something",
+		  "meaning_fa": "دست کشیدن",
+		  "example": "Never give up!",
+		  "source": "reading"
+		},
+		{
+		  "word": "hard",
+		  "meaning_en": "needing a lot of effort; difficult",
+		  "meaning_fa": "سخت",
+		  "example": "He works hard.",
+		  "source": "reading"
+		},
+		{
+		  "word": "success",
+		  "meaning_en": "achieving a goal",
+		  "meaning_fa": "موفقیت",
+		  "example": "Hard work is the key to success.",
+		  "source": "reading"
+		},
+		{
+		  "word": "university",
+		  "meaning_en": "a high-level school for learning after high school",
+		  "meaning_fa": "دانشگاه",
+		  "example": "She published her first book at university.",
+		  "source": "reading"
+		},
+		{
+		  "word": "translate",
+		  "meaning_en": "to change words from one language to another",
+		  "meaning_fa": "ترجمه کردن",
+		  "example": "She translated the Holy Quran.",
+		  "source": "reading"
+		},
+		{
+		  "word": "translation",
+		  "meaning_en": "the result of translating words",
+		  "meaning_fa": "ترجمه",
+		  "example": "The translation of the Quran was published.",
+		  "source": "reading"
+		},
+		{
+		  "word": "antibiotic",
+		  "meaning_en": "a medicine used to treat infections",
+		  "meaning_fa": "آنتی بیوتیک",
+		  "example": "Fleming worked on antibiotics.",
+		  "source": "reading"
+		},
+		{
+		  "word": "penicillin",
+		  "meaning_en": "a type of antibiotic discovered by Fleming",
+		  "meaning_fa": "پنی سیلین",
+		  "example": "Penicillin saved many lives.",
+		  "source": "reading"
+		},
+		{
+		  "word": "laboratory",
+		  "meaning_en": "a place with equipment for scientific experiments",
+		  "meaning_fa": "آزمایشگاه",
+		  "example": "Students do experiments in the lab.",
+		  "source": "reading"
+		},
+		{
+		  "word": "energetic",
+		  "meaning_en": "active and having a lot of energy",
+		  "meaning_fa": "پر انرژی",
+		  "example": "Babak is an energetic boy.",
+		  "source": "reading"
+		},
+		{
+		  "word": "successful",
+		  "meaning_en": "achieving what you want",
+		  "meaning_fa": "موفق",
+		  "example": "He was successful at the end of his life.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  },
+  {
+	"book": 1,
+	"lesson": 4,
+	"title": "Traveling the World",
+	"vocabulary": {
+	  "audio": "vocab_lesson4.mp3",
+	  "words": [
+		{
+		  "word": "plan",
+		  "meaning_en": "a set of actions for achieving something",
+		  "meaning_fa": "برنامه",
+		  "example": "I am planning for my summer vacation.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "agent",
+		  "meaning_en": "a person who acts for or represents another",
+		  "meaning_fa": "نماینده / کارگزار",
+		  "example": "He is talking to a travel agent.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "choice",
+		  "meaning_en": "a chance to choose something",
+		  "meaning_fa": "انتخاب",
+		  "example": "You may have some choices.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "probably",
+		  "meaning_en": "likely to happen or be true",
+		  "meaning_fa": "احتمالا",
+		  "example": "Iran is probably the best choice.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "hospitable",
+		  "meaning_en": "friendly and welcoming to guests",
+		  "meaning_fa": "مهمان نواز",
+		  "example": "Iranian people are very hospitable.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "suggestion",
+		  "meaning_en": "an idea or plan put forward",
+		  "meaning_fa": "پیشنهاد",
+		  "example": "Do you have any suggestions?",
+		  "source": "conversation"
+		},
+		{
+		  "word": "destination",
+		  "meaning_en": "the place someone is going to",
+		  "meaning_fa": "مقصد",
+		  "example": "I am not sure about my destination.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "tourist",
+		  "meaning_en": "a person who travels for pleasure",
+		  "meaning_fa": "گردشگر",
+		  "example": "Tourists visit Iran every year.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "tourism",
+		  "meaning_en": "the business of providing services to tourists",
+		  "meaning_fa": "گردشگری",
+		  "example": "Tourism is traveling for entertainment.",
+		  "source": "reading"
+		},
+		{
+		  "word": "international",
+		  "meaning_en": "involving many countries",
+		  "meaning_fa": "بین المللی",
+		  "example": "International tourists travel abroad.",
+		  "source": "reading"
+		},
+		{
+		  "word": "domestic",
+		  "meaning_en": "inside one's own country",
+		  "meaning_fa": "داخلی",
+		  "example": "Domestic tourists travel inside their country.",
+		  "source": "reading"
+		},
+		{
+		  "word": "attract",
+		  "meaning_en": "to cause people to come to a place",
+		  "meaning_fa": "جذب کردن",
+		  "example": "Egypt attracts many tourists.",
+		  "source": "reading"
+		},
+		{
+		  "word": "ancient",
+		  "meaning_en": "belonging to a very old time",
+		  "meaning_fa": "باستانی",
+		  "example": "Iran has many ancient historical sites.",
+		  "source": "reading"
+		},
+		{
+		  "word": "pyramid",
+		  "meaning_en": "a large ancient stone building with a triangular shape",
+		  "meaning_fa": "هرم",
+		  "example": "Egypt is famous for its pyramids.",
+		  "source": "reading"
+		},
+		{
+		  "word": "paradise",
+		  "meaning_en": "a place of great beauty and happiness",
+		  "meaning_fa": "بهشت",
+		  "example": "Iran is a true paradise.",
+		  "source": "reading"
+		},
+		{
+		  "word": "shrine",
+		  "meaning_en": "a holy place",
+		  "meaning_fa": "حرم / زیارتگاه",
+		  "example": "Muslims visit holy shrines in Mashhad.",
+		  "source": "reading"
+		},
+		{
+		  "word": "souvenir",
+		  "meaning_en": "an object kept to remember a place or event",
+		  "meaning_fa": "سوغاتی",
+		  "example": "He bought a souvenir from his trip.",
+		  "source": "reading"
+		},
+		{
+		  "word": "vacation",
+		  "meaning_en": "a period of time away from work or school",
+		  "meaning_fa": "تعطیلات",
+		  "example": "The family spent their summer vacation in Yasooj.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "booklet",
+		  "meaning_en": "a small paper book with information",
+		  "meaning_fa": "بروشور / کتابچه",
+		  "example": "You can check this booklet for information.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "site",
+		  "meaning_en": "a place where something important happened or exists",
+		  "meaning_fa": "محل / سایت (تاریخی)",
+		  "example": "Isfahan has many historical sites.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "pilgrim",
+		  "meaning_en": "a person who travels to a holy place",
+		  "meaning_fa": "زائر",
+		  "example": "Pilgrims come to Imam Reza Holy Shrine.",
+		  "source": "exercise"
+		},
+		{
+		  "word": "continent",
+		  "meaning_en": "one of the large land areas of the earth",
+		  "meaning_fa": "قاره",
+		  "example": "Asia is a large continent.",
+		  "source": "reading"
+		},
+		{
+		  "word": "desert",
+		  "meaning_en": "a dry area with little or no water",
+		  "meaning_fa": "بیابان",
+		  "example": "Camels travel across deserts.",
+		  "source": "reading"
+		},
+		{
+		  "word": "behavior",
+		  "meaning_en": "the way a person acts or behaves",
+		  "meaning_fa": "رفتار",
+		  "example": "We should be careful about our behavior.",
+		  "source": "reading"
+		},
+		{
+		  "word": "embassy",
+		  "meaning_en": "the office of a country's representatives in another country",
+		  "meaning_fa": "سفارت",
+		  "example": "You should go to the embassy for a visa.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  }
+]

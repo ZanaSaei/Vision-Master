@@ -5,14 +5,11 @@ extends Node
 #  Handles: loading lesson JSON data, and the saved-words system
 # ============================================================
 
-
 # ---------- VOCABULARY DATA LOADING ----------
-# NOTE: JSON files only contain vocabulary data. Conversation, Reading,
-# Grammar, and Speaking content is built directly into their own scenes.
+# Loads vocabulary data from the JSON file and finds the specific lesson
 
-# Loads res://data/v{book}_l{lesson}.json and returns it as a Dictionary
 func load_vocabulary(book_number: int, lesson_number: int) -> Dictionary:
-	var path := "res://data/v%d_l%d.json" % [book_number, lesson_number]
+	var path := "res://data/v%d_vocabularies.json" % book_number
 
 	if not FileAccess.file_exists(path):
 		push_error("Vocabulary file not found: " + path)
@@ -28,11 +25,24 @@ func load_vocabulary(book_number: int, lesson_number: int) -> Dictionary:
 		push_error("Failed to parse JSON at %s — %s" % [path, json.get_error_message()])
 		return {}
 
-	return json.data
+	var data = json.data
+	
+	# data should be an array of lesson objects
+	if not data is Array:
+		push_error("Invalid JSON format: expected array of lessons")
+		return {}
+	
+	# Find the lesson with matching book and lesson numbers
+	for lesson_data in data:
+		if lesson_data.get("book") == book_number and lesson_data.get("lesson") == lesson_number:
+			return lesson_data
+	
+	# If lesson not found, return empty
+	push_error("Lesson %d not found in book %d" % [lesson_number, book_number])
+	return {}
 
 
 # Builds the full resource path to an audio file for a given book/lesson.
-# Example: Global.get_audio_path(1, 1, "vocab.mp3") -> "res://assets/audio/v1/l1/vocab.mp3"
 func get_audio_path(book_number: int, lesson_number: int, filename: String) -> String:
 	return "res://assets/audio/v%d/l%d/%s" % [book_number, lesson_number, filename]
 
@@ -47,7 +57,6 @@ var current_book: int   = 1
 var current_lesson: int = 1
 
 # Controls whether VocabFlashcards loads lesson words or saved words
-# "lesson" = normal New Words screen | "saved" = Saved Words screen
 var flashcard_mode: String = "lesson"
 
 # Last scene the user visited — used by the Continue button
@@ -118,7 +127,6 @@ func _persist_saved_words() -> void:
 
 
 # A word is uniquely identified by its text + which book/lesson it came from
-# (since "left" could appear as a vocab word in more than one lesson someday)
 func is_word_saved(word: String, book: int, lesson: int) -> bool:
 	for entry in saved_words:
 		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:

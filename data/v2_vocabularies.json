@@ -1,0 +1,501 @@
+[
+  {
+	"book": 2,
+	"lesson": 1,
+	"title": "Understanding People",
+	"vocabulary": {
+	  "audio": "vocab_lesson1.mp3",
+	  "words": [
+		{
+		  "word": "region",
+		  "meaning_en": "a particular area or part of a country",
+		  "meaning_fa": "ناحیه / منطقه",
+		  "example": "Mazandaran is one of the best farming regions of Iran.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "exist",
+		  "meaning_en": "to be real or present",
+		  "meaning_fa": "وجود داشتن",
+		  "example": "Does water really exist on Mars?",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "continent",
+		  "meaning_en": "one of the large land masses of the earth",
+		  "meaning_fa": "قاره",
+		  "example": "Asia is the largest continent of the world.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "native",
+		  "meaning_en": "belonging to a particular place by birth",
+		  "meaning_fa": "بومی",
+		  "example": "Spanish is Diego's native language.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "range",
+		  "meaning_en": "the variety of things within a particular limit",
+		  "meaning_fa": "محدوده / دامنه",
+		  "example": "Dictionary prices range from $5 to $15.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "percent",
+		  "meaning_en": "one part in every hundred",
+		  "meaning_fa": "درصد",
+		  "example": "Less than 40 percent of people live in villages.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "imagine",
+		  "meaning_en": "to form a picture in your mind",
+		  "meaning_fa": "تصور کردن",
+		  "example": "Imagine you are traveling in space.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "century",
+		  "meaning_en": "a period of 100 years",
+		  "meaning_fa": "قرن",
+		  "example": "We are living in the twenty-first century.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "sign language",
+		  "meaning_en": "a language using hand movements, used by deaf people",
+		  "meaning_fa": "زبان اشاره",
+		  "example": "Our teacher explained the word by means of sign language.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "society",
+		  "meaning_en": "a large group of people who live together",
+		  "meaning_fa": "جامعه",
+		  "example": "We live in an Islamic society.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "ability",
+		  "meaning_en": "the power or skill to do something",
+		  "meaning_fa": "توانایی",
+		  "example": "Human's ability to talk makes him different from animals.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "vary",
+		  "meaning_en": "to be different from each other",
+		  "meaning_fa": "متفاوت بودن",
+		  "example": "In some cities, prices vary from shop to shop.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "make up",
+		  "meaning_en": "to form a thing, amount, or number",
+		  "meaning_fa": "تشکیل دادن",
+		  "example": "China makes up 18% of the world's population.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "despite",
+		  "meaning_en": "without taking any notice of; in spite of",
+		  "meaning_fa": "علی‌رغم",
+		  "example": "I enjoy the weekend, despite the bad weather.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "communicate",
+		  "meaning_en": "to share or exchange information with others",
+		  "meaning_fa": "ارتباط برقرار کردن",
+		  "example": "People communicate through languages.",
+		  "source": "reading"
+		},
+		{
+		  "word": "valuable",
+		  "meaning_en": "having great worth or importance",
+		  "meaning_fa": "ارزشمند",
+		  "example": "All languages are valuable.",
+		  "source": "reading"
+		},
+		{
+		  "word": "speaker",
+		  "meaning_en": "a person who speaks a particular language",
+		  "meaning_fa": "گوینده / سخن‌گو",
+		  "example": "English has many native speakers.",
+		  "source": "reading"
+		},
+		{
+		  "word": "endangered",
+		  "meaning_en": "at risk of disappearing or becoming extinct",
+		  "meaning_fa": "در خطر انقراض",
+		  "example": "Some languages are considered endangered.",
+		  "source": "reading"
+		},
+		{
+		  "word": "means",
+		  "meaning_en": "a method or way of doing something",
+		  "meaning_fa": "وسیله / راه",
+		  "example": "Language is a means of communication.",
+		  "source": "reading"
+		},
+		{
+		  "word": "respect",
+		  "meaning_en": "to show admiration or regard for someone or something",
+		  "meaning_fa": "احترام گذاشتن",
+		  "example": "We should respect all languages.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  },
+  {
+	"book": 2,
+	"lesson": 2,
+	"title": "A Healthy Lifestyle",
+	"vocabulary": {
+	  "audio": "vocab_lesson2.mp3",
+	  "words": [
+		{
+		  "word": "couch potato",
+		  "meaning_en": "a person who spends a lot of time sitting and watching TV",
+		  "meaning_fa": "آدم تنبل (کسی که زیاد تلویزیون تماشا می‌کند)",
+		  "example": "Stop being a couch potato!",
+		  "source": "conversation"
+		},
+		{
+		  "word": "gain weight",
+		  "meaning_en": "to become heavier or fatter",
+		  "meaning_fa": "چاق شدن / افزایش وزن",
+		  "example": "Eating junk food makes people gain weight.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "depressed",
+		  "meaning_en": "feeling very sad and without hope",
+		  "meaning_fa": "افسرده",
+		  "example": "He felt depressed when he stayed home alone.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "rarely",
+		  "meaning_en": "not very often; almost never",
+		  "meaning_fa": "به ندرت",
+		  "example": "I rarely go out and hang out with my friends.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "heartbeat",
+		  "meaning_en": "the movement or sound of the heart as it pumps blood",
+		  "meaning_fa": "ضربان قلب",
+		  "example": "The doctor is listening to my grandfather's heartbeat.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "blood pressure",
+		  "meaning_en": "the pressure of the blood in the arteries",
+		  "meaning_fa": "فشار خون",
+		  "example": "My uncle has high blood pressure.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "measure",
+		  "meaning_en": "to find the size, amount, or degree of something",
+		  "meaning_fa": "اندازه گرفتن",
+		  "example": "My sister measures herself every month.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "heart attack",
+		  "meaning_en": "a sudden serious medical condition where the heart stops working properly",
+		  "meaning_fa": "حمله قلبی",
+		  "example": "Our neighbor had a heart attack yesterday.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "serving",
+		  "meaning_en": "an amount of food for one person",
+		  "meaning_fa": "یک وعده غذا",
+		  "example": "One serving of rice is not enough for them.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "harmful",
+		  "meaning_en": "causing or likely to cause harm",
+		  "meaning_fa": "مضر",
+		  "example": "Smoking is harmful to everyone.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "habit",
+		  "meaning_en": "a thing that you do often and regularly",
+		  "meaning_fa": "عادت",
+		  "example": "Arash has a bad eating habit.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "addiction",
+		  "meaning_en": "the state of being addicted to something",
+		  "meaning_fa": "اعتیاد",
+		  "example": "Addiction to technology is a big problem.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "physical",
+		  "meaning_en": "relating to the body",
+		  "meaning_fa": "جسمانی",
+		  "example": "Swimming is a physical sport.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "calm",
+		  "meaning_en": "without worry or excitement",
+		  "meaning_fa": "آرام",
+		  "example": "My teacher has a very calm manner.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "balanced",
+		  "meaning_en": "with all parts existing in the correct amounts",
+		  "meaning_fa": "متوازن",
+		  "example": "A balanced diet contains lots of fruits and vegetables.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "recent",
+		  "meaning_en": "happening or starting a short time ago",
+		  "meaning_fa": "اخیر",
+		  "example": "The price of bananas has increased in recent weeks.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "emotional",
+		  "meaning_en": "relating to the emotions",
+		  "meaning_fa": "عاطفی",
+		  "example": "Her problem was more emotional than physical.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "prevent",
+		  "meaning_en": "to stop something from happening",
+		  "meaning_fa": "پیشگیری کردن",
+		  "example": "Daily exercise can prevent diseases.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "relationship",
+		  "meaning_en": "the way in which two people feel and behave towards each other",
+		  "meaning_fa": "رابطه",
+		  "example": "She has a very good relationship with her aunt.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "junk food",
+		  "meaning_en": "food that is unhealthy and high in calories",
+		  "meaning_fa": "غذای ناسالم",
+		  "example": "Eating junk food makes you gain weight.",
+		  "source": "reading"
+		},
+		{
+		  "word": "lifestyle",
+		  "meaning_en": "the way a person lives",
+		  "meaning_fa": "سبک زندگی",
+		  "example": "A healthy lifestyle can help you live longer.",
+		  "source": "reading"
+		},
+		{
+		  "word": "stress",
+		  "meaning_en": "a state of mental or emotional strain",
+		  "meaning_fa": "استرس",
+		  "example": "Praying decreases stress.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  },
+  {
+	"book": 2,
+	"lesson": 3,
+	"title": "Art and Culture",
+	"vocabulary": {
+	  "audio": "vocab_lesson3.mp3",
+	  "words": [
+		{
+		  "word": "depend on",
+		  "meaning_en": "to be decided by or affected by something",
+		  "meaning_fa": "بستگی داشتن به",
+		  "example": "The price depends on its size.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "discount",
+		  "meaning_en": "a reduction in the usual price",
+		  "meaning_fa": "تخفیف",
+		  "example": "You'll get a 20 percent discount.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "product",
+		  "meaning_en": "a thing that is made or grown to be sold",
+		  "meaning_fa": "محصول",
+		  "example": "Here you can find a range of hand-made products.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "pack",
+		  "meaning_en": "to put things into a container or box",
+		  "meaning_fa": "بسته‌بندی کردن",
+		  "example": "Please pack them for me.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "handicraft",
+		  "meaning_en": "an object made by hand, often using traditional methods",
+		  "meaning_fa": "صنایع دستی",
+		  "example": "I am looking for some Iranian handicrafts.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "tilework",
+		  "meaning_en": "decorative tiles used in architecture",
+		  "meaning_fa": "کاشی‌کاری",
+		  "example": "There is beautiful tilework in Sheikh Lotfollah Mosque.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "pottery",
+		  "meaning_en": "objects made of clay that are fired to harden them",
+		  "meaning_fa": "سفالگری",
+		  "example": "Pottery is one of the oldest handicrafts.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "carpet",
+		  "meaning_en": "a thick floor covering made of woven material",
+		  "meaning_fa": "فرش",
+		  "example": "Persian carpets are famous around the world.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "calligraphy",
+		  "meaning_en": "the art of beautiful handwriting",
+		  "meaning_fa": "خوشنویسی",
+		  "example": "She is a master of Persian calligraphy.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "painting",
+		  "meaning_en": "the art of using paints to create pictures",
+		  "meaning_fa": "نقاشی",
+		  "example": "He created a beautiful painting.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "decorative",
+		  "meaning_en": "used to make something look more attractive",
+		  "meaning_fa": "تزئینی",
+		  "example": "My aunt bought a decorative wall clock.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "vast",
+		  "meaning_en": "very large in size or area",
+		  "meaning_fa": "وسیع",
+		  "example": "Iran is a vast country in Southwest Asia.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "craftsman",
+		  "meaning_en": "a person who is skilled at making things by hand",
+		  "meaning_fa": "صنعتگر",
+		  "example": "Iranian craftsmen are hard-working people.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "weave",
+		  "meaning_en": "to make cloth or a rug by crossing threads under and over each other",
+		  "meaning_fa": "بافتن",
+		  "example": "He is weaving a rug.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "metal",
+		  "meaning_en": "a hard, shiny material such as iron, gold, or silver",
+		  "meaning_fa": "فلز",
+		  "example": "Gold and silver are valuable metals.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "unique",
+		  "meaning_en": "being the only one of its kind",
+		  "meaning_fa": "منحصربه‌فرد",
+		  "example": "Each person's fingerprint is unique.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "diversity",
+		  "meaning_en": "a range of different things or people",
+		  "meaning_fa": "تنوع",
+		  "example": "The animal diversity of Lorestan is amazing.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "custom",
+		  "meaning_en": "traditional or usual things that people do in an area",
+		  "meaning_fa": "رسم",
+		  "example": "My uncle is interested in old local customs.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "identity",
+		  "meaning_en": "who or what a person or thing is",
+		  "meaning_fa": "هویت",
+		  "example": "The policeman is searching for the identity of that man.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "reflect",
+		  "meaning_en": "to show a particular quality or feeling",
+		  "meaning_fa": "بازتاب دادن",
+		  "example": "This poem reflects the poet's love of nature.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "humankind",
+		  "meaning_en": "all people; humanity",
+		  "meaning_fa": "بشر",
+		  "example": "The World Wars were bad for humankind.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "appreciate",
+		  "meaning_en": "to recognize the full worth of something",
+		  "meaning_fa": "ارزش قائل شدن",
+		  "example": "Each society appreciates its art and culture.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "souvenir",
+		  "meaning_en": "a thing kept as a reminder of a place or event",
+		  "meaning_fa": "سوغاتی",
+		  "example": "Tourists buy handicrafts as souvenirs.",
+		  "source": "reading"
+		},
+		{
+		  "word": "economy",
+		  "meaning_en": "the system of making and selling goods in a country",
+		  "meaning_fa": "اقتصاد",
+		  "example": "Handicrafts help a country's economy.",
+		  "source": "reading"
+		},
+		{
+		  "word": "imagination",
+		  "meaning_en": "the ability to form new ideas or pictures in the mind",
+		  "meaning_fa": "تخیل",
+		  "example": "Art is created with imagination.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  }
+]

@@ -101,15 +101,38 @@ func _enter_lesson_mode() -> void:
 	audio_button.visible = true
 
 	# Bottom nav — standard
+	# Disconnect saved-mode signals first (if any)
+	if nav_list.pressed.is_connected(_on_remove_word_pressed):
+		nav_list.pressed.disconnect(_on_remove_word_pressed)
+	if nav_settings.pressed.is_connected(_on_quiz_pressed):
+		nav_settings.pressed.disconnect(_on_quiz_pressed)
+
+	# Connect lesson-mode signals
 	nav_list.pressed.connect(_on_nav_list_lesson_pressed)
 	nav_settings.pressed.connect(_on_nav_settings_lesson_pressed)
+
+	# Restore lesson icons (use your actual icon paths)
+	nav_list.texture_normal = load("res://images/menu.png")
+	nav_list.texture_pressed = load("res://images/menu.png")
+	nav_list.tooltip_text = "Lesson List"
+	
+	nav_settings.texture_normal = load("res://images/setting.png")
+	nav_settings.texture_pressed = load("res://images/setting.png")
+	nav_settings.tooltip_text = "Settings"
 
 	# Load data
 	var book: int   = Global.current_book
 	var lesson: int = Global.current_lesson
 	var lesson_data := Global.load_vocabulary(book, lesson)
+	
+	# Check if lesson data is valid
+	if lesson_data.is_empty():
+		push_error("Failed to load lesson %d from book %d" % [lesson, book])
+		get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+		return
+	
 	var vocab_section: Dictionary = lesson_data.get("vocabulary", {})
-	var _lesson_title: String = lesson_data.get("title", "")   # now prefixed with _
+	var _lesson_title: String = lesson_data.get("title", "")
 
 	setup(
 		vocab_section.get("words", []),
@@ -118,7 +141,6 @@ func _enter_lesson_mode() -> void:
 		Mode.LESSON
 	)
 
-
 func _enter_saved_mode() -> void:
 	mode = Mode.SAVED
 
@@ -126,17 +148,15 @@ func _enter_saved_mode() -> void:
 	audio_button.visible = false
 
 	# ----- Change nav icons for SAVED mode -----
-	# Replace "Lesson List" with "Remove Word" icon
-	nav_list.texture_normal = load("res://images/delete.png")   # <--- put your icon path
+	nav_list.texture_normal = load("res://images/delete.png")
 	nav_list.texture_pressed = load("res://images/delete.png")
 	nav_list.tooltip_text = "Remove current word"
 	
-	# Replace "Settings" with "Quiz" icon
-	nav_settings.texture_normal = load("res://images/quiz.png") # <--- put your icon path
+	nav_settings.texture_normal = load("res://images/quiz.png")
 	nav_settings.texture_pressed = load("res://images/quiz.png")
 	nav_settings.tooltip_text = "Start Quiz"
 
-	# Disconnect old lesson-mode signals (safety)
+	# Disconnect old lesson-mode signals
 	if nav_list.pressed.is_connected(_on_nav_list_lesson_pressed):
 		nav_list.pressed.disconnect(_on_nav_list_lesson_pressed)
 	if nav_settings.pressed.is_connected(_on_nav_settings_lesson_pressed):
@@ -147,13 +167,12 @@ func _enter_saved_mode() -> void:
 	nav_settings.pressed.connect(_on_quiz_pressed)
 
 	# Heart becomes a static filled indicator in saved mode
-	save_button.icon    = save_active
+	save_button.icon = save_active
 	save_button.modulate = Color("#EF4444")
 	save_button.disabled = true
 
 	var saved_copy = Global.get_saved_words().duplicate()
 	setup(saved_copy, 0, 0, "", Mode.SAVED)
-
 
 # ----------------------------------------------------------------
 #  PUBLIC SETUP

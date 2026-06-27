@@ -1,0 +1,473 @@
+[
+  {
+	"book": 3,
+	"lesson": 1,
+	"title": "Sense of Appreciation",
+	"vocabulary": {
+	  "audio": "vocab_lesson1.mp3",
+	  "words": [
+		{
+		  "word": "physician",
+		  "meaning_en": "a medical doctor; a specialist in medicine",
+		  "meaning_fa": "پزشک",
+		  "example": "Dr. Gharib was a famous physician.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "take temperature",
+		  "meaning_en": "to measure how hot a person's body is (using a thermometer)",
+		  "meaning_fa": "دما را اندازه گرفتن",
+		  "example": "The nurse is taking her temperature.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "regard",
+		  "meaning_en": "to think of someone or something in a particular way; consider",
+		  "meaning_fa": "به حساب آوردن / انگاشتن",
+		  "example": "He was regarded as a dedicated physician.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "dedicated",
+		  "meaning_en": "working hard with great commitment and loyalty",
+		  "meaning_fa": "متعهد / فداکار",
+		  "example": "He was known as a dedicated doctor.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "spare no pains",
+		  "meaning_en": "to try as hard as possible; to make every effort",
+		  "meaning_fa": "دریغ نکردن / کوشش فراوان کردن",
+		  "example": "He spared no pains to cure sick children.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "distinguished",
+		  "meaning_en": "very successful and admired; outstanding",
+		  "meaning_fa": "سرشناس / برجسته",
+		  "example": "He was a distinguished university professor.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "not surprisingly",
+		  "meaning_en": "as one would expect; predictably",
+		  "meaning_fa": "جای تعجب نیست",
+		  "example": "Not surprisingly, he was loved by his patients.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "sofa",
+		  "meaning_en": "a long comfortable seat for two or more people",
+		  "meaning_fa": "مبل",
+		  "example": "Hamid sits on the sofa and watches TV.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "pigeon",
+		  "meaning_en": "a grey bird often seen in cities",
+		  "meaning_fa": "کبوتر",
+		  "example": "My grandfather feeds the pigeons.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "shout",
+		  "meaning_en": "to speak very loudly or angrily",
+		  "meaning_fa": "فریاد زدن",
+		  "example": "Dad shouted at me when I didn't do my homework.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "hard of hearing",
+		  "meaning_en": "having difficulty hearing; partially deaf",
+		  "meaning_fa": "کم شنوا",
+		  "example": "My grandmother is hard of hearing.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "hug",
+		  "meaning_en": "to hold someone closely in your arms",
+		  "meaning_fa": "در آغوش گرفتن",
+		  "example": "He went to his son and hugged him.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "lap",
+		  "meaning_en": "the flat area formed by the upper part of your legs when you sit down",
+		  "meaning_fa": "زانو / دامان",
+		  "example": "My little sister sits on my mother's lap.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "burst into tears",
+		  "meaning_en": "to start crying suddenly",
+		  "meaning_fa": "ناگهان گریه کردن",
+		  "example": "Aida burst into tears when she saw her score.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "repeatedly",
+		  "meaning_en": "many times; again and again",
+		  "meaning_fa": "مکرراً",
+		  "example": "I've told Mohsen repeatedly to talk politely.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "forgive",
+		  "meaning_en": "to stop being angry with someone for a mistake",
+		  "meaning_fa": "بخشیدن",
+		  "example": "Mom forgave me for breaking the vase.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "calmly",
+		  "meaning_en": "in a quiet, peaceful, and controlled way",
+		  "meaning_fa": "آرامانه",
+		  "example": "He always speaks slowly and calmly.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "diary",
+		  "meaning_en": "a book in which you record your daily thoughts or events",
+		  "meaning_fa": "دفتر خاطرات",
+		  "example": "I have kept a diary for twelve years.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "kindness",
+		  "meaning_en": "the quality of being friendly, generous, and considerate",
+		  "meaning_fa": "مهربانی",
+		  "example": "Kindness boosts energy in elderly people.",
+		  "source": "reading"
+		},
+		{
+		  "word": "elderly",
+		  "meaning_en": "old; relating to older people",
+		  "meaning_fa": "سالمند",
+		  "example": "We should take care of elderly people.",
+		  "source": "reading"
+		},
+		{
+		  "word": "heritage",
+		  "meaning_en": "history, traditions, and culture passed down from previous generations",
+		  "meaning_fa": "میراث",
+		  "example": "We should protect our heritage for future generations.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  },
+  {
+	"book": 3,
+	"lesson": 2,
+	"title": "Look it Up!",
+	"vocabulary": {
+	  "audio": "vocab_lesson2.mp3",
+	  "words": [
+		{
+		  "word": "recommend",
+		  "meaning_en": "to suggest that someone should do or get something",
+		  "meaning_fa": "توصیه کردن",
+		  "example": "I recommend a learner's dictionary.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "suppose",
+		  "meaning_en": "to think or believe something is true",
+		  "meaning_fa": "فکر کردن / گمان کردن",
+		  "example": "I suppose a monolingual dictionary is suitable.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "elementary",
+		  "meaning_en": "basic; at the beginning level",
+		  "meaning_fa": "ابتدایی",
+		  "example": "An elementary level dictionary is OK for you.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "intermediate",
+		  "meaning_en": "at a level between beginner and advanced",
+		  "meaning_fa": "میانه / متوسط",
+		  "example": "The dictionary comes in elementary, intermediate, and advanced levels.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "advanced",
+		  "meaning_en": "at a high or complex level",
+		  "meaning_fa": "پیشرفته",
+		  "example": "Advanced dictionaries are for expert users.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "app",
+		  "meaning_en": "a software program for a computer or smartphone",
+		  "meaning_fa": "نرم افزار کاربردی",
+		  "example": "There are some free apps for smartphones.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "PC",
+		  "meaning_en": "personal computer",
+		  "meaning_fa": "رایانه شخصی",
+		  "example": "You can use a dictionary on your PC.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "smart phone",
+		  "meaning_en": "a mobile phone that can connect to the internet and run apps",
+		  "meaning_fa": "تلفن هوشمند",
+		  "example": "You can download a dictionary on your smart phone.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "contain",
+		  "meaning_en": "to have something inside",
+		  "meaning_fa": "شامل بودن / داشتن",
+		  "example": "Try to avoid foods that contain a lot of fat.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "entry",
+		  "meaning_en": "an item in a dictionary, list, or record",
+		  "meaning_fa": "مدخل (در فرهنگ لغت)",
+		  "example": "I circled the dictionary entry for the word 'purpose'.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "symbol",
+		  "meaning_en": "a sign, shape, or letter used to represent something",
+		  "meaning_fa": "نماد",
+		  "example": "C is the symbol for carbon.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "stand for",
+		  "meaning_en": "to represent or mean something",
+		  "meaning_fa": "نشان دادن / مخفف بودن",
+		  "example": "I.R. stands for Islamic Republic.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "figure out",
+		  "meaning_en": "to understand or solve something",
+		  "meaning_fa": "فهمیدن / حل کردن",
+		  "example": "Mehran couldn't figure out what the teacher was talking about.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "combination",
+		  "meaning_en": "an arrangement of different things in a particular order",
+		  "meaning_fa": "ترکیب",
+		  "example": "From the letters X and Y, we can get two combinations.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "introduction",
+		  "meaning_en": "the beginning part of a book that explains its purpose",
+		  "meaning_fa": "مقدمه",
+		  "example": "This book has only a two-page introduction.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "effectively",
+		  "meaning_en": "in a successful way that achieves the desired result",
+		  "meaning_fa": "به طور مؤثر",
+		  "example": "If you know how to study more effectively, you will learn more.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "arrange",
+		  "meaning_en": "to put things in a neat or useful order",
+		  "meaning_fa": "مرتب کردن",
+		  "example": "We'll need to arrange the chairs around the table.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "jump into",
+		  "meaning_en": "to start doing something suddenly without preparation",
+		  "meaning_fa": "ناگهان شروع کردن",
+		  "example": "I did not read the introduction and jumped into the next part.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "guide word",
+		  "meaning_en": "the words at the top of a dictionary page that show the first and last entries",
+		  "meaning_fa": "واژه راهنما",
+		  "example": "Guide words help you find the word you are looking for.",
+		  "source": "reading"
+		},
+		{
+		  "word": "abbreviation",
+		  "meaning_en": "a shortened form of a word or phrase",
+		  "meaning_fa": "اختصار",
+		  "example": "Learn what the abbreviations in the dictionary stand for.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  },
+  {
+	"book": 3,
+	"lesson": 3,
+	"title": "Renewable Energy",
+	"vocabulary": {
+	  "audio": "vocab_lesson3.mp3",
+	  "words": [
+		{
+		  "word": "generate",
+		  "meaning_en": "to produce or create something, especially energy",
+		  "meaning_fa": "تولید کردن",
+		  "example": "Wind turbines generate electricity.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "opposite",
+		  "meaning_en": "completely different; facing the other way",
+		  "meaning_fa": "مخالف / برعکس",
+		  "example": "A wind turbine works the opposite of a fan.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "blow",
+		  "meaning_en": "to move in the air (wind)",
+		  "meaning_fa": "وزیدن",
+		  "example": "The wind is blowing hard.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "remind",
+		  "meaning_en": "to make someone think of something again",
+		  "meaning_fa": "یادآوری کردن",
+		  "example": "These wind turbines remind me of wind towers in Yazd.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "air conditioner",
+		  "meaning_en": "a device that cools the air in a room",
+		  "meaning_fa": "کولر",
+		  "example": "Turn off the air conditioner when you leave the room.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "fossil fuel",
+		  "meaning_en": "fuel such as oil, coal, or gas formed from the remains of ancient living things",
+		  "meaning_fa": "سوخت فسیلی",
+		  "example": "Oil and coal are common fossil fuels.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "renewable",
+		  "meaning_en": "able to be replaced naturally (energy source)",
+		  "meaning_fa": "تجدیدپذیر",
+		  "example": "Wind and water are renewable energy sources.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "resource",
+		  "meaning_en": "a supply of something useful, such as oil or water",
+		  "meaning_fa": "منبع",
+		  "example": "Iran is rich in oil resources.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "pollute",
+		  "meaning_en": "to make air, water, or land dirty and harmful",
+		  "meaning_fa": "آلوده کردن",
+		  "example": "The factory has polluted the river.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "consume",
+		  "meaning_en": "to use up a resource or energy",
+		  "meaning_fa": "مصرف کردن",
+		  "example": "The new light bulbs consume less electricity.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "balcony",
+		  "meaning_en": "a platform with a wall or railing attached to the outside of a building",
+		  "meaning_fa": "بالکن",
+		  "example": "My uncle often sits on the balcony.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "variety",
+		  "meaning_en": "many different types of things or people",
+		  "meaning_fa": "تنوع",
+		  "example": "They do a variety of fitness activities.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "tide",
+		  "meaning_en": "the regular rise and fall of the sea level",
+		  "meaning_fa": "جزر و مد",
+		  "example": "Here you can see two high and two low tides each day.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "replace",
+		  "meaning_en": "to take the place of something or to put something back",
+		  "meaning_fa": "جایگزین کردن / بازگرداندن",
+		  "example": "The factory replaced its workers with robots.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "use up",
+		  "meaning_en": "to finish or consume all of something",
+		  "meaning_fa": "تمام کردن",
+		  "example": "Don't use up all the milk.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "forever",
+		  "meaning_en": "for all time; eternally",
+		  "meaning_fa": "برای همیشه",
+		  "example": "No one can live forever.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "demand",
+		  "meaning_en": "the amount of a product or service that people want",
+		  "meaning_fa": "تقاضا",
+		  "example": "Demand for organic food is increasing.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "convert",
+		  "meaning_en": "to change in form, character, or function",
+		  "meaning_fa": "تبدیل کردن",
+		  "example": "The sofa converts into a bed.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "absorb",
+		  "meaning_en": "to take in a substance gradually",
+		  "meaning_fa": "جذب کردن",
+		  "example": "Plants absorb carbon dioxide.",
+		  "source": "vocabulary"
+		},
+		{
+		  "word": "solar panel",
+		  "meaning_en": "a device that captures sunlight to produce electricity or heat",
+		  "meaning_fa": "پنل خورشیدی",
+		  "example": "Buildings with solar panels are common.",
+		  "source": "reading"
+		},
+		{
+		  "word": "turbine",
+		  "meaning_en": "a machine that uses wind or water to produce power",
+		  "meaning_fa": "توربین",
+		  "example": "Wind turbines produce clean energy.",
+		  "source": "conversation"
+		},
+		{
+		  "word": "environment",
+		  "meaning_en": "the natural world around us",
+		  "meaning_fa": "محیط زیست",
+		  "example": "Fossil fuels are harmful to the environment.",
+		  "source": "reading"
+		}
+	  ]
+	}
+  }
+]
