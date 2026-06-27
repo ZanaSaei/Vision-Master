@@ -9,6 +9,15 @@ extends Control
 const SCENE_MAIN_MENU   := "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
+# ---------- Font configuration ----------
+# Change these paths to your actual font files
+const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_JAKARTA_BOLD_PATH := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+
+# Preload fonts for better performance
+var font_regular: FontFile
+var font_bold: FontFile
+
 # Lesson titles per book, matching the real textbooks
 const LESSON_DATA := {
 	1: [
@@ -48,12 +57,36 @@ const BOOK_BG_COLORS := {
 
 
 func _ready() -> void:
+	# Load fonts
+	_load_fonts()
+	
+	# Apply fonts to existing labels
+	_apply_fonts_to_labels()
+	
 	back_button.button_up.connect(_on_back_button_pressed)
 	
 	var book: int = Global.current_book
 	top_bar_title.text = "Vision %d" % book
 
 	_build_lesson_buttons(book)
+
+
+func _load_fonts() -> void:
+	# Load fonts with error handling
+	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
+	font_bold = load(FONT_JAKARTA_BOLD_PATH)
+	
+	if font_regular == null:
+		push_warning("Regular font not found at: " + FONT_JAKARTA_REGULAR_PATH)
+		
+	if font_bold == null:
+		push_warning("Bold font not found at: " + FONT_JAKARTA_BOLD_PATH)
+
+
+func _apply_fonts_to_labels() -> void:
+	# Apply bold font to top bar title
+	if font_bold != null:
+		top_bar_title.add_theme_font_override("font", font_bold)
 
 
 func _build_lesson_buttons(book: int) -> void:
@@ -83,6 +116,10 @@ func _build_lesson_buttons(book: int) -> void:
 		hover_style.bg_color = accent_color.lightened(0.7)
 		btn.add_theme_stylebox_override("hover", hover_style)
 
+		# Apply font to button
+		if font_regular != null:
+			btn.add_theme_font_override("font", font_regular)
+		
 		btn.add_theme_font_size_override("font_size", 55)
 		btn.add_theme_color_override("font_color", Color("#1E293B"))
 
@@ -95,6 +132,7 @@ func _build_lesson_buttons(book: int) -> void:
 func _on_lesson_pressed(lesson_number: int) -> void:
 	Global.current_lesson = lesson_number
 	get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+
 
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file(SCENE_MAIN_MENU)

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://drvqgo4f36upv" path="res://scenes/vocabulary/vocab_flashcards.gd" id="1_tpk77"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_egq7b"]
-[ext_resource type="Texture2D" uid="uid://rdsufs33ip5d" path="res://images/Background Black.jpg" id="2_ynxvm"]
 [ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="3_egq7b"]
 [ext_resource type="Texture2D" uid="uid://ckihf4m1yrm16" path="res://images/prev.png" id="3_l3ryj"]
 [ext_resource type="Texture2D" uid="uid://dvhje7arnej0d" path="res://images/next.png" id="4_egq7b"]
@@ -12,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://p6l4qyae7rk8" path="res://images/setting.png" id="11_t0aqf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpk77"]
-bg_color = Color(0.14509805, 0.3882353, 0.92156863, 1)
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
 
@@ -46,6 +45,8 @@ corner_radius_top_left = 150
 corner_radius_top_right = 150
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
+shadow_color = Color(0, 0.24705882, 0, 0.6)
+shadow_size = 14
 
 [sub_resource type="SystemFont" id="SystemFont_tg8v8"]
 font_names = PackedStringArray("Sans-Serif")
@@ -152,7 +153,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tpk77")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=112322530]
+[node name="TextureRect" type="ColorRect" parent="." unique_id=2022602915]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -166,7 +167,7 @@ offset_bottom = 4218.5713
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.385, 0.385)
-texture = ExtResource("2_ynxvm")
+color = Color(0.9372549, 0.9647059, 1, 1)
 
 [node name="MainLayout" type="VBoxContainer" parent="." unique_id=124550328]
 layout_mode = 1

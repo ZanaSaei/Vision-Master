@@ -24,25 +24,43 @@ const SPEAKER_BG_COLORS := [
 	Color("#FFF7ED"),
 ]
 
-@onready var back_button: Button           = $MainLayout/HeaderBar/HeaderContent/BackButton
-@onready var header_title: Label           = $MainLayout/HeaderBar/HeaderContent/HeaderTitle
-@onready var audio_button: Button          = $MainLayout/HeaderBar/HeaderContent/AudioButton
-@onready var conversation_image: TextureRect = $MainLayout/ScrollContainer/ContentLayout/ConversationImage
-@onready var intro_label: Label            = $MainLayout/ScrollContainer/ContentLayout/IntroLabel
-@onready var lines_container: VBoxContainer  = $MainLayout/ScrollContainer/ContentLayout/LinesContainer
-@onready var questions_section: VBoxContainer = $MainLayout/ScrollContainer/ContentLayout/QuestionsSection
-@onready var questions_container: VBoxContainer = $MainLayout/ScrollContainer/ContentLayout/QuestionsSection/QuestionsContainer
+# ---------- Font configuration ----------
+# Change these paths to your actual font files
+const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_JAKARTA_BOLD_PATH := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_JAKARTA_ITALIC_PATH := "res://assets/fonts/PlusJakartaSans-Italic.ttf"
+const FONT_JAKARTA_MEDIUM_PATH := "res://assets/fonts/PlusJakartaSans-Medium.ttf" 
+
+# Preload fonts for better performance
+var font_regular: FontFile
+var font_bold: FontFile
+var font_italic: FontFile
+
+@onready var back_button: Button           = $HeaderBar/HeaderContent/BackButton
+@onready var header_title: Label           = $HeaderBar/HeaderContent/HeaderTitle
+@onready var audio_button: Button          = $HeaderBar/HeaderContent/AudioButton
+@onready var conversation_image: TextureRect = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/ConversationImage
+@onready var intro_label: Label            = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/IntroLabel
+@onready var lines_container: VBoxContainer  = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/LinesContainer
+@onready var questions_section: VBoxContainer = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection
+@onready var questions_container: VBoxContainer = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection/QuestionsContainer
 @onready var audio_player: AudioStreamPlayer = $AudioPlayer
 
 
 func _ready() -> void:
+	# Load fonts
+	_load_fonts()
+	
+	# Apply fonts to existing labels
+	_apply_fonts_to_existing_labels()
+	
 	back_button.pressed.connect(_on_back_pressed)
 	audio_button.pressed.connect(_on_audio_pressed)
 
 	var book: int   = Global.current_book
 	var lesson: int = Global.current_lesson
 
-	header_title.text = "Vision %d — Lesson %d Conversation" % [book, lesson]
+	header_title.text = "Lesson %d\nConversation" % [lesson]
 
 	var data: Dictionary = _load_conversation(book, lesson)
 	if data.is_empty():
@@ -50,6 +68,33 @@ func _ready() -> void:
 		return
 
 	_build_conversation(book, lesson, data)
+
+
+func _load_fonts() -> void:
+	# Load fonts with error handling
+	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
+	font_bold = load(FONT_JAKARTA_BOLD_PATH)
+	font_italic = load(FONT_JAKARTA_ITALIC_PATH)
+	
+	if font_regular == null:
+		push_warning("Regular font not found at: " + FONT_JAKARTA_REGULAR_PATH)
+		# Fallback to default system font - we'll use a default size instead
+		
+	if font_bold == null:
+		push_warning("Bold font not found at: " + FONT_JAKARTA_BOLD_PATH)
+		
+	if font_italic == null:
+		push_warning("Italic font not found at: " + FONT_JAKARTA_ITALIC_PATH)
+
+
+func _apply_fonts_to_existing_labels() -> void:
+	# Apply to intro label
+	if font_regular != null:
+		intro_label.add_theme_font_override("font", font_regular)
+	
+	# Apply to header title
+	if font_bold != null:
+		header_title.add_theme_font_override("font", font_bold)
 
 
 func _load_conversation(book: int, lesson: int) -> Dictionary:
@@ -84,6 +129,12 @@ func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 
 	# --- Intro ---
 	intro_label.text = data.get("intro", "")
+	intro_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	intro_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	
+	# Apply font to intro (in case it was reset)
+	if font_regular != null:
+		intro_label.add_theme_font_override("font", font_regular)
 
 	# --- Dialogue lines ---
 	var lines: Array = data.get("lines", [])
@@ -151,17 +202,23 @@ func _make_line_card(speaker: String, text: String, color_idx: int) -> PanelCont
 	# Speaker name label
 	var speaker_label := Label.new()
 	speaker_label.text = speaker
-	speaker_label.add_theme_font_size_override("font_size", 16)
+	speaker_label.add_theme_font_size_override("font_size", 40)
 	speaker_label.add_theme_color_override("font_color", accent_color)
-	# Make speaker name bold via theme if you have a bold font set up;
-	# otherwise it will use the default weight.
+	
+	# Apply bold font to speaker name
+	if font_bold != null:
+		speaker_label.add_theme_font_override("font", font_bold)
 
 	# Dialogue text label
 	var text_label := Label.new()
 	text_label.text = text
 	text_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	text_label.add_theme_font_size_override("font_size", 18)
+	text_label.add_theme_font_size_override("font_size", 45)
 	text_label.add_theme_color_override("font_color", Color("#1E293B"))
+	
+	# Apply regular font to dialogue text
+	if font_regular != null:
+		text_label.add_theme_font_override("font", font_regular)
 
 	inner.add_child(speaker_label)
 	inner.add_child(text_label)
@@ -178,20 +235,28 @@ func _build_questions(questions: Array) -> void:
 		var q: String = questions[i]
 
 		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 10)
+		row.add_theme_constant_override("separation", 35)
 
 		var number := Label.new()
 		number.text = "%d." % (i + 1)
-		number.add_theme_font_size_override("font_size", 16)
+		number.add_theme_font_size_override("font_size", 35)
 		number.add_theme_color_override("font_color", Color("#2563EB"))
 		number.custom_minimum_size = Vector2(28, 0)
+		
+		# Apply bold font to question number
+		if font_bold != null:
+			number.add_theme_font_override("font", font_bold)
 
 		var q_label := Label.new()
 		q_label.text = q
 		q_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-		q_label.add_theme_font_size_override("font_size", 16)
+		q_label.add_theme_font_size_override("font_size", 45)
 		q_label.add_theme_color_override("font_color", Color("#1E293B"))
 		q_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		
+		# Apply regular font to question text
+		if font_regular != null:
+			q_label.add_theme_font_override("font", font_regular)
 
 		row.add_child(number)
 		row.add_child(q_label)

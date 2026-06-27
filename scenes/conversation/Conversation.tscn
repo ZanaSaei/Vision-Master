@@ -1,6 +1,29 @@
 [gd_scene format=3 uid="uid://hghqnmbok55t"]
 
 [ext_resource type="Script" uid="uid://bmwx225q8jlsk" path="res://scenes/conversation/conversation.gd" id="1_swh16"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_khtvf"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_3afir"]
+[ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="3_s57c2"]
+[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="5_3afir"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhcqr"]
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+
+[sub_resource type="LabelSettings" id="LabelSettings_swh16"]
+font = ExtResource("3_3afir")
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_khtvf"]
+font = ExtResource("5_3afir")
+font_size = 45
+font_color = Color(1, 0.5647059, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3afir"]
+font = ExtResource("3_3afir")
+font_size = 45
+font_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 
 [node name="Conversation" type="Control" unique_id=393705888]
 layout_mode = 3
@@ -18,57 +41,87 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.9372549, 0.9647059, 1, 1)
 
-[node name="MainLayout" type="VBoxContainer" parent="." unique_id=1935269617]
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=1330912032]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 140
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
+layout_mode = 2
+icon = ExtResource("2_khtvf")
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
+layout_mode = 2
+text = "Conversation"
+label_settings = SubResource("LabelSettings_swh16")
+
+[node name="AudioButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1020383883]
+layout_mode = 2
+icon = ExtResource("3_s57c2")
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1463495940]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 274.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 100
 
-[node name="HeaderBar" type="PanelContainer" parent="MainLayout" unique_id=1330912032]
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=1935269617]
 layout_mode = 2
+theme_override_constants/separation = 30
 
-[node name="HeaderContent" type="HBoxContainer" parent="MainLayout/HeaderBar" unique_id=1297609347]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="BackButton" type="Button" parent="MainLayout/HeaderBar/HeaderContent" unique_id=681322488]
-layout_mode = 2
-
-[node name="HeaderTitle" type="Label" parent="MainLayout/HeaderBar/HeaderContent" unique_id=2090702329]
-layout_mode = 2
-text = "Conversation"
-
-[node name="AudioButton" type="Button" parent="MainLayout/HeaderBar/HeaderContent" unique_id=1020383883]
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=1131021853]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainLayout" unique_id=1131021853]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ContentLayout" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=1583681460]
+[node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="ConversationImage" type="TextureRect" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
 layout_mode = 2
 
-[node name="ConversationImage" type="TextureRect" parent="MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
+[node name="IntroLabel" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1426285093]
+custom_minimum_size = Vector2(950, 0)
 layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_khtvf")
+vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="IntroLabel" type="Label" parent="MainLayout/ScrollContainer/ContentLayout" unique_id=1426285093]
+[node name="LinesContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
 layout_mode = 2
+theme_override_constants/separation = 35
 
-[node name="LinesContainer" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
+[node name="QuestionsSection" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1136462616]
 layout_mode = 2
+theme_override_constants/separation = 25
 
-[node name="QuestionsSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentLayout" unique_id=1136462616]
-layout_mode = 2
-
-[node name="QuestionsTitle" type="Label" parent="MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=939271501]
+[node name="QuestionsTitle" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=939271501]
 layout_mode = 2
 text = "Think About It"
+label_settings = SubResource("LabelSettings_3afir")
 
-[node name="QuestionsContainer" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=1386943664]
+[node name="QuestionsContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=1386943664]
 layout_mode = 2
+theme_override_constants/separation = 35
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]

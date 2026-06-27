@@ -2,18 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bup0mtxrin4q2" path="res://scenes/book_menu/book_menu.gd" id="1_fjcg3"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_1vrhx"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_rdkw2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjcg3"]
-bg_color = Color(0.14509805, 0.3882353, 0.92156863, 1)
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
 
-[sub_resource type="SystemFont" id="SystemFont_rdkw2"]
-font_names = PackedStringArray("Times New Roman")
-subpixel_positioning = 0
-
 [sub_resource type="LabelSettings" id="LabelSettings_1vrhx"]
-font = SubResource("SystemFont_rdkw2")
+font = ExtResource("3_rdkw2")
 font_size = 68
 
 [sub_resource type="SystemFont" id="SystemFont_vlp4y"]
@@ -42,7 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 1, 1, 1)
+color = Color(0.9372549, 0.9647059, 1, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=112643346]
 layout_mode = 1
@@ -54,7 +51,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fjcg3")
 
 [node name="TopBar" type="HBoxContainer" parent="PanelContainer" unique_id=1356899270]
 layout_mode = 2
-theme_override_constants/separation = 500
+theme_override_constants/separation = 530
 alignment = 1
 
 [node name="BackButton" type="Button" parent="PanelContainer/TopBar" unique_id=457065337]

@@ -13,6 +13,15 @@ const SCENE_READING      := "res://scenes/reading/Reading.tscn"
 const SCENE_GRAMMAR      := "res://scenes/grammar/Grammar.tscn"
 const SCENE_SPEAKING     := "res://scenes/speaking/Speaking.tscn"
 
+# ---------- Font configuration ----------
+# Change these paths to your actual font files
+const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_JAKARTA_BOLD_PATH := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+
+# Preload fonts for better performance
+var font_regular: FontFile
+var font_bold: FontFile
+
 # Lesson titles — same data as BookMenu, kept here for the subtitle label
 const LESSON_TITLES := {
 	1: ["Saving Nature", "Wonders of Creation",
@@ -54,6 +63,12 @@ const SECTION_ACCENT_COLORS := [
 
 
 func _ready() -> void:
+	# Load fonts
+	_load_fonts()
+	
+	# Apply fonts to existing labels
+	_apply_fonts_to_labels()
+	
 	back_button.pressed.connect(_on_back_pressed)
 
 	var book: int   = Global.current_book
@@ -68,6 +83,28 @@ func _ready() -> void:
 	Global.set_last_scene(
 		get_tree().current_scene.scene_file_path
 	)
+
+
+func _load_fonts() -> void:
+	# Load fonts with error handling
+	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
+	font_bold = load(FONT_JAKARTA_BOLD_PATH)
+	
+	if font_regular == null:
+		push_warning("Regular font not found at: " + FONT_JAKARTA_REGULAR_PATH)
+		
+	if font_bold == null:
+		push_warning("Bold font not found at: " + FONT_JAKARTA_BOLD_PATH)
+
+
+func _apply_fonts_to_labels() -> void:
+	# Apply bold font to top bar title
+	if font_bold != null:
+		top_bar_title.add_theme_font_override("font", font_bold)
+	
+	# Apply regular font to lesson subtitle
+	if font_regular != null:
+		lesson_subtitle.add_theme_font_override("font", font_regular)
 
 
 func _get_lesson_title(book: int, lesson: int) -> String:
@@ -105,6 +142,11 @@ func _build_section_buttons() -> void:
 		hover_style.bg_color = SECTION_ACCENT_COLORS[i].lightened(0.75)
 		btn.add_theme_stylebox_override("hover", hover_style)
 
+		# Apply font to button
+		if font_regular != null:
+			btn.add_theme_font_override("font", font_regular)
+		
+		# Set font size (adjust as needed)
 		btn.add_theme_font_size_override("font_size", 60)
 		btn.add_theme_color_override("font_color", Color("#1E293B"))
 
