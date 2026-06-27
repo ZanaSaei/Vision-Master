@@ -4,7 +4,7 @@
 	"1": {
 	  "title": "Sense of Appreciation",
 	  "audio": "conversation.mp3",
-	  "image": "v3/l1/conversation.png",
+	  "image": "v3_l1_conversation.png",
 	  "intro": "Sara has been in the Children's Medical Center for a week. She has caught a terrible flu. The doctor told her to stay there to get better. There is a photograph of an old man on the wall. While the nurse is taking her temperature, they start talking.",
 	  "lines": [
 		{ "speaker": "Sara", "text": "Excuse me, who is that man in the picture?" },
@@ -30,7 +30,7 @@
 	"2": {
 	  "title": "Look it Up!",
 	  "audio": "conversation.mp3",
-	  "image": "v3/l2/conversation.png",
+	  "image": "v3_l2_conversation.png",
 	  "intro": "Majid is going to choose a suitable dictionary for his English class. He is talking to his English teacher during the break.",
 	  "lines": [
 		{ "speaker": "Majid", "text": "Excuse me Mr. Iranmehr, I wonder if you could help me." },
@@ -62,7 +62,7 @@
 	"3": {
 	  "title": "Renewable Energy",
 	  "audio": "conversation.mp3",
-	  "image": "v3/l3/conversation.png",
+	  "image": "v3_l3_conversation.png",
 	  "intro": "Emad and his father are traveling to Guilan. On the way, in Manjeel, Emad sees huge wind turbines.",
 	  "lines": [
 		{ "speaker": "Emad", "text": "Daddy, look at those big fans!" },

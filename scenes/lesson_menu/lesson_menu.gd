@@ -157,6 +157,7 @@ func _build_section_buttons() -> void:
 func _on_section_pressed(scene_key: String) -> void:
 	if scene_key == "VOCAB":
 		Global.flashcard_mode = "lesson"
+	
 	var scene_map := {
 		"VOCAB":        SCENE_VOCAB,
 		"CONVERSATION": SCENE_CONVERSATION,
@@ -168,8 +169,9 @@ func _on_section_pressed(scene_key: String) -> void:
 	if path == "":
 		push_error("No scene path for key: " + scene_key)
 		return
-	get_tree().change_scene_to_file(path)
+	
+	TransitionManager.change_scene(path)
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_BOOK_MENU)
+	TransitionManager.change_scene(SCENE_BOOK_MENU)

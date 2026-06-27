@@ -4,7 +4,7 @@
 	"1": {
 	  "title": "Talking about Languages",
 	  "audio": "conversation.mp3",
-	  "image": "v2/l1/conversation.png",
+	  "image": "v2_l1_conversation.png",
 	  "intro": "Babak Saberian is a translator who works for IRIB. Today, he is hosting Meysam in his office. Meysam is a high school student. He is interviewing Mr. Saberian for his school project.",
 	  "lines": [
 		{ "speaker": "Meysam",      "text": "Thank you Mr. Saberian for inviting me to your office." },
@@ -31,7 +31,7 @@
 	"2": {
 	  "title": "Talking about Lifestyle",
 	  "audio": "conversation.mp3",
-	  "image": "v2/l2/conversation.png",
+	  "image": "v2_l2_conversation.png",
 	  "intro": "Sina and Behzad are old friends. They have not seen each other for about three months. Behzad has called Sina.",
 	  "lines": [
 		{ "speaker": "Behzad", "text": "Hi Sina. How is it going? I haven't seen you since Norooz." },
@@ -54,7 +54,7 @@
 	"3": {
 	  "title": "Shopping Handicrafts",
 	  "audio": "conversation.mp3",
-	  "image": "v2/l3/conversation.png",
+	  "image": "v2_l3_conversation.png",
 	  "intro": "Listen to the conversation between Reza and a tourist.",
 	  "lines": [
 		{ "speaker": "Reza",    "text": "How can I help you, sir?" },

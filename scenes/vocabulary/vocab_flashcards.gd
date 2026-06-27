@@ -27,14 +27,20 @@ var mode: Mode           = Mode.LESSON
 var is_flipped: bool     = false
 var is_animating: bool   = false
 
-# ---------- Dot constants (now ints to avoid narrowing warnings) ----------
-const DOT_ACTIVE_W   := 24
-const DOT_INACTIVE_W := 14
-const DOT_HEIGHT     := 6
-const DOT_RADIUS     := 3
-const DOT_ACTIVE_COLOR   := Color("#2563EB")
-const DOT_INACTIVE_COLOR := Color("#CBD5E1")
+# ---------- Swipe & Slide state ----------
+var is_sliding: bool     = false
+var swipe_start: Vector2
+var is_swiping: bool     = false
+const SWIPE_THRESHOLD    := 40.0
+const SLIDE_DURATION     := 0.2
 
+# ---------- Dot constants (now ints to avoid narrowing warnings) ----------
+const DOT_ACTIVE_W    := 24
+const DOT_INACTIVE_W  := 14
+const DOT_HEIGHT      := 6
+const DOT_RADIUS      := 3
+const DOT_ACTIVE_COLOR    := Color("#2563EB")
+const DOT_INACTIVE_COLOR  := Color("#CBD5E1")
 
 # ---------- Scene paths ----------
 const SCENE_MAIN_MENU      := "res://scenes/main_menu/MainMenu.tscn"
@@ -63,9 +69,9 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var audio_button: Button              = $HeaderBar/HeaderContent/AudioButton
 @onready var back_nav_button: Button           = $HeaderBar/HeaderContent/BackButton
 
-@onready var nav_book: TextureButton                  = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavBook
-@onready var nav_list: TextureButton                   = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavList
-@onready var nav_settings: TextureButton               = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavSettings
+@onready var nav_book: TextureButton           = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavBook
+@onready var nav_list: TextureButton           = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavList
+@onready var nav_settings: TextureButton       = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavSettings
 
 @onready var save_inactive = preload("res://images/save_button.png")
 @onready var save_active = preload("res://images/saved_button.png")
@@ -294,10 +300,10 @@ func _show_face(show_back: bool) -> void:
 
 
 # ----------------------------------------------------------------
-#  FLIP ANIMATION
+#  FLIP & SLIDE ANIMATION
 # ----------------------------------------------------------------
 func _play_flip(landing_on_back: bool) -> void:
-	if is_animating:
+	if is_animating or is_sliding:
 		return
 	is_animating = true
 
@@ -318,38 +324,77 @@ func _play_flip(landing_on_back: bool) -> void:
 
 	tween.tween_callback(func(): is_animating = false)
 
+func _slide_to_word(direction: int) -> void:
+	# direction: 1 for next (slide left out), -1 for prev (slide right out)
+	if is_sliding or is_animating or word_list.is_empty():
+		return
+		
+	is_sliding = true
+
+	# Capture the starting position to ensure we snap back exactly where the layout dictates
+	var start_pos_x = card_panel.position.x 
+	var slide_distance = get_viewport_rect().size.x # Slide a full screen width
+
+	var tween = create_tween()
+
+	# Phase 1: Slide OUT
+	tween.tween_property(card_panel, "position:x", start_pos_x - (direction * slide_distance), SLIDE_DURATION) \
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+
+	# Phase 2: Update the card data instantly while it's off-screen, and move to the opposite side
+	tween.tween_callback(func():
+		if direction == 1:
+			current_index = (current_index + 1) % word_list.size()
+		else:
+			current_index = (current_index - 1 + word_list.size()) % word_list.size()
+			
+		_update_card(false) # Updates the labels
+		card_panel.position.x = start_pos_x + (direction * slide_distance)
+	)
+
+	# Phase 3: Slide IN
+	tween.tween_property(card_panel, "position:x", start_pos_x, SLIDE_DURATION) \
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+
+	tween.tween_callback(func(): is_sliding = false)
 
 # ----------------------------------------------------------------
 #  INPUT
 # ----------------------------------------------------------------
 func _on_card_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton \
-			and event.button_index == MOUSE_BUTTON_LEFT \
-			and event.pressed:
-		_flip()
-	elif event is InputEventScreenTouch and event.pressed:
-		_flip()
+	# Handles both Mouse (for desktop testing) and Touch (for Mobile)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT or event is InputEventScreenTouch:
+		if event.pressed:
+			swipe_start = event.position
+			is_swiping = true
+		else:
+			if is_swiping:
+				is_swiping = false
+				var swipe_dist = event.position.x - swipe_start.x
+				
+				# Check if the drag distance was long enough to count as a swipe
+				if abs(swipe_dist) > SWIPE_THRESHOLD:
+					if swipe_dist > 0:
+						_slide_to_word(-1) # Swiped Right -> Previous Card
+					else:
+						_slide_to_word(1)  # Swiped Left -> Next Card
+				else:
+					_flip() # Threshold not met, treat as a normal tap/flip
 
 
 func _flip() -> void:
-	if is_animating or word_list.is_empty():
+	if is_animating or is_sliding or word_list.is_empty():
 		return
 	is_flipped = not is_flipped
 	_play_flip(is_flipped)
 
 
 func _on_prev_pressed() -> void:
-	if is_animating or word_list.is_empty():
-		return
-	current_index = (current_index - 1 + word_list.size()) % word_list.size()
-	_update_card(false)
+	_slide_to_word(-1)
 
 
 func _on_next_pressed() -> void:
-	if is_animating or word_list.is_empty():
-		return
-	current_index = (current_index + 1) % word_list.size()
-	_update_card(false)
+	_slide_to_word(1)
 
 
 # ----------------------------------------------------------------
@@ -408,23 +453,23 @@ func _on_audio_pressed() -> void:
 func _on_back_pressed() -> void:
 	Global.flashcard_mode = "lesson"
 	if mode == Mode.SAVED:
-		get_tree().change_scene_to_file(SCENE_MAIN_MENU)
+		TransitionManager.change_scene(SCENE_MAIN_MENU)
 	else:
-		get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+		TransitionManager.change_scene(SCENE_LESSON_MENU)
 
 
 func _on_nav_book_pressed() -> void:
 	Global.flashcard_mode = "lesson"
-	get_tree().change_scene_to_file(SCENE_MAIN_MENU)
+	TransitionManager.change_scene(SCENE_MAIN_MENU)
 
 
 func _on_nav_list_lesson_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+	TransitionManager.change_scene(SCENE_LESSON_MENU)
 
 
 func _on_nav_settings_lesson_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_SETTINGS)
+	TransitionManager.change_scene(SCENE_SETTINGS)
 
 
 func _on_quiz_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_QUIZ)
+	TransitionManager.change_scene(SCENE_QUIZ)

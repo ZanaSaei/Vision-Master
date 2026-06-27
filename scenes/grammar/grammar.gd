@@ -324,4 +324,4 @@ func _add_tip_box(parent: VBoxContainer, tip: String) -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+	TransitionManager.change_scene(SCENE_LESSON_MENU)

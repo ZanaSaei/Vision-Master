@@ -55,21 +55,20 @@ func _setup_continue_button() -> void:
 #  NAVIGATION
 # ----------------------------------------------------------------
 func _on_saved_words_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_SAVED_WORDS)
+	Global.flashcard_mode = "saved"
+	TransitionManager.change_scene(SCENE_SAVED_WORDS)
 
 
 func _on_settings_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_SETTINGS)
+	TransitionManager.change_scene(SCENE_SETTINGS)
 
 
 func _on_continue_pressed() -> void:
 	var last := Global.get_last_scene()
 	if last != "":
-		get_tree().change_scene_to_file(last)
+		TransitionManager.change_scene(last)
 
 
 func _on_book_pressed(book_number: int) -> void:
-	# Store which book was chosen so BookMenu knows what to show,
-	# then navigate to the Book/Lesson selection screen.
 	Global.current_book = book_number
-	get_tree().change_scene_to_file(SCENE_BOOK_MENU)
+	TransitionManager.change_scene(SCENE_BOOK_MENU)

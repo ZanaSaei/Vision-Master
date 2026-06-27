@@ -4,7 +4,7 @@
 	"1": {
 	  "title": "Visiting the Museum of Nature and Wildlife",
 	  "audio": "conversation.mp3",
-	  "image": "v1/l1/conversation.png",
+	  "image": "v1_l1_conversation.png",
 	  "intro": "Maryam is visiting the Museum of Nature and Wildlife. She's talking to Mr. Razavi, who works in the museum.",
 	  "lines": [
 		{ "speaker": "Maryam",     "text": "Excuse me, what is it? Is it a leopard?" },
@@ -25,7 +25,7 @@
 	"2": {
 	  "title": "Visiting Iranian National Observatory",
 	  "audio": "conversation.mp3",
-	  "image": "v1/l2/conversation.png",
+	  "image": "v1_l2_conversation.png",
 	  "intro": "Alireza is visiting an observatory. He is talking to Ms. Tabesh who works there.",
 	  "lines": [
 		{ "speaker": "Ms. Tabesh", "text": "Are you interested in the planets?" },
@@ -48,7 +48,7 @@
 	"3": {
 	  "title": "Talking about Famous Iranian Scientists",
 	  "audio": "conversation.mp3",
-	  "image": "v1/l3/conversation.png",
+	  "image": "v1_l3_conversation.png",
 	  "intro": "Roya and Mahsa are leaving the library.",
 	  "lines": [
 		{ "speaker": "Roya",  "text": "When I came in, you were reading a book. What was it?" },
@@ -71,7 +71,7 @@
 	"4": {
 	  "title": "Finding a Good Tourist Destination",
 	  "audio": "conversation.mp3",
-	  "image": "v1/l4/conversation.png",
+	  "image": "v1_l4_conversation.png",
 	  "intro": "Diego is a Spanish tourist who is planning for his summer vacation. He is talking to Carlos Sabato, a travel agent in Madrid.",
 	  "lines": [
 		{ "speaker": "Diego",  "text": "Excuse me, sir! I am planning for my summer vacation." },

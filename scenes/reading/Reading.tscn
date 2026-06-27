@@ -34,7 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oshe3")
 
-[node name="Background" type="ColorRect" parent="." unique_id=616402954]
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=616402954]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,6 +42,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.9372549, 0.9647059, 1, 1)
+
+[node name="BackgroundImage" type="TextureRect" parent="." unique_id=1399288596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HeaderBar" type="PanelContainer" parent="." unique_id=1330912032]
 layout_mode = 1
@@ -94,7 +102,7 @@ size_flags_vertical = 3
 
 [node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
 layout_mode = 2
-theme_override_constants/separation = 60
+theme_override_constants/separation = 40
 
 [node name="ReadingImage" type="TextureRect" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
 layout_mode = 2

@@ -13,6 +13,9 @@ const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 const PARA_BG_COLOR     := Color("#F8FAFC")
 const PARA_BORDER_COLOR := Color("#2563EB")
 
+# Background image transparency (0.0 = fully transparent, 1.0 = fully opaque)
+const BACKGROUND_OPACITY := 0.15  # Very transparent background
+
 # ---------- Font configuration ----------
 const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_JAKARTA_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
@@ -25,6 +28,7 @@ var font_italic: FontFile
 @onready var back_button: Button              = $HeaderBar/HeaderContent/BackButton
 @onready var header_title: Label              = $HeaderBar/HeaderContent/HeaderTitle
 @onready var audio_button: Button             = $HeaderBar/HeaderContent/AudioButton
+@onready var background_image: TextureRect    = $BackgroundImage  # Background image node
 @onready var reading_image: TextureRect       = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/ReadingImage
 @onready var reading_title_label: Label       = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/ReadingTitleLabel
 @onready var paragraphs_container: VBoxContainer = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/ParagraphsContainer
@@ -36,6 +40,12 @@ var font_italic: FontFile
 func _ready() -> void:
 	_load_fonts()
 	_apply_fonts_to_existing_labels()
+
+	# Configure the main image to scale properly
+	_configure_main_image()
+	
+	# Configure the background image
+	_configure_background_image()
 
 	back_button.pressed.connect(_on_back_pressed)
 	audio_button.pressed.connect(_on_audio_pressed)
@@ -51,6 +61,39 @@ func _ready() -> void:
 		return
 
 	_build_reading(book, lesson, data)
+
+
+func _configure_main_image() -> void:
+	# Set the image to expand to fill available space while maintaining aspect ratio
+	reading_image.expand = true
+	reading_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	reading_image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	reading_image.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	
+	# Set a minimum height so the image has space to display
+	reading_image.custom_minimum_size = Vector2(0, 1000)
+
+
+func _configure_background_image() -> void:
+	# Set the background to cover the entire screen while maintaining aspect ratio
+	# STRETCH_KEEP_ASPECT_COVERED scales the image to cover the container,
+	# parts of the image will go beyond the screen but it won't be distorted
+	background_image.expand = true
+	background_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	
+	# Make it transparent (15% opacity)
+	background_image.modulate = Color(1, 1, 1, BACKGROUND_OPACITY)
+	
+	# Position it behind everything
+	background_image.mouse_filter = Control.MOUSE_FILTER_IGNORE  # Allow clicks to pass through
+	
+	# Make it fill the entire parent container
+	background_image.anchor_left = 0.0
+	background_image.anchor_top = 0.0
+	background_image.anchor_right = 1.0
+	background_image.anchor_bottom = 1.0
+	background_image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	background_image.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
 
 func _load_fonts() -> void:
@@ -93,13 +136,25 @@ func _load_reading(book: int, lesson: int) -> Dictionary:
 
 
 func _build_reading(book: int, lesson: int, data: Dictionary) -> void:
-	# --- Image ---
-	var image_path := "res://assets/images/%s" % data.get("image", "")
-	if ResourceLoader.exists(image_path):
-		reading_image.texture = load(image_path)
-		reading_image.visible = true
-	else:
-		reading_image.visible = false
+	var image_filename: String = data.get("image", "")
+	
+	# --- Background Image ---
+	if image_filename != "":
+		var bg_path := "res://assets/images/%s" % image_filename
+		if ResourceLoader.exists(bg_path):
+			background_image.texture = load(bg_path)
+			background_image.visible = true
+		else:
+			background_image.visible = false
+	
+	# --- Main Image ---
+	if image_filename != "":
+		var main_path := "res://assets/images/%s" % image_filename
+		if ResourceLoader.exists(main_path):
+			reading_image.texture = load(main_path)
+			reading_image.visible = true
+		else:
+			reading_image.visible = false
 
 	# --- Reading title ---
 	reading_title_label.text = data.get("title", "")
@@ -147,6 +202,9 @@ func _make_paragraph_card(_number: int, text: String) -> PanelContainer:
 	card_style.content_margin_top         = 14
 	card_style.content_margin_bottom      = 14
 	card.add_theme_stylebox_override("panel", card_style)
+
+	# Make the card background slightly transparent so the background image shows through
+	card_style.bg_color.a = 0.85  # 85% opacity
 
 	# Paragraph text label
 	var text_label := Label.new()
@@ -209,4 +267,4 @@ func _on_audio_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+	TransitionManager.change_scene(SCENE_LESSON_MENU)
