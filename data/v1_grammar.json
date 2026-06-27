@@ -1,0 +1,207 @@
+{
+  "book": 1,
+  "lessons": {
+	"1": {
+	  "lesson_title": "Saving Nature",
+	  "points": [
+		{
+		  "title": "آینده با will",
+		  "explanation": "از «will» برای بیان یک عمل یا اتفاق در آینده استفاده می‌کنیم. این زمان برای پیش‌بینی‌ها، قول‌ها و تصمیم‌های لحظه‌ای به کار می‌رود. «will» برای همه ضمایر یکسان است و تغییر نمی‌کند.",
+		  "structure": "[+] Subject + will + verb (base form)",
+		  "negative": "[-] Subject + will not (won't) + verb",
+		  "question": "[?] Will + Subject + verb?",
+		  "examples": [
+			{ "en": "I will save nature.", "fa": "من از طبیعت محافظت خواهم کرد." },
+			{ "en": "The animals will die out.", "fa": "حیوانات منقرض خواهند شد." },
+			{ "en": "She won't go hunting.", "fa": "او به شکار نخواهد رفت." },
+			{ "en": "Will they protect the forests?", "fa": "آیا آن‌ها از جنگل‌ها محافظت خواهند کرد؟" }
+		  ],
+		  "tip": "نکته: کلمات زمانی مثل tomorrow، next week، in the future نشانه‌ی زمان آینده هستند."
+		},
+		{
+		  "title": "آینده با be going to",
+		  "explanation": "از «be going to» برای بیان برنامه‌ها و قصدهایی که از قبل تصمیم گرفته شده‌اند استفاده می‌کنیم. همچنین وقتی نشانه‌ای در حال حاضر وجود دارد که نشان‌دهنده‌ی یک اتفاق آینده است، از این ساختار استفاده می‌کنیم.",
+		  "structure": "[+] Subject + am/is/are + going to + verb",
+		  "negative": "[-] Subject + am/is/are + not + going to + verb",
+		  "question": "[?] Am/Is/Are + Subject + going to + verb?",
+		  "examples": [
+			{ "en": "We are going to protect their homes.", "fa": "ما قرار است از خانه‌هایشان محافظت کنیم." },
+			{ "en": "Look at the sky! It is going to rain.", "fa": "به آسمان نگاه کن! قرار است باران ببارد." },
+			{ "en": "She is not going to watch TV tonight.", "fa": "او قرار نیست امشب تلویزیون تماشا کند." },
+			{ "en": "Are you going to visit the museum?", "fa": "آیا قرار است از موزه بازدید کنی؟" }
+		  ],
+		  "tip": "تفاوت will و be going to: اگر در لحظه تصمیم می‌گیرید از will، و اگر از قبل برنامه داشتید از be going to استفاده کنید."
+		},
+		{
+		  "title": "اسم و انواع آن",
+		  "explanation": "اسم کلمه‌ای است که نام یک شخص، حیوان، مکان، چیز یا ایده را می‌برد. اسم‌ها به دو نوع اصلی تقسیم می‌شوند: اسم عام (Common Noun) که به یک دسته کلی اشاره دارد و اسم خاص (Proper Noun) که نام یک شخص، مکان یا چیز خاص است و با حرف بزرگ نوشته می‌شود.",
+		  "structure": "Common Noun: boy, tree, animal\nProper Noun: Iran, Avicenna, Tehran",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "A farmer lives near the forest.", "fa": "یک کشاورز نزدیک جنگل زندگی می‌کند." },
+			{ "en": "Damavand is the highest mountain.", "fa": "دماوند بلندترین کوه است." },
+			{ "en": "We must protect wildlife.", "fa": "ما باید از حیات وحش محافظت کنیم." },
+			{ "en": "The Persian leopard lives in Iran.", "fa": "پلنگ ایرانی در ایران زندگی می‌کند." }
+		  ],
+		  "tip": "نکته: اسم‌های خاص همیشه با حرف بزرگ نوشته می‌شوند. مثلاً Iran، Ali، Mashhad."
+		},
+		{
+		  "title": "جمع اسم‌ها",
+		  "explanation": "برای جمع بستن اسم‌های منظم، به انتهای اسم «s» یا «es» اضافه می‌کنیم. اما برخی اسم‌ها نامنظم هستند و شکل جمع آن‌ها کاملاً تغییر می‌کند و باید حفظ شوند.",
+		  "structure": "Regular: book → books | box → boxes\nIrregular: man → men | child → children | wolf → wolves | woman → women | foot → feet",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "One wolf — two wolves", "fa": "یک گرگ — دو گرگ" },
+			{ "en": "One child — many children", "fa": "یک بچه — بچه‌های زیادی" },
+			{ "en": "One man — three men", "fa": "یک مرد — سه مرد" },
+			{ "en": "One life — many lives", "fa": "یک زندگی — زندگی‌های زیادی" }
+		  ],
+		  "tip": "اسم‌های نامنظم پرکاربرد را حفظ کنید: man/men، woman/women، child/children، foot/feet، tooth/teeth، mouse/mice."
+		}
+	  ]
+	},
+	"2": {
+	  "lesson_title": "Wonders of Creation",
+	  "points": [
+		{
+		  "title": "صفت و انواع آن",
+		  "explanation": "صفت کلمه‌ای است که اسم را توصیف می‌کند و اطلاعات بیشتری درباره کیفیت، اندازه، سن، رنگ، ملیت یا جنس آن می‌دهد. صفت‌ها معمولاً قبل از اسم یا بعد از فعل «be» قرار می‌گیرند.",
+		  "structure": "Before noun: a beautiful flower\nAfter 'be': The flower is beautiful.",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Jupiter is the largest planet.", "fa": "مشتری بزرگ‌ترین سیاره است." },
+			{ "en": "Red blood cells are tiny.", "fa": "گلبول‌های قرمز خون ریز هستند." },
+			{ "en": "She has powerful telescopes.", "fa": "او تلسکوپ‌های قوی دارد." },
+			{ "en": "The human body is amazing.", "fa": "بدن انسان شگفت‌انگیز است." }
+		  ],
+		  "tip": "انواع صفت را بشناسید: کیفیت (nice, boring)، اندازه (big, small)، سن (old, young)، رنگ (red, blue)، ملیت (Iranian, French)، جنس (wooden, rocky)."
+		},
+		{
+		  "title": "صفت تفضیلی (Comparative)",
+		  "explanation": "صفت تفضیلی برای مقایسه دو چیز یا دو نفر با یکدیگر استفاده می‌شود. برای صفت‌های کوتاه (یک هجایی) «er» به آخر اضافه می‌کنیم. برای صفت‌های بلند (دو هجا یا بیشتر) از «more» قبل از صفت استفاده می‌کنیم. بعد از صفت تفضیلی همیشه «than» می‌آید.",
+		  "structure": "Short: adjective + er + than\nLong: more + adjective + than\nEquality: as + adjective + as",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Mars is smaller than Jupiter.", "fa": "مریخ از مشتری کوچک‌تر است." },
+			{ "en": "Sharks are more dangerous than whales.", "fa": "کوسه‌ها از نهنگ‌ها خطرناک‌ترند." },
+			{ "en": "She is as tall as her sister.", "fa": "او به اندازه‌ی خواهرش قد دارد." },
+			{ "en": "Karoon is longer than Atrak.", "fa": "کارون از اترک بلندتر است." }
+		  ],
+		  "tip": "نکته: برای صفت‌های یک هجایی که به یک حرف بی‌صدا ختم می‌شوند، آن حرف را دو بار می‌نویسیم: hot → hotter، big → bigger."
+		},
+		{
+		  "title": "صفت عالی (Superlative)",
+		  "explanation": "صفت عالی برای مقایسه یک چیز با همه چیزهای دیگر در یک گروه استفاده می‌شود. برای صفت‌های کوتاه «est» به آخر اضافه می‌کنیم. برای صفت‌های بلند از «most» قبل از صفت استفاده می‌کنیم. قبل از صفت عالی همیشه «the» می‌آید.",
+		  "structure": "Short: the + adjective + est\nLong: the + most + adjective",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Jupiter is the largest planet of all.", "fa": "مشتری بزرگ‌ترین سیاره از همه است." },
+			{ "en": "This is the most difficult problem.", "fa": "این سخت‌ترین مسئله است." },
+			{ "en": "She is the kindest person I know.", "fa": "او مهربان‌ترین کسی است که می‌شناسم." },
+			{ "en": "Karoon is the longest river of Iran.", "fa": "کارون طولانی‌ترین رودخانه‌ی ایران است." }
+		  ],
+		  "tip": "صفت‌های نامنظم: good → better → the best | bad → worse → the worst | far → farther → the farthest | much/many → more → the most"
+		}
+	  ]
+	},
+	"3": {
+	  "lesson_title": "The Value of Knowledge",
+	  "points": [
+		{
+		  "title": "گذشته استمراری (Past Progressive)",
+		  "explanation": "زمان گذشته استمراری برای توصیف یک عملی که در یک لحظه خاص در گذشته در حال انجام بوده استفاده می‌شود. معمولاً با گذشته ساده همراه می‌شود: عملی که در حال انجام بوده (گذشته استمراری) و عمل دیگری که آن را قطع کرده (گذشته ساده).",
+		  "structure": "Subject + was/were + verb(ing)",
+		  "negative": "Subject + was/were + not + verb(ing)",
+		  "question": "Was/Were + Subject + verb(ing)?",
+		  "examples": [
+			{ "en": "Edison was reading books in the library.", "fa": "ادیسون داشت در کتابخانه کتاب می‌خواند." },
+			{ "en": "She was doing research when I called.", "fa": "وقتی زنگ زدم، داشت تحقیق می‌کرد." },
+			{ "en": "They were not sleeping at midnight.", "fa": "آن‌ها نیمه‌شب نداشتند می‌خوابیدند." },
+			{ "en": "What were you doing at 8 o'clock?", "fa": "ساعت ۸ داشتی چه کار می‌کردی؟" }
+		  ],
+		  "tip": "نکته: کلمات when (وقتی) و while (در حالی که) اغلب با گذشته استمراری استفاده می‌شوند. مثال: He was studying while she was sleeping."
+		},
+		{
+		  "title": "فعل‌های عملی و حالتی",
+		  "explanation": "فعل‌های عملی (Action Verbs) عملی را نشان می‌دهند که می‌توان آن را انجام داد و می‌توان آن‌ها را در هر دو شکل ساده و استمراری استفاده کرد. فعل‌های حالتی (State Verbs) یک حالت یا وضعیت را نشان می‌دهند (مثل احساسات، افکار، حواس) و معمولاً به شکل استمراری استفاده نمی‌شوند.",
+		  "structure": "Action: write, run, study, eat\nState: know, love, believe, want, need, like",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "She is writing a letter. (Action - OK)", "fa": "دارد نامه می‌نویسد. (درست است)" },
+			{ "en": "I know the answer. (State - NOT 'I am knowing')", "fa": "جواب را می‌دانم. (نه «دارم می‌دانم»)" },
+			{ "en": "We love our country. (State)", "fa": "ما کشورمان را دوست داریم." },
+			{ "en": "He is doing an experiment. (Action)", "fa": "دارد آزمایش انجام می‌دهد." }
+		  ],
+		  "tip": "فعل‌های حالتی پرکاربرد: know, love, like, want, need, believe, understand, remember, forget, hate, seem, belong"
+		},
+		{
+		  "title": "ضمایر انعکاسی (Self Pronouns)",
+		  "explanation": "ضمایر انعکاسی زمانی استفاده می‌شوند که فاعل و مفعول جمله یک نفر یا چیز باشند. همچنین برای تأکید استفاده می‌شوند، یعنی می‌خواهیم بگوییم فرد کاری را «خودش» انجام داده.",
+		  "structure": "I → myself | You → yourself/yourselves\nHe → himself | She → herself | It → itself\nWe → ourselves | They → themselves",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Edison taught himself science.", "fa": "ادیسون علم را به خودش یاد داد." },
+			{ "en": "She did the experiment herself.", "fa": "او خودش آزمایش را انجام داد." },
+			{ "en": "The computer turns itself off.", "fa": "کامپیوتر خودش خاموش می‌شود." },
+			{ "en": "We built this ourselves.", "fa": "ما این را خودمان ساختیم." }
+		  ],
+		  "tip": "برای تأکید می‌توانید ضمیر انعکاسی را قبل یا بعد از اسم بگذارید: Edison himself invented it. / He invented it himself."
+		}
+	  ]
+	},
+	"4": {
+	  "lesson_title": "Traveling the World",
+	  "points": [
+		{
+		  "title": "افعال کمکی (Modals)",
+		  "explanation": "افعال کمکی قبل از فعل اصلی می‌آیند و معنای جمله را تغییر می‌دهند. هر کدام معنای خاصی دارند و بعد از همه‌ی آن‌ها شکل پایه‌ی فعل (base form) می‌آید.",
+		  "structure": "can: توانایی | may: احتمال یا اجازه\nmust: اجبار | should: توصیه و پیشنهاد",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "She can speak four languages.", "fa": "او می‌تواند چهار زبان صحبت کند." },
+			{ "en": "You should protect nature.", "fa": "شما باید از طبیعت محافظت کنید." },
+			{ "en": "Tourists must get a passport.", "fa": "گردشگران باید گذرنامه بگیرند." },
+			{ "en": "It may rain tomorrow.", "fa": "احتمالاً فردا باران می‌بارد." }
+		  ],
+		  "tip": "تفاوت must و should: must یعنی اجبار قانونی یا خیلی مهم، اما should توصیه است. مثلاً: You must stop at red lights. / You should exercise daily."
+		},
+		{
+		  "title": "قید حالت (Adverbs of Manner)",
+		  "explanation": "قید حالت توضیح می‌دهد که یک عمل چگونه انجام می‌شود. بیشتر قیدهای حالت با اضافه کردن «ly» به آخر صفت ساخته می‌شوند. قید حالت معمولاً بعد از فعل یا مفعول قرار می‌گیرد.",
+		  "structure": "adjective + ly = adverb\npolite → politely | careful → carefully\nIrregular: good → well | fast → fast | hard → hard",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "She spoke politely.", "fa": "او با ادب صحبت کرد." },
+			{ "en": "He drives carefully.", "fa": "او با احتیاط رانندگی می‌کند." },
+			{ "en": "They worked hard.", "fa": "آن‌ها سخت کار کردند." },
+			{ "en": "She sings beautifully.", "fa": "او زیبا آواز می‌خواند." }
+		  ],
+		  "tip": "قیدهای نامنظم: good → well (نه goodly) | fast → fast (نه fastly) | hard → hard (نه hardly — hardly معنای دیگری دارد!)"
+		},
+		{
+		  "title": "حروف اضافه زمان و مکان (Prepositions)",
+		  "explanation": "حروف اضافه کلمات کوچکی هستند که رابطه بین کلمات را نشان می‌دهند. حروف اضافه زمان نشان می‌دهند که چه وقت اتفاقی می‌افتد. حروف اضافه مکان نشان می‌دهند کجا.",
+		  "structure": "Time: in (month/year/season) | at (time/night) | on (day/date)\nPlace: in (city/country) | on (surface) | next to | in front of",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "They travel in summer.", "fa": "آن‌ها در تابستان سفر می‌کنند." },
+			{ "en": "The flight is at 8 o'clock.", "fa": "پرواز ساعت ۸ است." },
+			{ "en": "She was born on Friday.", "fa": "او روز جمعه به دنیا آمد." },
+			{ "en": "He lives in Tehran.", "fa": "او در تهران زندگی می‌کند." }
+		  ],
+		  "tip": "قانون کلی: in برای زمان‌های بزرگ (سال، ماه، فصل) | at برای زمان‌های دقیق | on برای روزها و تاریخ‌ها استفاده می‌شود."
+		}
+	  ]
+	}
+  }
+}

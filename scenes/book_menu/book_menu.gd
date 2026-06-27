@@ -131,8 +131,14 @@ func _build_lesson_buttons(book: int) -> void:
 
 func _on_lesson_pressed(lesson_number: int) -> void:
 	Global.current_lesson = lesson_number
-	get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+	# Use await to ensure we're in a valid state
+	await get_tree().process_frame
+	if is_inside_tree():
+		get_tree().change_scene_to_file(SCENE_LESSON_MENU)
 
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_file(SCENE_MAIN_MENU)
+	# Use await to ensure we're in a valid state
+	await get_tree().process_frame
+	if is_inside_tree():
+		get_tree().change_scene_to_file(SCENE_MAIN_MENU)

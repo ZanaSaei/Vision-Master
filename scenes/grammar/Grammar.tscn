@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://ph0x1qd6mhmv"]
+
+[ext_resource type="Script" uid="uid://2m2g44ioaatv" path="res://scenes/grammar/grammar.gd" id="1_mqgpj"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_01g4x"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_2jgdv"]
+[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="5_yp075"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhcqr"]
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+
+[sub_resource type="LabelSettings" id="LabelSettings_swh16"]
+font = ExtResource("3_2jgdv")
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_khtvf"]
+font = ExtResource("5_yp075")
+font_size = 45
+font_color = Color(0, 0.4, 0, 1)
+
+[node name="Grammar" type="Control" unique_id=393705888]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mqgpj")
+
+[node name="Background" type="ColorRect" parent="." unique_id=616402954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9372549, 0.9647059, 1, 1)
+
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=1330912032]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 378
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
+layout_mode = 2
+icon = ExtResource("2_01g4x")
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
+layout_mode = 2
+text = "Lesson 1 Grammar"
+label_settings = SubResource("LabelSettings_swh16")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1463495940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 100
+
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=1935269617]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainLayout" unique_id=1131021853]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="GrammarTitleLabel" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1426285093]
+custom_minimum_size = Vector2(950, 0)
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_khtvf")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PointsContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]

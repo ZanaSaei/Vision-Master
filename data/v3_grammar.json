@@ -1,0 +1,118 @@
+{
+  "book": 3,
+  "lessons": {
+	"1": {
+	  "lesson_title": "Sense of Appreciation",
+	  "points": [
+		{
+		  "title": "مجهول (Passive Voice)",
+		  "explanation": "در جمله‌ی معلوم (Active) فاعل عمل را انجام می‌دهد. در جمله‌ی مجهول (Passive) روی عمل یا مفعول تأکید می‌شود، نه بر فاعل. مجهول زمانی استفاده می‌شود که فاعل مهم نیست، مشخص نیست، یا نمی‌خواهیم آن را بگوییم. فاعل اصلی با «by» در جمله مجهول می‌آید.",
+		  "structure": "Active: Subject + verb + object\nPassive: Object + be + past participle + (by subject)\nPresent: is/are + past participle\nPast: was/were + past participle\nPerfect: has/have been + past participle",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Edison invented the light bulb. (Active)", "fa": "ادیسون لامپ را اختراع کرد. (معلوم)" },
+			{ "en": "The light bulb was invented by Edison. (Passive)", "fa": "لامپ توسط ادیسون اختراع شد. (مجهول)" },
+			{ "en": "The book was written by Dr. Gharib.", "fa": "کتاب توسط دکتر قریب نوشته شد." },
+			{ "en": "Many products are made in China.", "fa": "محصولات زیادی در چین ساخته می‌شوند." }
+		  ],
+		  "tip": "در جمله‌ی مجهول، اگر فاعل را ذکر کنیم از «by» استفاده می‌کنیم. اما اگر فاعل مهم نباشد، آن را حذف می‌کنیم. مثال: The window was broken. (نمی‌دانیم کی شکست)"
+		},
+		{
+		  "title": "سؤال‌های ذیلی (Tag Questions)",
+		  "explanation": "سؤال‌های ذیلی جملات کوتاهی هستند که به انتهای یک جمله اضافه می‌شوند. دو کاربرد اصلی دارند: ۱) تأیید گرفتن وقتی فکر می‌کنیم جواب مثبت است ۲) بیان عدم اطمینان. قانون: اگر جمله اصلی مثبت باشد، دنباله‌اش منفی است و برعکس.",
+		  "structure": "Positive sentence + negative tag?\nNegative sentence + positive tag?\nShe is kind, isn't she? / He isn't here, is he?",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "Mina is happy, isn't she?", "fa": "مینا خوشحال است، نه؟" },
+			{ "en": "They have been there, haven't they?", "fa": "آن‌ها آنجا بوده‌اند، نه؟" },
+			{ "en": "He won't come, will he?", "fa": "او نخواهد آمد، خواهد آمد؟" },
+			{ "en": "It isn't serious, is it?", "fa": "جدی نیست، هست؟" }
+		  ],
+		  "tip": "نکته مهم: ضمیر در دنباله باید با فاعل جمله اصلی تطابق داشته باشد: Dr. Gharib was a doctor, wasn't HE? / The girls are late, aren't THEY?"
+		},
+		{
+		  "title": "جمله‌ی مرکب (Compound Sentence)",
+		  "explanation": "جمله‌ی مرکب از دو یا چند جمله‌ی ساده تشکیل می‌شود که با حروف ربط‌هایی مثل and، but، or، so به هم وصل می‌شوند. هر حرف ربط معنای خاصی دارد.",
+		  "structure": "and = و (برای نشان دادن تشابه یا اضافه کردن)\nbut = اما (برای نشان دادن تضاد)\nor = یا (برای نشان دادن انتخاب)\nso = پس/بنابراین (برای نشان دادن نتیجه)",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "I studied hard, and I passed.", "fa": "سخت درس خواندم و قبول شدم." },
+			{ "en": "The book was old, but it was useful.", "fa": "کتاب قدیمی بود، اما مفید بود." },
+			{ "en": "You can read it or watch the video.", "fa": "می‌توانی آن را بخوانی یا ویدیو را ببینی." },
+			{ "en": "He was tired, so he slept early.", "fa": "خسته بود، پس زود خوابید." }
+		  ],
+		  "tip": "قبل از and، but، or، so در جمله‌ی مرکب یک ویرگول (comma) می‌گذاریم. مثال: I was hungry, so I ate. همچنین می‌توانید ضمیر تکراری را حذف کنید: He came in and (he) sat down."
+		}
+	  ]
+	},
+	"2": {
+	  "lesson_title": "Look It Up!",
+	  "points": [
+		{
+		  "title": "جملات وصفی (Relative Clauses)",
+		  "explanation": "جملات وصفی بخشی از جمله هستند که اسم قبل از خودشان را توصیف یا مشخص‌تر می‌کنند. با ضمایر وصلی who (برای اشخاص)، which (برای اشیا و حیوانات) و that (برای هر دو) ساخته می‌شوند.",
+		  "structure": "who = که (برای اشخاص)\nwhich = که (برای اشیا/حیوانات)\nthat = که (برای هر دو)\nNoun + who/which/that + clause",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "The man who plays golf lives here.", "fa": "مردی که گلف بازی می‌کند اینجا زندگی می‌کند." },
+			{ "en": "The keys which I lost are here.", "fa": "کلیدهایی که گم کردم اینجا هستند." },
+			{ "en": "She is the teacher that helped me.", "fa": "او معلمی است که به من کمک کرد." },
+			{ "en": "The dictionary which I bought is useful.", "fa": "فرهنگ لغتی که خریدم مفید است." }
+		  ],
+		  "tip": "who/whom: who برای فاعل و whom برای مفعول استفاده می‌شود. مثال: The woman who(m) you met is my teacher. در زبان محاوره‌ای who برای هر دو حالت قابل قبول است."
+		},
+		{
+		  "title": "جملات شرطی نوع دوم (Conditional Type II)",
+		  "explanation": "جملات شرطی نوع دوم برای بیان موقعیت‌های خیالی، غیرواقعی یا بعید در زمان حال یا آینده استفاده می‌شوند. یعنی وقتی می‌خواهیم بگوییم «اگر چنین بودم، آنگاه چنان می‌کردم» اما در واقعیت آن شرط وجود ندارد.",
+		  "structure": "If + past simple, would + base verb\n(برای فعل be در هر ضمیری: were استفاده می‌شود)",
+		  "negative": "",
+		  "question": "",
+		  "examples": [
+			{ "en": "If I had glasses, I could read it.", "fa": "اگر عینک داشتم، می‌توانستم بخوانم. (اما ندارم)" },
+			{ "en": "I would buy a house if I were you.", "fa": "اگر جای شما بودم، خانه می‌خریدم." },
+			{ "en": "If it weren't raining, I would go out.", "fa": "اگر باران نمی‌بارید، بیرون می‌رفتم." },
+			{ "en": "What would you do if you had wings?", "fa": "اگر بال داشتی چه می‌کردی؟" }
+		  ],
+		  "tip": "تفاوت مهم: نوع اول (واقعی): If it rains, I will stay home. (احتمال دارد باران ببارد) | نوع دوم (خیالی): If it rained, I would stay home. (در واقعیت باران نمی‌بارد)"
+		}
+	  ]
+	},
+	"3": {
+	  "lesson_title": "Renewable Energy",
+	  "points": [
+		{
+		  "title": "مجهول با افعال کمکی (Passive with Modals)",
+		  "explanation": "می‌توانیم جملات مجهول را با افعال کمکی مثل can، may، must، should ترکیب کنیم. این ساختار برای بیان احتمال، اجبار یا توصیه درباره‌ی یک عملی که انجام می‌شود (بدون ذکر فاعل) استفاده می‌شود.",
+		  "structure": "Subject + modal + be + past participle\ncan be made | must be done\nshould be used | may be produced",
+		  "negative": "Subject + modal + not + be + past participle",
+		  "question": "",
+		  "examples": [
+			{ "en": "Wind can be converted to electricity.", "fa": "باد می‌تواند به برق تبدیل شود." },
+			{ "en": "The rules must be obeyed.", "fa": "قوانین باید رعایت شوند." },
+			{ "en": "Solar energy should be used more.", "fa": "انرژی خورشیدی باید بیشتر استفاده شود." },
+			{ "en": "Harmful gases may be produced.", "fa": "گازهای مضر ممکن است تولید شوند." }
+		  ],
+		  "tip": "توجه کنید که بعد از افعال کمکی در مجهول، همیشه «be» (شکل پایه) می‌آید نه was/were/been. مثال: It must be done. (نه must was done)"
+		},
+		{
+		  "title": "ماضی بعید (Past Perfect)",
+		  "explanation": "زمان ماضی بعید برای بیان عملی استفاده می‌شود که قبل از یک عمل دیگر در گذشته اتفاق افتاده. یعنی از دو عمل گذشته، عملی که زودتر انجام شده با ماضی بعید بیان می‌شود. این زمان اغلب با قبلاً (already)، قبل از (before) و بعد از اینکه (after) همراه می‌شود.",
+		  "structure": "Subject + had + past participle (verb3)\nBefore I arrived, she had already left.\nAfter he had eaten, he went to sleep.",
+		  "negative": "Subject + had + not (hadn't) + past participle",
+		  "question": "Had + Subject + past participle?",
+		  "examples": [
+			{ "en": "When I arrived, she had already gone.", "fa": "وقتی رسیدم، او قبلاً رفته بود." },
+			{ "en": "He had studied Chinese before he moved.", "fa": "قبل از اینکه نقل مکان کند، چینی خوانده بود." },
+			{ "en": "I had never seen snow before that day.", "fa": "قبل از آن روز هرگز برف ندیده بودم." },
+			{ "en": "Had you eaten before the meeting?", "fa": "قبل از جلسه غذا خورده بودی؟" }
+		  ],
+		  "tip": "ماضی بعید = had + شکل سوم فعل (past participle). در جملاتی که دو عمل گذشته داریم، عمل قدیمی‌تر ماضی بعید می‌گیرد و عمل جدیدتر گذشته ساده. مثال: She had finished dinner when he arrived."
+		}
+	  ]
+	}
+  }
+}

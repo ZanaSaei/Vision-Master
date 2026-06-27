@@ -131,7 +131,7 @@ func _build_paragraphs(paragraphs: Array) -> void:
 		paragraphs_container.add_child(card)
 
 
-func _make_paragraph_card(number: int, text: String) -> PanelContainer:
+func _make_paragraph_card(_number: int, text: String) -> PanelContainer:
 	# Outer card
 	var card := PanelContainer.new()
 	var card_style := StyleBoxFlat.new()
