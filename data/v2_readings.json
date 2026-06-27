@@ -1,0 +1,58 @@
+{
+  "book": 2,
+  "lessons": {
+	"1": {
+	  "title": "Languages of the World",
+	  "audio": "reading.mp3",
+	  "image": "v2/l1/reading.png",
+	  "paragraphs": [
+		"Language is a system of communication. It uses written and spoken forms. People use language to communicate with each other in a society. They exchange knowledge, beliefs, wishes, and feelings through it.",
+		"Languages vary greatly from region to region. They are so different that a person may not understand the language of someone from another region, country or continent. It is not surprising to hear that today about 7000 languages exist in the world. There are more than 2000 languages in Africa, 1000 in the Americas, more than 2250 in Asia, about 230 in Europe, and more than 1300 in Oceania.",
+		"Native speakers of these languages range in number from very large, with hundreds of millions of speakers, to very small, with fewer than 10 speakers. The most popular language in the world is Chinese. More than one billion people in the world speak Chinese.",
+		"Interestingly, English has fewer native speakers than Chinese, but there are about one billion learners of English all around the world. They learn English as an international language.",
+		"About fifty percent of the world's languages have fewer than 5000 speakers. In the beginning of the twenty-first century, 204 languages had fewer than 10 speakers and 344 languages had between 10 and 99 speakers. The 548 languages with fewer than 99 speakers make up nearly 8 percent of the world's languages. We call them 'endangered languages'. As the speakers of such languages grow old and die, their languages will die, too.",
+        "All languages are really valuable, despite their differences. Every language is an amazing means of communication that meets the needs of its own speakers. It is impossible to imagine the world without language. Therefore, we should respect all languages, no matter how different they are and how many speakers they have."
+	  ],
+	  "questions": [
+		"How many languages are there in the world?",
+		"What is the most popular language in the world?",
+        "What are endangered languages?"
+	  ]
+	},
+	"2": {
+	  "title": "Having a Healthier and Longer Life",
+	  "audio": "reading.mp3",
+	  "image": "v2/l2/reading.png",
+	  "paragraphs": [
+		"Have you ever thought of a healthy lifestyle to live longer? People can do many things to have a healthier life. Most people have a special diet or do lots of exercise; however, without a careful plan they may hurt themselves.",
+		"To have a healthier lifestyle, people need to do certain things. First they should check their general health. Measuring blood pressure and heartbeat is the most important thing to do. They also need to check their family health history. In this way, they understand if anyone in the family has had a special illness.",
+		"Another thing is paying attention to physical health. For example, eating healthy food helps people live longer and prevents diseases. Eating junk food makes people gain weight, and increases the risk of heart attack. Eating balanced servings of bread, vegetables, fruits, protein, and oil is necessary for everyone. Also, daily exercises improve people's health condition.",
+		"An effective way to enjoy a better lifestyle is having healthy relationships with others. Recent research has shown that a good social life decreases the risk of death. Sadly, some people do not visit their relatives very often these days. They are really busy with their work and usually use technology to communicate.",
+		"Bad habits and addiction can be harmful to health. One day of smoking can take around 5 hours away from the smoker's life. Addiction to technology such as using computers for a long time is also dangerous.",
+        "Above all, the most important thing to enjoy a good life is having emotional health. Praying decreases stress and gives people a calm and balanced life. People with this lifestyle have had a better life. There are many other things people can do to live healthier and longer. The key point, however, is having a plan for the way they want to live and take care of their physical and emotional health."
+	  ],
+	  "questions": [
+		"What increases the risk of heart attack?",
+		"How can we check our general health?",
+        "What is the most important factor to have a healthier life?"
+	  ]
+	},
+	"3": {
+	  "title": "Art, Culture and Society",
+	  "audio": "reading.mp3",
+	  "image": "v2/l3/reading.png",
+	  "paragraphs": [
+		"Art is what people create with imagination and skill. As a part of culture, it shows the way of life and identity of a nation and reflects the history of a society. In fact, the history of humankind is the history of art. If we want to know a country or a nation well, we should study its art.",
+		"Handicrafts are good examples of the art and culture of a country. By handicrafts, we mean making decorative items in a skillful way using our hands. Each country and culture has its own handicrafts. Making and selling handicrafts are good ways to help a country's economy and introduce its culture to other nations. Many people of the world produce handicrafts and sell them to tourists. In some Asian countries a part of the country's income comes from making and selling handicrafts.",
+		"Iran has a five-thousand-year-old history of artistic works and handicrafts including pottery, painting, calligraphy, rugs and carpets, etc. If you travel across Iran, you'll get back home with excellent handicrafts as souvenirs for your family and friends.",
+		"Iranian art is also quite famous all around the world. There are very excellent collections of Persian art in many important museums of the world. If we want to name countries with richest art and cultural diversity, Iran is among them. Persian art is famous in the world for reflecting moral and social values of Iranian people and the natural beauty of this vast country.",
+        "Iranian craftsmen and craftswomen are famous for producing very unique artworks from wood, metal and other simple materials around them. Many people of the world appreciate the art and skill of a young Iranian girl who weaves a beautiful silk carpet in a small village of Azarbaijan or Kordestan. When tourists buy Persian rugs or carpets, they take a part of Iranian art and culture to their homelands."
+	  ],
+	  "questions": [
+		"What does art reflect?",
+		"How can we help the economy of our country?",
+        "Why is Persian art famous?"
+	  ]
+	}
+  }
+}

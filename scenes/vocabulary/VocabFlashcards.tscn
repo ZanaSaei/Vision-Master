@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://ckihf4m1yrm16" path="res://images/prev.png" id="3_l3ryj"]
 [ext_resource type="Texture2D" uid="uid://dvhje7arnej0d" path="res://images/next.png" id="4_egq7b"]
 [ext_resource type="Texture2D" uid="uid://3w4stlwu0rek" path="res://images/Next_prev_background.png" id="4_gnf4q"]
+[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_opycv"]
+[ext_resource type="FontFile" uid="uid://drnivg6cxlyr2" path="res://assets/fonts/PlusJakartaSans-Italic.ttf" id="5_8ea6x"]
+[ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="6_pjroj"]
 [ext_resource type="Texture2D" uid="uid://bisxak8hgeo6l" path="res://images/book.png" id="9_8ea6x"]
 [ext_resource type="Texture2D" uid="uid://sre55m8nhynp" path="res://images/menu.png" id="10_pjroj"]
 [ext_resource type="Texture2D" uid="uid://p6l4qyae7rk8" path="res://images/setting.png" id="11_t0aqf"]
@@ -30,7 +33,12 @@ bg_color = Color(0.14509805, 0.3882353, 0.92156863, 0.39215687)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kaaem"]
 content_margin_top = 20.0
-bg_color = Color(0, 0.2590537, 0.4117923, 0.21568628)
+bg_color = Color(1, 1, 1, 0.39215687)
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -48,8 +56,11 @@ corner_radius_bottom_left = 150
 shadow_color = Color(0, 0.24705882, 0, 0.6)
 shadow_size = 14
 
-[sub_resource type="SystemFont" id="SystemFont_tg8v8"]
-font_names = PackedStringArray("Sans-Serif")
+[sub_resource type="LabelSettings" id="LabelSettings_kaaem"]
+font = ExtResource("4_opycv")
+font_size = 100
+outline_size = 10
+outline_color = Color(0, 0.54901963, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egq7b"]
 bg_color = Color(0.8627451, 0.9882353, 0.90588236, 1)
@@ -58,8 +69,10 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="SystemFont" id="SystemFont_ttw17"]
-font_names = PackedStringArray("Times New Roman")
+[sub_resource type="LabelSettings" id="LabelSettings_opycv"]
+font = ExtResource("5_8ea6x")
+font_size = 72
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25cvx"]
 bg_color = Color(0.85882354, 0.91764706, 0.99607843, 1)
@@ -76,8 +89,10 @@ font_names = PackedStringArray("Fantasy")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opycv"]
 bg_color = Color(0.3764706, 0.64705884, 0.98039216, 1)
 
-[sub_resource type="SystemFont" id="SystemFont_l3ryj"]
-font_names = PackedStringArray("Serif")
+[sub_resource type="LabelSettings" id="LabelSettings_pjroj"]
+font = ExtResource("6_pjroj")
+font_size = 55
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnf4q"]
 bg_color = Color(0.92941177, 0.9137255, 0.99607843, 1)
@@ -100,12 +115,16 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjroj"]
 bg_color = Color(0.99215686, 0.8784314, 0.2784314, 1)
 
-[sub_resource type="SystemFont" id="SystemFont_egq7b"]
-font_names = PackedStringArray("Serif")
+[sub_resource type="LabelSettings" id="LabelSettings_t0aqf"]
+font = ExtResource("6_pjroj")
+font_size = 55
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ujfs"]
 texture = ExtResource("4_gnf4q")
@@ -169,25 +188,20 @@ grow_vertical = 2
 scale = Vector2(0.385, 0.385)
 color = Color(0.9372549, 0.9647059, 1, 1)
 
-[node name="MainLayout" type="VBoxContainer" parent="." unique_id=124550328]
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=1292936121]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 208.0
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HeaderBar" type="PanelContainer" parent="MainLayout" unique_id=1292936121]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tpk77")
 
-[node name="HeaderContent" type="HBoxContainer" parent="MainLayout/HeaderBar" unique_id=1640705547]
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1640705547]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 11
 alignment = 1
 
-[node name="BackButton" type="Button" parent="MainLayout/HeaderBar/HeaderContent" unique_id=26320774]
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=26320774]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
@@ -195,11 +209,11 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ttw17")
 icon = ExtResource("2_egq7b")
 flat = true
 
-[node name="HeaderSpacer" type="Control" parent="MainLayout/HeaderBar/HeaderContent" unique_id=332775269]
+[node name="HeaderSpacer" type="Control" parent="HeaderBar/HeaderContent" unique_id=332775269]
 custom_minimum_size = Vector2(550, 0)
 layout_mode = 2
 
-[node name="LessonTitle" type="Label" parent="MainLayout/HeaderBar/HeaderContent/HeaderSpacer" unique_id=950076530]
+[node name="LessonTitle" type="Label" parent="HeaderBar/HeaderContent/HeaderSpacer" unique_id=950076530]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -216,7 +230,7 @@ label_settings = SubResource("LabelSettings_7ujfs")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AudioButton" type="Button" parent="MainLayout/HeaderBar/HeaderContent" unique_id=2085601035]
+[node name="AudioButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=2085601035]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
@@ -224,24 +238,36 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_tg8v8")
 icon = ExtResource("3_egq7b")
 flat = true
 
-[node name="ProgressBackground" type="PanelContainer" parent="MainLayout" unique_id=1908813479]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1824064392]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 223.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=124550328]
+layout_mode = 2
+
+[node name="ProgressBackground" type="PanelContainer" parent="MarginContainer/MainLayout" unique_id=1908813479]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_kaaem")
 
-[node name="ProgressDotsContainer" type="HBoxContainer" parent="MainLayout/ProgressBackground" unique_id=690053407]
+[node name="ProgressDotsContainer" type="HBoxContainer" parent="MarginContainer/MainLayout/ProgressBackground" unique_id=690053407]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="CardScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=124187935]
+[node name="CardScrollContainer" type="ScrollContainer" parent="MarginContainer/MainLayout" unique_id=124187935]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CardMargin" type="MarginContainer" parent="MainLayout/CardScrollContainer" unique_id=877321458]
+[node name="CardMargin" type="MarginContainer" parent="MarginContainer/MainLayout/CardScrollContainer" unique_id=877321458]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -250,65 +276,62 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 25
 
-[node name="CardPanel" type="PanelContainer" parent="MainLayout/CardScrollContainer/CardMargin" unique_id=1181669308]
+[node name="CardPanel" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin" unique_id=1181669308]
 custom_minimum_size = Vector2(0, 950)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_jl6ec")
 
-[node name="CardContent" type="MarginContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel" unique_id=1839581439]
+[node name="CardContent" type="MarginContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel" unique_id=1839581439]
 layout_mode = 2
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 28
 
-[node name="FrontFace" type="CenterContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent" unique_id=1035168544]
+[node name="FrontFace" type="CenterContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent" unique_id=1035168544]
 layout_mode = 2
 
-[node name="WordLabel" type="Label" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace" unique_id=240147812]
+[node name="WordLabel" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace" unique_id=240147812]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52156866)
-theme_override_fonts/font = SubResource("SystemFont_tg8v8")
-theme_override_font_sizes/font_size = 100
 text = "Endag"
+label_settings = SubResource("LabelSettings_kaaem")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackFace" type="VBoxContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent" unique_id=1718119032]
+[node name="BackFace" type="VBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent" unique_id=1718119032]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 100
 
-[node name="WordRow" type="PanelContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=1982308068]
+[node name="WordRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=1982308068]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_egq7b")
 
-[node name="WordRowContent" type="HBoxContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow" unique_id=523075560]
+[node name="WordRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow" unique_id=523075560]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="BackWordLabel" type="Label" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent" unique_id=2034923892]
+[node name="BackWordLabel" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent" unique_id=2034923892]
 layout_mode = 2
 size_flags_horizontal = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_ttw17")
-theme_override_font_sizes/font_size = 72
+label_settings = SubResource("LabelSettings_opycv")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="MeaningEnRow" type="PanelContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=6130533]
+[node name="MeaningEnRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=6130533]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_25cvx")
 
-[node name="MeaningEnRowContent" type="HBoxContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow" unique_id=2028642643]
+[node name="MeaningEnRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow" unique_id=2028642643]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="EnIcon" type="Label" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent" unique_id=1023012148]
+[node name="EnIcon" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent" unique_id=1023012148]
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -319,25 +342,23 @@ text = "Eng"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MeaningEnLabel" type="Label" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent" unique_id=1809925944]
+[node name="MeaningEnLabel" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent" unique_id=1809925944]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_l3ryj")
-theme_override_font_sizes/font_size = 55
+label_settings = SubResource("LabelSettings_pjroj")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="MeaningFaRow" type="PanelContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=12704249]
+[node name="MeaningFaRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=12704249]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_gnf4q")
 
-[node name="MeaningFaRowContent" type="HBoxContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow" unique_id=376515680]
+[node name="MeaningFaRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow" unique_id=376515680]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="FaIcon" type="Label" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent" unique_id=488565795]
+[node name="FaIcon" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent" unique_id=488565795]
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -348,7 +369,7 @@ text = "Fa"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MeaningFaLabel" type="Label" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent" unique_id=1300667213]
+[node name="MeaningFaLabel" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent" unique_id=1300667213]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -357,15 +378,15 @@ theme_override_font_sizes/font_size = 55
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ExampleRow" type="PanelContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=89035156]
+[node name="ExampleRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=89035156]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ynxvm")
 
-[node name="ExampleRowContent" type="HBoxContainer" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow" unique_id=592497139]
+[node name="ExampleRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow" unique_id=592497139]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ExIcon" type="Label" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent" unique_id=1972800285]
+[node name="ExIcon" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent" unique_id=1972800285]
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -376,29 +397,27 @@ text = "Example"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExampleLabel" type="Label" parent="MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent" unique_id=407483339]
+[node name="ExampleLabel" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent" unique_id=407483339]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_egq7b")
-theme_override_font_sizes/font_size = 55
+label_settings = SubResource("LabelSettings_t0aqf")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MainLayout" unique_id=438521418]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainLayout" unique_id=438521418]
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -35)
 offset_transform_scale = Vector2(0.85, 0.85)
 theme_override_styles/panel = SubResource("StyleBoxTexture_7ujfs")
 
-[node name="BottomControls" type="HBoxContainer" parent="MainLayout/PanelContainer" unique_id=895647629]
+[node name="BottomControls" type="HBoxContainer" parent="MarginContainer/MainLayout/PanelContainer" unique_id=895647629]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_constants/separation = 180
 alignment = 1
 
-[node name="PrevButton" type="Button" parent="MainLayout/PanelContainer/BottomControls" unique_id=694726294]
+[node name="PrevButton" type="Button" parent="MarginContainer/MainLayout/PanelContainer/BottomControls" unique_id=694726294]
 custom_minimum_size = Vector2(200, 80.91)
 layout_mode = 2
 theme_override_font_sizes/font_size = 150
@@ -407,14 +426,14 @@ icon = ExtResource("3_l3ryj")
 flat = true
 icon_alignment = 2
 
-[node name="SaveButton" type="Button" parent="MainLayout/PanelContainer/BottomControls" unique_id=1623208738]
+[node name="SaveButton" type="Button" parent="MarginContainer/MainLayout/PanelContainer/BottomControls" unique_id=1623208738]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_bd0ld")
 flat = true
 icon_alignment = 1
 
-[node name="NextButton" type="Button" parent="MainLayout/PanelContainer/BottomControls" unique_id=136792250]
+[node name="NextButton" type="Button" parent="MarginContainer/MainLayout/PanelContainer/BottomControls" unique_id=136792250]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 150
@@ -422,31 +441,31 @@ theme_override_icons/icon = ExtResource("4_egq7b")
 theme_override_styles/normal = SubResource("StyleBoxFlat_yjxky")
 flat = true
 
-[node name="BottomMargin" type="MarginContainer" parent="MainLayout" unique_id=138502399]
+[node name="BottomMargin" type="MarginContainer" parent="MarginContainer/MainLayout" unique_id=138502399]
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="BottomNav" type="PanelContainer" parent="MainLayout/BottomMargin" unique_id=747709476]
+[node name="BottomNav" type="PanelContainer" parent="MarginContainer/MainLayout/BottomMargin" unique_id=747709476]
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 5
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdnt6")
 
-[node name="IconsMargin" type="MarginContainer" parent="MainLayout/BottomMargin/BottomNav" unique_id=1425006884]
+[node name="IconsMargin" type="MarginContainer" parent="MarginContainer/MainLayout/BottomMargin/BottomNav" unique_id=1425006884]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_right = 40
 
-[node name="NavContent" type="HBoxContainer" parent="MainLayout/BottomMargin/BottomNav/IconsMargin" unique_id=43362807]
+[node name="NavContent" type="HBoxContainer" parent="MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin" unique_id=43362807]
 layout_mode = 2
 size_flags_horizontal = 0
 offset_transform_position = Vector2(-9.77, 0)
 theme_override_constants/separation = -120
 
-[node name="NavBook" type="TextureButton" parent="MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent" unique_id=1812356045]
+[node name="NavBook" type="TextureButton" parent="MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent" unique_id=1812356045]
 custom_maximum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -457,14 +476,14 @@ texture_normal = ExtResource("9_8ea6x")
 texture_pressed = ExtResource("9_8ea6x")
 stretch_mode = 3
 
-[node name="NavList" type="TextureButton" parent="MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent" unique_id=42744343]
+[node name="NavList" type="TextureButton" parent="MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent" unique_id=42744343]
 custom_maximum_size = Vector2(150, 150)
 layout_mode = 2
 texture_normal = ExtResource("10_pjroj")
 texture_pressed = ExtResource("10_pjroj")
 stretch_mode = 0
 
-[node name="NavSettings" type="TextureButton" parent="MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent" unique_id=916511278]
+[node name="NavSettings" type="TextureButton" parent="MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent" unique_id=916511278]
 custom_maximum_size = Vector2(150, 150)
 layout_mode = 2
 texture_normal = ExtResource("11_t0aqf")

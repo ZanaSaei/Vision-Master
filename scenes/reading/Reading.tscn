@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://ddainltp6ir8u"]
+
+[ext_resource type="Script" uid="uid://u2x24fu82pmb" path="res://scenes/reading/reading.gd" id="1_oshe3"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_wsob8"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_fd08m"]
+[ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="4_lcoe2"]
+[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="5_i03xs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhcqr"]
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+
+[sub_resource type="LabelSettings" id="LabelSettings_swh16"]
+font = ExtResource("3_fd08m")
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_khtvf"]
+font = ExtResource("5_i03xs")
+font_size = 45
+font_color = Color(0, 0.4, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3afir"]
+font = ExtResource("3_fd08m")
+font_size = 45
+font_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+
+[node name="Reading" type="Control" unique_id=393705888]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oshe3")
+
+[node name="Background" type="ColorRect" parent="." unique_id=616402954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9372549, 0.9647059, 1, 1)
+
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=1330912032]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 193
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
+layout_mode = 2
+icon = ExtResource("2_wsob8")
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
+layout_mode = 2
+text = "Conversation"
+label_settings = SubResource("LabelSettings_swh16")
+
+[node name="AudioButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1020383883]
+layout_mode = 2
+icon = ExtResource("4_lcoe2")
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1463495940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 100
+
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=1935269617]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainLayout" unique_id=1131021853]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="ReadingImage" type="TextureRect" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
+layout_mode = 2
+
+[node name="ReadingTitleLabel" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1426285093]
+custom_minimum_size = Vector2(950, 0)
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_khtvf")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ParagraphsContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="QuestionsSection" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1136462616]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="QuestionsTitle" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=939271501]
+layout_mode = 2
+text = "Think About It"
+label_settings = SubResource("LabelSettings_3afir")
+
+[node name="QuestionsContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=1386943664]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]

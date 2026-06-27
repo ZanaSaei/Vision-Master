@@ -44,28 +44,28 @@ const SCENE_QUIZ           := "res://scenes/quiz/Quiz.tscn"
 const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 
 # ---------- Node references ----------
-@onready var progress_dots: HBoxContainer      = $MainLayout/ProgressBackground/ProgressDotsContainer
-@onready var card_panel: PanelContainer        = $MainLayout/CardScrollContainer/CardMargin/CardPanel
+@onready var progress_dots: HBoxContainer      = $MarginContainer/MainLayout/ProgressBackground/ProgressDotsContainer
+@onready var card_panel: PanelContainer        = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel
 
-@onready var front_face: CenterContainer       = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace
-@onready var front_word_label: Label           = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace/WordLabel
+@onready var front_face: CenterContainer       = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace
+@onready var front_word_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace/WordLabel
 
-@onready var back_face: VBoxContainer          = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace
-@onready var back_word_label: Label            = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/BackWordLabel
-@onready var meaning_en_label: Label           = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent/MeaningEnLabel
-@onready var meaning_fa_label: Label           = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
-@onready var example_label: Label              = $MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
+@onready var back_face: VBoxContainer          = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace
+@onready var back_word_label: Label            = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/BackWordLabel
+@onready var meaning_en_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent/MeaningEnLabel
+@onready var meaning_fa_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
+@onready var example_label: Label              = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
 
-@onready var prev_button: Button               = $MainLayout/PanelContainer/BottomControls/PrevButton
-@onready var save_button: Button               = $MainLayout/PanelContainer/BottomControls/SaveButton
-@onready var next_button: Button               = $MainLayout/PanelContainer/BottomControls/NextButton
+@onready var prev_button: Button               = $MarginContainer/MainLayout/PanelContainer/BottomControls/PrevButton
+@onready var save_button: Button               = $MarginContainer/MainLayout/PanelContainer/BottomControls/SaveButton
+@onready var next_button: Button               = $MarginContainer/MainLayout/PanelContainer/BottomControls/NextButton
 
-@onready var audio_button: Button              = $MainLayout/HeaderBar/HeaderContent/AudioButton
-@onready var back_nav_button: Button           = $MainLayout/HeaderBar/HeaderContent/BackButton
+@onready var audio_button: Button              = $HeaderBar/HeaderContent/AudioButton
+@onready var back_nav_button: Button           = $HeaderBar/HeaderContent/BackButton
 
-@onready var nav_book: TextureButton                  = $MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavBook
-@onready var nav_list: TextureButton                   = $MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavList
-@onready var nav_settings: TextureButton               = $MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavSettings
+@onready var nav_book: TextureButton                  = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavBook
+@onready var nav_list: TextureButton                   = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavList
+@onready var nav_settings: TextureButton               = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavSettings
 
 @onready var save_inactive = preload("res://images/save_button.png")
 @onready var save_active = preload("res://images/saved_button.png")

@@ -1,0 +1,69 @@
+{
+  "book": 1,
+  "lessons": {
+	"1": {
+	  "title": "Endangered Animals",
+	  "audio": "reading.mp3",
+	  "image": "v1/l1/reading.png",
+	  "paragraphs": [
+		"Today, there are some endangered animals on Earth. It means that we can find only a few of them around us. Some examples are whales, pandas, tigers and Asian elephants.",
+		"Humans destroy the natural homes of the animals in the forests, lakes, and plains. When the number of people on Earth increases, they need more places for living. They cut down trees and destroy lakes. They make homes and roads instead. Then the animals won't have a place to live. They will die out.",
+		"The Iranian cheetah is among these animals. This wild animal lives only in the plains of Iran. Now there are only a few Iranian cheetahs alive. If people take care of them, there is hope for this beautiful animal to live.",
+        "Recently, families pay more attention to nature, students learn about saving wildlife, and some hunters don't go hunting anymore. In this way, the number of cheetahs is going to increase in the future."
+	  ],
+	  "questions": [
+		"Which of the followings is not an endangered animal: panda, cheetah, or horse?",
+		"Where is the natural home of the Iranian cheetah?",
+        "When people take care of cheetahs, what will happen to their number?"
+	  ]
+	},
+	"2": {
+	  "title": "A Wonderful Liquid",
+	  "audio": "reading.mp3",
+	  "image": "v1/l2/reading.png",
+	  "paragraphs": [
+		"The human body is a real wonder. It is sometimes good to think about our body and how it works. Our body is doing millions of jobs all the time.",
+		"One of the most important parts of the body is blood. The heart pumps this red liquid around the body. This keeps us healthy and alive.",
+		"More than half of blood is plasma. This is a clear and yellow liquid. It carries red and white cells. There are millions of red blood cells in one small drop of blood. They carry oxygen round the body and collect carbon dioxide from body parts. There are thousands of white cells in a drop of blood. They are bigger than red cells. They defend our body against microbes.",
+        "This wonderful liquid is a great gift from Allah. We can thank Allah by keeping our body healthy. One way to do that is eating healthy food and doing daily exercises. Another way is to donate our blood to those who need it."
+	  ],
+	  "questions": [
+		"What color is plasma?",
+		"How can we keep our body healthy?",
+        "How many white blood cells are there in a drop of blood?"
+	  ]
+	},
+	"3": {
+	  "title": "No Pain No Gain",
+	  "audio": "reading.mp3",
+	  "image": "v1/l3/reading.png",
+	  "paragraphs": [
+		"Human knowledge develops with scientists' hard work. Many great men and women try hard to find facts, solve problems and invent things.",
+		"Some of these scientists did not have easy lives. But they tried hard when they were working on problems. They never felt weak when they were studying. They never gave up when they were doing research.",
+		"There are great stories about scientists and their lives. One such a story is about Thomas Edison. As a young boy, Edison was very interested in science. He was very energetic and always asked questions. Sadly, young Edison lost his hearing at the age of 12. He did not attend school and learned science by reading books in the library himself.",
+		"When he grew up he worked in different places, but he never lost his interest in making things. Edison was famous for doing thousands of experiments to find answers to problems. He said, \"I never quit until I get what I'm after\". Edison had more than 1,000 inventions and was very successful at the end of his life.",
+        "Many great names had stories like this. But the key to their success is their hard work and belief in themselves. If you want to get what you want, work hard and never give up."
+	  ],
+	  "questions": [
+		"Where did Edison learn science?",
+		"How did Edison find answers to problems?",
+        "What is the key to scientists' success?"
+	  ]
+	},
+	"4": {
+	  "title": "Iran: A True Paradise",
+	  "audio": "reading.mp3",
+	  "image": "v1/l4/reading.png",
+	  "paragraphs": [
+		"Every year, about one billion tourists travel around the world. Tourism is traveling for entertainment, health, sport or learning about the culture of a nation. Tourism can be domestic or international. Domestic tourists travel to different parts of their own country. International tourists travel abroad.",
+		"Some countries attract a lot of tourists every year. Egypt is one of the oldest countries of Africa. It is famous for its wonderful pyramids. France, Italy and Spain are three beautiful European countries. They attract many tourists from other parts of the world. Brazil, Peru and Chile are in South America. They are famous for their ancient history and amazing nature.",
+        "In Asia, Iran is a great destination for tourists. This beautiful country is a true paradise for people of the world. Each year, many people from all parts of the world visit Iran's attractions. Iran is a four-season country and tourists can find a range of activities from skiing to desert touring in different parts of the country. Many Muslims also travel to Iran and go to holy shrines in Mashhad, Qom and Shiraz. Iranian people are hospitable and kind to travelers and tourists."
+	  ],
+	  "questions": [
+		"Which one is a four-season country?",
+		"South American countries are famous for what?",
+        "In which continent can we visit the ancient pyramids?"
+	  ]
+	}
+  }
+}
