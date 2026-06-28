@@ -63,6 +63,7 @@ const SECTION_ACCENT_COLORS := [
 
 
 func _ready() -> void:
+	back_button.pivot_offset = back_button.size / 2.0
 	# Load fonts
 	_load_fonts()
 	
@@ -175,3 +176,5 @@ func _on_section_pressed(scene_key: String) -> void:
 
 func _on_back_pressed() -> void:
 	TransitionManager.change_scene(SCENE_BOOK_MENU)
+	var tween = create_tween()
+	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)

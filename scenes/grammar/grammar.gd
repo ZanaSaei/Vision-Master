@@ -48,6 +48,7 @@ var font_fa: FontFile
 
 
 func _ready() -> void:
+	back_button.pivot_offset = back_button.size / 2.0
 	_load_fonts()
 
 	back_button.pressed.connect(_on_back_pressed)
@@ -325,3 +326,5 @@ func _add_tip_box(parent: VBoxContainer, tip: String) -> void:
 
 func _on_back_pressed() -> void:
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
+	var tween = create_tween()
+	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)

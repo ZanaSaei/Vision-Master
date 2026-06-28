@@ -264,7 +264,14 @@ func _on_audio_pressed() -> void:
 		audio_player.play()
 	else:
 		push_warning("Reading audio not found: " + path)
+	var tween := create_tween()
+	tween.tween_property(audio_button, "scale", Vector2(0.93, 0.93), 0.08) \
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(audio_button, "scale", Vector2.ONE, 0.12) \
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 
 func _on_back_pressed() -> void:
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
+	var tween = create_tween()
+	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)

@@ -435,3 +435,5 @@ func _on_audio_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
+	var tween = create_tween()
+	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)

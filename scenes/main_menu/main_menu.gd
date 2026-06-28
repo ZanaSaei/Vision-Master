@@ -119,7 +119,7 @@ func _play_intro_animation() -> void:
 		app_subtitle,
 		"modulate:a",
 		1.0,
-		0.45
+		2
 	)
 
 	# Wait until title/subtitle finish

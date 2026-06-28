@@ -57,6 +57,7 @@ const BOOK_BG_COLORS := {
 
 
 func _ready() -> void:
+	back_button.pivot_offset = back_button.size / 2.0
 	# Load fonts
 	_load_fonts()
 	
@@ -135,4 +136,6 @@ func _on_lesson_pressed(lesson_number: int) -> void:
 
 
 func _on_back_button_pressed() -> void:
+	var tween = create_tween()
+	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
 	TransitionManager.change_scene(SCENE_MAIN_MENU)

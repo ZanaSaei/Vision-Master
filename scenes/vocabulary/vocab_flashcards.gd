@@ -97,6 +97,14 @@ func _ready() -> void:
 	nav_book.pressed.connect(_on_nav_book_pressed)
 	card_panel.gui_input.connect(_on_card_input)
 
+	audio_button.pivot_offset = audio_button.size / 2.0
+	back_nav_button.pivot_offset = back_nav_button.size / 2.0
+	next_button.pivot_offset = next_button.size / 2.0
+	prev_button.pivot_offset = prev_button.size / 2.0
+	nav_book.pivot_offset = nav_book.size / 2.0
+	nav_list.pivot_offset = nav_list.size / 2.0
+	nav_settings.pivot_offset = nav_settings.size / 2.0
+
 	if Global.flashcard_mode == "saved":
 		_enter_saved_mode()
 	else:
