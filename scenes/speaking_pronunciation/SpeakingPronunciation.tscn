@@ -8,6 +8,7 @@
 bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
+expand_margin_top = 45.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
 font = ExtResource("3_6ryan")
@@ -35,15 +36,15 @@ color = Color(0.9372549, 0.9647059, 1, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 23.0
+offset_top = 30.0
+offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
 
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/separation = 378
+theme_override_constants/separation = 527
 
 [node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
 layout_mode = 2
@@ -60,7 +61,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 274.0
+offset_top = 377.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 60
@@ -78,10 +79,12 @@ size_flags_vertical = 3
 [node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = 60
 
 [node name="PointsContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 35
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]

@@ -8,6 +8,7 @@
 bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
+expand_margin_top = 45.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_bix6w"]
 font = ExtResource("3_ln7tq")
@@ -41,12 +42,14 @@ color = Color(0.9372549, 0.9647059, 1, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 31.0
+offset_top = 30.0
+offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1vrhx")
 
 [node name="TopBar" type="HBoxContainer" parent="PanelContainer" unique_id=284333027]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 498
 alignment = 1
 
@@ -64,6 +67,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 170.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

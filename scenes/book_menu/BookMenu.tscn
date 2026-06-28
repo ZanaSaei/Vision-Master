@@ -3,23 +3,21 @@
 [ext_resource type="Script" uid="uid://bup0mtxrin4q2" path="res://scenes/book_menu/book_menu.gd" id="1_fjcg3"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_1vrhx"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_rdkw2"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_vlp4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjcg3"]
 bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
+expand_margin_top = 45.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_1vrhx"]
 font = ExtResource("3_rdkw2")
 font_size = 68
 
-[sub_resource type="SystemFont" id="SystemFont_vlp4y"]
-font_names = PackedStringArray("2  Farnaz")
-subpixel_positioning = 0
-
 [sub_resource type="LabelSettings" id="LabelSettings_rdkw2"]
-font = SubResource("SystemFont_vlp4y")
-font_size = 73
+font = ExtResource("4_vlp4y")
+font_size = 59
 font_color = Color(0, 0, 0, 1)
 outline_size = 15
 
@@ -45,12 +43,14 @@ color = Color(0.9372549, 0.9647059, 1, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 49.0
+offset_top = 30.0
+offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fjcg3")
 
 [node name="TopBar" type="HBoxContainer" parent="PanelContainer" unique_id=1356899270]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 530
 alignment = 1
 
@@ -75,6 +75,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 187.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -85,7 +86,7 @@ theme_override_constants/margin_bottom = 32
 
 [node name="InnerLayout" type="VBoxContainer" parent="MainLayout" unique_id=1592577916]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 60
 
 [node name="HeroLabel" type="Label" parent="MainLayout/InnerLayout" unique_id=1359595524]
 layout_mode = 2

@@ -61,6 +61,7 @@ func _ready() -> void:
 
 	header_title.text = "Lesson %d 🎙️" % lesson
 
+
 	if font_bold != null:
 		header_title.add_theme_font_override("font", font_bold)
 

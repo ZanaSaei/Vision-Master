@@ -18,6 +18,7 @@
 bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
+expand_margin_top = 45.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttw17"]
 bg_color = Color(0.14509805, 0.3882353, 0.92156863, 0.39215687)
@@ -172,15 +173,15 @@ script = ExtResource("1_tpk77")
 
 [node name="TextureRect" type="ColorRect" parent="." unique_id=2022602915]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -565.0
-offset_top = -1010.0
-offset_right = 2364.87
-offset_bottom = 4218.5713
+anchors_preset = -1
+anchor_left = -0.104
+anchor_top = -0.055000003
+anchor_right = 1.095
+anchor_bottom = 1.171
+offset_left = 0.32000732
+offset_top = -0.3999939
+offset_right = 2069.0361
+offset_bottom = 3759.9656
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.385, 0.385)
@@ -190,7 +191,8 @@ color = Color(0.9372549, 0.9647059, 1, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 208.0
+offset_top = 30.0
+offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tpk77")
 
@@ -241,7 +243,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 223.0
+offset_top = 338.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -406,14 +408,13 @@ autowrap_mode = 2
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainLayout" unique_id=438521418]
 layout_mode = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, -35)
 offset_transform_scale = Vector2(0.85, 0.85)
 theme_override_styles/panel = SubResource("StyleBoxTexture_7ujfs")
 
 [node name="BottomControls" type="HBoxContainer" parent="MarginContainer/MainLayout/PanelContainer" unique_id=895647629]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-theme_override_constants/separation = 180
+theme_override_constants/separation = 206
 alignment = 1
 
 [node name="PrevButton" type="Button" parent="MarginContainer/MainLayout/PanelContainer/BottomControls" unique_id=694726294]

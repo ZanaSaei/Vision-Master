@@ -69,6 +69,7 @@ func _play_intro_animation() -> void:
 	await get_tree().process_frame
 
 	# ---------- Initial state ----------
+	app_title.pivot_offset = app_title.size / 2
 	app_title.scale = Vector2(0.7, 0.7)
 	app_title.modulate.a = 0.0
 

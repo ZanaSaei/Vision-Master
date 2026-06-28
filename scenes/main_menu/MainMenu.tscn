@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://fu47855vxrkx" path="res://scenes/main_menu/main_menu.gd" id="1_isws5"]
 [ext_resource type="Texture2D" uid="uid://bcuel645k21ak" path="res://images/save_words.png" id="2_xr86y"]
 [ext_resource type="Texture2D" uid="uid://dpd68y86vgnn8" path="res://images/setting_mainmenu.png" id="3_qmweu"]
+[ext_resource type="FontFile" uid="uid://g637eq3c7teb" path="res://assets/fonts/BebasNeue-Regular.ttf" id="4_qq55g"]
 [ext_resource type="StyleBox" uid="uid://iwxf7jw83unf" path="res://buttons_styles/ContinueNormal.tres" id="5_f1mbi"]
+[ext_resource type="FontFile" uid="uid://cd8w2vgcrha3v" path="res://assets/fonts/PlayfairDisplaySC-Bold.ttf" id="5_pkvjm"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="6_6gdku"]
 [ext_resource type="StyleBox" uid="uid://bpmplvjua0vvo" path="res://buttons_styles/Book1Normal.tres" id="6_arvcj"]
 [ext_resource type="StyleBox" uid="uid://cnd0l7h3t2mqw" path="res://buttons_styles/Book2Normal.tres" id="7_6k0m2"]
 [ext_resource type="StyleBox" uid="uid://dck62uet13ugq" path="res://buttons_styles/Book3Normal.tres" id="8_qq55g"]
 
-[sub_resource type="SystemFont" id="SystemFont_f1mbi"]
-font_names = PackedStringArray("Algerian")
-
 [sub_resource type="LabelSettings" id="LabelSettings_qmweu"]
-font = SubResource("SystemFont_f1mbi")
-font_size = 182
+font = ExtResource("4_qq55g")
+font_size = 250
 font_color = Color(1, 1, 0, 1)
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
@@ -27,24 +27,15 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="SystemFont" id="SystemFont_oitky"]
-font_names = PackedStringArray("Cambria")
-
 [sub_resource type="LabelSettings" id="LabelSettings_f1mbi"]
-font = SubResource("SystemFont_oitky")
-font_size = 60
+font = ExtResource("5_pkvjm")
+font_size = 40
 font_color = Color(0, 0.36078432, 0, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="SystemFont" id="SystemFont_wckin"]
-font_names = PackedStringArray("2  Farnaz")
-
-[sub_resource type="SystemFont" id="SystemFont_qmweu"]
-font_names = PackedStringArray("2  Farnaz")
-
 [sub_resource type="LabelSettings" id="LabelSettings_oitky"]
-font = SubResource("SystemFont_qmweu")
+font = ExtResource("6_6gdku")
 font_size = 61
 font_color = Color(1, 0.16470589, 0, 1)
 outline_size = 14
@@ -147,7 +138,7 @@ custom_minimum_size = Vector2(630, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme_override_fonts/font = SubResource("SystemFont_wckin")
+theme_override_fonts/font = ExtResource("6_6gdku")
 theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = ExtResource("5_f1mbi")
 theme_override_styles/pressed = ExtResource("5_f1mbi")
