@@ -461,6 +461,11 @@ func _on_remove_word_pressed() -> void:
 	word_list.remove_at(current_index)
 	if current_index >= word_list.size():
 		current_index = max(0, word_list.size() - 1)
+	var tween := create_tween()
+	tween.tween_property(save_button, "scale", Vector2(0.93, 0.93), 0.08) \
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(audio_button, "scale", Vector2.ONE, 0.12) \
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	_build_progress_dots()
 	_update_card(false)
 
@@ -472,6 +477,11 @@ func _on_audio_pressed() -> void:
 	if vocab_audio_filename == "":
 		return
 	var path := Global.get_audio_path(current_book, current_lesson, vocab_audio_filename)
+	var tween := create_tween()
+	tween.tween_property(audio_button, "scale", Vector2(0.93, 0.93), 0.08) \
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(audio_button, "scale", Vector2.ONE, 0.12) \
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	if ResourceLoader.exists(path):
 		audio_player.stream = load(path)
 		audio_player.play()
@@ -488,6 +498,8 @@ func _on_back_pressed() -> void:
 		TransitionManager.change_scene(SCENE_MAIN_MENU)
 	else:
 		TransitionManager.change_scene(SCENE_LESSON_MENU)
+	var tween = create_tween()
+	tween.tween_property(back_nav_button, "scale", Vector2(0.96, 0.96), 0.08)
 
 
 func _on_nav_book_pressed() -> void:
