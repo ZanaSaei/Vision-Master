@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_egq7b"]
 [ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="3_egq7b"]
 [ext_resource type="Texture2D" uid="uid://ckihf4m1yrm16" path="res://images/prev.png" id="3_l3ryj"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_t0aqf"]
 [ext_resource type="Texture2D" uid="uid://dvhje7arnej0d" path="res://images/next.png" id="4_egq7b"]
 [ext_resource type="Texture2D" uid="uid://3w4stlwu0rek" path="res://images/Next_prev_background.png" id="4_gnf4q"]
 [ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_opycv"]
@@ -21,12 +22,9 @@ corner_radius_bottom_left = 150
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttw17"]
 bg_color = Color(0.14509805, 0.3882353, 0.92156863, 0.39215687)
 
-[sub_resource type="SystemFont" id="SystemFont_3umrm"]
-font_names = PackedStringArray("Sans-Serif")
-
 [sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
-font = SubResource("SystemFont_3umrm")
-font_size = 45
+font = ExtResource("3_t0aqf")
+font_size = 55
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tg8v8"]
 bg_color = Color(0.14509805, 0.3882353, 0.92156863, 0.39215687)
@@ -266,6 +264,7 @@ alignment = 1
 [node name="CardScrollContainer" type="ScrollContainer" parent="MarginContainer/MainLayout" unique_id=124187935]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
 [node name="CardMargin" type="MarginContainer" parent="MarginContainer/MainLayout/CardScrollContainer" unique_id=877321458]
 layout_mode = 2

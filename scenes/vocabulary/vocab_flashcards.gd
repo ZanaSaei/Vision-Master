@@ -11,7 +11,7 @@ extends Control
 #
 #  SAVED mode (Global.flashcard_mode == "saved"):
 #    - Loads all words from Global.get_saved_words()
-#    - Header: back arrow (audio button hidden)
+#    - Header: back arrow + audio button (dynamically loads lesson audio)
 #    - Bottom nav: 📖 home | 🗑 Remove Word | 📝 Quiz
 #    - Heart: static filled indicator (word is saved)
 # ============================================================
@@ -27,14 +27,18 @@ var mode: Mode           = Mode.LESSON
 var is_flipped: bool     = false
 var is_animating: bool   = false
 
-# ---------- Swipe & Slide state ----------
-var is_sliding: bool     = false
-var swipe_start: Vector2
-var is_swiping: bool     = false
-const SWIPE_THRESHOLD    := 40.0
-const SLIDE_DURATION     := 0.2
+# ---------- Drag, Slide & Rotation state ----------
+var is_sliding: bool       = false
+var is_dragging: bool      = false
+var initial_card_x: float  = 0.0
+var total_drag_dist: float = 0.0
+const DRAG_THRESHOLD       := 80.0  # How far to drag before it counts as a word change
+const DRAG_FLIP_TOLERANCE  := 10.0  # If dragged less than this, treat as a tap (flip)
+const DRAG_ROTATION_FACTOR := 0.02  # How much the card tilts while dragging
+const SLIDE_DURATION       := 0.2
+const SNAP_DURATION        := 0.15
 
-# ---------- Dot constants (now ints to avoid narrowing warnings) ----------
+# ---------- Dot constants ----------
 const DOT_ACTIVE_W    := 24
 const DOT_INACTIVE_W  := 14
 const DOT_HEIGHT      := 6
@@ -50,6 +54,8 @@ const SCENE_QUIZ           := "res://scenes/quiz/Quiz.tscn"
 const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 
 # ---------- Node references ----------
+@onready var lesson_title: Label               = $HeaderBar/HeaderContent/HeaderSpacer/LessonTitle
+
 @onready var progress_dots: HBoxContainer      = $MarginContainer/MainLayout/ProgressBackground/ProgressDotsContainer
 @onready var card_panel: PanelContainer        = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel
 
@@ -102,22 +108,16 @@ func _ready() -> void:
 # ----------------------------------------------------------------
 func _enter_lesson_mode() -> void:
 	mode = Mode.LESSON
-
-	# Header
 	audio_button.visible = true
 
-	# Bottom nav — standard
-	# Disconnect saved-mode signals first (if any)
 	if nav_list.pressed.is_connected(_on_remove_word_pressed):
 		nav_list.pressed.disconnect(_on_remove_word_pressed)
 	if nav_settings.pressed.is_connected(_on_quiz_pressed):
 		nav_settings.pressed.disconnect(_on_quiz_pressed)
 
-	# Connect lesson-mode signals
 	nav_list.pressed.connect(_on_nav_list_lesson_pressed)
 	nav_settings.pressed.connect(_on_nav_settings_lesson_pressed)
 
-	# Restore lesson icons (use your actual icon paths)
 	nav_list.texture_normal = load("res://images/menu.png")
 	nav_list.texture_pressed = load("res://images/menu.png")
 	nav_list.tooltip_text = "Lesson List"
@@ -126,20 +126,18 @@ func _enter_lesson_mode() -> void:
 	nav_settings.texture_pressed = load("res://images/setting.png")
 	nav_settings.tooltip_text = "Settings"
 
-	# Load data
 	var book: int   = Global.current_book
 	var lesson: int = Global.current_lesson
 	var lesson_data := Global.load_vocabulary(book, lesson)
 	
-	# Check if lesson data is valid
+	lesson_title.text = "Vision %d\nLesson %s" % [book, lesson]
+	
 	if lesson_data.is_empty():
 		push_error("Failed to load lesson %d from book %d" % [lesson, book])
 		get_tree().change_scene_to_file(SCENE_LESSON_MENU)
 		return
 	
 	var vocab_section: Dictionary = lesson_data.get("vocabulary", {})
-	var _lesson_title: String = lesson_data.get("title", "")
-
 	setup(
 		vocab_section.get("words", []),
 		book, lesson,
@@ -147,13 +145,13 @@ func _enter_lesson_mode() -> void:
 		Mode.LESSON
 	)
 
+
 func _enter_saved_mode() -> void:
 	mode = Mode.SAVED
+	audio_button.visible = true # Brought this back for saved mode
 
-	# Header — no audio in saved mode
-	audio_button.visible = false
+	lesson_title.text = "کلمات ذخیره شده"
 
-	# ----- Change nav icons for SAVED mode -----
 	nav_list.texture_normal = load("res://images/delete.png")
 	nav_list.texture_pressed = load("res://images/delete.png")
 	nav_list.tooltip_text = "Remove current word"
@@ -162,17 +160,14 @@ func _enter_saved_mode() -> void:
 	nav_settings.texture_pressed = load("res://images/quiz.png")
 	nav_settings.tooltip_text = "Start Quiz"
 
-	# Disconnect old lesson-mode signals
 	if nav_list.pressed.is_connected(_on_nav_list_lesson_pressed):
 		nav_list.pressed.disconnect(_on_nav_list_lesson_pressed)
 	if nav_settings.pressed.is_connected(_on_nav_settings_lesson_pressed):
 		nav_settings.pressed.disconnect(_on_nav_settings_lesson_pressed)
 
-	# Connect new saved-mode signals
 	nav_list.pressed.connect(_on_remove_word_pressed)
 	nav_settings.pressed.connect(_on_quiz_pressed)
 
-	# Heart becomes a static filled indicator in saved mode
 	save_button.icon = save_active
 	save_button.modulate = Color("#EF4444")
 	save_button.disabled = true
@@ -180,16 +175,11 @@ func _enter_saved_mode() -> void:
 	var saved_copy = Global.get_saved_words().duplicate()
 	setup(saved_copy, 0, 0, "", Mode.SAVED)
 
+
 # ----------------------------------------------------------------
 #  PUBLIC SETUP
 # ----------------------------------------------------------------
-func setup(
-	words: Array,
-	book: int,
-	lesson: int,
-	audio_filename: String,
-	screen_mode: Mode = Mode.LESSON
-) -> void:
+func setup(words: Array, book: int, lesson: int, audio_filename: String, screen_mode: Mode = Mode.LESSON) -> void:
 	word_list            = words
 	current_book         = book
 	current_lesson       = lesson
@@ -209,9 +199,8 @@ func _build_progress_dots() -> void:
 	for child in progress_dots.get_children():
 		child.queue_free()
 
-	# Cap visible dots so they don't overflow on large saved lists
 	var total: int = word_list.size()
-	var num_dots: int = min(total, 50)   # renamed from 'show'
+	var num_dots: int = min(total, 50)
 
 	for i in num_dots:
 		var dot := Panel.new()
@@ -256,6 +245,14 @@ func _update_card(animate: bool = false) -> void:
 
 	var entry: Dictionary = word_list[current_index]
 
+	# Dynamically update audio details in Saved Mode
+	if mode == Mode.SAVED:
+		current_book = entry.get("book", 0)
+		current_lesson = entry.get("lesson", 0)
+		var lesson_data := Global.load_vocabulary(current_book, current_lesson)
+		if not lesson_data.is_empty():
+			vocab_audio_filename = lesson_data.get("vocabulary", {}).get("audio", "")
+
 	front_word_label.text = entry.get("word", "")
 	back_word_label.text  = entry.get("word", "")
 	meaning_en_label.text = entry.get("meaning_en", "")
@@ -276,20 +273,16 @@ func _update_card(animate: bool = false) -> void:
 
 
 func _handle_empty_list() -> void:
-	# All words removed from saved list — show the "no saved words" screen
 	if mode == Mode.SAVED:
 		get_tree().change_scene_to_file(SCENE_NO_SAVED_WORDS)
 	else:
-		# For lesson mode, this shouldn't happen, but we can fallback to main menu
 		get_tree().change_scene_to_file(SCENE_MAIN_MENU)
 
 
 func _refresh_save_button(entry: Dictionary) -> void:
 	if mode != Mode.LESSON:
 		return
-	var saved := Global.is_word_saved(
-		entry.get("word", ""), current_book, current_lesson
-	)
+	var saved := Global.is_word_saved(entry.get("word", ""), current_book, current_lesson)
 	save_button.icon     = save_active if saved else save_inactive
 	save_button.disabled = false
 
@@ -300,86 +293,117 @@ func _show_face(show_back: bool) -> void:
 
 
 # ----------------------------------------------------------------
-#  FLIP & SLIDE ANIMATION
+#  FLIP ANIMATION
 # ----------------------------------------------------------------
 func _play_flip(landing_on_back: bool) -> void:
 	if is_animating or is_sliding:
 		return
 	is_animating = true
-
-	card_panel.pivot_offset = Vector2(
-		card_panel.size.x / 2.0,
-		card_panel.size.y / 2.0
-	)
+	card_panel.pivot_offset = Vector2(card_panel.size.x / 2.0, card_panel.size.y / 2.0)
 
 	var tween := create_tween()
-
-	tween.tween_property(card_panel, "scale:x", 0.0, FLIP_DURATION) \
-		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-
+	tween.tween_property(card_panel, "scale:x", 0.0, FLIP_DURATION).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(func(): _show_face(landing_on_back))
-
-	tween.tween_property(card_panel, "scale:x", 1.0, FLIP_DURATION) \
-		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-
+	tween.tween_property(card_panel, "scale:x", 1.0, FLIP_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(func(): is_animating = false)
 
-func _slide_to_word(direction: int) -> void:
-	# direction: 1 for next (slide left out), -1 for prev (slide right out)
-	if is_sliding or is_animating or word_list.is_empty():
-		return
-		
-	is_sliding = true
 
-	# Capture the starting position to ensure we snap back exactly where the layout dictates
-	var start_pos_x = card_panel.position.x 
-	var slide_distance = get_viewport_rect().size.x # Slide a full screen width
+# ----------------------------------------------------------------
+#  DRAG, SLIDE & ROTATE LOGIC
+# ----------------------------------------------------------------
+func _on_card_input(event: InputEvent) -> void:
+	# 1. Handle Dragging (Mouse move or Touch drag)
+	if event is InputEventMouseMotion or event is InputEventScreenDrag:
+		if is_dragging:
+			total_drag_dist += event.relative.x
+			
+			# Move and Rotate
+			card_panel.position.x = initial_card_x + total_drag_dist
+			card_panel.rotation_degrees = total_drag_dist * DRAG_ROTATION_FACTOR
+			
+	# 2. Handle Press and Release
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT or event is InputEventScreenTouch:
+		if event.pressed:
+			if is_animating or is_sliding or word_list.is_empty():
+				return
+			# Start drag - Set pivot so it rotates from the center
+			card_panel.pivot_offset = Vector2(card_panel.size.x / 2.0, card_panel.size.y / 2.0)
+			is_dragging = true
+			initial_card_x = card_panel.position.x
+			total_drag_dist = 0.0
+		else:
+			# End drag
+			if is_dragging:
+				is_dragging = false
+				
+				# Evaluate the drag distance
+				if abs(total_drag_dist) > DRAG_THRESHOLD:
+					var direction = 1 if total_drag_dist < 0 else -1
+					_finish_slide_animation(direction, initial_card_x)
+				elif abs(total_drag_dist) > DRAG_FLIP_TOLERANCE:
+					# Didn't drag far enough to change word, snap back
+					_snap_back_animation(initial_card_x)
+				else:
+					# Barely moved at all, treat as a tap/flip
+					card_panel.position.x = initial_card_x
+					card_panel.rotation_degrees = 0.0
+					_flip()
+
+
+func _finish_slide_animation(direction: int, start_x: float) -> void:
+	# direction: 1 (sliding left to next), -1 (sliding right to prev)
+	is_sliding = true
+	var slide_distance = get_viewport_rect().size.x
+	var target_x = start_x - (direction * slide_distance)
+	
+	# Calculate how much it should be rotated when it reaches the edge
+	var target_rotation = (-direction * slide_distance) * DRAG_ROTATION_FACTOR 
 
 	var tween = create_tween()
+	
+	# Finish sliding out (Position AND Rotation at the same time using parallel)
+	tween.tween_property(card_panel, "position:x", target_x, SNAP_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	tween.parallel().tween_property(card_panel, "rotation_degrees", target_rotation, SNAP_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 
-	# Phase 1: Slide OUT
-	tween.tween_property(card_panel, "position:x", start_pos_x - (direction * slide_distance), SLIDE_DURATION) \
-		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-
-	# Phase 2: Update the card data instantly while it's off-screen, and move to the opposite side
 	tween.tween_callback(func():
 		if direction == 1:
 			current_index = (current_index + 1) % word_list.size()
 		else:
 			current_index = (current_index - 1 + word_list.size()) % word_list.size()
 			
-		_update_card(false) # Updates the labels
-		card_panel.position.x = start_pos_x + (direction * slide_distance)
+		_update_card(false)
+		
+		# Move to opposite side off-screen instantly, and reset rotation to 0
+		card_panel.position.x = start_x + (direction * slide_distance)
+		card_panel.rotation_degrees = 0.0
 	)
 
-	# Phase 3: Slide IN
-	tween.tween_property(card_panel, "position:x", start_pos_x, SLIDE_DURATION) \
-		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-
+	# Slide back in
+	tween.tween_property(card_panel, "position:x", start_x, SLIDE_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(func(): is_sliding = false)
 
-# ----------------------------------------------------------------
-#  INPUT
-# ----------------------------------------------------------------
-func _on_card_input(event: InputEvent) -> void:
-	# Handles both Mouse (for desktop testing) and Touch (for Mobile)
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT or event is InputEventScreenTouch:
-		if event.pressed:
-			swipe_start = event.position
-			is_swiping = true
-		else:
-			if is_swiping:
-				is_swiping = false
-				var swipe_dist = event.position.x - swipe_start.x
-				
-				# Check if the drag distance was long enough to count as a swipe
-				if abs(swipe_dist) > SWIPE_THRESHOLD:
-					if swipe_dist > 0:
-						_slide_to_word(-1) # Swiped Right -> Previous Card
-					else:
-						_slide_to_word(1)  # Swiped Left -> Next Card
-				else:
-					_flip() # Threshold not met, treat as a normal tap/flip
+
+func _snap_back_animation(target_x: float) -> void:
+	is_sliding = true
+	var tween = create_tween()
+	
+	# Snap back position and rotate back to 0 at the same time
+	tween.tween_property(card_panel, "position:x", target_x, SNAP_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	tween.parallel().tween_property(card_panel, "rotation_degrees", 0.0, SNAP_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	
+	tween.tween_callback(func(): is_sliding = false)
+
+
+# Re-use the slide logic for the UI buttons
+func _button_slide(direction: int) -> void:
+	if is_sliding or is_animating or is_dragging or word_list.is_empty():
+		return
+		
+	# Ensure pivot is centered for rotation
+	card_panel.pivot_offset = Vector2(card_panel.size.x / 2.0, card_panel.size.y / 2.0)
+	
+	# Start a slide from the center
+	_finish_slide_animation(direction, card_panel.position.x)
 
 
 func _flip() -> void:
@@ -390,11 +414,11 @@ func _flip() -> void:
 
 
 func _on_prev_pressed() -> void:
-	_slide_to_word(-1)
+	_button_slide(-1)
 
 
 func _on_next_pressed() -> void:
-	_slide_to_word(1)
+	_button_slide(1)
 
 
 # ----------------------------------------------------------------
