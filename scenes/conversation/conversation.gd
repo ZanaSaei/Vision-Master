@@ -265,6 +265,12 @@ func _build_questions(questions: Array) -> void:
 
 func _on_audio_pressed() -> void:
 	var path: String = get_meta("audio_path", "")
+	audio_button.pivot_offset = audio_button.size / 2.0
+	var tween := create_tween()
+	tween.tween_property(audio_button, "scale", Vector2(0.93, 0.93), 0.08) \
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(audio_button, "scale", Vector2.ONE, 0.12) \
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	if path == "":
 		return
 	if ResourceLoader.exists(path):
@@ -275,4 +281,7 @@ func _on_audio_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
+	back_button.pivot_offset = back_button.size / 2.0
+	var tween = create_tween()
+	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
 	TransitionManager.change_scene(SCENE_LESSON_MENU)

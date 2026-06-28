@@ -61,6 +61,7 @@ theme_override_constants/separation = 135
 layout_mode = 2
 icon = ExtResource("2_khtvf")
 flat = true
+icon_alignment = 1
 
 [node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
 layout_mode = 2
@@ -71,6 +72,7 @@ label_settings = SubResource("LabelSettings_swh16")
 layout_mode = 2
 icon = ExtResource("3_s57c2")
 flat = true
+icon_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1463495940]
 layout_mode = 1
