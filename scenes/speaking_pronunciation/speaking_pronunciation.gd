@@ -1,4 +1,4 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
 #  SPEAKING & PRONUNCIATION SCENE
@@ -54,7 +54,7 @@ var font_fa: FontFile
 func _ready() -> void:
 	_load_fonts()
 
-	back_button.pressed.connect(_on_back_pressed)
+	back_button.pressed.connect(_on_back_button_pressed)
 
 	var book: int   = Global.current_book
 	var lesson: int = Global.current_lesson
@@ -139,6 +139,7 @@ func _make_speaking_card(point: Dictionary, color_idx: int) -> PanelContainer:
 
 	# Outer card
 	var card := PanelContainer.new()
+	card.mouse_filter = Control.MOUSE_FILTER_PASS
 	var card_style := StyleBoxFlat.new()
 	card_style.bg_color                   = bg
 	card_style.corner_radius_top_left     = 16
@@ -154,6 +155,7 @@ func _make_speaking_card(point: Dictionary, color_idx: int) -> PanelContainer:
 	card.add_theme_stylebox_override("panel", card_style)
 
 	var inner := VBoxContainer.new()
+	inner.mouse_filter = Control.MOUSE_FILTER_PASS
 	inner.add_theme_constant_override("separation", 16)
 
 	# 1. Title (with icon)
@@ -238,6 +240,7 @@ func _add_explanation(parent: VBoxContainer, explanation: String) -> void:
 
 func _add_rule_box(parent: VBoxContainer, rule: String) -> void:
 	var box := PanelContainer.new()
+	box.mouse_filter = Control.MOUSE_FILTER_PASS
 	var box_style := StyleBoxFlat.new()
 	box_style.bg_color                   = RULE_BG
 	box_style.corner_radius_top_left     = 8
@@ -265,6 +268,7 @@ func _add_rule_box(parent: VBoxContainer, rule: String) -> void:
 
 func _add_pronunciation_box(parent: VBoxContainer, pronunciation: String) -> void:
 	var box := PanelContainer.new()
+	box.mouse_filter = Control.MOUSE_FILTER_PASS
 	var box_style := StyleBoxFlat.new()
 	box_style.bg_color                   = PRONUNCIATION_BG
 	box_style.corner_radius_top_left     = 8
@@ -293,6 +297,7 @@ func _add_pronunciation_box(parent: VBoxContainer, pronunciation: String) -> voi
 
 func _add_structure_box(parent: VBoxContainer, structure: String) -> void:
 	var box := PanelContainer.new()
+	box.mouse_filter = Control.MOUSE_FILTER_PASS
 	var box_style := StyleBoxFlat.new()
 	box_style.bg_color                   = STRUCTURE_BG
 	box_style.corner_radius_top_left     = 8
@@ -393,6 +398,7 @@ func _add_practice_section(parent: VBoxContainer, practice: String) -> void:
 
 func _add_tip_box(parent: VBoxContainer, tip: String) -> void:
 	var box := PanelContainer.new()
+	box.mouse_filter = Control.MOUSE_FILTER_PASS
 	var box_style := StyleBoxFlat.new()
 	box_style.bg_color                   = TIP_BG
 	box_style.corner_radius_top_left     = 8
@@ -433,7 +439,10 @@ func _on_audio_pressed() -> void:
 		push_warning("Speaking audio not found: " + path)
 
 
-func _on_back_pressed() -> void:
+func _on_back_button_pressed() -> void:
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
 	var tween = create_tween()
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
+
+func _on_android_back_pressed() -> void:
+	_on_back_button_pressed()

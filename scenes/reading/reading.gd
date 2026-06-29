@@ -1,4 +1,4 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
 #  READING SCENE
@@ -47,7 +47,7 @@ func _ready() -> void:
 	# Configure the background image
 	_configure_background_image()
 
-	back_button.pressed.connect(_on_back_pressed)
+	back_button.pressed.connect(_on_back_button_pressed)
 	audio_button.pressed.connect(_on_audio_pressed)
 
 	var book: int   = Global.current_book
@@ -189,6 +189,7 @@ func _build_paragraphs(paragraphs: Array) -> void:
 func _make_paragraph_card(_number: int, text: String) -> PanelContainer:
 	# Outer card
 	var card := PanelContainer.new()
+	card.mouse_filter = Control.MOUSE_FILTER_PASS
 	var card_style := StyleBoxFlat.new()
 	card_style.bg_color                   = PARA_BG_COLOR
 	card_style.corner_radius_top_left     = 12
@@ -229,6 +230,7 @@ func _build_questions(questions: Array) -> void:
 		var q: String = questions[i]
 
 		var row := HBoxContainer.new()
+		row.mouse_filter = Control.MOUSE_FILTER_PASS
 		row.add_theme_constant_override("separation", 35)
 
 		var number := Label.new()
@@ -271,7 +273,10 @@ func _on_audio_pressed() -> void:
 	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 
-func _on_back_pressed() -> void:
+func _on_back_button_pressed() -> void:
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
 	var tween = create_tween()
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
+
+func _on_android_back_pressed() -> void:
+	_on_back_button_pressed()

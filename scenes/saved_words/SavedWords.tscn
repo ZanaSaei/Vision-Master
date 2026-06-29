@@ -1,6 +1,19 @@
 [gd_scene format=3 uid="uid://deve4kxamx2df"]
 
 [ext_resource type="Script" uid="uid://bohbhtc8jn1ln" path="res://scenes/saved_words/saved_words.gd" id="1_cfgum"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="2_bltao"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_6xmsu"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="4_x13dl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h65dr"]
+font = ExtResource("2_bltao")
+font_size = 150
+font_color = Color(0, 0, 0.49411765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d1u5f"]
+font = ExtResource("3_6xmsu")
+font_size = 70
+font_color = Color(0, 0.05490196, 0.5176471, 1)
 
 [node name="SavedWords" type="Control" unique_id=1954587360]
 layout_mode = 3
@@ -18,7 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.9372549, 0.9647059, 1, 1)
 
 [node name="EmptyState" type="VBoxContainer" parent="." unique_id=770160139]
 layout_mode = 1
@@ -27,6 +40,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 409
 
 [node name="EmptyIcon" type="Label" parent="EmptyState" unique_id=1410395118]
 layout_mode = 2
@@ -35,12 +49,19 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 107
 text = "Empty"
+label_settings = SubResource("LabelSettings_h65dr")
 horizontal_alignment = 1
 
 [node name="EmptySubtitle" type="Label" parent="EmptyState" unique_id=1810149571]
 layout_mode = 2
+text = "هیچ کلمه ای ذخیره نشده."
+label_settings = SubResource("LabelSettings_d1u5f")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BackButton" type="Button" parent="EmptyState" unique_id=1614558577]
 layout_mode = 2
 theme_override_font_sizes/font_size = 55
-text = "Back"
+icon = ExtResource("4_x13dl")
+flat = true
+icon_alignment = 1

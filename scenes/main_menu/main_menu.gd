@@ -1,4 +1,4 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
 #  MAIN MENU
@@ -22,6 +22,8 @@ const SCENE_SETTINGS     := "res://scenes/settings/Settings.tscn"
 @onready var app_title: Label           = $MainLayout/InnerLayout/HeroSection/AppTitle
 @onready var app_subtitle: Label        = $MainLayout/InnerLayout/HeroSection/AppSubtitle
 @onready var choose_label: Label        = $MainLayout/InnerLayout/ChooseLabel
+
+var _back_pressed_once := false
 
 func _ready() -> void:
 	saved_words_button.pressed.connect(_on_saved_words_pressed)
@@ -168,3 +170,52 @@ func _on_book_pressed(book_number: int) -> void:
 		tween.tween_property(book2_button, "scale", Vector2(0.96, 0.96), 0.08)
 	elif book_number == 3:
 		tween.tween_property(book3_button, "scale", Vector2(0.96, 0.96), 0.08)
+
+func _on_android_back_pressed() -> void:
+	var current_time = Time.get_unix_time_from_system()
+	
+	if back_pressed_time > 0 and current_time - back_pressed_time < double_back_timeout:
+		# Second back press within timeout - close app
+		get_tree().quit()
+	else:
+		# First back press - show message
+		back_pressed_time = current_time
+		_show_back_message()
+
+
+func _show_back_message() -> void:
+	# Show a toast-like message (using a Label that appears and fades)
+	var message := Label.new()
+	message.text = "Press back again to exit"
+	message.add_theme_font_size_override("font_size", 40)
+	message.add_theme_color_override("font_color", Color.WHITE)
+	message.add_theme_color_override("font_outline_color", Color.BLACK)
+	message.outline_size = 2
+	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	message.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	message.anchor_left = 0.0
+	message.anchor_top = 0.0
+	message.anchor_right = 1.0
+	message.anchor_bottom = 1.0
+	add_child(message)
+	
+	# Create a background for the message
+	var bg := ColorRect.new()
+	bg.color = Color(0, 0, 0, 0.6)
+	bg.anchor_left = 0.0
+	bg.anchor_top = 0.0
+	bg.anchor_right = 1.0
+	bg.anchor_bottom = 1.0
+	add_child(bg)
+	move_child(bg, 0)
+	
+	# Fade out after 1.5 seconds
+	await get_tree().create_timer(1.5).timeout
+	
+	var tween := create_tween()
+	tween.parallel().tween_property(bg, "modulate:a", 0.0, 0.3)
+	tween.parallel().tween_property(message, "modulate:a", 0.0, 0.3)
+	await tween.finished
+	
+	bg.queue_free()
+	message.queue_free()

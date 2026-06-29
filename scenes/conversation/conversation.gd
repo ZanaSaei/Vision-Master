@@ -1,4 +1,4 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
 #  CONVERSATION SCENE
@@ -56,7 +56,7 @@ func _ready() -> void:
 	# Apply fonts to existing labels
 	_apply_fonts_to_existing_labels()
 	
-	back_button.pressed.connect(_on_back_pressed)
+	back_button.pressed.connect(_on_back_button_pressed)
 	audio_button.pressed.connect(_on_audio_pressed)
 
 	var book: int   = Global.current_book
@@ -70,7 +70,6 @@ func _ready() -> void:
 		return
 
 	_build_conversation(book, lesson, data)
-
 
 func _load_fonts() -> void:
 	# Load fonts with error handling
@@ -187,6 +186,7 @@ func _make_line_card(speaker: String, text: String, color_idx: int) -> PanelCont
 
 	# Outer card
 	var card := PanelContainer.new()
+	card.mouse_filter = Control.MOUSE_FILTER_PASS
 	var card_style := StyleBoxFlat.new()
 	card_style.bg_color                  = bg_color
 	card_style.corner_radius_top_left    = 12
@@ -200,9 +200,11 @@ func _make_line_card(speaker: String, text: String, color_idx: int) -> PanelCont
 	# Inner layout
 	var inner := VBoxContainer.new()
 	inner.add_theme_constant_override("separation", 6)
+	inner.mouse_filter = Control.MOUSE_FILTER_PASS
 
 	# Speaker name label
 	var speaker_label := Label.new()
+	speaker_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	speaker_label.text = speaker
 	speaker_label.add_theme_font_size_override("font_size", 40)
 	speaker_label.add_theme_color_override("font_color", accent_color)
@@ -217,7 +219,7 @@ func _make_line_card(speaker: String, text: String, color_idx: int) -> PanelCont
 	text_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	text_label.add_theme_font_size_override("font_size", 45)
 	text_label.add_theme_color_override("font_color", Color("#1E293B"))
-	
+	text_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	# Apply regular font to dialogue text
 	if font_regular != null:
 		text_label.add_theme_font_override("font", font_regular)
@@ -238,12 +240,14 @@ func _build_questions(questions: Array) -> void:
 
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 35)
+		row.mouse_filter = Control.MOUSE_FILTER_PASS
 
 		var number := Label.new()
 		number.text = "%d." % (i + 1)
 		number.add_theme_font_size_override("font_size", 35)
 		number.add_theme_color_override("font_color", Color("#2563EB"))
 		number.custom_minimum_size = Vector2(28, 0)
+		number.mouse_filter = Control.MOUSE_FILTER_PASS
 		
 		# Apply bold font to question number
 		if font_bold != null:
@@ -255,6 +259,7 @@ func _build_questions(questions: Array) -> void:
 		q_label.add_theme_font_size_override("font_size", 45)
 		q_label.add_theme_color_override("font_color", Color("#1E293B"))
 		q_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		q_label.mouse_filter = Control.MOUSE_FILTER_PASS
 		
 		# Apply regular font to question text
 		if font_regular != null:
@@ -281,7 +286,10 @@ func _on_audio_pressed() -> void:
 		push_warning("Conversation audio not found: " + path)
 
 
-func _on_back_pressed() -> void:
+func _on_back_button_pressed() -> void:
 	var tween = create_tween()
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
+
+func _on_android_back_pressed() -> void:
+	_on_back_button_pressed()

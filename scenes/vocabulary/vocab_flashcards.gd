@@ -1,4 +1,4 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
 #  VOCAB FLASHCARDS — handles both LESSON and SAVED modes.
@@ -89,11 +89,12 @@ const FLIP_DURATION := 0.18
 
 func _ready() -> void:
 	# Wire static buttons
+	
 	prev_button.pressed.connect(_on_prev_pressed)
 	next_button.pressed.connect(_on_next_pressed)
 	save_button.pressed.connect(_on_save_pressed)
 	audio_button.pressed.connect(_on_audio_pressed)
-	back_nav_button.pressed.connect(_on_back_pressed)
+	back_nav_button.pressed.connect(_on_back_button_pressed)
 	nav_book.pressed.connect(_on_nav_book_pressed)
 	card_panel.gui_input.connect(_on_card_input)
 
@@ -162,11 +163,9 @@ func _enter_saved_mode() -> void:
 
 	nav_list.texture_normal = load("res://images/delete.png")
 	nav_list.texture_pressed = load("res://images/delete.png")
-	nav_list.tooltip_text = "Remove current word"
 	
 	nav_settings.texture_normal = load("res://images/quiz.png")
 	nav_settings.texture_pressed = load("res://images/quiz.png")
-	nav_settings.tooltip_text = "Start Quiz"
 
 	if nav_list.pressed.is_connected(_on_nav_list_lesson_pressed):
 		nav_list.pressed.disconnect(_on_nav_list_lesson_pressed)
@@ -492,7 +491,7 @@ func _on_audio_pressed() -> void:
 # ----------------------------------------------------------------
 #  NAVIGATION
 # ----------------------------------------------------------------
-func _on_back_pressed() -> void:
+func _on_back_button_pressed() -> void:
 	Global.flashcard_mode = "lesson"
 	if mode == Mode.SAVED:
 		TransitionManager.change_scene(SCENE_MAIN_MENU)
@@ -504,16 +503,25 @@ func _on_back_pressed() -> void:
 
 func _on_nav_book_pressed() -> void:
 	Global.flashcard_mode = "lesson"
+	var tween = create_tween()
+	tween.tween_property(nav_book, "scale", Vector2(0.96, 0.96), 0.08)
 	TransitionManager.change_scene(SCENE_MAIN_MENU)
 
 
 func _on_nav_list_lesson_pressed() -> void:
+	var tween = create_tween()
+	tween.tween_property(nav_list, "scale", Vector2(0.96, 0.96), 0.08)
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
 
 
 func _on_nav_settings_lesson_pressed() -> void:
+	var tween = create_tween()
+	tween.tween_property(nav_settings, "scale", Vector2(0.96, 0.96), 0.08)
 	TransitionManager.change_scene(SCENE_SETTINGS)
 
 
 func _on_quiz_pressed() -> void:
 	TransitionManager.change_scene(SCENE_QUIZ)
+
+func _on_android_back_pressed() -> void:
+	_on_back_button_pressed()

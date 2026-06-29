@@ -1,4 +1,4 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
 #  BOOK MENU
@@ -71,7 +71,6 @@ func _ready() -> void:
 
 	_build_lesson_buttons(book)
 
-
 func _load_fonts() -> void:
 	# Load fonts with error handling
 	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
@@ -139,3 +138,6 @@ func _on_back_button_pressed() -> void:
 	var tween = create_tween()
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
 	TransitionManager.change_scene(SCENE_MAIN_MENU)
+
+func _on_android_back_pressed() -> void:
+	_on_back_button_pressed()

@@ -14,7 +14,7 @@ const SCENE_FLASHCARDS := "res://scenes/vocabulary/VocabFlashcards.tscn"
 
 
 func _ready() -> void:
-	back_button.pressed.connect(_on_back_pressed)
+	back_button.pressed.connect(_on_back_button_pressed)
 
 	if Global.get_saved_words().is_empty():
 		# Nothing saved yet — show the empty state in this scene
@@ -25,5 +25,8 @@ func _ready() -> void:
 		get_tree().change_scene_to_file(SCENE_FLASHCARDS)
 
 
-func _on_back_pressed() -> void:
+func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file(SCENE_MAIN_MENU)
+
+func _on_android_back_pressed() -> void:
+	_on_back_button_pressed()

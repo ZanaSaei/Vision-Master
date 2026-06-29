@@ -1,4 +1,4 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
 #  LESSON MENU
@@ -70,7 +70,7 @@ func _ready() -> void:
 	# Apply fonts to existing labels
 	_apply_fonts_to_labels()
 	
-	back_button.pressed.connect(_on_back_pressed)
+	back_button.pressed.connect(_on_back_button_pressed)
 
 	var book: int   = Global.current_book
 	var lesson: int = Global.current_lesson
@@ -174,7 +174,10 @@ func _on_section_pressed(scene_key: String) -> void:
 	TransitionManager.change_scene(path)
 
 
-func _on_back_pressed() -> void:
+func _on_back_button_pressed() -> void:
 	TransitionManager.change_scene(SCENE_BOOK_MENU)
 	var tween = create_tween()
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
+
+func _on_android_back_pressed() -> void:
+	_on_back_button_pressed()

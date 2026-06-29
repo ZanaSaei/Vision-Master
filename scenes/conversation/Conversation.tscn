@@ -98,7 +98,6 @@ size_flags_vertical = 3
 
 [node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
 layout_mode = 2
-mouse_filter = 2
 theme_override_constants/separation = 35
 
 [node name="ConversationImage" type="TextureRect" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
@@ -108,22 +107,22 @@ layout_mode = 2
 custom_minimum_size = Vector2(950, 0)
 layout_mode = 2
 size_flags_vertical = 1
+mouse_filter = 1
 label_settings = SubResource("LabelSettings_khtvf")
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="LinesContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
 layout_mode = 2
-mouse_filter = 2
 theme_override_constants/separation = 35
 
 [node name="QuestionsSection" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1136462616]
 layout_mode = 2
-mouse_filter = 2
 theme_override_constants/separation = 25
 
 [node name="QuestionsTitle" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=939271501]
 layout_mode = 2
+mouse_filter = 1
 text = "Think About It"
 label_settings = SubResource("LabelSettings_3afir")
 
