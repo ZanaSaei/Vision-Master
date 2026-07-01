@@ -8,6 +8,8 @@ extends Node
 # ---------- VOCABULARY DATA LOADING ----------
 # Loads vocabulary data from the JSON file and finds the specific lesson
 
+var intro_animation_played := false
+
 func load_vocabulary(book_number: int, lesson_number: int) -> Dictionary:
 	var path := "res://data/v%d_vocabularies.json" % book_number
 
@@ -152,3 +154,15 @@ func remove_word(word: String, book: int, lesson: int) -> void:
 
 func get_saved_words() -> Array:
 	return saved_words
+
+# ---------- UI HELPERS ----------
+
+# Quick "press" bounce animation reused by buttons across the app.
+# Scales the button down slightly then back to normal.
+func button_bounce(button: Control, shrink_to: float = 0.92, duration: float = 0.08) -> void:
+	if button.pivot_offset == Vector2.ZERO:
+		button.pivot_offset = button.size / 2.0
+
+	var tween := create_tween()
+	tween.tween_property(button, "scale", Vector2(shrink_to, shrink_to), duration)
+	tween.tween_property(button, "scale", Vector2.ONE, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

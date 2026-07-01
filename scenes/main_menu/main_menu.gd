@@ -9,12 +9,13 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_BOOK_MENU    := "res://scenes/book_menu/BookMenu.tscn"
 const SCENE_SAVED_WORDS  := "res://scenes/saved_words/SavedWords.tscn"
 const SCENE_SETTINGS     := "res://scenes/settings/Settings.tscn"
+const SCENE_SPECIFIC_ENGLISH := "res://scenes/specific_english/SpecificEnglish.tscn"
+const SCENE_BUY              := "res://scenes/buy/Buy.tscn"
 
 # We store the last visited scene path in Global so Continue works
 # across app sessions. Add this variable to Global.gd (see note below).
 
-@onready var saved_words_button: Button = $MainLayout/InnerLayout/TopBar/SavedWordsButton
-@onready var settings_button: Button    = $MainLayout/InnerLayout/TopBar/SettingsButton
+
 @onready var continue_button: Button    = $MainLayout/InnerLayout/ContinueButton
 @onready var book1_button: Button       = $MainLayout/InnerLayout/Book1Button
 @onready var book2_button: Button       = $MainLayout/InnerLayout/Book2Button
@@ -22,34 +23,48 @@ const SCENE_SETTINGS     := "res://scenes/settings/Settings.tscn"
 @onready var app_title: Label           = $MainLayout/InnerLayout/HeroSection/AppTitle
 @onready var app_subtitle: Label        = $MainLayout/InnerLayout/HeroSection/AppSubtitle
 @onready var choose_label: Label        = $MainLayout/InnerLayout/ChooseLabel
+@onready var specific_english_button: Button = $MainLayout/InnerLayout/SpecificEnglishButton
+@onready var hamburger_button: Button   = $HamburgerButton
 
-var _back_pressed_once := false
+@onready var side_menu = $SideMenu
 
 func _ready() -> void:
-	saved_words_button.pressed.connect(_on_saved_words_pressed)
-	settings_button.pressed.connect(_on_settings_pressed)
 	continue_button.pressed.connect(_on_continue_pressed)
 	book1_button.pressed.connect(_on_book_pressed.bind(1))
 	book2_button.pressed.connect(_on_book_pressed.bind(2))
 	book3_button.pressed.connect(_on_book_pressed.bind(3))
+	specific_english_button.pressed.connect(_on_specific_english_pressed)
 
 	app_title.pivot_offset = app_title.size / 2.0
 	continue_button.pivot_offset = continue_button.size / 2.0
-	settings_button.pivot_offset = settings_button.size / 2.0
 	book1_button.pivot_offset = book1_button.size / 2.0
 	book2_button.pivot_offset = book2_button.size / 2.0
 	book3_button.pivot_offset = book3_button.size / 2.0
-	saved_words_button.pivot_offset = saved_words_button.size / 2.0
+
+	# --- MENU CONNECTION CONFIGURATION ---
+	side_menu.set_hamburger_button(hamburger_button)
+	hamburger_button.pivot_offset = hamburger_button.size / 2.0 
+	
+	hamburger_button.pressed.connect(side_menu.toggle)
+	side_menu.saved_words_pressed.connect(_on_side_menu_saved_words_pressed)
 
 	_setup_book_buttons()
 	_setup_continue_button()
-	_play_intro_animation()
+	
+	# Only play intro animation once
+	if not Global.intro_animation_played:
+		Global.intro_animation_played = true
+		_play_intro_animation()
+	else:
+		# Make sure everything is visible immediately (skip animation)
+		_skip_intro_animation()
 
 func _setup_book_buttons() -> void:
 
 	book1_button.text = "Vision 1 — دهم"
 	book2_button.text = "Vision 2 — یازدهم"
 	book3_button.text = "Vision 3 — دوازدهم"
+	specific_english_button.text = "زبان برای کنکور"
 
 
 func _setup_continue_button() -> void:
@@ -79,12 +94,12 @@ func _play_intro_animation() -> void:
 	app_subtitle.modulate.a = 0.0
 
 	var controls := [
-		saved_words_button,
-		settings_button,
+		hamburger_button,
 		continue_button,
 		book1_button,
 		book2_button,
 		book3_button,
+		specific_english_button,
 		choose_label
 	]
 
@@ -139,18 +154,6 @@ func _play_intro_animation() -> void:
 # ----------------------------------------------------------------
 #  NAVIGATION
 # ----------------------------------------------------------------
-func _on_saved_words_pressed() -> void:
-	var tween = create_tween()
-	tween.tween_property(saved_words_button, "scale", Vector2(0.96, 0.96), 0.08)
-	Global.flashcard_mode = "saved"
-	TransitionManager.change_scene(SCENE_SAVED_WORDS)
-
-
-func _on_settings_pressed() -> void:
-	var tween = create_tween()
-	tween.tween_property(settings_button, "scale", Vector2(0.96, 0.96), 0.08)
-	TransitionManager.change_scene(SCENE_SETTINGS)
-
 
 func _on_continue_pressed() -> void:
 	var last := Global.get_last_scene()
@@ -182,6 +185,10 @@ func _on_android_back_pressed() -> void:
 		back_pressed_time = current_time
 		_show_back_message()
 
+
+func _on_specific_english_pressed() -> void:
+	Global.button_bounce(specific_english_button)
+	TransitionManager.change_scene(SCENE_SPECIFIC_ENGLISH)
 
 func _show_back_message() -> void:
 	# Show a toast-like message (using a Label that appears and fades)
@@ -219,3 +226,32 @@ func _show_back_message() -> void:
 	
 	bg.queue_free()
 	message.queue_free()
+# ----------------------------------------------------------------
+#  NAVIGATION
+# ----------------------------------------------------------------
+
+func _on_side_menu_saved_words_pressed() -> void:
+	# Set the flashcard mode just like you did before
+	Global.flashcard_mode = "saved"
+	
+	# Use your TransitionManager to change the scene
+	TransitionManager.change_scene(SCENE_SAVED_WORDS)
+
+func _skip_intro_animation() -> void:
+	# Set everything to their final visible state
+	app_title.scale = Vector2.ONE
+	app_title.modulate.a = 1.0
+	app_subtitle.modulate.a = 1.0
+	
+	var controls := [
+		hamburger_button,
+		continue_button,
+		book1_button,
+		book2_button,
+		book3_button,
+		specific_english_button,
+		choose_label
+	]
+	
+	for c in controls:
+		c.modulate.a = 1.0
