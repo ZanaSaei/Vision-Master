@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_wsob8"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_fd08m"]
 [ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="4_lcoe2"]
-[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="5_i03xs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhcqr"]
 bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
@@ -16,10 +15,10 @@ expand_margin_top = 45.0
 font = ExtResource("3_fd08m")
 font_size = 45
 
-[sub_resource type="LabelSettings" id="LabelSettings_khtvf"]
-font = ExtResource("5_i03xs")
-font_size = 45
-font_color = Color(0, 0.4, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_48fkr"]
+font = ExtResource("3_fd08m")
+font_size = 60
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_3afir"]
 font = ExtResource("3_fd08m")
@@ -115,11 +114,11 @@ theme_override_constants/separation = 40
 [node name="ReadingImage" type="TextureRect" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
 layout_mode = 2
 
-[node name="ReadingTitleLabel" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1426285093]
+[node name="ReadingTitleLabel" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=867229441]
 custom_minimum_size = Vector2(950, 0)
 layout_mode = 2
-size_flags_vertical = 1
-label_settings = SubResource("LabelSettings_khtvf")
+text = "How to Use Dictionary"
+label_settings = SubResource("LabelSettings_48fkr")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2

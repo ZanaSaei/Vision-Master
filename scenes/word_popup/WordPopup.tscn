@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://bi6gvwik01vw3"]
+
+[ext_resource type="Script" uid="uid://c6mvcyuxdwgyo" path="res://scenes/word_popup/word_popup.gd" id="1_u0ygw"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="2_olb5e"]
+[ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="3_7yvjm"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_ysw0h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
+font = ExtResource("2_olb5e")
+font_size = 45
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3umrm"]
+font = ExtResource("3_7yvjm")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ku3dv"]
+font = ExtResource("4_ysw0h")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ccj0"]
+font = ExtResource("3_7yvjm")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[node name="WordPopup" type="Control" unique_id=627684664]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u0ygw")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1517891711]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 280.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1092581844]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=421969312]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="WordLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=346955210]
+layout_mode = 2
+text = "endangered"
+label_settings = SubResource("LabelSettings_7ujfs")
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=193423889]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=472801021]
+layout_mode = 2
+text = "being in danger"
+label_settings = SubResource("LabelSettings_3umrm")
+autowrap_mode = 2
+
+[node name="MeaningEnLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1655298279]
+layout_mode = 2
+text = "being in danger"
+label_settings = SubResource("LabelSettings_3umrm")
+autowrap_mode = 2
+
+[node name="MeaningFaLable" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1487000083]
+layout_mode = 2
+text = "در معرض خطر"
+label_settings = SubResource("LabelSettings_ku3dv")
+autowrap_mode = 2
+
+[node name="VerbFormsLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1400045027]
+layout_mode = 2
+text = "در معرض خطر"
+label_settings = SubResource("LabelSettings_ku3dv")
+autowrap_mode = 2
+
+[node name="ExampleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=545394545]
+layout_mode = 2
+text = "Endangered animals are dying."
+label_settings = SubResource("LabelSettings_5ccj0")
+autowrap_mode = 2
+
+[node name="SourceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=126542574]
+layout_mode = 2
+text = "Endangered animals are dying."
+label_settings = SubResource("LabelSettings_5ccj0")
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1891005466]
+layout_mode = 2
+theme_override_constants/separation = 39
+alignment = 1
+
+[node name="SaveButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1044815738]
+layout_mode = 2
+text = "💾"
+
+[node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=64131900]
+layout_mode = 2
+text = "✕"
