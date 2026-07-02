@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://16eywetpysrr"
+path="res://.godot/imported/8-lesson-2-new words and expressions.mp3-a44775d8e26e84004fb89e2973a92e5b.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Vision Audio/Vision 2/lesson2-v2/8-lesson-2-new words and expressions.mp3"
+dest_files=["res://.godot/imported/8-lesson-2-new words and expressions.mp3-a44775d8e26e84004fb89e2973a92e5b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

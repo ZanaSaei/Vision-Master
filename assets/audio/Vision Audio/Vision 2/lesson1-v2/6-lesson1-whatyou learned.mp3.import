@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyx7y7uorgww5"
+path="res://.godot/imported/6-lesson1-whatyou learned.mp3-c7004b09a98cc41122f33f404f1f7956.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Vision Audio/Vision 2/lesson1-v2/6-lesson1-whatyou learned.mp3"
+dest_files=["res://.godot/imported/6-lesson1-whatyou learned.mp3-c7004b09a98cc41122f33f404f1f7956.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

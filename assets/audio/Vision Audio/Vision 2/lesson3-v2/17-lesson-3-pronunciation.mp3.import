@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3k856sldkk7l"
+path="res://.godot/imported/17-lesson-3-pronunciation.mp3-f002ee2da7fe200bdf2001d118750a07.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Vision Audio/Vision 2/lesson3-v2/17-lesson-3-pronunciation.mp3"
+dest_files=["res://.godot/imported/17-lesson-3-pronunciation.mp3-f002ee2da7fe200bdf2001d118750a07.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

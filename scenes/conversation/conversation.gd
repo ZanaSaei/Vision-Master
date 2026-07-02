@@ -329,6 +329,8 @@ func _on_slider_drag_ended(value_changed: bool) -> void:
 # ============================================================
 
 func _on_back_button_pressed() -> void:
+	# Stop audio and hide/reset the popup before leaving the scene
+	_on_close_audio_pressed()
 	var tween = create_tween()
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
 	TransitionManager.change_scene(SCENE_LESSON_MENU)

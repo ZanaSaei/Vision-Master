@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dibnkybpy0j4h"
+path="res://.godot/imported/17 -Listening and Speaking.mp3-a4b2c7e13ef245b8817b72eea89daf44.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Vision Audio/Vision 1/LESSON-3/17 -Listening and Speaking.mp3"
+dest_files=["res://.godot/imported/17 -Listening and Speaking.mp3-a4b2c7e13ef245b8817b72eea89daf44.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

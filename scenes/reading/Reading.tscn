@@ -144,6 +144,7 @@ theme_override_constants/separation = 35
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]
 
 [node name="AudioControlPanel" type="PanelContainer" parent="." unique_id=1574820956]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

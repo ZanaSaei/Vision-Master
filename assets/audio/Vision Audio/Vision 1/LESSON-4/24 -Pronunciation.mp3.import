@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://mpq0jw70yc5d"
+path="res://.godot/imported/24 -Pronunciation.mp3-6b47b79139e23e8949cc52478ee9fb81.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Vision Audio/Vision 1/LESSON-4/24 -Pronunciation.mp3"
+dest_files=["res://.godot/imported/24 -Pronunciation.mp3-6b47b79139e23e8949cc52478ee9fb81.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
