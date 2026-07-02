@@ -150,7 +150,7 @@ func _enter_lesson_mode() -> void:
 	setup(
 		vocab_section.get("words", []),
 		book, lesson,
-		vocab_section.get("audio", ""),
+		"",
 		Mode.LESSON
 	)
 
@@ -256,15 +256,15 @@ func _update_card(animate: bool = false) -> void:
 	if mode == Mode.SAVED:
 		current_book = entry.get("book", 0)
 		current_lesson = entry.get("lesson", 0)
-		var lesson_data := Global.load_vocabulary(current_book, current_lesson)
-		if not lesson_data.is_empty():
-			vocab_audio_filename = lesson_data.get("vocabulary", {}).get("audio", "")
 
 	front_word_label.text = entry.get("word", "")
 	back_word_label.text  = entry.get("word", "")
 	meaning_en_label.text = entry.get("meaning_en", "")
 	meaning_fa_label.text = entry.get("meaning_fa", "")
 	example_label.text    = entry.get("example", "")
+
+	# NEW — each word carries its own pronunciation file now
+	vocab_audio_filename = entry.get("audio", "")
 
 	is_flipped = false
 
@@ -475,7 +475,7 @@ func _on_remove_word_pressed() -> void:
 func _on_audio_pressed() -> void:
 	if vocab_audio_filename == "":
 		return
-	var path := Global.get_audio_path(current_book, current_lesson, vocab_audio_filename)
+	var path := Global.get_audio_path(current_book, current_lesson, "words/" + vocab_audio_filename)
 	var tween := create_tween()
 	tween.tween_property(audio_button, "scale", Vector2(0.93, 0.93), 0.08) \
 	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

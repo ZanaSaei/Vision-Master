@@ -26,6 +26,11 @@ font = ExtResource("3_3afir")
 font_size = 45
 font_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3afir"]
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+
 [node name="Conversation" type="Control" unique_id=393705888]
 layout_mode = 3
 anchors_preset = 15
@@ -131,3 +136,55 @@ layout_mode = 2
 theme_override_constants/separation = 35
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]
+
+[node name="AudioControlPanel" type="PanelContainer" parent="." unique_id=1344303056]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -191.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3afir")
+
+[node name="MarginContainer" type="MarginContainer" parent="AudioControlPanel" unique_id=449841989]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 30
+
+[node name="AudioUILayout" type="VBoxContainer" parent="AudioControlPanel/MarginContainer" unique_id=459718847]
+layout_mode = 2
+theme_override_constants/separation = 69
+
+[node name="AudioSlider" type="HSlider" parent="AudioControlPanel/MarginContainer/AudioUILayout" unique_id=568534041]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="ControlsLayout" type="HBoxContainer" parent="AudioControlPanel/MarginContainer/AudioUILayout" unique_id=325693788]
+layout_mode = 2
+theme_override_constants/separation = 47
+alignment = 1
+
+[node name="RewindButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=2024713601]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "-10s"
+
+[node name="PlayPauseButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=2095918429]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Pause"
+
+[node name="ForwardButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=834154193]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "+10s"
+
+[node name="CloseAudioButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=940643105]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "X"

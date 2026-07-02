@@ -4,15 +4,8 @@
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_jtoru"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_121v0"]
 
-[sub_resource type="Gradient" id="Gradient_wsx2i"]
-offsets = PackedFloat32Array(0, 0.016129032, 0.44623655, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.11372549, 0.36862746, 0.11372549, 1, 0.28627452, 0.6862745, 0.28627452, 1, 0.3882353, 1, 0.29803923, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_l4e15"]
-gradient = SubResource("Gradient_wsx2i")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_121v0"]
-texture = SubResource("GradientTexture1D_l4e15")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_121v0"]
+bg_color = Color(0, 0.2901961, 0.2901961, 1)
 
 [node name="SideMenu" type="CanvasLayer" unique_id=921434804]
 layer = 100
@@ -35,7 +28,7 @@ offset_right = 320.0
 offset_bottom = 574.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_121v0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_121v0")
 
 [node name="MarginContainer" type="MarginContainer" parent="MenuPanel" unique_id=1814318144]
 layout_mode = 2
