@@ -23,6 +23,9 @@ const FONT_JAKARTA_ITALIC_PATH  := "res://assets/fonts/PlusJakartaSans-Italic.tt
 var font_regular: FontFile
 var font_bold: FontFile
 var font_italic: FontFile
+# Touch tracking variables for mobile scrolling
+var _touch_start_pos: Vector2 = Vector2.ZERO
+var _is_drag_scrolling: bool = false
 
 # Existing Node References
 @onready var back_button: Button              = $HeaderBar/HeaderContent/BackButton
@@ -101,6 +104,18 @@ func _process(_delta: float) -> void:
 	if (audio_player.playing or audio_player.stream_paused) and not is_dragging_slider:
 		audio_slider.value = audio_player.get_playback_position()
 
+func _input(event: InputEvent) -> void:
+	# When finger touches the screen (or left mouse clicks)
+	if event is InputEventScreenTouch or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT):
+		if event.pressed:
+			_touch_start_pos = event.position
+			_is_drag_scrolling = false # Reset the scroll flag
+			
+	# When finger drags across the screen
+	elif event is InputEventScreenDrag or (event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
+		# If the finger moved more than 15 pixels, we consider it a scroll
+		if _touch_start_pos.distance_to(event.position) > 15.0:
+			_is_drag_scrolling = true
 
 func _configure_main_image() -> void:
 	reading_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -207,6 +222,11 @@ func _make_paragraph_card(text: String) -> PanelContainer:
 	rtl.bbcode_enabled = true
 	rtl.fit_content = true
 	rtl.autowrap_mode = TextServer.AUTOWRAP_WORD
+	
+	rtl.mouse_filter = Control.MOUSE_FILTER_PASS # Lets the swipe reach the ScrollContainer
+	rtl.scroll_active = false                    # Stops the text box from trying to scroll itself
+	rtl.selection_enabled = false                # Prevents accidental text highlighting while swiping
+	
 	rtl.add_theme_font_size_override("normal_font_size", 55)
 	rtl.add_theme_color_override("default_color", Color("#1E293B"))
 	rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -241,6 +261,8 @@ func _format_clickable_text(base_text: String, highlight_word: String) -> String
 
 
 func _on_word_clicked(meta: Variant, clicked_rtl: RichTextLabel, original_text: String) -> void:
+	if _is_drag_scrolling:
+		return # Ignore the click because the user was just scrolling!
 	var clicked_string := str(meta).to_lower()
 	var def := Global.get_word_definition_from_current_lesson(clicked_string)
 	
@@ -320,14 +342,14 @@ func _setup_word_popup() -> void:
 	vbox.add_child(hbox)
 	
 	btn_save_word = Button.new()
-	btn_save_word.text = "Save to Flashcards"
+	btn_save_word.text = "ذخیره کنید"
 	btn_save_word.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	btn_save_word.add_theme_font_size_override("font_size", 45)
 	btn_save_word.pressed.connect(_on_save_word_pressed)
 	hbox.add_child(btn_save_word)
 	
 	btn_close_popup = Button.new()
-	btn_close_popup.text = "Close"
+	btn_close_popup.text = "بستن"
 	btn_close_popup.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	btn_close_popup.add_theme_font_size_override("font_size", 45)
 	btn_close_popup.pressed.connect(_hide_word_popup)
@@ -363,10 +385,10 @@ func _populate_and_show_popup(def: Dictionary) -> void:
 	
 	# Check if already saved to update button text
 	if Global.is_word_saved(def.get("word"), def.get("book"), def.get("lesson")):
-		btn_save_word.text = "Saved ✓"
+		btn_save_word.text = "✓ ذخیره شد"
 		btn_save_word.disabled = true
 	else:
-		btn_save_word.text = "Save to Flashcards"
+		btn_save_word.text = "ذخیره کنید"
 		btn_save_word.disabled = false
 
 	# Slide In Animation
@@ -386,7 +408,7 @@ func _hide_word_popup() -> void:
 func _on_save_word_pressed() -> void:
 	if not current_word_data.is_empty():
 		Global.save_word(current_word_data)
-		btn_save_word.text = "Saved ✓"
+		btn_save_word.text = "✓ ذخیره شد"
 		btn_save_word.disabled = true
 		Global.button_bounce(btn_save_word)
 

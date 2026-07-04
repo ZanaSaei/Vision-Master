@@ -168,24 +168,31 @@ func _load_word_database() -> void:
 
 
 func _load_words_from_book(book: int) -> void:
-	"""Load words from a specific book's vocabulary"""
+	"""Load words from both the flashcard vocabulary and the extra dictionary"""
 	var vocab_path := "res://data/v%d_vocabularies.json" % book
+	var dict_path := "res://data/v%d_dictionary.json" % book
 	
-	if not FileAccess.file_exists(vocab_path):
+	# Load target words first
+	_parse_words_into_database(vocab_path, book)
+	# Load extra reading words second
+	_parse_words_into_database(dict_path, book)
+
+func _parse_words_into_database(file_path: String, book: int) -> void:
+	if not FileAccess.file_exists(file_path):
 		return
-	
-	var file := FileAccess.open(vocab_path, FileAccess.READ)
+		
+	var file := FileAccess.open(file_path, FileAccess.READ)
 	var text := file.get_as_text()
 	file.close()
 	
 	var json := JSON.new()
 	if json.parse(text) != OK:
 		return
-	
+		
 	var data = json.data
 	if not data is Array:
 		return
-	
+		
 	for lesson_data in data:
 		var lesson = lesson_data.get("lesson", 0)
 		var vocab = lesson_data.get("vocabulary", {})
@@ -204,9 +211,10 @@ func _load_words_from_book(book: int) -> void:
 						"example": word_obj.get("example", ""),
 						"book": book,
 						"lesson": lesson,
-						"word_type": word_obj.get("word_type", "noun"),  # noun, verb, adjective, etc.
-						"countable": word_obj.get("countable", null),  # true/false for nouns
-						"verb_forms": word_obj.get("verb_forms", {})  # {past, past_participle, present_participle, third_person}
+						"word_type": word_obj.get("word_type", "noun"),
+						"countable": word_obj.get("countable", null),
+						"verb_forms": word_obj.get("verb_forms", {}),
+						"audio": word_obj.get("audio", "")
 					}
 					word_database[key] = word_data
 					
@@ -215,15 +223,10 @@ func _load_words_from_book(book: int) -> void:
 						var forms = word_data["verb_forms"]
 						var base_word = word_data["word"]
 						
-						# Map each form to the base word
-						if forms.has("past"):
-							verb_forms[forms["past"].to_lower()] = base_word
-						if forms.has("past_participle"):
-							verb_forms[forms["past_participle"].to_lower()] = base_word
-						if forms.has("present_participle"):
-							verb_forms[forms["present_participle"].to_lower()] = base_word
-						if forms.has("third_person"):
-							verb_forms[forms["third_person"].to_lower()] = base_word
+						if forms.has("past"): verb_forms[forms["past"].to_lower()] = base_word
+						if forms.has("past_participle"): verb_forms[forms["past_participle"].to_lower()] = base_word
+						if forms.has("present_participle"): verb_forms[forms["present_participle"].to_lower()] = base_word
+						if forms.has("third_person"): verb_forms[forms["third_person"].to_lower()] = base_word
 
 
 func get_word_definition(word: String) -> Dictionary:
