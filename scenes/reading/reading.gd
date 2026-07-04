@@ -299,12 +299,12 @@ func _setup_word_popup() -> void:
 	style.shadow_size = 10
 	style.content_margin_left = 30
 	style.content_margin_right = 30
-	style.content_margin_top = 40
+	style.content_margin_top = 100
 	style.content_margin_bottom = 30
 	popup_panel.add_theme_stylebox_override("panel", style)
 	
 	popup_panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	popup_panel.position.y = -600 # Start offscreen
+	popup_panel.position.y = -800 # Start offscreen
 	popup_layer.add_child(popup_panel)
 	
 	var vbox = VBoxContainer.new()

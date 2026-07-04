@@ -50,7 +50,7 @@ const DOT_INACTIVE_COLOR  := Color("#CBD5E1")
 const SCENE_MAIN_MENU      := "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_LESSON_MENU    := "res://scenes/lesson_menu/LessonMenu.tscn"
 const SCENE_SETTINGS       := "res://scenes/settings/Settings.tscn"
-const SCENE_QUIZ           := "res://scenes/quiz/Quiz.tscn"
+const SCENE_REVIEW           := "res://scenes/review/WordReview.tscn"
 const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 
 # ---------- Node references ----------
@@ -121,8 +121,8 @@ func _enter_lesson_mode() -> void:
 
 	if nav_list.pressed.is_connected(_on_remove_word_pressed):
 		nav_list.pressed.disconnect(_on_remove_word_pressed)
-	if nav_settings.pressed.is_connected(_on_quiz_pressed):
-		nav_settings.pressed.disconnect(_on_quiz_pressed)
+	if nav_settings.pressed.is_connected(_on_review_pressed):
+		nav_settings.pressed.disconnect(_on_review_pressed)
 
 	nav_list.pressed.connect(_on_nav_list_lesson_pressed)
 	nav_settings.pressed.connect(_on_nav_settings_lesson_pressed)
@@ -173,7 +173,7 @@ func _enter_saved_mode() -> void:
 		nav_settings.pressed.disconnect(_on_nav_settings_lesson_pressed)
 
 	nav_list.pressed.connect(_on_remove_word_pressed)
-	nav_settings.pressed.connect(_on_quiz_pressed)
+	nav_settings.pressed.connect(_on_review_pressed)
 
 	save_button.icon = save_active
 	save_button.modulate = Color("#EF4444")
@@ -520,8 +520,8 @@ func _on_nav_settings_lesson_pressed() -> void:
 	TransitionManager.change_scene(SCENE_SETTINGS)
 
 
-func _on_quiz_pressed() -> void:
-	TransitionManager.change_scene(SCENE_QUIZ)
+func _on_review_pressed() -> void:
+	TransitionManager.change_scene(SCENE_REVIEW)
 
 func _on_android_back_pressed() -> void:
 	_on_back_button_pressed()

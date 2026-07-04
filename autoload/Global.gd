@@ -325,3 +325,135 @@ func button_bounce(button: Control, shrink_to: float = 0.92, duration: float = 0
 	var tween := create_tween()
 	tween.tween_property(button, "scale", Vector2(shrink_to, shrink_to), duration)
 	tween.tween_property(button, "scale", Vector2.ONE, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+# ============================================================
+#  SPACED REPETITION SYSTEM (simplified SM-2 / Anki-style)
+#  Add this entire section into Global.gd, anywhere after
+#  the existing saved_words variable/functions.
+# ============================================================
+
+const SRS_NEW_CARDS_PER_SESSION := 20
+
+
+func _today_day_number() -> int:
+	return int(Time.get_unix_time_from_system() / 86400.0)
+
+
+# Lazily adds SRS tracking fields to a word the first time it's touched
+# by the review system. Existing saved words don't need any migration —
+# this runs automatically whenever needed.
+func _ensure_srs_fields(entry: Dictionary) -> void:
+	if not entry.has("srs_interval"):
+		entry["srs_interval"] = 0.0
+	if not entry.has("srs_ease"):
+		entry["srs_ease"] = 2.5
+	if not entry.has("srs_reps"):
+		entry["srs_reps"] = 0
+	if not entry.has("srs_due"):
+		entry["srs_due"] = -1   # -1 means "new, never studied"
+
+
+# Returns every saved word due for review today (including new words,
+# capped so a big saved list doesn't dump hundreds of new cards at once).
+func get_due_words() -> Array:
+	var today := _today_day_number()
+	var due: Array = []
+	var new_count := 0
+
+	for entry in saved_words:
+		_ensure_srs_fields(entry)
+		if entry["srs_due"] == -1:
+			if new_count < SRS_NEW_CARDS_PER_SESSION:
+				due.append(entry)
+				new_count += 1
+		elif entry["srs_due"] <= today:
+			due.append(entry)
+
+	return due
+
+
+# Pure calculation — does NOT change the word yet. Used both for the
+# real review AND to preview "in X days" text on the rating buttons.
+func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
+	var ease: float     = entry.get("srs_ease", 2.5)
+	var interval: float = entry.get("srs_interval", 0.0)
+	var reps: int        = entry.get("srs_reps", 0)
+	var today := _today_day_number()
+
+	var new_ease := ease
+	var new_interval := interval
+	var new_reps := reps
+
+	match rating:
+		"again":
+			new_reps = 0
+			new_ease = max(1.3, ease - 0.2)
+			new_interval = 0.0
+		"hard":
+			new_ease = max(1.3, ease - 0.15)
+			new_interval = max(1.0, (interval if interval > 0 else 1.0) * 1.2)
+			new_reps = reps + 1
+		"good":
+			if reps == 0:
+				new_interval = 1.0
+			elif reps == 1:
+				new_interval = 3.0
+			else:
+				new_interval = interval * ease
+			new_reps = reps + 1
+		"easy":
+			if reps == 0:
+				new_interval = 2.0
+			else:
+				new_interval = interval * ease * 1.3
+			new_ease = ease + 0.15
+			new_reps = reps + 1
+
+	var new_due: int
+	if rating == "again":
+		new_due = today   # comes back later in the SAME session, not tomorrow
+	else:
+		new_due = today + int(ceil(new_interval))
+
+	return {
+		"ease": new_ease,
+		"interval": new_interval,
+		"reps": new_reps,
+		"due": new_due
+	}
+
+
+# Applies a rating to a word permanently and saves to disk.
+func review_word(word: String, book: int, lesson: int, rating: String) -> void:
+	for entry in saved_words:
+		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
+			_ensure_srs_fields(entry)
+			var result := _compute_srs_result(entry, rating)
+			entry["srs_ease"]     = result["ease"]
+			entry["srs_interval"] = result["interval"]
+			entry["srs_reps"]     = result["reps"]
+			entry["srs_due"]      = result["due"]
+			break
+	_persist_saved_words()
+
+
+# Returns Persian text previews for each rating button, e.g. "۳ روز"
+func preview_intervals(entry: Dictionary) -> Dictionary:
+	_ensure_srs_fields(entry)
+	var result := {}
+	for rating in ["again", "hard", "good", "easy"]:
+		var r := _compute_srs_result(entry, rating)
+		result[rating] = _format_interval(r["interval"], rating)
+	return result
+
+
+func _format_interval(interval: float, rating: String) -> String:
+	if rating == "again":
+		return "چند دقیقه دیگر"
+	var days := int(round(interval))
+	if days < 1:
+		return "امروز"
+	elif days == 1:
+		return "۱ روز"
+	else:
+		return "%d روز" % days

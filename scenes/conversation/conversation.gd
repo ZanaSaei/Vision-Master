@@ -29,11 +29,13 @@ const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.t
 const FONT_JAKARTA_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 const FONT_JAKARTA_ITALIC_PATH  := "res://assets/fonts/PlusJakartaSans-Italic.ttf"
 const FONT_JAKARTA_MEDIUM_PATH  := "res://assets/fonts/PlusJakartaSans-Medium.ttf" 
+const FONT_VAZIRMATN            := "res://assets/fonts/Vazirmatn-Regular.ttf"
 
 # Preload fonts for better performance
 var font_regular: FontFile
 var font_bold: FontFile
 var font_italic: FontFile
+var font_farsi: FontFile
 
 # Existing Node References
 @onready var back_button: Button             = $HeaderBar/HeaderContent/BackButton
@@ -140,10 +142,11 @@ func _load_fonts() -> void:
 	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
 	font_bold = load(FONT_JAKARTA_BOLD_PATH)
 	font_italic = load(FONT_JAKARTA_ITALIC_PATH)
+	font_farsi = load(FONT_VAZIRMATN)
 	if font_regular == null: push_warning("Regular font not found")
 	if font_bold == null: push_warning("Bold font not found")
 	if font_italic == null: push_warning("Italic font not found")
-
+	if font_farsi == null: push_warning("farsi font not found")
 
 func _apply_fonts_to_existing_labels() -> void:
 	if font_regular != null: intro_label.add_theme_font_override("font", font_regular)
@@ -313,12 +316,12 @@ func _setup_word_popup() -> void:
 	style.shadow_size = 10
 	style.content_margin_left = 30
 	style.content_margin_right = 30
-	style.content_margin_top = 40
+	style.content_margin_top = 100
 	style.content_margin_bottom = 30
 	popup_panel.add_theme_stylebox_override("panel", style)
 	
 	popup_panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	popup_panel.position.y = -600 
+	popup_panel.position.y = -800 
 	popup_layer.add_child(popup_panel)
 	
 	var vbox = VBoxContainer.new()

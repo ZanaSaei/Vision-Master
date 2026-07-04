@@ -1,0 +1,350 @@
+[gd_scene format=3 uid="uid://cdjcx4v013b5v"]
+
+[ext_resource type="Script" uid="uid://bp02fo3um6w2u" path="res://scenes/review/word_review.gd" id="1_chjlt"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_o6c0r"]
+[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_gfdwm"]
+[ext_resource type="FontFile" uid="uid://drnivg6cxlyr2" path="res://assets/fonts/PlusJakartaSans-Italic.ttf" id="5_3kfk6"]
+[ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="6_y8wcc"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="7_y8wcc"]
+[ext_resource type="StyleBox" uid="uid://cra0kyhull2d5" path="res://buttons_styles/show_answer.tres" id="8_hx4ce"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41h8a"]
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+expand_margin_top = 45.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_gfdwm"]
+font = ExtResource("7_y8wcc")
+font_size = 45
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hx4ce"]
+bg_color = Color(0.9526333, 0.67516935, 0.15735209, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+shadow_color = Color(0, 0.24705882, 0, 0.6)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfdwm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3suwl"]
+font = ExtResource("4_gfdwm")
+font_size = 80
+outline_size = 10
+outline_color = Color(0, 0.54901963, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmy2s"]
+bg_color = Color(0.8627451, 0.9882353, 0.90588236, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ynbm"]
+font = ExtResource("5_3kfk6")
+font_size = 65
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvwa6"]
+bg_color = Color(0.92941177, 0.9137255, 0.99607843, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_top = 25.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="SystemFont" id="SystemFont_5wq6o"]
+font_names = PackedStringArray("Fantasy")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t421v"]
+bg_color = Color(0.654902, 0.54509807, 0.98039216, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_bpgnl"]
+font_names = PackedStringArray("2  Mitra")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seiul"]
+bg_color = Color(0.99607843, 0.9764706, 0.7647059, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma18j"]
+bg_color = Color(0.99215686, 0.8784314, 0.2784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qhxo7"]
+font = ExtResource("6_y8wcc")
+font_size = 45
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4faa2"]
+bg_color = Color(0.85882354, 0.91764706, 0.99607843, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_top = 25.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6ipn"]
+bg_color = Color(0.3764706, 0.64705884, 0.98039216, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0remf"]
+font = ExtResource("6_y8wcc")
+font_size = 45
+font_color = Color(0, 0, 0, 1)
+
+[node name="WordReview" type="Control" unique_id=400343688]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_chjlt")
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=1650515110]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9372549, 0.9647059, 1, 1)
+
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=3457833]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 320.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_41h8a")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeaderBar" unique_id=601232500]
+layout_mode = 2
+theme_override_constants/margin_right = 35
+
+[node name="Header" type="HBoxContainer" parent="HeaderBar/MarginContainer" unique_id=1880404803]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 513
+
+[node name="BackButton" type="Button" parent="HeaderBar/MarginContainer/Header" unique_id=59771729]
+layout_mode = 2
+icon = ExtResource("2_o6c0r")
+flat = true
+
+[node name="DueCounter" type="Label" parent="HeaderBar/MarginContainer/Header" unique_id=1268915219]
+layout_mode = 2
+text = "Conversation"
+label_settings = SubResource("LabelSettings_gfdwm")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=925536739]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 360.0
+offset_bottom = -94.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 100
+
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=759159105]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="CardMargin" type="MarginContainer" parent="MarginContainer/MainLayout" unique_id=1502555184]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 25
+
+[node name="CardPanel" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin" unique_id=1616552339]
+custom_minimum_size = Vector2(0, 950)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_hx4ce")
+
+[node name="CardContent" type="MarginContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel" unique_id=1184700437]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Front" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent" unique_id=1689842312]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gfdwm")
+
+[node name="WordLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/Front" unique_id=1974911411]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52156866)
+text = "Endag"
+label_settings = SubResource("LabelSettings_3suwl")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BackFace" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent" unique_id=176735963]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+
+[node name="WordRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace" unique_id=1439418085]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xmy2s")
+
+[node name="WordRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/WordRow" unique_id=82509467]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BackWordLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent" unique_id=1685336828]
+layout_mode = 2
+size_flags_horizontal = 6
+label_settings = SubResource("LabelSettings_6ynbm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeaningFaRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace" unique_id=560208982]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jvwa6")
+
+[node name="MeaningFaRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow" unique_id=750755820]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FaIcon" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent" unique_id=1969363556]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_5wq6o")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_t421v")
+text = "Mean"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeaningFaLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent" unique_id=1350444316]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_bpgnl")
+theme_override_font_sizes/font_size = 45
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ExampleRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace" unique_id=1348854631]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_seiul")
+
+[node name="ExampleRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/ExampleRow" unique_id=800062758]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ExIcon" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent" unique_id=114112220]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_5wq6o")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_ma18j")
+text = "Example"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExampleLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent" unique_id=1115920128]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_qhxo7")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Extra" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace" unique_id=1006341301]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4faa2")
+
+[node name="ExtraRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/Extra" unique_id=278003915]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ExtraIcon" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/Extra/ExtraRowContent" unique_id=1225850748]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_5wq6o")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_j6ipn")
+text = "Source"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExtraLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/Extra/ExtraRowContent" unique_id=601784568]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_0remf")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="MarginContainer/MainLayout" unique_id=99393038]
+layout_mode = 2
+theme_override_constants/separation = -115
+
+[node name="ShowAnswerButton" type="Button" parent="MarginContainer/MainLayout/Controls" unique_id=772991822]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = ExtResource("8_hx4ce")
+theme_override_styles/pressed = ExtResource("8_hx4ce")
+theme_override_styles/hover = ExtResource("8_hx4ce")
+text = "معنی کلمه"
+
+[node name="RatingButtons" type="HBoxContainer" parent="MarginContainer/MainLayout/Controls" unique_id=865619281]
+layout_mode = 2
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="Again" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1274358560]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_font_sizes/font_size = 29
+text = "دوباره"
+autowrap_trim_flags = 0
+
+[node name="Hard" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1417025778]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_font_sizes/font_size = 29
+text = "سخت"
+
+[node name="Good" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=2141645236]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_font_sizes/font_size = 29
+text = "متوسط"
+
+[node name="Easy" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1046753146]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_font_sizes/font_size = 29
+text = "آسان"
