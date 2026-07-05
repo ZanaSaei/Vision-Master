@@ -84,6 +84,8 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 
 @onready var audio_player: AudioStreamPlayer   = $AudioPlayer
 
+@onready var FONT_FARSI : FontFile = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
+
 const FLIP_DURATION := 0.18
 
 
@@ -160,6 +162,8 @@ func _enter_saved_mode() -> void:
 	audio_button.visible = true # Brought this back for saved mode
 
 	lesson_title.text = "کلمات ذخیره شده"
+	if FONT_FARSI != null:
+		lesson_title.add_theme_font_override("font", FONT_FARSI)
 
 	nav_list.texture_normal = load("res://images/delete.png")
 	nav_list.texture_pressed = load("res://images/delete.png")

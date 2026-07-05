@@ -15,7 +15,6 @@ const SCENE_SETTINGS     := "res://scenes/settings/Settings.tscn"
 @onready var menu_panel: Control = $MenuPanel
 
 # Buttons
-@onready var profile_button: Button = $MenuPanel/MarginContainer/VBoxContainer/ProfileButton
 @onready var saved_words_button: Button = $MenuPanel/MarginContainer/VBoxContainer/SavedWordsButton
 @onready var purchase_button: Button = $MenuPanel/MarginContainer/VBoxContainer/PurchaseButton
 @onready var settings_button: Button = $MenuPanel/MarginContainer/VBoxContainer/SettingsButton
@@ -47,7 +46,6 @@ func _ready() -> void:
 	
 	overlay.gui_input.connect(_on_overlay_gui_input)
 	
-	profile_button.pressed.connect(func(): emit_signal("profile_pressed"); close())
 	saved_words_button.pressed.connect(func(): emit_signal("saved_words_pressed"); close())
 	purchase_button.pressed.connect(func(): emit_signal("purchase_pressed"); close())
 	settings_button.pressed.connect(func(): emit_signal("settings_pressed"); close())
