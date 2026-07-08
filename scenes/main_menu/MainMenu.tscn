@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://cnd0l7h3t2mqw" path="res://buttons_styles/Book2Normal.tres" id="7_6k0m2"]
 [ext_resource type="StyleBox" uid="uid://dck62uet13ugq" path="res://buttons_styles/Book3Normal.tres" id="8_qq55g"]
 [ext_resource type="StyleBox" uid="uid://wn3x36r4oiwa" path="res://buttons_styles/Konkor.tres" id="9_pkvjm"]
+[ext_resource type="StyleBox" uid="uid://d08gb1dgdb1wv" path="res://buttons_styles/MenuSlide.tres" id="10_6gdku"]
 [ext_resource type="PackedScene" uid="uid://b2onop4jk0ebo" path="res://scenes/side_menu/SideMenu.tscn" id="12_6gdku"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qmweu"]
@@ -181,6 +182,7 @@ theme_override_styles/pressed = ExtResource("9_pkvjm")
 theme_override_styles/hover = ExtResource("9_pkvjm")
 
 [node name="HamburgerButton" type="Button" parent="." unique_id=173506631]
+custom_minimum_size = Vector2(200, 130)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.89300007
@@ -193,10 +195,12 @@ offset_right = 67.05994
 offset_bottom = 40.19999
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("6_6gdku")
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = ExtResource("10_6gdku")
+theme_override_styles/pressed = ExtResource("10_6gdku")
+theme_override_styles/hover = ExtResource("10_6gdku")
 text = "منو"
 icon = ExtResource("2_qq55g")
-flat = true
 icon_alignment = 2
 
 [node name="SideMenu" parent="." unique_id=921434804 instance=ExtResource("12_6gdku")]

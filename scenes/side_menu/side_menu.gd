@@ -86,8 +86,6 @@ func open() -> void:
 		var target_btn_x = hamburger_original_position.x - menu_panel.size.x
 		tween.tween_property(hamburger_button, "position:x", target_btn_x, 0.4)\
 			.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-		tween.tween_property(hamburger_button, "rotation_degrees", 90.0, 0.4)\
-			.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 
 func close() -> void:
 	if not is_open: 

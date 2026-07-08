@@ -99,7 +99,7 @@ offset_right = 182.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 22
+theme_override_constants/separation = -22
 alignment = 1
 
 [node name="Label" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer/SavedWordsButton/HBoxContainer" unique_id=1678736001]
@@ -142,6 +142,7 @@ offset_right = -28.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 121
+alignment = 1
 
 [node name="Label" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer/LeitnerButton/HBoxContainer" unique_id=241654610]
 layout_mode = 2

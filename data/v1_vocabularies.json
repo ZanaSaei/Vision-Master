@@ -150,14 +150,14 @@
 		  "audio": "wild_animal.mp3"
 		},
 		{
-		  "word": "Golestan Forest",
-		  "meaning_en": "A famous forest in Iran.",
-		  "meaning_fa": "جنگل گلستان",
+		  "word": "forest",
+		  "meaning_en": "a large area of land covered with trees and plants",
+		  "meaning_fa": "جنگل",
 		  "example": "I went to Golestan Forest last year.",
-		  "word_type": "proper noun",
+		  "word_type": "noun",
 		  "countable": false,
 		  "verb_forms": {},
-		  "audio": "golestan_forest.mp3"
+		  "audio": "forest.mp3"
 		},
 		{
 		  "word": "jungle",
@@ -203,16 +203,6 @@
 		  "countable": true,
 		  "verb_forms": {},
 		  "audio": "plain.mp3"
-		},
-		{
-		  "word": "Tooran",
-		  "meaning_en": "A region in Iran, home to the Persian zebra.",
-		  "meaning_fa": "توران",
-		  "example": "Tooran is the natural home of the Persian zebra.",
-		  "word_type": "proper noun",
-		  "countable": false,
-		  "verb_forms": {},
-		  "audio": "tooran.mp3"
 		},
 		{
 		  "word": "Persian zebra",
