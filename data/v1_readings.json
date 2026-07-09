@@ -15,7 +15,58 @@
 		"Which of the followings is not an endangered animal: panda, cheetah, or horse?",
 		"Where is the natural home of the Iranian cheetah?",
         "When people take care of cheetahs, what will happen to their number?"
+	  ],
+	"exercises": [
+	{
+	  "type": "multiple_choice",
+	  "prompt": "کدام یک از موارد زیر یک حیوان در حال انقراض نیست؟",
+	  "options": [
+		"panda",
+		"cheetah",
+        "horse"
+	  ],
+	  "correct_index": 2
+	},
+	{
+	  "type": "multiple_choice",
+	  "prompt": "زیستگاه طبیعی یوزپلنگ ایرانی کجاست؟",
+	  "options": [
+		"forest",
+		"plain",
+        "mountain"
+	  ],
+	  "correct_index": 1
+	},
+	{
+	  "type": "true_false",
+	  "prompt": "در گذشته، بسیاری از شکارچیان به حیات وحش توجه می‌کردند.",
+	  "correct": false
+	},
+	{
+	  "type": "true_false",
+	  "prompt": "خانواده‌ها به محافظت از طبیعت علاقه‌مند هستند.",
+	  "correct": true
+	},
+	{
+	  "type": "matching",
+	  "prompt": "دو نیمه‌ی جمله را به هم وصل کنید:",
+	  "left": [
+		"When only a few numbers of an animal live on Earth,",
+		"If we take care of Iranian cheetahs,",
+        "People need more places for living,"
+	  ],
+	  "right": [
+		"when their number increases.",
+		"it means that it is an endangered animal.",
+        "they will live in the future."
+	  ],
+	  "correct_map": [
+		1,
+		0,
+		2
 	  ]
+	}
+  ]
 	},
 	"2": {
 	  "title": "A Wonderful Liquid",

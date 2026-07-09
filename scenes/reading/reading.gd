@@ -8,6 +8,7 @@ extends "res://autoload/BackButtonHandler.gd"
 # ============================================================
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
+const ExerciseSectionScene := preload("res://scenes/shared/ExerciseSection.tscn")
 
 # Paragraph accent color
 const PARA_BG_COLOR     := Color("#F8FAFC")
@@ -38,6 +39,8 @@ var _is_drag_scrolling: bool = false
 @onready var questions_section: VBoxContainer    = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection
 @onready var questions_container: VBoxContainer  = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection/QuestionsContainer
 @onready var audio_player: AudioStreamPlayer  = $AudioPlayer
+@onready var content_layout: VBoxContainer    =  $MarginContainer/MainLayout/ScrollContainer/ContentLayout
+
 
 # Audio Control References
 @onready var audio_control_panel: PanelContainer = $AudioControlPanel
@@ -181,6 +184,10 @@ func _build_reading(book: int, lesson: int, data: Dictionary) -> void:
 
 	var audio_filename: String = data.get("audio", "reading.mp3")
 	set_meta("audio_path", Global.get_audio_path(book, lesson, audio_filename))
+	
+	var exercise_ui := ExerciseSectionScene.instantiate()
+	content_layout.add_child(exercise_ui)  # your ScrollContainer's content VBox
+	exercise_ui.setup(data.get("exercises", []))
 
 
 # ============================================================
@@ -197,6 +204,7 @@ func _build_paragraphs(paragraphs: Array) -> void:
 		var para_text: String = paragraphs[i]
 		var card := _make_paragraph_card(para_text)
 		paragraphs_container.add_child(card)
+	
 
 
 func _make_paragraph_card(text: String) -> PanelContainer:
