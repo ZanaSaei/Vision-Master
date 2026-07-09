@@ -29,10 +29,10 @@
 	  "intro": "Alireza is visiting an observatory. He is talking to Ms. Tabesh who works there.",
 	  "lines": [
 		{ "speaker": "Ms. Tabesh", "text": "Are you interested in the planets?" },
-		{ "speaker": "Alireza",    "text": "Yes! They are really interesting for me, but I don't know much about them." },
+		{ "speaker": "Alireza",    "text": "Yes! They are really interesting for me, but I don 't know much about them." },
 		{ "speaker": "Ms. Tabesh", "text": "Planets are really amazing but not so much alike. Do you know how they are different?" },
 		{ "speaker": "Alireza",    "text": "Umm... I know they go around the Sun in different orbits." },
-		{ "speaker": "Ms. Tabesh", "text": "That's right. They have different colors and sizes, too. Some are rocky like Mars, some have rings like Saturn and some have moons like Uranus." },
+		{ "speaker": "Ms. Tabesh", "text": "That 's right. They have different colors and sizes, too. Some are rocky like Mars, some have rings like Saturn and some have moons like Uranus." },
 		{ "speaker": "Alireza",    "text": "How wonderful! Can we see them without a telescope?" },
 		{ "speaker": "Ms. Tabesh", "text": "Yeah..., we can see the planets nearer to us without a telescope, such as Mercury, Venus, Mars, Jupiter and Saturn. We can see Uranus and Neptune only with powerful telescopes." },
 		{ "speaker": "Alireza",    "text": "And which planet is the largest of all?" },
@@ -80,7 +80,7 @@
 		{ "speaker": "Carlos", "text": "Well, you may have some choices. You can visit China. It is famous for the Great Wall." },
 		{ "speaker": "Diego",  "text": "Yes, but I was in Beijing two years ago." },
 		{ "speaker": "Carlos", "text": "What about India? In fact, the Taj Mahal is a popular destination, but it is hot in summer. Probably Iran is the best choice." },
-		{ "speaker": "Diego",  "text": "I heard Iran is a great and beautiful country, but I don't know much about it." },
+		{ "speaker": "Diego",  "text": "I heard Iran is a great and beautiful country, but I don 't know much about it." },
 		{ "speaker": "Carlos", "text": "Well, Iran is a four-season country. It has many historical sites and amazing nature. Also, its people are very kind and hospitable." },
 		{ "speaker": "Diego",  "text": "It seems a suitable choice. But how can I get more information about Iran?" },
 		{ "speaker": "Carlos", "text": "You can check this booklet or may see our website." }

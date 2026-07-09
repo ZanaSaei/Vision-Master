@@ -15,11 +15,11 @@
 		{ "speaker": "Nurse", "text": "Dr. Gharib was born in Tehran in 1288. After receiving his diploma, he went abroad to study medicine. In 1316 he became a physician and then came back to his homeland. In 1347 this center was founded by Dr. Gharib and one of his close friends." },
 		{ "speaker": "Sara", "text": "Really? I didn't know that." },
 		{ "speaker": "Nurse", "text": "Dr. Gharib was also a generous man. He spared no pains to cure sick children. He was very friendly and helpful to poor families. Not surprisingly, he was regarded as a dedicated physician." },
-		{ "speaker": "Sara", "text": "It's a pity! I didn't know such a great man." },
+		{ "speaker": "Sara", "text": "It 's a pity! I didn't know such a great man." },
 		{ "speaker": "Nurse", "text": "He was known as a distinguished university professor, too. The first Persian textbook on children's diseases was written by him. He taught medicine to thousands of students." },
 		{ "speaker": "Sara", "text": "Oh, what a great man he was!" },
-		{ "speaker": "Nurse", "text": "By the way, it might be interesting to know that your physician was one of Dr. Gharib's students!" },
-		{ "speaker": "Sara", "text": "Really?! That's interesting!" }
+		{ "speaker": "Nurse", "text": "By the way, it might be interesting to know that your physician was one of Dr. Gharib 's students!" },
+		{ "speaker": "Sara", "text": "Really?! That 's interesting!" }
 	  ],
 	  "questions": [
 		"When was Dr. Gharib born?",
@@ -35,10 +35,10 @@
 	  "lines": [
 		{ "speaker": "Majid", "text": "Excuse me Mr. Iranmehr, I wonder if you could help me." },
 		{ "speaker": "Mr. Iranmehr", "text": "Sure. How can I help you?" },
-		{ "speaker": "Majid", "text": "I'd like some information about a good English dictionary." },
+		{ "speaker": "Majid", "text": "I 'd like some information about a good English dictionary." },
 		{ "speaker": "Mr. Iranmehr", "text": "Oh, well. Have you ever used a dictionary?" },
-		{ "speaker": "Majid", "text": "Actually, I haven't. But I've heard that using a good dictionary can really help me learn English better." },
-		{ "speaker": "Mr. Iranmehr", "text": "That's right. First, I recommend a learner's dictionary." },
+		{ "speaker": "Majid", "text": "Actually, I haven 't. But I've heard that using a good dictionary can really help me learn English better." },
+		{ "speaker": "Mr. Iranmehr", "text": "That 's right. First, I recommend a learner's dictionary." },
 		{ "speaker": "Majid", "text": "What is a learner's dictionary?" },
 		{ "speaker": "Mr. Iranmehr", "text": "It is designed for foreign students. It also helps them learn English better." },
 		{ "speaker": "Majid", "text": "Is there only one type of it?" },
@@ -51,7 +51,7 @@
 		{ "speaker": "Mr. Iranmehr", "text": "Yes, a pocket dictionary. You can carry it wherever you go." },
 		{ "speaker": "Majid", "text": "Oh, it's very good. And hmm..., is it expensive?" },
 		{ "speaker": "Mr. Iranmehr", "text": "No, such dictionaries are not expensive. By the way, you can use a free online dictionary, too. And also there are some free dictionaries for PCs and apps for smart phones." },
-		{ "speaker": "Majid", "text": "Thanks, that's a good idea, but I'd like to use a pocket dictionary!" }
+		{ "speaker": "Majid", "text": "Thanks, that's a good idea, but I 'd like to use a pocket dictionary!" }
 	  ],
 	  "questions": [
 		"What type of dictionary does Mr. Iranmehr recommend?",
