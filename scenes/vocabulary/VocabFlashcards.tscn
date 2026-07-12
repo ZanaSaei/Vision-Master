@@ -489,5 +489,3 @@ layout_mode = 2
 texture_normal = ExtResource("11_t0aqf")
 texture_pressed = ExtResource("11_t0aqf")
 stretch_mode = 0
-
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=175890779]

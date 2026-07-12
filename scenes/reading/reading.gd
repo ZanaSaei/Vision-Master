@@ -59,16 +59,7 @@ var word_regex := RegEx.new()
 var paragraph_rtls: Array = [] # Stores { "rtl": RichTextLabel, "text": String }
 var current_word_data: Dictionary = {}
 
-# Popup UI nodes
-var popup_layer: CanvasLayer
-var popup_panel: PanelContainer
-var popup_title: Label
-var popup_type: Label
-var popup_meaning: Label
-var popup_extra: Label
-var btn_save_word: Button
-var btn_close_popup: Button
-
+var dict_popup: DictionaryPopup
 
 func _ready() -> void:
 	# Compile regex to match words (including those with apostrophes or hyphens)
@@ -76,7 +67,11 @@ func _ready() -> void:
 	
 	_load_fonts()
 	_apply_fonts_to_existing_labels()
-	_setup_word_popup() # Create the popup UI programmatically
+	
+	# Instantiate our new reusable popup
+	dict_popup = DictionaryPopup.new()
+	add_child(dict_popup)
+	dict_popup.popup_closed.connect(_on_popup_closed)
 
 	_configure_main_image()
 	_configure_background_image()
@@ -283,143 +278,16 @@ func _on_word_clicked(meta: Variant, clicked_rtl: RichTextLabel, original_text: 
 	for item in paragraph_rtls:
 		item["rtl"].text = _format_clickable_text(item["text"], "")
 		
-	# Highlight the specific clicked word in the specific paragraph
+	# Highlight the specific clicked word
 	clicked_rtl.text = _format_clickable_text(original_text, str(meta))
 	
-	_populate_and_show_popup(def)
+	# Let our new reusable component handle showing the word
+	dict_popup.show_word(def)
 
-
-# ============================================================
-# DICTIONARY POPUP LOGIC
-# ============================================================
-
-func _setup_word_popup() -> void:
-	popup_layer = CanvasLayer.new()
-	popup_layer.layer = 100
-	add_child(popup_layer)
-	
-	popup_panel = PanelContainer.new()
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color("#FFFFFF")
-	style.corner_radius_bottom_left = 20
-	style.corner_radius_bottom_right = 20
-	style.shadow_color = Color(0,0,0,0.2)
-	style.shadow_size = 10
-	style.content_margin_left = 30
-	style.content_margin_right = 30
-	style.content_margin_top = 100
-	style.content_margin_bottom = 30
-	popup_panel.add_theme_stylebox_override("panel", style)
-	
-	popup_panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	popup_panel.position.y = -800 # Start offscreen
-	popup_layer.add_child(popup_panel)
-	
-	var vbox = VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 15)
-	popup_panel.add_child(vbox)
-	
-	popup_title = Label.new()
-	popup_title.add_theme_font_size_override("font_size", 70)
-	popup_title.add_theme_color_override("font_color", Color("#0F172A"))
-	if font_bold != null: popup_title.add_theme_font_override("font", font_bold)
-	vbox.add_child(popup_title)
-	
-	popup_type = Label.new()
-	popup_type.add_theme_font_size_override("font_size", 40)
-	popup_type.add_theme_color_override("font_color", Color("#64748B"))
-	if font_italic != null: popup_type.add_theme_font_override("font", font_italic)
-	vbox.add_child(popup_type)
-	
-	popup_meaning = Label.new()
-	popup_meaning.autowrap_mode = TextServer.AUTOWRAP_WORD
-	popup_meaning.add_theme_font_size_override("font_size", 50)
-	popup_meaning.add_theme_color_override("font_color", Color("#334155"))
-	if font_regular != null: popup_meaning.add_theme_font_override("font", font_regular)
-	vbox.add_child(popup_meaning)
-	
-	popup_extra = Label.new()
-	popup_extra.autowrap_mode = TextServer.AUTOWRAP_WORD
-	popup_extra.add_theme_font_size_override("font_size", 40)
-	popup_extra.add_theme_color_override("font_color", Color("#0284C7"))
-	if font_regular != null: popup_extra.add_theme_font_override("font", font_regular)
-	vbox.add_child(popup_extra)
-	
-	var hbox = HBoxContainer.new()
-	hbox.add_theme_constant_override("separation", 20)
-	vbox.add_child(hbox)
-	
-	btn_save_word = Button.new()
-	btn_save_word.text = "ذخیره کنید"
-	btn_save_word.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	btn_save_word.add_theme_font_size_override("font_size", 45)
-	btn_save_word.pressed.connect(_on_save_word_pressed)
-	hbox.add_child(btn_save_word)
-	
-	btn_close_popup = Button.new()
-	btn_close_popup.text = "بستن"
-	btn_close_popup.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	btn_close_popup.add_theme_font_size_override("font_size", 45)
-	btn_close_popup.pressed.connect(_hide_word_popup)
-	hbox.add_child(btn_close_popup)
-
-
-func _populate_and_show_popup(def: Dictionary) -> void:
-	# Base word title
-	popup_title.text = str(def.get("word", "")).capitalize()
-	
-	# Determine Type & Countability
-	var type_str := str(def.get("word_type", "Unknown")).capitalize()
-	if type_str.to_lower() == "noun" and def.get("countable") != null:
-		type_str += " (Countable)" if def.get("countable") else " (Uncountable)"
-	popup_type.text = type_str
-	
-	# Meaning
-	var en_meaning = def.get("meaning_en", "")
-	var fa_meaning = def.get("meaning_fa", "")
-	popup_meaning.text = en_meaning + ("\n" + fa_meaning if fa_meaning != "" else "")
-	
-	# Extra Info (Verb Forms)
-	popup_extra.text = ""
-	if type_str.to_lower().begins_with("verb") and def.has("verb_forms"):
-		var forms = def["verb_forms"]
-		var form_strings := []
-		if forms.has("past"): form_strings.append("Past: " + forms["past"])
-		if forms.has("past_participle"): form_strings.append("PP: " + forms["past_participle"])
-		if forms.has("present_participle"): form_strings.append("ING: " + forms["present_participle"])
-		popup_extra.text = " • ".join(form_strings)
-	
-	popup_extra.visible = popup_extra.text != ""
-	
-	# Check if already saved to update button text
-	if Global.is_word_saved(def.get("word"), def.get("book"), def.get("lesson")):
-		btn_save_word.text = "✓ ذخیره شد"
-		btn_save_word.disabled = true
-	else:
-		btn_save_word.text = "ذخیره کنید"
-		btn_save_word.disabled = false
-
-	# Slide In Animation
-	var tween = create_tween()
-	tween.tween_property(popup_panel, "position:y", 0, 0.35).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-
-
-func _hide_word_popup() -> void:
-	var tween = create_tween()
-	tween.tween_property(popup_panel, "position:y", -popup_panel.size.y - 50, 0.25).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-	
-	# Remove highlights from all paragraphs
+func _on_popup_closed() -> void:
+	# Remove highlights from all paragraphs when popup closes
 	for item in paragraph_rtls:
 		item["rtl"].text = _format_clickable_text(item["text"], "")
-
-
-func _on_save_word_pressed() -> void:
-	if not current_word_data.is_empty():
-		Global.save_word(current_word_data)
-		btn_save_word.text = "✓ ذخیره شد"
-		btn_save_word.disabled = true
-		Global.button_bounce(btn_save_word)
-
 
 # ============================================================
 # REMAINING FUNCTIONS (Questions, Audio, Navigation)
@@ -516,7 +384,7 @@ func _on_back_button_pressed() -> void:
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
 
 func _on_android_back_pressed() -> void:
-	if popup_panel.position.y >= 0:
-		_hide_word_popup()
+	if dict_popup.is_open():
+		dict_popup._hide_popup()
 	else:
 		_on_back_button_pressed()

@@ -22,7 +22,6 @@ var word_list: Array     = []
 var current_index: int   = 0
 var current_book: int    = 0
 var current_lesson: int  = 0
-var vocab_audio_filename := ""
 var mode: Mode           = Mode.LESSON
 var is_flipped: bool     = false
 var is_animating: bool   = false
@@ -82,7 +81,6 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var save_inactive = preload("res://images/save_button.png")
 @onready var save_active = preload("res://images/saved_button.png")
 
-@onready var audio_player: AudioStreamPlayer   = $AudioPlayer
 
 @onready var FONT_FARSI : FontFile = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
 
@@ -194,7 +192,6 @@ func setup(words: Array, book: int, lesson: int, audio_filename: String, screen_
 	word_list            = words
 	current_book         = book
 	current_lesson       = lesson
-	vocab_audio_filename = audio_filename
 	mode                 = screen_mode
 	current_index        = 0
 	is_flipped           = false
@@ -267,8 +264,6 @@ func _update_card(animate: bool = false) -> void:
 	meaning_fa_label.text = entry.get("meaning_fa", "")
 	example_label.text    = entry.get("example", "")
 
-	# NEW — each word carries its own pronunciation file now
-	vocab_audio_filename = entry.get("audio", "")
 
 	is_flipped = false
 
@@ -477,20 +472,24 @@ func _on_remove_word_pressed() -> void:
 #  AUDIO
 # ----------------------------------------------------------------
 func _on_audio_pressed() -> void:
-	if vocab_audio_filename == "":
+	if word_list.is_empty():
 		return
-	var path := Global.get_audio_path(current_book, current_lesson, "words/" + vocab_audio_filename)
+		
+	var entry: Dictionary = word_list[current_index]
+	var word_to_speak: String = entry.get("word", "")
+	
+	if word_to_speak.is_empty():
+		return
+
+	# Keep your existing button bounce animation
 	var tween := create_tween()
 	tween.tween_property(audio_button, "scale", Vector2(0.93, 0.93), 0.08) \
 	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(audio_button, "scale", Vector2.ONE, 0.12) \
 	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	if ResourceLoader.exists(path):
-		audio_player.stream = load(path)
-		audio_player.play()
-	else:
-		push_warning("Audio not found: " + path)
-
+	
+	# Trigger the built-in device TTS
+	Global.speak_word(word_to_speak)
 
 # ----------------------------------------------------------------
 #  NAVIGATION

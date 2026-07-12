@@ -5,6 +5,13 @@ extends Node
 #  Handles: loading lesson JSON data, and the saved-words system
 # ============================================================
 
+# ============================================================
+# TTS (Text-To-Speech) Engine
+# ============================================================
+var english_voice_id: String = ""
+
+const DICTIONARY_PATH := "res://data/v_dictionary.json"
+
 # ---------- VOCABULARY DATA LOADING ----------
 
 var intro_animation_played := false
@@ -67,6 +74,7 @@ func _ready() -> void:
 	_load_saved_words()
 	_load_progress()
 	_load_word_database()
+	_init_tts()
 
 
 # ---------- LAST SCENE ----------
@@ -156,77 +164,58 @@ func get_saved_words() -> Array:
 # ---------- ENHANCED WORD DATABASE ----------
 
 func _load_word_database() -> void:
-	"""Load all words from all vocabulary JSON files into the database"""
+	"""Load every word from the single unified dictionary file into the database"""
 	word_database.clear()
 	verb_forms.clear()
-	
-	var books := [1, 2, 3]
-	for book in books:
-		_load_words_from_book(book)
-	
-	print("Word database loaded: %d words" % word_database.size())
 
-
-func _load_words_from_book(book: int) -> void:
-	"""Load words from both the flashcard vocabulary and the extra dictionary"""
-	var vocab_path := "res://data/v%d_vocabularies.json" % book
-	var dict_path := "res://data/v%d_dictionary.json" % book
-	
-	# Load target words first
-	_parse_words_into_database(vocab_path, book)
-	# Load extra reading words second
-	_parse_words_into_database(dict_path, book)
-
-func _parse_words_into_database(file_path: String, book: int) -> void:
-	if not FileAccess.file_exists(file_path):
+	if not FileAccess.file_exists(DICTIONARY_PATH):
+		push_error("Dictionary file not found: " + DICTIONARY_PATH)
 		return
-		
-	var file := FileAccess.open(file_path, FileAccess.READ)
+
+	var file := FileAccess.open(DICTIONARY_PATH, FileAccess.READ)
 	var text := file.get_as_text()
 	file.close()
-	
+
 	var json := JSON.new()
 	if json.parse(text) != OK:
+		push_error("Failed to parse v_dictionary.json — %s" % json.get_error_message())
 		return
-		
+
 	var data = json.data
 	if not data is Array:
+		push_error("Invalid v_dictionary.json format: expected a flat array of word objects")
 		return
-		
-	for lesson_data in data:
-		var lesson = lesson_data.get("lesson", 0)
-		var vocab = lesson_data.get("vocabulary", {})
-		var words = vocab.get("words", [])
-		
-		for word_obj in words:
-			var word = word_obj.get("word", "")
-			if word != "":
-				var key = word.to_lower()
-				if not word_database.has(key):
-					# Build enhanced word data
-					var word_data = {
-						"word": word,
-						"meaning_en": word_obj.get("meaning_en", ""),
-						"meaning_fa": word_obj.get("meaning_fa", ""),
-						"example": word_obj.get("example", ""),
-						"book": book,
-						"lesson": lesson,
-						"word_type": word_obj.get("word_type", "noun"),
-						"countable": word_obj.get("countable", null),
-						"verb_forms": word_obj.get("verb_forms", {}),
-						"audio": word_obj.get("audio", "")
-					}
-					word_database[key] = word_data
-					
-					# If it's a verb, add all forms to verb_forms mapping
-					if word_data["word_type"] == "verb":
-						var forms = word_data["verb_forms"]
-						var base_word = word_data["word"]
-						
-						if forms.has("past"): verb_forms[forms["past"].to_lower()] = base_word
-						if forms.has("past_participle"): verb_forms[forms["past_participle"].to_lower()] = base_word
-						if forms.has("present_participle"): verb_forms[forms["present_participle"].to_lower()] = base_word
-						if forms.has("third_person"): verb_forms[forms["third_person"].to_lower()] = base_word
+
+	for word_obj in data:
+		var word: String = word_obj.get("word", "")
+		if word == "":
+			continue
+
+		var key := word.to_lower()
+		if word_database.has(key):
+			continue  # keep the first occurrence if a word appears twice
+
+		var word_data := {
+			"word": word,
+			"meaning_en": word_obj.get("meaning_en", ""),
+			"meaning_fa": word_obj.get("meaning_fa", ""),
+			"example": word_obj.get("example", ""),
+			"word_type": word_obj.get("word_type", "noun"),
+			"countable": word_obj.get("countable", null),
+			"verb_forms": word_obj.get("verb_forms", {}),
+			"audio": word_obj.get("audio", "")
+		}
+		word_database[key] = word_data
+
+		if word_data["word_type"] == "verb":
+			var forms = word_data["verb_forms"]
+			var base_word: String = word_data["word"]
+			if forms.has("past"): verb_forms[forms["past"].to_lower()] = base_word
+			if forms.has("past_participle"): verb_forms[forms["past_participle"].to_lower()] = base_word
+			if forms.has("present_participle"): verb_forms[forms["present_participle"].to_lower()] = base_word
+			if forms.has("third_person"): verb_forms[forms["third_person"].to_lower()] = base_word
+
+	print("Word database loaded: %d words" % word_database.size())
 
 
 func get_word_definition(word: String) -> Dictionary:
@@ -299,17 +288,17 @@ func get_word_definition(word: String) -> Dictionary:
 
 
 func get_word_definition_from_current_lesson(word: String) -> Dictionary:
-	"""Try to find word in the current lesson's vocabulary"""
-	var book = current_book
-	var lesson = current_lesson
-	
-	var definition = get_word_definition(word)
-	if not definition.is_empty():
-		if definition.get("book") == book and definition.get("lesson") == lesson:
-			return definition
-	
-	return get_word_definition(word)
+	"""Look up a word in the unified dictionary, then tag it with the
+	book/lesson the student is currently viewing — so saved words still
+	remember where they were learned, and the SRS system still works."""
+	var definition := get_word_definition(word)
+	if definition.is_empty():
+		return {}
 
+	var tagged := definition.duplicate(true)
+	tagged["book"] = current_book
+	tagged["lesson"] = current_lesson
+	return tagged
 
 func reload_word_database() -> void:
 	"""Reload the word database"""
@@ -457,3 +446,33 @@ func _format_interval(interval: float, rating: String) -> String:
 		return "۱ روز"
 	else:
 		return "%d روز" % days
+
+func _init_tts() -> void:
+	# Ask the device OS for English voices
+	var voices = DisplayServer.tts_get_voices_for_language("en")
+	
+	if voices.size() > 0:
+		# Use the default English voice provided by the OS
+		english_voice_id = voices[0]
+	else:
+		# Fallback: If "en" doesn't return anything, search all voices for English
+		var all_voices = DisplayServer.tts_get_voices()
+		for voice in all_voices:
+			if "en" in voice.to_lower():
+				english_voice_id = voice
+				break
+				
+	if english_voice_id == "":
+		push_warning("No English TTS voice found on this device.")
+
+# Call this from anywhere in your app!
+func speak_word(text: String) -> void:
+	if text.is_empty() or english_voice_id == "":
+		return
+		
+	# Instantly cut off the current audio if the user taps multiple words fast
+	if DisplayServer.tts_is_speaking():
+		DisplayServer.tts_stop()
+		
+	# Arguments: text, voice_id, volume (0-100), pitch (0.0-2.0), rate (0.1-10.0)
+	DisplayServer.tts_speak(text, english_voice_id, 50, 1.0, 1.0)
