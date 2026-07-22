@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_khtvf"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_3afir"]
 [ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="3_s57c2"]
-[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="5_3afir"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhcqr"]
 bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
@@ -15,11 +14,6 @@ expand_margin_top = 45.0
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
 font = ExtResource("3_3afir")
 font_size = 45
-
-[sub_resource type="LabelSettings" id="LabelSettings_khtvf"]
-font = ExtResource("5_3afir")
-font_size = 45
-font_color = Color(1, 0.5647059, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_3afir"]
 font = ExtResource("3_3afir")
@@ -61,7 +55,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 120
+size_flags_vertical = 4
+theme_override_constants/separation = 45
 
 [node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
 layout_mode = 2
@@ -73,6 +68,11 @@ icon_alignment = 1
 layout_mode = 2
 text = "Conversation"
 label_settings = SubResource("LabelSettings_swh16")
+
+[node name="TranslationToggleButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=223618354]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Translate"
 
 [node name="AudioButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1020383883]
 layout_mode = 2
@@ -108,14 +108,15 @@ theme_override_constants/separation = 35
 [node name="ConversationImage" type="TextureRect" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
 layout_mode = 2
 
-[node name="IntroLabel" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1426285093]
+[node name="IntroLabel" type="RichTextLabel" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=315135960]
 custom_minimum_size = Vector2(950, 0)
 layout_mode = 2
-size_flags_vertical = 1
 mouse_filter = 1
-label_settings = SubResource("LabelSettings_khtvf")
-vertical_alignment = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_3afir")
+theme_override_font_sizes/normal_font_size = 45
 autowrap_mode = 2
+vertical_alignment = 1
 
 [node name="LinesContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
 layout_mode = 2

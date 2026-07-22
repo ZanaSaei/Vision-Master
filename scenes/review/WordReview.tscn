@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="6_y8wcc"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="7_y8wcc"]
 [ext_resource type="StyleBox" uid="uid://cra0kyhull2d5" path="res://buttons_styles/show_answer.tres" id="8_hx4ce"]
+[ext_resource type="PackedScene" uid="uid://c4kduxd61oyll" path="res://scenes/side_menu/ReviewSideMenu.tscn" id="8_y8wcc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41h8a"]
 bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
@@ -100,6 +101,30 @@ font = ExtResource("6_y8wcc")
 font_size = 45
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8wcc"]
+bg_color = Color(0, 0.2901961, 0.2901961, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+expand_margin_left = 200.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3suwl"]
+bg_color = Color(0, 0.2901961, 0.2901961, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+expand_margin_left = 200.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ynbm"]
+bg_color = Color(0, 0.2901961, 0.2901961, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+expand_margin_left = 200.0
+
 [node name="WordReview" type="Control" unique_id=400343688]
 layout_mode = 3
 anchors_preset = 15
@@ -134,7 +159,7 @@ theme_override_constants/margin_right = 35
 [node name="Header" type="HBoxContainer" parent="HeaderBar/MarginContainer" unique_id=1880404803]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 513
+theme_override_constants/separation = 160
 
 [node name="BackButton" type="Button" parent="HeaderBar/MarginContainer/Header" unique_id=59771729]
 layout_mode = 2
@@ -348,3 +373,17 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("7_y8wcc")
 theme_override_font_sizes/font_size = 29
 text = "آسان"
+
+[node name="OpenListMenuButton" type="Button" parent="." unique_id=2028908847]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 907.0
+offset_right = 116.0
+offset_bottom = 1082.0
+theme_override_font_sizes/font_size = 109
+theme_override_styles/normal = SubResource("StyleBoxFlat_y8wcc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3suwl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6ynbm")
+text = "☰"
+
+[node name="ReviewSideMenu" parent="." unique_id=996475540 instance=ExtResource("8_y8wcc")]

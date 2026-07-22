@@ -1,0 +1,2133 @@
+[
+  {
+	"lesson": 1,
+	"book": 1,
+	"audio": "res://assets/audio/v1/l1/conversation.mp3",
+	"image": "v1_l1_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Maryam is visiting the Museum of Nature and Wildlife.",
+		  "fa": "مریم در حال بازدید از موزه طبیعت و حیات وحش است.",
+		  "start": 10.0,
+		  "end": 14.5
+		},
+		{
+		  "en": "She's talking to Mr. Razavi, who works in the museum.",
+		  "fa": "او با آقای رضوی که در موزه کار می‌کند صحبت می‌کند.",
+		  "start": 14.5,
+		  "end": 18.0
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Maryam",
+		"sentences": [
+		  {
+			"en": "Excuse me, what is it?",
+			"fa": "ببخشید، این چیست؟",
+			"start": 22.0,
+			"end": 25.3
+		  },
+		  {
+			"en": "Is it a leopard?",
+			"fa": "آیا این یک پلنگ است؟",
+			"start": 25.5,
+			"end": 26.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Razavi",
+		"sentences": [
+		  {
+			"en": "No, it is a cheetah.",
+			"fa": "نه، این یک یوزپلنگ است.",
+			"start": 27.0,
+			"end": 28.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Maryam",
+		"sentences": [
+		  {
+			"en": "Oh, a cheetah?",
+			"fa": "اوه، یوزپلنگ؟",
+			"start": 28.7,
+			"end": 30.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Razavi",
+		"sentences": [
+		  {
+			"en": "Yeah, an Iranian cheetah.",
+			"fa": "بله، یک یوزپلنگ ایرانی.",
+			"start": 31.0,
+			"end": 32.8
+		  },
+		  {
+			"en": "It is an endangered animal.",
+			"fa": "این یک حیوان در معرض خطر انقراض است.",
+			"start": 33.0,
+			"end": 34.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Maryam",
+		"sentences": [
+		  {
+			"en": "I know.",
+			"fa": "می‌دانم.",
+			"start": 35.0,
+			"end": 35.8
+		  },
+		  {
+			"en": "I heard around 70 of them are alive.",
+			"fa": "شنیدم حدود ۷۰ تا از آنها زنده هستند.",
+			"start": 36.0,
+			"end": 38.5
+		  },
+		  {
+			"en": "Yes?",
+			"fa": "درسته؟",
+			"start": 38.6,
+			"end": 38.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Razavi",
+		"sentences": [
+		  {
+			"en": "Right, but the number will increase.",
+			"fa": "درست است، اما تعداد آنها افزایش خواهد یافت.",
+			"start": 39.0,
+			"end": 41.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Maryam",
+		"sentences": [
+		  {
+			"en": "Really?!",
+			"fa": "واقعاً؟!",
+			"start": 41.5,
+			"end": 42.2
+		  },
+		  {
+			"en": "How?",
+			"fa": "چطور؟",
+			"start": 42.3,
+			"end": 43.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Razavi",
+		"sentences": [
+		  {
+			"en": "Well, we have some plans.",
+			"fa": "خب، ما چند برنامه داریم.",
+			"start": 43.3,
+			"end": 44.3
+		  },
+		  {
+			"en": "For example, we are going to protect their homes, to make movies about their life, and to teach people how to take more care of them.",
+			"fa": "به عنوان مثال، ما قصد داریم از خانه‌های آنها محافظت کنیم، درباره زندگی آنها فیلم بسازیم و به مردم آموزش دهیم که چگونه بیشتر از آنها مراقبت کنند.",
+			"start": 45.0,
+			"end": 52.0
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 2,
+	"book": 1,
+	"audio": "res://assets/audio/v1/l2/conversation.mp3",
+	"image": "v1_l2_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Alireza is visiting an observatory.",
+		  "fa": "علیرضا در حال بازدید از یک رصدخانه است.",
+		  "start": 11.0,
+		  "end": 16.3
+		},
+		{
+		  "en": "He is talking to Ms. Tabesh who works there.",
+		  "fa": "او با خانم طابش که آنجا کار می‌کند صحبت می‌کند.",
+		  "start": 11.0,
+		  "end": 16.3
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Ms. Tabesh",
+		"sentences": [
+		  {
+			"en": "Are you interested in the planets?",
+			"fa": "آیا به سیاره‌ها علاقه‌مندید؟",
+			"start": 16.5,
+			"end": 21.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Alireza",
+		"sentences": [
+		  {
+			"en": "Yes!",
+			"fa": "بله!",
+			"start": 21.6,
+			"end": 26.2
+		  },
+		  {
+			"en": "They are really interesting for me, but I don't know much about them.",
+			"fa": "آنها واقعاً برای من جالب هستند، اما چیز زیادی درباره آنها نمی‌دانم.",
+			"start": 21.6,
+			"end": 26.2
+		  }
+		]
+	  },
+	  {
+		"speaker": "Ms. Tabesh",
+		"sentences": [
+		  {
+			"en": "Planets are really amazing but not so much alike.",
+			"fa": "سیاره‌ها واقعاً شگفت‌انگیز هستند اما چندان شبیه هم نیستند.",
+			"start": 26.8,
+			"end": 30.2
+		  },
+		  {
+			"en": "Do you know how they are different?",
+			"fa": "آیا می‌دانید چگونه متفاوت هستند؟",
+			"start": 30.2,
+			"end": 31.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Alireza",
+		"sentences": [
+		  {
+			"en": "Umm... I know they go around the Sun in different orbits.",
+			"fa": "اوم... می‌دانم که آنها در مدارهای مختلف به دور خورشید می‌چرخند.",
+			"start": 32.7,
+			"end": 36.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Ms. Tabesh",
+		"sentences": [
+		  {
+			"en": "That's right.",
+			"fa": "درست است.",
+			"start": 36.6,
+			"end": 38.0
+		  },
+		  {
+			"en": "They have different colors and sizes, too.",
+			"fa": "آنها رنگ‌ها و اندازه‌های متفاوتی نیز دارند.",
+			"start": 38.1,
+			"end": 40.5
+		  },
+		  {
+			"en": "Some are rocky like Mars, some have rings like Saturn and some have moons like Uranus.",
+			"fa": "برخی صخره‌ای هستند مانند مریخ، برخی حلقه دارند مانند زحل و برخی قمر دارند مانند اورانوس.",
+			"start": 40.5,
+			"end": 47.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Alireza",
+		"sentences": [
+		  {
+			"en": "How wonderful!",
+			"fa": "چه شگفت‌انگیز!",
+			"start": 47.3,
+			"end": 48.1
+		  },
+		  {
+			"en": "Can we see them without a telescope?",
+			"fa": "آیا می‌توانیم آنها را بدون تلسکوپ ببینیم؟",
+			"start": 48.2,
+			"end": 50.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Ms. Tabesh",
+		"sentences": [
+		  {
+			"en": "Yeah..., we can see the planets nearer to us without a telescope, such as Mercury, Venus, Mars, Jupiter and Saturn.",
+			"fa": "بله...، ما می‌توانیم سیاره‌های نزدیک‌تر به خود را بدون تلسکوپ ببینیم، مانند عطارد، زهره، مریخ، مشتری و زحل.",
+			"start": 51.1,
+			"end": 60.4
+		  },
+		  {
+			"en": "We can see Uranus and Neptune only with powerful telescopes.",
+			"fa": "ما می‌توانیم اورانوس و نپتون را فقط با تلسکوپ‌های قدرتمند ببینیم.",
+			"start": 60.8,
+			"end": 65.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Alireza",
+		"sentences": [
+		  {
+			"en": "And which planet is the largest of all?",
+			"fa": "و کدام سیاره از همه بزرگتر است؟",
+			"start": 65.7,
+			"end": 68.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Ms. Tabesh",
+		"sentences": [
+		  {
+			"en": "Jupiter is the largest one.",
+			"fa": "مشتری بزرگترین آنهاست.",
+			"start": 69.0,
+			"end": 71.1
+		  },
+		  {
+			"en": "It has more than sixty moons.",
+			"fa": "این سیاره بیش از شصت قمر دارد.",
+			"start": 71.2,
+			"end": 73.0
+		  },
+		  {
+			"en": "Do you want to look at it?",
+			"fa": "آیا می‌خواهید به آن نگاه کنید؟",
+			"start": 73.2,
+			"end": 74.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Alireza",
+		"sentences": [
+		  {
+			"en": "I really like that.",
+			"fa": "من واقعاً آن را دوست دارم.",
+			"start": 75.1,
+			"end": 76.1
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 3,
+	"book": 1,
+	"audio": "res://assets/audio/v1/l3/conversation.mp3",
+	"image": "v1_l3_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Roya and Mahsa are leaving the library.",
+		  "fa": "رویا و مهسا در حال ترک کتابخانه هستند.",
+		  "start": 10.9,
+		  "end": 13.1
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Roya",
+		"sentences": [
+		  {
+			"en": "When I came in, you were reading a book.",
+			"fa": "وقتی وارد شدم، داشتی کتاب می‌خواندی.",
+			"start": 18.0,
+			"end": 19.8
+		  },
+		  {
+			"en": "What was it?",
+			"fa": "چه کتابی بود؟",
+			"start": 20.1,
+			"end": 20.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mahsa",
+		"sentences": [
+		  {
+			"en": "I was reading a book about famous Iranian scientists.",
+			"fa": "داشتم کتابی درباره دانشمندان مشهور ایرانی می‌خواندم.",
+			"start": 21.3,
+			"end": 23.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Roya",
+		"sentences": [
+		  {
+			"en": "But such books are not very interesting.",
+			"fa": "اما چنین کتاب‌هایی خیلی جالب نیستند.",
+			"start": 24.7,
+			"end": 26.6
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mahsa",
+		"sentences": [
+		  {
+			"en": "At first I had the same idea, believe me!",
+			"fa": "در ابتدا من هم همین ایده را داشتم، باور کنید!",
+			"start": 27.3,
+			"end": 29.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Roya",
+		"sentences": [
+		  {
+			"en": "Did you find it useful?",
+			"fa": "آیا آن را مفید یافتی؟",
+			"start": 30.1,
+			"end": 31.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mahsa",
+		"sentences": [
+		  {
+			"en": "Oh yes.",
+			"fa": "آه بله.",
+			"start": 31.8,
+			"end": 32.0
+		  },
+		  {
+			"en": "Actually I learned many interesting things about our scientists' lives.",
+			"fa": "در واقع من چیزهای جالب زیادی درباره زندگی دانشمندانمان یاد گرفتم.",
+			"start": 32.0,
+			"end": 31.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Roya",
+		"sentences": [
+		  {
+			"en": "Like what?",
+			"fa": "مثلاً چه چیزهایی؟",
+			"start": 36.6,
+			"end": 37.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mahsa",
+		"sentences": [
+		  {
+			"en": "For example Razi taught medicine to many young people while he was working in Ray Hospital.",
+			"fa": "به عنوان مثال رازی در حالی که در بیمارستان ری کار می‌کرد، پزشکی را به بسیاری از جوانان آموزش داد.",
+			"start": 37.6,
+			"end": 42.3
+		  },
+		  {
+			"en": "Or Nasireddin Toosi built Maragheh Observatory when he was studying the planets.",
+			"fa": "یا نصیرالدین طوسی هنگامی که در حال مطالعه سیاره‌ها بود، رصدخانه مراغه را ساخت.",
+			"start": 43.0,
+			"end": 47.6
+		  }
+		]
+	  },
+	  {
+		"speaker": "Roya",
+		"sentences": [
+		  {
+			"en": "Cool!",
+			"fa": "عالی!",
+			"start": 48.2,
+			"end": 48.6
+		  },
+		  {
+			"en": "What was the name of the book?",
+			"fa": "اسم کتاب چه بود؟",
+			"start": 48.7,
+			"end": 50.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mahsa",
+		"sentences": [
+		  {
+			"en": "Famous Iranian Scientists.",
+			"fa": "دانشمندان مشهور ایرانی.",
+			"start": 50.3,
+			"end": 51.6
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 4,
+	"book": 1,
+	"audio": "res://assets/audio/v1/l4/conversation.mp3",
+	"image": "v1_l4_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Diego is a Spanish tourist who is planning for his summer vacation.",
+		  "fa": "دیگو یک گردشگر اسپانیایی است که برای تعطیلات تابستانی خود برنامه‌ریزی می‌کند.",
+		  "start": 8.8,
+		  "end": 14.9
+		},
+		{
+		  "en": "He is talking to Carlos Sabato, a travel agent in Madrid.",
+		  "fa": "او با کارلوس ساباتو، یک عامل مسافرتی در مادرید صحبت می‌کند.",
+		  "start": 15.7,
+		  "end": 19.6
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Diego",
+		"sentences": [
+		  {
+			"en": "Excuse me, sir!",
+			"fa": "ببخشید، آقا!",
+			"start": 23.7,
+			"end": 24.1
+		  },
+		  {
+			"en": "I am planning for my summer vacation.",
+			"fa": "من برای تعطیلات تابستانی خود برنامه‌ریزی می‌کنم.",
+			"start": 24.2,
+			"end": 26.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Carlos",
+		"sentences": [
+		  {
+			"en": "How can I help you?",
+			"fa": "چگونه می‌توانم به شما کمک کنم؟",
+			"start": 27.1,
+			"end": 28.2
+		  }
+		]
+	  },
+	  {
+		"speaker": "Diego",
+		"sentences": [
+		  {
+			"en": "Actually I want to visit Asia, but I am not sure about my destination.",
+			"fa": "در واقع من می‌خواهم از آسیا دیدن کنم، اما در مورد مقصد خود مطمئن نیستم.",
+			"start": 29.0,
+			"end": 32.9
+		  },
+		  {
+			"en": "Do you have any suggestion?",
+			"fa": "آیا پیشنهادی دارید؟",
+			"start": 33.3,
+			"end": 34.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Carlos",
+		"sentences": [
+		  {
+			"en": "Well, you may have some choices.",
+			"fa": "خب، ممکن است چند گزینه داشته باشید.",
+			"start": 35.0,
+			"end": 36.8
+		  },
+		  {
+			"en": "You can visit China.",
+			"fa": "می‌توانید از چین دیدن کنید.",
+			"start": 37.3,
+			"end": 38.4
+		  },
+		  {
+			"en": "It is famous for the Great Wall.",
+			"fa": "این کشور به خاطر دیوار بزرگ چین مشهور است.",
+			"start": 38.9,
+			"end": 40.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Diego",
+		"sentences": [
+		  {
+			"en": "Yes, but I was in Beijing two years ago.",
+			"fa": "بله، اما دو سال پیش در پکن بودم.",
+			"start": 40.8,
+			"end": 43.6
+		  }
+		]
+	  },
+	  {
+		"speaker": "Carlos",
+		"sentences": [
+		  {
+			"en": "What about India?",
+			"fa": "هند چطور؟",
+			"start": 44.4,
+			"end": 45.2
+		  },
+		  {
+			"en": "In fact, the Taj Mahal is a popular destination, but it is hot in summer.",
+			"fa": "در واقع، تاج محل یک مقصد محبوب است، اما در تابستان گرم است.",
+			"start": 45.2,
+			"end": 50.2
+		  },
+		  {
+			"en": "Probably Iran is the best choice.",
+			"fa": "احتمالاً ایران بهترین انتخاب است.",
+			"start": 50.7,
+			"end": 52.6
+		  }
+		]
+	  },
+	  {
+		"speaker": "Diego",
+		"sentences": [
+		  {
+			"en": "I heard Iran is a great and beautiful country, but I don't know much about it.",
+			"fa": "شنیدم ایران کشور بزرگی و زیبایی است، اما چیز زیادی درباره آن نمی‌دانم.",
+			"start": 53.3,
+			"end": 57.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Carlos",
+		"sentences": [
+		  {
+			"en": "Well, Iran is a four-season country.",
+			"fa": "خب، ایران یک کشور چهار فصل است.",
+			"start": 58.0,
+			"end": 60.4
+		  },
+		  {
+			"en": "It has many historical sites and amazing nature.",
+			"fa": "این کشور دارای مکان‌های تاریخی بسیاری و طبیعت شگفت‌انگیزی است.",
+			"start": 61.1,
+			"end": 64.2
+		  },
+		  {
+			"en": "Also, its people are very kind and hospitable.",
+			"fa": "همچنین، مردم آن بسیار مهربان و مهمان‌نواز هستند.",
+			"start": 64.8,
+			"end": 67.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Diego",
+		"sentences": [
+		  {
+			"en": "It seems a suitable choice.",
+			"fa": "به نظر انتخاب مناسبی می‌رسد.",
+			"start": 68.5,
+			"end": 70.0
+		  },
+		  {
+			"en": "But how can I get more information about Iran?",
+			"fa": "اما چگونه می‌توانم اطلاعات بیشتری درباره ایران به دست آورم؟",
+			"start": 70.1,
+			"end": 72.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Carlos",
+		"sentences": [
+		  {
+			"en": "You can check this booklet or may see our website.",
+			"fa": "می‌توانید این کتابچه را بررسی کنید یا ممکن است وب‌سایت ما را ببینید.",
+			"start": 73.2,
+			"end": 75.7
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 1,
+	"book": 2,
+	"audio": "res://assets/audio/v2/l1/conversation.mp3",
+	"image": "v2_l1_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Babak Saberian is a translator who works for IRIB",
+		  "fa": "بابک صابریان مترجمی است که در صدا و سیمای جمهوری اسلامی ایران کار می کند.",
+		  "start": 15.4,
+		  "end": 20.0
+		},
+		{
+		  "en": "Today, he is hosting Meysam in his office.",
+		  "fa": "امروز در دفتر کارش میزبان میثم است.",
+		  "start": 20.9,
+		  "end": 24.8
+		},
+		{
+		  "en": "Meysam is a high school student.",
+		  "fa": "میثم یک دانش آموز دبیرستانی است.",
+		  "start": 24.9,
+		  "end": 27.0
+		},
+		{
+		  "en": "He is interviewing Mr. Saberian for his school project",
+		  "fa": "او برای پروژهٔ مدرسه‌اش با آقای صابریان مصاحبه می‌کند.",
+		  "start": 28.2,
+		  "end": 32.3
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Meysam",
+		"sentences": [
+		  {
+			"en": "Thank you Mr. Saberian for inviting me to your office.",
+			"fa": "از شما متشکرم، آقای صابریان، که مرا به دفترتان دعوت کردید.",
+			"start": 36.4,
+			"end": 39.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Saberian",
+		"sentences": [
+		  {
+			"en": "You’re welcome!",
+			"fa": "خواهش می‌کنم!",
+			"start": 40.1,
+			"end": 41.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Meysam",
+		"sentences": [
+		  {
+			"en": "I heard you know three languages. Is that right?",
+			"fa": "شنیدم که سه زبان بلدید. درست است؟",
+			"start": 41.2,
+			"end": 44.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Saberian",
+		"sentences": [
+		  {
+			"en": "Well, actually four languages",
+			"fa": "خب، در واقع چهار زبان",
+			"start": 45.5,
+			"end": 47.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Meysam",
+		"sentences": [
+		  {
+			"en": "Four! Really?! What languages do you know?",
+			"fa": "چهار تا؟! واقعاً؟ چه زبانی‌هایی بلدید؟",
+			"start": 48.0,
+			"end": 51.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Saberian",
+		"sentences": [
+		  {
+			"en": "Besides my mother tongue, Persian, I know English, French and Russian well.",
+			"fa": "به غیر از زبان مادری‌ام، فارسی، انگلیسی، فرانسوی و روسی را خوب می‌دانم.",
+			"start": 52.1,
+			"end": 56.6
+		  }
+		]
+	  },
+	  {
+		"speaker": "Meysam",
+		"sentences": [
+		  {
+			"en": "Interesting! And when did you learn them?",
+			"fa": "چه جالب! و کی آن‌ها را یاد گرفتید؟",
+			"start": 57.2,
+			"end": 60.1
+		  }
+		]
+	  },
+	{
+		"speaker": "Mr. Saberian",
+		"sentences": [
+		  {
+			"en": "I began learning English at school when I was thirteen.",
+			"fa": "به نظر انتخاب مناسبی می‌رسد.",
+			"start": 60.9,
+			"end": 64.8
+		  },
+		  {
+			"en": "Then I began learning French in a language institute when I was fifteen.",
+			"fa": "سپس وقتی پانزده ساله بودم، یادگیری فرانسوی را در یک مؤسسهٔ زبان شروع کردم.",
+			"start": 64.9,
+			"end": 68.8
+		  },
+		{
+			"en": "And I learned Russian when I was a university student in Moscow.",
+			"fa": "و روسی را وقتی دانشجوی دانشگاه در مسکو بودم یاد گرفتم.",
+			"start": 69.6,
+			"end": 73.5
+		  }
+		]
+	  },
+	{
+		"speaker": "Meysam",
+		"sentences": [
+		  {
+			"en": "Can you use all of them fluently?",
+			"fa": "می‌توانید همهٔ آن‌ها را روان صحبت کنید؟",
+			"start": 74.2,
+			"end": 76.2
+		  }
+		]
+	  },
+	{
+		"speaker": "Mr. Saberian",
+		"sentences": [
+		  {
+			"en": "I know all of them well, but I use English more",
+			"fa": "همهٔ آن‌ها را خوب می‌دانم، اما از انگلیسی بیشتر استفاده می‌کنم.",
+			"start": 77.1,
+			"end": 80.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Meysam",
+		"sentences": [
+		  {
+			"en": "OK. Do you think language learning should start as early as possible?",
+			"fa": "خوب. به نظر شما یادگیری زبان باید هر چه زودتر شروع شود؟",
+			"start": 80.4,
+			"end": 85.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Saberian",
+		"sentences": [
+		  {
+			"en": "My experience says interest and hard work are really more important than age.",
+			"fa": "تجربهٔ من می‌گوید که علاقه و تلاش سخت واقعاً از سن مهم‌تر هستند.",
+			"start": 85.9,
+			"end": 90.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Meysam",
+		"sentences": [
+		  {
+			"en": "Hmm… that’s an important point.",
+			"fa": "هوم... نکتهٔ مهمی است.",
+			"start": 90.9,
+			"end": 93.3
+		  },
+		{
+			"en": "May I know what your favorite language is? English, French, or Russian?",
+			"fa": "اجازه دارم بپرسم زبان مورد علاقه‌تان کدام است؟ انگلیسی، فرانسوی یا روسی؟",
+			"start": 93.6,
+			"end": 98.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Saberian",
+		"sentences": [
+		  {
+			"en": "To be honest, I enjoy using them all,",
+			"fa": "راستش، استفاده از همهٔ آن‌ها را لذت می‌برم،",
+			"start": 99.5,
+			"end": 102.8
+		  },
+		{
+			"en": "but my favorite language is absolutely my mother tongue!",
+			"fa": "اما زبان مورد علاقه‌ام قطعاً زبان مادری‌ام است!",
+			"start": 102.9,
+			"end": 106.2
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 2,
+	"book": 2,
+	"audio": "res://assets/audio/v2/l2/conversation.mp3",
+	"image": "v2_l2_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Sina and Behzad are old friends.",
+		  "fa": "سینا و بهزاد دوستان قدیمی هستند.",
+		  "start": 15.2,
+		  "end": 17.3
+		},
+		{
+		  "en": "They have not seen each other for about three months.",
+		  "fa": "آنها حدود سه ماه است که همدیگر را ندیده‌اند.",
+		  "start": 18.3,
+		  "end": 21.2
+		},
+		{
+		  "en": "Behzad has called Sina.",
+		  "fa": "بهزاد به سینا زنگ زده است.",
+		  "start": 22.3,
+		  "end": 24.0
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Behzad",
+		"sentences": [
+		  {
+			"en": "Hi Sina.",
+			"fa": "سلام سینا.",
+			"start": 26.3,
+			"end": 27.0
+		  },
+		  {
+			"en": "How is it going?",
+			"fa": "اوضاع چطور است؟",
+			"start": 27.1,
+			"end": 28.0
+		  },
+		  {
+			"en": "I haven't seen you since Norooz.",
+			"fa": "از نوروز تو را ندیده‌ام.",
+			"start": 28.5,
+			"end": 30.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sina",
+		"sentences": [
+		  {
+			"en": "Hi Behzad.",
+			"fa": "سلام بهزاد.",
+			"start": 30.9,
+			"end": 31.8
+		  },
+		  {
+			"en": "Thanks for calling.",
+			"fa": "ممنون که زنگ زدی.",
+			"start": 32.0,
+			"end": 33.1
+		  },
+		  {
+			"en": "I am home most of the time.",
+			"fa": "اکثر اوقات خانه هستم.",
+			"start": 33.7,
+			"end": 35.4
+		  },
+		  {
+			"en": "I do different things like surfing the net and playing computer games.",
+			"fa": "کارهای مختلفی مثل گشت و گذار در اینترنت و بازی‌های کامپیوتری انجام می‌دهم.",
+			"start": 36.2,
+			"end": 41.2
+		  }
+		]
+	  },
+	  {
+		"speaker": "Behzad",
+		"sentences": [
+		  {
+			"en": "How about your free time?",
+			"fa": "وقت آزادت چطور؟",
+			"start": 41.8,
+			"end": 43.1
+		  },
+		  {
+			"en": "Going out, jogging, playing football,...?",
+			"fa": "بیرون رفتن، آهسته دویدن، فوتبال بازی کردن،...؟",
+			"start": 43.5,
+			"end": 45.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sina",
+		"sentences": [
+		  {
+			"en": "Nope.",
+			"fa": "نه.",
+			"start": 46.1,
+			"end": 46.7
+		  },
+		  {
+			"en": "I rarely go out and hang out with my friends.",
+			"fa": "به ندرت بیرون می‌روم و با دوستانم وقت می‌گذرانم.",
+			"start": 46.8,
+			"end": 50.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Behzad",
+		"sentences": [
+		  {
+			"en": "I see.",
+			"fa": "می‌فهمم.",
+			"start": 50.6,
+			"end": 51.3
+		  },
+		  {
+			"en": "Reza and I are going to Darband for climbing and walking this Thursday.",
+			"fa": "رضا و من این پنجشنبه به دربند برای کوهنوردی و پیاده‌روی می‌رویم.",
+			"start": 51.4,
+			"end": 55.3
+		  },
+		  {
+			"en": "We really like to see you.",
+			"fa": "ما واقعاً دوست داریم تو را ببینیم.",
+			"start": 56.0,
+			"end": 57.2
+		  },
+		  {
+			"en": "Will you come with us?",
+			"fa": "آیا با ما می‌آیی؟",
+			"start": 57.3,
+			"end": 58.6
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sina",
+		"sentences": [
+		  {
+			"en": "What?!",
+			"fa": "چی؟!",
+			"start": 58.7,
+			"end": 59.2
+		  },
+		  {
+			"en": "Oh, no, I haven't been there for a long time.",
+			"fa": "اوه، نه، مدت زیادی است که آنجا نرفته‌ام.",
+			"start": 59.3,
+			"end": 62.7
+		  },
+		  {
+			"en": "I prefer to stay home and watch my movies on the weekend.",
+			"fa": "ترجیح می‌دهم آخر هفته در خانه بمانم و فیلم‌هایم را تماشا کنم.",
+			"start": 63.5,
+			"end": 67.9
+		  },
+		  {
+			"en": "I've bought lots of things to eat, too.",
+			"fa": "چیزهای زیادی برای خوردن هم خریده‌ام.",
+			"start": 68.9,
+			"end": 71.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Behzad",
+		"sentences": [
+		  {
+			"en": "Come on!",
+			"fa": "بی خیال!",
+			"start": 71.7,
+			"end": 72.2
+		  },
+		  {
+			"en": "Stop being a couch potato!",
+			"fa": "دیگر یک آدم تنبل نباش!",
+			"start": 72.3,
+			"end": 74.0
+		  },
+		  {
+			"en": "I guess you haven't exercised for a long time.",
+			"fa": "حدس می‌زنم مدت زیادی است که ورزش نکرده‌ای.",
+			"start": 74.7,
+			"end": 77.0
+		  },
+		  {
+			"en": "I think you are a bit fat now.",
+			"fa": "فکر می‌کنم الان کمی چاق شده‌ای.",
+			"start": 77.4,
+			"end": 78.9
+		  }
+		]
+	  },
+	{
+		"speaker": "Sina",
+		"sentences": [
+		  {
+			"en": "Um… actually, you’re right.",
+			"fa": "اممم....راستش حرفت درسته.",
+			"start": 79.6,
+			"end": 82.1
+		  },
+		  {
+			"en": "I’ve gained five kilos in three months.",
+			"fa": "تو سه ماه ۵ کیلو وزن اضافه کردم.",
+			"start": 82.5,
+			"end": 85.0
+		  },
+		{
+			"en": "I really do not like to move!",
+			"fa": "واقعا دوست ندارم تحرک داشته باشم.",
+			"start": 85.7,
+			"end": 87.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Behzad",
+		"sentences": [
+		  {
+			"en": "See? I told you. ",
+			"fa": "دیدی؟ بهت گفتم.",
+			"start": 88.2,
+			"end": 90.0
+		  },
+		  {
+			"en": "Working with computers for a long time makes people sick and depressed.",
+			"fa": "کار کردن طولانی مدت با کامپیوتر باعث ایجاد بیماری و افسردگی می شود.",
+			"start": 90.1,
+			"end": 93.9
+		  },
+		  {
+			"en": "I’ve read about this somewhere.",
+			"fa": "یک جایی در موردش خونده ام.",
+			"start": 94.6,
+			"end": 95.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sina",
+		"sentences": [
+		  {
+			"en": "All right. You won!....",
+			"fa": "باشه. تو بردی...",
+			"start": 96.5,
+			"end": 98.5
+		  },
+		  {
+			"en": "When and where should we meet?",
+			"fa": "کی و کجا همدیگر را ملاقات کنیم؟",
+			"start": 98.6,
+			"end": 100.7
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 3,
+	"book": 2,
+	"audio": "res://assets/audio/v2/l3/conversation.mp3",
+	"image": "v2_l3_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Reza is talking to a tourist in a handicraft shop.",
+		  "fa": "رضا در یک فروشگاه صنایع دستی با یک گردشگر صحبت می‌کند.",
+		  "start": 0.0,
+		  "end": 0.0
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Reza",
+		"sentences": [
+		  {
+			"en": "How can I help you, sir?",
+			"fa": "چگونه می‌توانم به شما کمک کنم، آقا؟",
+			"start": 22.1,
+			"end": 23.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Tourist",
+		"sentences": [
+		  {
+			"en": "I am looking for some Iranian handicrafts.",
+			"fa": "من به دنبال چند صنایع دستی ایرانی هستم.",
+			"start": 24.3,
+			"end": 27.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Reza",
+		"sentences": [
+		  {
+			"en": "Here you can find a range of Iranian hand-made products, from carpets to pottery and tilework, but we don't sell metalwork.",
+			"fa": "اینجا می‌توانید طیف وسیعی از محصولات دست‌ساز ایرانی، از فرش گرفته تا سفال و کاشی‌کاری را پیدا کنید، اما ما فلزکاری نمی‌فروشیم.",
+			"start": 27.7,
+			"end": 37.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Tourist",
+		"sentences": [
+		  {
+			"en": "I'd like to buy a Persian carpet, but it seems too expensive.",
+			"fa": "دوست دارم یک فرش ایرانی بخرم، اما به نظر خیلی گران می‌رسد.",
+			"start": 37.8,
+			"end": 41.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Reza",
+		"sentences": [
+		  {
+			"en": "The price depends on its size.",
+			"fa": "قیمت به اندازه آن بستگی دارد.",
+			"start": 42.1,
+			"end": 44.2
+		  },
+		  {
+			"en": "Instead, you can take an Isfahan Termeh or a Qashqai Gabbeh.",
+			"fa": "در عوض، می‌توانید یک ترمه اصفهان یا گبه قشقایی بردارید.",
+			"start": 44.7,
+			"end": 49.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Tourist",
+		"sentences": [
+		  {
+			"en": "Wow!",
+			"fa": "وای!",
+			"start": 49.9,
+			"end": 50.1
+		  },
+		  {
+			"en": "How touching this Gabbeh is!",
+			"fa": "چه قدر این گبه دلنشین است!",
+			"start": 50.2,
+			"end": 52.5
+		  },
+		  {
+			"en": "How much is it?",
+			"fa": "قیمتش چند است؟",
+			"start": 53.0,
+			"end": 53.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Reza",
+		"sentences": [
+		  {
+			"en": "It is 85 dollars.",
+			"fa": "۸۵ دلار است.",
+			"start": 54.3,
+			"end": 55.3
+		  },
+		  {
+			"en": "If you buy more than 100 dollars, you'll get a 20 percent discount.",
+			"fa": "اگر بیش از ۱۰۰ دلار خرید کنید، ۲۰ درصد تخفیف دریافت خواهید کرد.",
+			"start": 56.6,
+			"end": 61.3
+		  },
+		  {
+			"en": "You can take this calligraphic tile for only 30 dollars.",
+			"fa": "می‌توانید این کاشی خوشنویسی را فقط با ۳۰ دلار ببرید.",
+			"start": 62.1,
+			"end": 66.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Tourist",
+		"sentences": [
+		  {
+			"en": "Well, I'll take both.",
+			"fa": "خب، هر دو را می‌خرم.",
+			"start": 67.0,
+			"end": 68.5
+		  },
+		  {
+			"en": "Please pack them for me.",
+			"fa": "لطفاً آنها را برای من بسته‌بندی کنید.",
+			"start": 68.8,
+			"end": 70.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Reza",
+		"sentences": [
+		  {
+			"en": "Yes, sure.",
+			"fa": "بله، حتماً.",
+			"start": 70.4,
+			"end": 71.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Tourist",
+		"sentences": [
+		  {
+			"en": "Do you work for this shop?",
+			"fa": "آیا شما برای این فروشگاه کار می‌کنید؟",
+			"start": 72.0,
+			"end": 73.4
+		  },
+		  {
+			"en": "Who has made these beautiful items?",
+			"fa": "چه کسی این اشیاء زیبا را ساخته است؟",
+			"start": 73.8,
+			"end": 75.6
+		  }
+		]
+	  },
+	{
+		"speaker": "Reza",
+		"sentences": [
+		  {
+			"en": "Actually, it is my father’s workshop and store.",
+			"fa": "در واقع، این کارگاه و مغازه پدرم هست.",
+			"start": 76.9,
+			"end": 80.4
+		  },
+		  {
+			"en": "I work here after school.",
+			"fa": "بعد از مدرسه اینجا کار می کنم.",
+			"start": 81.0,
+			"end": 82.7
+		  },
+		{
+			"en": "All my family members work here to help our family business",
+			"fa": "همه اعضا خانوادم اینجا کار می کنند که به کسب و کار خانوادگی کمک کنند.",
+			"start": 83.6,
+			"end": 86.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Tourist",
+		"sentences": [
+		  {
+			"en": "Well done! How lucky you are to work in such a lovely shop.",
+			"fa": "خیلی عالی! چقدر خوش شانس هستید که در همچین مغازه دوست داشتنی کار می کنید.",
+			"start": 87.7,
+			"end": 91.7
+		  },
+		  {
+			"en": "I really appreciate the culture and art of Iran.",
+			"fa": "من خیلی قدردان فرهنگ و هنر ایرانی هستم.",
+			"start": 91.8,
+			"end": 94.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Reza",
+		"sentences": [
+		  {
+			"en": "Thank you very much.",
+			"fa": "خیلی ممنون",
+			"start": 95.5,
+			"end": 96.9
+		  },
+		  {
+			"en": "If you are interested in knowing more about our products, ",
+			"fa": "اگر علاقه مندید که بیشتر در مورد محصولات ما بدانید، ",
+			"start": 97.3,
+			"end": 101.0
+		  },
+		  {
+			"en": "you can check this booklet.",
+			"fa": "این کتابچه را می توانید بررسی کنید",
+			"start": 101.1,
+			"end": 102.1
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 1,
+	"book": 3,
+	"audio": "res://assets/audio/v3/l1/conversation.mp3",
+	"image": "v3_l1_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Sara has been in the Children's Medical Center for a week.",
+		  "fa": "سارا به مدت یک هفته در مرکز پزشکی کودکان بستری بوده است.",
+		  "start": 16.2,
+		  "end": 19.7
+		},
+		{
+		  "en": "She has caught a terrible flu.",
+		  "fa": "او به آنفولانزای شدیدی مبتلا شده است.",
+		  "start": 20.3,
+		  "end": 22.0
+		},
+		{
+		  "en": "The doctor told her to stay there to get better.",
+		  "fa": "دکتر به او گفت برای بهبودی آنجا بماند.",
+		  "start": 22.6,
+		  "end": 25.5
+		},
+		{
+		  "en": "There is a photograph of an old man on the wall.",
+		  "fa": "عکسی از یک پیرمرد روی دیوار است.",
+		  "start": 26.1,
+		  "end": 28.9
+		},
+		{
+		  "en": "While the nurse is taking her temperature, they start talking.",
+		  "fa": "در حالی که پرستار درجه حرارت او را می‌گیرد، آنها شروع به صحبت می‌کنند.",
+		  "start": 30.0,
+		  "end": 33.7
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Sara",
+		"sentences": [
+		  {
+			"en": "Excuse me, who is that man in the picture?",
+			"fa": "ببخشید، آن مرد در عکس کیست؟",
+			"start": 33.8,
+			"end": 39.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Nurse",
+		"sentences": [
+		  {
+			"en": "Oh, don't you know him?",
+			"fa": "اوه، آیا او را نمی‌شناسید؟",
+			"start": 40.7,
+			"end": 41.8
+		  },
+		  {
+			"en": "Have you ever heard of Dr. Mohammad Gharib?",
+			"fa": "آیا تا به حال نام دکتر محمد غریب را شنیده‌اید؟",
+			"start": 42.3,
+			"end": 44.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sara",
+		"sentences": [
+		  {
+			"en": "I guess I have only seen his name in my English book, but I'm not sure about it.",
+			"fa": "حدس می‌زنم فقط نام او را در کتاب انگلیسی‌ام دیده‌ام، اما مطمئن نیستم.",
+			"start": 45.4,
+			"end": 50.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Nurse",
+		"sentences": [
+		  {
+			"en": "Dr. Gharib was a famous physician.",
+			"fa": "دکتر غریب یک پزشک مشهور بود.",
+			"start": 51.2,
+			"end": 53.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sara",
+		"sentences": [
+		  {
+			"en": "Oh,... can you tell me a little about his life?",
+			"fa": "اوه،... آیا می‌توانید کمی در مورد زندگی او به من بگویید؟",
+			"start": 54.3,
+			"end": 57.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Nurse",
+		"sentences": [
+		  {
+			"en": "Dr. Gharib was born in Tehran in 1288.",
+			"fa": "دکتر غریب در سال ۱۲۸۸ در تهران به دنیا آمد.",
+			"start": 57.9,
+			"end": 61.3
+		  },
+		  {
+			"en": "After receiving his diploma, he went abroad to study medicine.",
+			"fa": "پس از دریافت دیپلم، برای تحصیل در رشته پزشکی به خارج از کشور رفت.",
+			"start": 62.0,
+			"end": 65.9
+		  },
+		  {
+			"en": "In 1316 he became a physician and then came back to his homeland.",
+			"fa": "در سال ۱۳۱۶ پزشک شد و سپس به وطن خود بازگشت.",
+			"start": 66.6,
+			"end": 71.4
+		  },
+		  {
+			"en": "In 1347 this center was founded by Dr. Gharib and one of his close friends.",
+			"fa": "در سال ۱۳۴۷ این مرکز توسط دکتر غریب و یکی از دوستان صمیمی او تأسیس شد.",
+			"start": 71.8,
+			"end": 78.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sara",
+		"sentences": [
+		  {
+			"en": "Really?",
+			"fa": "واقعاً؟",
+			"start": 79.3,
+			"end": 79.8
+		  },
+		  {
+			"en": "I didn't know that.",
+			"fa": "این را نمی‌دانستم.",
+			"start": 80.3,
+			"end": 81.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Nurse",
+		"sentences": [
+		  {
+			"en": "Dr. Gharib was also a generous man.",
+			"fa": "دکتر غریب همچنین مردی سخاوتمند بود.",
+			"start": 82.1,
+			"end": 84.4
+		  },
+		  {
+			"en": "He spared no pains to cure sick children.",
+			"fa": "او برای درمان کودکان بیمار از هیچ کوششی دریغ نمی‌کرد.",
+			"start": 84.7,
+			"end": 87.2
+		  },
+		  {
+			"en": "He was very friendly and helpful to poor families.",
+			"fa": "او با خانواده‌های فقیر بسیار دوستانه و مفید بود.",
+			"start": 87.8,
+			"end": 90.9
+		  },
+		  {
+			"en": "Not surprisingly, he was regarded as a dedicated physician.",
+			"fa": "جای تعجب نیست که او به عنوان یک پزشک فداکار شناخته می‌شد.",
+			"start": 91.7,
+			"end": 95.6
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sara",
+		"sentences": [
+		  {
+			"en": "It's a pity!",
+			"fa": "چه حیف!",
+			"start": 96.2,
+			"end": 97.2
+		  },
+		  {
+			"en": "I didn't know such a great man.",
+			"fa": "چنین مرد بزرگی را نمی‌شناختم.",
+			"start": 97.3,
+			"end": 98.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Nurse",
+		"sentences": [
+		  {
+			"en": "He was known as a distinguished university professor, too.",
+			"fa": "او همچنین به عنوان یک استاد برجسته دانشگاه شناخته می‌شد.",
+			"start": 99.4,
+			"end": 103.3
+		  },
+		  {
+			"en": "The first Persian textbook on children's diseases was written by him.",
+			"fa": "اولین کتاب درسی فارسی در مورد بیماری‌های کودکان توسط او نوشته شد.",
+			"start": 104.0,
+			"end": 108.7
+		  },
+		  {
+			"en": "He taught medicine to thousands of students.",
+			"fa": "او به هزاران دانشجو پزشکی آموزش داد.",
+			"start": 109.5,
+			"end": 112.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sara",
+		"sentences": [
+		  {
+			"en": "Oh, what a great man he was!",
+			"fa": "اوه، چه مرد بزرگی بود!",
+			"start": 113.0,
+			"end": 115.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Nurse",
+		"sentences": [
+		  {
+			"en": "By the way, it might be interesting to know that your physician was one of Dr. Gharib's students!",
+			"fa": "راستی، ممکن است جالب باشد بدانید که پزشک شما یکی از شاگردان دکتر غریب بوده است!",
+			"start": 116.4,
+			"end": 122.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Sara",
+		"sentences": [
+		  {
+			"en": "Really?!",
+			"fa": "واقعاً؟!",
+			"start": 123.2,
+			"end": 123.6
+		  },
+		  {
+			"en": "That's interesting!",
+			"fa": "این جالب است!",
+			"start": 124.6,
+			"end": 125.5
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 2,
+	"book": 3,
+	"audio": "res://assets/audio/v3/l2/conversation.mp3",
+	"image": "v3_l2_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Majid is going to choose a suitable dictionary for his English class.",
+		  "fa": "مجید قصد دارد یک فرهنگ لغت مناسب برای کلاس انگلیسی خود انتخاب کند.",
+		  "start": 26.8,
+		  "end": 30.8
+		},
+		{
+		  "en": "He is talking to his English teacher during the break.",
+		  "fa": "او در طول زنگ تفریح با معلم انگلیسی خود صحبت می‌کند.",
+		  "start": 32.1,
+		  "end": 34.8
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "Excuse me Mr. Iranmehr, I wonder if you could help me.",
+			"fa": "ببخشید آقای ایرانمهر، آیا ممکن است بتوانید به من کمک کنید؟",
+			"start": 40.7,
+			"end": 44.1
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": "Sure.",
+			"fa": "حتماً.",
+			"start": 44.3,
+			"end": 44.7
+		  },
+		  {
+			"en": "How can I help you?",
+			"fa": "چگونه می‌توانم به شما کمک کنم؟",
+			"start": 44.9,
+			"end": 45.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "I'd like some information about a good English dictionary.",
+			"fa": "من می‌خواهم اطلاعاتی در مورد یک فرهنگ لغت انگلیسی خوب داشته باشم.",
+			"start": 46.6,
+			"end": 49.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": "Oh, well.",
+			"fa": "اوه، خب.",
+			"start": 50.3,
+			"end": 50.8
+		  },
+		  {
+			"en": "Have you ever used a dictionary?",
+			"fa": "آیا تا به حال از فرهنگ لغت استفاده کرده‌اید؟",
+			"start": 51.1,
+			"end": 52.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "Actually, I haven't.",
+			"fa": "در واقع، نه.",
+			"start":53.8,
+			"end": 55.0
+		  },
+		  {
+			"en": "But I've heard that using a good dictionary can really help me learn English better.",
+			"fa": "اما شنیده‌ام که استفاده از یک فرهنگ لغت خوب واقعاً می‌تواند به من در یادگیری بهتر انگلیسی کمک کند.",
+			"start": 55.3,
+			"end": 59.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": "That's right.",
+			"fa": "درست است.",
+			"start": 60.3,
+			"end": 60.9
+		  },
+		  {
+			"en": "First, I recommend a learner's dictionary.",
+			"fa": "اول، من یک فرهنگ لغت آموزشی را توصیه می‌کنم.",
+			"start": 61.4,
+			"end": 63.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "What is a learner's dictionary?",
+			"fa": "فرهنگ لغت آموزشی چیست؟",
+			"start": 64.1,
+			"end": 65.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": "It is designed for foreign students.",
+			"fa": "این فرهنگ برای دانشجویان خارجی طراحی شده است.",
+			"start": 66.0,
+			"end": 67.9
+		  },
+		  {
+			"en": "It also helps them learn English better.",
+			"fa": "همچنین به آنها کمک می‌کند تا انگلیسی را بهتر یاد بگیرند.",
+			"start": 68.5,
+			"end": 70.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "Is there only one type of it?",
+			"fa": "آیا فقط یک نوع از آن وجود دارد؟",
+			"start": 71.3,
+			"end": 72.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": "No, in fact dictionaries have different types, levels, and sizes",
+			"fa": "نه، دو نوع وجود دارد: تک‌زبانه و دوزبانه.",
+			"start": 73.2,
+			"end": 77.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "What type do you suggest?",
+			"fa": "و در مورد سطوح چطور؟",
+			"start": 78.3,
+			"end": 79.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": " I suppose a monolingual dictionary is more suitable for you,",
+			"fa": "خب، معمولاً سه سطح وجود دارد: مقدماتی، متوسط و پیشرفته.",
+			"start": 80.9,
+			"end": 84.2
+		  },
+		  {
+			"en": "because you can find word information in English.",
+			"fa": "برای شما به عنوان یک دانش‌آموز دبیرستانی، یک سطح مقدماتی کافی است.",
+			"start": 84.3,
+			"end": 86.3
+		  }
+		]
+	  },
+	{
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "And what about levels?",
+			"fa": "و در مورد سطوح چطور؟",
+			"start": 87.3,
+			"end": 88.2
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": "Well, there are usually three levels: elementary, intermediate and advanced.",
+			"fa": "خب، معمولاً سه سطح وجود دارد: مقدماتی، متوسط و پیشرفته.",
+			"start": 89.6,
+			"end": 93.9
+		  },
+		  {
+			"en": "For you as a high school student, an elementary one is OK.",
+			"fa": "برای شما به عنوان یک دانش‌آموز دبیرستانی، یک سطح مقدماتی کافی است.",
+			"start": 94.4,
+			"end": 97.6
+		  }
+		]
+	  },
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "Do I need a small size one?",
+			"fa": "آیا به یک نوع کوچک نیاز دارم؟",
+			"start": 98.9,
+			"end": 100.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": "Yes, a pocket dictionary.",
+			"fa": "بله، یک فرهنگ جیبی.",
+			"start": 100.8,
+			"end": 102.6
+		  },
+		  {
+			"en": "You can carry it wherever you go.",
+			"fa": "می‌توانید آن را هر جا که می‌روید همراه داشته باشید.",
+			"start": 102.6,
+			"end": 104.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "Oh, it's very good.",
+			"fa": "اوه، خیلی خوب است.",
+			"start": 106.1,
+			"end": 107.4
+		  },
+		  {
+			"en": "And hmm..., is it expensive?",
+			"fa": "و هوم...، آیا گران است؟",
+			"start": 107.6,
+			"end": 109.4
+		  }
+		]
+	  },
+	  {
+		"speaker": "Mr. Iranmehr",
+		"sentences": [
+		  {
+			"en": "No, such dictionaries are not expensive.",
+			"fa": "نه، چنین فرهنگ‌هایی گران نیستند.",
+			"start": 109.9,
+			"end": 112.3
+		  },
+		  {
+			"en": "By the way, you can use a free online dictionary, too.",
+			"fa": "راستی، شما همچنین می‌توانید از یک فرهنگ لغت آنلاین رایگان استفاده کنید.",
+			"start": 112.7,
+			"end": 116.2
+		  },
+		  {
+			"en": "And also there are some free dictionaries for PCs and apps for smart phones.",
+			"fa": "و همچنین چند فرهنگ رایگان برای رایانه‌های شخصی و برنامه‌های کاربردی برای تلفن‌های هوشمند وجود دارد.",
+			"start": 116.7,
+			"end": 121.3
+		  }
+		]
+	  },
+	  {
+		"speaker": "Majid",
+		"sentences": [
+		  {
+			"en": "Thanks, that's a good idea, but I'd like to use a pocket dictionary!",
+			"fa": "متشکرم، ایده خوبی است، اما من دوست دارم از یک فرهنگ جیبی استفاده کنم!",
+			"start": 122.0,
+			"end": 125.9
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 3,
+	"book": 3,
+	"audio": "res://assets/audio/v3/l3/conversation.mp3",
+	"image": "v3_l3_conversation.png",
+	"intro": {
+	  "sentences": [
+		{
+		  "en": "Emad and his father are traveling to Guilan.",
+		  "fa": "عماد و پدرش در حال سفر به گیلان هستند.",
+		  "start": 19.0,
+		  "end": 22.0
+		},
+		{
+		  "en": "On the way, in Manjeel, Emad sees huge wind turbines.",
+		  "fa": "در بین راه، در منجیل، عماد توربین‌های بادی عظیمی را می‌بیند.",
+		  "start": 22.1,
+		  "end": 26.1
+		}
+	  ]
+	},
+	"lines": [
+	  {
+		"speaker": "Emad",
+		"sentences": [
+		  {
+			"en": "Daddy, look at those big fans!",
+			"fa": "بابا، به آن پنکه‌های بزرگ نگاه کن!",
+			"start": 30.8,
+			"end": 33.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Father",
+		"sentences": [
+		  {
+			"en": "They are actually wind turbines.",
+			"fa": "آنها در واقع توربین‌های بادی هستند.",
+			"start": 33.6,
+			"end": 35.8
+		  }
+		]
+	  },
+	  {
+		"speaker": "Emad",
+		"sentences": [
+		  {
+			"en": "Wind turbines?",
+			"fa": "توربین‌های بادی؟",
+			"start": 35.9,
+			"end": 37.2
+		  }
+		]
+	  },
+	  {
+		"speaker": "Father",
+		"sentences": [
+		  {
+			"en": "Yes, wind turbines are used to produce electricity from wind power.",
+			"fa": "بله، از توربین‌های بادی برای تولید برق از انرژی باد استفاده می‌شود.",
+			"start": 37.5,
+			"end": 41.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Emad",
+		"sentences": [
+		  {
+			"en": "I know electricity can be produced from water and sunlight.",
+			"fa": "می‌دانم که برق می‌تواند از آب و نور خورشید تولید شود.",
+			"start": 42.5,
+			"end": 46.0
+		  },
+		  {
+			"en": "How might it be generated from wind?",
+			"fa": "چگونه ممکن است از باد تولید شود؟",
+			"start": 46.2,
+			"end": 48.7
+		  }
+		]
+	  },
+	  {
+		"speaker": "Father",
+		"sentences": [
+		  {
+			"en": "Well, a wind turbine works the opposite of a fan.",
+			"fa": "خب، یک توربین بادی برعکس یک پنکه کار می‌کند.",
+			"start": 49.3,
+			"end": 52.8
+		  },
+		  {
+			"en": "Instead of using electricity to make wind, a turbine uses wind to make electricity.",
+			"fa": "به جای استفاده از برق برای ایجاد باد، یک توربین از باد برای تولید برق استفاده می‌کند.",
+			"start": 53.0,
+			"end": 57.8
+		  },
+		  {
+			"en": "It is a type of clean energy.",
+			"fa": "این یک نوع انرژی پاک است.",
+			"start": 58.4,
+			"end": 60.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Emad",
+		"sentences": [
+		  {
+			"en": "These wind turbines remind me of what I read about using wind power in Yazd's buildings.",
+			"fa": "این توربین‌های بادی مرا به یاد چیزی می‌اندازند که در مورد استفاده از انرژی باد در ساختمان‌های یزد خوانده‌ام.",
+			"start": 60.8,
+			"end": 65.9
+		  }
+		]
+	  },
+	  {
+		"speaker": "Father",
+		"sentences": [
+		  {
+			"en": "You mean wind towers?",
+			"fa": "منظورت بادگیرهاست؟",
+			"start": 66.1,
+			"end": 68.0
+		  }
+		]
+	  },
+	{
+		"speaker": "Emad",
+		"sentences": [
+		  {
+			"en": "Yes, they are natural air cooling systems and can be used instead of electrical air conditioners.",
+			"fa": "بله، آن‌ها سیستم‌های خنک‌کننده‌ی طبیعی هوا هستند و می‌توان به جای کولرهای برقی از آن‌ها استفاده کرد.",
+			"start": 68.1,
+			"end": 74.6
+		  },
+		  {
+			"en": "This is another source of clean energy, isn’t it?",
+			"fa": "این منبع دیگری از انرژی پاک است، اینطور نیست؟",
+			"start": 75.2,
+			"end": 78.0
+		  }
+		]
+	  },
+	  {
+		"speaker": "Father",
+		"sentences": [
+		  {
+			"en": "Yes, it is.",
+			"fa": "بله، همین‌طور است.",
+			"start": 78.2,
+			"end": 79.2
+		  },
+		  {
+			"en": " An excellent type of clean energy!",
+			"fa": "نوعی عالی از انرژی پاک!",
+			"start": 79.3,
+			"end": 81.5
+		  }
+		]
+	  },
+	  {
+		"speaker": "Emad",
+		"sentences": [
+		  {
+			"en": "Daddy, can we travel to Yazd this Norooz?",
+			"fa": "بابا، می‌توانیم این نوروز به یزد سفر کنیم؟",
+			"start": 82.0,
+			"end": 85.2
+		  }
+		]
+	  },
+	  {
+		"speaker": "Father",
+		"sentences": [
+		  {
+			"en": "That’s OK with me.",
+			"fa": "برای من مانعی ندارد.",
+			"start": 85.3,
+			"end": 87.0
+		  },
+		{
+			"en": "Let’s check it with others.",
+			"fa": "بگذار با دیگران هم هماهنگ کنیم.",
+			"start": 87.1,
+			"end": 88.5
+		  }
+		]
+	  }
+	]
+  }
+]

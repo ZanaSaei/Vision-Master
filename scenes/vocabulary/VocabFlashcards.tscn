@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://dvhje7arnej0d" path="res://images/next.png" id="4_egq7b"]
 [ext_resource type="Texture2D" uid="uid://3w4stlwu0rek" path="res://images/Next_prev_background.png" id="4_gnf4q"]
 [ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_opycv"]
-[ext_resource type="FontFile" uid="uid://drnivg6cxlyr2" path="res://assets/fonts/PlusJakartaSans-Italic.ttf" id="5_8ea6x"]
 [ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="6_pjroj"]
+[ext_resource type="FontFile" uid="uid://cd8w2vgcrha3v" path="res://assets/fonts/PlayfairDisplaySC-Bold.ttf" id="7_yjxky"]
 [ext_resource type="Texture2D" uid="uid://bisxak8hgeo6l" path="res://images/book.png" id="9_8ea6x"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="9_bd0ld"]
 [ext_resource type="Texture2D" uid="uid://sre55m8nhynp" path="res://images/menu.png" id="10_pjroj"]
 [ext_resource type="Texture2D" uid="uid://p6l4qyae7rk8" path="res://images/setting.png" id="11_t0aqf"]
 
@@ -62,54 +63,87 @@ outline_size = 10
 outline_color = Color(0, 0.54901963, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egq7b"]
-bg_color = Color(0.8627451, 0.9882353, 0.90588236, 1)
+bg_color = Color(0.8627451, 0.9882353, 0.90588236, 0)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_opycv"]
-font = ExtResource("5_8ea6x")
-font_size = 72
-font_color = Color(0, 0, 0, 1)
+font = ExtResource("3_t0aqf")
+font_size = 65
+shadow_size = 2
+shadow_color = Color(0, 0.54901963, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25cvx"]
 bg_color = Color(0.85882354, 0.91764706, 0.99607843, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.66700995, 0.8078193, 0.99072367, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-expand_margin_top = 25.0
-expand_margin_bottom = 25.0
-
-[sub_resource type="SystemFont" id="SystemFont_25cvx"]
-font_names = PackedStringArray("Fantasy")
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opycv"]
 bg_color = Color(0.3764706, 0.64705884, 0.98039216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_1d2su"]
+font = ExtResource("7_yjxky")
+font_size = 35
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_pjroj"]
 font = ExtResource("6_pjroj")
-font_size = 55
+font_size = 45
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnf4q"]
 bg_color = Color(0.92941177, 0.9137255, 0.99607843, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8296912, 0.7860895, 0.99086434, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-expand_margin_top = 25.0
-expand_margin_bottom = 25.0
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ea6x"]
 bg_color = Color(0.654902, 0.54509807, 0.98039216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[sub_resource type="SystemFont" id="SystemFont_tpk77"]
-font_names = PackedStringArray("2  Mitra")
+[sub_resource type="LabelSettings" id="LabelSettings_jl6ec"]
+font = ExtResource("7_yjxky")
+font_size = 35
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yjxky"]
+font = ExtResource("9_bd0ld")
+font_size = 35
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynxvm"]
 bg_color = Color(0.99607843, 0.9764706, 0.7647059, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8310552, 0.7656996, 0.05664666, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -119,10 +153,81 @@ expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjroj"]
 bg_color = Color(0.99215686, 0.8784314, 0.2784314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_uukxv"]
+font = ExtResource("7_yjxky")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_t0aqf"]
 font = ExtResource("6_pjroj")
-font_size = 55
+font_size = 45
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uukxv"]
+bg_color = Color(0.15393242, 0.7782753, 0.6423532, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.12638348, 0.63239455, 0.5228235, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xp6t4"]
+bg_color = Color(0.18964893, 0.9082303, 0.75402236, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_xp6t4"]
+font = ExtResource("7_yjxky")
+font_size = 35
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bd0ld"]
+font = ExtResource("4_opycv")
+font_size = 45
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1d2su"]
+bg_color = Color(0.92898226, 0.42187536, 0.3468256, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.79971683, 0.27742723, 0.20560336, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmelm"]
+bg_color = Color(0.9663057, 0.5714672, 0.5028417, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_jmelm"]
+font = ExtResource("7_yjxky")
+font_size = 35
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fdnt6"]
+font = ExtResource("4_opycv")
+font_size = 45
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ujfs"]
@@ -286,10 +391,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jl6ec")
 
 [node name="CardContent" type="MarginContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel" unique_id=1839581439]
 layout_mode = 2
-theme_override_constants/margin_left = 28
-theme_override_constants/margin_top = 28
-theme_override_constants/margin_right = 28
-theme_override_constants/margin_bottom = 28
+theme_override_constants/margin_left = 85
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 85
+theme_override_constants/margin_bottom = 20
 
 [node name="FrontFace" type="CenterContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent" unique_id=1035168544]
 layout_mode = 2
@@ -306,19 +411,23 @@ vertical_alignment = 1
 [node name="BackFace" type="VBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent" unique_id=1718119032]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 100
+mouse_filter = 2
+theme_override_constants/separation = 44
 
 [node name="WordRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=1982308068]
 layout_mode = 2
+offset_transform_position = Vector2(0, -40)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_egq7b")
 
 [node name="WordRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow" unique_id=523075560]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="BackWordLabel" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent" unique_id=2034923892]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 label_settings = SubResource("LabelSettings_opycv")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -326,20 +435,20 @@ autowrap_mode = 2
 
 [node name="MeaningEnRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=6130533]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_25cvx")
 
 [node name="MeaningEnRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow" unique_id=2028642643]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="EnIcon" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent" unique_id=1023012148]
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_25cvx")
-theme_override_font_sizes/font_size = 45
 theme_override_styles/normal = SubResource("StyleBoxFlat_opycv")
 text = "Eng"
+label_settings = SubResource("LabelSettings_1d2su")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -353,20 +462,20 @@ autowrap_mode = 2
 [node name="MeaningFaRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=12704249]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gnf4q")
 
 [node name="MeaningFaRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow" unique_id=376515680]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="FaIcon" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent" unique_id=488565795]
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_25cvx")
-theme_override_font_sizes/font_size = 45
 theme_override_styles/normal = SubResource("StyleBoxFlat_8ea6x")
 text = "Fa"
+label_settings = SubResource("LabelSettings_jl6ec")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -374,27 +483,29 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_tpk77")
-theme_override_font_sizes/font_size = 55
+label_settings = SubResource("LabelSettings_yjxky")
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="ExampleRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=89035156]
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ynxvm")
 
 [node name="ExampleRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow" unique_id=592497139]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="ExIcon" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent" unique_id=1972800285]
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_25cvx")
-theme_override_font_sizes/font_size = 45
+theme_override_fonts/font = ExtResource("7_yjxky")
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_pjroj")
 text = "Example"
+label_settings = SubResource("LabelSettings_uukxv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -402,7 +513,55 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 label_settings = SubResource("LabelSettings_t0aqf")
-horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SynonymsPanel" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=1055661000]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uukxv")
+
+[node name="SynonymsContainer" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel" unique_id=1513711352]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SynIcon" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel/SynonymsContainer" unique_id=1967609379]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_yjxky")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_xp6t4")
+text = "Syn"
+label_settings = SubResource("LabelSettings_xp6t4")
+
+[node name="SynonymsLabel" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel/SynonymsContainer" unique_id=890175500]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_bd0ld")
+autowrap_mode = 2
+
+[node name="AntonymsPanel" type="PanelContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace" unique_id=1570030809]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1d2su")
+
+[node name="AntonymsContainer" type="HBoxContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel" unique_id=993144856]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AntoIcon" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel/AntonymsContainer" unique_id=1552909346]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_jmelm")
+text = "Ant"
+label_settings = SubResource("LabelSettings_jmelm")
+
+[node name="AntonymsLabel" type="Label" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel/AntonymsContainer" unique_id=1562619083]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_fdnt6")
 autowrap_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainLayout" unique_id=438521418]

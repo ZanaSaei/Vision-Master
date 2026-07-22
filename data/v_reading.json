@@ -1,0 +1,1540 @@
+[
+  {
+	"lesson": 1,
+	"book": 1,
+	"audio": "res://assets/audio/v1/l1/reading.mp3",
+	"image": "res://assets/images/v1_l1_reading.png",
+	"title": "Endangered Animals",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "Today, there are some endangered animals on Earth.",
+			"fa": "امروزه، برخی از حیوانات در معرض خطر انقراض روی زمین وجود دارند.",
+			"start": 10.8,
+			"end": 13.8
+		  },
+		  {
+			"en": "It means that we can find only a few of them around us.",
+			"fa": "این بدان معناست که فقط تعداد کمی از آنها را در اطراف خود می‌یابیم.",
+			"start": 14.2,
+			"end": 17.4
+		  },
+		  {
+			"en": "Some examples are whales, pandas, tigers and Asian elephants.",
+			"fa": "برخی از مثال‌ها عبارتند از نهنگ‌ها، پانداها، ببرها و فیل‌های آسیایی.",
+			"start": 17.8,
+			"end": 22.5
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Humans destroy the natural homes of the animals in the forests, lakes, and plains.",
+			"fa": "انسان‌ها زیستگاه‌های طبیعی حیوانات را در جنگل‌ها، دریاچه‌ها و دشت‌ها نابود می‌کنند.",
+			"start": 23.4,
+			"end": 28.8
+		  },
+		  {
+			"en": "When the number of people on Earth increases, they need more places for living.",
+			"fa": "وقتی تعداد افراد روی زمین افزایش می‌یابد، آنها به مکان‌های بیشتری برای زندگی نیاز دارند.",
+			"start": 29.6,
+			"end": 33.8
+		  },
+		  {
+			"en": "They cut down trees and destroy lakes.",
+			"fa": "آنها درختان را قطع می‌کنند و دریاچه‌ها را نابود می‌سازند.",
+			"start": 34.7,
+			"end": 36.4
+		  },
+		  {
+			"en": "They make homes and roads instead.",
+			"fa": "به جای آن خانه و جاده می‌سازند.",
+			"start": 37.0,
+			"end": 38.8
+		  },
+		  {
+			"en": "Then the animals won't have a place to live.",
+			"fa": "پس حیوانات جایی برای زندگی نخواهند داشت.",
+			"start": 39.8,
+			"end": 42.0
+		  },
+		  {
+			"en": "They will die out.",
+			"fa": "آنها منقرض خواهند شد.",
+			"start": 42.4,
+			"end": 43.3
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "The Iranian cheetah is among these animals.",
+			"fa": "یوزپلنگ ایرانی در میان این حیوانات است.",
+			"start": 44.1,
+			"end": 46.3
+		  },
+		  {
+			"en": "This wild animal lives only in the plains of Iran.",
+			"fa": "این حیوان وحشی فقط در دشت‌های ایران زندگی می‌کند.",
+			"start": 46.8,
+			"end": 49.6
+		  },
+		  {
+			"en": "Now there are only a few Iranian cheetahs alive.",
+			"fa": "اکنون فقط تعداد کمی یوزپلنگ ایرانی زنده هستند.",
+			"start": 50.3,
+			"end": 53.1
+		  },
+		  {
+			"en": "If people take care of them, there is hope for this beautiful animal to live.",
+			"fa": "اگر مردم از آنها مراقبت کنند، امیدی برای زندگی این حیوان زیبا وجود دارد.",
+			"start": 53.4,
+			"end": 58.1
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Recently, families pay more attention to nature, students learn about saving wildlife, and some hunters don't go hunting anymore.",
+			"fa": "اخیراً، خانواده‌ها به طبیعت توجه بیشتری می‌کنند، دانش‌آموزان در مورد نجات حیات وحش یاد می‌گیرند و برخی شکارچیان دیگر به شکار نمی‌روند.",
+			"start": 59.2,
+			"end": 68.4
+		  },
+		  {
+			"en": "In this way, the number of cheetahs is going to increase in the future.",
+			"fa": "به این ترتیب، تعداد یوزپلنگ‌ها در آینده افزایش خواهد یافت.",
+			"start": 69.0,
+			"end": 73.1
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 2,
+	"book": 1,
+	"audio": "res://assets/audio/v1/l2/reading.mp3",
+	"image": "res://assets/images/v1_l2_reading.png",
+	"title": "A Wonderful Liquid",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "The human body is a real wonder.",
+			"fa": "بدن انسان شگفتی واقعی است.",
+			"start": 11.0,
+			"end": 13.4
+		  },
+		  {
+			"en": "It is sometimes good to think about our body and how it works.",
+			"fa": "گاهی خوب است که در مورد بدن خود و نحوه عملکرد آن فکر کنیم.",
+			"start": 1.5,
+			"end": 17.6
+		  },
+		  {
+			"en": "Our body is doing millions of jobs all the time.",
+			"fa": "بدن ما همیشه میلیون‌ها کار را انجام می‌دهد.",
+			"start": 18.5,
+			"end": 21.5
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "One of the most important parts of the body is blood.",
+			"fa": "یکی از مهم‌ترین قسمت‌های بدن خون است.",
+			"start": 22.5,
+			"end": 25.3
+		  },
+		  {
+			"en": "The heart pumps this red liquid around the body.",
+			"fa": "قلب این مایع قرمز را در سراسر بدن پمپاژ می‌کند.",
+			"start": 25.4,
+			"end": 29.0
+		  },
+		  {
+			"en": "This keeps us healthy and alive.",
+			"fa": "این باعث می‌شود ما سالم و زنده بمانیم.",
+			"start": 29.1,
+			"end": 31.0
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "More than half of blood is plasma.",
+			"fa": "بیش از نیمی از خون پلاسما است.",
+			"start": 32.3,
+			"end": 34.8
+		  },
+		  {
+			"en": "This is a clear and yellow liquid.",
+			"fa": "این یک مایع شفاف و زرد است.",
+			"start": 35.0,
+			"end": 37.3
+		  },
+		  {
+			"en": "It carries red and white cells.",
+			"fa": "این ماده سلول‌های قرمز و سفید را حمل می‌کند.",
+			"start": 37.6,
+			"end": 40.3
+		  },
+		  {
+			"en": "There are millions of red blood cells in one small drop of blood.",
+			"fa": "میلیون‌ها گلبول قرمز در یک قطره کوچک خون وجود دارد.",
+			"start": 40.5,
+			"end": 44.7
+		  },
+		  {
+			"en": "They carry oxygen round the body and collect carbon dioxide from body parts.",
+			"fa": "آنها اکسیژن را در سراسر بدن حمل می‌کنند و دی‌اکسید کربن را از قسمت‌های بدن جمع آوری می‌کنند.",
+			"start": 44.9,
+			"end": 50.0
+		  },
+		  {
+			"en": "There are thousands of white cells in a drop of blood.",
+			"fa": "هزاران گلبول سفید در یک قطره خون وجود دارد.",
+			"start": 50.3,
+			"end": 54.0
+		  },
+		  {
+			"en": "They are bigger than red cells.",
+			"fa": "آنها از سلول‌های قرمز بزرگتر هستند.",
+			"start": 54.2,
+			"end": 55.7
+		  },
+		  {
+			"en": "They defend our body against microbes.",
+			"fa": "آنها از بدن ما در برابر میکروب‌ها محافظت می‌کنند.",
+			"start": 55.9,
+			"end": 58.8
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "This wonderful liquid is a great gift from Allah.",
+			"fa": "این مایع شگفت انگیز هدیه بزرگی از طرف الله است.",
+			"start": 59.0,
+			"end": 63.7
+		  },
+		  {
+			"en": "We can thank Allah by keeping our body healthy.",
+			"fa": "ما می‌توانیم با سالم نگه داشتن بدن خود از الله تشکر کنیم.",
+			"start":63.9,
+			"end": 67.6
+		  },
+		  {
+			"en": "One way to do that is eating healthy food and doing daily exercises.",
+			"fa": "یکی از راه‌های انجام این کار خوردن غذای سالم و انجام تمرینات روزانه است.",
+			"start": 68.0,
+			"end": 73.1
+		  },
+		  {
+			"en": "Another way is to donate our blood to those who need it.",
+			"fa": "راه دیگر اهدای خون ما به کسانی است که به آن نیاز دارند.",
+			"start": 73.3,
+			"end": 77.0
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 3,
+	"book": 1,
+	"audio": "res://assets/audio/v1/l3/reading.mp3",
+	"image": "res://assets/images/v1_l3_reading.png",
+	"title": "No Pain No Gain",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "Human knowledge develops with scientists' hard work.",
+			"fa": "دانش بشری با کار سخت دانشمندان توسعه می‌یابد.",
+			"start": 10.7,
+			"end": 13.8
+		  },
+		  {
+			"en": "Many great men and women try hard to find facts, solve problems and invent things.",
+			"fa": "بسیاری از مردان و زنان بزرگ تلاش می‌کنند تا حقایق را بیابند، مشکلات را حل کنند و چیزهایی اختراع کنند.",
+			"start": 14.4,
+			"end": 19.8
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Some of these scientists did not have easy lives.",
+			"fa": "برخی از این دانشمندان زندگی آسانی نداشتند.",
+			"start": 20.5,
+			"end": 23.8
+		  },
+		  {
+			"en": "But they tried hard when they were working on problems.",
+			"fa": "اما وقتی روی مشکلات کار می‌کردند، سخت تلاش می‌کردند.",
+			"start": 24.0,
+			"end": 25.8
+		  },
+		  {
+			"en": "They never felt weak when they were studying.",
+			"fa": "وقتی درس می‌خواندند هرگز احساس ضعف نمی‌کردند.",
+			"start": 27.5,
+			"end": 30.1
+		  },
+		  {
+			"en": "They never gave up when they were doing research.",
+			"fa": "هنگام تحقیق هرگز تسلیم نشدند.",
+			"start": 30.7,
+			"end": 33.3
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "There are great stories about scientists and their lives.",
+			"fa": "داستان‌های بزرگی در مورد دانشمندان و زندگی آنها وجود دارد.",
+			"start": 34.2,
+			"end": 37.3
+		  },
+		  {
+			"en": "One such a story is about Thomas Edison.",
+			"fa": "یکی از این داستان‌ها درباره توماس ادیسون است.",
+			"start": 38.1,
+			"end": 41.0
+		  },
+		  {
+			"en": "As a young boy, Edison was very interested in science.",
+			"fa": "ادیسون در کودکی به علم بسیار علاقه داشت.",
+			"start": 41.1,
+			"end": 44.4
+		  },
+		  {
+			"en": "He was very energetic and always asked questions.",
+			"fa": "او بسیار پرانرژی بود و همیشه سوال می‌پرسید.",
+			"start": 45.3,
+			"end": 48.0
+		  },
+		  {
+			"en": "Sadly, young Edison lost his hearing at the age of 12.",
+			"fa": "متأسفانه، ادیسون جوان در سن ۱۲ سالگی شنوایی خود را از دست داد.",
+			"start": 48.8,
+			"end": 53.0
+		  },
+		  {
+			"en": "He did not attend school and learned science by reading books in the library himself.",
+			"fa": "او به مدرسه نرفت و علم را با خواندن کتاب در کتابخانه خود آموخت.",
+			"start": 53.8,
+			"end": 58.8
+		  },
+		  {
+			"en": "When he grew up he worked in different places, but he never lost his interest in making things.",
+			"fa": "وقتی بزرگ شد در مکان‌های مختلف کار کرد، اما هرگز علاقه خود را به ساختن چیزها از دست نداد.",
+			"start": 59.7,
+			"end": 66.0
+		  },
+		  {
+			"en": "Edison was famous for doing thousands of experiments to find answers to problems.",
+			"fa": "ادیسون به خاطر انجام هزاران آزمایش برای یافتن پاسخ مشکلات مشهور بود.",
+			"start": 66.9,
+			"end": 71.6
+		  },
+		  {
+			"en": "He said, 'I never quit until I get what I'm after'.",
+			"fa": "او گفت: 'من هرگز دست نمی‌کشم تا به چیزی که دنبالش هستم نرسم'.",
+			"start": 71.9,
+			"end": 75.7
+		  },
+		  {
+			"en": "Edison had more than 1,000 inventions and was very successful at the end of his life.",
+			"fa": "ادیسون بیش از ۱۰۰۰ اختراع داشت و در پایان زندگی خود بسیار موفق بود.",
+			"start": 77.0,
+			"end": 82.3
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Many great names had stories like this.",
+			"fa": "بسیاری از نام‌های بزرگ داستان‌هایی مانند این داشتند.",
+			"start": 83.4,
+			"end":85.9
+		  },
+		  {
+			"en": "But the key to their success is their hard work and belief in themselves.",
+			"fa": "اما کلید موفقیت آنها کار سخت و اعتقاد به خودشان است.",
+			"start": 86.0,
+			"end": 90.4
+		  },
+		  {
+			"en": "If you want to get what you want, work hard and never give up.",
+			"fa": "اگر می‌خواهید به آنچه می‌خواهید برسید، سخت کار کنید و هرگز تسلیم نشوید.",
+			"start": 91.2,
+			"end": 95.2
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 4,
+	"book": 1,
+	"audio": "res://assets/audio/v1/l4/reading.mp3",
+	"image": "res://assets/images/v1_l4_reading.png",
+	"title": "Iran: A True Paradise",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "Every year, about one billion tourists travel around the world.",
+			"fa": "هر سال، حدود یک میلیارد گردشگر به سراسر جهان سفر می‌کنند.",
+			"start": 10.7,
+			"end": 14.8
+		  },
+		  {
+			"en": "Tourism is traveling for entertainment, health, sport or learning about the culture of a nation.",
+			"fa": "گردشگری مسافرت برای سرگرمی، سلامت، ورزش یا یادگیری در مورد فرهنگ یک ملت است.",
+			"start": 15.5,
+			"end": 21.1
+		  },
+		  {
+			"en": "Tourism can be domestic or international.",
+			"fa": "گردشگری می‌تواند داخلی یا بین‌المللی باشد.",
+			"start": 21.9,
+			"end": 24.1
+		  },
+		  {
+			"en": "Domestic tourists travel to different parts of their own country.",
+			"fa": "گردشگران داخلی به نقاط مختلف کشور خود سفر می‌کنند.",
+			"start": 24.9,
+			"end": 28.2
+		  },
+		  {
+			"en": "International tourists travel abroad.",
+			"fa": "گردشگران بین‌المللی به خارج از کشور سفر می‌کنند.",
+			"start": 29.0,
+			"end": 31.1
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Some countries attract a lot of tourists every year.",
+			"fa": "برخی از کشورها هر ساله گردشگران زیادی را جذب می‌کنند.",
+			"start": 31.7,
+			"end": 34.8
+		  },
+		  {
+			"en": "Egypt is one of the oldest countries of Africa.",
+			"fa": "مصر یکی از قدیمی‌ترین کشورهای آفریقا است.",
+			"start": 35.3,
+			"end": 37.8
+		  },
+		  {
+			"en": "It is famous for its wonderful pyramids.",
+			"fa": "این کشور به خاطر اهرام شگفت انگیز خود مشهور است.",
+			"start": 38.3,
+			"end": 40.5
+		  },
+		  {
+			"en": "France, Italy and Spain are three beautiful European countries.",
+			"fa": "فرانسه، ایتالیا و اسپانیا سه کشور زیبای اروپایی هستند.",
+			"start": 40.8,
+			"end": 44.9
+		  },
+		  {
+			"en": "They attract many tourists from other parts of the world.",
+			"fa": "آنها گردشگران زیادی را از نقاط دیگر جهان جذب می‌کنند.",
+			"start": 45.5,
+			"end": 48.6
+		  },
+		  {
+			"en": "Brazil, Peru and Chile are in South America.",
+			"fa": "برزیل، پرو و شیلی در آمریکای جنوبی هستند.",
+			"start": 48.8,
+			"end": 52.6
+		  },
+		  {
+			"en": "They are famous for their ancient history and amazing nature.",
+			"fa": "آنها به خاطر تاریخ باستانی و طبیعت شگفت انگیز خود مشهور هستند.",
+			"start": 53.1,
+			"end": 55.9
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "In Asia, Iran is a great destination for tourists.",
+			"fa": "در آسیا، ایران مقصدی عالی برای گردشگران است.",
+			"start": 56.6,
+			"end": 59.6
+		  },
+		  {
+			"en": "This beautiful country is a true paradise for people of the world.",
+			"fa": "این کشور زیبا بهشتی واقعی برای مردم جهان است.",
+			"start": 60.6,
+			"end": 64.7
+		  },
+		  {
+			"en": "Each year, many people from all parts of the world visit Iran's attractions.",
+			"fa": "هر ساله، بسیاری از مردم از سراسر جهان از جاذبه‌های ایران بازدید می‌کنند.",
+			"start": 65.4,
+			"end": 70.5
+		  },
+		  {
+			"en": "Iran is a four-season country and tourists can find a range of activities from skiing to desert touring in different parts of the country.",
+			"fa": "ایران کشوری چهار فصل است و گردشگران می‌توانند طیف وسیعی از فعالیت‌ها را از اسکی تا تورهای کویری در نقاط مختلف کشور پیدا کنند.",
+			"start": 71.4,
+			"end": 79.2
+		  },
+		  {
+			"en": "Many Muslims also travel to Iran and go to holy shrines in Mashhad, Qom and Shiraz.",
+			"fa": "بسیاری از مسلمانان نیز به ایران سفر می‌کنند و به اماکن متبرکه در مشهد، قم و شیراز می‌روند.",
+			"start": 80.3,
+			"end": 86.3
+		  },
+		  {
+			"en": "Iranian people are hospitable and kind to travelers and tourists.",
+			"fa": "مردم ایران مهمان‌نواز و مهربان با مسافران و گردشگران هستند.",
+			"start": 87.1,
+			"end": 90.6
+		  }
+		]
+	  }
+	]
+  },
+  {
+  "lesson": 1,
+  "book": 2,
+  "audio": "res://assets/audio/v2/l1/reading.mp3",
+  "image": "res://assets/images/v2_l1_reading.png",
+  "title": "Languages of the World",
+  "paragraphs": [
+	{
+	  "sentences": [
+		{
+		  "en": "Language is a system of communication.",
+		  "fa": "زبان یک سیستم ارتباطی است.",
+		  "start": 16.5,
+		  "end": 18.7
+		},
+		{
+		  "en": "It uses written and spoken forms.",
+		  "fa": "از اشکال نوشتاری و گفتاری استفاده می‌کند.",
+		  "start": 19.3,
+		  "end": 22.0
+		},
+		{
+		  "en": "People use language to communicate with each other in a society.",
+		  "fa": "مردم از زبان برای برقراری ارتباط با یکدیگر در یک جامعه استفاده می‌کنند.",
+		  "start": 22.9,
+		  "end": 26.9
+		},
+		{
+		  "en": "They exchange knowledge, beliefs, wishes, and feelings through it.",
+		  "fa": "آنها از طریق آن دانش، باورها، خواسته‌ها و احساسات خود را رد و بدل می‌کنند.",
+		  "start": 28.0,
+		  "end": 32.6
+		}
+	  ]
+	},
+	{
+	  "sentences": [
+		{
+		  "en": "Languages vary greatly from region to region.",
+		  "fa": "زبان‌ها از منطقه‌ای به منطقه‌ی دیگر بسیار متفاوت هستند.",
+		  "start": 34.7,
+		  "end": 37.5
+		},
+		{
+		  "en": "They are so different that a person may not understand the language of someone from another region, country or continent.",
+		  "fa": "آن‌ها آنقدر متفاوت هستند که ممکن است فردی زبان کسی را از منطقه، کشور یا قاره‌ای دیگر نفهمد.",
+		  "start": 38.1,
+		  "end": 46.0
+		},
+		{
+		  "en": "It is not surprising to hear that today about 7000 languages exist in the world.",
+		  "fa": "شنیدن این که امروزه حدود ۷۰۰۰ زبان در جهان وجود دارد، تعجب‌آور نیست.",
+		  "start": 46.7,
+		  "end": 53.3
+		},
+		{
+		  "en": "There are more than 2000 languages in Africa, 1000 in the Americas, more than 2250 in Asia, about 230 in Europe, and more than 1300 in Oceania.",
+		  "fa": "بیش از ۲۰۰۰ زبان در آفریقا، ۱۰۰۰ در قاره‌ی آمریکا، بیش از ۲۲۵۰ در آسیا، حدود ۲۳۰ در اروپا و بیش از ۱۳۰۰ در اقیانوسیه وجود دارد.",
+		  "start": 55.8,
+		  "end": 73.1
+		},
+		{
+		  "en": "Native speakers of these languages range in number from very large, with hundreds of millions of speakers, to very small, with fewer than 10 speakers.",
+		  "fa": "تعداد گویشوران بومی این زبان‌ها از بسیار زیاد، با صدها میلیون گویشور، تا بسیار کم، با کمتر از ۱۰ گویشور، متغیر است.",
+		  "start": 75.5,
+		  "end": 86.1
+		},
+		{
+		  "en": "The most popular language in the world is Chinese.",
+		  "fa": "پرطرفدارترین زبان در جهان چینی است.",
+		  "start": 87.3,
+		  "end": 90.6
+		},
+		{
+		  "en": "More than one billion people in the world speak Chinese.",
+		  "fa": "بیش از یک میلیارد نفر در جهان به چینی صحبت می‌کنند.",
+		  "start": 91.8,
+		  "end": 95.7
+		}
+	  ]
+	},
+	{
+	  "sentences": [
+		{
+		  "en": "Interestingly, English has fewer native speakers than Chinese, but there are about one billion learners of English all around the world.",
+		  "fa": "جالب اینجاست که انگلیسی گویشوران بومی کمتری نسبت به چینی دارد، اما حدود یک میلیارد زبان‌آموز انگلیسی در سراسر جهان وجود دارد.",
+		  "start": 98.3,
+		  "end": 107.0
+		},
+		{
+		  "en": "They learn English as an international language.",
+		  "fa": "آنها انگلیسی را به عنوان یک زبان بین‌المللی یاد می‌گیرند.",
+		  "start": 108.1,
+		  "end": 110.9
+		},
+		{
+		  "en": "About fifty percent of the world's languages have fewer than 5000 speakers.",
+		  "fa": "حدود پنجاه درصد از زبان‌های جهان کمتر از ۵۰۰۰ گویشور دارند.",
+		  "start": 112.6,
+		  "end": 118.3
+		},
+		{
+		  "en": "In the beginning of the twenty-first century, 204 languages had fewer than 10 speakers and 344 languages had between 10 and 99 speakers.",
+		  "fa": "در آغاز قرن بیست و یکم، ۲۰۴ زبان کمتر از ۱۰ گویشور و ۳۴۴ زبان بین ۱۰ تا ۹۹ گویشور داشتند.",
+		  "start": 118.9,
+		  "end": 132.5
+		},
+		{
+		  "en": "The 548 languages with fewer than 99 speakers make up nearly 8 percent of the world's languages.",
+		  "fa": "۵۴۸ زبان با کمتر از ۹۹ گویشور نزدیک به ۸ درصد از زبان‌های جهان را تشکیل می‌دهند.",
+		  "start": 134.5,
+		  "end": 143.3
+		},
+		{
+		  "en": "We call them 'endangered languages'.",
+		  "fa": "ما آنها را 'زبان‌های در معرض خطر' می‌نامیم.",
+		  "start": 144.4,
+		  "end": 147.0
+		},
+		{
+		  "en": "As the speakers of such languages grow old and die, their languages will die, too.",
+		  "fa": "همانطور که گویشوران این زبان‌ها پیر می‌شوند و می‌میرند، زبان‌های آنها نیز خواهند مرد.",
+		  "start": 148.9,
+		  "end": 154.7
+		}
+	  ]
+	},
+	{
+	  "sentences": [
+		{
+		  "en": "All languages are really valuable, despite their differences.",
+		  "fa": "همه زبان‌ها علیرغم تفاوت‌هایشان واقعاً ارزشمند هستند.",
+		  "start": 156.7,
+		  "end": 160.5
+		},
+		{
+		  "en": "Every language is an amazing means of communication that meets the needs of its own speakers.",
+		  "fa": "هر زبانی وسیله ارتباطی شگفت‌انگیزی است که نیازهای گویشوران خود را برآورده می‌کند.",
+		  "start": 162.0,
+		  "end": 167.5
+		},
+		{
+		  "en": "It is impossible to imagine the world without language.",
+		  "fa": "تصور جهان بدون زبان غیرممکن است.",
+		  "start": 168.1,
+		  "end": 171.7
+		},
+		{
+		  "en": "Therefore, we should respect all languages, no matter how different they are and how many speakers they have.",
+		  "fa": "بنابراین، ما باید به همه زبان‌ها احترام بگذاریم، مهم نیست که چقدر متفاوت هستند و چند گویشور دارند.",
+		  "start": 172.8,
+		  "end": 179.2
+		}
+	  ]
+	}
+  ]
+},
+  {
+  "lesson": 2,
+  "book": 2,
+  "audio": "res://assets/audio/v2/l1/reading.mp3",
+  "image": "res://assets/images/v2_l1_reading.png",
+  "title": "Having a Healthier and Longer Life",
+  "paragraphs": [
+	{
+	  "sentences": [
+		{
+		  "en": "Have you ever thought of a healthy lifestyle to live longer?",
+		  "fa": "آیا تا به حال به سبک زندگی سالم برای عمر طولانی‌تر فکر کرده‌اید؟",
+		  "start": 17.4,
+		  "end": 21.0
+		},
+		{
+		  "en": "People can do many things to have a healthier life.",
+		  "fa": "مردم می‌توانند کارهای زیادی برای داشتن زندگی سالم‌تر انجام دهند.",
+		  "start": 22.3,
+		  "end": 25.4
+		},
+		{
+		  "en": "Most people have a special diet or do lots of exercise; however, without a careful plan they may hurt themselves.",
+		  "fa": "بیشتر مردم رژیم غذایی خاصی دارند یا ورزش زیادی می‌کنند؛ با این حال، بدون برنامه‌ریزی دقیق ممکن است به خودشان آسیب بزنند.",
+		  "start": 26.6,
+		  "end": 30.7
+		}
+	  ]
+	},
+	{
+	  "sentences": [
+		{
+		  "en": "To have a healthier lifestyle, people need to do certain things.",
+		  "fa": "برای داشتن سبک زندگی سالم‌تر، مردم باید کارهای مشخصی انجام دهند.",
+		  "start": 36.8,
+		  "end": 40.8
+		},
+		{
+		  "en": "First they should check their general health.",
+		  "fa": "اول باید سلامت عمومی خود را بررسی کنند.",
+		  "start": 42.2,
+		  "end": 45.1
+		},
+		{
+		  "en": "Measuring blood pressure and heartbeat is the most important thing to do.",
+		  "fa": "اندازه‌گیری فشار خون و ضربان قلب مهم‌ترین کاری است که باید انجام دهند.",
+		  "start": 46.3,
+		  "end": 50.8
+		},
+		{
+		  "en": "They also need to check their family health history.",
+		  "fa": "آنها همچنین باید سوابق سلامت خانواده خود را بررسی کنند.",
+		  "start": 51.8,
+		  "end": 54.7
+		},
+		{
+		  "en": "In this way, they understand if anyone in the family has had a special illness.",
+		  "fa": "به این ترتیب، متوجه می‌شوند که آیا کسی در خانواده بیماری خاصی داشته است یا نه.",
+		  "start": 55.6,
+		  "end": 61.1
+		}
+	  ]
+	},
+	{
+	  "sentences": [
+		{
+		  "en": "Another thing is paying attention to physical health.",
+		  "fa": "نکتهٔ دیگر توجه به سلامت جسمانی است.",
+		  "start": 62.8,
+		  "end": 65.8
+		},
+		{
+		  "en": "For example, eating healthy food helps people live longer and prevents diseases.",
+		  "fa": "به عنوان مثال، خوردن غذای سالم به مردم کمک می‌کند تا عمر طولانی‌تری داشته باشند و از بیماری‌ها پیشگیری می‌کند.",
+		  "start": 67.0,
+		  "end": 72.1
+		},
+		{
+		  "en": "Eating junk food makes people gain weight, and increases the risk of heart attack.",
+		  "fa": "خوردن غذاهای ناسالم باعث افزایش وزن مردم می‌شود و خطر حمله قلبی را افزایش می‌دهد.",
+		  "start": 73.6,
+		  "end": 78.5
+		},
+		{
+		  "en": "Eating balanced servings of bread, vegetables, fruits, protein, and oil is necessary for everyone.",
+		  "fa": "خوردن مقادیر متعادلی از نان، سبزیجات، میوه‌ها، پروتئین و روغن برای همه ضروری است.",
+		  "start": 80.3,
+		  "end": 87.9
+		},
+		{
+		  "en": "Also, daily exercises improve people's health condition.",
+		  "fa": "همچنین، ورزش روزانه وضعیت سلامت مردم را بهبود می‌بخشد.",
+		  "start": 89.6,
+		  "end": 93.4
+		}
+	  ]
+	},
+	{
+	  "sentences": [
+		{
+		  "en": "An effective way to enjoy a better lifestyle is having healthy relationships with others.",
+		  "fa": "یک راه مؤثر برای لذت بردن از سبک زندگی بهتر، داشتن روابط سالم با دیگران است.",
+		  "start": 95.3,
+		  "end": 100.9
+		},
+		{
+		  "en": "Recent research has shown that a good social life decreases the risk of death.",
+		  "fa": "تحقیقات اخیر نشان داده است که زندگی اجتماعی خوب خطر مرگ را کاهش می‌دهد.",
+		  "start": 102.2,
+		  "end": 107.5
+		},
+		{
+		  "en": "Sadly, some people do not visit their relatives very often these days.",
+		  "fa": "متأسفانه، این روزها برخی مردم به دیدار اقوام خود نمی‌روند.",
+		  "start": 108.4,
+		  "end": 113.1
+		},
+		{
+		  "en": "They are really busy with their work and usually use technology to communicate.",
+		  "fa": "آنها واقعاً مشغول کار خود هستند و معمولاً از فناوری برای ارتباط استفاده می‌کنند.",
+		  "start": 114.2,
+		  "end": 118.6
+		}
+	  ]
+	},
+	{
+	  "sentences": [
+		{
+		  "en": "Bad habits and addiction can be harmful to health.",
+		  "fa": "عادات بد و اعتیاد می‌تواند برای سلامتی مضر باشد.",
+		  "start": 120.7,
+		  "end": 123.5
+		},
+		{
+		  "en": "One day of smoking can take around 5 hours away from the smoker's life.",
+		  "fa": "یک روز سیگار کشیدن می‌تواند حدود ۵ ساعت از عمر فرد سیگاری کم کند.",
+		  "start": 124.7,
+		  "end": 130.1
+		},
+		{
+		  "en": "Addiction to technology such as using computers for a long time is also dangerous.",
+		  "fa": "اعتیاد به فناوری مانند استفاده طولانی مدت از رایانه نیز خطرناک است.",
+		  "start": 131.6,
+		  "end": 136.6
+		}
+	  ]
+	},
+	{
+	  "sentences": [
+		{
+		  "en": "Above all, the most important thing to enjoy a good life is having emotional health.",
+		  "fa": "از همه مهم‌تر، مهم‌ترین چیز برای لذت بردن از یک زندگی خوب، داشتن سلامت عاطفی است.",
+		  "start": 138.2,
+		  "end": 144.0
+		},
+		{
+		  "en": "Praying decreases stress and gives people a calm and balanced life.",
+		  "fa": "نماز (یا دعا) استرس را کاهش می‌دهد و به مردم زندگی آرام و متعادلی می‌بخشد.",
+		  "start": 145.1,
+		  "end": 149.3
+		},
+		{
+		  "en": "People with this lifestyle have had a better life.",
+		  "fa": "افراد با این سبک زندگی، زندگی بهتری داشته‌اند.",
+		  "start": 150.7,
+		  "end": 153.6
+		},
+		{
+		  "en": "There are many other things people can do to live healthier and longer.",
+		  "fa": "کارهای دیگری نیز وجود دارد که مردم می‌توانند برای سالم‌تر و طولانی‌تر زندگی کردن انجام دهند.",
+		  "start": 154.5,
+		  "end": 158.9
+		},
+		{
+		  "en": "The key point, however, is having a plan for the way they want to live and take care of their physical and emotional health.",
+		  "fa": "با این حال، نکته کلیدی این است که برای نحوهٔ زندگی که می‌خواهند داشته باشند و مراقبت از سلامت جسمی و عاطفی خود برنامه‌ریزی داشته باشند.",
+		  "start": 160.1,
+		  "end": 168.0
+		}
+	  ]
+	}
+  ]
+},
+  {
+	"lesson": 3,
+	"book": 2,
+	"audio": "res://assets/audio/v2/l3/reading.mp3",
+	"image": "res://assets/images/v2_l3_reading.png",
+	"title": "Art, Culture and Society",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "Art is what people create with imagination and skill.",
+			"fa": "هنر چیزی است که مردم با تخیل و مهارت خلق می‌کنند.",
+			"start": 18.9,
+			"end": 23.2
+		  },
+		  {
+			"en": "As a part of culture, it shows the way of life and identity of a nation and reflects the history of a society.",
+			"fa": "به عنوان بخشی از فرهنگ، نحوه زندگی و هویت یک ملت را نشان می‌دهد و تاریخ یک جامعه را منعکس می‌کند.",
+			"start": 24.3,
+			"end": 32.4
+		  },
+		  {
+			"en": "In fact, the history of humankind is the history of art.",
+			"fa": "در واقع، تاریخ بشر تاریخ هنر است.",
+			"start": 33.8,
+			"end": 38.4
+		  },
+		  {
+			"en": "If we want to know a country or a nation well, we should study its art.",
+			"fa": "اگر بخواهیم یک کشور یا یک ملت را به خوبی بشناسیم، باید هنر آن را مطالعه کنیم.",
+			"start": 39.2,
+			"end": 43.8
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Handicrafts are good examples of the art and culture of a country.",
+			"fa": "صنایع دستی نمونه‌های خوبی از هنر و فرهنگ یک کشور هستند.",
+			"start": 45.0,
+			"end": 49.1
+		  },
+		  {
+			"en": "By handicrafts, we mean making decorative items in a skillful way using our hands.",
+			"fa": "منظور از صنایع دستی، ساخت اشیاء تزئینی به روشی ماهرانه با استفاده از دستان ما است.",
+			"start": 50.2,
+			"end": 56.4
+		  },
+		  {
+			"en": "Each country and culture has its own handicrafts.",
+			"fa": "هر کشور و فرهنگی صنایع دستی مخصوص به خود را دارد.",
+			"start": 58.0,
+			"end": 61.4
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Making and selling handicrafts are good ways to help a country's economy and introduce its culture to other nations.",
+			"fa": "ساخت و فروش صنایع دستی راه‌های خوبی برای کمک به اقتصاد کشور و معرفی فرهنگ آن به سایر ملل است.",
+			"start": 61.9,
+			"end": 69.3
+		  },
+		  {
+			"en": "Many people of the world produce handicrafts and sell them to tourists.",
+			"fa": "بسیاری از مردم جهان صنایع دستی تولید می‌کنند و آنها را به گردشگران می‌فروشند.",
+			"start": 70.7,
+			"end": 75.3
+		  },
+		  {
+			"en": "In some Asian countries a part of the country's income comes from making and selling handicrafts.",
+			"fa": "در برخی از کشورهای آسیایی، بخشی از درآمد کشور از ساخت و فروش صنایع دستی تأمین می‌شود.",
+			"start": 76.6,
+			"end": 83.1
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Iran has a five-thousand-year-old history of artistic works and handicrafts including pottery, painting, calligraphy, rugs and carpets, etc.",
+			"fa": "ایران دارای پنج هزار سال تاریخچه آثار هنری و صنایع دستی از جمله سفالگری، نقاشی، خوشنویسی، گلیم و فرش و غیره است.",
+			"start": 84.2,
+			"end": 95.1
+		  },
+		  {
+			"en": "If you travel across Iran, you'll get back home with excellent handicrafts as souvenirs for your family and friends.",
+			"fa": "اگر در سراسر ایران سفر کنید، با صنایع دستی عالی به عنوان سوغاتی برای خانواده و دوستان خود به خانه باز خواهید گشت.",
+			"start": 96.5,
+			"end": 104.1
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Iranian art is also quite famous all around the world.",
+			"fa": "هنر ایرانی نیز در سراسر جهان کاملاً مشهور است.",
+			"start": 105.7,
+			"end": 109.4
+		  },
+		  {
+			"en": "There are very excellent collections of Persian art in many important museums of the world.",
+			"fa": "مجموعه‌های بسیار عالی از هنر ایرانی در بسیاری از موزه‌های مهم جهان وجود دارد.",
+			"start": 111.3,
+			"end": 116.7
+		  },
+		  {
+			"en": "If we want to name countries with richest art and cultural diversity, Iran is among them.",
+			"fa": "اگر بخواهیم کشورهایی با غنی‌ترین هنر و تنوع فرهنگی را نام ببریم، ایران در میان آنهاست.",
+			"start": 117.7,
+			"end": 124.4
+		  },
+		  {
+			"en": "Persian art is famous in the world for reflecting moral and social values of Iranian people and the natural beauty of this vast country.",
+			"fa": "هنر ایرانی در جهان به دلیل بازتاب ارزش‌های اخلاقی و اجتماعی مردم ایران و زیبایی طبیعی این کشور پهناور مشهور است.",
+			"start": 125.5,
+			"end": 134.5
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Iranian craftsmen and craftswomen are famous for producing very unique artworks from wood, metal and other simple materials around them.",
+			"fa": "صنعتگران زن و مرد ایرانی به دلیل تولید آثار هنری بسیار منحصر به فرد از چوب، فلز و سایر مواد ساده اطراف خود مشهور هستند.",
+			"start": 135.6,
+			"end": 146.3
+		  },
+		  {
+			"en": "Many people of the world appreciate the art and skill of a young Iranian girl who weaves a beautiful silk carpet in a small village of Azarbaijan or Kordestan.",
+			"fa": "بسیاری از مردم جهان هنر و مهارت یک دختر جوان ایرانی را که در روستایی کوچک در آذربایجان یا کردستان فرش ابریشمی زیبایی می‌بافد، تحسین می‌کنند.",
+			"start": 147.7,
+			"end": 158.7
+		  },
+		  {
+			"en": "When tourists buy Persian rugs or carpets, they take a part of Iranian art and culture to their homelands.",
+			"fa": "وقتی گردشگران گلیم یا فرش ایرانی می‌خرند، بخشی از هنر و فرهنگ ایران را به سرزمین‌های خود می‌برند.",
+			"start": 159.4,
+			"end": 167.0
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 1,
+	"book": 3,
+	"audio": "res://assets/audio/v3/l1/reading.mp3",
+	"image": "res://assets/images/v3_l1_reading.png",
+	"title": "Respect your Parents",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "On a spring morning, an old woman was sitting on the sofa in her house.",
+			"fa": "در یک صبح بهاری، پیرزنی روی مبل خانه‌اش نشسته بود.",
+			"start": 16.6,
+			"end": 21.0
+		  },
+		  {
+			"en": "Her young son was reading a newspaper.",
+			"fa": "پسر جوانش روزنامه می‌خواند.",
+			"start": 21.4,
+			"end": 24.1
+		  },
+		  {
+			"en": "Suddenly a pigeon sat on the window.",
+			"fa": "ناگهان کبوتری روی پنجره نشست.",
+			"start": 25.1,
+			"end": 27.2
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "The mother asked her son quietly, 'What is this?'",
+			"fa": "مادر به آرامی از پسرش پرسید: 'این چیست؟'",
+			"start": 28.5,
+			"end": 31.1
+		  },
+		  {
+			"en": "The son replied: 'It is a pigeon'.",
+			"fa": "پسر پاسخ داد: 'این یک کبوتر است'.",
+			"start": 32.1,
+			"end": 34.5
+		  },
+		  {
+			"en": "After a few minutes, she asked her son for the second time, 'What is this?'",
+			"fa": "پس از چند دقیقه، او برای بار دوم از پسرش پرسید: 'این چیست؟'",
+			"start": 35.5,
+			"end": 40.2
+		  },
+		  {
+			"en": "The son said, 'Mom, I have just told you, 'It is a pigeon, a pigeon'.",
+			"fa": "پسر گفت: 'مامان، من تازه به شما گفتم، 'این یک کبوتر است، یک کبوتر'.",
+			"start": 41.0,
+			"end": 45.5
+		  },
+		  {
+			"en": "After a little while, the old mother asked her son for the third time, 'What is this?'",
+			"fa": "کمی بعد، مادر پیر برای بار سوم از پسرش پرسید: 'این چیست؟'",
+			"start": 47.6,
+			"end": 52.6
+		  },
+		  {
+			"en": "This time the son shouted at his mother, 'Why do you keep asking me the same question again and again?",
+			"fa": "این بار پسر بر سر مادرش فریاد زد: 'چرا دوباره و دوباره همان سوال را از من می‌پرسی؟'",
+			"start": 53.2,
+			"end": 59.3
+		  },
+		  {
+			"en": "Are you hard of hearing?'",
+			"fa": "آیا کم شنوا هستی؟'",
+			"start": 59.9,
+			"end": 61.2
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "A little later, the mother went to her room and came back with an old diary.",
+			"fa": "کمی بعد، مادر به اتاقش رفت و با یک دفترچه خاطرات قدیمی برگشت.",
+			"start": 62.5,
+			"end": 67.6
+		  },
+		  {
+			"en": "She said, 'My dear son, I bought this diary when you were born'.",
+			"fa": "او گفت: 'پسر عزیزم، این دفترچه خاطرات را وقتی تو به دنیا آمدی خریدم'.",
+			"start": 68.3,
+			"end": 72.9
+		  },
+		  {
+			"en": "Then, she opened a page and kindly asked her son to read that page.",
+			"fa": "سپس، صفحه‌ای را باز کرد و با مهربانی از پسرش خواست آن صفحه را بخواند.",
+			"start": 73.7,
+			"end": 78.2
+		  },
+		  {
+			"en": "The son looked at the page, paused and started reading it aloud.",
+			"fa": "پسر به صفحه نگاه کرد، مکث کرد و شروع به خواندن آن با صدای بلند کرد.",
+			"start": 78.8,
+			"end": 83.7
+		  }
+		]
+	  },
+	{
+		"sentences": [
+		  {
+			"en": "Today my little son was sitting on my lap, when a pigeon sat on the window.",
+			"fa": "کمی بعد، مادر به اتاقش رفت و با یک دفترچه خاطرات قدیمی برگشت.",
+			"start": 86.3,
+			"end": 91.5
+		  },
+		  {
+			"en": "My son asked me what it was 15 times, and I replied to him all 15 times that it was a pigeon",
+			"fa": "او گفت: 'پسر عزیزم، این دفترچه خاطرات را وقتی تو به دنیا آمدی خریدم'.",
+			"start": 92.7,
+			"end": 100.1
+		  },
+		  {
+			"en": "I hugged him lovingly each time when he asked me the same question again and again.",
+			"fa": "سپس، صفحه‌ای را باز کرد و با مهربانی از پسرش خواست آن صفحه را بخواند.",
+			"start": 101.0,
+			"end": 106.6
+		  },
+		  {
+			"en": "I did not feel angry at all.",
+			"fa": "پسر به صفحه نگاه کرد، مکث کرد و شروع به خواندن آن با صدای بلند کرد.",
+			"start": 107.5,
+			"end": 109.4
+		  },
+		{
+			"en": "I was actually feeling happy for my lovely child.",
+			"fa": "پسر به صفحه نگاه کرد، مکث کرد و شروع به خواندن آن با صدای بلند کرد.",
+			"start": 110.2,
+			"end": 112.9
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Suddenly the son burst into tears, hugged his old mother and said repeatedly, 'Mom, mom, forgive me; please forgive me.'",
+			"fa": "ناگهان پسر به گریه افتاد، مادر پیر خود را در آغوش گرفت و بارها گفت: 'مامان، مامان، مرا ببخش؛ لطفاً مرا ببخش.'",
+			"start": 116.1,
+			"end": 125.9
+		  },
+		  {
+			"en": "The old woman hugged her son, kissed him and said calmly, 'We must care for those who once cared for us.'",
+			"fa": "پیرزن پسرش را در آغوش گرفت، او را بوسید و با آرامش گفت: 'ما باید از کسانی مراقبت کنیم که زمانی از ما مراقبت کردند.'",
+			"start": 126.7,
+			"end": 133.5
+		  },
+		  {
+			"en": "We all know how parents cared for their children for every little thing.",
+			"fa": "همه ما می‌دانیم که والدین چگونه برای هر چیز کوچکی از فرزندان خود مراقبت می‌کردند.",
+			"start": 133.8,
+			"end": 138.3
+		  },
+		  {
+			"en": "Children must love them, respect them, and care for them'.",
+			"fa": "فرزندان باید آنها را دوست داشته باشند، به آنها احترام بگذارند و از آنها مراقبت کنند'.",
+			"start": 139.5,
+			"end": 142.8
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 2,
+	"book": 3,
+	"audio": "res://assets/audio/v3/l2/reading.mp3",
+	"image": "res://assets/images/v3_l2_reading.png",
+	"title": "How to Use a Dictionary",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "A good dictionary gives the user information about words such as spellings, pronunciations and definitions.",
+			"fa": "فرهنگ لغت مناسب را انتخاب کنید.",
+			"start": 16.3,
+			"end": 24.8
+		  },
+		  {
+			"en": "It also gives examples of how to use the words in sentences correctly.",
+			"fa": "انواع مختلفی از فرهنگ‌های لغت مانند فرهنگ‌های آموزشی، فرهنگ‌های عمومی، فرهنگ‌های تصویری و غیره وجود دارد.",
+			"start": 26.0,
+			"end": 31.0
+		  },
+		  {
+			"en": "Therefore, it is essentialto know how to use a dictionary.",
+			"fa": "بنابراین، ابتدا نیازهای خود را شناسایی کنید.",
+			"start": 32.0,
+			"end": 35.8
+		  },
+		  {
+			"en": "In this lesson, we provide you with some helpful tips on how to use a dictionary effectively.",
+			"fa": "بدون انتخاب درست، نمی‌توانید نیازهای زبانی خود را برآورده کنید.",
+			"start": 37.0,
+			"end": 43.2
+		  }
+		]
+	  },
+	{
+		"sentences": [
+		  {
+			"en": "1. Choose the Right Dictionary",
+			"fa": "مقدمه را بخوانید.",
+			"start": 44.5,
+			"end": 52.7
+		  },
+		  {
+			"en": "There are many different types of dictionaries such as learner’s dictionaries, general dictionaries, picture dictionaries, etc.",
+			"fa": "بهترین راه برای یادگیری نحوه استفاده مؤثر از فرهنگ لغت، خواندن مقدمه آن است.",
+			"start": 53.8,
+			"end": 62.0
+		  },
+		  {
+			"en": "Therefore, first identify your needs. Without choosing the right one you cannot meet your language needs.",
+			"fa": "این بخش مسائلی مانند نحوه چیدمان مدخل‌ها، اطلاعات ارائه شده در مدخل‌ها و اختصارات و نمادهای تلفظ استفاده شده در سراسر مدخل‌ها را توضیح می‌دهد.",
+			"start": 63.0,
+			"end": 70.3
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "2. Read the Introduction.",
+			"fa": "مقدمه را بخوانید.",
+			"start": 74.5,
+			"end": 79.6
+		  },
+		  {
+			"en": "The best way to learn how to use your dictionary effectively is to read its introduction.",
+			"fa": "بهترین راه برای یادگیری نحوه استفاده مؤثر از فرهنگ لغت، خواندن مقدمه آن است.",
+			"start": 80.4,
+			"end": 85.8
+		  },
+		  {
+			"en": "This section explains issues like how entries are arranged, what information is offered in entries and what abbreviations and pronunciation symbols are used throughout the entries.",
+			"fa": "این بخش مسائلی مانند نحوه چیدمان مدخل‌ها، اطلاعات ارائه شده در مدخل‌ها و اختصارات و نمادهای تلفظ استفاده شده در سراسر مدخل‌ها را توضیح می‌دهد.",
+			"start": 86.9,
+			"end": 99.1
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "3. Learn the Abbreviations.",
+			"fa": "اختصارات را یاد بگیرید.",
+			"start": 106.3,
+			"end": 108.4
+		  },
+		  {
+			"en": "Different types of abbreviations are often used in the definitions for a word.",
+			"fa": "انواع مختلفی از اختصارات اغلب در تعاریف یک کلمه استفاده می‌شود.",
+			"start": 109.5,
+			"end": 114.3
+		  },
+		  {
+			"en": "This can be confusing if you do not know what the abbreviations stand for.",
+			"fa": "اگر ندانید که اختصارات مخفف چه چیزی هستند، این می‌تواند گیج‌کننده باشد.",
+			"start": 115.1,
+			"end": 119.8
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "4. Learn the Guide to Pronunciation.",
+			"fa": "راهنمای تلفظ را یاد بگیرید.",
+			"start": 122.5,
+			"end": 125.3
+		  },
+		  {
+			"en": "If you immediately jump into using the dictionary without understanding the pronunciation guide, it can be difficult to figure it out.",
+			"fa": "اگر بدون درک راهنمای تلفظ، بلافاصله به استفاده از فرهنگ لغت بپردازید، درک آن دشوار خواهد بود.",
+			"start": 128.5,
+			"end": 136.5
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "5. Read the Guide Words.",
+			"fa": "کلمات راهنما را بخوانید.",
+			"start": 152.6,
+			"end": 154.8
+		  },
+		  {
+			"en": "These are the two words at the top of each page that show the first and last entries on the page.",
+			"fa": "اینها دو کلمه در بالای هر صفحه هستند که اولین و آخرین مدخل را در صفحه نشان می‌دهند.",
+			"start": 156.3,
+			"end": 163.0
+		  },
+		  {
+			"en": "These words will help you find the word you are looking for in the right letter section.",
+			"fa": "این کلمات به شما کمک می‌کنند تا کلمه مورد نظر خود را در بخش حرف مناسب پیدا کنید.",
+			"start": 163.8,
+			"end": 169.5
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "6. Read the Definitions.",
+			"fa": "تعاریف را بخوانید.",
+			"start": 177.1,
+			"end": 179.5
+		  },
+		  {
+			"en": "Once you find an entry, you can find the exact meaning of the word, its pronunciation, part of speech, synonyms, antonyms, and probably its origin.",
+			"fa": "هنگامی که مدخلی را پیدا کردید، می‌توانید معنای دقیق کلمه، تلفظ، بخش گفتار، مترادف‌ها، متضادها و احتمالاً ریشه آن را پیدا کنید.",
+			"start": 180.8,
+			"end": 193.0
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "7. Look for Collocations.",
+			"fa": "به دنبال هم‌نشینی‌ها بگردید.",
+			"start": 202.8,
+			"end": 205.2
+		  },
+		  {
+			"en": "Learning the meaning of a single word is not usually enough.",
+			"fa": "یادگیری معنای یک کلمه معمولاً کافی نیست.",
+			"start": 206.5,
+			"end": 210.3
+		  },
+		  {
+			"en": "Through sentence examples, try to learn 'words in combination' to expand your vocabulary.",
+			"fa": "از طریق مثال‌های جمله، سعی کنید 'کلمات در ترکیب' را برای گسترش دایره لغات خود یاد بگیرید.",
+			"start": 211.2,
+			"end": 217.5
+		  }
+		]
+	  }
+	]
+  },
+  {
+	"lesson": 3,
+	"book": 3,
+	"audio": "res://assets/audio/v3/l3/reading.mp3",
+	"image": "res://assets/images/v3_l3_reading.png",
+	"title": "Earth for our Children",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "Energy is the ability to do work.",
+			"fa": "انرژی توانایی انجام کار است.",
+			"start": 15.9,
+			"end": 18.4
+		  },
+		  {
+			"en": "It can take a variety of forms: mechanical, electrical, chemical, and nuclear.",
+			"fa": "می‌تواند اشکال مختلفی داشته باشد: مکانیکی، الکتریکی، شیمیایی و هسته‌ای.",
+			"start": 19.0,
+			"end": 25.0
+		  },
+		  {
+			"en": "To produce any type of energy, the resources of the earth are used.",
+			"fa": "برای تولید هر نوع انرژی، از منابع زمین استفاده می‌شود.",
+			"start": 26.2,
+			"end": 30.0
+		  },
+		  {
+			"en": "The main resources of the earth are fossil fuels such as natural gas, oil, and coal.",
+			"fa": "منابع اصلی زمین سوخت‌های فسیلی مانند گاز طبیعی، نفت و زغال سنگ هستند.",
+			"start": 30.8,
+			"end": 36.8
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "We get most of our energy from these fossil fuels, but this is harmful to the environment.",
+			"fa": "ما بیشتر انرژی خود را از این سوخت‌های فسیلی به دست می‌آوریم، اما این برای محیط زیست مضر است.",
+			"start": 38.3,
+			"end": 43.8
+		  },
+		  {
+			"en": "Fossil fuels are nonrenewable and cannot be replaced easily.",
+			"fa": "سوخت‌های فسیلی تجدیدناپذیر هستند و به راحتی قابل جایگزینی نیستند.",
+			"start": 44.7,
+			"end": 48.9
+		  },
+		  {
+			"en": "Once we use them up, they're gone forever.",
+			"fa": "وقتی آنها را تمام کنیم، برای همیشه از بین می‌روند.",
+			"start": 49.6,
+			"end": 52.1
+		  },
+		  {
+			"en": "They are not clean as they pollute water or air.",
+			"fa": "آنها تمیز نیستند زیرا آب یا هوا را آلوده می‌کنند.",
+			"start": 53.0,
+			"end": 55.7
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "In recent years, scientists try to use other types of energy resources.",
+			"fa": "در سال‌های اخیر، دانشمندان سعی می‌کنند از انواع دیگر منابع انرژی استفاده کنند.",
+			"start": 56.9,
+			"end": 61.5
+		  },
+		  {
+			"en": "They call them clean energy resources because they do not pollute the earth.",
+			"fa": "آنها آنها را منابع انرژی پاک می‌نامند زیرا زمین را آلوده نمی‌کنند.",
+			"start": 62.3,
+			"end": 67.3
+		  },
+		  {
+			"en": "Clean energy is renewable.",
+			"fa": "انرژی پاک تجدیدپذیر است.",
+			"start": 68.0,
+			"end": 69.6
+		  },
+		  {
+			"en": "It is made from resources that can be replaced, like wind, water, sunshine, tides, and plants.",
+			"fa": "از منابعی ساخته می‌شود که قابل جایگزینی هستند، مانند باد، آب، نور خورشید، جزر و مد و گیاهان.",
+			"start": 70.0,
+			"end": 77.0
+		  },
+		  {
+			"en": "When renewable energy resources are used, the demand for fossil fuels is reduced.",
+			"fa": "هنگامی که از منابع انرژی تجدیدپذیر استفاده می‌شود، تقاضا برای سوخت‌های فسیلی کاهش می‌یابد.",
+			"start": 77.9,
+			"end": 82.7
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "The most common type of clean energy is the solar power.",
+			"fa": "رایج‌ترین نوع انرژی پاک، انرژی خورشیدی است.",
+			"start": 83.7,
+			"end": 87.0
+		  },
+		  {
+			"en": "Solar energy is produced by the radiation that reaches the earth.",
+			"fa": "انرژی خورشیدی توسط تشعشعی که به زمین می‌رسد تولید می‌شود.",
+			"start": 88.4,
+			"end": 92.7
+		  },
+		  {
+			"en": "People have used the sun as a heat source for thousands of years.",
+			"fa": "مردم هزاران سال است که از خورشید به عنوان منبع گرما استفاده می‌کنند.",
+			"start": 93.7,
+			"end": 97.4
+		  },
+		  {
+			"en": "Iranians, for instance, use special designs and arrangements of windows, balconies and yards to get the most sunshine.",
+			"fa": "به عنوان مثال، ایرانی‌ها از طرح‌ها و چیدمان‌های ویژه‌ای برای پنجره‌ها، بالکن‌ها و حیاط‌ها برای دریافت بیشترین نور خورشید استفاده می‌کنند.",
+			"start": 97.9,
+			"end": 105.5
+		  },
+		  {
+			"en": "Different types of materials might also be used in building the houses.",
+			"fa": "انواع مختلفی از مصالح نیز ممکن است در ساخت خانه‌ها استفاده شود.",
+			"start": 106.6,
+			"end": 110.4
+		  },
+		  {
+			"en": "This keeps people warm during cold seasons and cool during hot days of the year.",
+			"fa": "این باعث می‌شود افراد در فصول سرد گرم و در روزهای گرم سال خنک بمانند.",
+			"start": 111.3,
+			"end": 117.3
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Nowadays, solar energy can be converted into other forms of energy, such as heat and electricity.",
+			"fa": "امروزه، انرژی خورشیدی می‌تواند به اشکال دیگر انرژی مانند گرما و برق تبدیل شود.",
+			"start": 118.3,
+			"end": 125.2
+		  },
+		  {
+			"en": "Solar energy might be used for heating water and air in homes, buildings, or swimming pools.",
+			"fa": "انرژی خورشیدی ممکن است برای گرم کردن آب و هوا در خانه‌ها، ساختمان‌ها یا استخرهای شنا استفاده شود.",
+			"start": 126.0,
+			"end": 132.1
+		  },
+		  {
+			"en": "Maybe you've seen buildings or houses with big shiny panels on the roof.",
+			"fa": "شاید ساختمان‌ها یا خانه‌هایی با پنل‌های براق بزرگ روی پشت بام دیده باشید.",
+			"start": 133.4,
+			"end": 137.5
+		  },
+		  {
+			"en": "These are solar collectors that collect heat by absorbing sunlight and producing solar power.",
+			"fa": "اینها کلکتورهای خورشیدی هستند که با جذب نور خورشید و تولید انرژی خورشیدی، گرما را جمع‌آوری می‌کنند.",
+			"start": 138.2,
+			"end": 144.6
+		  },
+		  {
+			"en": "Also, solar energy can be used in generating electricity to provide power for watches, highway signs, houses and even space stations.",
+			"fa": "همچنین، انرژی خورشیدی می‌تواند در تولید برق برای تامین انرژی ساعت‌ها، تابلوهای راهنمایی و رانندگی، خانه‌ها و حتی ایستگاه‌های فضایی استفاده شود.",
+			"start": 146.1,
+			"end": 155.9
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Clean energy resources are widely used in many countries to keep cities and villages clean.",
+			"fa": "منابع انرژی پاک به طور گسترده در بسیاری از کشورها برای تمیز نگه داشتن شهرها و روستاها استفاده می‌شود.",
+			"start": 156.7,
+			"end": 162.0
+		  },
+		  {
+			"en": "As a result, fewer fossil fuels are consumed each year and they are saved for the future generations.",
+			"fa": "در نتیجه، هر سال سوخت‌های فسیلی کمتری مصرف می‌شود و برای نسل‌های آینده ذخیره می‌شوند.",
+			"start": 163.3,
+			"end": 169.6
+		  }
+		]
+	  }
+	]
+  }
+]

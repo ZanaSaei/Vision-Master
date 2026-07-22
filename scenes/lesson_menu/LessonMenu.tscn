@@ -67,7 +67,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 170.0
+offset_top = 179.0
+offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -78,7 +79,7 @@ theme_override_constants/margin_bottom = 32
 
 [node name="InnerLayout" type="VBoxContainer" parent="MainLayout" unique_id=1011622441]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 50
 
 [node name="LessonSubtitle" type="Label" parent="MainLayout/InnerLayout" unique_id=444510277]
 layout_mode = 2
@@ -91,7 +92,7 @@ vertical_alignment = 1
 
 [node name="SectionsContainer" type="VBoxContainer" parent="MainLayout/InnerLayout" unique_id=1859764807]
 layout_mode = 2
-theme_override_constants/separation = 120
+theme_override_constants/separation = 50
 
 [node name="BottomSpacer" type="Control" parent="MainLayout/InnerLayout" unique_id=1927847907]
 layout_mode = 2

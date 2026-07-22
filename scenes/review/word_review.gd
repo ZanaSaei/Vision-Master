@@ -18,6 +18,8 @@ const SCENE_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 
 @onready var back_button: Button           = $HeaderBar/MarginContainer/Header/BackButton
 @onready var due_counter: Label            = $HeaderBar/MarginContainer/Header/DueCounter
+@onready var review_side_menu              = $ReviewSideMenu
+@onready var open_list_menu_button: Button = $OpenListMenuButton
 
 @onready var card_panel: PanelContainer    = $MarginContainer/MainLayout/CardMargin/CardPanel
 @onready var front: PanelContainer        = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/Front
@@ -36,23 +38,46 @@ const SCENE_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var good_button: Button           = $MarginContainer/MainLayout/Controls/RatingButtons/Good
 @onready var easy_button: Button           = $MarginContainer/MainLayout/Controls/RatingButtons/Easy
 
+
 var review_queue: Array       = []
 var current_entry: Dictionary = {}
 
 
 func _ready() -> void:
+	Global.review_words_changed.connect(_on_review_words_changed)
 	back_button.pressed.connect(_on_back_button_pressed)
 	show_answer_button.pressed.connect(_on_show_answer_pressed)
 	again_button.pressed.connect(_on_rate_pressed.bind("again"))
 	hard_button.pressed.connect(_on_rate_pressed.bind("hard"))
 	good_button.pressed.connect(_on_rate_pressed.bind("good"))
 	easy_button.pressed.connect(_on_rate_pressed.bind("easy"))
-
+	# متصل کردن دکمه باز کردن منو
+	review_side_menu.set_hamburger_button(open_list_menu_button)
+	open_list_menu_button.pivot_offset = open_list_menu_button.size / 2.0 
+	
+	open_list_menu_button.pressed.connect(review_side_menu.toggle)
+	
 	_style_rating_buttons()
 
 	review_queue = Global.get_due_words()
 	_load_next_card()
+	_populate_word_list()
 
+
+func _on_review_words_changed():
+	# This will be called every time a word is added or removed
+	_populate_word_list()   # re‑reads Global.review_words and updates UI
+
+func _populate_word_list() -> void:
+	review_queue = Global.get_due_words()
+	_load_next_card()
+	_update_due_counter()
+
+
+func _on_review_menu_closed() -> void:
+	# گرفتن مجدد صف کلمات از گلوبال در صورتی که لیست تغییر کرده باشد
+	review_queue = Global.get_due_words()
+	_load_next_card()
 
 # ----------------------------------------------------------------
 #  VISUAL STYLING FOR RATING BUTTONS (Anki's standard color code)

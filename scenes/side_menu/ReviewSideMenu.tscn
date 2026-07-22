@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://c4kduxd61oyll"]
+
+[ext_resource type="Script" uid="uid://mtptybqk8sgw" path="res://scenes/side_menu/review_side_menu.gd" id="1_gd6gh"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_h4htg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw4b"]
+bg_color = Color(0, 0.2901961, 0.2901961, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ku3dv"]
+font = ExtResource("2_h4htg")
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_5vw4b"]
+font = ExtResource("2_h4htg")
+font_size = 45
+
+[node name="ReviewSideMenu" type="CanvasLayer" unique_id=1980856050]
+script = ExtResource("1_gd6gh")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=601768843]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.2901961, 0.2901961, 1)
+
+[node name="MenuPanel" type="PanelContainer" parent="." unique_id=1878074178]
+custom_minimum_size = Vector2(600, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 328.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5vw4b")
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPanel" unique_id=52301541]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanel/MarginContainer" unique_id=1449594807]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=153254029]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer/Header" unique_id=1940708394]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "لیست کلمات مرور"
+label_settings = SubResource("LabelSettings_ku3dv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=993114528]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="TotalWordsLabel" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=2082631654]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_5vw4b")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=1270779918]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=1623035185]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WordList" type="VBoxContainer" parent="MenuPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1315930817]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=70666404]

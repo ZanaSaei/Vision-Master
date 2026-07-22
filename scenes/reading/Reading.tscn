@@ -68,7 +68,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 193
+size_flags_vertical = 4
+theme_override_constants/separation = 70
 
 [node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
 layout_mode = 2
@@ -79,6 +80,11 @@ flat = true
 layout_mode = 2
 text = "Conversation"
 label_settings = SubResource("LabelSettings_swh16")
+
+[node name="TranslationToggleButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1752625087]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "translate"
 
 [node name="AudioButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1020383883]
 layout_mode = 2

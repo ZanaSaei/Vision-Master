@@ -67,6 +67,12 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var meaning_fa_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
 @onready var example_label: Label              = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
 
+# Synonyms and Antonyms nodes
+@onready var synonyms_panel: PanelContainer    = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel
+@onready var synonyms_label: Label             = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel/SynonymsContainer/SynonymsLabel
+@onready var antonyms_panel: PanelContainer    = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel
+@onready var antonyms_label: Label             = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel/AntonymsContainer/AntonymsLabel
+
 @onready var prev_button: Button               = $MarginContainer/MainLayout/PanelContainer/BottomControls/PrevButton
 @onready var save_button: Button               = $MarginContainer/MainLayout/PanelContainer/BottomControls/SaveButton
 @onready var next_button: Button               = $MarginContainer/MainLayout/PanelContainer/BottomControls/NextButton
@@ -263,7 +269,12 @@ func _update_card(animate: bool = false) -> void:
 	meaning_en_label.text = entry.get("meaning_en", "")
 	meaning_fa_label.text = entry.get("meaning_fa", "")
 	example_label.text    = entry.get("example", "")
-
+	
+	# --- Update Synonyms ---
+	_update_synonyms(entry)
+	
+	# --- Update Antonyms ---
+	_update_antonyms(entry)
 
 	is_flipped = false
 
@@ -276,6 +287,42 @@ func _update_card(animate: bool = false) -> void:
 
 	if mode == Mode.LESSON:
 		_refresh_save_button(entry)
+
+
+func _update_synonyms(entry: Dictionary) -> void:
+	var synonyms_data = entry.get("synonyms", {})
+	var en_synonyms: Array = synonyms_data.get("en", [])
+	var fa_synonyms: Array = synonyms_data.get("fa", [])
+	
+	# Combine synonyms: English ones first, then Farsi ones
+	var all_synonyms: Array = []
+	all_synonyms.append_array(en_synonyms)
+	all_synonyms.append_array(fa_synonyms)
+	
+	if all_synonyms.is_empty():
+		synonyms_panel.visible = false
+		return
+	
+	synonyms_panel.visible = true
+	synonyms_label.text = ", ".join(all_synonyms)
+
+
+func _update_antonyms(entry: Dictionary) -> void:
+	var antonyms_data = entry.get("antonyms", {})
+	var en_antonyms: Array = antonyms_data.get("en", [])
+	var fa_antonyms: Array = antonyms_data.get("fa", [])
+	
+	# Combine antonyms: English ones first, then Farsi ones
+	var all_antonyms: Array = []
+	all_antonyms.append_array(en_antonyms)
+	all_antonyms.append_array(fa_antonyms)
+	
+	if all_antonyms.is_empty():
+		antonyms_panel.visible = false
+		return
+	
+	antonyms_panel.visible = true
+	antonyms_label.text = ", ".join(all_antonyms)
 
 
 func _handle_empty_list() -> void:
