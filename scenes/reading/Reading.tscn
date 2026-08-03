@@ -1,34 +1,16 @@
 [gd_scene format=3 uid="uid://ddainltp6ir8u"]
 
 [ext_resource type="Script" uid="uid://u2x24fu82pmb" path="res://scenes/reading/reading.gd" id="1_oshe3"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_lki6g"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_wsob8"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_fd08m"]
 [ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="4_lcoe2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhcqr"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
-corner_radius_bottom_right = 150
-corner_radius_bottom_left = 150
-expand_margin_top = 45.0
+[ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="5_553gl"]
+[ext_resource type="PackedScene" uid="uid://d077on3j3i6pd" path="res://scenes/shared/AudioPanel.tscn" id="6_bgd46"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
 font = ExtResource("3_fd08m")
 font_size = 45
-
-[sub_resource type="LabelSettings" id="LabelSettings_48fkr"]
-font = ExtResource("3_fd08m")
-font_size = 60
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_3afir"]
-font = ExtResource("3_fd08m")
-font_size = 45
-font_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_553gl"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
-corner_radius_top_left = 150
-corner_radius_top_right = 150
 
 [node name="Reading" type="Control" unique_id=393705888]
 layout_mode = 3
@@ -46,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.9372549, 0.9647059, 1, 1)
+color = Color(0.17254902, 0.21960784, 0.49803922, 1)
 
 [node name="BackgroundImage" type="TextureRect" parent="." unique_id=1399288596]
 layout_mode = 1
@@ -63,7 +45,7 @@ anchor_right = 1.0
 offset_top = 30.0
 offset_bottom = 320.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
+theme_override_styles/panel = ExtResource("2_lki6g")
 
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
 layout_mode = 2
@@ -108,94 +90,11 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 30
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainLayout" unique_id=1131021853]
+[node name="PageView" type="Control" parent="MarginContainer/MainLayout" unique_id=1339141423]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("5_553gl")
+metadata/_custom_type_script = "uid://c80kxm3atqo2l"
 
-[node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 40
-
-[node name="ReadingImage" type="TextureRect" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
-layout_mode = 2
-
-[node name="ReadingTitleLabel" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=867229441]
-custom_minimum_size = Vector2(950, 0)
-layout_mode = 2
-text = "How to Use Dictionary"
-label_settings = SubResource("LabelSettings_48fkr")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="ParagraphsContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
-layout_mode = 2
-theme_override_constants/separation = 35
-
-[node name="QuestionsSection" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1136462616]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="QuestionsTitle" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=939271501]
-layout_mode = 2
-text = "Think About It"
-label_settings = SubResource("LabelSettings_3afir")
-
-[node name="QuestionsContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=1386943664]
-layout_mode = 2
-theme_override_constants/separation = 35
-
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]
-
-[node name="AudioControlPanel" type="PanelContainer" parent="." unique_id=1574820956]
-visible = false
+[node name="AudioPanel" parent="." unique_id=418187207 instance=ExtResource("6_bgd46")]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -191.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_553gl")
-
-[node name="MarginContainer" type="MarginContainer" parent="AudioControlPanel" unique_id=2063649944]
-layout_mode = 2
-theme_override_constants/margin_left = 70
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 70
-theme_override_constants/margin_bottom = 30
-
-[node name="AudioUILayout" type="VBoxContainer" parent="AudioControlPanel/MarginContainer" unique_id=886885469]
-layout_mode = 2
-theme_override_constants/separation = 69
-
-[node name="AudioSlider" type="HSlider" parent="AudioControlPanel/MarginContainer/AudioUILayout" unique_id=214520919]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="ControlsLayout" type="HBoxContainer" parent="AudioControlPanel/MarginContainer/AudioUILayout" unique_id=316315375]
-layout_mode = 2
-theme_override_constants/separation = 47
-alignment = 1
-
-[node name="RewindButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=588488362]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "-10s"
-
-[node name="PlayPauseButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=2136402095]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Pause"
-
-[node name="ForwardButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=1691125835]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "+10s"
-
-[node name="CloseAudioButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=218466135]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "X"

@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bup0mtxrin4q2" path="res://scenes/book_menu/book_menu.gd" id="1_fjcg3"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_1vrhx"]
+[ext_resource type="PackedScene" uid="uid://b4q4amyvxdy0n" path="res://scenes/dynamic_background/animated_background.tscn" id="2_5241p"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_rdkw2"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_vlp4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjcg3"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 0)
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
 expand_margin_top = 45.0
@@ -30,14 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fjcg3")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1406101027]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.9372549, 0.9647059, 1, 1)
+[node name="AnimatedBackground" parent="." unique_id=1120716659 instance=ExtResource("2_5241p")]
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=112643346]
 layout_mode = 1

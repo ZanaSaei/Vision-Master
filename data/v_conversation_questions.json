@@ -1,0 +1,334 @@
+{
+  "title": "Conversation Questions and Answers - Vision 1, 2, 3",
+  "description": "All questions after conversations with answers based on conversation text",
+  "books": [
+	{
+	  "book": 1,
+	  "title": "Vision 1",
+	  "grade": 10,
+	  "lessons": [
+		{
+		  "lesson": 1,
+		  "lesson_title": "Saving Nature",
+		  "conversation_title": "Visiting the Museum of Nature and Wildlife",
+		  "characters": ["Maryam", "Mr. Razavi"],
+		  "setting": "Museum of Nature and Wildlife",
+		  "questions": [
+			{
+			  "id": "v1_l1_q1",
+			  "question": "Where are they talking?",
+			  "type": "comprehension",
+			  "answer": "They are talking at the Museum of Nature and Wildlife.",
+			  "evidence": "Maryam is visiting the Museum of Nature and Wildlife. She's talking to Mr. Razavi, who works in the museum."
+			},
+			{
+			  "id": "v1_l1_q2",
+			  "question": "Are there many cheetahs alive?",
+			  "type": "comprehension",
+			  "answer": "No, there are not many cheetahs alive. Only around 70 of them are alive.",
+			  "evidence": "Maryam says: 'I heard around 70 of them are alive. Yes?' and Mr. Razavi confirms: 'Right, but the number will increase.'"
+			},
+			{
+			  "id": "v1_l1_q3",
+			  "question": "Do you take care of animals?",
+			  "type": "personal",
+			  "sample_answer": "Yes, I take care of animals. I have a cat at home and I feed it every day. I also try not to hurt any animals in nature.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		},
+		{
+		  "lesson": 2,
+		  "lesson_title": "Wonders of Creation",
+		  "conversation_title": "Visiting Iranian National Observatory",
+		  "characters": ["Alireza", "Ms. Tabesh"],
+		  "setting": "Iranian National Observatory",
+		  "questions": [
+			{
+			  "id": "v1_l2_q1",
+			  "question": "How are the planets different?",
+			  "type": "comprehension",
+			  "answer": "The planets are different in three ways: they go around the Sun in different orbits, they have different colors and sizes, and they have different features. Some are rocky like Mars, some have rings like Saturn, and some have moons like Uranus.",
+			  "evidence": "Ms. Tabesh says: 'They go around the Sun in different orbits. They have different colors and sizes, too. Some are rocky like Mars, some have rings like Saturn and some have moons like Uranus.'"
+			},
+			{
+			  "id": "v1_l2_q2",
+			  "question": "Can we see all planets without a telescope?",
+			  "type": "comprehension",
+			  "answer": "No, we cannot see all planets without a telescope. We can see Mercury, Venus, Mars, Jupiter, and Saturn without a telescope, but we can see Uranus and Neptune only with powerful telescopes.",
+			  "evidence": "Ms. Tabesh says: 'We can see the planets nearer to us without a telescope, such as Mercury, Venus, Mars, Jupiter and Saturn. We can see Uranus and Neptune only with powerful telescopes.'"
+			},
+			{
+			  "id": "v1_l2_q3",
+			  "question": "Do you know the names of the planets in Persian?",
+			  "type": "personal",
+			  "sample_answer": "Yes, I know some of them. For example, Mars is 'Merikh', Venus is 'Zohreh', Jupiter is 'Moshtari', and Saturn is 'Keyvan' in Persian.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		},
+		{
+		  "lesson": 3,
+		  "lesson_title": "The Value of Knowledge",
+		  "conversation_title": "Talking about Famous Iranian Scientists",
+		  "characters": ["Roya", "Mahsa"],
+		  "setting": "Library",
+		  "questions": [
+			{
+			  "id": "v1_l3_q1",
+			  "question": "Were Mahsa and Roya in a laboratory?",
+			  "type": "comprehension",
+			  "answer": "No, they were not in a laboratory. They were in the library.",
+			  "evidence": "The text says: 'Roya and Mahsa are leaving the library.'"
+			},
+			{
+			  "id": "v1_l3_q2",
+			  "question": "Who came to the library sooner, Mahsa or Roya?",
+			  "type": "comprehension",
+			  "answer": "Mahsa came to the library sooner than Roya.",
+			  "evidence": "Roya says: 'When I came in, you were reading a book.' This means Mahsa was already there before Roya arrived."
+			},
+			{
+			  "id": "v1_l3_q3",
+			  "question": "Do you know any interesting story about famous scientists?",
+			  "type": "personal",
+			  "sample_answer": "Yes, I know that Thomas Edison failed thousands of times before he invented the light bulb. He said: 'I have not failed. I've just found 10,000 ways that won't work.' This shows that hard work and never giving up are the keys to success.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		},
+		{
+		  "lesson": 4,
+		  "lesson_title": "Traveling the World",
+		  "conversation_title": "Finding a Good Tourist Destination",
+		  "characters": ["Diego", "Carlos Sabato"],
+		  "setting": "Travel agency in Madrid, Spain",
+		  "questions": [
+			{
+			  "id": "v1_l4_q1",
+			  "question": "What is China famous for?",
+			  "type": "comprehension",
+			  "answer": "China is famous for the Great Wall.",
+			  "evidence": "Carlos says: 'You can visit China. It is famous for the Great Wall.'"
+			},
+			{
+			  "id": "v1_l4_q2",
+			  "question": "Does Diego like traveling?",
+			  "type": "comprehension",
+			  "answer": "Yes, Diego likes traveling. He is planning for his summer vacation and wants to visit Asia. He has already been to Beijing two years ago.",
+			  "evidence": "Diego says: 'I am planning for my summer vacation' and 'I want to visit Asia.' He also mentions: 'I was in Beijing two years ago.'"
+			},
+			{
+			  "id": "v1_l4_q3",
+			  "question": "Where do you want to go for your vacation?",
+			  "type": "personal",
+			  "sample_answer": "I want to go to Isfahan for my vacation because it has many beautiful historical sites like Naqsh-e Jahan Square and Sheikh Lotfollah Mosque.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "book": 2,
+	  "title": "Vision 2",
+	  "grade": 11,
+	  "lessons": [
+		{
+		  "lesson": 1,
+		  "lesson_title": "Understanding People",
+		  "conversation_title": "Talking about Languages",
+		  "characters": ["Meysam", "Mr. Saberian"],
+		  "setting": "Mr. Saberian's office at IRIB",
+		  "questions": [
+			{
+			  "id": "v2_l1_q1",
+			  "question": "Where does Mr. Saberian work?",
+			  "type": "comprehension",
+			  "answer": "Mr. Saberian works for IRIB (Islamic Republic of Iran Broadcasting). He is a translator.",
+			  "evidence": "The text says: 'Babak Saberian is a translator who works for IRIB.'"
+			},
+			{
+			  "id": "v2_l1_q2",
+			  "question": "Was Mr. Saberian living in a foreign country when he was 13?",
+			  "type": "comprehension",
+			  "answer": "No, he was not living in a foreign country when he was 13. He began learning English at school in Iran when he was thirteen. He went to a foreign country (Moscow) later when he was a university student to learn Russian.",
+			  "evidence": "Mr. Saberian says: 'I began learning English at school when I was thirteen. Then I began learning French in a language institute when I was fifteen. And I learned Russian when I was a university student in Moscow.'"
+			},
+			{
+			  "id": "v2_l1_q3",
+			  "question": "How many languages do you know?",
+			  "type": "personal",
+			  "sample_answer": "I know two languages: Persian, which is my mother tongue, and English, which I am learning at school.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		},
+		{
+		  "lesson": 2,
+		  "lesson_title": "A Healthy Lifestyle",
+		  "conversation_title": "Talking about Lifestyle",
+		  "characters": ["Behzad", "Sina"],
+		  "setting": "Phone call between old friends",
+		  "questions": [
+			{
+			  "id": "v2_l2_q1",
+			  "question": "What does Sina do at home?",
+			  "type": "comprehension",
+			  "answer": "Sina surfs the net and plays computer games at home. He rarely goes out and hangs out with his friends. He prefers to stay home and watch movies on the weekend.",
+			  "evidence": "Sina says: 'I do different things like surfing the net and playing computer games.' and 'I rarely go out and hang out with my friends.' and 'I prefer to stay home and watch my movies on the weekend.'"
+			},
+			{
+			  "id": "v2_l2_q2",
+			  "question": "Is Sina a sportsperson?",
+			  "type": "comprehension",
+			  "answer": "No, Sina is not a sportsperson. He rarely goes out, has not exercised for a long time, and has gained five kilos in three months. He is described as a 'couch potato' by Behzad.",
+			  "evidence": "Behzad says: 'Stop being a couch potato! I guess you haven't exercised for a long time.' Sina admits: 'I've gained five kilos in three months. I really do not like to move!'"
+			},
+			{
+			  "id": "v2_l2_q3",
+			  "question": "What is your favorite sport?",
+			  "type": "personal",
+			  "sample_answer": "My favorite sport is football. I play it with my friends every Friday afternoon in the park near our house.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		},
+		{
+		  "lesson": 3,
+		  "lesson_title": "Art and Culture",
+		  "conversation_title": "Shopping Handicrafts",
+		  "characters": ["Reza", "Tourist"],
+		  "setting": "A handicraft shop (Reza's father's workshop and store)",
+		  "questions": [
+			{
+			  "id": "v2_l3_q1",
+			  "question": "What did the tourist buy?",
+			  "type": "comprehension",
+			  "answer": "The tourist bought two items: a Qashqai Gabbeh for 85 dollars and a calligraphic tile for 30 dollars.",
+			  "evidence": "Reza says: 'you can take an Isfahan Termeh or a Qashqai Gabbeh.' The tourist says: 'I'll take both.' referring to the Gabbeh (85 dollars) and the calligraphic tile (30 dollars)."
+			},
+			{
+			  "id": "v2_l3_q2",
+			  "question": "Are all Persian handicrafts expensive?",
+			  "type": "comprehension",
+			  "answer": "No, not all Persian handicrafts are expensive. The price depends on the size and type. While a Persian carpet may seem expensive, there are more affordable options like a Qashqai Gabbeh (85 dollars) or a calligraphic tile (30 dollars). There is also a 20 percent discount for purchases over 100 dollars.",
+			  "evidence": "Reza says: 'The price depends on its size. Instead, you can take an Isfahan Termeh or a Qashqai Gabbeh.' and 'If you buy more than 100 dollars, you'll get a 20 percent discount. You can take this calligraphic tile for only 30 dollars.'"
+			},
+			{
+			  "id": "v2_l3_q3",
+			  "question": "What is the most famous handicraft of your city or village?",
+			  "type": "personal",
+			  "sample_answer": "The most famous handicraft of my city is carpet weaving. Many families in our area make beautiful hand-woven carpets with traditional patterns.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "book": 3,
+	  "title": "Vision 3",
+	  "grade": 12,
+	  "lessons": [
+		{
+		  "lesson": 1,
+		  "lesson_title": "Sense of Appreciation",
+		  "conversation_title": "Talking about a Great Person (Dr. Gharib)",
+		  "characters": ["Sara", "Nurse"],
+		  "setting": "Children's Medical Center",
+		  "questions": [
+			{
+			  "id": "v3_l1_q1",
+			  "question": "When was Dr. Gharib born?",
+			  "type": "comprehension",
+			  "answer": "Dr. Gharib was born in Tehran in 1288.",
+			  "evidence": "The nurse says: 'Dr. Gharib was born in Tehran in 1288.'"
+			},
+			{
+			  "id": "v3_l1_q2",
+			  "question": "Why was Dr. Gharib regarded as a kind physician?",
+			  "type": "comprehension",
+			  "answer": "Dr. Gharib was regarded as a kind and dedicated physician because he spared no pains to cure sick children. He was very friendly and helpful to poor families. He was also a generous man.",
+			  "evidence": "The nurse says: 'Dr. Gharib was also a generous man. He spared no pains to cure sick children. He was very friendly and helpful to poor families. Not surprisingly, he was regarded as a dedicated physician.'"
+			},
+			{
+			  "id": "v3_l1_q3",
+			  "question": "Have you seen Dr. Gharib TV series?",
+			  "type": "personal",
+			  "sample_answer": "Yes, I have seen the Dr. Gharib TV series. It was very interesting and showed how he dedicated his life to helping sick children in Iran.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		},
+		{
+		  "lesson": 2,
+		  "lesson_title": "Look it Up!",
+		  "conversation_title": "Talking about Dictionaries",
+		  "characters": ["Majid", "Mr. Iranmehr"],
+		  "setting": "School, during the break",
+		  "questions": [
+			{
+			  "id": "v3_l2_q1",
+			  "question": "What type of dictionary does Mr. Iranmehr recommend?",
+			  "type": "comprehension",
+			  "answer": "Mr. Iranmehr recommends a learner's dictionary. Specifically, he suggests a monolingual dictionary at the elementary level in pocket size. He also mentions that Majid can use a free online dictionary or free dictionary apps for PCs and smart phones.",
+			  "evidence": "Mr. Iranmehr says: 'First, I recommend a learner's dictionary.' and 'I suppose a monolingual dictionary is more suitable for you.' and 'For you as a high school student, an elementary one is OK.' and 'Yes, a pocket dictionary.'"
+			},
+			{
+			  "id": "v3_l2_q2",
+			  "question": "What factors do you consider when you want to choose a dictionary?",
+			  "type": "personal",
+			  "sample_answer": "When I want to choose a dictionary, I consider the type (monolingual or bilingual), the level (elementary, intermediate, or advanced), the size (pocket or full), and whether it has good examples and pronunciation guides.",
+			  "note": "This is a personal question for the student to answer."
+			},
+			{
+			  "id": "v3_l2_q3",
+			  "question": "What type of dictionary do you often use?",
+			  "type": "personal",
+			  "sample_answer": "I often use an English-Persian bilingual dictionary on my smart phone because it is fast and convenient. Sometimes I also use an online monolingual dictionary to understand the English definitions.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		},
+		{
+		  "lesson": 3,
+		  "lesson_title": "Renewable Energy",
+		  "conversation_title": "Talking about Wind Turbines",
+		  "characters": ["Emad", "Father"],
+		  "setting": "On the road to Guilan, in Manjeel",
+		  "questions": [
+			{
+			  "id": "v3_l3_q1",
+			  "question": "Where are Emad and his father?",
+			  "type": "comprehension",
+			  "answer": "Emad and his father are in Manjeel, on the way to Guilan. They are traveling and Emad sees huge wind turbines there.",
+			  "evidence": "The text says: 'Emad and his father are traveling to Guilan. On the way, in Manjeel, Emad sees huge wind turbines.'"
+			},
+			{
+			  "id": "v3_l3_q2",
+			  "question": "Has Emad ever traveled to Yazd?",
+			  "type": "comprehension",
+			  "answer": "It seems that Emad has not traveled to Yazd yet. He asks his father: 'Daddy, can we travel to Yazd this Norooz?' which suggests he wants to go there for the first time. However, he has read about Yazd's wind towers in books.",
+			  "evidence": "Emad says: 'Daddy, can we travel to Yazd this Norooz?' and Father replies: 'That's OK with me. Let's check it with others.' This implies the trip has not happened yet. Emad also says: 'These wind turbines remind me of what I read about using wind power in Yazd's buildings.'"
+			},
+			{
+			  "id": "v3_l3_q3",
+			  "question": "What types of clean energy can you find in your city or village?",
+			  "type": "personal",
+			  "sample_answer": "In my city, we can find solar energy because there are many sunny days throughout the year. Some buildings have solar panels on their roofs. There is also a small wind farm near our city that produces electricity from wind power.",
+			  "note": "This is a personal question for the student to answer."
+			}
+		  ]
+		}
+	  ]
+	}
+  ],
+  "statistics": {
+	"total_questions": 30,
+	"comprehension_questions": 20,
+	"personal_questions": 10,
+	"books_covered": 3,
+	"lessons_covered": 10
+  }
+}

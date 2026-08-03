@@ -1,0 +1,205 @@
+{
+  "category": "pronunciation",
+  "title": {"en": "Pronunciation", "fa": "تلفظ"},
+  "icon": "🗣️",
+  "books": {
+	"1": {
+	  "1": {
+		"lesson_title": {"en": "Saving Nature", "fa": "نجات طبیعت"},
+		"topic": {"en": "Falling Intonation", "fa": "آهنگ نزولی"},
+		"rule": {
+		  "en": "When you ask for or give new information, use falling intonation.",
+		  "fa": "هنگامی که اطلاعات جدیدی می‌پرسید یا می‌دهید، از آهنگ نزولی استفاده کنید."
+		},
+		"items": [
+		  {"text": "Where are you going to go? I am going to go to Bam.", "fa": "کجا می‌خواهی بروی؟ من می‌خواهم به بم بروم.", "audio": "res://assets/audio/v1/l1/p1.mp3", "intonation": "falling", "stress": ["going", "Bam"]},
+		  {"text": "What does your brother do? He works in a zoo. He loves animals.", "fa": "برادرت چه کار می‌کند؟ او در باغ‌وحش کار می‌کند. او حیوانات را دوست دارد.", "audio": "res://assets/audio/v1/l1/p2.mp3", "intonation": "falling", "stress": ["brother", "zoo", "loves"]},
+		  {"text": "Dr. James will buy a new laptop. His old laptop doesn't work.", "fa": "دکتر جیمز یک لپ‌تاپ جدید خواهد خرید. لپ‌تاپ قدیمی‌اش کار نمی‌کند.", "audio": "res://assets/audio/v1/l1/p3.mp3", "intonation": "falling", "stress": ["new", "doesn't"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v1_l1_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "When do we use falling intonation?", "fa": "چه زمانی از آهنگ نزولی استفاده می‌کنیم؟"},
+		   "items": [{"question": {"en": "Falling intonation is used when:", "fa": "آهنگ نزولی زمانی استفاده می‌شود که:"},
+					  "options": ["Asking for or giving new information", "Checking known information", "Contrasting two ideas"], "answer": 0,
+					  "explanation": {"en": "We use falling intonation when asking for or giving new information.", "fa": "هنگام پرسیدن یا دادن اطلاعات جدید از آهنگ نزولی استفاده می‌کنیم."}}]}
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Wonders of Creation", "fa": "شگفتی‌های آفرینش"},
+		"topic": {"en": "Rising Intonation", "fa": "آهنگ صعودی"},
+		"rule": {
+		  "en": "When you check information, use rising intonation.",
+		  "fa": "هنگامی که می‌خواهید اطلاعاتی را بررسی یا تأیید کنید، از آهنگ صعودی استفاده کنید."
+		},
+		"items": [
+		  {"text": "Is this your new car?", "fa": "آیا این ماشین جدید شماست؟", "audio": "res://assets/audio/v1/l2/p1.mp3", "intonation": "rising", "stress": ["new", "car"]},
+		  {"text": "Was the book interesting?", "fa": "آیا کتاب جالب بود؟", "audio": "res://assets/audio/v1/l2/p2.mp3", "intonation": "rising", "stress": ["book", "interesting"]},
+		  {"text": "Are they the most expensive houses in this city?", "fa": "آیا آن‌ها گران‌ترین خانه‌ها در این شهر هستند؟", "audio": "res://assets/audio/v1/l2/p3.mp3", "intonation": "rising", "stress": ["most", "expensive"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v1_l2_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "Identify the correct intonation.", "fa": "آهنگ صحیح را شناسایی کنید."},
+		   "items": [{"question": {"en": "'Is this problem easier than that one?' ends with:", "fa": "جمله 'Is this problem easier than that one?' با چه آهنگی تمام می‌شود؟"},
+					  "options": ["Falling intonation", "Rising intonation", "Flat intonation"], "answer": 1,
+					  "explanation": {"en": "Yes/No questions checking information use rising intonation.", "fa": "سؤالات بله/خیر برای بررسی اطلاعات از آهنگ صعودی استفاده می‌کنند."}}]}
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "The Value of Knowledge", "fa": "ارزش دانش"},
+		"topic": {"en": "Emphatic Stress", "fa": "تأکید کلامی"},
+		"rule": {
+		  "en": "When you want to put special emphasis on something, you say it more strongly.",
+		  "fa": "وقتی می‌خواهید روی چیزی تأکید ویژه‌ای بگذارید، آن را محکم‌تر بیان می‌کنید."
+		},
+		"items": [
+		  {"text": "Were you doing the research? No, Ali was.", "fa": "آیا تو داشتی تحقیق می‌کردی؟ نه، علی بود.", "audio": "res://assets/audio/v1/l3/p1.mp3", "intonation": "emphatic", "stress": ["you", "Ali"]},
+		  {"text": "Who broke the window? It wasn't me.", "fa": "چه کسی پنجره را شکست؟ من نبودم.", "audio": "res://assets/audio/v1/l3/p2.mp3", "intonation": "emphatic", "stress": ["Who", "wasn't", "me"]},
+		  {"text": "Is it Jim's car over there? No, his car is white.", "fa": "آیا آن ماشین جیم آنجاست؟ نه، ماشین او سفید است.", "audio": "res://assets/audio/v1/l3/p3.mp3", "intonation": "emphatic", "stress": ["Jim's", "white"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v1_l3_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "Which word has emphatic stress?", "fa": "کدام کلمه تأکید کلامی دارد؟"},
+		   "items": [{"question": {"en": "In 'No, Ali was.', the stress is on:", "fa": "در جمله 'No, Ali was.'، تأکید روی کدام است؟"},
+					  "options": ["No", "Ali", "was"], "answer": 1,
+					  "explanation": {"en": "We emphasize the corrected information ('Ali').", "fa": "ما روی اطلاعات اصلاح‌شده ('Ali') تأکید می‌کنیم."}}]}
+		]
+	  },
+	  "4": {
+		"lesson_title": {"en": "Traveling the World", "fa": "سفر به دور جهان"},
+		"topic": {"en": "Contrastive Stress", "fa": "تأکید تقابلی"},
+		"rule": {
+		  "en": "When you want to contrast two things, you say both of them with emphasis.",
+		  "fa": "وقتی می‌خواهید دو چیز را با هم مقایسه یا تضاد کنید، هر دو را با تأکید بیان می‌کنید."
+		},
+		"items": [
+		  {"text": "Were you doing research or studying?", "fa": "آیا داشتی تحقیق می‌کردی یا درس می‌خواندی؟", "audio": "res://assets/audio/v1/l4/p1.mp3", "intonation": "contrastive", "stress": ["research", "studying"]},
+		  {"text": "Who broke the window? Ali or Amir?", "fa": "چه کسی پنجره را شکست؟ علی یا امیر؟", "audio": "res://assets/audio/v1/l4/p2.mp3", "intonation": "contrastive", "stress": ["Ali", "Amir"]},
+		  {"text": "Mom, should we help you or dad?", "fa": "مامان، باید به تو کمک کنیم یا به بابا؟", "audio": "res://assets/audio/v1/l4/p3.mp3", "intonation": "contrastive", "stress": ["you", "dad"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v1_l4_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "Identify the contrasted words.", "fa": "کلمات متضاد را شناسایی کنید."},
+		   "items": [{"question": {"en": "In 'Was Jim's car white or blue?', the contrasted words are:", "fa": "در جمله 'Was Jim's car white or blue?'، کلمات متضاد کدامند؟"},
+					  "options": ["Jim's and car", "white and blue", "Was and car"], "answer": 1,
+					  "explanation": {"en": "The two options being contrasted are 'white' and 'blue'.", "fa": "دو گزینه‌ای که با هم تضاد دارند 'white' و 'blue' هستند."}}]}
+		]
+	  }
+	},
+	"2": {
+	  "1": {
+		"lesson_title": {"en": "Understanding People", "fa": "درک مردم"},
+		"topic": {"en": "Teen Numbers vs. Ten Numbers", "fa": "اعداد teen در برابر ten"},
+		"rule": {
+		  "en": "'Ten numbers' (ten, twenty, thirty...) have strong stress on their FIRST part. 'Teen numbers' (thirteen, fourteen...) have strong stress on 'TEEN'.",
+		  "fa": "اعداد «ten» (ten، twenty، thirty...) در بخش اول استرس دارند. اعداد «teen» (thirteen، fourteen...) در بخش «TEEN» استرس دارند."
+		},
+		"items": [
+		  {"text": "She is almost thirTEEN.", "fa": "او تقریباً سیزده ساله است.", "audio": "res://assets/audio/v2/l1/p1.mp3", "intonation": "falling", "stress": ["thirteen"]},
+		  {"text": "Did you say EIGHty or eighTEEN?", "fa": "گفتی هشتاد یا هجده؟", "audio": "res://assets/audio/v2/l1/p2.mp3", "intonation": "contrastive", "stress": ["eighty", "eighteen"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v2_l1_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "Which word has stress on the second part?", "fa": "کدام کلمه در بخش دوم استرس دارد؟"},
+		   "items": [{"question": {"en": "Choose the word with second-part stress:", "fa": "کلمه‌ای با استرس بخش دوم را انتخاب کنید:"},
+					  "options": ["THIRty", "thirTEEN", "FORty"], "answer": 1,
+					  "explanation": {"en": "'Teen' numbers always stress the 'teen' part.", "fa": "اعداد 'teen' همیشه روی بخش 'teen' استرس دارند."}}]}
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "A Healthy Lifestyle", "fa": "سبک زندگی سالم"},
+		"topic": {"en": "Stress in Emergencies", "fa": "استرس در مواقع اضطراری"},
+		"rule": {
+		  "en": "In emergencies, all words are important. In that case, all words carry equal, strong stress.",
+		  "fa": "در مواقع اضطراری، همه کلمات مهم هستند. در این حالت، همه کلمات استرس برابر و قوی دارند."
+		},
+		"items": [
+		  {"text": "Get aWAY!", "fa": "دور شو!", "audio": "res://assets/audio/v2/l2/p1.mp3", "intonation": "falling", "stress": ["get", "away"]},
+		  {"text": "Wake UP!", "fa": "بیدار شو!", "audio": "res://assets/audio/v2/l2/p2.mp3", "intonation": "falling", "stress": ["wake", "up"]},
+		  {"text": "Take CARE!", "fa": "مراقب باش!", "audio": "res://assets/audio/v2/l2/p3.mp3", "intonation": "falling", "stress": ["take", "care"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v2_l2_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "How do we pronounce emergency phrases?", "fa": "عبارات اضطراری را چگونه تلفظ می‌کنیم؟"},
+		   "items": [{"question": {"en": "In 'Watch out!', which words are stressed?", "fa": "در 'Watch out!'، کدام کلمات استرس دارند؟"},
+					  "options": ["Only 'Watch'", "Only 'out'", "Both words equally"], "answer": 2,
+					  "explanation": {"en": "In emergencies, all words carry strong stress.", "fa": "در مواقع اضطراری، همه کلمات استرس قوی دارند."}}]}
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Art and Culture", "fa": "هنر و فرهنگ"},
+		"topic": {"en": "Intonation of Conditional Sentences", "fa": "آهنگ جملات شرطی"},
+		"rule": {
+		  "en": "Both rising and falling intonations are used in conditional sentences. The 'if' clause often rises, and the main clause falls.",
+		  "fa": "در جملات شرطی از هر دو آهنگ صعودی و نزولی استفاده می‌شود. بند 'if' اغلب بالا می‌رود و بند اصلی پایین می‌آید."
+		},
+		"items": [
+		  {"text": "If it snows, people will drive carefully.", "fa": "اگر برف ببارد، مردم با احتیاط رانندگی خواهند کرد.", "audio": "res://assets/audio/v2/l3/p1.mp3", "intonation": "mixed", "stress": ["snows", "carefully"]},
+		  {"text": "If I earn enough money next year, I will buy a new car.", "fa": "اگر سال آینده پول کافی به دست آورم، یک ماشین جدید خواهم خرید.", "audio": "res://assets/audio/v2/l3/p2.mp3", "intonation": "mixed", "stress": ["year", "car"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v2_l3_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "What is the intonation of the 'if' clause?", "fa": "آهنگ بند 'if' چیست؟"},
+		   "items": [{"question": {"en": "'If you eat healthy food...' ends with:", "fa": "'If you eat healthy food...' با چه آهنگی تمام می‌شود؟"},
+					  "options": ["Rising intonation", "Falling intonation", "Flat intonation"], "answer": 0,
+					  "explanation": {"en": "The 'if' clause is incomplete, so it rises to show more is coming.", "fa": "بند 'if' ناقص است، بنابراین برای نشان دادن ادامه جمله بالا می‌رود."}}]}
+		]
+	  }
+	},
+	"3": {
+	  "1": {
+		"lesson_title": {"en": "Sense of Appreciation", "fa": "حس قدردانی"},
+		"topic": {"en": "Tag Question Intonation", "fa": "آهنگ سؤالات ضمیمه‌ای"},
+		"rule": {
+		  "en": "Use falling intonation to confirm a fact you believe is true. Use rising intonation to signal uncertainty or ask a real question.",
+		  "fa": "برای تأیید واقعیتی که باور دارید از آهنگ نزولی و برای بیان عدم اطمینان یا پرسش واقعی از آهنگ صعودی استفاده کنید."
+		},
+		"items": [
+		  {"text": "Mina is happy, isn't she?", "fa": "مینا خوشحال است، نیست؟", "audio": "res://assets/audio/v3/l1/p1.mp3", "intonation": "falling", "stress": ["happy"]},
+		  {"text": "George wasn't hungry, was he?", "fa": "جورج گرسنه نبود، بود؟", "audio": "res://assets/audio/v3/l1/p2.mp3", "intonation": "rising", "stress": ["hungry"]},
+		  {"text": "The boys have broken the window, haven't they?", "fa": "پسرها پنجره را شکسته‌اند، نه؟", "audio": "res://assets/audio/v3/l1/p3.mp3", "intonation": "falling", "stress": ["broken"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v3_l1_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "When do we use rising intonation in tag questions?", "fa": "چه زمانی در سؤالات ضمیمه‌ای از آهنگ صعودی استفاده می‌کنیم؟"},
+		   "items": [{"question": {"en": "Rising intonation shows:", "fa": "آهنگ صعودی نشان‌دهنده چیست؟"},
+					  "options": ["Certainty", "Uncertainty / A real question", "Anger"], "answer": 1,
+					  "explanation": {"en": "Rising intonation means you are not sure and want an answer.", "fa": "آهنگ صعودی یعنی شما مطمئن نیستید و به دنبال پاسخ هستید."}}]}
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Look it Up!", "fa": "دنبالش بگرد!"},
+		"topic": {"en": "Imaginary Situations Intonation", "fa": "آهنگ موقعیت‌های خیالی"},
+		"rule": {
+		  "en": "In Type II conditionals (imaginary), the 'if' clause rises and the 'would' clause falls, emphasizing the imaginary nature.",
+		  "fa": "در شرطی نوع دوم (خیالی)، بند 'if' بالا می‌رود و بند 'would' پایین می‌آید و بر خیالی بودن تأکید می‌کند."
+		},
+		"items": [
+		  {"text": "If the old man had his glasses, he could read the paper.", "fa": "اگر پیرمرد عینکش را داشت، می‌توانست روزنامه بخواند.", "audio": "res://assets/audio/v3/l2/p1.mp3", "intonation": "mixed", "stress": ["glasses", "read"]},
+		  {"text": "I would buy a house if I were you.", "fa": "اگر جای تو بودم، یک خانه می‌خریدم.", "audio": "res://assets/audio/v3/l2/p2.mp3", "intonation": "mixed", "stress": ["buy", "you"]}
+		],
+		"exercises": [
+		  {"exercise_id": "v3_l2_p_ex1", "type": "multiple_choice",
+		   "instruction": {"en": "Identify the intonation pattern.", "fa": "الگوی آهنگ را شناسایی کنید."},
+		   "items": [{"question": {"en": "'If I were you, I would study harder.' has:", "fa": "جمله 'If I were you, I would study harder.' دارای الگوی زیر است:"},
+					  "options": ["Rising then Falling", "Falling then Rising", "All Rising"], "answer": 0,
+					  "explanation": {"en": "Imaginary 'if' rises, result 'would' falls.", "fa": "'if' خیالی بالا می‌رود، نتیجه 'would' پایین می‌آید."}}]}
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Renewable Energy", "fa": "انرژی تجدیدپذیر"},
+		"topic": {"en": "Review / No Specific Pronunciation Section", "fa": "مرور / بدون بخش تلفظ خاص"},
+		"rule": {
+		  "en": "This lesson focuses on grammar and speaking. Practice the intonation and stress patterns from previous lessons.",
+		  "fa": "این درس بر گرامر و گفتار تمرکز دارد. الگوهای آهنگ و استرس درس‌های قبلی را تمرین کنید."
+		},
+		"items": [],
+		"exercises": []
+	  }
+	}
+  },
+  "statistics": {
+	"total_lessons": 10,
+	"lessons_with_pronunciation": 9,
+	"books_covered": [1, 2, 3]
+  }
+}

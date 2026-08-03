@@ -10,7 +10,7 @@ bg_color = Color(0, 0.2901961, 0.2901961, 1)
 font = ExtResource("2_h4htg")
 font_size = 35
 
-[sub_resource type="LabelSettings" id="LabelSettings_5vw4b"]
+[sub_resource type="LabelSettings" id="LabelSettings_c73h7"]
 font = ExtResource("2_h4htg")
 font_size = 45
 
@@ -59,11 +59,26 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="TotalWordsLabel" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=2082631654]
+[node name="TotalWordsLabel" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=411886189]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_5vw4b")
+label_settings = SubResource("LabelSettings_c73h7")
 horizontal_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 3
+
+[node name="SearchContainer" type="HBoxContainer" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=135215983]
+layout_mode = 2
+
+[node name="SearchInput" type="LineEdit" parent="MenuPanel/MarginContainer/VBoxContainer/SearchContainer" unique_id=584777232]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_h4htg")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "جستجو در کلمات ....."
+
+[node name="ClearSearchButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer/SearchContainer" unique_id=2132784493]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "✕"
 
 [node name="HSeparator2" type="HSeparator" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=1270779918]
 layout_mode = 2

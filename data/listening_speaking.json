@@ -1,0 +1,708 @@
+{
+  "category": "listening_speaking",
+  "title": {"en": "Listening & Speaking", "fa": "شنیدار و گفتار"},
+  "icon": "🎧",
+  "books": {
+	"1": {
+	  "1": {
+		"lesson_title": {"en": "Saving Nature", "fa": "نجات طبیعت"},
+		"speaking": {
+		  "strategy_name": {"en": "Talking about Schedules & Plans", "fa": "صحبت درباره برنامه‌ها"},
+		  "icon": "📅",
+		  "intro": {
+			"en": "You may use the future tense to ask someone about their plans or talk about your own plans.",
+			"fa": "می‌توانید از زمان آینده برای پرسیدن درباره برنامه‌های دیگران یا صحبت درباره برنامه‌های خودتان استفاده کنید."
+		  },
+		  "patterns": [
+			{"q": {"en": "What will you do? / What are you going to do?", "fa": "چه کار خواهی کرد؟ / قرار است چه کار کنی؟"},
+			 "a": {"en": "I will ... / I am going to ...", "fa": "من ... خواهم کرد / قرار است ..."}},
+			{"q": {"en": "Where will you go? / Where are you going to go?", "fa": "کجا خواهی رفت؟ / قرار است کجا بروی؟"},
+			 "a": {"en": "I will go ... / I'm going to go ...", "fa": "من به ... خواهم رفت / قرار است به ... بروم"}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "Weekend Plans", "fa": "برنامه‌های آخر هفته"},
+			"turns": [
+			  {"role": "app",  "speaker": "Sara",  "text": "What are you going to do this weekend?", "fa": "این آخر هفته چه کار می‌کنی؟"},
+			  {"role": "user", "speaker": "You",   "text": "I am going to go to Golestan Forest.", "fa": "قصد دارم به جنگل گلستان بروم."},
+			  {"role": "app",  "speaker": "Sara",  "text": "Are you going to visit a museum?", "fa": "می‌خواهی از موزه دیدن کنی؟"},
+			  {"role": "user", "speaker": "You",   "text": "No, I am going to go out and enjoy wildlife.", "fa": "نه، می‌خواهم بیرون بروم و از حیات وحش لذت ببرم."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — the app will ask you. Answer aloud!", "fa": "روی یک گزینه بزنید — اپ از شما می‌پرسد. با صدای بلند جواب دهید!"},
+			"question_frame": "Are you going to ___ this weekend?",
+			"prompts": ["stay home", "read a book", "go to the museum", "visit our relatives", "go shopping", "study English"],
+			"sample_yes": "Yes, I am going to ___.",
+			"sample_no": "No, I am not going to ___."
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v1/l1/listening_1.mp3",
+			"transcript": {"en": "Alice is going to visit her grandmother this weekend. Alice will buy some flowers for her.", "fa": "آلیس قرار است این آخر هفته مادربزرگش را ببیند. آلیس برای او چند گل خواهد خرید."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v1_l1_lst_1a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "Alice is going to ___.", "fa": "آلیس قرار است ___."}, "answer": ["visit her grandmother", "visit her grandma"]},
+				 {"text": {"en": "Alice will ___.", "fa": "آلیس ___."}, "answer": ["buy some flowers"]}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v1/l1/listening_2.mp3",
+			"transcript": {"en": "Shahab is going to protect the forests. His family will take care of endangered animals.", "fa": "شهاب قرار است از جنگل‌ها محافظت کند. خانواده‌اش از حیوانات در خطر انقراض مراقبت خواهند کرد."},
+			"task": {"en": "Listen and tick what the speaker is going to do.", "fa": "گوش دهید و کاری را که گوینده قرار است انجام دهد علامت بزنید."},
+			"exercises": [
+			  {"exercise_id": "v1_l1_lst_2a", "type": "multiple_choice",
+			   "instruction": {"en": "What is Shahab going to do?", "fa": "شهاب قرار است چه کار کند؟"},
+			   "items": [
+				 {"question": {"en": "Shahab is going to ...", "fa": "شهاب قرار است ..."},
+				  "options": ["protect the forests", "hunt animals", "stay home"], "answer": 0}
+			   ]}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Wonders of Creation", "fa": "شگفتی‌های آفرینش"},
+		"speaking": {
+		  "strategy_name": {"en": "Asking about Details", "fa": "پرسیدن درباره جزئیات"},
+		  "icon": "🔎",
+		  "intro": {
+			"en": "You may use adjectives to describe something or ask about details such as the quality, size, age, and color.",
+			"fa": "می‌توانید از صفت‌ها برای توصیف چیزی یا پرسیدن درباره جزئیات مانند کیفیت، اندازه، سن و رنگ استفاده کنید."
+		  },
+		  "patterns": [
+			{"q": {"en": "How is (was) ...?", "fa": "... چگونه است (بود)؟"},
+			 "a": {"en": "It is (was) interesting / beautiful / nice.", "fa": "جالب / زیبا / خوب بود."}},
+			{"q": {"en": "What color is it?", "fa": "چه رنگی است؟"},
+			 "a": {"en": "It is black / white / yellow.", "fa": "سیاه / سفید / زرد است."}},
+			{"q": {"en": "Was it a modern house?", "fa": "آیا خانه‌ای مدرن بود؟"},
+			 "a": {"en": "Yes, it was. / No, it was an old house.", "fa": "بله، بود. / نه، خانه‌ای قدیمی بود."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "Describing a Dress", "fa": "توصیف یک لباس"},
+			"turns": [
+			  {"role": "app",  "speaker": "Leila", "text": "I bought a new dress yesterday.", "fa": "دیروز یک لباس جدید خریدم."},
+			  {"role": "user", "speaker": "You",   "text": "How was it? Was it beautiful?", "fa": "چطور بود؟ زیبا بود؟"},
+			  {"role": "app",  "speaker": "Leila", "text": "Yes, it was very beautiful and long.", "fa": "بله، خیلی زیبا و بلند بود."},
+			  {"role": "user", "speaker": "You",   "text": "What color was it?", "fa": "چه رنگی بود؟"},
+			  {"role": "app",  "speaker": "Leila", "text": "It was red.", "fa": "قرمز بود."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — describe it with adjectives!", "fa": "روی یک گزینه بزنید — آن را با صفت‌ها توصیف کنید!"},
+			"question_frame": "How is ___?",
+			"prompts": ["my best friend", "apple", "our school", "our English teacher", "Boostan Park", "pepper"],
+			"sample_yes": "It is small, green and fresh.",
+			"sample_no": ""
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v1/l2/listening_1.mp3",
+			"transcript": {"en": "She bought a beautiful dress. It was very nice and long.", "fa": "او یک لباس زیبا خرید. خیلی خوب و بلند بود."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v1_l2_lst_1a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "She bought ___.", "fa": "او ___ خرید."}, "answer": ["a beautiful dress"]},
+				 {"text": {"en": "It was ___.", "fa": "آن ___ بود."}, "answer": ["very nice and long"]}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v1/l2/listening_2.mp3",
+			"transcript": {"en": "She likes cooking. Cooking is interesting and healthy.", "fa": "او آشپزی را دوست دارد. آشپزی جالب و سالم است."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v1_l2_lst_2a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "She likes ___.", "fa": "او ___ را دوست دارد."}, "answer": ["cooking"]},
+				 {"text": {"en": "Cooking is ___.", "fa": "آشپزی ___ است."}, "answer": ["interesting and healthy"]}
+			   ]}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "The Value of Knowledge", "fa": "ارزش دانش"},
+		"speaking": {
+		  "strategy_name": {"en": "Narrating a Story", "fa": "روایت یک داستان"},
+		  "icon": "📖",
+		  "intro": {
+			"en": "You may use 'simple past' and 'past progressive' together to narrate a story. Past progressive is sometimes used to give background to the story.",
+			"fa": "می‌توانید از «گذشته ساده» و «گذشته استمراری» با هم برای روایت یک داستان استفاده کنید. گذشته استمراری گاهی برای دادن زمینه به داستان استفاده می‌شود."
+		  },
+		  "patterns": [
+			{"q": {"en": "What were you doing (yesterday at 8)?", "fa": "(دیروز ساعت ۸) داشتی چه کار می‌کردی؟"},
+			 "a": {"en": "I was reading a book when the phone rang.", "fa": "داشتم کتاب می‌خواندم که تلفن زنگ خورد."}},
+			{"q": {"en": "What was happening (yesterday at 8)?", "fa": "(دیروز ساعت ۸) چه اتفاقی داشت می‌افتاد؟"},
+			 "a": {"en": "We were talking when we heard a noise.", "fa": "داشتیم صحبت می‌کردیم که صدایی شنیدیم."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "A Kitty in the Kitchen", "fa": "یک بچه‌گربه در آشپزخانه"},
+			"turns": [
+			  {"role": "app",  "speaker": "Narrator", "text": "Last night at 8 o'clock we were sitting in the hall. We were talking about our day.", "fa": "دیشب ساعت ۸ در سالن نشسته بودیم. داشتیم درباره روزمان صحبت می‌کردیم."},
+			  {"role": "app",  "speaker": "Narrator", "text": "Suddenly we heard a noise. My father went out to see what was making the noise.", "fa": "ناگهان صدایی شنیدیم. پدرم بیرون رفت تا ببیند چه چیزی صدا می‌کند."},
+			  {"role": "user", "speaker": "You", "text": "What did you do then?", "fa": "بعد شما چه کار کردید؟"},
+			  {"role": "app",  "speaker": "Narrator", "text": "When my father was walking in the yard, we went to the kitchen. We saw a kitty in the kitchen. It was eating a cookie. The poor kitty was hungry.", "fa": "وقتی پدرم در حیاط راه می‌رفت، ما به آشپزخانه رفتیم. یک بچه‌گربه در آشپزخانه دیدیم. داشت یک کلوچه می‌خورد. بچه‌گربه بیچاره گرسنه بود."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — tell us what you were doing!", "fa": "روی یک گزینه بزنید — بگویید داشتید چه کار می‌کردید!"},
+			"question_frame": "What were you doing last weekend in the afternoon?",
+			"prompts": ["talk to someone", "read a book", "watch TV", "play in the yard"],
+			"sample_yes": "I was reading a book.",
+			"sample_no": ""
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v1/l3/listening_1.mp3",
+			"transcript": {"en": "Leila was reading a book when her mother came home. The driver was talking to a passenger.", "fa": "لیلا داشت کتاب می‌خواند که مادرش به خانه آمد. راننده داشت با یک مسافر صحبت می‌کرد."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v1_l3_lst_1a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "Leila was ___.", "fa": "لیلا داشت ___."}, "answer": ["reading a book"]},
+				 {"text": {"en": "The driver ___.", "fa": "راننده ___."}, "answer": ["was talking to a passenger"]}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v1/l3/listening_2.mp3",
+			"transcript": {"en": "Amir was studying hard when his friend called. Amir was working long hours to solve the problem.", "fa": "امیر داشت سخت درس می‌خواند که دوستش زنگ زد. امیر ساعت‌های طولانی کار می‌کرد تا مسئله را حل کند."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v1_l3_lst_2a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "Amir ___.", "fa": "امیر ___."}, "answer": ["was studying hard"]},
+				 {"text": {"en": "Amir was ___.", "fa": "امیر داشت ___."}, "answer": ["working long hours"]}
+			   ]}
+			]
+		  }
+		]
+	  },
+	  "4": {
+		"lesson_title": {"en": "Traveling the World", "fa": "سفر به دور جهان"},
+		"speaking": {
+		  "strategy_name": {"en": "Asking about Obligations & Possibilities", "fa": "پرسیدن درباره الزامات و امکانات"},
+		  "icon": "🛂",
+		  "intro": {
+			"en": "You may use modals (can, may, should, must) to ask and answer about what you can (not) / must (not) / should (not) / may (not) do.",
+			"fa": "می‌توانید از افعال وجهی (can، may، should، must) برای پرسیدن و پاسخ دادن درباره آنچه می‌توانید (نمی‌توانید) / باید (نباید) / بهتر است (بهتر است نکنید) / ممکن است (شاید نکنید) انجام دهید استفاده کنید."
+		  },
+		  "patterns": [
+			{"q": {"en": "May I leave the class?", "fa": "ممکن است کلاس را ترک کنم؟"},
+			 "a": {"en": "Yes, you may.", "fa": "بله، ممکن است."}},
+			{"q": {"en": "Should they be more careful?", "fa": "آیا آنها باید بیشتر مراقب باشند؟"},
+			 "a": {"en": "Yes, they should.", "fa": "بله، باید."}},
+			{"q": {"en": "Must we drive fast?", "fa": "آیا ما باید تند رانندگی کنیم؟"},
+			 "a": {"en": "No, you must not.", "fa": "نه، نباید."}},
+			{"q": {"en": "Can he speak French?", "fa": "آیا او می‌تواند فرانسوی صحبت کند؟"},
+			 "a": {"en": "No, he can't.", "fa": "نه، نمی‌تواند."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "Planning a Trip", "fa": "برنامه‌ریزی یک سفر"},
+			"turns": [
+			  {"role": "user", "speaker": "You",   "text": "May I use your camera for my trip?", "fa": "ممکن است دوربین شما را برای سفرم استفاده کنم؟"},
+			  {"role": "app",  "speaker": "Friend", "text": "Honestly, no. I need it this week. You should buy a camera for yourself.", "fa": "راستش نه. این هفته به آن نیاز دارم. باید برای خودت یک دوربین بخری."},
+			  {"role": "user", "speaker": "You",   "text": "But I can't pay for it now. I should pay for the ticket and other things.", "fa": "اما الان نمی‌توانم پولش را بدهم. باید پول بلیط و چیزهای دیگر را بدهم."},
+			  {"role": "app",  "speaker": "Friend", "text": "Well, you may ask Parvin. She can help you.", "fa": "خب، می‌توانی از پروین بخواهی. او می‌تواند کمکت کند."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — ask a modal question!", "fa": "روی یک گزینه بزنید — یک سؤال با فعل وجهی بپرسید!"},
+			"question_frame": "Can you / Must you ___?",
+			"prompts": ["play football", "do homework", "help mother", "speak Arabic", "study hard"],
+			"sample_yes": "Yes, I can. / Yes, I must.",
+			"sample_no": "No, I can't. / No, I must not."
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v1/l4/listening_1.mp3",
+			"transcript": {"en": "The man must go to the police to get a passport. His friend is coming to help him.", "fa": "مرد باید به پلیس برود تا پاسپورت بگیرد. دوستش دارد می‌آید تا به او کمک کند."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v1_l4_lst_1a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "The man ___.", "fa": "مرد ___."}, "answer": ["must go to the police"]},
+				 {"text": {"en": "Who is coming? ___.", "fa": "چه کسی دارد می‌آید؟ ___."}, "answer": ["his friend"]}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v1/l4/listening_2.mp3",
+			"transcript": {"en": "The girl must be polite in a foreign country. She should not say bad things about the host's food.", "fa": "دختر باید در یک کشور خارجی مؤدب باشد. او نباید درباره غذای میزبان حرف بدی بزند."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v1_l4_lst_2a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "The girl must ___.", "fa": "دختر باید ___."}, "answer": ["be polite"]},
+				 {"text": {"en": "What should she do? She should ___.", "fa": "او چه کار باید بکند؟ او باید ___."}, "answer": ["not say bad things"]}
+			   ]}
+			]
+		  }
+		]
+	  }
+	},
+	"2": {
+	  "1": {
+		"lesson_title": {"en": "Understanding People", "fa": "درک مردم"},
+		"speaking": {
+		  "strategy_name": {"en": "Shopping, Asking about Prices & Numbers", "fa": "خرید، پرسیدن درباره قیمت‌ها و اعداد"},
+		  "icon": "🛍️",
+		  "intro": {
+			"en": "You may use 'how much' to ask about prices and 'how many' to ask about numbers.",
+			"fa": "می‌توانید از 'how much' برای پرسیدن درباره قیمت‌ها و از 'how many' برای پرسیدن درباره تعداد استفاده کنید."
+		  },
+		  "patterns": [
+			{"q": {"en": "How much do/does ... cost?", "fa": "... چقدر قیمت دارد؟"},
+			 "a": {"en": "It costs 20,000 Tomans.", "fa": "قیمتش ۲۰٬۰۰۰ تومان است."}},
+			{"q": {"en": "How much is it? / How much are they?", "fa": "قیمتش چقدر است؟ / قیمتشان چقدر است؟"},
+			 "a": {"en": "10,000 Tomans.", "fa": "۱۰٬۰۰۰ تومان."}},
+			{"q": {"en": "How many ... are there?", "fa": "چند ... وجود دارد؟"},
+			 "a": {"en": "There are 12 candles.", "fa": "۱۲ شمع وجود دارد."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "Buying Birthday Candles", "fa": "خرید شمع تولد"},
+			"turns": [
+			  {"role": "app",  "speaker": "Shopkeeper", "text": "May I help you?", "fa": "می‌توانم کمکتان کنم؟"},
+			  {"role": "user", "speaker": "You",        "text": "Yes, please. I'm looking for some birthday candles.", "fa": "بله، لطفاً. دنبال چند شمع تولد هستم."},
+			  {"role": "app",  "speaker": "Shopkeeper", "text": "You can find different types of candles over there. How many candles do you need?", "fa": "می‌توانید انواع مختلف شمع را آنجا پیدا کنید. چند شمع نیاز دارید؟"},
+			  {"role": "user", "speaker": "You",        "text": "I need 12 birthday candles. Um... How much are those?", "fa": "من ۱۲ شمع تولد نیاز دارم. اُم... قیمت آن‌ها چقدر است؟"},
+			  {"role": "app",  "speaker": "Shopkeeper", "text": "20,000 Tomans. What about these?", "fa": "۲۰٬۰۰۰ تومان. این‌ها چطور؟"},
+			  {"role": "user", "speaker": "You",        "text": "10,000 Tomans. I think I'll take these. Here you are.", "fa": "۱۰٬۰۰۰ تومان. فکر می‌کنم این‌ها را می‌برم. بفرمایید."},
+			  {"role": "app",  "speaker": "Shopkeeper", "text": "Thank you.", "fa": "متشکرم."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — ask about its price or number!", "fa": "روی یک گزینه بزنید — درباره قیمت یا تعدادش بپرسید!"},
+			"question_frame": "How much / How many ___?",
+			"prompts": ["pen", "pencil", "eraser", "pencil-sharpener", "ruler", "notebook"],
+			"sample_yes": "How much is a pen? / How many pencils do you have?",
+			"sample_no": ""
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v2/l1/listening_1.mp3",
+			"transcript": {"en": "A ticket is 50,000 Tomans. She wants two tickets.", "fa": "یک بلیط ۵۰٬۰۰۰ تومان است. او دو بلیط می‌خواهد."},
+			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
+			"exercises": [
+			  {"exercise_id": "v2_l1_lst_1a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "How much is a ticket? ___ Tomans.", "fa": "یک بلیط چقدر است؟ ___ تومان."}, "answer": ["50000", "50,000", "fifty thousand"]},
+				 {"text": {"en": "How many tickets does she want? ___", "fa": "او چند بلیط می‌خواهد؟ ___"}, "answer": ["two", "2"]}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v2/l1/listening_2.mp3",
+			"transcript": {"en": "The boy wants a dictionary. The first dictionary has 50,000 words.", "fa": "پسر یک فرهنگ لغت می‌خواهد. فرهنگ لغت اول ۵۰٬۰۰۰ کلمه دارد."},
+			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
+			"exercises": [
+			  {"exercise_id": "v2_l1_lst_2a", "type": "multiple_choice",
+			   "instruction": {"en": "Listen and choose the correct answer.", "fa": "گوش دهید و پاسخ صحیح را انتخاب کنید."},
+			   "items": [
+				 {"question": {"en": "What does the boy want?", "fa": "پسر چه می‌خواهد؟"},
+				  "options": ["a dictionary", "a book", "a pen"], "answer": 0},
+				 {"question": {"en": "How many words does the first dictionary have?", "fa": "فرهنگ لغت اول چند کلمه دارد؟"},
+				  "options": ["50,000", "100,000", "10,000"], "answer": 0}
+			   ]}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "A Healthy Lifestyle", "fa": "سبک زندگی سالم"},
+		"speaking": {
+		  "strategy_name": {"en": "Talking about Past Experiences", "fa": "صحبت درباره تجربیات گذشته"},
+		  "icon": "✅",
+		  "intro": {
+			"en": "You may use 'present perfect tense' to ask and talk about past experiences.",
+			"fa": "می‌توانید از «زمان حال کامل» برای پرسیدن و صحبت درباره تجربیات گذشته استفاده کنید."
+		  },
+		  "patterns": [
+			{"q": {"en": "Have you ever ...?", "fa": "آیا تا به حال ...؟"},
+			 "a": {"en": "Yes, I have ... it once, last year. / No, I haven't. Maybe I'll try it later.", "fa": "بله، یک بار، پارسال ... . / نه. شاید بعداً امتحانش کنم."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "Travel to Mars Game", "fa": "بازی سفر به مریخ"},
+			"turns": [
+			  {"role": "app",  "speaker": "A", "text": "Have you ever played the game 'Travel to Mars'?", "fa": "آیا تا به حال بازی «سفر به مریخ» را انجام داده‌ای؟"},
+			  {"role": "user", "speaker": "You", "text": "Oh, yes. I have learned to play it recently. But I don't want to play it again.", "fa": "آه، بله. تازگی یاد گرفته‌ام بازی‌اش کنم. اما نمی‌خواهم دوباره بازی کنم."},
+			  {"role": "app",  "speaker": "A", "text": "Really? Why?", "fa": "واقعاً؟ چرا؟"},
+			  {"role": "user", "speaker": "You", "text": "It takes a lot of my time. I have attended a Spanish class since last Monday.", "fa": "وقت زیادی از من می‌گیرد. من از دوشنبه پیش در یک کلاس اسپانیایی شرکت کرده‌ام."},
+			  {"role": "app",  "speaker": "A", "text": "I see. But you can play it in your free time.", "fa": "می‌فهمم. اما می‌توانی در وقت آزادت بازی کنی."},
+			  {"role": "user", "speaker": "You", "text": "I don't know. I haven't thought about that yet.", "fa": "نمی‌دانم. هنوز درباره‌اش فکر نکرده‌ام."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — ask your friend about it!", "fa": "روی یک گزینه بزنید — از دوستتان درباره‌اش بپرسید!"},
+			"question_frame": "Have you ever ___?",
+			"prompts": ["play golf", "climb Mount Everest", "travel to the moon", "take part in the Olympics"],
+			"sample_yes": "Yes, I have.",
+			"sample_no": "No, I haven't."
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v2/l2/listening_1.mp3",
+			"transcript": {"en": "Hamid is on a football team. He has quitted the team to study harder.", "fa": "حمید در یک تیم فوتبال است. او تیم را ترک کرده است تا سخت‌تر درس بخواند."},
+			"task": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			"exercises": [
+			  {"exercise_id": "v2_l2_lst_1a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "Hamid is on a ___ team.", "fa": "حمید در یک تیم ___ است."}, "answer": ["football"]},
+				 {"text": {"en": "He has quitted the team to ___.", "fa": "او تیم را ترک کرده تا ___."}, "answer": ["study harder"]}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v2/l2/listening_2.mp3",
+			"transcript": {"en": "Farideh wants to watch Amir Kabir TV series. Farideh has tried to read poems of Hafez.", "fa": "فریده می‌خواهد سریال تلویزیونی امیرکبیر را تماشا کند. فریده سعی کرده اشعار حافظ را بخواند."},
+			"task": {"en": "Listen and tick what Farideh wants to do / has tried.", "fa": "گوش دهید و آنچه فریده می‌خواهد انجام دهد / سعی کرده علامت بزنید."},
+			"exercises": [
+			  {"exercise_id": "v2_l2_lst_2a", "type": "multiple_choice",
+			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
+			   "items": [
+				 {"question": {"en": "Farideh wants to ___.", "fa": "فریده می‌خواهد ___."}, "options": ["watch Amir Kabir TV series", "play football", "travel to the South"], "answer": 0},
+				 {"question": {"en": "Farideh has tried ___.", "fa": "فریده سعی کرده ___."}, "options": ["read poems of Hafez", "make a paper boat", "climb Damavand"], "answer": 0}
+			   ]}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Art and Culture", "fa": "هنر و فرهنگ"},
+		"speaking": {
+		  "strategy_name": {"en": "Talking about Conditions & Future Results", "fa": "صحبت درباره شرایط و نتایج آینده"},
+		  "icon": "🔀",
+		  "intro": {
+			"en": "You may use 'will' with 'if' to talk about what will happen in the future if certain conditions are met.",
+			"fa": "می‌توانید از 'will' با 'if' برای صحبت درباره آنچه در آینده اتفاق می‌افتد در صورت برآورده شدن شرایط خاص استفاده کنید."
+		  },
+		  "patterns": [
+			{"q": {"en": "If everything goes well, ...", "fa": "اگر همه چیز خوب پیش برود، ..."},
+			 "a": {"en": "I will ...", "fa": "من ... خواهم کرد."}},
+			{"q": {"en": "If all goes well, ...", "fa": "اگر همه چیز خوب پیش برود، ..."},
+			 "a": {"en": "they will ...", "fa": "آن‌ها ... خواهند کرد."}},
+			{"q": {"en": "If our plans work, ...", "fa": "اگر برنامه‌هایمان جواب داد، ..."},
+			 "a": {"en": "we will ...", "fa": "ما ... خواهیم کرد."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "Opening a New Store", "fa": "افتتاح یک فروشگاه جدید"},
+			"turns": [
+			  {"role": "user", "speaker": "You",   "text": "We want to buy a new store.", "fa": "ما می‌خواهیم یک فروشگاه جدید بخریم."},
+			  {"role": "app",  "speaker": "Friend", "text": "Really, what for?", "fa": "واقعاً، برای چه؟"},
+			  {"role": "user", "speaker": "You",   "text": "We want to make and sell more pottery work.", "fa": "ما می‌خواهیم کارهای سفالی بیشتری بسازیم و بفروشیم."},
+			  {"role": "app",  "speaker": "Friend", "text": "I've heard people are really interested in your work.", "fa": "شنیده‌ام مردم واقعاً به کار شما علاقه‌مندند."},
+			  {"role": "user", "speaker": "You",   "text": "Yeah, if everything goes well, we will open the new store in June.", "fa": "بله، اگر همه چیز خوب پیش برود، فروشگاه جدید را در خرداد افتتاح خواهیم کرد."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — tell us what you will do!", "fa": "روی یک گزینه بزنید — بگویید چه خواهید کرد!"},
+			"question_frame": "If ___, I will ___.",
+			"prompts": ["become a doctor in the future", "go to Marivan in Norooz", "buy a new computer next year"],
+			"sample_yes": "If I become a doctor, I will help sick people.",
+			"sample_no": ""
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v2/l3/listening_1.mp3",
+			"transcript": {"en": "They are going to open a new gallery. If all goes well, they will invite many artists.", "fa": "آن‌ها قرار است یک گالری جدید افتتاح کنند. اگر همه چیز خوب پیش برود، هنرمندان زیادی را دعوت خواهند کرد."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v2_l3_lst_1a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "They are going to ___.", "fa": "آن‌ها قرار دارند ___."}, "answer": ["open a new gallery"]},
+				 {"text": {"en": "If all goes well, ___.", "fa": "اگر همه چیز خوب پیش برود، ___."}, "answer": ["they will invite many artists"]}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v2/l3/listening_2.mp3",
+			"transcript": {"en": "Mohammad is going to study Physics. Amir is going to take part in charity.", "fa": "محمد قرار است فیزیک بخواند. امیر قرار است در خیریه شرکت کند."},
+			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
+			"exercises": [
+			  {"exercise_id": "v2_l3_lst_2a", "type": "fill_blank",
+			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
+			   "items": [
+				 {"text": {"en": "Mohammad is going to ___.", "fa": "محمد قرار دارد ___."}, "answer": ["study physics"]},
+				 {"text": {"en": "Amir is going to ___.", "fa": "امیر قرار دارد ___."}, "answer": ["take part in charity"]}
+			   ]}
+			]
+		  }
+		]
+	  }
+	},
+	"3": {
+	  "1": {
+		"lesson_title": {"en": "Sense of Appreciation", "fa": "حس قدردانی"},
+		"speaking": {
+		  "strategy_name": {"en": "Eliciting Agreement & Signaling Uncertainty", "fa": "گرفتن تأیید و بیان عدم اطمینان"},
+		  "icon": "❓",
+		  "intro": {
+			"en": "You may use 'tag questions' for two reasons: eliciting agreement (confirming facts) and signaling uncertainty.",
+			"fa": "می‌توانید از «سؤالات ضمیمه‌ای» به دو دلیل استفاده کنید: گرفتن تأیید (تأیید واقعیت‌ها) و بیان عدم اطمینان."
+		  },
+		  "patterns": [
+			{"q": {"en": "He's really generous, isn't he?", "fa": "او واقعاً بخشنده است، نیست؟"},
+			 "a": {"en": "Yes, he is.", "fa": "بله، هست."}},
+			{"q": {"en": "They are going to leave here, aren't they?", "fa": "آن‌ها قرار است اینجا را ترک کنند، نیستند؟"},
+			 "a": {"en": "Yes, they are.", "fa": "بله، هستند."}},
+			{"q": {"en": "This cannot be true, can it?", "fa": "این نمی‌تواند درست باشد، می‌تواند؟"},
+			 "a": {"en": "I hope not.", "fa": "امیدوارم نه."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "Confirming Facts", "fa": "تأیید واقعیت‌ها"},
+			"turns": [
+			  {"role": "app",  "speaker": "A", "text": "Sam has not come to work. I've heard he's sick, isn't he?", "fa": "سام به سر کار نیامده. شنیده‌ام مریض است، نیست؟"},
+			  {"role": "user", "speaker": "You", "text": "Oh, yes. He was not well yesterday.", "fa": "آه، بله. دیروز حالش خوب نبود."},
+			  {"role": "app",  "speaker": "A", "text": "What's wrong with him?", "fa": "مشکلش چیست؟"},
+			  {"role": "user", "speaker": "You", "text": "The doctors are checking his health condition.", "fa": "پزشکان دارند وضعیت سلامتی‌اش را بررسی می‌کنند."},
+			  {"role": "app",  "speaker": "A", "text": "It isn't something serious, is it?", "fa": "چیز جدی‌ای نیست، هست؟"},
+			  {"role": "user", "speaker": "You", "text": "I hope not.", "fa": "امیدوارم نباشد."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — make a tag question to confirm facts!", "fa": "روی یک گزینه بزنید — یک سؤال ضمیمه‌ای برای تأیید واقعیت‌ها بسازید!"},
+			"question_frame": "..., isn't it / aren't they?",
+			"prompts": ["weather", "future job", "a place to live"],
+			"sample_yes": "The weather is nice, isn't it?",
+			"sample_no": ""
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v3/l1/listening_1.mp3",
+			"transcript": {"en": "Amin is busy these days because he is preparing for his exams. Behzad thinks health is the most important thing.", "fa": "امین این روزها مشغول است چون دارد برای امتحاناتش آماده می‌شود. بهزاد فکر می‌کند سلامتی مهم‌ترین چیز است."},
+			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
+			"exercises": [
+			  {"exercise_id": "v3_l1_lst_1a", "type": "multiple_choice",
+			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
+			   "items": [
+				 {"question": {"en": "Why is Amin busy these days?", "fa": "چرا امین این روزها مشغول است؟"},
+				  "options": ["He is preparing for exams", "He is traveling", "He is sick"], "answer": 0},
+				 {"question": {"en": "What does Behzad think about health?", "fa": "بهزاد درباره سلامتی چه فکر می‌کند؟"},
+				  "options": ["It is the most important thing", "It is not important", "He doesn't think about it"], "answer": 0}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v3/l1/listening_2.mp3",
+			"transcript": {"en": "They are going to Hamedan. Mina prefers chess because it is interesting.", "fa": "آن‌ها دارند به همدان می‌روند. مینا شطرنج را ترجیح می‌دهد چون جالب است."},
+			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
+			"exercises": [
+			  {"exercise_id": "v3_l1_lst_2a", "type": "multiple_choice",
+			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
+			   "items": [
+				 {"question": {"en": "Where are they going?", "fa": "آن‌ها کجا می‌روند؟"},
+				  "options": ["Hamedan", "Tehran", "Isfahan"], "answer": 0},
+				 {"question": {"en": "Why does Mina prefer chess?", "fa": "چرا مینا شطرنج را ترجیح می‌دهد؟"},
+				  "options": ["Because it is interesting", "Because it is easy", "Because her friend plays"], "answer": 0}
+			   ]}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Look it Up!", "fa": "دنبالش بگرد!"},
+		"speaking": {
+		  "strategy_name": {"en": "Talking about Imaginary Situations", "fa": "صحبت درباره موقعیت‌های خیالی"},
+		  "icon": "💭",
+		  "intro": {
+			"en": "You may use 'conditional type II' to talk about imaginary situations, hopes, and wishes.",
+			"fa": "می‌توانید از «شرطی نوع دوم» برای صحبت درباره موقعیت‌های خیالی، آرزوها و امیدها استفاده کنید."
+		  },
+		  "patterns": [
+			{"q": {"en": "What would you do if you were me?", "fa": "اگر جای من بودی چه می‌کردی؟"},
+			 "a": {"en": "I would study harder.", "fa": "سخت‌تر درس می‌خواندم."}},
+			{"q": {"en": "What would you do if you had wings?", "fa": "اگر بال داشتی چه می‌کردی؟"},
+			 "a": {"en": "I would fly around the world.", "fa": "دور دنیا پرواز می‌کردم."}},
+			{"q": {"en": "What would you do if you were a university student?", "fa": "اگر دانشجوی دانشگاه بودی چه می‌کردی؟"},
+			 "a": {"en": "I would learn French.", "fa": "فرانسوی یاد می‌گرفتم."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "A Rainy Day", "fa": "یک روز بارانی"},
+			"turns": [
+			  {"role": "app",  "speaker": "A", "text": "Oh look! It is raining so heavily.", "fa": "آه نگاه کن! دارد خیلی شدید باران می‌بارد."},
+			  {"role": "user", "speaker": "You", "text": "What would you do if it weren't raining?", "fa": "اگر باران نمی‌بارید چه می‌کردی؟"},
+			  {"role": "app",  "speaker": "A", "text": "Hmm... if it were sunny, I would go to the park. I am really bored.", "fa": "هم... اگر آفتابی بود، به پارک می‌رفتم. واقعاً حوصله‌ام سر رفته."},
+			  {"role": "user", "speaker": "You", "text": "We can play one of our thinking games, instead.", "fa": "می‌توانیم در عوض یکی از بازی‌های فکری‌مان را بازی کنیم."},
+			  {"role": "app",  "speaker": "A", "text": "We could play 'Smart Kid' if Sina were home.", "fa": "می‌توانستیم «بچه باهوش» را بازی کنیم اگر سینا خانه بود."},
+			  {"role": "user", "speaker": "You", "text": "This one is also fun. Let's try it.", "fa": "این هم جالب است. بیا امتحانش کنیم."}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — tell us what you would do!", "fa": "روی یک گزینه بزنید — بگویید چه می‌کردید!"},
+			"question_frame": "If ___, I would ___.",
+			"prompts": ["it weren't so cold", "you did your homework sooner", "your father came home earlier"],
+			"sample_yes": "If it weren't so cold, I would go out.",
+			"sample_no": ""
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v3/l2/listening_1.mp3",
+			"transcript": {"en": "Mina lives in Tehran. Zoreh hasn't invited Mina yet because she is busy.", "fa": "مینا در تهران زندگی می‌کند. زهره هنوز مینا را دعوت نکرده چون مشغول است."},
+			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
+			"exercises": [
+			  {"exercise_id": "v3_l2_lst_1a", "type": "multiple_choice",
+			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
+			   "items": [
+				 {"question": {"en": "Where does Mina live?", "fa": "مینا کجا زندگی می‌کند؟"},
+				  "options": ["Tehran", "Shiraz", "Isfahan"], "answer": 0},
+				 {"question": {"en": "Why hasn't Zoreh invited Mina yet?", "fa": "چرا زهره هنوز مینا را دعوت نکرده؟"},
+				  "options": ["Because she is busy", "Because she forgot", "Because Mina is sick"], "answer": 0}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v3/l2/listening_2.mp3",
+			"transcript": {"en": "Bijan wanted to buy a new car. Bijan didn't tell Mehran about the problem because he was shy.", "fa": "بیژان می‌خواست یک ماشین جدید بخرد. بیژان درباره مشکل به مهران نگفت چون خجالتی بود."},
+			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
+			"exercises": [
+			  {"exercise_id": "v3_l2_lst_2a", "type": "multiple_choice",
+			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
+			   "items": [
+				 {"question": {"en": "What did Bijan want to buy?", "fa": "بیژان چه می‌خواست بخرد؟"},
+				  "options": ["a new car", "a new house", "a new book"], "answer": 0},
+				 {"question": {"en": "Why didn't Bijan tell Mehran about the problem?", "fa": "چرا بیژان درباره مشکل به مهران نگفت؟"},
+				  "options": ["Because he was shy", "Because he was angry", "Because he forgot"], "answer": 0}
+			   ]}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Renewable Energy", "fa": "انرژی تجدیدپذیر"},
+		"speaking": {
+		  "strategy_name": {"en": "Talking about an Activity before Another in the Past", "fa": "صحبت درباره فعالیتی قبل از فعالیت دیگر در گذشته"},
+		  "icon": "⏳",
+		  "intro": {
+			"en": "You may use 'past perfect tense' to talk about an event that happened before another event in the past.",
+			"fa": "می‌توانید از «زمان گذشته کامل» برای صحبت درباره رویدادی که قبل از رویداد دیگر در گذشته اتفاق افتاده استفاده کنید."
+		  },
+		  "patterns": [
+			{"q": {"en": "Before I ___, I had ___.", "fa": "قبل از اینکه ___، ___ بودم."},
+			 "a": {"en": "Before I played volleyball, we had taken some photographs.", "fa": "قبل از اینکه والیبال بازی کنم، چند عکس گرفته بودیم."}},
+			{"q": {"en": "After I had ___, I ___.", "fa": "بعد از اینکه ___، ___.", "options": ""},
+			 "a": {"en": "After we had eaten lunch, we flew our kites.", "fa": "بعد از اینکه ناهار خوردیم، بادبادک‌هایمان را به پرواز درآوردیم."}}
+		  ],
+		  "model_conversation": {
+			"title": {"en": "A Great Picnic", "fa": "یک پیک‌نیک عالی"},
+			"turns": [
+			  {"role": "app",  "speaker": "Dad",   "text": "OK, tell me about the picnic. What did you do?", "fa": "خب، درباره پیک‌نیک بگو. چه کار کردید؟"},
+			  {"role": "user", "speaker": "You",   "text": "That was great, dad. We played volleyball and had a barbecue.", "fa": "عالی بود، بابا. والیبال بازی کردیم و باربیکیو داشتیم."},
+			  {"role": "app",  "speaker": "Dad",   "text": "Oh, come on! Did you do anything fun?", "fa": "آه، بیا! کار جالبی کردید؟"},
+			  {"role": "user", "speaker": "You",   "text": "Yeah, it was all fun. Before we played volleyball, we had taken some photographs.", "fa": "بله، همه‌اش جالب بود. قبل از اینکه والیبال بازی کنیم، چند عکس گرفته بودیم."},
+			  {"role": "app",  "speaker": "Dad",   "text": "Great! Did you do anything in the afternoon?", "fa": "عالی! بعدازظهر چه کار کردید؟"},
+			  {"role": "user", "speaker": "You",   "text": "Oh, something interesting! After we had eaten lunch, we flew our kites. That was fantastic because we had made the kites ourselves!", "fa": "آه، یک چیز جالب! بعد از اینکه ناهار خوردیم، بادبادک‌هایمان را به پرواز درآوردیم. فوق‌العاده بود چون بادبادک‌ها را خودمان ساخته بودیم!"}
+			]
+		  },
+		  "practice": {
+			"instruction": {"en": "Tap a prompt — tell us what you had done before!", "fa": "روی یک گزینه بزنید — بگویید قبلش چه کرده بودید!"},
+			"question_frame": "Before I ___, I had ___.",
+			"prompts": ["travel to Mashhad", "borrow a book", "spend money", "catch cold", "go home", "leave Tehran"],
+			"sample_yes": "Before I traveled to Mashhad, I had booked a hotel.",
+			"sample_no": ""
+		  }
+		},
+		"listening": [
+		  {
+			"id": "conv1",
+			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
+			"audio": "res://assets/audio/v3/l3/listening_1.mp3",
+			"transcript": {"en": "Rasool had tried the restaurant sauce before. Rasool went to the new restaurant with his friends.", "fa": "رسول قبلاً سس رستوران را امتحان کرده بود. رسول با دوستانش به رستوران جدید رفت."},
+			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
+			"exercises": [
+			  {"exercise_id": "v3_l3_lst_1a", "type": "multiple_choice",
+			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
+			   "items": [
+				 {"question": {"en": "Had Rasool tried the restaurant sauce before?", "fa": "آیا رسول قبلاً سس رستوران را امتحان کرده بود؟"},
+				  "options": ["Yes, he had", "No, he hadn't", "We don't know"], "answer": 0},
+				 {"question": {"en": "Did Rasool go to the new restaurant alone?", "fa": "آیا رسول تنها به رستوران جدید رفت؟"},
+				  "options": ["No, he went with friends", "Yes, alone", "He didn't go"], "answer": 0}
+			   ]}
+			]
+		  },
+		  {
+			"id": "conv2",
+			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
+			"audio": "res://assets/audio/v3/l3/listening_2.mp3",
+			"transcript": {"en": "Samira and her friends had gone to the museum before the guests arrived. Samira's guests left her home at 10 pm.", "fa": "مینا و دوستانش قبل از رسیدن مهمان‌ها به موزه رفته بودند. مهمان‌های سمیرا ساعت ۱۰ شب خانه‌اش را ترک کردند."},
+			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
+			"exercises": [
+			  {"exercise_id": "v3_l3_lst_2a", "type": "multiple_choice",
+			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
+			   "items": [
+				 {"question": {"en": "When had Samira and her friends gone to the museum?", "fa": "سمیرا و دوستانش چه زمانی به موزه رفته بودند؟"},
+				  "options": ["Before the guests arrived", "After the guests left", "Yesterday morning"], "answer": 0},
+				 {"question": {"en": "When did Samira's guests leave her home?", "fa": "مهمان‌های سمیرا چه زمانی خانه‌اش را ترک کردند؟"},
+				  "options": ["At 10 pm", "At 8 pm", "At midnight"], "answer": 0}
+			   ]}
+			]
+		  }
+		]
+	  }
+	}
+  },
+  "statistics": {
+	"total_lessons": 10,
+	"total_speaking_strategies": 10,
+	"total_listening_conversations": 20,
+	"books_covered": [1, 2, 3]
+  }
+}

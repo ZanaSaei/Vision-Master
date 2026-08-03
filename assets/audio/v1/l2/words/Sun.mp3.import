@@ -2,13 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://bdp4m5d0kp1p0"
-path="res://.godot/imported/Sun.mp3-84c963dfeb855248d65e693ccebd012a.mp3str"
+uid="uid://ctr2pm7bhgiqn"
+path="res://.godot/imported/sun.mp3-1c13f305fa2ae5c9aa23e5e0dcf628b4.mp3str"
 
 [deps]
 
-source_file="res://assets/audio/v1/l2/words/Sun.mp3"
-dest_files=["res://.godot/imported/Sun.mp3-84c963dfeb855248d65e693ccebd012a.mp3str"]
+source_file="res://assets/audio/v1/l2/words/sun.mp3"
+dest_files=["res://.godot/imported/sun.mp3-1c13f305fa2ae5c9aa23e5e0dcf628b4.mp3str"]
 
 [params]
 

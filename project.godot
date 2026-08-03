@@ -25,6 +25,7 @@ general/text_to_speech=true
 
 Global="*uid://b3q8f06t1vj73"
 TransitionManager="*uid://b3bmr0hvx2x7n"
+MenuBackground="*uid://xuhqxtyibmvw"
 
 [display]
 

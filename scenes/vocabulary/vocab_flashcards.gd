@@ -66,6 +66,7 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var meaning_en_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent/MeaningEnLabel
 @onready var meaning_fa_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
 @onready var example_label: Label              = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
+@onready var phonetics_label: Label             = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/PhoneticsLabel
 
 # Synonyms and Antonyms nodes
 @onready var synonyms_panel: PanelContainer    = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel
@@ -269,6 +270,14 @@ func _update_card(animate: bool = false) -> void:
 	meaning_en_label.text = entry.get("meaning_en", "")
 	meaning_fa_label.text = entry.get("meaning_fa", "")
 	example_label.text    = entry.get("example", "")
+	
+	var phonetics_text: String = entry.get("phonetics", "")
+	if phonetics_text != "":
+		phonetics_label.text = phonetics_text
+		phonetics_label.visible = true
+	else:
+		phonetics_label.text = ""
+		phonetics_label.visible = false
 	
 	# --- Update Synonyms ---
 	_update_synonyms(entry)
@@ -523,20 +532,18 @@ func _on_audio_pressed() -> void:
 		return
 		
 	var entry: Dictionary = word_list[current_index]
-	var word_to_speak: String = entry.get("word", "")
-	
-	if word_to_speak.is_empty():
-		return
+	var audio_filename: String = entry.get("audio", "")
+	var word_text: String = entry.get("word", "")
 
 	# Keep your existing button bounce animation
 	var tween := create_tween()
 	tween.tween_property(audio_button, "scale", Vector2(0.93, 0.93), 0.08) \
-	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(audio_button, "scale", Vector2.ONE, 0.12) \
-	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	
-	# Trigger the built-in device TTS
-	Global.speak_word(word_to_speak)
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+	# Trigger unified audio playback (with built-in TTS fallback)
+	Global.play_word_audio(audio_filename, word_text)
 
 # ----------------------------------------------------------------
 #  NAVIGATION

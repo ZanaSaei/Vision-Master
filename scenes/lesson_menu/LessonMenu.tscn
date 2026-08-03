@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://b3oum2gxq8i63"]
 
 [ext_resource type="Script" uid="uid://de26svg4ih2vq" path="res://scenes/lesson_menu/lesson_menu.gd" id="1_bix6w"]
+[ext_resource type="PackedScene" uid="uid://b4q4amyvxdy0n" path="res://scenes/dynamic_background/animated_background.tscn" id="2_5aq3h"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_eo0tv"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_ln7tq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vrhx"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 0)
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
 expand_margin_top = 45.0
@@ -29,14 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bix6w")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1598437601]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.9372549, 0.9647059, 1, 1)
+[node name="AnimatedBackground" parent="." unique_id=1120716659 instance=ExtResource("2_5aq3h")]
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1246997477]
 layout_mode = 1

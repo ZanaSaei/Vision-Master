@@ -1,0 +1,330 @@
+{
+  "category": "vocabulary_development",
+  "title": {"en": "Vocabulary Development", "fa": "گسترش واژگان"},
+  "icon": "📚",
+  "books": {
+	"2": {
+	  "1": {
+		"lesson_title": {"en": "Understanding People", "fa": "درک مردم"},
+		"topic": {"en": "Synonyms", "fa": "مترادف‌ها"},
+		"theory": {
+		  "definition": {
+			"en": "Synonyms are words with similar meanings, for example, 'hard' and 'difficult'; or 'begin' and 'start' are synonyms. Learning synonyms is a good way to develop our vocabulary.",
+			"fa": "مترادف‌ها کلماتی با معانی مشابه هستند؛ برای مثال، 'hard' و 'difficult' یا 'begin' و 'start' مترادف هستند. یادگیری مترادف‌ها راه خوبی برای گسترش دایره واژگان ماست."
+		  },
+		  "key_points": [
+			{"en": "Synonyms help you avoid repeating the same word.", "fa": "مترادف‌ها به شما کمک می‌کنند از تکرار یک کلمه پرهیز کنید."},
+			{"en": "Many synonyms have slight differences in tone or formality.", "fa": "بسیاری از مترادف‌ها تفاوت‌های جزئی در لحن یا رسمی بودن دارند."}
+		  ]
+		},
+		"examples": [
+		  {"word": "small", "synonym": "tiny", "sentence": {"en": "The mouse is a tiny animal.", "fa": "موش یک حیوان کوچک است."}},
+		  {"word": "powerful", "synonym": "strong", "sentence": {"en": "The engine is very strong.", "fa": "موتور بسیار قدرتمند است."}},
+		  {"word": "quick", "synonym": "fast", "sentence": {"en": "He runs very fast.", "fa": "او خیلی سریع می‌دود."}},
+		  {"word": "simple", "synonym": "easy", "sentence": {"en": "This test is easy.", "fa": "این امتحان ساده است."}}
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v2_l1_vocab_a",
+			"type": "matching",
+			"instruction": {"en": "Write the words that mean the same under the picture where they belong.", "fa": "کلماتی که معنی یکسانی دارند زیر تصویر مربوط به آن‌ها بنویسید."},
+			"options": ["small", "powerful", "quick", "strong", "fast", "tiny", "simple", "easy"],
+			"items": [
+			  {"text": {"en": "Synonym of 'small'", "fa": "مترادف 'small'"}, "answer": "tiny"},
+			  {"text": {"en": "Synonym of 'powerful'", "fa": "مترادف 'powerful'"}, "answer": "strong"},
+			  {"text": {"en": "Synonym of 'quick'", "fa": "مترادف 'quick'"}, "answer": "fast"},
+			  {"text": {"en": "Synonym of 'simple'", "fa": "مترادف 'simple'"}, "answer": "easy"}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l1_vocab_b",
+			"type": "multiple_choice",
+			"instruction": {"en": "Two of the words in each group are synonyms. Find them.", "fa": "دو کلمه در هر گروه مترادف هستند. آن‌ها را پیدا کنید."},
+			"items": [
+			  {"question": {"en": "amazing / probable / wonderful", "fa": "amazing / probable / wonderful"}, "options": ["amazing & probable", "amazing & wonderful", "probable & wonderful"], "answer": 1, "explanation": {"en": "'Amazing' and 'wonderful' both mean very good/surprising.", "fa": "'Amazing' و 'wonderful' هر دو به معنی بسیار خوب/شگفت‌انگیز هستند."}},
+			  {"question": {"en": "seek / search for / exercise", "fa": "seek / search for / exercise"}, "options": ["seek & search for", "seek & exercise", "search for & exercise"], "answer": 0, "explanation": {"en": "'Seek' and 'search for' both mean to look for something.", "fa": "'Seek' و 'search for' هر دو به معنی جستجو کردن هستند."}},
+			  {"question": {"en": "quit / live / give up", "fa": "quit / live / give up"}, "options": ["quit & live", "quit & give up", "live & give up"], "answer": 1, "explanation": {"en": "'Quit' and 'give up' both mean to stop doing something.", "fa": "'Quit' و 'give up' هر دو به معنی دست کشیدن از کاری هستند."}},
+			  {"question": {"en": "fortunately / luckily / really", "fa": "fortunately / luckily / really"}, "options": ["fortunately & luckily", "fortunately & really", "luckily & really"], "answer": 0, "explanation": {"en": "'Fortunately' and 'luckily' both mean by good luck.", "fa": "'Fortunately' و 'luckily' هر دو به معنی خوشبختانه هستند."}}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l1_vocab_c",
+			"type": "fill_blank",
+			"instruction": {"en": "Look back at the Reading to find synonyms for the words.", "fa": "به متن خواندنی برگردید و مترادف کلمات را پیدا کنید."},
+			"items": [
+			  {"text": {"en": "In paragraph 2, find a synonym for 'largely':", "fa": "در پاراگراف ۲، مترادف 'largely' را پیدا کنید:"}, "answer": ["greatly"]},
+			  {"text": {"en": "In paragraph 4, find a synonym for 'nearly':", "fa": "در پاراگراف ۴، مترادف 'nearly' را پیدا کنید:"}, "answer": ["about"]},
+			  {"text": {"en": "In paragraph 5, find a synonym for 'to form':", "fa": "در پاراگراف ۵، مترادف 'to form' را پیدا کنید:"}, "answer": ["to make up", "make up"]},
+			  {"text": {"en": "In paragraph 6, find a synonym for 'to think of':", "fa": "در پاراگراف ۶، مترادف 'to think of' را پیدا کنید:"}, "answer": ["to imagine", "imagine"]}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "A Healthy Lifestyle", "fa": "سبک زندگی سالم"},
+		"topic": {"en": "Prefixes and Suffixes", "fa": "پیشوندها و پسوندها"},
+		"theory": {
+		  "definition": {
+			"en": "A prefix is a letter or a group of letters that comes at the beginning of a word. A suffix is a letter or a group of letters added to the end of a word to make a different word.",
+			"fa": "پیشوند حرف یا گروهی از حروف است که در ابتدای یک کلمه می‌آید. پسوند حرف یا گروهی از حروف است که به انتهای یک کلمه اضافه می‌شود تا کلمه متفاوتی بسازد."
+		  },
+		  "key_points": [
+			{"en": "Prefixes usually change the meaning of the word (e.g., making it negative).", "fa": "پیشوندها معمولاً معنی کلمه را تغییر می‌دهند (مثلاً آن را منفی می‌کنند)."},
+			{"en": "Suffixes often change the word class (e.g., from a verb to a noun).", "fa": "پسوندها اغلب نوع کلمه را تغییر می‌دهند (مثلاً از فعل به اسم)."}
+		  ]
+		},
+		"reference_table": [
+		  {"affix": "re-", "meaning_en": "again", "meaning_fa": "دوباره", "example": "rewrite (write again)"},
+		  {"affix": "un-", "meaning_en": "not", "meaning_fa": "نه / مخالف", "example": "unimportant (not important)"},
+		  {"affix": "im- / in-", "meaning_en": "not", "meaning_fa": "نه / مخالف", "example": "impossible, incorrect"},
+		  {"affix": "dis-", "meaning_en": "not / opposite", "meaning_fa": "نه / برعکس", "example": "dislike (not like)"},
+		  {"affix": "-er / -or", "meaning_en": "noun maker (doer)", "meaning_fa": "اسم‌ساز (انجام‌دهنده)", "example": "writer, translator"},
+		  {"affix": "-ness", "meaning_en": "noun maker (state)", "meaning_fa": "اسم‌ساز (حالت)", "example": "happiness"},
+		  {"affix": "-ful", "meaning_en": "adjective maker", "meaning_fa": "صفت‌ساز", "example": "useful"},
+		  {"affix": "-ous", "meaning_en": "adjective maker", "meaning_fa": "صفت‌ساز", "example": "dangerous"},
+		  {"affix": "-ly", "meaning_en": "adverb maker", "meaning_fa": "قیدساز", "example": "slowly"}
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v2_l2_vocab_a",
+			"type": "matching",
+			"instruction": {"en": "Read the following words. Match each word with its prefix (or 'no prefix').", "fa": "کلمات زیر را بخوانید. هر کلمه را با پیشوند آن (یا 'بدون پیشوند') تطبیق دهید."},
+			"options": ["dis-", "mid-", "un-", "in-", "no prefix"],
+			"items": [
+			  {"text": {"en": "disagree", "fa": "disagree"}, "answer": "dis-"},
+			  {"text": {"en": "midterm", "fa": "midterm"}, "answer": "mid-"},
+			  {"text": {"en": "uncle", "fa": "uncle"}, "answer": "no prefix"},
+			  {"text": {"en": "unsafe", "fa": "unsafe"}, "answer": "un-"},
+			  {"text": {"en": "read", "fa": "read"}, "answer": "no prefix"},
+			  {"text": {"en": "incomplete", "fa": "incomplete"}, "answer": "in-"},
+			  {"text": {"en": "disorder", "fa": "disorder"}, "answer": "dis-"},
+			  {"text": {"en": "unfortunately", "fa": "unfortunately"}, "answer": "un-"}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l2_vocab_b",
+			"type": "matching",
+			"instruction": {"en": "Read the following words. Match each word with its suffix (or 'no suffix').", "fa": "کلمات زیر را بخوانید. هر کلمه را با پسوند آن (یا 'بدون پسوند') تطبیق دهید."},
+			"options": ["-er", "-ful", "-less", "-ion", "-al", "-ous", "no suffix"],
+			"items": [
+			  {"text": {"en": "scanner", "fa": "scanner"}, "answer": "-er"},
+			  {"text": {"en": "powerful", "fa": "powerful"}, "answer": "-ful"},
+			  {"text": {"en": "homeless", "fa": "homeless"}, "answer": "-less"},
+			  {"text": {"en": "paper", "fa": "paper"}, "answer": "no suffix"},
+			  {"text": {"en": "invitation", "fa": "invitation"}, "answer": "-ion"},
+			  {"text": {"en": "cultural", "fa": "cultural"}, "answer": "-al"},
+			  {"text": {"en": "famous", "fa": "famous"}, "answer": "-ous"},
+			  {"text": {"en": "family", "fa": "family"}, "answer": "no suffix"}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l2_vocab_d",
+			"type": "fill_blank",
+			"instruction": {"en": "Look at the nouns. Their adjective forms are given in the Reading. Find them.", "fa": "به اسامی نگاه کنید. شکل صفت آن‌ها در متن خواندنی آمده است. آن‌ها را پیدا کنید."},
+			"items": [
+			  {"text": {"en": "care (par. 1) → adjective:", "fa": "care (پاراگراف ۱) ← صفت:"}, "answer": ["careful"]},
+			  {"text": {"en": "health (par. 4) → adjective:", "fa": "health (پاراگراف ۴) ← صفت:"}, "answer": ["healthy"]},
+			  {"text": {"en": "danger (par. 5) → adjective:", "fa": "danger (پاراگراف ۵) ← صفت:"}, "answer": ["dangerous"]},
+			  {"text": {"en": "emotion (par. 6) → adjective:", "fa": "emotion (پاراگراف ۶) ← صفت:"}, "answer": ["emotional"]}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Art and Culture", "fa": "هنر و فرهنگ"},
+		"topic": {"en": "Antonyms", "fa": "متضادها"},
+		"theory": {
+		  "definition": {
+			"en": "Antonyms are words that have opposite meanings. Sometimes antonyms are very different words, for example 'true' and 'false' or 'hot' and 'cold'. Other times, they are made by adding or changing prefixes or suffixes, for example, 'like' and 'dislike'.",
+			"fa": "متضادها کلماتی هستند که معانی مخالف دارند. گاهی متضادها کلمات کاملاً متفاوتی هستند، مانند 'true' و 'false' یا 'hot' و 'cold'. گاهی دیگر با افزودن یا تغییر پیشوند یا پسوند ساخته می‌شوند، مانند 'like' و 'dislike'."
+		  },
+		  "key_points": [
+			{"en": "Learning antonyms helps you express contrasting ideas clearly.", "fa": "یادگیری متضادها به شما کمک می‌کند ایده‌های متضاد را به وضوح بیان کنید."},
+			{"en": "Many antonyms are formed using negative prefixes like un-, dis-, im-.", "fa": "بسیاری از متضادها با استفاده از پیشوندهای منفی مانند un-، dis-، im- ساخته می‌شوند."}
+		  ]
+		},
+		"examples": [
+		  {"word": "happy", "synonym": "sad", "sentence": {"en": "She was happy, but he was sad.", "fa": "او خوشحال بود، اما او غمگین بود."}},
+		  {"word": "fast", "synonym": "slow", "sentence": {"en": "The car is fast, but the truck is slow.", "fa": "ماشین سریع است، اما کامیون آهسته است."}},
+		  {"word": "cold", "synonym": "hot", "sentence": {"en": "The tea is hot, but the water is cold.", "fa": "چای داغ است، اما آب سرد است."}},
+		  {"word": "careful", "synonym": "careless", "sentence": {"en": "Be careful, don't be careless!", "fa": "مراقب باش، بی‌دقت نباش!"}}
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v2_l3_vocab_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Write a word in each blank that is the opposite of the words in the left column.", "fa": "در هر جای خالی کلمه‌ای بنویسید که متضاد کلمات ستون کناری باشد."},
+			"items": [
+			  {"text": {"en": "happy →", "fa": "happy ←"}, "answer": ["sad", "unhappy"]},
+			  {"text": {"en": "fast →", "fa": "fast ←"}, "answer": ["slow"]},
+			  {"text": {"en": "cold →", "fa": "cold ←"}, "answer": ["hot", "warm"]}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l3_vocab_b",
+			"type": "multiple_choice",
+			"instruction": {"en": "Two of the words in each group are antonyms. Find them.", "fa": "دو کلمه در هر گروه متضاد هستند. آن‌ها را پیدا کنید."},
+			"items": [
+			  {"question": {"en": "start / finish / decrease / produce", "fa": "start / finish / decrease / produce"}, "options": ["start & finish", "start & decrease", "finish & produce"], "answer": 0, "explanation": {"en": "'Start' (begin) and 'finish' (end) are opposites.", "fa": "'Start' (شروع) و 'finish' (پایان) متضاد هستند."}},
+			  {"question": {"en": "quickly / sadly / greatly / slowly", "fa": "quickly / sadly / greatly / slowly"}, "options": ["quickly & sadly", "quickly & slowly", "sadly & greatly"], "answer": 1, "explanation": {"en": "'Quickly' (fast) and 'slowly' are opposites.", "fa": "'Quickly' (سریع) و 'slowly' (آهسته) متضاد هستند."}},
+			  {"question": {"en": "rise / move / reflect / fall", "fa": "rise / move / reflect / fall"}, "options": ["rise & move", "rise & fall", "move & reflect"], "answer": 1, "explanation": {"en": "'Rise' (go up) and 'fall' (go down) are opposites.", "fa": "'Rise' (بالا رفتن) و 'fall' (پایین آمدن) متضاد هستند."}},
+			  {"question": {"en": "cheap / famous / expensive / interesting", "fa": "cheap / famous / expensive / interesting"}, "options": ["cheap & famous", "cheap & expensive", "famous & interesting"], "answer": 1, "explanation": {"en": "'Cheap' (low price) and 'expensive' (high price) are opposites.", "fa": "'Cheap' (ارزان) و 'expensive' (گران) متضاد هستند."}}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l3_vocab_c",
+			"type": "fill_blank",
+			"instruction": {"en": "Look back at the Reading to find synonyms and antonyms for the words.", "fa": "به متن خواندنی برگردید و مترادف و متضاد کلمات را پیدا کنید."},
+			"items": [
+			  {"text": {"en": "In paragraph 1, find a synonym for 'reflect':", "fa": "در پاراگراف ۱، مترادف 'reflect' را پیدا کنید:"}, "answer": ["show"]},
+			  {"text": {"en": "In paragraph 3, find an antonym for 'buy':", "fa": "در پاراگراف ۳، متضاد 'buy' را پیدا کنید:"}, "answer": ["sell"]},
+			  {"text": {"en": "In paragraph 5, find a synonym for 'well-known':", "fa": "در پاراگراف ۵، مترادف 'well-known' را پیدا کنید:"}, "answer": ["famous"]},
+			  {"text": {"en": "In paragraph 6, find an antonym for 'ugly':", "fa": "در پاراگراف ۶، متضاد 'ugly' را پیدا کنید:"}, "answer": ["beautiful"]}
+			]
+		  }
+		]
+	  }
+	},
+	"3": {
+	  "1": {
+		"lesson_title": {"en": "Sense of Appreciation", "fa": "حس قدردانی"},
+		"topic": {"en": "Collocations", "fa": "هم‌آیندها (کلمات هم‌نشین)"},
+		"theory": {
+		  "definition": {
+			"en": "A collocation is two or more words that often go together. These combinations just sound 'right' to native speakers. For example: 'fast food' (not 'quick food'), 'strong wind' (not 'heavy wind'), 'make a mistake' (not 'do a mistake').",
+			"fa": "هم‌آیند دو یا چند کلمه است که اغلب با هم می‌آیند. این ترکیبات برای گویشوران بومی 'درست' به نظر می‌رسند. برای مثال: 'fast food' (نه 'quick food')، 'strong wind' (نه 'heavy wind')، 'make a mistake' (نه 'do a mistake')."
+		  },
+		  "key_points": [
+			{"en": "Using correct collocations makes your English sound natural.", "fa": "استفاده از هم‌آیندهای صحیح باعث می‌شود انگلیسی شما طبیعی به نظر برسد."},
+			{"en": "You must learn collocations as whole chunks, not word by word.", "fa": "شما باید هم‌آیندها را به صورت یک کل یاد بگیرید، نه کلمه به کلمه."}
+		  ]
+		},
+		"examples": [
+		  {"word": "fast food", "synonym": "NOT quick food", "sentence": {"en": "I rarely eat fast food.", "fa": "من به ندرت فست فود می‌خورم."}},
+		  {"word": "strong wind", "synonym": "NOT heavy wind", "sentence": {"en": "The strong wind broke the tree.", "fa": "باد شدید درخت را شکست."}},
+		  {"word": "make a mistake", "synonym": "NOT do a mistake", "sentence": {"en": "Everyone can make a mistake.", "fa": "هر کسی ممکن است اشتباه کند."}},
+		  {"word": "read a newspaper", "synonym": "NOT study a newspaper", "sentence": {"en": "He reads a newspaper every morning.", "fa": "او هر صبح روزنامه می‌خواند."}}
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v3_l1_vocab_a",
+			"type": "matching",
+			"instruction": {"en": "Without looking back at the Conversation, make collocations by matching the words on the left with the ones on the right.", "fa": "بدون نگاه کردن به مکالمه، با تطبیق کلمات ستون چپ با ستون راست، هم‌آیند بسازید."},
+			"options": ["well", "temperature", "abroad", "no pains", "surprisingly", "the way", "tears"],
+			"items": [
+			  {"text": {"en": "feel", "fa": "feel"}, "answer": "well"},
+			  {"text": {"en": "take", "fa": "take"}, "answer": "temperature"},
+			  {"text": {"en": "go", "fa": "go"}, "answer": "abroad"},
+			  {"text": {"en": "spare", "fa": "spare"}, "answer": "no pains"},
+			  {"text": {"en": "not", "fa": "not"}, "answer": "surprisingly"},
+			  {"text": {"en": "by", "fa": "by"}, "answer": "the way"},
+			  {"text": {"en": "burst into", "fa": "burst into"}, "answer": "tears"}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l1_vocab_b",
+			"type": "open_ended",
+			"instruction": {"en": "Use each collocation in a new sentence.", "fa": "از هر هم‌آیند در یک جمله جدید استفاده کنید."},
+			"items": [
+			  {"question": {"en": "Write five sentences using the collocations.", "fa": "پنج جمله با استفاده از هم‌آیندها بنویسید."}, "sample_answer": {"en": "1. I don't feel well today. 2. The nurse took the patient's temperature. 3. My brother wants to go abroad. 4. Dr. Gharib spared no pains to cure sick children. 5. By the way, where is your sister?", "fa": "۱. امروز حالم خوب نیست. ۲. پرستار دمای بدن بیمار را گرفت. ۳. برادرم می‌خواهد به خارج برود. ۴. دکتر قریب برای درمان کودکان بیمار از هیچ کوششی دریغ نکرد. ۵. راستی، خواهرت کجاست؟"}}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Look it Up!", "fa": "دنبالش بگرد!"},
+		"topic": {"en": "Word Part Families", "fa": "خانواده‌های بخش کلمه"},
+		"theory": {
+		  "definition": {
+			"en": "One way to figure out the meaning of an unknown word is to look for its relationship with other words in the same family. When you recognize prefixes and suffixes and know what they mean, it will help you work out the meaning of many words you read. This technique is also known as 'word attack'.",
+			"fa": "یکی از راه‌های فهمیدن معنی یک کلمه ناشناخته، جستجوی رابطه آن با کلمات دیگر در همان خانواده است. وقتی پیشوندها و پسوندها را بشناسید و معنی آن‌ها را بدانید، به شما کمک می‌کند معنی بسیاری از کلماتی را که می‌خوانید بفهمید. این روش به 'حمله به کلمه' نیز معروف است."
+		  },
+		  "key_points": [
+			{"en": "Words in the same family share a common root or base word.", "fa": "کلمات در یک خانواده یک ریشه یا پایه مشترک دارند."},
+			{"en": "Identifying the root helps you guess the meaning of complex words.", "fa": "شناسایی ریشه به شما کمک می‌کند معنی کلمات پیچیده را حدس بزنید."}
+		  ]
+		},
+		"examples": [
+		  {"word": "effectively", "synonym": "effect", "sentence": {"en": "If you study effectively, you will learn more.", "fa": "اگر به طور مؤثر درس بخوانید، بیشتر یاد می‌گیرید."}},
+		  {"word": "communicative", "synonym": "communicate", "sentence": {"en": "He wasn't very communicative.", "fa": "او خیلی اهل ارتباط نبود."}},
+		  {"word": "accidentally", "synonym": "accident", "sentence": {"en": "The fire was started accidentally.", "fa": "آتش‌سوزی تصادفی شروع شد."}},
+		  {"word": "endangering", "synonym": "danger", "sentence": {"en": "The pollution is endangering the crops.", "fa": "آلودگی دارد محصولات را به خطر می‌اندازد."}}
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v3_l2_vocab_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Look at the following sentences. Write down at least one other word you know that is related to the bold word.", "fa": "به جملات زیر نگاه کنید. حداقل یک کلمه دیگر که می‌شناسید و با کلمه پررنگ مرتبط است بنویسید."},
+			"items": [
+			  {"text": {"en": "My job has become increasingly difficult. → related to 'increasingly':", "fa": "My job has become increasingly difficult. ← مرتبط با 'increasingly':"}, "answer": ["increase", "increasing"]},
+			  {"text": {"en": "He wasn't very communicative. → related to 'communicative':", "fa": "He wasn't very communicative. ← مرتبط با 'communicative':"}, "answer": ["communicate", "communication"]},
+			  {"text": {"en": "The fire was started accidentally. → related to 'accidentally':", "fa": "The fire was started accidentally. ← مرتبط با 'accidentally':"}, "answer": ["accident", "accidental"]},
+			  {"text": {"en": "The pollution is endangering the crops. → related to 'endangering':", "fa": "The pollution is endangering the crops. ← مرتبط با 'endangering':"}, "answer": ["danger", "dangerous", "endanger"]},
+			  {"text": {"en": "We searched unsuccessfully. → related to 'unsuccessfully':", "fa": "We searched unsuccessfully. ← مرتبط با 'unsuccessfully':"}, "answer": ["success", "successful", "succeed"]}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l2_vocab_b",
+			"type": "fill_blank",
+			"instruction": {"en": "Attack these words to figure out their meanings. Write down other words related to them.", "fa": "به این کلمات حمله کنید تا معنی‌شان را بفهمید. کلمات دیگر مرتبط با آن‌ها را بنویسید."},
+			"items": [
+			  {"text": {"en": "disconnection → related words:", "fa": "disconnection ← کلمات مرتبط:"}, "answer": ["disconnect", "connection", "connect"]},
+			  {"text": {"en": "unsystematically → related words:", "fa": "unsystematically ← کلمات مرتبط:"}, "answer": ["system", "systematic", "systematically"]},
+			  {"text": {"en": "incomprehensible → related words:", "fa": "incomprehensible ← کلمات مرتبط:"}, "answer": ["comprehend", "comprehensible", "comprehension"]},
+			  {"text": {"en": "unexpectedly → related words:", "fa": "unexpectedly ← کلمات مرتبط:"}, "answer": ["expect", "expected", "expectation"]},
+			  {"text": {"en": "international → related words:", "fa": "international ← کلمات مرتبط:"}, "answer": ["nation", "national", "nationally"]},
+			  {"text": {"en": "unchangeable → related words:", "fa": "unchangeable ← کلمات مرتبط:"}, "answer": ["change", "changeable"]}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Renewable Energy", "fa": "انرژی تجدیدپذیر"},
+		"topic": {"en": "Proverbs", "fa": "ضرب‌المثل‌ها"},
+		"theory": {
+		  "definition": {
+			"en": "A proverb is a short well-known sentence that gives practical advice about life. Proverbs surround us every day. The following common proverbs in English have common equivalents in Persian.",
+			"fa": "ضرب‌المثل جمله کوتاه و شناخته‌شده‌ای است که پند عملی درباره زندگی می‌دهد. ضرب‌المثل‌ها هر روز ما را احاطه کرده‌اند. ضرب‌المثل‌های رایج انگلیسی زیر معادل‌های رایجی در فارسی دارند."
+		  },
+		  "key_points": [
+			{"en": "Proverbs reflect the culture and wisdom of a society.", "fa": "ضرب‌المثل‌ها نشان‌دهنده فرهنگ و خرد یک جامعه هستند."},
+			{"en": "Learning proverbs helps you understand native speakers better.", "fa": "یادگیری ضرب‌المثل‌ها به شما کمک می‌کند گویشوران بومی را بهتر درک کنید."}
+		  ]
+		},
+		"examples": [
+		  {"word": "God helps those who help themselves", "synonym": "تکرح وت زا تکرب ادخ زا (از تو حرکت، از خدا برکت)", "sentence": {"en": "Don't just wait for good things. Work hard!", "fa": "فقط منتظر چیزهای خوب نباش. سخت کار کن!"}},
+		  {"word": "The early bird catches the worm", "synonym": "شاب زیخ رحس یشاب اورماک ات (سحرخیز باش تا کامروا شوی)", "sentence": {"en": "Wake up early if you want to succeed.", "fa": "اگر می‌خواهی موفق شوی زود بیدار شو."}},
+		  {"word": "Birds of a feather flock together", "synonym": "کبوتر با کبوتر، باز با باز", "sentence": {"en": "People like to spend time with similar others.", "fa": "مردم دوست دارند با افراد مشابه خود وقت بگذرانند."}},
+		  {"word": "Actions speak louder than words", "synonym": "کار نیکو کردن از پر گفتن به", "sentence": {"en": "Doing it is more meaningful than saying it.", "fa": "انجام دادن آن معنادارتر از گفتن آن است."}}
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v3_l3_vocab_a",
+			"type": "matching",
+			"instruction": {"en": "Match the English proverbs with their Persian equivalents.", "fa": "ضرب‌المثل‌های انگلیسی را با معادل‌های فارسی‌شان تطبیق دهید."},
+			"options": ["کبوتر با کبوتر، باز با باز", "کار نیکو کردن از پر گفتن به", "آشپز که دوتا شد، آش یا شور می‌شود یا بی‌نمک", "باد آورده را باد می‌برد", "جوجه را آخر پاییز می‌شمارند", "از دل برود هر آنکه از دیده برفت"],
+			"items": [
+			  {"text": {"en": "Birds of a feather flock together", "fa": "Birds of a feather flock together"}, "answer": "کبوتر با کبوتر، باز با باز"},
+			  {"text": {"en": "Actions speak louder than words", "fa": "Actions speak louder than words"}, "answer": "کار نیکو کردن از پر گفتن به"},
+			  {"text": {"en": "Too many cooks spoil the broth", "fa": "Too many cooks spoil the broth"}, "answer": "آشپز که دوتا شد، آش یا شور می‌شود یا بی‌نمک"},
+			  {"text": {"en": "Easy come, easy go", "fa": "Easy come, easy go"}, "answer": "باد آورده را باد می‌برد"},
+			  {"text": {"en": "Don't count your chickens before they hatch", "fa": "Don't count your chickens before they hatch"}, "answer": "جوجه را آخر پاییز می‌شمارند"},
+			  {"text": {"en": "Out of sight, out of mind", "fa": "Out of sight, out of mind"}, "answer": "از دل برود هر آنکه از دیده برفت"}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l3_vocab_b",
+			"type": "fill_blank",
+			"instruction": {"en": "Write the Persian equivalents for the following English proverbs.", "fa": "معادل‌های فارسی ضرب‌المثل‌های انگلیسی زیر را بنویسید."},
+			"items": [
+			  {"text": {"en": "Cut your coat according to your cloth.", "fa": "Cut your coat according to your cloth."}, "answer": ["به اندازه بختت گلیمت را دراز کن", "گلیم خود را به اندازه بختت دراز کن"]},
+			  {"text": {"en": "A burnt child dreads the fire.", "fa": "A burnt child dreads the fire."}, "answer": ["مار گزیده از ریسمان سیاه و سفید می‌ترسد"]},
+			  {"text": {"en": "Kill two birds with one stone.", "fa": "Kill two birds with one stone."}, "answer": ["با یک تیر دو نشان زدن", "یک تیر و دو نشان"]},
+			  {"text": {"en": "Don't look a gift horse in the mouth.", "fa": "Don't look a gift horse in the mouth."}, "answer": ["در دهان اسب پیشکش شده نگاه نکن", "هدیه را عیب‌جویی نکن"]}
+			]
+		  }
+		]
+	  }
+	}
+  }
+}

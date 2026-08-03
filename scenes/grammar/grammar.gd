@@ -9,28 +9,27 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
-# Colors cycling across grammar point cards
+# Colors cycling across grammar point cards — dark theme
 const CARD_ACCENT_COLORS := [
-	Color("#2563EB"),  # blue
-	Color("#16A34A"),  # green
-	Color("#9333EA"),  # purple
-	Color("#EA580C"),  # orange
-	Color("#0D9488"),  # teal
+	Color("#22D3EE"),  # Cyan
+	Color("#34D399"),  # Emerald
+	Color("#EC4899"),  # Pink
+	Color("#FBBF24"),  # Amber
+	Color("#A78BFA"),  # Purple
 ]
 const CARD_BG_COLORS := [
-	Color("#EFF6FF"),
-	Color("#F0FDF4"),
-	Color("#FDF4FF"),
-	Color("#FFF7ED"),
-	Color("#F0FDFA"),
+	Color("#1a2f5c"),  # Deep blue
+	Color("#1a2d2a"),  # Deep teal
+	Color("#2d1f4e"),  # Deep purple
+	Color("#2d2a1f"),  # Deep amber-brown
+	Color("#1f2a4e"),  # Deep indigo
 ]
-
-const STRUCTURE_BG  := Color("#1E293B")
+const STRUCTURE_BG  := Color("#0f1b3d")  # Darker than cards
 const STRUCTURE_FG  := Color("#F1F5F9")
-const TIP_BG        := Color("#FEF9C3")
-const TIP_BORDER    := Color("#EAB308")
-const EXAMPLE_EN_FG := Color("#1E40AF")
-const EXAMPLE_FA_FG := Color("#64748B")
+const TIP_BG        := Color("#2d2a1f")  # Dark amber tint
+const TIP_BORDER    := Color("#FBBF24")
+const EXAMPLE_EN_FG := Color("#22D3EE")  # Cyan for English examples
+const EXAMPLE_FA_FG := Color("#94A3B8")  # Muted light for Farsi
 
 # ---------- Font configuration ----------
 const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
@@ -45,6 +44,7 @@ var font_fa: FontFile
 @onready var header_title: Label                 = $HeaderBar/HeaderContent/HeaderTitle
 @onready var points_container: VBoxContainer     = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/PointsContainer
 @onready var audio_player: AudioStreamPlayer     = $AudioPlayer
+@onready var exercises_container: VBoxContainer  = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/ExerciseSection
 
 
 func _ready() -> void:
@@ -60,7 +60,14 @@ func _ready() -> void:
 
 	if font_bold != null:
 		header_title.add_theme_font_override("font", font_bold)
-
+	
+	var lesson_data := Global.load_category("grammar_exercises", Global.current_book, Global.current_lesson)
+	for exercise in lesson_data.get("exercises", []):
+		var engine := ExerciseEngine.new()
+		exercises_container.add_child(engine)
+		engine.build(exercise)
+		engine.exercise_checked.connect(_on_exercise_checked)
+	
 	var data: Dictionary = _load_grammar(book, lesson)
 	if data.is_empty():
 		var empty := Label.new()
@@ -71,6 +78,9 @@ func _ready() -> void:
 
 	_build_grammar_points(data.get("points", []))
 
+func _on_exercise_checked(exercise_id: String, correct: int, total: int) -> void:
+	# Track progress / save to UserData here
+	print("%s → %d/%d" % [exercise_id, correct, total])
 
 func _load_fonts() -> void:
 	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
@@ -128,61 +138,56 @@ func _build_grammar_points(points: Array) -> void:
 func _make_grammar_card(point: Dictionary, color_idx: int) -> PanelContainer:
 	var accent: Color = CARD_ACCENT_COLORS[color_idx]
 	var bg: Color     = CARD_BG_COLORS[color_idx]
-
-	# Outer card
+	
 	var card := PanelContainer.new()
 	card.mouse_filter = Control.MOUSE_FILTER_PASS
+	
 	var card_style := StyleBoxFlat.new()
 	card_style.bg_color                   = bg
-	card_style.corner_radius_top_left     = 16
-	card_style.corner_radius_top_right    = 16
-	card_style.corner_radius_bottom_left  = 16
-	card_style.corner_radius_bottom_right = 16
+	card_style.corner_radius_top_left     = 20
+	card_style.corner_radius_top_right    = 20
+	card_style.corner_radius_bottom_left  = 20
+	card_style.corner_radius_bottom_right = 20
 	card_style.border_width_left          = 5
 	card_style.border_color               = accent
-	card_style.content_margin_left        = 20
-	card_style.content_margin_right       = 20
-	card_style.content_margin_top         = 18
-	card_style.content_margin_bottom      = 18
+	card_style.content_margin_left        = 24
+	card_style.content_margin_right       = 24
+	card_style.content_margin_top         = 22
+	card_style.content_margin_bottom      = 22
+	card_style.shadow_color               = Color(0, 0, 0, 0.45)
+	card_style.shadow_size                = 10
+	card_style.shadow_offset              = Vector2(0, 6)
 	card.add_theme_stylebox_override("panel", card_style)
-
+	
 	var inner := VBoxContainer.new()
 	inner.add_theme_constant_override("separation", 16)
 	inner.mouse_filter = Control.MOUSE_FILTER_PASS
-
-	# 1. Title
+	
 	_add_title(inner, point.get("title", ""), accent)
-
-	# 2. Persian explanation
 	_add_explanation(inner, point.get("explanation", ""))
-
-	# 3. Structure box (dark code-like block)
+	
 	var structure: String = point.get("structure", "")
 	if structure != "":
 		_add_structure_box(inner, structure)
-
-	# 4. Negative / Question forms (if present)
+	
 	var negative: String = point.get("negative", "")
 	if negative != "":
 		_add_structure_box(inner, negative)
-
+	
 	var question: String = point.get("question", "")
 	if question != "":
 		_add_structure_box(inner, question)
-
-	# 5. Examples
+	
 	var examples: Array = point.get("examples", [])
 	if not examples.is_empty():
 		_add_examples_section(inner, examples, accent)
-
-	# 6. Tip / نکته
+	
 	var tip: String = point.get("tip", "")
 	if tip != "":
 		_add_tip_box(inner, tip)
-
+	
 	card.add_child(inner)
 	return card
-
 
 # ----------------------------------------------------------------
 #  CARD SECTION BUILDERS
@@ -215,7 +220,7 @@ func _add_explanation(parent: VBoxContainer, explanation: String) -> void:
 	lbl.text = explanation
 	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
 	lbl.add_theme_font_size_override("font_size", 42)
-	lbl.add_theme_color_override("font_color", Color("#1E293B"))
+	lbl.add_theme_color_override("font_color", Color("#F1F5F9"))  # Light text
 	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	lbl.text_direction = Control.TEXT_DIRECTION_RTL
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -223,22 +228,24 @@ func _add_explanation(parent: VBoxContainer, explanation: String) -> void:
 		lbl.add_theme_font_override("font", font_fa)
 	parent.add_child(lbl)
 
-
 func _add_structure_box(parent: VBoxContainer, structure: String) -> void:
 	var box := PanelContainer.new()
 	box.mouse_filter = Control.MOUSE_FILTER_PASS
+	
 	var box_style := StyleBoxFlat.new()
 	box_style.bg_color                   = STRUCTURE_BG
-	box_style.corner_radius_top_left     = 8
-	box_style.corner_radius_top_right    = 8
-	box_style.corner_radius_bottom_left  = 8
-	box_style.corner_radius_bottom_right = 8
-	box_style.content_margin_left        = 16
-	box_style.content_margin_right       = 16
-	box_style.content_margin_top         = 12
-	box_style.content_margin_bottom      = 12
+	box_style.corner_radius_top_left     = 12
+	box_style.corner_radius_top_right    = 12
+	box_style.corner_radius_bottom_left  = 12
+	box_style.corner_radius_bottom_right = 12
+	box_style.content_margin_left        = 18
+	box_style.content_margin_right       = 18
+	box_style.content_margin_top         = 14
+	box_style.content_margin_bottom      = 14
+	box_style.border_width_left          = 3
+	box_style.border_color               = Color("#22D3EE")  # Cyan accent
 	box.add_theme_stylebox_override("panel", box_style)
-
+	
 	var lbl := Label.new()
 	lbl.text = structure
 	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
@@ -247,13 +254,10 @@ func _add_structure_box(parent: VBoxContainer, structure: String) -> void:
 	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if font_regular != null:
 		lbl.add_theme_font_override("font", font_regular)
-
 	box.add_child(lbl)
 	parent.add_child(box)
 
-
 func _add_examples_section(parent: VBoxContainer, examples: Array, accent: Color) -> void:
-	# Section header
 	var header := Label.new()
 	header.text = "مثال‌ها:"
 	header.add_theme_font_size_override("font_size", 38)
@@ -263,14 +267,12 @@ func _add_examples_section(parent: VBoxContainer, examples: Array, accent: Color
 	if font_fa != null:
 		header.add_theme_font_override("font", font_fa)
 	parent.add_child(header)
-
-	# Each example
+	
 	for ex in examples:
 		var ex_container := VBoxContainer.new()
 		ex_container.mouse_filter = Control.MOUSE_FILTER_PASS
 		ex_container.add_theme_constant_override("separation", 4)
-
-		# English line
+		
 		var en_lbl := Label.new()
 		en_lbl.text = "▸  " + ex.get("en", "")
 		en_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
@@ -279,8 +281,7 @@ func _add_examples_section(parent: VBoxContainer, examples: Array, accent: Color
 		en_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		if font_regular != null:
 			en_lbl.add_theme_font_override("font", font_regular)
-
-		# Farsi translation line
+		
 		var fa_lbl := Label.new()
 		fa_lbl.text = ex.get("fa", "")
 		fa_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
@@ -291,43 +292,41 @@ func _add_examples_section(parent: VBoxContainer, examples: Array, accent: Color
 		fa_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		if font_fa != null:
 			fa_lbl.add_theme_font_override("font", font_fa)
-
+		
 		ex_container.add_child(en_lbl)
 		ex_container.add_child(fa_lbl)
 		parent.add_child(ex_container)
 
-
 func _add_tip_box(parent: VBoxContainer, tip: String) -> void:
 	var box := PanelContainer.new()
 	box.mouse_filter = Control.MOUSE_FILTER_PASS
+	
 	var box_style := StyleBoxFlat.new()
 	box_style.bg_color                   = TIP_BG
-	box_style.corner_radius_top_left     = 8
-	box_style.corner_radius_top_right    = 8
-	box_style.corner_radius_bottom_left  = 8
-	box_style.corner_radius_bottom_right = 8
+	box_style.corner_radius_top_left     = 12
+	box_style.corner_radius_top_right    = 12
+	box_style.corner_radius_bottom_left  = 12
+	box_style.corner_radius_bottom_right = 12
 	box_style.border_width_left          = 4
 	box_style.border_color               = TIP_BORDER
-	box_style.content_margin_left        = 14
-	box_style.content_margin_right       = 14
-	box_style.content_margin_top         = 10
-	box_style.content_margin_bottom      = 10
+	box_style.content_margin_left        = 16
+	box_style.content_margin_right       = 16
+	box_style.content_margin_top         = 12
+	box_style.content_margin_bottom      = 12
 	box.add_theme_stylebox_override("panel", box_style)
-
+	
 	var lbl := Label.new()
 	lbl.text = "💡 " + tip
 	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
 	lbl.add_theme_font_size_override("font_size", 38)
-	lbl.add_theme_color_override("font_color", Color("#713F12"))
+	lbl.add_theme_color_override("font_color", Color("#FBBF24"))  # Amber text
 	lbl.text_direction = Control.TEXT_DIRECTION_RTL
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if font_fa != null:
 		lbl.add_theme_font_override("font", font_fa)
-
 	box.add_child(lbl)
 	parent.add_child(box)
-
 
 func _on_back_button_pressed() -> void:
 	TransitionManager.change_scene(SCENE_LESSON_MENU)

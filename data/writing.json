@@ -1,0 +1,768 @@
+{
+  "category": "writing",
+  "title": {"en": "Writing", "fa": "نوشتن"},
+  "icon": "✍️",
+  "books": {
+	"1": {
+	  "1": {
+		"lesson_title": {"en": "Saving Nature", "fa": "نجات طبیعت"},
+		"topic": {"en": "Nouns", "fa": "اسم‌ها"},
+		"concept": {
+		  "definition": {
+			"en": "A noun names something. A noun is a person, an animal, a place, a thing, or an idea.",
+			"fa": "اسم چیزی را نام‌گذاری می‌کند. اسم یک شخص، حیوان، مکان، شیء یا ایده است."
+		  },
+		  "key_points": [
+			{"en": "Every sentence needs at least one noun (or pronoun) as its subject.", "fa": "هر جمله حداقل به یک اسم (یا ضمیر) به‌عنوان فاعل نیاز دارد."},
+			{"en": "Nouns can be common (general) or proper (specific names).", "fa": "اسم‌ها می‌توانند عام (کلی) یا خاص (نام‌های مشخص) باشند."}
+		  ],
+		  "categories": [
+			{"name": {"en": "Person / Animal", "fa": "شخص / حیوان"}, "examples": ["farmer", "my brother", "Maryam", "a cow"]},
+			{"name": {"en": "Place", "fa": "مکان"}, "examples": ["school", "cinema", "sea", "a park"]},
+			{"name": {"en": "Thing", "fa": "شیء"}, "examples": ["computer", "apple", "car", "a book"]},
+			{"name": {"en": "Idea", "fa": "ایده"}, "examples": ["pain", "attention", "danger", "love of country"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Singular and Plural", "fa": "مفرد و جمع"},
+			"subtitle": {"en": "Most nouns are made plural by adding 's' or 'es'. Some are irregular.", "fa": "بیشتر اسم‌ها با افزودن 's' یا 'es' جمع بسته می‌شوند. برخی بی‌قاعده هستند."},
+			"table": [
+			  {"type": "Regular", "singular": "girl", "plural": "girls"},
+			  {"type": "Regular", "singular": "box", "plural": "boxes"},
+			  {"type": "Regular", "singular": "bus", "plural": "buses"},
+			  {"type": "Irregular", "singular": "man", "plural": "men"},
+			  {"type": "Irregular", "singular": "child", "plural": "children"},
+			  {"type": "Irregular", "singular": "wolf", "plural": "wolves"},
+			  {"type": "Irregular", "singular": "woman", "plural": "women"}
+			]
+		  },
+		  {
+			"title": {"en": "Common vs. Proper Nouns", "fa": "اسم عام و خاص"},
+			"subtitle": {"en": "Proper nouns name specific people, places, or things and always start with a capital letter.", "fa": "اسم‌های خاص نام افراد، مکان‌ها یا چیزهای مشخص هستند و همیشه با حرف بزرگ شروع می‌شوند."},
+			"table": [
+			  {"type": "Common", "singular": "boy", "plural": "boys"},
+			  {"type": "Common", "singular": "tree", "plural": "trees"},
+			  {"type": "Common", "singular": "bear", "plural": "bears"},
+			  {"type": "Proper", "singular": "Avicenna", "plural": "—"},
+			  {"type": "Proper", "singular": "Damavand", "plural": "—"},
+			  {"type": "Proper", "singular": "Milad Tower", "plural": "—"},
+			  {"type": "Proper", "singular": "Mashhad", "plural": "—"}
+			]
+		  },
+		  {
+			"title": {"en": "Noun Markers", "fa": "نشانه‌های اسم"},
+			"subtitle": {"en": "Words that often come before a noun.", "fa": "کلماتی که اغلب قبل از اسم می‌آیند."},
+			"table": [
+			  {"type": "Article", "singular": "a / an", "plural": "a hunter / an elephant"},
+			  {"type": "Definite", "singular": "the", "plural": "the child / the cars"},
+			  {"type": "Demonstrative", "singular": "this / that", "plural": "this bird / that tiger"},
+			  {"type": "Plural Dem.", "singular": "these / those", "plural": "these chairs / those men"},
+			  {"type": "Possessive", "singular": "my / your / his", "plural": "my friends / their towns"}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v1_l1_w_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Write the appropriate form of each noun (singular or plural).", "fa": "شکل مناسب هر اسم را بنویسید (مفرد یا جمع)."},
+			"items": [
+			  {"text": {"en": "Ali's ___ (brother) is a hard-working ___ (postman).", "fa": "___ (brother) علی یک ___ (postman) سخت‌کوش است."}, "answer": ["brother", "postman"]},
+			  {"text": {"en": "She sat down at her ___ (desk) and worked for two ___ (hour).", "fa": "او پشت ___ (desk) نشست و دو ___ (hour) کار کرد."}, "answer": ["desk", "hours"]},
+			  {"text": {"en": "There are two ___ (bus stop) near your ___ (school).", "fa": "دو ___ (bus stop) نزدیک ___ (school) شما هست."}, "answer": ["bus stops", "school"]},
+			  {"text": {"en": "I saw an old ___ (man) and two young ___ (woman) sitting near the lake of the ___ (park).", "fa": "من یک ___ (man) پیر و دو ___ (woman) جوان دیدم که کنار دریاچه ___ (park) نشسته بودند."}, "answer": ["man", "women", "park"]},
+			  {"text": {"en": "Frank is a ___ (farmer). He has four ___ (child).", "fa": "فرانک یک ___ (farmer) است. او چهار ___ (child) دارد."}, "answer": ["farmer", "children"]}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l1_w_b",
+			"type": "multiple_choice",
+			"instruction": {"en": "Circle the correct answer (proper nouns need capital letters).", "fa": "گزینه صحیح را انتخاب کنید (اسامی خاص به حرف بزرگ نیاز دارند)."},
+			"items": [
+			  {"question": {"en": "Today, ___ mountains and plains are the natural home of many animals.", "fa": "امروز، کوه‌ها و دشت‌های ___ خانه طبیعی بسیاری از حیوانات هستند."}, "options": ["Iran", "iran"], "answer": 0, "explanation": {"en": "'Iran' is a proper noun → capital letter.", "fa": "'Iran' یک اسم خاص است → حرف بزرگ."}},
+			  {"question": {"en": "One of them is the black ___ which lives in a few parts of the country.", "fa": "یکی از آن‌ها ___ سیاه است که در چند بخش کشور زندگی می‌کند."}, "options": ["Bear", "bear"], "answer": 1, "explanation": {"en": "'bear' is a common noun → lowercase.", "fa": "'bear' یک اسم عام است → حرف کوچک."}},
+			  {"question": {"en": "Amin ___ is a pilot. He is 40 years old.", "fa": "امین ___ یک خلبان است. او ۴۰ ساله است."}, "options": ["Askari", "askari"], "answer": 0, "explanation": {"en": "'Askari' is a proper noun (family name) → capital letter.", "fa": "'Askari' یک اسم خاص (نام خانوادگی) است → حرف بزرگ."}},
+			  {"question": {"en": "He lives with his wife and children in ___.", "fa": "او با همسر و فرزندانش در ___ زندگی می‌کند."}, "options": ["Mashhad", "mashhad"], "answer": 0, "explanation": {"en": "'Mashhad' is a proper noun (city name) → capital letter.", "fa": "'Mashhad' یک اسم خاص (نام شهر) است → حرف بزرگ."}},
+			  {"question": {"en": "The ___ Gulf is a very important sea between Iran and some Arab countries.", "fa": "خلیج ___ یک دریای بسیار مهم بین ایران و برخی کشورهای عربی است."}, "options": ["Persian", "persian"], "answer": 0, "explanation": {"en": "'Persian' is a proper adjective → capital letter.", "fa": "'Persian' یک صفت خاص است → حرف بزرگ."}}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l1_w_c",
+			"type": "categorize",
+			"instruction": {"en": "Read the sentences and categorize the underlined nouns.", "fa": "جملات را بخوانید و اسم‌های زیرخط‌دار را دسته‌بندی کنید."},
+			"categories": ["Person/Animal", "Place", "Thing", "Idea"],
+			"items": [
+			  {"text": {"en": "The weather is beautiful in the spring. → 'weather'", "fa": "آب‌وهوا در بهار زیبا است. ← 'weather'"}, "answer": "Idea"},
+			  {"text": {"en": "This is a low mountain, but those mountains are high. → 'mountain'", "fa": "این یک کوه کوتاه است، اما آن کوه‌ها بلند هستند. ← 'mountain'"}, "answer": "Place"},
+			  {"text": {"en": "Nasim read a book on the bus last week. → 'book'", "fa": "نسیم هفته پیش یک کتاب در اتوبوس خواند. ← 'book'"}, "answer": "Thing"},
+			  {"text": {"en": "Some people do not take care of animals. → 'people'", "fa": "بعضی مردم از حیوانات مراقبت نمی‌کنند. ← 'people'"}, "answer": "Person/Animal"},
+			  {"text": {"en": "I saw two wolves in the zoo. → 'wolves'", "fa": "من دو گرگ در باغ‌وحش دیدم. ← 'wolves'"}, "answer": "Person/Animal"}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Wonders of Creation", "fa": "شگفتی‌های آفرینش"},
+		"topic": {"en": "Adjectives", "fa": "صفت‌ها"},
+		"concept": {
+		  "definition": {
+			"en": "An adjective describes a noun. It gives more information about quality, size, age, color, nationality, or material.",
+			"fa": "صفت یک اسم را توصیف می‌کند. اطلاعات بیشتری درباره کیفیت، اندازه، سن، رنگ، ملیت یا جنس می‌دهد."
+		  },
+		  "key_points": [
+			{"en": "Adjectives usually come before a noun or after the verb 'be'.", "fa": "صفت‌ها معمولاً قبل از اسم یا بعد از فعل 'be' می‌آیند."},
+			{"en": "Comparative adjectives compare two things; superlative adjectives compare one thing with a group.", "fa": "صفت‌های تفضیلی دو چیز را مقایسه می‌کنند؛ صفت‌های عالی یک چیز را با یک گروه مقایسه می‌کنند."}
+		  ],
+		  "categories": [
+			{"name": {"en": "Quality / Opinion", "fa": "کیفیت / نظر"}, "examples": ["nice", "boring", "beautiful", "interesting"]},
+			{"name": {"en": "Size", "fa": "اندازه"}, "examples": ["small", "tall", "short", "big"]},
+			{"name": {"en": "Age", "fa": "سن"}, "examples": ["young", "new", "modern", "old"]},
+			{"name": {"en": "Color", "fa": "رنگ"}, "examples": ["black", "red", "dark", "blue"]},
+			{"name": {"en": "Nationality", "fa": "ملیت"}, "examples": ["Iranian", "German", "Chinese", "African"]},
+			{"name": {"en": "Material", "fa": "جنس"}, "examples": ["wooden", "rocky", "golden", "plastic"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Place of Adjectives", "fa": "جایگاه صفت‌ها"},
+			"subtitle": {"en": "Where adjectives appear in a sentence.", "fa": "صفت‌ها در کجای جمله ظاهر می‌شوند."},
+			"table": [
+			  {"type": "Before noun", "singular": "an interesting planet", "plural": "two small moons"},
+			  {"type": "After 'be'", "singular": "Human body is amazing.", "plural": "She was so happy."},
+			  {"type": "Comparative", "singular": "Mars is smaller than Jupiter.", "plural": "Karoon is longer than Atrak."},
+			  {"type": "Superlative", "singular": "Jupiter is the largest of all.", "plural": "Damavand is the tallest mountain."}
+			]
+		  },
+		  {
+			"title": {"en": "Spelling Hints", "fa": "نکات املا"},
+			"subtitle": {"en": "How to form comparative and superlative adjectives.", "fa": "چگونه صفت‌های تفضیلی و عالی بسازیم."},
+			"table": [
+			  {"type": "Short adj", "singular": "hot → hotter", "plural": "hot → the hottest"},
+			  {"type": "Short adj", "singular": "big → bigger", "plural": "big → the biggest"},
+			  {"type": "-y ending", "singular": "happy → happier", "plural": "happy → the happiest"},
+			  {"type": "-y ending", "singular": "cloudy → cloudier", "plural": "cloudy → the cloudiest"},
+			  {"type": "Irregular", "singular": "good → better", "plural": "good → the best"},
+			  {"type": "Irregular", "singular": "bad → worse", "plural": "bad → the worst"},
+			  {"type": "Irregular", "singular": "far → farther", "plural": "far → the farthest"}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v1_l2_w_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Complete each sentence with a suitable adjective. One adjective is extra.", "fa": "هر جمله را با یک صفت مناسب کامل کنید. یک صفت اضافی است."},
+			"items": [
+			  {"text": {"en": "It's not ___. Don't laugh please! (funny / careful / tall / golden / cloudy)", "fa": "این ___ نیست. لطفاً نخندید! (funny / careful / tall / golden / cloudy)"}, "answer": ["funny"]},
+			  {"text": {"en": "She looked at the ___ sky above the sea.", "fa": "او به آسمان ___ بالای دریا نگاه کرد."}, "answer": ["cloudy"]},
+			  {"text": {"en": "Be ___! Look both ways when you cross the street.", "fa": "___ باشید! وقتی از خیابان رد می‌شوید هر دو طرف را نگاه کنید."}, "answer": ["careful"]},
+			  {"text": {"en": "Mary lost her ___ watch in the park.", "fa": "مری ساعت ___ خود را در پارک گم کرد."}, "answer": ["golden"]}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l2_w_b",
+			"type": "fill_blank",
+			"instruction": {"en": "Write the comparative and superlative forms of each adjective.", "fa": "شکل تفضیلی و عالی هر صفت را بنویسید."},
+			"items": [
+			  {"text": {"en": "angry → comparative: ___", "fa": "angry ← تفضیلی: ___"}, "answer": ["angrier"]},
+			  {"text": {"en": "angry → superlative: ___", "fa": "angry ← عالی: ___"}, "answer": ["the angriest"]},
+			  {"text": {"en": "strong → comparative: ___", "fa": "strong ← تفضیلی: ___"}, "answer": ["stronger"]},
+			  {"text": {"en": "hot → superlative: ___", "fa": "hot ← عالی: ___"}, "answer": ["the hottest"]},
+			  {"text": {"en": "far → comparative: ___", "fa": "far ← تفضیلی: ___"}, "answer": ["farther", "further"]},
+			  {"text": {"en": "neat → superlative: ___", "fa": "neat ← عالی: ___"}, "answer": ["the neatest"]},
+			  {"text": {"en": "ugly → comparative: ___", "fa": "ugly ← تفضیلی: ___"}, "answer": ["uglier"]}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l2_w_c",
+			"type": "fill_blank",
+			"instruction": {"en": "Complete each sentence with a comparative or superlative form of an adjective in the box: deep, good, dangerous, expensive, small.", "fa": "هر جمله را با شکل تفضیلی یا عالی صفتی از جعبه کامل کنید: deep, good, dangerous, expensive, small."},
+			"items": [
+			  {"text": {"en": "Pluto is ___ than the moon of Earth.", "fa": "پلوتو ___ از ماه زمین است."}, "answer": ["smaller"]},
+			  {"text": {"en": "Are you sure this is the ___ way of doing it?", "fa": "مطمئنید این ___ راه انجام آن است؟"}, "answer": ["best"]},
+			  {"text": {"en": "Lions are ___ animals in the world.", "fa": "شیرها ___ حیوانات جهان هستند."}, "answer": ["the most dangerous"]},
+			  {"text": {"en": "This lake is ___ one in the world.", "fa": "این دریاچه ___ دریاچه جهان است."}, "answer": ["the deepest"]},
+			  {"text": {"en": "A plane ticket is ___ than a train ticket.", "fa": "بلیط هواپیما ___ از بلیط قطار است."}, "answer": ["more expensive"]}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "The Value of Knowledge", "fa": "ارزش دانش"},
+		"topic": {"en": "Verbs", "fa": "فعل‌ها"},
+		"concept": {
+		  "definition": {
+			"en": "A verb is a word that expresses an action or a state of being.",
+			"fa": "فعل کلمه‌ای است که یک عمل یا حالت وجودی را بیان می‌کند."
+		  },
+		  "key_points": [
+			{"en": "Action verbs express an action (write, run, drink).", "fa": "افعال عملی یک عمل را بیان می‌کنند (write، run، drink)."},
+			{"en": "State verbs express emotions, thoughts, and senses (love, believe, feel). They usually don't take the continuous form.", "fa": "افعال حالتی احساسات، افکار و حواس را بیان می‌کنند (love، believe، feel). آن‌ها معمولاً شکل استمراری نمی‌گیرند."}
+		  ],
+		  "categories": [
+			{"name": {"en": "Action Verbs", "fa": "افعال عملی"}, "examples": ["write", "run", "drink", "go", "clean"]},
+			{"name": {"en": "State Verbs", "fa": "افعال حالتی"}, "examples": ["love", "believe", "feel", "know", "want"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Simple and Continuous Forms", "fa": "شکل‌های ساده و استمراری"},
+			"subtitle": {"en": "How action and state verbs behave in different tenses.", "fa": "افعال عملی و حالتی در زمان‌های مختلف چگونه رفتار می‌کنند."},
+			"table": [
+			  {"type": "Action (simple)", "singular": "I cleaned my room yesterday.", "plural": "The children went to school."},
+			  {"type": "Action (continuous)", "singular": "I am cleaning my room now.", "plural": "They are playing in the yard."},
+			  {"type": "State (simple)", "singular": "I don't know the name.", "plural": "Kids love chocolate."},
+			  {"type": "State (no continuous)", "singular": "NOT: I am not knowing", "plural": "NOT: Kids are loving"}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v1_l3_w_a",
+			"type": "multiple_choice",
+			"instruction": {"en": "Read the following sentences and choose the best verb forms.", "fa": "جملات زیر را بخوانید و بهترین شکل فعل را انتخاب کنید."},
+			"items": [
+			  {"question": {"en": "I ___ reading newspapers.", "fa": "من روزنامه خواندن را ___."}, "options": ["don't like", "am not liking"], "answer": 0, "explanation": {"en": "'Like' is a state verb → use simple form, not continuous.", "fa": "'Like' یک فعل حالتی است → از شکل ساده استفاده کنید، نه استمراری."}},
+			  {"question": {"en": "At 3 o'clock yesterday, I ___ a taxi.", "fa": "دیروز ساعت ۳، من یک تاکسی ___."}, "options": ["needed", "was needing"], "answer": 0, "explanation": {"en": "'Need' is a state verb → simple form.", "fa": "'Need' یک فعل حالتی است → شکل ساده."}},
+			  {"question": {"en": "She ___ television at the moment.", "fa": "او در حال حاضر تلویزیون ___."}, "options": ["watches", "is watching"], "answer": 1, "explanation": {"en": "'At the moment' → action in progress → continuous.", "fa": "'At the moment' → عمل در حال انجام → استمراری."}},
+			  {"question": {"en": "I ___ to go to the cinema tonight.", "fa": "من امشب ___ به سینما بروم."}, "options": ["want", "am wanting"], "answer": 0, "explanation": {"en": "'Want' is a state verb → simple form.", "fa": "'Want' یک فعل حالتی است → شکل ساده."}},
+			  {"question": {"en": "Unfortunately, he ___ my name.", "fa": "متأسفانه، او نام من را ___."}, "options": ["didn't remember", "wasn't remembering"], "answer": 0, "explanation": {"en": "'Remember' is a state verb → simple form.", "fa": "'Remember' یک فعل حالتی است → شکل ساده."}}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l3_w_b",
+			"type": "categorize",
+			"instruction": {"en": "Categorize the following verbs as Action or State verbs.", "fa": "فعل‌های زیر را به‌عنوان فعل عملی یا حالتی دسته‌بندی کنید."},
+			"categories": ["Action", "State"],
+			"items": [
+			  {"text": {"en": "write", "fa": "write (نوشتن)"}, "answer": "Action"},
+			  {"text": {"en": "believe", "fa": "believe (باور داشتن)"}, "answer": "State"},
+			  {"text": {"en": "run", "fa": "run (دویدن)"}, "answer": "Action"},
+			  {"text": {"en": "love", "fa": "love (دوست داشتن)"}, "answer": "State"},
+			  {"text": {"en": "drink", "fa": "drink (نوشیدن)"}, "answer": "Action"},
+			  {"text": {"en": "feel", "fa": "feel (احساس کردن)"}, "answer": "State"},
+			  {"text": {"en": "go", "fa": "go (رفتن)"}, "answer": "Action"},
+			  {"text": {"en": "know", "fa": "know (دانستن)"}, "answer": "State"},
+			  {"text": {"en": "clean", "fa": "clean (تمیز کردن)"}, "answer": "Action"},
+			  {"text": {"en": "want", "fa": "want (خواستن)"}, "answer": "State"}
+			]
+		  }
+		]
+	  },
+	  "4": {
+		"lesson_title": {"en": "Traveling the World", "fa": "سفر به دور جهان"},
+		"topic": {"en": "Adverbs", "fa": "قیدها"},
+		"concept": {
+		  "definition": {
+			"en": "An adverb describes a verb. It tells us how, when, where, or how often an action happens.",
+			"fa": "قید یک فعل را توصیف می‌کند. به ما می‌گوید یک عمل چگونه، چه زمانی، کجا یا چند وقت یک‌بار اتفاق می‌افتد."
+		  },
+		  "key_points": [
+			{"en": "Most adverbs are formed by adding '-ly' to an adjective.", "fa": "بیشتر قیدها با افزودن '-ly' به صفت ساخته می‌شوند."},
+			{"en": "Some adverbs are irregular and do not follow the '-ly' rule.", "fa": "بعضی قیدها بی‌قاعده هستند و از قانون '-ly' پیروی نمی‌کنند."}
+		  ],
+		  "categories": [
+			{"name": {"en": "Regular (-ly)", "fa": "باقاعده (-ly)"}, "examples": ["slow → slowly", "quick → quickly", "polite → politely"]},
+			{"name": {"en": "-y → -ily", "fa": "-y → -ily"}, "examples": ["angry → angrily", "easy → easily", "happy → happily"]},
+			{"name": {"en": "-ble → -bly", "fa": "-ble → -bly"}, "examples": ["possible → possibly", "probable → probably", "comfortable → comfortably"]},
+			{"name": {"en": "Irregular", "fa": "بی‌قاعده"}, "examples": ["fast → fast", "late → late", "hard → hard", "good → well"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "How to Make -ly Adverbs", "fa": "چگونه قیدهای -ly بسازیم"},
+			"subtitle": {"en": "Regular patterns for forming adverbs from adjectives.", "fa": "الگوهای باقاعده برای ساختن قید از صفت."},
+			"table": [
+			  {"type": "Regular", "singular": "slow → slowly", "plural": "real → really"},
+			  {"type": "Regular", "singular": "quick → quickly", "plural": "polite → politely"},
+			  {"type": "-y → -ily", "singular": "angry → angrily", "plural": "easy → easily"},
+			  {"type": "-ble → -bly", "singular": "possible → possibly", "plural": "probable → probably"},
+			  {"type": "-ful", "singular": "wonderful → wonderfully", "plural": "careful → carefully"}
+			]
+		  },
+		  {
+			"title": {"en": "Irregular Adverbs", "fa": "قیدهای بی‌قاعده"},
+			"subtitle": {"en": "Adverbs that do not follow the '-ly' rule.", "fa": "قیدهایی که از قانون '-ly' پیروی نمی‌کنند."},
+			"table": [
+			  {"type": "Same form", "singular": "fast → fast", "plural": "late → late"},
+			  {"type": "Same form", "singular": "hard → hard", "plural": "early → early"},
+			  {"type": "Different", "singular": "good → well", "plural": "—"}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v1_l4_w_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Change the following adjectives to adverbs.", "fa": "صفت‌های زیر را به قید تبدیل کنید."},
+			"items": [
+			  {"text": {"en": "polite →", "fa": "polite ←"}, "answer": ["politely"]},
+			  {"text": {"en": "loud →", "fa": "loud ←"}, "answer": ["loudly"]},
+			  {"text": {"en": "comfortable →", "fa": "comfortable ←"}, "answer": ["comfortably"]},
+			  {"text": {"en": "wonderful →", "fa": "wonderful ←"}, "answer": ["wonderfully"]},
+			  {"text": {"en": "quiet →", "fa": "quiet ←"}, "answer": ["quietly"]},
+			  {"text": {"en": "slow →", "fa": "slow ←"}, "answer": ["slowly"]},
+			  {"text": {"en": "cruel →", "fa": "cruel ←"}, "answer": ["cruelly"]},
+			  {"text": {"en": "quick →", "fa": "quick ←"}, "answer": ["quickly"]},
+			  {"text": {"en": "suitable →", "fa": "suitable ←"}, "answer": ["suitably"]}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l4_w_b",
+			"type": "fill_blank",
+			"instruction": {"en": "Complete the following sentences with the proper form of adverbs (including irregular ones).", "fa": "جملات زیر را با شکل مناسب قیدها کامل کنید (شامل قیدهای بی‌قاعده)."},
+			"items": [
+			  {"text": {"en": "Hooshang came ___ (late) to the class yesterday.", "fa": "هوشنگ دیروز ___ (late) به کلاس آمد."}, "answer": ["late"]},
+			  {"text": {"en": "The policeman answered the tourists ___ (polite).", "fa": "پلیس ___ (polite) به گردشگران پاسخ داد."}, "answer": ["politely"]},
+			  {"text": {"en": "Can you talk ___ (quiet), please?", "fa": "ممکن است ___ (quiet) صحبت کنید؟"}, "answer": ["quietly"]},
+			  {"text": {"en": "Behrooz tried ___ (hard) to answer all questions.", "fa": "بهروز ___ (hard) تلاش کرد به همه سؤالات پاسخ دهد."}, "answer": ["hard"]},
+			  {"text": {"en": "My teacher speaks French ___ (good).", "fa": "معلم من ___ (good) فرانسوی صحبت می‌کند."}, "answer": ["well"]},
+			  {"text": {"en": "The people of the town ___ (generous) helped poor people.", "fa": "مردم شهر ___ (generous) به فقرا کمک کردند."}, "answer": ["generously"]}
+			]
+		  }
+		]
+	  }
+	},
+	"2": {
+	  "1": {
+		"lesson_title": {"en": "Understanding People", "fa": "درک مردم"},
+		"topic": {"en": "Simple Sentences", "fa": "جملات ساده"},
+		"concept": {
+		  "definition": {
+			"en": "In English, every simple sentence must have at least a subject and a verb. The subject is who or what the sentence is about; the verb is what the sentence says about the subject.",
+			"fa": "در انگلیسی، هر جمله ساده باید حداقل یک فاعل و یک فعل داشته باشد. فاعل کسی یا چیزی است که جمله درباره آن است؛ فعل چیزی است که جمله درباره فاعل می‌گوید."
+		  },
+		  "key_points": [
+			{"en": "A sentence begins with a capital letter and ends with a period, question mark, or exclamation point.", "fa": "جمله با حرف بزرگ شروع می‌شود و با نقطه، علامت سؤال یا علامت تعجب تمام می‌شود."},
+			{"en": "A simple sentence can also have an object (receives the action) and additional information (place, time, manner).", "fa": "یک جمله ساده می‌تواند مفعول (گیرنده عمل) و اطلاعات اضافی (مکان، زمان، حالت) هم داشته باشد."}
+		  ],
+		  "categories": [
+			{"name": {"en": "Subject (S)", "fa": "فاعل (S)"}, "examples": ["Mahan", "The bird", "The apple", "The teacher"]},
+			{"name": {"en": "Verb (V)", "fa": "فعل (V)"}, "examples": ["is sleeping", "does not sing", "fell down", "is hard-working"]},
+			{"name": {"en": "Object (O)", "fa": "مفعول (O)"}, "examples": ["English", "milk", "a new car", "his homework"]},
+			{"name": {"en": "Additional Info (AI)", "fa": "اطلاعات اضافی (AI)"}, "examples": ["at school", "every week", "last night", "fluently"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Parts of a Simple Sentence", "fa": "اجزای یک جمله ساده"},
+			"subtitle": {"en": "Examples showing S, V, O, and AI.", "fa": "مثال‌هایی که S، V، O و AI را نشان می‌دهند."},
+			"table": [
+			  {"type": "S + V", "singular": "Mahan is sleeping.", "plural": "The bird does not sing."},
+			  {"type": "S + V + O", "singular": "The students learn English.", "plural": "Mahdi visited his doctor."},
+			  {"type": "S + V + AI", "singular": "Ali will have an exam next week.", "plural": "We usually visit grandma on Fridays."},
+			  {"type": "S + V + O + AI", "singular": "She studies English at school every week.", "plural": "My friends take photographs of animals."}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v2_l1_w_a",
+			"type": "multiple_choice",
+			"instruction": {"en": "Read each group of words. Do these words make a sentence?", "fa": "هر گروه از کلمات را بخوانید. آیا این کلمات یک جمله می‌سازند؟"},
+			"items": [
+			  {"question": {"en": "'studying in the library'", "fa": "'studying in the library'"}, "options": ["Yes, it is a sentence.", "No, it is not a sentence."], "answer": 1, "explanation": {"en": "No subject and no finite verb → not a sentence.", "fa": "فاعل و فعل صرف‌شده ندارد → جمله نیست."}},
+			  {"question": {"en": "'she laughed'", "fa": "'she laughed'"}, "options": ["Yes, it is a sentence.", "No, it is not a sentence."], "answer": 0, "explanation": {"en": "Has subject (she) + verb (laughed) → sentence.", "fa": "فاعل (she) + فعل (laughed) دارد → جمله است."}},
+			  {"question": {"en": "'suitable for both boys and girls'", "fa": "'suitable for both boys and girls'"}, "options": ["Yes, it is a sentence.", "No, it is not a sentence."], "answer": 1, "explanation": {"en": "No subject and no verb → not a sentence.", "fa": "فاعل و فعل ندارد → جمله نیست."}},
+			  {"question": {"en": "'the lion died'", "fa": "'the lion died'"}, "options": ["Yes, it is a sentence.", "No, it is not a sentence."], "answer": 0, "explanation": {"en": "Has subject (the lion) + verb (died) → sentence.", "fa": "فاعل (the lion) + فعل (died) دارد → جمله است."}},
+			  {"question": {"en": "'the tree will fall down'", "fa": "'the tree will fall down'"}, "options": ["Yes, it is a sentence.", "No, it is not a sentence."], "answer": 0, "explanation": {"en": "Has subject (the tree) + verb (will fall) → sentence.", "fa": "فاعل (the tree) + فعل (will fall) دارد → جمله است."}},
+			  {"question": {"en": "'the baby with her small hands'", "fa": "'the baby with her small hands'"}, "options": ["Yes, it is a sentence.", "No, it is not a sentence."], "answer": 1, "explanation": {"en": "No verb → not a sentence.", "fa": "فعل ندارد → جمله نیست."}},
+			  {"question": {"en": "'it is very good for children'", "fa": "'it is very good for children'"}, "options": ["Yes, it is a sentence.", "No, it is not a sentence."], "answer": 0, "explanation": {"en": "Has subject (it) + verb (is) → sentence.", "fa": "فاعل (it) + فعل (is) دارد → جمله است."}},
+			  {"question": {"en": "'a beautiful lake in the forest'", "fa": "'a beautiful lake in the forest'"}, "options": ["Yes, it is a sentence.", "No, it is not a sentence."], "answer": 1, "explanation": {"en": "No verb → not a sentence.", "fa": "فعل ندارد → جمله نیست."}}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l1_w_b",
+			"type": "ordering",
+			"instruction": {"en": "Rearrange the words to create correct sentences.", "fa": "کلمات را مرتب کنید تا جملات صحیح بسازید."},
+			"items": [
+			  {"text": {"en": "borrowed / I / that book", "fa": "borrowed / I / that book"}, "answer": 1},
+			  {"text": {"en": "is going / she / the TV / to turn on", "fa": "is going / she / the TV / to turn on"}, "answer": 2},
+			  {"text": {"en": "can / learn / we / a new language", "fa": "can / learn / we / a new language"}, "answer": 3},
+			  {"text": {"en": "sang / a song / my grandfather", "fa": "sang / a song / my grandfather"}, "answer": 0}
+			],
+			"answer": [
+			  "I borrowed that book.",
+			  "She is going to turn on the TV.",
+			  "We can learn a new language.",
+              "My grandfather sang a song."
+			]
+		  },
+		  {
+			"exercise_id": "v2_l1_w_c",
+			"type": "categorize",
+			"instruction": {"en": "Read the sentences. Find the Subject (S), Verb (V), Object (O) and Additional Information (AI).", "fa": "جملات را بخوانید. فاعل (S)، فعل (V)، مفعول (O) و اطلاعات اضافی (AI) را پیدا کنید."},
+			"categories": ["Subject", "Verb", "Object", "Additional Info"],
+			"items": [
+			  {"text": {"en": "On weekends, I read storybooks. → 'I'", "fa": "On weekends, I read storybooks. → 'I'"}, "answer": "Subject"},
+			  {"text": {"en": "On weekends, I read storybooks. → 'read'", "fa": "On weekends, I read storybooks. → 'read'"}, "answer": "Verb"},
+			  {"text": {"en": "On weekends, I read storybooks. → 'storybooks'", "fa": "On weekends, I read storybooks. → 'storybooks'"}, "answer": "Object"},
+			  {"text": {"en": "On weekends, I read storybooks. → 'On weekends'", "fa": "On weekends, I read storybooks. → 'On weekends'"}, "answer": "Additional Info"},
+			  {"text": {"en": "I usually get good grades. → 'good grades'", "fa": "I usually get good grades. → 'good grades'"}, "answer": "Object"},
+			  {"text": {"en": "Last night, my mother made cookies. → 'my mother'", "fa": "Last night, my mother made cookies. → 'my mother'"}, "answer": "Subject"},
+			  {"text": {"en": "My friends take photographs of animals. → 'photographs'", "fa": "My friends take photographs of animals. → 'photographs'"}, "answer": "Object"},
+			  {"text": {"en": "I have a math class on Wednesdays. → 'on Wednesdays'", "fa": "I have a math class on Wednesdays. → 'on Wednesdays'"}, "answer": "Additional Info"}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "A Healthy Lifestyle", "fa": "سبک زندگی سالم"},
+		"topic": {"en": "Gerunds", "fa": "اسم مصدر (Gerund)"},
+		"concept": {
+		  "definition": {
+			"en": "A gerund is a verb+-ing that works like a noun. A gerund can be a subject or an object in a sentence.",
+			"fa": "اسم مصدر فعلی با -ing است که مانند اسم کار می‌کند. اسم مصدر می‌تواند فاعل یا مفعول در جمله باشد."
+		  },
+		  "key_points": [
+			{"en": "A gerund is always singular. When one gerund is the subject, it takes a singular verb.", "fa": "اسم مصدر همیشه مفرد است. وقتی یک اسم مصدر فاعل باشد، فعل مفرد می‌گیرد."},
+			{"en": "When two gerunds form the subject, the verb is plural.", "fa": "وقتی دو اسم مصدر فاعل را تشکیل دهند، فعل جمع است."},
+			{"en": "Do not confuse a gerund with the present progressive.", "fa": "اسم مصدر را با حال استمراری اشتباه نگیرید."}
+		  ],
+		  "categories": [
+			{"name": {"en": "As Subject", "fa": "به‌عنوان فاعل"}, "examples": ["Swimming is useful.", "Reading helps us.", "Walking makes me happy."]},
+			{"name": {"en": "As Object", "fa": "به‌عنوان مفعول"}, "examples": ["Vahid enjoys cycling.", "Maryam loves reading.", "Taking photos is her hobby."]},
+			{"name": {"en": "After 'go'", "fa": "بعد از 'go'"}, "examples": ["go fishing", "go swimming", "go jogging", "go skiing"]},
+			{"name": {"en": "After specific verbs", "fa": "بعد از افعال خاص"}, "examples": ["enjoy, finish, give up, imagine, keep on, practice, quit, love"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Gerund Patterns", "fa": "الگوهای اسم مصدر"},
+			"subtitle": {"en": "Common ways gerunds appear in sentences.", "fa": "راه‌های رایج ظاهر شدن اسم مصدر در جملات."},
+			"table": [
+			  {"type": "As subject", "singular": "Swimming is useful for everyone.", "plural": "Cycling and jogging are my favorite sports."},
+			  {"type": "As object", "singular": "I enjoy swimming.", "plural": "Maryam loves reading."},
+			  {"type": "After 'go'", "singular": "Let's go shopping.", "plural": "Yesterday, we went biking."},
+			  {"type": "After preposition", "singular": "Parastoo is good at speaking German.", "plural": "I am tired of washing the dishes."},
+			  {"type": "In notices (NO + -ing)", "singular": "NO PARKING", "plural": "NO SMOKING"}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v2_l2_w_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Change the following verbs into gerunds. Then complete the sentences.", "fa": "فعل‌های زیر را به اسم مصدر تبدیل کنید. سپس جملات را کامل کنید."},
+			"items": [
+			  {"text": {"en": "___ (eat) fast food makes you fat.", "fa": "___ (eat) غذای فست‌فود شما را چاق می‌کند."}, "answer": ["eating"]},
+			  {"text": {"en": "___ (travel) by train is cheap and safe.", "fa": "___ (travel) با قطار ارزان و امن است."}, "answer": ["traveling", "travelling"]},
+			  {"text": {"en": "___ (write) English well is one of my goals.", "fa": "___ (write) خوب انگلیسی یکی از اهداف من است."}, "answer": ["writing"]},
+			  {"text": {"en": "___ (do) regular exercise is useful for everyone.", "fa": "___ (do) ورزش منظم برای همه مفید است."}, "answer": ["doing"]}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l2_w_b",
+			"type": "fill_blank",
+			"instruction": {"en": "Change the following verbs into gerunds. Then complete the sentences.", "fa": "فعل‌های زیر را به اسم مصدر تبدیل کنید. سپس جملات را کامل کنید."},
+			"items": [
+			  {"text": {"en": "My sister enjoys ___ (play) in the rain.", "fa": "خواهرم از ___ (play) در باران لذت می‌برد."}, "answer": ["playing"]},
+			  {"text": {"en": "Mehran loves ___ (walk).", "fa": "مهران ___ (walk) را دوست دارد."}, "answer": ["walking"]},
+			  {"text": {"en": "My dad goes ___ (fish) on Fridays.", "fa": "پدرم جمعه‌ها ___ (fish) می‌رود."}, "answer": ["fishing"]},
+			  {"text": {"en": "Has she finished ___ (do) her homework?", "fa": "آیا او ___ (do) تکالیفش را تمام کرده است؟"}, "answer": ["doing"]}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l2_w_c",
+			"type": "multiple_choice",
+			"instruction": {"en": "Read the following sentences. Which of the underlined words is a gerund?", "fa": "جملات زیر را بخوانید. کدام یک از کلمات زیرخط‌دار اسم مصدر است؟"},
+			"items": [
+			  {"question": {"en": "They were watching a football match when I called.", "fa": "وقتی زنگ زدم، آن‌ها داشتند یک مسابقه فوتبال تماشا می‌کردند."}, "options": ["watching (present progressive)", "No gerund in this sentence"], "answer": 1, "explanation": {"en": "'Watching' here is part of past progressive, not a gerund.", "fa": "'Watching' اینجا بخشی از گذشته استمراری است، نه اسم مصدر."}},
+			  {"question": {"en": "Saeed is cycling in the park right now.", "fa": "سعید الان دارد در پارک دوچرخه‌سواری می‌کند."}, "options": ["cycling (present progressive)", "No gerund in this sentence"], "answer": 1, "explanation": {"en": "'Cycling' here is present progressive, not a gerund.", "fa": "'Cycling' اینجا حال استمراری است، نه اسم مصدر."}},
+			  {"question": {"en": "Farzaneh enjoys watching scientific movies.", "fa": "فرزانه از تماشای فیلم‌های علمی لذت می‌برد."}, "options": ["watching (gerund)", "watching (present progressive)"], "answer": 0, "explanation": {"en": "'Watching' follows 'enjoys' → it functions as a noun (object) → gerund.", "fa": "'Watching' بعد از 'enjoys' آمده → نقش اسم (مفعول) دارد → اسم مصدر."}},
+			  {"question": {"en": "My favorite sport is hiking.", "fa": "ورزش مورد علاقه من کوهنوردی است."}, "options": ["hiking (gerund)", "hiking (present progressive)"], "answer": 0, "explanation": {"en": "'Hiking' follows 'is' and names an activity → gerund.", "fa": "'Hiking' بعد از 'is' آمده و یک فعالیت را نام می‌برد → اسم مصدر."}}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Art and Culture", "fa": "هنر و فرهنگ"},
+		"topic": {"en": "Infinitives", "fa": "مصدر با to (Infinitive)"},
+		"concept": {
+		  "definition": {
+			"en": "An infinitive is the 'to' form of a verb, for instance, the infinitive form of 'study' is 'to study'. You can use an infinitive as the subject or object of a sentence.",
+			"fa": "مصدر شکل 'to' یک فعل است؛ برای مثال، مصدر 'study' می‌شود 'to study'. می‌توانید از مصدر به‌عنوان فاعل یا مفعول جمله استفاده کنید."
+		  },
+		  "key_points": [
+			{"en": "Infinitives can be the subject of a sentence, but the gerund form is more natural.", "fa": "مصدر می‌تواند فاعل جمله باشد، اما شکل اسم مصدر طبیعی‌تر است."},
+			{"en": "After some verbs (choose, decide, want, try, promise, forget, agree, wait, learn) we use infinitives.", "fa": "بعد از بعضی افعال (choose، decide، want، try، promise، forget، agree، wait، learn) از مصدر استفاده می‌کنیم."},
+			{"en": "We make negative infinitives with 'not + to + verb'.", "fa": "مصدر منفی را با 'not + to + verb' می‌سازیم."}
+		  ],
+		  "categories": [
+			{"name": {"en": "As Subject", "fa": "به‌عنوان فاعل"}, "examples": ["To smoke is very bad.", "To learn a language can be interesting."]},
+			{"name": {"en": "As Object", "fa": "به‌عنوان مفعول"}, "examples": ["I like to watch this movie.", "Hamed wants to learn a language."]},
+			{"name": {"en": "After verbs", "fa": "بعد از افعال"}, "examples": ["decide to learn", "want to buy", "remember to turn off"]},
+			{"name": {"en": "After adjectives", "fa": "بعد از صفت‌ها"}, "examples": ["glad to see", "sad to leave", "amazed to hear"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Infinitive Patterns", "fa": "الگوهای مصدر"},
+			"subtitle": {"en": "Common ways infinitives appear in sentences.", "fa": "راه‌های رایج ظاهر شدن مصدر در جملات."},
+			"table": [
+			  {"type": "As subject", "singular": "To smoke is very bad.", "plural": "To learn a language can be interesting."},
+			  {"type": "As object", "singular": "I like to watch this movie.", "plural": "She wanted to buy a handicraft."},
+			  {"type": "After verb", "singular": "I have decided to learn Spanish.", "plural": "Remember to turn off the lights."},
+			  {"type": "After adjective", "singular": "She became happy to see her classmate.", "plural": "Ali was really sad to leave us."},
+			  {"type": "Negative", "singular": "I told the children not to make noise.", "plural": "My dad tries not to forget numbers."}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v2_l3_w_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Complete the following sentences with the gerunds or infinitives of the verbs in the box: learn, leave, make, give, catch, turn off.", "fa": "جملات زیر را با اسم مصدر یا مصدر با to از فعل‌های جعبه کامل کنید: learn, leave, make, give, catch, turn off."},
+			"items": [
+			  {"text": {"en": "I went home after ___ the school.", "fa": "من بعد از ___ مدرسه به خانه رفتم."}, "answer": ["leaving"]},
+			  {"text": {"en": "I have decided ___ Spanish.", "fa": "من تصمیم گرفته‌ام اسپانیایی ___."}, "answer": ["to learn"]},
+			  {"text": {"en": "We can't learn English without ___ mistakes.", "fa": "ما نمی‌توانیم بدون ___ اشتباه انگلیسی یاد بگیریم."}, "answer": ["making"]},
+			  {"text": {"en": "Mahboobeh bought some flowers ___ to her mother.", "fa": "محبوبه چند گل خرید تا به مادرش ___."}, "answer": ["to give"]},
+			  {"text": {"en": "Remember ___ the lights.", "fa": "یادت باشد چراغ‌ها را ___."}, "answer": ["to turn off"]},
+			  {"text": {"en": "I ran fast ___ the bus.", "fa": "من تند دویدم تا اتوبوس را ___."}, "answer": ["to catch"]}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l3_w_b",
+			"type": "open_ended",
+			"instruction": {"en": "Using five adjectives from the list (careful, amazed, certain, ashamed, glad, fortunate, shocked, lucky, sorry, surprised), write five sentences with infinitives about yourself.", "fa": "با استفاده از پنج صفت از فهرست (careful, amazed, certain, ashamed, glad, fortunate, shocked, lucky, sorry, surprised)، پنج جمله با مصدر با to درباره خودتان بنویسید."},
+			"items": [
+			  {"question": {"en": "Write five sentences using adjective + infinitive.", "fa": "پنج جمله با استفاده از صفت + مصدر با to بنویسید."}, "sample_answer": {"en": "1. I am glad to see my friends. 2. She was surprised to hear the news. 3. We are lucky to live in Iran. 4. He was ashamed to tell the truth. 5. I am certain to pass the exam.", "fa": "۱. من خوشحالم که دوستانم را می‌بینم. ۲. او از شنیدن خبر شگفت‌زده شد. ۳. ما خوش‌شانس هستیم که در ایران زندگی می‌کنیم. ۴. او از گفتن حقیقت خجالت کشید. ۵. من مطمئنم که امتحان را قبول می‌شوم."}}
+			]
+		  }
+		]
+	  }
+	},
+	"3": {
+	  "1": {
+		"lesson_title": {"en": "Sense of Appreciation", "fa": "حس قدردانی"},
+		"topic": {"en": "Compound Sentences", "fa": "جملات مرکب"},
+		"concept": {
+		  "definition": {
+			"en": "A sentence with more than one subject, more than one verb and a connecting word such as 'and', 'or', 'but' or 'so' is called a compound sentence.",
+			"fa": "جمله‌ای با بیش از یک فاعل، بیش از یک فعل و یک کلمه ربط مانند 'and'، 'or'، 'but' یا 'so' جمله مرکب نامیده می‌شود."
+		  },
+		  "key_points": [
+			{"en": "Use a comma before 'and', 'or', 'but' and 'so' when you combine two sentences.", "fa": "هنگام ترکیب دو جمله، قبل از 'and'، 'or'، 'but' و 'so' از کاما استفاده کنید."},
+			{"en": "You can replace the repeated nouns with suitable pronouns.", "fa": "می‌توانید اسم‌های تکراری را با ضمایر مناسب جایگزین کنید."}
+		  ],
+		  "categories": [
+			{"name": {"en": "'and' — similar ideas", "fa": "'and' — ایده‌های مشابه"}, "examples": ["I get up early, and I make an omelet."]},
+			{"name": {"en": "'but' — contrast", "fa": "'but' — تضاد"}, "examples": ["The book was boring, but Tom had to read it."]},
+			{"name": {"en": "'or' — two choices", "fa": "'or' — دو انتخاب"}, "examples": ["Do your homework, or wash the dishes."]},
+			{"name": {"en": "'so' — result", "fa": "'so' — نتیجه"}, "examples": ["Saeed studied hard, so he passed the exam."]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Connecting Words", "fa": "کلمات ربط"},
+			"subtitle": {"en": "How each connector changes the meaning.", "fa": "هر کلمه ربط چگونه معنی را تغییر می‌دهد."},
+			"table": [
+			  {"type": "and", "singular": "I get up early, and I make an omelet.", "plural": "similar activities or feelings"},
+			  {"type": "but", "singular": "The book was boring, but Tom had to read it.", "plural": "contrast or difference"},
+			  {"type": "or", "singular": "Do your homework, or wash the dishes.", "plural": "two choices"},
+			  {"type": "so", "singular": "Saeed studied hard, so he passed the exam.", "plural": "result of the first sentence"}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v3_l1_w_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Complete the following sentences with 'and' or 'but'.", "fa": "جملات زیر را با 'and' یا 'but' کامل کنید."},
+			"items": [
+			  {"text": {"en": "We went to the park yesterday, ___ we had a wonderful time.", "fa": "ما دیروز به پارک رفتیم، ___ وقت فوق‌العاده‌ای داشتیم."}, "answer": ["and"]},
+			  {"text": {"en": "Behnam's family went to the zoo last week, ___ they did not enjoy it.", "fa": "خانواده بهنام هفته پیش به باغ‌وحش رفتند، ___ از آن لذت نبردند."}, "answer": ["but"]},
+			  {"text": {"en": "Susan has a pink dress, ___ she never wears it.", "fa": "سوزان یک لباس صورتی دارد، ___ هرگز آن را نمی‌پوشد."}, "answer": ["but"]},
+			  {"text": {"en": "Kate saw Sofia, ___ she didn't speak to her.", "fa": "کیت سوفیا را دید، ___ با او صحبت نکرد."}, "answer": ["but"]},
+			  {"text": {"en": "My English class is really enjoyable, ___ I have a lot of homework.", "fa": "کلاس انگلیسی من واقعاً لذت‌بخش است، ___ تکالیف زیادی دارم."}, "answer": ["but"]}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l1_w_b",
+			"type": "fill_blank",
+			"instruction": {"en": "Complete the following sentences with 'or' or 'so'.", "fa": "جملات زیر را با 'or' یا 'so' کامل کنید."},
+			"items": [
+			  {"text": {"en": "My mother doesn't like fast food, ___ she doesn't eat any.", "fa": "مادرم غذای فست‌فود دوست ندارد، ___ اصلاً نمی‌خورد."}, "answer": ["so"]},
+			  {"text": {"en": "I go out tonight, ___ I take a rest.", "fa": "امشب بیرون می‌روم، ___ استراحت می‌کنم."}, "answer": ["or"]},
+			  {"text": {"en": "We can eat our lunch at the restaurant, ___ we can have it at home.", "fa": "می‌توانیم ناهارمان را در رستوران بخوریم، ___ می‌توانیم در خانه بخوریم."}, "answer": ["or"]},
+			  {"text": {"en": "That dictionary is expensive, ___ I can't buy it.", "fa": "آن فرهنگ لغت گران است، ___ نمی‌توانم بخرمش."}, "answer": ["so"]},
+			  {"text": {"en": "This dress is not comfortable, ___ she rarely wears it.", "fa": "این لباس راحت نیست، ___ او به ندرت آن را می‌پوشد."}, "answer": ["so"]}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l1_w_c",
+			"type": "fill_blank",
+			"instruction": {"en": "Combine the two sentences with 'and', 'but', 'or' or 'so'.", "fa": "دو جمله را با 'and'، 'but'، 'or' یا 'so' ترکیب کنید."},
+			"items": [
+			  {"text": {"en": "Joseph is very busy today. He cannot watch TV. →", "fa": "جوزف امروز خیلی مشغول است. او نمی‌تواند تلویزیون تماشا کند. ←"}, "answer": ["joseph is very busy today, so he cannot watch tv."]},
+			  {"text": {"en": "My brother has a lot of books. He never reads them. →", "fa": "برادرم کتاب‌های زیادی دارد. او هرگز آن‌ها را نمی‌خواند. ←"}, "answer": ["my brother has a lot of books, but he never reads them."]},
+			  {"text": {"en": "We should do a lot of homework. We don't have enough time. →", "fa": "ما باید تکالیف زیادی انجام دهیم. وقت کافی نداریم. ←"}, "answer": ["we should do a lot of homework, but we don't have enough time."]},
+			  {"text": {"en": "Sepideh likes spaghetti. Her grandmother hates spaghetti. →", "fa": "سپیده اسپاگتی دوست دارد. مادربزرگش از اسپاگتی متنفر است. ←"}, "answer": ["sepideh likes spaghetti, but her grandmother hates it."]},
+			  {"text": {"en": "You can buy this coat. You can buy those shoes. →", "fa": "می‌توانی این کت را بخری. می‌توانی آن کفش‌ها را بخری. ←"}, "answer": ["you can buy this coat, or you can buy those shoes."]}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Look it Up!", "fa": "دنبالش بگرد!"},
+		"topic": {"en": "Paragraph", "fa": "پاراگراف"},
+		"concept": {
+		  "definition": {
+			"en": "A paragraph is a group of sentences about one idea. A paragraph can give us information, tell us an opinion, explain something, or tell us a short story.",
+			"fa": "پاراگراف گروهی از جملات درباره یک ایده است. پاراگراف می‌تواند به ما اطلاعات بدهد، نظر بگوید، چیزی را توضیح دهد یا یک داستان کوتاه تعریف کند."
+		  },
+		  "key_points": [
+			{"en": "Every sentence in a paragraph is about the same idea. When you want to write about a new idea, begin a new paragraph.", "fa": "هر جمله در یک پاراگراف درباره یک ایده است. وقتی می‌خواهید درباره ایده جدیدی بنویسید، یک پاراگراف جدید شروع کنید."},
+			{"en": "Sentences in a paragraph start with a capital letter and end with a period, question mark, or exclamation point.", "fa": "جملات در یک پاراگراف با حرف بزرگ شروع می‌شوند و با نقطه، علامت سؤال یا علامت تعجب تمام می‌شوند."},
+			{"en": "The most important sentence in a paragraph is the 'topic sentence'. It tells readers what they are going to read about.", "fa": "مهم‌ترین جمله در یک پاراگراف «جمله موضوعی» است. به خوانندگان می‌گوید قرار است درباره چه چیزی بخوانند."}
+		  ],
+		  "categories": [
+			{"name": {"en": "Topic", "fa": "موضوع"}, "examples": ["what the paragraph is about"]},
+			{"name": {"en": "Controlling Idea", "fa": "ایده کنترل‌کننده"}, "examples": ["what the writer is going to focus on"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Topic Sentence Structure", "fa": "ساختار جمله موضوعی"},
+			"subtitle": {"en": "Every topic sentence has two parts.", "fa": "هر جمله موضوعی دو بخش دارد."},
+			"table": [
+			  {"type": "Example 1", "singular": "My sister and I", "plural": "respect our parents all the time."},
+			  {"type": "Topic / Controlling", "singular": "TOPIC", "plural": "CONTROLLING IDEA"},
+			  {"type": "Example 2", "singular": "A cheetah", "plural": "is a wild animal from the cat family."},
+			  {"type": "Topic / Controlling", "singular": "TOPIC", "plural": "CONTROLLING IDEA"}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v3_l2_w_a",
+			"type": "fill_blank",
+			"instruction": {"en": "Look at the topic sentences. Find the topic and the controlling idea.", "fa": "به جملات موضوعی نگاه کنید. موضوع و ایده کنترل‌کننده را پیدا کنید."},
+			"items": [
+			  {"text": {"en": "Language is a system of communication. → Topic:", "fa": "Language is a system of communication. ← موضوع:"}, "answer": ["language"]},
+			  {"text": {"en": "Language is a system of communication. → Controlling idea:", "fa": "Language is a system of communication. ← ایده کنترل‌کننده:"}, "answer": ["is a system of communication"]},
+			  {"text": {"en": "About fifty percent of the world's languages have fewer than 5000 speakers. → Topic:", "fa": "About fifty percent of the world's languages have fewer than 5000 speakers. ← موضوع:"}, "answer": ["about fifty percent of the world's languages"]},
+			  {"text": {"en": "About fifty percent of the world's languages have fewer than 5000 speakers. → Controlling idea:", "fa": "About fifty percent of the world's languages have fewer than 5000 speakers. ← ایده کنترل‌کننده:"}, "answer": ["have fewer than 5000 speakers"]},
+			  {"text": {"en": "Bad habits and addiction can be harmful to health. → Topic:", "fa": "Bad habits and addiction can be harmful to health. ← موضوع:"}, "answer": ["bad habits and addiction"]},
+			  {"text": {"en": "Bad habits and addiction can be harmful to health. → Controlling idea:", "fa": "Bad habits and addiction can be harmful to health. ← ایده کنترل‌کننده:"}, "answer": ["can be harmful to health"]},
+			  {"text": {"en": "Art is what people create with imagination and skill. → Topic:", "fa": "Art is what people create with imagination and skill. ← موضوع:"}, "answer": ["art"]},
+			  {"text": {"en": "Handicrafts are good examples of the art and culture of a country. → Controlling idea:", "fa": "Handicrafts are good examples of the art and culture of a country. ← ایده کنترل‌کننده:"}, "answer": ["are good examples of the art and culture of a country"]}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l2_w_b",
+			"type": "open_ended",
+			"instruction": {"en": "Write a topic sentence for the following items.", "fa": "برای موارد زیر یک جمله موضوعی بنویسید."},
+			"items": [
+			  {"question": {"en": "sport", "fa": "ورزش"}, "sample_answer": {"en": "Sport is essential for maintaining a healthy body and mind.", "fa": "ورزش برای حفظ سلامت جسم و ذهن ضروری است."}},
+			  {"question": {"en": "writing", "fa": "نوشتن"}, "sample_answer": {"en": "Writing is a powerful tool for expressing ideas and emotions.", "fa": "نوشتن ابزاری قدرتمند برای بیان ایده‌ها و احساسات است."}},
+			  {"question": {"en": "forest", "fa": "جنگل"}, "sample_answer": {"en": "Forests are home to thousands of different species of plants and animals.", "fa": "جنگل‌ها خانه هزاران گونه مختلف گیاهان و حیوانات هستند."}},
+			  {"question": {"en": "smoking", "fa": "سیگار کشیدن"}, "sample_answer": {"en": "Smoking is one of the most dangerous habits that can destroy our health.", "fa": "سیگار کشیدن یکی از خطرناک‌ترین عادت‌هایی است که می‌تواند سلامت ما را نابود کند."}},
+			  {"question": {"en": "firefighters", "fa": "آتش‌نشانان"}, "sample_answer": {"en": "Firefighters are brave people who risk their lives to save others.", "fa": "آتش‌نشانان مردم شجاعی هستند که جانشان را برای نجات دیگران به خطر می‌اندازند."}},
+			  {"question": {"en": "Avicenna", "fa": "ابوعلی سینا"}, "sample_answer": {"en": "Avicenna was one of the greatest scientists and physicians in history.", "fa": "ابوعلی سینا یکی از بزرگ‌ترین دانشمندان و پزشکان تاریخ بود."}},
+			  {"question": {"en": "clean energy", "fa": "انرژی پاک"}, "sample_answer": {"en": "Clean energy is the best solution for protecting our environment.", "fa": "انرژی پاک بهترین راه‌حل برای حفاظت از محیط زیست ماست."}},
+			  {"question": {"en": "Persian Gulf", "fa": "خلیج فارس"}, "sample_answer": {"en": "The Persian Gulf is a historically important waterway in Southwest Asia.", "fa": "خلیج فارس یک آبراه تاریخی مهم در جنوب غربی آسیا است."}}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Renewable Energy", "fa": "انرژی تجدیدپذیر"},
+		"topic": {"en": "Supporting & Concluding Sentences", "fa": "جملات پشتیبان و نتیجه‌گیری"},
+		"concept": {
+		  "definition": {
+			"en": "Supporting sentences come after the topic sentence. They explain the idea, give reasons, give examples, or tell a short story. The concluding sentence is often the last sentence and repeats the idea of the topic sentence.",
+			"fa": "جملات پشتیبان بعد از جمله موضوعی می‌آیند. آن‌ها ایده را توضیح می‌دهند، دلیل می‌آورند، مثال می‌زنند یا داستان کوتاهی تعریف می‌کنند. جمله نتیجه‌گیری اغلب آخرین جمله است و ایده جمله موضوعی را تکرار می‌کند."
+		  },
+		  "key_points": [
+			{"en": "Not all paragraphs have concluding sentences.", "fa": "همه پاراگراف‌ها جمله نتیجه‌گیری ندارند."},
+			{"en": "A supporting sentence must be related to the topic sentence — it should not introduce a new idea.", "fa": "جمله پشتیبان باید با جمله موضوعی مرتبط باشد — نباید ایده جدیدی را مطرح کند."},
+			{"en": "The concluding sentence summarizes or restates the main idea.", "fa": "جمله نتیجه‌گیری ایده اصلی را خلاصه یا بازبیان می‌کند."}
+		  ],
+		  "categories": [
+			{"name": {"en": "Topic Sentence (T)", "fa": "جمله موضوعی (T)"}, "examples": ["the main idea of the paragraph"]},
+			{"name": {"en": "Supporting Sentence (S)", "fa": "جمله پشتیبان (S)"}, "examples": ["explains, gives reasons, examples, or story"]},
+			{"name": {"en": "Concluding Sentence (C)", "fa": "جمله نتیجه‌گیری (C)"}, "examples": ["repeats or summarizes the main idea"]}
+		  ]
+		},
+		"forms": [
+		  {
+			"title": {"en": "Paragraph Structure", "fa": "ساختار پاراگراف"},
+			"subtitle": {"en": "The three parts of a well-written paragraph.", "fa": "سه بخش یک پاراگراف خوب نوشته‌شده."},
+			"table": [
+			  {"type": "Topic Sentence", "singular": "Trees are very valuable.", "plural": "introduces the main idea"},
+			  {"type": "Supporting 1", "singular": "They supply us with necessary things.", "plural": "gives a reason/example"},
+			  {"type": "Supporting 2", "singular": "They take carbon dioxide and fill air with oxygen.", "plural": "gives another reason"},
+			  {"type": "Supporting 3", "singular": "They also cause rain.", "plural": "adds more detail"},
+			  {"type": "Concluding", "singular": "In short, trees are the best friends of man.", "plural": "summarizes the main idea"}
+			]
+		  }
+		],
+		"exercises": [
+		  {
+			"exercise_id": "v3_l3_w_a",
+			"type": "multiple_choice",
+			"instruction": {"en": "Read the paragraph. Which sentence does NOT support the topic sentence 'Ants are strange insects'?", "fa": "پاراگراف را بخوانید. کدام جمله از جمله موضوعی 'Ants are strange insects' پشتیبانی نمی‌کند؟"},
+			"items": [
+			  {"question": {"en": "Paragraph: 'Ants are strange insects. Like all insects, they have six legs. Each leg has three joints. Yesterday, I saw an ant. The legs of ants are very strong, which help ants run very quickly. I can run quickly too. If a man could run as fast for his size as an ant can, he could run as fast as a racehorse.'", "fa": "پاراگراف: 'مورچه‌ها حشرات عجیبی هستند. مانند همه حشرات، شش پا دارند. هر پا سه مفصل دارد. دیروز یک مورچه دیدم. پاهای مورچه‌ها بسیار قوی هستند و به آن‌ها کمک می‌کنند خیلی سریع بدوند. من هم می‌توانم سریع بدوم. اگر یک مرد می‌توانست به نسبت جثه‌اش به سرعت مورچه بدود، می‌توانست به سرعت یک اسب مسابقه بدود.'"}, "options": ["Like all insects, they have six legs.", "Yesterday, I saw an ant.", "I can run quickly too.", "If a man could run as fast for his size as an ant can, he could run as fast as a racehorse."], "answer": 1, "explanation": {"en": "'Yesterday, I saw an ant' is a personal anecdote that doesn't explain why ants are strange.", "fa": "'دیروز یک مورچه دیدم' یک خاطره شخصی است که توضیح نمی‌دهد چرا مورچه‌ها عجیب هستند."}}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l3_w_b",
+			"type": "multiple_choice",
+			"instruction": {"en": "Read the following paragraphs. Which one has a concluding sentence?", "fa": "پاراگراف‌های زیر را بخوانید. کدام یک جمله نتیجه‌گیری دارد؟"},
+			"items": [
+			  {"question": {"en": "Paragraph 1: 'Horses are farm animals. They are usually black, grey, white and brown in color. They carry people and goods from one place to another. They have long legs, which are very strong. They can easily run long distances. Horses usually move in herds. They live in a stable. They are very useful farm animals.'", "fa": "پاراگراف ۱: 'اسب‌ها حیوانات مزرعه هستند. معمولاً به رنگ سیاه، خاکستری، سفید و قهوه‌ای هستند. آن‌ها مردم و کالا را از جایی به جای دیگر حمل می‌کنند. پاهای بلندی دارند که بسیار قوی است. می‌توانند به راحتی مسافت‌های طولانی بدوند. اسب‌ها معمولاً به صورت گله حرکت می‌کنند. در اصطبل زندگی می‌کنند. آن‌ها حیوانات مزرعه بسیار مفیدی هستند.'"}, "options": ["Yes, it has a concluding sentence.", "No, it does not have a concluding sentence."], "answer": 0, "explanation": {"en": "'They are very useful farm animals' repeats the main idea → concluding sentence.", "fa": "'آن‌ها حیوانات مزرعه بسیار مفیدی هستند' ایده اصلی را تکرار می‌کند → جمله نتیجه‌گیری."}},
+			  {"question": {"en": "Paragraph 2: 'Energy is important. Without it, we would have a harder time because most of our activities like cooking a dinner, heating a house, lighting a street, keeping a hospital open, running a factory all require energy. It is thus at the heart of everybody's life.'", "fa": "پاراگراف ۲: 'انرژی مهم است. بدون آن، کارمان سخت‌تر می‌شد چون بیشتر فعالیت‌های ما مانند پختن شام، گرم کردن خانه، روشن کردن خیابان، باز نگه داشتن بیمارستان، راه‌اندازی کارخانه همه به انرژی نیاز دارند. بنابراین در قلب زندگی همه است.'"}, "options": ["Yes, it has a concluding sentence.", "No, it does not have a concluding sentence."], "answer": 0, "explanation": {"en": "'It is thus at the heart of everybody's life' summarizes the paragraph → concluding sentence.", "fa": "'بنابراین در قلب زندگی همه است' پاراگراف را خلاصه می‌کند → جمله نتیجه‌گیری."}},
+			  {"question": {"en": "Paragraph 3: 'Elephant is the largest animal to walk the Earth. An elephant can carry a load of 1200 pounds. They eat 300 pounds of food a day. An elephant baby can weigh 200 pounds at birth. Elephants can live up to 70 years.'", "fa": "پاراگراف ۳: 'فیل بزرگ‌ترین حیوانی است که روی زمین راه می‌رود. یک فیل می‌تواند باری به وزن ۱۲۰۰ پوند حمل کند. آن‌ها روزی ۳۰۰ پوند غذا می‌خورند. بچه فیل می‌تواند هنگام تولد ۲۰۰ پوند وزن داشته باشد. فیل‌ها می‌توانند تا ۷۰ سال عمر کنند.'"}, "options": ["Yes, it has a concluding sentence.", "No, it does not have a concluding sentence."], "answer": 1, "explanation": {"en": "The last sentence gives a new fact, not a summary → no concluding sentence.", "fa": "جمله آخر یک واقعیت جدید می‌دهد، نه خلاصه → جمله نتیجه‌گیری ندارد."}}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l3_w_c",
+			"type": "ordering",
+			"instruction": {"en": "Unscramble the following sentences. Then write them in correct order to form a paragraph.", "fa": "جملات زیر را مرتب کنید. سپس آن‌ها را به ترتیب صحیح بنویسید تا یک پاراگراف تشکیل شود."},
+			"items": [
+			  {"text": {"en": "In order of distance from the Sun, the planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune and Pluto.", "fa": "به ترتیب فاصله از خورشید، سیاره‌ها عبارتند از عطارد، زهره، زمین، مریخ، مشتری، زحل، اورانوس، نپتون و پلوتو."}, "answer": 3},
+			  {"text": {"en": "The Solar System consists of the Sun, Moon and Planets.", "fa": "منظومه شمسی از خورشید، ماه و سیاره‌ها تشکیل شده است."}, "answer": 1},
+			  {"text": {"en": "The Sun is at the centre of the Solar System and these planets revolve around it.", "fa": "خورشید در مرکز منظومه شمسی است و این سیاره‌ها به دور آن می‌چرخند."}, "answer": 2},
+			  {"text": {"en": "The Sun is the largest member of the Solar System.", "fa": "خورشید بزرگ‌ترین عضو منظومه شمسی است."}, "answer": 4}
+			],
+			"answer": [
+			  "The Solar System consists of the Sun, Moon and Planets.",
+			  "The Sun is the largest member of the Solar System.",
+			  "The Sun is at the centre of the Solar System and these planets revolve around it.",
+              "In order of distance from the Sun, the planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune and Pluto."
+			]
+		  },
+		  {
+			"exercise_id": "v3_l3_w_d",
+			"type": "categorize",
+			"instruction": {"en": "Below are sentences from a paragraph. Decide if each sentence is a Topic sentence (T), Supporting sentence (S), or Concluding sentence (C).", "fa": "جملات زیر از یک پاراگراف هستند. مشخص کنید هر جمله موضوعی (T)، پشتیبان (S) یا نتیجه‌گیری (C) است."},
+			"categories": ["Topic (T)", "Supporting (S)", "Concluding (C)"],
+			"items": [
+			  {"text": {"en": "Trees are very valuable.", "fa": "درختان بسیار ارزشمند هستند."}, "answer": "Topic (T)"},
+			  {"text": {"en": "They also cause rain.", "fa": "آن‌ها همچنین باعث بارندگی می‌شوند."}, "answer": "Supporting (S)"},
+			  {"text": {"en": "They take carbon dioxide from the atmosphere and fill it with oxygen.", "fa": "آن‌ها دی‌اکسید کربن را از جو می‌گیرند و آن را با اکسیژن پر می‌کنند."}, "answer": "Supporting (S)"},
+			  {"text": {"en": "In short, the trees are the best friends of man.", "fa": "به‌طور خلاصه، درختان بهترین دوستان انسان هستند."}, "answer": "Concluding (C)"},
+			  {"text": {"en": "They supply us with many necessary things of everyday life.", "fa": "آن‌ها چیزهای ضروری زیادی از زندگی روزمره را برای ما فراهم می‌کنند."}, "answer": "Supporting (S)"}
+			]
+		  }
+		]
+	  }
+	}
+  },
+  "statistics": {
+	"total_lessons": 10,
+	"total_exercises": 28,
+	"exercise_types": {
+	  "fill_blank": 16,
+	  "multiple_choice": 7,
+	  "categorize": 5,
+	  "ordering": 2,
+	  "open_ended": 2
+	},
+	"books_covered": [1, 2, 3]
+  }
+}

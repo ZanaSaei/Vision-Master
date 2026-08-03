@@ -1,0 +1,1552 @@
+{
+  "category": "workbook",
+  "title": {"en": "Vision 1 Workbook", "fa": "کتاب کار ویژن ۱"},
+  "icon": "📝",
+  "books": {
+	"1": {
+	  "1": {
+		"lesson_title": {"en": "Simple Ways to Protect Wildlife", "fa": "راه‌های ساده برای محافظت از حیات وحش"},
+		"parts": [
+		  {
+			"part_title": {"en": "Part I: Reading Comprehension", "fa": "بخش اول: درک مطلب"},
+			"page": 8,
+			"passage": {
+			  "en": "Simple ways to protect wildlife\n\nOne easy way to protect wildlife is learning about the endangered animals that live around you. Teach your friends and family about the wonderful birds, fish and plants that live near your home. In this way, they are going to be more careful about nature. You can also visit a national wildlife museum or park. These places give good information about how to protect endangered animals and their homes. You can do voluntary work in these places to help animals and their babies.\n\nAnother thing you can do is protecting the natural home of the endangered animals. When you keep nature clean and safe, the animals will live longer. Protecting the trees of forests is also helpful. If you live in a village, you need to be very careful about the hunters who come to your village to hurt animals. Whenever you see these people, you need to call the police. These are simple things, but they will help nature a lot.",
+			  "fa": "راه‌های ساده برای محافظت از حیات وحش\n\nیکی از راه‌های ساده برای محافظت از حیات وحش، یادگیری درباره حیوانات در حال انقراضی است که اطراف شما زندگی می‌کنند. به دوستان و خانواده‌تان درباره پرندگان، ماهی‌ها و گیاهان شگفت‌انگیزی که نزدیک خانه شما زندگی می‌کنند، آموزش دهید. به این ترتیب، آنها بیشتر مراقب طبیعت خواهند بود. همچنین می‌توانید از یک موزه یا پارک ملی حیات وحش بازدید کنید. این مکان‌ها اطلاعات خوبی درباره چگونگی محافظت از حیوانات در حال انقراض و خانه‌های آنها ارائه می‌دهند. شما می‌توانید در این مکان‌ها کار داوطلبانه انجام دهید تا به حیوانات و بچه‌های آنها کمک کنید.\n\nکار دیگری که می‌توانید انجام دهید محافظت از خانه طبیعی حیوانات در حال انقراض است. وقتی طبیعت را تمیز و امن نگه دارید، حیوانات بیشتر عمر می‌کنند. محافظت از درختان جنگل‌ها نیز مفید است. اگر در روستا زندگی می‌کنید، باید بسیار مراقب شکارچیانی باشید که به روستای شما می‌آیند تا به حیوانات آسیب بزنند. هر وقت این افراد را دیدید، باید به پلیس زنگ بزنید. این کارها ساده هستند، اما به طبیعت بسیار کمک می‌کنند."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v1_l1_p1_r1",
+				"type": "table_fill",
+				"instruction": {"en": "Complete the chart. Write the things you did in the past and you will do in the future.", "fa": "جدول را کامل کنید. کارهایی که در گذشته انجام دادید و در آینده انجام خواهید داد را بنویسید."},
+				"page": 9,
+				"columns": [
+				  {"en": "Verbs", "fa": "افعال"},
+				  {"en": "Past Tense", "fa": "زمان گذشته"},
+				  {"en": "Future Tense", "fa": "زمان آینده"}
+				],
+				"rows": [
+				  {"cells": [
+					{"text": {"en": "travel", "fa": "سفر کردن"}, "editable": false},
+					{"text": {"en": "I traveled to Isfahan last year.", "fa": "من پارسال به اصفهان سفر کردم."}, "editable": false},
+					{"text": {"en": "I will travel to Shiraz next year.", "fa": "من سال آینده به شیراز سفر خواهم کرد."}, "editable": false}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "buy", "fa": "خریدن"}, "editable": false},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I bought ...", "fa": "من ... خریدم"}},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I will buy ...", "fa": "من ... خواهم خرید"}}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "visit", "fa": "بازدید کردن"}, "editable": false},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I visited ...", "fa": "من ... بازدید کردم"}},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I will visit ...", "fa": "من ... بازدید خواهم کرد"}}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "watch", "fa": "تماشا کردن"}, "editable": false},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I watched ...", "fa": "من ... تماشا کردم"}},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I will watch ...", "fa": "من ... تماشا خواهم کرد"}}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "go", "fa": "رفتن"}, "editable": false},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I went ...", "fa": "من ... رفتم"}},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I will go ...", "fa": "من ... خواهم رفت"}}
+				  ]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p1_r2",
+				"type": "image_choice",
+				"instruction": {"en": "Reza is thinking about his trip to Kish and what he will do there. Look at the pictures and write what Reza will do there.", "fa": "رضا به سفر به کیش و کارهایی که در آنجا انجام خواهد داد فکر می‌کند. به تصاویر نگاه کنید و بنویسید رضا در آنجا چه کارهایی انجام خواهد داد."},
+				"page": 10,
+				"question": {"en": "What will Reza do in Kish?", "fa": "رضا در کیش چه کارهایی انجام خواهد داد؟"},
+				"options": [
+				  {"id": "museum", "label": {"en": "Visit a wildlife museum", "fa": "بازدید از موزه حیات وحش"}, "image": ""},
+				  {"id": "zoo", "label": {"en": "Go to a zoo", "fa": "رفتن به باغ وحش"}, "image": ""},
+				  {"id": "nature", "label": {"en": "Enjoy nature", "fa": "لذت بردن از طبیعت"}, "image": ""},
+				  {"id": "learn", "label": {"en": "Learn more about endangered animals", "fa": "یادگیری بیشتر درباره حیوانات در خطر انقراض"}, "image": ""}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p1_r3",
+				"type": "true_false",
+				"instruction": {"en": "Yes or No?", "fa": "بله یا خیر؟"},
+				"page": 11,
+				"items": [
+				  {"statement": {"en": "School students will learn to help injured animals.", "fa": "دانش‌آموزان مدرسه یاد خواهند گرفت که به حیوانات مجروح کمک کنند."}, "answer": true, "correction": {"en": "Students will learn to help injured animals.", "fa": "دانش‌آموزان یاد خواهند گرفت که به حیوانات مجروح کمک کنند."}},
+				  {"statement": {"en": "The number of cheetahs will increase in the future.", "fa": "تعداد یوزپلنگ‌ها در آینده افزایش خواهد یافت."}, "answer": true, "correction": {"en": "The number of cheetahs will increase if we protect them.", "fa": "اگر از آنها محافظت کنیم تعداد یوزپلنگ‌ها افزایش خواهد یافت."}},
+				  {"statement": {"en": "Iranians are going to protect endangered animals.", "fa": "ایرانیان از حیوانات در خطر انقراض محافظت خواهند کرد."}, "answer": true, "correction": {"en": "People are going to protect endangered animals.", "fa": "مردم از حیوانات در خطر انقراض محافظت خواهند کرد."}},
+				  {"statement": {"en": "When we keep earth clean and safe, animals will live longer.", "fa": "وقتی زمین را تمیز و امن نگه داریم، حیوانات بیشتر عمر خواهند کرد."}, "answer": true, "correction": {"en": "When we keep the earth clean and safe, animals will live longer.", "fa": "وقتی زمین را تمیز و امن نگه داریم، حیوانات بیشتر عمر خواهند کرد."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p1_r4",
+				"type": "fill_blank",
+				"instruction": {"en": "Read the following text. Complete it with 'to be going to' verbs.", "fa": "متن زیر را بخوانید. آن را با افعال 'to be going to' کامل کنید."},
+				"page": 13,
+				"items": [
+				  {"text": {"en": "Mr. Alavi is a teacher. Tomorrow, he and his students ______ (go) on a school trip.", "fa": "آقای علوی معلم است. فردا، او و دانش‌آموزانش ______ به یک سفر مدرسه."}, "answer": ["are going to go"]},
+				  {"text": {"en": "They ______ (go) to a park out of the city.", "fa": "آنها ______ به پارکی خارج از شهر."}, "answer": ["are going to go"]},
+				  {"text": {"en": "They ______ (leave) the school at 9.", "fa": "آنها مدرسه را ساعت 9 ______."}, "answer": ["are going to leave"]},
+				  {"text": {"en": "They ______ (stay) in the park till afternoon.", "fa": "آنها تا بعد از ظهر در پارک ______."}, "answer": ["are going to stay"]},
+				  {"text": {"en": "They ______ (visit) the aquarium in the park, too.", "fa": "آنها همچنین از آکواریوم در پارک ______."}, "answer": ["are going to visit"]},
+				  {"text": {"en": "Mr. Alavi ______ (talk) about sea animals there.", "fa": "آقای علوی در آنجا درباره حیوانات دریایی ______."}, "answer": ["is going to talk"]},
+				  {"text": {"en": "The students ______ (write) a report from this trip.", "fa": "دانش‌آموزان گزارشی از این سفر ______."}, "answer": ["are going to write"]},
+				  {"text": {"en": "Other students ______ (read) their friends' reports and learn many things about nature and sea animals.", "fa": "دانش‌آموزان دیگر گزارش‌های دوستانشان را ______ و چیزهای زیادی درباره طبیعت و حیوانات دریایی یاد می‌گیرند."}, "answer": ["are going to read"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p1_r5",
+				"type": "open_ended",
+				"instruction": {"en": "Now answer the following questions.", "fa": "حالا به سوالات زیر پاسخ دهید."},
+				"page": 13,
+				"items": [
+				  {"question": {"en": "Are the students going to go to a zoo?", "fa": "آیا دانش‌آموزان به باغ وحش خواهند رفت؟"}, "sample_answer": {"en": "No, they are going to a park out of the city.", "fa": "نه، آنها به پارکی خارج از شهر می‌روند."}},
+				  {"question": {"en": "Is Mr. Alavi going to read the students' reports?", "fa": "آیا آقای علوی گزارش‌های دانش‌آموزان را خواهد خواند؟"}, "sample_answer": {"en": "No, other students are going to read their friends' reports.", "fa": "نه، دانش‌آموزان دیگر گزارش‌های دوستانشان را خواهند خواند."}},
+				  {"question": {"en": "Are you going to visit a museum this weekend?", "fa": "آیا این آخر هفته قصد بازدید از موزه را دارید؟"}, "sample_answer": {"en": "Yes, I am going to visit a museum this weekend.", "fa": "بله، این آخر هفته قصد دارم از یک موزه بازدید کنم."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part II: Grammar", "fa": "بخش دوم: گرامر"},
+			"page": 10,
+			"grammar_note": {
+			  "en": "We use 'will' and 'going to' to talk about future actions. 'Will' is used for predictions, promises, and decisions made at the moment of speaking. 'Going to' is used for plans and intentions.",
+			  "fa": "ما از 'will' و 'going to' برای صحبت درباره اقدامات آینده استفاده می‌کنیم. 'Will' برای پیش‌بینی‌ها، قول‌ها و تصمیمات گرفته شده در لحظه صحبت استفاده می‌شود. 'Going to' برای برنامه‌ها و نیت‌ها استفاده می‌شود."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v1_l1_p2_g1",
+				"type": "table_fill",
+				"instruction": {"en": "Complete the chart. Write the things you did in the past and you will do in the future.", "fa": "جدول را کامل کنید. کارهایی که در گذشته انجام دادید و در آینده انجام خواهید داد را بنویسید."},
+				"page": 10,
+				"columns": [
+				  {"en": "Verbs", "fa": "افعال"},
+				  {"en": "Past Tense", "fa": "زمان گذشته"},
+				  {"en": "Future Tense", "fa": "زمان آینده"}
+				],
+				"rows": [
+				  {"cells": [
+					{"text": {"en": "travel", "fa": "سفر کردن"}, "editable": false},
+					{"text": {"en": "I traveled to Isfahan last year.", "fa": "من پارسال به اصفهان سفر کردم."}, "editable": false},
+					{"text": {"en": "I will travel to Shiraz next year.", "fa": "من سال آینده به شیراز سفر خواهم کرد."}, "editable": false}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "buy", "fa": "خریدن"}, "editable": false},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I bought ...", "fa": "من ... خریدم"}},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I will buy ...", "fa": "من ... خواهم خرید"}}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "visit", "fa": "بازدید کردن"}, "editable": false},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I visited ...", "fa": "من ... بازدید کردم"}},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I will visit ...", "fa": "من ... بازدید خواهم کرد"}}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "watch", "fa": "تماشا کردن"}, "editable": false},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I watched ...", "fa": "من ... تماشا کردم"}},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I will watch ...", "fa": "من ... تماشا خواهم کرد"}}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "go", "fa": "رفتن"}, "editable": false},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I went ...", "fa": "من ... رفتم"}},
+					{"text": {"en": "", "fa": ""}, "editable": true, "placeholder": {"en": "I will go ...", "fa": "من ... خواهم رفت"}}
+				  ]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p2_g2",
+				"type": "image_choice",
+				"instruction": {"en": "Reza is thinking about his trip to Kish and what he will do there. Look at the pictures and write what Reza will do there.", "fa": "رضا به سفر به کیش و کارهایی که در آنجا انجام خواهد داد فکر می‌کند. به تصاویر نگاه کنید و بنویسید رضا در آنجا چه کارهایی انجام خواهد داد."},
+				"page": 11,
+				"question": {"en": "What will Reza do in Kish?", "fa": "رضا در کیش چه کارهایی انجام خواهد داد؟"},
+				"options": [
+				  {"id": "museum", "label": {"en": "Visit a wildlife museum", "fa": "بازدید از موزه حیات وحش"}, "image": ""},
+				  {"id": "zoo", "label": {"en": "Go to a zoo", "fa": "رفتن به باغ وحش"}, "image": ""},
+				  {"id": "nature", "label": {"en": "Enjoy nature", "fa": "لذت بردن از طبیعت"}, "image": ""},
+				  {"id": "learn", "label": {"en": "Learn more about endangered animals", "fa": "یادگیری بیشتر درباره حیوانات در خطر انقراض"}, "image": ""}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p2_g3",
+				"type": "true_false",
+				"instruction": {"en": "Yes or No?", "fa": "بله یا خیر؟"},
+				"page": 12,
+				"items": [
+				  {"statement": {"en": "School students will learn to help injured animals.", "fa": "دانش‌آموزان مدرسه یاد خواهند گرفت که به حیوانات مجروح کمک کنند."}, "answer": true, "correction": {"en": "Students will learn to help injured animals.", "fa": "دانش‌آموزان یاد خواهند گرفت که به حیوانات مجروح کمک کنند."}},
+				  {"statement": {"en": "The number of cheetahs will increase in the future.", "fa": "تعداد یوزپلنگ‌ها در آینده افزایش خواهد یافت."}, "answer": true, "correction": {"en": "The number of cheetahs will increase if we protect them.", "fa": "اگر از آنها محافظت کنیم تعداد یوزپلنگ‌ها افزایش خواهد یافت."}},
+				  {"statement": {"en": "Iranians are going to protect endangered animals.", "fa": "ایرانیان از حیوانات در خطر انقراض محافظت خواهند کرد."}, "answer": true, "correction": {"en": "People are going to protect endangered animals.", "fa": "مردم از حیوانات در خطر انقراض محافظت خواهند کرد."}},
+				  {"statement": {"en": "When we keep earth clean and safe, animals will live longer.", "fa": "وقتی زمین را تمیز و امن نگه داریم، حیوانات بیشتر عمر خواهند کرد."}, "answer": true, "correction": {"en": "When we keep the earth clean and safe, animals will live longer.", "fa": "وقتی زمین را تمیز و امن نگه داریم، حیوانات بیشتر عمر خواهند کرد."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p2_g4",
+				"type": "fill_blank",
+				"instruction": {"en": "Read the following text. Complete it with 'to be going to' verbs.", "fa": "متن زیر را بخوانید. آن را با افعال 'to be going to' کامل کنید."},
+				"page": 13,
+				"items": [
+				  {"text": {"en": "Mr. Alavi is a teacher. Tomorrow, he and his students ______ (go) on a school trip.", "fa": "آقای علوی معلم است. فردا، او و دانش‌آموزانش ______ به یک سفر مدرسه."}, "answer": ["are going to go"]},
+				  {"text": {"en": "They ______ (go) to a park out of the city.", "fa": "آنها ______ به پارکی خارج از شهر."}, "answer": ["are going to go"]},
+				  {"text": {"en": "They ______ (leave) the school at 9.", "fa": "آنها مدرسه را ساعت 9 ______."}, "answer": ["are going to leave"]},
+				  {"text": {"en": "They ______ (stay) in the park till afternoon.", "fa": "آنها تا بعد از ظهر در پارک ______."}, "answer": ["are going to stay"]},
+				  {"text": {"en": "They ______ (visit) the aquarium in the park, too.", "fa": "آنها همچنین از آکواریوم در پارک ______."}, "answer": ["are going to visit"]},
+				  {"text": {"en": "Mr. Alavi ______ (talk) about sea animals there.", "fa": "آقای علوی در آنجا درباره حیوانات دریایی ______."}, "answer": ["is going to talk"]},
+				  {"text": {"en": "The students ______ (write) a report from this trip.", "fa": "دانش‌آموزان گزارشی از این سفر ______."}, "answer": ["are going to write"]},
+				  {"text": {"en": "Other students ______ (read) their friends' reports and learn many things about nature and sea animals.", "fa": "دانش‌آموزان دیگر گزارش‌های دوستانشان را ______ و چیزهای زیادی درباره طبیعت و حیوانات دریایی یاد می‌گیرند."}, "answer": ["are going to read"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p2_g5",
+				"type": "open_ended",
+				"instruction": {"en": "Now answer the following questions.", "fa": "حالا به سوالات زیر پاسخ دهید."},
+				"page": 13,
+				"items": [
+				  {"question": {"en": "Are the students going to go to a zoo?", "fa": "آیا دانش‌آموزان به باغ وحش خواهند رفت؟"}, "sample_answer": {"en": "No, they are going to a park out of the city.", "fa": "نه، آنها به پارکی خارج از شهر می‌روند."}},
+				  {"question": {"en": "Is Mr. Alavi going to read the students' reports?", "fa": "آیا آقای علوی گزارش‌های دانش‌آموزان را خواهد خواند؟"}, "sample_answer": {"en": "No, other students are going to read their friends' reports.", "fa": "نه، دانش‌آموزان دیگر گزارش‌های دوستانشان را خواهند خواند."}},
+				  {"question": {"en": "Are you going to visit a museum this weekend?", "fa": "آیا این آخر هفته قصد بازدید از موزه را دارید؟"}, "sample_answer": {"en": "Yes, I am going to visit a museum this weekend.", "fa": "بله، این آخر هفته قصد دارم از یک موزه بازدید کنم."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part III: Vocabulary", "fa": "بخش سوم: واژگان"},
+			"page": 14,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v1_l1_p3_v1",
+				"type": "word_search",
+				"instruction": {"en": "Find 11 animals below.", "fa": "۱۱ حیوان را در زیر پیدا کنید."},
+				"page": 14,
+				"words": ["elephant", "bear", "cheetah", "wolf", "dolphin", "duck", "leopard", "goat", "panda", "lion", "zebra"]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p3_v2",
+				"type": "odd_one_out",
+				"instruction": {"en": "One odd out.", "fa": "یک مورد متفاوت."},
+				"page": 15,
+				"items": [
+				  {"question": {"en": "die out / live / kill / hunt", "fa": "منقرض شدن / زندگی کردن / کشتن / شکار کردن"}, "options": [{"en": "die out", "fa": "منقرض شدن"}, {"en": "live", "fa": "زندگی کردن"}, {"en": "kill", "fa": "کشتن"}, {"en": "hunt", "fa": "شکار کردن"}], "answer": 1, "explanation": {"en": "'Live' is the opposite of the others, which are about death or harming.", "fa": "«زندگی کردن» متضاد بقیه است که درباره مرگ یا آسیب هستند."}},
+				  {"question": {"en": "goat / cow / hen / leopard", "fa": "بز / گاو / مرغ / پلنگ"}, "options": [{"en": "goat", "fa": "بز"}, {"en": "cow", "fa": "گاو"}, {"en": "hen", "fa": "مرغ"}, {"en": "leopard", "fa": "پلنگ"}], "answer": 3, "explanation": {"en": "'Leopard' is a wild animal, while the others are domestic.", "fa": "«پلنگ» یک حیوان وحشی است، در حالی که بقیه اهلی هستند."}},
+				  {"question": {"en": "plain / mountain / jungle / zoo", "fa": "دشت / کوه / جنگل / باغ وحش"}, "options": [{"en": "plain", "fa": "دشت"}, {"en": "mountain", "fa": "کوه"}, {"en": "jungle", "fa": "جنگل"}, {"en": "zoo", "fa": "باغ وحش"}], "answer": 3, "explanation": {"en": "'Zoo' is man-made, while the others are natural places.", "fa": "«باغ وحش» ساخته دست بشر است، در حالی که بقیه مکان‌های طبیعی هستند."}},
+				  {"question": {"en": "hunters / zookeepers / teachers / farmers", "fa": "شکارچیان / باغ‌وحش‌داران / معلمان / کشاورزان"}, "options": [{"en": "hunters", "fa": "شکارچیان"}, {"en": "zookeepers", "fa": "باغ‌وحش‌داران"}, {"en": "teachers", "fa": "معلمان"}, {"en": "farmers", "fa": "کشاورزان"}], "answer": 0, "explanation": {"en": "'Hunters' harm animals, while the others care for animals or people.", "fa": "«شکارچیان» به حیوانات آسیب می‌رسانند، در حالی که بقیه از حیوانات یا مردم مراقبت می‌کنند."}},
+				  {"question": {"en": "save / take care of / protect / hurt", "fa": "نجات دادن / مراقبت کردن / محافظت کردن / آسیب زدن"}, "options": [{"en": "save", "fa": "نجات دادن"}, {"en": "take care of", "fa": "مراقبت کردن"}, {"en": "protect", "fa": "محافظت کردن"}, {"en": "hurt", "fa": "آسیب زدن"}], "answer": 3, "explanation": {"en": "'Hurt' is negative, while the others are positive actions.", "fa": "«آسیب زدن» منفی است، در حالی که بقیه اقدامات مثبت هستند."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p3_v3",
+				"type": "matching",
+				"instruction": {"en": "Match columns A and B.", "fa": "ستون A و B را تطبیق دهید."},
+				"page": 16,
+				"options": ["pay", "save", "protect", "natural", "take", "hunt"],
+				"items": [
+				  {"text": {"en": "pay", "fa": "پرداخت کردن"}, "answer": "attention"},
+				  {"text": {"en": "save", "fa": "نجات دادن"}, "answer": "animals"},
+				  {"text": {"en": "protect", "fa": "محافظت کردن"}, "answer": "wildlife"},
+				  {"text": {"en": "natural", "fa": "طبیعی"}, "answer": "home"},
+				  {"text": {"en": "take", "fa": "گرفتن"}, "answer": "care of"},
+				  {"text": {"en": "hunt", "fa": "شکار کردن"}, "answer": "animals"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p3_v4",
+				"type": "categorize",
+				"instruction": {"en": "Put the words in three groups considering their natural home.", "fa": "کلمات را با توجه به خانه طبیعی آنها در سه گروه قرار دهید."},
+				"page": 17,
+				"categories": ["Sea", "Mountain/Forest", "Farm"],
+				"items": [
+				  {"text": {"en": "whale", "fa": "نهنگ"}, "answer": "Sea"},
+				  {"text": {"en": "cow", "fa": "گاو"}, "answer": "Farm"},
+				  {"text": {"en": "lion", "fa": "شیر"}, "answer": "Mountain/Forest"},
+				  {"text": {"en": "panda", "fa": "پاندا"}, "answer": "Mountain/Forest"},
+				  {"text": {"en": "bear", "fa": "خرس"}, "answer": "Mountain/Forest"},
+				  {"text": {"en": "leopard", "fa": "پلنگ"}, "answer": "Mountain/Forest"},
+				  {"text": {"en": "tiger", "fa": "ببر"}, "answer": "Mountain/Forest"},
+				  {"text": {"en": "fish", "fa": "ماهی"}, "answer": "Sea"},
+				  {"text": {"en": "wolf", "fa": "گرگ"}, "answer": "Mountain/Forest"},
+				  {"text": {"en": "dolphin", "fa": "دلفین"}, "answer": "Sea"},
+				  {"text": {"en": "duck", "fa": "اردک"}, "answer": "Sea"},
+				  {"text": {"en": "zebra", "fa": "گورخر"}, "answer": "Farm"},
+				  {"text": {"en": "goat", "fa": "بز"}, "answer": "Farm"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p3_v5",
+				"type": "fill_blank",
+				"instruction": {"en": "Fill in the blanks with the given words.", "fa": "جاهای خالی را با کلمات داده شده پر کنید."},
+				"page": 18,
+				"items": [
+				  {"text": {"en": "The hunters killed the tiger and ______ its home.", "fa": "شکارچیان ببر را کشتند و ______ خانه آن."}, "answer": ["destroyed"]},
+				  {"text": {"en": "There are lots of beautiful zebras living in this ______.", "fa": "گورخرهای زیبای زیادی در این ______ زندگی می‌کنند."}, "answer": ["plain"]},
+				  {"text": {"en": "I brought the ______ bird into the room and took care of it.", "fa": "من پرنده ______ را به اتاق آوردم و از آن مراقبت کردم."}, "answer": ["injured"]},
+				  {"text": {"en": "Hopefully, people will pay more attention to wildlife in the ______.", "fa": "امیدواریم مردم در ______ بیشتر به حیات وحش توجه کنند."}, "answer": ["future"]},
+				  {"text": {"en": "One of our ______ is a zookeeper in Mazandaran.", "fa": "یکی از ______ ما یک باغ‌وحش‌دار در مازندران است."}, "answer": ["relatives"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part IV: Pronunciation", "fa": "بخش چهارم: تلفظ"},
+			"page": 20,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v1_l1_p4_p1",
+				"type": "open_ended",
+				"instruction": {"en": "Ask and answer with falling intonation.", "fa": "با آهنگ نزولی بپرسید و پاسخ دهید."},
+				"page": 20,
+				"items": [
+				  {"question": {"en": "Who will protect our Earth?", "fa": "چه کسی از زمین ما محافظت خواهد کرد؟"}, "sample_answer": {"en": "We will protect our Earth.", "fa": "ما از زمین خود محافظت خواهیم کرد."}},
+				  {"question": {"en": "What will happen to endangered animals?", "fa": "چه اتفاقی برای حیوانات در خطر انقراض خواهد افتاد؟"}, "sample_answer": {"en": "They will die out if we don't protect them.", "fa": "اگر از آنها محافظت نکنیم منقرض خواهند شد."}},
+				  {"question": {"en": "Who will protect our forests?", "fa": "چه کسی از جنگل‌های ما محافظت خواهد کرد؟"}, "sample_answer": {"en": "We will protect our forests.", "fa": "ما از جنگل‌های خود محافظت خواهیم کرد."}},
+				  {"question": {"en": "What are you going to do to save nature?", "fa": "برای نجات طبیعت چه کاری می‌خواهید انجام دهید؟"}, "sample_answer": {"en": "I am going to plant more trees.", "fa": "من قصد دارم درختان بیشتری بکارم."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part V: Writing", "fa": "بخش پنجم: نوشتن"},
+			"page": 21,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v1_l1_p5_w1",
+				"type": "letter_scramble",
+				"instruction": {"en": "Unscramble the letters and make nouns.", "fa": "حروف را مرتب کنید و اسم بسازید."},
+				"page": 21,
+				"items": [
+				  {"scrambled": "gnuelj", "answer": "jungle", "hint": {"en": "A place with many trees and wild animals", "fa": "مکانی با درختان زیاد و حیوانات وحشی"}},
+				  {"scrambled": "denrfi", "answer": "friend", "hint": {"en": "Someone you like and trust", "fa": "کسی که دوستش دارید و به او اعتماد دارید"}},
+				  {"scrambled": "eret", "answer": "tree", "hint": {"en": "A tall plant with a trunk and branches", "fa": "گیاهی بلند با تنه و شاخه"}},
+				  {"scrambled": "etarw", "answer": "water", "hint": {"en": "A clear liquid that we drink", "fa": "مایعی شفاف که می‌نوشیم"}},
+				  {"scrambled": "nipa", "answer": "plain", "hint": {"en": "A large flat area of land", "fa": "منطقه وسیع و مسطح از زمین"}},
+				  {"scrambled": "itroisv", "answer": "visitor", "hint": {"en": "Someone who comes to see a place", "fa": "کسی که به دیدن یک مکان می‌آید"}},
+				  {"scrambled": "veol", "answer": "love", "hint": {"en": "A strong feeling of affection", "fa": "احساس قوی محبت"}},
+				  {"scrambled": "umuems", "answer": "museum", "hint": {"en": "A place where you can see historical objects", "fa": "مکانی که می‌توانید اشیاء تاریخی را ببینید"}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v1_l1_p5_w2",
+				"type": "open_ended",
+				"instruction": {"en": "Write a short paragraph about how you can protect wildlife.", "fa": "یک پاراگراف کوتاه درباره اینکه چگونه می‌توانید از حیات وحش محافظت کنید بنویسید."},
+				"page": 22,
+				"items": [
+				  {"question": {"en": "How can you protect wildlife in your daily life?", "fa": "چگونه می‌توانید در زندگی روزمره از حیات وحش محافظت کنید؟"}, "sample_answer": {"en": "I can protect wildlife by not littering, recycling, and telling others about endangered animals. I also avoid buying products that harm animals and their habitats.", "fa": "من می‌توانم با زباله نریختن، بازیافت و گفتن به دیگران درباره حیوانات در حال انقراض از حیات وحش محافظت کنم. همچنین از خرید محصولاتی که به حیوانات و زیستگاه‌های آنها آسیب می‌زند خودداری می‌کنم."}}
+				]
+			  }
+			]
+		  }
+		]
+	  }
+	},
+	"2": {
+	  "1": {
+		"lesson_title": {"en": "Microbes", "fa": "میکروب‌ها"},
+		"parts": [
+		  {
+			"part_title": {"en": "Part I: Reading Comprehension", "fa": "بخش اول: درک مطلب"},
+			"page": 26,
+			"passage": {
+			  "en": "Microbes\n\nMicrobes are really wonderful. They are everywhere! They live all around you, on you and inside you! Microbes are very small, so you can't see them. But don't worry. Some microbes make you sick but most others keep you healthy and even help you to fight disease.\n\nThere are so many different types of microbes. We still don't really know how many there are, but we know that microbes do lots of different things. Bacteria and viruses are two important types of microbes.\n\nBacteria are really important microbes. They are very small. They have only one cell. Bacteria can live in any area of the earth. They aren't all bad; in fact you couldn't live without some bacteria!\n\nViruses are among the smallest microbes on the earth, even smaller than bacteria. They are different from bacteria because they cannot live on their own. Viruses need to be inside a living cell to live and grow. There aren't many good things about viruses -- they usually attack your body and make you sick!",
+			  "fa": "میکروب‌ها\n\nمیکروب‌ها واقعاً شگفت‌انگیز هستند. آنها همه جا هستند! آنها در اطراف شما، روی شما و داخل شما زندگی می‌کنند! میکروب‌ها بسیار کوچک هستند، بنابراین نمی‌توانید آنها را ببینید. اما نگران نباشید. برخی میکروب‌ها شما را بیمار می‌کنند اما بیشتر آنها شما را سالم نگه می‌دارند و حتی به شما در مبارزه با بیماری کمک می‌کنند.\n\nانواع مختلفی از میکروب‌ها وجود دارد. ما هنوز واقعاً نمی‌دانیم چند نوع وجود دارد، اما می‌دانیم که میکروب‌ها کارهای مختلف زیادی انجام می‌دهند. باکتری‌ها و ویروس‌ها دو نوع مهم میکروب هستند.\n\nباکتری‌ها میکروب‌های بسیار مهمی هستند. آنها بسیار کوچک هستند. آنها فقط یک سلول دارند. باکتری‌ها می‌توانند در هر منطقه‌ای از زمین زندگی کنند. همه آنها بد نیستند؛ در واقع شما بدون برخی باکتری‌ها نمی‌توانید زندگی کنید!\n\nویروس‌ها در میان کوچکترین میکروب‌های روی زمین هستند، حتی کوچکتر از باکتری‌ها. آنها با باکتری‌ها تفاوت دارند زیرا نمی‌توانند به تنهایی زندگی کنند. ویروس‌ها برای زندگی و رشد باید درون یک سلول زنده باشند. چیزهای خوب زیادی در مورد ویروس‌ها وجود ندارد - آنها معمولاً به بدن شما حمله می‌کنند و شما را بیمار می‌کنند!"
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v2_l1_p1_r1",
+				"type": "multiple_choice",
+				"instruction": {"en": "Circle the correct answer.", "fa": "پاسخ صحیح را دور بزنید."},
+				"page": 27,
+				"items": [
+				  {"question": {"en": "His new car is ______ than my car.", "fa": "ماشین جدید او از ماشین من ______ است."}, "options": [{"en": "faster", "fa": "سریع‌تر"}, {"en": "the fastest", "fa": "سریع‌ترین"}], "answer": 0, "explanation": {"en": "We use 'faster' for comparing two things.", "fa": "برای مقایسه دو چیز از 'faster' استفاده می‌کنیم."}},
+				  {"question": {"en": "Russia is ______ country of the world.", "fa": "روسیه ______ کشور جهان است."}, "options": [{"en": "bigger", "fa": "بزرگ‌تر"}, {"en": "the biggest", "fa": "بزرگ‌ترین"}], "answer": 1, "explanation": {"en": "We use 'the biggest' for comparing more than two things.", "fa": "برای مقایسه بیش از دو چیز از 'the biggest' استفاده می‌کنیم."}},
+				  {"question": {"en": "The whale is ______ sea animal.", "fa": "نهنگ ______ حیوان دریایی است."}, "options": [{"en": "heavier", "fa": "سنگین‌تر"}, {"en": "the heaviest", "fa": "سنگین‌ترین"}], "answer": 1, "explanation": {"en": "We use 'the heaviest' for comparing more than two things.", "fa": "برای مقایسه بیش از دو چیز از 'the heaviest' استفاده می‌کنیم."}},
+				  {"question": {"en": "Kazem is ______ player in the team.", "fa": "کاظم ______ بازیکن تیم است."}, "options": [{"en": "taller", "fa": "بلندتر"}, {"en": "the tallest", "fa": "بلندترین"}], "answer": 1, "explanation": {"en": "We use 'the tallest' for comparing more than two things.", "fa": "برای مقایسه بیش از دو چیز از 'the tallest' استفاده می‌کنیم."}},
+				  {"question": {"en": "Mary and Fatima are ______ than Leila.", "fa": "مریم و فاطمه از لیلا ______ هستند."}, "options": [{"en": "older", "fa": "بزرگ‌تر"}, {"en": "the oldest", "fa": "بزرگ‌ترین"}], "answer": 0, "explanation": {"en": "We use 'older' for comparing two things.", "fa": "برای مقایسه دو چیز از 'older' استفاده می‌کنیم."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p1_r2",
+				"type": "fill_blank",
+				"instruction": {"en": "Fill in the blanks with the following adjectives.", "fa": "جاهای خالی را با صفت‌های زیر پر کنید."},
+				"page": 27,
+				"items": [
+				  {"text": {"en": "Elephants are the ______ and ______ land animals in the world.", "fa": "فیل‌ها ______ و ______ حیوانات خشکی در جهان هستند."}, "answer": ["biggest", "strongest"]},
+				  {"text": {"en": "The ______ elephant lives in Africa and the Indian elephant lives in Asia.", "fa": "فیل ______ در آفریقا زندگی می‌کند و فیل هندی در آسیا."}, "answer": ["African"]},
+				  {"text": {"en": "The African elephant is ______ than the Indian elephant.", "fa": "فیل آفریقایی از فیل هندی ______ است."}, "answer": ["bigger"]},
+				  {"text": {"en": "The Indian, or the ______ elephant is ______ than the African elephant and has smaller ears.", "fa": "فیل هندی یا ______ از فیل آفریقایی ______ است و گوش‌های کوچک‌تری دارد."}, "answer": ["Asian", "smaller"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p1_r3",
+				"type": "open_ended",
+				"instruction": {"en": "Now answer the following questions.", "fa": "حالا به سوالات زیر پاسخ دهید."},
+				"page": 28,
+				"items": [
+				  {"question": {"en": "What type of elephant lives in Asia?", "fa": "چه نوع فیلی در آسیا زندگی می‌کند؟"}, "sample_answer": {"en": "The Indian elephant lives in Asia.", "fa": "فیل هندی در آسیا زندگی می‌کند."}},
+				  {"question": {"en": "Is the African elephant smaller than the Asian elephant?", "fa": "آیا فیل آفریقایی از فیل آسیایی کوچک‌تر است؟"}, "sample_answer": {"en": "No, the African elephant is larger than the Asian elephant.", "fa": "نه، فیل آفریقایی از فیل آسیایی بزرگ‌تر است."}},
+				  {"question": {"en": "Do Indian elephants have bigger ears than African elephants?", "fa": "آیا فیل‌های هندی گوش‌های بزرگ‌تری از فیل‌های آفریقایی دارند؟"}, "sample_answer": {"en": "No, African elephants have larger ears than Indian elephants.", "fa": "نه، فیل‌های آفریقایی گوش‌های بزرگ‌تری از فیل‌های هندی دارند."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part II: Grammar", "fa": "بخش دوم: گرامر"},
+			"page": 29,
+			"grammar_note": {
+			  "en": "Comparative adjectives are used to compare two things. We add '-er' to short adjectives and use 'more' with long adjectives. We use 'the' before superlative adjectives.",
+			  "fa": "صفت‌های تفضیلی برای مقایسه دو چیز استفاده می‌شوند. به صفت‌های کوتاه '-er' اضافه می‌کنیم و با صفت‌های بلند از 'more' استفاده می‌کنیم. قبل از صفت‌های عالی از 'the' استفاده می‌کنیم."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v2_l1_p2_g1",
+				"type": "multiple_choice",
+				"instruction": {"en": "Circle the correct answer.", "fa": "پاسخ صحیح را دور بزنید."},
+				"page": 29,
+				"items": [
+				  {"question": {"en": "His new car is ______ than my car.", "fa": "ماشین جدید او از ماشین من ______ است."}, "options": [{"en": "faster", "fa": "سریع‌تر"}, {"en": "the fastest", "fa": "سریع‌ترین"}], "answer": 0, "explanation": {"en": "We use 'faster' for comparing two things.", "fa": "برای مقایسه دو چیز از 'faster' استفاده می‌کنیم."}},
+				  {"question": {"en": "Russia is ______ country of the world.", "fa": "روسیه ______ کشور جهان است."}, "options": [{"en": "bigger", "fa": "بزرگ‌تر"}, {"en": "the biggest", "fa": "بزرگ‌ترین"}], "answer": 1, "explanation": {"en": "We use 'the biggest' for comparing more than two things.", "fa": "برای مقایسه بیش از دو چیز از 'the biggest' استفاده می‌کنیم."}},
+				  {"question": {"en": "The whale is ______ sea animal.", "fa": "نهنگ ______ حیوان دریایی است."}, "options": [{"en": "heavier", "fa": "سنگین‌تر"}, {"en": "the heaviest", "fa": "سنگین‌ترین"}], "answer": 1, "explanation": {"en": "We use 'the heaviest' for comparing more than two things.", "fa": "برای مقایسه بیش از دو چیز از 'the heaviest' استفاده می‌کنیم."}},
+				  {"question": {"en": "Kazem is ______ player in the team.", "fa": "کاظم ______ بازیکن تیم است."}, "options": [{"en": "taller", "fa": "بلندتر"}, {"en": "the tallest", "fa": "بلندترین"}], "answer": 1, "explanation": {"en": "We use 'the tallest' for comparing more than two things.", "fa": "برای مقایسه بیش از دو چیز از 'the tallest' استفاده می‌کنیم."}},
+				  {"question": {"en": "Mary and Fatima are ______ than Leila.", "fa": "مریم و فاطمه از لیلا ______ هستند."}, "options": [{"en": "older", "fa": "بزرگ‌تر"}, {"en": "the oldest", "fa": "بزرگ‌ترین"}], "answer": 0, "explanation": {"en": "We use 'older' for comparing two things.", "fa": "برای مقایسه دو چیز از 'older' استفاده می‌کنیم."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p2_g2",
+				"type": "fill_blank",
+				"instruction": {"en": "Fill in the blanks with the following adjectives.", "fa": "جاهای خالی را با صفت‌های زیر پر کنید."},
+				"page": 30,
+				"items": [
+				  {"text": {"en": "Elephants are the ______ and ______ land animals in the world.", "fa": "فیل‌ها ______ و ______ حیوانات خشکی در جهان هستند."}, "answer": ["biggest", "strongest"]},
+				  {"text": {"en": "The ______ elephant lives in Africa and the Indian elephant lives in Asia.", "fa": "فیل ______ در آفریقا زندگی می‌کند و فیل هندی در آسیا."}, "answer": ["African"]},
+				  {"text": {"en": "The African elephant is ______ than the Indian elephant.", "fa": "فیل آفریقایی از فیل هندی ______ است."}, "answer": ["bigger"]},
+				  {"text": {"en": "The Indian, or the ______ elephant is ______ than the African elephant and has smaller ears.", "fa": "فیل هندی یا ______ از فیل آفریقایی ______ است و گوش‌های کوچک‌تری دارد."}, "answer": ["Asian", "smaller"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p2_g3",
+				"type": "open_ended",
+				"instruction": {"en": "Now answer the following questions.", "fa": "حالا به سوالات زیر پاسخ دهید."},
+				"page": 30,
+				"items": [
+				  {"question": {"en": "What type of elephant lives in Asia?", "fa": "چه نوع فیلی در آسیا زندگی می‌کند؟"}, "sample_answer": {"en": "The Indian elephant lives in Asia.", "fa": "فیل هندی در آسیا زندگی می‌کند."}},
+				  {"question": {"en": "Is the African elephant smaller than the Asian elephant?", "fa": "آیا فیل آفریقایی از فیل آسیایی کوچک‌تر است؟"}, "sample_answer": {"en": "No, the African elephant is larger than the Asian elephant.", "fa": "نه، فیل آفریقایی از فیل آسیایی بزرگ‌تر است."}},
+				  {"question": {"en": "Do Indian elephants have bigger ears than African elephants?", "fa": "آیا فیل‌های هندی گوش‌های بزرگ‌تری از فیل‌های آفریقایی دارند؟"}, "sample_answer": {"en": "No, African elephants have larger ears than Indian elephants.", "fa": "نه، فیل‌های آفریقایی گوش‌های بزرگ‌تری از فیل‌های هندی دارند."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p2_g4",
+				"type": "fill_blank",
+				"instruction": {"en": "Fill in the blanks with irregular comparative forms of the following adjectives.", "fa": "جاهای خالی را با شکل‌های تفضیلی بی‌قاعده صفت‌های زیر پر کنید."},
+				"page": 31,
+				"items": [
+				  {"text": {"en": "I know that my cooking is bad, but your cooking is ______.", "fa": "می‌دانم که آشپزی من بد است، اما آشپزی شما ______ است."}, "answer": ["worse"]},
+				  {"text": {"en": "The bed was hard, but it was ______ than nothing.", "fa": "تخت سخت بود، اما از هیچ ______ بود."}, "answer": ["better"]},
+				  {"text": {"en": "It's too dark. I cannot see ______ than two meters.", "fa": "بسیار تاریک است. نمی‌توانم ______ از دو متر ببینم."}, "answer": ["farther"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part III: Vocabulary", "fa": "بخش سوم: واژگان"},
+			"page": 32,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v2_l1_p3_v1",
+				"type": "matching",
+				"instruction": {"en": "Match the words with their definitions.", "fa": "کلمات را با تعاریف آنها تطبیق دهید."},
+				"page": 32,
+				"options": ["planet", "observatory", "microscope", "plasma", "brain"],
+				"items": [
+				  {"text": {"en": "a place from which people can watch the planets and stars", "fa": "مکانی که مردم می‌توانند سیارات و ستارگان را تماشا کنند"}, "answer": "observatory"},
+				  {"text": {"en": "a large and round body of rock or gas that moves around the Sun", "fa": "جسم بزرگ و گرد از سنگ یا گاز که به دور خورشید می‌چرخد"}, "answer": "planet"},
+				  {"text": {"en": "the yellow liquid that carries the blood cells", "fa": "مایع زرد رنگ که سلول‌های خون را حمل می‌کند"}, "answer": "plasma"},
+				  {"text": {"en": "it uses lenses to make very small things look larger", "fa": "از لنزها برای بزرگ‌تر نشان دادن چیزهای بسیار کوچک استفاده می‌کند"}, "answer": "microscope"},
+				  {"text": {"en": "it is inside your head and controls your body", "fa": "داخل سر شماست و بدن شما را کنترل می‌کند"}, "answer": "brain"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p3_v2",
+				"type": "odd_one_out",
+				"instruction": {"en": "One odd out.", "fa": "یک مورد متفاوت."},
+				"page": 33,
+				"items": [
+				  {"question": {"en": "interesting / amazing / useful / wonderful", "fa": "جالب / شگفت‌انگیز / مفید / فوق‌العاده"}, "options": [{"en": "interesting", "fa": "جالب"}, {"en": "amazing", "fa": "شگفت‌انگیز"}, {"en": "useful", "fa": "مفید"}, {"en": "wonderful", "fa": "فوق‌العاده"}], "answer": 2, "explanation": {"en": "'Useful' is practical, while the others are about being impressive or enjoyable.", "fa": "«مفید» کاربردی است، در حالی که بقیه درباره چشمگیر یا لذت‌بخش بودن هستند."}},
+				  {"question": {"en": "Mars / Saturn / Jupiter / Sun", "fa": "مریخ / زحل / مشتری / خورشید"}, "options": [{"en": "Mars", "fa": "مریخ"}, {"en": "Saturn", "fa": "زحل"}, {"en": "Jupiter", "fa": "مشتری"}, {"en": "Sun", "fa": "خورشید"}], "answer": 3, "explanation": {"en": "The Sun is a star, while the others are planets.", "fa": "خورشید یک ستاره است، در حالی که بقیه سیاره هستند."}},
+				  {"question": {"en": "heart / brain / blood / moon", "fa": "قلب / مغز / خون / ماه"}, "options": [{"en": "heart", "fa": "قلب"}, {"en": "brain", "fa": "مغز"}, {"en": "blood", "fa": "خون"}, {"en": "moon", "fa": "ماه"}], "answer": 3, "explanation": {"en": "'Moon' is a celestial body, while the others are parts of the body or bodily substances.", "fa": "«ماه» یک جرم آسمانی است، در حالی که بقیه اعضای بدن یا مواد بدن هستند."}},
+				  {"question": {"en": "red / yellow / liquid / white", "fa": "قرمز / زرد / مایع / سفید"}, "options": [{"en": "red", "fa": "قرمز"}, {"en": "yellow", "fa": "زرد"}, {"en": "liquid", "fa": "مایع"}, {"en": "white", "fa": "سفید"}], "answer": 2, "explanation": {"en": "'Liquid' is a state of matter, while the others are colors.", "fa": "«مایع» یک حالت ماده است، در حالی که بقیه رنگ هستند."}},
+				  {"question": {"en": "microbe / cell / virus / bacteria", "fa": "میکروب / سلول / ویروس / باکتری"}, "options": [{"en": "microbe", "fa": "میکروب"}, {"en": "cell", "fa": "سلول"}, {"en": "virus", "fa": "ویروس"}, {"en": "bacteria", "fa": "باکتری"}], "answer": 1, "explanation": {"en": "'Cell' is a basic unit of life, while the others are types of microbes.", "fa": "«سلول» واحد پایه زندگی است، در حالی که بقیه انواع میکروب هستند."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p3_v3",
+				"type": "categorize",
+				"instruction": {"en": "Put the words in three groups based on their size.", "fa": "کلمات را بر اساس اندازه در سه گروه قرار دهید."},
+				"page": 35,
+				"categories": ["Large", "Medium", "Small"],
+				"items": [
+				  {"text": {"en": "planet", "fa": "سیاره"}, "answer": "Large"},
+				  {"text": {"en": "star", "fa": "ستاره"}, "answer": "Large"},
+				  {"text": {"en": "Sun", "fa": "خورشید"}, "answer": "Large"},
+				  {"text": {"en": "moon", "fa": "ماه"}, "answer": "Medium"},
+				  {"text": {"en": "heart", "fa": "قلب"}, "answer": "Medium"},
+				  {"text": {"en": "brain", "fa": "مغز"}, "answer": "Medium"},
+				  {"text": {"en": "cell", "fa": "سلول"}, "answer": "Small"},
+				  {"text": {"en": "virus", "fa": "ویروس"}, "answer": "Small"},
+				  {"text": {"en": "microbe", "fa": "میکروب"}, "answer": "Small"},
+				  {"text": {"en": "plasma", "fa": "پلاسما"}, "answer": "Small"},
+				  {"text": {"en": "ear", "fa": "گوش"}, "answer": "Medium"},
+				  {"text": {"en": "eye", "fa": "چشم"}, "answer": "Medium"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p3_v4",
+				"type": "ordering",
+				"instruction": {"en": "Look at the picture and order the planets based on their size (from the largest to the smallest).", "fa": "به تصویر نگاه کنید و سیارات را بر اساس اندازه مرتب کنید (از بزرگ‌ترین به کوچک‌ترین)."},
+				"page": 36,
+				"items": ["Jupiter", "Saturn", "Uranus", "Neptune", "Earth", "Venus", "Mars", "Mercury", "Pluto"],
+				"answer": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p3_v5",
+				"type": "fill_blank",
+				"instruction": {"en": "Look at the above picture and fill in the blanks.", "fa": "به تصویر بالا نگاه کنید و جاهای خالی را پر کنید."},
+				"page": 37,
+				"items": [
+				  {"text": {"en": "The farthest planet from the Sun: ______", "fa": "دورترین سیاره از خورشید: ______"}, "answer": ["Pluto"]},
+				  {"text": {"en": "The closest planet to the Sun: ______", "fa": "نزدیک‌ترین سیاره به خورشید: ______"}, "answer": ["Mercury"]},
+				  {"text": {"en": "The Red Planet which is the neighbor of Earth: ______", "fa": "سیاره سرخ که همسایه زمین است: ______"}, "answer": ["Mars"]},
+				  {"text": {"en": "The planet on which we live: ______", "fa": "سیاره‌ای که روی آن زندگی می‌کنیم: ______"}, "answer": ["Earth"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p3_v6",
+				"type": "fill_blank",
+				"instruction": {"en": "Fill in the blanks with the given words.", "fa": "جاهای خالی را با کلمات داده شده پر کنید."},
+				"page": 37,
+				"items": [
+				  {"text": {"en": "White blood cells ______ body against diseases.", "fa": "گلبول‌های سفید بدن را در برابر بیماری‌ها ______ می‌کنند."}, "answer": ["defend"]},
+				  {"text": {"en": "The sky is cloudy. We cannot see the ______ tonight.", "fa": "آسمان ابری است. امشب نمی‌توانیم ______ را ببینیم."}, "answer": ["moon"]},
+				  {"text": {"en": "You need a ______ microscope to see something so small.", "fa": "برای دیدن چیزی به این کوچکی به یک میکروسکوپ ______ نیاز دارید."}, "answer": ["powerful"]},
+				  {"text": {"en": "Daily exercise keeps us strong and ______.", "fa": "ورزش روزانه ما را قوی و ______ نگه می‌دارد."}, "answer": ["healthy"]},
+				  {"text": {"en": "The Hubble ______ goes around Earth every 97 minutes.", "fa": "______ هابل هر ۹۷ دقیقه به دور زمین می‌چرخد."}, "answer": ["telescope"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part IV: Pronunciation", "fa": "بخش چهارم: تلفظ"},
+			"page": 39,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v2_l1_p4_p1",
+				"type": "open_ended",
+				"instruction": {"en": "Ask and answer with appropriate intonation.", "fa": "با آهنگ مناسب بپرسید و پاسخ دهید."},
+				"page": 39,
+				"items": [
+				  {"question": {"en": "Is a cheetah faster than a lion?", "fa": "آیا یوزپلنگ از شیر سریع‌تر است؟"}, "sample_answer": {"en": "Yes, a cheetah is faster than a lion.", "fa": "بله، یوزپلنگ از شیر سریع‌تر است."}},
+				  {"question": {"en": "Is football more interesting than volleyball?", "fa": "آیا فوتبال از والیبال جالب‌تر است؟"}, "sample_answer": {"en": "I think football is more interesting than volleyball.", "fa": "فکر می‌کنم فوتبال از والیبال جالب‌تر است."}},
+				  {"question": {"en": "Are you the tallest person in your family?", "fa": "آیا شما بلندترین فرد خانواده خود هستید؟"}, "sample_answer": {"en": "No, my brother is taller than me.", "fa": "نه، برادرم از من بلندتر است."}},
+				  {"question": {"en": "Is Mercury's orbit different from other planets' orbits?", "fa": "آیا مدار عطارد با مدار سیارات دیگر تفاوت دارد؟"}, "sample_answer": {"en": "Yes, Mercury's orbit is more elliptical than other planets.", "fa": "بله، مدار عطارد از مدار سیارات دیگر بیضی‌تر است."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part V: Writing", "fa": "بخش پنجم: نوشتن"},
+			"page": 40,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v2_l1_p5_w1",
+				"type": "open_ended",
+				"instruction": {"en": "Compare each pair of things in the box. Write two sentences for each pair.", "fa": "هر جفت از چیزهای موجود در جعبه را مقایسه کنید. برای هر جفت دو جمله بنویسید."},
+				"page": 40,
+				"items": [
+				  {"question": {"en": "Earth and Mars", "fa": "زمین و مریخ"}, "sample_answer": {"en": "Earth is larger than Mars. Mars is colder than Earth.", "fa": "زمین از مریخ بزرگ‌تر است. مریخ از زمین سردتر است."}},
+				  {"question": {"en": "cheetahs and lions", "fa": "یوزپلنگ‌ها و شیرها"}, "sample_answer": {"en": "Cheetahs are faster than lions. Lions are stronger than cheetahs.", "fa": "یوزپلنگ‌ها از شیرها سریع‌تر هستند. شیرها از یوزپلنگ‌ها قوی‌تر هستند."}},
+				  {"question": {"en": "train travel and bus travel", "fa": "سفر با قطار و سفر با اتوبوس"}, "sample_answer": {"en": "Train travel is safer than bus travel. Bus travel is cheaper than train travel.", "fa": "سفر با قطار از سفر با اتوبوس ایمن‌تر است. سفر با اتوبوس از سفر با قطار ارزان‌تر است."}},
+				  {"question": {"en": "Abadan and Mashhad", "fa": "آبادان و مشهد"}, "sample_answer": {"en": "Abadan is busier than Mashhad. Mashhad is colder than Abadan.", "fa": "آبادان از مشهد شلوغ‌تر است. مشهد از آبادان سردتر است."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v2_l1_p5_w2",
+				"type": "open_ended",
+				"instruction": {"en": "Read the text in Part I. Find all adjectives and change them into comparative and superlative forms.", "fa": "متن بخش اول را بخوانید. همه صفت‌ها را پیدا کنید و آنها را به شکل تفضیلی و عالی تبدیل کنید."},
+				"page": 41,
+				"items": [
+				  {"question": {"en": "Adjectives in the text", "fa": "صفت‌های موجود در متن"}, "sample_answer": {"en": "small → smaller → smallest; important → more important → most important; different → more different → most different; good → better → best; bad → worse → worst; many → more → most", "fa": "کوچک → کوچک‌تر → کوچک‌ترین؛ مهم → مهم‌تر → مهم‌ترین؛ متفاوت → متفاوت‌تر → متفاوت‌ترین؛ خوب → بهتر → بهترین؛ بد → بدتر → بدترین؛ زیاد → بیشتر → بیشترین"}}
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "The Value of Knowledge", "fa": "ارزش دانش"},
+		"parts": [
+		  {
+			"part_title": {"en": "Part I: Reading Comprehension", "fa": "بخش اول: درک مطلب"},
+			"page": 44,
+			"passage": {
+			  "en": "The Value of Knowledge\n\nWho is a scientist?\n\nThe world around us is full of amazing things. Knowing this beautiful world is very interesting for humans. One group of people who study the world are scientists. A scientist studies nature, animals, or people. Scientists work hard and do research to solve problems, find facts or invent new things. Scientists learn about the world by observing and experimenting.\n\nThere are different types of scientists. Some of them study plants, earth, seas, or animals. Others study people and how they behave and learn. Some scientists like to study history or languages. Others are interested in making new things. They want to make people's lives easier.\n\nSome scientists become very rich and famous. Many people around the world may remember their names and faces. But this is not what they call 'success'. They feel successful when they solve problems and find answers to their questions.",
+			  "fa": "ارزش دانش\n\nدانشمند کیست؟\n\nدنیای اطراف ما پر از چیزهای شگفت‌انگیز است. دانستن این دنیای زیبا برای انسان‌ها بسیار جالب است. یکی از گروه‌هایی که جهان را مطالعه می‌کنند، دانشمندان هستند. یک دانشمند طبیعت، حیوانات یا مردم را مطالعه می‌کند. دانشمندان سخت کار می‌کنند و تحقیق می‌کنند تا مشکلات را حل کنند، حقایق را پیدا کنند یا چیزهای جدید اختراع کنند. دانشمندان با مشاهده و آزمایش کردن درباره جهان یاد می‌گیرند.\n\nانواع مختلفی از دانشمندان وجود دارد. برخی از آنها گیاهان، زمین، دریاها یا حیوانات را مطالعه می‌کنند. برخی دیگر مردم و نحوه رفتار و یادگیری آنها را مطالعه می‌کنند. برخی از دانشمندان دوست دارند تاریخ یا زبان‌ها را مطالعه کنند. برخی دیگر به ساختن چیزهای جدید علاقه دارند. آنها می‌خواهند زندگی مردم را آسان‌تر کنند.\n\nبرخی از دانشمندان بسیار ثروتمند و مشهور می‌شوند. بسیاری از مردم در سراسر جهان ممکن است نام و چهره آنها را به خاطر بسپارند. اما این چیزی نیست که آنها آن را 'موفقیت' می‌نامند. آنها زمانی احساس موفقیت می‌کنند که مشکلات را حل می‌کنند و پاسخ سوالات خود را پیدا می‌کنند."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v3_l1_p1_r1",
+				"type": "sentence_ordering",
+				"instruction": {"en": "Unscramble the following sentences.", "fa": "جملات زیر را مرتب کنید."},
+				"page": 45,
+				"items": [
+				  {"words": ["doing research", "a new medicine", "when", "was", "she", "Shirin", "found", "."], "answer": ["Shirin found a new medicine when she was doing research.", "When Shirin was doing research, she found a new medicine."]},
+				  {"words": ["the injured animal", "they", "trying hard", "were", "to save", "."], "answer": ["They were trying hard to save the injured animal."]},
+				  {"words": ["English", "as a translator", "worked", "when", "he", "studying", "Hassan", "was", "at university", "."], "answer": ["Hassan worked as a translator when he was studying English at university.", "When Hassan was studying English at university, he worked as a translator."]},
+				  {"words": ["called him", "Reza", "studying", "Arabic book", "when", "his", "was", "his mother", "?"], "answer": ["Did his mother call him when Reza was studying his Arabic book?"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p1_r2",
+				"type": "fill_blank",
+				"instruction": {"en": "Look at this photo. My uncle took it yesterday at 8 o'clock. Then complete the sentences.", "fa": "به این عکس نگاه کنید. عمویم دیروز ساعت ۸ آن را گرفت. سپس جملات را کامل کنید."},
+				"page": 46,
+				"items": [
+				  {"text": {"en": "My father was reading a newspaper.", "fa": "پدرم روزنامه می‌خواند."}, "answer": ["reading"]},
+				  {"text": {"en": "My mother ______.", "fa": "مادرم ______."}, "answer": ["was cooking"]},
+				  {"text": {"en": "My sister was ______.", "fa": "خواهرم ______."}, "answer": ["watching TV"]},
+				  {"text": {"en": "My brother was ______.", "fa": "برادرم ______."}, "answer": ["playing video games"]},
+				  {"text": {"en": "My grandfather was ______.", "fa": "پدربزرگم ______."}, "answer": ["sleeping"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part II: Grammar", "fa": "بخش دوم: گرامر"},
+			"page": 46,
+			"grammar_note": {
+			  "en": "Past Continuous Tense: We use the past continuous to talk about actions that were in progress at a specific time in the past. Form: was/were + verb-ing.",
+			  "fa": "زمان گذشته استمراری: از گذشته استمراری برای صحبت درباره اقداماتی که در زمان خاصی در گذشته در حال انجام بودند استفاده می‌کنیم. ساختار: was/were + فعل-ing."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v3_l1_p2_g1",
+				"type": "sentence_ordering",
+				"instruction": {"en": "Unscramble the following sentences.", "fa": "جملات زیر را مرتب کنید."},
+				"page": 46,
+				"items": [
+				  {"words": ["doing research", "a new medicine", "when", "was", "she", "Shirin", "found", "."], "answer": ["Shirin found a new medicine when she was doing research.", "When Shirin was doing research, she found a new medicine."]},
+				  {"words": ["the injured animal", "they", "trying hard", "were", "to save", "."], "answer": ["They were trying hard to save the injured animal."]},
+				  {"words": ["English", "as a translator", "worked", "when", "he", "studying", "Hassan", "was", "at university", "."], "answer": ["Hassan worked as a translator when he was studying English at university.", "When Hassan was studying English at university, he worked as a translator."]},
+				  {"words": ["called him", "Reza", "studying", "Arabic book", "when", "his", "was", "his mother", "?"], "answer": ["Did his mother call him when Reza was studying his Arabic book?"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p2_g2",
+				"type": "fill_blank",
+				"instruction": {"en": "Look at this photo. My uncle took it yesterday at 8 o'clock. Then complete the sentences.", "fa": "به این عکس نگاه کنید. عمویم دیروز ساعت ۸ آن را گرفت. سپس جملات را کامل کنید."},
+				"page": 47,
+				"items": [
+				  {"text": {"en": "My father was reading a newspaper.", "fa": "پدرم روزنامه می‌خواند."}, "answer": ["reading"]},
+				  {"text": {"en": "My mother ______.", "fa": "مادرم ______."}, "answer": ["was cooking"]},
+				  {"text": {"en": "My sister was ______.", "fa": "خواهرم ______."}, "answer": ["watching TV"]},
+				  {"text": {"en": "My brother was ______.", "fa": "برادرم ______."}, "answer": ["playing video games"]},
+				  {"text": {"en": "My grandfather was ______.", "fa": "پدربزرگم ______."}, "answer": ["sleeping"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p2_g3",
+				"type": "open_ended",
+				"instruction": {"en": "Write what you were doing at the given times.", "fa": "بنویسید در زمان‌های داده شده چه کار می‌کردید."},
+				"page": 48,
+				"items": [
+				  {"question": {"en": "Yesterday afternoon,", "fa": "دیروز بعد از ظهر،"}, "sample_answer": {"en": "I was studying for my English test.", "fa": "برای امتحان انگلیسی درس می‌خواندم."}},
+				  {"question": {"en": "Last week at this moment,", "fa": "هفته گذشته در این زمان،"}, "sample_answer": {"en": "I was watching a movie with my family.", "fa": "با خانواده‌ام فیلم تماشا می‌کردم."}},
+				  {"question": {"en": "This morning at 5,", "fa": "امروز صبح ساعت ۵،"}, "sample_answer": {"en": "I was sleeping in my bed.", "fa": "در رختخواب خواب بودم."}},
+				  {"question": {"en": "When my mother was cooking dinner last night,", "fa": "دیشب وقتی مادرم شام می‌پخت،"}, "sample_answer": {"en": "I was helping her in the kitchen.", "fa": "در آشپزخانه به او کمک می‌کردم."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p2_g4",
+				"type": "fill_blank",
+				"instruction": {"en": "Read the following text. Complete it with appropriate 'self-pronouns'.", "fa": "متن زیر را بخوانید. آن را با 'ضمایر بازتابی' مناسب کامل کنید."},
+				"page": 49,
+				"items": [
+				  {"text": {"en": "Yesterday I was all alone. I was cleaning the house. As no one was helping me, I was doing everything ______.", "fa": "دیروز من تنها بودم. خانه را تمیز می‌کردم. از آنجایی که کسی به من کمک نمی‌کرد، همه کارها را ______ انجام می‌دادم."}, "answer": ["myself"]},
+				  {"text": {"en": "I remember how my mother cleaned the house when we didn't help her. I felt so sorry and ashamed.", "fa": "به یاد دارم که مادرم چگونه خانه را تمیز می‌کرد وقتی ما به او کمک نمی‌کردیم. بسیار متأسف و خجالت‌زده شدم."}, "answer": []},
+				  {"text": {"en": "I was still working when my mother came in. I was cleaning the kitchen. She asked: 'Babak, did you do that ______?'", "fa": "هنوز مشغول کار بودم که مادرم وارد شد. داشتم آشپزخانه را تمیز می‌کردم. پرسید: 'بابک، آن را ______ انجام دادی؟'"}, "answer": ["yourself"]},
+				  {"text": {"en": "I answered: 'Yes, mom. I did it ______.'", "fa": "پاسخ دادم: 'بله مامان. ______ انجامش دادم.'"}, "answer": ["myself"]},
+				  {"text": {"en": "She said, 'Thank you, dear. But now wait, don't do that ______. Let's do everything together ______.'", "fa": "گفت: 'متشکرم عزیزم. اما حالا صبر کن، آن را ______ انجام نده. بیایید همه کارها را با هم ______ انجام دهیم.'"}, "answer": ["yourself", "ourselves"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part III: Vocabulary", "fa": "بخش سوم: واژگان"},
+			"page": 50,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v3_l1_p3_v1",
+				"type": "matching",
+				"instruction": {"en": "Read the descriptions and find the word.", "fa": "توضیحات را بخوانید و کلمه را پیدا کنید."},
+				"page": 50,
+				"options": ["scientist", "quit", "belief", "develop", "solve"],
+				"items": [
+				  {"text": {"en": "a person who does research and finds facts", "fa": "شخصی که تحقیق می‌کند و حقایق را پیدا می‌کند"}, "answer": "scientist"},
+				  {"text": {"en": "to stop doing something", "fa": "دست از انجام کاری برداشتن"}, "answer": "quit"},
+				  {"text": {"en": "something that you believe", "fa": "چیزی که به آن باور دارید"}, "answer": "belief"},
+				  {"text": {"en": "to grow or change into a stronger, larger or better form", "fa": "رشد کردن یا تغییر به شکل قوی‌تر، بزرگ‌تر یا بهتر"}, "answer": "develop"},
+				  {"text": {"en": "to find an answer to a problem", "fa": "پیدا کردن پاسخ برای یک مشکل"}, "answer": "solve"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p3_v2",
+				"type": "odd_one_out",
+				"instruction": {"en": "One odd out.", "fa": "یک مورد متفاوت."},
+				"page": 51,
+				"items": [
+				  {"question": {"en": "find / solve / invent / attend", "fa": "پیدا کردن / حل کردن / اختراع کردن / شرکت کردن"}, "options": [{"en": "find", "fa": "پیدا کردن"}, {"en": "solve", "fa": "حل کردن"}, {"en": "invent", "fa": "اختراع کردن"}, {"en": "attend", "fa": "شرکت کردن"}], "answer": 3, "explanation": {"en": "'Attend' is about being present, while the others are about creating or discovering.", "fa": "«شرکت کردن» درباره حضور است، در حالی که بقیه درباره ایجاد یا کشف هستند."}},
+				  {"question": {"en": "grow up / develop / destroy / increase", "fa": "بزرگ شدن / توسعه یافتن / تخریب کردن / افزایش یافتن"}, "options": [{"en": "grow up", "fa": "بزرگ شدن"}, {"en": "develop", "fa": "توسعه یافتن"}, {"en": "destroy", "fa": "تخریب کردن"}, {"en": "increase", "fa": "افزایش یافتن"}], "answer": 2, "explanation": {"en": "'Destroy' is negative, while the others are positive or neutral.", "fa": "«تخریب کردن» منفی است، در حالی که بقیه مثبت یا خنثی هستند."}},
+				  {"question": {"en": "inventor / researcher / farmer / thinker", "fa": "مخترع / محقق / کشاورز / متفکر"}, "options": [{"en": "inventor", "fa": "مخترع"}, {"en": "researcher", "fa": "محقق"}, {"en": "farmer", "fa": "کشاورز"}, {"en": "thinker", "fa": "متفکر"}], "answer": 2, "explanation": {"en": "'Farmer' is a laborer, while the others are intellectuals.", "fa": "«کشاورز» یک کارگر است، در حالی که بقیه روشنفکر هستند."}},
+				  {"question": {"en": "observatory / library / laboratory / memory", "fa": "رصدخانه / کتابخانه / آزمایشگاه / حافظه"}, "options": [{"en": "observatory", "fa": "رصدخانه"}, {"en": "library", "fa": "کتابخانه"}, {"en": "laboratory", "fa": "آزمایشگاه"}, {"en": "memory", "fa": "حافظه"}], "answer": 3, "explanation": {"en": "'Memory' is an abstract concept, while the others are physical places.", "fa": "«حافظه» یک مفهوم انتزاعی است، در حالی که بقیه مکان‌های فیزیکی هستند."}},
+				  {"question": {"en": "powerful / weak / strong / energetic", "fa": "قدرتمند / ضعیف / قوی / پرانرژی"}, "options": [{"en": "powerful", "fa": "قدرتمند"}, {"en": "weak", "fa": "ضعیف"}, {"en": "strong", "fa": "قوی"}, {"en": "energetic", "fa": "پرانرژی"}], "answer": 1, "explanation": {"en": "'Weak' is the opposite of the others.", "fa": "«ضعیف» متضاد بقیه است."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p3_v3",
+				"type": "matching",
+				"instruction": {"en": "Match columns A and B.", "fa": "ستون A و B را تطبیق دهید."},
+				"page": 52,
+				"options": ["become", "build", "attend", "translate"],
+				"items": [
+				  {"text": {"en": "become", "fa": "شدن"}, "answer": "successful"},
+				  {"text": {"en": "build", "fa": "ساختن"}, "answer": "a laboratory"},
+				  {"text": {"en": "attend", "fa": "شرکت کردن"}, "answer": "an interview"},
+				  {"text": {"en": "translate", "fa": "ترجمه کردن"}, "answer": "a poem"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p3_v4",
+				"type": "categorize",
+				"instruction": {"en": "Put these famous people in four groups.", "fa": "این افراد مشهور را در چهار گروه قرار دهید."},
+				"page": 53,
+				"categories": ["Poet", "Inventor", "Translator", "Writer"],
+				"items": [
+				  {"text": {"en": "Wright Brothers", "fa": "برادران رایت"}, "answer": "Inventor"},
+				  {"text": {"en": "Parvin Etesami", "fa": "پروین اعتصامی"}, "answer": "Poet"},
+				  {"text": {"en": "Mohammad Ghazi", "fa": "محمد قاضی"}, "answer": "Translator"},
+				  {"text": {"en": "Victor Hugo", "fa": "ویکتور هوگو"}, "answer": "Writer"},
+				  {"text": {"en": "Shahriyar", "fa": "شهریار"}, "answer": "Poet"},
+				  {"text": {"en": "Mahmood Hakimi", "fa": "محمود حکیمی"}, "answer": "Writer"},
+				  {"text": {"en": "Tahereh Saffarzadeh", "fa": "طاهره صفارزاده"}, "answer": "Translator"},
+				  {"text": {"en": "Alexander Graham Bell", "fa": "الکساندر گراهام بل"}, "answer": "Inventor"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p3_v5",
+				"type": "fill_blank",
+				"instruction": {"en": "Fill in the blanks with the given words.", "fa": "جاهای خالی را با کلمات داده شده پر کنید."},
+				"page": 54,
+				"items": [
+				  {"text": {"en": "The airplane is one of the greatest ______ of human.", "fa": "هواپیما یکی از بزرگ‌ترین ______ انسان است."}, "answer": ["inventions"]},
+				  {"text": {"en": "Some scientists are very ______ in their lives.", "fa": "برخی از دانشمندان در زندگی خود بسیار ______ هستند."}, "answer": ["successful"]},
+				  {"text": {"en": "When children ______ their personality changes.", "fa": "وقتی کودکان ______ شخصیت آنها تغییر می‌کند."}, "answer": ["grow up"]},
+				  {"text": {"en": "Do you ______ what she was saying about Mars?", "fa": "آیا ______ آنچه در مورد مریخ می‌گفت؟"}, "answer": ["believe"]},
+				  {"text": {"en": "He changed the ______ to have more light in the room.", "fa": "او ______ را عوض کرد تا نور بیشتری در اتاق داشته باشد."}, "answer": ["bulb"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p3_v6",
+				"type": "fill_blank",
+				"instruction": {"en": "Use appropriate nouns with the following verbs.", "fa": "با افعال زیر اسم‌های مناسب استفاده کنید."},
+				"page": 55,
+				"items": [
+				  {"text": {"en": "do", "fa": "انجام دادن"}, "answer": ["research", "experiment", "work"]},
+				  {"text": {"en": "give up", "fa": "دست کشیدن"}, "answer": ["hope", "smoking", "trying"]},
+				  {"text": {"en": "solve", "fa": "حل کردن"}, "answer": ["problem", "puzzle", "mystery"]},
+				  {"text": {"en": "translate", "fa": "ترجمه کردن"}, "answer": ["book", "poem", "text"]},
+				  {"text": {"en": "change", "fa": "تغییر دادن"}, "answer": ["mind", "job", "plan"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part IV: Pronunciation", "fa": "بخش چهارم: تلفظ"},
+			"page": 56,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v3_l1_p4_p1",
+				"type": "open_ended",
+				"instruction": {"en": "Say the sentences with emphatic stress over the appropriate element.", "fa": "جملات را با تأکید بر عنصر مناسب بگویید."},
+				"page": 56,
+				"items": [
+				  {"question": {"en": "I was reading Arabic. (Not Amir)", "fa": "من عربی می‌خواندم. (نه امیر)"}, "sample_answer": {"en": "I was reading Arabic.", "fa": "من عربی می‌خواندم."}},
+				  {"question": {"en": "I was reading Arabic. (Not writing Arabic)", "fa": "من عربی می‌خواندم. (نه عربی می‌نوشتم)"}, "sample_answer": {"en": "I was reading Arabic.", "fa": "من عربی می‌خواندم."}},
+				  {"question": {"en": "I was reading Arabic. (Not English)", "fa": "من عربی می‌خواندم. (نه انگلیسی)"}, "sample_answer": {"en": "I was reading Arabic.", "fa": "من عربی می‌خواندم."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part V: Writing", "fa": "بخش پنجم: نوشتن"},
+			"page": 57,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v3_l1_p5_w1",
+				"type": "letter_scramble",
+				"instruction": {"en": "Complete the spelling of words.", "fa": "املای کلمات را کامل کنید."},
+				"page": 57,
+				"items": [
+				  {"scrambled": "r_m_mb_r", "answer": "remember"},
+				  {"scrambled": "at_e_d", "answer": "attend"},
+				  {"scrambled": "bu_d", "answer": "build"},
+				  {"scrambled": "in_e_t", "answer": "invent"},
+				  {"scrambled": "cr_te", "answer": "create"},
+				  {"scrambled": "bel_eve", "answer": "believe"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p5_w2",
+				"type": "table_fill",
+				"instruction": {"en": "Complete the word family chart.", "fa": "جدول خانواده کلمه را کامل کنید."},
+				"page": 58,
+				"columns": [
+				  {"en": "Verb", "fa": "فعل"},
+				  {"en": "Noun", "fa": "اسم"}
+				],
+				"rows": [
+				  {"cells": [
+					{"text": {"en": "invent", "fa": "اختراع کردن"}, "editable": false},
+					{"text": {"en": "inventor", "fa": "مخترع"}, "editable": false}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "build", "fa": "ساختن"}, "editable": false},
+					{"text": {"en": "building", "fa": "ساختمان"}, "editable": false}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "know", "fa": "دانستن"}, "editable": false},
+					{"text": {"en": "knowledge", "fa": "دانش"}, "editable": false}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "think", "fa": "فکر کردن"}, "editable": false},
+					{"text": {"en": "thinker", "fa": "متفکر"}, "editable": false}
+				  ]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v3_l1_p5_w3",
+				"type": "categorize",
+				"instruction": {"en": "Read the text. Find nouns, adjectives and verbs. Write them in appropriate columns.", "fa": "متن را بخوانید. اسم‌ها، صفت‌ها و فعل‌ها را پیدا کنید. آنها را در ستون‌های مناسب بنویسید."},
+				"page": 59,
+				"passage": {
+				  "en": "Yesterday, it was snowing heavily. Maryam was playing inside. She really wanted to go out to play. But she stayed in because it was very cold outside. She was thinking about what to do to have fun inside the house. She went into her room. She was looking at her things when her friend Mina called. She lives next door. Mina was coming to Maryam's house with her mother. She was bringing some interesting books and games. They were reading and playing all evening. They really had a good time.",
+				  "fa": "دیروز برف سنگینی می‌بارید. مریم داخل خانه بازی می‌کرد. او واقعاً می‌خواست بیرون برود تا بازی کند. اما داخل ماند چون بیرون بسیار سرد بود. او به این فکر می‌کرد که برای تفریح در داخل خانه چه کاری انجام دهد. به اتاقش رفت. داشت به وسایلش نگاه می‌کرد که دوستش مینا تماس گرفت. او همسایه است. مینا با مادرش به خانه مریم می‌آمد. او چند کتاب و بازی جالب می‌آورد. آنها تمام شب را می‌خواندند و بازی می‌کردند. آنها واقعاً وقت خوبی داشتند."
+				},
+				"columns": [
+				  {"en": "Noun", "fa": "اسم"},
+				  {"en": "Verb", "fa": "فعل"},
+				  {"en": "Adjective", "fa": "صفت"}
+				],
+				"rows": [
+				  {"cells": [
+					{"text": {"en": "yesterday, snow, Maryam, house, room, things, friend, Mina, mother, books, games, time", "fa": "دیروز، برف، مریم، خانه، اتاق، وسایل، دوست، مینا، مادر، کتاب‌ها، بازی‌ها، وقت"}, "editable": true},
+					{"text": {"en": "was snowing, was playing, wanted, to go out, stayed, was thinking, to do, went, was looking, called, lives, was coming, was bringing, were reading, were playing, had", "fa": "می‌بارید، بازی می‌کرد، می‌خواست، بیرون برود، ماند، فکر می‌کرد، انجام دهد، رفت، نگاه می‌کرد، تماس گرفت، زندگی می‌کند، می‌آمد، می‌آورد، می‌خواندند، بازی می‌کردند، داشتند"}, "editable": true},
+					{"text": {"en": "heavily, inside, really, out, very, cold, outside, interesting, good", "fa": "سنگین، داخل، واقعاً، بیرون، بسیار، سرد، بیرون، جالب، خوب"}, "editable": true}
+				  ]}
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "How to be a good traveler", "fa": "چگونه یک مسافر خوب باشیم"},
+		"parts": [
+		  {
+			"part_title": {"en": "Part I: Reading Comprehension", "fa": "بخش اول: درک مطلب"},
+			"page": 62,
+			"passage": {
+			  "en": "How to be a good traveler\n\nTravel is about visiting new places and meeting new people. When visiting a destination, a traveler should take care of people, places and cultures. So, before any travel, we must pay attention to some points.\n\nFirst, we must read as much as possible about the main tourist attractions we are going to visit. Searching the Internet is an easy way to know about them. Also, learning a few words and phrases of the local language can be very useful, especially when we meet new people there.\n\nWhen we meet local people, we must not forget that we are guests! So, we must respect their way of living. When visiting historical and especially holy places, we must respect them, too.\n\nWhen we visit natural places such as lakes, forests and deserts, we must protect the plants and wild animals. In this way, every travel can be a great experience for us.",
+			  "fa": "چگونه یک مسافر خوب باشیم\n\nسفر درباره بازدید از مکان‌های جدید و ملاقات با افراد جدید است. هنگام بازدید از یک مقصد، یک مسافر باید مراقب مردم، مکان‌ها و فرهنگ‌ها باشد. بنابراین، قبل از هر سفر، باید به نکاتی توجه کنیم.\n\nاول، باید تا حد امکان درباره جاذبه‌های گردشگری اصلی که قصد بازدید از آنها را داریم، مطالعه کنیم. جستجو در اینترنت راهی آسان برای آشنایی با آنهاست. همچنین، یادگیری چند کلمه و عبارت از زبان محلی می‌تواند بسیار مفید باشد، به ویژه زمانی که با افراد جدید در آنجا ملاقات می‌کنیم.\n\nوقتی با مردم محلی ملاقات می‌کنیم، نباید فراموش کنیم که ما مهمان هستیم! بنابراین، باید به روش زندگی آنها احترام بگذاریم. هنگام بازدید از مکان‌های تاریخی و به ویژه مکان‌های مقدس، باید به آنها نیز احترام بگذاریم.\n\nوقتی از مکان‌های طبیعی مانند دریاچه‌ها، جنگل‌ها و بیابان‌ها بازدید می‌کنیم، باید از گیاهان و حیوانات وحشی محافظت کنیم. به این ترتیب، هر سفری می‌تواند تجربه‌ای عالی برای ما باشد."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v4_l1_p1_r1",
+				"type": "open_ended",
+				"instruction": {"en": "Answer the following questions with the given words and phrases.", "fa": "به سوالات زیر با کلمات و عبارات داده شده پاسخ دهید."},
+				"page": 63,
+				"items": [
+				  {"question": {"en": "Where can you travel in summer? (North)", "fa": "در تابستان کجا می‌توانید سفر کنید؟ (شمال)"}, "sample_answer": {"en": "I can travel to the North in summer.", "fa": "در تابستان می‌توانم به شمال سفر کنم."}},
+				  {"question": {"en": "When should she buy her ticket? (before her travel)", "fa": "چه زمانی باید بلیط خود را بخرد؟ (قبل از سفرش)"}, "sample_answer": {"en": "She should buy her ticket before her travel.", "fa": "او باید بلیط خود را قبل از سفرش بخرد."}},
+				  {"question": {"en": "What may they buy? (souvenirs)", "fa": "آنها ممکن است چه چیزی بخرند؟ (سوغاتی)"}, "sample_answer": {"en": "They may buy some souvenirs.", "fa": "آنها ممکن است چند سوغاتی بخرند."}},
+				  {"question": {"en": "How can Amir find a good hotel? (searching the net)", "fa": "امیر چگونه می‌تواند یک هتل خوب پیدا کند؟ (جستجو در اینترنت)"}, "sample_answer": {"en": "Amir can find a good hotel by searching the net.", "fa": "امیر با جستجو در اینترنت می‌تواند یک هتل خوب پیدا کند."}},
+				  {"question": {"en": "Which language must we speak in that city? (Chinese)", "fa": "در آن شهر باید به کدام زبان صحبت کنیم؟ (چینی)"}, "sample_answer": {"en": "We must speak Chinese in that city.", "fa": "در آن شهر باید به چینی صحبت کنیم."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p1_r2",
+				"type": "image_choice",
+				"instruction": {"en": "Write a sentence for each picture.", "fa": "برای هر تصویر یک جمله بنویسید."},
+				"page": 64,
+				"options": [
+				  {"id": "smoke", "label": {"en": "People must not smoke.", "fa": "مردم نباید سیگار بکشند."}, "image": ""},
+				  {"id": "leave", "label": {"en": "You may leave.", "fa": "شما می‌توانید بروید."}, "image": ""},
+				  {"id": "park", "label": {"en": "You can park here.", "fa": "اینجا می‌توانید پارک کنید."}, "image": ""},
+				  {"id": "loudly", "label": {"en": "You should not speak loudly.", "fa": "نباید بلند صحبت کنید."}, "image": ""},
+				  {"id": "drive", "label": {"en": "You must drive carefully.", "fa": "باید با احتیاط رانندگی کنید."}, "image": ""}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part II: Grammar", "fa": "بخش دوم: گرامر"},
+			"page": 64,
+			"grammar_note": {
+			  "en": "Modal Verbs: We use 'must', 'should', 'can', 'may' to express obligation, advice, ability, and possibility. 'Must' is stronger than 'should'. 'Can' is used for ability and permission. 'May' is used for possibility and permission.",
+			  "fa": "افعال کمکی: از 'must'، 'should'، 'can'، 'may' برای بیان الزام، توصیه، توانایی و احتمال استفاده می‌کنیم. 'Must' قوی‌تر از 'should' است. 'Can' برای توانایی و اجازه استفاده می‌شود. 'May' برای احتمال و اجازه استفاده می‌شود."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v4_l1_p2_g1",
+				"type": "open_ended",
+				"instruction": {"en": "Answer the following questions with the given words and phrases.", "fa": "به سوالات زیر با کلمات و عبارات داده شده پاسخ دهید."},
+				"page": 64,
+				"items": [
+				  {"question": {"en": "Where can you travel in summer? (North)", "fa": "در تابستان کجا می‌توانید سفر کنید؟ (شمال)"}, "sample_answer": {"en": "I can travel to the North in summer.", "fa": "در تابستان می‌توانم به شمال سفر کنم."}},
+				  {"question": {"en": "When should she buy her ticket? (before her travel)", "fa": "چه زمانی باید بلیط خود را بخرد؟ (قبل از سفرش)"}, "sample_answer": {"en": "She should buy her ticket before her travel.", "fa": "او باید بلیط خود را قبل از سفرش بخرد."}},
+				  {"question": {"en": "What may they buy? (souvenirs)", "fa": "آنها ممکن است چه چیزی بخرند؟ (سوغاتی)"}, "sample_answer": {"en": "They may buy some souvenirs.", "fa": "آنها ممکن است چند سوغاتی بخرند."}},
+				  {"question": {"en": "How can Amir find a good hotel? (searching the net)", "fa": "امیر چگونه می‌تواند یک هتل خوب پیدا کند؟ (جستجو در اینترنت)"}, "sample_answer": {"en": "Amir can find a good hotel by searching the net.", "fa": "امیر با جستجو در اینترنت می‌تواند یک هتل خوب پیدا کند."}},
+				  {"question": {"en": "Which language must we speak in that city? (Chinese)", "fa": "در آن شهر باید به کدام زبان صحبت کنیم؟ (چینی)"}, "sample_answer": {"en": "We must speak Chinese in that city.", "fa": "در آن شهر باید به چینی صحبت کنیم."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p2_g2",
+				"type": "image_choice",
+				"instruction": {"en": "Write a sentence for each picture.", "fa": "برای هر تصویر یک جمله بنویسید."},
+				"page": 65,
+				"options": [
+				  {"id": "smoke", "label": {"en": "People must not smoke.", "fa": "مردم نباید سیگار بکشند."}, "image": ""},
+				  {"id": "leave", "label": {"en": "You may leave.", "fa": "شما می‌توانید بروید."}, "image": ""},
+				  {"id": "park", "label": {"en": "You can park here.", "fa": "اینجا می‌توانید پارک کنید."}, "image": ""},
+				  {"id": "loudly", "label": {"en": "You should not speak loudly.", "fa": "نباید بلند صحبت کنید."}, "image": ""},
+				  {"id": "drive", "label": {"en": "You must drive carefully.", "fa": "باید با احتیاط رانندگی کنید."}, "image": ""}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p2_g3",
+				"type": "open_ended",
+				"instruction": {"en": "Write five things you do before your travel.", "fa": "پنج کاری که قبل از سفر خود انجام می‌دهید را بنویسید."},
+				"page": 67,
+				"items": [
+				  {"question": {"en": "Things I do before travel", "fa": "کارهایی که قبل از سفر انجام می‌دهم"}, "sample_answer": {"en": "I can pack my bags. I should buy a ticket. I must check my passport. I may buy some souvenirs. I shouldn't forget my phone.", "fa": "می‌توانم چمدان‌هایم را ببندم. باید بلیط بخرم. باید پاسپورتم را چک کنم. ممکن است چند سوغاتی بخرم. نباید تلفنم را فراموش کنم."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p2_g4",
+				"type": "fill_blank",
+				"instruction": {"en": "Read the following text. Complete it with appropriate prepositions.", "fa": "متن زیر را بخوانید. آن را با حروف اضافه مناسب کامل کنید."},
+				"page": 68,
+				"items": [
+				  {"text": {"en": "Armin is a student. He lives ______ Shahrood.", "fa": "آرمین دانش‌آموز است. او ______ شاهرود زندگی می‌کند."}, "answer": ["in"]},
+				  {"text": {"en": "He usually wakes up ______ 5 o'clock ______ the morning.", "fa": "او معمولاً ساعت 5 ______ صبح از خواب بیدار می‌شود."}, "answer": ["at", "in"]},
+				  {"text": {"en": "______ Thursdays and Fridays, he wakes up later because he doesn't go to school.", "fa": "______ پنجشنبه‌ها و جمعه‌ها، دیرتر بیدار می‌شود چون به مدرسه نمی‌رود."}, "answer": ["On"]},
+				  {"text": {"en": "______ their house, there is a stadium.", "fa": "______ خانه آنها، یک ورزشگاه وجود دارد."}, "answer": ["near"]},
+				  {"text": {"en": "He goes there to play football. ______ noon, he comes back home and rests.", "fa": "او به آنجا می‌رود تا فوتبال بازی کند. ______ ظهر، به خانه برمی‌گردد و استراحت می‌کند."}, "answer": ["At"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p2_g5",
+				"type": "open_ended",
+				"instruction": {"en": "Now answer the following questions.", "fa": "حالا به سوالات زیر پاسخ دهید."},
+				"page": 68,
+				"items": [
+				  {"question": {"en": "Where does Armin live?", "fa": "آرمین کجا زندگی می‌کند؟"}, "sample_answer": {"en": "Armin lives in Shahrood.", "fa": "آرمین در شاهرود زندگی می‌کند."}},
+				  {"question": {"en": "When does he usually wake up?", "fa": "او معمولاً چه زمانی بیدار می‌شود؟"}, "sample_answer": {"en": "He usually wakes up at 5 o'clock in the morning.", "fa": "او معمولاً ساعت ۵ صبح بیدار می‌شود."}},
+				  {"question": {"en": "Where is the stadium?", "fa": "ورزشگاه کجاست؟"}, "sample_answer": {"en": "The stadium is near their house.", "fa": "ورزشگاه نزدیک خانه آنهاست."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part III: Vocabulary", "fa": "بخش سوم: واژگان"},
+			"page": 69,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v4_l1_p3_v1",
+				"type": "word_search",
+				"instruction": {"en": "Find 10 words related to travel.", "fa": "۱۰ کلمه مرتبط با سفر را پیدا کنید."},
+				"page": 69,
+				"words": ["pilgrim", "destination", "ticket", "check in", "attraction", "baggage", "passport", "plane", "vacation", "train"]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p3_v2",
+				"type": "odd_one_out",
+				"instruction": {"en": "One odd out.", "fa": "یک مورد متفاوت."},
+				"page": 70,
+				"items": [
+				  {"question": {"en": "travel / trip / nation / journey", "fa": "سفر / سفر / ملت / سفر"}, "options": [{"en": "travel", "fa": "سفر"}, {"en": "trip", "fa": "سفر"}, {"en": "nation", "fa": "ملت"}, {"en": "journey", "fa": "سفر"}], "answer": 2, "explanation": {"en": "'Nation' is a country, while the others are types of travel.", "fa": "«ملت» یک کشور است، در حالی که بقیه انواع سفر هستند."}},
+				  {"question": {"en": "local / international / domestic / national", "fa": "محلی / بین‌المللی / داخلی / ملی"}, "options": [{"en": "local", "fa": "محلی"}, {"en": "international", "fa": "بین‌المللی"}, {"en": "domestic", "fa": "داخلی"}, {"en": "national", "fa": "ملی"}], "answer": 1, "explanation": {"en": "'International' is about more than one country, while the others are about one country.", "fa": "«بین‌المللی» درباره بیش از یک کشور است، در حالی که بقیه درباره یک کشور هستند."}},
+				  {"question": {"en": "hospitable / kind / polite / angry", "fa": "مهمان‌نواز / مهربان / مودب / عصبانی"}, "options": [{"en": "hospitable", "fa": "مهمان‌نواز"}, {"en": "kind", "fa": "مهربان"}, {"en": "polite", "fa": "مودب"}, {"en": "angry", "fa": "عصبانی"}], "answer": 3, "explanation": {"en": "'Angry' is negative, while the others are positive traits.", "fa": "«عصبانی» منفی است، در حالی که بقیه ویژگی‌های مثبت هستند."}},
+				  {"question": {"en": "jungle / town / desert / plain", "fa": "جنگل / شهر / بیابان / دشت"}, "options": [{"en": "jungle", "fa": "جنگل"}, {"en": "town", "fa": "شهر"}, {"en": "desert", "fa": "بیابان"}, {"en": "plain", "fa": "دشت"}], "answer": 1, "explanation": {"en": "'Town' is man-made, while the others are natural places.", "fa": "«شهر» ساخته دست بشر است، در حالی که بقیه مکان‌های طبیعی هستند."}},
+				  {"question": {"en": "Europe / Asia / Spain / Africa", "fa": "اروپا / آسیا / اسپانیا / آفریقا"}, "options": [{"en": "Europe", "fa": "اروپا"}, {"en": "Asia", "fa": "آسیا"}, {"en": "Spain", "fa": "اسپانیا"}, {"en": "Africa", "fa": "آفریقا"}], "answer": 2, "explanation": {"en": "'Spain' is a country, while the others are continents.", "fa": "«اسپانیا» یک کشور است، در حالی که بقیه قاره هستند."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p3_v3",
+				"type": "matching",
+				"instruction": {"en": "Match columns A and B.", "fa": "ستون A و B را تطبیق دهید."},
+				"page": 71,
+				"options": ["summer", "historical", "suitable", "check", "four-season", "have"],
+				"items": [
+				  {"text": {"en": "summer", "fa": "تابستان"}, "answer": "vacation"},
+				  {"text": {"en": "historical", "fa": "تاریخی"}, "answer": "sites"},
+				  {"text": {"en": "suitable", "fa": "مناسب"}, "answer": "choice"},
+				  {"text": {"en": "check", "fa": "چک کردن"}, "answer": "suggestions"},
+				  {"text": {"en": "four-season", "fa": "چهارفصل"}, "answer": "country"},
+				  {"text": {"en": "have", "fa": "داشتن"}, "answer": "websites"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p3_v4",
+				"type": "categorize",
+				"instruction": {"en": "Put the words in three groups considering their means of transportation.", "fa": "کلمات را با توجه به وسیله حمل و نقل در سه گروه قرار دهید."},
+				"page": 72,
+				"categories": ["Land", "Air", "Sea"],
+				"items": [
+				  {"text": {"en": "bus", "fa": "اتوبوس"}, "answer": "Land"},
+				  {"text": {"en": "airplane", "fa": "هواپیما"}, "answer": "Air"},
+				  {"text": {"en": "ship", "fa": "کشتی"}, "answer": "Sea"},
+				  {"text": {"en": "train", "fa": "قطار"}, "answer": "Land"},
+				  {"text": {"en": "balloon", "fa": "بالون"}, "answer": "Air"},
+				  {"text": {"en": "boat", "fa": "قایق"}, "answer": "Sea"},
+				  {"text": {"en": "helicopter", "fa": "هلیکوپتر"}, "answer": "Air"},
+				  {"text": {"en": "bicycle", "fa": "دوچرخه"}, "answer": "Land"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p3_v5",
+				"type": "ordering",
+				"instruction": {"en": "Order the following means of transportation based on their speed (from the fastest to the slowest).", "fa": "وسایل حمل و نقل زیر را بر اساس سرعت مرتب کنید (از سریع‌ترین به کندترین)."},
+				"page": 73,
+				"items": ["airplane", "helicopter", "train", "bus", "car", "bicycle"],
+				"answer": [0, 1, 2, 3, 4, 5]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p3_v6",
+				"type": "fill_blank",
+				"instruction": {"en": "Fill in the blanks with the given words.", "fa": "جاهای خالی را با کلمات داده شده پر کنید."},
+				"page": 74,
+				"items": [
+				  {"text": {"en": "Egypt is ______ for its Pyramids.", "fa": "مصر به خاطر اهرام خود ______ است."}, "answer": ["famous"]},
+				  {"text": {"en": "Amazing nature of Iran ______ many tourists.", "fa": "طبیعت شگفت‌انگیز ایران ______ بسیاری از گردشگران را."}, "answer": ["attracts"]},
+				  {"text": {"en": "We should respect the languages and ______ of other countries.", "fa": "ما باید به زبان‌ها و ______ کشورهای دیگر احترام بگذاریم."}, "answer": ["cultures"]},
+				  {"text": {"en": "We can do a ______ of activities in our free time.", "fa": "ما می‌توانیم ______ از فعالیت‌ها را در اوقات فراغت خود انجام دهیم."}, "answer": ["range"]},
+				  {"text": {"en": "Do you have any ______ to solve the problem?", "fa": "آیا برای حل مشکل ______ دارید؟"}, "answer": ["suggestion"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p3_v7",
+				"type": "sentence_ordering",
+				"instruction": {"en": "Unscramble the following sentences.", "fa": "جملات زیر را مرتب کنید."},
+				"page": 75,
+				"items": [
+				  {"words": ["famous", "is", "China", "the Great Wall", "for", "."], "answer": ["China is famous for the Great Wall."]},
+				  {"words": ["Shiraz", "sites", "historical", "many", "and", "an amazing nature", "has", "."], "answer": ["Shiraz has many historical sites and an amazing nature."]},
+				  {"words": ["attracts", "a lot of", "Hamedan", "tourists", "from", "of Iran", "cities", "other", "."], "answer": ["Hamedan attracts a lot of tourists from other cities of Iran."]},
+				  {"words": ["to Mashhad and Qom", "travel", "to go to", "many Muslims", "shrines", "holy", "."], "answer": ["Many Muslims travel to Mashhad and Qom to go to holy shrines."]},
+				  {"words": ["is", "the best", "what", "souvenir", "your city", "of", "?"], "answer": ["What is the best souvenir of your city?"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part IV: Pronunciation", "fa": "بخش چهارم: تلفظ"},
+			"page": 76,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v4_l1_p4_p1",
+				"type": "open_ended",
+				"instruction": {"en": "Ask and answer with contrastive stress and appropriate intonation.", "fa": "با تأکید تضادی و آهنگ مناسب بپرسید و پاسخ دهید."},
+				"page": 76,
+				"items": [
+				  {"question": {"en": "Which country are you from, Iran or Italy?", "fa": "اهل کدام کشور هستید، ایران یا ایتالیا؟"}, "sample_answer": {"en": "I am from Iran.", "fa": "من اهل ایران هستم."}},
+				  {"question": {"en": "Where do you go, Isfahan or Yazd?", "fa": "به کجا می‌روید، اصفهان یا یزد؟"}, "sample_answer": {"en": "I go to Isfahan.", "fa": "من به اصفهان می‌روم."}},
+				  {"question": {"en": "Which color do you like more, yellow or brown?", "fa": "کدام رنگ را بیشتر دوست دارید، زرد یا قهوه‌ای؟"}, "sample_answer": {"en": "I like yellow more.", "fa": "من زرد را بیشتر دوست دارم."}},
+				  {"question": {"en": "What do you want to have, spaghetti or kebab?", "fa": "چه می‌خواهید داشته باشید، اسپاگتی یا کباب؟"}, "sample_answer": {"en": "I want to have kebab.", "fa": "من کباب می‌خواهم."}},
+				  {"question": {"en": "Should I check it online or offline?", "fa": "آیا باید آن را به صورت آنلاین چک کنم یا آفلاین؟"}, "sample_answer": {"en": "You should check it online.", "fa": "شما باید آن را به صورت آنلاین چک کنید."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part V: Writing", "fa": "بخش پنجم: نوشتن"},
+			"page": 77,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v4_l1_p5_w1",
+				"type": "transformation",
+				"instruction": {"en": "Change the following adjectives into adverbs. Pay attention to their spelling.", "fa": "صفت‌های زیر را به قید تبدیل کنید. به املای آنها توجه کنید."},
+				"page": 77,
+				"items": [
+				  {"text": {"en": "quick", "fa": "سریع"}, "answer": ["quickly"]},
+				  {"text": {"en": "real", "fa": "واقعی"}, "answer": ["really"]},
+				  {"text": {"en": "angry", "fa": "عصبانی"}, "answer": ["angrily"]},
+				  {"text": {"en": "easy", "fa": "آسان"}, "answer": ["easily"]},
+				  {"text": {"en": "probable", "fa": "محتمل"}, "answer": ["probably"]},
+				  {"text": {"en": "good", "fa": "خوب"}, "answer": ["well"]},
+				  {"text": {"en": "careless", "fa": "بی‌دقت"}, "answer": ["carelessly"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v4_l1_p5_w2",
+				"type": "table_fill",
+				"instruction": {"en": "Read the text; then complete the tables.", "fa": "متن را بخوانید؛ سپس جدول‌ها را کامل کنید."},
+				"page": 77,
+				"passage": {
+				  "en": "People usually go to different places by different means of travel. If they want to arrive fast and comfortably, they can travel by a plane. Probably some people prefer to travel by train. Actually it is cheap and safe. But sometimes it is not easy to find train and plane tickets. So they may use their cars, but they should drive carefully.",
+				  "fa": "مردم معمولاً با وسایل سفر مختلف به مکان‌های مختلف می‌روند. اگر می‌خواهند سریع و راحت برسند، می‌توانند با هواپیما سفر کنند. احتمالاً برخی از مردم ترجیح می‌دهند با قطار سفر کنند. در واقع ارزان و ایمن است. اما گاهی اوقات پیدا کردن بلیط قطار و هواپیما آسان نیست. بنابراین ممکن است از ماشین خود استفاده کنند، اما باید با احتیاط رانندگی کنند."
+				},
+				"columns": [
+				  {"en": "Adjective", "fa": "صفت"},
+				  {"en": "Adverb", "fa": "قید"}
+				],
+				"rows": [
+				  {"cells": [
+					{"text": {"en": "different", "fa": "مختلف"}, "editable": false},
+					{"text": {"en": "differently", "fa": "به طور متفاوت"}, "editable": false}
+				  ]},
+				  {"cells": [
+					{"text": {"en": "usual", "fa": "معمول"}, "editable": false},
+					{"text": {"en": "usually", "fa": "معمولاً"}, "editable": false}
+				  ]}
+				]
+			  }
+			]
+		  }
+		]
+	  }
+	},
+	"3": {
+	  "1": {
+		"lesson_title": {"en": "Respecting Our Elders", "fa": "احترام به بزرگترها"},
+		"parts": [
+		  {
+			"part_title": {"en": "Part I: Reading Comprehension", "fa": "بخش اول: درک مطلب"},
+			"page": 44,
+			"passage": {
+			  "en": "Respecting Our Elders\n\nIt is very important for us to respect our elders. It is also important to note that elders were not born elders; they were kids like us and now have grown old. A few years hence we will also grow older. If today we respect them, our present and future generations will carry those values and will learn to respect us as well when we grow old.\n\nElders have a lot to share with us: their life experiences, their failures, their successes and many more. Thus we need to care for them because they deserve to be cared for. Respect and care for elders start with our parents as they are our first teachers in our life.\n\nNo matter what we do in our lives, who we are, and where we live, we must love them as they love us unconditionally. They feel honored when we appreciate their love and respect them. So it is our duty to help them when they need us because they are not young enough to handle things on their own like before.",
+			  "fa": "احترام به بزرگترها\n\nبرای ما بسیار مهم است که به بزرگترهای خود احترام بگذاریم. همچنین مهم است که توجه کنیم بزرگترها بزرگ به دنیا نیامده‌اند؛ آنها مانند ما بچه بودند و اکنون پیر شده‌اند. چند سال دیگر ما نیز بزرگتر خواهیم شد. اگر امروز به آنها احترام بگذاریم، نسل‌های حال و آینده ما آن ارزش‌ها را حمل خواهند کرد و زمانی که ما پیر شویم، احترام به ما را نیز خواهند آموخت.\n\nبزرگترها چیزهای زیادی برای به اشتراک گذاشتن با ما دارند: تجربیات زندگی، شکست‌ها، موفقیت‌ها و موارد بسیار دیگر. بنابراین ما باید از آنها مراقبت کنیم زیرا شایسته مراقبت هستند. احترام و مراقبت از بزرگترها با والدین ما شروع می‌شود زیرا آنها اولین معلمان ما در زندگی هستند.\n\nمهم نیست در زندگی چه می‌کنیم، چه کسی هستیم و کجا زندگی می‌کنیم، باید آنها را دوست داشته باشیم همانطور که آنها بی‌قید و شرط ما را دوست دارند. وقتی از عشق آنها قدردانی می‌کنیم و به آنها احترام می‌گذاریم، احساس افتخار می‌کنند. بنابراین وظیفه ماست که وقتی به ما نیاز دارند به آنها کمک کنیم زیرا آنها به اندازه کافی جوان نیستند که مانند قبل خودشان کارها را انجام دهند."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l1_p1_r1",
+				"type": "open_ended",
+				"instruction": {"en": "Read the text and answer the questions.", "fa": "متن را بخوانید و به سوالات پاسخ دهید."},
+				"page": 44,
+				"items": [
+				  {"question": {"en": "Why is it important to respect our elders?", "fa": "چرا احترام به بزرگترها مهم است؟"}, "sample_answer": {"en": "Elders have valuable life experiences to share, and respecting them sets a good example for future generations.", "fa": "بزرگترها تجربیات ارزشمند زندگی دارند و احترام به آنها الگوی خوبی برای نسل‌های آینده است."}},
+				  {"question": {"en": "What can elders share with us?", "fa": "بزرگترها چه چیزی می‌توانند با ما به اشتراک بگذارند؟"}, "sample_answer": {"en": "Elders can share their life experiences, failures, successes, and wisdom.", "fa": "بزرگترها می‌توانند تجربیات زندگی، شکست‌ها، موفقیت‌ها و خرد خود را به اشتراک بگذارند."}},
+				  {"question": {"en": "Who are our first teachers in life?", "fa": "اولین معلمان ما در زندگی چه کسانی هستند؟"}, "sample_answer": {"en": "Our parents are our first teachers in life.", "fa": "والدین ما اولین معلمان ما در زندگی هستند."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l1_p1_r2",
+				"type": "fill_blank",
+				"instruction": {"en": "Find what the underlined pronouns refer to.", "fa": "پیدا کنید که ضمایر زیرخط‌دار به چه چیزی اشاره دارند."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "They were kids like us and now have grown old. (Paragraph 1)", "fa": "آنها بچه‌هایی مثل ما بودند و حالا پیر شده‌اند. (پاراگراف ۱)"}, "answer": ["elders"]},
+				  {"text": {"en": "They deserve to be cared for. (Paragraph 2)", "fa": "آنها شایسته مراقبت هستند. (پاراگراف ۲)"}, "answer": ["elders"]},
+				  {"text": {"en": "We must love them as they love us. (Paragraph 3)", "fa": "ما باید آنها را دوست داشته باشیم همانطور که آنها ما را دوست دارند. (پاراگراف ۳)"}, "answer": ["elders"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part II: Vocabulary", "fa": "بخش دوم: واژگان"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l1_p2_v1",
+				"type": "matching",
+				"instruction": {"en": "Match the words with their definitions.", "fa": "کلمات را با تعاریف آنها تطبیق دهید."},
+				"page": 45,
+				"options": ["Generation", "Deserve", "Failure", "Appreciate"],
+				"items": [
+				  {"text": {"en": "To be grateful for something", "fa": "قدردان چیزی بودن"}, "answer": "Appreciate"},
+				  {"text": {"en": "All the people of about the same age within a society", "fa": "همه مردم هم سن و سال در یک جامعه"}, "answer": "Generation"},
+				  {"text": {"en": "A lack of success in doing something", "fa": "عدم موفقیت در انجام کاری"}, "answer": "Failure"},
+				  {"text": {"en": "To be worthy of something", "fa": "سزاوار چیزی بودن"}, "answer": "Deserve"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l1_p2_v2",
+				"type": "fill_blank",
+				"instruction": {"en": "Complete the sentences with the correct words.", "fa": "جملات را با کلمات صحیح کامل کنید."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "Parnia never ______ her toys with her cousins.", "fa": "پارنیا هرگز اسباب‌بازی‌های خود را با پسرعموهایش ______ نمی‌کند."}, "answer": ["shares"]},
+				  {"text": {"en": "Students show their ______ for the teacher by not talking.", "fa": "دانش‌آموزان ______ خود را به معلم با حرف نزدن نشان می‌دهند."}, "answer": ["respect"]},
+				  {"text": {"en": "Their first attempt to climb Sabalan ended in ______.", "fa": "اولین تلاش آنها برای صعود به سبلان به ______ انجامید."}, "answer": ["failure"]},
+				  {"text": {"en": "The project will be completed two weeks ______.", "fa": "پروژه دو هفته ______ تکمیل خواهد شد."}, "answer": ["later"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part III: Grammar", "fa": "بخش سوم: گرامر"},
+			"page": 45,
+			"grammar_note": {
+			  "en": "Passive Voice: We use the passive voice when we want to focus on the action rather than the doer. Form: subject + be + past participle + (by + agent).",
+			  "fa": "صدای مجهول: از صدای مجهول زمانی استفاده می‌کنیم که می‌خواهیم بر روی عمل تمرکز کنیم نه بر فاعل. ساختار: فاعل + be + اسم مفعول + (by + فاعل)."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l1_p3_g1",
+				"type": "open_ended",
+				"instruction": {"en": "Change the active sentences to passive.", "fa": "جملات معلوم را به مجهول تبدیل کنید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "The cruel hunter killed the gazelle.", "fa": "شکارچی بی‌رحم آهو را کشت."}, "sample_answer": {"en": "The gazelle was killed by the cruel hunter.", "fa": "آهو توسط شکارچی بی‌رحم کشته شد."}},
+				  {"question": {"en": "Sina gave my mother a book for his birthday.", "fa": "سینا برای تولدش به مادرم یک کتاب داد."}, "sample_answer": {"en": "A book was given to my mother by Sina for his birthday.", "fa": "یک کتاب توسط سینا برای تولدش به مادرم داده شد."}},
+				  {"question": {"en": "Baird invented the first television in 1924.", "fa": "برد اولین تلویزیون را در سال ۱۹۲۴ اختراع کرد."}, "sample_answer": {"en": "The first television was invented by Baird in 1924.", "fa": "اولین تلویزیون توسط برد در سال ۱۹۲۴ اختراع شد."}},
+				  {"question": {"en": "We always keep the butter in the fridge.", "fa": "ما همیشه کره را در یخچال نگهداری می‌کنیم."}, "sample_answer": {"en": "The butter is always kept in the fridge.", "fa": "کره همیشه در یخچال نگهداری می‌شود."}},
+				  {"question": {"en": "They didn't inform us about the results.", "fa": "آنها ما را از نتایج مطلع نکردند."}, "sample_answer": {"en": "We weren't informed about the results.", "fa": "ما از نتایج مطلع نشدیم."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l1_p3_g2",
+				"type": "fill_blank",
+				"instruction": {"en": "Complete the sentences with the passive form of the verbs.", "fa": "جملات را با شکل مجهول افعال کامل کنید."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "The first fast food restaurants in our city ______ (open) thirty years ago.", "fa": "اولین رستوران‌های فست‌فود در شهر ما سی سال پیش ______ (افتتاح) شدند."}, "answer": ["were opened"]},
+				  {"text": {"en": "I have two parrots. They ______ (keep) in the cage.", "fa": "من دو طوطی دارم. آنها در قفس ______ (نگهداری) می‌شوند."}, "answer": ["are kept"]},
+				  {"text": {"en": "Persian ______ (speak) in Iran, Tajikistan and Afghanistan.", "fa": "فارسی در ایران، تاجیکستان و افغانستان ______ (صحبت) می‌شود."}, "answer": ["is spoken"]},
+				  {"text": {"en": "Jack's money ______ (steal) in the train.", "fa": "پول جک در قطار ______ (دزدیده) شد."}, "answer": ["was stolen"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l1_p3_g3",
+				"type": "fill_blank",
+				"instruction": {"en": "Complete the sentences with 'so', 'but', or 'because'.", "fa": "جملات را با 'بنابراین'، 'اما' یا 'زیرا' کامل کنید."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "She didn't invite me, ______ I didn't go to her birthday party.", "fa": "او مرا دعوت نکرد، ______ من به جشن تولدش نرفتم."}, "answer": ["so"]},
+				  {"text": {"en": "Robert can sing well, ______ he cannot draw well.", "fa": "رابرت خوب می‌خواند، ______ خوب نقاشی نمی‌کشد."}, "answer": ["but"]},
+				  {"text": {"en": "My grandfather can't sleep, ______ he is going to drink a glass of hot milk.", "fa": "پدربزرگ من نمی‌تواند بخوابد، ______ می‌خواهد یک لیوان شیر داغ بنوشد."}, "answer": ["so"]},
+				  {"text": {"en": "I'm hungry ______ there is no food in the kitchen.", "fa": "من گرسنه هستم ______ در آشپزخانه غذایی نیست."}, "answer": ["because"]},
+				  {"text": {"en": "We can take a taxi ______ travel by train.", "fa": "ما می‌توانیم تاکسی بگیریم ______ با قطار سفر کنیم."}, "answer": ["or"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part IV: Pronunciation", "fa": "بخش چهارم: تلفظ"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l1_p4_p1",
+				"type": "multiple_choice",
+				"instruction": {"en": "Choose the word with a different stress pattern.", "fa": "کلمه‌ای را با الگوی استرس متفاوت انتخاب کنید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "Which word has a different stress?", "fa": "کدام کلمه استرس متفاوتی دارد؟"}, "options": [{"en": "appreciate", "fa": "قدردانی کردن"}, {"en": "generation", "fa": "نسل"}, {"en": "failure", "fa": "شکست"}, {"en": "respect", "fa": "احترام"}], "answer": 2, "explanation": {"en": "'Failure' has stress on the first syllable, while others have stress on the second syllable.", "fa": "«شکست» استرس روی هجای اول دارد، در حالی که بقیه استرس روی هجای دوم دارند."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part V: Writing", "fa": "بخش پنجم: نوشتن"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l1_p5_w1",
+				"type": "open_ended",
+				"instruction": {"en": "Write a paragraph about someone you respect.", "fa": "یک پاراگراف درباره کسی که به او احترام می‌گذارید بنویسید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "Describe someone you respect and explain why.", "fa": "کسی را که به او احترام می‌گذارید توصیف کنید و توضیح دهید چرا."}, "sample_answer": {"en": "I respect my grandfather because he is wise and kind. He always listens to my problems and gives me good advice. He has experienced many things in life and I learn a lot from him. He taught me the importance of hard work and honesty.", "fa": "من به پدربزرگم احترام می‌گذارم زیرا او خردمند و مهربان است. او همیشه به مشکلات من گوش می‌دهد و به من توصیه‌های خوبی می‌کند. او چیزهای زیادی را در زندگی تجربه کرده است و من از او چیزهای زیادی یاد می‌گیرم. او اهمیت سخت‌کوشی و صداقت را به من آموخت."}}
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Dictionaries", "fa": "فرهنگ‌های لغت"},
+		"parts": [
+		  {
+			"part_title": {"en": "Part I: Reading Comprehension", "fa": "بخش اول: درک مطلب"},
+			"page": 44,
+			"passage": {
+			  "en": "Dictionaries\n\nA dictionary is a book which explains the meanings of words and expressions. You can find words easily because dictionaries put them in alphabetical order. The word 'dictionary' comes from the Latin 'dictio' ('saying').\n\nThere are several types of dictionaries. Dictionaries which explain words and how they are used; dictionaries which translate words from one language to another; dictionaries of biography which tell about famous people; and technical dictionaries which explain the meanings of technical words.\n\nDictionaries which explain what words mean give a clear 'definition' of them. A good dictionary also gives more information about words. For instance, it explains how they are pronounced. Usually the International Phonetic Alphabet (IPA) is used for this purpose.\n\nThere are also dictionaries which translate words into other languages. Very often one volume translates both ways; for example, half of the book is from English to Persian and the other half from Persian to English.\n\nWhen using a dictionary to find out how to say something in another language, one has to be careful to choose the right meaning.\n\nA word like 'right' has several meanings in English, for example, 'correct' and 'the opposite of left'. A word like 'present' may be used as an adjective, meaning 'not absent', as a noun, meaning 'gift' or as a verb, meaning 'give'. Words with different meanings exist in other languages, too. A good dictionary lists all the meanings of words to help people find the meaning that they look for.\n\nA complete dictionary also tells you about the origin of words and the story behind them. For example, the words like 'pajamas', 'bazaar' and 'paradise' entered English from Persian.",
+			  "fa": "فرهنگ‌های لغت\n\nفرهنگ لغت کتابی است که معانی کلمات و عبارات را توضیح می‌دهد. شما می‌توانید به راحتی کلمات را پیدا کنید زیرا فرهنگ‌های لغت آنها را به ترتیب الفبا قرار می‌دهند. کلمه 'dictionary' از لاتین 'dictio' (به معنی 'گفتن') آمده است.\n\nانواع مختلفی از فرهنگ‌های لغت وجود دارد. فرهنگ‌هایی که کلمات و نحوه استفاده از آنها را توضیح می‌دهند؛ فرهنگ‌هایی که کلمات را از زبانی به زبان دیگر ترجمه می‌کنند؛ فرهنگ‌های زندگینامه‌ای که درباره افراد مشهور صحبت می‌کنند؛ و فرهنگ‌های فنی که معانی کلمات تخصصی را توضیح می‌دهند.\n\nفرهنگ‌هایی که معنی کلمات را توضیح می‌دهند، 'تعریف' واضحی از آنها ارائه می‌دهند. یک فرهنگ لغت خوب همچنین اطلاعات بیشتری درباره کلمات می‌دهد. به عنوان مثال، نحوه تلفظ آنها را توضیح می‌دهد. معمولاً الفبای آوایی بین‌المللی (IPA) برای این منظور استفاده می‌شود.\n\nهمچنین فرهنگ‌هایی وجود دارند که کلمات را به زبان‌های دیگر ترجمه می‌کنند. اغلب یک جلد هر دو جهت را ترجمه می‌کند؛ به عنوان مثال، نیمی از کتاب از انگلیسی به فارسی و نیمی دیگر از فارسی به انگلیسی است.\n\nهنگام استفاده از فرهنگ لغت برای فهمیدن اینکه چگونه چیزی را به زبان دیگری بگوییم، باید مراقب باشیم که معنی درست را انتخاب کنیم.\n\nیک کلمه مانند 'right' در انگلیسی معانی متعددی دارد، به عنوان مثال، 'صحیح' و 'مقابل چپ'. یک کلمه مانند 'present' ممکن است به عنوان صفت به معنی 'حاضر نبودن'، به عنوان اسم به معنی 'هدیه' یا به عنوان فعل به معنی 'دادن' استفاده شود. کلمات با معانی مختلف در زبان‌های دیگر نیز وجود دارند. یک فرهنگ لغت خوب تمام معانی کلمات را فهرست می‌کند تا به مردم کمک کند معنی مورد نظر خود را پیدا کنند.\n\nیک فرهنگ لغت کامل همچنین درباره ریشه کلمات و داستان پشت آنها به شما می‌گوید. به عنوان مثال، کلماتی مانند 'pajamas'، 'bazaar' و 'paradise' از فارسی وارد انگلیسی شده‌اند."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l2_p1_r1",
+				"type": "true_false",
+				"instruction": {"en": "Read the text and mark the statements True (T) or False (F).", "fa": "متن را بخوانید و عبارات را درست (T) یا نادرست (F) علامت بزنید."},
+				"page": 44,
+				"items": [
+				  {"statement": {"en": "A word starting with 'p' appears before a word starting with 'm' in a dictionary.", "fa": "یک کلمه که با 'پ' شروع می‌شود قبل از کلمه‌ای که با 'م' شروع می‌شود در فرهنگ لغت ظاهر می‌شود."}, "answer": false, "correction": {"en": "Words are arranged alphabetically, so 'm' comes before 'p'.", "fa": "کلمات به ترتیب الفبا مرتب شده‌اند، بنابراین 'م' قبل از 'پ' می‌آید."}},
+				  {"statement": {"en": "Some dictionaries do not give users the meaning of words.", "fa": "برخی از فرهنگ‌های لغت معنی کلمات را به کاربران نمی‌دهند."}, "answer": false, "correction": {"en": "All dictionaries give the meaning of words, but some are specialized like biographical or technical dictionaries.", "fa": "همه فرهنگ‌های لغت معنی کلمات را می‌دهند، اما برخی تخصصی هستند مانند فرهنگ‌های زندگینامه‌ای یا فنی."}},
+				  {"statement": {"en": "The word 'bazaar' is not English, originally.", "fa": "کلمه 'بازار' در اصل انگلیسی نیست."}, "answer": true, "correction": {"en": "The word 'bazaar' entered English from Persian.", "fa": "کلمه 'بازار' از فارسی وارد انگلیسی شده است."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l2_p1_r2",
+				"type": "open_ended",
+				"instruction": {"en": "Answer the following questions.", "fa": "به سوالات زیر پاسخ دهید."},
+				"page": 44,
+				"items": [
+				  {"question": {"en": "Why can we find words in a dictionary easily?", "fa": "چرا می‌توانیم کلمات را به راحتی در فرهنگ لغت پیدا کنیم؟"}, "sample_answer": {"en": "Because dictionaries put words in alphabetical order.", "fa": "زیرا فرهنگ‌های لغت کلمات را به ترتیب الفبا مرتب می‌کنند."}},
+				  {"question": {"en": "What is the difference between technical dictionaries and biographical ones?", "fa": "تفاوت بین فرهنگ‌های فنی و زندگینامه‌ای چیست؟"}, "sample_answer": {"en": "Technical dictionaries explain technical words, while biographical dictionaries tell about famous people.", "fa": "فرهنگ‌های فنی کلمات تخصصی را توضیح می‌دهند، در حالی که فرهنگ‌های زندگینامه‌ای درباره افراد مشهور اطلاعات می‌دهند."}},
+				  {"question": {"en": "What is the origin of the word 'dictionary'?", "fa": "ریشه کلمه 'dictionary' چیست؟"}, "sample_answer": {"en": "The word 'dictionary' comes from the Latin 'dictio' meaning 'saying'.", "fa": "کلمه 'dictionary' از لاتین 'dictio' به معنی 'گفتن' آمده است."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part II: Vocabulary", "fa": "بخش دوم: واژگان"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l2_p2_v1",
+				"type": "matching",
+				"instruction": {"en": "Match the words with their definitions.", "fa": "کلمات را با تعاریف آنها تطبیق دهید."},
+				"page": 45,
+				"options": ["Arrange", "Contain", "Symbol", "Recommend", "Figure out"],
+				"items": [
+				  {"text": {"en": "To organize and put in order", "fa": "سازماندهی و مرتب کردن"}, "answer": "Arrange"},
+				  {"text": {"en": "To have something inside", "fa": "داشتن چیزی درون"}, "answer": "Contain"},
+				  {"text": {"en": "Something that stands for something else", "fa": "چیزی که به جای چیز دیگری می‌ایستد"}, "answer": "Symbol"},
+				  {"text": {"en": "To tell somebody that something is good", "fa": "به کسی گفتن که چیزی خوب است"}, "answer": "Recommend"},
+				  {"text": {"en": "To think and believe", "fa": "فکر کردن و باور کردن"}, "answer": "Figure out"}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l2_p2_v2",
+				"type": "fill_blank",
+				"instruction": {"en": "Complete the sentences with the correct words.", "fa": "جملات را با کلمات صحیح کامل کنید."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "This monolingual dictionary has about 50,000 ______.", "fa": "این فرهنگ لغت تک‌زبانه حدود ۵۰،۰۰۰ ______ دارد."}, "answer": ["entries", "words"]},
+				  {"text": {"en": "What does BC ______?", "fa": "BC به چه معنی ______؟"}, "answer": ["stand for", "mean"]},
+				  {"text": {"en": "The building is a ______ of new and old styles.", "fa": "ساختمان ______ سبک‌های جدید و قدیمی است."}, "answer": ["mixture", "combination"]},
+				  {"text": {"en": "The ______ of the book is available on our website.", "fa": "______ کتاب در وب‌سایت ما موجود است."}, "answer": ["introduction"]},
+				  {"text": {"en": "Being able to communicate is one of the most important life ______.", "fa": "توانایی برقراری ارتباط یکی از مهم‌ترین ______ زندگی است."}, "answer": ["skills"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part III: Grammar", "fa": "بخش سوم: گرامر"},
+			"page": 45,
+			"grammar_note": {
+			  "en": "Relative Clauses: We use relative clauses to give more information about a person or thing. 'Who' is used for people, 'which' for things, and 'that' for both people and things.",
+			  "fa": "جملات موصولی: از جملات موصولی برای اطلاعات بیشتر درباره شخص یا چیز استفاده می‌کنیم. 'Who' برای افراد، 'which' برای چیزها و 'that' برای هر دو افراد و چیزها استفاده می‌شود."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l2_p3_g1",
+				"type": "open_ended",
+				"instruction": {"en": "Combine the sentences using 'who', 'which', or 'that'.", "fa": "جملات را با استفاده از 'که' ترکیب کنید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "I saw the man. The man lives next door.", "fa": "مرد را دیدم. آن مرد همسایه است."}, "sample_answer": {"en": "I saw the man who lives next door.", "fa": "مردی را که همسایه است دیدم."}},
+				  {"question": {"en": "The mechanic had an accident. He is very skillful.", "fa": "مکانیک تصادف کرد. او بسیار ماهر است."}, "sample_answer": {"en": "The mechanic who had an accident is very skillful.", "fa": "مکانیکی که تصادف کرد بسیار ماهر است."}},
+				  {"question": {"en": "We bought some books. Our teacher suggested them.", "fa": "ما چند کتاب خریدیم. معلم ما آنها را پیشنهاد کرد."}, "sample_answer": {"en": "We bought some books that our teacher suggested.", "fa": "ما چند کتابی که معلم ما پیشنهاد کرد خریدیم."}},
+				  {"question": {"en": "She watched the DVD. Her father bought it.", "fa": "او DVD را تماشا کرد. پدرش آن را خرید."}, "sample_answer": {"en": "She watched the DVD which her father bought.", "fa": "او DVD را که پدرش خریده بود تماشا کرد."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l2_p3_g2",
+				"type": "fill_blank",
+				"instruction": {"en": "Complete the sentences with the second conditional.", "fa": "جملات را با شرطی نوع دوم کامل کنید."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "If I ______ (have) a smartphone, I ______ (use) an online dictionary.", "fa": "اگر ______ (داشتم) یک گوشی هوشمند، ______ (استفاده می‌کردم) از یک فرهنگ لغت آنلاین."}, "answer": ["had", "would use"]},
+				  {"text": {"en": "We ______ (help) you if we ______ (know) how.", "fa": "ما ______ (کمک می‌کردیم) به شما اگر ______ (می‌دانستیم) چگونه."}, "answer": ["would help", "knew"]},
+				  {"text": {"en": "I ______ (earn) a lot of money if I ______ (get) a good job.", "fa": "من ______ (درآمد زیادی داشتم) اگر ______ (داشتم) یک شغل خوب."}, "answer": ["would earn", "got"]},
+				  {"text": {"en": "He ______ (learn) French if he ______ (have) more time.", "fa": "او ______ (یاد می‌گرفت) فرانسوی اگر ______ (داشت) زمان بیشتر."}, "answer": ["would learn", "had"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part IV: Pronunciation", "fa": "بخش چهارم: تلفظ"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l2_p4_p1",
+				"type": "categorize",
+				"instruction": {"en": "Put the words into groups based on their stress pattern.", "fa": "کلمات را بر اساس الگوی استرس در گروه‌ها قرار دهید."},
+				"page": 45,
+				"categories": ["1st syllable", "2nd syllable"],
+				"items": [
+				  {"text": {"en": "dictionary", "fa": "فرهنگ لغت"}, "answer": "1st syllable"},
+				  {"text": {"en": "definition", "fa": "تعریف"}, "answer": "2nd syllable"},
+				  {"text": {"en": "alphabetical", "fa": "الفبایی"}, "answer": "2nd syllable"},
+				  {"text": {"en": "biography", "fa": "زندگینامه"}, "answer": "2nd syllable"},
+				  {"text": {"en": "technical", "fa": "فنی"}, "answer": "1st syllable"},
+				  {"text": {"en": "language", "fa": "زبان"}, "answer": "1st syllable"}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part V: Writing", "fa": "بخش پنجم: نوشتن"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l2_p5_w1",
+				"type": "open_ended",
+				"instruction": {"en": "Write a paragraph about why dictionaries are important.", "fa": "یک پاراگراف درباره اینکه چرا فرهنگ‌های لغت مهم هستند بنویسید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "Why are dictionaries important for learning a language?", "fa": "چرا فرهنگ‌های لغت برای یادگیری زبان مهم هستند؟"}, "sample_answer": {"en": "Dictionaries are important because they help us understand the meaning, pronunciation, and usage of words. They also show different meanings of the same word and give examples of how to use words in sentences. Moreover, good dictionaries explain the origin of words and help us choose the right meaning in different contexts.", "fa": "فرهنگ‌های لغت مهم هستند زیرا به ما کمک می‌کنند معنی، تلفظ و کاربرد کلمات را بفهمیم. آنها همچنین معانی مختلف یک کلمه را نشان می‌دهند و نمونه‌هایی از نحوه استفاده از کلمات در جملات ارائه می‌دهند. علاوه بر این، فرهنگ‌های لغت خوب ریشه کلمات را توضیح می‌دهند و به ما کمک می‌کنند معنی درست را در زمینه‌های مختلف انتخاب کنیم."}}
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Renewable Energy", "fa": "انرژی تجدیدپذیر"},
+		"parts": [
+		  {
+			"part_title": {"en": "Part I: Reading Comprehension", "fa": "بخش اول: درک مطلب"},
+			"page": 44,
+			"passage": {
+			  "en": "Renewable Energy\n\nMany countries now think that cars that burn fossil fuels should be replaced by electric cars. Electric cars don't burn gasoline in the engine, so they don't pollute the air. They use electricity stored on the car in batteries.\n\nSometimes, 12 or 24 batteries, or more, are needed to power the car. Just like a remote-controlled car, an electric car has an electric motor that turns the wheels and a battery to run the motor.\n\nElectricity, the same energy that lights your lamps and runs your TV, is stored in batteries on an electric car. The batteries can be like the batteries you find in flashlights or in regular gasoline cars.\n\nTo get the battery ready to roll, you have to charge it. This process isn't much different from the way you charge the portable devices you carry around every day: your cell phone, MP3 player, or digital camera. The difference is that you deal with a much bigger gadget that carries you around instead.\n\nThe electric car is usually plugged in at night. The car can be plugged into a special charging unit even at houses. Some electric cars can be plugged right into a regular electrical wall outlet. Others need a larger outlet, like the kind that a stove or a vacuum cleaner plugs into.\n\nThe engineers are trying to make better batteries that hold more energy and last longer. To overcome the problem of charging electric cars, hybrid cars are also available. Hybrid cars combine the benefits of gasoline engines and electric motors. They can be designed to meet different goals, such as better fuel economy or more power.",
+			  "fa": "انرژی تجدیدپذیر\n\nبسیاری از کشورها اکنون فکر می‌کنند که خودروهایی که سوخت فسیلی می‌سوزانند باید با خودروهای برقی جایگزین شوند. خودروهای برقی در موتور بنزین نمی‌سوزانند، بنابراین هوا را آلوده نمی‌کنند. آنها از برق ذخیره شده در باتری‌های خودرو استفاده می‌کنند.\n\nگاهی اوقات، ۱۲ یا ۲۴ باتری یا بیشتر برای تامین انرژی خودرو مورد نیاز است. درست مانند یک خودروی کنترل از راه دور، یک خودروی برقی دارای یک موتور الکتریکی است که چرخ‌ها را می‌چرخاند و یک باتری برای کارکرد موتور دارد.\n\nبرق، همان انرژی که لامپ‌های شما را روشن می‌کند و تلویزیون شما را کار می‌اندازد، در باتری‌های یک خودروی برقی ذخیره می‌شود. باتری‌ها می‌توانند مانند باتری‌هایی باشند که در چراغ قوه‌ها یا در خودروهای بنزینی معمولی پیدا می‌کنید.\n\nبرای آماده کردن باتری برای حرکت، باید آن را شارژ کنید. این فرآیند تفاوت چندانی با روشی که دستگاه‌های قابل حملی که هر روز با خود حمل می‌کنید شارژ می‌کنید ندارد: تلفن همراه، پخش‌کننده MP3 یا دوربین دیجیتال. تفاوت در این است که با یک دستگاه بسیار بزرگتر سروکار دارید که شما را حمل می‌کند.\n\nخودروی برقی معمولاً شب‌ها به برق وصل می‌شود. خودرو را می‌توان حتی در خانه‌ها به یک واحد شارژ مخصوص وصل کرد. برخی از خودروهای برقی را می‌توان مستقیماً به یک پریز برق دیواری معمولی وصل کرد. برخی دیگر به یک پریز بزرگتر نیاز دارند، مانند نوعی که اجاق گاز یا جاروبرقی به آن وصل می‌شود.\n\nمهندسان در تلاش هستند تا باتری‌های بهتری بسازند که انرژی بیشتری ذخیره کنند و دوام بیشتری داشته باشند. برای غلبه بر مشکل شارژ خودروهای برقی، خودروهای هیبریدی نیز در دسترس هستند. خودروهای هیبریدی مزایای موتورهای بنزینی و موتورهای الکتریکی را ترکیب می‌کنند. آنها می‌توانند برای رسیدن به اهداف مختلف، مانند مصرف سوخت بهتر یا قدرت بیشتر طراحی شوند."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l3_p1_r1",
+				"type": "true_false",
+				"instruction": {"en": "Read the text and mark the statements True (T) or False (F).", "fa": "متن را بخوانید و عبارات را درست (T) یا نادرست (F) علامت بزنید."},
+				"page": 44,
+				"items": [
+				  {"statement": {"en": "Electric cars use both fossil fuel and electricity.", "fa": "خودروهای برقی هم از سوخت فسیلی و هم از برق استفاده می‌کنند."}, "answer": false, "correction": {"en": "Electric cars don't burn gasoline; they use electricity stored in batteries.", "fa": "خودروهای برقی بنزین نمی‌سوزانند؛ آنها از برق ذخیره شده در باتری‌ها استفاده می‌کنند."}},
+				  {"statement": {"en": "All electric cars have batteries.", "fa": "همه خودروهای برقی باتری دارند."}, "answer": true, "correction": {"en": "Electric cars use batteries to store electricity.", "fa": "خودروهای برقی از باتری‌ها برای ذخیره برق استفاده می‌کنند."}},
+				  {"statement": {"en": "People can charge electric cars at home.", "fa": "مردم می‌توانند خودروهای برقی را در خانه شارژ کنند."}, "answer": true, "correction": {"en": "Electric cars can be plugged into a regular electrical wall outlet at home.", "fa": "خودروهای برقی را می‌توان در خانه به پریز برق معمولی وصل کرد."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l3_p1_r2",
+				"type": "open_ended",
+				"instruction": {"en": "Answer the following questions.", "fa": "به سوالات زیر پاسخ دهید."},
+				"page": 44,
+				"items": [
+				  {"question": {"en": "What is an electric car?", "fa": "خودروی برقی چیست؟"}, "sample_answer": {"en": "An electric car is a vehicle that uses electricity stored in batteries instead of burning gasoline.", "fa": "خودروی برقی وسیله نقلیه‌ای است که به جای سوزاندن بنزین از برق ذخیره شده در باتری‌ها استفاده می‌کند."}},
+				  {"question": {"en": "Why do people use hybrid cars?", "fa": "چرا مردم از خودروهای هیبریدی استفاده می‌کنند؟"}, "sample_answer": {"en": "Hybrid cars combine the benefits of gasoline engines and electric motors for better fuel economy or more power.", "fa": "خودروهای هیبریدی مزایای موتورهای بنزینی و موتورهای برقی را برای مصرف سوخت بهتر یا قدرت بیشتر ترکیب می‌کنند."}},
+				  {"question": {"en": "Have you ever seen an electric car?", "fa": "آیا تا به حال خودروی برقی دیده‌اید؟"}, "sample_answer": {"en": "Yes, I have seen electric cars in the city. They are very quiet.", "fa": "بله، خودروهای برقی را در شهر دیده‌ام. آنها بسیار بی‌صدا هستند."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part II: Vocabulary", "fa": "بخش دوم: واژگان"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l3_p2_v1",
+				"type": "multiple_choice",
+				"instruction": {"en": "Choose the odd one out.", "fa": "گزینه متفاوت را انتخاب کنید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "water / tree / coal / sun", "fa": "آب / درخت / زغال سنگ / خورشید"}, "options": [{"en": "water", "fa": "آب"}, {"en": "tree", "fa": "درخت"}, {"en": "coal", "fa": "زغال سنگ"}, {"en": "sun", "fa": "خورشید"}], "answer": 2, "explanation": {"en": "'Coal' is a non-renewable resource, while the others are renewable.", "fa": "«زغال سنگ» یک منبع تجدیدناپذیر است، در حالی که بقیه تجدیدپذیر هستند."}},
+				  {"question": {"en": "pollution / waste / garbage / resource", "fa": "آلودگی / زباله / زباله / منبع"}, "options": [{"en": "pollution", "fa": "آلودگی"}, {"en": "waste", "fa": "زباله"}, {"en": "garbage", "fa": "زباله"}, {"en": "resource", "fa": "منبع"}], "answer": 3, "explanation": {"en": "'Resource' is a positive term, while the others are negative.", "fa": "«منبع» یک اصطلاح مثبت است، در حالی که بقیه منفی هستند."}},
+				  {"question": {"en": "yard / balcony / roof / motor", "fa": "حیاط / بالکن / پشت بام / موتور"}, "options": [{"en": "yard", "fa": "حیاط"}, {"en": "balcony", "fa": "بالکن"}, {"en": "roof", "fa": "پشت بام"}, {"en": "motor", "fa": "موتور"}], "answer": 3, "explanation": {"en": "'Motor' is a mechanical part, while the others are parts of a building.", "fa": "«موتور» یک قطعه مکانیکی است، در حالی که بقیه بخش‌هایی از یک ساختمان هستند."}},
+				  {"question": {"en": "absorb / use up / generate / digest", "fa": "جذب کردن / مصرف کردن / تولید کردن / هضم کردن"}, "options": [{"en": "absorb", "fa": "جذب کردن"}, {"en": "use up", "fa": "مصرف کردن"}, {"en": "generate", "fa": "تولید کردن"}, {"en": "digest", "fa": "هضم کردن"}], "answer": 2, "explanation": {"en": "'Generate' means to create/produce, while the others mean to consume or break down.", "fa": "«تولید کردن» به معنای ایجاد/تولید است، در حالی که بقیه به معنای مصرف یا تجزیه هستند."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l3_p2_v2",
+				"type": "fill_blank",
+				"instruction": {"en": "Complete the sentences with the correct words.", "fa": "جملات را با کلمات صحیح کامل کنید."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "Asia is a continent rich in natural ______.", "fa": "آسیا قاره‌ای غنی از ______ طبیعی است."}, "answer": ["resources"]},
+				  {"text": {"en": "Wind turbines ______ electricity for the local community.", "fa": "توربین‌های بادی ______ برق برای جامعه محلی."}, "answer": ["generate", "produce"]},
+				  {"text": {"en": "The people of this city come from a ______ of different backgrounds.", "fa": "مردم این شهر از ______ پیشینه‌های مختلف می‌آیند."}, "answer": ["variety", "range"]},
+				  {"text": {"en": "Special ______ can be made for guests with disabilities.", "fa": "______ ویژه‌ای می‌توان برای مهمانان دارای معلولیت ایجاد کرد."}, "answer": ["arrangements"]},
+				  {"text": {"en": "The students constantly had to be ______ about their homework.", "fa": "دانش‌آموزان دائماً باید در مورد تکالیف خود ______ می‌بودند."}, "answer": ["worried"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part III: Grammar", "fa": "بخش سوم: گرامر"},
+			"page": 45,
+			"grammar_note": {
+			  "en": "Passive Voice with Modals: When using modal verbs (can, should, may, must, etc.) in the passive voice, use: modal + be + past participle.",
+			  "fa": "صدای مجهول با افعال کمکی: هنگام استفاده از افعال کمکی (می‌تواند، باید، ممکن است، و غیره) در صدای مجهول، از: modal + be + اسم مفعول استفاده کنید."
+			},
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l3_p3_g1",
+				"type": "fill_blank",
+				"instruction": {"en": "Complete the sentences with the passive form of the verbs.", "fa": "جملات را با شکل مجهول افعال کامل کنید."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "The river may ______ (pollute) with aluminum.", "fa": "رودخانه ممکن است با آلومینیوم ______ (آلوده) شود."}, "answer": ["be polluted"]},
+				  {"text": {"en": "The list can ______ (arrange) alphabetically.", "fa": "لیست می‌تواند به ترتیب الفبا ______ (مرتب) شود."}, "answer": ["be arranged"]},
+				  {"text": {"en": "The waste should ______ (collect) every night to be sent to the landfill.", "fa": "زباله باید هر شب ______ (جمع‌آوری) شود تا به محل دفن فرستاده شود."}, "answer": ["be collected"]},
+				  {"text": {"en": "Nowadays power can ______ (generate) by resources other than fossil fuels.", "fa": "امروزه برق می‌تواند توسط منابعی غیر از سوخت‌های فسیلی ______ (تولید) شود."}, "answer": ["be generated"]}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l3_p3_g2",
+				"type": "open_ended",
+				"instruction": {"en": "Write passive sentences based on the pictures.", "fa": "بر اساس تصاویر جملات مجهول بنویسید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "Describe what is happening in the picture.", "fa": "آنچه در تصویر اتفاق می‌افتد را توصیف کنید."}, "sample_answer": {"en": "The flowers are being watered by the gardener.", "fa": "گل‌ها توسط باغبان آبیاری می‌شوند."}},
+				  {"question": {"en": "Describe what was done in the past.", "fa": "توضیح دهید در گذشته چه کاری انجام شده است."}, "sample_answer": {"en": "The car was repaired by the mechanic.", "fa": "ماشین توسط مکانیک تعمیر شد."}}
+				]
+			  },
+			  {
+				"exercise_id": "wb_v5_l3_p3_g3",
+				"type": "fill_blank",
+				"instruction": {"en": "Complete the sentences using the past perfect tense.", "fa": "جملات را با استفاده از زمان گذشته کامل کامل کنید."},
+				"page": 45,
+				"items": [
+				  {"text": {"en": "I ______ (eat) lunch before I ______ (go) out.", "fa": "من ناهار ______ (خورده بودم) قبل از اینکه ______ (بروم) بیرون."}, "answer": ["had eaten", "went"]},
+				  {"text": {"en": "When I ______ (get) home, my sister ______ already ______ (fall asleep).", "fa": "وقتی ______ (رسیدم) خانه، خواهرم قبلاً ______ (خوابیده بود)."}, "answer": ["got", "had", "fallen asleep"]},
+				  {"text": {"en": "She ______ (upset) because she ______ (get) a bad score.", "fa": "او ______ (ناراحت بود) زیرا ______ (گرفته بود) نمره بد."}, "answer": ["was upset", "had gotten"]}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part IV: Pronunciation", "fa": "بخش چهارم: تلفظ"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l3_p4_p1",
+				"type": "multiple_choice",
+				"instruction": {"en": "Choose the word with a different stress pattern.", "fa": "کلمه‌ای را با الگوی استرس متفاوت انتخاب کنید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "Which word has a different stress?", "fa": "کدام کلمه استرس متفاوتی دارد؟"}, "options": [{"en": "electric", "fa": "برقی"}, {"en": "pollution", "fa": "آلودگی"}, {"en": "energy", "fa": "انرژی"}, {"en": "resource", "fa": "منبع"}], "answer": 2, "explanation": {"en": "'Energy' has stress on the first syllable, while others have stress on the second syllable.", "fa": "«انرژی» استرس روی هجای اول دارد، در حالی که بقیه استرس روی هجای دوم دارند."}}
+				]
+			  }
+			]
+		  },
+		  {
+			"part_title": {"en": "Part V: Writing", "fa": "بخش پنجم: نوشتن"},
+			"page": 45,
+			"exercises": [
+			  {
+				"exercise_id": "wb_v5_l3_p5_w1",
+				"type": "open_ended",
+				"instruction": {"en": "Write a paragraph about renewable energy.", "fa": "یک پاراگراف درباره انرژی تجدیدپذیر بنویسید."},
+				"page": 45,
+				"items": [
+				  {"question": {"en": "Why should we use renewable energy sources?", "fa": "چرا باید از منابع انرژی تجدیدپذیر استفاده کنیم؟"}, "sample_answer": {"en": "We should use renewable energy because it is clean and does not pollute the environment. Sources like solar, wind, and water power are unlimited and available everywhere. Using renewable energy helps reduce global warming and protects our planet for future generations. It also reduces our dependence on fossil fuels, which are limited and harmful to the environment.", "fa": "ما باید از انرژی تجدیدپذیر استفاده کنیم زیرا پاک است و محیط زیست را آلوده نمی‌کند. منابعی مانند انرژی خورشیدی، بادی و آبی نامحدود هستند و در همه جا در دسترس هستند. استفاده از انرژی تجدیدپذیر به کاهش گرمایش جهانی کمک می‌کند و از سیاره ما برای نسل‌های آینده محافظت می‌کند. همچنین وابستگی ما به سوخت‌های فسیلی را کاهش می‌دهد که محدود و برای محیط زیست مضر هستند."}}
+				]
+			  }
+			]
+		  }
+		]
+	  }
+	}
+  }
+}

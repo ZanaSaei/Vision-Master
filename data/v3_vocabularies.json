@@ -16,7 +16,8 @@
 		  "synonyms": {"en": ["doctor", "medical practitioner"], "fa": ["پزشک", "طبیب"]},
 		  "antonyms": {"en": ["patient"], "fa": ["بیمار"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/fɪˈzɪʃən/"
 		},
 		{
 		  "word": "take temperature",
@@ -30,7 +31,8 @@
 		  "synonyms": {"en": [], "fa": ["تب گرفتن"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/teɪk ˈtemprətʃər/"
 		},
 		{
 		  "word": "regard",
@@ -44,7 +46,8 @@
 		  "synonyms": {"en": ["consider", "deem"], "fa": ["به حساب آوردن", "در نظر گرفتن"]},
 		  "antonyms": {"en": ["ignore", "disregard"], "fa": ["نادیده گرفتن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈɡɑːrd/"
 		},
 		{
 		  "word": "dedicated",
@@ -58,7 +61,8 @@
 		  "synonyms": {"en": ["committed", "devoted"], "fa": ["متعهد", "فداکار"]},
 		  "antonyms": {"en": ["uncommitted", "indifferent"], "fa": ["بی‌تعهد", "بی‌تفاوت"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈdedɪkeɪtɪd/"
 		},
 		{
 		  "word": "spare no pains",
@@ -72,7 +76,8 @@
 		  "synonyms": {"en": ["make every effort", "go to great lengths"], "fa": ["از هیچ کوششی دریغ نکردن"]},
 		  "antonyms": {"en": ["do nothing", "give up"], "fa": ["هیچ کاری نکردن", "دست کشیدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/sper noʊ peɪnz/"
 		},
 		{
 		  "word": "distinguished",
@@ -86,7 +91,8 @@
 		  "synonyms": {"en": ["eminent", "renowned"], "fa": ["برجسته", "نامدار"]},
 		  "antonyms": {"en": ["ordinary", "mediocre"], "fa": ["معمولی", "متوسط"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dɪˈstɪŋɡwɪʃt/"
 		},
 		{
 		  "word": "not surprisingly",
@@ -100,7 +106,8 @@
 		  "synonyms": {"en": ["predictably", "as expected"], "fa": ["انتظار می‌رفت", "به طور قابل پیش‌بینی"]},
 		  "antonyms": {"en": ["unexpectedly"], "fa": ["به طور غیرمنتظره"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/nɑːt sərˈpraɪzɪŋli/"
 		},
 		{
 		  "word": "sofa",
@@ -114,7 +121,8 @@
 		  "synonyms": {"en": ["couch", "settee"], "fa": ["مبل", "کاناپه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈsoʊfə/"
 		},
 		{
 		  "word": "pigeon",
@@ -128,7 +136,8 @@
 		  "synonyms": {"en": ["dove"], "fa": ["کبوتر", "فاخته"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpɪdʒɪn/"
 		},
 		{
 		  "word": "shout",
@@ -142,7 +151,8 @@
 		  "synonyms": {"en": ["yell", "scream"], "fa": ["فریاد زدن", "داد زدن"]},
 		  "antonyms": {"en": ["whisper", "murmur"], "fa": ["نجوا کردن", "آهسته گفتن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ʃaʊt/"
 		},
 		{
 		  "word": "hard of hearing",
@@ -156,7 +166,8 @@
 		  "synonyms": {"en": ["hearing-impaired", "deaf"], "fa": ["کم شنوا", "ناشنوا"]},
 		  "antonyms": {"en": ["perfect hearing"], "fa": ["شنوایی کامل"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/hɑːrd əv ˈhɪrɪŋ/"
 		},
 		{
 		  "word": "hug",
@@ -170,7 +181,8 @@
 		  "synonyms": {"en": ["embrace", "cuddle"], "fa": ["در آغوش گرفتن", "بغل کردن"]},
 		  "antonyms": {"en": ["push away", "reject"], "fa": ["دور کردن", "رد کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/hʌɡ/"
 		},
 		{
 		  "word": "lap",
@@ -184,7 +196,8 @@
 		  "synonyms": {"en": [], "fa": ["دامان", "بغل"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/læp/"
 		},
 		{
 		  "word": "burst into tears",
@@ -198,7 +211,8 @@
 		  "synonyms": {"en": ["break down crying", "sob"], "fa": ["ناگهان گریه کردن", "به گریه افتادن"]},
 		  "antonyms": {"en": ["laugh", "smile"], "fa": ["خندیدن", "لبخند زدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/bɜːrst ˈɪntuː tɪrz/"
 		},
 		{
 		  "word": "repeatedly",
@@ -212,7 +226,8 @@
 		  "synonyms": {"en": ["frequently", "constantly"], "fa": ["مکرراً", "به دفعات"]},
 		  "antonyms": {"en": ["once", "rarely"], "fa": ["یک بار", "به ندرت"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈpiːtɪdli/"
 		},
 		{
 		  "word": "forgive",
@@ -226,7 +241,8 @@
 		  "synonyms": {"en": ["pardon", "excuse"], "fa": ["بخشیدن", "گذشت کردن"]},
 		  "antonyms": {"en": ["blame", "punish"], "fa": ["سرزنش کردن", "مجازات کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/fərˈɡɪv/"
 		},
 		{
 		  "word": "calmly",
@@ -240,7 +256,8 @@
 		  "synonyms": {"en": ["peacefully", "serenely"], "fa": ["آرامانه", "با خونسردی"]},
 		  "antonyms": {"en": ["angrily", "aggressively"], "fa": ["با عصبانیت", "پرخاشگرانه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkɑːmli/"
 		},
 		{
 		  "word": "diary",
@@ -254,7 +271,8 @@
 		  "synonyms": {"en": ["journal", "notebook"], "fa": ["دفتر خاطرات", "روزنامه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈdaɪəri/"
 		},
 		{
 		  "word": "kindness",
@@ -268,7 +286,8 @@
 		  "synonyms": {"en": ["compassion", "generosity"], "fa": ["مهربانی", "دلسوزی"]},
 		  "antonyms": {"en": ["cruelty", "meanness"], "fa": ["ظلم", "خسیسی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkaɪndnəs/"
 		},
 		{
 		  "word": "elderly",
@@ -282,7 +301,8 @@
 		  "synonyms": {"en": ["aged", "senior"], "fa": ["سالمند", "سالخورده"]},
 		  "antonyms": {"en": ["young", "youthful"], "fa": ["جوان", "جوان‌سالار"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈeldərli/"
 		},
 		{
 		  "word": "heritage",
@@ -296,7 +316,8 @@
 		  "synonyms": {"en": ["legacy", "inheritance"], "fa": ["میراث", "ارثیه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈherɪtɪdʒ/"
 		}
 	  ]
 	}
@@ -318,7 +339,8 @@
 		  "synonyms": {"en": ["advise", "suggest"], "fa": ["توصیه کردن", "پیشنهاد کردن"]},
 		  "antonyms": {"en": ["discourage", "oppose"], "fa": ["منصرف کردن", "مخالفت کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌrekəˈmend/"
 		},
 		{
 		  "word": "suppose",
@@ -332,7 +354,8 @@
 		  "synonyms": {"en": ["assume", "presume"], "fa": ["فرض کردن", "گمان کردن"]},
 		  "antonyms": {"en": ["know", "disbelieve"], "fa": ["دانستن", "باور نکردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/səˈpoʊz/"
 		},
 		{
 		  "word": "elementary",
@@ -346,7 +369,8 @@
 		  "synonyms": {"en": ["basic", "beginner"], "fa": ["ابتدایی", "مقدماتی"]},
 		  "antonyms": {"en": ["advanced", "complex"], "fa": ["پیشرفته", "پیچیده"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌelɪˈmentəri/"
 		},
 		{
 		  "word": "intermediate",
@@ -360,7 +384,8 @@
 		  "synonyms": {"en": ["medium", "middle"], "fa": ["متوسط", "میانه"]},
 		  "antonyms": {"en": ["beginner", "advanced"], "fa": ["مبتدی", "پیشرفته"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌɪntərˈmiːdiət/"
 		},
 		{
 		  "word": "advanced",
@@ -374,7 +399,8 @@
 		  "synonyms": {"en": ["high-level", "complex"], "fa": ["پیشرفته", "پیچیده"]},
 		  "antonyms": {"en": ["beginner", "elementary"], "fa": ["مبتدی", "ابتدایی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ədˈvænst/"
 		},
 		{
 		  "word": "app",
@@ -388,7 +414,8 @@
 		  "synonyms": {"en": ["application", "software"], "fa": ["نرم‌افزار", "برنامه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/æp/"
 		},
 		{
 		  "word": "PC",
@@ -402,7 +429,8 @@
 		  "synonyms": {"en": ["computer", "laptop"], "fa": ["رایانه", "کامپیوتر"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/piː siː/"
 		},
 		{
 		  "word": "smart phone",
@@ -416,7 +444,8 @@
 		  "synonyms": {"en": ["smartphone", "mobile device"], "fa": ["تلفن هوشمند", "گوشی هوشمند"]},
 		  "antonyms": {"en": ["feature phone", "dumb phone"], "fa": ["تلفن ساده"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/smɑːrt foʊn/"
 		},
 		{
 		  "word": "contain",
@@ -430,7 +459,8 @@
 		  "synonyms": {"en": ["hold", "include"], "fa": ["شامل بودن", "داشتن"]},
 		  "antonyms": {"en": ["exclude", "omit"], "fa": ["حذف کردن", "نداشتن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kənˈteɪn/"
 		},
 		{
 		  "word": "entry",
@@ -444,7 +474,8 @@
 		  "synonyms": {"en": ["item", "headword"], "fa": ["مدخل", "درایه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈentri/"
 		},
 		{
 		  "word": "symbol",
@@ -458,7 +489,8 @@
 		  "synonyms": {"en": ["sign", "emblem"], "fa": ["نماد", "علامت"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈsɪmbəl/"
 		},
 		{
 		  "word": "stand for",
@@ -472,7 +504,8 @@
 		  "synonyms": {"en": ["represent", "mean"], "fa": ["مخفف بودن", "نشان دادن"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/stænd fɔːr/"
 		},
 		{
 		  "word": "figure out",
@@ -486,7 +519,8 @@
 		  "synonyms": {"en": ["understand", "solve"], "fa": ["فهمیدن", "حل کردن"]},
 		  "antonyms": {"en": ["misunderstand", "confuse"], "fa": ["اشتباه فهمیدن", "گیج کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈfɪɡjər aʊt/"
 		},
 		{
 		  "word": "combination",
@@ -500,7 +534,8 @@
 		  "synonyms": {"en": ["mixture", "arrangement"], "fa": ["ترکیب", "تلفیق"]},
 		  "antonyms": {"en": ["separation"], "fa": ["جدایی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌkɑːmbɪˈneɪʃən/"
 		},
 		{
 		  "word": "introduction",
@@ -514,7 +549,8 @@
 		  "synonyms": {"en": ["preface", "foreword"], "fa": ["مقدمه", "پیشگفتار"]},
 		  "antonyms": {"en": ["conclusion", "epilogue"], "fa": ["نتیجه‌گیری", "پایان‌بند"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌɪntrəˈdʌkʃən/"
 		},
 		{
 		  "word": "effectively",
@@ -528,7 +564,8 @@
 		  "synonyms": {"en": ["efficiently", "successfully"], "fa": ["به طور مؤثر", "موفقانه"]},
 		  "antonyms": {"en": ["ineffectively", "uselessly"], "fa": ["به طور نا مؤثر", "بی‌فایده"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪˈfektɪvli/"
 		},
 		{
 		  "word": "arrange",
@@ -542,7 +579,8 @@
 		  "synonyms": {"en": ["organize", "order"], "fa": ["مرتب کردن", "سامان دادن"]},
 		  "antonyms": {"en": ["mess up", "disorganize"], "fa": ["به هم ریختن", "نامرتب کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əˈreɪndʒ/"
 		},
 		{
 		  "word": "jump into",
@@ -556,7 +594,8 @@
 		  "synonyms": {"en": ["dive into", "start abruptly"], "fa": ["ناگهان شروع کردن", "وارد شدن"]},
 		  "antonyms": {"en": ["ease into", "prepare"], "fa": ["آهسته شروع کردن", "آماده شدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dʒʌmp ˈɪntuː/"
 		},
 		{
 		  "word": "guide word",
@@ -570,7 +609,8 @@
 		  "synonyms": {"en": ["header word", "catchword"], "fa": ["واژه راهنما"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɡaɪd wɜːrd/"
 		},
 		{
 		  "word": "abbreviation",
@@ -584,7 +624,8 @@
 		  "synonyms": {"en": ["shortening", "acronym"], "fa": ["اختصار", "مخفف"]},
 		  "antonyms": {"en": ["full form"], "fa": ["شکل کامل"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əˌbriːviˈeɪʃən/"
 		}
 	  ]
 	}
@@ -606,7 +647,8 @@
 		  "synonyms": {"en": ["produce", "create"], "fa": ["تولید کردن", "ایجاد کردن"]},
 		  "antonyms": {"en": ["consume", "use up"], "fa": ["مصرف کردن", "تمام کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈdʒenəreɪt/"
 		},
 		{
 		  "word": "opposite",
@@ -620,7 +662,8 @@
 		  "synonyms": {"en": ["contrary", "reverse"], "fa": ["مخالف", "برعکس"]},
 		  "antonyms": {"en": ["same", "similar"], "fa": ["یکسان", "مشابه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈɑːpəzɪt/"
 		},
 		{
 		  "word": "blow",
@@ -634,7 +677,8 @@
 		  "synonyms": {"en": ["gust", "flow"], "fa": ["وزیدن", "جریان داشتن"]},
 		  "antonyms": {"en": ["calm", "stop"], "fa": ["آرام شدن", "ایستادن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/bloʊ/"
 		},
 		{
 		  "word": "remind",
@@ -648,7 +692,8 @@
 		  "synonyms": {"en": ["prompt", "bring back"], "fa": ["یادآوری کردن", "به خاطر آوردن"]},
 		  "antonyms": {"en": ["forget", "ignore"], "fa": ["فراموش کردن", "نادیده گرفتن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈmaɪnd/"
 		},
 		{
 		  "word": "air conditioner",
@@ -662,7 +707,8 @@
 		  "synonyms": {"en": ["AC", "cooler"], "fa": ["کولر", "تهویه مطبوع"]},
 		  "antonyms": {"en": ["heater"], "fa": ["بخاری"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/er kənˈdɪʃənər/"
 		},
 		{
 		  "word": "fossil fuel",
@@ -676,7 +722,8 @@
 		  "synonyms": {"en": ["hydrocarbon fuel"], "fa": ["سوخت فسیلی"]},
 		  "antonyms": {"en": ["renewable energy", "clean energy"], "fa": ["انرژی تجدیدپذیر", "انرژی پاک"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈfɑːsəl ˈfjuːəl/"
 		},
 		{
 		  "word": "renewable",
@@ -690,7 +737,8 @@
 		  "synonyms": {"en": ["sustainable", "inexhaustible"], "fa": ["تجدیدپذیر", "پایدار"]},
 		  "antonyms": {"en": ["nonrenewable", "finite"], "fa": ["تجدیدناپذیر", "محدود"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈnuːəbəl/"
 		},
 		{
 		  "word": "resource",
@@ -704,7 +752,8 @@
 		  "synonyms": {"en": ["supply", "reserve"], "fa": ["منبع", "ذخیره"]},
 		  "antonyms": {"en": ["waste"], "fa": ["ضایعه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈriːsɔːrs/"
 		},
 		{
 		  "word": "pollute",
@@ -718,7 +767,8 @@
 		  "synonyms": {"en": ["contaminate", "taint"], "fa": ["آلوده کردن", "نجس کردن"]},
 		  "antonyms": {"en": ["purify", "clean"], "fa": ["تصفیه کردن", "تمیز کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/pəˈluːt/"
 		},
 		{
 		  "word": "consume",
@@ -732,7 +782,8 @@
 		  "synonyms": {"en": ["use", "utilize"], "fa": ["مصرف کردن", "استفاده کردن"]},
 		  "antonyms": {"en": ["save", "produce"], "fa": ["ذخیره کردن", "تولید کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kənˈsuːm/"
 		},
 		{
 		  "word": "balcony",
@@ -746,7 +797,8 @@
 		  "synonyms": {"en": ["terrace", "veranda"], "fa": ["بالکن", "ایوان"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈbælkəni/"
 		},
 		{
 		  "word": "variety",
@@ -760,7 +812,8 @@
 		  "synonyms": {"en": ["diversity", "range"], "fa": ["تنوع", "گوناگونی"]},
 		  "antonyms": {"en": ["uniformity", "sameness"], "fa": ["یکنواختی", "تشابه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/vəˈraɪəti/"
 		},
 		{
 		  "word": "tide",
@@ -774,7 +827,8 @@
 		  "synonyms": {"en": ["ebb and flow"], "fa": ["جزر و مد", "کشند"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/taɪd/"
 		},
 		{
 		  "word": "replace",
@@ -788,7 +842,8 @@
 		  "synonyms": {"en": ["substitute", "exchange"], "fa": ["جایگزین کردن", "تعویض کردن"]},
 		  "antonyms": {"en": ["keep", "retain"], "fa": ["نگه داشتن", "حفظ کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈpleɪs/"
 		},
 		{
 		  "word": "use up",
@@ -802,7 +857,8 @@
 		  "synonyms": {"en": ["exhaust", "deplete"], "fa": ["تمام کردن", "به پایان رساندن"]},
 		  "antonyms": {"en": ["save", "conserve"], "fa": ["ذخیره کردن", "حفظ کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/juːz ʌp/"
 		},
 		{
 		  "word": "forever",
@@ -816,7 +872,8 @@
 		  "synonyms": {"en": ["eternally", "permanently"], "fa": ["برای همیشه", "جاودانه"]},
 		  "antonyms": {"en": ["temporarily", "briefly"], "fa": ["موقتاً", "به طور خلاصه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/fərˈevər/"
 		},
 		{
 		  "word": "demand",
@@ -830,7 +887,8 @@
 		  "synonyms": {"en": ["request", "need"], "fa": ["تقاضا", "نیاز"]},
 		  "antonyms": {"en": ["supply"], "fa": ["عرضه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dɪˈmænd/"
 		},
 		{
 		  "word": "convert",
@@ -844,7 +902,8 @@
 		  "synonyms": {"en": ["change", "transform"], "fa": ["تبدیل کردن", "تغییر دادن"]},
 		  "antonyms": {"en": ["keep", "maintain"], "fa": ["نگه داشتن", "حفظ کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kənˈvɜːrt/"
 		},
 		{
 		  "word": "absorb",
@@ -858,7 +917,8 @@
 		  "synonyms": {"en": ["soak up", "take in"], "fa": ["جذب کردن", "مکیدن"]},
 		  "antonyms": {"en": ["release", "emit"], "fa": ["آزاد کردن", "انتشار دادن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əbˈzɔːrb/"
 		},
 		{
 		  "word": "solar panel",
@@ -872,7 +932,8 @@
 		  "synonyms": {"en": ["photovoltaic panel"], "fa": ["پنل خورشیدی"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈsoʊlər ˈpænəl/"
 		},
 		{
 		  "word": "turbine",
@@ -886,7 +947,8 @@
 		  "synonyms": {"en": ["engine", "motor"], "fa": ["توربین"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈtɜːrbaɪn/"
 		},
 		{
 		  "word": "environment",
@@ -900,7 +962,8 @@
 		  "synonyms": {"en": ["ecology", "habitat"], "fa": ["محیط زیست", "زیست‌بوم"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪnˈvaɪrənmənt/"
 		}
 	  ]
 	}

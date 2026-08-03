@@ -1,27 +1,24 @@
 extends "res://autoload/BackButtonHandler.gd"
-
 # ============================================================
-#  CONVERSATION SCENE
-#  Loads from res://data/v_conversation.json 
-#  Shows: image, intro, dialogue lines, discussion questions
-#  Includes: Clickable words, dictionary slide-in popup, Persian translation toggle,
-#  and Audio-Text Synchronization!
+# CONVERSATION SCENE — PageView Edition
+# Two swipeable pages: Conversation / Oral Practice
 # ============================================================
-
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
-# Speaker colors
+# Vibrant accent colors for the left border & speaker labels
 const SPEAKER_COLORS := [
-	Color("#2563EB"),  # blue
-	Color("#16A34A"),  # green
-	Color("#9333EA"),  # purple
-	Color("#EA580C"),  # orange
+	Color("#22D3EE"),  # Cyan
+	Color("#EC4899"),  # Pink/Magenta
+	Color("#FBBF24"),  # Amber/Gold
+	Color("#34D399")   # Emerald
 ]
+
+# Dark, harmonious card backgrounds (tinted to match the navy theme)
 const SPEAKER_BG_COLORS := [
-	Color("#EFF6FF"),
-	Color("#F0FDF4"),
-	Color("#FDF4FF"),
-	Color("#FFF7ED"),
+	Color("#1a2f5c"),  # Deep blue
+	Color("#2d1f4e"),  # Deep purple
+	Color("#2d2a1f"),  # Deep amber-brown
+	Color("#1a2d2a")   # Deep teal
 ]
 
 # ---------- Font configuration ----------
@@ -31,135 +28,172 @@ const FONT_JAKARTA_ITALIC_PATH  := "res://assets/fonts/PlusJakartaSans-Italic.tt
 const FONT_JAKARTA_MEDIUM_PATH  := "res://assets/fonts/PlusJakartaSans-Medium.ttf"
 const FONT_VAZIRMATN            := "res://assets/fonts/Vazirmatn-Regular.ttf"
 
-# Preload fonts for better performance
 var font_regular: FontFile
 var font_bold: FontFile
 var font_italic: FontFile
 var font_farsi: FontFile
 
-# Existing Node References
-@onready var back_button: Button             = $HeaderBar/HeaderContent/BackButton
-@onready var header_title: Label             = $HeaderBar/HeaderContent/HeaderTitle
-@onready var audio_button: Button            = $HeaderBar/HeaderContent/AudioButton
-@onready var translation_toggle: Button      = $HeaderBar/HeaderContent/TranslationToggleButton
-@onready var conversation_image: TextureRect = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/ConversationImage
-@onready var intro_label: RichTextLabel      = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/IntroLabel # Now a RichTextLabel
-@onready var lines_container: VBoxContainer  = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/LinesContainer
-@onready var questions_section: VBoxContainer = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection
-@onready var questions_container: VBoxContainer = $MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection/QuestionsContainer
-@onready var audio_player: AudioStreamPlayer = $AudioPlayer
-@onready var content_layout: VBoxContainer   = $MarginContainer/MainLayout/ScrollContainer/ContentLayout
+# ---------- Node References ----------
+@onready var header_bar: Control              = $HeaderBar
+@onready var back_button: Button              = $HeaderBar/HeaderContent/BackButton
+@onready var header_title: Label              = $HeaderBar/HeaderContent/HeaderTitle
+@onready var audio_button: Button             = $HeaderBar/HeaderContent/AudioButton
+@onready var translation_toggle: Button       = $HeaderBar/HeaderContent/TranslationToggleButton
+@onready var audio_panel: PanelContainer      = $AudioPanel
+@onready var page_view: PageView              = $MarginContainer/MainLayout/PageView
 
-# Audio Control References
-@onready var audio_control_panel: PanelContainer = $AudioControlPanel
-@onready var audio_slider: HSlider = $AudioControlPanel/MarginContainer/AudioUILayout/AudioSlider
-@onready var rewind_button: Button = $AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout/RewindButton
-@onready var play_pause_button: Button = $AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout/PlayPauseButton
-@onready var forward_button: Button = $AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout/ForwardButton
-@onready var close_audio_button: Button = $AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout/CloseAudioButton
+# ---------- Dynamically Created Nodes ----------
+var conversation_image: TextureRect
+var intro_label: RichTextLabel
+var lines_container: VBoxContainer
+var exercises_container: VBoxContainer
+var intro_translation_label: Label = null
 
-# Audio state variables
+# ---------- State Variables ----------
 const SEEK_STEP: float = 10.0
 var is_dragging_slider: bool = false
-
-# Dictionary/Popup Variables
 var word_regex := RegEx.new()
-var line_rtls: Array = [] # Stores { "rtl": RichTextLabel, "text": String, "sentences": Array, "translation": String, "translation_label": Label }
+var line_rtls: Array = []
 var current_word_data: Dictionary = {}
 var current_highlighted_word: String = ""
-
-# Audio Sync Variables
 var all_sentences_sync: Array = []
 var intro_sentences_data: Array = []
 var _last_active_sentence: Dictionary = {}
-
-# Touch tracking variables for mobile scrolling
 var _touch_start_pos: Vector2 = Vector2.ZERO
 var _is_drag_scrolling: bool = false
-
 var dict_popup: DictionaryPopup
-
-# Translation toggle
 var show_translation: bool = false
-
-# Store current data for rebuilding
 var current_book: int = 0
 var current_lesson: int = 0
 var current_data: Dictionary = {}
-var intro_translation_label: Label = null  # Store reference to intro translation label
 
+# ============================================================
+# READY — Build the two pages
+# ============================================================
 func _ready() -> void:
-	# Compile regex to match words (including those with apostrophes or hyphens)
-	word_regex.compile("\\b([a-zA-Z]+(?:[-'’][a-zA-Z]+)?)\\b")
-
+	page_view.add_swipe_blocker(audio_panel)
+	page_view.add_swipe_blocker(header_bar)
+	
+	var apostrophes := "'%s%s" % [char(0x2018), char(0x2019)]
+	word_regex.compile("\\b([a-zA-Z]+(?:[%s-][a-zA-Z]+)*)\\b" % apostrophes)
 	dict_popup = DictionaryPopup.new()
 	add_child(dict_popup)
 	dict_popup.popup_closed.connect(_on_popup_closed)
-
+	
 	audio_button.pivot_offset = audio_button.size / 2.0
 	back_button.pivot_offset = back_button.size / 2.0
-
+	
 	_load_fonts()
-	_apply_fonts_to_existing_labels()
-
-	# Connect existing buttons
+	if font_bold: header_title.add_theme_font_override("font", font_bold)
+	
+	# General Connections
 	back_button.pressed.connect(_on_back_button_pressed)
 	audio_button.pressed.connect(_on_audio_pressed)
 	translation_toggle.pressed.connect(_on_translation_toggle_pressed)
-
-	# Connect audio control buttons
-	rewind_button.pressed.connect(_on_rewind_pressed)
-	play_pause_button.pressed.connect(_on_play_pause_pressed)
-	forward_button.pressed.connect(_on_forward_pressed)
-	close_audio_button.pressed.connect(_on_close_audio_pressed)
 	
-	audio_player.finished.connect(_on_audio_finished)
-
-	# Connect slider signals
-	audio_slider.drag_started.connect(_on_slider_drag_started)
-	audio_slider.drag_ended.connect(_on_slider_drag_ended)
-
+	# Audio Panel Connections
+	audio_panel.playback_updated.connect(_update_audio_sync)
+	audio_panel.audio_closed.connect(_on_audio_stopped)
+	audio_panel.audio_finished.connect(_on_audio_stopped)
+	
 	current_book = Global.current_book
 	current_lesson = Global.current_lesson
-
 	header_title.text = "Lesson %d\nConversation" % [current_lesson]
-
 	current_data = Global.load_conversation(current_book, current_lesson)
+	
+	# ---- Build the two pages ----
+	_build_conversation_page()
+	_build_oral_page()
+	
 	if current_data.is_empty():
 		intro_label.text = "Conversation not available yet."
 		return
-
+		
+	var lesson_data := Global.load_category("conversation_oral", Global.current_book, Global.current_lesson)
+	for exercise in lesson_data.get("exercises", []):
+		var engine := ExerciseEngine.new()
+		exercises_container.add_child(engine)
+		engine.build(exercise)
+		engine.exercise_checked.connect(_on_exercise_checked)
+		
 	_build_conversation(current_book, current_lesson, current_data)
-	_add_bottom_scroll_spacer()
-	# Set initial toggle button text
 	_update_toggle_button_text()
 
-# Call this at the end of _ready() or after loading data
-func _add_bottom_scroll_spacer() -> void:
+# ============================================================
+# PAGE BUILDERS
+# ============================================================
+func _build_conversation_page() -> void:
+	var page := VBoxContainer.new()
+	page.add_theme_constant_override("separation", 24)
+	
+	# Tint the page background to match the dark navy theme
+	var page_bg := StyleBoxFlat.new()
+	page_bg.bg_color = Color("#2c387f")
+	page.add_theme_stylebox_override("panel", page_bg)
+
+	# Conversation Image
+	conversation_image = TextureRect.new()
+	conversation_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	conversation_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	conversation_image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	conversation_image.custom_minimum_size = Vector2(0, 800)
+	page.add_child(conversation_image)
+
+	# Intro Label
+	intro_label = RichTextLabel.new()
+	intro_label.bbcode_enabled = true
+	intro_label.scroll_active = false
+	intro_label.fit_content = true
+	intro_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	intro_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	intro_label.add_theme_font_size_override("normal_font_size", 48)
+	intro_label.add_theme_color_override("default_color", Color("#F1F5F9"))  # Light slate for visibility
+	if font_regular:
+		intro_label.add_theme_font_override("normal_font", font_regular)
+	page.add_child(intro_label)
+
+	# Lines Container
+	lines_container = VBoxContainer.new()
+	lines_container.add_theme_constant_override("separation", 20)
+	page.add_child(lines_container)
+
+	# Spacer for Audio Panel
 	var spacer := Control.new()
-	# Set this height equal to (or slightly larger than) your AudioControlPanel height
-	spacer.custom_minimum_size = Vector2(0, 200) 
+	spacer.custom_minimum_size = Vector2(0, 200)
 	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	content_layout.add_child(spacer)
+	page.add_child(spacer)
 
-func _process(_delta: float) -> void:
-	# Keep the slider and text synced with the audio playback, even if paused
-	if (audio_player.playing or audio_player.stream_paused) and not is_dragging_slider:
-		var current_time = audio_player.get_playback_position()
-		audio_slider.value = current_time
-		_update_audio_sync(current_time)
+	page_view.add_page("conversation", "Conversation", "💬", page)
 
+func _build_oral_page() -> void:
+	var page := VBoxContainer.new()
+	page.add_theme_constant_override("separation", 24)
+	
+	# Exercises Container
+	exercises_container = VBoxContainer.new()
+	exercises_container.add_theme_constant_override("separation", 24)
+	page.add_child(exercises_container)
+	
+	# Spacer for Audio Panel
+	var spacer := Control.new()
+	spacer.custom_minimum_size = Vector2(0, 200)
+	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	page.add_child(spacer)
+	
+	page_view.add_page("oral", "Oral Practice", "🗣️", page)
 
+# ============================================================
+# INPUT & SCROLL TRACKING
+# ============================================================
 func _input(event: InputEvent) -> void:
 	super._input(event)
 	if event is InputEventScreenTouch or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT):
 		if event.pressed:
 			_touch_start_pos = event.position
-			_is_drag_scrolling = false 
-	elif event is InputEventScreenDrag or (event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
-		if _touch_start_pos.distance_to(event.position) > 15.0:
-			_is_drag_scrolling = true
-
+			_is_drag_scrolling = false
+		elif event is InputEventScreenDrag or (event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
+			if _touch_start_pos.distance_to(event.position) > 15.0:
+				_is_drag_scrolling = true
 
 func _load_fonts() -> void:
 	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
@@ -167,17 +201,9 @@ func _load_fonts() -> void:
 	font_italic = load(FONT_JAKARTA_ITALIC_PATH)
 	font_farsi = load(FONT_VAZIRMATN)
 
-func _apply_fonts_to_existing_labels() -> void:
-	if font_regular != null: intro_label.add_theme_font_override("normal_font", font_regular) # Changed to normal_font for RichTextLabel
-	if font_bold != null: header_title.add_theme_font_override("font", font_bold)
-
 # ============================================================
 # DATA LOADING & AUDIO SYNC LOGIC
 # ============================================================
-
-func _load_conversation(book: int, lesson: int) -> Dictionary:
-	return Global.load_conversation(book, lesson)
-
 func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 	all_sentences_sync.clear()
 	var image_path := "res://assets/images/%s" % data.get("image", "")
@@ -186,11 +212,11 @@ func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 		conversation_image.visible = true
 	else:
 		conversation_image.visible = false
-
+		conversation_image.custom_minimum_size = Vector2(0, 0) # Hide if no image
+		
 	# --- Intro with translation ---
 	var intro_data: Dictionary = data.get("intro", {})
 	intro_sentences_data = intro_data.get("sentences", [])
-	
 	var intro_text: String = ""
 	var intro_fa: String = ""
 	
@@ -198,87 +224,56 @@ func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 		var sentence = intro_sentences_data[i]
 		intro_text += sentence.get("en", "") + " "
 		intro_fa += sentence.get("fa", "") + " "
-		
-		# Register intro sentences for audio syncing
 		if sentence.has("start") and sentence.has("end"):
 			all_sentences_sync.append({
-				"type": "intro",
-				"block_idx": -1,
-				"sentence_idx": i,
-				"start": sentence.get("start", 0.0),
-				"end": sentence.get("end", 0.0)
+				"type": "intro", "block_idx": -1, "sentence_idx": i,
+				"start": sentence.get("start", 0.0), "end": sentence.get("end", 0.0)
 			})
-
-	# Configure RichTextLabel intro properties
-	intro_label.bbcode_enabled = true
-	intro_label.scroll_active = false
-	intro_label.fit_content = true
+			
 	intro_label.text = intro_text.strip_edges()
-	intro_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	intro_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	if font_regular != null: intro_label.add_theme_font_override("normal_font", font_regular)
-	
 	intro_label.set_meta("translation", intro_fa.strip_edges())
 	_create_intro_translation_label(intro_fa.strip_edges())
-
+	
 	_build_lines(data.get("lines", []))
-
-	var questions: Array = data.get("questions", [])
-	if questions.is_empty():
-		questions_section.visible = false
-	else:
-		questions_section.visible = true
-		_build_questions(questions)
-
+	
 	var audio_value: String = data.get("audio", "")
 	var audio_path: String = Global.resolve_audio_path(book, lesson, audio_value, "reading.mp3")
 	set_meta("audio_path", audio_path)
 
-
 func _build_lines(lines: Array) -> void:
 	for child in lines_container.get_children():
 		child.queue_free()
-
 	line_rtls.clear()
-
+	
 	var speaker_map: Dictionary = {}
 	var color_counter: int = 0
-
 	for line in lines:
 		var speaker: String = line.get("speaker", "")
 		if speaker != "" and not speaker_map.has(speaker):
 			speaker_map[speaker] = color_counter % SPEAKER_COLORS.size()
 			color_counter += 1
-
+			
 	for line in lines:
 		var speaker: String = line.get("speaker", "")
 		var sentences: Array = line.get("sentences", [])
 		var text: String = ""
 		var translation: String = ""
-		
-		var block_idx = line_rtls.size() # Index of the line card
+		var block_idx = line_rtls.size()
 		
 		for i in range(sentences.size()):
 			var sentence = sentences[i]
 			text += sentence.get("en", "") + " "
 			translation += sentence.get("fa", "") + " "
-			
-			# Register dialogue sentences for audio syncing
 			if sentence.has("start") and sentence.has("end"):
 				all_sentences_sync.append({
-					"type": "line",
-					"block_idx": block_idx,
-					"sentence_idx": i,
-					"start": sentence.get("start", 0.0),
-					"end": sentence.get("end", 0.0)
+					"type": "line", "block_idx": block_idx, "sentence_idx": i,
+					"start": sentence.get("start", 0.0), "end": sentence.get("end", 0.0)
 				})
-
+				
 		text = text.strip_edges()
 		translation = translation.strip_edges()
-		
-		var color_idx: int  = speaker_map.get(speaker, 0)
+		var color_idx: int = speaker_map.get(speaker, 0)
 		lines_container.add_child(_make_line_card(speaker, text, translation, color_idx, sentences))
-
 
 func _make_line_card(speaker: String, text: String, translation: String, color_idx: int, sentences: Array) -> PanelContainer:
 	var accent_color: Color = SPEAKER_COLORS[color_idx]
@@ -286,27 +281,35 @@ func _make_line_card(speaker: String, text: String, translation: String, color_i
 
 	var card := PanelContainer.new()
 	card.mouse_filter = Control.MOUSE_FILTER_PASS
+
+	# --- Modern card style with shadow & rounded corners ---
 	var card_style := StyleBoxFlat.new()
-	card_style.bg_color                  = bg_color
-	card_style.corner_radius_top_left    = 12
-	card_style.corner_radius_top_right   = 12
-	card_style.corner_radius_bottom_left = 12
-	card_style.corner_radius_bottom_right = 12
-	card_style.border_width_left         = 4
-	card_style.border_color              = accent_color
+	card_style.bg_color = bg_color
+	card_style.set_corner_radius_all(20)
+	card_style.border_width_left = 5
+	card_style.border_color = accent_color
+	card_style.shadow_color = Color(0, 0, 0, 0.45)
+	card_style.shadow_size = 10
+	card_style.shadow_offset = Vector2(0, 6)
+	card_style.content_margin_left   = 28
+	card_style.content_margin_right  = 28
+	card_style.content_margin_top    = 22
+	card_style.content_margin_bottom = 22
 	card.add_theme_stylebox_override("panel", card_style)
 
 	var inner := VBoxContainer.new()
-	inner.add_theme_constant_override("separation", 6)
+	inner.add_theme_constant_override("separation", 10)
 	inner.mouse_filter = Control.MOUSE_FILTER_PASS
 
+	# --- Speaker label (vibrant accent color) ---
 	var speaker_label := Label.new()
-	speaker_label.mouse_filter = Control.MOUSE_FILTER_PASS
-	speaker_label.text = speaker
-	speaker_label.add_theme_font_size_override("font_size", 40)
+	speaker_label.text = speaker.to_upper()
+	speaker_label.add_theme_font_size_override("font_size", 42)
 	speaker_label.add_theme_color_override("font_color", accent_color)
-	if font_bold != null: speaker_label.add_theme_font_override("font", font_bold)
+	if font_bold:
+		speaker_label.add_theme_font_override("font", font_bold)
 
+	# --- Main text (light color for visibility on dark card) ---
 	var text_label := RichTextLabel.new()
 	text_label.meta_underlined = false
 	text_label.bbcode_enabled = true
@@ -315,26 +318,28 @@ func _make_line_card(speaker: String, text: String, translation: String, color_i
 	text_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	text_label.scroll_active = false
 	text_label.selection_enabled = false
-
-	text_label.add_theme_font_size_override("normal_font_size", 45)
-	text_label.add_theme_color_override("default_color", Color("#1E293B"))
+	text_label.add_theme_font_size_override("normal_font_size", 48)
+	text_label.add_theme_color_override("default_color", Color("#F1F5F9"))  # Light slate
 	text_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
-	if font_regular != null: text_label.add_theme_font_override("normal_font", font_regular)
-	if font_bold != null: text_label.add_theme_font_override("bold_font", font_bold)
-
+	if font_regular:
+		text_label.add_theme_font_override("normal_font", font_regular)
+	if font_bold:
+		text_label.add_theme_font_override("bold_font", font_bold)
+	
 	text_label.text = _format_clickable_text(text, "")
 	text_label.meta_clicked.connect(func(meta): _on_word_clicked(meta, text_label, text))
-	
+
+	# --- Translation label (muted light for hierarchy) ---
 	var translation_label := Label.new()
 	translation_label.text = translation
 	translation_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	translation_label.add_theme_font_size_override("font_size", 38)
-	translation_label.add_theme_color_override("font_color", Color("#64748B"))
+	translation_label.add_theme_font_size_override("font_size", 40)
+	translation_label.add_theme_color_override("font_color", Color("#94A3B8"))  # Muted light
 	translation_label.text_direction = Control.TEXT_DIRECTION_RTL
 	translation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	translation_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	if font_farsi != null: translation_label.add_theme_font_override("font", font_farsi)
+	if font_farsi:
+		translation_label.add_theme_font_override("font", font_farsi)
 	translation_label.visible = show_translation
 
 	inner.add_child(speaker_label)
@@ -342,27 +347,23 @@ func _make_line_card(speaker: String, text: String, translation: String, color_i
 	inner.add_child(translation_label)
 	card.add_child(inner)
 
-	# Store the sentences array along with everything else
 	line_rtls.append({
 		"rtl": text_label, 
 		"text": text, 
 		"sentences": sentences,
-		"translation": translation,
+		"translation": translation, 
 		"translation_label": translation_label
 	})
-
+	
 	return card
-
 
 func _update_audio_sync(current_time: float) -> void:
 	var active_sentence: Dictionary = {}
-
-	# Find which sentence is currently playing
 	for s in all_sentences_sync:
 		if current_time >= s["start"] and current_time <= s["end"]:
 			active_sentence = s
 			break
-
+			
 	if not _is_same_sentence(active_sentence, _last_active_sentence):
 		_last_active_sentence = active_sentence
 		_refresh_all_text()
@@ -372,20 +373,17 @@ func _is_same_sentence(a: Dictionary, b: Dictionary) -> bool:
 	if a.is_empty() or b.is_empty(): return false
 	return a["type"] == b["type"] and a["block_idx"] == b["block_idx"] and a["sentence_idx"] == b["sentence_idx"]
 
-
 func _refresh_all_text() -> void:
 	# 1. Update Intro
-	var new_intro = ""
+	var new_intro := ""
 	for i in range(intro_sentences_data.size()):
 		var s = intro_sentences_data[i]
 		var en_text = s.get("en", "")
-
 		if _last_active_sentence.has("type") and _last_active_sentence["type"] == "intro" and _last_active_sentence["sentence_idx"] == i:
-			# Wrap the active sentence in a blue highlight
-			new_intro += "[bgcolor=#bfdbfe]" + en_text + "[/bgcolor] "
+			new_intro += "[bgcolor=#fbbf2480][color=#ffffff]" + en_text + "[/color][/bgcolor] "
 		else:
 			new_intro += en_text + " "
-	
+			
 	if intro_label != null:
 		intro_label.text = new_intro.strip_edges()
 
@@ -394,73 +392,106 @@ func _refresh_all_text() -> void:
 		var block = line_rtls[block_idx]
 		var rtl: RichTextLabel = block["rtl"]
 		var sentences: Array = block["sentences"]
-
-		var new_bbcode = ""
+		var new_bbcode := ""
+		
 		for s_idx in range(sentences.size()):
 			var s = sentences[s_idx]
 			var en_text = s.get("en", "")
 			var clickable_sentence = _format_clickable_text(en_text, current_highlighted_word)
-
+			
 			if _last_active_sentence.has("type") and _last_active_sentence["type"] == "line" and _last_active_sentence["block_idx"] == block_idx and _last_active_sentence["sentence_idx"] == s_idx:
-				new_bbcode += "[bgcolor=#bfdbfe]" + clickable_sentence + "[/bgcolor] "
+				new_bbcode += "[bgcolor=#fbbf2480][color=#ffffff]" + clickable_sentence + "[/color][/bgcolor] "
 			else:
 				new_bbcode += clickable_sentence + " "
-
+				
 		rtl.text = new_bbcode.strip_edges()
 
-
 # ============================================================
-# DICTIONARY POPUP & HIGHLIGHT LOGIC
+# DICTIONARY POPUP & TRANSLATION TOGGLES
 # ============================================================
-
 func _format_clickable_text(base_text: String, highlight_word: String) -> String:
-	var bbcode = word_regex.sub(base_text, "[url=\"$1\"]$1[/url]", true)
+	var out := ""
+	var last_end := 0
+
+	var normalized_highlight := ""
 	if highlight_word != "":
-		var h_regex := RegEx.new()
-		h_regex.compile("\\[url=\"?(?i)" + highlight_word + "\"?\\](.*?)\\[/url\\]")
-		bbcode = h_regex.sub(bbcode, "[bgcolor=#fef08a][color=#000000]$1[/color][/bgcolor]", true)
-	return bbcode
+		normalized_highlight = _normalize_word(highlight_word)
+
+	for m in word_regex.search_all(base_text):
+		var start: int = m.get_start()
+		var end: int = m.get_end()
+		var word: String = base_text.substr(start, end - start)
+
+		# Add any spaces/punctuation before this word.
+		out += base_text.substr(last_end, start - last_end)
+
+		# Meta must be safe for BBCode attributes.
+		var safe_meta := _encode_word_meta(word)
+
+		if normalized_highlight != "" and _normalize_word(word) == normalized_highlight:
+			out += "[bgcolor=#fbbf24][color=#000000][url=%s]%s[/url][/color][/bgcolor]" % [
+				safe_meta, word
+			]
+		else:
+			out += "[url=%s]%s[/url]" % [
+				safe_meta, word
+			]
+
+		last_end = end
+
+	# Add anything after the last matched word.
+	out += base_text.substr(last_end)
+
+	return out
+
+func _normalize_word(word: String) -> String:
+	var normalized := word
+
+	# Convert common apostrophe-like characters to a normal ASCII apostrophe.
+	normalized = normalized.replace(char(0x2018), "'")  # ‘
+	normalized = normalized.replace(char(0x2019), "'")  # ’
+	normalized = normalized.replace(char(0x00B4), "'")  # ´
+	normalized = normalized.replace("`", "'")
+
+	return normalized.to_lower()
+
+
+func _encode_word_meta(word: String) -> String:
+	# Make the meta safe for RichTextLabel BBCode.
+	# Do not put raw apostrophes inside [url=...].
+	return _normalize_word(word).replace("'", "%27")
 
 func _on_word_clicked(meta: Variant, clicked_rtl: RichTextLabel, original_text: String) -> void:
 	if _is_drag_scrolling:
 		return
 
-	var clicked_string := str(meta).to_lower()
-	var def := Global.get_word_definition_from_current_lesson(clicked_string)
+	var clicked_string := str(meta).replace("%27", "'")
+	clicked_string = _normalize_word(clicked_string)
 
+	var def := Global.get_word_definition_from_current_lesson(clicked_string)
 	if def.is_empty():
 		return
 
 	current_word_data = def
-	current_highlighted_word = str(meta)
-	
-	# Regenerate everything so audio highlights and dictionary highlights can stack safely
-	_refresh_all_text() 
+	current_highlighted_word = clicked_string
+
+	_refresh_all_text()
 	dict_popup.show_word(def)
 
 func _on_popup_closed() -> void:
 	current_highlighted_word = ""
 	_refresh_all_text()
 
-
-# ============================================================
-# TRANSLATION TOGGLES
-# ============================================================
-
 func _update_toggle_button_text() -> void:
-	if show_translation:
-		translation_toggle.text = "🔽 Hide Translation"
-	else:
-		translation_toggle.text = "🔼 Show Translation"
+	translation_toggle.text = "🔽 Hide Translation" if show_translation else "🔼 Show Translation"
 
 func _on_translation_toggle_pressed() -> void:
 	show_translation = !show_translation
 	_update_toggle_button_text()
-	
 	for item in line_rtls:
 		if item.has("translation_label") and item["translation_label"] != null:
 			item["translation_label"].visible = show_translation
-	
+			
 	var intro_translation = intro_label.get_meta("translation", "")
 	if intro_translation != "":
 		_toggle_intro_translation(intro_translation)
@@ -477,7 +508,7 @@ func _create_intro_translation_label(translation: String) -> void:
 	intro_translation_label.text_direction = Control.TEXT_DIRECTION_RTL
 	intro_translation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	intro_translation_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	if font_farsi != null: intro_translation_label.add_theme_font_override("font", font_farsi)
+	if font_farsi: intro_translation_label.add_theme_font_override("font", font_farsi)
 	intro_translation_label.visible = show_translation
 	
 	var parent = intro_label.get_parent()
@@ -488,7 +519,7 @@ func _create_intro_translation_label(translation: String) -> void:
 		if parent.get_child(i) == intro_label:
 			index = i + 1
 			break
-	
+			
 	parent.add_child(intro_translation_label)
 	parent.move_child(intro_translation_label, index)
 
@@ -503,112 +534,26 @@ func _remove_intro_translation_label() -> void:
 		intro_translation_label.queue_free()
 		intro_translation_label = null
 
-
 # ============================================================
-# QUESTIONS & AUDIO CONTROL
+# AUDIO & NAVIGATION
 # ============================================================
-
-func _build_questions(questions: Array) -> void:
-	for child in questions_container.get_children():
-		child.queue_free()
-
-	for i in questions.size():
-		var q: String = questions[i]
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 35)
-		row.mouse_filter = Control.MOUSE_FILTER_PASS
-
-		var number := Label.new()
-		number.text = "%d." % (i + 1)
-		number.add_theme_font_size_override("font_size", 35)
-		number.add_theme_color_override("font_color", Color("#2563EB"))
-		number.custom_minimum_size = Vector2(28, 0)
-		number.mouse_filter = Control.MOUSE_FILTER_PASS
-		if font_bold != null: number.add_theme_font_override("font", font_bold)
-
-		var q_label := Label.new()
-		q_label.text = q
-		q_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-		q_label.add_theme_font_size_override("font_size", 45)
-		q_label.add_theme_color_override("font_color", Color("#1E293B"))
-		q_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		q_label.mouse_filter = Control.MOUSE_FILTER_PASS
-		if font_regular != null: q_label.add_theme_font_override("font", font_regular)
-
-		row.add_child(number)
-		row.add_child(q_label)
-		questions_container.add_child(row)
-
 func _on_audio_pressed() -> void:
 	var tween := create_tween()
 	tween.tween_property(audio_button, "scale", Vector2(0.93, 0.93), 0.08).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(audio_button, "scale", Vector2.ONE, 0.12).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	audio_control_panel.show()
-	if not audio_player.playing and not audio_player.stream_paused:
+	if not audio_panel.is_playing():
 		var path: String = get_meta("audio_path", "")
-		if path == "": return
-		if ResourceLoader.exists(path):
-			audio_player.stream = load(path)
-			audio_player.play()
-			audio_player.stream_paused = false
-			play_pause_button.text = "Pause"
-			audio_slider.max_value = audio_player.stream.get_length()
-			audio_slider.value = 0.0
-		else:
-			push_warning("Conversation audio not found: " + path)
+		audio_panel.load_and_play(path)
 
-func _on_play_pause_pressed() -> void:
-	if audio_player.stream == null:
-		_on_audio_pressed()
-		return
-
-	if audio_player.stream_paused:
-		audio_player.stream_paused = false
-		play_pause_button.text = "Pause"
-		if not audio_player.playing:
-			audio_player.play(audio_slider.value)
-	elif audio_player.playing:
-		audio_player.stream_paused = true
-		play_pause_button.text = "Play"
-	else:
-		_on_audio_pressed()
-
-func _on_rewind_pressed() -> void:
-	if audio_player.stream != null:
-		var current_pos = audio_player.get_playback_position()
-		audio_player.seek(max(0.0, current_pos - SEEK_STEP))
-		audio_slider.value = audio_player.get_playback_position()
-
-func _on_forward_pressed() -> void:
-	if audio_player.stream != null:
-		var current_pos = audio_player.get_playback_position()
-		var max_length = audio_player.stream.get_length()
-		audio_player.seek(min(max_length, current_pos + SEEK_STEP))
-		audio_slider.value = audio_player.get_playback_position()
-
-func _on_close_audio_pressed() -> void:
-	audio_player.stop()
-	audio_player.stream_paused = false
-	audio_control_panel.hide()
-	audio_slider.value = 0.0
+func _on_audio_stopped() -> void:
 	_last_active_sentence = {}
 	_refresh_all_text()
 
-func _on_audio_finished() -> void:
-	_last_active_sentence = {}
-	_refresh_all_text()
-	play_pause_button.text = "Play"
-
-func _on_slider_drag_started() -> void:
-	is_dragging_slider = true
-
-func _on_slider_drag_ended(value_changed: bool) -> void:
-	is_dragging_slider = false
-	if audio_player.stream != null:
-		audio_player.seek(audio_slider.value)
+func _on_exercise_checked(exercise_id: String, correct: int, total: int) -> void:
+	print("%s → %d/%d" % [exercise_id, correct, total])
 
 func _on_back_button_pressed() -> void:
-	_on_close_audio_pressed()
+	audio_panel.stop_and_close()
 	_remove_intro_translation_label()
 	var tween = create_tween()
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)

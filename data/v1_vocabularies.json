@@ -16,7 +16,8 @@
 		  "synonyms": {"en": ["threatened", "at risk"], "fa": ["در معرض خطر", "تهدید شده"]},
 		  "antonyms": {"en": ["safe", "protected"], "fa": ["ایمن", "محافظت شده"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪnˈdeɪndʒərd/"
 		},
 		{
 		  "word": "alive",
@@ -30,7 +31,8 @@
 		  "synonyms": {"en": ["living", "breathing"], "fa": ["زنده", "جان‌دار"]},
 		  "antonyms": {"en": ["dead", "deceased"], "fa": ["مرده", "فوت شده"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əˈlaɪv/"
 		},
 		{
 		  "word": "increase",
@@ -44,7 +46,8 @@
 		  "synonyms": {"en": ["grow", "rise"], "fa": ["افزایش یافتن", "بزرگتر شدن"]},
 		  "antonyms": {"en": ["decrease", "reduce"], "fa": ["کاهش یافتن", "کم شدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪnˈkriːs/"
 		},
 		{
 		  "word": "hear",
@@ -58,7 +61,8 @@
 		  "synonyms": {"en": ["listen", "catch"], "fa": ["شنیدن", "گوش دادن"]},
 		  "antonyms": {"en": ["ignore", "overlook"], "fa": ["نادیده گرفتن", "چشم‌پوشی کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/hɪr/"
 		},
 		{
 		  "word": "protect",
@@ -72,7 +76,8 @@
 		  "synonyms": {"en": ["guard", "shield"], "fa": ["محافظت کردن", "پاسداری کردن"]},
 		  "antonyms": {"en": ["harm", "endanger"], "fa": ["آسیب رساندن", "به خطر انداختن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/prəˈtekt/"
 		},
 		{
 		  "word": "for example",
@@ -86,7 +91,8 @@
 		  "synonyms": {"en": ["for instance", "such as"], "fa": ["به عنوان مثال", "مانند"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/fər ɪɡˈzæmpəl/"
 		},
 		{
 		  "word": "a few",
@@ -100,7 +106,8 @@
 		  "synonyms": {"en": ["some", "several"], "fa": ["چند", "تعدادی"]},
 		  "antonyms": {"en": ["many", "a lot of"], "fa": ["بسیاری", "تعداد زیادی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ə ˈfjuː/"
 		},
 		{
 		  "word": "human",
@@ -114,7 +121,8 @@
 		  "synonyms": {"en": ["person", "individual"], "fa": ["آدم", "فرد"]},
 		  "antonyms": {"en": ["animal", "creature"], "fa": ["حیوان", "جاندار"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈhjuːmən/"
 		},
 		{
 		  "word": "instead",
@@ -128,7 +136,8 @@
 		  "synonyms": {"en": ["rather", "alternatively"], "fa": ["به جای آن", "در عوض"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪnˈsted/"
 		},
 		{
 		  "word": "future",
@@ -142,7 +151,8 @@
 		  "synonyms": {"en": ["time to come", "hereafter"], "fa": ["آینده", "زمان آینده"]},
 		  "antonyms": {"en": ["past", "present"], "fa": ["گذشته", "حال"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈfjuːtʃər/"
 		},
 		{
 		  "word": "Earth",
@@ -156,7 +166,8 @@
 		  "synonyms": {"en": ["world", "globe"], "fa": ["جهان", "کره زمین"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɜːrθ/"
 		},
 		{
 		  "word": "tiger",
@@ -170,7 +181,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈtaɪɡər/"
 		},
 		{
 		  "word": "wild animal",
@@ -184,7 +196,8 @@
 		  "synonyms": {"en": ["beast", "creature"], "fa": ["جانور وحشی", "حیوان درنده"]},
 		  "antonyms": {"en": ["domestic animal", "pet"], "fa": ["حیوان اهلی", "حیوان خانگی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/waɪld ˈænɪməl/"
 		},
 		{
 		  "word": "forest",
@@ -198,7 +211,8 @@
 		  "synonyms": {"en": ["woods", "woodland"], "fa": ["جنگل", "بیشه"]},
 		  "antonyms": {"en": ["desert", "plain"], "fa": ["بیابان", "دشت"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈfɔːrɪst/"
 		},
 		{
 		  "word": "jungle",
@@ -212,7 +226,8 @@
 		  "synonyms": {"en": ["rainforest", "woodland"], "fa": ["جنگل گرمسیری", "بیشه"]},
 		  "antonyms": {"en": ["desert"], "fa": ["بیابان"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈdʒʌŋɡəl/"
 		},
 		{
 		  "word": "die out",
@@ -226,7 +241,8 @@
 		  "synonyms": {"en": ["become extinct", "disappear"], "fa": ["منقرض شدن", "از بین رفتن"]},
 		  "antonyms": {"en": ["survive", "thrive"], "fa": ["زنده ماندن", "شکوفا شدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/daɪ aʊt/"
 		},
 		{
 		  "word": "attention",
@@ -240,7 +256,8 @@
 		  "synonyms": {"en": ["notice", "awareness"], "fa": ["توجه", "دقت"]},
 		  "antonyms": {"en": ["neglect", "ignorance"], "fa": ["غفلت", "بی‌توجهی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əˈtenʃən/"
 		},
 		{
 		  "word": "plain",
@@ -254,7 +271,8 @@
 		  "synonyms": {"en": ["prairie", "savannah"], "fa": ["دشت", "مرغزار"]},
 		  "antonyms": {"en": ["mountain", "valley"], "fa": ["کوه", "دره"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/pleɪn/"
 		},
 		{
 		  "word": "Persian zebra",
@@ -268,7 +286,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpɜːrʒən ˈziːbrə/"
 		},
 		{
 		  "word": "injured",
@@ -282,7 +301,8 @@
 		  "synonyms": {"en": ["wounded", "hurt"], "fa": ["مجروح", "آسیب دیده"]},
 		  "antonyms": {"en": ["healthy", "unharmed"], "fa": ["سالم", "آسیب ندیده"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈɪndʒərd/"
 		},
 		{
 		  "word": "put out",
@@ -296,7 +316,8 @@
 		  "synonyms": {"en": ["extinguish", "quench"], "fa": ["خاموش کردن", "فرونشاندن"]},
 		  "antonyms": {"en": ["ignite", "light"], "fa": ["آتش زدن", "روشن کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/pʊt aʊt/"
 		},
 		{
 		  "word": "hurt",
@@ -310,7 +331,8 @@
 		  "synonyms": {"en": ["injure", "harm"], "fa": ["آسیب رساندن", "صدمه زدن"]},
 		  "antonyms": {"en": ["heal", "help"], "fa": ["شفا دادن", "کمک کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/hɜːrt/"
 		},
 		{
 		  "word": "cut down",
@@ -324,7 +346,8 @@
 		  "synonyms": {"en": ["chop down", "fell"], "fa": ["قطع کردن", "بریدن"]},
 		  "antonyms": {"en": ["plant", "grow"], "fa": ["کاشتن", "رویاندن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kʌt daʊn/"
 		},
 		{
 		  "word": "help",
@@ -338,7 +361,8 @@
 		  "synonyms": {"en": ["aid", "assist"], "fa": ["کمک کردن", "یاری کردن"]},
 		  "antonyms": {"en": ["hinder", "harm"], "fa": ["مانع شدن", "آسیب رساندن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/help/"
 		},
 		{
 		  "word": "whale",
@@ -352,7 +376,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/weɪl/"
 		},
 		{
 		  "word": "wolf",
@@ -366,7 +391,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/wʊlf/"
 		},
 		{
 		  "word": "panda",
@@ -380,7 +406,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpændə/"
 		},
 		{
 		  "word": "leopard",
@@ -394,7 +421,8 @@
 		  "synonyms": {"en": ["panther"], "fa": ["پلنگ"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈlepərd/"
 		},
 		{
 		  "word": "elephant",
@@ -408,7 +436,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈelɪfənt/"
 		},
 		{
 		  "word": "goat",
@@ -422,7 +451,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɡoʊt/"
 		},
 		{
 		  "word": "cat",
@@ -436,7 +466,8 @@
 		  "synonyms": {"en": ["feline", "kitty"], "fa": ["گربه", "پیشی"]},
 		  "antonyms": {"en": ["dog"], "fa": ["سگ"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kæt/"
 		},
 		{
 		  "word": "duck",
@@ -450,7 +481,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dʌk/"
 		}
 	  ]
 	}
@@ -472,7 +504,8 @@
 		  "synonyms": {"en": ["world", "globe"], "fa": ["سیاره", "جهان"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈplænɪt/"
 		},
 		{
 		  "word": "Sun",
@@ -486,7 +519,8 @@
 		  "synonyms": {"en": ["star"], "fa": ["خورشید", "آفتاب"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/sʌn/"
 		},
 		{
 		  "word": "body",
@@ -500,7 +534,8 @@
 		  "synonyms": {"en": ["frame", "figure"], "fa": ["بدن", "جسم"]},
 		  "antonyms": {"en": ["mind", "spirit"], "fa": ["ذهن", "روح"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈbɑːdi/"
 		},
 		{
 		  "word": "wonderful",
@@ -514,7 +549,8 @@
 		  "synonyms": {"en": ["amazing", "marvelous"], "fa": ["شگفت‌انگیز", "حیرت‌آور"]},
 		  "antonyms": {"en": ["terrible", "awful"], "fa": ["وحشتناک", "افتضاح"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈwʌndərfəl/"
 		},
 		{
 		  "word": "system",
@@ -528,7 +564,8 @@
 		  "synonyms": {"en": ["network", "organization"], "fa": ["سیستم", "سامانه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈsɪstəm/"
 		},
 		{
 		  "word": "ant",
@@ -542,7 +579,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ænt/"
 		},
 		{
 		  "word": "amazing",
@@ -556,7 +594,8 @@
 		  "synonyms": {"en": ["astonishing", "incredible"], "fa": ["شگفت‌آور", "باورنکردنی"]},
 		  "antonyms": {"en": ["ordinary", "unremarkable"], "fa": ["معمولی", "عادی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əˈmeɪzɪŋ/"
 		},
 		{
 		  "word": "camel",
@@ -570,7 +609,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkæməl/"
 		},
 		{
 		  "word": "water",
@@ -584,7 +624,8 @@
 		  "synonyms": {"en": ["liquid", "H2O"], "fa": ["آب", "مایع"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈwɔːtər/"
 		},
 		{
 		  "word": "ring",
@@ -598,7 +639,8 @@
 		  "synonyms": {"en": ["circle", "band"], "fa": ["حلقه", "چنبر"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪŋ/"
 		},
 		{
 		  "word": "heart",
@@ -612,7 +654,8 @@
 		  "synonyms": {"en": ["pump"], "fa": ["قلب"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/hɑːrt/"
 		},
 		{
 		  "word": "blood",
@@ -626,7 +669,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/blʌd/"
 		},
 		{
 		  "word": "moon",
@@ -640,7 +684,8 @@
 		  "synonyms": {"en": ["satellite"], "fa": ["ماه", "قمر"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/muːn/"
 		},
 		{
 		  "word": "observatory",
@@ -654,7 +699,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əbˈzɜːrvətɔːri/"
 		},
 		{
 		  "word": "telescope",
@@ -668,7 +714,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈtelɪskoʊp/"
 		},
 		{
 		  "word": "microscope",
@@ -682,7 +729,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈmaɪkrəskoʊp/"
 		},
 		{
 		  "word": "liquid",
@@ -696,7 +744,8 @@
 		  "synonyms": {"en": ["fluid"], "fa": ["مایع", "شاره"]},
 		  "antonyms": {"en": ["solid", "gas"], "fa": ["جامد", "گاز"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈlɪkwɪd/"
 		},
 		{
 		  "word": "blood cells",
@@ -710,7 +759,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/blʌd sɛlz/"
 		},
 		{
 		  "word": "microbe",
@@ -724,7 +774,8 @@
 		  "synonyms": {"en": ["germ", "bacterium"], "fa": ["میکروب", "باکتری"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈmaɪkroʊb/"
 		},
 		{
 		  "word": "drop",
@@ -738,7 +789,8 @@
 		  "synonyms": {"en": ["bead", "globule"], "fa": ["قطره", "چکیده"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/drɑːp/"
 		},
 		{
 		  "word": "paint",
@@ -752,7 +804,8 @@
 		  "synonyms": {"en": ["dye", "pigment"], "fa": ["رنگ", "رنگدانه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/peɪnt/"
 		},
 		{
 		  "word": "thousand",
@@ -766,7 +819,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈθaʊzənd/"
 		},
 		{
 		  "word": "daily exercise",
@@ -780,7 +834,8 @@
 		  "synonyms": {"en": ["daily workout"], "fa": ["ورزش روزانه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈdeɪli ˈɛksərsaɪz/"
 		},
 		{
 		  "word": "healthy",
@@ -794,7 +849,8 @@
 		  "synonyms": {"en": ["fit", "well"], "fa": ["سالم", "تندرست"]},
 		  "antonyms": {"en": ["sick", "unwell"], "fa": ["بیمار", "ناخوش"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈhelθi/"
 		},
 		{
 		  "word": "defend",
@@ -808,7 +864,8 @@
 		  "synonyms": {"en": ["protect", "guard"], "fa": ["دفاع کردن", "محافظت کردن"]},
 		  "antonyms": {"en": ["attack", "surrender"], "fa": ["حمله کردن", "تسلیم شدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dɪˈfend/"
 		},
 		{
 		  "word": "carry",
@@ -822,7 +879,8 @@
 		  "synonyms": {"en": ["transport", "bear"], "fa": ["حمل کردن", "بردن"]},
 		  "antonyms": {"en": ["drop", "leave"], "fa": ["انداختن", "گذاشتن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkæri/"
 		},
 		{
 		  "word": "collect",
@@ -836,7 +894,8 @@
 		  "synonyms": {"en": ["gather", "accumulate"], "fa": ["جمع آوری کردن", "گردآوری کردن"]},
 		  "antonyms": {"en": ["distribute", "disperse"], "fa": ["توزیع کردن", "پراکنده کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kəˈlekt/"
 		},
 		{
 		  "word": "fact",
@@ -850,7 +909,8 @@
 		  "synonyms": {"en": ["truth", "reality"], "fa": ["حقیقت", "واقعیت"]},
 		  "antonyms": {"en": ["fiction", "lie"], "fa": ["داستان", "دروغ"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/fækt/"
 		},
 		{
 		  "word": "near",
@@ -864,7 +924,8 @@
 		  "synonyms": {"en": ["close to", "by"], "fa": ["نزدیک", "کنار"]},
 		  "antonyms": {"en": ["far from", "distant"], "fa": ["دور از", "بعید"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/nɪr/"
 		},
 		{
 		  "word": "rocky",
@@ -878,7 +939,8 @@
 		  "synonyms": {"en": ["stony", "rough"], "fa": ["صخره‌ای", "سنگلاخ"]},
 		  "antonyms": {"en": ["smooth", "flat"], "fa": ["صاف", "مسطح"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈrɑːki/"
 		},
 		{
 		  "word": "orbit",
@@ -892,7 +954,8 @@
 		  "synonyms": {"en": ["path", "trajectory"], "fa": ["مدار", "مسیر"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈɔːrbɪt/"
 		},
 		{
 		  "word": "powerful",
@@ -906,7 +969,8 @@
 		  "synonyms": {"en": ["strong", "mighty"], "fa": ["قدرتمند", "توانا"]},
 		  "antonyms": {"en": ["weak", "powerless"], "fa": ["ضعیف", "بی‌قدرت"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpaʊərfəl/"
 		}
 	  ]
 	}
@@ -928,7 +992,8 @@
 		  "synonyms": {"en": ["illumination", "brightness"], "fa": ["نور", "روشنایی"]},
 		  "antonyms": {"en": ["darkness"], "fa": ["تاریکی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/laɪt/"
 		},
 		{
 		  "word": "talk",
@@ -942,7 +1007,8 @@
 		  "synonyms": {"en": ["speak", "converse"], "fa": ["صحبت کردن", "گفتگو کردن"]},
 		  "antonyms": {"en": ["listen", "remain silent"], "fa": ["گوش دادن", "سکوت کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/tɔːk/"
 		},
 		{
 		  "word": "camera",
@@ -956,7 +1022,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkæmərə/"
 		},
 		{
 		  "word": "picture",
@@ -970,7 +1037,8 @@
 		  "synonyms": {"en": ["photo", "image"], "fa": ["عکس", "تصویر"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpɪktʃər/"
 		},
 		{
 		  "word": "travel",
@@ -984,7 +1052,8 @@
 		  "synonyms": {"en": ["journey", "tour"], "fa": ["سفر کردن", "مسافرت کردن"]},
 		  "antonyms": {"en": ["stay", "remain"], "fa": ["ماندن", "اقامت کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈtrævəl/"
 		},
 		{
 		  "word": "modern",
@@ -998,7 +1067,8 @@
 		  "synonyms": {"en": ["contemporary", "current"], "fa": ["مدرن", "جدید"]},
 		  "antonyms": {"en": ["old", "ancient"], "fa": ["قدیمی", "باستانی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈmɑːdərn/"
 		},
 		{
 		  "word": "Iranian",
@@ -1012,7 +1082,8 @@
 		  "synonyms": {"en": ["Persian"], "fa": ["ایرانی", "پارسی"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪˈreɪniən/"
 		},
 		{
 		  "word": "old",
@@ -1026,7 +1097,8 @@
 		  "synonyms": {"en": ["ancient", "aged"], "fa": ["قدیمی", "کهنه"]},
 		  "antonyms": {"en": ["young", "new"], "fa": ["جوان", "جدید"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/oʊld/"
 		},
 		{
 		  "word": "medicine",
@@ -1040,7 +1112,8 @@
 		  "synonyms": {"en": ["medical science"], "fa": ["پزشکی", "طب"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈmedɪsɪn/"
 		},
 		{
 		  "word": "famous",
@@ -1054,7 +1127,8 @@
 		  "synonyms": {"en": ["renowned", "well-known"], "fa": ["مشهور", "معروف"]},
 		  "antonyms": {"en": ["unknown", "obscure"], "fa": ["ناشناخته", "گمنام"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈfeɪməs/"
 		},
 		{
 		  "word": "build",
@@ -1068,7 +1142,8 @@
 		  "synonyms": {"en": ["construct", "erect"], "fa": ["ساختن", "بنا کردن"]},
 		  "antonyms": {"en": ["destroy", "demolish"], "fa": ["تخریب کردن", "ویران کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/bɪld/"
 		},
 		{
 		  "word": "hard",
@@ -1082,7 +1157,8 @@
 		  "synonyms": {"en": ["difficult", "tough"], "fa": ["سخت", "دشوار"]},
 		  "antonyms": {"en": ["easy", "soft"], "fa": ["آسان", "نرم"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/hɑːrd/"
 		},
 		{
 		  "word": "energetic",
@@ -1096,7 +1172,8 @@
 		  "synonyms": {"en": ["active", "lively"], "fa": ["پر انرژی", "فعال"]},
 		  "antonyms": {"en": ["lazy", "inactive"], "fa": ["تنبل", "بی‌حال"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌenərˈdʒetɪk/"
 		},
 		{
 		  "word": "experiment",
@@ -1110,7 +1187,8 @@
 		  "synonyms": {"en": ["test", "trial"], "fa": ["آزمایش", "آزمون"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪkˈsperɪmənt/"
 		},
 		{
 		  "word": "grow up",
@@ -1124,7 +1202,8 @@
 		  "synonyms": {"en": ["mature", "develop"], "fa": ["بزرگ شدن", "رشد کردن"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɡroʊ ʌp/"
 		},
 		{
 		  "word": "rapidly",
@@ -1138,7 +1217,8 @@
 		  "synonyms": {"en": ["quickly", "swiftly"], "fa": ["به سرعت", "سریع"]},
 		  "antonyms": {"en": ["slowly", "gradually"], "fa": ["آهسته", "تدریجی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈræpɪdli/"
 		},
 		{
 		  "word": "research",
@@ -1152,7 +1232,8 @@
 		  "synonyms": {"en": ["study", "investigation"], "fa": ["تحقیق", "پژوهش"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈsɜːrtʃ/"
 		},
 		{
 		  "word": "flu",
@@ -1166,7 +1247,8 @@
 		  "synonyms": {"en": ["influenza"], "fa": ["آنفولانزا"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/fluː/"
 		},
 		{
 		  "word": "weak",
@@ -1180,7 +1262,8 @@
 		  "synonyms": {"en": ["feeble", "frail"], "fa": ["ضعیف", "ناتوان"]},
 		  "antonyms": {"en": ["strong", "powerful"], "fa": ["قوی", "توانا"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/wiːk/"
 		},
 		{
 		  "word": "success",
@@ -1194,7 +1277,8 @@
 		  "synonyms": {"en": ["achievement", "accomplishment"], "fa": ["موفقیت", "کامیابی"]},
 		  "antonyms": {"en": ["failure"], "fa": ["شکست"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/səkˈses/"
 		},
 		{
 		  "word": "invent",
@@ -1208,7 +1292,8 @@
 		  "synonyms": {"en": ["create", "devise"], "fa": ["اختراع کردن", "ابداع کردن"]},
 		  "antonyms": {"en": ["copy", "imitate"], "fa": ["کپی کردن", "تقلید کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪnˈvent/"
 		},
 		{
 		  "word": "solve",
@@ -1222,7 +1307,8 @@
 		  "synonyms": {"en": ["resolve", "unravel"], "fa": ["حل کردن", "گشودن"]},
 		  "antonyms": {"en": ["complicate", "confuse"], "fa": ["پیچیده کردن", "گیج کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/sɑːlv/"
 		},
 		{
 		  "word": "develop",
@@ -1236,7 +1322,8 @@
 		  "synonyms": {"en": ["progress", "advance"], "fa": ["توسعه دادن", "پیشرفت کردن"]},
 		  "antonyms": {"en": ["decline", "regress"], "fa": ["تنزل کردن", "عقب‌گرد کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dɪˈveləp/"
 		},
 		{
 		  "word": "belief",
@@ -1250,7 +1337,8 @@
 		  "synonyms": {"en": ["faith", "conviction"], "fa": ["باور", "ایمان"]},
 		  "antonyms": {"en": ["doubt", "skepticism"], "fa": ["شک", "تردید"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/bɪˈliːf/"
 		},
 		{
 		  "word": "quit",
@@ -1264,7 +1352,8 @@
 		  "synonyms": {"en": ["stop", "cease"], "fa": ["ترک کردن", "دست کشیدن"]},
 		  "antonyms": {"en": ["continue", "start"], "fa": ["ادامه دادن", "شروع کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kwɪt/"
 		},
 		{
 		  "word": "give up",
@@ -1278,7 +1367,8 @@
 		  "synonyms": {"en": ["surrender", "abandon"], "fa": ["دست کشیدن", "تسلیم شدن"]},
 		  "antonyms": {"en": ["persevere", "continue"], "fa": ["پافشاری کردن", "ادامه دادن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɡɪv ʌp/"
 		},
 		{
 		  "word": "thousands of",
@@ -1292,7 +1382,8 @@
 		  "synonyms": {"en": ["numerous", "countless"], "fa": ["هزاران", "بی‌شمار"]},
 		  "antonyms": {"en": ["few"], "fa": ["تعداد کم"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈθaʊzəndz əv/"
 		}
 	  ]
 	}
@@ -1314,7 +1405,8 @@
 		  "synonyms": {"en": ["go overseas"], "fa": ["سفر به خارج از کشور"]},
 		  "antonyms": {"en": ["stay home"], "fa": ["در خانه ماندن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈtrævəl əˈbrɔːd/"
 		},
 		{
 		  "word": "tourist attraction",
@@ -1328,7 +1420,8 @@
 		  "synonyms": {"en": ["sight", "landmark"], "fa": ["جاذبه گردشگری", "دیدنی"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈtʊrɪst əˈtrækʃən/"
 		},
 		{
 		  "word": "ticket",
@@ -1342,7 +1435,8 @@
 		  "synonyms": {"en": ["pass", "voucher"], "fa": ["بلیط", "کارت"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈtɪkɪt/"
 		},
 		{
 		  "word": "destination",
@@ -1356,7 +1450,8 @@
 		  "synonyms": {"en": ["goal", "target"], "fa": ["مقصد", "هدف"]},
 		  "antonyms": {"en": ["origin"], "fa": ["مبدا"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌdestɪˈneɪʃən/"
 		},
 		{
 		  "word": "airport",
@@ -1370,7 +1465,8 @@
 		  "synonyms": {"en": ["airfield", "terminal"], "fa": ["فرودگاه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈerpɔːrt/"
 		},
 		{
 		  "word": "pilgrim",
@@ -1384,7 +1480,8 @@
 		  "synonyms": {"en": ["worshipper", "devotee"], "fa": ["زائر", "عابد"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpɪlɡrɪm/"
 		},
 		{
 		  "word": "booklet",
@@ -1398,7 +1495,8 @@
 		  "synonyms": {"en": ["brochure", "pamphlet"], "fa": ["بروشور", "کتابچه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈbʊklət/"
 		},
 		{
 		  "word": "site",
@@ -1412,7 +1510,8 @@
 		  "synonyms": {"en": ["location", "place"], "fa": ["مکان", "محل"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/saɪt/"
 		},
 		{
 		  "word": "vacation",
@@ -1426,7 +1525,8 @@
 		  "synonyms": {"en": ["holiday", "leave"], "fa": ["تعطیلات", "مرخصی"]},
 		  "antonyms": {"en": ["work", "school"], "fa": ["کار", "مدرسه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/veɪˈkeɪʃən/"
 		},
 		{
 		  "word": "wind tower",
@@ -1440,7 +1540,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/wɪnd ˈtaʊər/"
 		},
 		{
 		  "word": "desert",
@@ -1454,7 +1555,8 @@
 		  "synonyms": {"en": ["wasteland", "wilderness"], "fa": ["بیابان", "کویر"]},
 		  "antonyms": {"en": ["forest", "jungle"], "fa": ["جنگل"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈdezərt/"
 		},
 		{
 		  "word": "pyramid",
@@ -1468,7 +1570,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpɪrəmɪd/"
 		},
 		{
 		  "word": "one billion",
@@ -1482,7 +1585,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/wʌn ˈbɪljən/"
 		},
 		{
 		  "word": "plan",
@@ -1496,7 +1600,8 @@
 		  "synonyms": {"en": ["scheme", "strategy"], "fa": ["برنامه", "طرح"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/plæn/"
 		},
 		{
 		  "word": "agent",
@@ -1510,7 +1615,8 @@
 		  "synonyms": {"en": ["representative", "broker"], "fa": ["نماینده", "کارگزار"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈeɪdʒənt/"
 		},
 		{
 		  "word": "choice",
@@ -1524,7 +1630,8 @@
 		  "synonyms": {"en": ["option", "alternative"], "fa": ["انتخاب", "گزینه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/tʃɔɪs/"
 		},
 		{
 		  "word": "probably",
@@ -1538,7 +1645,8 @@
 		  "synonyms": {"en": ["likely", "possibly"], "fa": ["احتمالا", "به احتمال زیاد"]},
 		  "antonyms": {"en": ["unlikely", "definitely"], "fa": ["بعید", "قطعی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈprɑːbəbli/"
 		},
 		{
 		  "word": "hospitable",
@@ -1552,7 +1660,8 @@
 		  "synonyms": {"en": ["friendly", "welcoming"], "fa": ["مهمان‌نواز", "خوش‌آمدگو"]},
 		  "antonyms": {"en": ["unwelcoming", "hostile"], "fa": ["غیر مهمان‌نواز", "خصمانه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈhɑːspɪtəbəl/"
 		},
 		{
 		  "word": "suggestion",
@@ -1566,7 +1675,8 @@
 		  "synonyms": {"en": ["proposal", "recommendation"], "fa": ["پیشنهاد", "توصیه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/səˈdʒestʃən/"
 		}
 	  ]
 	}

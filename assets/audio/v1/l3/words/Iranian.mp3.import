@@ -2,13 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://c3js41ab1gxtj"
-path="res://.godot/imported/Iranian.mp3-861eaa7579a5dfb78bec1606334fc110.mp3str"
+uid="uid://doh0k4hu04373"
+path="res://.godot/imported/iranian.mp3-8a05b41879dab370c8ef2529abd2e14b.mp3str"
 
 [deps]
 
-source_file="res://assets/audio/v1/l3/words/Iranian.mp3"
-dest_files=["res://.godot/imported/Iranian.mp3-861eaa7579a5dfb78bec1606334fc110.mp3str"]
+source_file="res://assets/audio/v1/l3/words/iranian.mp3"
+dest_files=["res://.godot/imported/iranian.mp3-8a05b41879dab370c8ef2529abd2e14b.mp3str"]
 
 [params]
 

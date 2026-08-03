@@ -16,7 +16,8 @@
 		  "synonyms": {"en": ["area", "zone"], "fa": ["ناحیه", "منطقه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈriːdʒən/"
 		},
 		{
 		  "word": "exist",
@@ -30,7 +31,8 @@
 		  "synonyms": {"en": ["live", "occur"], "fa": ["وجود داشتن", "بودن"]},
 		  "antonyms": {"en": ["vanish", "disappear"], "fa": ["ناپدید شدن", "از بین رفتن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪɡˈzɪst/"
 		},
 		{
 		  "word": "continent",
@@ -44,7 +46,8 @@
 		  "synonyms": {"en": ["landmass"], "fa": ["قاره"]},
 		  "antonyms": {"en": ["ocean", "island"], "fa": ["اقیانوس", "جزیره"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkɑːntɪnənt/"
 		},
 		{
 		  "word": "native",
@@ -58,7 +61,8 @@
 		  "synonyms": {"en": ["indigenous", "local"], "fa": ["بومی", "محلی"]},
 		  "antonyms": {"en": ["foreign", "imported"], "fa": ["خارجی", "بیگانه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈneɪtɪv/"
 		},
 		{
 		  "word": "range",
@@ -72,7 +76,8 @@
 		  "synonyms": {"en": ["scope", "span"], "fa": ["محدوده", "دامنه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/reɪndʒ/"
 		},
 		{
 		  "word": "percent",
@@ -86,7 +91,8 @@
 		  "synonyms": {"en": [], "fa": []},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/pərˈsent/"
 		},
 		{
 		  "word": "imagine",
@@ -100,7 +106,8 @@
 		  "synonyms": {"en": ["picture", "envision"], "fa": ["تصور کردن", "مجسم کردن"]},
 		  "antonyms": {"en": ["ignore", "disbelieve"], "fa": ["نادیده گرفتن", "باور نکردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪˈmædʒɪn/"
 		},
 		{
 		  "word": "century",
@@ -114,7 +121,8 @@
 		  "synonyms": {"en": ["hundred years"], "fa": ["قرن", "صد سال"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈsentʃəri/"
 		},
 		{
 		  "word": "sign language",
@@ -128,7 +136,8 @@
 		  "synonyms": {"en": ["gesture language"], "fa": ["زبان اشاره"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/saɪn ˈlæŋɡwɪdʒ/"
 		},
 		{
 		  "word": "society",
@@ -142,7 +151,8 @@
 		  "synonyms": {"en": ["community", "civilization"], "fa": ["جامعه", "تمدن"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/səˈsaɪəti/"
 		},
 		{
 		  "word": "ability",
@@ -156,7 +166,8 @@
 		  "synonyms": {"en": ["skill", "talent"], "fa": ["توانایی", "استعداد"]},
 		  "antonyms": {"en": ["inability", "weakness"], "fa": ["ناتوانی", "ضعف"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əˈbɪləti/"
 		},
 		{
 		  "word": "vary",
@@ -170,7 +181,8 @@
 		  "synonyms": {"en": ["differ", "fluctuate"], "fa": ["متفاوت بودن", "تغییر کردن"]},
 		  "antonyms": {"en": ["remain", "stay same"], "fa": ["یکسان ماندن", "ثابت بودن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈveri/"
 		},
 		{
 		  "word": "make up",
@@ -184,7 +196,8 @@
 		  "synonyms": {"en": ["compose", "constitute"], "fa": ["تشکیل دادن", "ساختن"]},
 		  "antonyms": {"en": ["break down", "separate"], "fa": ["تجزیه کردن", "جداسازی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/meɪk ʌp/"
 		},
 		{
 		  "word": "despite",
@@ -198,7 +211,8 @@
 		  "synonyms": {"en": ["in spite of", "notwithstanding"], "fa": ["علی‌رغم", "با وجود"]},
 		  "antonyms": {"en": ["because of", "due to"], "fa": ["به دلیل", "به خاطر"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dɪˈspaɪt/"
 		},
 		{
 		  "word": "communicate",
@@ -212,7 +226,8 @@
 		  "synonyms": {"en": ["interact", "convey"], "fa": ["ارتباط برقرار کردن", "انتقال دادن"]},
 		  "antonyms": {"en": ["withdraw", "isolate"], "fa": ["کناره‌گیری کردن", "منزوی شدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kəˈmjuːnɪkeɪt/"
 		},
 		{
 		  "word": "valuable",
@@ -226,7 +241,8 @@
 		  "synonyms": {"en": ["precious", "worthwhile"], "fa": ["ارزشمند", "باارزش"]},
 		  "antonyms": {"en": ["worthless", "cheap"], "fa": ["بی‌ارزش", "ارزان"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈvæljuəbəl/"
 		},
 		{
 		  "word": "speaker",
@@ -240,7 +256,8 @@
 		  "synonyms": {"en": ["talker", "orator"], "fa": ["گوینده", "سخنران"]},
 		  "antonyms": {"en": ["listener"], "fa": ["شنونده"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈspiːkər/"
 		},
 		{
 		  "word": "endangered",
@@ -254,7 +271,8 @@
 		  "synonyms": {"en": ["threatened", "vulnerable"], "fa": ["در معرض خطر", "آسیب‌پذیر"]},
 		  "antonyms": {"en": ["safe", "secure"], "fa": ["ایمن", "امن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪnˈdeɪndʒərd/"
 		},
 		{
 		  "word": "means",
@@ -268,7 +286,8 @@
 		  "synonyms": {"en": ["method", "way"], "fa": ["وسیله", "راه"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/miːnz/"
 		},
 		{
 		  "word": "respect",
@@ -282,7 +301,8 @@
 		  "synonyms": {"en": ["admire", "esteem"], "fa": ["احترام گذاشتن", "بزرگ شمردن"]},
 		  "antonyms": {"en": ["disrespect", "insult"], "fa": ["بی‌احترامی کردن", "توهین کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈspekt/"
 		}
 	  ]
 	}
@@ -304,7 +324,8 @@
 		  "synonyms": {"en": ["couch potato", "lazy person"], "fa": ["آدم تنبل"]},
 		  "antonyms": {"en": ["active person"], "fa": ["آدم فعال"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kaʊtʃ pəˈteɪtoʊ/"
 		},
 		{
 		  "word": "gain weight",
@@ -318,7 +339,8 @@
 		  "synonyms": {"en": ["put on weight", "get heavier"], "fa": ["چاق شدن", "افزایش وزن"]},
 		  "antonyms": {"en": ["lose weight", "get thinner"], "fa": ["کاهش وزن", "لاغر شدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɡeɪn weɪt/"
 		},
 		{
 		  "word": "rarely",
@@ -332,7 +354,8 @@
 		  "synonyms": {"en": ["seldom", "hardly"], "fa": ["به ندرت", "ندرتاً"]},
 		  "antonyms": {"en": ["often", "frequently"], "fa": ["اغلب", "مکرراً"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈrerli/"
 		},
 		{
 		  "word": "heartbeat",
@@ -346,7 +369,8 @@
 		  "synonyms": {"en": ["pulse"], "fa": ["ضربان قلب", "نبض"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈhɑːrtbiːt/"
 		},
 		{
 		  "word": "blood pressure",
@@ -360,7 +384,8 @@
 		  "synonyms": {"en": [], "fa": ["فشار خون"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/blʌd ˈpreʃər/"
 		},
 		{
 		  "word": "measure",
@@ -374,7 +399,8 @@
 		  "synonyms": {"en": ["weigh", "gauge"], "fa": ["اندازه گرفتن", "سنجیدن"]},
 		  "antonyms": {"en": ["guess", "estimate"], "fa": ["حدس زدن", "تخمین زدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈmeʒər/"
 		},
 		{
 		  "word": "heart attack",
@@ -388,7 +414,8 @@
 		  "synonyms": {"en": ["cardiac arrest"], "fa": ["حمله قلبی", "سکته قلبی"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/hɑːrt əˈtæk/"
 		},
 		{
 		  "word": "serving",
@@ -402,7 +429,8 @@
 		  "synonyms": {"en": ["portion", "helping"], "fa": ["وعده", "پرس"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈsɜːrvɪŋ/"
 		},
 		{
 		  "word": "harmful",
@@ -416,7 +444,8 @@
 		  "synonyms": {"en": ["damaging", "dangerous"], "fa": ["مضر", "زیان‌آور"]},
 		  "antonyms": {"en": ["harmless", "safe"], "fa": ["بی‌ضرر", "ایمن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈhɑːrmfəl/"
 		},
 		{
 		  "word": "habit",
@@ -430,7 +459,8 @@
 		  "synonyms": {"en": ["custom", "routine"], "fa": ["عادت", "روال"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈhæbɪt/"
 		},
 		{
 		  "word": "addiction",
@@ -444,7 +474,8 @@
 		  "synonyms": {"en": ["dependence", "obsession"], "fa": ["اعتیاد", "وابستگی"]},
 		  "antonyms": {"en": ["independence"], "fa": ["استقلال"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əˈdɪkʃən/"
 		},
 		{
 		  "word": "physical",
@@ -458,7 +489,8 @@
 		  "synonyms": {"en": ["bodily", "corporeal"], "fa": ["جسمانی", "بدنی"]},
 		  "antonyms": {"en": ["mental", "spiritual"], "fa": ["ذهنی", "روحانی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈfɪzɪkəl/"
 		},
 		{
 		  "word": "calm",
@@ -472,7 +504,8 @@
 		  "synonyms": {"en": ["peaceful", "serene"], "fa": ["آرام", "متین"]},
 		  "antonyms": {"en": ["angry", "agitated"], "fa": ["عصبانی", "آشفته"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kɑːm/"
 		},
 		{
 		  "word": "balanced",
@@ -486,7 +519,8 @@
 		  "synonyms": {"en": ["proportionate", "harmonious"], "fa": ["متوازن", "متناسب"]},
 		  "antonyms": {"en": ["unbalanced", "uneven"], "fa": ["نامتوازن", "ناهموار"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈbælənst/"
 		},
 		{
 		  "word": "recent",
@@ -500,7 +534,8 @@
 		  "synonyms": {"en": ["latest", "new"], "fa": ["اخیر", "جدید"]},
 		  "antonyms": {"en": ["old", "ancient"], "fa": ["قدیمی", "باستانی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈriːsənt/"
 		},
 		{
 		  "word": "emotional",
@@ -514,7 +549,8 @@
 		  "synonyms": {"en": ["sentimental", "affective"], "fa": ["عاطفی", "احساسی"]},
 		  "antonyms": {"en": ["rational", "logical"], "fa": ["منطقی", "عقلی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪˈmoʊʃənəl/"
 		},
 		{
 		  "word": "prevent",
@@ -528,7 +564,8 @@
 		  "synonyms": {"en": ["avoid", "stop"], "fa": ["پیشگیری کردن", "جلوگیری کردن"]},
 		  "antonyms": {"en": ["cause", "allow"], "fa": ["سبب شدن", "اجازه دادن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/prɪˈvent/"
 		},
 		{
 		  "word": "relationship",
@@ -542,7 +579,8 @@
 		  "synonyms": {"en": ["connection", "bond"], "fa": ["رابطه", "ارتباط"]},
 		  "antonyms": {"en": ["distance", "hostility"], "fa": ["فاصله", "خصومت"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈleɪʃənʃɪp/"
 		},
 		{
 		  "word": "junk food",
@@ -556,7 +594,8 @@
 		  "synonyms": {"en": ["fast food", "unhealthy food"], "fa": ["غذای ناسالم", "فست فود"]},
 		  "antonyms": {"en": ["healthy food", "home-cooked meal"], "fa": ["غذای سالم", "غذای خانگی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dʒʌŋk fuːd/"
 		},
 		{
 		  "word": "lifestyle",
@@ -570,7 +609,8 @@
 		  "synonyms": {"en": ["way of life", "life"], "fa": ["سبک زندگی"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈlaɪfstaɪl/"
 		},
 		{
 		  "word": "stress",
@@ -584,7 +624,8 @@
 		  "synonyms": {"en": ["tension", "anxiety"], "fa": ["استرس", "تنش"]},
 		  "antonyms": {"en": ["relaxation", "calmness"], "fa": ["آرامش", "سکون"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/stres/"
 		}
 	  ]
 	}
@@ -606,7 +647,8 @@
 		  "synonyms": {"en": ["rely on", "hinge on"], "fa": ["بستگی داشتن به", "وابسته بودن به"]},
 		  "antonyms": {"en": ["independent of"], "fa": ["مستقل از"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/dɪˈpend ɑːn/"
 		},
 		{
 		  "word": "discount",
@@ -620,7 +662,8 @@
 		  "synonyms": {"en": ["deduction", "rebate"], "fa": ["تخفیف", "کاهش قیمت"]},
 		  "antonyms": {"en": ["surcharge", "increase"], "fa": ["افزایش قیمت", "اضافه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈdɪskaʊnt/"
 		},
 		{
 		  "word": "product",
@@ -634,7 +677,8 @@
 		  "synonyms": {"en": ["goods", "merchandise"], "fa": ["محصول", "کالا"]},
 		  "antonyms": {"en": ["waste", "trash"], "fa": ["ضایعه", "زباله"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈprɑːdʌkt/"
 		},
 		{
 		  "word": "pack",
@@ -648,7 +692,8 @@
 		  "synonyms": {"en": ["wrap", "box"], "fa": ["بسته‌بندی کردن", "جا دادن"]},
 		  "antonyms": {"en": ["unpack", "empty"], "fa": ["خالی کردن", "باز کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/pæk/"
 		},
 		{
 		  "word": "handicraft",
@@ -662,7 +707,8 @@
 		  "synonyms": {"en": ["handiwork", "craftwork"], "fa": ["صنایع دستی"]},
 		  "antonyms": {"en": ["machine-made product"], "fa": ["محصول ماشینی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈhændikræft/"
 		},
 		{
 		  "word": "tilework",
@@ -676,7 +722,8 @@
 		  "synonyms": {"en": ["mosaic"], "fa": ["کاشی‌کاری", "معرق"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈtaɪlwɜːrk/"
 		},
 		{
 		  "word": "pottery",
@@ -690,7 +737,8 @@
 		  "synonyms": {"en": ["ceramics", "stoneware"], "fa": ["سفالگری", "سرامیک"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpɑːtəri/"
 		},
 		{
 		  "word": "carpet",
@@ -704,7 +752,8 @@
 		  "synonyms": {"en": ["rug", "mat"], "fa": ["فرش", "قالی"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkɑːrpɪt/"
 		},
 		{
 		  "word": "calligraphy",
@@ -718,7 +767,8 @@
 		  "synonyms": {"en": ["penmanship", "handwriting"], "fa": ["خوشنویسی"]},
 		  "antonyms": {"en": ["scrawl", "scribble"], "fa": ["خراشیدن", "ناخوانا نویسی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/kəˈlɪɡrəfi/"
 		},
 		{
 		  "word": "painting",
@@ -732,7 +782,8 @@
 		  "synonyms": {"en": ["picture", "portrait"], "fa": ["نقاشی"]},
 		  "antonyms": {"en": ["sculpture"], "fa": ["مجسمه"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈpeɪntɪŋ/"
 		},
 		{
 		  "word": "decorative",
@@ -746,7 +797,8 @@
 		  "synonyms": {"en": ["ornamental", "fancy"], "fa": ["تزئینی", "آرایشی"]},
 		  "antonyms": {"en": ["plain", "utilitarian"], "fa": ["ساده", "عملی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈdekəreɪtɪv/"
 		},
 		{
 		  "word": "vast",
@@ -760,7 +812,8 @@
 		  "synonyms": {"en": ["huge", "enormous"], "fa": ["وسیع", "بزرگ"]},
 		  "antonyms": {"en": ["tiny", "small"], "fa": ["کوچک", "ریز"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/væst/"
 		},
 		{
 		  "word": "craftsman",
@@ -774,7 +827,8 @@
 		  "synonyms": {"en": ["artisan", "craftsperson"], "fa": ["صنعتگر", "هنرمند"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkræftsmən/"
 		},
 		{
 		  "word": "weave",
@@ -788,7 +842,8 @@
 		  "synonyms": {"en": ["interlace", "knit"], "fa": ["بافتن", "تنیدن"]},
 		  "antonyms": {"en": ["unravel", "untangle"], "fa": ["باز کردن", "گشودن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/wiːv/"
 		},
 		{
 		  "word": "metal",
@@ -802,7 +857,8 @@
 		  "synonyms": {"en": ["ore", "alloy"], "fa": ["فلز"]},
 		  "antonyms": {"en": ["wood", "plastic"], "fa": ["چوب", "پلاستیک"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈmetl/"
 		},
 		{
 		  "word": "unique",
@@ -816,7 +872,8 @@
 		  "synonyms": {"en": ["exclusive", "rare"], "fa": ["منحصربه‌فرد", "بی‌نظیر"]},
 		  "antonyms": {"en": ["common", "ordinary"], "fa": ["معمولی", "متداول"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/juːˈniːk/"
 		},
 		{
 		  "word": "diversity",
@@ -830,7 +887,8 @@
 		  "synonyms": {"en": ["variety", "multitude"], "fa": ["تنوع", "گوناگونی"]},
 		  "antonyms": {"en": ["uniformity", "homogeneity"], "fa": ["یکنواختی", "همگونی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/daɪˈvɜːrsəti/"
 		},
 		{
 		  "word": "custom",
@@ -844,7 +902,8 @@
 		  "synonyms": {"en": ["tradition", "practice"], "fa": ["رسم", "سنن"]},
 		  "antonyms": {"en": ["modernity"], "fa": ["مدرنیته"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˈkʌstəm/"
 		},
 		{
 		  "word": "identity",
@@ -858,7 +917,8 @@
 		  "synonyms": {"en": ["personality", "individuality"], "fa": ["هویت", "شخصیت"]},
 		  "antonyms": {"en": ["anonymity"], "fa": ["گمنامی"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/aɪˈdentəti/"
 		},
 		{
 		  "word": "reflect",
@@ -872,7 +932,8 @@
 		  "synonyms": {"en": ["mirror", "manifest"], "fa": ["بازتاب دادن", "نشان دادن"]},
 		  "antonyms": {"en": ["conceal", "hide"], "fa": ["پنهان کردن", "مخفی کردن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/rɪˈflekt/"
 		},
 		{
 		  "word": "humankind",
@@ -886,7 +947,8 @@
 		  "synonyms": {"en": ["mankind", "humanity"], "fa": ["بشر", "انسانیت"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌhjuːmənˈkaɪnd/"
 		},
 		{
 		  "word": "appreciate",
@@ -900,7 +962,8 @@
 		  "synonyms": {"en": ["value", "admire"], "fa": ["ارزش قائل شدن", "ستایش کردن"]},
 		  "antonyms": {"en": ["disdain", "underestimate"], "fa": ["بی‌ارزش شمردن", "کم‌تخمین زدن"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/əˈpriːʃieɪt/"
 		},
 		{
 		  "word": "souvenir",
@@ -914,7 +977,8 @@
 		  "synonyms": {"en": ["keepsake", "memento"], "fa": ["سوغاتی", "یادگاری"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ˌsuːvəˈnɪr/"
 		},
 		{
 		  "word": "economy",
@@ -928,7 +992,8 @@
 		  "synonyms": {"en": ["financial system", "commerce"], "fa": ["اقتصاد", "تجارت"]},
 		  "antonyms": {"en": [], "fa": []},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪˈkɑːnəmi/"
 		},
 		{
 		  "word": "imagination",
@@ -942,7 +1007,8 @@
 		  "synonyms": {"en": ["creativity", "vision"], "fa": ["تخیل", "خلاقیت"]},
 		  "antonyms": {"en": ["reality"], "fa": ["واقعیت"]},
 		  "phrase": {},
-		  "idiom": {}
+		  "idiom": {},
+		  "phonetics": "/ɪˌmædʒɪˈneɪʃən/"
 		}
 	  ]
 	}

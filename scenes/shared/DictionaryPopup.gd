@@ -236,8 +236,12 @@ func _on_save_word_pressed() -> void:
 
 func _on_audio_pressed() -> void:
 	Global.button_bounce(audio_button)
-	var word_to_speak = current_word_data.get("word", "")
-	Global.speak_word(word_to_speak)
 	
+	var audio_filename: String = current_word_data.get("audio", "")
+	var word_text: String = current_word_data.get("word", "")
+
+	# Trigger unified audio playback (with built-in TTS fallback)
+	Global.play_word_audio(audio_filename, word_text)
+
 func is_open() -> bool:
 	return popup_panel.position.y >= 0

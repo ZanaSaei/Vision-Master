@@ -1,26 +1,20 @@
 [gd_scene format=3 uid="uid://csjykfgswhgaf"]
 
 [ext_resource type="Script" uid="uid://fu47855vxrkx" path="res://scenes/main_menu/main_menu.gd" id="1_isws5"]
+[ext_resource type="PackedScene" uid="uid://b4q4amyvxdy0n" path="res://scenes/dynamic_background/animated_background.tscn" id="2_6gdku"]
 [ext_resource type="Texture2D" uid="uid://be4epk85ppowb" path="res://images/menu-bar.png" id="2_qq55g"]
-[ext_resource type="FontFile" uid="uid://g637eq3c7teb" path="res://assets/fonts/BebasNeue-Regular.ttf" id="4_qq55g"]
 [ext_resource type="StyleBox" uid="uid://iwxf7jw83unf" path="res://buttons_styles/ContinueNormal.tres" id="5_f1mbi"]
 [ext_resource type="FontFile" uid="uid://cd8w2vgcrha3v" path="res://assets/fonts/PlayfairDisplaySC-Bold.ttf" id="5_pkvjm"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="6_6gdku"]
 [ext_resource type="StyleBox" uid="uid://bpmplvjua0vvo" path="res://buttons_styles/Book1Normal.tres" id="6_arvcj"]
+[ext_resource type="Texture2D" uid="uid://b6bvdh03susvh" path="res://images/Vision 1.jpg" id="7_2c0k1"]
 [ext_resource type="StyleBox" uid="uid://cnd0l7h3t2mqw" path="res://buttons_styles/Book2Normal.tres" id="7_6k0m2"]
 [ext_resource type="StyleBox" uid="uid://dck62uet13ugq" path="res://buttons_styles/Book3Normal.tres" id="8_qq55g"]
+[ext_resource type="Texture2D" uid="uid://bhl3jodthtpt8" path="res://images/Vision 2.jpg" id="9_ifx2v"]
 [ext_resource type="StyleBox" uid="uid://wn3x36r4oiwa" path="res://buttons_styles/Konkor.tres" id="9_pkvjm"]
 [ext_resource type="StyleBox" uid="uid://d08gb1dgdb1wv" path="res://buttons_styles/MenuSlide.tres" id="10_6gdku"]
+[ext_resource type="Texture2D" uid="uid://bifs1kq6koolm" path="res://images/Vision 3.jpg" id="11_4ei73"]
 [ext_resource type="PackedScene" uid="uid://b2onop4jk0ebo" path="res://scenes/side_menu/SideMenu.tscn" id="12_6gdku"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_qmweu"]
-font = ExtResource("4_qq55g")
-font_size = 250
-font_color = Color(1, 1, 0, 1)
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 20
-shadow_color = Color(1, 1, 0, 0.19607843)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oitky"]
 bg_color = Color(1, 1, 1, 1)
@@ -38,9 +32,9 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_oitky"]
 font = ExtResource("6_6gdku")
-font_size = 61
+font_size = 65
 font_color = Color(0, 0.36078432, 0, 1)
-outline_size = 50
+outline_size = 35
 
 [sub_resource type="SystemFont" id="SystemFont_arvcj"]
 
@@ -53,22 +47,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_isws5")
 
-[node name="Background" type="ColorRect" parent="." unique_id=451996402]
-modulate = Color(1, 1, 1, 0.19607843)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.093
-anchor_top = -0.054
-anchor_right = 1.1170001
-anchor_bottom = 1.116
-offset_left = 0.44000244
-offset_top = -0.3199997
-offset_right = -0.36010742
-offset_bottom = -0.72021484
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_scale = Vector2(0.46, 0.46)
-color = Color(0, 1, 1, 1)
+[node name="AnimatedBackground" parent="." unique_id=1120716659 instance=ExtResource("2_6gdku")]
+
+[node name="FloatingParticles" type="CanvasLayer" parent="." unique_id=1328281086]
+
+[node name="ParticlesNode" type="GPUParticles2D" parent="FloatingParticles" unique_id=497234890]
 
 [node name="MainLayout" type="MarginContainer" parent="." unique_id=554003002]
 layout_mode = 1
@@ -103,10 +86,6 @@ alignment = 1
 [node name="AppTitle" type="Label" parent="MainLayout/InnerLayout/HeroSection" unique_id=1002857951]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.14509805, 0.3882353, 0.92156863, 1)
-text = " Vision 
-Master"
-label_settings = SubResource("LabelSettings_qmweu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -151,6 +130,12 @@ theme_override_styles/pressed = ExtResource("6_arvcj")
 theme_override_styles/hover = ExtResource("6_arvcj")
 text = "Vision 1 — Grade 10"
 
+[node name="Sprite2D" type="Sprite2D" parent="MainLayout/InnerLayout/Book1Button" unique_id=1692458671]
+position = Vector2(870.00024, 20)
+rotation = 0.2617994
+scale = Vector2(0.5184781, 0.51847816)
+texture = ExtResource("7_2c0k1")
+
 [node name="Book2Button" type="Button" parent="MainLayout/InnerLayout" unique_id=710697251]
 custom_minimum_size = Vector2(855, 120)
 layout_mode = 2
@@ -161,6 +146,12 @@ theme_override_styles/pressed = ExtResource("7_6k0m2")
 theme_override_styles/hover = ExtResource("7_6k0m2")
 text = "Vision 2 — Grade 11"
 
+[node name="Sprite2D" type="Sprite2D" parent="MainLayout/InnerLayout/Book2Button" unique_id=1007092881]
+position = Vector2(870, 20)
+rotation = 0.2617994
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_ifx2v")
+
 [node name="Book3Button" type="Button" parent="MainLayout/InnerLayout" unique_id=2031747423]
 custom_minimum_size = Vector2(855, 120)
 layout_mode = 2
@@ -170,6 +161,12 @@ theme_override_styles/normal = ExtResource("8_qq55g")
 theme_override_styles/pressed = ExtResource("8_qq55g")
 theme_override_styles/hover = ExtResource("8_qq55g")
 text = "Vision 3 — Grade 12"
+
+[node name="Sprite2D" type="Sprite2D" parent="MainLayout/InnerLayout/Book3Button" unique_id=1535857050]
+position = Vector2(870, 20)
+rotation = 0.2617994
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_4ei73")
 
 [node name="SpecificEnglishButton" type="Button" parent="MainLayout/InnerLayout" unique_id=1455141466]
 custom_minimum_size = Vector2(855, 120)

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://gfbsv0sy3y8t"]
+
+[ext_resource type="Script" uid="uid://f31otdqpw66n" path="res://scenes/vocabulary_development/vocabulary_development.gd" id="1_bdns1"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_qkhlu"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_w8c8i"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_do64j"]
+[ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_aklu6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_swh16"]
+font = ExtResource("3_do64j")
+font_size = 45
+
+[node name="VocabularyDevelopment" type="Control" unique_id=393705888]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bdns1")
+
+[node name="Background" type="ColorRect" parent="." unique_id=616402954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.17254902, 0.21960784, 0.49803922, 1)
+
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=1330912032]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 320.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("2_qkhlu")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 527
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
+layout_mode = 2
+icon = ExtResource("2_w8c8i")
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
+layout_mode = 2
+text = "Lesson 1 v"
+label_settings = SubResource("LabelSettings_swh16")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1463495940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 377.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 100
+
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=1935269617]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="PageView" type="Control" parent="MarginContainer/MainLayout" unique_id=1023457759]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_aklu6")
+metadata/_custom_type_script = "uid://c80kxm3atqo2l"

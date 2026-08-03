@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cdjcx4v013b5v"]
 
 [ext_resource type="Script" uid="uid://bp02fo3um6w2u" path="res://scenes/review/word_review.gd" id="1_chjlt"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_hx4ce"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_o6c0r"]
 [ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_gfdwm"]
 [ext_resource type="FontFile" uid="uid://drnivg6cxlyr2" path="res://assets/fonts/PlusJakartaSans-Italic.ttf" id="5_3kfk6"]
@@ -9,23 +10,17 @@
 [ext_resource type="StyleBox" uid="uid://cra0kyhull2d5" path="res://buttons_styles/show_answer.tres" id="8_hx4ce"]
 [ext_resource type="PackedScene" uid="uid://c4kduxd61oyll" path="res://scenes/side_menu/ReviewSideMenu.tscn" id="8_y8wcc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41h8a"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
-corner_radius_bottom_right = 150
-corner_radius_bottom_left = 150
-expand_margin_top = 45.0
-
 [sub_resource type="LabelSettings" id="LabelSettings_gfdwm"]
 font = ExtResource("7_y8wcc")
 font_size = 45
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hx4ce"]
-bg_color = Color(0.9526333, 0.67516935, 0.15735209, 1)
+bg_color = Color(0.18976924, 0.85086226, 0.68409914, 1)
 corner_radius_top_left = 150
 corner_radius_top_right = 150
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
-shadow_color = Color(0, 0.24705882, 0, 0.6)
+shadow_color = Color(0, 0, 0, 0.22352941)
 shadow_size = 14
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfdwm"]
@@ -49,6 +44,16 @@ font = ExtResource("5_3kfk6")
 font_size = 65
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wq6o"]
+bg_color = Color(0.8627451, 0.9529412, 0.5764706, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ku3dv"]
+bg_color = Color(0.6521925, 0.7520547, 0.24800432, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvwa6"]
 bg_color = Color(0.92941177, 0.9137255, 0.99607843, 1)
 corner_radius_top_left = 12
@@ -57,9 +62,6 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 expand_margin_top = 25.0
 expand_margin_bottom = 25.0
-
-[sub_resource type="SystemFont" id="SystemFont_5wq6o"]
-font_names = PackedStringArray("Fantasy")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t421v"]
 bg_color = Color(0.654902, 0.54509807, 0.98039216, 1)
@@ -141,7 +143,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.9372549, 0.9647059, 1, 1)
+color = Color(0.17254902, 0.21960784, 0.49803922, 1)
 
 [node name="HeaderBar" type="PanelContainer" parent="." unique_id=3457833]
 layout_mode = 1
@@ -150,7 +152,7 @@ anchor_right = 1.0
 offset_top = 30.0
 offset_bottom = 320.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_41h8a")
+theme_override_styles/panel = ExtResource("2_hx4ce")
 
 [node name="MarginContainer" type="MarginContainer" parent="HeaderBar" unique_id=601232500]
 layout_mode = 2
@@ -246,6 +248,29 @@ label_settings = SubResource("LabelSettings_6ynbm")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PhoneticsRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace" unique_id=752047165]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5wq6o")
+
+[node name="PhoneticsRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/PhoneticsRow" unique_id=1242085341]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PhonIcon" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/PhoneticsRow/PhoneticsRowContent" unique_id=383338791]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_3kfk6")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_ku3dv")
+text = "Phonetics"
+
+[node name="PhoneticsLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/PhoneticsRow/PhoneticsRowContent" unique_id=1494065236]
+layout_mode = 2
+size_flags_horizontal = 6
+label_settings = SubResource("LabelSettings_6ynbm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MeaningFaRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace" unique_id=560208982]
 layout_mode = 2
 size_flags_vertical = 3
@@ -259,7 +284,7 @@ theme_override_constants/separation = 12
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_5wq6o")
+theme_override_fonts/font = ExtResource("5_3kfk6")
 theme_override_font_sizes/font_size = 45
 theme_override_styles/normal = SubResource("StyleBoxFlat_t421v")
 text = "Mean"
@@ -287,7 +312,7 @@ theme_override_constants/separation = 12
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_5wq6o")
+theme_override_fonts/font = ExtResource("5_3kfk6")
 theme_override_font_sizes/font_size = 45
 theme_override_styles/normal = SubResource("StyleBoxFlat_ma18j")
 text = "Example"
@@ -313,7 +338,7 @@ theme_override_constants/separation = 12
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_5wq6o")
+theme_override_fonts/font = ExtResource("5_3kfk6")
 theme_override_font_sizes/font_size = 45
 theme_override_styles/normal = SubResource("StyleBoxFlat_j6ipn")
 text = "Source"

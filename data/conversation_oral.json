@@ -1,0 +1,290 @@
+{
+  "category": "conversation_questions",
+  "title": "Oral Questions After Conversations",
+  "icon": "🗣️",
+  "books": {
+	"1": {
+	  "1": {
+		"lesson_title": "Saving Nature",
+		"exercises": [
+		  {
+			"exercise_id": "v1_l1_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "Where are they talking?", "fa": "آن‌ها کجا دارند صحبت می‌کنند؟" },
+				"sample_answer": { "en": "They are talking at the Museum of Nature and Wildlife.", "fa": "آن‌ها در موزه طبیعت و حیات وحش صحبت می‌کنند." }
+			  },
+			  {
+				"question": { "en": "Are there many cheetahs alive?", "fa": "آیا یوزپلنگ‌های زیادی زنده هستند؟" },
+				"sample_answer": { "en": "No, there are not many. Only around 70 of them are alive, but the number will increase.", "fa": "نه، زیاد نیستند. فقط حدود ۷۰ یوزپلنگ زنده است، اما این تعداد افزایش خواهد یافت." }
+			  },
+			  {
+				"question": { "en": "Do you take care of animals?", "fa": "آیا از حیوانات مراقبت می‌کنی؟" },
+				"sample_answer": { "en": "Yes, I take care of animals. I feed the birds in winter and I never hurt them.", "fa": "بله، من از حیوانات مراقبت می‌کنم. در زمستان به پرندگان غذا می‌دهم و هرگز به آن‌ها آسیب نمی‌زنم." }
+			  }
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": "Wonders of Creation",
+		"exercises": [
+		  {
+			"exercise_id": "v1_l2_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "How are the planets different?", "fa": "سیاره‌ها چگونه با هم متفاوت هستند؟" },
+				"sample_answer": { "en": "They go around the Sun in different orbits. They have different colors and sizes. Some are rocky like Mars, some have rings like Saturn, and some have moons like Uranus.", "fa": "آن‌ها در مدارهای مختلفی به دور خورشید می‌چرخند. رنگ‌ها و اندازه‌های متفاوتی دارند. بعضی مانند مریخ سنگی هستند، بعضی مانند زحل حلقه دارند و بعضی مانند اورانوس قمر دارند." }
+			  },
+			  {
+				"question": { "en": "Can we see all planets without a telescope?", "fa": "آیا می‌توانیم همه سیاره‌ها را بدون تلسکوپ ببینیم؟" },
+				"sample_answer": { "en": "No, we cannot. We can see Mercury, Venus, Mars, Jupiter, and Saturn without a telescope, but we can see Uranus and Neptune only with powerful telescopes.", "fa": "نه، نمی‌توانیم. عطارد، زهره، مریخ، مشتری و زحل را بدون تلسکوپ می‌توانیم ببینیم، اما اورانوس و نپتون را فقط با تلسکوپ‌های قدرتمند می‌توانیم ببینیم." }
+			  },
+			  {
+				"question": { "en": "Do you know the names of the planets in Persian?", "fa": "آیا نام سیاره‌ها را به فارسی می‌دانی؟" },
+				"sample_answer": { "en": "Yes, I know some. Mars is 'Merikh', Venus is 'Zohreh', and Jupiter is 'Moshtari' in Persian.", "fa": "بله، بعضی را می‌دانم. مریخ به فارسی «مریخ»، زهره «زهره» و مشتری «مشتری» است." }
+			  }
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": "The Value of Knowledge",
+		"exercises": [
+		  {
+			"exercise_id": "v1_l3_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "Were Mahsa and Roya in a laboratory?", "fa": "آیا مهسا و رویا در آزمایشگاه بودند؟" },
+				"sample_answer": { "en": "No, they were not. They were in the library.", "fa": "نه، نبودند. آن‌ها در کتابخانه بودند." }
+			  },
+			  {
+				"question": { "en": "Who came to the library sooner, Mahsa or Roya?", "fa": "چه کسی زودتر به کتابخانه آمد، مهسا یا رویا؟" },
+				"sample_answer": { "en": "Mahsa came sooner. When Roya came in, Mahsa was reading a book.", "fa": "مهسا زودتر آمد. وقتی رویا وارد شد، مهسا داشت کتاب می‌خواند." }
+			  },
+			  {
+				"question": { "en": "Do you know any interesting story about famous scientists?", "fa": "آیا داستان جالبی درباره دانشمندان مشهور می‌دانی؟" },
+				"sample_answer": { "en": "Yes. Edison failed thousands of times before he made the light bulb, but he never gave up. He said, \"I never quit until I get what I'm after.\"", "fa": "بله. ادیسون قبل از ساخت لامپ هزاران بار شکست خورد، اما هرگز تسلیم نشد. او گفت: «تا به چیزی که دنبالش هستم نرسم، هرگز دست برنمی‌دارم.»" }
+			  }
+			]
+		  }
+		]
+	  },
+	  "4": {
+		"lesson_title": "Traveling the World",
+		"exercises": [
+		  {
+			"exercise_id": "v1_l4_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "What is China famous for?", "fa": "چین به چه چیزی مشهور است؟" },
+				"sample_answer": { "en": "China is famous for the Great Wall.", "fa": "چین به دیوار بزرگش مشهور است." }
+			  },
+			  {
+				"question": { "en": "Does Diego like traveling?", "fa": "آیا دیگو سفر کردن را دوست دارد؟" },
+				"sample_answer": { "en": "Yes, he does. He is planning for his summer vacation and wants to visit Asia. He was in Beijing two years ago.", "fa": "بله، دوست دارد. او دارد برای تعطیلات تابستانش برنامه‌ریزی می‌کند و می‌خواهد از آسیا دیدن کند. او دو سال پیش در پکن بود." }
+			  },
+			  {
+				"question": { "en": "Where do you want to go for your vacation?", "fa": "برای تعطیلات می‌خواهی کجا بروی؟" },
+				"sample_answer": { "en": "I want to go to Isfahan because it has many historical sites like Naqsh-e Jahan Square.", "fa": "من می‌خواهم به اصفهان بروم چون مکان‌های تاریخی زیادی مانند میدان نقش جهان دارد." }
+			  }
+			]
+		  }
+		]
+	  }
+	},
+	"2": {
+	  "1": {
+		"lesson_title": "Understanding People",
+		"exercises": [
+		  {
+			"exercise_id": "v2_l1_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "Where does Mr. Saberian work?", "fa": "آقای صابریان کجا کار می‌کند؟" },
+				"sample_answer": { "en": "He works for IRIB. He is a translator and he knows four languages: Persian, English, French, and Russian.", "fa": "او در صدا و سیما (IRIB) کار می‌کند. او مترجم است و چهار زبان می‌داند: فارسی، انگلیسی، فرانسوی و روسی." }
+			  },
+			  {
+				"question": { "en": "Was Mr. Saberian living in a foreign country when he was 13?", "fa": "آیا آقای صابریان وقتی ۱۳ ساله بود در کشور خارجی زندگی می‌کرد؟" },
+				"sample_answer": { "en": "No, he was not. He began learning English at school in Iran when he was thirteen. He learned Russian later, when he was a university student in Moscow.", "fa": "نه، زندگی نمی‌کرد. او در سیزده سالگی در مدرسه در ایران شروع به یادگیری انگلیسی کرد. او روسی را بعداً، وقتی دانشجوی دانشگاه در مسکو بود، یاد گرفت." }
+			  },
+			  {
+				"question": { "en": "How many languages do you know?", "fa": "تو چند زبان می‌دانی؟" },
+				"sample_answer": { "en": "I know two languages: Persian, my mother tongue, and English, which I am learning at school.", "fa": "من دو زبان می‌دانم: فارسی، زبان مادری‌ام، و انگلیسی که در مدرسه در حال یادگیری آن هستم." }
+			  }
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": "A Healthy Lifestyle",
+		"exercises": [
+		  {
+			"exercise_id": "v2_l2_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "What does Sina do at home?", "fa": "سینا در خانه چه کار می‌کند؟" },
+				"sample_answer": { "en": "He surfs the net and plays computer games. He rarely goes out and hangs out with his friends, and he prefers to stay home and watch movies on the weekend.", "fa": "او در اینترنت می‌چرخد و بازی‌های کامپیوتری می‌کند. او به ندرت بیرون می‌رود و با دوستانش وقت می‌گذراند و ترجیح می‌دهد در خانه بماند و آخر هفته فیلم تماشا کند." }
+			  },
+			  {
+				"question": { "en": "Is Sina a sportsperson?", "fa": "آیا سینا اهل ورزش است؟" },
+				"sample_answer": { "en": "No, he is not. He has not exercised for a long time and he has gained five kilos in three months. Behzad calls him a \"couch potato\".", "fa": "نه، اهل ورزش نیست. او مدت زیادی است که ورزش نکرده و در سه ماه پنج کیلوگرم اضافه کرده است. بهزاد او را «آدم تنبل و لم‌داده» می‌نامد." }
+			  },
+			  {
+				"question": { "en": "What is your favorite sport?", "fa": "ورزش مورد علاقه تو چیست؟" },
+				"sample_answer": { "en": "My favorite sport is football. I play it with my friends every Friday afternoon.", "fa": "ورزش مورد علاقه من فوتبال است. من هر جمعه بعدازظهر با دوستانم فوتبال بازی می‌کنم." }
+			  }
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": "Art and Culture",
+		"exercises": [
+		  {
+			"exercise_id": "v2_l3_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "What did the tourist buy?", "fa": "گردشگر چه چیزهایی خرید؟" },
+				"sample_answer": { "en": "The tourist bought a Qashqai Gabbeh for 85 dollars and a calligraphic tile for 30 dollars.", "fa": "گردشگر یک گبه قشقایی به قیمت ۸۵ دلار و یک کاشی خوشنویسی به قیمت ۳۰ دلار خرید." }
+			  },
+			  {
+				"question": { "en": "Are all Persian handicrafts expensive?", "fa": "آیا همه صنایع دستی ایرانی گران هستند؟" },
+				"sample_answer": { "en": "No, they are not. The price depends on the size and type. A Persian carpet may be expensive, but a Gabbeh or a calligraphic tile is affordable. There is also a 20 percent discount for purchases over 100 dollars.", "fa": "نه، اینطور نیست. قیمت به اندازه و نوع بستگی دارد. فرش ایرانی ممکن است گران باشد، اما گبه یا کاشی خوشنویسی مقرون‌به‌صرفه است. برای خریدهای بالای ۱۰۰ دلار هم ۲۰ درصد تخفیف وجود دارد." }
+			  },
+			  {
+				"question": { "en": "What is the most famous handicraft of your city or village?", "fa": "مشهورترین صنایع دستی شهر یا روستای تو چیست؟" },
+				"sample_answer": { "en": "The most famous handicraft of my city is carpet weaving. Many families make beautiful hand-woven carpets with traditional patterns.", "fa": "مشهورترین صنایع دستی شهر من قالی‌بافی است. بسیاری از خانواده‌ها فرش‌های دست‌باف زیبایی با طرح‌های سنتی می‌بافند." }
+			  }
+			]
+		  }
+		]
+	  }
+	},
+	"3": {
+	  "1": {
+		"lesson_title": "Sense of Appreciation",
+		"exercises": [
+		  {
+			"exercise_id": "v3_l1_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "When was Dr. Gharib born?", "fa": "دکتر قریب چه زمانی به دنیا آمد؟" },
+				"sample_answer": { "en": "Dr. Gharib was born in Tehran in 1288.", "fa": "دکتر قریب در سال ۱۲۸۸ در تهران به دنیا آمد." }
+			  },
+			  {
+				"question": { "en": "Why was Dr. Gharib regarded as a kind physician?", "fa": "چرا دکتر قریب پزشکی مهربان شناخته می‌شد؟" },
+				"sample_answer": { "en": "Because he spared no pains to cure sick children. He was very friendly and helpful to poor families, and he was also a generous man and a distinguished university professor.", "fa": "زیرا او برای درمان کودکان بیمار از هیچ کوششی دریغ نکرد. او با خانواده‌های فقیر بسیار صمیمی و کمک‌کننده بود و همچنین مردی بخشنده و استاد دانشگاه برجسته‌ای بود." }
+			  },
+			  {
+				"question": { "en": "Have you seen Dr. Gharib TV series?", "fa": "آیا سریال تلویزیونی دکتر قریب را دیده‌ای؟" },
+				"sample_answer": { "en": "Yes, I have seen it. It was very interesting and it showed how he dedicated his life to helping sick children.", "fa": "بله، آن را دیده‌ام. خیلی جالب بود و نشان می‌داد که او چگونه زندگی‌اش را وقف کمک به کودکان بیمار کرد." }
+			  }
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": "Look it Up!",
+		"exercises": [
+		  {
+			"exercise_id": "v3_l2_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "What type of dictionary does Mr. Iranmehr recommend?", "fa": "آقای ایرانمهر چه نوع فرهنگ لغتی را توصیه می‌کند؟" },
+				"sample_answer": { "en": "He recommends a learner's dictionary. Specifically, a monolingual dictionary at the elementary level in pocket size. He also says Majid can use a free online dictionary or free apps for PCs and smart phones.", "fa": "او فرهنگ لغت زبان‌آموز را توصیه می‌کند. به‌طور خاص، یک فرهنگ لغت تک‌زبانه در سطح مقدماتی با اندازه جیبی. او همچنین می‌گوید مجید می‌تواند از فرهنگ لغت آنلاین رایگان یا برنامه‌های رایگان برای کامپیوتر و گوشی هوشمند استفاده کند." }
+			  },
+			  {
+				"question": { "en": "What factors do you consider when you want to choose a dictionary?", "fa": "وقتی می‌خواهی فرهنگ لغتی انتخاب کنی، چه عواملی را در نظر می‌گیری؟" },
+				"sample_answer": { "en": "I consider the type, the level, and the size. I also check if it has good examples and pronunciation guides.", "fa": "من نوع، سطح و اندازه را در نظر می‌گیرم. همچنین بررسی می‌کنم که آیا مثال‌های خوب و راهنمای تلفظ دارد یا نه." }
+			  },
+			  {
+				"question": { "en": "What type of dictionary do you often use?", "fa": "تو معمولاً از چه نوع فرهنگ لغتی استفاده می‌کنی؟" },
+				"sample_answer": { "en": "I often use an English-Persian dictionary on my smart phone because it is fast and convenient.", "fa": "من معمولاً از فرهنگ لغت انگلیسی به فارسی روی گوشی هوشمندم استفاده می‌کنم چون سریع و راحت است." }
+			  }
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": "Renewable Energy",
+		"exercises": [
+		  {
+			"exercise_id": "v3_l3_oral",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Answer the following questions based on the conversation.",
+			  "fa": "به سوالات زیر بر اساس مکالمه پاسخ دهید."
+			},
+			"items": [
+			  {
+				"question": { "en": "Where are Emad and his father?", "fa": "عماد و پدرش کجا هستند؟" },
+				"sample_answer": { "en": "They are in Manjeel, on the way to Guilan. Emad sees huge wind turbines there.", "fa": "آن‌ها در منجیل، در راه گیلان هستند. عماد در آنجا توربین‌های بادی عظیمی می‌بیند." }
+			  },
+			  {
+				"question": { "en": "Has Emad ever traveled to Yazd?", "fa": "آیا عماد تا به حال به یزد سفر کرده است؟" },
+				"sample_answer": { "en": "No, he has not traveled to Yazd yet. He asks his father, \"Can we travel to Yazd this Norooz?\" He only knows about Yazd's wind towers from what he has read.", "fa": "نه، او هنوز به یزد سفر نکرده است. او از پدرش می‌پرسد: «می‌توانیم این نوروز به یزد سفر کنیم؟» او فقط از آنچه خوانده درباره بادگیرهای یزد می‌داند." }
+			  },
+			  {
+				"question": { "en": "What types of clean energy can you find in your city or village?", "fa": "چه انواعی از انرژی پاک را می‌توانی در شهر یا روستایت پیدا کنی؟" },
+				"sample_answer": { "en": "In my city, we can find solar energy because there are many sunny days. Some buildings have solar panels on their roofs.", "fa": "در شهر من، می‌توانیم انرژی خورشیدی پیدا کنیم چون روزهای آفتابی زیادی دارد. بعضی ساختمان‌ها روی پشت‌بامشان پنل خورشیدی دارند." }
+			  }
+			]
+		  }
+		]
+	  }
+	}
+  },
+  "statistics": {
+	"total_exercises": 10,
+	"exercise_types": {
+	  "open_ended": 10
+	},
+	"lessons_covered": 10
+  }
+}

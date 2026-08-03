@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://d077on3j3i6pd"]
+
+[ext_resource type="Script" uid="uid://cuyy7b8mylefo" path="res://scenes/shared/audio_panel.gd" id="1_f8ndu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ujfs"]
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 150
+
+[node name="AudioPanel" type="PanelContainer" unique_id=418187207]
+visible = false
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -236.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ujfs")
+script = ExtResource("1_f8ndu")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=786871783]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 30
+
+[node name="AudioUILayout" type="VBoxContainer" parent="MarginContainer" unique_id=1942358996]
+layout_mode = 2
+theme_override_constants/separation = 69
+
+[node name="AudioSlider" type="HSlider" parent="MarginContainer/AudioUILayout" unique_id=1904602263]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="ControlsLayout" type="HBoxContainer" parent="MarginContainer/AudioUILayout" unique_id=1091542684]
+layout_mode = 2
+theme_override_constants/separation = 47
+alignment = 1
+
+[node name="RewindButton" type="Button" parent="MarginContainer/AudioUILayout/ControlsLayout" unique_id=1178258274]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "-10s"
+
+[node name="PlayPauseButton" type="Button" parent="MarginContainer/AudioUILayout/ControlsLayout" unique_id=705844987]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Pause"
+
+[node name="ForwardButton" type="Button" parent="MarginContainer/AudioUILayout/ControlsLayout" unique_id=2096941339]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "+10s"
+
+[node name="CloseAudioButton" type="Button" parent="MarginContainer/AudioUILayout/ControlsLayout" unique_id=362126367]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "X"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1281031876]

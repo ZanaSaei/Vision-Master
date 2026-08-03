@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://v1r2ad6yfiqs"]
+
+[ext_resource type="Script" uid="uid://deryoeahrd4v2" path="res://scenes/reading_strategy/reading_strategy.gd" id="1_7b0dw"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_xivrk"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_xff7t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhcqr"]
+bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 150
+expand_margin_top = 45.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_swh16"]
+font = ExtResource("3_xff7t")
+font_size = 45
+
+[node name="ReadingStrategy" type="Control" unique_id=393705888]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7b0dw")
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=616402954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9372549, 0.9647059, 1, 1)
+
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=1330912032]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 320.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 70
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
+layout_mode = 2
+icon = ExtResource("2_xivrk")
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
+layout_mode = 2
+text = "Conversation"
+label_settings = SubResource("LabelSettings_swh16")
+
+[node name="TranslationToggleButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1752625087]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "translate"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1463495940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 347.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 100
+
+[node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=1935269617]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 30
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainLayout" unique_id=1131021853]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 40

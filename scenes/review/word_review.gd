@@ -30,6 +30,7 @@ const SCENE_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var meaning_label: Label          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
 @onready var example_label: Label          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
 @onready var extra_label: Label            = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/Extra/ExtraRowContent/ExtraLabel
+@onready var phonetics_label: Label        = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/PhoneticsRow/PhoneticsRowContent/PhoneticsLabel
 
 @onready var show_answer_button: Button    = $MarginContainer/MainLayout/Controls/ShowAnswerButton
 @onready var rating_buttons: HBoxContainer = $MarginContainer/MainLayout/Controls/RatingButtons
@@ -51,6 +52,10 @@ func _ready() -> void:
 	hard_button.pressed.connect(_on_rate_pressed.bind("hard"))
 	good_button.pressed.connect(_on_rate_pressed.bind("good"))
 	easy_button.pressed.connect(_on_rate_pressed.bind("easy"))
+	
+	# Connect the new word_selected signal
+	review_side_menu.word_selected.connect(_on_word_selected_from_menu)
+	
 	# متصل کردن دکمه باز کردن منو
 	review_side_menu.set_hamburger_button(open_list_menu_button)
 	open_list_menu_button.pivot_offset = open_list_menu_button.size / 2.0 
@@ -63,6 +68,30 @@ func _ready() -> void:
 	_load_next_card()
 	_populate_word_list()
 
+# Add this new function to handle word selection
+func _on_word_selected_from_menu(word_data: Dictionary) -> void:
+	"""Navigate to a specific word in the review queue"""
+	# Find the word in the queue
+	for i in range(review_queue.size()):
+		var entry = review_queue[i]
+		if entry.get("word") == word_data.get("word") and \
+		   entry.get("book") == word_data.get("book") and \
+		   entry.get("lesson") == word_data.get("lesson"):
+			# Reorder queue to put this word first
+			var temp = review_queue[i]
+			review_queue.remove_at(i)
+			review_queue.insert(0, temp)
+			_load_next_card()
+			return
+	
+	# If word not found in queue, reload queue and try again
+	review_queue = Global.get_due_words()
+	for entry in review_queue:
+		if entry.get("word") == word_data.get("word") and \
+		   entry.get("book") == word_data.get("book") and \
+		   entry.get("lesson") == word_data.get("lesson"):
+			_load_next_card()
+			return
 
 func _on_review_words_changed():
 	# This will be called every time a word is added or removed
@@ -127,6 +156,14 @@ func _load_next_card() -> void:
 		current_entry.get("meaning_fa", "")
 	]
 	example_label.text = current_entry.get("example", "")
+
+	var phonetics_text: String = current_entry.get("phonetics", "")
+	if phonetics_text != "":
+		phonetics_label.text = phonetics_text
+		phonetics_label.visible = true
+	else:
+		phonetics_label.text = ""
+		phonetics_label.visible = false
 
 	var book: int   = current_entry.get("book", 0)
 	var lesson: int = current_entry.get("lesson", 0)

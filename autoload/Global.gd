@@ -11,12 +11,15 @@ signal review_words_changed()
 # TTS (Text-To-Speech) Engine
 # ============================================================
 var english_voice_id: String = ""
+var _category_cache: Dictionary = {}
 
 const DICTIONARY_PATH := "res://data/v_dictionary.json"
 
 # ---------- VOCABULARY DATA LOADING ----------
 
 var intro_animation_played := false
+
+var audio_player: AudioStreamPlayer
 
 # Word database for quick lookup
 var word_database: Dictionary = {}
@@ -151,8 +154,11 @@ func _ready() -> void:
 	_load_review_words()
 	_load_progress()
 	_load_word_database()
-	_init_tts()
-
+	_init_tts() # You can keep or remove TTS init, keeping it for safety
+	
+	# Initialize AudioStreamPlayer for playing word audio files
+	audio_player = AudioStreamPlayer.new()
+	add_child(audio_player)
 
 # ---------- LAST SCENE ----------
 
@@ -344,7 +350,8 @@ func _load_word_database() -> void:
 	"word_type": word_obj.get("word_type", "noun"),
 	"countable": word_obj.get("countable", null),
 	"verb_forms": word_obj.get("verb_forms", {}),
-	"audio": word_obj.get("audio", "")
+	"audio": word_obj.get("audio", ""),
+	"phonetics": word_obj.get("phonetics", "")
 }
 		word_database[key] = word_data
 
@@ -494,6 +501,22 @@ func get_due_words() -> Array:
 
 	return due
 
+func load_category(category: String, book: int, lesson: int) -> Dictionary:
+	if not _category_cache.has(category):
+		var path := "res://data/%s.json" % category
+		if not FileAccess.file_exists(path):
+			push_warning("Category file not found: " + path)
+			return {}
+		var file := FileAccess.open(path, FileAccess.READ)
+		var json := JSON.new()
+		if json.parse(file.get_as_text()) != OK:
+			push_error("JSON error in " + path)
+			return {}
+		file.close()
+		_category_cache[category] = json.data
+	
+	var data: Dictionary = _category_cache[category]
+	return data.get("books", {}).get(str(book), {}).get(str(lesson), {})
 
 func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
 	var ease: float     = entry.get("srs_ease", 2.5)
@@ -591,6 +614,35 @@ func _init_tts() -> void:
 
 	if english_voice_id == "":
 		push_warning("No English TTS voice found on this device.")
+
+func play_word_audio(audio_filename: String, word_text: String = "") -> void:
+	# 1. If no audio filename is provided in the JSON, fallback to TTS immediately
+	if audio_filename.is_empty():
+		if word_text != "":
+			speak_word(word_text)
+		return
+		
+	var path: String = "res://assets/audio/Vocabularies/%s" % audio_filename
+		
+	# 2. Check if the file actually exists in the project
+	if not ResourceLoader.exists(path):
+		push_warning("Audio file not found: " + path + ". Falling back to TTS.")
+		if word_text != "":
+			speak_word(word_text)
+		return
+		
+	# 3. Try to load and play the audio file
+	var stream = load(path)
+	if stream is AudioStream:
+		if audio_player.playing:
+			audio_player.stop() # Stop current audio if it's still playing
+		audio_player.stream = stream
+		audio_player.play()
+	else:
+		# 4. Fallback if the file exists but fails to load (e.g., corrupted file)
+		push_error("Failed to load audio stream from: " + path + ". Falling back to TTS.")
+		if word_text != "":
+			speak_word(word_text)
 
 func speak_word(text: String) -> void:
 	if text.is_empty() or english_voice_id == "":

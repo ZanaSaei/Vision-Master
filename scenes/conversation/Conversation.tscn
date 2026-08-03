@@ -1,29 +1,16 @@
 [gd_scene format=3 uid="uid://hghqnmbok55t"]
 
 [ext_resource type="Script" uid="uid://bmwx225q8jlsk" path="res://scenes/conversation/conversation.gd" id="1_swh16"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_08em2"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_khtvf"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_3afir"]
 [ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="3_s57c2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhcqr"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
-corner_radius_bottom_right = 150
-corner_radius_bottom_left = 150
-expand_margin_top = 45.0
+[ext_resource type="PackedScene" uid="uid://d077on3j3i6pd" path="res://scenes/shared/AudioPanel.tscn" id="5_3afir"]
+[ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="5_jy5oa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
 font = ExtResource("3_3afir")
 font_size = 45
-
-[sub_resource type="LabelSettings" id="LabelSettings_3afir"]
-font = ExtResource("3_3afir")
-font_size = 45
-font_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3afir"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
-corner_radius_top_left = 150
-corner_radius_top_right = 150
 
 [node name="Conversation" type="Control" unique_id=393705888]
 layout_mode = 3
@@ -41,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.9372549, 0.9647059, 1, 1)
+color = Color(0.17254902, 0.21960784, 0.49803922, 1)
 
 [node name="HeaderBar" type="PanelContainer" parent="." unique_id=1330912032]
 layout_mode = 1
@@ -50,7 +37,7 @@ anchor_right = 1.0
 offset_top = 30.0
 offset_bottom = 320.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
+theme_override_styles/panel = ExtResource("2_08em2")
 
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
 layout_mode = 2
@@ -97,95 +84,11 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 30
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MainLayout" unique_id=1131021853]
+[node name="PageView" type="Control" parent="MarginContainer/MainLayout" unique_id=207640961]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("5_jy5oa")
+metadata/_custom_type_script = "uid://c80kxm3atqo2l"
 
-[node name="ContentLayout" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer" unique_id=1583681460]
-layout_mode = 2
-theme_override_constants/separation = 35
-
-[node name="ConversationImage" type="TextureRect" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=357568747]
-layout_mode = 2
-
-[node name="IntroLabel" type="RichTextLabel" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=315135960]
-custom_minimum_size = Vector2(950, 0)
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("3_3afir")
-theme_override_font_sizes/normal_font_size = 45
-autowrap_mode = 2
-vertical_alignment = 1
-
-[node name="LinesContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1012636005]
-layout_mode = 2
-theme_override_constants/separation = 35
-
-[node name="QuestionsSection" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout" unique_id=1136462616]
-layout_mode = 2
-theme_override_constants/separation = 25
-
-[node name="QuestionsTitle" type="Label" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=939271501]
-layout_mode = 2
-mouse_filter = 1
-text = "Think About It"
-label_settings = SubResource("LabelSettings_3afir")
-
-[node name="QuestionsContainer" type="VBoxContainer" parent="MarginContainer/MainLayout/ScrollContainer/ContentLayout/QuestionsSection" unique_id=1386943664]
-layout_mode = 2
-theme_override_constants/separation = 35
-
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=829871561]
-
-[node name="AudioControlPanel" type="PanelContainer" parent="." unique_id=1344303056]
-visible = false
+[node name="AudioPanel" parent="." unique_id=418187207 instance=ExtResource("5_3afir")]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -191.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_3afir")
-
-[node name="MarginContainer" type="MarginContainer" parent="AudioControlPanel" unique_id=449841989]
-layout_mode = 2
-theme_override_constants/margin_left = 70
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 70
-theme_override_constants/margin_bottom = 30
-
-[node name="AudioUILayout" type="VBoxContainer" parent="AudioControlPanel/MarginContainer" unique_id=459718847]
-layout_mode = 2
-theme_override_constants/separation = 69
-
-[node name="AudioSlider" type="HSlider" parent="AudioControlPanel/MarginContainer/AudioUILayout" unique_id=568534041]
-layout_mode = 2
-size_flags_vertical = 6
-
-[node name="ControlsLayout" type="HBoxContainer" parent="AudioControlPanel/MarginContainer/AudioUILayout" unique_id=325693788]
-layout_mode = 2
-theme_override_constants/separation = 47
-alignment = 1
-
-[node name="RewindButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=2024713601]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "-10s"
-
-[node name="PlayPauseButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=2095918429]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "Pause"
-
-[node name="ForwardButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=834154193]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "+10s"
-
-[node name="CloseAudioButton" type="Button" parent="AudioControlPanel/MarginContainer/AudioUILayout/ControlsLayout" unique_id=940643105]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "X"

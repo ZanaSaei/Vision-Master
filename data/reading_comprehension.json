@@ -1,0 +1,387 @@
+{
+  "category": "reading_comprehension",
+  "title": "Reading Comprehension",
+  "icon": "📖",
+  "books": {
+	"1": {
+	  "1": {
+		"lesson_title": "Saving Nature",
+		"reading_title": "Endangered Animals",
+		"exercises": [
+		  {
+			"exercise_id": "v1_l1_rc_mcq",
+			"type": "multiple_choice",
+			"instruction": "Choose the best answer.",
+			"items": [
+			  {"question": "Which of the followings is not an endangered animal?", "options": ["panda", "cheetah", "horse"], "answer": 2, "explanation": "The text lists whales, pandas, tigers, Asian elephants and the Iranian cheetah — not horses."},
+			  {"question": "Where is the natural home of the Iranian cheetah?", "options": ["forest", "plain", "mountain"], "answer": 1, "explanation": "\"This wild animal lives only in the plains of Iran.\""},
+			  {"question": "Which place is not a natural home of wild animals?", "options": ["park", "lake", "jungle"], "answer": 0, "explanation": "The text mentions forests, lakes and plains as natural homes — a park is man-made."}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l1_rc_tf",
+			"type": "true_false",
+			"instruction": "Read the sentences; put T for true and F for false.",
+			"items": [
+			  {"statement": "In the past, many hunters paid attention to wildlife.", "answer": false, "correction": "Only recently do some hunters stop hunting; in the past they did not pay attention to wildlife."},
+			  {"statement": "Families are interested in protecting nature.", "answer": true, "correction": ""},
+			  {"statement": "When people take care of cheetahs, the number of these animals will increase.", "answer": true, "correction": ""}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l1_rc_match",
+			"type": "matching",
+			"instruction": "Match two halves. There is one extra option.",
+			"options": ["when their number increases.", "it means that it is an endangered animal.", "some hunters go hunting.", "they will live in the future."],
+			"items": [
+			  {"text": "When only a few numbers of an animal live on Earth, ...", "answer": "it means that it is an endangered animal."},
+			  {"text": "If we take care of Iranian cheetahs, ...", "answer": "they will live in the future."},
+			  {"text": "People need more places for living, ...", "answer": "some hunters go hunting."}
+			],
+			"note": "\"when their number increases.\" is the extra option."
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": "Wonders of Creation",
+		"reading_title": "A Wonderful Liquid",
+		"exercises": [
+		  {
+			"exercise_id": "v1_l2_rc_mcq",
+			"type": "multiple_choice",
+			"instruction": "Choose the best answer.",
+			"items": [
+			  {"question": "What color is plasma?", "options": ["red", "yellow", "white"], "answer": 1, "explanation": "\"This is a clear and yellow liquid.\""},
+			  {"question": "How can we keep our body healthy?", "options": ["By eating fast foods", "By doing daily exercises", "By sleeping late"], "answer": 1, "explanation": "\"...eating healthy food and doing daily exercises.\""},
+			  {"question": "How many white blood cells are there in a drop of blood?", "options": ["hundreds", "thousands", "millions"], "answer": 1, "explanation": "\"There are thousands of white cells in a drop of blood.\""}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l2_rc_tf",
+			"type": "true_false",
+			"instruction": "Read the sentences; put T for true and F for false.",
+			"items": [
+			  {"statement": "There are only white cells in plasma.", "answer": false, "correction": "Plasma carries both red and white cells."},
+			  {"statement": "Red cells are smaller than white cells.", "answer": true, "correction": ""},
+			  {"statement": "The number of red cells is more than white cells.", "answer": true, "correction": ""}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l2_rc_match",
+			"type": "matching",
+			"instruction": "Match two halves. There is one extra option.",
+			"options": ["so it is sometimes good to think about it.", "then it is dangerous.", "and collect carbon dioxide.", "to keep us alive."],
+			"items": [
+			  {"text": "The heart pumps blood round the body ...", "answer": "to keep us alive."},
+			  {"text": "Our body is really wonderful, ...", "answer": "so it is sometimes good to think about it."},
+			  {"text": "Red blood cells carry oxygen round the body ...", "answer": "and collect carbon dioxide."}
+			],
+			"note": "\"then it is dangerous.\" is the extra option."
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": "The Value of Knowledge",
+		"reading_title": "No Pain No Gain",
+		"exercises": [
+		  {
+			"exercise_id": "v1_l3_rc_mcq",
+			"type": "multiple_choice",
+			"instruction": "Choose the best answer.",
+			"items": [
+			  {"question": "Where did Edison learn science?", "options": ["In the library", "At school", "In the laboratory"], "answer": 0, "explanation": "\"...learned science by reading books in the library himself.\""},
+			  {"question": "How did Edison find answers to problems?", "options": ["By sleeping in the laboratory", "By doing many experiments", "By quitting what he was after"], "answer": 1, "explanation": "\"Edison was famous for doing thousands of experiments...\""},
+			  {"question": "Which is not true about scientists?", "options": ["They find facts", "They invent things", "They feel weak"], "answer": 2, "explanation": "\"They never felt weak when they were studying.\""}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l3_rc_tf",
+			"type": "true_false",
+			"instruction": "Read the sentences; put T for true and F for false.",
+			"items": [
+			  {"statement": "Edison finally lost his interest in inventing things.", "answer": false, "correction": "He never lost his interest in making things."},
+			  {"statement": "Edison did not attend school at all.", "answer": true, "correction": ""},
+			  {"statement": "Hard work is the key to scientists' success.", "answer": true, "correction": ""}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l3_rc_match",
+			"type": "matching",
+			"instruction": "Match two halves. There is one extra option.",
+			"options": ["you must not feel weak.", "he did not quit studying.", "they did not give up.", "he became a famous person."],
+			"items": [
+			  {"text": "After Edison lost his hearing, ...", "answer": "he did not quit studying."},
+			  {"text": "When scientists were working on problems, ...", "answer": "they did not give up."},
+			  {"text": "If you like to be successful, ...", "answer": "you must not feel weak."}
+			],
+			"note": "\"he became a famous person.\" is the extra option."
+		  }
+		]
+	  },
+	  "4": {
+		"lesson_title": "Traveling the World",
+		"reading_title": "Iran: A True Paradise",
+		"exercises": [
+		  {
+			"exercise_id": "v1_l4_rc_mcq",
+			"type": "multiple_choice",
+			"instruction": "Choose the best answer.",
+			"items": [
+			  {"question": "Which one is a four-season country?", "options": ["Brazil", "Iran", "Egypt"], "answer": 1, "explanation": "\"Iran is a four-season country...\""},
+			  {"question": "South American countries are famous for ...", "options": ["amazing nature", "delicious food", "traditional ceremonies"], "answer": 0, "explanation": "\"They are famous for their ancient history and amazing nature.\""},
+			  {"question": "In which continent can we visit the ancient pyramids?", "options": ["Asia", "Africa", "Europe"], "answer": 1, "explanation": "\"Egypt is one of the oldest countries of Africa. It is famous for its wonderful pyramids.\""}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l4_rc_tf",
+			"type": "true_false",
+			"instruction": "Read the sentences; put T for true and F for false.",
+			"items": [
+			  {"statement": "Peru and Chile are historical countries.", "answer": true, "correction": ""},
+			  {"statement": "Holy shrines in Iran are destinations only for domestic tourists.", "answer": false, "correction": "Many Muslims from other countries also travel to Iran's holy shrines."},
+			  {"statement": "All countries have tourist attractions for international travelers.", "answer": false, "correction": "The text says some countries attract a lot of tourists — not all."}
+			]
+		  },
+		  {
+			"exercise_id": "v1_l4_rc_match",
+			"type": "matching",
+			"instruction": "Match two halves. There is one extra option.",
+			"options": ["nobody likes to travel there.", "to visit the wonderful pyramids.", "people can do both summer and winter activities at the same time.", "make South America an attractive destination for tourists."],
+			"items": [
+			  {"text": "When a country is a four-season one, ...", "answer": "people can do both summer and winter activities at the same time."},
+			  {"text": "Many tourists travel to Egypt every year ...", "answer": "to visit the wonderful pyramids."},
+			  {"text": "Both history and nature ...", "answer": "make South America an attractive destination for tourists."}
+			],
+			"note": "\"nobody likes to travel there.\" is the extra option."
+		  }
+		]
+	  }
+	},
+	"2": {
+	  "1": {
+		"lesson_title": "Understanding People",
+		"reading_title": "Languages of the World",
+		"strategy": "Scanning",
+		"exercises": [
+		  {
+			"exercise_id": "v2_l1_rc_scan_numbers",
+			"type": "matching",
+			"instruction": "Scan the passage for the following numbers. Match them with the information. There is one extra number.",
+			"options": ["548", "2250", "8", "1300", "204"],
+			"items": [
+			  {"text": "The number of languages with speakers fewer than 10", "answer": "204"},
+			  {"text": "The percent of endangered languages", "answer": "8"},
+			  {"text": "The number of languages with speakers fewer than 99", "answer": "548"},
+			  {"text": "The number of languages in Oceania", "answer": "1300"}
+			],
+			"note": "2250 is the extra number (languages in Asia)."
+		  },
+		  {
+			"exercise_id": "v2_l1_rc_proper_nouns",
+			"type": "matching",
+			"instruction": "Scan the passage for the proper nouns.",
+			"options": ["English", "the Americas", "Chinese", "Asia"],
+			"items": [
+			  {"text": "The language with more than one billion learners:", "answer": "English"},
+			  {"text": "The continent with one thousand languages:", "answer": "the Americas"},
+			  {"text": "The language with the largest number of native speakers:", "answer": "Chinese"}
+			],
+			"note": "\"Asia\" is the extra option."
+		  },
+		  {
+			"exercise_id": "v2_l1_rc_scan_answer",
+			"type": "fill_blank",
+			"instruction": "Scan the passage and answer the following questions.",
+			"items": [
+			  {"text": "How many languages are there in the world?", "answer": ["about 7000", "7000", "about 7000 languages"]},
+			  {"text": "What is the number of endangered languages?", "answer": ["548"]},
+			  {"text": "Which continent has the largest number of languages in the world?", "answer": ["asia"]}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l1_rc_tf",
+			"type": "true_false",
+			"instruction": "Read the sentences; put T for true and F for false. If a sentence is false, correct it.",
+			"items": [
+			  {"statement": "Through languages, people can exchange only knowledge.", "answer": false, "correction": "People exchange knowledge, beliefs, wishes, and feelings through language."},
+			  {"statement": "When a language has no speaker, it dies out.", "answer": true, "correction": ""},
+			  {"statement": "Only a few languages can meet the needs of their own speakers.", "answer": false, "correction": "Every language meets the needs of its own speakers."}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": "A Healthy Lifestyle",
+		"reading_title": "Having a Healthier and Longer Life",
+		"strategy": "Skimming",
+		"exercises": [
+		  {
+			"exercise_id": "v2_l2_rc_ideas",
+			"type": "matching",
+			"instruction": "Find each idea in the Reading and write the number of the paragraph that discusses it.",
+			"options": ["Paragraph 2", "Paragraph 3", "Paragraph 4", "Paragraph 5"],
+			"items": [
+			  {"text": "Having a healthy relationship with others makes our lives better.", "answer": "Paragraph 4"},
+			  {"text": "Addiction is a harmful habit.", "answer": "Paragraph 5"},
+			  {"text": "Paying attention to our food is necessary for our physical health.", "answer": "Paragraph 3"}
+			],
+			"note": "Paragraph 2 is the extra option (it is about checking general health)."
+		  },
+		  {
+			"exercise_id": "v2_l2_rc_main_idea",
+			"type": "multiple_choice",
+			"instruction": "Skim the Reading. Circle the main idea.",
+			"items": [
+			  {"question": "What is the main idea of the Reading?", "options": ["Smoking is harmful to health.", "Having a healthy and long life needs a careful plan.", "Praying gives people a healthy life."], "answer": 1, "explanation": "The last paragraph: \"The key point is having a plan for the way they want to live...\""}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l2_rc_scan",
+			"type": "fill_blank",
+			"instruction": "Scan the Reading to find the following information.",
+			"items": [
+			  {"text": "What increases the risk of heart attack?", "answer": ["eating junk food", "junk food"]},
+			  {"text": "How can we check our general health?", "answer": ["measuring blood pressure and heartbeat", "by measuring blood pressure and heartbeat"]},
+			  {"text": "What is the most important factor to have a healthier life?", "answer": ["emotional health", "having emotional health"]}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": "Art and Culture",
+		"reading_title": "Art, Culture and Society",
+		"strategy": "Recognizing Reference Words",
+		"exercises": [
+		  {
+			"exercise_id": "v2_l3_rc_references",
+			"type": "matching",
+			"instruction": "Use the strategy to find what these words refer to.",
+			"options": ["art", "a country's", "handicrafts", "countries with the richest art", "tourists"],
+			"items": [
+			  {"text": "it (paragraph 1, line 2)", "answer": "art"},
+			  {"text": "its (paragraph 2, line 3)", "answer": "a country's"},
+			  {"text": "them (paragraph 3, line 3)", "answer": "handicrafts"},
+			  {"text": "them (paragraph 5, line 4)", "answer": "countries with the richest art"},
+			  {"text": "they (paragraph 6, line 6)", "answer": "tourists"}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l3_rc_scan",
+			"type": "fill_blank",
+			"instruction": "Scan the Reading to find the following information.",
+			"items": [
+			  {"text": "What does art reflect?", "answer": ["the history of a society", "history of a society"]},
+			  {"text": "How can we help the economy of our country?", "answer": ["by making and selling handicrafts", "making and selling handicrafts"]},
+			  {"text": "Why is Persian art famous?", "answer": ["for reflecting moral and social values of iranian people and the natural beauty of this vast country", "reflecting moral and social values"]}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l3_rc_ideas",
+			"type": "matching",
+			"instruction": "Find each idea in the Reading and write the number of the paragraph that discusses it.",
+			"options": ["Paragraph 2", "Paragraph 3", "Paragraph 6"],
+			"items": [
+			  {"text": "Making and selling handicrafts help a country's economy.", "answer": "Paragraph 3"},
+			  {"text": "Many people in the world value the art and skill of Iranian artists.", "answer": "Paragraph 6"},
+			  {"text": "Handicrafts can show the art and culture of a nation.", "answer": "Paragraph 2"}
+			]
+		  }
+		]
+	  }
+	},
+	"3": {
+	  "1": {
+		"lesson_title": "Sense of Appreciation",
+		"reading_title": "Respect Your Parents",
+		"strategy": "Question Generation",
+		"exercises": [
+		  {
+			"exercise_id": "v3_l1_rc_generate",
+			"type": "open_ended",
+			"instruction": "Read the passage. Generate at least five questions with the question starters (Who, What, Where, When, Why, How) and then answer them.",
+			"items": [
+			  {"question": "Write your questions and answers here.", "sample_answer": "1) Who was sitting on the sofa? → An old woman. 2) What sat on the window? → A pigeon. 3) How many times did the mother ask the same question? → Three times. 4) Why did the son burst into tears? → Because he read his mother's diary and felt sorry. 5) What did the mother say calmly? → \"We must care for those who once cared for us.\""}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l1_rc_main_idea",
+			"type": "open_ended",
+			"instruction": "Skim the Reading. Write its main idea.",
+			"items": [
+			  {"question": "Main idea:", "sample_answer": "We must love, respect, and care for our parents, because they cared for us patiently when we were children."}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l1_rc_references",
+			"type": "matching",
+			"instruction": "Read the Reading. Find what these words refer to.",
+			"options": ["the old woman", "the son's", "the son", "the mother", "parents"],
+			"items": [
+			  {"text": "her (paragraph 1, line 2)", "answer": "the old woman"},
+			  {"text": "his (paragraph 2, line 5)", "answer": "the son's"},
+			  {"text": "you (paragraph 3, line 2)", "answer": "the son"},
+			  {"text": "me (paragraph 4, line 5)", "answer": "the mother"},
+			  {"text": "them (paragraph 5, line 6)", "answer": "parents"}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": "Look it Up!",
+		"reading_title": "How to Use a Dictionary",
+		"strategy": "Highlighting",
+		"exercises": [
+		  {
+			"exercise_id": "v3_l2_rc_highlight",
+			"type": "open_ended",
+			"instruction": "Read the paragraph about sharks and write the most important information you would highlight.",
+			"items": [
+			  {"question": "What would you highlight?", "sample_answer": "• There are nearly 400 different kinds of sharks. • Most sharks never attack people. • Sharks kill about 40 people every year. • Snakes kill about 60,000 people every year. • People kill 25,000,000 sharks every year."}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l2_rc_questions",
+			"type": "fill_blank",
+			"instruction": "Generate questions with the question starters and answer them from the Reading.",
+			"items": [
+			  {"text": "What does a good dictionary give the user?", "answer": ["information about words", "information about words such as spellings, pronunciations and definitions"]},
+			  {"text": "How can you learn to use your dictionary effectively?", "answer": ["by reading its introduction", "read the introduction"]},
+			  {"text": "Where are the guide words?", "answer": ["at the top of each page", "the top of each page"]}
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": "Renewable Energy",
+		"reading_title": "Earth for our Children",
+		"strategy": "Note Taking",
+		"exercises": [
+		  {
+			"exercise_id": "v3_l3_rc_notes",
+			"type": "fill_blank",
+			"instruction": "Use the information in the Reading to complete the notes.",
+			"items": [
+			  {"text": "The main resources of the earth are ___ such as natural gas, oil, and coal.", "answer": ["fossil fuels"]},
+			  {"text": "Clean energy is made from resources that can be replaced, like ___, water, sunshine, tides, and plants.", "answer": ["wind"]},
+			  {"text": "The most common type of clean energy is ___ power.", "answer": ["solar"]},
+			  {"text": "Solar collectors collect heat by ___ sunlight.", "answer": ["absorbing"]}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l3_rc_references",
+			"type": "matching",
+			"instruction": "Read the Reading. Find what these words refer to.",
+			"options": ["energy", "fossil fuels", "other types of energy resources", "big shiny panels", "fossil fuels "],
+			"items": [
+			  {"text": "it (paragraph 1, line 1)", "answer": "energy"},
+			  {"text": "them (paragraph 2, line 3)", "answer": "fossil fuels"},
+			  {"text": "them (paragraph 3, line 2)", "answer": "other types of energy resources"},
+			  {"text": "these (paragraph 5, line 5)", "answer": "big shiny panels"},
+			  {"text": "they (paragraph 6, line 3)", "answer": "fossil fuels "}
+			]
+		  }
+		]
+	  }
+	}
+  }
+}

@@ -1,0 +1,560 @@
+{
+  "category": "reading_strategies",
+  "title": {"en": "Reading Strategies", "fa": "راهبردهای خواندن"},
+  "icon": "🎯",
+  "description": {
+	"en": "Reading strategies help you understand texts better and faster.",
+	"fa": "راهبردهای خواندن به شما کمک می‌کنند متن‌ها را بهتر و سریع‌تر درک کنید."
+  },
+  "books": {
+	"2": {
+	  "1": {
+		"lesson_title": {"en": "Understanding People", "fa": "درک مردم"},
+		"reading_title": {"en": "Languages of the World", "fa": "زبان‌های جهان"},
+		"strategy": {
+		  "name": {"en": "Scanning", "fa": "پویش (اسکن)"},
+		  "icon": "🔍",
+		  "description": {
+			"en": "You can scan a reading passage to look for and find specific information quickly such as a number, a name, a word, or a phrase.",
+			"fa": "شما می‌توانید یک متن خواندنی را پویش کنید تا اطلاعات خاصی مانند یک عدد، یک نام، یک کلمه یا یک عبارت را به سرعت پیدا کنید."
+		  },
+		  "steps": [
+			{"en": "Make a clear picture in your mind of the information you are looking for.", "fa": "تصویر روشنی از اطلاعاتی که به دنبالش هستید در ذهن خود بسازید."},
+			{"en": "Look for that information.", "fa": "به دنبال آن اطلاعات بگردید."},
+			{"en": "Move your eyes quickly across the text. Don't read every word.", "fa": "چشمان خود را به سرعت روی متن حرکت دهید. همه کلمات را نخوانید."},
+			{"en": "When you find the information, stop, read the sentence and mark the information.", "fa": "وقتی اطلاعات را پیدا کردید، توقف کنید، جمله را بخوانید و اطلاعات را علامت بزنید."}
+		  ],
+		  "extra_fa": [
+			"پویش مانند جستجوی یک کلمه در فرهنگ لغت است؛ شما همه صفحه را نمی‌خوانید، فقط به دنبال کلمه مورد نظر می‌گردید.",
+			"وقتی در روزنامه به دنبال نتیجه یک مسابقه فوتبال می‌گردید یا در فهرست تلفن دنبال شماره یک دوست هستید، در واقع دارید پویش می‌کنید.",
+			"در امتحانات زبان، وقتی باید پاسخ یک سؤال خاص را در متن پیدا کنید، پویش به شما کمک می‌کند زمان زیادی صرفه‌جویی کنید.",
+            "در پویش، هدف درک کامل متن نیست؛ هدف فقط پیدا کردن یک اطلاعات خاص است."
+		  ],
+		  "tips_fa": [
+			"قبل از شروع، دقیقاً بدانید دنبال چه چیزی هستید (عدد، نام، تاریخ یا مکان).",
+			"از انگشت یا مداد خود برای هدایت چشم‌ها روی متن استفاده کنید.",
+            "وقتی به عدد یا نام مورد نظر رسیدید، همان جمله را با دقت بخوانید."
+		  ]
+		},
+		"exercises": [
+		  {
+			"exercise_id": "v2_l1_strategy_quiz",
+			"type": "multiple_choice",
+			"instruction": {
+			  "en": "Check your understanding of the Scanning strategy.",
+			  "fa": "درک خود را از راهبرد پویش بررسی کنید."
+			},
+			"items": [
+			  {
+				"question": {"en": "What is the main purpose of scanning?", "fa": "هدف اصلی پویش چیست؟"},
+				"options": [
+				  {"en": "To understand every detail of the text", "fa": "درک همه جزئیات متن"},
+				  {"en": "To find specific information quickly", "fa": "پیدا کردن سریع اطلاعات خاص"},
+				  {"en": "To memorize the whole text", "fa": "حفظ کردن کل متن"}
+				],
+				"answer": 1,
+				"explanation": {"en": "Scanning is used to find specific information like numbers, names, or words quickly.", "fa": "پویش برای پیدا کردن سریع اطلاعات خاص مانند اعداد، نام‌ها یا کلمات استفاده می‌شود."}
+			  },
+			  {
+				"question": {"en": "Which of these is NOT a step in scanning?", "fa": "کدام یک از مراحل پویش نیست؟"},
+				"options": [
+				  {"en": "Make a clear picture of the information you need", "fa": "تصویر روشنی از اطلاعات مورد نیاز بسازید"},
+				  {"en": "Read every word slowly and carefully", "fa": "همه کلمات را آهسته و با دقت بخوانید"},
+				  {"en": "Move your eyes quickly across the text", "fa": "چشمان خود را به سرعت روی متن حرکت دهید"}
+				],
+				"answer": 1,
+				"explanation": {"en": "In scanning you do NOT read every word — you move your eyes quickly.", "fa": "در پویش همه کلمات را نمی‌خوانید، بلکه چشمان خود را به سرعت حرکت می‌دهید."}
+			  }
+			]
+		  },
+		  {
+			"exercise_id": "v2_l1_strategy_tf",
+			"type": "true_false",
+			"instruction": {
+			  "en": "Read the sentences; put T for true and F for false.",
+			  "fa": "جملات را بخوانید؛ برای درست T و برای نادرست F بگذارید."
+			},
+			"items": [
+			  {"statement": {"en": "In scanning, you should read every word carefully.", "fa": "در پویش باید همه کلمات را با دقت بخوانید."}, "answer": false, "correction": {"en": "You move your eyes quickly and don't read every word.", "fa": "چشمان خود را به سرعت حرکت می‌دهید و همه کلمات را نمی‌خوانید."}},
+			  {"statement": {"en": "Looking for a word in a dictionary is a kind of scanning.", "fa": "جستجوی یک کلمه در فرهنگ لغت نوعی پویش است."}, "answer": true, "correction": ""},
+			  {"statement": {"en": "When you find the information, you should stop and read the sentence.", "fa": "وقتی اطلاعات را پیدا کردید، باید توقف کنید و جمله را بخوانید."}, "answer": true, "correction": ""}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l1_strategy_practice",
+			"type": "fill_blank",
+			"instruction": {
+			  "en": "Scan this short text and answer the questions. Text: 'Reza is 15 years old. He lives in Shiraz. His school has 850 students. His English teacher, Mr. Karimi, has 20 years of experience. Reza studies English 4 days a week.'",
+			  "fa": "این متن کوتاه را پویش کنید و به سؤالات پاسخ دهید. متن: «رضا ۱۵ ساله است. او در شیراز زندگی می‌کند. مدرسه او ۸۵۰ دانش‌آموز دارد. معلم انگلیسی او، آقای کریمی، ۲۰ سال سابقه دارد. رضا هفته‌ای ۴ روز انگلیسی می‌خواند.»"
+			},
+			"items": [
+			  {"text": {"en": "How old is Reza?", "fa": "رضا چند ساله است؟"}, "answer": ["15", "fifteen", "15 years old"]},
+			  {"text": {"en": "How many students does his school have?", "fa": "مدرسه او چند دانش‌آموز دارد؟"}, "answer": ["850", "850 students"]},
+			  {"text": {"en": "Who is his English teacher?", "fa": "معلم انگلیسی او کیست؟"}, "answer": ["mr. karimi", "mr karimi", "karimi"]},
+			  {"text": {"en": "How many years of experience does Mr. Karimi have?", "fa": "آقای کریمی چند سال سابقه دارد؟"}, "answer": ["20", "twenty", "20 years"]}
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "A Healthy Lifestyle", "fa": "سبک زندگی سالم"},
+		"reading_title": {"en": "Having a Healthier and Longer Life", "fa": "داشتن زندگی سالم‌تر و طولانی‌تر"},
+		"strategy": {
+		  "name": {"en": "Skimming", "fa": "خواندن اجمالی (اسکیمینگ)"},
+		  "icon": "📖",
+		  "description": {
+			"en": "You can skim a passage to identify the topic and understand the writer's main idea, or message. When you skim, you can also predict and guess what the reading is about. Skimming a passage before you fully and carefully read it can help you understand it better.",
+			"fa": "شما می‌توانید یک متن را به صورت اجمالی بخوانید تا موضوع را شناسایی کنید و ایده یا پیام اصلی نویسنده را بفهمید. هنگام خواندن اجمالی می‌توانید پیش‌بینی و حدس بزنید که متن درباره چیست. خواندن اجمالی یک متن قبل از خواندن کامل و دقیق آن، به درک بهتر شما کمک می‌کند."
+		  },
+		  "steps": [
+			{"en": "Read the title.", "fa": "عنوان را بخوانید."},
+			{"en": "Look at photos.", "fa": "به تصاویر نگاه کنید."},
+			{"en": "Read the first and the last lines of each paragraph.", "fa": "خط اول و آخر هر پاراگراف را بخوانید."},
+			{"en": "Read quickly. Don't read every word. Details are not important.", "fa": "سریع بخوانید. همه کلمات را نخوانید. جزئیات مهم نیستند."},
+			{"en": "Find and write the main idea.", "fa": "ایده اصلی را پیدا کنید و بنویسید."}
+		  ],
+		  "key_questions": [
+			{"en": "To identify the TOPIC, ask: What is the passage about?", "fa": "برای شناسایی موضوع بپرسید: متن درباره چیست؟"},
+			{"en": "To identify the MAIN IDEA, ask: What are the most important things the writer says about the topic?", "fa": "برای شناسایی ایده اصلی بپرسید: مهم‌ترین چیزهایی که نویسنده درباره موضوع می‌گوید چیست؟"}
+		  ],
+		  "extra_fa": [
+			"خواندن اجمالی مانند نگاه کردن به نقشه یک شهر قبل از سفر است؛ به شما دید کلی می‌دهد اما جزئیات را نشان نمی‌دهد.",
+			"موضوع (topic) با ایده اصلی (main idea) فرق دارد: موضوع فقط یک کلمه یا عبارت کوتاه است، اما ایده اصلی یک جمله کامل است که پیام نویسنده را بیان می‌کند.",
+			"قبل از خواندن دقیق هر درس، ابتدا آن را اجمالی بخوانید تا بدانید درباره چیست؛ این کار درک شما را چند برابر می‌کند.",
+            "معمولاً جمله اول و آخر هر پاراگراف مهم‌ترین اطلاعات را دارند."
+		  ],
+		  "tips_fa": [
+			"عنوان و زیرعنوان‌ها بزرگ‌ترین سرنخ‌ها درباره موضوع هستند.",
+			"تصاویر و زیرنویس آن‌ها را جدی بگیرید؛ آن‌ها خلاصه خوبی از متن هستند.",
+            "اگر بعد از خواندن اجمالی نتوانستید ایده اصلی را بگویید، یک بار دیگر خط اول و آخر پاراگراف‌ها را بخوانید."
+		  ]
+		},
+		"exercises": [
+		  {
+			"exercise_id": "v2_l2_strategy_quiz",
+			"type": "multiple_choice",
+			"instruction": {
+			  "en": "Check your understanding of the Skimming strategy.",
+			  "fa": "درک خود را از راهبرد خواندن اجمالی بررسی کنید."
+			},
+			"items": [
+			  {
+				"question": {"en": "What is the main purpose of skimming?", "fa": "هدف اصلی خواندن اجمالی چیست؟"},
+				"options": [
+				  {"en": "To find a specific number or name", "fa": "پیدا کردن یک عدد یا نام خاص"},
+				  {"en": "To identify the topic and main idea", "fa": "شناسایی موضوع و ایده اصلی"},
+				  {"en": "To learn every detail", "fa": "یادگیری همه جزئیات"}
+				],
+				"answer": 1,
+				"explanation": {"en": "Skimming helps you find the topic and the writer's main idea.", "fa": "خواندن اجمالی به شما کمک می‌کند موضوع و ایده اصلی نویسنده را پیدا کنید."}
+			  },
+			  {
+				"question": {"en": "Which lines of each paragraph are most important when skimming?", "fa": "هنگام خواندن اجمالی، کدام خطوط هر پاراگراف مهم‌ترند؟"},
+				"options": [
+				  {"en": "The middle lines", "fa": "خطوط میانی"},
+				  {"en": "The first and last lines", "fa": "خط اول و آخر"},
+				  {"en": "Only the last line", "fa": "فقط خط آخر"}
+				],
+				"answer": 1,
+				"explanation": {"en": "The first and last lines usually carry the main idea.", "fa": "خط اول و آخر معمولاً ایده اصلی را در بر دارند."}
+			  }
+			]
+		  },
+		  {
+			"exercise_id": "v2_l2_strategy_tf",
+			"type": "true_false",
+			"instruction": {
+			  "en": "Read the sentences; put T for true and F for false.",
+			  "fa": "جملات را بخوانید؛ برای درست T و برای نادرست F بگذارید."
+			},
+			"items": [
+			  {"statement": {"en": "Details are very important when skimming.", "fa": "جزئیات هنگام خواندن اجمالی بسیار مهم هستند."}, "answer": false, "correction": {"en": "Details are NOT important when skimming.", "fa": "جزئیات هنگام خواندن اجمالی مهم نیستند."}},
+			  {"statement": {"en": "The topic and the main idea are the same thing.", "fa": "موضوع و ایده اصلی یک چیز هستند."}, "answer": false, "correction": {"en": "The topic is a word/phrase, but the main idea is a full sentence.", "fa": "موضوع یک کلمه/عبارت است، اما ایده اصلی یک جمله کامل است."}},
+			  {"statement": {"en": "Skimming before careful reading helps you understand better.", "fa": "خواندن اجمالی قبل از خواندن دقیق به درک بهتر کمک می‌کند."}, "answer": true, "correction": ""}
+			]
+		  },
+		  {
+			"exercise_id": "v2_l2_strategy_practice",
+			"type": "multiple_choice",
+			"instruction": {
+			  "en": "Skim this short text and choose the main idea. Text: 'Exercise is very good for your health. It makes your heart strong. It helps you sleep better. It also makes you feel happy. Doctors say 30 minutes of exercise every day is enough.'",
+			  "fa": "این متن کوتاه را اجمالی بخوانید و ایده اصلی را انتخاب کنید. متن: «ورزش برای سلامتی شما بسیار مفید است. قلب شما را قوی می‌کند. به شما کمک می‌کند بهتر بخوابید. همچنین باعث می‌شود احساس شادی کنید. پزشکان می‌گویند روزی ۳۰ دقیقه ورزش کافی است.»"
+			},
+			"items": [
+			  {
+				"question": {"en": "What is the main idea of the text?", "fa": "ایده اصلی متن چیست؟"},
+				"options": [
+				  {"en": "Doctors work very hard.", "fa": "پزشکان خیلی سخت کار می‌کنند."},
+				  {"en": "Exercise is good for your health.", "fa": "ورزش برای سلامتی مفید است."},
+				  {"en": "Sleeping is important.", "fa": "خوابیدن مهم است."}
+				],
+				"answer": 1,
+				"explanation": {"en": "All sentences support the idea that exercise is good for health.", "fa": "همه جملات از این ایده پشتیبانی می‌کنند که ورزش برای سلامتی مفید است."}
+			  }
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Art and Culture", "fa": "هنر و فرهنگ"},
+		"reading_title": {"en": "Art, Culture and Society", "fa": "هنر، فرهنگ و جامعه"},
+		"strategy": {
+		  "name": {"en": "Recognizing Reference Words", "fa": "شناسایی کلمات ارجاعی"},
+		  "icon": "🔗",
+		  "description": {
+			"en": "We use reference words instead of repeating the names of people, places, ideas, or other things.",
+			"fa": "ما به جای تکرار نام افراد، مکان‌ها، ایده‌ها یا چیزهای دیگر از کلمات ارجاعی استفاده می‌کنیم."
+		  },
+		  "steps": [
+			{"en": "Read the text.", "fa": "متن را بخوانید."},
+			{"en": "Look out for common reference words like 'it, they, them, this, those, that, etc'.", "fa": "مراقب کلمات ارجاعی رایج مانند it، they، them، this، those، that و غیره باشید."},
+			{"en": "Look at sentences nearby, especially the former ones, to find what they refer to.", "fa": "به جملات نزدیک، به ویژه جملات قبلی، نگاه کنید تا بفهمید به چه چیزی اشاره می‌کنند."}
+		  ],
+		  "common_reference_words": [
+			{"en": "it / its", "fa": "آن (برای اشیاء و حیوانات)"},
+			{"en": "they / them / their", "fa": "آن‌ها"},
+			{"en": "he / him / his", "fa": "او (مذکر)"},
+			{"en": "she / her", "fa": "او (مونث)"},
+			{"en": "this / that", "fa": "این / آن"},
+			{"en": "these / those", "fa": "اینها / آنها"}
+		  ],
+		  "extra_fa": [
+			"کلمات ارجاعی به ما کمک می‌کنند از تکرار خسته‌کننده نام‌ها جلوگیری کنیم و متن روان‌تر شود.",
+			"در فارسی هم همین کار را می‌کنیم؛ مثلاً به جای تکرار «کتاب»، می‌گوییم «آن را خواندم».",
+			"برای پیدا کردن مرجع یک کلمه ارجاعی، معمولاً باید به جمله قبلی نگاه کنید، چون مرجع تقریباً همیشه قبل از کلمه ارجاعی می‌آید.",
+            "در امتحانات، سؤالات «... به چه چیزی اشاره می‌کند؟» بسیار رایج هستند و این راهبرد دقیقاً برای پاسخ به آن‌هاست."
+		  ],
+		  "tips_fa": [
+			"وقتی به کلمه‌ای مانند it یا they رسیدید، مکث کنید و بپرسید: «این کلمه به چه چیزی برمی‌گردد؟»",
+			"مرجع باید از نظر تعداد (مفرد/جمع) با کلمه ارجاعی مطابقت داشته باشد: it برای مفرد، they برای جمع.",
+            "اگر مطمئن نبودید، کلمه ارجاعی را با مرجع حدسی خود جایگزین کنید؛ اگر جمله معنی داد، درست حدس زده‌اید."
+		  ]
+		},
+		"exercises": [
+		  {
+			"exercise_id": "v2_l3_strategy_quiz",
+			"type": "multiple_choice",
+			"instruction": {
+			  "en": "Check your understanding of Reference Words.",
+			  "fa": "درک خود را از کلمات ارجاعی بررسی کنید."
+			},
+			"items": [
+			  {
+				"question": {"en": "Why do we use reference words?", "fa": "چرا از کلمات ارجاعی استفاده می‌کنیم؟"},
+				"options": [
+				  {"en": "To make the text longer", "fa": "برای طولانی‌تر کردن متن"},
+				  {"en": "To avoid repeating names of people, places or things", "fa": "برای جلوگیری از تکرار نام افراد، مکان‌ها یا چیزها"},
+				  {"en": "To make the text more difficult", "fa": "برای سخت‌تر کردن متن"}
+				],
+				"answer": 1,
+				"explanation": {"en": "Reference words replace repeated nouns to keep the text smooth.", "fa": "کلمات ارجاعی جایگزین اسم‌های تکراری می‌شوند تا متن روان بماند."}
+			  },
+			  {
+				"question": {"en": "Where do we usually look to find what a reference word refers to?", "fa": "معمولاً کجا نگاه می‌کنیم تا بفهمیم یک کلمه ارجاعی به چه چیزی اشاره می‌کند؟"},
+				"options": [
+				  {"en": "The sentences nearby, especially the former ones", "fa": "جملات نزدیک، به ویژه جملات قبلی"},
+				  {"en": "The last paragraph only", "fa": "فقط پاراگراف آخر"},
+				  {"en": "The title of the text", "fa": "عنوان متن"}
+				],
+				"answer": 0,
+				"explanation": {"en": "The reference usually comes before the reference word, in nearby sentences.", "fa": "مرجع معمولاً قبل از کلمه ارجاعی و در جملات نزدیک می‌آید."}
+			  }
+			]
+		  },
+		  {
+			"exercise_id": "v2_l3_strategy_practice",
+			"type": "matching",
+			"instruction": {
+			  "en": "Read this text: 'My friend Ali has a cat. It is very cute. Ali feeds it every day. He loves it very much.' Match each reference word with what it refers to.",
+			  "fa": "این متن را بخوانید: «دوست من علی یک گربه دارد. آن خیلی بامزه است. علی هر روز به آن غذا می‌دهد. او آن را خیلی دوست دارد.» هر کلمه ارجاعی را با مرجعش تطبیق دهید."
+			},
+			"options": ["the cat", "Ali"],
+			"items": [
+			  {"text": {"en": "It (sentence 2)", "fa": "It (جمله ۲)"}, "answer": "the cat"},
+			  {"text": {"en": "it (sentence 3, 'feeds it')", "fa": "it (جمله ۳، 'feeds it')"}, "answer": "the cat"},
+			  {"text": {"en": "He (sentence 4)", "fa": "He (جمله ۴)"}, "answer": "Ali"},
+			  {"text": {"en": "it (sentence 4, 'loves it')", "fa": "it (جمله ۴، 'loves it')"}, "answer": "the cat"}
+			]
+		  }
+		]
+	  }
+	},
+	"3": {
+	  "1": {
+		"lesson_title": {"en": "Sense of Appreciation", "fa": "حس قدردانی"},
+		"reading_title": {"en": "Respect Your Parents", "fa": "به پدر و مادرت احترام بگذار"},
+		"strategy": {
+		  "name": {"en": "Question Generation", "fa": "پرسش‌سازی"},
+		  "icon": "❓",
+		  "description": {
+			"en": "Question generation is a reading comprehension strategy whereby readers ask and answer meaningful questions about the important points or main ideas of a text. Using this strategy, students ask and answer their own questions rather than only answering questions provided by the book or the teacher.",
+			"fa": "پرسش‌سازی راهبردی برای درک خواندن است که در آن خواننده درباره نکات مهم یا ایده‌های اصلی متن، پرسش‌های معنادار می‌پرسد و پاسخ می‌دهد. با استفاده از این راهبرد، دانش‌آموزان به جای اینکه فقط به پرسش‌های کتاب یا معلم پاسخ دهند، پرسش‌های خودشان را می‌سازند و جواب می‌دهند."
+		  },
+		  "steps": [
+			{"en": "Read the text.", "fa": "متن را بخوانید."},
+			{"en": "Find the important points or main ideas.", "fa": "نکات مهم یا ایده‌های اصلی را پیدا کنید."},
+			{"en": "Make a question for each point or idea.", "fa": "برای هر نکته یا ایده یک پرسش بسازید."},
+			{"en": "Answer the questions.", "fa": "به پرسش‌ها پاسخ دهید."}
+		  ],
+		  "question_starters": [
+			{"starter": "Who", "answer_type": {"en": "Person", "fa": "شخص"}, "fa": "چه کسی"},
+			{"starter": "What", "answer_type": {"en": "Object, Description or Process", "fa": "شیء، توصیف یا فرایند"}, "fa": "چه چیزی"},
+			{"starter": "Where", "answer_type": {"en": "Location", "fa": "مکان"}, "fa": "کجا"},
+			{"starter": "When", "answer_type": {"en": "Time", "fa": "زمان"}, "fa": "چه زمانی"},
+			{"starter": "Why", "answer_type": {"en": "Reason", "fa": "دلیل"}, "fa": "چرا"},
+			{"starter": "How", "answer_type": {"en": "Quantity, Process or Description", "fa": "مقدار، فرایند یا توصیف"}, "fa": "چگونه / چطور"}
+		  ],
+		  "extra_fa": [
+			"وقتی خودتان سؤال می‌سازید، متن را عمیق‌تر درک می‌کنید، چون مجبورید به نکات مهم فکر کنید.",
+			"این راهبرد به شما کمک می‌کند فعالانه بخوانید، نه منفعلانه؛ مانند یک کارآگاه که دنبال جواب می‌گردد.",
+			"سؤالات «چرا» و «چگونه» معمولاً شما را به درک عمیق‌تری می‌رسانند تا سؤالات ساده «چه کسی» و «کجا».",
+            "این روش برای مرور درس قبل از امتحان عالی است: از خودتان سؤال بپرسید و جواب دهید."
+		  ],
+		  "tips_fa": [
+			"بعد از خواندن هر پاراگراف، مکث کنید و از خود بپرسید: «از این پاراگراف چه سؤالی می‌توانم بسازم؟»",
+			"سؤالات خود را بنویسید، نه اینکه فقط در ذهن نگه دارید.",
+            "اگر نتوانستید به سؤال خود پاسخ دهید، یعنی آن بخش را خوب نفهمیده‌اید و باید دوباره بخوانید."
+		  ]
+		},
+		"exercises": [
+		  {
+			"exercise_id": "v3_l1_strategy_quiz",
+			"type": "matching",
+			"instruction": {
+			  "en": "Match each question starter with the type of answer it asks for.",
+			  "fa": "هر کلمه پرسشی را با نوع پاسخی که می‌خواهد تطبیق دهید."
+			},
+			"options": ["Person", "Location", "Time", "Reason", "Object or Description"],
+			"items": [
+			  {"text": {"en": "Who", "fa": "Who (چه کسی)"}, "answer": "Person"},
+			  {"text": {"en": "Where", "fa": "Where (کجا)"}, "answer": "Location"},
+			  {"text": {"en": "When", "fa": "When (چه زمانی)"}, "answer": "Time"},
+			  {"text": {"en": "Why", "fa": "Why (چرا)"}, "answer": "Reason"},
+			  {"text": {"en": "What", "fa": "What (چه چیزی)"}, "answer": "Object or Description"}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l1_strategy_tf",
+			"type": "true_false",
+			"instruction": {
+			  "en": "Read the sentences; put T for true and F for false.",
+			  "fa": "جملات را بخوانید؛ برای درست T و برای نادرست F بگذارید."
+			},
+			"items": [
+			  {"statement": {"en": "In question generation, you only answer the teacher's questions.", "fa": "در پرسش‌سازی، فقط به سؤالات معلم پاسخ می‌دهید."}, "answer": false, "correction": {"en": "You make and answer your OWN questions.", "fa": "شما پرسش‌های خودتان را می‌سازید و پاسخ می‌دهید."}},
+			  {"statement": {"en": "Question generation helps you understand a text more deeply.", "fa": "پرسش‌سازی به شما کمک می‌کند متن را عمیق‌تر درک کنید."}, "answer": true, "correction": ""},
+			  {"statement": {"en": "'Why' and 'How' questions lead to deeper understanding.", "fa": "سؤالات «چرا» و «چگونه» به درک عمیق‌تر می‌رسند."}, "answer": true, "correction": ""}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l1_strategy_practice",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Read this text and generate at least three questions with question starters, then answer them. Text: 'Dr. Gharib was born in Tehran in 1288. He became a famous physician. He spared no pains to cure sick children.'",
+			  "fa": "این متن را بخوانید و حداقل سه پرسش با کلمات پرسشی بسازید، سپس به آن‌ها پاسخ دهید. متن: «دکتر قریب در سال ۱۲۸۸ در تهران به دنیا آمد. او پزشک مشهوری شد. او برای درمان کودکان بیمار از هیچ کوششی دریغ نکرد.»"
+			},
+			"items": [
+			  {
+				"question": {"en": "Write your questions and answers here.", "fa": "پرسش‌ها و پاسخ‌های خود را اینجا بنویسید."},
+				"sample_answer": {
+				  "en": "1) When was Dr. Gharib born? → He was born in 1288. 2) Where was he born? → He was born in Tehran. 3) Why was he famous? → Because he was a physician who cured sick children.",
+				  "fa": "۱) دکتر قریب چه زمانی به دنیا آمد؟ ← او در سال ۱۲۸۸ به دنیا آمد. ۲) او کجا به دنیا آمد؟ ← او در تهران به دنیا آمد. ۳) چرا او مشهور بود؟ ← چون پزشکی بود که کودکان بیمار را درمان می‌کرد."
+				}
+			  }
+			]
+		  }
+		]
+	  },
+	  "2": {
+		"lesson_title": {"en": "Look it Up!", "fa": "دنبالش بگرد!"},
+		"reading_title": {"en": "How to Use a Dictionary", "fa": "چگونه از فرهنگ لغت استفاده کنیم"},
+		"strategy": {
+		  "name": {"en": "Highlighting", "fa": "برجسته‌سازی (هایلایت)"},
+		  "icon": "🖍️",
+		  "description": {
+			"en": "One way to remember what you have read is to highlight important information.",
+			"fa": "یکی از راه‌های به خاطر سپردن آنچه خوانده‌اید، برجسته کردن اطلاعات مهم است."
+		  },
+		  "steps": [
+			{"en": "Highlight the main ideas.", "fa": "ایده‌های اصلی را برجسته کنید."},
+			{"en": "Highlight the key points, not minor details or less important information.", "fa": "نکات کلیدی را برجسته کنید، نه جزئیات ریز یا اطلاعات کم‌اهمیت."},
+			{"en": "Highlight phrases and parts of sentences instead of entire sentences.", "fa": "به جای جملات کامل، عبارت‌ها و بخش‌هایی از جملات را برجسته کنید."},
+			{"en": "Do not highlight many sentences or too much of the text.", "fa": "جملات زیادی یا بخش زیادی از متن را برجسته نکنید."}
+		  ],
+		  "extra_fa": [
+			"اگر همه چیز را برجسته کنید، یعنی در واقع هیچ چیز را برجسته نکرده‌اید! برجسته‌سازی فقط زمانی مفید است که انتخابی باشد.",
+			"قانون طلایی: فقط حدود ۱۰ تا ۲۰ درصد متن را برجسته کنید.",
+			"برجسته‌سازی باید بعد از خواندن و درک هر پاراگراف انجام شود، نه همزمان با اولین خواندن.",
+            "از رنگ‌های مختلف برای انواع مختلف اطلاعات استفاده کنید: مثلاً زرد برای ایده اصلی، سبز برای تعریف‌ها، صورتی برای مثال‌ها."
+		  ],
+		  "tips_fa": [
+			"اول یک پاراگراف را کامل بخوانید، بعد برگردید و فقط مهم‌ترین بخش‌ها را برجسته کنید.",
+			"به جای کل جمله، فقط عبارت کلیدی آن را برجسته کنید.",
+            "بعد از برجسته‌سازی، با نگاه کردن فقط به بخش‌های برجسته، سعی کنید متن را خلاصه کنید."
+		  ]
+		},
+		"exercises": [
+		  {
+			"exercise_id": "v3_l2_strategy_quiz",
+			"type": "multiple_choice",
+			"instruction": {
+			  "en": "Check your understanding of the Highlighting strategy.",
+			  "fa": "درک خود را از راهبرد برجسته‌سازی بررسی کنید."
+			},
+			"items": [
+			  {
+				"question": {"en": "How much of the text should you highlight?", "fa": "چه مقدار از متن را باید برجسته کنید؟"},
+				"options": [
+				  {"en": "The whole text", "fa": "کل متن"},
+				  {"en": "Only the main ideas and key points (about 10-20%)", "fa": "فقط ایده‌های اصلی و نکات کلیدی (حدود ۱۰ تا ۲۰ درصد)"},
+				  {"en": "Every sentence", "fa": "هر جمله"}
+				],
+				"answer": 1,
+				"explanation": {"en": "Highlighting too much makes it useless. Only highlight key points.", "fa": "برجسته‌سازی زیاد آن را بی‌فایده می‌کند. فقط نکات کلیدی را برجسته کنید."}
+			  },
+			  {
+				"question": {"en": "What is better to highlight?", "fa": "برجسته کردن چه چیزی بهتر است؟"},
+				"options": [
+				  {"en": "Entire sentences", "fa": "جملات کامل"},
+				  {"en": "Phrases and parts of sentences", "fa": "عبارت‌ها و بخش‌هایی از جملات"},
+				  {"en": "Minor details", "fa": "جزئیات ریز"}
+				],
+				"answer": 1,
+				"explanation": {"en": "Highlight phrases and parts of sentences, not whole sentences or minor details.", "fa": "عبارت‌ها و بخش‌هایی از جملات را برجسته کنید، نه جملات کامل یا جزئیات ریز را."}
+			  }
+			]
+		  },
+		  {
+			"exercise_id": "v3_l2_strategy_tf",
+			"type": "true_false",
+			"instruction": {
+			  "en": "Read the sentences; put T for true and F for false.",
+			  "fa": "جملات را بخوانید؛ برای درست T و برای نادرست F بگذارید."
+			},
+			"items": [
+			  {"statement": {"en": "You should highlight minor details and less important information.", "fa": "باید جزئیات ریز و اطلاعات کم‌اهمیت را برجسته کنید."}, "answer": false, "correction": {"en": "Highlight key points, NOT minor details.", "fa": "نکات کلیدی را برجسته کنید، نه جزئیات ریز را."}},
+			  {"statement": {"en": "Highlighting helps you remember what you have read.", "fa": "برجسته‌سازی به شما کمک می‌کند آنچه خوانده‌اید به خاطر بسپارید."}, "answer": true, "correction": ""},
+			  {"statement": {"en": "It is best to highlight while reading a paragraph for the first time.", "fa": "بهترین کار این است که هنگام اولین خواندن یک پاراگراف، آن را برجسته کنید."}, "answer": false, "correction": {"en": "Read the paragraph first, then highlight the key parts.", "fa": "اول پاراگراف را بخوانید، سپس بخش‌های کلیدی را برجسته کنید."}}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l2_strategy_practice",
+			"type": "multiple_choice",
+			"instruction": {
+			  "en": "Read this text and choose the BEST part to highlight. Text: 'Sharks are not all the same. In fact, there are nearly 400 different kinds. Most sharks never attack people. Only a special group of sharks can be dangerous. They kill an average of forty people every year.'",
+			  "fa": "این متن را بخوانید و بهترین بخش برای برجسته کردن را انتخاب کنید. متن: «همه کوسه‌ها یکسان نیستند. در واقع، نزدیک به ۴۰۰ نوع مختلف وجود دارد. بیشتر کوسه‌ها هرگز به انسان حمله نمی‌کنند. فقط گروه خاصی از کوسه‌ها می‌توانند خطرناک باشند. آن‌ها به طور متوسط سالانه چهل نفر را می‌کشند.»"
+			},
+			"items": [
+			  {
+				"question": {"en": "Which is the most important idea to highlight?", "fa": "مهم‌ترین ایده برای برجسته کردن کدام است؟"},
+				"options": [
+				  {"en": "'In fact'", "fa": "'In fact' (در واقع)"},
+				  {"en": "'Most sharks never attack people'", "fa": "'Most sharks never attack people' (بیشتر کوسه‌ها هرگز به انسان حمله نمی‌کنند)"},
+				  {"en": "'every year'", "fa": "'every year' (هر سال)"}
+				],
+				"answer": 1,
+				"explanation": {"en": "The main idea is that most sharks are not dangerous to people.", "fa": "ایده اصلی این است که بیشتر کوسه‌ها برای انسان خطرناک نیستند."}
+			  }
+			]
+		  }
+		]
+	  },
+	  "3": {
+		"lesson_title": {"en": "Renewable Energy", "fa": "انرژی تجدیدپذیر"},
+		"reading_title": {"en": "Earth for our Children", "fa": "زمین برای فرزندان ما"},
+		"strategy": {
+		  "name": {"en": "Note Taking", "fa": "یادداشت‌برداری"},
+		  "icon": "📝",
+		  "description": {
+			"en": "Learning to take good notes is very important. Good notes can help you remember and review a text you have read. There is no magic formula to taking notes when reading. You have to find out what works best for you.",
+			"fa": "یادگیری یادداشت‌برداری خوب بسیار مهم است. یادداشت‌های خوب می‌توانند به شما کمک کنند متنی را که خوانده‌اید به خاطر بسپارید و مرور کنید. برای یادداشت‌برداری هنگام خواندن، فرمول جادویی وجود ندارد. شما باید بفهمید چه روشی برای شما بهتر کار می‌کند."
+		  },
+		  "steps": [
+			{"en": "Be sure to include all the important ideas and examples.", "fa": "حتماً همه ایده‌ها و مثال‌های مهم را بگنجانید."},
+			{"en": "Write only important words, not complete sentences.", "fa": "فقط کلمات مهم را بنویسید، نه جملات کامل را."},
+			{"en": "Use abbreviations and symbols.", "fa": "از اختصارات و نمادها استفاده کنید."},
+			{"en": "You can write your notes in the margins or on a separate page.", "fa": "می‌توانید یادداشت‌های خود را در حاشیه یا در یک صفحه جداگانه بنویسید."}
+		  ],
+		  "useful_symbols": [
+			{"symbol": "&", "meaning": {"en": "and", "fa": "و"}},
+			{"symbol": "→", "meaning": {"en": "leads to / results in", "fa": "منجر می‌شود به"}},
+			{"symbol": "+", "meaning": {"en": "plus / and", "fa": "به علاوه / و"}},
+			{"symbol": "↑", "meaning": {"en": "increase", "fa": "افزایش"}},
+			{"symbol": "↓", "meaning": {"en": "decrease", "fa": "کاهش"}},
+			{"symbol": "≠", "meaning": {"en": "is different from", "fa": "متفاوت است از"}}
+		  ],
+		  "extra_fa": [
+			"یادداشت‌برداری خوب مانند ساختن یک نقشه گنج از متن است؛ بعداً با یک نگاه می‌توانید کل متن را به یاد بیاورید.",
+			"یادداشت‌های خود را با کلمات خودتان بنویسید، نه اینکه جملات کتاب را کپی کنید؛ این کار درک شما را عمیق‌تر می‌کند.",
+			"یادداشت‌برداری با دست (نه تایپ کردن) باعث می‌شود مطالب بهتر در حافظه بلندمدت شما بماند.",
+            "بعد از خواندن، یادداشت‌های خود را در عرض ۲۴ ساعت یک بار مرور کنید تا فراموش نشوند."
+		  ],
+		  "tips_fa": [
+			"از علائم اختصاری استفاده کنید تا سریع‌تر بنویسید: & به جای and، → به جای leads to.",
+			"از نمودار، فلش و شکل‌های ساده برای نشان دادن رابطه بین ایده‌ها استفاده کنید.",
+            "یادداشت‌های هر درس را در یک صفحه جداگانه نگه دارید تا مرور آن‌ها آسان باشد."
+		  ]
+		},
+		"exercises": [
+		  {
+			"exercise_id": "v3_l3_strategy_quiz",
+			"type": "true_false",
+			"instruction": {
+			  "en": "Read the sentences; put T for true and F for false.",
+			  "fa": "جملات را بخوانید؛ برای درست T و برای نادرست F بگذارید."
+			},
+			"items": [
+			  {"statement": {"en": "You should write complete sentences in your notes.", "fa": "باید در یادداشت‌های خود جملات کامل بنویسید."}, "answer": false, "correction": {"en": "Write only important words, not complete sentences.", "fa": "فقط کلمات مهم را بنویسید، نه جملات کامل را."}},
+			  {"statement": {"en": "Using abbreviations and symbols helps you take notes faster.", "fa": "استفاده از اختصارات و نمادها به شما کمک می‌کند سریع‌تر یادداشت بردارید."}, "answer": true, "correction": ""},
+			  {"statement": {"en": "Good notes help you remember and review a text.", "fa": "یادداشت‌های خوب به شما کمک می‌کنند متن را به خاطر بسپارید و مرور کنید."}, "answer": true, "correction": ""}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l3_strategy_match",
+			"type": "matching",
+			"instruction": {
+			  "en": "Match each symbol/abbreviation with its meaning.",
+			  "fa": "هر نماد/اختصار را با معنی‌اش تطبیق دهید."
+			},
+			"options": ["and", "leads to", "increase", "decrease"],
+			"items": [
+			  {"text": {"en": "&", "fa": "&"}, "answer": "and"},
+			  {"text": {"en": "→", "fa": "→"}, "answer": "leads to"},
+			  {"text": {"en": "↑", "fa": "↑"}, "answer": "increase"},
+			  {"text": {"en": "↓", "fa": "↓"}, "answer": "decrease"}
+			]
+		  },
+		  {
+			"exercise_id": "v3_l3_strategy_practice",
+			"type": "open_ended",
+			"instruction": {
+			  "en": "Read this paragraph and take notes using only important words, abbreviations and symbols. Paragraph: 'Clean energy is renewable. It is made from resources that can be replaced, like wind, water, sunshine, tides, and plants. When renewable energy resources are used, the demand for fossil fuels is reduced.'",
+			  "fa": "این پاراگراف را بخوانید و فقط با کلمات مهم، اختصارات و نمادها یادداشت بردارید. پاراگراف: «انرژی پاک تجدیدپذیر است. این انرژی از منابعی ساخته می‌شود که قابل جایگزینی هستند، مانند باد، آب، نور خورشید، جزر و مد و گیاهان. وقتی از منابع انرژی تجدیدپذیر استفاده شود، تقاضا برای سوخت‌های فسیلی کاهش می‌یابد.»"
+			},
+			"items": [
+			  {
+				"question": {"en": "Write your notes here.", "fa": "یادداشت‌های خود را اینجا بنویسید."},
+				"sample_answer": {
+				  "en": "Clean energy = renewable. Sources: wind, water, sunshine, tides, plants. Renewable energy ↑ → fossil fuel demand ↓",
+				  "fa": "انرژی پاک = تجدیدپذیر. منابع: باد، آب، نور خورشید، جزر و مد، گیاهان. انرژی تجدیدپذیر ↑ ← تقاضای سوخت فسیلی ↓"
+				}
+			  }
+			]
+		  }
+		]
+	  }
+	}
+  },
+  "statistics": {
+	"total_strategies": 6,
+	"total_exercises": 14,
+	"books_covered": [2, 3],
+	"exercise_types": {
+	  "multiple_choice": 6,
+	  "true_false": 5,
+	  "matching": 3,
+	  "fill_blank": 1,
+	  "open_ended": 2
+	}
+  }
+}
