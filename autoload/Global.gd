@@ -15,6 +15,7 @@ var _category_cache: Dictionary = {}
 
 const DICTIONARY_PATH := "res://data/v_dictionary.json"
 
+var word_review_return: String = ""
 # ---------- VOCABULARY DATA LOADING ----------
 
 var intro_animation_played := false
@@ -600,21 +601,6 @@ func _format_interval(interval: float, rating: String) -> String:
 	else:
 		return "%d روز" % days
 
-func _init_tts() -> void:
-	var voices = DisplayServer.tts_get_voices_for_language("en")
-
-	if voices.size() > 0:
-		english_voice_id = voices[0]
-	else:
-		var all_voices = DisplayServer.tts_get_voices()
-		for voice in all_voices:
-			if "en" in voice.to_lower():
-				english_voice_id = voice
-				break
-
-	if english_voice_id == "":
-		push_warning("No English TTS voice found on this device.")
-
 func play_word_audio(audio_filename: String, word_text: String = "") -> void:
 	# 1. If no audio filename is provided in the JSON, fallback to TTS immediately
 	if audio_filename.is_empty():
@@ -644,11 +630,86 @@ func play_word_audio(audio_filename: String, word_text: String = "") -> void:
 		if word_text != "":
 			speak_word(word_text)
 
+func _init_tts() -> void:
+	# Ask the OS directly for English voices.
+	# (kept untyped on purpose — the return type differs between Godot versions)
+	var en_voices = DisplayServer.tts_get_voices_for_language("en")
+	if en_voices.size() > 0:
+		english_voice_id = _extract_voice_id(en_voices[0])
+
+	# Fallback: scan every installed voice and pick an English one.
+	if english_voice_id == "":
+		var all_voices = DisplayServer.tts_get_voices()
+		for voice in all_voices:
+			var voice_id := _extract_voice_id(voice)
+			var voice_lang := _extract_voice_language(voice).to_lower()
+
+			var is_english := false
+			if voice_lang != "":
+				is_english = voice_lang.begins_with("en")
+			else:
+				is_english = "en" in voice_id.to_lower()
+
+			if is_english and voice_id != "":
+				english_voice_id = voice_id
+				break
+
+	if english_voice_id == "":
+		push_warning("No English TTS voice found on this device.")
+
+
+# ------------------------------------------------------------
+# In Godot 4.7, DisplayServer.tts_get_voices() returns an
+# Array of Dictionaries (one Dictionary per voice), not plain
+# String IDs. These helpers safely pull out the voice ID and
+# language whether the entry is a Dictionary or a plain String.
+# ------------------------------------------------------------
+func _extract_voice_id(voice: Variant) -> String:
+	if voice is Dictionary:
+		# Try the most common key names for the voice identifier.
+		for key in ["id", "identifier", "voice_id", "name"]:
+			if voice.has(key):
+				return str(voice[key])
+		return ""
+	return str(voice)
+
+
+func _extract_voice_language(voice: Variant) -> String:
+	if voice is Dictionary:
+		for key in ["language", "lang", "locale"]:
+			if voice.has(key):
+				return str(voice[key])
+		return ""
+	return str(voice)
+
+# On some devices the TTS engine is not ready at autoload time,
+# so give voice detection a second chance right before speaking.
+func ensure_english_voice() -> void:
+	if english_voice_id == "":
+		_init_tts()
+
+
 func speak_word(text: String) -> void:
-	if text.is_empty() or english_voice_id == "":
+	if text.is_empty():
+		return
+
+	# Retry voice detection in case it failed at startup.
+	ensure_english_voice()
+	if english_voice_id == "":
 		return
 
 	if DisplayServer.tts_is_speaking():
 		DisplayServer.tts_stop()
 
-	DisplayServer.tts_speak(text, english_voice_id, 50, 1.0, 1.0)
+	# Real tts_speak() signature: (text, voice, volume, pitch, rate, utterance_id, interrupt)
+	# volume is 0..100. The previous version had these shifted one slot over,
+	# which put 0 into the volume slot (mute) and 100.0 into pitch (way out of range).
+	DisplayServer.tts_speak(
+		text,
+		english_voice_id,
+		100.0,  # volume (max, 0-100)
+		1.0,    # pitch
+		1.0,    # rate (normal speed)
+		0,      # utterance_id
+		true    # interrupt anything currently speaking
+	)

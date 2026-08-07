@@ -37,7 +37,7 @@ func _ready() -> void:
 	if font_bold: header_title.add_theme_font_override("font", font_bold)
 	back_button.pressed.connect(_on_back_button_pressed)
 	page_view.set_accent(ACCENT)
-	
+
 	_current_book = Global.current_book
 	_current_lesson = Global.current_lesson
 	header_title.text = "Lesson %d\nWorkbook" % _current_lesson
@@ -146,6 +146,17 @@ func _build_part_page(part_num: int, part: Dictionary, lesson_title: Dictionary)
 	var exercises: Array = part.get("exercises", [])
 	for exercise in exercises:
 		var engine := ExerciseEngine.new()
+		
+		# Choose which exercise types show the audio button.
+		# Must be set BEFORE build().
+		engine.audio_types = [
+			"multiple_choice",
+			"fill_blank",
+			"cloze",
+		]
+		
+		engine.audio_panel_scene_path = "res://scenes/shared/AudioPanel.tscn"
+		
 		page.add_child(engine)
 		engine.build(exercise)
 	

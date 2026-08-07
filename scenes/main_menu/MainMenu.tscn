@@ -26,14 +26,12 @@ corner_radius_bottom_left = 25
 [sub_resource type="LabelSettings" id="LabelSettings_f1mbi"]
 font = ExtResource("5_pkvjm")
 font_size = 40
-font_color = Color(0, 0.36078432, 0, 1)
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
+font_color = Color(0, 0, 0.27450982, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_oitky"]
 font = ExtResource("6_6gdku")
 font_size = 65
-font_color = Color(0, 0.36078432, 0, 1)
+font_color = Color(0, 0, 0.27450982, 1)
 outline_size = 35
 
 [sub_resource type="SystemFont" id="SystemFont_arvcj"]
@@ -168,7 +166,7 @@ rotation = 0.2617994
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_4ei73")
 
-[node name="SpecificEnglishButton" type="Button" parent="MainLayout/InnerLayout" unique_id=1455141466]
+[node name="Exam" type="Button" parent="MainLayout/InnerLayout" unique_id=1455141466]
 custom_minimum_size = Vector2(855, 120)
 layout_mode = 2
 size_flags_vertical = 0

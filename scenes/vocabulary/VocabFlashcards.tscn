@@ -43,7 +43,7 @@ expand_margin_right = 10.0
 expand_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jl6ec"]
-bg_color = Color(0.43077445, 0.11573308, 0.5979887, 1)
+bg_color = Color(0, 0.83137256, 0.41960785, 1)
 corner_radius_top_left = 150
 corner_radius_top_right = 150
 corner_radius_bottom_right = 150
@@ -285,7 +285,7 @@ offset_bottom = 3759.9656
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.385, 0.385)
-color = Color(0.17069602, 0.21997052, 0.49866015, 1)
+color = Color(0.972549, 0.98039216, 0.9882353, 1)
 
 [node name="HeaderBar" type="PanelContainer" parent="." unique_id=1292936121]
 layout_mode = 1

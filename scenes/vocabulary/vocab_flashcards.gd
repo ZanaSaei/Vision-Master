@@ -114,6 +114,7 @@ func _ready() -> void:
 	nav_settings.pivot_offset = nav_settings.size / 2.0
 
 	if Global.flashcard_mode == "saved":
+		Global.word_review_return = "res://scenes/vocabulary/VocabFlashcards.tscn"
 		_enter_saved_mode()
 	else:
 		_enter_lesson_mode()

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ph0x1qd6mhmv"]
 
-[ext_resource type="Script" uid="uid://c7o13mhih3ys0" path="res://scenes/grammar/grammar_scene.gd" id="1_xa6db"]
+[ext_resource type="Script" uid="uid://c7o13mhih3ys0" path="res://scenes/grammar/grammar.gd" id="1_xa6db"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_01g4x"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_mqgpj"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_2jgdv"]

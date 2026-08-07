@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bgfvwp5bbef8f"]
+[gd_scene format=3 uid="uid://de083h1ig7hpl"]
 
-[node name="SpecificEnglish" type="Control" unique_id=754281592]
+[node name="AboutMe" type="Control" unique_id=1173745988]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

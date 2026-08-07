@@ -1,9 +1,13 @@
 extends "res://autoload/BackButtonHandler.gd"
+
 # ============================================================
 # VOCABULARY DEVELOPMENT SCENE — three swipeable pages
-#   Page 1 "Learn"    → theory + reference tables
-#   Page 2 "Examples" → worked examples with word highlighting
-#   Page 3 "Practice" → interactive exercises
+# Page 1 "Learn"    → theory + reference tables
+# Page 2 "Examples" → worked examples with word highlighting
+# Page 3 "Practice" → interactive exercises
+#
+# Dark-theme harmonized version.
+# Titles are kept on one line with wrapping disabled.
 # ============================================================
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
@@ -12,14 +16,24 @@ const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
 
+# ---------- Dark theme ----------
+const APP_BG := Color("#0b1229")
+const PANEL_BG := Color("#0f1b3d")
+const PANEL_BORDER := Color("#2d3a6a")
+
+const TEXT_LIGHT := Color("#F1F5F9")
+const TEXT_SOFT := Color("#CBD5E1")
+const TEXT_MUTED := Color("#94A3B8")
+
+const SUCCESS := Color("#34D399")
+
+# Distinct purple accent.
+const ACCENT := Color("#7C3AED")
+
 var font_regular: FontFile
 var font_bold: FontFile
 var font_farsi: FontFile
 var font_italic: FontFile
-
-# Distinct purple accent — different from Grammar (blue) and Reading (teal)
-const ACCENT := Color("#7C3AED")
-const SOFT   := Color("#F5F3FF")
 
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
@@ -32,159 +46,257 @@ var _data: Dictionary = {}
 
 func _ready() -> void:
 	font_regular = load(FONT_REGULAR_PATH)
-	font_bold    = load(FONT_BOLD_PATH)
-	font_farsi   = load(FONT_VAZIRMATN)
-	if font_bold: header_title.add_theme_font_override("font", font_bold)
+	font_bold = load(FONT_BOLD_PATH)
+	font_farsi = load(FONT_VAZIRMATN)
+
+	# Optional italic font is not required.
+	font_italic = null
+
+	if font_bold:
+		header_title.add_theme_font_override("font", font_bold)
+
+	# Keep header readable on dark theme.
+	header_title.add_theme_color_override("font_color", TEXT_LIGHT)
+
 	back_button.pressed.connect(_on_back_button_pressed)
 	page_view.page_changed.connect(_on_page_changed)
 	page_view.set_accent(ACCENT)
-	
+
+	# Put a dark background behind the whole PageView.
+	_add_page_view_background()
+
 	header_title.text = "Lesson %d\nVocabulary" % Global.current_lesson
-	
-	_data = Global.load_category("vocabulary_development", Global.current_book, Global.current_lesson)
+
+	_data = Global.load_category(
+		"vocabulary_development",
+		Global.current_book,
+		Global.current_lesson
+	)
+
 	if _data.is_empty():
 		return
-	
-	page_view.add_page("learn",    "Learn",    "📖", _build_learn_page())
+
+	page_view.add_page("learn", "Learn", "📖", _build_learn_page())
 	page_view.add_page("examples", "Examples", "💡", _build_examples_page())
 	page_view.add_page("practice", "Practice", "✏️", _build_practice_page())
-	
+
+	# Force dark backgrounds for PageView scroll areas.
+	_apply_dark_scroll_background(page_view)
+
 	_play_reveal(0)
 
 
 # ============================================================
-# PAGE 1 — LEARN (theory + reference tables)
+# DARK THEME HELPERS
 # ============================================================
+
+func _add_page_view_background() -> void:
+	if page_view.has_meta("dark_bg"):
+		return
+
+	var bg := ColorRect.new()
+	bg.color = APP_BG
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	page_view.add_child(bg)
+	page_view.move_child(bg, 0)
+	page_view.set_meta("dark_bg", bg)
+
+
+func _apply_dark_scroll_background(root: Control) -> void:
+	for child in root.get_children():
+		if child is ScrollContainer:
+			var style := StyleBoxFlat.new()
+			style.bg_color = APP_BG
+			child.add_theme_stylebox_override("panel", style)
+
+		if child is Control:
+			_apply_dark_scroll_background(child)
+
+
+func _dark_tint(color: Color, amount := 0.16) -> Color:
+	# Creates a dark panel color tinted by the given accent color.
+	return PANEL_BG.lerp(Color(color.r, color.g, color.b, 1.0), amount)
+
+
+func _contrast_color(bg: Color) -> Color:
+	# Chooses readable text color for colored banners/buttons.
+	if bg.get_luminance() > 0.6:
+		return Color("#0b1229")
+	return Color.WHITE
+
+
+# ============================================================
+# PAGE 1 — LEARN
+# ============================================================
+
 func _build_learn_page() -> VBoxContainer:
 	var page := VBoxContainer.new()
 	page.add_theme_constant_override("separation", 22)
+
 	_page_reveals[0] = []
-	
-	# Topic banner
-	var topic_en: String = _data.get("topic", {}).get("en", "Vocabulary")
-	var topic_fa: String = _data.get("topic", {}).get("fa", "واژگان")
+
+	# Topic banner.
+	var topic_en := str(_data.get("topic", {}).get("en", "Vocabulary"))
+	var topic_fa := str(_data.get("topic", {}).get("fa", "واژگان"))
+
 	page.add_child(_make_topic_banner("📚", topic_en, topic_fa))
-	
-	# Definition card
+
+	# Definition card.
 	var theory: Dictionary = _data.get("theory", {})
+
 	if not theory.is_empty():
 		var def: Dictionary = theory.get("definition", {})
+
 		if not def.is_empty():
-			var card := _make_text_card(def.get("en", ""), def.get("fa", ""), SOFT, ACCENT)
+			var card := _make_text_card(
+				str(def.get("en", "")),
+				str(def.get("fa", "")),
+				_dark_tint(ACCENT),
+				ACCENT
+			)
+
 			page.add_child(card)
 			_page_reveals[0].append(card)
-		
-		# Key points
+
+		# Key points.
 		var points: Array = theory.get("key_points", [])
+
 		for point in points:
-			page.add_child(_make_bullet(point.get("en", ""), point.get("fa", "")))
-	
-	# Reference table (for Prefixes & Suffixes)
+			page.add_child(_make_bullet(
+				str(point.get("en", "")),
+				str(point.get("fa", ""))
+			))
+
+	# Reference table.
 	if _data.has("reference_table"):
 		page.add_child(_make_section_title("Reference Table"))
-		page.add_child(_make_reference_table(_data["reference_table"]))
-		_page_reveals[0].append(page.get_child(page.get_child_count() - 1))
-	
+
+		var table := _make_reference_table(_data["reference_table"])
+		page.add_child(table)
+		_page_reveals[0].append(table)
+
 	return page
 
 
 # ============================================================
-# PAGE 2 — EXAMPLES (worked examples with word highlighting)
+# PAGE 2 — EXAMPLES
 # ============================================================
+
 func _build_examples_page() -> VBoxContainer:
 	var page := VBoxContainer.new()
 	page.add_theme_constant_override("separation", 22)
+
 	_page_reveals[1] = []
-	
+
 	page.add_child(_make_topic_banner("💡", "Examples", "مثال‌ها"))
-	
+
 	var examples: Array = _data.get("examples", [])
+
 	if examples.is_empty():
-		var empty := _make_label("No examples available yet.", 36, Color("#64748B"), false)
+		var empty := _make_label("No examples available yet.", 36, TEXT_MUTED, false)
 		page.add_child(empty)
 		return page
-	
+
 	for ex in examples:
 		var card := _make_example_card(ex)
 		page.add_child(card)
 		_page_reveals[1].append(card)
-	
+
 	return page
 
 
 # ============================================================
-# PAGE 3 — PRACTICE (interactive exercises)
+# PAGE 3 — PRACTICE
 # ============================================================
+
 func _build_practice_page() -> VBoxContainer:
 	var page := VBoxContainer.new()
 	page.add_theme_constant_override("separation", 22)
+
 	_page_reveals[2] = []
-	
+
 	page.add_child(_make_topic_banner("✏️", "Practice", "تمرین"))
-	
+
 	var intro := _make_text_card(
 		"Test your understanding with these exercises!",
 		"با این تمرین‌ها درک خود را بسنجید!",
-		Color("#F0FDF4"), Color("#16A34A"))
+		_dark_tint(SUCCESS, 0.10),
+		SUCCESS
+	)
+
 	page.add_child(intro)
 	_page_reveals[2].append(intro)
-	
+
 	for exercise in _data.get("exercises", []):
 		var engine := ExerciseEngine.new()
 		page.add_child(engine)
 		engine.build(exercise)
 		_page_reveals[2].append(engine)
-	
+
 	return page
 
 
 # ============================================================
 # WIDGETS
 # ============================================================
+
 func _make_topic_banner(icon: String, en: String, fa: String) -> PanelContainer:
 	var banner := PanelContainer.new()
+
 	var style := StyleBoxFlat.new()
 	style.bg_color = ACCENT
 	style.set_corner_radius_all(20)
 	style.set_content_margin_all(26)
+
 	banner.add_theme_stylebox_override("panel", style)
-	
+
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 8)
-	
+
 	var ic := Label.new()
 	ic.text = icon
 	ic.add_theme_font_size_override("font_size", 72)
 	ic.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vb.add_child(ic)
-	
-	var en_l := _make_label(en, 50, Color.WHITE, true)
+
+	var text_color := _contrast_color(ACCENT)
+	var sub_color := Color(text_color.r, text_color.g, text_color.b, 0.85)
+
+	# Banner title: one line, no wrapping.
+	var en_l := _make_label(en, 50, text_color, true, false)
 	en_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(en_l)
-	
-	var fa_l := _make_fa_label(fa, 36)
-	fa_l.add_theme_color_override("font_color", Color(1, 1, 1, 0.85))
+
+	var fa_l := _make_fa_label(fa, 36, sub_color, false)
 	fa_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(fa_l)
-	
+
 	banner.add_child(vb)
 	return banner
 
 
 func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelContainer:
 	var card := PanelContainer.new()
+
 	var style := StyleBoxFlat.new()
 	style.bg_color = bg
 	style.set_corner_radius_all(14)
 	style.border_width_left = 4
 	style.border_color = border
 	style.set_content_margin_all(18)
+
 	card.add_theme_stylebox_override("panel", style)
-	
+
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 6)
-	vb.add_child(_make_label(en, 36, Color("#1E293B"), false))
-	vb.add_child(_make_fa_label(fa, 31))
+
+	# Body text stays wrapped.
+	vb.add_child(_make_label(en, 36, TEXT_LIGHT, false))
+	vb.add_child(_make_fa_label(fa, 31, TEXT_MUTED))
+
 	card.add_child(vb)
 	return card
 
@@ -192,89 +304,120 @@ func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelC
 func _make_bullet(en: String, fa: String) -> VBoxContainer:
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 4)
-	vb.add_child(_make_label("•  " + en, 34, Color("#334155"), false))
-	vb.add_child(_make_fa_label(fa, 29))
+
+	vb.add_child(_make_label("•  " + en, 34, TEXT_SOFT, false))
+	vb.add_child(_make_fa_label(fa, 29, TEXT_MUTED))
+
 	return vb
 
 
 func _make_example_card(ex: Dictionary) -> PanelContainer:
 	var card := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color.WHITE
+	style.bg_color = PANEL_BG
 	style.set_corner_radius_all(16)
 	style.border_width_left = 5
 	style.border_color = ACCENT
 	style.set_content_margin_all(20)
 	card.add_theme_stylebox_override("panel", style)
-	
+
 	var vb := VBoxContainer.new()
-	vb.add_theme_constant_override("separation", 10)
-	
-	# Word pair (highlighted)
-	var word_text: String = ex.get("word", "")
-	var synonym_text: String = ex.get("synonym", "")
+	vb.add_theme_constant_override("separation", 12)
+
+	# Word pair.
+	var word_text := str(ex.get("word", ""))
+	var synonym_text := str(ex.get("synonym", ""))
+
 	var rtl := RichTextLabel.new()
 	rtl.bbcode_enabled = true
 	rtl.fit_content = true
 	rtl.scroll_active = false
-	rtl.add_theme_font_size_override("normal_font_size", 42)
-	rtl.add_theme_color_override("default_color", Color("#1E293B"))
-	rtl.text = "[color=#7C3AED][b]" + word_text + "[/b][/color]  =  [color=#16A34A][b]" + synonym_text + "[/b][/color]"
-	if font_bold: rtl.add_theme_font_override("normal_font", font_bold)
+	rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rtl.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+
+	# Make the colored English word line much larger and bold.
+	rtl.add_theme_font_size_override("normal_font_size", 45)
+	rtl.add_theme_font_size_override("bold_font_size", 45)
+	rtl.add_theme_color_override("default_color", TEXT_LIGHT)
+
+	# Slightly brighter colors improve visibility on the dark panel.
+	rtl.text = (
+		"[color=#C4B5FD][b]" + word_text + "[/b][/color]"
+		+ "  =  "
+		+ "[color=#6EE7B7][b]" + synonym_text + "[/b][/color]"
+	)
+
+	if font_bold:
+		rtl.add_theme_font_override("normal_font", font_bold)
+		rtl.add_theme_font_override("bold_font", font_bold)
+
 	vb.add_child(rtl)
-	
-	# Example sentence
+
+	# Example sentence.
 	var sentence: Dictionary = ex.get("sentence", {})
 	if not sentence.is_empty():
-		vb.add_child(_make_label(sentence.get("en", ""), 34, Color("#475569"), false))
-		vb.add_child(_make_fa_label(sentence.get("fa", ""), 30))
-	
+		# Increase the English and Persian example sentences too.
+		vb.add_child(_make_label(str(sentence.get("en", "")), 42, TEXT_SOFT, false))
+		vb.add_child(_make_fa_label(str(sentence.get("fa", "")), 36, TEXT_MUTED))
+
 	card.add_child(vb)
 	return card
 
-
 func _make_reference_table(table: Array) -> PanelContainer:
 	var card := PanelContainer.new()
+
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color.WHITE
+	style.bg_color = PANEL_BG
 	style.set_corner_radius_all(14)
 	style.border_width_left = 5
 	style.border_color = ACCENT
 	style.set_content_margin_all(18)
+
 	card.add_theme_stylebox_override("panel", style)
-	
+
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 10)
-	
+
 	for entry in table:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 14)
-		
-		var affix := Label.new()
-		affix.text = str(entry.get("affix", ""))
-		affix.add_theme_font_size_override("font_size", 34)
-		affix.add_theme_color_override("font_color", ACCENT)
+		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+		# Affix label is a small title-like cell, so keep it on one line.
+		var affix := _make_label(
+			str(entry.get("affix", "")),
+			34,
+			ACCENT.lightened(0.25),
+			true,
+			false
+		)
 		affix.custom_minimum_size.x = 120
-		if font_bold: affix.add_theme_font_override("font", font_bold)
 		row.add_child(affix)
-		
-		var meaning_en := Label.new()
-		meaning_en.text = str(entry.get("meaning_en", ""))
-		meaning_en.add_theme_font_size_override("font_size", 32)
-		meaning_en.add_theme_color_override("font_color", Color("#1E293B"))
+
+		var meaning_en := _make_label(
+			str(entry.get("meaning_en", "")),
+			32,
+			TEXT_LIGHT,
+			false
+		)
 		meaning_en.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		if font_regular: meaning_en.add_theme_font_override("font", font_regular)
 		row.add_child(meaning_en)
-		
-		var example := Label.new()
-		example.text = str(entry.get("example", ""))
-		example.add_theme_font_size_override("font_size", 30)
-		example.add_theme_color_override("font_color", Color("#64748B"))
-		if font_italic: example.add_theme_font_override("font", font_italic)
+
+		var example := _make_label(
+			str(entry.get("example", "")),
+			30,
+			TEXT_MUTED,
+			false
+		)
+		example.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+		if font_italic:
+			example.add_theme_font_override("font", font_italic)
+
 		row.add_child(example)
-		
+
 		vb.add_child(row)
-	
+
 	card.add_child(vb)
 	return card
 
@@ -282,62 +425,126 @@ func _make_reference_table(table: Array) -> PanelContainer:
 func _make_section_title(en: String) -> HBoxContainer:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
 	var bar := ColorRect.new()
 	bar.color = ACCENT
 	bar.custom_minimum_size = Vector2(6, 44)
+	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(bar)
-	row.add_child(_make_label(en, 40, Color("#1E293B"), true))
+
+	# Section title: one line, no wrapping, fills horizontally.
+	var title := _make_label(en, 40, TEXT_LIGHT, true, false)
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(title)
+
 	return row
 
 
-func _make_label(text: String, size: int, color: Color, bold: bool) -> Label:
+func _make_label(text: String, size: int, color: Color, bold: bool, wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD
-	l.add_theme_font_size_override("font_size", size)
+	l.custom_minimum_size.x = 0
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	# Disable wrapping for titles when requested.
+	if wrap:
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD
+	else:
+		l.autowrap_mode = TextServer.AUTOWRAP_OFF
+		l.clip_text = false
+		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
+
+	# Slightly shrink very long one-line titles so they fit better.
+	var final_size := size
+	if not wrap:
+		if text.length() > 30:
+			final_size = int(float(size) * 0.85)
+		if text.length() > 55:
+			final_size = int(float(size) * 0.72)
+
+	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)
-	if bold and font_bold: l.add_theme_font_override("font", font_bold)
-	elif not bold and font_regular: l.add_theme_font_override("font", font_regular)
+
+	if bold and font_bold:
+		l.add_theme_font_override("font", font_bold)
+	elif not bold and font_regular:
+		l.add_theme_font_override("font", font_regular)
+
 	return l
 
 
-func _make_fa_label(text: String, size: int) -> Label:
+func _make_fa_label(text: String, size: int, color: Color = TEXT_MUTED, wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD
-	l.add_theme_font_size_override("font_size", size)
-	l.add_theme_color_override("font_color", Color("#64748B"))
+	l.custom_minimum_size.x = 0
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	if wrap:
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD
+	else:
+		l.autowrap_mode = TextServer.AUTOWRAP_OFF
+		l.clip_text = false
+		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
+
+	# Slightly shrink very long one-line Persian titles.
+	var final_size := size
+	if not wrap:
+		if text.length() > 34:
+			final_size = int(float(size) * 0.85)
+		if text.length() > 60:
+			final_size = int(float(size) * 0.72)
+
+	l.add_theme_font_size_override("font_size", final_size)
+	l.add_theme_color_override("font_color", color)
 	l.text_direction = Control.TEXT_DIRECTION_RTL
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	if font_farsi: l.add_theme_font_override("font", font_farsi)
+
+	if font_farsi:
+		l.add_theme_font_override("font", font_farsi)
+
 	return l
 
 
 # ============================================================
 # ENTRANCE ANIMATION
 # ============================================================
+
 func _on_page_changed(index: int, _page_id: String) -> void:
 	_play_reveal(index)
 
 
 func _play_reveal(index: int) -> void:
-	if _page_revealed.get(index, false): return
+	if _page_revealed.get(index, false):
+		return
+
 	_page_revealed[index] = true
+
 	var cards: Array = _page_reveals.get(index, [])
+
 	for i in cards.size():
 		var card: Control = cards[i]
 		card.modulate.a = 0.0
+
 		var t := create_tween()
-		t.tween_property(card, "modulate:a", 1.0, 0.3).set_delay(0.07 * i).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		t.tween_property(
+			card,
+			"modulate:a",
+			1.0,
+			0.3
+		).set_delay(0.07 * i).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 
 # ============================================================
 # NAVIGATION
 # ============================================================
+
 func _on_back_button_pressed() -> void:
 	back_button.pivot_offset = back_button.size / 2.0
+
 	var t := create_tween()
 	t.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
+
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
 
 

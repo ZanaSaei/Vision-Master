@@ -1,9 +1,13 @@
 extends "res://autoload/BackButtonHandler.gd"
+
 # ============================================================
 # WHAT YOU LEARNED SCENE — 3 swipeable pages via PageView
-#   Page 1 "Listen"  → Audio + Transcript + Fill-in-the-blanks
-#   Page 2 "Read"    → Reading passage + Comprehension
-#   Page 3 "Speak"   → Open-ended speaking prompts
+# Page 1 "Listen"  → Audio + Transcript + Fill-in-the-blanks
+# Page 2 "Read"    → Reading passage + Comprehension
+# Page 3 "Speak"   → Open-ended speaking prompts
+#
+# Dark-theme harmonized version.
+# Titles are kept on one line with wrapping disabled.
 # ============================================================
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
@@ -12,19 +16,35 @@ const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
 
+# ---------- Dark theme ----------
+const APP_BG := Color("#0b1229")
+const PANEL_BG := Color("#0f1b3d")
+const PANEL_BORDER := Color("#2d3a6a")
+
+const TEXT_LIGHT := Color("#F1F5F9")
+const TEXT_SOFT := Color("#CBD5E1")
+const TEXT_MUTED := Color("#94A3B8")
+
+const SUCCESS := Color("#34D399")
+
+const ACCENT := Color("#059669")
+
 var font_regular: FontFile
 var font_bold: FontFile
 var font_farsi: FontFile
-
-# Emerald Green for Review/Mastery
-const ACCENT := Color("#059669")
-const SOFT   := Color("#ECFDF5")
 
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
 @onready var page_view: PageView = $MarginContainer/MainLayout/PageView
 
-var _audio_player: AudioStreamPlayer
+# ---------- Audio panel support ----------
+# Path to your AudioPanel scene. Adjust if yours is elsewhere.
+const AUDIO_PANEL_SCENE_PATH := "res://scenes/shared/AudioPanel.tscn"
+
+var _audio_panel: Node = null
+var _listen_audio_btn: Button = null
+var _listen_audio_path := ""
+
 var _transcript_label: PanelContainer
 var _transcript_btn: Button
 var _data: Dictionary = {}
@@ -32,166 +52,284 @@ var _data: Dictionary = {}
 
 func _ready() -> void:
 	font_regular = load(FONT_REGULAR_PATH)
-	font_bold    = load(FONT_BOLD_PATH)
-	font_farsi   = load(FONT_VAZIRMATN)
-	if font_bold: header_title.add_theme_font_override("font", font_bold)
+	font_bold = load(FONT_BOLD_PATH)
+	font_farsi = load(FONT_VAZIRMATN)
+
+	if font_bold:
+		header_title.add_theme_font_override("font", font_bold)
+
+	# Keep header readable on dark theme.
+	header_title.add_theme_color_override("font_color", TEXT_LIGHT)
+
 	back_button.pressed.connect(_on_back_button_pressed)
 	page_view.page_changed.connect(_on_page_changed)
 	page_view.set_accent(ACCENT)
-	
-	_audio_player = AudioStreamPlayer.new()
-	add_child(_audio_player)
-	_audio_player.finished.connect(func(): _transcript_btn.text = "📜 Show Transcript")
-	
+
+	# Put a dark background behind the whole PageView.
+	_add_page_view_background()
+
 	header_title.text = "Lesson %d\nReview" % Global.current_lesson
-	
-	_data = Global.load_category("what_you_learned", Global.current_book, Global.current_lesson)
+
+	_data = Global.load_category(
+		"what_you_learned",
+		Global.current_book,
+		Global.current_lesson
+	)
+
 	if _data.is_empty():
 		return
-	
+
 	page_view.add_page("listen", "Listen", "🎧", _build_listen_page())
-	page_view.add_page("read",   "Read",   "📖", _build_read_page())
-	page_view.add_page("speak",  "Speak",  "🗣️", _build_speak_page())
+	page_view.add_page("read", "Read", "📖", _build_read_page())
+	page_view.add_page("speak", "Speak", "🗣️", _build_speak_page())
+
+	# Force dark backgrounds for PageView scroll areas.
+	_apply_dark_scroll_background(page_view)
 
 
 # ============================================================
-# PAGE 1 — LISTEN (Audio + Transcript + Exercises)
+# DARK THEME HELPERS
 # ============================================================
+
+func _add_page_view_background() -> void:
+	if page_view.has_meta("dark_bg"):
+		return
+
+	var bg := ColorRect.new()
+	bg.color = APP_BG
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	page_view.add_child(bg)
+	page_view.move_child(bg, 0)
+	page_view.set_meta("dark_bg", bg)
+
+
+func _apply_dark_scroll_background(root: Control) -> void:
+	for child in root.get_children():
+		if child is ScrollContainer:
+			var style := StyleBoxFlat.new()
+			style.bg_color = APP_BG
+			child.add_theme_stylebox_override("panel", style)
+
+		if child is Control:
+			_apply_dark_scroll_background(child)
+
+
+func _dark_tint(color: Color, amount := 0.16) -> Color:
+	# Creates a dark panel color tinted by the given accent color.
+	return PANEL_BG.lerp(Color(color.r, color.g, color.b, 1.0), amount)
+
+
+func _contrast_color(bg: Color) -> Color:
+	# Chooses readable text color for colored banners/buttons.
+	if bg.get_luminance() > 0.6:
+		return Color("#0b1229")
+	return Color.WHITE
+
+
+# ============================================================
+# PAGE 1 — LISTEN
+# ============================================================
+
 func _build_listen_page() -> VBoxContainer:
 	var page := VBoxContainer.new()
 	page.add_theme_constant_override("separation", 22)
-	
+
 	page.add_child(_make_topic_banner("🎧", "Listen & Review", "گوش دهید و مرور کنید"))
-	
+
 	var listen_data: Dictionary = _data.get("listen", {})
-	
-	# Audio Controls
+
+	# Audio controls.
 	var audio_box := HBoxContainer.new()
 	audio_box.add_theme_constant_override("separation", 14)
-	
+	audio_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+		# Play/Stop button that opens the AudioPanel.
 	var play_btn := _make_button("▶  Play Audio", ACCENT)
-	play_btn.pressed.connect(func():
-		var path: String = listen_data.get("audio", "")
-		if path != "" and ResourceLoader.exists(path):
-			_audio_player.stream = load(path)
-			_audio_player.play()
-			play_btn.text = "⏸  Pause"
-		else:
-			play_btn.text = "❌ No Audio"
-	)
+	play_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_listen_audio_btn = play_btn
+	_listen_audio_path = str(listen_data.get("audio", ""))
+	play_btn.pressed.connect(_on_listen_audio_pressed)
 	audio_box.add_child(play_btn)
 	
+	# Sync the button label when the panel closes or the track ends.
+	var panel := _get_or_create_audio_panel()
+	if panel != null:
+		if not panel.audio_closed.is_connected(_on_listen_audio_closed):
+			panel.audio_closed.connect(_on_listen_audio_closed)
+		if not panel.audio_finished.is_connected(_on_listen_audio_closed):
+			panel.audio_finished.connect(_on_listen_audio_closed)
+
 	_transcript_btn = _make_button("📜 Show Transcript", Color("#64748B"))
+	_transcript_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
 	_transcript_btn.pressed.connect(func():
 		_transcript_label.visible = not _transcript_label.visible
-		_transcript_btn.text = "🙈 Hide Transcript" if _transcript_label.visible else "📜 Show Transcript"
+
+		if _transcript_label.visible:
+			_transcript_btn.text = "🙈 Hide Transcript"
+		else:
+			_transcript_btn.text = "📜 Show Transcript"
 	)
+
 	audio_box.add_child(_transcript_btn)
 	page.add_child(audio_box)
-	
-	# Transcript
+
+	# Transcript.
 	var transcript: Dictionary = listen_data.get("transcript", {})
-	_transcript_label = _make_text_card(transcript.get("en", ""), transcript.get("fa", ""), SOFT, ACCENT)
+
+	_transcript_label = _make_text_card(
+		str(transcript.get("en", "")),
+		str(transcript.get("fa", "")),
+		_dark_tint(ACCENT),
+		ACCENT
+	)
+
 	_transcript_label.visible = false
 	page.add_child(_transcript_label)
-	
-	# Exercises
+
+	# Exercises.
 	for exercise in listen_data.get("exercises", []):
-		var engine := ExerciseEngine.new()
+		var engine := _create_exercise_engine()
 		page.add_child(engine)
 		engine.build(exercise)
-	
+
 	return page
 
 
 # ============================================================
-# PAGE 2 — READ (Passage + Comprehension)
+# PAGE 2 — READ
 # ============================================================
+
 func _build_read_page() -> VBoxContainer:
 	var page := VBoxContainer.new()
 	page.add_theme_constant_override("separation", 22)
-	
+
 	page.add_child(_make_topic_banner("📖", "Read & Understand", "بخوانید و درک کنید"))
-	
+
 	var read_data: Dictionary = _data.get("read", {})
 	var text: Dictionary = read_data.get("text", {})
-	
+
 	if not text.is_empty():
-		page.add_child(_make_text_card(text.get("en", ""), text.get("fa", ""), SOFT, ACCENT))
-	
+		page.add_child(_make_text_card(
+			str(text.get("en", "")),
+			str(text.get("fa", "")),
+			_dark_tint(ACCENT),
+			ACCENT
+		))
+
 	for exercise in read_data.get("exercises", []):
-		var engine := ExerciseEngine.new()
+		var engine := _create_exercise_engine()
 		page.add_child(engine)
 		engine.build(exercise)
-	
+
 	return page
 
 
 # ============================================================
-# PAGE 3 — SPEAK (Open-ended prompts)
+# PAGE 3 — SPEAK
 # ============================================================
+
 func _build_speak_page() -> VBoxContainer:
 	var page := VBoxContainer.new()
 	page.add_theme_constant_override("separation", 22)
-	
+
 	page.add_child(_make_topic_banner("🗣️", "Speak & Practice", "صحبت کنید و تمرین کنید"))
-	
+
 	var intro := _make_text_card(
 		"Work with a partner or say the answers out loud! Tap 'Show Sample Answer' to check.",
 		"با یک شریک کار کنید یا جواب‌ها را بلند بگویید! روی «نمایش نمونه جواب» بزنید تا چک کنید.",
-		Color("#F0FDF4"), Color("#16A34A"))
+		_dark_tint(SUCCESS, 0.10),
+		SUCCESS
+	)
+
 	page.add_child(intro)
-	
+
 	var speak_data: Dictionary = _data.get("speak", {})
+
 	for exercise in speak_data.get("exercises", []):
-		var engine := ExerciseEngine.new()
+		var engine := _create_exercise_engine()
 		page.add_child(engine)
 		engine.build(exercise)
-	
+
 	return page
 
 
 # ============================================================
 # SHARED WIDGETS
 # ============================================================
+# Creates an ExerciseEngine configured with the audio button.
+func _create_exercise_engine() -> ExerciseEngine:
+	var engine := ExerciseEngine.new()
+	
+	# Choose which exercise types show the audio button.
+	engine.audio_types = [
+		"multiple_choice",
+		"fill_blank",
+		"cloze",
+	]
+	
+	engine.audio_panel_scene_path = "res://scenes/shared/AudioPanel.tscn"
+	
+	return engine
+
+
 func _make_topic_banner(icon: String, en: String, fa: String) -> PanelContainer:
 	var banner := PanelContainer.new()
+
 	var style := StyleBoxFlat.new()
 	style.bg_color = ACCENT
 	style.set_corner_radius_all(20)
 	style.set_content_margin_all(26)
+
 	banner.add_theme_stylebox_override("panel", style)
+
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 8)
+
 	var ic := Label.new()
 	ic.text = icon
 	ic.add_theme_font_size_override("font_size", 72)
 	ic.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vb.add_child(ic)
-	var en_l := _make_label(en, 50, Color.WHITE, true)
+
+	var text_color := _contrast_color(ACCENT)
+	var sub_color := Color(text_color.r, text_color.g, text_color.b, 0.85)
+
+	# Banner title: one line, no wrapping.
+	var en_l := _make_label(en, 50, text_color, true, false)
 	en_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(en_l)
-	var fa_l := _make_fa_label(fa, 36)
-	fa_l.add_theme_color_override("font_color", Color(1, 1, 1, 0.85))
+
+	var fa_l := _make_fa_label(fa, 36, sub_color, false)
 	fa_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(fa_l)
+
 	banner.add_child(vb)
 	return banner
 
 
 func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelContainer:
 	var card := PanelContainer.new()
+
 	var style := StyleBoxFlat.new()
 	style.bg_color = bg
 	style.set_corner_radius_all(14)
 	style.border_width_left = 4
 	style.border_color = border
 	style.set_content_margin_all(18)
+
 	card.add_theme_stylebox_override("panel", style)
+
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 6)
-	vb.add_child(_make_label(en, 36, Color("#1E293B"), false))
-	vb.add_child(_make_fa_label(fa, 31))
+
+	# Body text stays wrapped.
+	vb.add_child(_make_label(en, 36, TEXT_LIGHT, false))
+	vb.add_child(_make_fa_label(fa, 31, TEXT_MUTED))
+
 	card.add_child(vb)
 	return card
 
@@ -199,56 +337,197 @@ func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelC
 func _make_button(text: String, color: Color) -> Button:
 	var btn := Button.new()
 	btn.text = text
+	btn.autowrap_mode = TextServer.AUTOWRAP_OFF
 	btn.add_theme_font_size_override("font_size", 32)
-	btn.add_theme_color_override("font_color", Color.WHITE)
+	btn.add_theme_color_override("font_color", _contrast_color(color))
+
 	var style := StyleBoxFlat.new()
 	style.bg_color = color
 	style.set_corner_radius_all(12)
 	style.set_content_margin_all(14)
+
 	btn.add_theme_stylebox_override("normal", style)
-	var hover := style.duplicate()
+
+	var hover: StyleBoxFlat = style.duplicate()
 	hover.bg_color = color.lightened(0.15)
+
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", hover)
-	if font_bold: btn.add_theme_font_override("font", font_bold)
+
+	if font_bold:
+		btn.add_theme_font_override("font", font_bold)
+
 	return btn
 
 
-func _make_label(text: String, size: int, color: Color, bold: bool) -> Label:
+func _make_label(text: String, size: int, color: Color, bold: bool, wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD
-	l.add_theme_font_size_override("font_size", size)
+	l.custom_minimum_size.x = 0
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	# Disable wrapping for titles when requested.
+	if wrap:
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD
+	else:
+		l.autowrap_mode = TextServer.AUTOWRAP_OFF
+		l.clip_text = false
+		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
+
+	# Slightly shrink very long one-line titles so they fit better.
+	var final_size := size
+	if not wrap:
+		if text.length() > 30:
+			final_size = int(float(size) * 0.85)
+		if text.length() > 55:
+			final_size = int(float(size) * 0.72)
+
+	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)
-	if bold and font_bold: l.add_theme_font_override("font", font_bold)
-	elif not bold and font_regular: l.add_theme_font_override("font", font_regular)
+
+	if bold and font_bold:
+		l.add_theme_font_override("font", font_bold)
+	elif not bold and font_regular:
+		l.add_theme_font_override("font", font_regular)
+
 	return l
 
 
-func _make_fa_label(text: String, size: int) -> Label:
+func _make_fa_label(text: String, size: int, color: Color = TEXT_MUTED, wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD
-	l.add_theme_font_size_override("font_size", size)
-	l.add_theme_color_override("font_color", Color("#64748B"))
+	l.custom_minimum_size.x = 0
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	if wrap:
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD
+	else:
+		l.autowrap_mode = TextServer.AUTOWRAP_OFF
+		l.clip_text = false
+		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
+
+	# Slightly shrink very long one-line Persian titles.
+	var final_size := size
+	if not wrap:
+		if text.length() > 34:
+			final_size = int(float(size) * 0.85)
+		if text.length() > 60:
+			final_size = int(float(size) * 0.72)
+
+	l.add_theme_font_size_override("font_size", final_size)
+	l.add_theme_color_override("font_color", color)
 	l.text_direction = Control.TEXT_DIRECTION_RTL
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	if font_farsi: l.add_theme_font_override("font", font_farsi)
+
+	if font_farsi:
+		l.add_theme_font_override("font", font_farsi)
+
 	return l
 
 
 # ============================================================
 # NAVIGATION
 # ============================================================
-func _on_page_changed(_index: int, _page_id: String) -> void:
-	pass
+
+func _on_page_changed(_index: int, page_id: String) -> void:
+	# Stop audio when leaving the Listen page.
+	if page_id != "listen":
+		_stop_audio_panel()
+
 
 func _on_back_button_pressed() -> void:
-	_audio_player.stop()
+	_stop_audio_panel()
+
 	back_button.pivot_offset = back_button.size / 2.0
+
 	var t := create_tween()
 	t.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
+
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
+
 
 func _on_android_back_pressed() -> void:
 	_on_back_button_pressed()
+
+# ============================================================
+# AUDIO PANEL HELPERS
+# ============================================================
+func _get_or_create_audio_panel() -> Node:
+	# Reuse our existing instance.
+	if _audio_panel != null and is_instance_valid(_audio_panel):
+		return _audio_panel
+	
+	# Reuse a panel already created by an ExerciseEngine.
+	var found := get_tree().get_first_node_in_group("audio_panel")
+	if found != null:
+		_audio_panel = found
+		return _audio_panel
+	
+	# Otherwise instantiate AudioPanel.tscn.
+	if not ResourceLoader.exists(AUDIO_PANEL_SCENE_PATH):
+		push_warning("WhatYouLearned: AudioPanel scene not found: " + AUDIO_PANEL_SCENE_PATH)
+		return null
+	
+	var scene := load(AUDIO_PANEL_SCENE_PATH) as PackedScene
+	if scene == null:
+		return null
+	
+	var panel: Node = scene.instantiate()
+	# Add it to the root so it is never clipped and always on top.
+	get_tree().root.add_child(panel)
+	if panel is Control:
+		panel.set_anchors_preset(Control.PRESET_FULL_RECT)
+	# Start hidden. load_and_play() will show it.
+	panel.hide()
+	# Share it with the ExerciseEngine instances.
+	panel.add_to_group("audio_panel")
+	_audio_panel = panel
+	return _audio_panel
+
+
+func _on_listen_audio_pressed() -> void:
+	# No valid audio file for this lesson -> show "No Audio" and stop.
+	if _listen_audio_path == "" or not ResourceLoader.exists(_listen_audio_path):
+		_set_listen_button_no_audio()
+		return
+	
+	var panel := _get_or_create_audio_panel()
+	if panel == null:
+		return
+	
+	if panel.is_playing():
+		# Audio is playing -> stop it and close the panel.
+		panel.stop_and_close()
+		_set_listen_button_idle()
+	else:
+		# Open the panel and start playback.
+		panel.load_and_play(_listen_audio_path)
+		_set_listen_button_playing()
+
+func _set_listen_button_playing() -> void:
+	if _listen_audio_btn != null and is_instance_valid(_listen_audio_btn):
+		_listen_audio_btn.text = "⏹  Stop Audio"
+
+func _set_listen_button_no_audio() -> void:
+	if _listen_audio_btn != null and is_instance_valid(_listen_audio_btn):
+		_listen_audio_btn.text = "❌ No Audio"
+		# Disable it so the user cannot press a button with no audio.
+		_listen_audio_btn.disabled = true
+		# Dim the text so it clearly looks inactive.
+		_listen_audio_btn.add_theme_color_override("font_color", TEXT_MUTED)
+		_listen_audio_btn.add_theme_color_override("font_disabled_color", TEXT_MUTED)
+
+func _set_listen_button_idle() -> void:
+	if _listen_audio_btn != null and is_instance_valid(_listen_audio_btn):
+		_listen_audio_btn.text = "▶  Play Audio"
+
+
+func _on_listen_audio_closed() -> void:
+	# The panel was closed OR the track finished -> reset the button.
+	_set_listen_button_idle()
+
+
+func _stop_audio_panel() -> void:
+	if _audio_panel != null and is_instance_valid(_audio_panel):
+		if _audio_panel.is_playing():
+			_audio_panel.stop_and_close()

@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://c2ko5qlahacvi" path="res://scenes/side_menu/side_menu.gd" id="1_6wynt"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_jtoru"]
 [ext_resource type="FontFile" uid="uid://g637eq3c7teb" path="res://assets/fonts/BebasNeue-Regular.ttf" id="3_121v0"]
-[ext_resource type="Texture2D" uid="uid://ba5384ly5cp4p" path="res://images/bookmark.png" id="3_dmyun"]
-[ext_resource type="StyleBox" uid="uid://btwbuwgmri1ml" path="res://buttons_styles/side_button_style.tres" id="3_hmx2g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_121v0"]
 bg_color = Color(0, 0.2901961, 0.2901961, 1)
@@ -83,9 +81,6 @@ custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("3_hmx2g")
-theme_override_styles/pressed = ExtResource("3_hmx2g")
-theme_override_styles/hover = ExtResource("3_hmx2g")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuPanel/MarginContainer/VBoxContainer/SavedWordsButton" unique_id=458006663]
 layout_mode = 1
@@ -111,25 +106,11 @@ label_settings = SubResource("LabelSettings_7ujfs")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MenuPanel/MarginContainer/VBoxContainer/SavedWordsButton/HBoxContainer" unique_id=1848953886]
-layout_mode = 2
-size_flags_horizontal = 3
-offset_transform_enabled = true
-offset_transform_position = Vector2(-25.145, -32.105)
-offset_transform_scale = Vector2(0.145, 0.145)
-offset_transform_visual_only = false
-texture = ExtResource("3_dmyun")
-expand_mode = 3
-stretch_mode = 2
-
 [node name="LeitnerButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=344930561]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("3_hmx2g")
-theme_override_styles/pressed = ExtResource("3_hmx2g")
-theme_override_styles/hover = ExtResource("3_hmx2g")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuPanel/MarginContainer/VBoxContainer/LeitnerButton" unique_id=2017932120]
 layout_mode = 1
@@ -150,45 +131,25 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "لایتنر"
 label_settings = SubResource("LabelSettings_7ujfs")
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="MenuPanel/MarginContainer/VBoxContainer/LeitnerButton/HBoxContainer" unique_id=581460692]
-layout_mode = 2
-size_flags_horizontal = 8
-offset_transform_enabled = true
-offset_transform_position = Vector2(-25.145, -32.105)
-offset_transform_scale = Vector2(0.145, 0.145)
-offset_transform_visual_only = false
-texture = ExtResource("3_dmyun")
-expand_mode = 3
-stretch_mode = 2
 
 [node name="PurchaseButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=565388961]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("3_hmx2g")
-theme_override_styles/pressed = ExtResource("3_hmx2g")
-theme_override_styles/hover = ExtResource("3_hmx2g")
 text = "خرید برنامه"
 
 [node name="SettingsButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=53408693]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("3_hmx2g")
-theme_override_styles/pressed = ExtResource("3_hmx2g")
-theme_override_styles/hover = ExtResource("3_hmx2g")
 text = "تنظیمات"
 
 [node name="AboutMeButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=1523931110]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("3_hmx2g")
-theme_override_styles/pressed = ExtResource("3_hmx2g")
-theme_override_styles/hover = ExtResource("3_hmx2g")
 text = "درباره من"
 
 [node name="Control" type="Control" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=1596525306]

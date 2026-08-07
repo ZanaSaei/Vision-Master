@@ -253,7 +253,13 @@ func _show_all_done() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	TransitionManager.change_scene(SCENE_SAVED_WORDS)
+	# Return to whichever scene opened this review session
+	var target: String = Global.word_review_return
+	if target == "":
+		target = SCENE_SAVED_WORDS   # safe fallback if never set
+	TransitionManager.change_scene(target)
+	
+	# Keep the little press feedback
 	var tween = create_tween()
 	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
 

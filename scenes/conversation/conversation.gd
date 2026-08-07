@@ -229,8 +229,11 @@ func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 				"type": "intro", "block_idx": -1, "sentence_idx": i,
 				"start": sentence.get("start", 0.0), "end": sentence.get("end", 0.0)
 			})
-			
-	intro_label.text = intro_text.strip_edges()
+	
+	# --- FIX: Make intro text clickable ---
+	intro_label.meta_underlined = false
+	intro_label.text = _format_clickable_text(intro_text.strip_edges(), "")
+	intro_label.meta_clicked.connect(func(meta): _on_word_clicked(meta, intro_label, intro_text.strip_edges()))
 	intro_label.set_meta("translation", intro_fa.strip_edges())
 	_create_intro_translation_label(intro_fa.strip_edges())
 	
@@ -239,6 +242,7 @@ func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 	var audio_value: String = data.get("audio", "")
 	var audio_path: String = Global.resolve_audio_path(book, lesson, audio_value, "reading.mp3")
 	set_meta("audio_path", audio_path)
+
 
 func _build_lines(lines: Array) -> void:
 	for child in lines_container.get_children():
@@ -374,18 +378,20 @@ func _is_same_sentence(a: Dictionary, b: Dictionary) -> bool:
 	return a["type"] == b["type"] and a["block_idx"] == b["block_idx"] and a["sentence_idx"] == b["sentence_idx"]
 
 func _refresh_all_text() -> void:
-	# 1. Update Intro
-	var new_intro := ""
+	# 1. Update Intro with clickable words and highlight
+	var new_intro_bbcode := ""
 	for i in range(intro_sentences_data.size()):
 		var s = intro_sentences_data[i]
 		var en_text = s.get("en", "")
+		var clickable_sentence = _format_clickable_text(en_text, current_highlighted_word)
+		
 		if _last_active_sentence.has("type") and _last_active_sentence["type"] == "intro" and _last_active_sentence["sentence_idx"] == i:
-			new_intro += "[bgcolor=#fbbf2480][color=#ffffff]" + en_text + "[/color][/bgcolor] "
+			new_intro_bbcode += "[bgcolor=#fbbf2480][color=#ffffff]" + clickable_sentence + "[/color][/bgcolor] "
 		else:
-			new_intro += en_text + " "
+			new_intro_bbcode += clickable_sentence + " "
 			
 	if intro_label != null:
-		intro_label.text = new_intro.strip_edges()
+		intro_label.text = new_intro_bbcode.strip_edges()
 
 	# 2. Update Lines
 	for block_idx in range(line_rtls.size()):
