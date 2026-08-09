@@ -295,7 +295,11 @@ func _set_btn_border_size(mat: ShaderMaterial, btn: Button) -> void:
 # Re-measure a couple of frames after layout settles
 func _finalize_shine_sizes() -> void:
 	await get_tree().process_frame
+	if not is_inside_tree():
+		return
 	await get_tree().process_frame
+	if not is_inside_tree():
+		return
 	_set_title_shine_size()
 	for i in range(_btn_border_mats.size()):
 		_set_btn_border_size(_btn_border_mats[i], _btn_border_owners[i])
@@ -548,34 +552,32 @@ func _start_ambient() -> void:
 # CINEMATIC STAGGERED INTRO
 ############################################################
 func _play_intro_animation() -> void:
-	# Logo starts small and invisible.
 	app_title.scale = Vector2(0.4, 0.4)
 	app_title.modulate.a = 0.0
-	
+
 	var staggered: Array[Control] = [
 		app_subtitle, continue_button, choose_label,
 		book1_button, book2_button, book3_button,
 		exam_button, hamburger_button,
 	]
-	
 	for c in staggered:
 		if c.visible:
 			c.scale = Vector2(0.7, 0.7)
 			c.modulate.a = 0.0
-			
-	# One frame so sizes are valid before setting pivots.
+
 	await get_tree().process_frame
+	if not is_inside_tree():
+		return
+
 	app_title.pivot_offset = app_title.size / 2.0
 	for c in staggered:
 		c.pivot_offset = c.size / 2.0
-		
-	# Logo pops in first with a springy overshoot.
+
 	var title_tw := create_tween()
 	title_tw.parallel().tween_property(app_title, "scale", Vector2.ONE, 0.9) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	title_tw.parallel().tween_property(app_title, "modulate:a", 1.0, 0.5)
-	
-	# Then each control follows, 90 ms apart.
+
 	var i := 0
 	for c in staggered:
 		if not c.visible:
@@ -587,9 +589,11 @@ func _play_intro_animation() -> void:
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		tw.parallel().tween_property(c, "modulate:a", 1.0, 0.35)
 		i += 1
-		
-	# Wait for the whole cascade, then re-measure shines and go ambient.
+
 	await get_tree().create_timer(0.45 + staggered.size() * 0.09 + 0.55).timeout
+	if not is_inside_tree():
+		return
+
 	_finalize_shine_sizes()
 	_start_ambient()
 
@@ -713,7 +717,6 @@ func _on_android_back_pressed() -> void:
 		_show_back_message()
 
 func _show_back_message() -> void:
-	# Full-screen dim + centered hint, auto-dismissed after 1.5 s.
 	var message := Label.new()
 	message.text = "Press back again to exit"
 	message.add_theme_font_size_override("font_size", 40)
@@ -721,26 +724,30 @@ func _show_back_message() -> void:
 	message.add_theme_color_override("font_outline_color", Color("#0F172A"))
 	message.add_theme_constant_override("outline_size", 4)
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	message.vertical_alignment   = VERTICAL_ALIGNMENT_CENTER
+	message.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	message.anchor_left = 0.0; message.anchor_top = 0.0
 	message.anchor_right = 1.0; message.anchor_bottom = 1.0
 	message.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(message)
-	
+
 	var bg := ColorRect.new()
-	bg.color = Color("#0F172A", 0.75) # Dark overlay using Text color
+	bg.color = Color("#0F172A", 0.75)
 	bg.anchor_left = 0.0; bg.anchor_top = 0.0
 	bg.anchor_right = 1.0; bg.anchor_bottom = 1.0
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bg)
-	move_child(bg, 0)   # dim behind the text
-	
+	move_child(bg, 0)
+
 	await get_tree().create_timer(1.5).timeout
-	
-	# Fade both out together, then free them.
+	if not is_inside_tree():
+		return
+
 	var tw := create_tween()
 	tw.parallel().tween_property(bg, "modulate:a", 0.0, 0.3)
 	tw.parallel().tween_property(message, "modulate:a", 0.0, 0.3)
 	await tw.finished
+	if not is_inside_tree():
+		return
+
 	bg.queue_free()
 	message.queue_free()

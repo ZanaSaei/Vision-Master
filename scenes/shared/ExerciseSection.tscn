@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://nugsj5qvid5p"]
-
-[ext_resource type="Script" uid="uid://cp6uu4ie0mj3l" path="res://scenes/shared/ExerciseEngineBackup.gd" id="1_vcqid"]
-
-[node name="ExerciseSection" type="VBoxContainer" unique_id=1902207286]
-script = ExtResource("1_vcqid")

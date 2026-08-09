@@ -278,6 +278,8 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	scroll.follow_focus = true
+	scroll.scroll_deadzone = 24
+	scroll.focus_mode = Control.FOCUS_ALL
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
@@ -888,3 +890,53 @@ func _is_touch_blocked(global_pos: Vector2) -> bool:
 				return true
 
 	return false
+
+func _exercise_request_keyboard_visibility() -> void:
+	var focused := get_viewport().gui_get_focus_owner()
+
+	if focused == null:
+		return
+
+	if not (focused is LineEdit or focused is TextEdit):
+		return
+
+	# Give Android a moment to display the keyboard and report
+	# its actual height.
+	await get_tree().create_timer(0.15).timeout
+
+	if not is_instance_valid(focused):
+		return
+
+	var scroll := _get_current_scroll()
+
+	if scroll == null:
+		return
+
+	# First let Godot's built-in focus-follow behavior do its job.
+	scroll.ensure_control_visible(focused)
+
+	# Android keyboard height.
+	var keyboard_height := DisplayServer.virtual_keyboard_get_height()
+
+	if keyboard_height <= 0:
+		return
+
+	# Give the field a comfortable gap above the keyboard.
+	var safe_gap := 32.0
+
+	var field_rect := focused.get_global_rect()
+	var scroll_rect := scroll.get_global_rect()
+
+	var keyboard_top := get_viewport().get_visible_rect().size.y - keyboard_height
+
+	var field_bottom := field_rect.position.y + field_rect.size.y
+	var allowed_bottom := keyboard_top - safe_gap
+
+	if field_bottom > allowed_bottom:
+		var amount := field_bottom - allowed_bottom
+
+		scroll.scroll_vertical = clampi(
+			int(scroll.scroll_vertical + amount),
+			0,
+			_get_max_scroll(scroll)
+		)
