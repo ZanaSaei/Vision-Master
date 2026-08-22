@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dcrsfdywig7xo"]
 
-[ext_resource type="Script" uid="uid://dynl61khhtuwd" path="res://scenes/grammar/scripts/GrammarLesson.gd" id="1_jhhe6"]
+[ext_resource type="Script" uid="uid://c2qhngdb8eg2b" path="res://scenes/grammar/scripts/GrammarLesson.gd" id="1_jhhe6"]
 
 [node name="GrammarLesson" type="Control" unique_id=845843860]
 layout_mode = 3

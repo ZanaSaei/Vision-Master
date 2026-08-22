@@ -6,7 +6,10 @@ var questions: Array = []
 
 var question_label: Label
 var instruction_label: Label
-var options_container: VBoxContainer
+var options_container: Container
+
+var _main: VBoxContainer
+var _long_mode_buttons: Array[GrammarButton] = []
 
 
 func setup(data: Dictionary) -> void:
@@ -57,6 +60,8 @@ func _build_ui() -> void:
 		18
 	)
 
+	_main = main
+
 	margin.add_child(main)
 
 	instruction_label = Label.new()
@@ -71,7 +76,17 @@ func _build_ui() -> void:
 
 	instruction_label.add_theme_font_size_override(
 		"font_size",
-		18
+		GrammarTheme.BODY_SIZE
+	)
+
+	instruction_label.add_theme_color_override(
+		"font_color",
+		GrammarTheme.TEXT_SECONDARY
+	)
+
+	instruction_label.add_theme_font_override(
+		"font",
+		GrammarTheme.get_fa_bold()
 	)
 
 	main.add_child(instruction_label)
@@ -97,7 +112,12 @@ func _build_ui() -> void:
 
 	question_label.add_theme_font_size_override(
 		"font_size",
-		26
+		GrammarTheme.HEADING_SIZE
+	)
+
+	question_label.add_theme_color_override(
+		"font_color",
+		GrammarTheme.TEXT
 	)
 
 	main.add_child(question_label)
@@ -127,8 +147,14 @@ func _show_question() -> void:
 
 	answered = false
 
-	for child in options_container.get_children():
-		child.queue_free()
+	# Drop the previous question's option container immediately (not just
+	# queue_free, which defers to end of frame). Otherwise the stale,
+	# already-answered buttons linger behind the new buttons' fade-in and
+	# can show as a "selected" option — most visibly on the last one.
+	if is_instance_valid(options_container) \
+			and options_container.get_parent() != null:
+		_main.remove_child(options_container)
+		options_container.queue_free()
 
 	var question: Dictionary = questions[
 		current_index
@@ -153,6 +179,51 @@ func _show_question() -> void:
 		[]
 	)
 
+	# Short options (<= 3 words) sit in a 2x2 grid; longer sentence
+	# options get one full-width line each so the whole sentence fits.
+	var long_mode := false
+
+	for i in range(options.size()):
+		if str(options[i]).split(" ", false).size() > 3:
+			long_mode = true
+			break
+
+	_long_mode_buttons.clear()
+
+	if long_mode:
+		var vbox := VBoxContainer.new()
+
+		vbox.add_theme_constant_override(
+			"separation",
+			14
+		)
+
+		options_container = vbox
+	else:
+		var grid := GridContainer.new()
+
+		grid.columns = 2
+
+		grid.add_theme_constant_override(
+			"h_separation",
+		14
+		)
+
+		grid.add_theme_constant_override(
+			"v_separation",
+			14
+		)
+
+		grid.size_flags_horizontal = (
+			Control.SIZE_EXPAND_FILL
+		)
+
+		options_container = grid
+
+	_main.add_child(
+		options_container
+	)
+
 	for i in range(options.size()):
 		var button := GrammarButton.new()
 
@@ -160,14 +231,38 @@ func _show_question() -> void:
 			GrammarButton.ButtonVariant.SECONDARY
 		)
 
-		button.custom_minimum_size = Vector2(
-			0,
-			64
-		)
+		button.play_click_sound = false
+		button.neutral_states = true
 
-		button.size_flags_horizontal = (
-			Control.SIZE_EXPAND_FILL
-		)
+		if long_mode:
+			# Full-width buttons for long options, with a shared height
+			# based on the tallest wrapped sentence.
+			button.custom_minimum_size = Vector2(
+				0,
+				78
+			)
+
+			button.size_flags_horizontal = (
+				Control.SIZE_EXPAND_FILL
+			)
+
+			button.autowrap_mode = (
+				TextServer.AUTOWRAP_WORD_SMART
+			)
+
+			button.no_clip = true
+
+			_long_mode_buttons.append(button)
+		else:
+			# Half-width cells in the 2-column grid.
+			button.custom_minimum_size = Vector2(
+				0,
+				72
+			)
+
+			button.size_flags_horizontal = (
+				Control.SIZE_EXPAND_FILL
+			)
 
 		button.text = str(
 			options[i]
@@ -192,9 +287,49 @@ func _show_question() -> void:
 			i * 0.04
 		)
 
+	if long_mode:
+		call_deferred(
+			"_equalize_long_mode_buttons"
+		)
+
 	GrammarAnimation.appear(
 		question_label
 	)
+
+
+func _equalize_long_mode_buttons() -> void:
+	if _long_mode_buttons.is_empty():
+		return
+
+	var available_width: float = float(options_container.size.x)
+	if available_width <= 0.0:
+		available_width = float(get_viewport_rect().size.x)
+		available_width -= float(GrammarTheme.SAFE_MARGIN * 2)
+		available_width -= float(GrammarTheme.CONTENT_MARGIN * 2)
+		available_width -= 24.0
+
+	var font: Font = GrammarTheme.get_fa_bold()
+	var tallest: float = 0.0
+
+	for button in _long_mode_buttons:
+		var measured := GrammarTheme.measure_text(
+			font,
+			button.text,
+			GrammarTheme.BUTTON_FONT_SIZE,
+			maxf(240.0, available_width - 24.0),
+			HORIZONTAL_ALIGNMENT_CENTER
+		)
+		tallest = maxf(tallest, measured.y)
+
+	var final_height := int(ceil(tallest + 34.0))
+	if final_height < 78:
+		final_height = 78
+
+	for button in _long_mode_buttons:
+		button.custom_minimum_size = Vector2(
+			0,
+			final_height
+		)
 
 
 func _on_answer_pressed(

@@ -1,5 +1,5 @@
 class_name FeedbackPopup
-extends PanelContainer
+extends Control
 
 
 signal continue_pressed
@@ -11,6 +11,8 @@ var continue_button: GrammarButton
 
 var is_correct := false
 
+var _card: PanelContainer
+
 
 func _ready() -> void:
 
@@ -21,38 +23,78 @@ func _ready() -> void:
 
 func _build_ui() -> void:
 
-	GrammarTheme.style_card(
-		self
+	set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
 	)
 
-	custom_minimum_size = Vector2(
-		0,
-		190
+	mouse_filter = Control.MOUSE_FILTER_STOP
+
+	# Dim the screen behind the feedback card.
+	var dim := ColorRect.new()
+
+	dim.color = Color(
+		0.04,
+		0.05,
+		0.08,
+		0.62
+	)
+
+	dim.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+
+	add_child(dim)
+
+	# Center the card on the whole screen.
+	var center := CenterContainer.new()
+
+	center.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+
+	add_child(center)
+
+	_card = PanelContainer.new()
+
+	# Wide enough that the explanation text fits at least ~7 words per
+	# line (minus the card's inner margins) instead of wrapping into a
+	# tall, narrow strip.
+	_card.custom_minimum_size = Vector2(
+		900,
+		0
+	)
+
+	GrammarTheme.style_card(
+		_card
+	)
+
+	center.add_child(
+		_card
 	)
 
 	var margin := MarginContainer.new()
 
 	margin.add_theme_constant_override(
 		"margin_left",
-		20
+		26
 	)
 
 	margin.add_theme_constant_override(
 		"margin_right",
-		20
+		26
 	)
 
 	margin.add_theme_constant_override(
 		"margin_top",
-		16
+		22
 	)
 
 	margin.add_theme_constant_override(
 		"margin_bottom",
-		16
+		22
 	)
 
-	add_child(
+	_card.add_child(
 		margin
 	)
 
@@ -60,7 +102,7 @@ func _build_ui() -> void:
 
 	layout.add_theme_constant_override(
 		"separation",
-		8
+		14
 	)
 
 	margin.add_child(
@@ -75,7 +117,12 @@ func _build_ui() -> void:
 
 	title_label.add_theme_font_size_override(
 		"font_size",
-		25
+		32
+	)
+
+	title_label.add_theme_font_override(
+		"font",
+		GrammarTheme.get_fa_bold()
 	)
 
 	layout.add_child(
@@ -94,7 +141,7 @@ func _build_ui() -> void:
 
 	explanation_label.add_theme_font_size_override(
 		"font_size",
-		17
+		GrammarTheme.BODY_SIZE
 	)
 
 	explanation_label.add_theme_color_override(
@@ -110,7 +157,7 @@ func _build_ui() -> void:
 
 	spacer.custom_minimum_size = Vector2(
 		0,
-		4
+		6
 	)
 
 	layout.add_child(
@@ -151,6 +198,8 @@ func show_correct(
 
 	continue_button.text = "ادامه"
 
+	Sfx.correct()
+
 	_show_popup()
 
 
@@ -169,7 +218,9 @@ func show_wrong(
 
 	explanation_label.text = explanation
 
-	continue_button.text = "دوباره ادامه می‌دیم"
+	continue_button.text = "دوباره امتحان کن"
+
+	Sfx.wrong()
 
 	_show_popup()
 
@@ -179,14 +230,14 @@ func _show_popup() -> void:
 	show()
 
 	GrammarAnimation.pop(
-		self
+		_card
 	)
 
 
 func hide_popup() -> void:
 
 	GrammarAnimation.disappear(
-		self
+		_card
 	)
 
 	await get_tree().create_timer(

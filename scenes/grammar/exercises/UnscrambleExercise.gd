@@ -8,6 +8,14 @@ var check_button: GrammarButton
 
 var selected_words: Array[String] = []
 
+# True when the current item uses the template/word-bank ("blanks") format
+# instead of the classic full-sentence unscramble format.
+var _blanks_mode := false
+var _blank_words: Array[String] = []
+var _blank_buttons: Array[GrammarButton] = []
+var _bank_buttons := {}
+var _word_button_width: int = 0
+
 
 func setup(data: Dictionary) -> void:
 	super.setup(data)
@@ -23,10 +31,16 @@ func _build_ui() -> void:
 
 	var root := VBoxContainer.new()
 
+	root.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+
 	root.add_theme_constant_override(
 		"separation",
-		18
+		20
 	)
+
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
 
 	add_child(root)
 
@@ -45,7 +59,12 @@ func _build_ui() -> void:
 
 	instruction.add_theme_font_size_override(
 		"font_size",
-		19
+		GrammarTheme.BODY_SIZE
+	)
+
+	instruction.add_theme_color_override(
+		"font_color",
+		GrammarTheme.TEXT_SECONDARY
 	)
 
 	root.add_child(
@@ -128,6 +147,7 @@ func _show_item() -> void:
 	answered = false
 
 	selected_words.clear()
+	_word_button_width = 0
 
 	for child in answer_container.get_children():
 		child.queue_free()
@@ -135,12 +155,53 @@ func _show_item() -> void:
 	for child in words_container.get_children():
 		child.queue_free()
 
-	var words: Array = items[
-		current_index
-	].get(
+	_blanks_mode = false
+	_blank_words.clear()
+	_blank_buttons.clear()
+	_bank_buttons.clear()
+
+	var item: Dictionary = items[current_index]
+
+	if item.has("template") and item.has("options"):
+		_blanks_mode = true
+		_show_blanks_item(item)
+	else:
+		_show_sentence_item(item)
+
+
+func _measure_uniform_word_width(words: Array) -> int:
+	var font: Font = GrammarTheme.get_fa_bold()
+	var widest: float = 0.0
+
+	for w in words:
+		var s := str(w)
+		widest = maxf(
+			widest,
+			GrammarTheme.measure_text(
+				font,
+				s,
+				GrammarTheme.BUTTON_FONT_SIZE,
+				-1.0,
+				HORIZONTAL_ALIGNMENT_LEFT
+			).x
+		)
+
+	var width := int(ceil(widest + 34.0))
+	if width < 80:
+		width = 80
+	return width
+
+
+# Classic format: shuffle all words, user taps them in order to build
+# the full sentence.
+func _show_sentence_item(item: Dictionary) -> void:
+
+	var words: Array = item.get(
 		"words",
 		[]
 	).duplicate()
+
+	_word_button_width = _measure_uniform_word_width(words)
 
 	words.shuffle()
 
@@ -152,16 +213,29 @@ func _show_item() -> void:
 			GrammarButton.ButtonVariant.SECONDARY
 		)
 
+		button.play_click_sound = false
+		button.neutral_states = true
+
 		button.text = str(word)
 
+		# All word chips use the size of the largest word in the item so
+		# the row stays visually even and no letters get clipped.
 		button.custom_minimum_size = Vector2(
-			100,
-			52
+			_word_button_width,
+			0
+		)
+
+		button.min_height = 62
+
+		button.no_clip = true
+
+		button.size_flags_horizontal = (
+			Control.SIZE_SHRINK_CENTER
 		)
 
 		button.add_theme_font_size_override(
 			"font_size",
-			18
+			GrammarTheme.BUTTON_FONT_SIZE
 		)
 
 		button.pressed.connect(
@@ -179,6 +253,197 @@ func _show_item() -> void:
 		GrammarAnimation.appear(
 			button
 		)
+
+
+# Blank-fill format: a template sentence with ______ slots and a numbered
+# word bank. The user taps bank words to fill the blanks in order.
+func _show_blanks_item(item: Dictionary) -> void:
+
+	var template := str(item.get("template", ""))
+
+	var parts := template.split("______")
+
+	for i in range(parts.size()):
+
+		var part := parts[i].strip_edges()
+
+		if not part.is_empty():
+
+			var label := Label.new()
+
+			label.text = part
+
+			# Deliberately NO autowrap: inside the HFlowContainer, an
+			# autowrapping label collapses to its minimum (single-letter)
+			# width and wraps vertically. Each template segment should
+			# render at its full text width on one line and flow inline.
+			label.size_flags_horizontal = (
+				Control.SIZE_SHRINK_CENTER
+			)
+
+			label.add_theme_font_size_override(
+				"font_size",
+				GrammarTheme.BODY_LARGE_SIZE
+			)
+
+			label.add_theme_color_override(
+				"font_color",
+				GrammarTheme.TEXT
+			)
+
+			answer_container.add_child(
+				label
+			)
+
+		if i < parts.size() - 1:
+
+			var blank := GrammarButton.new()
+
+			blank.variant = (
+				GrammarButton.ButtonVariant.SECONDARY
+			)
+
+			blank.play_click_sound = false
+			blank.neutral_states = true
+
+			blank.text = "%d" % (i + 1)
+
+			# Compact slot so the blank fits inline with the sentence text
+			# instead of a giant box. 52px wide gives a tappable square;
+			# it grows to fit a filled-in word.
+			blank.custom_minimum_size = Vector2(
+				52,
+				0
+			)
+
+			blank.min_height = 54
+
+			blank.no_clip = true
+
+			blank.size_flags_horizontal = (
+				Control.SIZE_SHRINK_CENTER
+			)
+
+			blank.add_theme_font_size_override(
+				"font_size",
+				GrammarTheme.BODY_LARGE_SIZE
+			)
+
+			blank.set_meta(
+				"blank_index",
+				i
+			)
+
+			blank.pressed.connect(
+				func():
+					_remove_blank(blank)
+			)
+
+			_blank_buttons.append(
+				blank
+			)
+
+			answer_container.add_child(
+				blank
+			)
+
+			_blank_words.append("")
+
+	var options: Array = item.get(
+		"options",
+		[]
+	).duplicate()
+
+	_word_button_width = _measure_uniform_word_width(options)
+
+	options.shuffle()
+
+	for w in options:
+
+		var word := str(w)
+
+		var btn := GrammarButton.new()
+
+		btn.variant = (
+			GrammarButton.ButtonVariant.SECONDARY
+		)
+
+		btn.play_click_sound = false
+		btn.neutral_states = true
+
+		btn.text = word
+
+		# All bank words share the size of the largest word in the item.
+		btn.custom_minimum_size = Vector2(
+			_word_button_width,
+			0
+		)
+
+		btn.min_height = 62
+
+		btn.no_clip = true
+
+		btn.size_flags_horizontal = (
+			Control.SIZE_SHRINK_CENTER
+		)
+
+		btn.add_theme_font_size_override(
+			"font_size",
+			GrammarTheme.BUTTON_FONT_SIZE
+		)
+
+		btn.pressed.connect(
+			func():
+				_fill_blank(btn, word)
+		)
+
+		_bank_buttons[word] = btn
+
+		words_container.add_child(
+			btn
+		)
+
+		GrammarAnimation.appear(
+			btn
+		)
+
+
+func _fill_blank(btn: GrammarButton, word: String) -> void:
+
+	if answered or btn.disabled:
+		return
+
+	for i in range(_blank_words.size()):
+		if _blank_words[i] == "":
+			_blank_words[i] = word
+			_blank_buttons[i].text = word
+			btn.disabled = true
+			return
+
+
+func _remove_blank(blank: GrammarButton) -> void:
+
+	if answered:
+		return
+
+	var i := int(blank.get_meta("blank_index", -1))
+
+	if i < 0 or i >= _blank_words.size():
+		return
+
+	var word: String = _blank_words[i]
+
+	if word == "":
+		return
+
+	_blank_words[i] = ""
+
+	blank.text = "%d" % (i + 1)
+
+	var bank_btn = _bank_buttons.get(word)
+
+	if bank_btn is GrammarButton:
+		bank_btn.disabled = false
 
 
 func _select_word(
@@ -201,11 +466,21 @@ func _select_word(
 		GrammarButton.ButtonVariant.SECONDARY
 	)
 
+	answer_button.play_click_sound = false
+	answer_button.neutral_states = true
+
 	answer_button.text = word
 
+	# Share the same width as the largest word in the current item.
 	answer_button.custom_minimum_size = Vector2(
-		90,
-		50
+		_word_button_width,
+		0
+	)
+
+	answer_button.no_clip = true
+
+	answer_button.size_flags_horizontal = (
+		Control.SIZE_SHRINK_CENTER
 	)
 
 	answer_button.set_meta(
@@ -269,20 +544,23 @@ func _check_answer() -> void:
 		current_index
 	]
 
-	var expected := str(
-		item.get(
-			"answer",
-			""
-		)
-	).to_lower().strip_edges()
+	var correct := false
 
-	var actual := " ".join(
-		selected_words
-	).to_lower().strip_edges()
+	if _blanks_mode:
+		correct = _check_blanks_answer(item)
+	else:
+		var expected := str(
+			item.get(
+				"answer",
+				""
+			)
+		).to_lower().strip_edges()
 
-	var correct := (
-		actual == expected
-	)
+		var actual := " ".join(
+			selected_words
+		).to_lower().strip_edges()
+
+		correct = (actual == expected)
 
 	answered = true
 
@@ -299,6 +577,32 @@ func _check_answer() -> void:
 			false,
 			"ترتیب کلمات هنوز درست نیست. دوباره امتحان کن."
 		)
+
+
+func _check_blanks_answer(item: Dictionary) -> bool:
+
+	var expected: Array = item.get(
+		"answer",
+		[]
+	)
+
+	if expected.size() != _blank_words.size():
+		return false
+
+	for i in range(expected.size()):
+
+		var a := str(
+			_blank_words[i]
+		).to_lower().strip_edges()
+
+		var b := str(
+			expected[i]
+		).to_lower().strip_edges()
+
+		if a != b:
+			return false
+
+	return true
 
 
 func continue_to_next() -> void:

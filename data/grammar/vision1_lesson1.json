@@ -1,1113 +1,1122 @@
 {
-	"lesson": {
-		"id": "vision1_lesson1_saving_nature",
-		"book": "Vision 1",
-		"lesson_number": 1,
-		"title_en": "Saving Nature",
-		"title_fa": "حفاظت از طبیعت",
-		"icon": "🌱",
-		"theme_color": "#35B879",
-		"xp_per_correct": 10,
+ "lesson": {
+  "id": "vision1_lesson1_saving_nature",
+  "book": "Vision 1",
+  "lesson_number": 1,
+  "title_en": "Saving Nature",
+  "title_fa": "حفاظت از طبیعت",
+  "icon": "🌱",
+  "theme_color": "#35B879",
+  "xp_per_correct": 10,
+  "units": [
+   {
+	"id": "true_false",
+	"type": "true_false",
+	"title_fa": "درست یا غلط؟",
+	"instruction_fa": "هر جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+	"items": [
+	 {
+	  "statement": "After will, we use the base form of the verb.",
+	  "fa": "بعد از will از شکل ساده‌ی فعل استفاده می‌کنیم.",
+	  "answer": true,
+	  "explanation_fa": "درست است."
+	 },
+	 {
+	  "statement": "Won't is the short form of will not.",
+	  "fa": "Won't شکل کوتاه will not است.",
+	  "answer": true,
+	  "explanation_fa": "درست است."
+	 },
+	 {
+	  "statement": "Be going to changes according to the subject.",
+	  "fa": "در be going to، am/is/are با فاعل تغییر می‌کند.",
+	  "answer": true,
+	  "explanation_fa": "درست است."
+	 },
+	 {
+	  "statement": "We always use will for plans that were decided before.",
+	  "fa": "برای برنامه‌هایی که از قبل تصمیم‌گیری شده‌اند همیشه از will استفاده می‌کنیم.",
+	  "answer": false,
+	  "explanation_fa": "غلط است. برای برنامه‌ی قبلی معمولاً be going to مناسب‌تر است."
+	 }
+	]
+   },
+   {
+	"id": "will_basic",
+	"type": "learn",
+	"title_fa": "آینده با WILL",
+	"title_en": "Future with WILL",
+	"explanation": "برای صحبت درباره‌ی کارهایی که در آینده اتفاق می‌افتند، می‌توانیم از will استفاده کنیم.",
+	"structure": "Subject + will + base verb",
+	"examples": [
+	 {
+	  "en": "We will save nature.",
+	  "fa": "ما طبیعت را نجات خواهیم داد."
+	 },
+	 {
+	  "en": "She will protect nature.",
+	  "fa": "او از طبیعت محافظت خواهد کرد."
+	 },
+	 {
+	  "en": "They will travel tomorrow.",
+	  "fa": "آن‌ها فردا سفر خواهند کرد."
+	 }
+	]
+   },
+   {
+	"id": "will_basic_mc",
+	"type": "multiple_choice",
+	"title_fa": "تمرین WILL",
+	"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "Humans ______ destroy the natural homes of animals if we don't act now.",
+	  "options": [
+	   "will",
+	   "are",
+	   "do",
+       "did"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "آفرین! برای صحبت درباره‌ی آینده از will استفاده می‌کنیم.",
+	  "wrong_explanation_fa": "اینجا درباره‌ی آینده صحبت می‌کنیم، بنابراین will مناسب است."
+	 },
+	 {
+	  "question": "Next year, there ______ be a few more Iranian cheetahs.",
+	  "options": [
+	   "will",
+	   "is",
+	   "are",
+       "do"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "درست است! بعد از will فعل به شکل ساده می‌آید.",
+	  "wrong_explanation_fa": "برای آینده از will استفاده می‌کنیم."
+	 },
+	 {
+	  "question": "We ______ have clean air in the future if we work hard.",
+	  "options": [
+	   "will",
+	   "is going",
+	   "are will",
+       "going to"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "عالی! ساختار درست will + فعل ساده است.",
+	  "wrong_explanation_fa": "گزینه‌ی درست will است."
+	 }
+	]
+   },
+   {
+	"id": "will_golden_rule",
+	"type": "learn",
+	"title_fa": "قانون طلایی WILL",
+	"title_en": "The Golden Rule",
+	"explanation": "بعد از will همیشه شکل ساده‌ی فعل می‌آید.",
+	"examples": [
+	 {
+	  "en": "will go ✓",
+	  "fa": "درست"
+	 },
+	 {
+	  "en": "will goes ✗",
+	  "fa": "غلط"
+	 },
+	 {
+	  "en": "will going ✗",
+	  "fa": "غلط"
+	 },
+	 {
+	  "en": "will to go ✗",
+	  "fa": "غلط"
+	 }
+	]
+   },
+   {
+	"id": "will_negative",
+	"type": "learn",
+	"title_fa": "جمله‌ی منفی با WILL",
+	"title_en": "Negative with WILL",
+	"explanation": "برای منفی کردن will از will not استفاده می‌کنیم. شکل کوتاه آن won't است.",
+	"structure": "Subject + will not / won't + base verb",
+	"examples": [
+	 {
+	  "en": "I will not forget.",
+	  "fa": "من فراموش نخواهم کرد."
+	 },
+	 {
+	  "en": "They won't destroy the forest.",
+	  "fa": "آن‌ها جنگل را نابود نخواهند کرد."
+	 }
+	]
+   },
+   {
+	"id": "will_negative_practice",
+	"type": "multiple_choice",
+	"title_fa": "منفی با WILL",
+	"instruction_fa": "جمله‌ی درست را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "We ______ the injured animal.",
+	  "options": [
+	   "won't hurt",
+	   "not will hurt",
+	   "don't will hurt",
+       "isn't hurt"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "آفرین! won't شکل کوتاه will not است.",
+	  "wrong_explanation_fa": "شکل منفی درست will، یعنی will not یا won't است."
+	 },
+	 {
+	  "question": "They ______ in the yard tomorrow.",
+	  "options": [
+	   "won't play",
+	   "not will play",
+	   "doesn't play",
+       "isn't play"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "درست است! won't + فعل ساده.",
+	  "wrong_explanation_fa": "بعد از won't باید فعل ساده بیاید."
+	 }
+	]
+   },
+   {
+	"id": "will_questions",
+	"type": "learn",
+	"title_fa": "سؤال با WILL",
+	"title_en": "Questions with WILL",
+	"explanation": "برای ساختن سؤال، will را قبل از فاعل می‌آوریم.",
+	"structure": "Will + subject + base verb ...?",
+	"examples": [
+	 {
+	  "en": "Will you help me?",
+	  "fa": "آیا به من کمک خواهی کرد؟"
+	 },
+	 {
+	  "en": "Will they visit the museum?",
+	  "fa": "آیا آن‌ها از موزه دیدن خواهند کرد؟"
+	 }
+	]
+   },
+   {
+	"id": "will_questions_practice",
+	"type": "multiple_choice",
+	"title_fa": "سؤال‌های آینده",
+	"instruction_fa": "ساختار درست سؤال را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "______ you ______ protect the environment?",
+	  "options": [
+	   "Will / protect",
+	   "Do / protect",
+	   "Are / protect",
+       "Did / protect"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "آفرین! ساختار سؤال با will این است: Will + subject + base verb.",
+	  "wrong_explanation_fa": "برای سؤال با will، will قبل از فاعل قرار می‌گیرد."
+	 },
+	 {
+	  "question": "______ our family buy a new car next year?",
+	  "options": [
+	   "Is",
+	   "Will",
+	   "Does",
+       "Are"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "درست است! Will our family buy...?",
+	  "wrong_explanation_fa": "برای سؤال آینده از will استفاده می‌کنیم."
+	 }
+	]
+   },
+   {
+	"id": "wh_questions",
+	"type": "learn",
+	"title_fa": "سؤال‌های Wh با WILL",
+	"title_en": "Wh-questions with WILL",
+	"explanation": "برای پرسیدن اطلاعات بیشتر، کلمات Who، When، Where و What را قبل از will می‌آوریم.",
+	"structure": "Wh-word + will + subject + base verb?",
+	"examples": [
+	 {
+	  "en": "Who will visit Shiraz?",
+	  "fa": "چه کسی از شیراز دیدن خواهد کرد؟"
+	 },
+	 {
+	  "en": "When will the tourists visit Shiraz?",
+	  "fa": "گردشگران چه زمانی از شیراز دیدن خواهند کرد؟"
+	 },
+	 {
+	  "en": "Where will they go?",
+	  "fa": "آن‌ها کجا خواهند رفت؟"
+	 },
+	 {
+	  "en": "What will they do?",
+	  "fa": "آن‌ها چه کار خواهند کرد؟"
+	 }
+	]
+   },
+   {
+	"id": "wh_practice",
+	"type": "multiple_choice",
+	"title_fa": "تمرین Wh",
+	"instruction_fa": "کلمه‌ی پرسشی مناسب را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "______ will the tourists visit Shiraz?",
+	  "options": [
+	   "When",
+	   "Do",
+	   "Are",
+       "Did"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "آفرین! When برای پرسیدن زمان استفاده می‌شود.",
+	  "wrong_explanation_fa": "درباره‌ی زمان سؤال می‌کنیم، پس When مناسب است."
+	 },
+	 {
+	  "question": "______ will they go?",
+	  "options": [
+	   "Where",
+	   "Do",
+	   "Are",
+       "Did"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "درست است! Where برای پرسیدن مکان است.",
+	  "wrong_explanation_fa": "درباره‌ی مکان سؤال می‌کنیم، بنابراین Where مناسب است."
+	 }
+	]
+   },
+   {
+	"id": "will_uses",
+	"type": "learn",
+	"title_fa": "WILL را چه زمانی استفاده می‌کنیم؟",
+	"title_en": "Uses of WILL",
+	"explanation": "در این درس will را بیشتر برای پیش‌بینی، تصمیم لحظه‌ای، وعده، پیشنهاد کمک و درخواست می‌بینیم.",
+	"cards": [
+	 {
+	  "en": "I think people will protect more animals.",
+	  "fa": "پیش‌بینی"
+	 },
+	 {
+	  "en": "The phone is ringing. I'll answer it.",
+	  "fa": "تصمیم لحظه‌ای"
+	 },
+	 {
+	  "en": "I will help you.",
+	  "fa": "وعده"
+	 },
+	 {
+	  "en": "Don't worry. I will help you.",
+	  "fa": "پیشنهاد کمک"
+	 },
+	 {
+	  "en": "Will you close the door, please?",
+	  "fa": "درخواست"
+	 }
+	]
+   },
+   {
+	"id": "will_fill",
+	"type": "fill_blank",
+	"title_fa": "WILL را کامل کن",
+	"instruction_fa": "جای خالی را با شکل درست کامل کن.",
+	"items": [
+	 {
+	  "text": "I ______ (save) nature.",
+	  "answers": [
+       "will save"
+	  ]
+	 },
+	 {
+	  "text": "They ______ (destroy) the jungle.",
+	  "answers": [
+       "will destroy"
+	  ]
+	 },
+	 {
+	  "text": "We ______ (protect) endangered animals.",
+	  "answers": [
+       "will protect"
+	  ]
+	 },
+	 {
+	  "text": "The number of cheetahs ______ (increase).",
+	  "answers": [
+       "will increase"
+	  ]
+	 },
+	 {
+	  "text": "We ______ (not / hurt) the animals.",
+	  "answers": [
+	   "will not hurt",
+       "won't hurt"
+	  ]
+	 }
+	]
+   },
+   {
+	"id": "going_to_basic",
+	"type": "learn",
+	"title_fa": "آینده با BE GOING TO",
+	"title_en": "Future with BE GOING TO",
+	"explanation": "از be going to برای برنامه یا قصدی که از قبل داریم و همچنین پیش‌بینی بر اساس نشانه‌های موجود استفاده می‌کنیم.",
+	"structure": "Subject + am / is / are + going to + base verb",
+	"cards": [
+	 {
+	  "en": "I am going to study.",
+	  "fa": "I → am going to"
+	 },
+	 {
+	  "en": "She is going to visit the museum.",
+	  "fa": "She → is going to"
+	 },
+	 {
+	  "en": "We are going to protect wildlife.",
+	  "fa": "We → are going to"
+	 }
+	]
+   },
+   {
+	"id": "going_to_subject",
+	"type": "multiple_choice",
+	"title_fa": "AM / IS / ARE",
+	"instruction_fa": "فعل کمکی درست را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "I ______ going to study tonight.",
+	  "options": [
+	   "am",
+	   "is",
+	   "are",
+       "be"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "I با am می‌آید.",
+	  "wrong_explanation_fa": "برای I باید از am استفاده کنیم."
+	 },
+	 {
+	  "question": "She ______ going to visit the museum.",
+	  "options": [
+	   "am",
+	   "is",
+	   "are",
+       "be"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "She با is می‌آید.",
+	  "wrong_explanation_fa": "برای she باید از is استفاده کنیم."
+	 },
+	 {
+	  "question": "They ______ going to protect wildlife.",
+	  "options": [
+	   "am",
+	   "is",
+	   "are",
+       "be"
+	  ],
+	  "correct": 2,
+	  "explanation_fa": "They با are می‌آید.",
+	  "wrong_explanation_fa": "برای they باید از are استفاده کنیم."
+	 }
+	]
+   },
+   {
+	"id": "going_to_negative",
+	"type": "learn",
+	"title_fa": "منفی با BE GOING TO",
+	"title_en": "Negative with BE GOING TO",
+	"explanation": "برای منفی کردن be going to، not را بعد از am/is/are قرار می‌دهیم.",
+	"structure": "Subject + am/is/are + not + going to + base verb",
+	"examples": [
+	 {
+	  "en": "I am not going to watch TV.",
+	  "fa": "من قصد ندارم تلویزیون تماشا کنم."
+	 },
+	 {
+	  "en": "He isn't going to travel tomorrow.",
+	  "fa": "او فردا قصد سفر ندارد."
+	 },
+	 {
+	  "en": "They aren't going to destroy nature.",
+	  "fa": "آن‌ها قصد ندارند طبیعت را نابود کنند."
+	 }
+	]
+   },
+   {
+	"id": "going_to_negative_practice",
+	"type": "multiple_choice",
+	"title_fa": "تمرین منفی",
+	"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "Reza ______ going to watch TV tonight.",
+	  "options": [
+	   "isn't",
+	   "aren't",
+	   "won't",
+       "don't"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "آفرین! Reza با is می‌آید و شکل منفی آن isn't است.",
+	  "wrong_explanation_fa": "برای Reza باید از isn't going to استفاده کنیم."
+	 },
+	 {
+	  "question": "We ______ going to destroy nature.",
+	  "options": [
+	   "aren't",
+	   "isn't",
+	   "won't",
+       "doesn't"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "We با are می‌آید، پس شکل منفی aren’t است.",
+	  "wrong_explanation_fa": "برای We باید از aren't going to استفاده کنیم."
+	 }
+	]
+   },
+   {
+	"id": "going_to_questions",
+	"type": "learn",
+	"title_fa": "سؤال با BE GOING TO",
+	"title_en": "Questions with BE GOING TO",
+	"explanation": "در سؤال، am/is/are را قبل از فاعل می‌آوریم.",
+	"structure": "Am / Is / Are + subject + going to + base verb?",
+	"examples": [
+	 {
+	  "en": "Are you going to visit the museum?",
+	  "fa": "آیا قصد داری از موزه دیدن کنی؟"
+	 },
+	 {
+	  "en": "Is Alice going to read some poems?",
+	  "fa": "آیا آلیس قصد دارد چند شعر بخواند؟"
+	 }
+	]
+   },
+   {
+	"id": "going_to_questions_practice",
+	"type": "multiple_choice",
+	"title_fa": "سؤال با GOING TO",
+	"instruction_fa": "ساختار درست را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "______ you going to visit the museum?",
+	  "options": [
+	   "Are",
+	   "Will",
+	   "Do",
+       "Is"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "You با are می‌آید.",
+	  "wrong_explanation_fa": "ساختار درست: Are you going to...?"
+	 },
+	 {
+	  "question": "______ Alice going to read some poems?",
+	  "options": [
+	   "Are",
+	   "Is",
+	   "Will",
+       "Does"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "Alice با is می‌آید.",
+	  "wrong_explanation_fa": "برای Alice باید از Is استفاده کنیم."
+	 }
+	]
+   },
+   {
+	"id": "going_to_fill",
+	"type": "fill_blank",
+	"title_fa": "تمرین BE GOING TO",
+	"instruction_fa": "جمله‌ها را کامل کن.",
+	"items": [
+	 {
+	  "text": "Look at the clouds! It ______ (rain).",
+	  "answers": [
+       "is going to rain"
+	  ]
+	 },
+	 {
+	  "text": "We ______ (not / destroy) nature.",
+	  "answers": [
 
-		"units": [
-
-			{
-				"id": "intro",
-				"type": "learn",
-				"title_fa": "امروز درباره‌ی آینده یاد می‌گیریم",
-				"title_en": "Talking about the Future",
-				"explanation": "برای صحبت درباره‌ی آینده در این درس دو ساختار مهم داریم.",
-				"cards": [
-					{
-						"en": "will + base verb",
-						"fa": "برای بیان آینده با will"
-					},
-					{
-						"en": "am / is / are + going to + base verb",
-						"fa": "برای بیان آینده با be going to"
-					}
-				]
-			},
-
-			{
-				"id": "will_basic",
-				"type": "learn",
-				"title_fa": "آینده با WILL",
-				"title_en": "Future with WILL",
-				"explanation": "برای صحبت درباره‌ی کارهایی که در آینده اتفاق می‌افتند، می‌توانیم از will استفاده کنیم.",
-				"structure": "Subject + will + base verb",
-				"examples": [
-					{
-						"en": "We will save nature.",
-						"fa": "ما طبیعت را نجات خواهیم داد."
-					},
-					{
-						"en": "She will protect nature.",
-						"fa": "او از طبیعت محافظت خواهد کرد."
-					},
-					{
-						"en": "They will travel tomorrow.",
-						"fa": "آن‌ها فردا سفر خواهند کرد."
-					}
-				]
-			},
-
-			{
-				"id": "will_basic_mc",
-				"type": "multiple_choice",
-				"title_fa": "تمرین WILL",
-				"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
-				"questions": [
-					{
-						"question": "Humans ______ destroy the natural homes of animals if we don't act now.",
-						"options": [
-							"will",
-							"are",
-							"do",
-							"did"
-						],
-						"correct": 0,
-						"explanation_fa": "آفرین! برای صحبت درباره‌ی آینده از will استفاده می‌کنیم.",
-						"wrong_explanation_fa": "اینجا درباره‌ی آینده صحبت می‌کنیم، بنابراین will مناسب است."
-					},
-					{
-						"question": "Next year, there ______ be a few more Iranian cheetahs.",
-						"options": [
-							"will",
-							"is",
-							"are",
-							"do"
-						],
-						"correct": 0,
-						"explanation_fa": "درست است! بعد از will فعل به شکل ساده می‌آید.",
-						"wrong_explanation_fa": "برای آینده از will استفاده می‌کنیم."
-					},
-					{
-						"question": "We ______ have clean air in the future if we work hard.",
-						"options": [
-							"will",
-							"is going",
-							"are will",
-							"going to"
-						],
-						"correct": 0,
-						"explanation_fa": "عالی! ساختار درست will + فعل ساده است.",
-						"wrong_explanation_fa": "گزینه‌ی درست will است."
-					}
-				]
-			},
-
-			{
-				"id": "will_golden_rule",
-				"type": "learn",
-				"title_fa": "قانون طلایی WILL",
-				"title_en": "The Golden Rule",
-				"explanation": "بعد از will همیشه شکل ساده‌ی فعل می‌آید.",
-				"examples": [
-					{
-						"en": "will go ✓",
-						"fa": "درست"
-					},
-					{
-						"en": "will goes ✗",
-						"fa": "غلط"
-					},
-					{
-						"en": "will going ✗",
-						"fa": "غلط"
-					},
-					{
-						"en": "will to go ✗",
-						"fa": "غلط"
-					}
-				]
-			},
-
-			{
-				"id": "will_negative",
-				"type": "learn",
-				"title_fa": "جمله‌ی منفی با WILL",
-				"title_en": "Negative with WILL",
-				"explanation": "برای منفی کردن will از will not استفاده می‌کنیم. شکل کوتاه آن won't است.",
-				"structure": "Subject + will not / won't + base verb",
-				"examples": [
-					{
-						"en": "I will not forget.",
-						"fa": "من فراموش نخواهم کرد."
-					},
-					{
-						"en": "They won't destroy the forest.",
-						"fa": "آن‌ها جنگل را نابود نخواهند کرد."
-					}
-				]
-			},
-
-			{
-				"id": "will_negative_practice",
-				"type": "multiple_choice",
-				"title_fa": "منفی با WILL",
-				"instruction_fa": "جمله‌ی درست را انتخاب کن.",
-				"questions": [
-					{
-						"question": "We ______ the injured animal.",
-						"options": [
-							"won't hurt",
-							"not will hurt",
-							"don't will hurt",
-							"isn't hurt"
-						],
-						"correct": 0,
-						"explanation_fa": "آفرین! won't شکل کوتاه will not است.",
-						"wrong_explanation_fa": "شکل منفی درست will، یعنی will not یا won't است."
-					},
-					{
-						"question": "They ______ in the yard tomorrow.",
-						"options": [
-							"won't play",
-							"not will play",
-							"doesn't play",
-							"isn't play"
-						],
-						"correct": 0,
-						"explanation_fa": "درست است! won't + فعل ساده.",
-						"wrong_explanation_fa": "بعد از won't باید فعل ساده بیاید."
-					}
-				]
-			},
-
-			{
-				"id": "will_questions",
-				"type": "learn",
-				"title_fa": "سؤال با WILL",
-				"title_en": "Questions with WILL",
-				"explanation": "برای ساختن سؤال، will را قبل از فاعل می‌آوریم.",
-				"structure": "Will + subject + base verb ...?",
-				"examples": [
-					{
-						"en": "Will you help me?",
-						"fa": "آیا به من کمک خواهی کرد؟"
-					},
-					{
-						"en": "Will they visit the museum?",
-						"fa": "آیا آن‌ها از موزه دیدن خواهند کرد؟"
-					}
-				]
-			},
-
-			{
-				"id": "will_questions_practice",
-				"type": "multiple_choice",
-				"title_fa": "سؤال‌های آینده",
-				"instruction_fa": "ساختار درست سؤال را انتخاب کن.",
-				"questions": [
-					{
-						"question": "______ you ______ protect the environment?",
-						"options": [
-							"Will / protect",
-							"Do / protect",
-							"Are / protect",
-							"Did / protect"
-						],
-						"correct": 0,
-						"explanation_fa": "آفرین! ساختار سؤال با will این است: Will + subject + base verb.",
-						"wrong_explanation_fa": "برای سؤال با will، will قبل از فاعل قرار می‌گیرد."
-					},
-					{
-						"question": "______ our family buy a new car next year?",
-						"options": [
-							"Is",
-							"Will",
-							"Does",
-							"Are"
-						],
-						"correct": 1,
-						"explanation_fa": "درست است! Will our family buy...?",
-						"wrong_explanation_fa": "برای سؤال آینده از will استفاده می‌کنیم."
-					}
-				]
-			},
-
-			{
-				"id": "wh_questions",
-				"type": "learn",
-				"title_fa": "سؤال‌های Wh با WILL",
-				"title_en": "Wh-questions with WILL",
-				"explanation": "برای پرسیدن اطلاعات بیشتر، کلمات Who، When، Where و What را قبل از will می‌آوریم.",
-				"structure": "Wh-word + will + subject + base verb?",
-				"examples": [
-					{
-						"en": "Who will visit Shiraz?",
-						"fa": "چه کسی از شیراز دیدن خواهد کرد؟"
-					},
-					{
-						"en": "When will the tourists visit Shiraz?",
-						"fa": "گردشگران چه زمانی از شیراز دیدن خواهند کرد؟"
-					},
-					{
-						"en": "Where will they go?",
-						"fa": "آن‌ها کجا خواهند رفت؟"
-					},
-					{
-						"en": "What will they do?",
-						"fa": "آن‌ها چه کار خواهند کرد؟"
-					}
-				]
-			},
-
-			{
-				"id": "wh_practice",
-				"type": "multiple_choice",
-				"title_fa": "تمرین Wh",
-				"instruction_fa": "کلمه‌ی پرسشی مناسب را انتخاب کن.",
-				"questions": [
-					{
-						"question": "______ will the tourists visit Shiraz?",
-						"options": [
-							"When",
-							"Do",
-							"Are",
-							"Did"
-						],
-						"correct": 0,
-						"explanation_fa": "آفرین! When برای پرسیدن زمان استفاده می‌شود.",
-						"wrong_explanation_fa": "درباره‌ی زمان سؤال می‌کنیم، پس When مناسب است."
-					},
-					{
-						"question": "______ will they go?",
-						"options": [
-							"Where",
-							"Do",
-							"Are",
-							"Did"
-						],
-						"correct": 0,
-						"explanation_fa": "درست است! Where برای پرسیدن مکان است.",
-						"wrong_explanation_fa": "درباره‌ی مکان سؤال می‌کنیم، بنابراین Where مناسب است."
-					}
-				]
-			},
-
-			{
-				"id": "will_uses",
-				"type": "learn",
-				"title_fa": "WILL را چه زمانی استفاده می‌کنیم؟",
-				"title_en": "Uses of WILL",
-				"explanation": "در این درس will را بیشتر برای پیش‌بینی، تصمیم لحظه‌ای، وعده، پیشنهاد کمک و درخواست می‌بینیم.",
-				"cards": [
-					{
-						"en": "I think people will protect more animals.",
-						"fa": "پیش‌بینی"
-					},
-					{
-						"en": "The phone is ringing. I'll answer it.",
-						"fa": "تصمیم لحظه‌ای"
-					},
-					{
-						"en": "I will help you.",
-						"fa": "وعده"
-					},
-					{
-						"en": "Don't worry. I will help you.",
-						"fa": "پیشنهاد کمک"
-					},
-					{
-						"en": "Will you close the door, please?",
-						"fa": "درخواست"
-					}
-				]
-			},
-
-			{
-				"id": "will_fill",
-				"type": "fill_blank",
-				"title_fa": "WILL را کامل کن",
-				"instruction_fa": "جای خالی را با شکل درست کامل کن.",
-				"items": [
-					{
-						"text": "I ______ (save) nature.",
-						"answers": ["will save"]
-					},
-					{
-						"text": "They ______ (destroy) the jungle.",
-						"answers": ["will destroy"]
-					},
-					{
-						"text": "We ______ (protect) endangered animals.",
-						"answers": ["will protect"]
-					},
-					{
-						"text": "The number of cheetahs ______ (increase).",
-						"answers": ["will increase"]
-					},
-					{
-						"text": "We ______ (not / hurt) the animals.",
-						"answers": ["will not hurt", "won't hurt"]
-					}
-				]
-			},
-
-			{
-				"id": "going_to_basic",
-				"type": "learn",
-				"title_fa": "آینده با BE GOING TO",
-				"title_en": "Future with BE GOING TO",
-				"explanation": "از be going to برای برنامه یا قصدی که از قبل داریم و همچنین پیش‌بینی بر اساس نشانه‌های موجود استفاده می‌کنیم.",
-				"structure": "Subject + am / is / are + going to + base verb",
-				"cards": [
-					{
-						"en": "I am going to study.",
-						"fa": "I → am going to"
-					},
-					{
-						"en": "She is going to visit the museum.",
-						"fa": "She → is going to"
-					},
-					{
-						"en": "We are going to protect wildlife.",
-						"fa": "We → are going to"
-					}
-				]
-			},
-
-			{
-				"id": "going_to_subject",
-				"type": "multiple_choice",
-				"title_fa": "AM / IS / ARE",
-				"instruction_fa": "فعل کمکی درست را انتخاب کن.",
-				"questions": [
-					{
-						"question": "I ______ going to study tonight.",
-						"options": [
-							"am",
-							"is",
-							"are",
-							"be"
-						],
-						"correct": 0,
-						"explanation_fa": "I با am می‌آید.",
-						"wrong_explanation_fa": "برای I باید از am استفاده کنیم."
-					},
-					{
-						"question": "She ______ going to visit the museum.",
-						"options": [
-							"am",
-							"is",
-							"are",
-							"be"
-						],
-						"correct": 1,
-						"explanation_fa": "She با is می‌آید.",
-						"wrong_explanation_fa": "برای she باید از is استفاده کنیم."
-					},
-					{
-						"question": "They ______ going to protect wildlife.",
-						"options": [
-							"am",
-							"is",
-							"are",
-							"be"
-						],
-						"correct": 2,
-						"explanation_fa": "They با are می‌آید.",
-						"wrong_explanation_fa": "برای they باید از are استفاده کنیم."
-					}
-				]
-			},
-
-			{
-				"id": "going_to_negative",
-				"type": "learn",
-				"title_fa": "منفی با BE GOING TO",
-				"title_en": "Negative with BE GOING TO",
-				"explanation": "برای منفی کردن be going to، not را بعد از am/is/are قرار می‌دهیم.",
-				"structure": "Subject + am/is/are + not + going to + base verb",
-				"examples": [
-					{
-						"en": "I am not going to watch TV.",
-						"fa": "من قصد ندارم تلویزیون تماشا کنم."
-					},
-					{
-						"en": "He isn't going to travel tomorrow.",
-						"fa": "او فردا قصد سفر ندارد."
-					},
-					{
-						"en": "They aren't going to destroy nature.",
-						"fa": "آن‌ها قصد ندارند طبیعت را نابود کنند."
-					}
-				]
-			},
-
-			{
-				"id": "going_to_negative_practice",
-				"type": "multiple_choice",
-				"title_fa": "تمرین منفی",
-				"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
-				"questions": [
-					{
-						"question": "Reza ______ going to watch TV tonight.",
-						"options": [
-							"isn't",
-							"aren't",
-							"won't",
-							"don't"
-						],
-						"correct": 0,
-						"explanation_fa": "آفرین! Reza با is می‌آید و شکل منفی آن isn't است.",
-						"wrong_explanation_fa": "برای Reza باید از isn't going to استفاده کنیم."
-					},
-					{
-						"question": "We ______ going to destroy nature.",
-						"options": [
-							"aren't",
-							"isn't",
-							"won't",
-							"doesn't"
-						],
-						"correct": 0,
-						"explanation_fa": "We با are می‌آید، پس شکل منفی aren’t است.",
-						"wrong_explanation_fa": "برای We باید از aren't going to استفاده کنیم."
-					}
-				]
-			},
-
-			{
-				"id": "going_to_questions",
-				"type": "learn",
-				"title_fa": "سؤال با BE GOING TO",
-				"title_en": "Questions with BE GOING TO",
-				"explanation": "در سؤال، am/is/are را قبل از فاعل می‌آوریم.",
-				"structure": "Am / Is / Are + subject + going to + base verb?",
-				"examples": [
-					{
-						"en": "Are you going to visit the museum?",
-						"fa": "آیا قصد داری از موزه دیدن کنی؟"
-					},
-					{
-						"en": "Is Alice going to read some poems?",
-						"fa": "آیا آلیس قصد دارد چند شعر بخواند؟"
-					}
-				]
-			},
-
-			{
-				"id": "going_to_questions_practice",
-				"type": "multiple_choice",
-				"title_fa": "سؤال با GOING TO",
-				"instruction_fa": "ساختار درست را انتخاب کن.",
-				"questions": [
-					{
-						"question": "______ you going to visit the museum?",
-						"options": [
-							"Are",
-							"Will",
-							"Do",
-							"Is"
-						],
-						"correct": 0,
-						"explanation_fa": "You با are می‌آید.",
-						"wrong_explanation_fa": "ساختار درست: Are you going to...?"
-					},
-					{
-						"question": "______ Alice going to read some poems?",
-						"options": [
-							"Are",
-							"Is",
-							"Will",
-							"Does"
-						],
-						"correct": 1,
-						"explanation_fa": "Alice با is می‌آید.",
-						"wrong_explanation_fa": "برای Alice باید از Is استفاده کنیم."
-					}
-				]
-			},
-
-			{
-				"id": "going_to_fill",
-				"type": "fill_blank",
-				"title_fa": "تمرین BE GOING TO",
-				"instruction_fa": "جمله‌ها را کامل کن.",
-				"items": [
-					{
-						"text": "Look at the clouds! It ______ (rain).",
-						"answers": ["is going to rain"]
-					},
-					{
-						"text": "We ______ (not / destroy) nature.",
-						"answers": [
-							"are not going to destroy",
-							"aren't going to destroy"
-						]
-					},
-					{
-						"text": "______ you ______ (visit) the museum?",
-						"answers": ["Are you going to visit"]
-					},
-					{
-						"text": "Alice ______ (read) some poems tonight.",
-						"answers": ["is going to read"]
-					},
-					{
-						"text": "Reza ______ (not / watch) TV.",
-						"answers": [
-							"is not going to watch",
-							"isn't going to watch"
-						]
-					}
-				]
-			},
-
-			{
-				"id": "will_vs_going",
-				"type": "learn",
-				"title_fa": "WILL یا GOING TO؟",
-				"title_en": "WILL vs GOING TO",
-				"explanation": "برای انتخاب ساختار، به موقعیت نگاه کن.",
-				"cards": [
-					{
-						"en": "I think people will protect more animals.",
-						"fa": "نظر یا پیش‌بینی → WILL"
-					},
-					{
-						"en": "The phone is ringing. I'll answer it.",
-						"fa": "تصمیم همین لحظه → WILL"
-					},
-					{
-						"en": "We have already planned our trip.",
-						"fa": "برنامه‌ی قبلی → GOING TO"
-					},
-					{
-						"en": "Look at those dark clouds!",
-						"fa": "نشانه‌ی واضح → GOING TO"
-					}
-				]
-			},
-
-			{
-				"id": "will_vs_going_mc",
-				"type": "multiple_choice",
-				"title_fa": "کدام را انتخاب کنیم؟",
-				"instruction_fa": "با توجه به موقعیت، بهترین گزینه را انتخاب کن.",
-				"questions": [
-					{
-						"question": "Look at those dark clouds! It ______ rain.",
-						"options": [
-							"will",
-							"is going to",
-							"does",
-							"did"
-						],
-						"correct": 1,
-						"explanation_fa": "چون نشانه‌ی واضحی مثل ابرهای تیره داریم، از is going to استفاده می‌کنیم.",
-						"wrong_explanation_fa": "اینجا شواهدی برای اتفاق آینده داریم؛ پس going to مناسب است."
-					},
-					{
-						"question": "The phone is ringing. I ______ answer it.",
-						"options": [
-							"am going to",
-							"will",
-							"am",
-							"did"
-						],
-						"correct": 1,
-						"explanation_fa": "تصمیم همین لحظه گرفته شده، پس will مناسب است.",
-						"wrong_explanation_fa": "تصمیم در همان لحظه گرفته می‌شود؛ بنابراین will انتخاب مناسب‌تری است."
-					},
-					{
-						"question": "We have already planned our trip. We ______ visit Golestan Forest next month.",
-						"options": [
-							"will",
-							"are going to",
-							"do",
-							"did"
-						],
-						"correct": 1,
-						"explanation_fa": "چون برنامه از قبل وجود دارد، are going to مناسب است.",
-						"wrong_explanation_fa": "عبارت have already planned نشان می‌دهد که این یک برنامه‌ی قبلی است."
-					},
-					{
-						"question": "I think people ______ save more animals in the future.",
-						"options": [
-							"are going to",
-							"will",
-							"are",
-							"did"
-						],
-						"correct": 1,
-						"explanation_fa": "I think یک نظر یا پیش‌بینی را نشان می‌دهد، بنابراین will مناسب است.",
-						"wrong_explanation_fa": "اینجا بیشتر درباره‌ی یک پیش‌بینی یا نظر صحبت می‌کنیم."
-					}
-				]
-			},
-
-			{
-				"id": "both_possible",
-				"type": "learn",
-				"title_fa": "گاهی هر دو درست‌اند",
-				"title_en": "When Both Are Possible",
-				"explanation": "گاهی وقتی فقط درباره‌ی یک پیش‌بینی آینده صحبت می‌کنیم و برنامه یا شواهد مشخصی نداریم، هر دو ساختار می‌توانند استفاده شوند.",
-				"examples": [
-					{
-						"en": "In the future, there will be fewer wild animals.",
-						"fa": "یک پیش‌بینی درباره‌ی آینده"
-					},
-					{
-						"en": "In the future, there are going to be fewer wild animals.",
-						"fa": "این جمله نیز می‌تواند همان پیش‌بینی را بیان کند."
-					}
-				]
-			},
-
-			{
-				"id": "if_future",
-				"type": "learn",
-				"title_fa": "آینده با IF",
-				"title_en": "Future after IF",
-				"explanation": "وقتی درباره‌ی آینده صحبت می‌کنیم، بعد از if معمولاً Present Simple می‌آید، نه will.",
-				"structure": "If + Present Simple, ... will + base verb",
-				"examples": [
-					{
-						"en": "If people take care of cheetahs, their number will increase.",
-						"fa": "اگر مردم از یوزپلنگ‌ها مراقبت کنند، تعدادشان افزایش خواهد یافت."
-					},
-					{
-						"en": "If we don't protect nature, animals will suffer.",
-						"fa": "اگر از طبیعت محافظت نکنیم، حیوانات آسیب خواهند دید."
-					},
-					{
-						"en": "If it rains, we will stay home.",
-						"fa": "اگر باران ببارد، در خانه می‌مانیم."
-					}
-				]
-			},
-
-			{
-				"id": "if_practice",
-				"type": "multiple_choice",
-				"title_fa": "تمرین IF",
-				"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
-				"questions": [
-					{
-						"question": "If people take care of them, cheetahs ______ live longer.",
-						"options": [
-							"will",
-							"going to",
-							"are",
-							"do"
-						],
-						"correct": 0,
-						"explanation_fa": "آفرین! بعد از if از حال ساده استفاده می‌کنیم و در بخش نتیجه می‌توانیم will داشته باشیم.",
-						"wrong_explanation_fa": "ساختار درست: If + Present Simple, will + base verb."
-					},
-					{
-						"question": "Which sentence is correct?",
-						"options": [
-							"If people will take care of animals, they will live longer.",
-							"If people take care of animals, they will live longer.",
-							"If people taking care of animals, they will live longer.",
-							"If people takes care of animals, they will live longer."
-						],
-						"correct": 1,
-						"explanation_fa": "درست است! بعد از if در این ساختار از Present Simple استفاده می‌کنیم.",
-						"wrong_explanation_fa": "بعد از if نباید will بیاوریم."
-					}
-				]
-			},
-
-			{
-				"id": "other_time_clauses",
-				"type": "learn",
-				"title_fa": "WHEN و کلمات زمانی",
-				"title_en": "Future Time Clauses",
-				"explanation": "در این ساختارها نیز بعد از when، before، after و as soon as معمولاً Present Simple می‌آید.",
-				"cards": [
-					{
-						"en": "When I finish school, I will travel around Iran.",
-						"fa": "When + Present Simple → will"
-					},
-					{
-						"en": "As soon as it stops raining, we will go outside.",
-						"fa": "As soon as + Present Simple → will"
-					}
-				]
-			},
-
-			{
-				"id": "contractions",
-				"type": "learn",
-				"title_fa": "شکل کوتاه WILL",
-				"title_en": "Contractions",
-				"explanation": "در انگلیسی روزمره شکل‌های کوتاه will بسیار رایج هستند.",
-				"cards": [
-					{
-						"en": "I will → I'll",
-						"fa": "من خواهم..."
-					},
-					{
-						"en": "you will → you'll",
-						"fa": "تو / شما خواهید..."
-					},
-					{
-						"en": "he will → he'll",
-						"fa": "او خواهد..."
-					},
-					{
-						"en": "she will → she'll",
-						"fa": "او خواهد..."
-					},
-					{
-						"en": "we will → we'll",
-						"fa": "ما خواهیم..."
-					},
-					{
-						"en": "they will → they'll",
-						"fa": "آن‌ها خواهند..."
-					},
-					{
-						"en": "will not → won't",
-						"fa": "نخواهـد / نخواهیم..."
-					}
-				]
-			},
-
-			{
-				"id": "mistakes",
-				"type": "multiple_choice",
-				"title_fa": "اشتباهات رایج",
-				"instruction_fa": "جمله‌ی درست را انتخاب کن.",
-				"questions": [
-					{
-						"question": "Choose the correct sentence.",
-						"options": [
-							"She will goes to school.",
-							"She will go to school.",
-							"She will going to school.",
-							"She will to go school."
-						],
-						"correct": 1,
-						"explanation_fa": "بعد از will همیشه شکل ساده‌ی فعل می‌آید: will go.",
-						"wrong_explanation_fa": "بعد از will نباید s، ing یا to بیاید."
-					},
-					{
-						"question": "Choose the correct sentence.",
-						"options": [
-							"I am go to visit my friend.",
-							"I am going to visit my friend.",
-							"I going to visit my friend.",
-							"I am going visit my friend."
-						],
-						"correct": 1,
-						"explanation_fa": "ساختار درست am going to + base verb است.",
-						"wrong_explanation_fa": "بعد از am باید going to بیاید."
-					},
-					{
-						"question": "Choose the correct sentence.",
-						"options": [
-							"Will you going to come?",
-							"Will you come?",
-							"Will you to come?",
-							"Will you coming?"
-						],
-						"correct": 1,
-						"explanation_fa": "ساختار سؤال با will: Will + subject + base verb.",
-						"wrong_explanation_fa": "بعد از will باید فعل ساده بیاید."
-					},
-					{
-						"question": "Choose the correct sentence.",
-						"options": [
-							"If it will rain, we will stay home.",
-							"If it rains, we will stay home.",
-							"If it raining, we will stay home.",
-							"If it rain, we will stay home."
-						],
-						"correct": 1,
-						"explanation_fa": "بعد از if در این ساختار از Present Simple استفاده می‌کنیم.",
-						"wrong_explanation_fa": "بعد از if نباید will بیاوریم."
-					}
-				]
-			},
-
-			{
-				"id": "true_false",
-				"type": "true_false",
-				"title_fa": "درست یا غلط؟",
-				"instruction_fa": "هر جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
-				"items": [
-					{
-						"statement": "After will, we use the base form of the verb.",
-						"fa": "بعد از will از شکل ساده‌ی فعل استفاده می‌کنیم.",
-						"answer": true,
-						"explanation_fa": "درست است."
-					},
-					{
-						"statement": "Won't is the short form of will not.",
-						"fa": "Won't شکل کوتاه will not است.",
-						"answer": true,
-						"explanation_fa": "درست است."
-					},
-					{
-						"statement": "Be going to changes according to the subject.",
-						"fa": "در be going to، am/is/are با فاعل تغییر می‌کند.",
-						"answer": true,
-						"explanation_fa": "درست است."
-					},
-					{
-						"statement": "We always use will for plans that were decided before.",
-						"fa": "برای برنامه‌هایی که از قبل تصمیم‌گیری شده‌اند همیشه از will استفاده می‌کنیم.",
-						"answer": false,
-						"explanation_fa": "غلط است. برای برنامه‌ی قبلی معمولاً be going to مناسب‌تر است."
-					}
-				]
-			},
-
-			{
-				"id": "matching",
-				"type": "matching",
-				"title_fa": "جمله‌ها را به هم وصل کن",
-				"instruction_fa": "هر قسمت را با ادامه‌ی مناسبش جور کن.",
-				"items": [
-					{
-						"left": "If people protect nature,",
-						"right": "animals will not die out."
-					},
-					{
-						"left": "Look at the sky!",
-						"right": "It's going to rain."
-					},
-					{
-						"left": "We",
-						"right": "are going to save the forest."
-					},
-					{
-						"left": "The number of tigers",
-						"right": "will increase in the future."
-					},
-					{
-						"left": "Where",
-						"right": "will you visit next summer?"
-					}
-				]
-			},
-
-			{
-				"id": "unscramble",
-				"type": "unscramble",
-				"title_fa": "جمله را بساز",
-				"instruction_fa": "کلمات را به ترتیب درست قرار بده.",
-				"items": [
-					{
-						"words": [
-							"will",
-							"nature",
-							"protect",
-							"we"
-						],
-						"answer": "we will protect nature"
-					},
-					{
-						"words": [
-							"going",
-							"to",
-							"rain",
-							"is",
-							"it"
-						],
-						"answer": "it is going to rain"
-					},
-					{
-						"words": [
-							"will",
-							"animals",
-							"protect",
-							"they"
-						],
-						"answer": "they will protect animals"
-					},
-					{
-						"words": [
-							"you",
-							"will",
-							"help",
-							"me"
-						],
-						"answer": "will you help me"
-					}
-				]
-			},
-
-			{
-				"id": "mixed_practice",
-				"type": "multiple_choice",
-				"title_fa": "تمرین ترکیبی",
-				"instruction_fa": "همه‌ی چیزهایی را که یاد گرفتی به کار ببر.",
-				"questions": [
-					{
-						"question": "The number of endangered animals ______ increase in the future.",
-						"options": [
-							"is going to",
-							"will",
-							"both a and b",
-							"none"
-						],
-						"correct": 2,
-						"explanation_fa": "در این جمله هر دو ساختار می‌توانند یک پیش‌بینی آینده را بیان کنند.",
-						"wrong_explanation_fa": "در این موقعیت، هر دو ساختار می‌توانند ممکن باشند."
-					},
-					{
-						"question": "If humans take care of nature, wild animals ______ in number.",
-						"options": [
-							"will increase",
-							"are increase",
-							"will increasing",
-							"increase will"
-						],
-						"correct": 0,
-						"explanation_fa": "ساختار درست If + Present Simple, will + base verb است.",
-						"wrong_explanation_fa": "بعد از if حال ساده و در نتیجه will + فعل ساده می‌آید."
-					},
-					{
-						"question": "The phone is ringing! I ______ answer it.",
-						"options": [
-							"will",
-							"am going to",
-							"am",
-							"did"
-						],
-						"correct": 0,
-						"explanation_fa": "تصمیم همین لحظه گرفته شده است.",
-						"wrong_explanation_fa": "تصمیم لحظه‌ای یکی از کاربردهای will است."
-					},
-					{
-						"question": "Maryam is visiting the museum. She ______ going to learn about wildlife.",
-						"options": [
-							"is",
-							"will",
-							"do",
-							"are"
-						],
-						"correct": 0,
-						"explanation_fa": "She با is going to می‌آید.",
-						"wrong_explanation_fa": "ساختار درست: She is going to..."
-					}
-				]
-			},
-
-			{
-				"id": "master_check",
-				"type": "multiple_choice",
-				"title_fa": "🧠 آزمون تسلط",
-				"instruction_fa": "قبل از چالش نهایی، ببینیم واقعاً درس را یاد گرفته‌ای.",
-				"questions": [
-					{
-						"question": "After will, which form of the verb do we use?",
-						"options": [
-							"Base form",
-							"-s form",
-							"-ing form",
-							"to + verb"
-						],
-						"correct": 0,
-						"explanation_fa": "بعد از will همیشه شکل ساده‌ی فعل می‌آید."
-					},
-					{
-						"question": "Which form changes with the subject in be going to?",
-						"options": [
-							"going",
-							"to",
-							"am / is / are",
-							"the main verb"
-						],
-						"correct": 2,
-						"explanation_fa": "am/is/are بر اساس فاعل تغییر می‌کند."
-					},
-					{
-						"question": "Which is commonly used for a decision made at the moment of speaking?",
-						"options": [
-							"will",
-							"be going to",
-							"Past Simple",
-							"Present Perfect"
-						],
-						"correct": 0,
-						"explanation_fa": "will برای تصمیم لحظه‌ای یکی از کاربردهای اصلی آن در این درس است."
-					},
-					{
-						"question": "What do we normally use after if when talking about the future?",
-						"options": [
-							"will",
-							"Present Simple",
-							"Past Simple",
-							"going"
-						],
-						"correct": 1,
-						"explanation_fa": "بعد از if در این ساختار از Present Simple استفاده می‌کنیم."
-					}
-				]
-			},
-
-			{
-				"id": "final_challenge",
-				"type": "multiple_choice",
-				"title_fa": "🏆 چالش نهایی",
-				"instruction_fa": "آخرین مرحله! با دقت جواب بده.",
-				"questions": [
-					{
-						"question": "Look! The cheetah ______ run into the forest.",
-						"options": [
-							"will",
-							"is going to",
-							"does",
-							"can"
-						],
-						"correct": 1,
-						"explanation_fa": "نشانه‌ی واضحی وجود دارد، پس going to مناسب است."
-					},
-					{
-						"question": "I think people ______ protect more animals in the future.",
-						"options": [
-							"are going to",
-							"will",
-							"are",
-							"did"
-						],
-						"correct": 1,
-						"explanation_fa": "I think یک پیش‌بینی یا نظر را نشان می‌دهد."
-					},
-					{
-						"question": "Which sentence is correct?",
-						"options": [
-							"If people will take care of animals, they will live longer.",
-							"If people take care of animals, they will live longer.",
-							"If people taking care of animals, they will live longer.",
-							"If people takes care of animals, they will live longer."
-						],
-						"correct": 1,
-						"explanation_fa": "بعد از if در این ساختار Present Simple می‌آید."
-					},
-					{
-						"question": "Which sentence is correct?",
-						"options": [
-							"She will goes to school.",
-							"She will go to school.",
-							"She will going to school.",
-							"She will to go school."
-						],
-						"correct": 1,
-						"explanation_fa": "بعد از will همیشه فعل ساده می‌آید."
-					},
-					{
-						"question": "We have already planned our trip. We ______ visit Golestan Forest.",
-						"options": [
-							"will",
-							"are going to",
-							"do",
-							"did"
-						],
-						"correct": 1,
-						"explanation_fa": "چون برنامه از قبل وجود دارد، going to مناسب است."
-					}
-				]
-			}
-		]
-	}
+       "aren't going to destroy"
+	  ]
+	 },
+	 {
+	  "text": "______ you ______ (visit) the museum?",
+	  "answers": [
+       "Are you going to visit"
+	  ]
+	 },
+	 {
+	  "text": "Alice ______ (read) some poems tonight.",
+	  "answers": [
+       "is going to read"
+	  ]
+	 },
+	 {
+	  "text": "Reza ______ (not / watch) TV.",
+	  "answers": [
+	   "is not going to watch",
+       "isn't going to watch"
+	  ]
+	 }
+	]
+   },
+   {
+	"id": "will_vs_going",
+	"type": "learn",
+	"title_fa": "WILL یا GOING TO؟",
+	"title_en": "WILL vs GOING TO",
+	"explanation": "برای انتخاب ساختار، به موقعیت نگاه کن.",
+	"cards": [
+	 {
+	  "en": "I think people will protect more animals.",
+	  "fa": "نظر یا پیش‌بینی → WILL"
+	 },
+	 {
+	  "en": "The phone is ringing. I'll answer it.",
+	  "fa": "تصمیم همین لحظه → WILL"
+	 },
+	 {
+	  "en": "We have already planned our trip.",
+	  "fa": "برنامه‌ی قبلی → GOING TO"
+	 },
+	 {
+	  "en": "Look at those dark clouds!",
+	  "fa": "نشانه‌ی واضح → GOING TO"
+	 }
+	]
+   },
+   {
+	"id": "will_vs_going_mc",
+	"type": "multiple_choice",
+	"title_fa": "کدام را انتخاب کنیم؟",
+	"instruction_fa": "با توجه به موقعیت، بهترین گزینه را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "Look at those dark clouds! It ______ rain.",
+	  "options": [
+	   "will",
+	   "is going to",
+	   "does",
+       "did"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "چون نشانه‌ی واضحی مثل ابرهای تیره داریم، از is going to استفاده می‌کنیم.",
+	  "wrong_explanation_fa": "اینجا شواهدی برای اتفاق آینده داریم؛ پس going to مناسب است."
+	 },
+	 {
+	  "question": "The phone is ringing. I ______ answer it.",
+	  "options": [
+	   "am going to",
+	   "will",
+	   "am",
+       "did"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "تصمیم همین لحظه گرفته شده، پس will مناسب است.",
+	  "wrong_explanation_fa": "تصمیم در همان لحظه گرفته می‌شود؛ بنابراین will انتخاب مناسب‌تری است."
+	 },
+	 {
+	  "question": "We have already planned our trip. We ______ visit Golestan Forest next month.",
+	  "options": [
+	   "will",
+	   "are going to",
+	   "do",
+       "did"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "چون برنامه از قبل وجود دارد، are going to مناسب است.",
+	  "wrong_explanation_fa": "عبارت have already planned نشان می‌دهد که این یک برنامه‌ی قبلی است."
+	 },
+	 {
+	  "question": "I think people ______ save more animals in the future.",
+	  "options": [
+	   "are going to",
+	   "will",
+	   "are",
+       "did"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "I think یک نظر یا پیش‌بینی را نشان می‌دهد، بنابراین will مناسب است.",
+	  "wrong_explanation_fa": "اینجا بیشتر درباره‌ی یک پیش‌بینی یا نظر صحبت می‌کنیم."
+	 }
+	]
+   },
+   {
+	"id": "both_possible",
+	"type": "learn",
+	"title_fa": "گاهی هر دو درست‌اند",
+	"title_en": "When Both Are Possible",
+	"explanation": "گاهی وقتی فقط درباره‌ی یک پیش‌بینی آینده صحبت می‌کنیم و برنامه یا شواهد مشخصی نداریم، هر دو ساختار می‌توانند استفاده شوند.",
+	"examples": [
+	 {
+	  "en": "In the future, there will be fewer wild animals.",
+	  "fa": "یک پیش‌بینی درباره‌ی آینده"
+	 },
+	 {
+	  "en": "In the future, there are going to be fewer wild animals.",
+	  "fa": "این جمله نیز می‌تواند همان پیش‌بینی را بیان کند."
+	 }
+	]
+   },
+   {
+	"id": "if_future",
+	"type": "learn",
+	"title_fa": "آینده با IF",
+	"title_en": "Future after IF",
+	"explanation": "وقتی درباره‌ی آینده صحبت می‌کنیم، بعد از if معمولاً Present Simple می‌آید، نه will.",
+	"structure": "If + Present Simple, ... will + base verb",
+	"examples": [
+	 {
+	  "en": "If people take care of cheetahs, their number will increase.",
+	  "fa": "اگر مردم از یوزپلنگ‌ها مراقبت کنند، تعدادشان افزایش خواهد یافت."
+	 },
+	 {
+	  "en": "If we don't protect nature, animals will suffer.",
+	  "fa": "اگر از طبیعت محافظت نکنیم، حیوانات آسیب خواهند دید."
+	 },
+	 {
+	  "en": "If it rains, we will stay home.",
+	  "fa": "اگر باران ببارد، در خانه می‌مانیم."
+	 }
+	]
+   },
+   {
+	"id": "if_practice",
+	"type": "multiple_choice",
+	"title_fa": "تمرین IF",
+	"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "If people take care of them, cheetahs ______ live longer.",
+	  "options": [
+	   "will",
+	   "going to",
+	   "are",
+       "do"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "آفرین! بعد از if از حال ساده استفاده می‌کنیم و در بخش نتیجه می‌توانیم will داشته باشیم.",
+	  "wrong_explanation_fa": "ساختار درست: If + Present Simple, will + base verb."
+	 },
+	 {
+	  "question": "Which sentence is correct?",
+	  "options": [
+	   "If people will take care of animals, they will live longer.",
+	   "If people take care of animals, they will live longer.",
+	   "If people taking care of animals, they will live longer.",
+       "If people takes care of animals, they will live longer."
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "درست است! بعد از if در این ساختار از Present Simple استفاده می‌کنیم.",
+	  "wrong_explanation_fa": "بعد از if نباید will بیاوریم."
+	 }
+	]
+   },
+   {
+	"id": "other_time_clauses",
+	"type": "learn",
+	"title_fa": "WHEN و کلمات زمانی",
+	"title_en": "Future Time Clauses",
+	"explanation": "در این ساختارها نیز بعد از when، before، after و as soon as معمولاً Present Simple می‌آید.",
+	"cards": [
+	 {
+	  "en": "When I finish school, I will travel around Iran.",
+	  "fa": "When + Present Simple → will"
+	 },
+	 {
+	  "en": "As soon as it stops raining, we will go outside.",
+	  "fa": "As soon as + Present Simple → will"
+	 }
+	]
+   },
+   {
+	"id": "contractions",
+	"type": "learn",
+	"title_fa": "شکل کوتاه WILL",
+	"title_en": "Contractions",
+	"explanation": "در انگلیسی روزمره شکل‌های کوتاه will بسیار رایج هستند.",
+	"cards": [
+	 {
+	  "en": "I will → I'll",
+	  "fa": "من خواهم..."
+	 },
+	 {
+	  "en": "you will → you'll",
+	  "fa": "تو / شما خواهید..."
+	 },
+	 {
+	  "en": "he will → he'll",
+	  "fa": "او خواهد..."
+	 },
+	 {
+	  "en": "she will → she'll",
+	  "fa": "او خواهد..."
+	 },
+	 {
+	  "en": "we will → we'll",
+	  "fa": "ما خواهیم..."
+	 },
+	 {
+	  "en": "they will → they'll",
+	  "fa": "آن‌ها خواهند..."
+	 },
+	 {
+	  "en": "will not → won't",
+	  "fa": "نخواهـد / نخواهیم..."
+	 }
+	]
+   },
+   {
+	"id": "mistakes",
+	"type": "multiple_choice",
+	"title_fa": "اشتباهات رایج",
+	"instruction_fa": "جمله‌ی درست را انتخاب کن.",
+	"questions": [
+	 {
+	  "question": "Choose the correct sentence.",
+	  "options": [
+	   "She will goes to school.",
+	   "She will go to school.",
+	   "She will going to school.",
+       "She will to go school."
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "بعد از will همیشه شکل ساده‌ی فعل می‌آید: will go.",
+	  "wrong_explanation_fa": "بعد از will نباید s، ing یا to بیاید."
+	 },
+	 {
+	  "question": "Choose the correct sentence.",
+	  "options": [
+	   "I am go to visit my friend.",
+	   "I am going to visit my friend.",
+	   "I going to visit my friend.",
+       "I am going visit my friend."
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "ساختار درست am going to + base verb است.",
+	  "wrong_explanation_fa": "بعد از am باید going to بیاید."
+	 },
+	 {
+	  "question": "Choose the correct sentence.",
+	  "options": [
+	   "Will you going to come?",
+	   "Will you come?",
+	   "Will you to come?",
+       "Will you coming?"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "ساختار سؤال با will: Will + subject + base verb.",
+	  "wrong_explanation_fa": "بعد از will باید فعل ساده بیاید."
+	 },
+	 {
+	  "question": "Choose the correct sentence.",
+	  "options": [
+	   "If it will rain, we will stay home.",
+	   "If it rains, we will stay home.",
+	   "If it raining, we will stay home.",
+       "If it rain, we will stay home."
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "بعد از if در این ساختار از Present Simple استفاده می‌کنیم.",
+	  "wrong_explanation_fa": "بعد از if نباید will بیاوریم."
+	 }
+	]
+   },
+   {
+	"id": "true_false",
+	"type": "true_false",
+	"title_fa": "درست یا غلط؟",
+	"instruction_fa": "هر جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+	"items": [
+	 {
+	  "statement": "After will, we use the base form of the verb.",
+	  "fa": "بعد از will از شکل ساده‌ی فعل استفاده می‌کنیم.",
+	  "answer": true,
+	  "explanation_fa": "درست است."
+	 },
+	 {
+	  "statement": "Won't is the short form of will not.",
+	  "fa": "Won't شکل کوتاه will not است.",
+	  "answer": true,
+	  "explanation_fa": "درست است."
+	 },
+	 {
+	  "statement": "Be going to changes according to the subject.",
+	  "fa": "در be going to، am/is/are با فاعل تغییر می‌کند.",
+	  "answer": true,
+	  "explanation_fa": "درست است."
+	 },
+	 {
+	  "statement": "We always use will for plans that were decided before.",
+	  "fa": "برای برنامه‌هایی که از قبل تصمیم‌گیری شده‌اند همیشه از will استفاده می‌کنیم.",
+	  "answer": false,
+	  "explanation_fa": "غلط است. برای برنامه‌ی قبلی معمولاً be going to مناسب‌تر است."
+	 }
+	]
+   },
+   {
+	"id": "matching",
+	"type": "matching",
+	"title_fa": "جمله‌ها را به هم وصل کن",
+	"instruction_fa": "هر قسمت را با ادامه‌ی مناسبش جور کن.",
+	"items": [
+	 {
+	  "left": "If people protect nature,",
+	  "right": "animals will not die out."
+	 },
+	 {
+	  "left": "Look at the sky!",
+	  "right": "It's going to rain."
+	 },
+	 {
+	  "left": "We",
+	  "right": "are going to save the forest."
+	 },
+	 {
+	  "left": "The number of tigers",
+	  "right": "will increase in the future."
+	 },
+	 {
+	  "left": "Where",
+	  "right": "will you visit next summer?"
+	 }
+	]
+   },
+   {
+	"id": "unscramble",
+	"type": "unscramble",
+	"title_fa": "جمله را بساز",
+	"instruction_fa": "کلمات را به ترتیب درست قرار بده.",
+	"items": [
+	 {
+	  "words": [
+	   "will",
+	   "nature",
+	   "protect",
+       "we"
+	  ],
+	  "answer": "we will protect nature"
+	 },
+	 {
+	  "words": [
+	   "going",
+	   "to",
+	   "rain",
+	   "is",
+       "it"
+	  ],
+	  "answer": "it is going to rain"
+	 },
+	 {
+	  "words": [
+	   "will",
+	   "animals",
+	   "protect",
+       "they"
+	  ],
+	  "answer": "they will protect animals"
+	 },
+	 {
+	  "words": [
+	   "you",
+	   "will",
+	   "help",
+       "me"
+	  ],
+	  "answer": "will you help me"
+	 },
+	 {
+	  "template": "______ he ______ able to be here?",
+	  "options": [
+	   "be",
+       "Will"
+	  ],
+	  "answer": [
+	   "Will",
+       "be"
+	  ]
+	 }
+	]
+   },
+   {
+	"id": "mixed_practice",
+	"type": "multiple_choice",
+	"title_fa": "تمرین ترکیبی",
+	"instruction_fa": "همه‌ی چیزهایی را که یاد گرفتی به کار ببر.",
+	"questions": [
+	 {
+	  "question": "The number of endangered animals ______ increase in the future.",
+	  "options": [
+	   "is going to",
+	   "will",
+	   "both a and b",
+       "none"
+	  ],
+	  "correct": 2,
+	  "explanation_fa": "در این جمله هر دو ساختار می‌توانند یک پیش‌بینی آینده را بیان کنند.",
+	  "wrong_explanation_fa": "در این موقعیت، هر دو ساختار می‌توانند ممکن باشند."
+	 },
+	 {
+	  "question": "If humans take care of nature, wild animals ______ in number.",
+	  "options": [
+	   "will increase",
+	   "are increase",
+	   "will increasing",
+       "increase will"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "ساختار درست If + Present Simple, will + base verb است.",
+	  "wrong_explanation_fa": "بعد از if حال ساده و در نتیجه will + فعل ساده می‌آید."
+	 },
+	 {
+	  "question": "The phone is ringing! I ______ answer it.",
+	  "options": [
+	   "will",
+	   "am going to",
+	   "am",
+       "did"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "تصمیم همین لحظه گرفته شده است.",
+	  "wrong_explanation_fa": "تصمیم لحظه‌ای یکی از کاربردهای will است."
+	 },
+	 {
+	  "question": "Maryam is visiting the museum. She ______ going to learn about wildlife.",
+	  "options": [
+	   "is",
+	   "will",
+	   "do",
+       "are"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "She با is going to می‌آید.",
+	  "wrong_explanation_fa": "ساختار درست: She is going to..."
+	 }
+	]
+   },
+   {
+	"id": "master_check",
+	"type": "multiple_choice",
+	"title_fa": "🧠 آزمون تسلط",
+	"instruction_fa": "قبل از چالش نهایی، ببینیم واقعاً درس را یاد گرفته‌ای.",
+	"questions": [
+	 {
+	  "question": "After will, which form of the verb do we use?",
+	  "options": [
+	   "Base form",
+	   "-s form",
+	   "-ing form",
+       "to + verb"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "بعد از will همیشه شکل ساده‌ی فعل می‌آید."
+	 },
+	 {
+	  "question": "Which form changes with the subject in be going to?",
+	  "options": [
+	   "going",
+	   "to",
+	   "am / is / are",
+       "the main verb"
+	  ],
+	  "correct": 2,
+	  "explanation_fa": "am/is/are بر اساس فاعل تغییر می‌کند."
+	 },
+	 {
+	  "question": "Which is commonly used for a decision made at the moment of speaking?",
+	  "options": [
+	   "will",
+	   "be going to",
+	   "Past Simple",
+       "Present Perfect"
+	  ],
+	  "correct": 0,
+	  "explanation_fa": "will برای تصمیم لحظه‌ای یکی از کاربردهای اصلی آن در این درس است."
+	 },
+	 {
+	  "question": "What do we normally use after if when talking about the future?",
+	  "options": [
+	   "will",
+	   "Present Simple",
+	   "Past Simple",
+       "going"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "بعد از if در این ساختار از Present Simple استفاده می‌کنیم."
+	 }
+	]
+   },
+   {
+	"id": "final_challenge",
+	"type": "multiple_choice",
+	"title_fa": "🏆 چالش نهایی",
+	"instruction_fa": "آخرین مرحله! با دقت جواب بده.",
+	"questions": [
+	 {
+	  "question": "Look! The cheetah ______ run into the forest.",
+	  "options": [
+	   "will",
+	   "is going to",
+	   "does",
+       "can"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "نشانه‌ی واضحی وجود دارد، پس going to مناسب است."
+	 },
+	 {
+	  "question": "I think people ______ protect more animals in the future.",
+	  "options": [
+	   "are going to",
+	   "will",
+	   "are",
+       "did"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "I think یک پیش‌بینی یا نظر را نشان می‌دهد."
+	 },
+	 {
+	  "question": "Which sentence is correct?",
+	  "options": [
+	   "If people will take care of animals, they will live longer.",
+	   "If people take care of animals, they will live longer.",
+	   "If people taking care of animals, they will live longer.",
+       "If people takes care of animals, they will live longer."
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "بعد از if در این ساختار Present Simple می‌آید."
+	 },
+	 {
+	  "question": "Which sentence is correct?",
+	  "options": [
+	   "She will goes to school.",
+	   "She will go to school.",
+	   "She will going to school.",
+       "She will to go school."
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "بعد از will همیشه فعل ساده می‌آید."
+	 },
+	 {
+	  "question": "We have already planned our trip. We ______ visit Golestan Forest.",
+	  "options": [
+	   "will",
+	   "are going to",
+	   "do",
+       "did"
+	  ],
+	  "correct": 1,
+	  "explanation_fa": "چون برنامه از قبل وجود دارد، going to مناسب است."
+	 }
+	]
+   }
+  ]
+ }
 }

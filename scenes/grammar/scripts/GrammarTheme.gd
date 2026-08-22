@@ -6,32 +6,69 @@ extends RefCounted
 # COLORS
 # ============================================================
 
-const BACKGROUND := Color("#F7F9FC")
-const SURFACE := Color("#FFFFFF")
+# ============================================================
+# COLORS  —  eye-friendly DARK palette (soft, low contrast)
+# Surfaces are dark slate; text is warm light. Bright accent
+# colors are kept saturated but gentle so they read on dark.
+# ============================================================
 
-const PRIMARY := Color("#5B67F1")
-const PRIMARY_DARK := Color("#4652D4")
-const PRIMARY_LIGHT := Color("#EEF0FF")
+const BACKGROUND := Color("#12141C")
+const SURFACE := Color("#1E2230")
 
-const SECONDARY := Color("#5CC8B2")
-const SECONDARY_LIGHT := Color("#E8FAF5")
+const PRIMARY := Color("#6C7AFF")
+const PRIMARY_DARK := Color("#8490FF")
+const PRIMARY_LIGHT := Color("#262B4D")
 
-const TEXT := Color("#202535")
-const TEXT_SECONDARY := Color("#6B7280")
-const TEXT_MUTED := Color("#9AA1AF")
+const SECONDARY := Color("#6FD6C2")
+const SECONDARY_LIGHT := Color("#18332C")
 
-const SUCCESS := Color("#32B86C")
-const SUCCESS_LIGHT := Color("#E7F8EE")
+const TEXT := Color("#EAEDF5")
+const TEXT_SECONDARY := Color("#A8B0C2")
+const TEXT_MUTED := Color("#6E7689")
 
-const ERROR := Color("#E85D75")
-const ERROR_LIGHT := Color("#FDE9ED")
+const SUCCESS := Color("#3CCF7E")
+const SUCCESS_LIGHT := Color("#173322")
 
-const WARNING := Color("#F4B740")
-const WARNING_LIGHT := Color("#FFF5DA")
+const ERROR := Color("#F26D86")
+const ERROR_LIGHT := Color("#3A1E27")
 
-const XP := Color("#FFB938")
+const WARNING := Color("#FFC24D")
+const WARNING_LIGHT := Color("#3A2E14")
 
-const DISABLED := Color("#D9DEE8")
+const XP := Color("#FFC24D")
+
+const DISABLED := Color("#2A2F3D")
+
+
+# ============================================================
+# TYPOGRAPHY & SPACING (sized for a phone portrait UI)
+# ============================================================
+
+const HEADING_SIZE := 46
+const BODY_LARGE_SIZE := 42
+const BODY_SIZE := 46
+const BODY_SMALL_SIZE := 34
+const SECTION_SIZE := 42
+const CAPTION_SIZE := 28
+
+const SPACING_SM := 50
+const SPACING_MD := 100
+const SPACING_LG := 30
+
+const BUTTON_HEIGHT := 78
+const CARD_RADIUS := 24
+
+# Shared font size for question answer buttons. Matching uses its own
+# value below so its pair labels can differ from the rest.
+const BUTTON_FONT_SIZE := 36
+const BUTTON_FONT_SIZE_MATCHING := 24
+
+# Margin kept clear around the whole screen edge so content never
+# sits under a phone notch / rounded corner.
+const SAFE_MARGIN := 60
+
+# Extra padding inside the main grammar content card.
+const CONTENT_MARGIN := 20
 
 
 # ============================================================
@@ -70,6 +107,33 @@ static func get_en_bold() -> Font:
 	return load(FONT_EN_BOLD_PATH) as Font
 
 
+static func measure_text(
+	font: Font,
+	text: String,
+	font_size: int,
+	wrap_width: float = -1.0,
+	alignment: int = HORIZONTAL_ALIGNMENT_LEFT
+) -> Vector2:
+	var used_font: Font = font
+	if used_font == null:
+		used_font = ThemeDB.fallback_font
+	
+	if wrap_width > 0.0:
+		return used_font.get_multiline_string_size(
+			text,
+			alignment,
+			wrap_width,
+			font_size
+		)
+	
+	return used_font.get_string_size(
+		text,
+		alignment,
+		-1,
+		font_size
+	)
+
+
 # ============================================================
 # STYLE BOXES
 # ============================================================
@@ -104,17 +168,19 @@ static func rounded_box(
 static func card_style() -> StyleBoxFlat:
 	var style := rounded_box(
 		SURFACE,
-		20
+		20,
+		Color("#2E3446"),
+		1
 	)
 
 	style.shadow_color = Color(
-		0.05,
-		0.07,
-		0.12,
-		0.08
+		0.0,
+		0.0,
+		0.0,
+		0.28
 	)
 
-	style.shadow_size = 8
+	style.shadow_size = 10
 	style.shadow_offset = Vector2(0, 4)
 
 	return style
@@ -145,7 +211,7 @@ static func secondary_button() -> StyleBoxFlat:
 	return rounded_box(
 		SURFACE,
 		18,
-		Color("#DDE2F0"),
+		Color("#3A4154"),
 		2
 	)
 
@@ -165,6 +231,15 @@ static func error_button() -> StyleBoxFlat:
 		18,
 		ERROR,
 		2
+	)
+
+
+static func selected_button() -> StyleBoxFlat:
+	return rounded_box(
+		PRIMARY_LIGHT,
+		18,
+		PRIMARY,
+		3
 	)
 
 
@@ -230,7 +305,7 @@ static func style_primary_button(
 
 	button.add_theme_font_size_override(
 		"font_size",
-		19
+		BUTTON_FONT_SIZE
 	)
 
 	var font := get_fa_bold()
@@ -288,7 +363,7 @@ static func style_secondary_button(
 
 	button.add_theme_font_size_override(
 		"font_size",
-		18
+		BUTTON_FONT_SIZE
 	)
 
 	var font := get_fa_bold()
@@ -307,4 +382,37 @@ static func style_card(
 	panel.add_theme_stylebox_override(
 		"panel",
 		card_style()
+	)
+
+
+# Professional raised header bar: a surface clearly different from the
+# background, with a soft drop shadow so it reads as floating above.
+static func header_style() -> StyleBoxFlat:
+	var style := rounded_box(
+		Color("#232B3E"),
+		18,
+		Color("#303A50"),
+		1
+	)
+
+	style.shadow_color = Color(
+		0.0,
+		0.0,
+		0.0,
+		0.35
+	)
+
+	style.shadow_size = 12
+	style.shadow_offset = Vector2(0, 4)
+
+	return style
+
+
+static func style_header_box(
+	panel: PanelContainer
+) -> void:
+
+	panel.add_theme_stylebox_override(
+		"panel",
+		header_style()
 	)

@@ -5,6 +5,7 @@ extends GrammarExercise
 var statement_label: Label
 var true_button: GrammarButton
 var false_button: GrammarButton
+var statement_box: Control
 
 
 func setup(data: Dictionary) -> void:
@@ -18,14 +19,48 @@ func _build_ui() -> void:
 	for child in get_children():
 		child.queue_free()
 
+	var outer_margin := MarginContainer.new()
+
+	outer_margin.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+
+	outer_margin.add_theme_constant_override(
+		"margin_left",
+		20
+	)
+
+	outer_margin.add_theme_constant_override(
+		"margin_right",
+		20
+	)
+
+	outer_margin.add_theme_constant_override(
+		"margin_top",
+		16
+	)
+
+	outer_margin.add_theme_constant_override(
+		"margin_bottom",
+		16
+	)
+
+	add_child(outer_margin)
+
 	var container := VBoxContainer.new()
+
+	container.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
+	)
 
 	container.add_theme_constant_override(
 		"separation",
-		18
+		22
 	)
 
-	add_child(container)
+	container.alignment = BoxContainer.ALIGNMENT_BEGIN
+
+	outer_margin.add_child(container)
 
 	var instruction := Label.new()
 
@@ -37,15 +72,52 @@ func _build_ui() -> void:
 	)
 
 	instruction.horizontal_alignment = (
-		HORIZONTAL_ALIGNMENT_CENTER
+		HORIZONTAL_ALIGNMENT_RIGHT
+	)
+
+	instruction.autowrap_mode = (
+		TextServer.AUTOWRAP_WORD_SMART
+	)
+
+	instruction.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
 	)
 
 	instruction.add_theme_font_size_override(
 		"font_size",
-		19
+		GrammarTheme.BODY_SMALL_SIZE
+	)
+
+	instruction.add_theme_color_override(
+		"font_color",
+		GrammarTheme.TEXT_SECONDARY
 	)
 
 	container.add_child(instruction)
+
+	statement_box = MarginContainer.new()
+
+	statement_box.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
+	)
+
+	statement_box.size_flags_vertical = (
+		Control.SIZE_EXPAND_FILL
+	)
+
+	statement_box.add_theme_constant_override(
+		"margin_left",
+		0
+	)
+
+	statement_box.add_theme_constant_override(
+		"margin_right",
+		0
+	)
+	statement_box.custom_minimum_size = Vector2(
+		650,
+		180
+	)
 
 	statement_label = Label.new()
 
@@ -61,22 +133,40 @@ func _build_ui() -> void:
 		VERTICAL_ALIGNMENT_CENTER
 	)
 
+	statement_label.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
+	)
+
 	statement_label.custom_minimum_size = Vector2(
-		0,
+		650,
 		180
 	)
 
 	statement_label.add_theme_font_size_override(
 		"font_size",
-		23
+		GrammarTheme.BODY_SMALL_SIZE
 	)
 
-	container.add_child(statement_label)
+	statement_label.add_theme_color_override(
+		"font_color",
+		GrammarTheme.TEXT
+	)
+
+	statement_box.add_child(statement_label)
+
+	container.add_child(statement_box)
 
 	true_button = GrammarButton.new()
 
 	true_button.variant = (
 		GrammarButton.ButtonVariant.SECONDARY
+	)
+
+	true_button.play_click_sound = false
+	true_button.neutral_states = true
+
+	true_button.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
 	)
 
 	true_button.text = "✓ درست"
@@ -96,6 +186,13 @@ func _build_ui() -> void:
 		GrammarButton.ButtonVariant.SECONDARY
 	)
 
+	false_button.play_click_sound = false
+	false_button.neutral_states = true
+
+	false_button.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
+	)
+
 	false_button.text = "✗ غلط"
 
 	false_button.pressed.connect(
@@ -106,6 +203,7 @@ func _build_ui() -> void:
 	container.add_child(
 		false_button
 	)
+
 
 
 func _show_item() -> void:
@@ -119,6 +217,11 @@ func _show_item() -> void:
 		return
 
 	answered = false
+
+	# Clear any correct/wrong highlight left over from the previous
+	# item so the selected option does not carry into the next question.
+	true_button.reset_state()
+	false_button.reset_state()
 
 	var item: Dictionary = items[
 		current_index

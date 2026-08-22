@@ -20,10 +20,16 @@ func _build_ui() -> void:
 
 	var container := VBoxContainer.new()
 
+	container.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+
 	container.add_theme_constant_override(
 		"separation",
-		18
+		22
 	)
+
+	container.alignment = BoxContainer.ALIGNMENT_CENTER
 
 	add_child(container)
 
@@ -46,7 +52,12 @@ func _build_ui() -> void:
 
 	title.add_theme_font_size_override(
 		"font_size",
-		19
+		GrammarTheme.BODY_SIZE
+	)
+
+	title.add_theme_color_override(
+		"font_color",
+		GrammarTheme.TEXT_SECONDARY
 	)
 
 	container.add_child(title)
@@ -72,7 +83,12 @@ func _build_ui() -> void:
 
 	prompt_label.add_theme_font_size_override(
 		"font_size",
-		24
+		GrammarTheme.HEADING_SIZE
+	)
+
+	prompt_label.add_theme_color_override(
+		"font_color",
+		GrammarTheme.TEXT
 	)
 
 	container.add_child(prompt_label)
@@ -84,8 +100,13 @@ func _build_ui() -> void:
 	)
 
 	input.custom_minimum_size = Vector2(
-		0,
-		60
+		600,
+		70
+	)
+
+	# Keep it a centered 1000-wide box instead of stretching edge-to-edge.
+	input.size_flags_horizontal = (
+		Control.SIZE_SHRINK_CENTER
 	)
 
 	input.alignment = (
@@ -94,7 +115,7 @@ func _build_ui() -> void:
 
 	input.add_theme_font_size_override(
 		"font_size",
-		20
+		GrammarTheme.BODY_LARGE_SIZE
 	)
 
 	container.add_child(input)

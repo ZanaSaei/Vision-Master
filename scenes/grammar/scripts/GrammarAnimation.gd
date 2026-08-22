@@ -29,6 +29,15 @@ static func _store_tween(
 	)
 
 
+# Makes scale animations grow/shrink from the control's center
+# instead of its top-left corner.
+static func _center_pivot(
+	control: Control
+) -> void:
+
+	control.pivot_offset = control.size * 0.5
+
+
 # ============================================================
 # BUTTON PRESS
 # ============================================================
@@ -38,6 +47,13 @@ static func press(
 ) -> void:
 
 	_kill_tweens(control)
+
+	# If this button was mid-appear (modulate fading in) and we just
+	# killed that tween, force it fully opaque so it never renders as
+	# a stuck dark/half-faded "blacked-out" box.
+	control.modulate.a = 1.0
+
+	_center_pivot(control)
 
 	var tween := control.create_tween()
 
@@ -86,6 +102,13 @@ static func small_pop(
 
 	_kill_tweens(control)
 
+	# Same as press: never leave a button half-faded after killing an
+	# in-progress appear tween (e.g. a mouse_entered right as a new
+	# question's options fade in behind a closing popup).
+	control.modulate.a = 1.0
+
+	_center_pivot(control)
+
 	var tween := control.create_tween()
 
 	_store_tween(
@@ -125,6 +148,8 @@ static func correct(
 ) -> void:
 
 	_kill_tweens(control)
+
+	_center_pivot(control)
 
 	var original_position := control.position
 
@@ -182,6 +207,8 @@ static func wrong(
 
 	_kill_tweens(control)
 
+	_center_pivot(control)
+
 	var original_position := control.position
 
 	var tween := control.create_tween()
@@ -233,6 +260,8 @@ static func appear(
 
 	_kill_tweens(control)
 
+	_center_pivot(control)
+
 	control.modulate.a = 0.0
 	control.scale = Vector2(
 		0.92,
@@ -282,6 +311,8 @@ static func disappear(
 ) -> void:
 
 	_kill_tweens(control)
+
+	_center_pivot(control)
 
 	var tween := control.create_tween()
 
@@ -372,6 +403,8 @@ static func pop(
 ) -> void:
 
 	_kill_tweens(control)
+
+	_center_pivot(control)
 
 	control.scale = Vector2(
 		0.65,

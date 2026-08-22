@@ -19,6 +19,9 @@ func setup(data: Dictionary) -> void:
 
 	_build_ui()
 	_create_items()
+	call_deferred(
+		"_equalize_button_heights"
+	)
 
 
 func _build_ui() -> void:
@@ -27,10 +30,16 @@ func _build_ui() -> void:
 
 	var root := VBoxContainer.new()
 
+	root.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+
 	root.add_theme_constant_override(
 		"separation",
-		14
+		20
 	)
+
+	root.alignment = BoxContainer.ALIGNMENT_CENTER
 
 	add_child(root)
 
@@ -49,7 +58,12 @@ func _build_ui() -> void:
 
 	instruction.add_theme_font_size_override(
 		"font_size",
-		19
+		GrammarTheme.BODY_SIZE
+	)
+
+	instruction.add_theme_color_override(
+		"font_color",
+		GrammarTheme.TEXT_SECONDARY
 	)
 
 	root.add_child(instruction)
@@ -75,7 +89,7 @@ func _build_ui() -> void:
 
 	left_container.add_theme_constant_override(
 		"separation",
-		10
+		30
 	)
 
 	columns.add_child(
@@ -90,7 +104,7 @@ func _build_ui() -> void:
 
 	right_container.add_theme_constant_override(
 		"separation",
-		10
+		30
 	)
 
 	columns.add_child(
@@ -181,6 +195,9 @@ func _create_button(
 		GrammarButton.ButtonVariant.SECONDARY
 	)
 
+	button.play_click_sound = false
+	button.neutral_states = true
+
 	button.text = text_value
 
 	button.custom_minimum_size = Vector2(
@@ -194,8 +211,14 @@ func _create_button(
 
 	button.add_theme_font_size_override(
 		"font_size",
-		16
+		GrammarTheme.BUTTON_FONT_SIZE_MATCHING
 	)
+
+	button.autowrap_mode = (
+		TextServer.AUTOWRAP_WORD_SMART
+	)
+
+	button.no_clip = true
 
 	button.set_meta(
 		"is_left",
@@ -213,6 +236,42 @@ func _create_button(
 	return button
 
 
+func _equalize_button_heights() -> void:
+	var all_buttons: Array[GrammarButton] = []
+	all_buttons.append_array(left_buttons)
+	all_buttons.append_array(right_buttons)
+	if all_buttons.is_empty():
+		return
+
+	var column_width: float = float(left_container.size.x)
+	if column_width <= 0.0:
+		var vp_width: float = float(get_viewport_rect().size.x)
+		column_width = maxf(240.0, (vp_width - 36.0) * 0.5)
+
+	var font: Font = GrammarTheme.get_fa_bold()
+	var tallest: float = 0.0
+
+	for button in all_buttons:
+		var size := GrammarTheme.measure_text(
+			font,
+			button.text,
+			GrammarTheme.BUTTON_FONT_SIZE_MATCHING,
+			maxf(180.0, column_width - 18.0),
+			HORIZONTAL_ALIGNMENT_CENTER
+		)
+		tallest = maxf(tallest, size.y)
+
+	var final_height := int(ceil(tallest + 28.0))
+	if final_height < 65:
+		final_height = 65
+
+	for button in all_buttons:
+		button.custom_minimum_size = Vector2(
+			0,
+			final_height
+		)
+
+
 func _select(
 	button: GrammarButton,
 	is_left: bool
@@ -225,10 +284,18 @@ func _select(
 		button
 	)
 
+	# Highlight the picked button and clear any previous pick in the
+	# same column so it is always obvious what has been chosen.
 	if is_left:
+		if selected_left != null and selected_left != button:
+			selected_left.clear_selected_state()
 		selected_left = button
 	else:
+		if selected_right != null and selected_right != button:
+			selected_right.clear_selected_state()
 		selected_right = button
+
+	button.set_selected_state()
 
 	if (
 		selected_left != null
@@ -262,6 +329,11 @@ func _check_pair() -> void:
 		selected_left.set_correct_state()
 		selected_right.set_correct_state()
 
+		# Turned green and disabled (unselectable) by set_correct_state;
+		# drop the selection highlight so they read as "matched".
+		selected_left.clear_selected_state()
+		selected_right.clear_selected_state()
+
 		matched += 1
 
 		selected_left = null
@@ -281,6 +353,9 @@ func _check_pair() -> void:
 			complete()
 
 	else:
+
+		selected_left.clear_selected_state()
+		selected_right.clear_selected_state()
 
 		GrammarAnimation.wrong(
 			selected_left

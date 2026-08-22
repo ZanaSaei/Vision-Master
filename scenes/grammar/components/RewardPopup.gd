@@ -171,6 +171,8 @@ func show_reward(
 
 	reward_label.text = "⭐ +%d XP" % xp
 
+	Sfx.reward()
+
 	show()
 
 	GrammarAnimation.pop(
