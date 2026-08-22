@@ -1,4 +1,4 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 # ============================================================
 #  GRAMMAR LESSON — main micro-learning controller
 # ------------------------------------------------------------
@@ -49,7 +49,13 @@ func _animate_progress() -> void:
 
 
 func _ready() -> void:
+	super._ready()
 	_load_lesson()
+	if units.is_empty():
+		current_unit_index = 0
+	else:
+		current_unit_index = clampi(Global.grammar_start_unit_index, 0, units.size() - 1)
+	Global.grammar_start_unit_index = 0
 	_build_ui()
 	_show_unit()
 
@@ -297,11 +303,13 @@ func _on_feedback_continue() -> void:
 
 func _on_learning_continue() -> void:
 	current_unit_index += 1
+	_sync_grammar_progress()
 	_show_unit()
 
 
 func _on_exercise_completed() -> void:
 	current_unit_index += 1
+	_sync_grammar_progress()
 	_show_unit()
 
 
@@ -326,5 +334,19 @@ func _finish_lesson() -> void:
 	Sfx.complete()
 
 
+func _sync_grammar_progress() -> void:
+	var unlocked: int = current_unit_index + 1
+	if units.size() > 0:
+		unlocked = min(unlocked, units.size())
+	Global.set_grammar_unlocked_units(Global.current_book, Global.current_lesson, unlocked)
+
+
 func _on_back_pressed() -> void:
-	TransitionManager.change_scene(LESSON_MENU)
+	var last_scene: String = Global.get_last_scene()
+	if last_scene.is_empty():
+		last_scene = LESSON_MENU
+	TransitionManager.slide_change_scene(last_scene, TransitionManager.Slide.BACK)
+
+
+func _on_android_back_pressed() -> void:
+	_on_back_pressed()

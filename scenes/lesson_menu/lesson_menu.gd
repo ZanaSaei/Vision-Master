@@ -14,7 +14,7 @@ const SCENE_BOOK_MENU         := "res://scenes/book_menu/BookMenu.tscn"
 const SCENE_VOCAB             := "res://scenes/vocabulary/VocabFlashcards.tscn"
 const SCENE_CONVERSATION      := "res://scenes/conversation/Conversation.tscn"
 const SCENE_READING           := "res://scenes/reading/Reading.tscn"
-const SCENE_GRAMMAR           := "res://scenes/grammar/GrammarLesson.tscn"
+const SCENE_GRAMMAR           := "res://scenes/grammar/GrammarHub.tscn"
 const SCENE_VOCAB_DEVELOPMENT := "res://scenes/vocabulary_development/VocabularyDevelopment.tscn"
 const SCENE_LISTENING_SPEAKING:= "res://scenes/listening_speaking/ListeningSpeaking.tscn"
 const SCENE_PRONUNCIATION     := "res://scenes/pronunciation/Pronunciation.tscn"
@@ -269,6 +269,7 @@ func _on_section_pressed(scene_key: String) -> void:
 	if _navigating:
 		return
 	_navigating = true
+	Global.set_last_scene(get_tree().current_scene.scene_file_path)
 	
 	# Set flashcard mode for vocabulary sections
 	if scene_key == "VOCAB":
@@ -295,7 +296,7 @@ func _on_section_pressed(scene_key: String) -> void:
 		_navigating = false
 		return
 	
-	TransitionManager.change_scene(path)
+	TransitionManager.slide_change_scene(path, TransitionManager.Slide.FORWARD)
 
 func _on_back_button_pressed() -> void:
 	# Navigate back to book menu with slide animation

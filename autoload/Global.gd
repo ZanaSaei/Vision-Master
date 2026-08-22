@@ -148,6 +148,8 @@ var flashcard_mode: String = "lesson"
 var _last_scene: String = ""
 var saved_words: Array = []
 var review_words: Array = []
+var grammar_unlocked_units: Dictionary = {}
+var grammar_start_unit_index: int = 0
 
 
 func _ready() -> void:
@@ -176,11 +178,40 @@ func has_last_scene() -> bool:
 	return _last_scene != ""
 
 
+func _grammar_unlock_key(book: int, lesson: int) -> String:
+	return "%d_%d" % [book, lesson]
+
+
+func get_grammar_unlocked_units(book: int, lesson: int, total_units: int = 0) -> int:
+	var key: String = _grammar_unlock_key(book, lesson)
+	var unlocked: int = int(grammar_unlocked_units.get(key, 1))
+	if total_units > 0:
+		unlocked = clampi(unlocked, 1, total_units)
+	else:
+		unlocked = maxi(unlocked, 1)
+	return unlocked
+
+
+func set_grammar_unlocked_units(book: int, lesson: int, unlocked: int) -> void:
+	var key: String = _grammar_unlock_key(book, lesson)
+	var current: int = int(grammar_unlocked_units.get(key, 1))
+	var next_value: int = maxi(current, unlocked)
+	grammar_unlocked_units[key] = next_value
+	_save_progress()
+
+
+func set_grammar_start_unit(index: int) -> void:
+	grammar_start_unit_index = maxi(index, 0)
+
+
 # ---------- PROGRESS PERSISTENCE ----------
 
 func _save_progress() -> void:
-	var data := {"last_scene": _last_scene}
-	var file := FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
+	var data: Dictionary = {
+		"last_scene": _last_scene,
+		"grammar_unlocked_units": grammar_unlocked_units,
+	}
+	var file: FileAccess = FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
 	file.close()
 
@@ -188,12 +219,16 @@ func _save_progress() -> void:
 func _load_progress() -> void:
 	if not FileAccess.file_exists(PROGRESS_PATH):
 		return
-	var file := FileAccess.open(PROGRESS_PATH, FileAccess.READ)
-	var text := file.get_as_text()
+	var file: FileAccess = FileAccess.open(PROGRESS_PATH, FileAccess.READ)
+	var text: String = file.get_as_text()
 	file.close()
-	var json := JSON.new()
+	var json: JSON = JSON.new()
 	if json.parse(text) == OK and json.data is Dictionary:
-		_last_scene = json.data.get("last_scene", "")
+		var data: Dictionary = json.data
+		_last_scene = str(data.get("last_scene", ""))
+		var unlocked: Variant = data.get("grammar_unlocked_units", {})
+		if unlocked is Dictionary:
+			grammar_unlocked_units = unlocked
 
 
 func _load_saved_words() -> void:

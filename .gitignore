@@ -1,6 +1,6 @@
 .godot/
 .import/
-
+addons/
 export_presets.cfg
 
 *.translation

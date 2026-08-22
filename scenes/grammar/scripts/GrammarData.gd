@@ -58,19 +58,50 @@ static func load_lesson(book: int, lesson: int) -> Dictionary:
 		push_error("Grammar JSON not found: " + path)
 		return {}
 
-	var file := FileAccess.open(path, FileAccess.READ)
-	var text := file.get_as_text()
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
+	var text: String = file.get_as_text()
 	file.close()
 
-	var json := JSON.new()
-	var err := json.parse(text)
+	var json: JSON = JSON.new()
+	var err: Error = json.parse(text)
 	if err != OK:
 		push_error("Grammar JSON parse error at %s: %s" % [path, json.get_error_message()])
 		return {}
 
-	var data = json.data
+	var data: Variant = json.data
 	if not data is Dictionary:
 		push_error("Grammar JSON root must be a Dictionary: " + path)
 		return {}
 
-	return data.get("lesson", {})
+	return (data as Dictionary).get("lesson", {})
+
+
+static func unit_icon(unit: Dictionary) -> String:
+	match str(unit.get("type", "")):
+		"learn":
+			return "📚"
+		"multiple_choice":
+			return "🟣"
+		"fill_blank":
+			return "📝"
+		"true_false":
+			return "✅"
+		"matching":
+			return "🔗"
+		"unscramble":
+			return "🔀"
+		_:
+			return "📦"
+
+
+static func unit_title(unit: Dictionary) -> String:
+	var title: String = str(unit.get("title_fa", ""))
+	if title.is_empty():
+		title = str(unit.get("instruction_fa", ""))
+	if title.is_empty():
+		title = str(unit.get("type", "Unit"))
+	return title
+
+
+static func unit_label(unit: Dictionary) -> String:
+	return "%s\n%s" % [unit_icon(unit), unit_title(unit)]
