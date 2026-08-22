@@ -48,8 +48,8 @@ corner_radius_top_left = 150
 corner_radius_top_right = 150
 corner_radius_bottom_right = 150
 corner_radius_bottom_left = 150
-shadow_color = Color(1, 1, 1, 0.16078432)
-shadow_size = 14
+shadow_color = Color(0, 0.3019608, 0.13725491, 0.5058824)
+shadow_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_kaaem"]
 font = ExtResource("4_opycv")
@@ -307,6 +307,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_ttw17")
 icon = ExtResource("2_egq7b")
+flat = true
+
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
 flat = true
 
 [node name="HeaderSpacer" type="Control" parent="HeaderBar/HeaderContent" unique_id=332775269]
@@ -610,6 +617,7 @@ theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
 [node name="BottomNav" type="PanelContainer" parent="MarginContainer/MainLayout/BottomMargin" unique_id=747709476]
+custom_maximum_size = Vector2(1050, 165)
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 5

@@ -22,12 +22,21 @@ var font_farsi: FontFile
 const ACCENT := Color("#0D9488")
 
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
+@onready var home_button: Button = $HeaderBar/HeaderContent/HomeButton
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
+@onready var translation_toggle: Button = $HeaderBar/HeaderContent/TranslationToggleButton
 @onready var page_view: PageView = $MarginContainer/MainLayout/PageView
 
 var _data: Dictionary = {}
 var _current_book: int = 0
 var _current_lesson: int = 0
+
+# Master Farsi-translation switch. Starts off so translations are hidden on
+# open; the header toggle flips it and shows/hides every passage, grammar
+# note, and exercise translation.
+var show_translation: bool = false
+var _engines: Array = []       # ExerciseEngine instances on the current page
+var _fa_labels: Array = []     # Farsi labels from passage/grammar-note cards
 
 
 func _ready() -> void:
@@ -36,12 +45,15 @@ func _ready() -> void:
 	font_farsi   = load(FONT_VAZIRMATN)
 	if font_bold: header_title.add_theme_font_override("font", font_bold)
 	back_button.pressed.connect(_on_back_button_pressed)
+	home_button.pressed.connect(_on_home_pressed)
+	translation_toggle.pressed.connect(_on_translation_toggle_pressed)
 	page_view.set_accent(ACCENT)
 
 	_current_book = Global.current_book
 	_current_lesson = Global.current_lesson
 	header_title.text = "Lesson %d\nWorkbook" % _current_lesson
-	
+	_update_toggle_button_text()
+
 	_data = Global.load_category("workbook", _current_book, _current_lesson)
 	
 	if _data.is_empty():
@@ -111,7 +123,6 @@ func _build_workbook_pages() -> void:
 	# Create a page for each part
 	for i in parts.size():
 		var part: Dictionary = parts[i]
-		var part_title: Dictionary = part.get("part_title", {})
 		var page := _build_part_page(i + 1, part, lesson_title)
 		page_view.add_page("part_%d" % (i + 1), "Part %s" % _number_to_roman(i + 1), "📄", page)
 
@@ -159,6 +170,8 @@ func _build_part_page(part_num: int, part: Dictionary, lesson_title: Dictionary)
 		
 		page.add_child(engine)
 		engine.build(exercise)
+		engine.set_show_translation(show_translation)
+		_engines.append(engine)
 	
 	# Bottom spacer
 	var spacer := Control.new()
@@ -250,32 +263,63 @@ func _make_passage_card(passage: Dictionary) -> PanelContainer:
 	if font_bold: header.add_theme_font_override("font", font_bold)
 	vb.add_child(header)
 	
-	# English text
+	# English and Farsi are split into paragraphs and interleaved, so each
+	# English paragraph is immediately followed by its Farsi translation
+	# instead of showing the whole text in English and then all in Farsi.
 	var en_text: String = passage.get("en", "")
-	if en_text != "":
-		var en_label := Label.new()
-		en_label.text = en_text
-		en_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-		en_label.add_theme_font_size_override("font_size", 34)
-		en_label.add_theme_color_override("font_color", Color("#1E293B"))
-		if font_regular: en_label.add_theme_font_override("font", font_regular)
-		vb.add_child(en_label)
-	
-	# Farsi translation
 	var fa_text: String = passage.get("fa", "")
-	if fa_text != "":
-		var fa_label := Label.new()
-		fa_label.text = fa_text
-		fa_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-		fa_label.add_theme_font_size_override("font_size", 32)
-		fa_label.add_theme_color_override("font_color", Color("#64748B"))
-		fa_label.text_direction = Control.TEXT_DIRECTION_RTL
-		fa_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		if font_farsi: fa_label.add_theme_font_override("font", font_farsi)
-		vb.add_child(fa_label)
-	
+	var en_paras := _split_paragraphs(en_text)
+	var fa_paras := _split_paragraphs(fa_text)
+
+	if fa_paras.size() > 0 and fa_paras.size() == en_paras.size():
+		for i in en_paras.size():
+			vb.add_child(_make_passage_en_label(en_paras[i]))
+			vb.add_child(_make_passage_fa_label(fa_paras[i]))
+	else:
+		# Fallback: show the full English text then the full Farsi text.
+		if en_text != "":
+			vb.add_child(_make_passage_en_label(en_text))
+		if fa_text != "":
+			vb.add_child(_make_passage_fa_label(fa_text))
+
 	card.add_child(vb)
 	return card
+
+
+# Splits text into non-empty paragraphs on blank lines ("\n\n").
+func _split_paragraphs(text: String) -> Array:
+	var out: Array = []
+	for p in text.split("\n\n"):
+		var s := p.strip_edges()
+		if s != "":
+			out.append(p)
+	return out
+
+
+func _make_passage_en_label(text: String) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	label.add_theme_font_size_override("font_size", 34)
+	label.add_theme_color_override("font_color", Color("#1E293B"))
+	if font_regular:
+		label.add_theme_font_override("font", font_regular)
+	return label
+
+
+func _make_passage_fa_label(text: String) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	label.add_theme_font_size_override("font_size", 32)
+	label.add_theme_color_override("font_color", Color("#64748B"))
+	label.text_direction = Control.TEXT_DIRECTION_RTL
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	if font_farsi:
+		label.add_theme_font_override("font", font_farsi)
+	label.visible = show_translation
+	_fa_labels.append(label)
+	return label
 
 
 # ============================================================
@@ -324,6 +368,8 @@ func _make_grammar_note_card(grammar_note: Dictionary) -> PanelContainer:
 		fa_label.text_direction = Control.TEXT_DIRECTION_RTL
 		fa_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		if font_farsi: fa_label.add_theme_font_override("font", font_farsi)
+		fa_label.visible = show_translation
+		_fa_labels.append(fa_label)
 		vb.add_child(fa_label)
 	
 	card.add_child(vb)
@@ -343,6 +389,35 @@ func _number_to_roman(num: int) -> String:
 		9: return "IX"
 		10: return "X"
 		_: return str(num)
+
+
+# ============================================================
+# TRANSLATION TOGGLE
+# ============================================================
+# Flips the master switch and applies it to every Farsi label already on
+# the page: workbook passage/grammar-note labels plus each exercise
+# engine's translations. Toggling only changes .visible, so the layout
+# (which already reserves space for the labels) never reflows.
+func _on_translation_toggle_pressed() -> void:
+	show_translation = !show_translation
+	_update_toggle_button_text()
+	for label in _fa_labels:
+		if is_instance_valid(label):
+			label.visible = show_translation
+	for engine in _engines:
+		if is_instance_valid(engine):
+			engine.set_show_translation(show_translation)
+
+
+func _update_toggle_button_text() -> void:
+	if translation_toggle == null:
+		return
+	translation_toggle.text = "🔽 Hide Translation" if show_translation else "🔼 Show Translation"
+
+
+# Returns the user to the main menu.
+func _on_home_pressed() -> void:
+	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")
 
 
 # ============================================================

@@ -274,14 +274,30 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 	# ------------------------------------------------------------
 	# Wrap content in its own vertical scroller + padding.
 	# ------------------------------------------------------------
+	# ------------------------------------------------------------
+	# Wrap content in its own vertical scroller + padding.
+	# Each page sits inside a fixed-width slot (a plain Control). A plain
+	# Control never auto-grows to its child's width, so the page width stays
+	# locked to one viewport no matter how wide the content is — oversized
+	# content can never push a page into the neighbouring page.
+	# ------------------------------------------------------------
+	var slot := Control.new()
+	slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	slot.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	slot.clip_contents = true
+	_slider.add_child(slot)
+
 	var scroll := ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	scroll.follow_focus = true
 	scroll.scroll_deadzone = 24
 	scroll.focus_mode = Control.FOCUS_ALL
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	# Clip page content so it can never spill over the page edges.
+	scroll.clip_contents = true
+	slot.add_child(scroll)
 
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 28)
@@ -289,13 +305,17 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 	margin.add_theme_constant_override("margin_top", 24)
 	margin.add_theme_constant_override("margin_bottom", 60)
 	margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
+	margin.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.add_child(margin)
 
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	# Lock the page's content to the viewport width so wrapped text never
+	# inflates the ScrollContainer's minimum size (which would push the whole
+	# page slot wider than one viewport and spill past the right edge).
+	content.custom_minimum_size = Vector2(_page_content_width(), 0)
 	margin.add_child(content)
 
-	_slider.add_child(scroll)
 	_style_page_scroll(scroll)
 
 	_pages.append({
@@ -303,6 +323,8 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 		"title": title,
 		"icon": icon,
 		"scroll": scroll,
+		"slot": slot,
+		"content": content,
 	})
 
 	# ------------------------------------------------------------
@@ -430,6 +452,12 @@ func set_accent(color: Color) -> void:
 # LAYOUT
 # ============================================================
 
+func _page_content_width() -> float:
+	# Width available to a page's content: one full viewport minus the
+	# horizontal margins applied in add_page() (28 left + 28 right).
+	return maxf(0.0, _page_width - 56.0)
+
+
 func _refresh_layout() -> void:
 	_page_width = _viewport.size.x
 
@@ -437,17 +465,53 @@ func _refresh_layout() -> void:
 		return
 
 	_slider.size = Vector2(_page_width * _pages.size(), _viewport.size.y)
+	_slider.alignment = BoxContainer.ALIGNMENT_BEGIN
 
 	for page in _pages:
+		var slot := page.get("slot") as Control
+		if is_instance_valid(slot):
+			slot.custom_minimum_size = Vector2(_page_width, 0)
+
 		var scroll := page.get("scroll") as ScrollContainer
 		if is_instance_valid(scroll):
-			scroll.custom_minimum_size = Vector2(_page_width, 0)
 			scroll.clip_contents = true
+			scroll.custom_minimum_size = Vector2(_page_width, 0)
+
+		var content := page.get("content") as Control
+		if is_instance_valid(content):
+			content.custom_minimum_size = Vector2(_page_content_width(), 0)
 
 	_slider.position.x = -_current * _page_width
 	_set_indicator_to(float(_current))
 
 	_refresh_tab_fit()
+
+	# Post-layout safety: force every page to exactly the viewport width &
+	# height so oversized content can never push a page past its boundary.
+	call_deferred("_clamp_page_size")
+
+
+func _clamp_page_size() -> void:
+	if _page_width <= 0.0 or _pages.is_empty():
+		return
+
+	var vh := _viewport.size.y
+
+	for page in _pages:
+		var slot := page.get("slot") as Control
+		if is_instance_valid(slot):
+			slot.custom_minimum_size = Vector2(_page_width, 0)
+			slot.size = Vector2(_page_width, vh)
+
+		var scroll := page.get("scroll") as ScrollContainer
+		if is_instance_valid(scroll):
+			scroll.clip_contents = true
+			scroll.custom_minimum_size = Vector2(_page_width, 0)
+			scroll.size = Vector2(_page_width, vh)
+
+		var content := page.get("content") as Control
+		if is_instance_valid(content):
+			content.custom_minimum_size = Vector2(_page_content_width(), 0)
 
 
 func _style_page_scroll(scroll: ScrollContainer) -> void:
@@ -925,7 +989,6 @@ func _exercise_request_keyboard_visibility() -> void:
 	var safe_gap := 32.0
 
 	var field_rect := focused.get_global_rect()
-	var scroll_rect := scroll.get_global_rect()
 
 	var keyboard_top := get_viewport().get_visible_rect().size.y - keyboard_height
 

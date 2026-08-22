@@ -1,6 +1,4 @@
 extends CanvasLayer
-
-signal menu_closed
 signal word_selected(word_data)  # New signal for when a word is selected from search
 
 # --- Node References ---
@@ -287,7 +285,7 @@ func _create_word_item(entry: Dictionary, is_search_result: bool = false) -> voi
 	
 	word_list.add_child(item_box)
 
-func _on_word_item_clicked(event: InputEvent, entry: Dictionary, item_node: Node) -> void:
+func _on_word_item_clicked(event: InputEvent, entry: Dictionary, _item_node: Node) -> void:
 	"""Handle clicking on a word item to navigate to it"""
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		# Emit signal that a word was selected

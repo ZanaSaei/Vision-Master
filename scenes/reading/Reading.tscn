@@ -58,6 +58,13 @@ layout_mode = 2
 icon = ExtResource("2_wsob8")
 flat = true
 
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
+flat = true
+
 [node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
 layout_mode = 2
 text = "Conversation"

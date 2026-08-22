@@ -167,7 +167,7 @@ func _apply_glossy_style(btn: Button, accent: Color) -> void:
 
 	var style := StyleBoxFlat.new()
 	style.bg_color = fill
-	style.set_corner_radius_all(CORNER_RADIUS)
+	style.set_corner_radius_all(int(CORNER_RADIUS))
 	style.border_width_left = 2; style.border_width_top = 2
 	style.border_width_right = 1; style.border_width_bottom = 1
 	style.border_color = rim

@@ -40,11 +40,18 @@ theme_override_styles/panel = ExtResource("2_mt8p7")
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 527
+theme_override_constants/separation = 264
 
 [node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
 layout_mode = 2
 icon = ExtResource("1_fjmkr")
+flat = true
+
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1716302399]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
 flat = true
 
 [node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]

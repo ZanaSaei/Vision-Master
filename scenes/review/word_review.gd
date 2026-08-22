@@ -143,20 +143,22 @@ func _apply_button_color(btn: Button, color: Color) -> void:
 # ----------------------------------------------------------------
 func _load_next_card() -> void:
 	_update_due_counter()
-
+	
 	if review_queue.is_empty():
-		_show_all_done()
+		if Global.review_words.is_empty():
+			_show_no_words_saved()
+		else:
+			_show_all_done()
 		return
-
+	
 	current_entry = review_queue[0]
-
 	word_label.text    = current_entry.get("word", "")
 	meaning_label.text = "%s\n%s" % [
 		current_entry.get("meaning_en", ""),
 		current_entry.get("meaning_fa", "")
 	]
 	example_label.text = current_entry.get("example", "")
-
+	
 	var phonetics_text: String = current_entry.get("phonetics", "")
 	if phonetics_text != "":
 		phonetics_label.text = phonetics_text
@@ -164,15 +166,13 @@ func _load_next_card() -> void:
 	else:
 		phonetics_label.text = ""
 		phonetics_label.visible = false
-
+	
 	var book: int   = current_entry.get("book", 0)
 	var lesson: int = current_entry.get("lesson", 0)
 	extra_label.text = ("Vision %d — Lesson %d" % [book, lesson]) if book > 0 else ""
-
 	type_label.text = _get_state_badge(current_entry)
-
+	
 	_show_front()
-
 
 # Shows a badge describing where this word is in its learning journey
 func _get_state_badge(entry: Dictionary) -> String:
@@ -251,6 +251,13 @@ func _show_all_done() -> void:
 
 	due_counter.text = "تمام شد ✅"
 
+func _show_no_words_saved() -> void:
+	word_label.text = "📭\nهیچ کلمه ای در لایتنر ذخیره نشده است."
+	front.visible               = true
+	back.visible                 = false
+	show_answer_button.visible   = false
+	rating_buttons.visible       = false
+	due_counter.text = "لیست خالی است"
 
 func _on_back_button_pressed() -> void:
 	# Return to whichever scene opened this review session

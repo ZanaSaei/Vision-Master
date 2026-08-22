@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://e1ps5xltiuv1"]
+
+[ext_resource type="Script" uid="uid://b5ul167x6ddh1" path="res://scenes/grammar/components/GrammarButton.gd" id="1_mttvp"]
+
+[node name="GrammarButton" type="Button" unique_id=1725369934]
+script = ExtResource("1_mttvp")

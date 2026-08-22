@@ -43,6 +43,7 @@ var _tts_fallback_tween: Tween
 var _listening_tts_active_id := ""
 
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
+@onready var home_button: Button = $HeaderBar/HeaderContent/HomeButton
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
 @onready var page_view: PageView = $MarginContainer/MainLayout/PageView
 
@@ -76,6 +77,7 @@ func _ready() -> void:
 	header_title.add_theme_color_override("font_color", TEXT_LIGHT)
 
 	back_button.pressed.connect(_on_back_button_pressed)
+	home_button.pressed.connect(_on_home_pressed)
 	page_view.page_changed.connect(_on_page_changed)
 
 	# Put a dark background behind the whole PageView.
@@ -899,12 +901,12 @@ func _make_banner(
 
 	var sub_color := Color(text_color.r, text_color.g, text_color.b, 0.85)
 
-	# Banner title: one line, no wrapping.
-	var en_l := _make_label(en, 50, text_color, true, false)
+	# Banner title: wraps so long titles never inflate the page width.
+	var en_l := _make_label(en, 50, text_color, true)
 	en_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	bv.add_child(en_l)
 
-	var fa_l := _make_fa_label(fa, 36, sub_color, false)
+	var fa_l := _make_fa_label(fa, 36, sub_color)
 	fa_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	bv.add_child(fa_l)
 
@@ -964,8 +966,8 @@ func _make_section_title(en: String, accent: Color) -> HBoxContainer:
 	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(bar)
 
-	# Section title: one line, no wrapping, fills horizontally.
-	var title := _make_label(en, 40, TEXT_LIGHT, true, false)
+	# Section title: wraps so it always fits the screen width.
+	var title := _make_label(en, 40, TEXT_LIGHT, true)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(title)
 
@@ -1006,14 +1008,14 @@ func _make_button(text: String, color: Color) -> Button:
 	return btn
 
 
-func _make_label(text: String, size: int, color: Color, bold: bool, wrap := true) -> Label:
+func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.custom_minimum_size.x = 0
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	# Disable wrapping for titles when requested.
-	if wrap:
+	if do_wrap:
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD
 	else:
 		l.autowrap_mode = TextServer.AUTOWRAP_OFF
@@ -1021,12 +1023,12 @@ func _make_label(text: String, size: int, color: Color, bold: bool, wrap := true
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 
 	# Slightly shrink very long one-line titles so they fit better.
-	var final_size := size
-	if not wrap:
+	var final_size := font_size
+	if not do_wrap:
 		if text.length() > 30:
-			final_size = int(float(size) * 0.85)
+			final_size = int(float(font_size) * 0.85)
 		if text.length() > 55:
-			final_size = int(float(size) * 0.72)
+			final_size = int(float(font_size) * 0.72)
 
 	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)
@@ -1039,13 +1041,13 @@ func _make_label(text: String, size: int, color: Color, bold: bool, wrap := true
 	return l
 
 
-func _make_fa_label(text: String, size: int, color: Color = TEXT_MUTED, wrap := true) -> Label:
+func _make_fa_label(text: String, font_size: int, color: Color = TEXT_MUTED, do_wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.custom_minimum_size.x = 0
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	if wrap:
+	if do_wrap:
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD
 	else:
 		l.autowrap_mode = TextServer.AUTOWRAP_OFF
@@ -1053,12 +1055,12 @@ func _make_fa_label(text: String, size: int, color: Color = TEXT_MUTED, wrap := 
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 
 	# Slightly shrink very long one-line Persian titles.
-	var final_size := size
-	if not wrap:
+	var final_size := font_size
+	if not do_wrap:
 		if text.length() > 34:
-			final_size = int(float(size) * 0.85)
+			final_size = int(float(font_size) * 0.85)
 		if text.length() > 60:
-			final_size = int(float(size) * 0.72)
+			final_size = int(float(font_size) * 0.72)
 
 	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)
@@ -1074,6 +1076,12 @@ func _make_fa_label(text: String, size: int, color: Color = TEXT_MUTED, wrap := 
 # ============================================================
 # NAVIGATION
 # ============================================================
+func _on_home_pressed() -> void:
+	_is_model_playing = false
+	_stop_tts()
+	_stop_all_listening_players()
+	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")
+
 func _on_back_button_pressed() -> void:
 	_is_model_playing = false
 

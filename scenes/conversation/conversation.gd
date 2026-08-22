@@ -36,6 +36,7 @@ var font_farsi: FontFile
 # ---------- Node References ----------
 @onready var header_bar: Control              = $HeaderBar
 @onready var back_button: Button              = $HeaderBar/HeaderContent/BackButton
+@onready var home_button: Button              = $HeaderBar/HeaderContent/HomeButton
 @onready var header_title: Label              = $HeaderBar/HeaderContent/HeaderTitle
 @onready var audio_button: Button             = $HeaderBar/HeaderContent/AudioButton
 @onready var translation_toggle: Button       = $HeaderBar/HeaderContent/TranslationToggleButton
@@ -88,6 +89,7 @@ func _ready() -> void:
 	
 	# General Connections
 	back_button.pressed.connect(_on_back_button_pressed)
+	home_button.pressed.connect(_on_home_pressed)
 	audio_button.pressed.connect(_on_audio_pressed)
 	translation_toggle.pressed.connect(_on_translation_toggle_pressed)
 	
@@ -467,7 +469,7 @@ func _encode_word_meta(word: String) -> String:
 	# Do not put raw apostrophes inside [url=...].
 	return _normalize_word(word).replace("'", "%27")
 
-func _on_word_clicked(meta: Variant, clicked_rtl: RichTextLabel, original_text: String) -> void:
+func _on_word_clicked(meta: Variant, _clicked_rtl: RichTextLabel, _original_text: String) -> void:
 	if _is_drag_scrolling:
 		return
 
@@ -557,6 +559,11 @@ func _on_audio_stopped() -> void:
 
 func _on_exercise_checked(exercise_id: String, correct: int, total: int) -> void:
 	print("%s → %d/%d" % [exercise_id, correct, total])
+
+func _on_home_pressed() -> void:
+	audio_panel.stop_and_close()
+	_remove_intro_translation_label()
+	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")
 
 func _on_back_button_pressed() -> void:
 	audio_panel.stop_and_close()

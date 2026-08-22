@@ -40,17 +40,38 @@ theme_override_styles/panel = ExtResource("2_y31tq")
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1297609347]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 527
+theme_override_constants/separation = 20
 
 [node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322488]
 layout_mode = 2
 icon = ExtResource("2_b4itg")
 flat = true
 
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
+flat = true
+
+[node name="LeftSpacer" type="Control" parent="HeaderBar/HeaderContent" unique_id=681322489]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
 layout_mode = 2
 text = "Lesson 1 v"
 label_settings = SubResource("LabelSettings_swh16")
+
+[node name="RightSpacer" type="Control" parent="HeaderBar/HeaderContent" unique_id=681322490]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TranslationToggleButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=681322491]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 26
+text = "🔼 Show Translation"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1463495940]
 layout_mode = 1

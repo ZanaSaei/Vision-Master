@@ -780,12 +780,12 @@
 		  }
 		]
 	  },
-	{
+	  {
 		"speaker": "Mr. Saberian",
 		"sentences": [
 		  {
 			"en": "I began learning English at school when I was thirteen.",
-			"fa": "به نظر انتخاب مناسبی می‌رسد.",
+			"fa": "یادگیری انگلیسی را در مدرسه وقتی سیزده ساله بودم شروع کردم.",
 			"start": 60.9,
 			"end": 64.8
 		  },
@@ -795,7 +795,7 @@
 			"start": 64.9,
 			"end": 68.8
 		  },
-		{
+		  {
 			"en": "And I learned Russian when I was a university student in Moscow.",
 			"fa": "و روسی را وقتی دانشجوی دانشگاه در مسکو بودم یاد گرفتم.",
 			"start": 69.6,
@@ -803,7 +803,7 @@
 		  }
 		]
 	  },
-	{
+	  {
 		"speaker": "Meysam",
 		"sentences": [
 		  {
@@ -814,7 +814,7 @@
 		  }
 		]
 	  },
-	{
+	  {
 		"speaker": "Mr. Saberian",
 		"sentences": [
 		  {
@@ -856,7 +856,7 @@
 			"start": 90.9,
 			"end": 93.3
 		  },
-		{
+		  {
 			"en": "May I know what your favorite language is? English, French, or Russian?",
 			"fa": "اجازه دارم بپرسم زبان مورد علاقه‌تان کدام است؟ انگلیسی، فرانسوی یا روسی؟",
 			"start": 93.6,
@@ -873,7 +873,7 @@
 			"start": 99.5,
 			"end": 102.8
 		  },
-		{
+		  {
 			"en": "but my favorite language is absolutely my mother tongue!",
 			"fa": "اما زبان مورد علاقه‌ام قطعاً زبان مادری‌ام است!",
 			"start": 102.9,
@@ -1084,7 +1084,7 @@
 		  }
 		]
 	  },
-	{
+	  {
 		"speaker": "Sina",
 		"sentences": [
 		  {
@@ -1099,7 +1099,7 @@
 			"start": 82.5,
 			"end": 85.0
 		  },
-		{
+		  {
 			"en": "I really do not like to move!",
 			"fa": "واقعا دوست ندارم تحرک داشته باشم.",
 			"start": 85.7,
@@ -1317,7 +1317,7 @@
 		  }
 		]
 	  },
-	{
+	  {
 		"speaker": "Reza",
 		"sentences": [
 		  {
@@ -1332,7 +1332,7 @@
 			"start": 81.0,
 			"end": 82.7
 		  },
-		{
+		  {
 			"en": "All my family members work here to help our family business",
 			"fa": "همه اعضا خانوادم اینجا کار می کنند که به کسب و کار خانوادگی کمک کنند.",
 			"start": 83.6,
@@ -1723,7 +1723,7 @@
 		  {
 			"en": "Actually, I haven't.",
 			"fa": "در واقع، نه.",
-			"start":53.8,
+			"start": 53.8,
 			"end": 55.0
 		  },
 		  {
@@ -1795,7 +1795,7 @@
 		"sentences": [
 		  {
 			"en": "No, in fact dictionaries have different types, levels, and sizes",
-			"fa": "نه، دو نوع وجود دارد: تک‌زبانه و دوزبانه.",
+			"fa": "نه، در واقع فرهنگ‌های لغت انواع، سطوح و اندازه‌های مختلفی دارند.",
 			"start": 73.2,
 			"end": 77.4
 		  }
@@ -1806,7 +1806,7 @@
 		"sentences": [
 		  {
 			"en": "What type do you suggest?",
-			"fa": "و در مورد سطوح چطور؟",
+			"fa": "چه نوعی را پیشنهاد می‌کنید؟",
 			"start": 78.3,
 			"end": 79.4
 		  }
@@ -1816,20 +1816,20 @@
 		"speaker": "Mr. Iranmehr",
 		"sentences": [
 		  {
-			"en": " I suppose a monolingual dictionary is more suitable for you,",
-			"fa": "خب، معمولاً سه سطح وجود دارد: مقدماتی، متوسط و پیشرفته.",
+			"en": "I suppose a monolingual dictionary is more suitable for you,",
+			"fa": "من یک فرهنگ لغت تک‌زبانه را مناسب‌تر می‌دانم،",
 			"start": 80.9,
 			"end": 84.2
 		  },
 		  {
 			"en": "because you can find word information in English.",
-			"fa": "برای شما به عنوان یک دانش‌آموز دبیرستانی، یک سطح مقدماتی کافی است.",
+			"fa": "زیرا می‌توانید اطلاعات کلمه را به انگلیسی پیدا کنید.",
 			"start": 84.3,
 			"end": 86.3
 		  }
 		]
 	  },
-	{
+	  {
 		"speaker": "Majid",
 		"sentences": [
 		  {
@@ -2066,7 +2066,7 @@
 		  }
 		]
 	  },
-	{
+	  {
 		"speaker": "Emad",
 		"sentences": [
 		  {
@@ -2093,7 +2093,7 @@
 			"end": 79.2
 		  },
 		  {
-			"en": " An excellent type of clean energy!",
+			"en": "An excellent type of clean energy!",
 			"fa": "نوعی عالی از انرژی پاک!",
 			"start": 79.3,
 			"end": 81.5
@@ -2120,7 +2120,7 @@
 			"start": 85.3,
 			"end": 87.0
 		  },
-		{
+		  {
 			"en": "Let’s check it with others.",
 			"fa": "بگذار با دیگران هم هماهنگ کنیم.",
 			"start": 87.1,

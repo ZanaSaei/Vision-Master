@@ -80,6 +80,7 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 
 @onready var audio_button: Button              = $HeaderBar/HeaderContent/AudioButton
 @onready var back_nav_button: Button           = $HeaderBar/HeaderContent/BackButton
+@onready var home_button: Button               = $HeaderBar/HeaderContent/HomeButton
 
 @onready var nav_book: TextureButton           = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavBook
 @onready var nav_list: TextureButton           = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavList
@@ -102,6 +103,7 @@ func _ready() -> void:
 	save_button.pressed.connect(_on_save_pressed)
 	audio_button.pressed.connect(_on_audio_pressed)
 	back_nav_button.pressed.connect(_on_back_button_pressed)
+	home_button.pressed.connect(_on_home_pressed)
 	nav_book.pressed.connect(_on_nav_book_pressed)
 	card_panel.gui_input.connect(_on_card_input)
 
@@ -196,7 +198,7 @@ func _enter_saved_mode() -> void:
 # ----------------------------------------------------------------
 #  PUBLIC SETUP
 # ----------------------------------------------------------------
-func setup(words: Array, book: int, lesson: int, audio_filename: String, screen_mode: Mode = Mode.LESSON) -> void:
+func setup(words: Array, book: int, lesson: int, _audio_filename: String, screen_mode: Mode = Mode.LESSON) -> void:
 	word_list            = words
 	current_book         = book
 	current_lesson       = lesson
@@ -549,6 +551,10 @@ func _on_audio_pressed() -> void:
 # ----------------------------------------------------------------
 #  NAVIGATION
 # ----------------------------------------------------------------
+func _on_home_pressed() -> void:
+	Global.flashcard_mode = "lesson"
+	TransitionManager.change_scene(SCENE_MAIN_MENU)
+
 func _on_back_button_pressed() -> void:
 	Global.flashcard_mode = "lesson"
 	if mode == Mode.SAVED:

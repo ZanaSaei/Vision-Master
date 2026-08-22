@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://csjykfgswhgaf"]
 
 [ext_resource type="Script" uid="uid://fu47855vxrkx" path="res://scenes/main_menu/main_menu.gd" id="1_isws5"]
-[ext_resource type="PackedScene" uid="uid://b4q4amyvxdy0n" path="res://scenes/dynamic_background/animated_background.tscn" id="2_6gdku"]
 [ext_resource type="Texture2D" uid="uid://be4epk85ppowb" path="res://images/menu-bar.png" id="2_qq55g"]
 [ext_resource type="StyleBox" uid="uid://iwxf7jw83unf" path="res://buttons_styles/ContinueNormal.tres" id="5_f1mbi"]
 [ext_resource type="FontFile" uid="uid://cd8w2vgcrha3v" path="res://assets/fonts/PlayfairDisplaySC-Bold.ttf" id="5_pkvjm"]
@@ -35,6 +34,7 @@ font_color = Color(0, 0, 0.27450982, 1)
 outline_size = 35
 
 [sub_resource type="SystemFont" id="SystemFont_arvcj"]
+subpixel_positioning = 0
 
 [node name="MainMenu" type="Control" unique_id=1996851528]
 layout_mode = 3
@@ -44,8 +44,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_isws5")
-
-[node name="AnimatedBackground" parent="." unique_id=1120716659 instance=ExtResource("2_6gdku")]
 
 [node name="FloatingParticles" type="CanvasLayer" parent="." unique_id=1328281086]
 

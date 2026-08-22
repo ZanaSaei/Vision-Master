@@ -7,7 +7,6 @@ extends "res://autoload/BackButtonHandler.gd" #[cite: 2]
 # ============================================================
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn" #[cite: 2]
-const ExerciseSectionScene := preload("res://scenes/shared/ExerciseSection.tscn") #[cite: 2]
 
 # Paragraph accent color — dark theme
 const PARA_BG_COLOR     := Color("#1a2f5c")
@@ -50,6 +49,7 @@ var _touch_max_distance: float = 0.0 #[cite: 2]
 @onready var header_bar: Control              = $HeaderBar
 @onready var header_content: HBoxContainer    = $HeaderBar/HeaderContent
 @onready var back_button: Button              = $HeaderBar/HeaderContent/BackButton #[cite: 2]
+@onready var home_button: Button              = $HeaderBar/HeaderContent/HomeButton
 @onready var header_title: Label              = $HeaderBar/HeaderContent/HeaderTitle #[cite: 2]
 @onready var audio_button: Button             = $HeaderBar/HeaderContent/AudioButton #[cite: 2]
 @onready var translation_toggle: Button       = $HeaderBar/HeaderContent/TranslationToggleButton #[cite: 2]
@@ -110,6 +110,7 @@ func _ready() -> void:
 	
 	# General Connections
 	back_button.pressed.connect(_on_back_button_pressed) #[cite: 2]
+	home_button.pressed.connect(_on_home_pressed)
 	audio_button.pressed.connect(_on_audio_pressed) #[cite: 2]
 	translation_toggle.pressed.connect(_on_translation_toggle_pressed) #[cite: 2]
 	page_view.page_changed.connect(_on_page_changed) #[cite: 2]
@@ -186,13 +187,13 @@ func _build_strategy_page(data: Dictionary) -> void:
 	content_layout = page #[cite: 2]
 	
 	var strategy: Dictionary = data["strategy"] #[cite: 2]
-	var theme: Dictionary = STRATEGY_THEMES.get(strategy["name"]["en"], DEFAULT_THEME) #[cite: 2]
+	var strategy_theme: Dictionary = STRATEGY_THEMES.get(strategy["name"]["en"], DEFAULT_THEME) #[cite: 2]
 	
-	_build_banner(strategy, theme) #[cite: 2]
-	_build_steps(strategy, theme) #[cite: 2]
-	_build_reference_materials(strategy, theme) #[cite: 2]
-	_build_persian_insights(strategy, theme) #[cite: 2]
-	_build_practice(data.get("exercises", []), theme) #[cite: 2]
+	_build_banner(strategy, strategy_theme) #[cite: 2]
+	_build_steps(strategy, strategy_theme) #[cite: 2]
+	_build_reference_materials(strategy, strategy_theme) #[cite: 2]
+	_build_persian_insights(strategy, strategy_theme) #[cite: 2]
+	_build_practice(data.get("exercises", []), strategy_theme) #[cite: 2]
 	page.add_child(_make_page_spacer()) #[cite: 2]
 	
 	page_view.add_page("strategy", "Strategy", "🎯", page) #[cite: 2]
@@ -283,7 +284,7 @@ func _load_fonts() -> void:
 # ============================================================
 # DATA LOADING & AUDIO SYNC LOGIC
 # ============================================================
-func _build_reading(book: int, lesson: int, data: Dictionary) -> void:
+func _build_reading(_book: int, _lesson: int, data: Dictionary) -> void:
 	all_sentences_sync.clear() #[cite: 2]
 	
 	var image_filename: String = data.get("image", "") as String #[cite: 2]
@@ -494,7 +495,7 @@ func _encode_word_meta(word: String) -> String:
 	# Do not put raw apostrophes inside [url=...].
 	return _normalize_word(word).replace("'", "%27")
 
-func _on_word_clicked(meta: Variant, clicked_rtl: RichTextLabel, original_text: String) -> void:
+func _on_word_clicked(meta: Variant, _clicked_rtl: RichTextLabel, _original_text: String) -> void:
 	var press_duration := (Time.get_ticks_msec() / 1000.0) - _touch_start_time
 
 	if _is_drag_scrolling or _touch_max_distance > 15.0 or press_duration > 0.35:
@@ -541,8 +542,8 @@ func _on_translation_toggle_pressed() -> void:
 # ============================================================
 # READING STRATEGY BUILDERS
 # ============================================================
-func _build_banner(strategy: Dictionary, theme: Dictionary) -> void:
-	var accent: Color = theme["accent"] #[cite: 2]
+func _build_banner(strategy: Dictionary, th: Dictionary) -> void:
+	var accent: Color = th["accent"] #[cite: 2]
 	var banner := PanelContainer.new() #[cite: 2]
 	var style := StyleBoxFlat.new() #[cite: 2]
 	style.bg_color = accent #[cite: 2]
@@ -555,7 +556,7 @@ func _build_banner(strategy: Dictionary, theme: Dictionary) -> void:
 	
 	var icon := Label.new() #[cite: 2]
 	icon.name = "BannerIcon" #[cite: 2]
-	icon.text = str(theme["icon"]) #[cite: 2]
+	icon.text = str(th["icon"]) #[cite: 2]
 	icon.add_theme_font_size_override("font_size", 84) #[cite: 2]
 	icon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER #[cite: 2]
 	vbox.add_child(icon) #[cite: 2]
@@ -607,11 +608,11 @@ func _build_banner(strategy: Dictionary, theme: Dictionary) -> void:
 	_reveal_cards.append(banner) #[cite: 2]
 
 
-func _build_steps(strategy: Dictionary, theme: Dictionary) -> void:
+func _build_steps(strategy: Dictionary, th: Dictionary) -> void:
 	var steps: Array = strategy.get("steps", []) #[cite: 2]
 	if steps.is_empty(): return #[cite: 2]
-	var accent: Color = theme["accent"] #[cite: 2]
-	var soft: Color = theme["soft"] #[cite: 2]
+	var accent: Color = th["accent"] #[cite: 2]
+	var soft: Color = th["soft"] #[cite: 2]
 	
 	content_layout.add_child(_make_section_title("How to do it", "چگونه انجام دهیم", accent)) #[cite: 2]
 	
@@ -682,9 +683,9 @@ func _build_steps(strategy: Dictionary, theme: Dictionary) -> void:
 	
 	content_layout.add_child(timeline) #[cite: 2]
 
-func _build_reference_materials(strategy: Dictionary, theme: Dictionary) -> void:
-	var accent: Color = theme["accent"] #[cite: 2]
-	var soft: Color = theme["soft"] #[cite: 2]
+func _build_reference_materials(strategy: Dictionary, th: Dictionary) -> void:
+	var accent: Color = th["accent"] #[cite: 2]
+	var soft: Color = th["soft"] #[cite: 2]
 	
 	if strategy.has("question_starters"): #[cite: 2]
 		content_layout.add_child(_make_section_title("Question Starters", "کلمات پرسشی", accent)) #[cite: 2]
@@ -734,8 +735,8 @@ func _build_reference_materials(strategy: Dictionary, theme: Dictionary) -> void
 			_reveal_cards.append(card) #[cite: 2]
 
 
-func _build_persian_insights(strategy: Dictionary, theme: Dictionary) -> void:
-	var accent: Color = theme["accent"] #[cite: 2]
+func _build_persian_insights(strategy: Dictionary, th: Dictionary) -> void:
+	var accent: Color = th["accent"] #[cite: 2]
 	
 	var extra: Array = strategy.get("extra_fa", []) #[cite: 2]
 	if not extra.is_empty(): #[cite: 2]
@@ -779,9 +780,9 @@ func _make_insight_card(text: String, accent: Color) -> PanelContainer:
 	_add_hover_lift(card)
 	return card
 
-func _build_practice(exercises: Array, theme: Dictionary) -> void:
+func _build_practice(exercises: Array, th: Dictionary) -> void:
 	if exercises.is_empty(): return #[cite: 2]
-	content_layout.add_child(_make_section_title("Practice", "تمرین", theme["accent"])) #[cite: 2]
+	content_layout.add_child(_make_section_title("Practice", "تمرین", th["accent"])) #[cite: 2]
 	for exercise in exercises: #[cite: 2]
 		var engine := ExerciseEngine.new() #[cite: 2]
 		content_layout.add_child(engine) #[cite: 2]
@@ -839,7 +840,7 @@ func _make_soft_card(soft: Color, accent: Color) -> PanelContainer:
 	card.add_theme_stylebox_override("panel", style)
 	return card
 
-func _make_chip(main: String, sub: String, accent: Color, soft: Color) -> PanelContainer:
+func _make_chip(main: String, sub: String, accent: Color, _soft: Color) -> PanelContainer:
 	var chip := PanelContainer.new()
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color("#1a2f5c")  # Dark bg
@@ -875,11 +876,11 @@ func _make_chip(main: String, sub: String, accent: Color, soft: Color) -> PanelC
 	_add_hover_lift(chip)
 	return chip
 
-func _make_label(text: String, size: int, color: Color, bold: bool) -> Label:
+func _make_label(text: String, font_size: int, color: Color, bold: bool) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD
-	l.add_theme_font_size_override("font_size", size)
+	l.add_theme_font_size_override("font_size", font_size)
 	l.add_theme_color_override("font_color", color)
 	if bold and font_bold: l.add_theme_font_override("font", font_bold)
 	elif not bold and font_regular: l.add_theme_font_override("font", font_regular)
@@ -938,6 +939,10 @@ func _on_audio_stopped() -> void:
 # ============================================================
 # NAVIGATION
 # ============================================================
+func _on_home_pressed() -> void:
+	audio_panel.stop_and_close()
+	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")
+
 func _on_back_button_pressed() -> void:
 	audio_panel.stop_and_close()
 	TransitionManager.change_scene(SCENE_LESSON_MENU) #[cite: 2]

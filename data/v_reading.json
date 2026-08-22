@@ -228,7 +228,7 @@
 		  {
 			"en": "We can thank Allah by keeping our body healthy.",
 			"fa": "ما می‌توانیم با سالم نگه داشتن بدن خود از الله تشکر کنیم.",
-			"start":63.9,
+			"start": 63.9,
 			"end": 67.6
 		  },
 		  {
@@ -368,7 +368,7 @@
 			"en": "Many great names had stories like this.",
 			"fa": "بسیاری از نام‌های بزرگ داستان‌هایی مانند این داشتند.",
 			"start": 83.4,
-			"end":85.9
+			"end": 85.9
 		  },
 		  {
 			"en": "But the key to their success is their hard work and belief in themselves.",
@@ -516,345 +516,345 @@
 	]
   },
   {
-  "lesson": 1,
-  "book": 2,
-  "audio": "res://assets/audio/v2/l1/reading.mp3",
-  "image": "res://assets/images/v2_l1_reading.png",
-  "title": "Languages of the World",
-  "paragraphs": [
-	{
-	  "sentences": [
-		{
-		  "en": "Language is a system of communication.",
-		  "fa": "زبان یک سیستم ارتباطی است.",
-		  "start": 16.5,
-		  "end": 18.7
-		},
-		{
-		  "en": "It uses written and spoken forms.",
-		  "fa": "از اشکال نوشتاری و گفتاری استفاده می‌کند.",
-		  "start": 19.3,
-		  "end": 22.0
-		},
-		{
-		  "en": "People use language to communicate with each other in a society.",
-		  "fa": "مردم از زبان برای برقراری ارتباط با یکدیگر در یک جامعه استفاده می‌کنند.",
-		  "start": 22.9,
-		  "end": 26.9
-		},
-		{
-		  "en": "They exchange knowledge, beliefs, wishes, and feelings through it.",
-		  "fa": "آنها از طریق آن دانش، باورها، خواسته‌ها و احساسات خود را رد و بدل می‌کنند.",
-		  "start": 28.0,
-		  "end": 32.6
-		}
-	  ]
-	},
-	{
-	  "sentences": [
-		{
-		  "en": "Languages vary greatly from region to region.",
-		  "fa": "زبان‌ها از منطقه‌ای به منطقه‌ی دیگر بسیار متفاوت هستند.",
-		  "start": 34.7,
-		  "end": 37.5
-		},
-		{
-		  "en": "They are so different that a person may not understand the language of someone from another region, country or continent.",
-		  "fa": "آن‌ها آنقدر متفاوت هستند که ممکن است فردی زبان کسی را از منطقه، کشور یا قاره‌ای دیگر نفهمد.",
-		  "start": 38.1,
-		  "end": 46.0
-		},
-		{
-		  "en": "It is not surprising to hear that today about 7000 languages exist in the world.",
-		  "fa": "شنیدن این که امروزه حدود ۷۰۰۰ زبان در جهان وجود دارد، تعجب‌آور نیست.",
-		  "start": 46.7,
-		  "end": 53.3
-		},
-		{
-		  "en": "There are more than 2000 languages in Africa, 1000 in the Americas, more than 2250 in Asia, about 230 in Europe, and more than 1300 in Oceania.",
-		  "fa": "بیش از ۲۰۰۰ زبان در آفریقا، ۱۰۰۰ در قاره‌ی آمریکا، بیش از ۲۲۵۰ در آسیا، حدود ۲۳۰ در اروپا و بیش از ۱۳۰۰ در اقیانوسیه وجود دارد.",
-		  "start": 55.8,
-		  "end": 73.1
-		},
-		{
-		  "en": "Native speakers of these languages range in number from very large, with hundreds of millions of speakers, to very small, with fewer than 10 speakers.",
-		  "fa": "تعداد گویشوران بومی این زبان‌ها از بسیار زیاد، با صدها میلیون گویشور، تا بسیار کم، با کمتر از ۱۰ گویشور، متغیر است.",
-		  "start": 75.5,
-		  "end": 86.1
-		},
-		{
-		  "en": "The most popular language in the world is Chinese.",
-		  "fa": "پرطرفدارترین زبان در جهان چینی است.",
-		  "start": 87.3,
-		  "end": 90.6
-		},
-		{
-		  "en": "More than one billion people in the world speak Chinese.",
-		  "fa": "بیش از یک میلیارد نفر در جهان به چینی صحبت می‌کنند.",
-		  "start": 91.8,
-		  "end": 95.7
-		}
-	  ]
-	},
-	{
-	  "sentences": [
-		{
-		  "en": "Interestingly, English has fewer native speakers than Chinese, but there are about one billion learners of English all around the world.",
-		  "fa": "جالب اینجاست که انگلیسی گویشوران بومی کمتری نسبت به چینی دارد، اما حدود یک میلیارد زبان‌آموز انگلیسی در سراسر جهان وجود دارد.",
-		  "start": 98.3,
-		  "end": 107.0
-		},
-		{
-		  "en": "They learn English as an international language.",
-		  "fa": "آنها انگلیسی را به عنوان یک زبان بین‌المللی یاد می‌گیرند.",
-		  "start": 108.1,
-		  "end": 110.9
-		},
-		{
-		  "en": "About fifty percent of the world's languages have fewer than 5000 speakers.",
-		  "fa": "حدود پنجاه درصد از زبان‌های جهان کمتر از ۵۰۰۰ گویشور دارند.",
-		  "start": 112.6,
-		  "end": 118.3
-		},
-		{
-		  "en": "In the beginning of the twenty-first century, 204 languages had fewer than 10 speakers and 344 languages had between 10 and 99 speakers.",
-		  "fa": "در آغاز قرن بیست و یکم، ۲۰۴ زبان کمتر از ۱۰ گویشور و ۳۴۴ زبان بین ۱۰ تا ۹۹ گویشور داشتند.",
-		  "start": 118.9,
-		  "end": 132.5
-		},
-		{
-		  "en": "The 548 languages with fewer than 99 speakers make up nearly 8 percent of the world's languages.",
-		  "fa": "۵۴۸ زبان با کمتر از ۹۹ گویشور نزدیک به ۸ درصد از زبان‌های جهان را تشکیل می‌دهند.",
-		  "start": 134.5,
-		  "end": 143.3
-		},
-		{
-		  "en": "We call them 'endangered languages'.",
-		  "fa": "ما آنها را 'زبان‌های در معرض خطر' می‌نامیم.",
-		  "start": 144.4,
-		  "end": 147.0
-		},
-		{
-		  "en": "As the speakers of such languages grow old and die, their languages will die, too.",
-		  "fa": "همانطور که گویشوران این زبان‌ها پیر می‌شوند و می‌میرند، زبان‌های آنها نیز خواهند مرد.",
-		  "start": 148.9,
-		  "end": 154.7
-		}
-	  ]
-	},
-	{
-	  "sentences": [
-		{
-		  "en": "All languages are really valuable, despite their differences.",
-		  "fa": "همه زبان‌ها علیرغم تفاوت‌هایشان واقعاً ارزشمند هستند.",
-		  "start": 156.7,
-		  "end": 160.5
-		},
-		{
-		  "en": "Every language is an amazing means of communication that meets the needs of its own speakers.",
-		  "fa": "هر زبانی وسیله ارتباطی شگفت‌انگیزی است که نیازهای گویشوران خود را برآورده می‌کند.",
-		  "start": 162.0,
-		  "end": 167.5
-		},
-		{
-		  "en": "It is impossible to imagine the world without language.",
-		  "fa": "تصور جهان بدون زبان غیرممکن است.",
-		  "start": 168.1,
-		  "end": 171.7
-		},
-		{
-		  "en": "Therefore, we should respect all languages, no matter how different they are and how many speakers they have.",
-		  "fa": "بنابراین، ما باید به همه زبان‌ها احترام بگذاریم، مهم نیست که چقدر متفاوت هستند و چند گویشور دارند.",
-		  "start": 172.8,
-		  "end": 179.2
-		}
-	  ]
-	}
-  ]
-},
+	"lesson": 1,
+	"book": 2,
+	"audio": "res://assets/audio/v2/l1/reading.mp3",
+	"image": "res://assets/images/v2_l1_reading.png",
+	"title": "Languages of the World",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "Language is a system of communication.",
+			"fa": "زبان یک سیستم ارتباطی است.",
+			"start": 16.5,
+			"end": 18.7
+		  },
+		  {
+			"en": "It uses written and spoken forms.",
+			"fa": "از اشکال نوشتاری و گفتاری استفاده می‌کند.",
+			"start": 19.3,
+			"end": 22.0
+		  },
+		  {
+			"en": "People use language to communicate with each other in a society.",
+			"fa": "مردم از زبان برای برقراری ارتباط با یکدیگر در یک جامعه استفاده می‌کنند.",
+			"start": 22.9,
+			"end": 26.9
+		  },
+		  {
+			"en": "They exchange knowledge, beliefs, wishes, and feelings through it.",
+			"fa": "آنها از طریق آن دانش، باورها، خواسته‌ها و احساسات خود را رد و بدل می‌کنند.",
+			"start": 28.0,
+			"end": 32.6
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Languages vary greatly from region to region.",
+			"fa": "زبان‌ها از منطقه‌ای به منطقه‌ی دیگر بسیار متفاوت هستند.",
+			"start": 34.7,
+			"end": 37.5
+		  },
+		  {
+			"en": "They are so different that a person may not understand the language of someone from another region, country or continent.",
+			"fa": "آن‌ها آنقدر متفاوت هستند که ممکن است فردی زبان کسی را از منطقه، کشور یا قاره‌ای دیگر نفهمد.",
+			"start": 38.1,
+			"end": 46.0
+		  },
+		  {
+			"en": "It is not surprising to hear that today about 7000 languages exist in the world.",
+			"fa": "شنیدن این که امروزه حدود ۷۰۰۰ زبان در جهان وجود دارد، تعجب‌آور نیست.",
+			"start": 46.7,
+			"end": 53.3
+		  },
+		  {
+			"en": "There are more than 2000 languages in Africa, 1000 in the Americas, more than 2250 in Asia, about 230 in Europe, and more than 1300 in Oceania.",
+			"fa": "بیش از ۲۰۰۰ زبان در آفریقا، ۱۰۰۰ در قاره‌ی آمریکا، بیش از ۲۲۵۰ در آسیا، حدود ۲۳۰ در اروپا و بیش از ۱۳۰۰ در اقیانوسیه وجود دارد.",
+			"start": 55.8,
+			"end": 73.1
+		  },
+		  {
+			"en": "Native speakers of these languages range in number from very large, with hundreds of millions of speakers, to very small, with fewer than 10 speakers.",
+			"fa": "تعداد گویشوران بومی این زبان‌ها از بسیار زیاد، با صدها میلیون گویشور، تا بسیار کم، با کمتر از ۱۰ گویشور، متغیر است.",
+			"start": 75.5,
+			"end": 86.1
+		  },
+		  {
+			"en": "The most popular language in the world is Chinese.",
+			"fa": "پرطرفدارترین زبان در جهان چینی است.",
+			"start": 87.3,
+			"end": 90.6
+		  },
+		  {
+			"en": "More than one billion people in the world speak Chinese.",
+			"fa": "بیش از یک میلیارد نفر در جهان به چینی صحبت می‌کنند.",
+			"start": 91.8,
+			"end": 95.7
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Interestingly, English has fewer native speakers than Chinese, but there are about one billion learners of English all around the world.",
+			"fa": "جالب اینجاست که انگلیسی گویشوران بومی کمتری نسبت به چینی دارد، اما حدود یک میلیارد زبان‌آموز انگلیسی در سراسر جهان وجود دارد.",
+			"start": 98.3,
+			"end": 107.0
+		  },
+		  {
+			"en": "They learn English as an international language.",
+			"fa": "آنها انگلیسی را به عنوان یک زبان بین‌المللی یاد می‌گیرند.",
+			"start": 108.1,
+			"end": 110.9
+		  },
+		  {
+			"en": "About fifty percent of the world's languages have fewer than 5000 speakers.",
+			"fa": "حدود پنجاه درصد از زبان‌های جهان کمتر از ۵۰۰۰ گویشور دارند.",
+			"start": 112.6,
+			"end": 118.3
+		  },
+		  {
+			"en": "In the beginning of the twenty-first century, 204 languages had fewer than 10 speakers and 344 languages had between 10 and 99 speakers.",
+			"fa": "در آغاز قرن بیست و یکم، ۲۰۴ زبان کمتر از ۱۰ گویشور و ۳۴۴ زبان بین ۱۰ تا ۹۹ گویشور داشتند.",
+			"start": 118.9,
+			"end": 132.5
+		  },
+		  {
+			"en": "The 548 languages with fewer than 99 speakers make up nearly 8 percent of the world's languages.",
+			"fa": "۵۴۸ زبان با کمتر از ۹۹ گویشور نزدیک به ۸ درصد از زبان‌های جهان را تشکیل می‌دهند.",
+			"start": 134.5,
+			"end": 143.3
+		  },
+		  {
+			"en": "We call them 'endangered languages'.",
+			"fa": "ما آنها را 'زبان‌های در معرض خطر' می‌نامیم.",
+			"start": 144.4,
+			"end": 147.0
+		  },
+		  {
+			"en": "As the speakers of such languages grow old and die, their languages will die, too.",
+			"fa": "همانطور که گویشوران این زبان‌ها پیر می‌شوند و می‌میرند، زبان‌های آنها نیز خواهند مرد.",
+			"start": 148.9,
+			"end": 154.7
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "All languages are really valuable, despite their differences.",
+			"fa": "همه زبان‌ها علیرغم تفاوت‌هایشان واقعاً ارزشمند هستند.",
+			"start": 156.7,
+			"end": 160.5
+		  },
+		  {
+			"en": "Every language is an amazing means of communication that meets the needs of its own speakers.",
+			"fa": "هر زبانی وسیله ارتباطی شگفت‌انگیزی است که نیازهای گویشوران خود را برآورده می‌کند.",
+			"start": 162.0,
+			"end": 167.5
+		  },
+		  {
+			"en": "It is impossible to imagine the world without language.",
+			"fa": "تصور جهان بدون زبان غیرممکن است.",
+			"start": 168.1,
+			"end": 171.7
+		  },
+		  {
+			"en": "Therefore, we should respect all languages, no matter how different they are and how many speakers they have.",
+			"fa": "بنابراین، ما باید به همه زبان‌ها احترام بگذاریم، مهم نیست که چقدر متفاوت هستند و چند گویشور دارند.",
+			"start": 172.8,
+			"end": 179.2
+		  }
+		]
+	  }
+	]
+  },
   {
-  "lesson": 2,
-  "book": 2,
-  "audio": "res://assets/audio/v2/l1/reading.mp3",
-  "image": "res://assets/images/v2_l1_reading.png",
-  "title": "Having a Healthier and Longer Life",
-  "paragraphs": [
-	{
-	  "sentences": [
-		{
-		  "en": "Have you ever thought of a healthy lifestyle to live longer?",
-		  "fa": "آیا تا به حال به سبک زندگی سالم برای عمر طولانی‌تر فکر کرده‌اید؟",
-		  "start": 17.4,
-		  "end": 21.0
-		},
-		{
-		  "en": "People can do many things to have a healthier life.",
-		  "fa": "مردم می‌توانند کارهای زیادی برای داشتن زندگی سالم‌تر انجام دهند.",
-		  "start": 22.3,
-		  "end": 25.4
-		},
-		{
-		  "en": "Most people have a special diet or do lots of exercise; however, without a careful plan they may hurt themselves.",
-		  "fa": "بیشتر مردم رژیم غذایی خاصی دارند یا ورزش زیادی می‌کنند؛ با این حال، بدون برنامه‌ریزی دقیق ممکن است به خودشان آسیب بزنند.",
-		  "start": 26.6,
-		  "end": 30.7
-		}
-	  ]
-	},
-	{
-	  "sentences": [
-		{
-		  "en": "To have a healthier lifestyle, people need to do certain things.",
-		  "fa": "برای داشتن سبک زندگی سالم‌تر، مردم باید کارهای مشخصی انجام دهند.",
-		  "start": 36.8,
-		  "end": 40.8
-		},
-		{
-		  "en": "First they should check their general health.",
-		  "fa": "اول باید سلامت عمومی خود را بررسی کنند.",
-		  "start": 42.2,
-		  "end": 45.1
-		},
-		{
-		  "en": "Measuring blood pressure and heartbeat is the most important thing to do.",
-		  "fa": "اندازه‌گیری فشار خون و ضربان قلب مهم‌ترین کاری است که باید انجام دهند.",
-		  "start": 46.3,
-		  "end": 50.8
-		},
-		{
-		  "en": "They also need to check their family health history.",
-		  "fa": "آنها همچنین باید سوابق سلامت خانواده خود را بررسی کنند.",
-		  "start": 51.8,
-		  "end": 54.7
-		},
-		{
-		  "en": "In this way, they understand if anyone in the family has had a special illness.",
-		  "fa": "به این ترتیب، متوجه می‌شوند که آیا کسی در خانواده بیماری خاصی داشته است یا نه.",
-		  "start": 55.6,
-		  "end": 61.1
-		}
-	  ]
-	},
-	{
-	  "sentences": [
-		{
-		  "en": "Another thing is paying attention to physical health.",
-		  "fa": "نکتهٔ دیگر توجه به سلامت جسمانی است.",
-		  "start": 62.8,
-		  "end": 65.8
-		},
-		{
-		  "en": "For example, eating healthy food helps people live longer and prevents diseases.",
-		  "fa": "به عنوان مثال، خوردن غذای سالم به مردم کمک می‌کند تا عمر طولانی‌تری داشته باشند و از بیماری‌ها پیشگیری می‌کند.",
-		  "start": 67.0,
-		  "end": 72.1
-		},
-		{
-		  "en": "Eating junk food makes people gain weight, and increases the risk of heart attack.",
-		  "fa": "خوردن غذاهای ناسالم باعث افزایش وزن مردم می‌شود و خطر حمله قلبی را افزایش می‌دهد.",
-		  "start": 73.6,
-		  "end": 78.5
-		},
-		{
-		  "en": "Eating balanced servings of bread, vegetables, fruits, protein, and oil is necessary for everyone.",
-		  "fa": "خوردن مقادیر متعادلی از نان، سبزیجات، میوه‌ها، پروتئین و روغن برای همه ضروری است.",
-		  "start": 80.3,
-		  "end": 87.9
-		},
-		{
-		  "en": "Also, daily exercises improve people's health condition.",
-		  "fa": "همچنین، ورزش روزانه وضعیت سلامت مردم را بهبود می‌بخشد.",
-		  "start": 89.6,
-		  "end": 93.4
-		}
-	  ]
-	},
-	{
-	  "sentences": [
-		{
-		  "en": "An effective way to enjoy a better lifestyle is having healthy relationships with others.",
-		  "fa": "یک راه مؤثر برای لذت بردن از سبک زندگی بهتر، داشتن روابط سالم با دیگران است.",
-		  "start": 95.3,
-		  "end": 100.9
-		},
-		{
-		  "en": "Recent research has shown that a good social life decreases the risk of death.",
-		  "fa": "تحقیقات اخیر نشان داده است که زندگی اجتماعی خوب خطر مرگ را کاهش می‌دهد.",
-		  "start": 102.2,
-		  "end": 107.5
-		},
-		{
-		  "en": "Sadly, some people do not visit their relatives very often these days.",
-		  "fa": "متأسفانه، این روزها برخی مردم به دیدار اقوام خود نمی‌روند.",
-		  "start": 108.4,
-		  "end": 113.1
-		},
-		{
-		  "en": "They are really busy with their work and usually use technology to communicate.",
-		  "fa": "آنها واقعاً مشغول کار خود هستند و معمولاً از فناوری برای ارتباط استفاده می‌کنند.",
-		  "start": 114.2,
-		  "end": 118.6
-		}
-	  ]
-	},
-	{
-	  "sentences": [
-		{
-		  "en": "Bad habits and addiction can be harmful to health.",
-		  "fa": "عادات بد و اعتیاد می‌تواند برای سلامتی مضر باشد.",
-		  "start": 120.7,
-		  "end": 123.5
-		},
-		{
-		  "en": "One day of smoking can take around 5 hours away from the smoker's life.",
-		  "fa": "یک روز سیگار کشیدن می‌تواند حدود ۵ ساعت از عمر فرد سیگاری کم کند.",
-		  "start": 124.7,
-		  "end": 130.1
-		},
-		{
-		  "en": "Addiction to technology such as using computers for a long time is also dangerous.",
-		  "fa": "اعتیاد به فناوری مانند استفاده طولانی مدت از رایانه نیز خطرناک است.",
-		  "start": 131.6,
-		  "end": 136.6
-		}
-	  ]
-	},
-	{
-	  "sentences": [
-		{
-		  "en": "Above all, the most important thing to enjoy a good life is having emotional health.",
-		  "fa": "از همه مهم‌تر، مهم‌ترین چیز برای لذت بردن از یک زندگی خوب، داشتن سلامت عاطفی است.",
-		  "start": 138.2,
-		  "end": 144.0
-		},
-		{
-		  "en": "Praying decreases stress and gives people a calm and balanced life.",
-		  "fa": "نماز (یا دعا) استرس را کاهش می‌دهد و به مردم زندگی آرام و متعادلی می‌بخشد.",
-		  "start": 145.1,
-		  "end": 149.3
-		},
-		{
-		  "en": "People with this lifestyle have had a better life.",
-		  "fa": "افراد با این سبک زندگی، زندگی بهتری داشته‌اند.",
-		  "start": 150.7,
-		  "end": 153.6
-		},
-		{
-		  "en": "There are many other things people can do to live healthier and longer.",
-		  "fa": "کارهای دیگری نیز وجود دارد که مردم می‌توانند برای سالم‌تر و طولانی‌تر زندگی کردن انجام دهند.",
-		  "start": 154.5,
-		  "end": 158.9
-		},
-		{
-		  "en": "The key point, however, is having a plan for the way they want to live and take care of their physical and emotional health.",
-		  "fa": "با این حال، نکته کلیدی این است که برای نحوهٔ زندگی که می‌خواهند داشته باشند و مراقبت از سلامت جسمی و عاطفی خود برنامه‌ریزی داشته باشند.",
-		  "start": 160.1,
-		  "end": 168.0
-		}
-	  ]
-	}
-  ]
-},
+	"lesson": 2,
+	"book": 2,
+	"audio": "res://assets/audio/v2/l1/reading.mp3",
+	"image": "res://assets/images/v2_l1_reading.png",
+	"title": "Having a Healthier and Longer Life",
+	"paragraphs": [
+	  {
+		"sentences": [
+		  {
+			"en": "Have you ever thought of a healthy lifestyle to live longer?",
+			"fa": "آیا تا به حال به سبک زندگی سالم برای عمر طولانی‌تر فکر کرده‌اید؟",
+			"start": 17.4,
+			"end": 21.0
+		  },
+		  {
+			"en": "People can do many things to have a healthier life.",
+			"fa": "مردم می‌توانند کارهای زیادی برای داشتن زندگی سالم‌تر انجام دهند.",
+			"start": 22.3,
+			"end": 25.4
+		  },
+		  {
+			"en": "Most people have a special diet or do lots of exercise; however, without a careful plan they may hurt themselves.",
+			"fa": "بیشتر مردم رژیم غذایی خاصی دارند یا ورزش زیادی می‌کنند؛ با این حال، بدون برنامه‌ریزی دقیق ممکن است به خودشان آسیب بزنند.",
+			"start": 26.6,
+			"end": 30.7
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "To have a healthier lifestyle, people need to do certain things.",
+			"fa": "برای داشتن سبک زندگی سالم‌تر، مردم باید کارهای مشخصی انجام دهند.",
+			"start": 36.8,
+			"end": 40.8
+		  },
+		  {
+			"en": "First they should check their general health.",
+			"fa": "اول باید سلامت عمومی خود را بررسی کنند.",
+			"start": 42.2,
+			"end": 45.1
+		  },
+		  {
+			"en": "Measuring blood pressure and heartbeat is the most important thing to do.",
+			"fa": "اندازه‌گیری فشار خون و ضربان قلب مهم‌ترین کاری است که باید انجام دهند.",
+			"start": 46.3,
+			"end": 50.8
+		  },
+		  {
+			"en": "They also need to check their family health history.",
+			"fa": "آنها همچنین باید سوابق سلامت خانواده خود را بررسی کنند.",
+			"start": 51.8,
+			"end": 54.7
+		  },
+		  {
+			"en": "In this way, they understand if anyone in the family has had a special illness.",
+			"fa": "به این ترتیب، متوجه می‌شوند که آیا کسی در خانواده بیماری خاصی داشته است یا نه.",
+			"start": 55.6,
+			"end": 61.1
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Another thing is paying attention to physical health.",
+			"fa": "نکتهٔ دیگر توجه به سلامت جسمانی است.",
+			"start": 62.8,
+			"end": 65.8
+		  },
+		  {
+			"en": "For example, eating healthy food helps people live longer and prevents diseases.",
+			"fa": "به عنوان مثال، خوردن غذای سالم به مردم کمک می‌کند تا عمر طولانی‌تری داشته باشند و از بیماری‌ها پیشگیری می‌کند.",
+			"start": 67.0,
+			"end": 72.1
+		  },
+		  {
+			"en": "Eating junk food makes people gain weight, and increases the risk of heart attack.",
+			"fa": "خوردن غذاهای ناسالم باعث افزایش وزن مردم می‌شود و خطر حمله قلبی را افزایش می‌دهد.",
+			"start": 73.6,
+			"end": 78.5
+		  },
+		  {
+			"en": "Eating balanced servings of bread, vegetables, fruits, protein, and oil is necessary for everyone.",
+			"fa": "خوردن مقادیر متعادلی از نان، سبزیجات، میوه‌ها، پروتئین و روغن برای همه ضروری است.",
+			"start": 80.3,
+			"end": 87.9
+		  },
+		  {
+			"en": "Also, daily exercises improve people's health condition.",
+			"fa": "همچنین، ورزش روزانه وضعیت سلامت مردم را بهبود می‌بخشد.",
+			"start": 89.6,
+			"end": 93.4
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "An effective way to enjoy a better lifestyle is having healthy relationships with others.",
+			"fa": "یک راه مؤثر برای لذت بردن از سبک زندگی بهتر، داشتن روابط سالم با دیگران است.",
+			"start": 95.3,
+			"end": 100.9
+		  },
+		  {
+			"en": "Recent research has shown that a good social life decreases the risk of death.",
+			"fa": "تحقیقات اخیر نشان داده است که زندگی اجتماعی خوب خطر مرگ را کاهش می‌دهد.",
+			"start": 102.2,
+			"end": 107.5
+		  },
+		  {
+			"en": "Sadly, some people do not visit their relatives very often these days.",
+			"fa": "متأسفانه، این روزها برخی مردم به دیدار اقوام خود نمی‌روند.",
+			"start": 108.4,
+			"end": 113.1
+		  },
+		  {
+			"en": "They are really busy with their work and usually use technology to communicate.",
+			"fa": "آنها واقعاً مشغول کار خود هستند و معمولاً از فناوری برای ارتباط استفاده می‌کنند.",
+			"start": 114.2,
+			"end": 118.6
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Bad habits and addiction can be harmful to health.",
+			"fa": "عادات بد و اعتیاد می‌تواند برای سلامتی مضر باشد.",
+			"start": 120.7,
+			"end": 123.5
+		  },
+		  {
+			"en": "One day of smoking can take around 5 hours away from the smoker's life.",
+			"fa": "یک روز سیگار کشیدن می‌تواند حدود ۵ ساعت از عمر فرد سیگاری کم کند.",
+			"start": 124.7,
+			"end": 130.1
+		  },
+		  {
+			"en": "Addiction to technology such as using computers for a long time is also dangerous.",
+			"fa": "اعتیاد به فناوری مانند استفاده طولانی مدت از رایانه نیز خطرناک است.",
+			"start": 131.6,
+			"end": 136.6
+		  }
+		]
+	  },
+	  {
+		"sentences": [
+		  {
+			"en": "Above all, the most important thing to enjoy a good life is having emotional health.",
+			"fa": "از همه مهم‌تر، مهم‌ترین چیز برای لذت بردن از یک زندگی خوب، داشتن سلامت عاطفی است.",
+			"start": 138.2,
+			"end": 144.0
+		  },
+		  {
+			"en": "Praying decreases stress and gives people a calm and balanced life.",
+			"fa": "نماز (یا دعا) استرس را کاهش می‌دهد و به مردم زندگی آرام و متعادلی می‌بخشد.",
+			"start": 145.1,
+			"end": 149.3
+		  },
+		  {
+			"en": "People with this lifestyle have had a better life.",
+			"fa": "افراد با این سبک زندگی، زندگی بهتری داشته‌اند.",
+			"start": 150.7,
+			"end": 153.6
+		  },
+		  {
+			"en": "There are many other things people can do to live healthier and longer.",
+			"fa": "کارهای دیگری نیز وجود دارد که مردم می‌توانند برای سالم‌تر و طولانی‌تر زندگی کردن انجام دهند.",
+			"start": 154.5,
+			"end": 158.9
+		  },
+		  {
+			"en": "The key point, however, is having a plan for the way they want to live and take care of their physical and emotional health.",
+			"fa": "با این حال، نکته کلیدی این است که برای نحوهٔ زندگی که می‌خواهند داشته باشند و مراقبت از سلامت جسمی و عاطفی خود برنامه‌ریزی داشته باشند.",
+			"start": 160.1,
+			"end": 168.0
+		  }
+		]
+	  }
+	]
+  },
   {
 	"lesson": 3,
 	"book": 2,
@@ -1105,35 +1105,35 @@
 		  }
 		]
 	  },
-	{
+	  {
 		"sentences": [
 		  {
 			"en": "Today my little son was sitting on my lap, when a pigeon sat on the window.",
-			"fa": "کمی بعد، مادر به اتاقش رفت و با یک دفترچه خاطرات قدیمی برگشت.",
+			"fa": "امروز پسرم روی پاهایم نشسته بود که کبوتری روی پنجره نشست.",
 			"start": 86.3,
 			"end": 91.5
 		  },
 		  {
 			"en": "My son asked me what it was 15 times, and I replied to him all 15 times that it was a pigeon",
-			"fa": "او گفت: 'پسر عزیزم، این دفترچه خاطرات را وقتی تو به دنیا آمدی خریدم'.",
+			"fa": "پسرم ۱۵ بار از من پرسید آن چیست و من هر ۱۵ بار به او گفتم که کبوتر است.",
 			"start": 92.7,
 			"end": 100.1
 		  },
 		  {
 			"en": "I hugged him lovingly each time when he asked me the same question again and again.",
-			"fa": "سپس، صفحه‌ای را باز کرد و با مهربانی از پسرش خواست آن صفحه را بخواند.",
+			"fa": "هر بار که دوباره و دوباره همان سوال را می‌پرسید، با محبت او را بغل می‌کردم.",
 			"start": 101.0,
 			"end": 106.6
 		  },
 		  {
 			"en": "I did not feel angry at all.",
-			"fa": "پسر به صفحه نگاه کرد، مکث کرد و شروع به خواندن آن با صدای بلند کرد.",
+			"fa": "من اصلاً عصبانی نمی‌شدم.",
 			"start": 107.5,
 			"end": 109.4
 		  },
-		{
+		  {
 			"en": "I was actually feeling happy for my lovely child.",
-			"fa": "پسر به صفحه نگاه کرد، مکث کرد و شروع به خواندن آن با صدای بلند کرد.",
+			"fa": "در واقع برای فرزند دوست‌داشتنی‌ام احساس خوشحالی می‌کردم.",
 			"start": 110.2,
 			"end": 112.9
 		  }
@@ -1180,47 +1180,47 @@
 		"sentences": [
 		  {
 			"en": "A good dictionary gives the user information about words such as spellings, pronunciations and definitions.",
-			"fa": "فرهنگ لغت مناسب را انتخاب کنید.",
+			"fa": "یک فرهنگ لغت خوب اطلاعاتی در مورد کلمات مانند املا، تلفظ و تعاریف به کاربر می‌دهد.",
 			"start": 16.3,
 			"end": 24.8
 		  },
 		  {
 			"en": "It also gives examples of how to use the words in sentences correctly.",
-			"fa": "انواع مختلفی از فرهنگ‌های لغت مانند فرهنگ‌های آموزشی، فرهنگ‌های عمومی، فرهنگ‌های تصویری و غیره وجود دارد.",
+			"fa": "همچنین مثال‌هایی از نحوه استفاده صحیح از کلمات در جملات ارائه می‌دهد.",
 			"start": 26.0,
 			"end": 31.0
 		  },
 		  {
 			"en": "Therefore, it is essentialto know how to use a dictionary.",
-			"fa": "بنابراین، ابتدا نیازهای خود را شناسایی کنید.",
+			"fa": "بنابراین، دانستن نحوه استفاده از فرهنگ لغت ضروری است.",
 			"start": 32.0,
 			"end": 35.8
 		  },
 		  {
 			"en": "In this lesson, we provide you with some helpful tips on how to use a dictionary effectively.",
-			"fa": "بدون انتخاب درست، نمی‌توانید نیازهای زبانی خود را برآورده کنید.",
+			"fa": "در این درس، نکات مفیدی در مورد نحوه استفاده مؤثر از فرهنگ لغت در اختیار شما قرار می‌دهیم.",
 			"start": 37.0,
 			"end": 43.2
 		  }
 		]
 	  },
-	{
+	  {
 		"sentences": [
 		  {
 			"en": "1. Choose the Right Dictionary",
-			"fa": "مقدمه را بخوانید.",
+			"fa": "۱. فرهنگ لغت مناسب را انتخاب کنید",
 			"start": 44.5,
 			"end": 52.7
 		  },
 		  {
 			"en": "There are many different types of dictionaries such as learner’s dictionaries, general dictionaries, picture dictionaries, etc.",
-			"fa": "بهترین راه برای یادگیری نحوه استفاده مؤثر از فرهنگ لغت، خواندن مقدمه آن است.",
+			"fa": "انواع مختلفی از فرهنگ‌های لغت وجود دارد مانند فرهنگ‌های آموزشی، فرهنگ‌های عمومی، فرهنگ‌های تصویری و غیره.",
 			"start": 53.8,
 			"end": 62.0
 		  },
 		  {
 			"en": "Therefore, first identify your needs. Without choosing the right one you cannot meet your language needs.",
-			"fa": "این بخش مسائلی مانند نحوه چیدمان مدخل‌ها، اطلاعات ارائه شده در مدخل‌ها و اختصارات و نمادهای تلفظ استفاده شده در سراسر مدخل‌ها را توضیح می‌دهد.",
+			"fa": "بنابراین، ابتدا نیازهای خود را شناسایی کنید. بدون انتخاب فرهنگ مناسب، نمی‌توانید نیازهای زبانی خود را برآورده کنید.",
 			"start": 63.0,
 			"end": 70.3
 		  }

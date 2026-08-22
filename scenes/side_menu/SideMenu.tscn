@@ -15,10 +15,6 @@ font_size = 55
 font = ExtResource("2_jtoru")
 font_size = 30
 
-[sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
-font = ExtResource("2_jtoru")
-font_size = 37
-
 [node name="SideMenu" type="CanvasLayer" unique_id=921434804]
 layer = 100
 script = ExtResource("1_6wynt")
@@ -36,8 +32,8 @@ color = Color(3.4894794e-07, 0.2901732, 0.2901732, 1)
 custom_minimum_size = Vector2(500, 0)
 anchors_preset = -1
 anchor_bottom = 1.034
-offset_left = -180.0
-offset_right = 320.0
+offset_left = -150.0
+offset_right = 430.0
 offset_bottom = -0.2800293
 grow_horizontal = 0
 grow_vertical = 2
@@ -67,7 +63,7 @@ horizontal_alignment = 1
 
 [node name="WelcomeText" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer/Header" unique_id=743887579]
 layout_mode = 2
-text = "خوش آمدید"
+text = "وضعیت اشتراک"
 label_settings = SubResource("LabelSettings_3umrm")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -77,79 +73,28 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="SavedWordsButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=1177915556]
-custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
-theme_override_font_sizes/font_size = 40
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuPanel/MarginContainer/VBoxContainer/SavedWordsButton" unique_id=458006663]
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -184.0
-offset_top = 1.0
-offset_right = 182.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = -22
-alignment = 1
-
-[node name="Label" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer/SavedWordsButton/HBoxContainer" unique_id=1678736001]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "کلمات ذخیره شده"
-label_settings = SubResource("LabelSettings_7ujfs")
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "فلش کارت"
 
 [node name="LeitnerButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=344930561]
-custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
-theme_override_font_sizes/font_size = 40
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuPanel/MarginContainer/VBoxContainer/LeitnerButton" unique_id=2017932120]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -335.0
-offset_right = -28.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_constants/separation = 121
-alignment = 1
-
-[node name="Label" type="Label" parent="MenuPanel/MarginContainer/VBoxContainer/LeitnerButton/HBoxContainer" unique_id=241654610]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
 text = "لایتنر"
-label_settings = SubResource("LabelSettings_7ujfs")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="PurchaseButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=565388961]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
-theme_override_font_sizes/font_size = 40
-text = "خرید برنامه"
+text = "خرید اشتراک"
 
 [node name="SettingsButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=53408693]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
-theme_override_font_sizes/font_size = 40
 text = "تنظیمات"
 
 [node name="AboutMeButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=1523931110]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
-theme_override_font_sizes/font_size = 40
 text = "درباره من"
 
 [node name="Control" type="Control" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=1596525306]

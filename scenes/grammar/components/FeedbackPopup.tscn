@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bu17tqxglkdmc"]
+
+[ext_resource type="Script" uid="uid://cf3ay15tmm8mu" path="res://scenes/grammar/components/FeedbackPopup.gd" id="1_rvxts"]
+
+[node name="FeedbackPopup" type="PanelContainer" unique_id=568508355]
+script = ExtResource("1_rvxts")

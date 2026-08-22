@@ -14,8 +14,7 @@ const SCENE_BOOK_MENU         := "res://scenes/book_menu/BookMenu.tscn"
 const SCENE_VOCAB             := "res://scenes/vocabulary/VocabFlashcards.tscn"
 const SCENE_CONVERSATION      := "res://scenes/conversation/Conversation.tscn"
 const SCENE_READING           := "res://scenes/reading/Reading.tscn"
-const SCENE_GRAMMAR           := "res://scenes/grammar/Grammar.tscn"
-const SCENE_SPEAKING          := "res://scenes/speaking_pronunciation/SpeakingPronunciation.tscn"
+const SCENE_GRAMMAR           := "res://scenes/grammar/GrammarLesson.tscn"
 const SCENE_VOCAB_DEVELOPMENT := "res://scenes/vocabulary_development/VocabularyDevelopment.tscn"
 const SCENE_LISTENING_SPEAKING:= "res://scenes/listening_speaking/ListeningSpeaking.tscn"
 const SCENE_PRONUNCIATION     := "res://scenes/pronunciation/Pronunciation.tscn"
@@ -94,7 +93,6 @@ const SECTION_ACCENT_COLORS: Array[Color] = [
 const CORNER_RADIUS := 26.0
 var _section_mats: Array[ShaderMaterial] = []
 var _section_btns: Array[Button]         = []
-var _border_shader: Shader = null
 
 func _ready() -> void:
 	# Remove old AnimatedBackground if it exists in this scene
@@ -161,7 +159,7 @@ func _apply_glossy_style(btn: Button, accent: Color) -> void:
 	# Normal state style
 	var style := StyleBoxFlat.new()
 	style.bg_color = fill
-	style.set_corner_radius_all(CORNER_RADIUS)
+	style.set_corner_radius_all(int(CORNER_RADIUS))
 	style.border_width_left = 2; style.border_width_top = 2
 	style.border_width_right = 1; style.border_width_bottom = 1
 	style.border_color  = rim

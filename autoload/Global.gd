@@ -520,22 +520,22 @@ func load_category(category: String, book: int, lesson: int) -> Dictionary:
 	return data.get("books", {}).get(str(book), {}).get(str(lesson), {})
 
 func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
-	var ease: float     = entry.get("srs_ease", 2.5)
+	var ease_factor: float = entry.get("srs_ease", 2.5)
 	var interval: float = entry.get("srs_interval", 0.0)
 	var reps: int        = entry.get("srs_reps", 0)
 	var today := _today_day_number()
 
-	var new_ease := ease
+	var new_ease := ease_factor
 	var new_interval := interval
 	var new_reps := reps
 
 	match rating:
 		"again":
 			new_reps = 0
-			new_ease = max(1.3, ease - 0.2)
+			new_ease = max(1.3, ease_factor - 0.2)
 			new_interval = 0.0
 		"hard":
-			new_ease = max(1.3, ease - 0.15)
+			new_ease = max(1.3, ease_factor - 0.15)
 			new_interval = max(1.0, (interval if interval > 0 else 1.0) * 1.2)
 			new_reps = reps + 1
 		"good":
@@ -544,14 +544,14 @@ func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
 			elif reps == 1:
 				new_interval = 3.0
 			else:
-				new_interval = interval * ease
+				new_interval = interval * ease_factor
 			new_reps = reps + 1
 		"easy":
 			if reps == 0:
 				new_interval = 2.0
 			else:
-				new_interval = interval * ease * 1.3
-			new_ease = ease + 0.15
+				new_interval = interval * ease_factor * 1.3
+			new_ease = ease_factor + 0.15
 			new_reps = reps + 1
 
 	var new_due: int
@@ -655,7 +655,10 @@ func _init_tts() -> void:
 				break
 
 	if english_voice_id == "":
-		push_warning("No English TTS voice found on this device.")
+		# Not an error: speech is an optional feature. Some devices (and lean
+		# desktop installs) have no TTS voices, so the app just runs without
+		# audio. Log once (informational) instead of raising a warning.
+		print("[TTS] No English voice available on this device; pronunciation/speech disabled. Install a TTS voice to enable it.")
 
 
 # ------------------------------------------------------------
@@ -707,7 +710,7 @@ func speak_word(text: String) -> void:
 	DisplayServer.tts_speak(
 		text,
 		english_voice_id,
-		100.0,  # volume (max, 0-100)
+		100,  # volume (max, 0-100)
 		1.0,    # pitch
 		1.0,    # rate (normal speed)
 		0,      # utterance_id

@@ -31,8 +31,12 @@ const C_INFO    := Color("#22D3EE")
 const C_PURPLE  := Color("#A78BFA")
 const C_ORANGE  := Color("#FB923C")
 
+const CLOZE_OPT_FONT := 42            # matches the cloze passage text size
+const MIN_FONT := 28                   # nothing rendered smaller than this
+
 const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
 
 const SAVE_PATH := "user://exercise_saves.json"
 
@@ -139,10 +143,22 @@ func _apply_fa_meta(ctrl: Object, key: String) -> void:
 	if entry.has("fa"):
 		ctrl.set_meta("text_fa", str(entry["fa"]))
 
+# Always returns the Farsi variant of a UI_STRINGS entry, regardless of
+# ui_locale. Answer feedback labels must always be Farsi, while the actual
+# answer content stays English.
+func _t_fa(key: String) -> String:
+	var entry: Dictionary = UI_STRINGS.get(key, {})
+	return str(entry.get("fa", entry.get("en", key)))
 
 # false = classic content-sized VBox (recommended inside workbook pages).
 # true  = the engine wraps itself in a ScrollContainer (fixed-height boxes).
 var use_internal_scroll := false
+
+# When true, the engine's built-in footer buttons (Check Answer / Save /
+# Show Sample Answer) are hidden. Used on exam pages that present a single
+# global "Check All Answers" button instead. Per-item feedback labels are
+# still shown after grading.
+var hide_footer_buttons := false
 
 var _exercise: Dictionary = {}
 var _items: Array = []
@@ -160,14 +176,37 @@ var _is_open_ended := false
 var _is_non_interactive := false
 var _font_regular: FontFile
 var _font_bold: FontFile
+var _font_farsi: FontFile
+
+# Master switch for showing the Farsi translation of authored content
+# (passages, instructions, notes, cloze passages). Workbook wires its
+# header toggle button to set_show_translation(). Farsi labels are
+# appended during build() and simply shown/hidden based on this flag.
+var show_translation := false
+var _fa_labels: Array = []
+
 
 # Loaded once per app run and shared by every ExerciseEngine instance,
 # instead of re-resolving the font path on every _ready().
 static var _shared_font_regular: FontFile
 static var _shared_font_bold: FontFile
+static var _shared_font_farsi: FontFile
 var _active_vbox: VBoxContainer
 var _scroll: ScrollContainer = null
 var _target: Control = null
+
+# --- Inline cloze state (choices are picked by tapping blanks in the text) ---
+var _cloze_rtl: RichTextLabel = null
+var _cloze_click_global := Vector2.ZERO   # last tap position on cloze label (global coords)
+var _cloze_popup: PopupPanel = null
+var _cloze_popup_list: VBoxContainer = null  # holds the option rows
+var _cloze_segments: Array = []     # [{ "index": int }] for blanks, String for prose
+var _cloze_choices: Array = []      # chosen option text per blank ("" = not chosen)
+var _cloze_correct: Array = []      # correct option text per blank
+var _cloze_options: Array = []      # option texts per blank
+var _cloze_graded: Array = []       # bool per blank (set after grading)
+var _cloze_graded_all := false
+var _cloze_active := -1             # blank index whose popup is open
 
 # --- Tap vs drag scrolling state ---
 var _drag_source: Control = null
@@ -226,6 +265,12 @@ func _ready() -> void:
 		if bold is FontFile:
 			_shared_font_bold = bold
 	_font_bold = _shared_font_bold
+
+	if _shared_font_farsi == null:
+		var farsi := load(FONT_VAZIRMATN)
+		if farsi is FontFile:
+			_shared_font_farsi = farsi
+	_font_farsi = _shared_font_farsi
 
 	add_theme_constant_override("separation", 18)
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -993,7 +1038,7 @@ func _load_open_ended_answers() -> void:
 # ============================================================
 # MAIN ENTRY
 # ============================================================
-func build(exercise: Dictionary, increment_group := true) -> void:
+func build(exercise: Dictionary, _increment_group := true) -> void:
 	_exercise = exercise
 	_items.clear()
 	_is_graded = false
@@ -1129,6 +1174,22 @@ func _get_fa_text(val: Variant) -> String:
 	return ""
 
 
+# Returns true when Persian characters outnumber Latin ones in `text`.
+# Used to pick RTL vs LTR base direction for mixed Persian/English lines
+# so punctuation and word order stay correct (a single stray Persian word
+# should not flip a mostly-English line to RTL, and vice versa).
+func _is_fa_dominant(text: String) -> bool:
+	var fa := 0
+	var lat := 0
+	for i in text.length():
+		var u: int = text.unicode_at(i)
+		if u >= 0x0600 and u <= 0x06FF:
+			fa += 1
+		elif (u >= 0x0041 and u <= 0x007A) or (u >= 0x00C0 and u <= 0x024F):
+			lat += 1
+	return fa > 0 and fa >= lat
+
+
 func _get_item_main_text(item: Dictionary) -> String:
 	for key in ["question", "prompt", "text", "statement", "sentence", "title", "word", "active"]:
 		if item.has(key):
@@ -1159,6 +1220,16 @@ func _find_option_index(options: Array, value: Variant) -> int:
 			return i
 	return -1
 
+# ------------------------------------------------------------
+# JSON parses every number as float ("answer": 1 -> 1.0), so
+# `answer is int` silently fails for answers loaded from JSON.
+# Normalize whole-number floats back to int once, right after
+# reading them, so index checks and answer_display work.
+# ------------------------------------------------------------
+func _normalize_answer_index(value: Variant) -> Variant:
+	if value is float and value == floor(value):
+		return int(value)
+	return value
 
 func _join_words(arr: Array) -> String:
 	var parts: Array = []
@@ -1192,7 +1263,7 @@ func _add_badge() -> void:
 	var badge := Label.new()
 	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	badge.text = str(meta["badge"])
-	badge.add_theme_font_size_override("font_size", 28)
+	badge.add_theme_font_size_override("font_size", 32)
 	# Use white text on a solid accent background for maximum visibility.
 	badge.add_theme_color_override("font_color", Color.WHITE)
 
@@ -1268,7 +1339,10 @@ func _add_common_passage() -> void:
 	rtl.scroll_active = false
 	rtl.custom_minimum_size = Vector2(0, 120)
 	rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	rtl.add_theme_font_size_override("normal_font_size", 36)
+	rtl.add_theme_font_size_override("normal_font_size", 40)
+	rtl.add_theme_font_size_override("bold_font_size", 40)
+	rtl.add_theme_font_size_override("italics_font_size", 40)
+	rtl.add_theme_font_size_override("bold_italics_font_size", 40)
 	rtl.add_theme_color_override("default_color", Color("#F1F5F9"))
 	if _font_regular:
 		rtl.add_theme_font_override("normal_font", _font_regular)
@@ -1276,6 +1350,7 @@ func _add_common_passage() -> void:
 	if passage_raw is Dictionary:
 		rtl.set_meta("text_fa", _get_fa_text(passage_raw))
 	_active_vbox.add_child(rtl)
+	_add_fa_label(_get_fa_text(passage_raw), 32)
 
 
 # ------------------------------------------------------------
@@ -1294,10 +1369,16 @@ func _compute_letter_index() -> int:
 	if parent == null:
 		return 0
 	var idx := 0
+	# Count how many sibling ExerciseEngine instances precede this one.
+	# We check the type directly instead of group membership because the
+	# engine's _ready() (which registers the "exercise_engines" group) only
+	# fires once the node is inside the scene tree — but build() is typically
+	# called while the parent page is still detached, so the group would be
+	# empty and every engine would incorrectly report index 0 (i.e. "A").
 	for child in parent.get_children():
 		if child == self:
 			return idx
-		if child is Node and child.is_in_group("exercise_engines"):
+		if child is ExerciseEngine:
 			idx += 1
 	return idx
 
@@ -1317,12 +1398,17 @@ func _add_instruction() -> void:
 	instruction.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	instruction.text = final_text
 	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD
-	instruction.add_theme_font_size_override("font_size", 40)
+	instruction.add_theme_font_size_override("font_size", 44)
 	instruction.add_theme_color_override("font_color", C_TEXT)
 	instruction.set_meta("text_fa", _get_fa_text(text_raw))
-	if _font_bold:
+	var fa_dominant := _is_fa_dominant(final_text)
+	instruction.text_direction = Control.TEXT_DIRECTION_RTL if fa_dominant else Control.TEXT_DIRECTION_LTR
+	if fa_dominant and _font_farsi:
+		instruction.add_theme_font_override("font", _font_farsi)
+	elif _font_bold:
 		instruction.add_theme_font_override("font", _font_bold)
 	_active_vbox.add_child(instruction)
+	_add_fa_label(_get_fa_text(text_raw), 34)
 
 	var sep := HSeparator.new()
 	sep.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -1344,6 +1430,7 @@ func _add_note() -> void:
 	if _is_open_ended or _is_non_interactive:
 		_note_label.visible = true
 	_active_vbox.add_child(_note_label)
+	_add_fa_label(_get_fa_text(note_raw), 30)
 
 
 # ============================================================
@@ -1460,6 +1547,8 @@ func _make_media_control(img_data: Variant) -> Control:
 func _add_footer_buttons() -> void:
 	if _is_non_interactive:
 		return
+	if hide_footer_buttons:
+		return
 
 	var graded_count := 0
 	var has_sample := false
@@ -1473,7 +1562,7 @@ func _add_footer_buttons() -> void:
 		_score_banner = Label.new()
 		_score_banner.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_score_banner.autowrap_mode = TextServer.AUTOWRAP_WORD
-		_score_banner.add_theme_font_size_override("font_size", 36)
+		_score_banner.add_theme_font_size_override("font_size", 40)
 		_score_banner.visible = false
 		if _font_bold:
 			_score_banner.add_theme_font_override("font", _font_bold)
@@ -1510,7 +1599,7 @@ func _make_button(text: String, color: Color) -> Button:
 	var btn := Button.new()
 	btn.mouse_filter = Control.MOUSE_FILTER_PASS
 	btn.text = text
-	btn.add_theme_font_size_override("font_size", 34)
+	btn.add_theme_font_size_override("font_size", 38)
 	btn.add_theme_color_override("font_color", Color.WHITE)
 	_set_button_color(btn, color)
 	if _font_bold:
@@ -1551,11 +1640,10 @@ func _build_multiple_choice() -> void:
 			option_btns.append(b)
 			item_vbox.add_child(b)
 
-		var answer: Variant = item.get("answer", -1)
+		var answer: Variant = _normalize_answer_index(item.get("answer", -1))
 		if answer is String:
 			answer = _find_option_index(options, answer)
-
-		# Build answer_display with the actual word/text instead of index
+		# Build answer_display with the actual word/text instead of index.
 		var answer_display := ""
 		if answer is int and answer >= 0 and answer < options.size():
 			answer_display = _get_option_text(options[answer])
@@ -1667,6 +1755,11 @@ func _build_fill_blank() -> void:
 		if hint != "":
 			item_vbox.add_child(_make_label("Hint: " + hint, 30, C_MUTED, false))
 
+		# Completed example rows (editable=false) render the sentence as-is
+		# with no input box and are excluded from grading entirely.
+		if not bool(item.get("editable", true)):
+			continue
+
 		var le := _make_line_edit(_t("type_your_answer"))
 		item_vbox.add_child(le)
 
@@ -1687,46 +1780,315 @@ func _build_fill_blank() -> void:
 # CLOZE
 # ------------------------------------------------------------
 func _build_cloze() -> void:
-	var p_raw = _exercise.get("passage", "")
-	var passage := _make_label(_get_en_text(p_raw), 38, C_MUTED, false)
-	passage.set_meta("text_fa", _get_fa_text(p_raw))
-	_active_vbox.add_child(passage)
+	var blanks: Array = _exercise.get("blanks", [])
+	if blanks.is_empty():
+		_active_vbox.add_child(_make_label(_t("no_correct_words"), 32, C_MUTED, false))
+		return
 
-	for i in _exercise.get("blanks", []).size():
-		var blank: Dictionary = _exercise["blanks"][i]
-		var item_vbox := _start_item_block(blank, 12, false)
+	# ---- Reset inline state ----
+	_cloze_rtl = null
+	_cloze_popup = null
+	_cloze_choices.clear()
+	_cloze_correct.clear()
+	_cloze_options.clear()
+	_cloze_graded.clear()
+	_cloze_graded_all = false
+	_cloze_active = -1
 
-		var label := _make_label("(%d) ______" % (i + 1), 38, C_TEXT, true)
-		item_vbox.add_child(label)
-
-		var options: Array = blank.get("options", [])
+	# ---- Resolve per-blank option texts + correct answer ----
+	for b in blanks:
 		var option_texts: Array = []
-		for opt in options:
+		for opt in b.get("options", []):
 			option_texts.append(_get_option_text(opt))
-
-		var ob := _make_option_dropdown(option_texts)
-		item_vbox.add_child(ob)
-
-		var answer: Variant = blank.get("answer", "")
-		if answer is int and answer >= 0 and answer < option_texts.size():
-			answer = option_texts[answer]
-		elif answer is String:
-			for opt in options:
-				if opt is Dictionary and str(opt.get("id", "")) == str(answer):
-					answer = _get_option_text(opt)
+		_cloze_options.append(option_texts)
+		var ans: Variant = b.get("answer", "")
+		if ans is float and ans == floor(ans):
+			ans = int(ans)
+		var correct_text := ""
+		if ans is int and ans >= 0 and ans < option_texts.size():
+			correct_text = str(option_texts[ans])
+		elif ans is String:
+			var raw_opts: Array = b.get("options", [])
+			for oi in raw_opts.size():
+				var opt: Variant = raw_opts[oi]
+				if opt is Dictionary and str(opt.get("id", "")) == str(ans):
+					correct_text = str(option_texts[oi])
 					break
+		_cloze_correct.append(correct_text)
+		_cloze_choices.append("")
+		_cloze_graded.append(false)
 
+	# ---- Split the (English) passage into prose + blanks ----
+	_cloze_segments = _split_cloze_passage(
+		_get_en_text(_exercise.get("passage", "")),
+		_cloze_choices.size()
+	)
+
+	# ---- RichTextLabel: prose flows naturally, blanks are inline tappable ----
+	var rtl := RichTextLabel.new()
+	rtl.bbcode_enabled = true
+	rtl.fit_content = true
+	rtl.scroll_active = false
+	rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rtl.add_theme_font_size_override("normal_font_size", 42)
+	rtl.add_theme_font_size_override("bold_font_size", 42)
+	rtl.add_theme_font_size_override("italics_font_size", 42)
+	rtl.add_theme_font_size_override("bold_italics_font_size", 42)
+	rtl.add_theme_color_override("default_color", C_TEXT)
+	if _font_regular:
+		rtl.add_theme_font_override("normal_font", _font_regular)
+	rtl.mouse_filter = Control.MOUSE_FILTER_PASS
+	rtl.meta_underlined = false
+	rtl.meta_clicked.connect(_on_cloze_meta_clicked)
+	rtl.gui_input.connect(_on_cloze_gui_input)
+	_active_vbox.add_child(rtl)
+	_register_scroll_control(rtl)
+	_cloze_rtl = rtl
+	# Plain Farsi translation line under the cloze passage (toggled by the
+	# header show-translation switch).
+	_add_fa_label(_get_fa_text(_exercise.get("passage", "")), 32)
+	# Farsi mirror stays interactive (same ids), options remain English.
+	rtl.set_meta("text_fa", _render_cloze_bbcode(_get_fa_text(_exercise.get("passage", ""))))
+	_refresh_cloze_bbcode()
+
+	# ---- Shared option dropdown (one per engine, recreated each build).
+	# A custom PopupPanel with large, roomy Button rows so the choices are
+	# easy to read and tap on a phone (matches the app's other dropdowns). ----
+	var popup := PopupPanel.new()
+
+	var panel := StyleBoxFlat.new()
+	panel.bg_color = Color("#0f1b3d")
+	panel.set_corner_radius_all(16)
+	panel.border_width_left = 1
+	panel.border_width_right = 1
+	panel.border_width_top = 1
+	panel.border_width_bottom = 1
+	panel.border_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.45)
+	panel.shadow_color = Color(0, 0, 0, 0.55)
+	panel.shadow_size = 20
+	panel.shadow_offset = Vector2(0, 10)
+	panel.set_content_margin_all(12)
+	popup.add_theme_stylebox_override("panel", panel)
+
+	var popup_scroll := ScrollContainer.new()
+	popup_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	popup.add_child(popup_scroll)
+
+	var popup_list := VBoxContainer.new()
+	popup_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	popup_list.add_theme_constant_override("separation", 12)
+	popup_scroll.add_child(popup_list)
+
+	_active_vbox.add_child(popup)
+	_cloze_popup = popup
+	_cloze_popup_list = popup_list
+
+	# ---- Grading items (one per blank). No per-item label is needed: the
+	# inline slots themselves are recolored by _apply_cloze_feedback(). ----
+	for i in _cloze_choices.size():
+		var idx := i
 		_items.append({
 			"type": "cloze",
+			"blank_idx": idx,
 			"get": func():
-				if ob.selected > 0:
-					return ob.get_item_text(ob.selected)
+				if _cloze_choices.size() > idx:
+					return _cloze_choices[idx]
 				return "",
-			"answer": answer,
-			"feedback": _make_feedback(item_vbox),
-			"explanation_en": _get_en_text(blank.get("explanation", "")),
-			"explanation_fa": _get_fa_text(blank.get("explanation", "")),
+			"answer": _cloze_correct[idx],
 		})
+
+
+# ------------------------------------------------------------
+# INLINE CLOZE HELPERS
+# ------------------------------------------------------------
+# Splits a passage at its numbered blank markers "(1) ______" into a list of
+# prose strings and {"index": int} placeholders, in order.
+func _split_cloze_passage(text: String, blank_count: int) -> Array:
+	var segments: Array = []
+	if text == "":
+		return segments
+	var regex := RegEx.new()
+	if regex.compile(r"\(\d+\)\s*_{2,}") != OK:
+		segments.append(text)
+		return segments
+	var pos := 0
+	var blank_idx := 0
+	for m in regex.search_all(text):
+		var start: int = m.get_start()
+		var end: int = m.get_end()
+		if start > pos:
+			segments.append(text.substr(pos, start - pos))
+		if blank_idx < blank_count:
+			segments.append({"index": blank_idx})
+		blank_idx += 1
+		pos = end
+	if pos < text.length():
+		segments.append(text.substr(pos))
+	return segments
+
+
+# Builds the full BBCode for a passage (used for both EN text and the FA meta).
+func _render_cloze_bbcode(text: String) -> String:
+	var segments: Array = _split_cloze_passage(text, _cloze_choices.size())
+	var out := ""
+	for seg in segments:
+		if seg is Dictionary:
+			out += _cloze_blank_bbcode(int(seg["index"]))
+		else:
+			out += _cloze_escape(str(seg))
+	return out
+
+
+func _refresh_cloze_bbcode() -> void:
+	if _cloze_rtl == null:
+		return
+	_cloze_rtl.text = _render_cloze_bbcode(_get_en_text(_exercise.get("passage", "")))
+
+
+func _cloze_placeholder(idx: int) -> String:
+	return "(%d) ______" % (idx + 1)
+
+
+# The inline slot: highlights it, shows the current choice (or the numbered
+# placeholder), and — after grading — recolors it and reveals the correct form.
+func _cloze_blank_bbcode(idx: int) -> String:
+	var display := ""
+	if not _cloze_graded_all:
+		display = _cloze_choices[idx] if _cloze_choices[idx] != "" else _cloze_placeholder(idx)
+	elif _cloze_graded[idx]:
+		display = _cloze_choices[idx] if _cloze_choices[idx] != "" else _cloze_correct[idx]
+	else:
+		var chosen: String = str(_cloze_choices[idx])
+		display = (chosen if chosen != "" else _cloze_placeholder(idx)) + "  →  " + _cloze_correct[idx]
+	var color := "#22D3EE"
+	if _cloze_graded_all:
+		color = "#34D399" if _cloze_graded[idx] else "#F87171"
+	# Replace inner spaces with non-breaking spaces so the whole slot is kept
+	# together on one line instead of the RichTextLabel wrapping mid-blank.
+	var inline := _cloze_escape(display).replace(" ", "\u00A0")
+	return "[url=clz:%d][bgcolor=#22D3EE26][color=%s]%s[/color][/bgcolor][/url]" % [
+		idx,
+		color,
+		inline,
+	]
+
+
+func _cloze_escape(s: String) -> String:
+	return s.replace("[", "[lb]").replace("]", "[rb]")
+
+
+func _on_cloze_meta_clicked(meta: Variant) -> void:
+	if _cloze_graded_all:
+		return
+	var s := String(meta)
+	if not s.begins_with("clz:"):
+		return
+	var idx := int(s.substr(4))
+	if idx < 0 or idx >= _cloze_options.size():
+		return
+	_show_cloze_popup(idx)
+
+
+# Captures the exact tap position on the cloze label so the dropdown can open
+# precisely below the blank that was tapped (not below a stale mouse position).
+func _on_cloze_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if _cloze_rtl != null:
+			_cloze_click_global = _cloze_rtl.get_global_rect().position + (event as InputEventMouseButton).position
+
+
+func _show_cloze_popup(idx: int) -> void:
+	_cloze_active = idx
+	if _cloze_popup == null or _cloze_popup_list == null:
+		return
+	# Drop any rows from a previous open.
+	for c in _cloze_popup_list.get_children():
+		_cloze_popup_list.remove_child(c)
+		c.queue_free()
+
+	var opts: Array = _cloze_options[idx]
+	var cur: String = _cloze_choices[idx]
+
+	var f: Font = _font_regular if _font_regular else ThemeDB.fallback_font
+	var longest := 0.0
+	for o in opts:
+		longest = maxf(longest, f.get_string_size(str(o), HORIZONTAL_ALIGNMENT_LEFT, -1, CLOZE_OPT_FONT).x)
+
+	var vp := get_viewport()
+	var vp_size := Vector2(1280.0, 720.0)
+	var anchor := _cloze_click_global
+	if vp != null:
+		vp_size = vp.get_visible_rect().size
+		if anchor == Vector2.ZERO:
+			anchor = vp.get_mouse_position()
+	var w := clampi(int(maxf(longest + 110.0, 400.0)), 320, int(vp_size.x) - 24)
+
+	for oi in opts.size():
+		var is_sel := (str(opts[oi]) == cur)
+		var row := Button.new()
+		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.custom_minimum_size.y = CLOZE_OPT_FONT + 54
+		row.text = ("✓  " if is_sel else "") + str(opts[oi])
+		row.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		row.add_theme_font_size_override("font_size", CLOZE_OPT_FONT)
+		if _font_regular:
+			row.add_theme_font_override("font", _font_regular)
+		row.add_theme_color_override("font_color", Color("#F1F5F9"))
+		row.add_theme_color_override("font_hover_color", C_PRIMARY)
+
+		var normal := StyleBoxFlat.new()
+		normal.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.18) if is_sel else Color("#152a52")
+		normal.set_corner_radius_all(10)
+		if is_sel:
+			normal.border_width_left = 5
+			normal.border_color = C_PRIMARY
+		row.add_theme_stylebox_override("normal", normal)
+
+		var hover := StyleBoxFlat.new()
+		hover.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.14)
+		hover.set_corner_radius_all(10)
+		row.add_theme_stylebox_override("hover", hover)
+		row.add_theme_stylebox_override("pressed", hover)
+		row.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+		row.pressed.connect(_on_cloze_popup_selected.bind(oi))
+		_cloze_popup_list.add_child(row)
+
+	_cloze_popup_list.custom_minimum_size.x = w
+	var content_h: int = int(_cloze_popup_list.get_combined_minimum_size().y) + 24
+	var h := mini(content_h, int(vp_size.y) - 48)
+	var scroll: ScrollContainer = _cloze_popup_list.get_parent() as ScrollContainer
+	if scroll:
+		scroll.custom_minimum_size = Vector2(w, h)
+	var x := clampi(int(anchor.x - w / 2.0), 8, int(vp_size.x) - w - 8)
+	var y := clampi(int(anchor.y + 24), 8, int(vp_size.y) - h - 8)
+	_cloze_popup.popup(Rect2i(x, y, w, h))
+
+
+func _on_cloze_popup_selected(id: int) -> void:
+	var idx := _cloze_active
+	_cloze_active = -1
+	if _cloze_popup != null:
+		_cloze_popup.hide()
+	if idx < 0 or idx >= _cloze_options.size():
+		return
+	var opts: Array = _cloze_options[idx]
+	if id < 0 or id >= opts.size():
+		return
+	_cloze_choices[idx] = str(opts[id])
+	_refresh_cloze_bbcode()
+
+
+# Recolors each inline blank green/red after "Check Answer".
+func _apply_cloze_feedback() -> void:
+	_cloze_graded_all = true
+	for item in _items:
+		if str(item.get("type", "")) != "cloze":
+			continue
+		var idx: int = int(item.get("blank_idx", -1))
+		if idx < 0 or idx >= _cloze_graded.size():
+			continue
+		_cloze_graded[idx] = _is_item_correct(item, item["get"].call())
+	_refresh_cloze_bbcode()
 
 
 # ------------------------------------------------------------
@@ -1903,7 +2265,7 @@ func _build_open_ended() -> void:
 		te.placeholder_text = _t("write_your_answer")
 		te.custom_minimum_size = Vector2(0, 180)
 		te.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		te.add_theme_font_size_override("font_size", 36)
+		te.add_theme_font_size_override("font_size", 40)
 		# Dark answer box: use light text instead of black text.
 		te.add_theme_color_override("font_color", C_TEXT)
 		te.add_theme_color_override("font_placeholder_color", C_MUTED)
@@ -1941,7 +2303,7 @@ func _build_open_ended() -> void:
 			var cb := CheckBox.new()
 			cb.mouse_filter = Control.MOUSE_FILTER_PASS
 			cb.text = _get_en_text(r)
-			cb.add_theme_font_size_override("font_size", 32)
+			cb.add_theme_font_size_override("font_size", 36)
 			if _font_regular:
 				cb.add_theme_font_override("font", _font_regular)
 			item_vbox.add_child(cb)
@@ -1954,7 +2316,7 @@ func _build_open_ended() -> void:
 			done_check.mouse_filter = Control.MOUSE_FILTER_PASS
 			done_check.text = _t("self_check_label")
 			_apply_fa_meta(done_check, "self_check_label")
-			done_check.add_theme_font_size_override("font_size", 32)
+			done_check.add_theme_font_size_override("font_size", 36)
 			if _font_regular:
 				done_check.add_theme_font_override("font", _font_regular)
 			item_vbox.add_child(done_check)
@@ -2217,130 +2579,201 @@ func _build_table_fill() -> void:
 # Cell types: label / line / dropdown / true_false / yes_no / checkbox
 # ------------------------------------------------------------
 func _build_table_fill_advanced() -> void:
-	var columns: Array = _exercise.get("columns", [])
-	var grid := GridContainer.new()
-	grid.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	grid.columns = maxi(columns.size(), 1)
-	grid.add_theme_constant_override("h_separation", 20)
-	grid.add_theme_constant_override("v_separation", 16)
-	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_active_vbox.add_child(grid)
+	# Supports either a single table via "columns"/"rows" (legacy) or multiple
+	# tables via "tables": [ { "title": {...}, "columns": [...], "rows": [...] } ].
+	var tables: Array = _exercise.get("tables", [])
+	if tables.is_empty() and _exercise.has("columns"):
+		tables = [ { "columns": _exercise.get("columns", []), "rows": _exercise.get("rows", []) } ]
 
-	for col in columns:
-		var h := _make_label(_get_en_text(col), 34, C_PRIMARY, true)
-		h.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		h.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		grid.add_child(h)
+	for table in tables:
+		var columns: Array = []
+		var rows: Array = []
+		if table is Dictionary:
+			columns = table.get("columns", [])
+			rows = table.get("rows", [])
+		else:
+			columns = _exercise.get("columns", [])
+			rows = _exercise.get("rows", [])
 
-	for row in _exercise.get("rows", []):
-		var cells: Array = []
-		if row is Dictionary:
-			cells = row.get("cells", [])
-		elif row is Array:
-			cells = row
-		for cell in cells:
-			var cell_box := VBoxContainer.new()
-			cell_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			cell_box.add_theme_constant_override("separation", 6)
-			cell_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			grid.add_child(cell_box)
+		if table is Dictionary and table.has("title"):
+			var tl := _make_label(_get_en_text(table.get("title", "")), 34, C_MUTED, true)
+			_active_vbox.add_child(tl)
 
-			if not cell is Dictionary:
-				var plain := _make_label(str(cell), 34, C_TEXT, false)
-				plain.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				cell_box.add_child(plain)
-				continue
+		if columns.is_empty():
+			continue
 
-			var ctype := str(cell.get("type", cell.get("editor", "label")))
-			match ctype:
-				"line", "fill_blank", "text":
-					var le := _make_line_edit(str(cell.get("placeholder", "...")))
-					cell_box.add_child(le)
-					_items.append({
-						"type": "fill_blank",
-						"get": func(): return le.text,
-						"answer": cell.get("answer", []),
-						"feedback": _make_feedback(cell_box),
-						"explanation_en": _get_en_text(cell.get("explanation", "")),
-						"explanation_fa": _get_fa_text(cell.get("explanation", "")),
-					})
-				"dropdown", "select":
-					var options: Array = cell.get("options", [])
-					var option_texts: Array = []
-					for opt in options:
-						option_texts.append(_get_option_text(opt))
-					var ob := _make_option_dropdown(option_texts, str(cell.get("placeholder", _t("choose"))))
-					cell_box.add_child(ob)
-					var ans: Variant = cell.get("answer", "")
-					if ans is int and ans >= 0 and ans < option_texts.size():
-						ans = option_texts[ans]
-					elif ans is String:
+		var grid := GridContainer.new()
+		grid.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		grid.columns = maxi(columns.size(), 1)
+		grid.add_theme_constant_override("h_separation", 20)
+		grid.add_theme_constant_override("v_separation", 16)
+		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_active_vbox.add_child(grid)
+
+		for col in columns:
+			var h := _make_label(_get_en_text(col), 34, C_PRIMARY, true)
+			h.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			h.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			grid.add_child(h)
+
+		for row in rows:
+			var cells: Array = []
+			if row is Dictionary:
+				cells = row.get("cells", [])
+			elif row is Array:
+				cells = row
+			for cell in cells:
+				var cell_box := VBoxContainer.new()
+				cell_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				cell_box.add_theme_constant_override("separation", 6)
+				cell_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				grid.add_child(cell_box)
+
+				if not cell is Dictionary:
+					var plain := _make_label(str(cell), 34, C_TEXT, false)
+					plain.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+					cell_box.add_child(plain)
+					continue
+
+				var ctype := str(cell.get("type", cell.get("editor", "label")))
+				match ctype:
+					"line", "fill_blank", "text":
+						var le := _make_line_edit(str(cell.get("placeholder", "...")))
+						cell_box.add_child(le)
+						_items.append({
+							"type": "fill_blank",
+							"get": func(): return le.text,
+							"answer": cell.get("answer", []),
+							"feedback": _make_feedback(cell_box),
+							"explanation_en": _get_en_text(cell.get("explanation", "")),
+							"explanation_fa": _get_fa_text(cell.get("explanation", "")),
+						})
+					"dropdown", "select":
+						var options: Array = cell.get("options", [])
+						var option_texts: Array = []
 						for opt in options:
-							if opt is Dictionary and str(opt.get("id", "")) == str(ans):
-								ans = _get_option_text(opt)
-								break
-					_items.append({
-						"type": "dropdown",
-						"get": func():
-							if ob.selected > 0:
-								return ob.get_item_text(ob.selected)
-							return "",
-						"answer": ans,
-						"feedback": _make_feedback(cell_box),
-						"explanation_en": _get_en_text(cell.get("explanation", "")),
-						"explanation_fa": _get_fa_text(cell.get("explanation", "")),
-					})
-				"true_false", "yes_no":
-					var group := ButtonGroup.new()
-					var yes_text := "Yes" if ctype == "yes_no" else "True"
-					var no_text := "No" if ctype == "yes_no" else "False"
-					var hbox := HBoxContainer.new()
-					hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-					hbox.add_theme_constant_override("separation", 10)
-					hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-					cell_box.add_child(hbox)
-					var b_yes := _make_select_button(yes_text, group, C_SUCCESS)
-					var b_no := _make_select_button(no_text, group, C_ERROR)
-					hbox.add_child(b_yes)
-					hbox.add_child(b_no)
-					var ans_tf: Variant = cell.get("answer", true)
-					if ans_tf is String:
-						var s := _normalize(str(ans_tf))
-						ans_tf = (s == "yes" or s == "true" or s == "y" or s == "t")
-					_items.append({
-						"type": ctype,
-						"get": func():
-							if b_yes.button_pressed:
-								return true
-							if b_no.button_pressed:
-								return false
-							return null,
-						"answer": ans_tf,
-						"feedback": _make_feedback(cell_box),
-						"explanation_en": _get_en_text(cell.get("explanation", "")),
-						"explanation_fa": _get_fa_text(cell.get("explanation", "")),
-					})
-				"checkbox", "check":
-					var cb := CheckBox.new()
-					cb.mouse_filter = Control.MOUSE_FILTER_PASS
-					cb.text = _get_en_text(cell.get("text", ""))
-					cb.add_theme_font_size_override("font_size", 32)
-					if _font_regular:
-						cb.add_theme_font_override("font", _font_regular)
-					cell_box.add_child(cb)
-					_register_scroll_control(cb)
-					_items.append({
-						"type": "checkbox",
-						"get": func(): return cb.button_pressed,
-						"answer": bool(cell.get("answer", false)),
-						"feedback": _make_feedback(cell_box),
-						"explanation_en": _get_en_text(cell.get("explanation", "")),
-						"explanation_fa": _get_fa_text(cell.get("explanation", "")),
-					})
-				_:
-					var lbl := _make_label(_get_en_text(cell.get("text", "")), 34, C_TEXT, false)
-					lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-					cell_box.add_child(lbl)
+							option_texts.append(_get_option_text(opt))
+						var ob := _make_option_dropdown(option_texts, str(cell.get("placeholder", _t("choose"))))
+						cell_box.add_child(ob)
+						var ans: Variant = cell.get("answer", "")
+						if ans is int and ans >= 0 and ans < option_texts.size():
+							ans = option_texts[ans]
+						elif ans is String:
+							for opt in options:
+								if opt is Dictionary and str(opt.get("id", "")) == str(ans):
+									ans = _get_option_text(opt)
+									break
+						_items.append({
+							"type": "dropdown",
+							"get": func():
+								if ob.selected > 0:
+									return ob.get_item_text(ob.selected)
+								return "",
+							"answer": ans,
+							"feedback": _make_feedback(cell_box),
+							"explanation_en": _get_en_text(cell.get("explanation", "")),
+							"explanation_fa": _get_fa_text(cell.get("explanation", "")),
+						})
+					"true_false", "yes_no":
+						var group := ButtonGroup.new()
+						var yes_text := "Yes" if ctype == "yes_no" else "True"
+						var no_text := "No" if ctype == "yes_no" else "False"
+						var hbox := HBoxContainer.new()
+						hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+						hbox.add_theme_constant_override("separation", 10)
+						hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+						cell_box.add_child(hbox)
+						var b_yes := _make_select_button(yes_text, group, C_SUCCESS)
+						var b_no := _make_select_button(no_text, group, C_ERROR)
+						hbox.add_child(b_yes)
+						hbox.add_child(b_no)
+						var ans_tf: Variant = cell.get("answer", true)
+						if ans_tf is String:
+							var s := _normalize(str(ans_tf))
+							ans_tf = (s == "yes" or s == "true" or s == "y" or s == "t")
+						_items.append({
+							"type": ctype,
+							"get": func():
+								if b_yes.button_pressed:
+									return true
+								if b_no.button_pressed:
+									return false
+								return null,
+							"answer": ans_tf,
+							"feedback": _make_feedback(cell_box),
+							"explanation_en": _get_en_text(cell.get("explanation", "")),
+							"explanation_fa": _get_fa_text(cell.get("explanation", "")),
+						})
+					"checkbox", "check":
+						var cb := CheckBox.new()
+						cb.mouse_filter = Control.MOUSE_FILTER_PASS
+						cb.text = _get_en_text(cell.get("text", ""))
+						cb.add_theme_font_size_override("font_size", 36)
+						if _font_regular:
+							cb.add_theme_font_override("font", _font_regular)
+						cell_box.add_child(cb)
+						_register_scroll_control(cb)
+						_items.append({
+							"type": "checkbox",
+							"get": func(): return cb.button_pressed,
+							"answer": bool(cell.get("answer", false)),
+							"feedback": _make_feedback(cell_box),
+							"explanation_en": _get_en_text(cell.get("explanation", "")),
+							"explanation_fa": _get_fa_text(cell.get("explanation", "")),
+						})
+					"textarea", "multiline":
+						var te := TextEdit.new()
+						te.mouse_filter = Control.MOUSE_FILTER_PASS
+						te.placeholder_text = str(cell.get("placeholder", _t("type_your_answer")))
+						# Free-form box: starts tall and grows with each typed line so the
+						# user can write as many words as they want, one per line.
+						const _TEXTAREA_BASE := 170.0
+						const _TEXTAREA_LINE_GROWTH := 54.0
+						te.custom_minimum_size = Vector2(0, _TEXTAREA_BASE)
+						te.text_changed.connect(func():
+							var lines := float(te.get_line_count())
+							var target := _TEXTAREA_BASE + maxf(0.0, lines - 2.0) * _TEXTAREA_LINE_GROWTH
+							if te.custom_minimum_size.y != target:
+								te.custom_minimum_size = Vector2(te.custom_minimum_size.x, target)
+						)
+						te.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+						te.add_theme_font_size_override("font_size", 34)
+						# Dark answer box: light text instead of black.
+						te.add_theme_color_override("font_color", C_TEXT)
+						te.add_theme_color_override("font_placeholder_color", C_MUTED)
+						te.add_theme_color_override("caret_color", C_PRIMARY)
+						te.add_theme_color_override(
+							"selection_color",
+							Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.35)
+						)
+						te.add_theme_color_override("font_selected_color", Color.WHITE)
+						if _font_regular:
+							te.add_theme_font_override("font", _font_regular)
+						var te_style := StyleBoxFlat.new()
+						te_style.bg_color = Color("#0f1b3d")
+						te_style.set_corner_radius_all(10)
+						te_style.border_width_bottom = 2
+						te_style.border_color = Color("#3d4a7a")
+						te_style.set_content_margin_all(12)
+						te.add_theme_stylebox_override("normal", te_style)
+						var te_focus: StyleBoxFlat = te_style.duplicate()
+						te_focus.border_color = C_PRIMARY
+						te.add_theme_stylebox_override("focus", te_focus)
+						cell_box.add_child(te)
+						_register_scroll_control(te)
+						_items.append({
+							"type": "textarea",
+							"get": func(): return te.text,
+							"answer": cell.get("answer", []),
+							"placeholder": str(cell.get("placeholder", "")),
+							"feedback": _make_feedback(cell_box),
+							"explanation_en": _get_en_text(cell.get("explanation", "")),
+							"explanation_fa": _get_fa_text(cell.get("explanation", "")),
+						})
+					_:
+						var lbl := _make_label(_get_en_text(cell.get("text", "")), 34, C_TEXT, false)
+						lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+						cell_box.add_child(lbl)
 
 
 # ------------------------------------------------------------
@@ -2374,7 +2807,7 @@ func _build_text_highlight() -> void:
 		var fb := Label.new()
 		fb.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		fb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		fb.add_theme_font_size_override("font_size", 22)
+		fb.add_theme_font_size_override("font_size", 28)
 		fb.visible = false
 		pair.add_child(fb)
 
@@ -2452,7 +2885,7 @@ func _build_text_highlight_multi() -> void:
 		var wb := Button.new()
 		wb.mouse_filter = Control.MOUSE_FILTER_PASS
 		wb.text = str(tokens[idx])
-		wb.add_theme_font_size_override("font_size", 34)
+		wb.add_theme_font_size_override("font_size", 38)
 		if _font_regular:
 			wb.add_theme_font_override("font", _font_regular)
 		_update_multi_word_style(wb, "", categories)
@@ -2464,7 +2897,7 @@ func _build_text_highlight_multi() -> void:
 		var fb := Label.new()
 		fb.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		fb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		fb.add_theme_font_size_override("font_size", 20)
+		fb.add_theme_font_size_override("font_size", 28)
 		fb.visible = false
 		pair.add_child(fb)
 
@@ -2611,7 +3044,10 @@ func _build_error_correction() -> void:
 		rtl.fit_content = true
 		rtl.scroll_active = false
 		rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		rtl.add_theme_font_size_override("normal_font_size", 38)
+		rtl.add_theme_font_size_override("normal_font_size", 42)
+		rtl.add_theme_font_size_override("bold_font_size", 42)
+		rtl.add_theme_font_size_override("italics_font_size", 42)
+		rtl.add_theme_font_size_override("bold_italics_font_size", 42)
 		rtl.add_theme_color_override("default_color", C_TEXT)
 		if _font_regular:
 			rtl.add_theme_font_override("normal_font", _font_regular)
@@ -2714,7 +3150,7 @@ func _build_word_search() -> void:
 		wb.mouse_filter = Control.MOUSE_FILTER_PASS
 		wb.text = word_text
 		wb.toggle_mode = true
-		wb.add_theme_font_size_override("font_size", 32)
+		wb.add_theme_font_size_override("font_size", 36)
 
 		# This prevents the words from collapsing or piling up.
 		wb.custom_minimum_size = Vector2(0, 64)
@@ -3019,36 +3455,28 @@ func _grade_word_search() -> void:
 
 	if _score_banner:
 		_score_banner.visible = true
-
 		if correct_total == 0:
-			_score_banner.text = _t("no_correct_words")
-			_apply_fa_meta(_score_banner, "no_correct_words")
+			_score_banner.text = _t_fa("no_correct_words")
+			_score_banner.set_meta("text_fa", _score_banner.text)
 			_score_banner.add_theme_color_override("font_color", C_WARNING)
 		elif correct_selected == correct_total and wrong_selected == 0:
-			_score_banner.text = _t("all_correct_words")
-			_apply_fa_meta(_score_banner, "all_correct_words")
+			_score_banner.text = _t_fa("all_correct_words")
+			_score_banner.set_meta("text_fa", _score_banner.text)
 			_score_banner.add_theme_color_override("font_color", C_SUCCESS)
 		elif wrong_selected > 0:
-			_score_banner.text = _t("chose_correct_and_wrong") % [
+			_score_banner.text = _t_fa("chose_correct_and_wrong") % [
 				correct_selected,
 				correct_total,
 				wrong_selected
 			]
-			_score_banner.set_meta("text_fa", str(UI_STRINGS["chose_correct_and_wrong"]["fa"]) % [
-				correct_selected,
-				correct_total,
-				wrong_selected
-			])
+			_score_banner.set_meta("text_fa", _score_banner.text)
 			_score_banner.add_theme_color_override("font_color", C_ERROR)
 		else:
-			_score_banner.text = _t("chose_correct") % [
+			_score_banner.text = _t_fa("chose_correct") % [
 				correct_selected,
 				correct_total
 			]
-			_score_banner.set_meta("text_fa", str(UI_STRINGS["chose_correct"]["fa"]) % [
-				correct_selected,
-				correct_total
-			])
+			_score_banner.set_meta("text_fa", _score_banner.text)
 			_score_banner.add_theme_color_override("font_color", C_PRIMARY)
 
 	if _note_label:
@@ -3195,11 +3623,10 @@ func _build_odd_one_out() -> void:
 			option_btns.append(b)
 			grid.add_child(b)
 
-		var answer: Variant = item.get("answer", -1)
+		var answer: Variant = _normalize_answer_index(item.get("answer", -1))
 		if answer is String:
 			answer = _find_option_index(word_texts, answer)
-
-		# Build answer_display with the actual word instead of index
+		# Build answer_display with the actual word instead of index.
 		var answer_display := ""
 		if answer is int and answer >= 0 and answer < word_texts.size():
 			answer_display = str(word_texts[answer])
@@ -3233,7 +3660,10 @@ func _build_grammar_choice() -> void:
 		rtl.fit_content = true
 		rtl.scroll_active = false
 		rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		rtl.add_theme_font_size_override("normal_font_size", 38)
+		rtl.add_theme_font_size_override("normal_font_size", 42)
+		rtl.add_theme_font_size_override("bold_font_size", 42)
+		rtl.add_theme_font_size_override("italics_font_size", 42)
+		rtl.add_theme_font_size_override("bold_italics_font_size", 42)
 		rtl.add_theme_color_override("default_color", C_TEXT)
 		if _font_regular:
 			rtl.add_theme_font_override("normal_font", _font_regular)
@@ -3264,7 +3694,11 @@ func _build_grammar_choice() -> void:
 		var answer: Variant = item.get("answer", -1)
 		if answer is String:
 			answer = _find_option_index(options, answer)
-
+		# Store the correct option's text so feedback shows the actual word,
+		# not the numeric option index.
+		var answer_display := ""
+		if answer is int and answer >= 0 and answer < option_texts.size():
+			answer_display = str(option_texts[answer])
 		_items.append({
 			"type": "grammar_choice",
 			"get": func():
@@ -3273,6 +3707,7 @@ func _build_grammar_choice() -> void:
 						return i
 				return -1,
 			"answer": answer,
+			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
 			"explanation_fa": _get_fa_text(item.get("explanation", "")),
@@ -3326,7 +3761,10 @@ func _build_grammar_identification() -> void:
 		rtl.fit_content = true
 		rtl.scroll_active = false
 		rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		rtl.add_theme_font_size_override("normal_font_size", 36)
+		rtl.add_theme_font_size_override("normal_font_size", 40)
+		rtl.add_theme_font_size_override("bold_font_size", 40)
+		rtl.add_theme_font_size_override("italics_font_size", 40)
+		rtl.add_theme_font_size_override("bold_italics_font_size", 40)
 		rtl.add_theme_color_override("default_color", C_TEXT)
 		if _font_regular:
 			rtl.add_theme_font_override("normal_font", _font_regular)
@@ -3355,7 +3793,10 @@ func _build_grammar_identification() -> void:
 		var answer: Variant = item.get("answer", -1)
 		if answer is String:
 			answer = _find_option_index(options, answer)
-
+		# Store the correct option's text so feedback shows the actual word.
+		var answer_display := ""
+		if answer is int and answer >= 0 and answer < option_texts.size():
+			answer_display = str(option_texts[answer])
 		_items.append({
 			"type": "grammar_identification",
 			"get": func():
@@ -3364,6 +3805,7 @@ func _build_grammar_identification() -> void:
 						return i
 				return -1,
 			"answer": answer,
+			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
 			"explanation_fa": _get_fa_text(item.get("explanation", "")),
@@ -3453,6 +3895,13 @@ func _build_token_label() -> void:
 				if t_i < token_answers.size():
 					ans = _category_id_from_value(token_answers[t_i], categories)
 
+			# Show the readable label in feedback instead of the raw category id.
+			var ans_display := ans
+			for c in categories:
+				if str(c["id"]) == ans:
+					ans_display = str(c["label"])
+					break
+
 			var word_label := _make_label(token_text, 36, C_TEXT, true)
 			token_box.add_child(word_label)
 
@@ -3462,7 +3911,7 @@ func _build_token_label() -> void:
 			for lname in label_names:
 				ob.add_item(lname)
 			ob.selected = 0
-			ob.add_theme_font_size_override("font_size", 28)
+			ob.add_theme_font_size_override("font_size", 32)
 			ob.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			if _font_regular:
 				ob.add_theme_font_override("font", _font_regular)
@@ -3478,6 +3927,7 @@ func _build_token_label() -> void:
 						return ids[ob.selected - 1]
 					return "",
 				"answer": ans,
+				"answer_display": ans_display,
 				"feedback": fb,
 				"explanation_en": expl_en,
 				"explanation_fa": expl_fa,
@@ -3510,7 +3960,10 @@ func _build_image_choice() -> void:
 	var answer: Variant = _exercise.get("answer", -1)
 	if answer is String:
 		answer = _find_option_index(options, answer)
-
+	# Store the correct option's text so feedback shows the actual word.
+	var answer_display := ""
+	if answer is int and answer >= 0 and answer < options.size():
+		answer_display = _get_option_text(options[answer])
 	var fb := _make_feedback(_active_vbox)
 	_items.append({
 		"type": "image_choice",
@@ -3520,6 +3973,7 @@ func _build_image_choice() -> void:
 					return i
 			return -1,
 		"answer": answer,
+		"answer_display": answer_display,
 		"feedback": fb,
 		"explanation_en": _get_en_text(_exercise.get("explanation", "")),
 		"explanation_fa": _get_fa_text(_exercise.get("explanation", "")),
@@ -3555,7 +4009,10 @@ func _build_image_match() -> void:
 		var answer: Variant = item.get("answer", -1)
 		if answer is String:
 			answer = _find_option_index(options, answer)
-
+		# Store the correct option's text so feedback shows the actual word.
+		var answer_display := ""
+		if answer is int and answer >= 0 and answer < options.size():
+			answer_display = _get_option_text(options[answer])
 		_items.append({
 			"type": "image_match",
 			"get": func():
@@ -3564,6 +4021,7 @@ func _build_image_match() -> void:
 						return i
 				return -1,
 			"answer": answer,
+			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
 			"explanation_fa": _get_fa_text(item.get("explanation", "")),
@@ -3655,19 +4113,59 @@ func _build_image_hotspot() -> void:
 # ============================================================
 # WIDGET HELPERS
 # ============================================================
-func _make_label(text: String, size: int, color: Color, bold: bool) -> Label:
+func _make_label(text: String, font_size: int, color: Color, bold: bool) -> Label:
+	font_size += 4
 	var l := Label.new()
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	l.text = text
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD
 	l.custom_minimum_size.x = 0
-	l.add_theme_font_size_override("font_size", size)
+	l.add_theme_font_size_override("font_size", maxi(font_size, MIN_FONT))
 	l.add_theme_color_override("font_color", color)
-	if bold and _font_bold:
+	var fa_dominant := _is_fa_dominant(text)
+	l.text_direction = Control.TEXT_DIRECTION_RTL if fa_dominant else Control.TEXT_DIRECTION_LTR
+	if fa_dominant and _font_farsi:
+		l.add_theme_font_override("font", _font_farsi)
+	elif bold and _font_bold:
 		l.add_theme_font_override("font", _font_bold)
 	elif not bold and _font_regular:
 		l.add_theme_font_override("font", _font_regular)
 	return l
+
+
+# Creates an RTL Farsi label for showing a translation line under authored
+# English content, then adds it to _active_vbox right after the content it
+# translates. Visible only while show_translation is on; set_show_translation()
+# flips every collected Farsi label at once.
+func _add_fa_label(fa_text: String, font_size: int = 32, color: Color = C_MUTED) -> Label:
+	font_size += 4
+	var clean := fa_text.strip_edges()
+	if clean == "":
+		return null
+	var label := Label.new()
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.text = clean
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	label.add_theme_font_size_override("font_size", maxi(font_size, MIN_FONT))
+	label.add_theme_color_override("font_color", color)
+	label.text_direction = Control.TEXT_DIRECTION_RTL
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	if _font_farsi:
+		label.add_theme_font_override("font", _font_farsi)
+	label.visible = show_translation
+	_fa_labels.append(label)
+	_active_vbox.add_child(label)
+	return label
+
+
+# Public switch used by the Workbook header toggle. Shows/hides every Farsi
+# translation label this engine built once (they keep their place in the
+# layout either way, so toggling never reflows the page).
+func set_show_translation(v: bool) -> void:
+	show_translation = v
+	for label in _fa_labels:
+		if is_instance_valid(label):
+			label.visible = v
 
 
 func _make_option_button(text: String, group: ButtonGroup) -> Button:
@@ -3685,7 +4183,7 @@ func _make_select_button(text: String, group: ButtonGroup, accent: Color) -> But
 	# Lets the button stretch inside grids so columns fill the screen.
 	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	b.custom_minimum_size = Vector2(0, 0)
-	b.add_theme_font_size_override("font_size", 36)
+	b.add_theme_font_size_override("font_size", 40)
 	b.add_theme_color_override("font_color", Color("#F1F5F9"))
 	b.add_theme_color_override("font_hover_color", accent)
 	b.add_theme_color_override("font_pressed_color", accent)
@@ -3731,7 +4229,7 @@ func _make_image_option_button(opt: Variant, group: ButtonGroup) -> Button:
 	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	b.text = _get_option_text(opt)
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	b.add_theme_font_size_override("font_size", 30)
+	b.add_theme_font_size_override("font_size", 34)
 	# Dark image option button needs light text.
 	b.add_theme_color_override("font_color", C_TEXT)
 	b.add_theme_color_override("font_hover_color", C_PRIMARY)
@@ -3796,7 +4294,7 @@ func _make_line_edit(placeholder: String) -> LineEdit:
 	var le := LineEdit.new()
 	le.mouse_filter = Control.MOUSE_FILTER_PASS
 	le.placeholder_text = placeholder
-	le.add_theme_font_size_override("font_size", 36)
+	le.add_theme_font_size_override("font_size", 40)
 	le.add_theme_color_override("font_color", Color("#F1F5F9"))
 	le.add_theme_color_override("font_placeholder_color", Color("#64748B"))
 	le.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -3828,7 +4326,7 @@ func _make_chart_input(placeholder: String) -> LineEdit:
 	var le := LineEdit.new()
 	le.mouse_filter = Control.MOUSE_FILTER_PASS
 	le.placeholder_text = placeholder
-	le.add_theme_font_size_override("font_size", 34)
+	le.add_theme_font_size_override("font_size", 38)
 	# Dark input field: light text, muted placeholder, visible caret.
 	le.add_theme_color_override("font_color", C_TEXT)
 	le.add_theme_color_override("font_placeholder_color", C_MUTED)
@@ -3864,7 +4362,7 @@ func _make_chip_button(text: String, filled := false) -> Button:
 	var b := Button.new()
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
 	b.text = text
-	b.add_theme_font_size_override("font_size", 34)
+	b.add_theme_font_size_override("font_size", 38)
 	b.add_theme_color_override("font_color", Color("#000000") if filled else Color("#F1F5F9"))
 	b.add_theme_color_override("font_hover_color", Color("#000000") if filled else C_PRIMARY)
 	if _font_regular:
@@ -3903,10 +4401,10 @@ func _make_word_toggle(word: String, compact := false) -> Button:
 	b.text = word
 	b.toggle_mode = true
 	if compact:
-		b.add_theme_font_size_override("font_size", 30)
+		b.add_theme_font_size_override("font_size", 34)
 		b.custom_minimum_size = Vector2(36, 44)
 	else:
-		b.add_theme_font_size_override("font_size", 36)
+		b.add_theme_font_size_override("font_size", 40)
 	b.add_theme_color_override("font_color", Color("#F1F5F9"))
 	b.add_theme_color_override("font_pressed_color", Color("#000000"))
 	b.add_theme_color_override("font_hover_color", C_PRIMARY)
@@ -3934,7 +4432,7 @@ func _make_feedback(parent: Node) -> Label:
 	var fb := Label.new()
 	fb.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	fb.autowrap_mode = TextServer.AUTOWRAP_WORD
-	fb.add_theme_font_size_override("font_size", 32)
+	fb.add_theme_font_size_override("font_size", 36)
 	fb.visible = false
 	if _font_bold:
 		fb.add_theme_font_override("font", _font_bold)
@@ -4104,43 +4602,48 @@ func _on_check_pressed() -> void:
 	if _is_graded:
 		_reset_for_retry()
 		return
-# Word Search uses its own visual grading.
+	# Word Search uses its own visual grading.
 	if str(_exercise.get("type", "")) in ["word_search", "word_find"]:
 		_grade_word_search()
 		return
-
 	var correct := 0
 	var total := 0
-
 	for item in _items:
 		if not item.has("get"):
 			continue
 		total += 1
 		var user_answer = item["get"].call()
 		var is_correct := _is_item_correct(item, user_answer)
+		# Count BEFORE the feedback check: some types (e.g. inline cloze) carry
+		# no per-item feedback label but must still be scored.
+		if is_correct:
+			correct += 1
 		var fb: Label = item.get("feedback", null)
 		if fb == null:
 			continue
 		fb.visible = true
-
-		var answer_text: String = str(item.get("answer_display", _format_answer(item.get("answer"))))
+		# Prefer the human-readable answer text. Fall back to the formatted
+		# raw answer only when no display text exists.
+		# Prefer the human-readable answer text; fall back to the raw
+		# answer only when no display text exists.
+		var answer_text: String = str(item.get("answer_display", ""))
+		if answer_text == "":
+			answer_text = _format_answer(item.get("answer"))
 		var item_type := str(item.get("type", ""))
-
-		# If user left a text field empty, show "Empty" feedback
+		# If the user left a text field empty, show the Farsi "Empty" label.
 		var user_str := str(user_answer).strip_edges()
 		if user_str == "" and item_type in ["fill_blank", "chart_fill", "transformation", "letter_scramble", "error_correction", "passive_transformation", "question_formation"]:
-			fb.text = _t("empty")
-			_apply_fa_meta(fb, "empty")
+			fb.text = _t_fa("empty")
+			fb.set_meta("text_fa", fb.text)
 			fb.add_theme_color_override("font_color", C_WARNING)
 			continue
-
 		if is_correct:
-			correct += 1
 			if item_type in ["text_highlight", "text_highlight_multi", "word_search_cell"]:
 				fb.text = "✓"
 			else:
-				fb.text = _t("correct")
-				_apply_fa_meta(fb, "correct")
+				# Feedback label is always Farsi.
+				fb.text = _t_fa("correct")
+				fb.set_meta("text_fa", fb.text)
 			fb.add_theme_color_override("font_color", C_SUCCESS)
 		else:
 			if item_type in ["text_highlight", "text_highlight_multi", "word_search_cell"]:
@@ -4148,50 +4651,57 @@ func _on_check_pressed() -> void:
 			else:
 				var expl_en := str(item.get("explanation_en", ""))
 				var expl_fa := str(item.get("explanation_fa", ""))
-
-				fb.text = _t("correct_answer_prefix") + answer_text
+				# Label in Farsi, but the correct answer itself stays English.
+				fb.text = _t_fa("correct_answer_prefix") + answer_text
 				if expl_en != "":
 					fb.text += "\n" + expl_en
-
-				# explanation_fa is collected from every exercise type's JSON
-				# but was previously never shown anywhere - only the English
-				# explanation ever reached the student. Surface it here via
-				# the same text_fa meta convention the rest of this file uses,
-				# so whatever Farsi toggle exists elsewhere picks it up.
-				var fa_text := str(UI_STRINGS["correct_answer_prefix"]["fa"]) + answer_text
+				# Farsi mirror, kept for the translate-toggle convention.
+				var fa_text := _t_fa("correct_answer_prefix") + answer_text
 				if expl_fa != "":
 					fa_text += "\n" + expl_fa
 				elif expl_en != "":
 					fa_text += "\n" + expl_en
 				fb.set_meta("text_fa", fa_text)
 			fb.add_theme_color_override("font_color", C_ERROR)
-
 	_is_graded = true
-
+	# Inline cloze recolors its blank slots instead of using per-item labels.
+	if str(_exercise.get("type", "")) == "cloze":
+		_apply_cloze_feedback()
 	if _score_banner:
 		_score_banner.visible = true
 		if total > 0 and correct == total:
-			_score_banner.text = _t("excellent_score") % [correct, total]
-			_score_banner.set_meta("text_fa", str(UI_STRINGS["excellent_score"]["fa"]) % [correct, total])
+			_score_banner.text = _t_fa("excellent_score") % [correct, total]
+			_score_banner.set_meta("text_fa", _score_banner.text)
 			_score_banner.add_theme_color_override("font_color", C_SUCCESS)
 		else:
-			_score_banner.text = _t("got_score") % [correct, total]
-			_score_banner.set_meta("text_fa", str(UI_STRINGS["got_score"]["fa"]) % [correct, total])
+			_score_banner.text = _t_fa("got_score") % [correct, total]
+			_score_banner.set_meta("text_fa", _score_banner.text)
 			_score_banner.add_theme_color_override("font_color", C_PRIMARY)
-
 	if _note_label:
 		_note_label.visible = true
-
 	if _check_btn:
 		_check_btn.text = _t("try_again")
 		_apply_fa_meta(_check_btn, "try_again")
-
 	exercise_checked.emit(str(_exercise.get("exercise_id", "")), correct, total)
-
 
 func _is_item_correct(item: Dictionary, user_answer: Variant) -> bool:
 	var item_type := str(item.get("type", ""))
-
+	# Multi-line categorization cell: the user types one word per line. It is
+	# correct if every non-empty line is an accepted answer word (case-insensitive).
+	if item_type == "textarea":
+		var accepted: Array = []
+		for w in item.get("answer", []):
+			accepted.append(_normalize(str(w)))
+		var u := str(user_answer)
+		var any_line := false
+		for ln in u.split("\n"):
+			var s := _normalize(ln)
+			if s == "":
+				continue
+			any_line = true
+			if not accepted.has(s):
+				return false
+		return any_line
 	if item_type == "image_hotspot":
 		var u: Array = []
 		if user_answer is Array:
@@ -4207,23 +4717,26 @@ func _is_item_correct(item: Dictionary, user_answer: Variant) -> bool:
 		u.sort()
 		c.sort()
 		return _compare(u, c)
-
+	# 1) Exact match against the accepted answer(s).
 	if _compare(user_answer, item.get("answer")):
 		return true
-
 	var user_str := str(user_answer)
 	var norm := _normalize(user_str)
-
-	if item.has("answer_patterns"):
-		for pat in item["answer_patterns"]:
-			var rx := RegEx.new()
-			if rx.compile(str(pat)) == OK:
-				if rx.search(user_str):
-					return true
-
-	if item.has("required_words"):
+	# 2) Optional regex patterns (harmless when the list is empty).
+	var patterns: Array = item.get("answer_patterns", [])
+	for pat in patterns:
+		var rx := RegEx.new()
+		if rx.compile(str(pat)) == OK:
+			if rx.search(user_str):
+				return true
+	# 3) Optional required/forbidden words.
+	# IMPORTANT: skip this block when the list is empty. Before this fix,
+	# an empty required_words list left req_ok = true, so EVERY typed
+	# answer was accepted as correct.
+	var required: Array = item.get("required_words", [])
+	if not required.is_empty():
 		var req_ok := true
-		for w in item["required_words"]:
+		for w in required:
 			if not norm.contains(_normalize(str(w))):
 				req_ok = false
 				break
@@ -4234,9 +4747,7 @@ func _is_item_correct(item: Dictionary, user_answer: Variant) -> bool:
 					break
 		if req_ok:
 			return true
-
 	return false
-
 
 func _compare(user_answer: Variant, correct_answer: Variant) -> bool:
 	if user_answer == null:
@@ -4245,8 +4756,10 @@ func _compare(user_answer: Variant, correct_answer: Variant) -> bool:
 		return false
 
 	if correct_answer is Array:
+		# An empty list means no correct answer was defined for this item.
+		# Treat it as wrong instead of accepting anything non-empty.
 		if correct_answer.is_empty():
-			return str(user_answer).strip_edges() != ""
+			return false
 		if user_answer is Array:
 			if user_answer.size() != correct_answer.size():
 				return false
@@ -4370,7 +4883,7 @@ class Dropdown extends Button:
 	var _scroll: ScrollContainer
 	var _list: VBoxContainer
 
-	const _ITEM_FONT := 35
+	const _ITEM_FONT := 39
 	const _MAX_W := 900
 	const _MIN_W := 360
 	const _MAX_H := 560
@@ -4411,9 +4924,9 @@ class Dropdown extends Button:
 		hover.border_color = ExerciseEngine.C_PRIMARY
 		add_theme_stylebox_override("hover", hover)
 
-		var pressed: StyleBoxFlat = hover.duplicate()
-		pressed.bg_color = Color(ExerciseEngine.C_PRIMARY.r, ExerciseEngine.C_PRIMARY.g, ExerciseEngine.C_PRIMARY.b, 0.1)
-		add_theme_stylebox_override("pressed", pressed)
+		var pressed_style: StyleBoxFlat = hover.duplicate()
+		pressed_style.bg_color = Color(ExerciseEngine.C_PRIMARY.r, ExerciseEngine.C_PRIMARY.g, ExerciseEngine.C_PRIMARY.b, 0.1)
+		add_theme_stylebox_override("pressed", pressed_style)
 
 		_build_popup()
 		_refresh_face()
