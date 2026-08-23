@@ -151,6 +151,9 @@ var review_words: Array = []
 var grammar_unlocked_units: Dictionary = {}
 var grammar_start_unit_index: int = 0
 var grammar_xp: Dictionary = {}
+# Per lesson ("book_lesson") -> Array of بخش indices already completed, so XP
+# is only awarded once per unit (never on replays).
+var grammar_completed_units: Dictionary = {}
 
 
 func _ready() -> void:
@@ -228,6 +231,23 @@ func get_total_grammar_xp() -> int:
 	return total
 
 
+# ---------- GRAMMAR COMPLETED UNITS ----------
+
+func is_unit_completed(book: int, lesson: int, unit_index: int) -> bool:
+	var key: String = _grammar_unlock_key(book, lesson)
+	var completed: Array = grammar_completed_units.get(key, [])
+	return unit_index in completed
+
+
+func mark_unit_completed(book: int, lesson: int, unit_index: int) -> void:
+	var key: String = _grammar_unlock_key(book, lesson)
+	var completed: Array = grammar_completed_units.get(key, [])
+	if not (unit_index in completed):
+		completed.append(unit_index)
+		grammar_completed_units[key] = completed
+		_save_progress()
+
+
 # ---------- PROGRESS PERSISTENCE ----------
 
 func _save_progress() -> void:
@@ -235,6 +255,7 @@ func _save_progress() -> void:
 		"last_scene": _last_scene,
 		"grammar_unlocked_units": grammar_unlocked_units,
 		"grammar_xp": grammar_xp,
+		"grammar_completed_units": grammar_completed_units,
 	}
 	var file: FileAccess = FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
@@ -257,6 +278,9 @@ func _load_progress() -> void:
 		var xp_data: Variant = data.get("grammar_xp", {})
 		if xp_data is Dictionary:
 			grammar_xp = xp_data
+		var completed_data: Variant = data.get("grammar_completed_units", {})
+		if completed_data is Dictionary:
+			grammar_completed_units = completed_data
 
 
 func _load_saved_words() -> void:

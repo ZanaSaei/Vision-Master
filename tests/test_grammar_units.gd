@@ -12,6 +12,7 @@ var _backup := ""
 var _orig_unlocked: Variant = null
 var _orig_start: int = 0
 var _orig_xp: Variant = null
+var _orig_completed: Variant = null
 
 const TEST_PROGRESS_PATH := "user://progress.json"
 
@@ -43,6 +44,10 @@ func _restore() -> void:
 		Global.grammar_xp.erase(key)
 	else:
 		Global.grammar_xp[key] = _orig_xp
+	if _orig_completed == null:
+		Global.grammar_completed_units.erase(key)
+	else:
+		Global.grammar_completed_units[key] = _orig_completed
 
 
 func test_grammar_unlock_progression() -> void:
@@ -99,8 +104,10 @@ func test_xp_awarded_only_on_unit_completion() -> void:
 	_orig_xp = Global.grammar_xp.get(key, null)
 	_orig_unlocked = Global.grammar_unlocked_units.get(key, null)
 	_orig_start = Global.grammar_start_unit_index
+	_orig_completed = Global.grammar_completed_units.get(key, null)
 	Global.grammar_xp.erase(key)
 	Global.grammar_unlocked_units.erase(key)
+	Global.grammar_completed_units.erase(key)
 
 	var lesson_script: GDScript = load("res://scenes/grammar/scripts/GrammarLesson.gd")
 	var lesson: Control = lesson_script.new()
@@ -116,6 +123,35 @@ func test_xp_awarded_only_on_unit_completion() -> void:
 	assert(lesson.xp == 10, "completing a بخش awards xp_per_unit, got " + str(lesson.xp))
 	assert(Global.get_grammar_xp(Global.current_book, Global.current_lesson) == 10, "XP persisted to Global, got " + str(Global.get_grammar_xp(Global.current_book, Global.current_lesson)))
 	assert(lesson._last_award == 10, "last award tracks the granted amount")
+	lesson.free()
+	_restore()
+
+
+func test_no_xp_on_unit_replay() -> void:
+	var key: String = "%d_%d" % [Global.current_book, Global.current_lesson]
+	_orig_xp = Global.grammar_xp.get(key, null)
+	_orig_unlocked = Global.grammar_unlocked_units.get(key, null)
+	_orig_start = Global.grammar_start_unit_index
+	_orig_completed = Global.grammar_completed_units.get(key, null)
+	Global.grammar_xp.erase(key)
+	Global.grammar_unlocked_units.erase(key)
+	Global.grammar_completed_units.erase(key)
+
+	var lesson_script: GDScript = load("res://scenes/grammar/scripts/GrammarLesson.gd")
+	var lesson: Control = lesson_script.new()
+	lesson.lesson_data = {"title_fa": "test", "xp_per_unit": 10}
+	lesson.units = [{}, {}]
+	lesson.current_unit_index = 0
+	lesson.xp = 0
+	# First completion awards XP and records the unit as done.
+	lesson._award_unit_xp()
+	assert(lesson.xp == 10, "first completion awards XP, got " + str(lesson.xp))
+
+	# Replaying the same unit (same index) awards no additional XP.
+	lesson.xp = 0
+	lesson._award_unit_xp()
+	assert(lesson.xp == 0, "replaying a completed unit awards no XP, got " + str(lesson.xp))
+	assert(lesson._last_award == 0, "replay last_award should be 0, got " + str(lesson._last_award))
 	lesson.free()
 	_restore()
 

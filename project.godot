@@ -41,6 +41,10 @@ window/handheld/orientation=1
 naming/scene_name_casing=1
 naming/script_name_casing=2
 
+[gui]
+
+theme/custom_font="res://assets/fonts/Vazirmatn-Regular.ttf"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

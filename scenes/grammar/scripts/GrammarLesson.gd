@@ -416,11 +416,21 @@ func _on_exercise_completed() -> void:
 
 
 # Awards XP for finishing the current بخش and persists it. Uses the
-# lesson's xp_per_unit value (default 10).
+# lesson's xp_per_unit value (default 10). XP is only granted the FIRST
+# time a بخش is completed — replaying it grants nothing.
 func _award_unit_xp() -> void:
-	_last_award = int(lesson_data.get("xp_per_unit", 10))
-	xp += _last_award
-	Global.add_grammar_xp(Global.current_book, Global.current_lesson, _last_award)
+	var already_done: bool = Global.is_unit_completed(
+		Global.current_book, Global.current_lesson, current_unit_index
+	)
+	Global.mark_unit_completed(
+		Global.current_book, Global.current_lesson, current_unit_index
+	)
+	if already_done:
+		_last_award = 0
+	else:
+		_last_award = int(lesson_data.get("xp_per_unit", 10))
+		xp += _last_award
+		Global.add_grammar_xp(Global.current_book, Global.current_lesson, _last_award)
 	_update_xp_label()
 
 
