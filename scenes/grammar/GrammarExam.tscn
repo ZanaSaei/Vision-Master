@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d2r6g628hd4vt"]
+
+[ext_resource type="Script" uid="uid://camgks36hi3wn" path="res://scenes/grammar/scripts/GrammarExam.gd" id="1_exam"]
+
+[node name="GrammarExam" type="Control" unique_id=390357982]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_exam")

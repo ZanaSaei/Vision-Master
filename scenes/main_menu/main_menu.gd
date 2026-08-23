@@ -9,7 +9,7 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_BOOK_MENU        := "res://scenes/book_menu/BookMenu.tscn"
 const SCENE_SAVED_WORDS      := "res://scenes/saved_words/SavedWords.tscn"
 const SCENE_SETTINGS         := "res://scenes/settings/Settings.tscn"
-const SCENE_EXAM             := "res://scenes/exam/Exam.tscn"
+const SCENE_FINAL_EXAMS      := "res://scenes/exam/FinalExams.tscn"
 const SCENE_PURCHASE         := "res://scenes/purchase/Purchase.tscn"
 const SCENE_LEITNER          := "res://scenes/review/WordReview.tscn"
 const SCENE_ABOUT_ME         := "res://scenes/about_me/AboutMe.tscn"
@@ -666,7 +666,7 @@ func _on_exam_pressed() -> void:
 	_navigating = true
 	Global.button_bounce(exam_button)
 	await get_tree().create_timer(0.14).timeout
-	TransitionManager.slide_change_scene(SCENE_EXAM, TransitionManager.Slide.FORWARD)
+	TransitionManager.slide_change_scene(SCENE_FINAL_EXAMS, TransitionManager.Slide.FORWARD)
 
 func _on_side_menu_about_me_pressed() -> void:
 	# Same guard pattern as saved_words_button's handler

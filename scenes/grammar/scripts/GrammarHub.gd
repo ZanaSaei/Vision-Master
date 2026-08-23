@@ -4,6 +4,7 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_LESSON_MENU: String = "res://scenes/lesson_menu/LessonMenu.tscn"
 const SCENE_UNITS: String = "res://scenes/grammar/GrammarUnits.tscn"
 const SCENE_WORKBOOK: String = "res://scenes/workbook/Workbook.tscn"
+const SCENE_GRAMMAR_EXAM: String = "res://scenes/grammar/GrammarExam.tscn"
 
 var _navigating: bool = false
 
@@ -117,6 +118,14 @@ func _build_ui() -> void:
 	)
 	button_row.add_child(workbook_button)
 
+	var exam_button: GrammarButton = _make_full_button(
+		"🎓\nامتحان گرامر",
+		Color("#D97706"),
+		52,
+		Callable(self, "_on_exam_pressed")
+	)
+	content.add_child(exam_button)
+
 
 func _make_header_button(text: String, callback: Callable) -> Button:
 	var button: Button = Button.new()
@@ -143,6 +152,33 @@ func _make_feature_button(text: String, accent: Color, font_size: int, callback:
 	button.custom_minimum_size = Vector2(0.0, 260.0)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	button.enable_press_animation = true
+	button.play_click_sound = true
+	button.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	button.add_theme_font_size_override("font_size", font_size)
+	button.add_theme_color_override("font_color", Color.WHITE)
+	button.add_theme_color_override("font_hover_color", Color.WHITE)
+	button.add_theme_color_override("font_pressed_color", Color.WHITE)
+	button.add_theme_color_override("font_focus_color", Color.WHITE)
+	button.add_theme_color_override("font_disabled_color", Color("#D1D5DB"))
+	# Apply accent styleboxes on `ready` so GrammarButton._apply_theme()
+	# (which runs during _ready) cannot overwrite them.
+	button.ready.connect(func() -> void: _apply_feature_styles(button, accent))
+	button.pressed.connect(callback)
+	return button
+
+
+func _make_full_button(text: String, accent: Color, font_size: int, callback: Callable) -> GrammarButton:
+	# A single full-width, horizontally-filled big button (used below the
+	# two-column feature row, e.g. the "امتحان گرامر" entry).
+	var button: GrammarButton = GrammarButton.new()
+	button.variant = GrammarButton.ButtonVariant.PRIMARY
+	button.no_clip = true
+	button.text = text
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	button.custom_minimum_size = Vector2(0.0, 150.0)
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.enable_press_animation = true
 	button.play_click_sound = true
 	button.add_theme_font_override("font", GrammarTheme.get_fa_bold())
@@ -188,6 +224,14 @@ func _on_workbook_pressed() -> void:
 	_navigating = true
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
 	TransitionManager.change_scene(SCENE_WORKBOOK)
+
+
+func _on_exam_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	Global.set_last_scene(get_tree().current_scene.scene_file_path)
+	TransitionManager.change_scene(SCENE_GRAMMAR_EXAM)
 
 
 func _on_back_pressed() -> void:

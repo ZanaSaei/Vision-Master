@@ -28,6 +28,8 @@ func _get_player() -> AudioStreamPlayer:
 func play(sfx_name: String) -> void:
 	if sfx_name.is_empty():
 		return
+	if not Global.sound_enabled:
+		return
 	var path := DIR + sfx_name
 	if not ResourceLoader.exists(path):
 		push_warning("SFX not found: " + path)

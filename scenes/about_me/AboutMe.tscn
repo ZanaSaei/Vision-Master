@@ -1,9 +1,379 @@
 [gd_scene format=3 uid="uid://de083h1ig7hpl"]
 
-[node name="AboutMe" type="Control" unique_id=1173745988]
+[ext_resource type="Script" uid="uid://ck2vut4ftdqmj" path="res://scenes/about_me/about_me.gd" id="1_aboutme"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="back_style"]
+content_margin_left = 30.0
+content_margin_top = 16.0
+content_margin_right = 30.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 1, 1, 0.08)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.14)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="btn_pressed"]
+content_margin_left = 26.0
+content_margin_top = 18.0
+content_margin_right = 26.0
+content_margin_bottom = 18.0
+bg_color = Color(0.545098, 0.360784, 0.964706, 0.42)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.760784, 0.611765, 1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="btn_hover"]
+content_margin_left = 26.0
+content_margin_top = 18.0
+content_margin_right = 26.0
+content_margin_bottom = 18.0
+bg_color = Color(0.545098, 0.360784, 0.964706, 0.3)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.654902, 0.482353, 0.980392, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="profile_style"]
+content_margin_left = 44.0
+content_margin_top = 44.0
+content_margin_right = 44.0
+content_margin_bottom = 40.0
+bg_color = Color(0.545098, 0.360784, 0.964706, 0.12)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.760784, 0.611765, 1, 0.35)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="avatar_style"]
+bg_color = Color(0.545098, 0.360784, 0.964706, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="card_style"]
+content_margin_left = 44.0
+content_margin_top = 38.0
+content_margin_right = 44.0
+content_margin_bottom = 38.0
+bg_color = Color(1, 1, 1, 0.06)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="btn_style"]
+content_margin_left = 26.0
+content_margin_top = 18.0
+content_margin_right = 26.0
+content_margin_bottom = 18.0
+bg_color = Color(1, 1, 1, 0.09)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.14)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="sep_line"]
+bg_color = Color(1, 1, 1, 0.1)
+
+[node name="AboutMe" type="Control" unique_id=1719486538]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_aboutme")
+
+[node name="Bg" type="ColorRect" parent="." unique_id=1447436396]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.018, 0.055, 0.88)
+
+[node name="Header" type="Control" parent="." unique_id=1615973894]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 170.0
+grow_horizontal = 2
+
+[node name="Margin" type="MarginContainer" parent="Header" unique_id=1643775161]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 26
+
+[node name="HBox" type="HBoxContainer" parent="Header/Margin" unique_id=1677616699]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="BackButton" type="Button" parent="Header/Margin/HBox" unique_id=385981541]
+custom_minimum_size = Vector2(190, 96)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("back_style")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn_hover")
+theme_override_styles/focus = SubResource("back_style")
+text = "←  بازگشت"
+
+[node name="Title" type="Label" parent="Header/Margin/HBox" unique_id=1090858082]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.4)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 56
+text = "درباره من"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="." unique_id=1665583781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Scroll" unique_id=585024103]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 80
+
+[node name="Layout" type="VBoxContainer" parent="Scroll/Margin" unique_id=1628503862]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="ProfileCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=1266644671]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("profile_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/ProfileCard" unique_id=901349655]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Avatar" type="PanelContainer" parent="Scroll/Margin/Layout/ProfileCard/VBox" unique_id=1402139395]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("avatar_style")
+
+[node name="Initial" type="Label" parent="Scroll/Margin/Layout/ProfileCard/VBox/Avatar" unique_id=1676316689]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.35)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 92
+text = "M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Scroll/Margin/Layout/ProfileCard/VBox" unique_id=669503059]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.4)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 52
+text = "MrSaei"
+horizontal_alignment = 1
+
+[node name="Role" type="Label" parent="Scroll/Margin/Layout/ProfileCard/VBox" unique_id=1107879167]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.760784, 0.611765, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+text = "توسعه‌دهنده اپلیکیشن Vision Master"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Scroll/Margin/Layout/ProfileCard/VBox" unique_id=231173959]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.82, 0.82, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "ساخته‌شده با ❤️ برای زبان‌آموزان ایرانی"
+horizontal_alignment = 1
+
+[node name="BioCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=1599968103]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("card_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/BioCard" unique_id=433612615]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BioTitle" type="Label" parent="Scroll/Margin/Layout/BioCard/VBox" unique_id=1706716984]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.760784, 0.611765, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 42
+text = "درباره من"
+horizontal_alignment = 1
+
+[node name="BioText" type="Label" parent="Scroll/Margin/Layout/BioCard/VBox" unique_id=215645327]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.98, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 34
+text = "سلام! من MrSaei هستم، توسعه‌دهنده اپلیکیشن Vision Master. هدف من ساخت ابزارهایی است که یادگیری زبان انگلیسی را برای دانش‌آموزان ایرانی ساده، لذت‌بخش و مؤثر کند. این پروژه با عشق به آموزش و تکنولوژی طراحی و پیاده‌سازی شده است."
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="AppCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=1624166069]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("card_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/AppCard" unique_id=821647724]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AppTitle" type="Label" parent="Scroll/Margin/Layout/AppCard/VBox" unique_id=1489349883]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.760784, 0.611765, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 42
+text = "درباره اپلیکیشن"
+horizontal_alignment = 1
+
+[node name="AppText" type="Label" parent="Scroll/Margin/Layout/AppCard/VBox" unique_id=154966334]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.98, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 34
+text = "Vision Master یک اپلیکیشن آموزش زبان انگلیسی برای دبیرستان است؛ شامل واژگان، دستور زبان، مکالمه، خواندن و تمرین‌های تعاملی برای کتاب‌های Vision 1 تا 3."
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="ContactCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=1397626582]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("card_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/ContactCard" unique_id=870877841]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="ContactTitle" type="Label" parent="Scroll/Margin/Layout/ContactCard/VBox" unique_id=1410569530]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.760784, 0.611765, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 42
+text = "ارتباط با من"
+horizontal_alignment = 1
+
+[node name="EmailRow" type="Button" parent="Scroll/Margin/Layout/ContactCard/VBox" unique_id=1170938235]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_style")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn_hover")
+theme_override_styles/focus = SubResource("btn_style")
+text = "✉️   mrsaei@example.com"
+
+[node name="InstagramRow" type="Button" parent="Scroll/Margin/Layout/ContactCard/VBox" unique_id=1982736451]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_style")
+theme_override_styles/pressed = SubResource("btn_pressed")
+theme_override_styles/hover = SubResource("btn_hover")
+theme_override_styles/focus = SubResource("btn_style")
+text = "📸   @mrsaei"
+
+[node name="Sep" type="HSeparator" parent="Scroll/Margin/Layout/ContactCard/VBox" unique_id=1845794110]
+layout_mode = 2
+theme_override_styles/separator = SubResource("sep_line")
+
+[node name="ContactHint" type="Label" parent="Scroll/Margin/Layout/ContactCard/VBox" unique_id=488596213]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.78, 0.82, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 28
+text = "برای تماس، روی ایمیل یا اینستاگرام بزنید تا کپی شود."
+horizontal_alignment = 1
+
+[node name="Footer" type="VBoxContainer" parent="Scroll/Margin/Layout" unique_id=1324767713]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="VersionValue" type="Label" parent="Scroll/Margin/Layout/Footer" unique_id=1249979699]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.82, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "نسخه 1.0.0"
+horizontal_alignment = 1
+
+[node name="CreditLabel" type="Label" parent="Scroll/Margin/Layout/Footer" unique_id=1155908400]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.66, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 26
+text = "Developed by MrSaei"
+horizontal_alignment = 1

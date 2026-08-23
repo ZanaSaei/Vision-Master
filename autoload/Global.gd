@@ -155,12 +155,42 @@ var grammar_xp: Dictionary = {}
 # is only awarded once per unit (never on replays).
 var grammar_completed_units: Dictionary = {}
 
+# ---------- APP SETTINGS ----------
+const SETTINGS_PATH := "user://settings.json"
+var sound_enabled: bool = true   # UI sound effects (Sfx autoload)
+var tts_enabled: bool = true     # English text-to-speech pronunciation
+
+
+func _load_settings() -> void:
+	if not FileAccess.file_exists(SETTINGS_PATH):
+		return
+	var file := FileAccess.open(SETTINGS_PATH, FileAccess.READ)
+	var text := file.get_as_text()
+	file.close()
+	var json := JSON.new()
+	if json.parse(text) != OK or not (json.data is Dictionary):
+		return
+	var data: Dictionary = json.data
+	sound_enabled = bool(data.get("sound_enabled", true))
+	tts_enabled = bool(data.get("tts_enabled", true))
+
+
+func save_settings() -> void:
+	var data: Dictionary = {
+		"sound_enabled": sound_enabled,
+		"tts_enabled": tts_enabled,
+	}
+	var file := FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
+	file.store_string(JSON.stringify(data))
+	file.close()
+
 
 func _ready() -> void:
 	_load_saved_words()
 	_load_review_words()
 	_load_progress()
 	_load_word_database()
+	_load_settings()
 	_init_tts() # You can keep or remove TTS init, keeping it for safety
 	
 	# Initialize AudioStreamPlayer for playing word audio files
@@ -391,6 +421,33 @@ func remove_review_word(word:String, book:int, lesson:int) -> void:
 
 func get_review_words() -> Array:
 	return review_words
+
+
+# ---------- DATA MANAGEMENT (used by the Settings screen) ----------
+
+func clear_saved_words() -> void:
+	saved_words.clear()
+	_persist_saved_words()
+	review_words_changed.emit()
+
+
+func clear_review_words() -> void:
+	review_words.clear()
+	_persist_review_words()
+	review_words_changed.emit()
+
+
+func reset_all_progress() -> void:
+	saved_words.clear()
+	review_words.clear()
+	grammar_unlocked_units.clear()
+	grammar_xp.clear()
+	grammar_completed_units.clear()
+	_last_scene = ""
+	_persist_saved_words()
+	_persist_review_words()
+	_save_progress()
+	review_words_changed.emit()
 
 
 # ---------- ENHANCED WORD DATABASE ----------
@@ -781,6 +838,8 @@ func ensure_english_voice() -> void:
 
 func speak_word(text: String) -> void:
 	if text.is_empty():
+		return
+	if not tts_enabled:
 		return
 
 	# Retry voice detection in case it failed at startup.

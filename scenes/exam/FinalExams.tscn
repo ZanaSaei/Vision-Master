@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfsxchwulflga"]
 
-[node name="Exam" type="Control" unique_id=1140232866]
+[node name="FinalExams" type="Control" unique_id=1140232866]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
