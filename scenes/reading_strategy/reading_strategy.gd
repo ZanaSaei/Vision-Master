@@ -35,6 +35,7 @@ const DEFAULT_THEME := {"accent": Color("#2563EB"), "soft": Color("#EFF6FF"), "i
 @onready var content_layout: VBoxContainer = $MarginContainer/MainLayout/ScrollContainer/ContentLayout
 
 var _reveal_cards: Array = []   # collected for staggered entrance
+var _ambient_accent := Color("#2563EB")  # last applied ambient accent
 
 
 func _ready() -> void:
@@ -44,6 +45,8 @@ func _ready() -> void:
 	
 	back_button.pressed.connect(_on_back_button_pressed)
 	if font_bold: header_title.add_theme_font_override("font", font_bold)
+	# Restyle live when the app theme toggles.
+	Global.on_theme_changed(_apply_theme)
 	
 	var book: int = Global.current_book
 	var lesson: int = Global.current_lesson
@@ -55,27 +58,42 @@ func _ready() -> void:
 		return
 	
 	var strategy: Dictionary = data["strategy"]
-	var theme: Dictionary = STRATEGY_THEMES.get(strategy["name"]["en"], DEFAULT_THEME)
+	var palette: Dictionary = STRATEGY_THEMES.get(strategy["name"]["en"], DEFAULT_THEME)
 	
-	_apply_ambient_background(theme["accent"])
-	_build_banner(strategy, theme)
-	_build_steps(strategy, theme)
-	_build_reference_materials(strategy, theme)
-	_build_persian_insights(strategy, theme)
-	_build_practice(data.get("exercises", []), theme)
+	_apply_ambient_background(palette["accent"])
+	_build_banner(strategy, palette)
+	_build_steps(strategy, palette)
+	_build_reference_materials(strategy, palette)
+	_build_persian_insights(strategy, palette)
+	_build_practice(data.get("exercises", []), palette)
 	_build_bottom_spacer()
 	_play_entrance()
+	_apply_theme()
 
 
 # ============================================================
 # AMBIENT BACKGROUND — tinted by the strategy's accent
 # ============================================================
 func _apply_ambient_background(accent: Color) -> void:
+	_ambient_accent = accent
+	_apply_ambient_material()
+
+
+func _apply_ambient_material() -> void:
+	# Dark mode keeps today's light gradient; light mode uses the palette.
+	var top: Color
+	var bottom: Color
+	if Global.theme_is_dark():
+		top = Color(0.97, 0.98, 1.0)
+		bottom = Color(0.92, 0.94, 0.98)
+	else:
+		top = Global.get_theme_color("bg")
+		bottom = Global.get_theme_color("bg_base")
 	var shader := Shader.new()
 	shader.code = """
 shader_type canvas_item;
-uniform vec4 top : source_color = vec4(0.97, 0.98, 1.0, 1.0);
-uniform vec4 bottom : source_color = vec4(0.92, 0.94, 0.98, 1.0);
+uniform vec4 top : source_color = vec4(%f, %f, %f, 1.0);
+uniform vec4 bottom : source_color = vec4(%f, %f, %f, 1.0);
 uniform vec4 accent : source_color = vec4(0.0, 0.5, 0.6, 1.0);
 void fragment() {
 	vec4 grad = mix(top, bottom, UV.y);
@@ -83,18 +101,24 @@ void fragment() {
 	float glow = clamp(1.0 - d * 1.4, 0.0, 1.0);
 	COLOR = mix(grad, accent, glow * 0.10);
 }
-"""
+""" % [top.r, top.g, top.b, bottom.r, bottom.g, bottom.b]
 	var mat := ShaderMaterial.new()
 	mat.shader = shader
-	mat.set_shader_parameter("accent", accent)
+	mat.set_shader_parameter("accent", _ambient_accent)
 	background.material = mat
+
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	_apply_ambient_material()
 
 
 # ============================================================
 # BANNER — the strategy's identity, big and bold
 # ============================================================
-func _build_banner(strategy: Dictionary, theme: Dictionary) -> void:
-	var accent: Color = theme["accent"]
+func _build_banner(strategy: Dictionary, palette: Dictionary) -> void:
+	var accent: Color = palette["accent"]
 	
 	var banner := PanelContainer.new()
 	var style := StyleBoxFlat.new()
@@ -108,7 +132,7 @@ func _build_banner(strategy: Dictionary, theme: Dictionary) -> void:
 	
 	var icon := Label.new()
 	icon.name = "BannerIcon"
-	icon.text = str(theme["icon"])
+	icon.text = str(palette["icon"])
 	icon.add_theme_font_size_override("font_size", 84)
 	icon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(icon)
@@ -157,12 +181,12 @@ func _build_banner(strategy: Dictionary, theme: Dictionary) -> void:
 # ============================================================
 # STEPS — numbered vertical timeline
 # ============================================================
-func _build_steps(strategy: Dictionary, theme: Dictionary) -> void:
+func _build_steps(strategy: Dictionary, palette: Dictionary) -> void:
 	var steps: Array = strategy.get("steps", [])
 	if steps.is_empty(): return
 	
-	var accent: Color = theme["accent"]
-	var soft: Color = theme["soft"]
+	var accent: Color = palette["accent"]
+	var soft: Color = palette["soft"]
 	
 	content_layout.add_child(_make_section_title("How to do it", "چگونه انجام دهیم", accent))
 	
@@ -237,9 +261,9 @@ func _build_steps(strategy: Dictionary, theme: Dictionary) -> void:
 # ============================================================
 # REFERENCE MATERIALS — question starters / ref words / symbols
 # ============================================================
-func _build_reference_materials(strategy: Dictionary, theme: Dictionary) -> void:
-	var accent: Color = theme["accent"]
-	var soft: Color = theme["soft"]
+func _build_reference_materials(strategy: Dictionary, palette: Dictionary) -> void:
+	var accent: Color = palette["accent"]
+	var soft: Color = palette["soft"]
 	
 	# Question starters (Question Generation)
 	if strategy.has("question_starters"):
@@ -299,8 +323,8 @@ func _build_reference_materials(strategy: Dictionary, theme: Dictionary) -> void
 # ============================================================
 # PERSIAN INSIGHTS — extra_fa + tips_fa
 # ============================================================
-func _build_persian_insights(strategy: Dictionary, theme: Dictionary) -> void:
-	var accent: Color = theme["accent"]
+func _build_persian_insights(strategy: Dictionary, palette: Dictionary) -> void:
+	var accent: Color = palette["accent"]
 	
 	var extra: Array = strategy.get("extra_fa", [])
 	if not extra.is_empty():
@@ -346,9 +370,9 @@ func _make_insight_card(text: String, accent: Color) -> PanelContainer:
 # ============================================================
 # PRACTICE — reuse your ExerciseEngine
 # ============================================================
-func _build_practice(exercises: Array, theme: Dictionary) -> void:
+func _build_practice(exercises: Array, palette: Dictionary) -> void:
 	if exercises.is_empty(): return
-	content_layout.add_child(_make_section_title("Practice", "تمرین", theme["accent"]))
+	content_layout.add_child(_make_section_title("Practice", "تمرین", palette["accent"]))
 	for exercise in exercises:
 		var engine := ExerciseEngine.new()
 		content_layout.add_child(engine)
@@ -444,11 +468,11 @@ func _make_chip(main: String, sub: String, accent: Color, soft: Color) -> PanelC
 	return chip
 
 
-func _make_label(text: String, size: int, color: Color, bold: bool) -> Label:
+func _make_label(text: String, font_size: int, color: Color, bold: bool) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD
-	l.add_theme_font_size_override("font_size", size)
+	l.add_theme_font_size_override("font_size", font_size)
 	l.add_theme_color_override("font_color", color)
 	if bold and font_bold: l.add_theme_font_override("font", font_bold)
 	elif not bold and font_regular: l.add_theme_font_override("font", font_regular)

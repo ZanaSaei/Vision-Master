@@ -37,6 +37,7 @@ var _current_lesson: int = 0
 var show_translation: bool = false
 var _engines: Array = []       # ExerciseEngine instances on the current page
 var _fa_labels: Array = []     # Farsi labels from passage/grammar-note cards
+var _theme_targets: Array[Callable] = []  # restyle callbacks for dynamic nodes
 
 
 func _ready() -> void:
@@ -54,6 +55,9 @@ func _ready() -> void:
 	header_title.text = "Lesson %d\nWorkbook" % _current_lesson
 	_update_toggle_button_text()
 
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
 	_data = Global.load_category("workbook", _current_book, _current_lesson)
 	
 	if _data.is_empty():
@@ -61,6 +65,34 @@ func _ready() -> void:
 		return
 	
 	_build_workbook_pages()
+
+
+# ============================================================
+# THEME
+# ============================================================
+# Returns the given fixed color in dark mode (identical to today) or the
+# matching palette role in light mode.
+func _palette(dark_color: Color, role: String) -> Color:
+	return dark_color if Global.theme_is_dark() else Global.get_theme_color(role)
+
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	# Full-screen page background.
+	var background := get_node_or_null("Background") as ColorRect
+	if background:
+		background.color = Color(0.17254902, 0.21960784, 0.49803922, 1) \
+			if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+	# Restyle every dynamically built themed node for the current mode.
+	for target in _theme_targets:
+		target.call()
+
+
+func _on_theme_changed(_mode: int) -> void:
+	if not is_inside_tree():
+		return
+	_apply_theme()
 
 
 # ============================================================
@@ -101,8 +133,10 @@ func _show_empty_message() -> void:
 	msg.text = "📚 Workbook content for Lesson %d is not available yet.\n\nPlease check that the workbook.json file exists at:\nres://data/workbook.json" % _current_lesson
 	msg.autowrap_mode = TextServer.AUTOWRAP_WORD
 	msg.add_theme_font_size_override("font_size", 36)
-	msg.add_theme_color_override("font_color", Color("#64748B"))
+	msg.add_theme_color_override("font_color", _palette(Color("#64748B"), "text_dim"))
 	msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_theme_targets.append(func() -> void:
+		msg.add_theme_color_override("font_color", _palette(Color("#64748B"), "text_dim")))
 	if font_regular: msg.add_theme_font_override("font", font_regular)
 	page.add_child(msg)
 	
@@ -245,12 +279,14 @@ func _make_part_banner(part_num: int, part_title: Dictionary, lesson_title: Dict
 func _make_passage_card(passage: Dictionary) -> PanelContainer:
 	var card := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#F8FAFC")
+	style.bg_color = _palette(Color("#F8FAFC"), "surface")
 	style.set_corner_radius_all(16)
 	style.border_width_left = 5
 	style.border_color = ACCENT
 	style.set_content_margin_all(20)
 	card.add_theme_stylebox_override("panel", style)
+	_theme_targets.append(func() -> void:
+		style.bg_color = _palette(Color("#F8FAFC"), "surface"))
 	
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 12)
@@ -301,9 +337,11 @@ func _make_passage_en_label(text: String) -> Label:
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	label.add_theme_font_size_override("font_size", 34)
-	label.add_theme_color_override("font_color", Color("#1E293B"))
+	label.add_theme_color_override("font_color", _palette(Color("#1E293B"), "text"))
 	if font_regular:
 		label.add_theme_font_override("font", font_regular)
+	_theme_targets.append(func() -> void:
+		label.add_theme_color_override("font_color", _palette(Color("#1E293B"), "text")))
 	return label
 
 
@@ -312,13 +350,15 @@ func _make_passage_fa_label(text: String) -> Label:
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	label.add_theme_font_size_override("font_size", 32)
-	label.add_theme_color_override("font_color", Color("#64748B"))
+	label.add_theme_color_override("font_color", _palette(Color("#64748B"), "text_dim"))
 	label.text_direction = Control.TEXT_DIRECTION_RTL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	if font_farsi:
 		label.add_theme_font_override("font", font_farsi)
 	label.visible = show_translation
 	_fa_labels.append(label)
+	_theme_targets.append(func() -> void:
+		label.add_theme_color_override("font_color", _palette(Color("#64748B"), "text_dim")))
 	return label
 
 
@@ -328,12 +368,15 @@ func _make_passage_fa_label(text: String) -> Label:
 func _make_grammar_note_card(grammar_note: Dictionary) -> PanelContainer:
 	var card := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#FEF9C3")
+	style.bg_color = _palette(Color("#FEF9C3"), "surface")
 	style.set_corner_radius_all(16)
 	style.border_width_left = 5
-	style.border_color = Color("#CA8A04")
+	style.border_color = _palette(Color("#CA8A04"), "border")
 	style.set_content_margin_all(20)
 	card.add_theme_stylebox_override("panel", style)
+	_theme_targets.append(func() -> void:
+		style.bg_color = _palette(Color("#FEF9C3"), "surface")
+		style.border_color = _palette(Color("#CA8A04"), "border"))
 	
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 10)
@@ -342,9 +385,11 @@ func _make_grammar_note_card(grammar_note: Dictionary) -> PanelContainer:
 	var header := Label.new()
 	header.text = "📐 Grammar Note"
 	header.add_theme_font_size_override("font_size", 34)
-	header.add_theme_color_override("font_color", Color("#92400E"))
+	header.add_theme_color_override("font_color", _palette(Color("#92400E"), "accent"))
 	if font_bold: header.add_theme_font_override("font", font_bold)
 	vb.add_child(header)
+	_theme_targets.append(func() -> void:
+		header.add_theme_color_override("font_color", _palette(Color("#92400E"), "accent")))
 	
 	# English explanation
 	var en_text: String = grammar_note.get("en", "")
@@ -353,9 +398,11 @@ func _make_grammar_note_card(grammar_note: Dictionary) -> PanelContainer:
 		en_label.text = en_text
 		en_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 		en_label.add_theme_font_size_override("font_size", 34)
-		en_label.add_theme_color_override("font_color", Color("#1E293B"))
+		en_label.add_theme_color_override("font_color", _palette(Color("#1E293B"), "text"))
 		if font_regular: en_label.add_theme_font_override("font", font_regular)
 		vb.add_child(en_label)
+		_theme_targets.append(func() -> void:
+			en_label.add_theme_color_override("font_color", _palette(Color("#1E293B"), "text")))
 	
 	# Farsi explanation
 	var fa_text: String = grammar_note.get("fa", "")
@@ -364,13 +411,15 @@ func _make_grammar_note_card(grammar_note: Dictionary) -> PanelContainer:
 		fa_label.text = fa_text
 		fa_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 		fa_label.add_theme_font_size_override("font_size", 32)
-		fa_label.add_theme_color_override("font_color", Color("#78716C"))
+		fa_label.add_theme_color_override("font_color", _palette(Color("#78716C"), "text_dim"))
 		fa_label.text_direction = Control.TEXT_DIRECTION_RTL
 		fa_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		if font_farsi: fa_label.add_theme_font_override("font", font_farsi)
 		fa_label.visible = show_translation
 		_fa_labels.append(fa_label)
 		vb.add_child(fa_label)
+		_theme_targets.append(func() -> void:
+			fa_label.add_theme_color_override("font_color", _palette(Color("#78716C"), "text_dim")))
 	
 	card.add_child(vb)
 	return card

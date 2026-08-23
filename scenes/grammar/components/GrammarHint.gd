@@ -36,6 +36,10 @@ func _ready() -> void:
 	# Button itself captures presses.
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_build_ui()
+	_apply_theme()
+	Global.on_theme_changed(
+		_on_theme_changed
+	)
 	set_process(true)
 
 
@@ -57,7 +61,6 @@ func _build_ui() -> void:
 	_bubble.visible = false
 	_bubble.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_bubble.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_bubble.add_theme_stylebox_override("panel", GrammarTheme.rounded_box(GrammarTheme.WARNING, 20, Color(1.0, 0.92, 0.6, 0.6), 2))
 	vbox.add_child(_bubble)
 
 	_bubble_margin = MarginContainer.new()
@@ -74,7 +77,6 @@ func _build_ui() -> void:
 	_bubble_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_bubble_label.custom_minimum_size = Vector2(320, 0)
 	_bubble_label.add_theme_font_size_override("font_size", GrammarTheme.BODY_SMALL_SIZE)
-	_bubble_label.add_theme_color_override("font_color", Color(0.09, 0.09, 0.12))
 	_bubble_label.add_theme_font_override("font", GrammarTheme.get_fa_regular())
 	_bubble_margin.add_child(_bubble_label)
 
@@ -95,6 +97,34 @@ func _build_ui() -> void:
 	_bulb.add_theme_stylebox_override("disabled", flat)
 	_bulb.pressed.connect(func() -> void: hint_requested.emit())
 	vbox.add_child(_bulb)
+
+
+# Theme --------------------------------------------------------
+
+func _apply_theme() -> void:
+	if _bubble == null or _bubble_label == null:
+		return
+	# The hint bubble is an intentionally bright, friendly light-bulb
+	# callout. In dark mode it uses the warm warning gold; in light mode
+	# a bright warm yellow keeps the same friendly look. Dark text reads
+	# well on both fills.
+	var is_dark := Global.theme_is_dark()
+	var fill: Color = GrammarTheme.warning_color() if is_dark else Color(1.0, 0.84, 0.30)
+	var border: Color = Color(1.0, 0.92, 0.6, 0.6) if is_dark else Color(1.0, 0.80, 0.40, 0.9)
+	_bubble.add_theme_stylebox_override(
+		"panel",
+		GrammarTheme.rounded_box(fill, 20, border, 2)
+	)
+	_bubble_label.add_theme_color_override(
+		"font_color",
+		Color(0.09, 0.09, 0.12)
+	)
+
+
+func _on_theme_changed(_mode: int) -> void:
+	if not is_inside_tree():
+		return
+	_apply_theme()
 
 
 # Public API ---------------------------------------------------

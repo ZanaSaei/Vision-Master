@@ -134,6 +134,9 @@ func _ready() -> void:
 	_build_comprehension_page(comp_data) #[cite: 2]
 	
 	_update_toggle_button_text() #[cite: 2]
+	
+	Global.on_theme_changed(_apply_theme) #[cite: 2]
+	_apply_theme() #[cite: 2]
 
 # ============================================================
 # PAGE BUILDERS
@@ -158,7 +161,7 @@ func _build_reading_page(data: Dictionary) -> void:
 	reading_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	reading_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	reading_title_label.add_theme_font_size_override("font_size", 58)
-	reading_title_label.add_theme_color_override("font_color", Color("#F1F5F9"))  # Light
+	reading_title_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	if font_bold: reading_title_label.add_theme_font_override("font", font_bold)
 	page.add_child(reading_title_label)
 	
@@ -343,21 +346,7 @@ func _make_paragraph_card(text: String, translation: String, sentences: Array) -
 	var card := PanelContainer.new()
 	card.mouse_filter = Control.MOUSE_FILTER_PASS
 	
-	var card_style := StyleBoxFlat.new()
-	card_style.bg_color                   = PARA_BG_COLOR
-	card_style.corner_radius_top_left     = 20
-	card_style.corner_radius_top_right    = 20
-	card_style.corner_radius_bottom_left  = 20
-	card_style.corner_radius_bottom_right = 20
-	card_style.border_width_left          = 5
-	card_style.border_color               = PARA_BORDER_COLOR
-	card_style.content_margin_left        = 28
-	card_style.content_margin_right       = 28
-	card_style.content_margin_top         = 22
-	card_style.content_margin_bottom      = 22
-	card_style.shadow_color               = Color(0, 0, 0, 0.45)
-	card_style.shadow_size                = 10
-	card_style.shadow_offset              = Vector2(0, 6)
+	var card_style := _make_paragraph_style()
 	card.add_theme_stylebox_override("panel", card_style)
 	
 	var container := VBoxContainer.new()
@@ -373,7 +362,7 @@ func _make_paragraph_card(text: String, translation: String, sentences: Array) -
 	rtl.scroll_active = false
 	rtl.selection_enabled = false
 	rtl.add_theme_font_size_override("normal_font_size", 55)
-	rtl.add_theme_color_override("default_color", Color("#F1F5F9"))  # Light text
+	rtl.add_theme_color_override("default_color", Global.get_theme_color("text"))
 	rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if font_regular != null:
 		rtl.add_theme_font_override("normal_font", font_regular)
@@ -385,7 +374,7 @@ func _make_paragraph_card(text: String, translation: String, sentences: Array) -
 	translation_label.text = translation
 	translation_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	translation_label.add_theme_font_size_override("font_size", 45)
-	translation_label.add_theme_color_override("font_color", Color("#94A3B8"))  # Muted light
+	translation_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 	translation_label.text_direction = Control.TEXT_DIRECTION_RTL
 	translation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	translation_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -401,9 +390,50 @@ func _make_paragraph_card(text: String, translation: String, sentences: Array) -
 		"text": text,
 		"sentences": sentences,
 		"translation": translation,
-		"translation_label": translation_label
+		"translation_label": translation_label,
+		"card": card
 	})
 	return card
+
+# ---------- Theme helpers ----------
+func _card_bg() -> Color:
+	# Dark: keep the current navy card background; Light: white card.
+	return PARA_BG_COLOR if Global.theme_is_dark() else Color(1, 1, 1, 1)
+
+func _make_paragraph_style() -> StyleBoxFlat:
+	var card_style := StyleBoxFlat.new()
+	card_style.bg_color                   = _card_bg()
+	card_style.corner_radius_top_left     = 20
+	card_style.corner_radius_top_right    = 20
+	card_style.corner_radius_bottom_left  = 20
+	card_style.corner_radius_bottom_right = 20
+	card_style.border_width_left          = 5
+	card_style.border_color               = PARA_BORDER_COLOR
+	card_style.content_margin_left        = 28
+	card_style.content_margin_right       = 28
+	card_style.content_margin_top         = 22
+	card_style.content_margin_bottom      = 22
+	card_style.shadow_color               = Color(0, 0, 0, 0.45)
+	card_style.shadow_size                = 10
+	card_style.shadow_offset              = Vector2(0, 6)
+	return card_style
+
+# Restyle the reading widgets on theme toggle (and once at startup).
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	if is_instance_valid(reading_title_label):
+		reading_title_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	for item in paragraph_rtls:
+		var rtl: RichTextLabel = item.get("rtl")
+		if is_instance_valid(rtl):
+			rtl.add_theme_color_override("default_color", Global.get_theme_color("text"))
+		var tl: Label = item.get("translation_label")
+		if is_instance_valid(tl):
+			tl.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+		var card: PanelContainer = item.get("card")
+		if is_instance_valid(card):
+			card.add_theme_stylebox_override("panel", _make_paragraph_style())
 
 func _update_audio_sync(current_time: float) -> void:
 	var active_sentence: Dictionary = {} #[cite: 2]
@@ -657,7 +687,7 @@ func _build_steps(strategy: Dictionary, th: Dictionary) -> void:
 		en.text = steps[i]["en"] #[cite: 2]
 		en.autowrap_mode = TextServer.AUTOWRAP_WORD #[cite: 2]
 		en.add_theme_font_size_override("font_size", 38) #[cite: 2]
-		en.add_theme_color_override("font_color", Color("#F1F5F9")) #[cite: 2]
+		en.add_theme_color_override("font_color", Global.get_theme_color("text")) #[cite: 2]
 		if font_regular: en.add_theme_font_override("font", font_regular) #[cite: 2]
 		step_vbox.add_child(en) #[cite: 2]
 		
@@ -665,7 +695,7 @@ func _build_steps(strategy: Dictionary, th: Dictionary) -> void:
 		fa.text = steps[i]["fa"] #[cite: 2]
 		fa.autowrap_mode = TextServer.AUTOWRAP_WORD #[cite: 2]
 		fa.add_theme_font_size_override("font_size", 34) #[cite: 2]
-		fa.add_theme_color_override("font_color", Color("#94A3B8")) #[cite: 2]
+		fa.add_theme_color_override("font_color", Global.get_theme_color("text_dim")) #[cite: 2]
 		fa.text_direction = Control.TEXT_DIRECTION_RTL #[cite: 2]
 		fa.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT #[cite: 2]
 		if font_farsi: fa.add_theme_font_override("font", font_farsi) #[cite: 2]
@@ -758,7 +788,7 @@ func _build_persian_insights(strategy: Dictionary, th: Dictionary) -> void:
 func _make_insight_card(text: String, accent: Color) -> PanelContainer:
 	var card := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#1a2f5c")  # Dark bg
+	style.bg_color = _card_bg()
 	style.set_corner_radius_all(14)
 	style.border_width_right = 5
 	style.border_color = accent
@@ -772,7 +802,7 @@ func _make_insight_card(text: String, accent: Color) -> PanelContainer:
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	label.add_theme_font_size_override("font_size", 36)
-	label.add_theme_color_override("font_color", Color("#F1F5F9"))  # Light text
+	label.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	label.text_direction = Control.TEXT_DIRECTION_RTL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	if font_farsi: label.add_theme_font_override("font", font_farsi)
@@ -805,7 +835,7 @@ func _make_section_title(en: String, fa: String, accent: Color, rtl_primary := f
 	var title := Label.new()
 	title.text = en if not rtl_primary else fa
 	title.add_theme_font_size_override("font_size", 42)
-	title.add_theme_color_override("font_color", Color("#F1F5F9"))  # Light
+	title.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	if rtl_primary:
 		title.text_direction = Control.TEXT_DIRECTION_RTL
 		if font_farsi: title.add_theme_font_override("font", font_farsi)
@@ -816,7 +846,7 @@ func _make_section_title(en: String, fa: String, accent: Color, rtl_primary := f
 	var sub := Label.new()
 	sub.text = fa if not rtl_primary else en
 	sub.add_theme_font_size_override("font_size", 32)
-	sub.add_theme_color_override("font_color", Color("#94A3B8"))  # Muted light
+	sub.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 	if not rtl_primary:
 		if font_farsi: sub.add_theme_font_override("font", font_farsi)
 	sub.visible = show_translation
@@ -829,7 +859,7 @@ func _make_soft_card(soft: Color, accent: Color) -> PanelContainer:
 	var card := PanelContainer.new()
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var style := StyleBoxFlat.new()
-	style.bg_color = soft  # Now uses dark soft colors from STRATEGY_THEMES
+	style.bg_color = soft if Global.theme_is_dark() else Color(1, 1, 1, 1)
 	style.set_corner_radius_all(14)
 	style.border_width_left = 5
 	style.border_color = accent
@@ -843,7 +873,7 @@ func _make_soft_card(soft: Color, accent: Color) -> PanelContainer:
 func _make_chip(main: String, sub: String, accent: Color, _soft: Color) -> PanelContainer:
 	var chip := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#1a2f5c")  # Dark bg
+	style.bg_color = _card_bg()
 	style.set_corner_radius_all(22)
 	style.border_width_left = 1; style.border_width_right = 1
 	style.border_width_top = 1; style.border_width_bottom = 1
@@ -863,7 +893,7 @@ func _make_chip(main: String, sub: String, accent: Color, _soft: Color) -> Panel
 	var s := Label.new()
 	s.text = sub
 	s.add_theme_font_size_override("font_size", 28)
-	s.add_theme_color_override("font_color", Color("#94A3B8"))  # Muted light
+	s.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 	s.text_direction = Control.TEXT_DIRECTION_RTL
 	s.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	if font_farsi: s.add_theme_font_override("font", font_farsi)

@@ -120,6 +120,22 @@ func _on_viewport_resized() -> void:
 	for wave in _waves:
 		wave.rebuild()
 
+
+## Recolor the base fill and every corner wave for the active theme.
+## Each wave gets a rich 3-stop gradient (top → mid → bottom).
+func apply_theme(bg: Color, wave_top: Color, wave_mid: Color, wave_bottom: Color) -> void:
+	base_color = bg
+	for i in range(_waves.size()):
+		var wave: CornerWave = _waves[i]
+		wave.top_color = wave_top
+		wave.mid_color = wave_mid
+		wave.bottom_color = wave_bottom
+		# Slight per-corner hue variation for a richer, more organic range.
+		var offset := float(i % 3) * 0.06
+		wave.top_color = wave_top.lerp(Color(0.0, 0.3, 0.9, 1.0), offset)
+		wave.rebuild()
+	queue_redraw()
+
 func play_enter(stagger: float = 0.07, duration: float = 0.7) -> void:
 	if _is_animating:
 		return

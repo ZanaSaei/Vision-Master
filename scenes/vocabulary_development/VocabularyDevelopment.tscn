@@ -47,7 +47,7 @@ layout_mode = 2
 icon = ExtResource("2_w8c8i")
 flat = true
 
-[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=79949850]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 theme_override_font_sizes/font_size = 44

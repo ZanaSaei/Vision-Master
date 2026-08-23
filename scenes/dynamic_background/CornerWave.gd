@@ -16,6 +16,7 @@ enum CornerType { TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT }
 @export var corner: CornerType = CornerType.TOP_LEFT
 @export var edge_points: Array[Vector2] = []
 @export var top_color: Color = Color(0.06, 0.11, 0.4)
+@export var mid_color: Color = Color(0.09, 0.14, 0.46)
 @export var bottom_color: Color = Color(0.03, 0.05, 0.18)
 @export var smooth_segments: int = 14
 
@@ -63,7 +64,7 @@ func rebuild() -> void:
 
 	# Always start from the corner
 	_polygon.append(corner_point)
-	_colors.append(top_color.lerp(bottom_color, clamp(corner_point.y / vp.y, 0.0, 1.0)))
+	_colors.append(_gradient_color(clamp(corner_point.y / vp.y, 0.0, 1.0)))
 
 	# Add the smoothed points
 	for point in smoothed:
@@ -73,10 +74,16 @@ func rebuild() -> void:
 			clamp(point.y, 0.0, vp.y)
 		)
 		_polygon.append(clamped_point)
-		var t: float = clamp(clamped_point.y / vp.y, 0.0, 1.0)
-		_colors.append(top_color.lerp(bottom_color, t))
+		_colors.append(_gradient_color(clamp(clamped_point.y / vp.y, 0.0, 1.0)))
 
 	queue_redraw()
+
+
+## 3-stop vertical gradient: top → mid (midpoint) → bottom.
+func _gradient_color(t: float) -> Color:
+	if t < 0.5:
+		return top_color.lerp(mid_color, t * 2.0)
+	return mid_color.lerp(bottom_color, (t - 0.5) * 2.0)
 
 
 func _draw() -> void:

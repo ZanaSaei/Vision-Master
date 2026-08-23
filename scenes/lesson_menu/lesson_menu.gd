@@ -122,6 +122,27 @@ func _ready() -> void:
 	# Allow layout to settle before setting shader sizes
 	_finalize_shine_sizes()
 
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	# Lesson subtitle: keep the current black text in dark mode, use the
+	# palette text color in light mode.
+	lesson_subtitle.add_theme_color_override(
+		"font_color",
+		Color(0, 0, 0, 1) if Global.theme_is_dark() else Global.get_theme_color("text")
+	)
+
+
+func _on_theme_changed(_mode: int) -> void:
+	if not is_inside_tree():
+		return
+	_apply_theme()
+
+
 func _load_fonts() -> void:
 	# Load custom fonts from assets
 	font_regular = load(FONT_JAKARTA_REGULAR_PATH)

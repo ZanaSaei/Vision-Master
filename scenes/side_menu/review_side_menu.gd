@@ -4,6 +4,7 @@ signal word_selected(word_data)  # New signal for when a word is selected from s
 # --- Node References ---
 @onready var overlay: ColorRect = $Overlay
 @onready var menu_panel: Control = $MenuPanel
+@onready var title_label: Label = $MenuPanel/MarginContainer/VBoxContainer/Header/TitleLabel
 @onready var total_words_label: Label = $MenuPanel/MarginContainer/VBoxContainer/TotalWordsLabel
 @onready var word_list: VBoxContainer = $MenuPanel/MarginContainer/VBoxContainer/ScrollContainer/WordList
 
@@ -54,12 +55,109 @@ func _ready() -> void:
 	# Connect to Global signal to update list when review words change
 	Global.review_words_changed.connect(_on_review_words_changed)
 	
+	# Theme awareness — restyle the panel live on theme toggle.
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
 	# Initially hide clear button
 	clear_search_button.visible = false
 
 func set_hamburger_button(button: Button) -> void:
 	hamburger_button = button
 	hamburger_original_position = hamburger_button.position
+
+# ══════════════════════════════════════════════════════════════
+# THEME AWARENESS — restyle the panel for Dark / Light
+# ══════════════════════════════════════════════════════════════
+func _on_theme_changed(_mode: int) -> void:
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	var dark := Global.theme_is_dark()
+
+	# Panel background per theme.
+	var st := StyleBoxFlat.new()
+	st.set_corner_radius_all(24)
+	if dark:
+		st.bg_color = Color(0, 0.29, 0.29, 1)
+		st.set_border_width_all(0)
+	else:
+		st.bg_color = Color(0.97, 0.98, 1, 1)
+		st.border_color = Color(0, 0, 0, 0.08)
+		st.set_border_width_all(1)
+	menu_panel.add_theme_stylebox_override("panel", st)
+
+	# Overlay dims the page behind — neutral in both themes.
+	overlay.color = Color(0, 0, 0, 1) if not dark else Color(0, 0.29, 0.29, 1)
+
+	# Static panel labels. These use LabelSettings resources that override the
+	# theme font colour, so drive them explicitly.
+	var _dim: Color = Global.get_theme_color("text_dim")
+	var _text: Color = Global.get_theme_color("text")
+	title_label.add_theme_color_override("font_color", _text)
+	total_words_label.add_theme_color_override("font_color", _text)
+	for _l in [title_label, total_words_label]:
+		if _l.label_settings != null:
+			var _ls: LabelSettings = _l.label_settings
+			_ls.font_color = _text
+	# Make the search LineEdit readable in both themes (bg + text + caret).
+	var _field := StyleBoxFlat.new()
+	_field.set_corner_radius_all(12)
+	_field.content_margin_left = 14
+	_field.content_margin_right = 14
+	if dark:
+		_field.bg_color = Color(1, 1, 1, 0.10)
+		_field.border_color = Color(1, 1, 1, 0.15)
+	else:
+		_field.bg_color = Color(1, 1, 1, 1)
+		_field.border_color = Color(0, 0, 0, 0.15)
+	_field.set_border_width_all(1)
+	var _field_focus: StyleBoxFlat = _field.duplicate() as StyleBoxFlat
+	_field_focus.border_color = Color("#8B5CF6")
+	_field_focus.set_border_width_all(2)
+	search_input.add_theme_stylebox_override("normal", _field)
+	search_input.add_theme_stylebox_override("focus", _field_focus)
+	search_input.add_theme_color_override("font_color", _text)
+	search_input.add_theme_color_override("font_placeholder_color", _dim)
+	search_input.add_theme_color_override("caret_color", Global.get_theme_color("accent"))
+
+	# Button text + backgrounds readable on the panel in both themes.
+	var text_color: Color = Global.get_theme_color("text")
+	var btn_bg := Color(1, 1, 1, 0.08) if dark else Color(0, 0, 0, 0.05)
+	var btn_border := Color(1, 1, 1, 0.12) if dark else Color(0, 0, 0, 0.10)
+	var btn_hover_bg := Color(1, 1, 1, 0.15) if dark else Color(0.545, 0.361, 0.965, 0.12)
+
+	for btn in [clear_search_button]:
+		btn.add_theme_color_override("font_color", text_color)
+		btn.add_theme_color_override("font_hover_color", text_color)
+		btn.add_theme_color_override("font_pressed_color", text_color)
+		btn.add_theme_color_override("font_focus_color", text_color)
+
+		# The visible text is a child Label inside the button — recolor it too.
+		for lbl in btn.find_children("TextLabel", "Label", true, false):
+			lbl.add_theme_color_override("font_color", text_color)
+
+		# Give the buttons a subtle, theme-appropriate backdrop.
+		var normal := StyleBoxFlat.new()
+		normal.bg_color = btn_bg
+		normal.border_color = btn_border
+		normal.set_border_width_all(1)
+		normal.set_corner_radius_all(12)
+		normal.content_margin_left = 16
+		normal.content_margin_right = 16
+		normal.content_margin_top = 10
+		normal.content_margin_bottom = 10
+		var hover := normal.duplicate() as StyleBoxFlat
+		hover.bg_color = btn_hover_bg
+		hover.border_color = Color("#8B5CF6")
+		hover.set_border_width_all(2)
+		var pressed := hover.duplicate() as StyleBoxFlat
+		var focus := hover.duplicate() as StyleBoxFlat
+		btn.add_theme_stylebox_override("normal", normal)
+		btn.add_theme_stylebox_override("hover", hover)
+		btn.add_theme_stylebox_override("pressed", pressed)
+		btn.add_theme_stylebox_override("focus", focus)
 
 func toggle() -> void:
 	if is_open:
@@ -240,6 +338,9 @@ func _create_word_item(entry: Dictionary, is_search_result: bool = false) -> voi
 	
 	# Set font size
 	word_label.add_theme_font_size_override("font_size", 45)
+	
+	# Theme-aware text so words stay readable on the panel in both modes.
+	word_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	
 	# Add search highlight if this is a search result
 	if is_search_result and search_input.text != "":

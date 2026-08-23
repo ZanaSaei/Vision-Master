@@ -23,6 +23,11 @@ const SCENE_ABOUT_ME    := "res://scenes/about_me/AboutMe.tscn"
 @onready var settings_button: Button = $MenuPanel/MarginContainer/VBoxContainer/SettingsButton
 @onready var about_me_button: Button = $MenuPanel/MarginContainer/VBoxContainer/AboutMeButton
 
+# Header / footer labels (use LabelSettings that override the theme — recolor them)
+@onready var user_name_label: Label = $MenuPanel/MarginContainer/VBoxContainer/Header/UserName
+@onready var welcome_label: Label   = $MenuPanel/MarginContainer/VBoxContainer/Header/WelcomeText
+@onready var version_label: Label   = $MenuPanel/MarginContainer/VBoxContainer/VersionLabel
+
 var is_open := false
 var tween: Tween
 var hamburger_button: Button
@@ -75,6 +80,82 @@ func _ready() -> void:
 	about_me_button.pressed.connect(func(): emit_signal("about_me_pressed"); close())
 
 	_setup_modern_buttons()
+
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
+
+# ══════════════════════════════════════════════════════════════
+# THEME AWARENESS — restyle the panel for Dark / Light
+# ══════════════════════════════════════════════════════════════
+func _on_theme_changed(_mode: int) -> void:
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	var dark := Global.theme_is_dark()
+	var st := StyleBoxFlat.new()
+	st.set_corner_radius_all(24)
+	if dark:
+		st.bg_color = Color(0, 0.29, 0.29, 1)
+		st.set_border_width_all(0)
+	else:
+		st.bg_color = Color(0.97, 0.98, 1, 1)
+		st.border_color = Color(0, 0, 0, 0.08)
+		st.set_border_width_all(1)
+	menu_panel.add_theme_stylebox_override("panel", st)
+
+	# Overlay dims the page behind — neutral in both themes.
+	overlay.color = Color(0, 0, 0, 1) if not dark else Color(0, 0.29, 0.29, 1)
+
+	# Button text + backgrounds must be readable on the panel in both themes.
+	var text_color: Color = Global.get_theme_color("text")
+
+	# Header title / subtitle / footer must be readable on the panel.
+	var dim_color: Color = Global.get_theme_color("text_dim")
+	for l in [user_name_label, version_label]:
+		if l.label_settings != null:
+			l.label_settings.font_color = text_color
+		else:
+			l.add_theme_color_override("font_color", text_color)
+	if welcome_label.label_settings != null:
+		welcome_label.label_settings.font_color = dim_color
+	else:
+		welcome_label.add_theme_color_override("font_color", dim_color)
+	var btn_bg := Color(1, 1, 1, 0.08) if dark else Color(0, 0, 0, 0.05)
+	var btn_border := Color(1, 1, 1, 0.12) if dark else Color(0, 0, 0, 0.10)
+	var btn_hover_bg := Color(1, 1, 1, 0.15) if dark else Color(0.545, 0.361, 0.965, 0.12)
+
+	for btn in [saved_words_button, leitner_button, purchase_button, settings_button, about_me_button]:
+		btn.add_theme_color_override("font_color", text_color)
+		btn.add_theme_color_override("font_hover_color", text_color)
+		btn.add_theme_color_override("font_pressed_color", text_color)
+		btn.add_theme_color_override("font_focus_color", text_color)
+
+		# The visible text is a child Label inside the button — recolor it too.
+		for lbl in btn.find_children("TextLabel", "Label", true, false):
+			lbl.add_theme_color_override("font_color", text_color)
+
+		# Give the buttons a subtle, theme-appropriate backdrop.
+		var normal := StyleBoxFlat.new()
+		normal.bg_color = btn_bg
+		normal.border_color = btn_border
+		normal.set_border_width_all(1)
+		normal.set_corner_radius_all(12)
+		normal.content_margin_left = 16
+		normal.content_margin_right = 16
+		normal.content_margin_top = 10
+		normal.content_margin_bottom = 10
+		var hover := normal.duplicate() as StyleBoxFlat
+		hover.bg_color = btn_hover_bg
+		hover.border_color = Color("#8B5CF6")
+		hover.set_border_width_all(2)
+		var pressed := hover.duplicate() as StyleBoxFlat
+		var focus := hover.duplicate() as StyleBoxFlat
+		btn.add_theme_stylebox_override("normal", normal)
+		btn.add_theme_stylebox_override("hover", hover)
+		btn.add_theme_stylebox_override("pressed", pressed)
+		btn.add_theme_stylebox_override("focus", focus)
 
 
 # ══════════════════════════════════════════════════════════════

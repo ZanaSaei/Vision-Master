@@ -37,6 +37,7 @@ var font_farsi: FontFile
 @onready var home_button: Button = $HeaderBar/HeaderContent/HomeButton
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
 @onready var page_view: PageView = $MarginContainer/MainLayout/PageView
+@onready var background: ColorRect = $Background
 
 # ---------- Audio panel support ----------
 # Path to your AudioPanel scene. Adjust if yours is elsewhere.
@@ -59,13 +60,15 @@ func _ready() -> void:
 	if font_bold:
 		header_title.add_theme_font_override("font", font_bold)
 
-	# Keep header readable on dark theme.
-	header_title.add_theme_color_override("font_color", TEXT_LIGHT)
+	# Keep header readable on the current theme.
+	header_title.add_theme_color_override("font_color", Global.get_theme_color("text"))
 
 	back_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
 	page_view.page_changed.connect(_on_page_changed)
 	page_view.set_accent(ACCENT)
+	# Restyle live when the app theme toggles.
+	Global.on_theme_changed(_apply_theme)
 
 	# Put a dark background behind the whole PageView.
 	_add_page_view_background()
@@ -85,8 +88,9 @@ func _ready() -> void:
 	page_view.add_page("read", "Read", "📖", _build_read_page())
 	page_view.add_page("speak", "Speak", "🗣️", _build_speak_page())
 
-	# Force dark backgrounds for PageView scroll areas.
+	# Force backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
+	_apply_theme()
 
 
 # ============================================================
@@ -98,7 +102,7 @@ func _add_page_view_background() -> void:
 		return
 
 	var bg := ColorRect.new()
-	bg.color = APP_BG
+	bg.color = Global.get_theme_color("bg_base")
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -111,7 +115,7 @@ func _apply_dark_scroll_background(root: Control) -> void:
 	for child in root.get_children():
 		if child is ScrollContainer:
 			var style := StyleBoxFlat.new()
-			style.bg_color = APP_BG
+			style.bg_color = Global.get_theme_color("bg_base")
 			child.add_theme_stylebox_override("panel", style)
 
 		if child is Control:
@@ -119,8 +123,8 @@ func _apply_dark_scroll_background(root: Control) -> void:
 
 
 func _dark_tint(color: Color, amount := 0.16) -> Color:
-	# Creates a dark panel color tinted by the given accent color.
-	return PANEL_BG.lerp(Color(color.r, color.g, color.b, 1.0), amount)
+	# Creates a panel color tinted by the given accent color (theme surface).
+	return Global.get_theme_color("surface").lerp(Color(color.r, color.g, color.b, 1.0), amount)
 
 
 func _contrast_color(bg: Color) -> Color:
@@ -128,6 +132,23 @@ func _contrast_color(bg: Color) -> Color:
 	if bg.get_luminance() > 0.6:
 		return Color("#0b1229")
 	return Color.WHITE
+
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	header_title.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	# Scene background (behind the header) — keep the current color in dark mode.
+	if background != null:
+		if Global.theme_is_dark():
+			background.color = Color("#2c387f")
+		else:
+			background.color = Global.get_theme_color("bg_base")
+	# PageView background behind the content.
+	if page_view.has_meta("dark_bg"):
+		var bg: ColorRect = page_view.get_meta("dark_bg")
+		bg.color = Global.get_theme_color("bg_base")
+	_apply_dark_scroll_background(page_view)
 
 
 # ============================================================
@@ -329,8 +350,8 @@ func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelC
 	vb.add_theme_constant_override("separation", 6)
 
 	# Body text stays wrapped.
-	vb.add_child(_make_label(en, 36, TEXT_LIGHT, false))
-	vb.add_child(_make_fa_label(fa, 31, TEXT_MUTED))
+	vb.add_child(_make_label(en, 36, Global.get_theme_color("text"), false))
+	vb.add_child(_make_fa_label(fa, 31, Global.get_theme_color("text_dim")))
 
 	card.add_child(vb)
 	return card
@@ -395,7 +416,7 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap
 	return l
 
 
-func _make_fa_label(text: String, font_size: int, color: Color = TEXT_MUTED, do_wrap := true) -> Label:
+func _make_fa_label(text: String, font_size: int, color: Color = Global.get_theme_color("text_dim"), do_wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.custom_minimum_size.x = 0
@@ -520,8 +541,8 @@ func _set_listen_button_no_audio() -> void:
 		# Disable it so the user cannot press a button with no audio.
 		_listen_audio_btn.disabled = true
 		# Dim the text so it clearly looks inactive.
-		_listen_audio_btn.add_theme_color_override("font_color", TEXT_MUTED)
-		_listen_audio_btn.add_theme_color_override("font_disabled_color", TEXT_MUTED)
+		_listen_audio_btn.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+		_listen_audio_btn.add_theme_color_override("font_disabled_color", Global.get_theme_color("text_dim"))
 
 func _set_listen_button_idle() -> void:
 	if _listen_audio_btn != null and is_instance_valid(_listen_audio_btn):

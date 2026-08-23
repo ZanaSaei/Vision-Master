@@ -269,6 +269,44 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("btn_style")
 text = "روشن"
 
+[node name="ThemeCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=1788320410]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("card_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/ThemeCard" unique_id=1561124009]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ThemeTitle" type="Label" parent="Scroll/Margin/Layout/ThemeCard/VBox" unique_id=1567757821]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.760784, 0.611765, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 42
+text = "ظاهر"
+
+[node name="ThemeRow" type="HBoxContainer" parent="Scroll/Margin/Layout/ThemeCard/VBox" unique_id=1315952926]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ThemeLabel" type="Label" parent="Scroll/Margin/Layout/ThemeCard/VBox/ThemeRow" unique_id=1099967324]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+text = "حالت تاریک"
+vertical_alignment = 1
+
+[node name="ThemeToggle" type="Button" parent="Scroll/Margin/Layout/ThemeCard/VBox/ThemeRow" unique_id=1005566170]
+custom_minimum_size = Vector2(210, 84)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("btn_style")
+text = "روشن"
+
 [node name="DataCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=1418657074]
 layout_mode = 2
 size_flags_horizontal = 3

@@ -12,8 +12,10 @@ const SCENE_MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 
 # --- Node references (match Settings.tscn) ---
 @onready var back_button: Button    = $Header/Margin/HBox/BackButton
+@onready var bg: ColorRect          = $Bg
 @onready var sound_toggle: Button    = $Scroll/Margin/Layout/SoundCard/VBox/SoundRow/SoundToggle
 @onready var tts_toggle: Button      = $Scroll/Margin/Layout/SoundCard/VBox/TtsRow/TtsToggle
+@onready var theme_toggle: Button    = $Scroll/Margin/Layout/ThemeCard/VBox/ThemeRow/ThemeToggle
 @onready var clear_saved_button: Button = $Scroll/Margin/Layout/DataCard/VBox/ClearSavedButton
 @onready var clear_review_button: Button = $Scroll/Margin/Layout/DataCard/VBox/ClearReviewButton
 @onready var reset_button: Button        = $Scroll/Margin/Layout/DataCard/VBox/ResetButton
@@ -34,6 +36,7 @@ func _ready() -> void:
 	# Initialise the toggles from the persisted settings.
 	_set_toggle(sound_toggle, Global.sound_enabled)
 	_set_toggle(tts_toggle, Global.tts_enabled)
+	_set_toggle(theme_toggle, Global.theme_is_dark())
 
 	# About section values.
 	version_value.text = _app_version()
@@ -43,11 +46,13 @@ func _ready() -> void:
 	back_button.pressed.connect(_on_back_pressed)
 	sound_toggle.pressed.connect(_on_sound_toggled)
 	tts_toggle.pressed.connect(_on_tts_toggled)
+	theme_toggle.pressed.connect(_on_theme_toggled)
 	clear_saved_button.pressed.connect(_on_clear_saved_pressed)
 	clear_review_button.pressed.connect(_on_clear_review_pressed)
 	reset_button.pressed.connect(_on_reset_pressed)
 
 	_build_confirm_dialog()
+	_apply_theme()
 
 
 # ══════════════════════════════════════════════════════════════
@@ -62,16 +67,124 @@ func _set_toggle(btn: Button, on: bool) -> void:
 	style.content_margin_right = 26.0
 	style.content_margin_bottom = 16.0
 	if on:
-		style.bg_color = Color(0.545098, 0.360784, 0.964706, 0.92)
-		style.border_color = Color(0.760784, 0.611765, 1, 1)
+		style.bg_color = Global.get_theme_color("accent")
+		style.border_color = Global.get_theme_color("accent_bright")
 		style.set_border_width_all(2)
+		btn.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
 	else:
-		style.bg_color = Color(1, 1, 1, 0.08)
-		style.border_color = Color(1, 1, 1, 0.35)
+		style.bg_color = Global.get_theme_color("surface_alt")
+		style.border_color = Global.get_theme_color("border")
 		style.set_border_width_all(1)
+		btn.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	btn.add_theme_stylebox_override("normal", style)
 	btn.add_theme_stylebox_override("hover", style)
 	btn.add_theme_stylebox_override("pressed", style)
+
+
+func _on_theme_toggled() -> void:
+	var dark := not Global.theme_is_dark()
+	Global.set_theme_mode(Global.ThemeMode.DARK if dark else Global.ThemeMode.LIGHT)
+	_set_toggle(theme_toggle, dark)
+	_apply_theme()
+	Sfx.click()
+
+
+# ══════════════════════════════════════════════════════════════
+#  THEME AWARENESS — restyle this screen for Dark / Light
+# ══════════════════════════════════════════════════════════════
+func _apply_theme() -> void:
+	var dark := Global.theme_is_dark()
+	# Background overlay over the animated backdrop.
+	bg.color = Color(0.012, 0.018, 0.055, 0.88) if dark else Color(0.955, 0.968, 0.98, 0.90)
+
+	# Cards + text walk the whole scene.
+	_theme_walk(self)
+
+	# Rebuild the custom toggles with the current palette.
+	_set_toggle(sound_toggle, Global.sound_enabled)
+	_set_toggle(tts_toggle, Global.tts_enabled)
+	_set_toggle(theme_toggle, dark)
+
+	# Back button font follows the palette (light theme needs dark text).
+	back_button.add_theme_color_override("font_color", Global.get_theme_color("text"))
+
+	# Danger (reset) button: solid red + white text reads clearly in both themes.
+	var danger := StyleBoxFlat.new()
+	danger.set_corner_radius_all(18)
+	danger.content_margin_left = 26.0
+	danger.content_margin_top = 20.0
+	danger.content_margin_right = 26.0
+	danger.content_margin_bottom = 20.0
+	danger.set_border_width_all(1)
+	danger.border_color = Color(1, 0.5, 0.55, 1)
+	if Global.theme_is_dark():
+		danger.bg_color = Color(0.85, 0.16, 0.22, 0.30)
+	else:
+		danger.bg_color = Color(0.85, 0.16, 0.22, 1.0)
+	reset_button.add_theme_stylebox_override("normal", danger)
+	reset_button.add_theme_stylebox_override("hover", danger)
+	reset_button.add_theme_stylebox_override("pressed", danger)
+	reset_button.add_theme_stylebox_override("focus", danger)
+	if Global.theme_is_dark():
+		reset_button.add_theme_color_override("font_color", Color(1, 0.75, 0.8))
+	else:
+		reset_button.add_theme_color_override("font_color", Color.WHITE)
+
+	# The runtime confirm modal follows the palette too.
+	if _confirm_card != null:
+		var p := _confirm_card.get_theme_stylebox("panel") as StyleBoxFlat
+		p.bg_color = Global.get_theme_color("surface")
+		p.border_color = Global.get_theme_color("accent")
+	_confirm_title.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
+	_confirm_message.add_theme_color_override("font_color", Global.get_theme_color("text"))
+
+	# Unified header styling last, so it wins over the generic walk.
+	if has_node("Header"):
+		Global.style_header($Header)
+
+
+func _theme_walk(node: Node) -> void:
+	var node_name: String = node.name
+	if node == _modal_root:
+		return
+	if node is ColorRect and node_name == "Bg":
+		bg.color = Color(0.012, 0.018, 0.055, 0.88) if Global.theme_is_dark() else Color(0.955, 0.968, 0.98, 0.90)
+
+	elif node is PanelContainer:
+		var style := StyleBoxFlat.new()
+		style.set_corner_radius_all(26)
+		style.content_margin_left = 44.0
+		style.content_margin_top = 38.0
+		style.content_margin_right = 44.0
+		style.content_margin_bottom = 38.0
+		if Global.theme_is_dark():
+			style.bg_color = Color(1, 1, 1, 0.06)
+			style.border_color = Color(1, 1, 1, 0.10)
+		else:
+			style.bg_color = Color(1, 1, 1, 0.85)
+			style.border_color = Color(0, 0, 0, 0.10)
+		style.set_border_width_all(1)
+		node.add_theme_stylebox_override("panel", style)
+
+	elif node is Label:
+		_theme_label(node)
+
+	elif node is Button and node != back_button and node != sound_toggle and node != tts_toggle and node != theme_toggle and node != reset_button:
+		var btn := node as Button
+		btn.add_theme_color_override("font_color", Global.get_theme_color("text"))
+
+	for child in node.get_children():
+		_theme_walk(child)
+
+
+func _theme_label(label: Label) -> void:
+	var n: String = label.name
+	if n.ends_with("Title"):
+		label.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
+	elif n in ["VersionName", "DevName", "SubName"]:
+		label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	else:
+		label.add_theme_color_override("font_color", Global.get_theme_color("text"))
 
 
 func _on_sound_toggled() -> void:
@@ -233,10 +346,10 @@ func _build_confirm_dialog() -> void:
 	buttons.add_child(_confirm_cancel)
 
 
-func _style_dialog_button(btn: Button, bg: Color) -> void:
+func _style_dialog_button(btn: Button, bg_col: Color) -> void:
 	var normal := StyleBoxFlat.new()
-	normal.bg_color = bg
-	normal.border_color = bg.lightened(0.25)
+	normal.bg_color = bg_col
+	normal.border_color = bg_col.lightened(0.25)
 	normal.set_border_width_all(2)
 	normal.set_corner_radius_all(20)
 	normal.content_margin_left = 34
@@ -245,13 +358,13 @@ func _style_dialog_button(btn: Button, bg: Color) -> void:
 	normal.content_margin_bottom = 22
 
 	var hover := normal.duplicate() as StyleBoxFlat
-	hover.bg_color = bg.lightened(0.12)
-	hover.shadow_color = Color(bg.r, bg.g, bg.b, 0.5)
+	hover.bg_color = bg_col.lightened(0.12)
+	hover.shadow_color = Color(bg_col.r, bg_col.g, bg_col.b, 0.5)
 	hover.shadow_size = 14
 	hover.shadow_offset = Vector2.ZERO
 
 	var pressed := hover.duplicate() as StyleBoxFlat
-	pressed.bg_color = bg.darkened(0.12)
+	pressed.bg_color = bg_col.darkened(0.12)
 
 	btn.add_theme_stylebox_override("normal", normal)
 	btn.add_theme_stylebox_override("hover", hover)

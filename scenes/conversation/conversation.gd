@@ -34,6 +34,7 @@ var font_italic: FontFile
 var font_farsi: FontFile
 
 # ---------- Node References ----------
+@onready var background: ColorRect            = $Background
 @onready var header_bar: Control              = $HeaderBar
 @onready var back_button: Button              = $HeaderBar/HeaderContent/BackButton
 @onready var home_button: Button              = $HeaderBar/HeaderContent/HomeButton
@@ -49,6 +50,7 @@ var intro_label: RichTextLabel
 var lines_container: VBoxContainer
 var exercises_container: VBoxContainer
 var intro_translation_label: Label = null
+var _page_bg_style: StyleBoxFlat
 
 # ---------- State Variables ----------
 const SEEK_STEP: float = 10.0
@@ -107,6 +109,10 @@ func _ready() -> void:
 	_build_conversation_page()
 	_build_oral_page()
 	
+	# Theme-aware styling + live re-theme on toggle.
+	Global.on_theme_changed(_apply_theme)
+	_apply_theme()
+	
 	if current_data.is_empty():
 		intro_label.text = "Conversation not available yet."
 		return
@@ -128,9 +134,10 @@ func _build_conversation_page() -> void:
 	var page := VBoxContainer.new()
 	page.add_theme_constant_override("separation", 24)
 	
-	# Tint the page background to match the dark navy theme
+	# Tint the page background to match the current theme
 	var page_bg := StyleBoxFlat.new()
-	page_bg.bg_color = Color("#2c387f")
+	page_bg.bg_color = _page_bg()
+	_page_bg_style = page_bg
 	page.add_theme_stylebox_override("panel", page_bg)
 
 	# Conversation Image
@@ -149,7 +156,7 @@ func _build_conversation_page() -> void:
 	intro_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	intro_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	intro_label.add_theme_font_size_override("normal_font_size", 48)
-	intro_label.add_theme_color_override("default_color", Color("#F1F5F9"))  # Light slate for visibility
+	intro_label.add_theme_color_override("default_color", _text_color())  # Readable body text
 	if font_regular:
 		intro_label.add_theme_font_override("normal_font", font_regular)
 	page.add_child(intro_label)
@@ -202,6 +209,59 @@ func _load_fonts() -> void:
 	font_bold = load(FONT_JAKARTA_BOLD_PATH)
 	font_italic = load(FONT_JAKARTA_ITALIC_PATH)
 	font_farsi = load(FONT_VAZIRMATN)
+
+
+# ============================================================
+# THEME-AWARE STYLING
+# ============================================================
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+
+	if background != null:
+		background.color = _page_bg()
+
+	if _page_bg_style != null:
+		_page_bg_style.bg_color = _page_bg()
+
+	if intro_label != null:
+		intro_label.add_theme_color_override("default_color", _text_color())
+
+	if intro_translation_label != null and is_instance_valid(intro_translation_label):
+		intro_translation_label.add_theme_color_override("font_color", _text_muted())
+
+	for item in line_rtls:
+		var rtl: RichTextLabel = item.get("rtl")
+		if rtl != null:
+			rtl.add_theme_color_override("default_color", _text_color())
+		var tl: Label = item.get("translation_label")
+		if tl != null:
+			tl.add_theme_color_override("font_color", _text_muted())
+
+	# Rebuild the clickable/highlighted BBCode so highlight colors match.
+	if not current_data.is_empty() and intro_label != null:
+		_refresh_all_text()
+
+
+# ---------- Theme-aware color helpers ----------
+# Dark mode matches today's hardcoded palette; Light mode uses the app palette.
+func _page_bg() -> Color:
+	return Color("#2c387f") if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+
+func _text_color() -> Color:
+	return Color("#F1F5F9") if Global.theme_is_dark() else Global.get_theme_color("text")
+
+func _text_muted() -> Color:
+	return Color("#94A3B8") if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+
+func _speaker_bg(idx: int) -> Color:
+	if Global.theme_is_dark():
+		return SPEAKER_BG_COLORS[idx]
+	return Global.get_theme_color("surface").lerp(SPEAKER_COLORS[idx], 0.08)
+
+func _highlight_text_color() -> String:
+	return "#ffffff" if Global.theme_is_dark() else "#111111"
 
 # ============================================================
 # DATA LOADING & AUDIO SYNC LOGIC
@@ -290,7 +350,7 @@ func _make_line_card(speaker: String, text: String, translation: String, color_i
 
 	# --- Modern card style with shadow & rounded corners ---
 	var card_style := StyleBoxFlat.new()
-	card_style.bg_color = bg_color
+	card_style.bg_color = _speaker_bg(color_idx)
 	card_style.set_corner_radius_all(20)
 	card_style.border_width_left = 5
 	card_style.border_color = accent_color
@@ -325,7 +385,7 @@ func _make_line_card(speaker: String, text: String, translation: String, color_i
 	text_label.scroll_active = false
 	text_label.selection_enabled = false
 	text_label.add_theme_font_size_override("normal_font_size", 48)
-	text_label.add_theme_color_override("default_color", Color("#F1F5F9"))  # Light slate
+	text_label.add_theme_color_override("default_color", _text_color())  # Readable body text
 	text_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if font_regular:
 		text_label.add_theme_font_override("normal_font", font_regular)
@@ -340,7 +400,7 @@ func _make_line_card(speaker: String, text: String, translation: String, color_i
 	translation_label.text = translation
 	translation_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	translation_label.add_theme_font_size_override("font_size", 40)
-	translation_label.add_theme_color_override("font_color", Color("#94A3B8"))  # Muted light
+	translation_label.add_theme_color_override("font_color", _text_muted())  # Muted text
 	translation_label.text_direction = Control.TEXT_DIRECTION_RTL
 	translation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	translation_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -388,7 +448,7 @@ func _refresh_all_text() -> void:
 		var clickable_sentence = _format_clickable_text(en_text, current_highlighted_word)
 		
 		if _last_active_sentence.has("type") and _last_active_sentence["type"] == "intro" and _last_active_sentence["sentence_idx"] == i:
-			new_intro_bbcode += "[bgcolor=#fbbf2480][color=#ffffff]" + clickable_sentence + "[/color][/bgcolor] "
+			new_intro_bbcode += "[bgcolor=#fbbf2480][color=%s]" % _highlight_text_color() + clickable_sentence + "[/color][/bgcolor] "
 		else:
 			new_intro_bbcode += clickable_sentence + " "
 			
@@ -408,7 +468,7 @@ func _refresh_all_text() -> void:
 			var clickable_sentence = _format_clickable_text(en_text, current_highlighted_word)
 			
 			if _last_active_sentence.has("type") and _last_active_sentence["type"] == "line" and _last_active_sentence["block_idx"] == block_idx and _last_active_sentence["sentence_idx"] == s_idx:
-				new_bbcode += "[bgcolor=#fbbf2480][color=#ffffff]" + clickable_sentence + "[/color][/bgcolor] "
+				new_bbcode += "[bgcolor=#fbbf2480][color=%s]" % _highlight_text_color() + clickable_sentence + "[/color][/bgcolor] "
 			else:
 				new_bbcode += clickable_sentence + " "
 				
@@ -512,7 +572,7 @@ func _create_intro_translation_label(translation: String) -> void:
 	intro_translation_label.text = translation
 	intro_translation_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	intro_translation_label.add_theme_font_size_override("font_size", 38)
-	intro_translation_label.add_theme_color_override("font_color", Color("#64748B"))
+	intro_translation_label.add_theme_color_override("font_color", _text_muted())
 	intro_translation_label.text_direction = Control.TEXT_DIRECTION_RTL
 	intro_translation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	intro_translation_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL

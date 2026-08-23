@@ -53,6 +53,7 @@ const BOOK_BG_COLORS = {
 @onready var back_button: Button              = $PanelContainer/TopBar/BackButton
 @onready var top_bar_title: Label             = $PanelContainer/TopBar/TopBarTitle
 @onready var lessons_container: VBoxContainer = $MainLayout/InnerLayout/LessonsContainer
+@onready var hero_label: Label                = $MainLayout/InnerLayout/HeroLabel
 
 # --- Glossy + border-comet state ---
 const CORNER_RADIUS = 26.0
@@ -78,6 +79,27 @@ func _ready() -> void:
 
 	# Let the layout settle, then feed the shaders their real pixel sizes.
 	_finalize_shine_sizes()
+
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	# Hero prompt: keep the current black text in dark mode, use the
+	# palette text color in light mode.
+	hero_label.add_theme_color_override(
+		"font_color",
+		Color(0, 0, 0, 1) if Global.theme_is_dark() else Global.get_theme_color("text")
+	)
+
+
+func _on_theme_changed(_mode: int) -> void:
+	if not is_inside_tree():
+		return
+	_apply_theme()
+
 
 func _load_fonts() -> void:
 	font_regular = load(FONT_JAKARTA_REGULAR_PATH)

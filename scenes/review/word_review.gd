@@ -20,6 +20,7 @@ const SCENE_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var due_counter: Label            = $HeaderBar/MarginContainer/Header/DueCounter
 @onready var review_side_menu              = $ReviewSideMenu
 @onready var open_list_menu_button: Button = $OpenListMenuButton
+@onready var background_color: ColorRect = $BackgroundColor
 
 @onready var card_panel: PanelContainer    = $MarginContainer/MainLayout/CardMargin/CardPanel
 @onready var front: PanelContainer        = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/Front
@@ -63,6 +64,9 @@ func _ready() -> void:
 	open_list_menu_button.pressed.connect(review_side_menu.toggle)
 	
 	_style_rating_buttons()
+
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
 
 	review_queue = Global.get_due_words()
 	_load_next_card()
@@ -136,6 +140,110 @@ func _apply_button_color(btn: Button, color: Color) -> void:
 	var hover := style.duplicate()
 	hover.bg_color = color.darkened(0.12)
 	btn.add_theme_stylebox_override("hover", hover)
+
+
+# ----------------------------------------------------------------
+#  THEME AWARENESS — restyle cards, header, labels & buttons for
+#  Dark / Light without touching layout or logic.
+# ----------------------------------------------------------------
+func _on_theme_changed(_mode: int) -> void:
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	_theme_walk(self)
+
+
+func _theme_walk(node: Node) -> void:
+	# The side menu is its own theme-aware scene; don't restyle it here.
+	if node.name == "ReviewSideMenu":
+		return
+	if node is ColorRect and node.name == "BackgroundColor":
+		background_color.color = Global.get_theme_color("bg_base")
+	elif node is PanelContainer:
+		_restyle_panel(node)
+	elif node is Label:
+		_theme_label(node)
+	elif node is Button:
+		_theme_button(node)
+	for child in node.get_children():
+		_theme_walk(child)
+
+
+# Re-tint an existing panel stylebox so its corner radius / margins /
+# shadows survive; only the bg + border are swapped per theme.
+func _restyle_panel(node: PanelContainer) -> void:
+	var style := node.get_theme_stylebox("panel") as StyleBoxFlat
+	if style == null:
+		style = StyleBoxFlat.new()
+	else:
+		style = style.duplicate() as StyleBoxFlat
+	if Global.theme_is_dark():
+		style.bg_color = Color(1, 1, 1, 0.06)
+		style.border_color = Color(1, 1, 1, 0.10)
+	else:
+		style.bg_color = Color(1, 1, 1, 0.85)
+		style.border_color = Color(0, 0, 0, 0.10)
+	style.set_border_width_all(1)
+	node.add_theme_stylebox_override("panel", style)
+
+
+func _theme_label(label: Label) -> void:
+	var n: String = label.name
+	# Icon chips keep their fixed black-on-color styling in both themes.
+	if n in ["PhonIcon", "FaIcon", "ExIcon", "ExtraIcon"]:
+		return
+	elif n == "WordLabel":
+		# On the card the main word reads best in accent in dark; in light use a
+		# solid dark colour and drop the glow outline so it never looks hollow.
+		var ls: LabelSettings = label.label_settings
+		if Global.theme_is_dark():
+			label.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
+			label.add_theme_color_override("font_outline_color", Color(0.24, 0.76, 0.5))
+			label.add_theme_constant_override("outline_size", 6)
+			if ls:
+				ls.font_color = Global.get_theme_color("accent_bright")
+				ls.outline_color = Color(0.24, 0.76, 0.5)
+				ls.outline_size = 6
+		else:
+			label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+			label.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0))
+			label.add_theme_constant_override("outline_size", 0)
+			if ls:
+				ls.font_color = Global.get_theme_color("text")
+				ls.outline_size = 0
+	elif n in ["DueCounter", "BackWordLabel"]:
+		label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	else:
+		label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+
+
+func _theme_button(btn: Button) -> void:
+	if btn == back_button:
+		return  # flat icon button
+	elif btn == show_answer_button:
+		btn.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
+	elif btn in [again_button, hard_button, good_button, easy_button]:
+		btn.add_theme_color_override("font_color", Color.WHITE)
+	elif btn == open_list_menu_button:
+		var dark := Global.theme_is_dark()
+		var ham := StyleBoxFlat.new()
+		ham.set_corner_radius_all(30)
+		if dark:
+			ham.bg_color = Color(0, 0.29, 0.29, 1)
+			ham.border_color = Color(1, 1, 1, 0.10)
+		else:
+			ham.bg_color = Global.get_theme_color("surface")
+			ham.border_color = Color(0, 0, 0, 0.10)
+		ham.set_border_width_all(1)
+		open_list_menu_button.add_theme_stylebox_override("normal", ham)
+		open_list_menu_button.add_theme_stylebox_override("pressed", ham)
+		open_list_menu_button.add_theme_stylebox_override("hover", ham)
+		open_list_menu_button.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	else:
+		btn.add_theme_color_override("font_color", Global.get_theme_color("text"))
 
 
 # ----------------------------------------------------------------

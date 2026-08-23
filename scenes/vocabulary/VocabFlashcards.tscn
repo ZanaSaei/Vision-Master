@@ -309,7 +309,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ttw17")
 icon = ExtResource("2_egq7b")
 flat = true
 
-[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1697454971]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 44

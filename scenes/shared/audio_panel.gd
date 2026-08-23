@@ -25,6 +25,26 @@ func _ready() -> void:
 	audio_slider.drag_ended.connect(_on_slider_drag_ended)
 	audio_player.finished.connect(_on_audio_finished)
 
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	var dark := Global.theme_is_dark()
+	var panel_sb := StyleBoxFlat.new()
+	panel_sb.bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1) if dark else Global.get_theme_color("surface")
+	panel_sb.corner_radius_top_left = 150
+	panel_sb.corner_radius_top_right = 150
+	add_theme_stylebox_override("panel", panel_sb)
+
+
+func _on_theme_changed(_mode: int) -> void:
+	if not is_inside_tree():
+		return
+	_apply_theme()
+
 func _process(_delta: float) -> void:
 	# Broadcast the current time for syncing text[cite: 2, 3]
 	if (audio_player.playing or audio_player.stream_paused) and not is_dragging_slider:

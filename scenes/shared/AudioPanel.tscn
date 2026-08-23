@@ -2,11 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cuyy7b8mylefo" path="res://scenes/shared/audio_panel.gd" id="1_f8ndu"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ujfs"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1)
-corner_radius_top_left = 150
-corner_radius_top_right = 150
-
 [node name="AudioPanel" type="PanelContainer" unique_id=418187207]
 visible = false
 anchors_preset = 12
@@ -16,7 +11,6 @@ anchor_bottom = 1.0
 offset_top = -236.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_7ujfs")
 script = ExtResource("1_f8ndu")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=786871783]

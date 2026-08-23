@@ -45,6 +45,7 @@ var font_regular: FontFile
 var font_bold: FontFile
 var font_farsi: FontFile
 
+@onready var background: ColorRect = $Background
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var home_button: Button = $HeaderBar/HeaderContent/HomeButton
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
@@ -63,8 +64,8 @@ func _ready() -> void:
 	if font_bold:
 		header_title.add_theme_font_override("font", font_bold)
 
-	# Keep header readable on dark theme.
-	header_title.add_theme_color_override("font_color", TEXT_LIGHT)
+	# Keep header readable (theme-aware).
+	header_title.add_theme_color_override("font_color", _text_color())
 
 	back_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
@@ -73,6 +74,10 @@ func _ready() -> void:
 
 	# Put a dark background behind the whole PageView.
 	_add_page_view_background()
+
+	# Theme-aware styling + live re-theme on toggle (runs for all data paths).
+	Global.on_theme_changed(_apply_theme)
+	_apply_theme()
 
 	header_title.text = "Lesson %d\nWriting" % Global.current_lesson
 
@@ -89,7 +94,7 @@ func _ready() -> void:
 	page_view.add_page("forms", "Forms", "📋", _build_forms_page())
 	page_view.add_page("practice", "Practice", "✏️", _build_practice_page())
 
-	# Force dark backgrounds for PageView scroll areas.
+	# Force themed backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
 
 	_play_reveal(0)
@@ -104,7 +109,7 @@ func _add_page_view_background() -> void:
 		return
 
 	var bg := ColorRect.new()
-	bg.color = APP_BG
+	bg.color = _app_bg()
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -117,16 +122,51 @@ func _apply_dark_scroll_background(root: Control) -> void:
 	for child in root.get_children():
 		if child is ScrollContainer:
 			var style := StyleBoxFlat.new()
-			style.bg_color = APP_BG
+			style.bg_color = _app_bg()
 			child.add_theme_stylebox_override("panel", style)
 
 		if child is Control:
 			_apply_dark_scroll_background(child)
 
 
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+
+	if background != null:
+		background.color = _navy_bg()
+
+	header_title.add_theme_color_override("font_color", _text_color())
+	_apply_dark_scroll_background(page_view)
+
+
+# ---------- Theme-aware color helpers ----------
+# Dark mode matches today's hardcoded palette; Light mode uses the app palette.
+func _navy_bg() -> Color:
+	return Color("#2c387f") if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+
+func _app_bg() -> Color:
+	return APP_BG if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+
+func _panel_bg() -> Color:
+	return PANEL_BG if Global.theme_is_dark() else Global.get_theme_color("surface")
+
+func _panel_border() -> Color:
+	return PANEL_BORDER if Global.theme_is_dark() else Global.get_theme_color("border")
+
+func _text_color() -> Color:
+	return TEXT_LIGHT if Global.theme_is_dark() else Global.get_theme_color("text")
+
+func _text_soft() -> Color:
+	return TEXT_SOFT if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+
+func _text_muted() -> Color:
+	return TEXT_MUTED if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+
+
 func _dark_tint(color: Color, amount := 0.16) -> Color:
 	# Creates a dark panel color tinted by the given accent color.
-	return PANEL_BG.lerp(Color(color.r, color.g, color.b, 1.0), amount)
+	return _panel_bg().lerp(Color(color.r, color.g, color.b, 1.0), amount)
 
 
 func _contrast_color(bg: Color) -> Color:
@@ -235,7 +275,7 @@ func _build_forms_page() -> VBoxContainer:
 	var forms: Array = _data.get("forms", [])
 
 	if forms.is_empty():
-		var empty := _make_label("No forms available yet.", 36, TEXT_MUTED, false)
+		var empty := _make_label("No forms available yet.", 36, _text_muted(), false)
 		page.add_child(empty)
 		return page
 
@@ -334,8 +374,8 @@ func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelC
 	vb.add_theme_constant_override("separation", 6)
 
 	# Body text stays wrapped.
-	vb.add_child(_make_label(en, 36, TEXT_LIGHT, false))
-	vb.add_child(_make_fa_label(fa, 31, TEXT_MUTED))
+	vb.add_child(_make_label(en, 36, _text_color(), false))
+	vb.add_child(_make_fa_label(fa, 31, _text_muted()))
 
 	card.add_child(vb)
 	return card
@@ -345,8 +385,8 @@ func _make_bullet(en: String, fa: String) -> VBoxContainer:
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 4)
 
-	vb.add_child(_make_label("•  " + en, 34, TEXT_SOFT, false))
-	vb.add_child(_make_fa_label(fa, 29, TEXT_MUTED))
+	vb.add_child(_make_label("•  " + en, 34, _text_soft(), false))
+	vb.add_child(_make_fa_label(fa, 29, _text_muted()))
 
 	return vb
 
@@ -356,7 +396,7 @@ func _make_category_card(category_name: Dictionary, examples: Array, color: Colo
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = PANEL_BG
+	style.bg_color = _panel_bg()
 	style.set_corner_radius_all(14)
 	style.border_width_top = 5
 	style.border_color = color
@@ -381,11 +421,11 @@ func _make_category_card(category_name: Dictionary, examples: Array, color: Colo
 
 	vb.add_child(badge)
 
-	vb.add_child(_make_fa_label(str(category_name.get("fa", "")), 28, TEXT_MUTED, false))
+	vb.add_child(_make_fa_label(str(category_name.get("fa", "")), 28, _text_muted(), false))
 
 	# Examples stay wrapped.
 	for ex in examples:
-		var ex_label := _make_label("·  " + str(ex), 30, TEXT_SOFT, false)
+		var ex_label := _make_label("·  " + str(ex), 30, _text_soft(), false)
 		vb.add_child(ex_label)
 
 	card.add_child(vb)
@@ -396,7 +436,7 @@ func _make_form_card(form: Dictionary) -> PanelContainer:
 	var card := PanelContainer.new()
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = PANEL_BG
+	style.bg_color = _panel_bg()
 	style.set_corner_radius_all(16)
 	style.border_width_left = 5
 	style.border_color = ACCENT
@@ -408,12 +448,12 @@ func _make_form_card(form: Dictionary) -> PanelContainer:
 	vb.add_theme_constant_override("separation", 12)
 
 	# Form title: one line, no wrapping.
-	vb.add_child(_make_label(_get_en(form.get("title", "")), 38, TEXT_LIGHT, true, false))
-	vb.add_child(_make_fa_label(_get_fa(form.get("title", "")), 30, TEXT_MUTED, false))
+	vb.add_child(_make_label(_get_en(form.get("title", "")), 38, _text_color(), true, false))
+	vb.add_child(_make_fa_label(_get_fa(form.get("title", "")), 30, _text_muted(), false))
 
 	# Subtitle can wrap.
-	vb.add_child(_make_label(_get_en(form.get("subtitle", "")), 32, TEXT_MUTED, false))
-	vb.add_child(_make_fa_label(_get_fa(form.get("subtitle", "")), 28, TEXT_MUTED))
+	vb.add_child(_make_label(_get_en(form.get("subtitle", "")), 32, _text_muted(), false))
+	vb.add_child(_make_fa_label(_get_fa(form.get("subtitle", "")), 28, _text_muted()))
 
 	# Table.
 	var table: Array = form.get("table", [])
@@ -439,8 +479,8 @@ func _make_form_card(form: Dictionary) -> PanelContainer:
 				type_color = ACCENT.lightened(0.25)
 
 			grid.add_child(_make_table_cell(str(row.get("type", "")), type_color, true))
-			grid.add_child(_make_table_cell(str(row.get("singular", "")), TEXT_LIGHT, false))
-			grid.add_child(_make_table_cell(str(row.get("plural", "")), TEXT_LIGHT, false))
+			grid.add_child(_make_table_cell(str(row.get("singular", "")), _text_color(), false))
+			grid.add_child(_make_table_cell(str(row.get("plural", "")), _text_color(), false))
 
 		vb.add_child(grid)
 
@@ -487,13 +527,13 @@ func _make_table_cell(text: String, color: Color, bold: bool) -> Label:
 	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#0b1229")
+	style.bg_color = _app_bg()
 	style.set_corner_radius_all(8)
 	style.border_width_left = 1
 	style.border_width_right = 1
 	style.border_width_top = 1
 	style.border_width_bottom = 1
-	style.border_color = PANEL_BORDER
+	style.border_color = _panel_border()
 	style.set_content_margin_all(8)
 
 	l.add_theme_stylebox_override("normal", style)
@@ -518,7 +558,7 @@ func _make_section_title(en: String) -> HBoxContainer:
 	row.add_child(bar)
 
 	# Section title: one line, no wrapping, fills horizontally.
-	var title := _make_label(en, 40, TEXT_LIGHT, true)
+	var title := _make_label(en, 40, _text_color(), true)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(title)
 

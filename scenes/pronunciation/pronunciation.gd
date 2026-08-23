@@ -38,6 +38,7 @@ var font_farsi: FontFile
 @onready var home_button: Button = $HeaderBar/HeaderContent/HomeButton
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
 @onready var page_view: PageView = $MarginContainer/MainLayout/PageView
+@onready var background: ColorRect = $Background
 
 var _page_reveals: Dictionary = {}
 var _page_revealed: Dictionary = {}
@@ -56,13 +57,15 @@ func _ready() -> void:
 	
 	if font_bold:
 		header_title.add_theme_font_override("font", font_bold)
-	# Keep header readable on dark theme.
-	header_title.add_theme_color_override("font_color", TEXT_LIGHT)
+	# Keep header readable on the current theme.
+	header_title.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	
 	back_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
 	page_view.page_changed.connect(_on_page_changed)
 	page_view.set_accent(ACCENT)
+	# Restyle live when the app theme toggles.
+	Global.on_theme_changed(_apply_theme)
 	# Dark background behind PageView content.
 	_add_page_view_background()
 	
@@ -89,6 +92,7 @@ func _ready() -> void:
 	# Force dark backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
 	_play_reveal(0)
+	_apply_theme()
 
 # ============================================================
 # DARK THEME HELPERS
@@ -97,7 +101,7 @@ func _add_page_view_background() -> void:
 	if page_view.has_meta("dark_bg"):
 		return
 	var bg := ColorRect.new()
-	bg.color = APP_BG
+	bg.color = Global.get_theme_color("bg_base")
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	page_view.add_child(bg)
@@ -108,14 +112,30 @@ func _apply_dark_scroll_background(root: Control) -> void:
 	for child in root.get_children():
 		if child is ScrollContainer:
 			var style := StyleBoxFlat.new()
-			style.bg_color = APP_BG
+			style.bg_color = Global.get_theme_color("bg_base")
 			child.add_theme_stylebox_override("panel", style)
 		if child is Control:
 			_apply_dark_scroll_background(child)
 
 func _dark_tint(color: Color, amount := 0.16) -> Color:
-	# Creates a dark panel color tinted by the given accent color.
-	return PANEL_BG.lerp(Color(color.r, color.g, color.b, 1.0), amount)
+	# Creates a panel color tinted by the given accent color (theme surface).
+	return Global.get_theme_color("surface").lerp(Color(color.r, color.g, color.b, 1.0), amount)
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	header_title.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	# Scene background (behind the header) — keep the current color in dark mode.
+	if background != null:
+		if Global.theme_is_dark():
+			background.color = Color("#2c387f")
+		else:
+			background.color = Global.get_theme_color("bg_base")
+	# PageView background behind the content.
+	if page_view.has_meta("dark_bg"):
+		var bg: ColorRect = page_view.get_meta("dark_bg")
+		bg.color = Global.get_theme_color("bg_base")
+	_apply_dark_scroll_background(page_view)
 
 # ============================================================
 # PAGE 1 — LEARN
@@ -155,7 +175,7 @@ func _build_learn_page() -> VBoxContainer:
 func _make_pronunciation_card(item: Dictionary) -> PanelContainer:
 	var card := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = PANEL_BG
+	style.bg_color = Global.get_theme_color("surface")
 	style.set_corner_radius_all(16)
 	style.border_width_left = 5
 	style.border_color = ACCENT
@@ -181,7 +201,7 @@ func _make_pronunciation_card(item: Dictionary) -> PanelContainer:
 	rtl.scroll_active = false
 	rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	rtl.add_theme_font_size_override("normal_font_size", SENTENCE_FONT_SIZE)
-	rtl.add_theme_color_override("default_color", TEXT_LIGHT)
+	rtl.add_theme_color_override("default_color", Global.get_theme_color("text"))
 	if font_bold:
 		rtl.add_theme_font_override("normal_font", font_bold)
 		# CHANGED: make sure [b] tags resolve to the real bold font
@@ -204,7 +224,7 @@ func _make_pronunciation_card(item: Dictionary) -> PanelContainer:
 	vb.add_child(rtl)
 	
 	# Persian translation.
-	vb.add_child(_make_fa_label(str(item.get("fa", "")), 34, TEXT_MUTED))
+	vb.add_child(_make_fa_label(str(item.get("fa", "")), 34, Global.get_theme_color("text_dim")))
 	
 	# CHANGED: single Play/Stop button (the "Slow" button was removed).
 	vb.add_child(_make_play_btn(str(item.get("audio", "")), raw_text))
@@ -421,8 +441,8 @@ func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelC
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 6)
 	# Body text stays wrapped.
-	vb.add_child(_make_label(en, 36, TEXT_LIGHT, false))
-	vb.add_child(_make_fa_label(fa, 31, TEXT_MUTED))
+	vb.add_child(_make_label(en, 36, Global.get_theme_color("text"), false))
+	vb.add_child(_make_fa_label(fa, 31, Global.get_theme_color("text_dim")))
 	card.add_child(vb)
 	return card
 
@@ -453,7 +473,7 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap
 		l.add_theme_font_override("font", font_regular)
 	return l
 
-func _make_fa_label(text: String, font_size: int, color: Color = TEXT_MUTED, do_wrap := true) -> Label:
+func _make_fa_label(text: String, font_size: int, color: Color = Global.get_theme_color("text_dim"), do_wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.custom_minimum_size.x = 0

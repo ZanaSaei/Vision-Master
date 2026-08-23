@@ -90,6 +90,8 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var save_active = preload("res://images/saved_button.png")
 
 
+@onready var bg_rect: ColorRect = $TextureRect
+
 @onready var FONT_FARSI : FontFile = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
 
 const FLIP_DURATION := 0.18
@@ -115,11 +117,109 @@ func _ready() -> void:
 	nav_list.pivot_offset = nav_list.size / 2.0
 	nav_settings.pivot_offset = nav_settings.size / 2.0
 
+	# Theme awareness: restyle for Dark / Light and follow live toggles.
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
 	if Global.flashcard_mode == "saved":
 		Global.word_review_return = "res://scenes/vocabulary/VocabFlashcards.tscn"
 		_enter_saved_mode()
 	else:
 		_enter_lesson_mode()
+
+
+# ----------------------------------------------------------------
+#  THEME AWARENESS — restyle this screen for Dark / Light
+# ----------------------------------------------------------------
+func _on_theme_changed(_mode: int) -> void:
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	# Background ColorRect: dark in dark mode, light in light mode.
+	bg_rect.color = Color(0.055, 0.07, 0.13) if Global.theme_is_dark() else Color(0.955, 0.968, 0.98)
+	# Header bar, cards, labels, buttons walk the whole scene.
+	_theme_walk(self)
+	# Unified header bar styling last, so it wins over the generic walk.
+	if has_node("HeaderBar"):
+		Global.style_header($HeaderBar)
+
+
+func _theme_walk(node: Node) -> void:
+	if node is ColorRect and node.name in ["BackgroundColor", "Bg", "TextureRect"]:
+		bg_rect.color = Color(0.055, 0.07, 0.13) if Global.theme_is_dark() else Color(0.955, 0.968, 0.98)
+	elif node is PanelContainer:
+		_theme_card(node)
+	elif node is Label:
+		_theme_label(node)
+	elif node is Button:
+		_theme_button(node)
+	for child in node.get_children():
+		_theme_walk(child)
+
+
+func _theme_card(node: PanelContainer) -> void:
+	var dark := Global.theme_is_dark()
+	var old: StyleBox = node.get_theme_stylebox("panel")
+	var style := StyleBoxFlat.new()
+	if old is StyleBoxFlat:
+		var of := old as StyleBoxFlat
+		style.content_margin_left = of.content_margin_left
+		style.content_margin_top = of.content_margin_top
+		style.content_margin_right = of.content_margin_right
+		style.content_margin_bottom = of.content_margin_bottom
+		style.set_corner_radius_all(of.corner_radius_top_left if of.corner_radius_top_left > 0 else 20)
+	else:
+		style.set_corner_radius_all(20)
+	if dark:
+		style.bg_color = Global.get_theme_color("surface")
+		style.border_color = Color(1, 1, 1, 0.10)
+	else:
+		style.bg_color = Color(1, 1, 1, 1)
+		style.border_color = Color(0, 0, 0, 0.10)
+	style.set_border_width_all(1)
+	node.add_theme_stylebox_override("panel", style)
+
+
+func _theme_label(label: Label) -> void:
+	var n: String = label.name
+	var dark := Global.theme_is_dark()
+	var fill: Color
+	if n.ends_with("Title"):
+		fill = Global.get_theme_color("accent_bright")
+	elif n in ["PhoneticsLabel"]:
+		fill = Global.get_theme_color("text_dim")
+	else:
+		fill = Global.get_theme_color("text")
+	label.add_theme_color_override("font_color", fill)
+	# LabelSettings resources override the theme's font color — drive them
+	# explicitly so these labels follow the theme too.
+	if label.label_settings != null:
+		label.label_settings.font_color = fill
+		if not dark:
+			label.label_settings.outline_size = 0
+	# Glow outlines read as "hollow" text on light cards — drop them.
+	if not dark:
+		label.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0))
+		label.add_theme_constant_override("outline_size", 0)
+
+
+func _theme_button(btn: Button) -> void:
+	var colored := _button_has_colored_bg(btn)
+	var fc: Color = Color(1, 1, 1) if colored else Global.get_theme_color("text")
+	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		btn.add_theme_color_override(state, fc)
+
+
+func _button_has_colored_bg(btn: Button) -> bool:
+	var st: StyleBox = btn.get_theme_stylebox("normal")
+	if st is StyleBoxFlat:
+		var c: Color = (st as StyleBoxFlat).bg_color
+		var mx := maxf(maxf(c.r, c.g), c.b)
+		var mn := minf(minf(c.r, c.g), c.b)
+		# Saturated accents AND dark backgrounds both need light text.
+		return c.a > 0.4 and ((mx - mn) > 0.25 or c.get_luminance() < 0.45)
+	return false
 
 
 # ----------------------------------------------------------------

@@ -17,6 +17,10 @@ var font_bold = preload("res://assets/fonts/PlusJakartaSans-Bold.ttf")
 var font_italic = preload("res://assets/fonts/PlusJakartaSans-Italic.ttf")
 var font_farsi = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
 
+var popup_style: StyleBoxFlat
+var close_style: StyleBoxFlat
+var close_pressed: StyleBoxFlat
+
 var current_word_data: Dictionary = {}
 
 func _init() -> void:
@@ -25,7 +29,8 @@ func _init() -> void:
 
 func _build_ui() -> void:
 	popup_panel = PanelContainer.new()
-	var style = StyleBoxFlat.new()
+	popup_style = StyleBoxFlat.new()
+	var style := popup_style
 	style.bg_color = Color("#FFFFFF")
 	style.corner_radius_bottom_left = 32
 	style.corner_radius_bottom_right = 32
@@ -163,8 +168,9 @@ func _build_ui() -> void:
 	btn_close_popup.add_theme_color_override("font_hover_color", Color("#475569")) # Match normal text color
 	if font_farsi != null: btn_close_popup.add_theme_font_override("font", font_farsi)
 	
-	var close_style = StyleBoxFlat.new()
-	close_style.bg_color = Color("#F1F5F9")
+	close_style = StyleBoxFlat.new()
+	var close_sb := close_style
+	close_sb.bg_color = Color("#F1F5F9")
 	close_style.corner_radius_top_left = 16
 	close_style.corner_radius_top_right = 16
 	close_style.corner_radius_bottom_left = 16
@@ -176,7 +182,7 @@ func _build_ui() -> void:
 	btn_close_popup.add_theme_stylebox_override("normal", close_style)
 	btn_close_popup.add_theme_stylebox_override("hover", close_style)
 	
-	var close_pressed = close_style.duplicate()
+	close_pressed = close_style.duplicate()
 	close_pressed.bg_color = Color("#E2E8F0")
 	btn_close_popup.add_theme_stylebox_override("pressed", close_pressed)
 	
@@ -245,3 +251,28 @@ func _on_audio_pressed() -> void:
 
 func is_open() -> bool:
 	return popup_panel.position.y >= 0
+
+
+func _ready() -> void:
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	var dark := Global.theme_is_dark()
+	popup_style.bg_color = Color("#FFFFFF") if dark else Global.get_theme_color("surface")
+	title_label.add_theme_color_override("font_color", Color("#0F172A") if dark else Global.get_theme_color("text"))
+	type_label.add_theme_color_override("font_color", Color("#64748B") if dark else Global.get_theme_color("text_dim"))
+	meaning_label.add_theme_color_override("font_color", Color("#334155") if dark else Global.get_theme_color("text"))
+	btn_close_popup.add_theme_color_override("font_color", Color("#475569") if dark else Global.get_theme_color("text_dim"))
+	btn_close_popup.add_theme_color_override("font_hover_color", Color("#475569") if dark else Global.get_theme_color("text_dim"))
+	close_style.bg_color = Color("#F1F5F9") if dark else Global.get_theme_color("surface_alt")
+	close_pressed.bg_color = Color("#E2E8F0") if dark else Global.get_theme_color("surface_alt")
+
+
+func _on_theme_changed(_mode: int) -> void:
+	if not is_inside_tree():
+		return
+	_apply_theme()

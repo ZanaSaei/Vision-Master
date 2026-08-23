@@ -11,9 +11,15 @@ var reward_label: Label
 var next_button: GrammarButton
 var back_button: GrammarButton
 
+var _card: PanelContainer
+
 
 func _ready() -> void:
 	_build_ui()
+	_apply_theme()
+	Global.on_theme_changed(
+		_on_theme_changed
+	)
 	hide()
 
 
@@ -31,17 +37,17 @@ func _build_ui() -> void:
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(center)
 
-	var card := PanelContainer.new()
-	card.custom_minimum_size = Vector2(720, 0)
-	GrammarTheme.style_card(card)
-	center.add_child(card)
+	_card = PanelContainer.new()
+	_card.custom_minimum_size = Vector2(720, 0)
+	GrammarTheme.style_card(_card)
+	center.add_child(_card)
 
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 24)
 	margin.add_theme_constant_override("margin_right", 24)
 	margin.add_theme_constant_override("margin_top", 24)
 	margin.add_theme_constant_override("margin_bottom", 24)
-	card.add_child(margin)
+	_card.add_child(margin)
 
 	var layout := VBoxContainer.new()
 	layout.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -63,7 +69,7 @@ func _build_ui() -> void:
 
 	reward_label = Label.new()
 	reward_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	reward_label.add_theme_color_override("font_color", GrammarTheme.XP)
+	reward_label.add_theme_color_override("font_color", GrammarTheme.xp_color())
 	reward_label.add_theme_font_size_override("font_size", 28)
 	layout.add_child(reward_label)
 
@@ -86,6 +92,22 @@ func _build_ui() -> void:
 	back_button.pressed.connect(_on_back)
 	back_button.visible = false
 	layout.add_child(back_button)
+
+
+func _apply_theme() -> void:
+	if _card != null:
+		GrammarTheme.style_card(_card)
+	if reward_label != null:
+		reward_label.add_theme_color_override(
+			"font_color",
+			GrammarTheme.xp_color()
+		)
+
+
+func _on_theme_changed(_mode: int) -> void:
+	if not is_inside_tree():
+		return
+	_apply_theme()
 
 
 func show_reward(title: String, awarded_xp: int, next_text: String = "ادامه", show_back: bool = false) -> void:

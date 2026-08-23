@@ -42,6 +42,7 @@ var _tts_fallback_tween: Tween
 # ---------- Extra listening state ----------
 var _listening_tts_active_id := ""
 
+@onready var background: ColorRect = $Background
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var home_button: Button = $HeaderBar/HeaderContent/HomeButton
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
@@ -73,8 +74,8 @@ func _ready() -> void:
 	if font_bold:
 		header_title.add_theme_font_override("font", font_bold)
 
-	# Keep header readable on dark theme.
-	header_title.add_theme_color_override("font_color", TEXT_LIGHT)
+	# Keep header readable (theme-aware).
+	header_title.add_theme_color_override("font_color", _text_color())
 
 	back_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
@@ -83,6 +84,10 @@ func _ready() -> void:
 	# Put a dark background behind the whole PageView.
 	_ambient_bg = _add_page_view_background()
 	_apply_ambient(SPEAK_ACCENT)
+
+	# Theme-aware styling + live re-theme on toggle (runs for all data paths).
+	Global.on_theme_changed(_apply_theme)
+	_apply_theme()
 
 	header_title.text = "Lesson %d\nListening & Speaking" % Global.current_lesson
 
@@ -100,8 +105,39 @@ func _ready() -> void:
 	page_view.add_page("speaking", "Speaking", "🗣", _build_speaking_page(_speaking_data))
 	page_view.add_page("listening", "Listening", "🎧", _build_listening_page(data.get("listening", [])))
 
-	# Force dark backgrounds for PageView scroll areas.
+	# Force themed backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
+
+
+# ============================================================
+# THEME-AWARE STYLING
+# ============================================================
+
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+
+	if background != null:
+		background.color = _navy_bg()
+
+	header_title.add_theme_color_override("font_color", _text_color())
+
+	if _ambient_bg != null:
+		_ambient_bg.color = _app_bg().lerp(
+			Color(SPEAK_ACCENT.r, SPEAK_ACCENT.g, SPEAK_ACCENT.b, 1.0), 0.06
+		)
+
+	_apply_dark_scroll_background(page_view)
+	_retheme_turn_cards()
+
+
+func _retheme_turn_cards() -> void:
+	for entry in _turn_cards:
+		var accent: Color = SPEAK_ACCENT if entry["is_app"] else SUCCESS
+		entry["base_bg"] = _dark_tint(accent, 0.12)
+		entry["highlight_bg"] = _dark_tint(accent, 0.35)
+		var st: StyleBoxFlat = entry["style"]
+		st.bg_color = entry["base_bg"]
 
 
 # ============================================================
@@ -113,7 +149,7 @@ func _add_page_view_background() -> ColorRect:
 		return page_view.get_meta("dark_bg")
 
 	var bg := ColorRect.new()
-	bg.color = APP_BG
+	bg.color = _app_bg()
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -128,7 +164,7 @@ func _apply_dark_scroll_background(root: Control) -> void:
 	for child in root.get_children():
 		if child is ScrollContainer:
 			var style := StyleBoxFlat.new()
-			style.bg_color = APP_BG
+			style.bg_color = _app_bg()
 			child.add_theme_stylebox_override("panel", style)
 
 		if child is Control:
@@ -139,13 +175,34 @@ func _apply_ambient(accent: Color) -> void:
 	if _ambient_bg == null:
 		return
 
-	# Very subtle accent tint over the dark app background.
-	_ambient_bg.color = APP_BG.lerp(Color(accent.r, accent.g, accent.b, 1.0), 0.06)
+	# Very subtle accent tint over the app background.
+	_ambient_bg.color = _app_bg().lerp(Color(accent.r, accent.g, accent.b, 1.0), 0.06)
 
 
 func _dark_tint(color: Color, amount := 0.16) -> Color:
-	# Creates a dark panel color tinted by the given accent color.
-	return PANEL_BG.lerp(Color(color.r, color.g, color.b, 1.0), amount)
+	# Creates a panel color tinted by the given accent color.
+	return _panel_bg().lerp(Color(color.r, color.g, color.b, 1.0), amount)
+
+
+# ---------- Theme-aware color helpers ----------
+# Dark mode matches today's hardcoded palette; Light mode uses the app palette.
+func _navy_bg() -> Color:
+	return Color("#2c387f") if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+
+func _app_bg() -> Color:
+	return APP_BG if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+
+func _panel_bg() -> Color:
+	return PANEL_BG if Global.theme_is_dark() else Global.get_theme_color("surface")
+
+func _text_color() -> Color:
+	return TEXT_LIGHT if Global.theme_is_dark() else Global.get_theme_color("text")
+
+func _text_soft() -> Color:
+	return TEXT_SOFT if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+
+func _text_muted() -> Color:
+	return TEXT_MUTED if Global.theme_is_dark() else Global.get_theme_color("text_dim")
 
 
 func _get_en(val: Variant) -> String:
@@ -230,7 +287,7 @@ func _build_partner_controls(page: VBoxContainer) -> void:
 	_status_label.text = "Tap “Practice with the App” — it speaks Sara’s lines, you speak yours."
 	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	_status_label.add_theme_font_size_override("font_size", 32)
-	_status_label.add_theme_color_override("font_color", TEXT_MUTED)
+	_status_label.add_theme_color_override("font_color", _text_muted())
 
 	if font_regular:
 		_status_label.add_theme_font_override("font", font_regular)
@@ -340,8 +397,8 @@ func _build_turn_cards(page: VBoxContainer) -> void:
 		vb.add_child(role)
 
 		# Conversation text stays wrapped.
-		vb.add_child(_make_label(str(turn.get("text", "")), 36, TEXT_LIGHT, false))
-		vb.add_child(_make_fa_label(str(turn.get("fa", "")), 30, TEXT_MUTED))
+		vb.add_child(_make_label(str(turn.get("text", "")), 36, _text_color(), false))
+		vb.add_child(_make_fa_label(str(turn.get("fa", "")), 30, _text_muted()))
 
 		card.add_child(vb)
 		page.add_child(card)
@@ -534,7 +591,7 @@ func _on_tts_utterance_ended(_utterance_id: int) -> void:
 # ---------- Practice prompts ----------
 
 func _build_practice(page: VBoxContainer, practice: Dictionary) -> void:
-	page.add_child(_make_label(_get_en(practice.get("instruction", "")), 33, TEXT_MUTED, false))
+	page.add_child(_make_label(_get_en(practice.get("instruction", "")), 33, _text_muted(), false))
 
 	var flow := HFlowContainer.new()
 	flow.add_theme_constant_override("h_separation", 12)
@@ -595,7 +652,7 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	var card := PanelContainer.new()
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = PANEL_BG
+	style.bg_color = _panel_bg()
 	style.set_corner_radius_all(18)
 	style.border_width_left = 6
 	style.border_color = LISTEN_ACCENT
@@ -614,7 +671,7 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	head.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	# Conversation title: one line, no wrapping.
-	var title := _make_label(_get_en(conv.get("title", "")), 40, TEXT_LIGHT, true, false)
+	var title := _make_label(_get_en(conv.get("title", "")), 40, _text_color(), true, false)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(title)
 
@@ -622,7 +679,7 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	badge.text = "🔒 Not listened yet"
 	badge.autowrap_mode = TextServer.AUTOWRAP_OFF
 	badge.add_theme_font_size_override("font_size", 26)
-	badge.add_theme_color_override("font_color", TEXT_MUTED)
+	badge.add_theme_color_override("font_color", _text_muted())
 
 	if font_bold:
 		badge.add_theme_font_override("font", font_bold)
@@ -631,7 +688,7 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	vb.add_child(head)
 
 	# Task instruction.
-	vb.add_child(_make_label(_get_en(conv.get("task", "")), 34, TEXT_SOFT, false))
+	vb.add_child(_make_label(_get_en(conv.get("task", "")), 34, _text_soft(), false))
 
 	# ------------------------------------------------------------
 	# Audio player + play button.
@@ -657,7 +714,7 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	transcript_label.text = _get_en(conv.get("transcript", ""))
 	transcript_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	transcript_label.add_theme_font_size_override("font_size", 32)
-	transcript_label.add_theme_color_override("font_color", TEXT_SOFT)
+	transcript_label.add_theme_color_override("font_color", _text_soft())
 	transcript_label.visible = false
 
 	if font_regular:
@@ -736,7 +793,7 @@ func _set_listening_entry_stopped(entry: Dictionary) -> void:
 			badge.add_theme_color_override("font_color", SUCCESS)
 		else:
 			badge.text = "⏹ Stopped"
-			badge.add_theme_color_override("font_color", TEXT_MUTED)
+			badge.add_theme_color_override("font_color", _text_muted())
 
 
 func _reset_listening_tts_ui() -> void:
@@ -821,7 +878,7 @@ func _play_listening(
 				badge.add_theme_color_override("font_color", SUCCESS)
 			else:
 				badge.text = "⏹ Stopped"
-				badge.add_theme_color_override("font_color", TEXT_MUTED)
+				badge.add_theme_color_override("font_color", _text_muted())
 
 			return
 
@@ -851,7 +908,7 @@ func _play_listening(
 			badge.add_theme_color_override("font_color", SUCCESS)
 		else:
 			badge.text = "⏹ Stopped"
-			badge.add_theme_color_override("font_color", TEXT_MUTED)
+			badge.add_theme_color_override("font_color", _text_muted())
 
 		return
 
@@ -934,7 +991,7 @@ func _make_pattern_card(p: Dictionary) -> PanelContainer:
 	var card := PanelContainer.new()
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = PANEL_BG
+	style.bg_color = _panel_bg()
 	style.set_corner_radius_all(14)
 	style.border_width_left = 4
 	style.border_color = SPEAK_ACCENT.lightened(0.2)
@@ -948,7 +1005,7 @@ func _make_pattern_card(p: Dictionary) -> PanelContainer:
 	var q_text := _get_en(p.get("q", ""))
 	var a_text := _get_en(p.get("a", ""))
 
-	vb.add_child(_make_label("❓  " + q_text, 34, TEXT_LIGHT, true))
+	vb.add_child(_make_label("❓  " + q_text, 34, _text_color(), true))
 	vb.add_child(_make_label("💬  " + a_text, 34, SUCCESS, false))
 
 	card.add_child(vb)
@@ -967,7 +1024,7 @@ func _make_section_title(en: String, accent: Color) -> HBoxContainer:
 	row.add_child(bar)
 
 	# Section title: wraps so it always fits the screen width.
-	var title := _make_label(en, 40, TEXT_LIGHT, true)
+	var title := _make_label(en, 40, _text_color(), true)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(title)
 

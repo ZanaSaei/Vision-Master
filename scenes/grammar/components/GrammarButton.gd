@@ -42,6 +42,10 @@ func _ready() -> void:
 	# grow from the button's middle instead of its top-left corner.
 	pivot_offset = size * 0.5
 
+	Global.on_theme_changed(
+		_on_theme_changed
+	)
+
 	pressed.connect(
 		func() -> void:
 			if play_click_sound:
@@ -105,6 +109,17 @@ func _apply_theme() -> void:
 		clip_text = true
 
 
+func _on_theme_changed(_mode: int) -> void:
+
+	if not is_inside_tree():
+		return
+
+	# Re-apply the base theme styling for the current mode. Transient
+	# correct/wrong/selected overrides are re-applied by their callers
+	# the next time they are triggered.
+	_apply_theme()
+
+
 func _on_button_down() -> void:
 
 	if enable_press_animation:
@@ -139,7 +154,7 @@ func set_correct_state() -> void:
 
 	add_theme_color_override(
 		"font_disabled_color",
-		GrammarTheme.SUCCESS
+		GrammarTheme.success_color()
 	)
 
 	GrammarAnimation.correct(
@@ -161,7 +176,7 @@ func set_wrong_state() -> void:
 
 	add_theme_color_override(
 		"font_color",
-		GrammarTheme.ERROR
+		GrammarTheme.error_color()
 	)
 
 	GrammarAnimation.wrong(
@@ -199,12 +214,12 @@ func set_selected_state() -> void:
 
 	add_theme_color_override(
 		"font_color",
-		GrammarTheme.PRIMARY_DARK
+		GrammarTheme.accent_font_color()
 	)
 
 	add_theme_color_override(
 		"font_hover_color",
-		GrammarTheme.PRIMARY_DARK
+		GrammarTheme.accent_font_color()
 	)
 
 

@@ -252,14 +252,14 @@ func _equalize_button_heights() -> void:
 	var tallest: float = 0.0
 
 	for button in all_buttons:
-		var size := GrammarTheme.measure_text(
+		var measured := GrammarTheme.measure_text(
 			font,
 			button.text,
 			GrammarTheme.BUTTON_FONT_SIZE_MATCHING,
 			maxf(180.0, column_width - 18.0),
 			HORIZONTAL_ALIGNMENT_CENTER
 		)
-		tallest = maxf(tallest, size.y)
+		tallest = maxf(tallest, measured.y)
 
 	var final_height := int(ceil(tallest + 28.0))
 	if final_height < 65:

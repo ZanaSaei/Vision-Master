@@ -41,6 +41,73 @@ const DISABLED := Color("#2A2F3D")
 
 
 # ============================================================
+# THEME-AWARE COLORS
+# ------------------------------------------------------------
+# The grammar palette, resolved per app theme mode. Dark mode
+# reproduces the legacy constants above exactly; Light mode
+# borrows the app-wide Global palette where a role maps 1:1 and
+# keeps grammar-specific accent / gold hues with a light variant.
+# All static style helpers below derive from these, so every
+# GrammarTheme-styled widget follows the current Dark / Light mode.
+# ============================================================
+
+static func _pick(dark: Color, light: Color) -> Color:
+	return dark if Global.theme_is_dark() else light
+
+
+# Primary brand accent (button fills, borders, selected markers).
+static func accent_color() -> Color:
+	return _pick(PRIMARY, Global.get_theme_color("accent"))
+
+
+# Lighter accent used for hover fills / bright accents.
+static func accent_bright_color() -> Color:
+	return _pick(PRIMARY_DARK, Global.get_theme_color("accent_bright"))
+
+
+# Muted accent surface used for selected / hover chip backgrounds.
+static func accent_soft_color() -> Color:
+	return _pick(PRIMARY_LIGHT, Global.get_theme_color("accent_soft"))
+
+
+# Accent used as a *font* color (needs to read on a light surface).
+static func accent_font_color() -> Color:
+	return _pick(PRIMARY_DARK, Global.get_theme_color("accent"))
+
+
+static func text_secondary_color() -> Color:
+	return _pick(TEXT_SECONDARY, Global.get_theme_color("text_dim"))
+
+
+static func text_muted_color() -> Color:
+	return _pick(TEXT_MUTED, Global.get_theme_color("text_dim"))
+
+
+static func success_color() -> Color:
+	return Global.get_theme_color("success")
+
+
+static func success_soft_color() -> Color:
+	return _pick(SUCCESS_LIGHT, Global.get_theme_color("success").lightened(0.82))
+
+
+static func error_color() -> Color:
+	return Global.get_theme_color("error")
+
+
+static func error_soft_color() -> Color:
+	return _pick(ERROR_LIGHT, Global.get_theme_color("error").lightened(0.85))
+
+
+static func warning_color() -> Color:
+	return Global.get_theme_color("warning")
+
+
+static func xp_color() -> Color:
+	return _pick(XP, Color(0.62, 0.45, 0.0))
+
+
+# ============================================================
 # TYPOGRAPHY & SPACING (sized for a phone portrait UI)
 # ============================================================
 
@@ -167,9 +234,9 @@ static func rounded_box(
 
 static func card_style() -> StyleBoxFlat:
 	var style := rounded_box(
-		SURFACE,
+		_pick(SURFACE, Global.get_theme_color("surface")),
 		20,
-		Color("#2E3446"),
+		_pick(Color("#2E3446"), Global.get_theme_color("border")),
 		1
 	)
 
@@ -188,64 +255,64 @@ static func card_style() -> StyleBoxFlat:
 
 static func primary_button() -> StyleBoxFlat:
 	return rounded_box(
-		PRIMARY,
+		accent_color(),
 		18
 	)
 
 
 static func primary_button_hover() -> StyleBoxFlat:
 	return rounded_box(
-		PRIMARY_DARK,
+		accent_bright_color(),
 		18
 	)
 
 
 static func primary_button_pressed() -> StyleBoxFlat:
 	return rounded_box(
-		PRIMARY_DARK,
+		accent_bright_color(),
 		18
 	)
 
 
 static func secondary_button() -> StyleBoxFlat:
 	return rounded_box(
-		SURFACE,
+		_pick(SURFACE, Global.get_theme_color("surface")),
 		18,
-		Color("#3A4154"),
+		_pick(Color("#3A4154"), Global.get_theme_color("border")),
 		2
 	)
 
 
 static func success_button() -> StyleBoxFlat:
 	return rounded_box(
-		SUCCESS_LIGHT,
+		success_soft_color(),
 		18,
-		SUCCESS,
+		success_color(),
 		2
 	)
 
 
 static func error_button() -> StyleBoxFlat:
 	return rounded_box(
-		ERROR_LIGHT,
+		error_soft_color(),
 		18,
-		ERROR,
+		error_color(),
 		2
 	)
 
 
 static func selected_button() -> StyleBoxFlat:
 	return rounded_box(
-		PRIMARY_LIGHT,
+		accent_soft_color(),
 		18,
-		PRIMARY,
+		accent_color(),
 		3
 	)
 
 
 static func disabled_button() -> StyleBoxFlat:
 	return rounded_box(
-		DISABLED,
+		_pick(DISABLED, Global.get_theme_color("surface_alt")),
 		18
 	)
 
@@ -300,7 +367,7 @@ static func style_primary_button(
 
 	button.add_theme_color_override(
 		"font_disabled_color",
-		TEXT_MUTED
+		text_muted_color()
 	)
 
 	button.add_theme_font_size_override(
@@ -329,9 +396,9 @@ static func style_secondary_button(
 	button.add_theme_stylebox_override(
 		"hover",
 		rounded_box(
-			PRIMARY_LIGHT,
+			accent_soft_color(),
 			18,
-			PRIMARY,
+			accent_color(),
 			2
 		)
 	)
@@ -339,26 +406,26 @@ static func style_secondary_button(
 	button.add_theme_stylebox_override(
 		"pressed",
 		rounded_box(
-			PRIMARY_LIGHT,
+			accent_soft_color(),
 			18,
-			PRIMARY,
+			accent_color(),
 			2
 		)
 	)
 
 	button.add_theme_color_override(
 		"font_color",
-		TEXT
+		Global.get_theme_color("text")
 	)
 
 	button.add_theme_color_override(
 		"font_hover_color",
-		PRIMARY_DARK
+		accent_font_color()
 	)
 
 	button.add_theme_color_override(
 		"font_pressed_color",
-		PRIMARY_DARK
+		accent_font_color()
 	)
 
 	button.add_theme_font_size_override(
@@ -388,20 +455,18 @@ static func style_card(
 # Professional raised header bar: a surface clearly different from the
 # background, with a soft drop shadow so it reads as floating above.
 static func header_style() -> StyleBoxFlat:
+	# Unified app header look: theme surface, rounded-bottom pill, violet underline.
 	var style := rounded_box(
-		Color("#232B3E"),
-		18,
-		Color("#303A50"),
+		_pick(Color("#232B3E"), Global.get_theme_color("surface")),
+		48,
+		_pick(Color("#303A50"), Global.get_theme_color("accent")),
 		1
 	)
+	style.corner_radius_top_left = 10
+	style.corner_radius_top_right = 10
+	style.border_width_bottom = 3
 
-	style.shadow_color = Color(
-		0.0,
-		0.0,
-		0.0,
-		0.35
-	)
-
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.35)
 	style.shadow_size = 12
 	style.shadow_offset = Vector2(0, 4)
 

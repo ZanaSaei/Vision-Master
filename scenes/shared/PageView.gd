@@ -14,17 +14,9 @@ extends Control
 signal page_changed(index: int, page_id: String)
 
 # ---------- Theme ----------
-const TEXT_MUTED := Color("#94A3B8")
-const TEXT_LIGHT := Color("#F1F5F9")
-
-const APP_BG := Color("#0b1229")
-const PANEL_BG := Color("#0f1b3d")
-const PANEL_BORDER := Color("#2d3a6a")
-
-const DOT_OFF := Color("#3d4a7a")
-const SCROLL_GRABBER := Color("#3d4a7a")
-const SCROLL_TRACK := Color("#16224a")
-
+# Colors are read from Global.get_theme_color(...) at build/rebuild time so
+# the component follows the app-wide light/dark theme. No hardcoded fallback
+# palette is kept here.
 const FONT_BOLD_PATH := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 
 var _accent: Color = Color("#22D3EE")
@@ -46,6 +38,13 @@ var _slider: HBoxContainer
 var _dots_row: HBoxContainer
 var _tab_buttons: Array = []
 var _dot_controls: Array = []
+
+# ---------- Themeable styleboxes / nodes ----------
+var _bg: Panel
+var _tab_bar: PanelContainer
+var _bg_style: StyleBoxFlat
+var _tab_style: StyleBoxFlat
+var _ind_style: StyleBoxFlat
 
 # ---------- Drag / Swipe ----------
 var _touch_start: Vector2 = Vector2.ZERO
@@ -77,10 +76,14 @@ func _ready() -> void:
 
 	mouse_filter = Control.MOUSE_FILTER_PASS
 
-	# Applies a dark fallback theme to content that does not style itself.
+	# Apply the app-wide base theme (correct for the current light/dark mode).
 	_apply_page_theme()
 
 	_build_skeleton()
+
+	# Build the scene-specific styleboxes from the palette and follow theme changes.
+	_apply_theme()
+	Global.on_theme_changed(_apply_theme)
 
 	_viewport.resized.connect(_refresh_layout)
 	_tab_inner.resized.connect(_refresh_tab_fit)
@@ -105,81 +108,50 @@ func _reset_exercise_gestures() -> void:
 	get_tree().call_group("exercise_engines", "reset_active_gesture")
 
 func _apply_page_theme() -> void:
-	# If a theme was already assigned locally, do not override it.
-	if theme != null:
+	# Follow the app-wide base theme (already correct for the current mode)
+	# instead of a hardcoded dark fallback. The base theme styles all child
+	# controls (text, panels, popups, input fields) automatically. Only the
+	# scene-specific styleboxes below are rebuilt from the palette.
+	theme = Global.get_base_theme()
+
+
+func _apply_theme() -> void:
+	# Restyle hook: rebuild the scene-specific styleboxes from the palette and
+	# re-apply the base theme. Connected to Global.on_theme_changed for live
+	# toggling, and called once after the skeleton is built in _ready().
+	if not is_inside_tree():
 		return
 
-	var t := Theme.new()
+	theme = Global.get_base_theme()
 
-	# ------------------------------------------------------------
-	# Fallback text colors for common controls.
-	# This fixes content that would otherwise render black on dark.
-	# ------------------------------------------------------------
-	t.set_color("font_color", "Label", TEXT_LIGHT)
-	t.set_color("font_color", "Button", TEXT_LIGHT)
-	t.set_color("font_color", "CheckBox", TEXT_LIGHT)
-	t.set_color("font_color", "OptionButton", TEXT_LIGHT)
-	t.set_color("font_color", "LineEdit", TEXT_LIGHT)
-	t.set_color("font_color", "TextEdit", TEXT_LIGHT)
-	t.set_color("font_color", "ItemList", TEXT_LIGHT)
-	t.set_color("font_color", "Tree", TEXT_LIGHT)
-	t.set_color("font_color", "PopupMenu", TEXT_LIGHT)
+	# Background panel.
+	if _bg_style != null:
+		_bg_style.bg_color = Global.get_theme_color("bg_base")
+	if _bg != null:
+		_bg.add_theme_stylebox_override("panel", _bg_style)
 
-	t.set_color("default_color", "RichTextLabel", TEXT_LIGHT)
+	# Tab bar.
+	if _tab_style != null:
+		_tab_style.bg_color = Global.get_theme_color("surface")
+		_tab_style.border_color = Global.get_theme_color("border")
+	if _tab_bar != null:
+		_tab_bar.add_theme_stylebox_override("panel", _tab_style)
 
-	# Placeholder / caret colors.
-	t.set_color("font_placeholder_color", "LineEdit", TEXT_MUTED)
-	t.set_color("font_placeholder_color", "TextEdit", TEXT_MUTED)
-	t.set_color("caret_color", "LineEdit", _accent)
-	t.set_color("caret_color", "TextEdit", _accent)
+	# Indicator pill.
+	if _ind_style != null:
+		_ind_style.bg_color = _accent
+	if _indicator != null:
+		_indicator.add_theme_stylebox_override("panel", _ind_style)
 
-	# ------------------------------------------------------------
-	# Dark panels.
-	# ------------------------------------------------------------
-	var panel_style := StyleBoxFlat.new()
-	panel_style.bg_color = PANEL_BG
-	panel_style.set_corner_radius_all(14)
-	panel_style.border_width_left = 1
-	panel_style.border_width_right = 1
-	panel_style.border_width_top = 1
-	panel_style.border_width_bottom = 1
-	panel_style.border_color = PANEL_BORDER
-	panel_style.set_content_margin_all(16)
+	# Page scrollbars / backgrounds.
+	for page in _pages:
+		var scroll := page.get("scroll") as ScrollContainer
+		if is_instance_valid(scroll):
+			_style_page_scroll(scroll)
 
-	t.set_stylebox("panel", "Panel", panel_style)
-	t.set_stylebox("panel", "PanelContainer", panel_style)
-
-	# Let PageView's own background show through generic scroll containers.
-	t.set_stylebox("panel", "ScrollContainer", StyleBoxEmpty.new())
-
-	# ------------------------------------------------------------
-	# Dark popups.
-	# ------------------------------------------------------------
-	var popup_style: StyleBoxFlat = panel_style.duplicate()
-	popup_style.bg_color = PANEL_BG
-
-	t.set_stylebox("panel", "PopupPanel", popup_style)
-	t.set_stylebox("panel", "PopupMenu", popup_style)
-
-	# ------------------------------------------------------------
-	# Dark input fields.
-	# ------------------------------------------------------------
-	var input_style := StyleBoxFlat.new()
-	input_style.bg_color = Color("#0f1b3d")
-	input_style.set_corner_radius_all(10)
-	input_style.border_width_bottom = 2
-	input_style.border_color = Color("#3d4a7a")
-	input_style.set_content_margin_all(12)
-
-	var input_focus: StyleBoxFlat = input_style.duplicate()
-	input_focus.border_color = _accent
-
-	t.set_stylebox("normal", "LineEdit", input_style)
-	t.set_stylebox("focus", "LineEdit", input_focus)
-	t.set_stylebox("normal", "TextEdit", input_style)
-	t.set_stylebox("focus", "TextEdit", input_focus)
-
-	theme = t
+	# Tab text + dots.
+	_update_tabs(_current)
+	_update_dots(_current)
 
 
 func _build_skeleton() -> void:
@@ -187,15 +159,15 @@ func _build_skeleton() -> void:
 	# Full dark background.
 	# This prevents white underlying surfaces from showing through.
 	# ------------------------------------------------------------
-	var bg := Panel.new()
-	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_bg = Panel.new()
+	_bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var bg_style := StyleBoxFlat.new()
-	bg_style.bg_color = APP_BG
+	_bg_style = StyleBoxFlat.new()
+	_bg_style.bg_color = Global.get_theme_color("bg_base")
 
-	bg.add_theme_stylebox_override("panel", bg_style)
-	add_child(bg)
+	_bg.add_theme_stylebox_override("panel", _bg_style)
+	add_child(_bg)
 
 	# ------------------------------------------------------------
 	# Main vertical layout.
@@ -209,30 +181,30 @@ func _build_skeleton() -> void:
 	# ------------------------------------------------------------
 	# Tab bar.
 	# ------------------------------------------------------------
-	var tab_bar := PanelContainer.new()
+	_tab_bar = PanelContainer.new()
 
-	var tab_style := StyleBoxFlat.new()
-	tab_style.bg_color = PANEL_BG
-	tab_style.set_content_margin_all(12)
-	tab_style.border_width_bottom = 2
-	tab_style.border_color = PANEL_BORDER
+	_tab_style = StyleBoxFlat.new()
+	_tab_style.bg_color = Global.get_theme_color("surface")
+	_tab_style.set_content_margin_all(12)
+	_tab_style.border_width_bottom = 2
+	_tab_style.border_color = Global.get_theme_color("border")
 
-	tab_bar.add_theme_stylebox_override("panel", tab_style)
-	_vbox.add_child(tab_bar)
+	_tab_bar.add_theme_stylebox_override("panel", _tab_style)
+	_vbox.add_child(_tab_bar)
 
 	_tab_inner = Control.new()
 	_tab_inner.custom_minimum_size = Vector2(0, 64)
 	_tab_inner.mouse_filter = Control.MOUSE_FILTER_PASS
-	tab_bar.add_child(_tab_inner)
+	_tab_bar.add_child(_tab_inner)
 
 	_indicator = Panel.new()
 	_indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var ind_style := StyleBoxFlat.new()
-	ind_style.bg_color = _accent
-	ind_style.set_corner_radius_all(16)
+	_ind_style = StyleBoxFlat.new()
+	_ind_style.bg_color = _accent
+	_ind_style.set_corner_radius_all(16)
 
-	_indicator.add_theme_stylebox_override("panel", ind_style)
+	_indicator.add_theme_stylebox_override("panel", _ind_style)
 	_tab_inner.add_child(_indicator)
 
 	_tabs_hbox = HBoxContainer.new()
@@ -347,7 +319,7 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 	btn.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 
 	btn.add_theme_font_size_override("font_size", 31)
-	btn.add_theme_color_override("font_color", TEXT_MUTED)
+	btn.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 
 	btn.add_theme_stylebox_override("hover", StyleBoxEmpty.new())
 	btn.add_theme_stylebox_override("pressed", StyleBoxEmpty.new())
@@ -369,7 +341,7 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 	dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	var d_style := StyleBoxFlat.new()
-	d_style.bg_color = DOT_OFF
+	d_style.bg_color = Global.get_theme_color("text_dim")
 	d_style.set_corner_radius_all(6)
 
 	dot.add_theme_stylebox_override("panel", d_style)
@@ -433,10 +405,10 @@ func scroll_current_to_top() -> void:
 func set_accent(color: Color) -> void:
 	_accent = color
 
-	var ind_style := StyleBoxFlat.new()
-	ind_style.bg_color = _accent
-	ind_style.set_corner_radius_all(16)
-	_indicator.add_theme_stylebox_override("panel", ind_style)
+	_ind_style = StyleBoxFlat.new()
+	_ind_style.bg_color = _accent
+	_ind_style.set_corner_radius_all(16)
+	_indicator.add_theme_stylebox_override("panel", _ind_style)
 
 	# Update page scrollbars to match the new accent.
 	for page in _pages:
@@ -515,9 +487,9 @@ func _clamp_page_size() -> void:
 
 
 func _style_page_scroll(scroll: ScrollContainer) -> void:
-	# Dark page background.
+	# Page background.
 	var scroll_style := StyleBoxFlat.new()
-	scroll_style.bg_color = APP_BG
+	scroll_style.bg_color = Global.get_theme_color("bg_base")
 	scroll.add_theme_stylebox_override("panel", scroll_style)
 
 	# Dark vertical scrollbar.
@@ -535,12 +507,12 @@ func _style_page_scroll(scroll: ScrollContainer) -> void:
 	vbar.add_theme_stylebox_override("increment_highlight", empty)
 
 	var track := StyleBoxFlat.new()
-	track.bg_color = SCROLL_TRACK
+	track.bg_color = Global.get_theme_color("surface_alt")
 	track.set_corner_radius_all(5)
 	vbar.add_theme_stylebox_override("scroll", track)
 
 	var grabber := StyleBoxFlat.new()
-	grabber.bg_color = SCROLL_GRABBER
+	grabber.bg_color = Global.get_theme_color("text_dim")
 	grabber.set_corner_radius_all(5)
 	vbar.add_theme_stylebox_override("grabber", grabber)
 
@@ -647,7 +619,7 @@ func _animate_indicator_to(float_index: float) -> void:
 func _update_tabs(active: int) -> void:
 	for i in _tab_buttons.size():
 		var btn: Button = _tab_buttons[i]
-		var target: Color = TEXT_LIGHT if i == active else TEXT_MUTED
+		var target: Color = Global.get_theme_color("text") if i == active else Global.get_theme_color("text_dim")
 
 		var t := create_tween()
 		t.tween_property(
@@ -664,7 +636,7 @@ func _update_dots(active: int) -> void:
 		var is_active := i == active
 
 		var style := StyleBoxFlat.new()
-		style.bg_color = _accent if is_active else DOT_OFF
+		style.bg_color = _accent if is_active else Global.get_theme_color("text_dim")
 		style.set_corner_radius_all(6)
 		dot.add_theme_stylebox_override("panel", style)
 

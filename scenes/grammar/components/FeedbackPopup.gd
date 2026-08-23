@@ -20,6 +20,12 @@ func _ready() -> void:
 
 	_build_ui()
 
+	_apply_theme()
+
+	Global.on_theme_changed(
+		_on_theme_changed
+	)
+
 	hide()
 
 
@@ -148,7 +154,7 @@ func _build_ui() -> void:
 
 	explanation_label.add_theme_color_override(
 		"font_color",
-		GrammarTheme.TEXT_SECONDARY
+		GrammarTheme.text_secondary_color()
 	)
 
 	layout.add_child(
@@ -234,7 +240,7 @@ func show_correct(
 
 	title_label.add_theme_color_override(
 		"font_color",
-		GrammarTheme.SUCCESS
+		GrammarTheme.success_color()
 	)
 
 	explanation_label.text = explanation
@@ -260,7 +266,7 @@ func show_wrong(
 
 	title_label.add_theme_color_override(
 		"font_color",
-		GrammarTheme.WARNING
+		GrammarTheme.warning_color()
 	)
 
 	explanation_label.text = "اشکالی نداره! دوباره امتحان کن.\nمی‌تونی از چراغ راهنما 💡 کمک بگیری."
@@ -270,6 +276,26 @@ func show_wrong(
 	Sfx.wrong()
 
 	_show_popup()
+
+
+func _apply_theme() -> void:
+
+	if _card != null:
+		GrammarTheme.style_card(_card)
+
+	if explanation_label != null:
+		explanation_label.add_theme_color_override(
+			"font_color",
+			GrammarTheme.text_secondary_color()
+		)
+
+
+func _on_theme_changed(_mode: int) -> void:
+
+	if not is_inside_tree():
+		return
+
+	_apply_theme()
 
 
 func _show_popup() -> void:

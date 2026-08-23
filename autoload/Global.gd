@@ -159,6 +159,524 @@ var grammar_completed_units: Dictionary = {}
 const SETTINGS_PATH := "user://settings.json"
 var sound_enabled: bool = true   # UI sound effects (Sfx autoload)
 var tts_enabled: bool = true     # English text-to-speech pronunciation
+var theme_mode: int = 0          # 0 = Dark, 1 = Light
+
+# ---------- THEME SYSTEM (Dark / Light universes) ----------
+# Exposed on Global (an already-registered autoload) so every scene can
+# call Global.* without depending on a newly-registered global name.
+signal theme_changed(mode: int)
+
+enum ThemeMode { DARK, LIGHT }
+
+const THEME_FONT := "res://assets/fonts/Vazirmatn-Regular.ttf"
+
+var theme_palette: Dictionary = {}
+var _theme: Theme = Theme.new()
+var _theme_font: Font
+
+const THEME_PALETTES := {
+	# ---------------------------------------------------------------
+	# DARK  — "Midnight Nebula": deep indigo-navy base, violet accent,
+	#         teal success, rich violet→indigo gradient waves.
+	# ---------------------------------------------------------------
+	ThemeMode.DARK: {
+		"bg":            Color(0.055, 0.062, 0.125),
+		"surface":       Color(0.088, 0.102, 0.20),
+		"surface_alt":   Color(0.135, 0.150, 0.29),
+		"border":        Color(1, 1, 1, 0.10),
+		"text":          Color(0.90, 0.915, 1.0),
+		"text_dim":      Color(0.60, 0.63, 0.82),
+		"accent":        Color(0.545, 0.361, 0.965),
+		"accent_bright": Color(0.80, 0.66, 1.0),
+		"accent_soft":   Color(0.545, 0.361, 0.965, 0.16),
+		"on_accent":     Color(1, 1, 1, 1),
+		"success":       Color(0.30, 0.84, 0.60),
+		"error":         Color(1.0, 0.40, 0.46),
+		"warning":       Color(1.0, 0.80, 0.36),
+		"overlay":       Color(0, 0, 0, 0.6),
+		"bg_base":       Color(0.028, 0.036, 0.11),
+		"wave_top":      Color(0.32, 0.21, 0.66),
+		"wave_mid":      Color(0.20, 0.24, 0.66),
+		"wave_bottom":   Color(0.09, 0.12, 0.42),
+	},
+	# ---------------------------------------------------------------
+	# LIGHT — "Morning Periwinkle": soft periwinkle base, crisp white
+	#         surfaces, violet accent, light lavender gradient waves.
+	# ---------------------------------------------------------------
+	ThemeMode.LIGHT: {
+		"bg":            Color(0.955, 0.960, 0.99),
+		"surface":       Color(1, 1, 1, 1),
+		"surface_alt":   Color(0.90, 0.912, 0.97),
+		"border":        Color(0.10, 0.11, 0.25, 0.14),
+		"text":          Color(0.10, 0.115, 0.23),
+		"text_dim":      Color(0.36, 0.39, 0.55),
+		"accent":        Color(0.40, 0.26, 0.92),
+		"accent_bright": Color(0.50, 0.36, 1.0),
+		"accent_soft":   Color(0.40, 0.26, 0.92, 0.10),
+		"on_accent":     Color(1, 1, 1, 1),
+		"success":       Color(0.12, 0.60, 0.42),
+		"error":         Color(0.86, 0.20, 0.32),
+		"warning":       Color(0.84, 0.58, 0.04),
+		"overlay":       Color(0.05, 0.06, 0.16, 0.35),
+		"bg_base":       Color(0.92, 0.925, 0.99),
+		"wave_top":      Color(0.60, 0.55, 0.98),
+		"wave_mid":      Color(0.74, 0.66, 1.0),
+		"wave_bottom":   Color(0.84, 0.82, 1.0),
+	},
+}
+
+
+func theme_is_dark() -> bool:
+	return theme_mode == ThemeMode.DARK
+
+
+func get_theme_color(role: String) -> Color:
+	return theme_palette.get(role, Color.WHITE)
+
+
+func on_theme_changed(callback: Callable) -> void:
+	theme_changed.connect(callback)
+
+
+# The app-wide base Theme (already applied to the tree root). Shared
+# components can assign this to themselves so all their children follow
+# the current Dark / Light palette automatically.
+func get_base_theme() -> Theme:
+	return _theme
+
+
+func set_theme_mode(new_mode: int) -> void:
+	if new_mode != ThemeMode.DARK and new_mode != ThemeMode.LIGHT:
+		new_mode = ThemeMode.DARK
+	if new_mode == theme_mode and not theme_palette.is_empty():
+		return
+	theme_mode = new_mode
+	theme_palette = THEME_PALETTES[theme_mode]
+	_rebuild_theme()
+	_apply_theme_to_root()
+	_apply_theme_to_background()
+	save_settings()
+	theme_changed.emit(theme_mode)
+
+
+func _setup_theme() -> void:
+	_theme_font = load(THEME_FONT) as Font
+	if theme_mode != ThemeMode.DARK and theme_mode != ThemeMode.LIGHT:
+		theme_mode = ThemeMode.DARK
+	theme_palette = THEME_PALETTES[theme_mode]
+	_rebuild_theme()
+	_apply_theme_to_root()
+	_apply_theme_to_background()
+
+
+func _rebuild_theme() -> void:
+	var t := Theme.new()
+	t.default_font = _theme_font
+	t.default_font_size = 34
+
+	var bg: Color = theme_palette["bg"]
+	var surface: Color = theme_palette["surface"]
+	var alt: Color = theme_palette["surface_alt"]
+	var border: Color = theme_palette["border"]
+	var text: Color = theme_palette["text"]
+	var dim: Color = theme_palette["text_dim"]
+	var accent: Color = theme_palette["accent"]
+
+	t.set_color("font_color", "Label", text)
+	t.set_color("font_hover_color", "Label", text)
+	t.set_color("font_focus_color", "Label", text)
+	t.set_color("font_selected_color", "Label", text)
+	t.set_color("font_outline_color", "Label", Color(0, 0, 0, 0))
+	t.set_constant("outline_size", "Label", 0)
+
+	var btn_normal := StyleBoxFlat.new()
+	btn_normal.bg_color = alt
+	btn_normal.border_color = border
+	btn_normal.set_border_width_all(1)
+	btn_normal.set_corner_radius_all(16)
+	btn_normal.content_margin_left = 24
+	btn_normal.content_margin_right = 24
+	btn_normal.content_margin_top = 14
+	btn_normal.content_margin_bottom = 14
+	var btn_hover := btn_normal.duplicate() as StyleBoxFlat
+	btn_hover.bg_color = alt.lerp(accent, 0.18)
+	var btn_pressed := btn_normal.duplicate() as StyleBoxFlat
+	btn_pressed.bg_color = alt.lerp(accent, 0.3)
+	var btn_focus := btn_normal.duplicate() as StyleBoxFlat
+	btn_focus.border_color = accent
+	t.set_stylebox("normal", "Button", btn_normal)
+	t.set_stylebox("hover", "Button", btn_hover)
+	t.set_stylebox("pressed", "Button", btn_pressed)
+	t.set_stylebox("focus", "Button", btn_focus)
+	t.set_stylebox("disabled", "Button", btn_normal)
+	t.set_color("font_color", "Button", text)
+	t.set_color("font_hover_color", "Button", text)
+	t.set_color("font_pressed_color", "Button", text)
+	t.set_color("font_focus_color", "Button", text)
+	t.set_color("font_disabled_color", "Button", dim)
+
+	for ptype in ["Panel", "PanelContainer"]:
+		var p := StyleBoxFlat.new()
+		p.bg_color = surface
+		p.border_color = border
+		p.set_border_width_all(1)
+		p.set_corner_radius_all(20)
+		t.set_stylebox("panel", ptype, p)
+
+	var sc := StyleBoxFlat.new()
+	sc.bg_color = Color(0, 0, 0, 0)
+	t.set_stylebox("panel", "ScrollContainer", sc)
+
+	var grab := StyleBoxFlat.new()
+	grab.bg_color = accent
+	grab.set_corner_radius_all(8)
+	t.set_stylebox("grabber", "VScrollBar", grab)
+	t.set_stylebox("grabber", "HScrollBar", grab)
+	t.set_stylebox("grabber_highlight", "VScrollBar", grab)
+	t.set_stylebox("grabber_highlight", "HScrollBar", grab)
+	var track := StyleBoxFlat.new()
+	track.bg_color = Color(0, 0, 0, 0)
+	t.set_stylebox("track", "VScrollBar", track)
+	t.set_stylebox("track", "HScrollBar", track)
+
+	var le_normal := StyleBoxFlat.new()
+	le_normal.bg_color = bg
+	le_normal.border_color = border
+	le_normal.set_border_width_all(1)
+	le_normal.set_corner_radius_all(12)
+	le_normal.content_margin_left = 16
+	le_normal.content_margin_right = 16
+	var le_focus := le_normal.duplicate() as StyleBoxFlat
+	le_focus.border_color = accent
+	t.set_stylebox("normal", "LineEdit", le_normal)
+	t.set_stylebox("focus", "LineEdit", le_focus)
+	t.set_color("font_color", "LineEdit", text)
+	t.set_color("caret_color", "LineEdit", accent)
+	t.set_color("font_placeholder_color", "LineEdit", dim)
+
+	t.set_color("font_color", "OptionButton", text)
+	t.set_color("font_color", "CheckButton", text)
+	t.set_color("font_color", "CheckBox", text)
+	t.set_color("font_hover_color", "CheckButton", text)
+	t.set_color("font_hover_color", "CheckBox", text)
+	t.set_color("font_color", "TabContainer", text)
+	t.set_color("font_selected_color", "TabContainer", accent)
+	t.set_color("font_color", "ProgressBar", text)
+	t.set_color("font_color", "RichTextLabel", text)
+	t.set_color("default_color", "RichTextLabel", text)
+
+	var sep := StyleBoxLine.new()
+	sep.color = border
+	t.set_stylebox("separator", "HSeparator", sep)
+	t.set_stylebox("separator", "VSeparator", sep)
+
+	var tip := StyleBoxFlat.new()
+	tip.bg_color = alt
+	tip.border_color = border
+	tip.set_border_width_all(1)
+	tip.set_corner_radius_all(8)
+	t.set_stylebox("panel", "TooltipPanel", tip)
+	t.set_color("font_color", "TooltipLabel", text)
+
+	_theme = t
+
+
+func _apply_theme_to_root() -> void:
+	if is_inside_tree():
+		get_tree().root.theme = _theme
+
+
+func _apply_theme_to_background() -> void:
+	if not is_inside_tree():
+		return
+	call_deferred("_apply_theme_to_background_deferred")
+
+
+func _apply_theme_to_background_deferred() -> void:
+	var mb: Node = get_tree().root.get_node_or_null("MenuBackground")
+	if mb == null or not mb.has_method("apply_theme"):
+		return
+	mb.apply_theme(
+		theme_palette["bg_base"],
+		theme_palette["wave_top"],
+		theme_palette["wave_mid"],
+		theme_palette["wave_bottom"]
+	)
+
+
+# ══════════════════════════════════════════════════════════════
+# GENERIC SCENE THEMING
+# Walks any scene and restyles its Controls so Dark / Light stays
+# consistent across the whole app. Scenes that already implement
+# their own theme walk (settings, about_me, the grammar system)
+# are skipped to avoid double-styling.
+# ══════════════════════════════════════════════════════════════
+const SELF_THEMED_SCRIPTS := [
+	"settings.gd",
+	"about_me.gd",
+	"vocab_flashcards.gd",
+	"grammar_button.gd",
+	"grammar_hub.gd",
+	"grammar_units.gd",
+	"main_menu.gd",
+]
+
+# Labels that read better muted in both themes.
+const DIM_LABELS := [
+	"Subtitle", "Hint", "ContactHint", "VersionValue", "CreditLabel",
+	"SubName", "DevName", "VersionName",
+]
+
+
+func scene_handles_own_theme(root: Node) -> bool:
+	var s: Script = root.get_script()
+	if s == null:
+		return false
+	var p := String(s.resource_path).to_lower()
+	for script_name in SELF_THEMED_SCRIPTS:
+		if p.ends_with(script_name):
+			return true
+	return false
+
+
+func style_scene(root: Node) -> void:
+	if root == null:
+		return
+	if scene_handles_own_theme(root):
+		return
+	_style_walk(root)
+
+
+func _style_walk(node: Node) -> void:
+	# Independent overlay layers (side menu, transitions, animated
+	# background) own their theming or are decorative — skip them.
+	if node is CanvasLayer:
+		return
+
+	# Unified header bars are themed as a whole (bar + its buttons/labels).
+	if node.name in HEADER_BAR_NAMES and node is Control:
+		style_header(node)
+		return
+
+	if node is ColorRect:
+		_style_background_rect(node)
+	elif node is PanelContainer or node is Panel:
+		_style_card(node)
+	elif node is Label:
+		_style_label(node)
+	elif node is Button:
+		_style_button(node)
+
+	for child in node.get_children():
+		_style_walk(child)
+
+
+func _style_background_rect(cr: ColorRect) -> void:
+	var n := cr.name
+	if n != "BackgroundColor" and n != "Bg" and not n.contains("Background"):
+		return
+	if theme_is_dark():
+		cr.color = Color(0.055, 0.07, 0.13, cr.color.a)
+	else:
+		cr.color = Color(0.955, 0.968, 0.98, cr.color.a)
+
+
+func _style_card(node: Node) -> void:
+	var dark := theme_is_dark()
+	var old: StyleBox = node.get_theme_stylebox("panel")
+	var style := StyleBoxFlat.new()
+	if old is StyleBoxFlat:
+		var of := old as StyleBoxFlat
+		style.content_margin_left = of.content_margin_left
+		style.content_margin_top = of.content_margin_top
+		style.content_margin_right = of.content_margin_right
+		style.content_margin_bottom = of.content_margin_bottom
+		style.set_corner_radius_all(of.corner_radius_top_left if of.corner_radius_top_left > 0 else 20)
+	else:
+		style.set_corner_radius_all(20)
+	if dark:
+		style.bg_color = get_theme_color("surface")
+		style.border_color = Color(1, 1, 1, 0.10)
+	else:
+		style.bg_color = Color(1, 1, 1, 1)
+		style.border_color = Color(0, 0, 0, 0.10)
+	style.set_border_width_all(1)
+	node.add_theme_stylebox_override("panel", style)
+
+
+func _style_label(label: Label) -> void:
+	var n := label.name
+	if n.ends_with("Title") or n.ends_with("Header"):
+		label.add_theme_color_override("font_color", get_theme_color("accent_bright"))
+	elif n in DIM_LABELS:
+		label.add_theme_color_override("font_color", get_theme_color("text_dim"))
+	else:
+		label.add_theme_color_override("font_color", get_theme_color("text"))
+
+
+func _style_button(btn: Button) -> void:
+	var colored := _button_has_colored_bg(btn)
+	var fc: Color = Color(1, 1, 1) if colored else get_theme_color("text")
+	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		btn.add_theme_color_override(state, fc)
+
+
+func _button_has_colored_bg(btn: Button) -> bool:
+	var st: StyleBox = btn.get_theme_stylebox("normal")
+	if st is StyleBoxFlat:
+		var c: Color = (st as StyleBoxFlat).bg_color
+		var mx := maxf(maxf(c.r, c.g), c.b)
+		var mn := minf(minf(c.r, c.g), c.b)
+		# Saturated accents AND dark backgrounds both need light text.
+		return c.a > 0.4 and ((mx - mn) > 0.25 or c.get_luminance() < 0.45)
+	return false
+
+
+# ══════════════════════════════════════════════════════════════
+# UNIFIED HEADER BAR — one consistent look across every scene.
+# Same shapes, same labels, same colors in Dark and Light.
+# Only the look changes — button functions are untouched.
+# ══════════════════════════════════════════════════════════════
+const HEADER_BAR_NAMES := ["HeaderBar", "TopBar", "TopHeader", "TitleBar"]
+
+
+func style_header(header: Node) -> void:
+	if header == null or not (header is Control):
+		return
+	var dark := theme_is_dark()
+	var accent := get_theme_color("accent")
+
+	# 1) Bar background — rounded-bottom "pill" bar, theme surface.
+	var bar := _header_bar_stylebox(dark, accent)
+	if header is PanelContainer or header is Panel:
+		header.add_theme_stylebox_override("panel", bar)
+	elif header is Control and not (header is Container):
+		# Plain-Control headers (Settings/AboutMe) get a background bar
+		# inserted behind their floating content. (Container headers such as
+		# BookMenu's TopBar are left as-is — a bg child would break their layout.)
+		var bg: Panel = header.get_node_or_null("__HeaderBarBg") as Panel
+		if bg == null:
+			bg = Panel.new()
+			bg.name = "__HeaderBarBg"
+			bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+			bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			header.add_child(bg)
+			header.move_child(bg, 0)
+		bg.add_theme_stylebox_override("panel", bar.duplicate())
+
+	# 2) Normalise layout rhythm across every header (consistent spacing).
+	for hb in header.find_children("*", "HBoxContainer", true, false):
+		(hb as HBoxContainer).add_theme_constant_override("separation", 24)
+	for hb in header.find_children("*", "VBoxContainer", true, false):
+		(hb as VBoxContainer).add_theme_constant_override("separation", 10)
+
+	# 3) Style every button + label inside the header subtree.
+	var stack: Array = [header]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n is Button:
+			_style_header_button(n)
+		elif n is Label:
+			_style_header_label(n)
+		for c in n.get_children():
+			stack.push_back(c)
+
+
+func _header_bar_stylebox(dark: bool, accent: Color) -> StyleBoxFlat:
+	var bar := StyleBoxFlat.new()
+	bar.set_corner_radius_all(48)
+	bar.corner_radius_top_left = 10
+	bar.corner_radius_top_right = 10
+	if dark:
+		bar.bg_color = get_theme_color("surface")
+		bar.border_color = Color(1, 1, 1, 0.08)
+	else:
+		bar.bg_color = Color(1, 1, 1, 1)
+		bar.border_color = Color(0, 0, 0, 0.10)
+		bar.shadow_color = Color(0.12, 0.12, 0.25, 0.12)
+		bar.shadow_size = 12
+	bar.set_border_width_all(1)
+	# A signature violet underline ties every bar together.
+	bar.border_width_bottom = 3
+	bar.border_color = accent
+	# Breathing room so header content never touches the screen edges.
+	bar.content_margin_left = 36
+	bar.content_margin_right = 36
+	bar.content_margin_top = 18
+	bar.content_margin_bottom = 14
+	return bar
+
+func _style_header_button(btn: Button) -> void:
+	var dark := theme_is_dark()
+	var accent := get_theme_color("accent")
+	var is_back := String(btn.name).to_lower().contains("back")
+
+	# Flat buttons ignore stylebox backgrounds — force the chip to draw.
+	btn.flat = false
+	# 200×200 icon assets must scale down to fit the chip.
+	btn.expand_icon = true
+	# Keep chips at their natural size (don't stretch to fill the tall bar).
+	btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+
+	if is_back:
+		# Circular solid-accent chip with a clean font arrow (the shared
+		# Back.png asset is a white-disc icon that reads poorly on a chip).
+		var d := 80.0
+		var chip := StyleBoxFlat.new()
+		chip.set_corner_radius_all(int(d / 2.0))
+		chip.bg_color = accent
+		chip.border_color = accent.lightened(0.2) if dark else accent.darkened(0.1)
+		chip.set_border_width_all(1)
+		chip.content_margin_left = 10
+		chip.content_margin_right = 10
+		chip.content_margin_top = 8
+		chip.content_margin_bottom = 8
+		for state in ["normal", "hover", "pressed", "focus"]:
+			btn.add_theme_stylebox_override(state, chip)
+		btn.custom_minimum_size = Vector2(d, d)
+		btn.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+		btn.add_theme_font_size_override("font_size", 38)
+		btn.icon = null
+		btn.text = "←"
+	else:
+		# Action buttons (home / translate / audio…) — rounded chips.
+		var is_icon_only := btn.text == "" and btn.icon != null
+		var chip := StyleBoxFlat.new()
+		if dark:
+			chip.bg_color = Color(1, 1, 1, 0.10)
+			chip.border_color = Color(1, 1, 1, 0.12)
+		else:
+			chip.bg_color = Color(0.94, 0.945, 0.99)
+			chip.border_color = Color(0, 0, 0, 0.08)
+		chip.set_border_width_all(1)
+		if is_icon_only:
+			# Icon-only buttons (e.g. audio) become neat square chips.
+			chip.set_corner_radius_all(24)
+			chip.content_margin_left = 20
+			chip.content_margin_right = 20
+			chip.content_margin_top = 20
+			chip.content_margin_bottom = 20
+			btn.custom_minimum_size = Vector2(88, 88)
+		else:
+			chip.set_corner_radius_all(24)
+			chip.content_margin_left = 18
+			chip.content_margin_right = 18
+			chip.content_margin_top = 12
+			chip.content_margin_bottom = 12
+			btn.custom_minimum_size = Vector2(0, 64)
+		for state in ["normal", "hover", "pressed", "focus"]:
+			btn.add_theme_stylebox_override(state, chip)
+		var fc: Color = Color(1, 1, 1, 1) if dark else get_theme_color("text")
+		for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+			btn.add_theme_color_override(state, fc)
+
+
+func _style_header_label(label: Label) -> void:
+	var c: Color = get_theme_color("accent_bright") if theme_is_dark() else get_theme_color("accent")
+	if label.label_settings != null:
+		label.label_settings.font_color = c
+	label.add_theme_color_override("font_color", c)
 
 
 func _load_settings() -> void:
@@ -173,12 +691,14 @@ func _load_settings() -> void:
 	var data: Dictionary = json.data
 	sound_enabled = bool(data.get("sound_enabled", true))
 	tts_enabled = bool(data.get("tts_enabled", true))
+	theme_mode = int(data.get("theme_mode", 0))
 
 
 func save_settings() -> void:
 	var data: Dictionary = {
 		"sound_enabled": sound_enabled,
 		"tts_enabled": tts_enabled,
+		"theme_mode": theme_mode,
 	}
 	var file := FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
@@ -192,10 +712,24 @@ func _ready() -> void:
 	_load_word_database()
 	_load_settings()
 	_init_tts() # You can keep or remove TTS init, keeping it for safety
-	
+	_setup_theme()
+
+	# Style every scene as it becomes current (covers transitions and the
+	# initial launch) so Dark / Light is consistent app-wide.
+	get_tree().scene_changed.connect(_on_scene_changed)
+	call_deferred("_style_initial_scene")
+
 	# Initialize AudioStreamPlayer for playing word audio files
 	audio_player = AudioStreamPlayer.new()
 	add_child(audio_player)
+
+
+func _on_scene_changed() -> void:
+	style_scene(get_tree().current_scene)
+
+
+func _style_initial_scene() -> void:
+	style_scene(get_tree().current_scene)
 
 # ---------- LAST SCENE ----------
 

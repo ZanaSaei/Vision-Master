@@ -31,6 +31,35 @@ const C_INFO    := Color("#22D3EE")
 const C_PURPLE  := Color("#A78BFA")
 const C_ORANGE  := Color("#FB923C")
 
+# ---------- Theme-aware color helpers ----------
+# All UI chrome colors are resolved from the active Dark/Light palette
+# (Global). C_* above remain as the app's scene accents (cyan/purple/orange
+# etc.) which stay the same in both modes. Feedback + surface/text colors are
+# resolved live so the whole exercise UI follows the current theme.
+static func _c_surface() -> Color:
+	return Global.get_theme_color("surface")
+
+static func _c_surface_alt() -> Color:
+	return Global.get_theme_color("surface_alt")
+
+static func _c_border() -> Color:
+	return Global.get_theme_color("border")
+
+static func _c_text() -> Color:
+	return Global.get_theme_color("text")
+
+static func _c_text_dim() -> Color:
+	return Global.get_theme_color("text_dim")
+
+static func _c_success() -> Color:
+	return Global.get_theme_color("success")
+
+static func _c_error() -> Color:
+	return Global.get_theme_color("error")
+
+static func _c_warning() -> Color:
+	return Global.get_theme_color("warning")
+
 const CLOZE_OPT_FONT := 42            # matches the cloze passage text size
 const MIN_FONT := 28                   # nothing rendered smaller than this
 
@@ -194,6 +223,8 @@ static var _shared_font_farsi: FontFile
 var _active_vbox: VBoxContainer
 var _scroll: ScrollContainer = null
 var _target: Control = null
+var _master_panel_style: StyleBoxFlat = null
+var _theme_hook_active := false
 
 # --- Inline cloze state (choices are picked by tapping blanks in the text) ---
 var _cloze_rtl: RichTextLabel = null
@@ -279,7 +310,29 @@ func _ready() -> void:
 	# PageView uses this group to cancel exercise gestures during swipes/scrolls.
 	add_to_group("exercise_engines")
 
+	# Assign the app-wide base theme and follow live Dark/Light toggles.
+	if not _theme_hook_active:
+		_theme_hook_active = true
+		Global.on_theme_changed(_apply_theme)
+	_apply_theme()
+
 	_ensure_layout_target()
+
+# Restyles theme-driven chrome live. Individual widget StyleBoxes built in
+# build() already resolve their colors through _c_*() at construction time, so
+# they are correct for the current mode whenever the exercise is (re)built.
+# The base theme is re-applied here so theme-agnostic children follow too, and
+# the master card stylebox is updated in place on a toggle.
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	theme = Global.get_base_theme()
+	if _scroll != null:
+		_scroll.theme = Global.get_base_theme()
+	if _target != null:
+		_target.theme = Global.get_base_theme()
+	if _master_panel_style != null:
+		_master_panel_style.bg_color = _c_surface()
 
 func _process(_delta: float) -> void:
 	if not is_inside_tree():
@@ -1287,8 +1340,9 @@ func _create_master_panel() -> void:
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#1a2f5c")
+	style.bg_color = _c_surface()
 	style.set_corner_radius_all(16)
+	_master_panel_style = style
 
 	var type := str(_exercise.get("type", "open_ended"))
 	var meta: Dictionary = TYPE_META.get(type, TYPE_META["open_ended"])
@@ -1343,7 +1397,7 @@ func _add_common_passage() -> void:
 	rtl.add_theme_font_size_override("bold_font_size", 40)
 	rtl.add_theme_font_size_override("italics_font_size", 40)
 	rtl.add_theme_font_size_override("bold_italics_font_size", 40)
-	rtl.add_theme_color_override("default_color", Color("#F1F5F9"))
+	rtl.add_theme_color_override("default_color", _c_text())
 	if _font_regular:
 		rtl.add_theme_font_override("normal_font", _font_regular)
 	rtl.text = text
@@ -1399,7 +1453,7 @@ func _add_instruction() -> void:
 	instruction.text = final_text
 	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD
 	instruction.add_theme_font_size_override("font_size", 44)
-	instruction.add_theme_color_override("font_color", C_TEXT)
+	instruction.add_theme_color_override("font_color", _c_text())
 	instruction.set_meta("text_fa", _get_fa_text(text_raw))
 	var fa_dominant := _is_fa_dominant(final_text)
 	instruction.text_direction = Control.TEXT_DIRECTION_RTL if fa_dominant else Control.TEXT_DIRECTION_LTR
@@ -1413,7 +1467,7 @@ func _add_instruction() -> void:
 	var sep := HSeparator.new()
 	sep.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var sep_style := StyleBoxLine.new()
-	sep_style.color = C_MUTED.lightened(0.7)
+	sep_style.color = _c_text_dim().lightened(0.7)
 	sep_style.thickness = 2
 	sep.add_theme_stylebox_override("separator", sep_style)
 	_active_vbox.add_child(sep)
@@ -1424,7 +1478,7 @@ func _add_note() -> void:
 	var note := _get_en_text(note_raw)
 	if note == "":
 		return
-	_note_label = _make_label(_t("info_prefix") + note, 32, C_MUTED, false)
+	_note_label = _make_label(_t("info_prefix") + note, 32, _c_text_dim(), false)
 	_note_label.set_meta("text_fa", _get_fa_text(note_raw))
 	_note_label.visible = false
 	if _is_open_ended or _is_non_interactive:
@@ -1509,7 +1563,7 @@ func _make_media_control(img_data: Variant) -> Control:
 	max_width = _safe_media_width(max_width)
 
 	if path == "":
-		var ph := _make_label(_t("image_placeholder"), 28, C_MUTED, false)
+		var ph := _make_label(_t("image_placeholder"), 28, _c_text_dim(), false)
 		_apply_fa_meta(ph, "image_placeholder")
 		vbox.add_child(ph)
 		return vbox
@@ -1530,12 +1584,12 @@ func _make_media_control(img_data: Variant) -> Control:
 			center.add_child(img)
 			vbox.add_child(center)
 			if caption != "":
-				var cap := _make_label(caption, 28, C_MUTED, false)
+				var cap := _make_label(caption, 28, _c_text_dim(), false)
 				cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 				vbox.add_child(cap)
 			return vbox
 
-	var missing := _make_label(_t("image_not_found_prefix") + path.get_file(), 28, C_MUTED, false)
+	var missing := _make_label(_t("image_not_found_prefix") + path.get_file(), 28, _c_text_dim(), false)
 	missing.set_meta("text_fa", str(UI_STRINGS["image_not_found_prefix"]["fa"]) + path.get_file())
 	vbox.add_child(missing)
 	return vbox
@@ -1581,7 +1635,7 @@ func _add_footer_buttons() -> void:
 			_reveal_btn.pressed.connect(_on_reveal_sample)
 			btn_row.add_child(_reveal_btn)
 		# Green "Save" button
-		_done_btn = _make_button(_t("save"), C_SUCCESS)
+		_done_btn = _make_button(_t("save"), _c_success())
 		_apply_fa_meta(_done_btn, "save")
 		_done_btn.pressed.connect(_on_open_ended_done)
 		btn_row.add_child(_done_btn)
@@ -1629,7 +1683,7 @@ func _build_multiple_choice() -> void:
 	for item in _exercise.get("items", []):
 		var item_vbox := _start_item_block(item)
 
-		var q_label := _make_label(_get_item_main_text(item), 40, C_TEXT, true)
+		var q_label := _make_label(_get_item_main_text(item), 40, _c_text(), true)
 		item_vbox.add_child(q_label)
 
 		var group := ButtonGroup.new()
@@ -1670,7 +1724,7 @@ func _build_true_false() -> void:
 	for item in _exercise.get("items", []):
 		var item_vbox := _start_item_block(item)
 
-		var statement := _make_label(_get_item_main_text(item), 40, C_TEXT, false)
+		var statement := _make_label(_get_item_main_text(item), 40, _c_text(), false)
 		item_vbox.add_child(statement)
 
 		var group := ButtonGroup.new()
@@ -1708,7 +1762,7 @@ func _build_matching() -> void:
 	for item in _exercise.get("items", []):
 		var item_vbox := _start_item_block(item)
 
-		var text := _make_label(_get_item_main_text(item), 38, C_TEXT, false)
+		var text := _make_label(_get_item_main_text(item), 38, _c_text(), false)
 		item_vbox.add_child(text)
 
 		var options: Array = item.get("options", exercise_options)
@@ -1748,12 +1802,12 @@ func _build_fill_blank() -> void:
 	for item in _exercise.get("items", []):
 		var item_vbox := _start_item_block(item)
 
-		var text := _make_label(_get_item_main_text(item), 38, C_TEXT, false)
+		var text := _make_label(_get_item_main_text(item), 38, _c_text(), false)
 		item_vbox.add_child(text)
 
 		var hint := _get_en_text(item.get("hint", ""))
 		if hint != "":
-			item_vbox.add_child(_make_label("Hint: " + hint, 30, C_MUTED, false))
+			item_vbox.add_child(_make_label("Hint: " + hint, 30, _c_text_dim(), false))
 
 		# Completed example rows (editable=false) render the sentence as-is
 		# with no input box and are excluded from grading entirely.
@@ -1782,7 +1836,7 @@ func _build_fill_blank() -> void:
 func _build_cloze() -> void:
 	var blanks: Array = _exercise.get("blanks", [])
 	if blanks.is_empty():
-		_active_vbox.add_child(_make_label(_t("no_correct_words"), 32, C_MUTED, false))
+		_active_vbox.add_child(_make_label(_t("no_correct_words"), 32, _c_text_dim(), false))
 		return
 
 	# ---- Reset inline state ----
@@ -1834,7 +1888,7 @@ func _build_cloze() -> void:
 	rtl.add_theme_font_size_override("bold_font_size", 42)
 	rtl.add_theme_font_size_override("italics_font_size", 42)
 	rtl.add_theme_font_size_override("bold_italics_font_size", 42)
-	rtl.add_theme_color_override("default_color", C_TEXT)
+	rtl.add_theme_color_override("default_color", _c_text())
 	if _font_regular:
 		rtl.add_theme_font_override("normal_font", _font_regular)
 	rtl.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -1857,7 +1911,7 @@ func _build_cloze() -> void:
 	var popup := PopupPanel.new()
 
 	var panel := StyleBoxFlat.new()
-	panel.bg_color = Color("#0f1b3d")
+	panel.bg_color = _c_surface()
 	panel.set_corner_radius_all(16)
 	panel.border_width_left = 1
 	panel.border_width_right = 1
@@ -2033,11 +2087,11 @@ func _show_cloze_popup(idx: int) -> void:
 		row.add_theme_font_size_override("font_size", CLOZE_OPT_FONT)
 		if _font_regular:
 			row.add_theme_font_override("font", _font_regular)
-		row.add_theme_color_override("font_color", Color("#F1F5F9"))
+		row.add_theme_color_override("font_color", _c_text())
 		row.add_theme_color_override("font_hover_color", C_PRIMARY)
 
 		var normal := StyleBoxFlat.new()
-		normal.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.18) if is_sel else Color("#152a52")
+		normal.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.18) if is_sel else _c_surface_alt()
 		normal.set_corner_radius_all(10)
 		if is_sel:
 			normal.border_width_left = 5
@@ -2167,22 +2221,22 @@ func _rebuild_ordering_list(list_vbox: VBoxContainer, current_order: Array, item
 		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		list_vbox.add_child(row)
 
-		var num := _make_label("%d." % (pos + 1), 34, C_MUTED, true)
+		var num := _make_label("%d." % (pos + 1), 34, _c_text_dim(), true)
 		num.custom_minimum_size.x = 60
 		row.add_child(num)
 
-		var txt := _make_label(str(item_texts[idx]), 36, C_TEXT, false)
+		var txt := _make_label(str(item_texts[idx]), 36, _c_text(), false)
 		txt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(txt)
 
 		# Use arrow symbols instead of "Up" / "Down"
-		var up := _make_button("↑", C_MUTED)
+		var up := _make_button("↑", _c_text_dim())
 		up.custom_minimum_size = Vector2(70, 60)
 		up.disabled = (pos == 0)
 		up.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, -1))
 		row.add_child(up)
 
-		var down := _make_button("↓", C_MUTED)
+		var down := _make_button("↓", _c_text_dim())
 		down.custom_minimum_size = Vector2(70, 60)
 		down.disabled = (pos == current_order.size() - 1)
 		down.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, 1))
@@ -2211,7 +2265,7 @@ func _build_categorize() -> void:
 	for item in _exercise.get("items", []):
 		var item_vbox := _start_item_block(item)
 
-		var text := _make_label(_get_item_main_text(item), 38, C_TEXT, false)
+		var text := _make_label(_get_item_main_text(item), 38, _c_text(), false)
 		item_vbox.add_child(text)
 
 		var ob := _make_option_dropdown(category_texts, "Category")
@@ -2257,7 +2311,7 @@ func _build_open_ended() -> void:
 
 		var q := _get_item_main_text(item)
 		if q != "":
-			var q_label := _make_label(q, 38, C_TEXT, false)
+			var q_label := _make_label(q, 38, _c_text(), false)
 			item_vbox.add_child(q_label)
 
 		var te := TextEdit.new()
@@ -2267,8 +2321,8 @@ func _build_open_ended() -> void:
 		te.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		te.add_theme_font_size_override("font_size", 40)
 		# Dark answer box: use light text instead of black text.
-		te.add_theme_color_override("font_color", C_TEXT)
-		te.add_theme_color_override("font_placeholder_color", C_MUTED)
+		te.add_theme_color_override("font_color", _c_text())
+		te.add_theme_color_override("font_placeholder_color", _c_text_dim())
 		te.add_theme_color_override("caret_color", C_PRIMARY)
 		# Keep selected text readable on the dark background.
 		te.add_theme_color_override(
@@ -2281,10 +2335,10 @@ func _build_open_ended() -> void:
 
 		var te_style := StyleBoxFlat.new()
 		# Replace the white background with the dark panel color.
-		te_style.bg_color = Color("#0f1b3d")
+		te_style.bg_color = _c_surface()
 		te_style.set_corner_radius_all(10)
 		te_style.border_width_bottom = 2
-		te_style.border_color = Color("#3d4a7a")
+		te_style.border_color = _c_border()
 		te_style.set_content_margin_all(14)
 		te.add_theme_stylebox_override("normal", te_style)
 
@@ -2325,7 +2379,7 @@ func _build_open_ended() -> void:
 		var sample_text := _get_en_text(item.get("sample_answer", ""))
 		var sample: Label = null
 		if sample_text != "":
-			sample = _make_label(_t("sample_answer_prefix") + sample_text, 34, C_SUCCESS, false)
+			sample = _make_label(_t("sample_answer_prefix") + sample_text, 34, _c_success(), false)
 			sample.set_meta("text_fa", _get_fa_text(item.get("sample_answer", "")))
 			sample.visible = false
 			item_vbox.add_child(sample)
@@ -2346,7 +2400,7 @@ func _on_open_ended_text_changed() -> void:
 		_is_saved = false
 		_done_btn.text = _t("save")
 		_apply_fa_meta(_done_btn, "save")
-		_set_button_color(_done_btn, C_SUCCESS)
+		_set_button_color(_done_btn, _c_success())
 
 
 # ------------------------------------------------------------
@@ -2361,7 +2415,7 @@ func _build_word_bank() -> void:
 	for item in _exercise.get("items", []):
 		var item_vbox := _start_item_block(item)
 
-		var text := _make_label(_get_item_main_text(item), 38, C_TEXT, false)
+		var text := _make_label(_get_item_main_text(item), 38, _c_text(), false)
 		item_vbox.add_child(text)
 
 		var ob := _make_option_dropdown(bank_texts, _t("choose_a_word"))
@@ -2513,7 +2567,7 @@ func _build_letter_scramble() -> void:
 
 		var hint_raw = item.get("hint", "")
 		if _get_en_text(hint_raw) != "":
-			var hint := _make_label("Hint: " + _get_en_text(hint_raw), 32, C_MUTED, false)
+			var hint := _make_label("Hint: " + _get_en_text(hint_raw), 32, _c_text_dim(), false)
 			hint.set_meta("text_fa", _get_fa_text(hint_raw))
 			item_vbox.add_child(hint)
 
@@ -2544,7 +2598,7 @@ func _build_table_fill() -> void:
 	_active_vbox.add_child(grid)
 
 	for col in columns:
-		var h := _make_label(_get_en_text(col), 34, C_MUTED, true)
+		var h := _make_label(_get_en_text(col), 34, _c_text_dim(), true)
 		h.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		h.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		grid.add_child(h)
@@ -2569,7 +2623,7 @@ func _build_table_fill() -> void:
 					"explanation_fa": "",
 				})
 			else:
-				var lbl := _make_label(_get_en_text(cell.get("text", "")), 36, C_TEXT, false)
+				var lbl := _make_label(_get_en_text(cell.get("text", "")), 36, _c_text(), false)
 				lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				cell_box.add_child(lbl)
 
@@ -2596,7 +2650,7 @@ func _build_table_fill_advanced() -> void:
 			rows = _exercise.get("rows", [])
 
 		if table is Dictionary and table.has("title"):
-			var tl := _make_label(_get_en_text(table.get("title", "")), 34, C_MUTED, true)
+			var tl := _make_label(_get_en_text(table.get("title", "")), 34, _c_text_dim(), true)
 			_active_vbox.add_child(tl)
 
 		if columns.is_empty():
@@ -2630,7 +2684,7 @@ func _build_table_fill_advanced() -> void:
 				grid.add_child(cell_box)
 
 				if not cell is Dictionary:
-					var plain := _make_label(str(cell), 34, C_TEXT, false)
+					var plain := _make_label(str(cell), 34, _c_text(), false)
 					plain.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 					cell_box.add_child(plain)
 					continue
@@ -2683,8 +2737,8 @@ func _build_table_fill_advanced() -> void:
 						hbox.add_theme_constant_override("separation", 10)
 						hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 						cell_box.add_child(hbox)
-						var b_yes := _make_select_button(yes_text, group, C_SUCCESS)
-						var b_no := _make_select_button(no_text, group, C_ERROR)
+						var b_yes := _make_select_button(yes_text, group, _c_success())
+						var b_no := _make_select_button(no_text, group, _c_error())
 						hbox.add_child(b_yes)
 						hbox.add_child(b_no)
 						var ans_tf: Variant = cell.get("answer", true)
@@ -2739,8 +2793,8 @@ func _build_table_fill_advanced() -> void:
 						te.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 						te.add_theme_font_size_override("font_size", 34)
 						# Dark answer box: light text instead of black.
-						te.add_theme_color_override("font_color", C_TEXT)
-						te.add_theme_color_override("font_placeholder_color", C_MUTED)
+						te.add_theme_color_override("font_color", _c_text())
+						te.add_theme_color_override("font_placeholder_color", _c_text_dim())
 						te.add_theme_color_override("caret_color", C_PRIMARY)
 						te.add_theme_color_override(
 							"selection_color",
@@ -2750,10 +2804,10 @@ func _build_table_fill_advanced() -> void:
 						if _font_regular:
 							te.add_theme_font_override("font", _font_regular)
 						var te_style := StyleBoxFlat.new()
-						te_style.bg_color = Color("#0f1b3d")
+						te_style.bg_color = _c_surface()
 						te_style.set_corner_radius_all(10)
 						te_style.border_width_bottom = 2
-						te_style.border_color = Color("#3d4a7a")
+						te_style.border_color = _c_border()
 						te_style.set_content_margin_all(12)
 						te.add_theme_stylebox_override("normal", te_style)
 						var te_focus: StyleBoxFlat = te_style.duplicate()
@@ -2771,7 +2825,7 @@ func _build_table_fill_advanced() -> void:
 							"explanation_fa": _get_fa_text(cell.get("explanation", "")),
 						})
 					_:
-						var lbl := _make_label(_get_en_text(cell.get("text", "")), 34, C_TEXT, false)
+						var lbl := _make_label(_get_en_text(cell.get("text", "")), 34, _c_text(), false)
 						lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 						cell_box.add_child(lbl)
 
@@ -2785,7 +2839,7 @@ func _build_text_highlight() -> void:
 	var words: PackedStringArray = passage_text.split(" ", false)
 	var answer_indices: Array = _exercise.get("answer_indices", [])
 
-	var hint := _make_label("Tap the words that match the instruction above.", 30, C_MUTED, false)
+	var hint := _make_label("Tap the words that match the instruction above.", 30, _c_text_dim(), false)
 	_active_vbox.add_child(hint)
 
 	var flow := HFlowContainer.new()
@@ -2848,7 +2902,7 @@ func _build_text_highlight_multi() -> void:
 		var chip := _make_label(str(c["label"]), 28, c["color"], true)
 		legend.add_child(chip)
 
-	var hint := _make_label("Tap a word to change its label. Tap again to cycle.", 30, C_MUTED, false)
+	var hint := _make_label("Tap a word to change its label. Tap again to cycle.", 30, _c_text_dim(), false)
 	_active_vbox.add_child(hint)
 
 	var flow := HFlowContainer.new()
@@ -2934,7 +2988,7 @@ func _update_multi_word_style(btn: Button, cat_id: String, categories: Array) ->
 	if cat_id == "":
 		style.bg_color = Color(1, 1, 1, 0)
 		style.border_width_bottom = 1
-		style.border_color = Color("#CBD5E1")
+		style.border_color = _c_border()
 	else:
 		var col := _get_category_color(cat_id, categories)
 		style.bg_color = Color(col.r, col.g, col.b, 0.22)
@@ -3002,12 +3056,12 @@ func _build_transformation() -> void:
 	for item in _exercise.get("items", []):
 		var item_vbox := _start_item_block(item, 10)
 
-		var prompt := _make_label(_get_item_main_text(item), 38, C_TEXT, true)
+		var prompt := _make_label(_get_item_main_text(item), 38, _c_text(), true)
 		item_vbox.add_child(prompt)
 
 		var task_raw = item.get("task", "")
 		if _get_en_text(task_raw) != "":
-			var task := _make_label("Task: " + _get_en_text(task_raw), 32, C_MUTED, false)
+			var task := _make_label("Task: " + _get_en_text(task_raw), 32, _c_text_dim(), false)
 			task.set_meta("text_fa", _get_fa_text(task_raw))
 			item_vbox.add_child(task)
 
@@ -3048,7 +3102,7 @@ func _build_error_correction() -> void:
 		rtl.add_theme_font_size_override("bold_font_size", 42)
 		rtl.add_theme_font_size_override("italics_font_size", 42)
 		rtl.add_theme_font_size_override("bold_italics_font_size", 42)
-		rtl.add_theme_color_override("default_color", C_TEXT)
+		rtl.add_theme_color_override("default_color", _c_text())
 		if _font_regular:
 			rtl.add_theme_font_override("normal_font", _font_regular)
 
@@ -3089,7 +3143,7 @@ func _build_word_building() -> void:
 		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		item_vbox.add_child(row)
 
-		var prefix_label := _make_label(_get_en_text(item.get("prefix", "")) + "  +", 40, C_TEXT, true)
+		var prefix_label := _make_label(_get_en_text(item.get("prefix", "")) + "  +", 40, _c_text(), true)
 		row.add_child(prefix_label)
 
 		var ob := _make_option_dropdown(option_texts)
@@ -3125,11 +3179,11 @@ func _build_word_search() -> void:
 	var correct_words := _get_word_search_correct_words(word_list)
 
 	if word_list.is_empty():
-		var msg := _make_label("No words were provided for this word search.", 32, C_MUTED, false)
+		var msg := _make_label("No words were provided for this word search.", 32, _c_text_dim(), false)
 		_active_vbox.add_child(msg)
 		return
 
-	var words_title := _make_label("Tap the words:", 32, C_MUTED, true)
+	var words_title := _make_label("Tap the words:", 32, _c_text_dim(), true)
 	_active_vbox.add_child(words_title)
 
 	# Use a flow container so the words wrap correctly.
@@ -3370,31 +3424,31 @@ func _style_word_search_word_button(btn: Button, state: String) -> void:
 	style.border_width_top = 1
 	style.border_width_bottom = 1
 
-	var bg := Color("#0f1b3d")
-	var border := Color("#3d4a7a")
-	var font_color := Color("#F1F5F9")
+	var bg := _c_surface()
+	var border := _c_border()
+	var font_color := _c_text()
 
 	match state:
 		"selected":
 			# User selected before checking.
-			bg = C_WARNING
-			border = C_WARNING
+			bg = _c_warning()
+			border = _c_warning()
 			font_color = Color("#241a00")
 		"correct":
 			# Correct answer after checking.
-			bg = C_SUCCESS
-			border = C_SUCCESS
+			bg = _c_success()
+			border = _c_success()
 			font_color = Color("#03251a")
 		"wrong":
 			# Wrong selected word after checking.
-			bg = C_ERROR
-			border = C_ERROR
+			bg = _c_error()
+			border = _c_error()
 			font_color = Color("#2b0505")
 		_:
 			# Idle / unselected.
-			bg = Color("#0f1b3d")
-			border = Color("#3d4a7a")
-			font_color = Color("#F1F5F9")
+			bg = _c_surface()
+			border = _c_border()
+			font_color = _c_text()
 
 	style.bg_color = bg
 	style.border_color = border
@@ -3458,11 +3512,11 @@ func _grade_word_search() -> void:
 		if correct_total == 0:
 			_score_banner.text = _t_fa("no_correct_words")
 			_score_banner.set_meta("text_fa", _score_banner.text)
-			_score_banner.add_theme_color_override("font_color", C_WARNING)
+			_score_banner.add_theme_color_override("font_color", _c_warning())
 		elif correct_selected == correct_total and wrong_selected == 0:
 			_score_banner.text = _t_fa("all_correct_words")
 			_score_banner.set_meta("text_fa", _score_banner.text)
-			_score_banner.add_theme_color_override("font_color", C_SUCCESS)
+			_score_banner.add_theme_color_override("font_color", _c_success())
 		elif wrong_selected > 0:
 			_score_banner.text = _t_fa("chose_correct_and_wrong") % [
 				correct_selected,
@@ -3470,7 +3524,7 @@ func _grade_word_search() -> void:
 				wrong_selected
 			]
 			_score_banner.set_meta("text_fa", _score_banner.text)
-			_score_banner.add_theme_color_override("font_color", C_ERROR)
+			_score_banner.add_theme_color_override("font_color", _c_error())
 		else:
 			_score_banner.text = _t_fa("chose_correct") % [
 				correct_selected,
@@ -3498,25 +3552,25 @@ func _style_word_search_cell(btn: Button, state: String) -> void:
 	style.set_content_margin_all(3)
 
 	var bg := Color(0, 0, 0, 0)
-	var font_color := Color("#F1F5F9")
+	var font_color := _c_text()
 
 	match state:
 		"selected":
 			# User-selected before checking.
-			bg = C_WARNING
+			bg = _c_warning()
 			font_color = Color("#241a00")
 		"correct":
 			# Correct answer after checking.
-			bg = C_SUCCESS
+			bg = _c_success()
 			font_color = Color("#03251a")
 		"wrong":
 			# Wrong selected cell after checking.
-			bg = C_ERROR
+			bg = _c_error()
 			font_color = Color("#2b0505")
 		_:
 			# Idle / unselected.
 			bg = Color(0, 0, 0, 0)
-			font_color = Color("#F1F5F9")
+			font_color = _c_text()
 
 	style.bg_color = bg
 
@@ -3582,7 +3636,7 @@ func _build_chart_fill() -> void:
 				})
 			else:
 				var text_val: Dictionary = cell.get("text", {})
-				var lbl := _make_label(_get_en_text(text_val), 34, C_TEXT, false)
+				var lbl := _make_label(_get_en_text(text_val), 34, _c_text(), false)
 				lbl.set_meta("text_fa", _get_fa_text(text_val))
 				lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 				lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -3604,7 +3658,7 @@ func _build_odd_one_out() -> void:
 		var question_text := "Which word does not belong?"
 		if item.has("question"):
 			question_text = _get_en_text(item.get("question", ""))
-		var q_label := _make_label(question_text, 34, C_TEXT, true)
+		var q_label := _make_label(question_text, 34, _c_text(), true)
 		item_vbox.add_child(q_label)
 
 		var group := ButtonGroup.new()
@@ -3619,7 +3673,7 @@ func _build_odd_one_out() -> void:
 		item_vbox.add_child(grid)
 
 		for w in word_texts:
-			var b := _make_select_button(str(w), group, C_WARNING)
+			var b := _make_select_button(str(w), group, _c_warning())
 			option_btns.append(b)
 			grid.add_child(b)
 
@@ -3664,7 +3718,7 @@ func _build_grammar_choice() -> void:
 		rtl.add_theme_font_size_override("bold_font_size", 42)
 		rtl.add_theme_font_size_override("italics_font_size", 42)
 		rtl.add_theme_font_size_override("bold_italics_font_size", 42)
-		rtl.add_theme_color_override("default_color", C_TEXT)
+		rtl.add_theme_color_override("default_color", _c_text())
 		if _font_regular:
 			rtl.add_theme_font_override("normal_font", _font_regular)
 		var highlighted := sentence.replace("___", "[color=#2563EB][u]___[/u][/color]")
@@ -3722,11 +3776,11 @@ func _build_passive_transformation() -> void:
 		var item_vbox := _start_item_block(item)
 
 		var active_text: String = _get_en_text(item.get("active", item.get("prompt", "")))
-		var label := _make_label("Active: " + active_text, 36, C_TEXT, true)
+		var label := _make_label("Active: " + active_text, 36, _c_text(), true)
 		item_vbox.add_child(label)
 
 		var hint_text := _get_en_text(item.get("hint", "Rewrite in passive voice:"))
-		var hint := _make_label("Task: " + hint_text, 32, C_MUTED, false)
+		var hint := _make_label("Task: " + hint_text, 32, _c_text_dim(), false)
 		item_vbox.add_child(hint)
 
 		var le := _make_line_edit("Type the passive sentence...")
@@ -3765,7 +3819,7 @@ func _build_grammar_identification() -> void:
 		rtl.add_theme_font_size_override("bold_font_size", 40)
 		rtl.add_theme_font_size_override("italics_font_size", 40)
 		rtl.add_theme_font_size_override("bold_italics_font_size", 40)
-		rtl.add_theme_color_override("default_color", C_TEXT)
+		rtl.add_theme_color_override("default_color", _c_text())
 		if _font_regular:
 			rtl.add_theme_font_override("normal_font", _font_regular)
 
@@ -3775,7 +3829,7 @@ func _build_grammar_identification() -> void:
 		rtl.text = highlighted
 		item_vbox.add_child(rtl)
 
-		var question := _make_label("What is the grammatical form of the underlined word or phrase?", 32, C_MUTED, false)
+		var question := _make_label("What is the grammatical form of the underlined word or phrase?", 32, _c_text_dim(), false)
 		item_vbox.add_child(question)
 
 		var options: Array = item.get("options", [])
@@ -3820,7 +3874,7 @@ func _build_question_formation() -> void:
 		var item_vbox := _start_item_block(item)
 
 		var prompt_text: String = _get_en_text(item.get("prompt", "Form a question:"))
-		var label := _make_label(prompt_text, 36, C_TEXT, true)
+		var label := _make_label(prompt_text, 36, _c_text(), true)
 		label.set_meta("text_fa", _get_fa_text(item.get("prompt", "")))
 		item_vbox.add_child(label)
 
@@ -3853,7 +3907,7 @@ func _build_token_label() -> void:
 
 		var inst := _get_en_text(item.get("instruction", ""))
 		if inst != "":
-			item_vbox.add_child(_make_label(inst, 32, C_MUTED, false))
+			item_vbox.add_child(_make_label(inst, 32, _c_text_dim(), false))
 
 		var labels_raw: Array = item.get("labels", default_labels)
 		var categories := _normalize_categories(labels_raw)
@@ -3902,7 +3956,7 @@ func _build_token_label() -> void:
 					ans_display = str(c["label"])
 					break
 
-			var word_label := _make_label(token_text, 36, C_TEXT, true)
+			var word_label := _make_label(token_text, 36, _c_text(), true)
 			token_box.add_child(word_label)
 
 			var ob := OptionButton.new()
@@ -3940,7 +3994,7 @@ func _build_token_label() -> void:
 func _build_image_choice() -> void:
 	var question := _get_en_text(_exercise.get("question", _exercise.get("prompt", "")))
 	if question != "":
-		_active_vbox.add_child(_make_label(question, 38, C_TEXT, true))
+		_active_vbox.add_child(_make_label(question, 38, _c_text(), true))
 
 	var options: Array = _exercise.get("options", [])
 	var flow := HFlowContainer.new()
@@ -3990,7 +4044,7 @@ func _build_image_match() -> void:
 
 		var text := _get_item_main_text(item)
 		if text != "":
-			item_vbox.add_child(_make_label(text, 38, C_TEXT, true))
+			item_vbox.add_child(_make_label(text, 38, _c_text(), true))
 
 		var flow := HFlowContainer.new()
 		flow.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -4034,13 +4088,13 @@ func _build_image_match() -> void:
 func _build_image_hotspot() -> void:
 	var img_path := _get_first_image_path(_exercise)
 	if img_path == "" or not ResourceLoader.exists(img_path):
-		var missing_label := _make_label(_t("image_not_found_prefix") + img_path, 32, C_ERROR, false)
+		var missing_label := _make_label(_t("image_not_found_prefix") + img_path, 32, _c_error(), false)
 		missing_label.set_meta("text_fa", str(UI_STRINGS["image_not_found_prefix"]["fa"]) + img_path)
 		_active_vbox.add_child(missing_label)
 		return
 	var tex := load(img_path) as Texture2D
 	if tex == null:
-		_active_vbox.add_child(_make_label("Could not load image: " + img_path, 32, C_ERROR, false))
+		_active_vbox.add_child(_make_label("Could not load image: " + img_path, 32, _c_error(), false))
 		return
 
 	var base_size: Vector2 = tex.get_size()
@@ -4137,11 +4191,13 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool) -> Labe
 # English content, then adds it to _active_vbox right after the content it
 # translates. Visible only while show_translation is on; set_show_translation()
 # flips every collected Farsi label at once.
-func _add_fa_label(fa_text: String, font_size: int = 32, color: Color = C_MUTED) -> Label:
+func _add_fa_label(fa_text: String, font_size: int = 32, color: Color = Color(0, 0, 0, -1)) -> Label:
 	font_size += 4
 	var clean := fa_text.strip_edges()
 	if clean == "":
 		return null
+	if color.a < 0.0:
+		color = _c_text_dim()
 	var label := Label.new()
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.text = clean
@@ -4184,18 +4240,18 @@ func _make_select_button(text: String, group: ButtonGroup, accent: Color) -> But
 	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	b.custom_minimum_size = Vector2(0, 0)
 	b.add_theme_font_size_override("font_size", 40)
-	b.add_theme_color_override("font_color", Color("#F1F5F9"))
+	b.add_theme_color_override("font_color", _c_text())
 	b.add_theme_color_override("font_hover_color", accent)
 	b.add_theme_color_override("font_pressed_color", accent)
 
 	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color("#0f1b3d")
+	normal.bg_color = _c_surface()
 	normal.set_corner_radius_all(10)
 	normal.border_width_left = 1
 	normal.border_width_right = 1
 	normal.border_width_top = 1
 	normal.border_width_bottom = 1
-	normal.border_color = Color("#3d4a7a")
+	normal.border_color = _c_border()
 	normal.set_content_margin_all(14)
 	b.add_theme_stylebox_override("normal", normal)
 
@@ -4231,7 +4287,7 @@ func _make_image_option_button(opt: Variant, group: ButtonGroup) -> Button:
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	b.add_theme_font_size_override("font_size", 34)
 	# Dark image option button needs light text.
-	b.add_theme_color_override("font_color", C_TEXT)
+	b.add_theme_color_override("font_color", _c_text())
 	b.add_theme_color_override("font_hover_color", C_PRIMARY)
 	b.add_theme_color_override("font_pressed_color", C_PRIMARY)
 
@@ -4246,13 +4302,13 @@ func _make_image_option_button(opt: Variant, group: ButtonGroup) -> Button:
 
 	var normal := StyleBoxFlat.new()
 	# Dark button background instead of white.
-	normal.bg_color = Color("#0f1b3d")
+	normal.bg_color = _c_surface()
 	normal.set_corner_radius_all(12)
 	normal.border_width_left = 1
 	normal.border_width_right = 1
 	normal.border_width_top = 1
 	normal.border_width_bottom = 1
-	normal.border_color = Color("#3d4a7a")
+	normal.border_color = _c_border()
 	normal.set_content_margin_all(12)
 	b.add_theme_stylebox_override("normal", normal)
 
@@ -4295,14 +4351,14 @@ func _make_line_edit(placeholder: String) -> LineEdit:
 	le.mouse_filter = Control.MOUSE_FILTER_PASS
 	le.placeholder_text = placeholder
 	le.add_theme_font_size_override("font_size", 40)
-	le.add_theme_color_override("font_color", Color("#F1F5F9"))
-	le.add_theme_color_override("font_placeholder_color", Color("#64748B"))
+	le.add_theme_color_override("font_color", _c_text())
+	le.add_theme_color_override("font_placeholder_color", _c_text_dim())
 	le.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if _font_regular:
 		le.add_theme_font_override("font", _font_regular)
 
 	var le_style := StyleBoxFlat.new()
-	le_style.bg_color = Color("#0f1b3d")
+	le_style.bg_color = _c_surface()
 	le_style.set_corner_radius_all(10)
 	le_style.border_width_bottom = 2
 	le_style.border_color = C_PRIMARY.lightened(0.3)
@@ -4328,8 +4384,8 @@ func _make_chart_input(placeholder: String) -> LineEdit:
 	le.placeholder_text = placeholder
 	le.add_theme_font_size_override("font_size", 38)
 	# Dark input field: light text, muted placeholder, visible caret.
-	le.add_theme_color_override("font_color", C_TEXT)
-	le.add_theme_color_override("font_placeholder_color", C_MUTED)
+	le.add_theme_color_override("font_color", _c_text())
+	le.add_theme_color_override("font_placeholder_color", _c_text_dim())
 	le.add_theme_color_override("caret_color", C_PRIMARY)
 	# Keep selected text readable.
 	le.add_theme_color_override(
@@ -4343,10 +4399,10 @@ func _make_chart_input(placeholder: String) -> LineEdit:
 
 	var le_style := StyleBoxFlat.new()
 	# Use the same dark background as the other input fields.
-	le_style.bg_color = Color("#0f1b3d")
+	le_style.bg_color = _c_surface()
 	le_style.set_corner_radius_all(8)
 	le_style.border_width_bottom = 2
-	le_style.border_color = Color("#3d4a7a")
+	le_style.border_color = _c_border()
 	le_style.set_content_margin_all(10)
 	le.add_theme_stylebox_override("normal", le_style)
 
@@ -4363,19 +4419,19 @@ func _make_chip_button(text: String, filled := false) -> Button:
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
 	b.text = text
 	b.add_theme_font_size_override("font_size", 38)
-	b.add_theme_color_override("font_color", Color("#000000") if filled else Color("#F1F5F9"))
+	b.add_theme_color_override("font_color", Color("#000000") if filled else _c_text())
 	b.add_theme_color_override("font_hover_color", Color("#000000") if filled else C_PRIMARY)
 	if _font_regular:
 		b.add_theme_font_override("font", _font_regular)
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = C_PRIMARY if filled else Color("#0f1b3d")
+	style.bg_color = C_PRIMARY if filled else _c_surface()
 	style.set_corner_radius_all(10)
 	style.border_width_left = 1
 	style.border_width_right = 1
 	style.border_width_top = 1
 	style.border_width_bottom = 1
-	style.border_color = C_PRIMARY if filled else Color("#3d4a7a")
+	style.border_color = C_PRIMARY if filled else _c_border()
 	style.set_content_margin_all(12)
 	b.add_theme_stylebox_override("normal", style)
 
@@ -4385,10 +4441,10 @@ func _make_chip_button(text: String, filled := false) -> Button:
 	b.add_theme_stylebox_override("pressed", hover)
 
 	var disabled: StyleBoxFlat = style.duplicate()
-	disabled.bg_color = Color("#1a2540")
-	disabled.border_color = Color("#2d3a6a")
+	disabled.bg_color = _c_surface_alt()
+	disabled.border_color = _c_border()
 	b.add_theme_stylebox_override("disabled", disabled)
-	b.add_theme_color_override("font_disabled_color", Color("#4a5580"))
+	b.add_theme_color_override("font_disabled_color", _c_text_dim())
 
 	_register_scroll_control(b)
 	return b
@@ -4405,7 +4461,7 @@ func _make_word_toggle(word: String, compact := false) -> Button:
 		b.custom_minimum_size = Vector2(36, 44)
 	else:
 		b.add_theme_font_size_override("font_size", 40)
-	b.add_theme_color_override("font_color", Color("#F1F5F9"))
+	b.add_theme_color_override("font_color", _c_text())
 	b.add_theme_color_override("font_pressed_color", Color("#000000"))
 	b.add_theme_color_override("font_hover_color", C_PRIMARY)
 	if _font_regular:
@@ -4572,7 +4628,7 @@ func _set_audio_button_playing() -> void:
 	if _audio_btn != null and is_instance_valid(_audio_btn):
 		_audio_btn.text = "Stop the Audio"
 		# Red so it clearly means "stop".
-		_set_button_color(_audio_btn, C_ERROR)
+		_set_button_color(_audio_btn, _c_error())
 
 
 func _set_audio_button_idle() -> void:
@@ -4594,6 +4650,11 @@ func _exit_tree() -> void:
 			_audio_panel.stop_and_close()
 		if _audio_panel_owned:
 			_audio_panel.queue_free()
+	# Stop following live theme changes.
+	if _theme_hook_active and is_instance_valid(Global):
+		_theme_hook_active = false
+		if Global.theme_changed.is_connected(_apply_theme):
+			Global.theme_changed.disconnect(_apply_theme)
 
 # ============================================================
 # GRADING
@@ -4635,7 +4696,7 @@ func _on_check_pressed() -> void:
 		if user_str == "" and item_type in ["fill_blank", "chart_fill", "transformation", "letter_scramble", "error_correction", "passive_transformation", "question_formation"]:
 			fb.text = _t_fa("empty")
 			fb.set_meta("text_fa", fb.text)
-			fb.add_theme_color_override("font_color", C_WARNING)
+			fb.add_theme_color_override("font_color", _c_warning())
 			continue
 		if is_correct:
 			if item_type in ["text_highlight", "text_highlight_multi", "word_search_cell"]:
@@ -4644,7 +4705,7 @@ func _on_check_pressed() -> void:
 				# Feedback label is always Farsi.
 				fb.text = _t_fa("correct")
 				fb.set_meta("text_fa", fb.text)
-			fb.add_theme_color_override("font_color", C_SUCCESS)
+			fb.add_theme_color_override("font_color", _c_success())
 		else:
 			if item_type in ["text_highlight", "text_highlight_multi", "word_search_cell"]:
 				fb.text = "✗"
@@ -4662,7 +4723,7 @@ func _on_check_pressed() -> void:
 				elif expl_en != "":
 					fa_text += "\n" + expl_en
 				fb.set_meta("text_fa", fa_text)
-			fb.add_theme_color_override("font_color", C_ERROR)
+			fb.add_theme_color_override("font_color", _c_error())
 	_is_graded = true
 	# Inline cloze recolors its blank slots instead of using per-item labels.
 	if str(_exercise.get("type", "")) == "cloze":
@@ -4672,7 +4733,7 @@ func _on_check_pressed() -> void:
 		if total > 0 and correct == total:
 			_score_banner.text = _t_fa("excellent_score") % [correct, total]
 			_score_banner.set_meta("text_fa", _score_banner.text)
-			_score_banner.add_theme_color_override("font_color", C_SUCCESS)
+			_score_banner.add_theme_color_override("font_color", _c_success())
 		else:
 			_score_banner.text = _t_fa("got_score") % [correct, total]
 			_score_banner.set_meta("text_fa", _score_banner.text)
@@ -4844,7 +4905,7 @@ func _on_reveal_sample() -> void:
 			_reveal_btn.text = _t("hide_sample_answer")
 			_apply_fa_meta(_reveal_btn, "hide_sample_answer")
 			# Gray color for Hide
-			_set_button_color(_reveal_btn, C_MUTED)
+			_set_button_color(_reveal_btn, _c_text_dim())
 		else:
 			_reveal_btn.text = _t("show_sample_answer")
 			_apply_fa_meta(_reveal_btn, "show_sample_answer")
@@ -4864,7 +4925,7 @@ func _on_open_ended_done() -> void:
 		_apply_fa_meta(_done_btn, "saved")
 		_is_saved = true
 		# Gray color for Saved state
-		_set_button_color(_done_btn, C_MUTED)
+		_set_button_color(_done_btn, _c_text_dim())
 
 	exercise_checked.emit(str(_exercise.get("exercise_id", "")), 1, 1)
 
@@ -4907,13 +4968,13 @@ class Dropdown extends Button:
 		clip_text = true
 		text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		add_theme_font_size_override("font_size", _ITEM_FONT)
-		add_theme_color_override("font_color", Color("#F1F5F9"))
+		add_theme_color_override("font_color", ExerciseEngine._c_text())
 		add_theme_color_override("font_hover_color", ExerciseEngine.C_PRIMARY)
 		if _font:
 			add_theme_font_override("font", _font)
 
 		var style := StyleBoxFlat.new()
-		style.bg_color = Color("#0f1b3d")
+		style.bg_color = ExerciseEngine._c_surface()
 		style.set_corner_radius_all(10)
 		style.border_width_bottom = 2
 		style.border_color = ExerciseEngine.C_PRIMARY.lightened(0.3)
@@ -4935,7 +4996,7 @@ class Dropdown extends Button:
 	func _build_popup() -> void:
 		_popup = PopupPanel.new()
 		var panel := StyleBoxFlat.new()
-		panel.bg_color = Color("#0f1b3d")
+		panel.bg_color = ExerciseEngine._c_surface()
 		panel.set_corner_radius_all(14)
 		panel.border_width_left = 1
 		panel.border_width_right = 1
@@ -5036,7 +5097,7 @@ class Dropdown extends Button:
 			lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 			lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			lbl.add_theme_font_size_override("font_size", _ITEM_FONT)
-			var base_color: Color = ExerciseEngine.C_MUTED if is_placeholder else Color("#F1F5F9")
+			var base_color: Color = ExerciseEngine._c_text_dim() if is_placeholder else ExerciseEngine._c_text()
 			lbl.add_theme_color_override("font_color", base_color)
 			if _font:
 				lbl.add_theme_font_override("font", _font)

@@ -119,7 +119,11 @@ func _ready() -> void:
 	
 	# 10. Make sure every shine shader knows its true pixel size
 	_finalize_shine_sizes()
-	
+
+	# 10b. Theme awareness (menu button + labels follow Dark / Light)
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
 	# 11. Entrance — cinematic stagger (ambient starts when it finishes)
 	if not Global.intro_animation_played:
 		Global.intro_animation_played = true
@@ -127,6 +131,39 @@ func _ready() -> void:
 	else:
 		_skip_intro_animation()
 		_start_ambient()
+
+############################################################
+# THEME AWARENESS — MainMenu stays brand-consistent in both
+# themes: coloured glass cards + white text read on any backdrop,
+# so only the menu button and plain labels need adjusting.
+############################################################
+func _on_theme_changed(_mode: int) -> void:
+	_apply_theme()
+
+
+func _apply_theme() -> void:
+	var dark := Global.theme_is_dark()
+
+	# Hamburger / menu button — keep it clearly readable on the theme backdrop.
+	var hb_bg := Color(0.0, 0.32, 0.42, 1.0) if dark else Color(0.30, 0.21, 0.78, 1.0)
+	var hb_style := StyleBoxFlat.new()
+	hb_style.bg_color = hb_bg
+	hb_style.set_corner_radius_all(20)
+	hb_style.content_margin_left = 24
+	hb_style.content_margin_right = 24
+	hb_style.content_margin_top = 12
+	hb_style.content_margin_bottom = 12
+	hb_style.border_color = Color(1, 1, 1, 0.30)
+	hb_style.set_border_width_all(1)
+	for s in ["normal", "hover", "pressed", "focus"]:
+		hamburger_button.add_theme_stylebox_override(s, hb_style)
+	hamburger_button.add_theme_color_override("font_color", Color.WHITE)
+	hamburger_button.add_theme_color_override("font_hover_color", Color.WHITE)
+	hamburger_button.add_theme_color_override("font_pressed_color", Color.WHITE)
+
+	# Choose-label follows the theme so it never disappears.
+	choose_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+
 
 ############################################################
 # LOGO — bold, high-contrast wordmark for "Vision Master"

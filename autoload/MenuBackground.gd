@@ -58,3 +58,13 @@ func enter_background() -> void:
 		return                     # already covering the screen
 	is_showing = true
 	background.play_enter()
+
+
+############################################################
+# Retint the whole animated background for the active theme
+# (called by ThemeManager). base_color + wave gradient colors.
+############################################################
+func apply_theme(bg: Color, wave_top: Color, wave_mid: Color, wave_bottom: Color) -> void:
+	if background == null:
+		return
+	background.apply_theme(bg, wave_top, wave_mid, wave_bottom)

@@ -11,6 +11,7 @@ const DEV_INSTAGRAM := "@mrsaei"           # TODO: replace with your real handle
 
 # --- Node references (match AboutMe.tscn) ---
 @onready var back_button: Button = $Header/Margin/HBox/BackButton
+@onready var bg: ColorRect = $Bg
 @onready var email_button: Button = $Scroll/Margin/Layout/ContactCard/VBox/EmailRow
 @onready var instagram_button: Button = $Scroll/Margin/Layout/ContactCard/VBox/InstagramRow
 @onready var version_value: Label = $Scroll/Margin/Layout/Footer/VersionValue
@@ -21,6 +22,63 @@ func _ready() -> void:
 	back_button.pressed.connect(_on_back_pressed)
 	email_button.pressed.connect(_on_email_pressed)
 	instagram_button.pressed.connect(_on_instagram_pressed)
+	Global.on_theme_changed(_on_theme_changed)
+	_apply_theme()
+
+
+func _on_theme_changed(_mode: int) -> void:
+	_apply_theme()
+
+
+# ══════════════════════════════════════════════════════════════
+#  THEME AWARENESS — restyle this page for Dark / Light
+# ══════════════════════════════════════════════════════════════
+func _apply_theme() -> void:
+	var dark := Global.theme_is_dark()
+	bg.color = Color(0.012, 0.018, 0.055, 0.88) if dark else Color(0.955, 0.968, 0.98, 0.90)
+	back_button.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	_theme_walk(self)
+	# Unified header styling last, so it wins over the generic walk.
+	if has_node("Header"):
+		Global.style_header($Header)
+
+
+func _theme_walk(node: Node) -> void:
+	if node is ColorRect and node.name == "Bg":
+		bg.color = Color(0.012, 0.018, 0.055, 0.88) if Global.theme_is_dark() else Color(0.955, 0.968, 0.98, 0.90)
+	elif node is PanelContainer and node.name != "Avatar":
+		var style := StyleBoxFlat.new()
+		style.set_corner_radius_all(26)
+		style.content_margin_left = 44.0
+		style.content_margin_top = 38.0
+		style.content_margin_right = 44.0
+		style.content_margin_bottom = 38.0
+		if Global.theme_is_dark():
+			style.bg_color = Color(1, 1, 1, 0.06)
+			style.border_color = Color(1, 1, 1, 0.10)
+		else:
+			style.bg_color = Color(1, 1, 1, 0.85)
+			style.border_color = Color(0, 0, 0, 0.10)
+		style.set_border_width_all(1)
+		node.add_theme_stylebox_override("panel", style)
+	elif node is Label:
+		_theme_label(node)
+	elif node is Button and node != back_button:
+		node.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	for child in node.get_children():
+		_theme_walk(child)
+
+
+func _theme_label(label: Label) -> void:
+	var n: String = label.name
+	if n.ends_with("Title"):
+		label.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
+	elif n in ["Subtitle", "ContactHint", "VersionValue", "CreditLabel"]:
+		label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	elif n == "Role":
+		label.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
+	else:
+		label.add_theme_color_override("font_color", Global.get_theme_color("text"))
 
 
 func _on_instagram_pressed() -> void:
