@@ -23,6 +23,7 @@ var current_unit_index := 0
 
 var xp := 0
 var correct_answers := 0
+var _last_award := 0
 
 var title_label: Label
 var progress_label: Label
@@ -32,6 +33,10 @@ var xp_label: Label
 var content_container: VBoxContainer
 var feedback_popup: FeedbackPopup
 var reward_popup: RewardPopup
+var hint_bulb: GrammarHint
+# Wrong attempts on the current question; used to reveal the skip button
+# after the learner has failed twice.
+var _wrong_attempts := 0
 
 var _accent := GrammarTheme.PRIMARY
 
@@ -57,7 +62,32 @@ func _ready() -> void:
 		current_unit_index = clampi(Global.grammar_start_unit_index, 0, units.size() - 1)
 	Global.grammar_start_unit_index = 0
 	_build_ui()
+	# XP carries over across sessions from saved progress, then grows as
+	# بخش‌ها are completed in this run.
+	xp = Global.get_grammar_xp(Global.current_book, Global.current_lesson)
+	_update_xp_label()
+	if units.is_empty():
+		_show_no_content()
+		return
 	_show_unit()
+
+
+func _show_no_content() -> void:
+	# No grammar JSON exists for this book/lesson: never fall back to the
+	# bundled Vision 1 / Lesson 1 sample. Show a friendly message instead.
+	var label: Label = Label.new()
+	label.text = "📭\nهنوز محتوایی نیست\n\nمحتوای گرامر برای این درس هنوز آماده نشده است.\nفقط برای کتاب ۱ درس ۱ در دسترس است."
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	label.add_theme_font_size_override("font_size", 26)
+	label.add_theme_color_override("font_color", GrammarTheme.TEXT_MUTED)
+	var body_font: Font = GrammarTheme.get_fa_regular()
+	if body_font != null:
+		label.add_theme_font_override("font", body_font)
+	content_container.add_child(label)
 
 
 # ============================================================
@@ -66,9 +96,6 @@ func _ready() -> void:
 
 func _load_lesson() -> void:
 	var data := GrammarData.load_lesson(Global.current_book, Global.current_lesson)
-	if data.is_empty():
-		# Fall back to the bundled sample so the scene is never blank.
-		data = GrammarData.load_lesson(1, 1)
 	lesson_data = data
 	units = lesson_data.get("units", [])
 
@@ -154,11 +181,31 @@ func _build_ui() -> void:
 	feedback_popup = FeedbackPopup.new()
 	add_child(feedback_popup)
 	feedback_popup.continue_pressed.connect(_on_feedback_continue)
+	feedback_popup.skip_pressed.connect(_on_skip_pressed)
 
-	# Full-screen reward overlay for completion.
+	# Full-screen reward overlay shown after each completed بخش.
 	reward_popup = RewardPopup.new()
 	add_child(reward_popup)
-	reward_popup.finished.connect(_on_back_pressed)
+	reward_popup.next_requested.connect(_on_reward_next)
+	reward_popup.back_requested.connect(_on_reward_back)
+
+	# The hint light-bulb floats near the bottom-centre of the big content
+	# card. It flashes after a wrong answer and reveals a friendly hint when
+	# tapped.
+	hint_bulb = GrammarHint.new()
+	hint_bulb.name = "HintBulb"
+	hint_bulb.anchor_left = 0.5
+	hint_bulb.anchor_right = 0.5
+	hint_bulb.anchor_top = 1.0
+	hint_bulb.anchor_bottom = 1.0
+	hint_bulb.offset_left = -210
+	hint_bulb.offset_right = 210
+	hint_bulb.offset_top = -230
+	hint_bulb.offset_bottom = -6
+	hint_bulb.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	hint_bulb.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	content_box.add_child(hint_bulb)
+	hint_bulb.hint_requested.connect(_on_hint_requested)
 
 
 func _build_top_bar(main: VBoxContainer) -> void:
@@ -242,6 +289,14 @@ func _show_unit() -> void:
 	progress_label.text = "%d / %d" % [current_unit_index + 1, units.size()]
 	_animate_progress()
 
+	# The hint bulb stays invisible until the learner gets an answer
+	# wrong; it then appears with a heartbeat pulse to offer help. It is
+	# hidden again at the start of each fresh question.
+	_wrong_attempts = 0
+	hint_bulb.visible = false
+	hint_bulb.stop_flash()
+	hint_bulb.hide_bubble()
+
 	match type:
 		"learn":
 			_show_learning_unit(unit)
@@ -280,13 +335,27 @@ func _show_exercise(unit: Dictionary) -> void:
 # ============================================================
 
 func _on_answer_selected(correct: bool, explanation: String) -> void:
+	# XP is only earned when a whole بخش is completed (_award_unit_xp),
+	# never per individual answer.
 	if correct:
-		xp += int(lesson_data.get("xp_per_correct", 10))
 		correct_answers += 1
-		_update_xp_label()
+		_wrong_attempts = 0
+		# Correct answer: hide the bulb again (no hint needed anymore).
+		hint_bulb.visible = false
+		hint_bulb.stop_flash()
+		hint_bulb.hide_bubble()
 		feedback_popup.show_correct(explanation)
 	else:
+		_wrong_attempts += 1
+		# Wrong answer: stay on the question and reveal the hint bulb
+		# with a heartbeat pulse so the learner can ask for help.
+		hint_bulb.visible = true
+		hint_bulb.flash()
 		feedback_popup.show_wrong(explanation)
+		# After two failed attempts, offer a skip so the learner can move
+		# on to the next question.
+		if _wrong_attempts >= 2:
+			feedback_popup.show_skip_button()
 
 
 func _update_xp_label() -> void:
@@ -294,32 +363,101 @@ func _update_xp_label() -> void:
 		xp_label.text = "⭐ %d" % xp
 
 
-func _on_feedback_continue() -> void:
+func _current_exercise() -> GrammarExercise:
 	for child in content_container.get_children():
 		if child is GrammarExercise:
-			child.continue_to_next()
-			return
+			return child
+	return null
+
+
+func _on_hint_requested() -> void:
+	var exercise: GrammarExercise = _current_exercise()
+	if exercise == null:
+		return
+	hint_bulb.set_hint(exercise.get_current_hint())
+	hint_bulb.show_bubble()
+
+
+func _on_feedback_continue() -> void:
+	var exercise: GrammarExercise = _current_exercise()
+	if exercise == null:
+		return
+	# A correct answer advances to the next item; a wrong one stays on the
+	# same item so the learner retries it (the hint bulb can help).
+	if feedback_popup.is_correct:
+		exercise.continue_to_next()
+	else:
+		exercise.retry_current()
+
+
+func _on_skip_pressed() -> void:
+	# The learner has failed twice and chose to skip; move on to the next
+	# question and reset the wrong-attempt counter + hide the hint bulb.
+	_wrong_attempts = 0
+	hint_bulb.visible = false
+	hint_bulb.stop_flash()
+	hint_bulb.hide_bubble()
+	var exercise: GrammarExercise = _current_exercise()
+	if exercise == null:
+		return
+	exercise.continue_to_next()
 
 
 func _on_learning_continue() -> void:
-	current_unit_index += 1
 	_sync_grammar_progress()
-	_show_unit()
+	_award_unit_xp()
+	_show_unit_completed_reward()
 
 
 func _on_exercise_completed() -> void:
-	current_unit_index += 1
 	_sync_grammar_progress()
+	_award_unit_xp()
+	_show_unit_completed_reward()
+
+
+# Awards XP for finishing the current بخش and persists it. Uses the
+# lesson's xp_per_unit value (default 10).
+func _award_unit_xp() -> void:
+	_last_award = int(lesson_data.get("xp_per_unit", 10))
+	xp += _last_award
+	Global.add_grammar_xp(Global.current_book, Global.current_lesson, _last_award)
+	_update_xp_label()
+
+
+# ============================================================
+# UNIT REWARD / FINISH
+# ============================================================
+
+# After a بخش finishes, show the reward popup with a "next بخش" button
+# (and a "back to بخش‌ها" button). The very last بخش triggers the end.
+func _show_unit_completed_reward() -> void:
+	if current_unit_index >= units.size() - 1:
+		_finish_lesson()
+		return
+	var n: int = current_unit_index + 1
+	reward_popup.show_reward("بخش %d کامل شد!" % n, _last_award, "رفتن به بخش بعدی", true)
+
+
+func _on_reward_next() -> void:
+	if current_unit_index >= units.size() - 1:
+		_go_back_to_units()
+		return
+	current_unit_index += 1
 	_show_unit()
 
 
-# ============================================================
-# FINISH
-# ============================================================
+func _on_reward_back() -> void:
+	_go_back_to_units()
+
 
 func _finish_lesson() -> void:
 	for child in content_container.get_children():
 		child.queue_free()
+
+	if hint_bulb != null:
+		hint_bulb.visible = false
+		hint_bulb.stop_flash()
+		hint_bulb.hide_bubble()
 
 	if _progress_tween != null and _progress_tween.is_valid():
 		_progress_tween.kill()
@@ -330,22 +468,29 @@ func _finish_lesson() -> void:
 
 	_update_xp_label()
 
-	reward_popup.show_reward("بخش کامل شد!", xp)
+	reward_popup.show_reward("بخش کامل شد!", _last_award, "بازگشت به بخش‌ها", false)
 	Sfx.complete()
 
 
+# Called once a بخش finishes. current_unit_index still points at the just
+# completed بخش, so unlocking the next one means recording index + 2 (capped
+# at the lesson size).
 func _sync_grammar_progress() -> void:
-	var unlocked: int = current_unit_index + 1
+	var unlocked: int = current_unit_index + 2
 	if units.size() > 0:
 		unlocked = min(unlocked, units.size())
 	Global.set_grammar_unlocked_units(Global.current_book, Global.current_lesson, unlocked)
 
 
-func _on_back_pressed() -> void:
+func _go_back_to_units() -> void:
 	var last_scene: String = Global.get_last_scene()
 	if last_scene.is_empty():
 		last_scene = LESSON_MENU
-	TransitionManager.slide_change_scene(last_scene, TransitionManager.Slide.BACK)
+	TransitionManager.change_scene(last_scene)
+
+
+func _on_back_pressed() -> void:
+	_go_back_to_units()
 
 
 func _on_android_back_pressed() -> void:

@@ -4,7 +4,6 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_MAIN_MENU: String = "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_GRAMMAR_HUB: String = "res://scenes/grammar/GrammarHub.tscn"
 const SCENE_GRAMMAR_LESSON: String = "res://scenes/grammar/GrammarLesson.tscn"
-const BACKGROUND_SCENE: PackedScene = preload("res://scenes/dynamic_background/animated_background.tscn")
 
 var lesson_data: Dictionary = {}
 var units: Array = []
@@ -15,6 +14,9 @@ var _navigating: bool = false
 
 func _ready() -> void:
 	super._ready()
+	# Use the shared animated background (MenuBackground autoload) exactly
+	# like the book menu and lesson menu do.
+	MenuBackground.enter_background()
 	_load_lesson()
 	_build_ui()
 
@@ -22,18 +24,12 @@ func _ready() -> void:
 func _load_lesson() -> void:
 	lesson_data = GrammarData.load_lesson(Global.current_book, Global.current_lesson)
 	units = lesson_data.get("units", [])
-	if units.is_empty():
-		lesson_data = GrammarData.load_lesson(1, 1)
-		units = lesson_data.get("units", [])
 	unlocked_units = Global.get_grammar_unlocked_units(Global.current_book, Global.current_lesson, units.size())
 	if unlocked_units < 1:
 		unlocked_units = 1
 
 
 func _build_ui() -> void:
-	var background: Node = BACKGROUND_SCENE.instantiate()
-	add_child(background)
-
 	var root_margin: MarginContainer = MarginContainer.new()
 	root_margin.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root_margin.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -69,7 +65,7 @@ func _build_ui() -> void:
 	header_row.add_child(menu_button)
 
 	var title_label: Label = Label.new()
-	title_label.text = "واحدهای گرامر"
+	title_label.text = "بخش‌های گرامر"
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -115,34 +111,80 @@ func _build_ui() -> void:
 	lesson_title.add_theme_color_override("font_color", GrammarTheme.TEXT)
 	content.add_child(lesson_title)
 
-	var hint: Label = Label.new()
-	hint.text = "فقط واحدهای بازشده قابل انتخاب هستند."
-	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var body_font: Font = GrammarTheme.get_fa_regular()
-	if body_font != null:
-		hint.add_theme_font_override("font", body_font)
-	hint.add_theme_font_size_override("font_size", 24)
-	hint.add_theme_color_override("font_color", GrammarTheme.TEXT_MUTED)
-	content.add_child(hint)
 
-	var scroll: ScrollContainer = ScrollContainer.new()
-	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_child(scroll)
+	if not units.is_empty():
+		var xp_label: Label = Label.new()
+		xp_label.text = "⭐ %d XP" % Global.get_grammar_xp(Global.current_book, Global.current_lesson)
+		xp_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		xp_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		if body_font != null:
+			xp_label.add_theme_font_override("font", body_font)
+		xp_label.add_theme_font_size_override("font_size", 26)
+		xp_label.add_theme_color_override("font_color", GrammarTheme.XP)
+		content.add_child(xp_label)
 
-	var grid: GridContainer = GridContainer.new()
-	grid.columns = 2
-	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation", 18)
-	grid.add_theme_constant_override("v_separation", 18)
-	scroll.add_child(grid)
+		var hint: Label = Label.new()
+		hint.text = "فقط بخش‌های بازشده قابل انتخاب هستند."
+		hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		if body_font != null:
+			hint.add_theme_font_override("font", body_font)
+		hint.add_theme_font_size_override("font_size", 24)
+		hint.add_theme_color_override("font_color", GrammarTheme.TEXT_MUTED)
+		content.add_child(hint)
 
-	for i in range(units.size()):
-		var unit: Dictionary = units[i]
-		var button: GrammarButton = _make_unit_button(i, unit)
-		grid.add_child(button)
-		_unit_buttons.append(button)
+	if units.is_empty():
+		var empty_box: VBoxContainer = VBoxContainer.new()
+		empty_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		empty_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		empty_box.alignment = BoxContainer.ALIGNMENT_CENTER
+		empty_box.add_theme_constant_override("separation", 16)
+		content.add_child(empty_box)
+
+		var empty_icon: Label = Label.new()
+		empty_icon.text = "📭"
+		empty_icon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty_icon.add_theme_font_size_override("font_size", 72)
+		empty_box.add_child(empty_icon)
+
+		var empty_title: Label = Label.new()
+		empty_title.text = "هنوز محتوایی نیست"
+		empty_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		if title_font != null:
+			empty_title.add_theme_font_override("font", title_font)
+		empty_title.add_theme_font_size_override("font_size", 32)
+		empty_title.add_theme_color_override("font_color", GrammarTheme.TEXT)
+		empty_box.add_child(empty_title)
+
+		var empty_desc: Label = Label.new()
+		empty_desc.text = "محتوای گرامر برای این درس هنوز آماده نشده است.\nفقط برای کتاب ۱ درس ۱ در دسترس است."
+		empty_desc.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty_desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		if body_font != null:
+			empty_desc.add_theme_font_override("font", body_font)
+		empty_desc.add_theme_font_size_override("font_size", 24)
+		empty_desc.add_theme_color_override("font_color", GrammarTheme.TEXT_MUTED)
+		empty_box.add_child(empty_desc)
+	else:
+		var scroll: ScrollContainer = ScrollContainer.new()
+		scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		content.add_child(scroll)
+
+		var grid: GridContainer = GridContainer.new()
+		grid.columns = 2
+		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_theme_constant_override("h_separation", 18)
+		grid.add_theme_constant_override("v_separation", 18)
+		scroll.add_child(grid)
+
+		for i in range(units.size()):
+			var unit: Dictionary = units[i]
+			var button: GrammarButton = _make_unit_button(i, unit)
+			grid.add_child(button)
+			_unit_buttons.append(button)
 
 
 func _make_header_button(text: String, callback: Callable) -> Button:
@@ -185,7 +227,7 @@ func _make_unit_button(index: int, unit: Dictionary) -> GrammarButton:
 		status = "▶"
 
 	var label: String = GrammarData.unit_title(unit)
-	button.text = "%s %s\nواحد %d\n%s" % [status, GrammarData.unit_icon(unit), index + 1, label]
+	button.text = "%s %s\nبخش %d\n%s" % [status, GrammarData.unit_icon(unit), index + 1, label]
 
 	if unlocked:
 		button.pressed.connect(_on_unit_pressed.bind(index))
@@ -225,21 +267,21 @@ func _on_unit_pressed(index: int) -> void:
 	_navigating = true
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
 	Global.set_grammar_start_unit(index)
-	TransitionManager.slide_change_scene(SCENE_GRAMMAR_LESSON, TransitionManager.Slide.FORWARD)
+	TransitionManager.change_scene(SCENE_GRAMMAR_LESSON)
 
 
 func _on_main_menu_pressed() -> void:
 	if _navigating:
 		return
 	_navigating = true
-	TransitionManager.slide_change_scene(SCENE_MAIN_MENU, TransitionManager.Slide.BACK)
+	TransitionManager.change_scene(SCENE_MAIN_MENU)
 
 
 func _on_previous_pressed() -> void:
 	if _navigating:
 		return
 	_navigating = true
-	TransitionManager.slide_change_scene(SCENE_GRAMMAR_HUB, TransitionManager.Slide.BACK)
+	TransitionManager.change_scene(SCENE_GRAMMAR_HUB)
 
 
 func _on_android_back_pressed() -> void:

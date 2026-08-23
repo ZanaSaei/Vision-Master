@@ -12,8 +12,8 @@ extends RefCounted
 # colors are kept saturated but gentle so they read on dark.
 # ============================================================
 
-const BACKGROUND := Color("#12141C")
-const SURFACE := Color("#1E2230")
+const BACKGROUND := Color("049797ff")
+const SURFACE := Color("0e2619ff")
 
 const PRIMARY := Color("#6C7AFF")
 const PRIMARY_DARK := Color("#8490FF")
@@ -22,9 +22,9 @@ const PRIMARY_LIGHT := Color("#262B4D")
 const SECONDARY := Color("#6FD6C2")
 const SECONDARY_LIGHT := Color("#18332C")
 
-const TEXT := Color("#EAEDF5")
-const TEXT_SECONDARY := Color("#A8B0C2")
-const TEXT_MUTED := Color("#6E7689")
+const TEXT := Color("ffffffff")
+const TEXT_SECONDARY := Color("ffffdcff")
+const TEXT_MUTED := Color("ffffebff")
 
 const SUCCESS := Color("#3CCF7E")
 const SUCCESS_LIGHT := Color("#173322")

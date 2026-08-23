@@ -298,3 +298,21 @@ func continue_to_next() -> void:
 	current_index += 1
 
 	_show_item()
+
+
+func retry_current() -> void:
+	# Reset the two buttons and re-show the same statement for a retry.
+	_show_item()
+
+
+func get_current_hint() -> String:
+	var items: Array = exercise_data.get("items", [])
+	if current_index >= items.size():
+		return ""
+	var item: Dictionary = items[current_index]
+	var hint := str(item.get("hint_fa", ""))
+	if hint.is_empty():
+		hint = str(item.get("fa", ""))
+	if hint.is_empty():
+		hint = "جمله را با دقت بخوان؛ آیا ادعا درست است یا نادرست؟"
+	return hint

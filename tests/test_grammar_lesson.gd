@@ -25,7 +25,8 @@ func test_feedback_popup_wrong_state() -> void:
 	popup.show_wrong("Try again.")
 	assert(popup.visible, "popup should be shown for a wrong answer")
 	assert(popup.title_label.text.contains("نزدیک"), "wrong should show retry title, got: " + popup.title_label.text)
-	assert(popup.explanation_label.text == "Try again.", "wrong should show its explanation")
+	assert(popup.explanation_label.text.contains("امتحان کن"), "wrong should show a 'try again' message (never the correct answer), got: " + popup.explanation_label.text)
+	assert(popup.continue_button.text.contains("امتحان کن"), "wrong should offer a retry button, got: " + popup.continue_button.text)
 	popup.queue_free()
 
 func test_grammar_lesson_routes_to_show_correct() -> void:
@@ -58,9 +59,153 @@ func test_grammar_lesson_routes_to_show_correct() -> void:
 	assert(real_popup.visible, "feedback popup should appear after answering")
 	assert(real_popup.title_label.text.contains("عالی"), "correct path should show success, got: " + real_popup.title_label.text)
 	assert(real_popup.explanation_label.text == "RIGHT-EXP", "correct path should show explanation")
-	assert(lesson.xp == 10, "correct answer awards XP")
-	assert(lesson.xp_label.text == "⭐ 10", "XP label updates live, got: " + lesson.xp_label.text)
+	# XP is awarded only when a whole بخش finishes, never per answer.
+	assert(lesson.xp == 0, "no XP for a single answer")
+	assert(lesson.xp_label.text == "⭐ 0", "XP label stays put per-answer, got: " + lesson.xp_label.text)
 	lesson.queue_free()
+
+func test_wrong_answer_stays_on_question() -> void:
+	# A wrong answer must NOT reveal the correct option or advance; the
+	# learner retries the same question. A correct answer still advances.
+	var lesson: Control = (load("res://scenes/grammar/scripts/GrammarLesson.gd") as GDScript).new()
+	lesson._build_ui()
+	var real_popup: FeedbackPopup = lesson.feedback_popup
+	real_popup._build_ui()
+
+	lesson.lesson_data = {"title_fa": "test"}
+	lesson.units = [{
+		"type": "multiple_choice",
+		"questions": [
+			{"question": "q1", "options": ["A", "B"], "correct": 0, "wrong_explanation_fa": "W1", "explanation_fa": "E1"},
+			{"question": "q2", "options": ["C", "D"], "correct": 0, "wrong_explanation_fa": "W2", "explanation_fa": "E2"},
+		]
+	}]
+	lesson.current_unit_index = 0
+	lesson._show_unit()
+
+	var ex: MultipleChoiceExercise = lesson._current_exercise()
+	assert(ex != null, "exercise should be created")
+
+	# Answer wrong (option index 1).
+	ex.options_container.get_child(1).pressed.emit()
+	assert(real_popup.is_correct == false, "wrong answer marks the popup as wrong")
+	assert(real_popup.explanation_label.text.contains("امتحان کن"), "wrong feedback says try again")
+	# The correct option must NOT have been revealed.
+	for child in ex.options_container.get_children():
+		var b: GrammarButton = child as GrammarButton
+		if int(b.get_meta("answer_index", -1)) == 0:
+			assert(not b.disabled and not b.has_meta("grammar_correct"), "correct option must not be revealed on a wrong answer")
+			break
+
+	# Continuing after a wrong answer stays on the same question (retry).
+	lesson._on_feedback_continue()
+	assert(ex.current_index == 0, "wrong answer must NOT advance to the next question")
+	assert(ex.answered == false, "retry unlocks the question again")
+
+	# Now answer correctly and continue -> advances to the next question.
+	ex.options_container.get_child(0).pressed.emit()
+	assert(real_popup.is_correct, "correct answer marks the popup as correct")
+	lesson._on_feedback_continue()
+	assert(ex.current_index == 1, "correct answer advances to the next question")
+
+	lesson.queue_free()
+
+
+func test_matching_feedback_shows_before_reward() -> void:
+	# Matching: the "عالی بود" feedback must appear immediately when the
+	# last pair is found; the بخش reward must wait for the continue tap.
+	var progress_path := "user://progress.json"
+	var backup := ""
+	if FileAccess.file_exists(progress_path):
+		backup = FileAccess.open(progress_path, FileAccess.READ).get_as_text()
+
+	var lesson: Control = (load("res://scenes/grammar/scripts/GrammarLesson.gd") as GDScript).new()
+	lesson._build_ui()
+	var real_popup: FeedbackPopup = lesson.feedback_popup
+	real_popup._build_ui()
+	var reward: RewardPopup = lesson.reward_popup
+	reward._build_ui()
+	reward.hide()
+
+	lesson.lesson_data = {"title_fa": "test"}
+	lesson.units = [
+		{"type": "matching", "items": [
+			{"left": "a", "right": "A"},
+			{"left": "b", "right": "B"},
+		]},
+		{"type": "learn", "title_fa": "x", "body_fa": "y"},
+	]
+	lesson.current_unit_index = 0
+	lesson._show_unit()
+
+	var ex: MatchingExercise = lesson._current_exercise()
+	assert(ex != null, "matching exercise should be created")
+
+	# Match every pair (left button then the right button with the same value).
+	for left_button in ex.left_buttons:
+		var value := str(left_button.get_meta("match_value", ""))
+		var right_button: GrammarButton = null
+		for rb in ex.right_buttons:
+			if str(rb.get_meta("match_value", "")) == value and not rb.disabled:
+				right_button = rb
+				break
+		ex._select(left_button, true)
+		ex._select(right_button, false)
+
+	# Feedback shows immediately; the reward has NOT appeared yet.
+	assert(real_popup.visible, "feedback popup should show right after all pairs are found")
+	assert(real_popup.is_correct, "feedback should be the success state")
+	assert(reward.visible == false, "reward popup must NOT show before the continue tap")
+
+	# Tapping continue now completes the unit and shows the reward.
+	lesson._on_feedback_continue()
+	assert(reward.visible, "reward popup should show after the continue tap")
+
+	lesson.queue_free()
+
+	# Restore the real progress file.
+	if backup != "":
+		FileAccess.open(progress_path, FileAccess.WRITE).store_string(backup)
+
+
+func test_skip_button_after_two_wrongs() -> void:
+	# The "skip" escape hatch should appear only after the learner has
+	# been wrong twice on the same question, and pressing it advances to
+	# the next question.
+	var lesson: Control = (load("res://scenes/grammar/scripts/GrammarLesson.gd") as GDScript).new()
+	lesson._build_ui()
+	var real_popup: FeedbackPopup = lesson.feedback_popup
+	real_popup._build_ui()
+
+	lesson.lesson_data = {"title_fa": "test"}
+	lesson.units = [{
+		"type": "multiple_choice",
+		"questions": [
+			{"question": "q1", "options": ["A", "B"], "correct": 0, "wrong_explanation_fa": "W", "explanation_fa": "E"},
+			{"question": "q2", "options": ["C", "D"], "correct": 0, "wrong_explanation_fa": "W", "explanation_fa": "E"},
+		]
+	}]
+	lesson.current_unit_index = 0
+	lesson._show_unit()
+
+	var ex: MultipleChoiceExercise = lesson._current_exercise()
+	assert(ex != null, "exercise should be created")
+
+	# First wrong answer -> no skip button yet.
+	ex.options_container.get_child(1).pressed.emit()
+	assert(real_popup.skip_button.visible == false, "no skip button after the first wrong answer")
+	lesson._on_feedback_continue()  # retry the same question
+
+	# Second wrong answer -> skip button appears.
+	ex.options_container.get_child(1).pressed.emit()
+	assert(real_popup.skip_button.visible == true, "skip button appears after two wrong answers")
+
+	# Pressing skip advances to the next question.
+	lesson._on_skip_pressed()
+	assert(ex.current_index == 1, "skip advances to the next question")
+
+	lesson.queue_free()
+
 
 func test_unscramble_blanks_mode() -> void:
 	# The unscramble exercise must also support a template + word-bank
@@ -116,3 +261,37 @@ func test_grammar_data_loads_generically() -> void:
 	# Missing files resolve to an empty dict (no crash)
 	var missing: Dictionary = GrammarData.load_lesson(9, 9)
 	assert(missing.is_empty(), "missing lesson should return empty dict, not error")
+
+
+func test_matching_wrong_pair_no_feedback() -> void:
+	# A wrong pair in the matching exercise must NOT emit answer_selected
+	# (which would pop the feedback popup) — it only shakes in place.
+	var ex := MatchingExercise.new()
+	ex.exercise_data = {
+		"type": "matching",
+		"items": [
+			{"left": "L1", "right": "R1"},
+			{"left": "L2", "right": "R2"},
+			{"left": "L3", "right": "R3"},
+		]
+	}
+	var emitted: Array = []
+	ex.answer_selected.connect(func(correct: bool, explanation: String): emitted.append(correct))
+	ex._build_ui()
+	ex._create_items()
+
+	var left: GrammarButton = ex.left_buttons[0]
+	# Pick a right button whose match_value differs from the left button's, so
+	# the pair is guaranteed to be wrong.
+	var left_match: String = str(left.get_meta("match_value", ""))
+	var wrong_right: GrammarButton = null
+	for rb in ex.right_buttons:
+		if str(rb.get_meta("match_value", "")) != left_match:
+			wrong_right = rb
+			break
+	assert(wrong_right != null, "a non-matching right button should exist")
+
+	ex._select(left, true)
+	ex._select(wrong_right, false)
+	assert(emitted.is_empty(), "wrong matching pair must not emit answer_selected (no feedback popup)")
+	ex.queue_free()

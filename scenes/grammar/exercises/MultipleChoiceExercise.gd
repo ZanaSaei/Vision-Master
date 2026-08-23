@@ -367,22 +367,8 @@ func _on_answer_pressed(
 		button.set_correct_state()
 	else:
 		button.set_wrong_state()
-
-		# Also show the correct answer.
-		for child in options_container.get_children():
-			if child is GrammarButton:
-				var option_button := child as GrammarButton
-
-				var index := int(
-					option_button.get_meta(
-						"answer_index",
-						-1
-					)
-				)
-
-				if index == correct_index:
-					option_button.set_correct_state()
-					break
+		# Deliberately do NOT reveal the correct option — the learner just
+		# retries (the hint bulb can help).
 
 	var explanation := ""
 
@@ -411,3 +397,20 @@ func continue_to_next() -> void:
 	current_index += 1
 
 	_show_question()
+
+
+func retry_current() -> void:
+	# Rebuild the same question's options so the learner can pick again.
+	_show_question()
+
+
+func get_current_hint() -> String:
+	if current_index >= questions.size():
+		return ""
+	var q: Dictionary = questions[current_index]
+	var hint := str(q.get("hint_fa", ""))
+	if hint.is_empty():
+		hint = str(q.get("wrong_explanation_fa", ""))
+	if hint.is_empty():
+		hint = "به معنی هر گزینه خوب دقت کن و جمله را دوباره بخوان."
+	return hint

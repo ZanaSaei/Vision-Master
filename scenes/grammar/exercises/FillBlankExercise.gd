@@ -239,3 +239,19 @@ func continue_to_next() -> void:
 	current_index += 1
 
 	_show_item()
+
+
+func retry_current() -> void:
+	# Clear the box and let the learner type a new answer for the same item.
+	_show_item()
+
+
+func get_current_hint() -> String:
+	var items: Array = exercise_data.get("items", [])
+	if current_index >= items.size():
+		return ""
+	var item: Dictionary = items[current_index]
+	var hint := str(item.get("hint_fa", ""))
+	if hint.is_empty():
+		hint = "به معنای جمله فکر کن و جای خالی را با کلمهٔ مناسب پر کن."
+	return hint

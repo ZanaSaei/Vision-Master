@@ -46,3 +46,16 @@ func continue_to_next() -> void:
 
 	if current_index >= get_item_count():
 		complete()
+
+
+# Called when the learner answers wrong and chooses to try again.
+# By default it just unlocks answering again; exercise subclasses
+# override this to rebuild/reset their own UI for the same item.
+func retry_current() -> void:
+	answered = false
+
+
+# Returns the hint text for the item the learner is currently on.
+# Subclasses override this to pull the hint from their data.
+func get_current_hint() -> String:
+	return ""

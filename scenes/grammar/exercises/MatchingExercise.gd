@@ -341,22 +341,22 @@ func _check_pair() -> void:
 
 		if matched >= left_buttons.size():
 
+			# Show the "عالی بود" feedback immediately when the last pair
+			# is found. The بخش reward only appears once the learner taps
+			# continue (continue_to_next), not before.
 			submit_result(
 				true,
 				"🎉 عالی! همه‌ی جفت‌ها را پیدا کردی."
 			)
-
-			await get_tree().create_timer(
-				0.4
-			).timeout
-
-			complete()
 
 	else:
 
 		selected_left.clear_selected_state()
 		selected_right.clear_selected_state()
 
+		# Wrong pairs just shake in place — no feedback popup (the user
+		# learns from the vibration and retries). So we do NOT call
+		# submit_result(false, ...) here, which would show the popup.
 		GrammarAnimation.wrong(
 			selected_left
 		)
@@ -365,14 +365,15 @@ func _check_pair() -> void:
 			selected_right
 		)
 
-		submit_result(
-			false,
-			"این دو قسمت با هم جور نیستند. دوباره امتحان کن."
-		)
-
 		selected_left = null
 		selected_right = null
 
 
 func continue_to_next() -> void:
-	current_index += 1
+	# Matching is finished once every pair is found; the feedback popup's
+	# continue button drives completion (which shows the بخش reward).
+	complete()
+
+
+func get_current_hint() -> String:
+	return "ستون راست را با معنای درست در ستون چپ جفت کن."

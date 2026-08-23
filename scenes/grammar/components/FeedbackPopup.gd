@@ -3,11 +3,13 @@ extends Control
 
 
 signal continue_pressed
+signal skip_pressed
 
 
 var title_label: Label
 var explanation_label: Label
 var continue_button: GrammarButton
+var skip_button: GrammarButton
 
 var is_correct := false
 
@@ -164,6 +166,17 @@ func _build_ui() -> void:
 		spacer
 	)
 
+	var button_row := HBoxContainer.new()
+
+	button_row.add_theme_constant_override(
+		"separation",
+		14
+	)
+
+	layout.add_child(
+		button_row
+	)
+
 	continue_button = GrammarButton.new()
 
 	continue_button.variant = (
@@ -172,12 +185,40 @@ func _build_ui() -> void:
 
 	continue_button.text = "ادامه"
 
+	continue_button.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
+	)
+
 	continue_button.pressed.connect(
 		_on_continue_pressed
 	)
 
-	layout.add_child(
+	button_row.add_child(
 		continue_button
+	)
+
+	# A "skip" escape hatch shown only after the learner has gotten the
+	# question wrong twice; lets them move on to the next question.
+	skip_button = GrammarButton.new()
+
+	skip_button.variant = (
+		GrammarButton.ButtonVariant.SECONDARY
+	)
+
+	skip_button.text = "پرش به سوال بعدی ⏭"
+
+	skip_button.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
+	)
+
+	skip_button.visible = false
+
+	skip_button.pressed.connect(
+		_on_skip_pressed
+	)
+
+	button_row.add_child(
+		skip_button
 	)
 
 
@@ -186,6 +227,8 @@ func show_correct(
 ) -> void:
 
 	is_correct = true
+
+	skip_button.visible = false
 
 	title_label.text = "🎉 عالی بود!"
 
@@ -204,19 +247,23 @@ func show_correct(
 
 
 func show_wrong(
-	explanation: String
+	_explanation: String
 ) -> void:
 
 	is_correct = false
 
+	skip_button.visible = false
+
+	# On a wrong answer we never reveal the correct answer — we just
+	# encourage the learner to try again (the hint bulb offers help).
 	title_label.text = "🌱 نزدیک بود!"
 
 	title_label.add_theme_color_override(
 		"font_color",
-		GrammarTheme.ERROR
+		GrammarTheme.WARNING
 	)
 
-	explanation_label.text = explanation
+	explanation_label.text = "اشکالی نداره! دوباره امتحان کن.\nمی‌تونی از چراغ راهنما 💡 کمک بگیری."
 
 	continue_button.text = "دوباره امتحان کن"
 
@@ -247,8 +294,23 @@ func hide_popup() -> void:
 	hide()
 
 
+# Reveals the skip button (called after the learner has been wrong
+# twice). The continue button stays as the primary "try again" action.
+func show_skip_button() -> void:
+
+	if skip_button != null:
+		skip_button.visible = true
+
+
 func _on_continue_pressed() -> void:
 
 	continue_pressed.emit()
+
+	hide()
+
+
+func _on_skip_pressed() -> void:
+
+	skip_pressed.emit()
 
 	hide()

@@ -609,3 +609,21 @@ func continue_to_next() -> void:
 	current_index += 1
 
 	_show_item()
+
+
+func retry_current() -> void:
+	# Rebuild the current item so the learner can re-arrange the words.
+	_show_item()
+
+
+func get_current_hint() -> String:
+	var items: Array = exercise_data.get("items", [])
+	if current_index >= items.size():
+		return ""
+	var item: Dictionary = items[current_index]
+	var hint := str(item.get("hint_fa", ""))
+	if hint.is_empty():
+		hint = str(item.get("fa", ""))
+	if hint.is_empty():
+		hint = "کلمات را طوری مرتب کن که یک جملهٔ درست و معنادار بسازی."
+	return hint

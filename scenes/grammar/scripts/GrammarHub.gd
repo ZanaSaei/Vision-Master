@@ -4,20 +4,19 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_LESSON_MENU: String = "res://scenes/lesson_menu/LessonMenu.tscn"
 const SCENE_UNITS: String = "res://scenes/grammar/GrammarUnits.tscn"
 const SCENE_WORKBOOK: String = "res://scenes/workbook/Workbook.tscn"
-const BACKGROUND_SCENE: PackedScene = preload("res://scenes/dynamic_background/animated_background.tscn")
 
 var _navigating: bool = false
 
 
 func _ready() -> void:
 	super._ready()
+	# Use the shared animated background (MenuBackground autoload) exactly
+	# like the book menu and lesson menu do.
+	MenuBackground.enter_background()
 	_build_ui()
 
 
 func _build_ui() -> void:
-	var background: Node = BACKGROUND_SCENE.instantiate()
-	add_child(background)
-
 	var root_margin: MarginContainer = MarginContainer.new()
 	root_margin.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root_margin.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -180,7 +179,7 @@ func _on_learning_pressed() -> void:
 		return
 	_navigating = true
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
-	TransitionManager.slide_change_scene(SCENE_UNITS, TransitionManager.Slide.FORWARD)
+	TransitionManager.change_scene(SCENE_UNITS)
 
 
 func _on_workbook_pressed() -> void:
@@ -188,13 +187,14 @@ func _on_workbook_pressed() -> void:
 		return
 	_navigating = true
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
-	TransitionManager.slide_change_scene(SCENE_WORKBOOK, TransitionManager.Slide.FORWARD)
+	TransitionManager.change_scene(SCENE_WORKBOOK)
 
 
 func _on_back_pressed() -> void:
 	if _navigating:
 		return
 	_navigating = true
+	# Match the lesson-menu -> book-menu "back" transition (slide BACK).
 	TransitionManager.slide_change_scene(SCENE_LESSON_MENU, TransitionManager.Slide.BACK)
 
 

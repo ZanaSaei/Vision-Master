@@ -150,6 +150,7 @@ var saved_words: Array = []
 var review_words: Array = []
 var grammar_unlocked_units: Dictionary = {}
 var grammar_start_unit_index: int = 0
+var grammar_xp: Dictionary = {}
 
 
 func _ready() -> void:
@@ -204,12 +205,36 @@ func set_grammar_start_unit(index: int) -> void:
 	grammar_start_unit_index = maxi(index, 0)
 
 
+# ---------- GRAMMAR XP ----------
+
+func get_grammar_xp(book: int, lesson: int) -> int:
+	var key: String = _grammar_unlock_key(book, lesson)
+	return int(grammar_xp.get(key, 0))
+
+
+# Adds earned XP for a lesson, persists it, and returns the new total.
+func add_grammar_xp(book: int, lesson: int, amount: int) -> int:
+	var key: String = _grammar_unlock_key(book, lesson)
+	var total: int = int(grammar_xp.get(key, 0)) + maxi(amount, 0)
+	grammar_xp[key] = total
+	_save_progress()
+	return total
+
+
+func get_total_grammar_xp() -> int:
+	var total := 0
+	for value in grammar_xp.values():
+		total += int(value)
+	return total
+
+
 # ---------- PROGRESS PERSISTENCE ----------
 
 func _save_progress() -> void:
 	var data: Dictionary = {
 		"last_scene": _last_scene,
 		"grammar_unlocked_units": grammar_unlocked_units,
+		"grammar_xp": grammar_xp,
 	}
 	var file: FileAccess = FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
@@ -229,6 +254,9 @@ func _load_progress() -> void:
 		var unlocked: Variant = data.get("grammar_unlocked_units", {})
 		if unlocked is Dictionary:
 			grammar_unlocked_units = unlocked
+		var xp_data: Variant = data.get("grammar_xp", {})
+		if xp_data is Dictionary:
+			grammar_xp = xp_data
 
 
 func _load_saved_words() -> void:

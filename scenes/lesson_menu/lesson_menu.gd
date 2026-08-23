@@ -295,8 +295,14 @@ func _on_section_pressed(scene_key: String) -> void:
 		push_error("No scene path for key: " + scene_key)
 		_navigating = false
 		return
-	
-	TransitionManager.slide_change_scene(path, TransitionManager.Slide.FORWARD)
+
+	# Grammar is part of the main menu flow (book -> lesson -> grammar), so
+	# it slides FORWARD exactly like book-menu -> lesson-menu does. The other
+	# drill-downs keep the fade transition.
+	if scene_key == "GRAMMAR":
+		TransitionManager.slide_change_scene(path, TransitionManager.Slide.FORWARD)
+	else:
+		TransitionManager.change_scene(path)
 
 func _on_back_button_pressed() -> void:
 	# Navigate back to book menu with slide animation
