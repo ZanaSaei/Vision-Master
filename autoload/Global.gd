@@ -12,6 +12,12 @@ signal review_words_changed()
 # ============================================================
 var english_voice_id: String = ""
 var _category_cache: Dictionary = {}
+# Cache of parsed JSON lesson arrays keyed by res:// path, plus a per-file
+# book_lesson -> entry index so lookups are O(1) instead of re-parsing the
+# whole file and linearly scanning it on every scene entry.
+var _json_cache: Dictionary = {}
+var _lesson_index_cache: Dictionary = {}
+var _word_db_loaded := false
 
 const DICTIONARY_PATH := "res://data/v_dictionary.json"
 
@@ -31,33 +37,7 @@ var verb_forms: Dictionary = {}
 
 func load_vocabulary(book_number: int, lesson_number: int) -> Dictionary:
 	var path := "res://data/v%d_vocabularies.json" % book_number
-
-	if not FileAccess.file_exists(path):
-		push_error("Vocabulary file not found: " + path)
-		return {}
-
-	var file := FileAccess.open(path, FileAccess.READ)
-	var text := file.get_as_text()
-	file.close()
-
-	var json := JSON.new()
-	var error := json.parse(text)
-	if error != OK:
-		push_error("Failed to parse JSON at %s — %s" % [path, json.get_error_message()])
-		return {}
-
-	var data = json.data
-
-	if not data is Array:
-		push_error("Invalid JSON format: expected array of lessons")
-		return {}
-
-	for lesson_data in data:
-		if lesson_data.get("book") == book_number and lesson_data.get("lesson") == lesson_number:
-			return lesson_data
-
-	push_error("Lesson %d not found in book %d" % [lesson_number, book_number])
-	return {}
+	return _lookup_lesson_entry(path, book_number, lesson_number)
 
 
 func get_audio_path(book_number: int, lesson_number: int, filename: String) -> String:
@@ -87,30 +67,46 @@ func load_reading(book_number: int, lesson_number: int) -> Dictionary:
 
 
 func _load_unified_lesson_entry(path: String, book_number: int, lesson_number: int) -> Dictionary:
+	return _lookup_lesson_entry(path, book_number, lesson_number)
+
+
+## Parses a lesson-data JSON file (a flat array of lesson entries) exactly
+## once per session and caches it. Returns the cached Array (empty on error).
+func _load_lesson_file(path: String) -> Array:
+	if _json_cache.has(path):
+		return _json_cache[path]
 	if not FileAccess.file_exists(path):
 		push_error("File not found: " + path)
-		return {}
-
+		return []
 	var file := FileAccess.open(path, FileAccess.READ)
 	var text := file.get_as_text()
 	file.close()
-
 	var json := JSON.new()
 	var error := json.parse(text)
 	if error != OK:
 		push_error("Failed to parse JSON at %s — %s" % [path, json.get_error_message()])
-		return {}
-
+		return []
 	var data = json.data
 	if not data is Array:
-		push_error("Invalid JSON format at %s: expected a flat array of lesson entries" % path)
-		return {}
+		push_error("Invalid JSON format at %s: expected an array of lesson entries" % path)
+		return []
+	_json_cache[path] = data
+	return data
 
-	for entry in data:
-		if entry.get("book") == book_number and entry.get("lesson") == lesson_number:
-			return entry
 
-	return {}
+## Finds a lesson entry by book/lesson. Builds a book_lesson -> entry index
+## for the file on first use, so lookups are O(1) instead of a linear scan.
+func _lookup_lesson_entry(path: String, book_number: int, lesson_number: int) -> Dictionary:
+	if not _lesson_index_cache.has(path):
+		_lesson_index_cache[path] = {}
+		var index: Dictionary = _lesson_index_cache[path]
+		for entry in _load_lesson_file(path):
+			var b := int(entry.get("book", -1))
+			var l := int(entry.get("lesson", -1))
+			if b < 0 or l < 0:
+				continue
+			index["%d_%d" % [b, l]] = entry
+	return _lesson_index_cache[path].get("%d_%d" % [book_number, lesson_number], {})
 
 
 # Joins an array of sentence objects ({"en":..., "fa":..., "start":..., "end":...})
@@ -810,7 +806,9 @@ func _ready() -> void:
 	_load_saved_words()
 	_load_review_words()
 	_load_progress()
-	_load_word_database()
+	# The 1 MB dictionary parse is deferred off the boot critical path (and
+	# lazily loaded on first lookup) so startup doesn't freeze on it.
+	call_deferred("_load_word_database")
 	_load_settings()
 	_init_tts() # You can keep or remove TTS init, keeping it for safety
 	_setup_theme()
@@ -1097,8 +1095,10 @@ func reset_all_progress() -> void:
 
 # ---------- ENHANCED WORD DATABASE ----------
 
-func _load_word_database() -> void:
+func _load_word_database(force := false) -> void:
 	"""Load every word from the single unified dictionary file into the database"""
+	if _word_db_loaded and not force:
+		return
 	word_database.clear()
 	verb_forms.clear()
 
@@ -1154,10 +1154,13 @@ func _load_word_database() -> void:
 			if forms.has("third_person"): verb_forms[forms["third_person"].to_lower()] = base_word
 
 	print("Word database loaded: %d words" % word_database.size())
+	_word_db_loaded = true
 
 
 func get_word_definition(word: String) -> Dictionary:
 	"""Get definition for a word from the database"""
+	if not _word_db_loaded:
+		_load_word_database()
 	if word == "":
 		return {}
 
@@ -1240,7 +1243,7 @@ func get_word_definition_from_current_lesson(word: String) -> Dictionary:
 
 func reload_word_database() -> void:
 	"""Reload the word database"""
-	_load_word_database()
+	_load_word_database(true)
 
 
 # ---------- UI HELPERS ----------

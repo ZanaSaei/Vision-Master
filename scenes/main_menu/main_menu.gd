@@ -259,25 +259,34 @@ func _border_shine_source() -> String:
 		"    float r = clamp(corner_radius, 0.0, min(half_size.x, half_size.y) - 1.0);",
 		"    float sd = sd_round_box(p, half_size, r);",
 		"",
-		"    float core = smoothstep(1.6, 0.0, abs(sd));",
-		"    float halo = exp(-abs(sd) / ring_soft);",
-		"    float ring = max(core, halo * 0.6);",
+		"    vec3  add = vec3(0.0);",
+		"    float add_a = 0.0;",
 		"",
-		"    float ang  = atan(p.y, p.x);",
-		"    float t    = (ang + 3.14159265) / 6.28318530;",
-		"    float head = fract(TIME * speed + phase);",
-		"    float back = fract(head - t + 1.0);",
+		"    // Interior pixels carry no border comet; gate the expensive",
+		"    // exp()/atan()/pow math so it only runs on the thin border ring.",
+		"    float border_mask = 1.0 - smoothstep(-4.0, 2.0, sd);",
+		"    if (border_mask >= 0.02) {",
+		"        float core = smoothstep(1.6, 0.0, abs(sd));",
+		"        float halo = exp(-abs(sd) / ring_soft);",
+		"        float ring = max(core, halo * 0.6);",
 		"",
-		"    float tail = pow(smoothstep(tail_len, 0.0, back), 1.4);",
-		"    float hot  = smoothstep(0.05, 0.0, back);",
-		"    float comet = tail + hot * 1.6;",
+		"        float ang  = atan(p.y, p.x);",
+		"        float t    = (ang + 3.14159265) / 6.28318530;",
+		"        float head = fract(TIME * speed + phase);",
+		"        float back = fract(head - t + 1.0);",
 		"",
-		"    vec3 tail_col = accent * 1.25;",
-		"    vec3 comet_col = mix(tail_col, vec3(1.0), smoothstep(0.12, 0.0, back));",
-		"    float rim_base = halo * 0.18;",
+		"        float tail = pow(smoothstep(tail_len, 0.0, back), 1.4);",
+		"        float hot  = smoothstep(0.05, 0.0, back);",
+		"        float comet = tail + hot * 1.6;",
 		"",
-		"    vec3  add   = comet_col * comet * ring + accent * rim_base;",
-		"    float add_a = (comet * ring + rim_base) * glow;",
+		"        vec3 tail_col = accent * 1.25;",
+		"        vec3 comet_col = mix(tail_col, vec3(1.0), smoothstep(0.12, 0.0, back));",
+		"        float rim_base = halo * 0.18;",
+		"",
+		"        add   = comet_col * comet * ring + accent * rim_base;",
+		"        add_a = (comet * ring + rim_base) * glow;",
+		"    }",
+		"",
 		"    COLOR = vec4(base.rgb + add, clamp(base.a + add_a, 0.0, 1.0));",
 		"}",
 	])
@@ -398,7 +407,13 @@ func _sync_hamburger_gloss() -> void:
 	_hamburger_gloss.modulate = hamburger_button.modulate
 
 func _process(_delta: float) -> void:
-	_sync_hamburger_gloss()
+	# Only re-glue the hamburger gloss while the button is actually animating
+	# (hover/press scale + modulate tweens); skip the writes while it is idle.
+	if _hamburger_gloss == null or not is_instance_valid(hamburger_button):
+		return
+	if _hamburger_gloss.scale != hamburger_button.scale \
+			or _hamburger_gloss.modulate != hamburger_button.modulate:
+		_sync_hamburger_gloss()
 
 ############################################################
 # PIVOTS

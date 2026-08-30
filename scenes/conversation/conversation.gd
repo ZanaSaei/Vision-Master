@@ -62,6 +62,7 @@ var current_highlighted_word: String = ""
 var all_sentences_sync: Array = []
 var intro_sentences_data: Array = []
 var _last_active_sentence: Dictionary = {}
+var _sync_index: int = 0
 var _touch_start_pos: Vector2 = Vector2.ZERO
 var _is_drag_scrolling: bool = false
 var dict_popup: DictionaryPopup
@@ -268,6 +269,7 @@ func _highlight_text_color() -> String:
 # ============================================================
 func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 	all_sentences_sync.clear()
+	_sync_index = 0
 	var image_path := "res://assets/images/%s" % data.get("image", "")
 	if ResourceLoader.exists(image_path):
 		conversation_image.texture = load(image_path)
@@ -424,15 +426,34 @@ func _make_line_card(speaker: String, text: String, translation: String, color_i
 	return card
 
 func _update_audio_sync(current_time: float) -> void:
-	var active_sentence: Dictionary = {}
-	for s in all_sentences_sync:
-		if current_time >= s["start"] and current_time <= s["end"]:
-			active_sentence = s
-			break
-			
+	var active_sentence: Dictionary = _find_active_sentence(current_time)
 	if not _is_same_sentence(active_sentence, _last_active_sentence):
 		_last_active_sentence = active_sentence
 		_refresh_all_text()
+
+
+## Time-ordered sentence lookup with a forward-advancing cursor (O(1) per
+## frame on forward playback) instead of scanning the whole array every frame.
+func _find_active_sentence(current_time: float) -> Dictionary:
+	var arr: Array = all_sentences_sync
+	if arr.is_empty():
+		_sync_index = 0
+		return {}
+	if _sync_index >= arr.size():
+		_sync_index = arr.size() - 1
+	if current_time < float(arr[_sync_index].get("start", 0.0)):
+		_sync_index = 0 # backward seek — restart the scan
+	while _sync_index < arr.size() \
+			and current_time > float(arr[_sync_index].get("end", 0.0)):
+		_sync_index += 1
+	if _sync_index >= arr.size():
+		_sync_index = arr.size() - 1
+		return {}
+	var s: Dictionary = arr[_sync_index]
+	if current_time >= float(s.get("start", 0.0)) \
+			and current_time <= float(s.get("end", 0.0)):
+		return s
+	return {}
 
 func _is_same_sentence(a: Dictionary, b: Dictionary) -> bool:
 	if a.is_empty() and b.is_empty(): return true
@@ -615,6 +636,7 @@ func _on_audio_pressed() -> void:
 
 func _on_audio_stopped() -> void:
 	_last_active_sentence = {}
+	_sync_index = 0
 	_refresh_all_text()
 
 func _on_exercise_checked(exercise_id: String, correct: int, total: int) -> void:

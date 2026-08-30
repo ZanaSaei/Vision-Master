@@ -81,6 +81,7 @@ var current_highlighted_word: String = "" #[cite: 2]
 # Audio Sync Variables
 var all_sentences_sync: Array = [] #[cite: 2]
 var _last_active_sentence: Dictionary = {} #[cite: 2]
+var _sync_index: int = 0 #[cite: 2]
 var dict_popup: DictionaryPopup #[cite: 2]
 
 # Translation toggle
@@ -289,6 +290,7 @@ func _load_fonts() -> void:
 # ============================================================
 func _build_reading(_book: int, _lesson: int, data: Dictionary) -> void:
 	all_sentences_sync.clear() #[cite: 2]
+	_sync_index = 0 #[cite: 2]
 	
 	var image_filename: String = data.get("image", "") as String #[cite: 2]
 	if image_filename != "" and ResourceLoader.exists(image_filename): #[cite: 2]
@@ -436,14 +438,34 @@ func _apply_theme() -> void:
 			card.add_theme_stylebox_override("panel", _make_paragraph_style())
 
 func _update_audio_sync(current_time: float) -> void:
-	var active_sentence: Dictionary = {} #[cite: 2]
-	for s in all_sentences_sync: #[cite: 2]
-		if current_time >= s["start"] and current_time <= s["end"]: #[cite: 2]
-			active_sentence = s #[cite: 2]
-			break #[cite: 2]
+	var active_sentence: Dictionary = _find_active_sentence(current_time) #[cite: 2]
 	if not _is_same_sentence(active_sentence, _last_active_sentence): #[cite: 2]
 		_last_active_sentence = active_sentence #[cite: 2]
 		_refresh_all_text() #[cite: 2]
+
+
+## Time-ordered sentence lookup with a forward-advancing cursor (O(1) per
+## frame on forward playback) instead of scanning the whole array every frame.
+func _find_active_sentence(current_time: float) -> Dictionary: #[cite: 2]
+	var arr: Array = all_sentences_sync #[cite: 2]
+	if arr.is_empty(): #[cite: 2]
+		_sync_index = 0 #[cite: 2]
+		return {} #[cite: 2]
+	if _sync_index >= arr.size(): #[cite: 2]
+		_sync_index = arr.size() - 1 #[cite: 2]
+	if current_time < float(arr[_sync_index].get("start", 0.0)): #[cite: 2]
+		_sync_index = 0 # backward seek — restart the scan #[cite: 2]
+	while _sync_index < arr.size() \
+			and current_time > float(arr[_sync_index].get("end", 0.0)): #[cite: 2]
+		_sync_index += 1 #[cite: 2]
+	if _sync_index >= arr.size(): #[cite: 2]
+		_sync_index = arr.size() - 1 #[cite: 2]
+		return {} #[cite: 2]
+	var s: Dictionary = arr[_sync_index] #[cite: 2]
+	if current_time >= float(s.get("start", 0.0)) \
+			and current_time <= float(s.get("end", 0.0)): #[cite: 2]
+		return s #[cite: 2]
+	return {} #[cite: 2]
 
 
 func _is_same_sentence(a: Dictionary, b: Dictionary) -> bool:
@@ -960,6 +982,7 @@ func _on_audio_pressed() -> void:
 func _on_audio_stopped() -> void:
 	# Called when audio finishes OR user hits close[cite: 2]
 	_last_active_sentence = {} #[cite: 2]
+	_sync_index = 0 #[cite: 2]
 	_refresh_all_text() #[cite: 2]
 
 
