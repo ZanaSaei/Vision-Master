@@ -90,7 +90,7 @@ func _build_ui() -> void:
 
 	instruction.add_theme_color_override(
 		"font_color",
-		GrammarTheme.TEXT_SECONDARY
+		GrammarTheme.text_secondary_color()
 	)
 
 	container.add_child(instruction)
@@ -149,7 +149,7 @@ func _build_ui() -> void:
 
 	statement_label.add_theme_color_override(
 		"font_color",
-		GrammarTheme.TEXT
+		GrammarTheme.text_color()
 	)
 
 	statement_box.add_child(statement_label)

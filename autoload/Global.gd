@@ -193,6 +193,9 @@ const THEME_PALETTES := {
 		"success":       Color(0.30, 0.84, 0.60),
 		"error":         Color(1.0, 0.40, 0.46),
 		"warning":       Color(1.0, 0.80, 0.36),
+		"success_soft":  Color(0.09, 0.20, 0.13),
+		"error_soft":    Color(0.23, 0.12, 0.15),
+		"warning_soft":  Color(0.23, 0.18, 0.08),
 		"overlay":       Color(0, 0, 0, 0.6),
 		"bg_base":       Color(0.028, 0.036, 0.11),
 		"wave_top":      Color(0.32, 0.21, 0.66),
@@ -217,6 +220,9 @@ const THEME_PALETTES := {
 		"success":       Color(0.12, 0.60, 0.42),
 		"error":         Color(0.86, 0.20, 0.32),
 		"warning":       Color(0.84, 0.58, 0.04),
+		"success_soft":  Color(0.85, 0.96, 0.88),
+		"error_soft":    Color(0.99, 0.90, 0.92),
+		"warning_soft":  Color(0.99, 0.96, 0.85),
 		"overlay":       Color(0.05, 0.06, 0.16, 0.35),
 		"bg_base":       Color(0.92, 0.925, 0.99),
 		"wave_top":      Color(0.60, 0.55, 0.98),
@@ -417,8 +423,10 @@ const SELF_THEMED_SCRIPTS := [
 	"vocab_flashcards.gd",
 	"grammar_button.gd",
 	"grammar_hub.gd",
+	"grammar_lesson.gd",
 	"grammar_units.gd",
 	"main_menu.gd",
+	"word_review.gd",
 ]
 
 # Labels that read better muted in both themes.
@@ -453,6 +461,17 @@ func _style_walk(node: Node) -> void:
 	if node is CanvasLayer:
 		return
 
+	# PageView manages its own internal chrome (tabs, indicator, dots) via
+	# Global.on_theme_changed — the walker must not touch its children.
+	if node is PageView:
+		return
+
+	# GrammarHint is a fully self-themed widget (warm-yellow light-bulb
+	# bubble + flat bulb button). It styles every part of itself in
+	# _apply_theme, so the walker must not re-style its bubble as a card.
+	if node is GrammarHint:
+		return
+
 	# Unified header bars are themed as a whole (bar + its buttons/labels).
 	if node.name in HEADER_BAR_NAMES and node is Control:
 		style_header(node)
@@ -461,7 +480,12 @@ func _style_walk(node: Node) -> void:
 	if node is ColorRect:
 		_style_background_rect(node)
 	elif node is PanelContainer or node is Panel:
-		_style_card(node)
+		if _is_header_bar_panel(node):
+			# BookMenu/LessonMenu: the bar panel is invisible — only the
+			# header buttons inside it should be visible.
+			_hide_header_bar_panel(node)
+		else:
+			_style_card(node)
 	elif node is Label:
 		_style_label(node)
 	elif node is Button:
@@ -479,6 +503,27 @@ func _style_background_rect(cr: ColorRect) -> void:
 		cr.color = Color(0.055, 0.07, 0.13, cr.color.a)
 	else:
 		cr.color = Color(0.955, 0.968, 0.98, cr.color.a)
+
+
+func _is_header_bar_panel(node: Node) -> bool:
+	for c in node.get_children():
+		if c.name in HEADER_BAR_NAMES:
+			return true
+	return false
+
+
+func _hide_header_bar_panel(node: Control) -> void:
+	# Transparent fill with the same breathing room as regular header bars,
+	# so the buttons inside sit at identical positions to every other scene.
+	var s := StyleBoxFlat.new()
+	s.bg_color = Color(0, 0, 0, 0)
+	s.border_color = Color(0, 0, 0, 0)
+	s.set_border_width_all(0)
+	s.content_margin_left = 30
+	s.content_margin_right = 30
+	s.content_margin_top = 16
+	s.content_margin_bottom = 12
+	node.add_theme_stylebox_override("panel", s)
 
 
 func _style_card(node: Node) -> void:
@@ -565,6 +610,17 @@ func style_header(header: Node) -> void:
 		bg.add_theme_stylebox_override("panel", bar.duplicate())
 
 	# 2) Normalise layout rhythm across every header (consistent spacing).
+	if header is BoxContainer:
+		# Container headers (TopBar rows) pin their buttons to the same left
+		# position as every other scene; titles expand into the rest.
+		var bc := header as BoxContainer
+		bc.add_theme_constant_override("separation", 24)
+		bc.alignment = BoxContainer.ALIGNMENT_BEGIN
+		bc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		for c in bc.get_children():
+			if c is Label:
+				(c as Control).size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				(c as Label).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	for hb in header.find_children("*", "HBoxContainer", true, false):
 		(hb as HBoxContainer).add_theme_constant_override("separation", 24)
 	for hb in header.find_children("*", "VBoxContainer", true, false):
@@ -583,94 +639,139 @@ func style_header(header: Node) -> void:
 
 
 func _header_bar_stylebox(dark: bool, accent: Color) -> StyleBoxFlat:
+	# ── Glossy header bar: translucent glass, bright rim, violet-glow shadow ──
 	var bar := StyleBoxFlat.new()
 	bar.set_corner_radius_all(48)
 	bar.corner_radius_top_left = 10
 	bar.corner_radius_top_right = 10
 	if dark:
-		bar.bg_color = get_theme_color("surface")
-		bar.border_color = Color(1, 1, 1, 0.08)
+		bar.bg_color = Color(0.06, 0.08, 0.16, 0.88)
 	else:
-		bar.bg_color = Color(1, 1, 1, 1)
-		bar.border_color = Color(0, 0, 0, 0.10)
-		bar.shadow_color = Color(0.12, 0.12, 0.25, 0.12)
-		bar.shadow_size = 12
-	bar.set_border_width_all(1)
-	# A signature violet underline ties every bar together.
-	bar.border_width_bottom = 3
-	bar.border_color = accent
-	# Breathing room so header content never touches the screen edges.
-	bar.content_margin_left = 36
-	bar.content_margin_right = 36
-	bar.content_margin_top = 18
-	bar.content_margin_bottom = 14
+		bar.bg_color = Color(1, 1, 1, 0.68)
+	# Bright rim — thicker top/left catches the light.
+	bar.border_width_left = 2; bar.border_width_top = 2
+	bar.border_width_right = 1; bar.border_width_bottom = 3
+	var rim: Color = accent.lerp(Color.WHITE, 0.50)
+	rim.a = 0.70
+	bar.border_color = rim
+	# Strong accent glow underneath.
+	bar.shadow_color = Color(accent.r * 0.45, accent.g * 0.45, accent.b * 0.45, 0.60)
+	bar.shadow_size = 24
+	bar.shadow_offset = Vector2(0, 6)
+	bar.content_margin_left = 30
+	bar.content_margin_right = 30
+	bar.content_margin_top = 16
+	bar.content_margin_bottom = 12
 	return bar
+
+# Every header button uses the SAME method: "Emoji + Persian label", and the
+# SAME pill size — so a header always reads as a neat, uniform row of chips.
+const HEADER_BUTTON_LABELS := {
+	"back": "⬅️ بازگشت",
+	"home": "🏠 خانه",
+	"translation": "🌐 ترجمه",
+	"audio": "🔊 صدا",
+}
+
+const HEADER_BUTTON_HEIGHT := 76.0
+const HEADER_BUTTON_FONT := 24
+
+func _header_button_kind(btn: Button) -> String:
+	var n := String(btn.name).to_lower()
+	if n.contains("back"):
+		return "back"
+	if n.contains("home"):
+		return "home"
+	if n.contains("translation") or n.contains("toggle"):
+		return "translation"
+	if n.contains("audio"):
+		return "audio"
+	return ""
 
 func _style_header_button(btn: Button) -> void:
 	var dark := theme_is_dark()
 	var accent := get_theme_color("accent")
-	var is_back := String(btn.name).to_lower().contains("back")
+	var kind := _header_button_kind(btn)
+	var is_back := kind == "back"
 
-	# Flat buttons ignore stylebox backgrounds — force the chip to draw.
 	btn.flat = false
-	# 200×200 icon assets must scale down to fit the chip.
 	btn.expand_icon = true
-	# Keep chips at their natural size (don't stretch to fill the tall bar).
 	btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 
+	# ── Glossy pill chip (same rich look as the lesson‑menu buttons) ──
+	var chip := StyleBoxFlat.new()
+	chip.set_corner_radius_all(int(HEADER_BUTTON_HEIGHT / 2.0))
+	var rim: Color = accent.lerp(Color.WHITE, 0.60)
+	rim.a = 0.82
 	if is_back:
-		# Circular solid-accent chip with a clean font arrow (the shared
-		# Back.png asset is a white-disc icon that reads poorly on a chip).
-		var d := 80.0
-		var chip := StyleBoxFlat.new()
-		chip.set_corner_radius_all(int(d / 2.0))
-		chip.bg_color = accent
-		chip.border_color = accent.lightened(0.2) if dark else accent.darkened(0.1)
-		chip.set_border_width_all(1)
-		chip.content_margin_left = 10
-		chip.content_margin_right = 10
-		chip.content_margin_top = 8
-		chip.content_margin_bottom = 8
-		for state in ["normal", "hover", "pressed", "focus"]:
-			btn.add_theme_stylebox_override(state, chip)
-		btn.custom_minimum_size = Vector2(d, d)
-		btn.add_theme_color_override("font_color", Color(1, 1, 1, 1))
-		btn.add_theme_font_size_override("font_size", 38)
-		btn.icon = null
-		btn.text = "←"
+		chip.bg_color = Color(accent.r, accent.g, accent.b, 0.68)
 	else:
-		# Action buttons (home / translate / audio…) — rounded chips.
-		var is_icon_only := btn.text == "" and btn.icon != null
-		var chip := StyleBoxFlat.new()
 		if dark:
-			chip.bg_color = Color(1, 1, 1, 0.10)
-			chip.border_color = Color(1, 1, 1, 0.12)
+			chip.bg_color = Color(1, 1, 1, 0.14)
 		else:
 			chip.bg_color = Color(0.94, 0.945, 0.99)
-			chip.border_color = Color(0, 0, 0, 0.08)
-		chip.set_border_width_all(1)
-		if is_icon_only:
-			# Icon-only buttons (e.g. audio) become neat square chips.
-			chip.set_corner_radius_all(24)
-			chip.content_margin_left = 20
-			chip.content_margin_right = 20
-			chip.content_margin_top = 20
-			chip.content_margin_bottom = 20
-			btn.custom_minimum_size = Vector2(88, 88)
-		else:
-			chip.set_corner_radius_all(24)
-			chip.content_margin_left = 18
-			chip.content_margin_right = 18
-			chip.content_margin_top = 12
-			chip.content_margin_bottom = 12
-			btn.custom_minimum_size = Vector2(0, 64)
-		for state in ["normal", "hover", "pressed", "focus"]:
-			btn.add_theme_stylebox_override(state, chip)
-		var fc: Color = Color(1, 1, 1, 1) if dark else get_theme_color("text")
-		for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-			btn.add_theme_color_override(state, fc)
+		rim = accent.lerp(Color.WHITE, 0.40)
+		rim.a = 0.55
+	chip.border_color = rim
+	chip.border_width_left = 2; chip.border_width_top = 2
+	chip.border_width_right = 1; chip.border_width_bottom = 1
+	chip.shadow_color = Color(accent.r * 0.42, accent.g * 0.42, accent.b * 0.42, 0.60)
+	chip.shadow_size = 16
+	chip.shadow_offset = Vector2(0, 5)
+	chip.content_margin_left = 16
+	chip.content_margin_right = 16
+	chip.content_margin_top = 10
+	chip.content_margin_bottom = 10
+	for state in ["normal", "pressed", "focus"]:
+		btn.add_theme_stylebox_override(state, chip)
 
+	# Hover — lifts with larger glow.
+	var hover := chip.duplicate() as StyleBoxFlat
+	if is_back:
+		hover.bg_color = Color(accent.r, accent.g, accent.b, 0.78)
+	else:
+		hover.bg_color = Color(1, 1, 1, 0.22) if dark else Color(0.86, 0.84, 1.0)
+	hover.shadow_size = 20
+	btn.add_theme_stylebox_override("hover", hover)
+
+	# Press — sinks slightly.
+	var press := chip.duplicate() as StyleBoxFlat
+	if is_back:
+		press.bg_color = Color(accent.r, accent.g, accent.b, 0.44)
+	else:
+		press.bg_color = Color(1, 1, 1, 0.10) if dark else Color(0.80, 0.78, 0.98)
+	press.shadow_size = 6
+	press.shadow_offset = Vector2(0, 2)
+	btn.add_theme_stylebox_override("pressed", press)
+
+	# Same height for every button.
+	btn.custom_minimum_size = Vector2(0, HEADER_BUTTON_HEIGHT)
+
+	# Text.
+	var fc: Color = Color(1, 1, 1, 1) if (dark or is_back) else get_theme_color("text")
+	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+		btn.add_theme_color_override(state, fc)
+	btn.add_theme_font_size_override("font_size", HEADER_BUTTON_FONT)
+
+	# Emoji + Persian label.
+	if HEADER_BUTTON_LABELS.has(kind):
+		btn.icon = null
+		btn.text = HEADER_BUTTON_LABELS[kind]
+
+
+# Keeps the header translation button in its unified Emoji + Persian form no
+# matter how many times it is toggled. The on/off state is shown by tinting
+# the chip (accent = translations visible) instead of swapping the label.
+func set_translation_toggle_state(btn: Button, active: bool) -> void:
+	if btn == null:
+		return
+	btn.text = HEADER_BUTTON_LABELS["translation"]
+	var accent := get_theme_color("accent")
+	if active:
+		btn.modulate = accent.lightened(0.35) if theme_is_dark() else accent
+	else:
+		btn.modulate = Color(1, 1, 1, 1)
 
 func _style_header_label(label: Label) -> void:
 	var c: Color = get_theme_color("accent_bright") if theme_is_dark() else get_theme_color("accent")
@@ -919,10 +1020,23 @@ func remove_word(word: String, book: int, lesson: int) -> void:
 			saved_words.remove_at(i)
 			break
 	_persist_saved_words()
+	# Keep the review queue in sync so it never holds orphaned words.
+	_remove_from_array(review_words, word, book, lesson)
+	_persist_review_words()
+	review_words_changed.emit()
+
+
+func _remove_from_array(arr: Array, word: String, book: int, lesson: int) -> void:
+	for i in range(arr.size()):
+		var entry: Variant = arr[i]
+		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
+			arr.remove_at(i)
+			return
 
 
 func get_saved_words() -> Array:
-	return saved_words
+	return saved_words.duplicate(true)
+
 
 func add_review_word(word_data: Dictionary) -> void:
 
@@ -937,37 +1051,34 @@ func add_review_word(word_data: Dictionary) -> void:
 	review_words_changed.emit()
 
 func remove_review_word(word:String, book:int, lesson:int) -> void:
-
-	for i in range(review_words.size()):
-
-		var entry = review_words[i]
-
-		if entry.get("word") == word \
-		and entry.get("book") == book \
-		and entry.get("lesson") == lesson:
-
-			review_words.remove_at(i)
-			break
-
+	# A word removed from the review list is also removed from saved words —
+	# the two stay in sync so neither array keeps orphans.
+	_remove_from_array(review_words, word, book, lesson)
+	_remove_from_array(saved_words, word, book, lesson)
 	_persist_review_words()
+	_persist_saved_words()
 	review_words_changed.emit()
 
 
 func get_review_words() -> Array:
-	return review_words
+	return review_words.duplicate(true)
 
 
 # ---------- DATA MANAGEMENT (used by the Settings screen) ----------
 
 func clear_saved_words() -> void:
 	saved_words.clear()
+	review_words.clear()
 	_persist_saved_words()
+	_persist_review_words()
 	review_words_changed.emit()
 
 
 func clear_review_words() -> void:
 	review_words.clear()
+	saved_words.clear()
 	_persist_review_words()
+	_persist_saved_words()
 	review_words_changed.emit()
 
 
@@ -1150,7 +1261,10 @@ const SRS_NEW_CARDS_PER_SESSION := 20
 
 
 func _today_day_number() -> int:
-	return int(Time.get_unix_time_from_system() / 86400.0)
+	# Local-time day number (not UTC) so a "due today" review rolls over at
+	# local midnight rather than UTC midnight.
+	var local := Time.get_datetime_dict_from_system()
+	return int(Time.get_unix_time_from_datetime_dict(local) / 86400.0)
 
 
 func _ensure_srs_fields(entry: Dictionary) -> void:
@@ -1166,17 +1280,25 @@ func _ensure_srs_fields(entry: Dictionary) -> void:
 
 func get_due_words() -> Array:
 	var today := _today_day_number()
-	var due: Array = []
-	var new_count := 0
+	var reviews: Array = []
+	var new_cards: Array = []
 
 	for entry in review_words:
 		_ensure_srs_fields(entry)
 		if entry["srs_due"] == -1:
-			if new_count < SRS_NEW_CARDS_PER_SESSION:
-				due.append(entry)
-				new_count += 1
+			new_cards.append(entry)            # never studied yet
 		elif entry["srs_due"] <= today:
-			due.append(entry)
+			reviews.append(entry)              # due for review
+
+	# Due reviews always come first; new cards follow, capped per session.
+	var due: Array = []
+	due.append_array(reviews)
+	var shown_new := 0
+	for entry in new_cards:
+		if shown_new >= SRS_NEW_CARDS_PER_SESSION:
+			break
+		due.append(entry)
+		shown_new += 1
 
 	return due
 
@@ -1247,16 +1369,37 @@ func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
 
 
 func review_word(word: String, book: int, lesson: int, rating: String) -> void:
+	if not rating in ["again", "hard", "good", "easy"]:
+		return
+	var result: Dictionary = {}
 	for entry in saved_words:
 		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
 			_ensure_srs_fields(entry)
-			var result := _compute_srs_result(entry, rating)
+			result = _compute_srs_result(entry, rating)
 			entry["srs_ease"]     = result["ease"]
 			entry["srs_interval"] = result["interval"]
 			entry["srs_reps"]     = result["reps"]
 			entry["srs_due"]      = result["due"]
 			break
 	_persist_saved_words()
+	if result.is_empty():
+		return
+	# Keep the review queue (the source of get_due_words) in sync so the SRS
+	# schedule actually controls when the word comes back. NOTE: we do NOT
+	# emit review_words_changed here — the WordReview scene manages its own
+	# in-session queue and would re-enter _populate_list() and skip cards.
+	_sync_srs_to_review_words(word, book, lesson, result)
+	_persist_review_words()
+
+
+func _sync_srs_to_review_words(word: String, book: int, lesson: int, result: Dictionary) -> void:
+	for entry in review_words:
+		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
+			entry["srs_ease"]     = result["ease"]
+			entry["srs_interval"] = result["interval"]
+			entry["srs_reps"]     = result["reps"]
+			entry["srs_due"]      = result["due"]
+			return
 
 
 func preview_intervals(entry: Dictionary) -> Dictionary:

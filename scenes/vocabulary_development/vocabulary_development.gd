@@ -12,6 +12,9 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
+# Global scale applied to every text size so fonts render larger.
+const FONT_SCALE := 1.25
+
 const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
@@ -58,7 +61,7 @@ func _ready() -> void:
 		header_title.add_theme_font_override("font", font_bold)
 
 	# Keep header readable on the current theme.
-	header_title.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	header_title.add_theme_color_override("font_color", _text_color())
 
 	back_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
@@ -81,9 +84,9 @@ func _ready() -> void:
 	if _data.is_empty():
 		return
 
-	page_view.add_page("learn", "Learn", "📖", _build_learn_page())
-	page_view.add_page("examples", "Examples", "💡", _build_examples_page())
-	page_view.add_page("practice", "Practice", "✏️", _build_practice_page())
+	page_view.add_page("learn", "یادگیری", "📖", _build_learn_page())
+	page_view.add_page("examples", "مثال‌ها", "💡", _build_examples_page())
+	page_view.add_page("practice", "تمرین", "✏️", _build_practice_page())
 
 	# Force backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
@@ -133,16 +136,18 @@ func _contrast_color(bg: Color) -> Color:
 	return Color.WHITE
 
 
+func _text_color() -> Color:
+	# Pure white in dark theme, pure black in light theme — maximum contrast.
+	return Color.WHITE if Global.theme_is_dark() else Color.BLACK
+
+
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	header_title.add_theme_color_override("font_color", Global.get_theme_color("text"))
-	# Scene background (behind the header) — keep the current color in dark mode.
+	header_title.add_theme_color_override("font_color", _text_color())
+	# Scene background (behind the header) — from the theme source.
 	if background != null:
-		if Global.theme_is_dark():
-			background.color = Color("#2c387f")
-		else:
-			background.color = Global.get_theme_color("bg_base")
+		background.color = Global.get_theme_color("bg_base")
 	# PageView background behind the content.
 	if page_view.has_meta("dark_bg"):
 		var bg: ColorRect = page_view.get_meta("dark_bg")
@@ -218,7 +223,7 @@ func _build_examples_page() -> VBoxContainer:
 	var examples: Array = _data.get("examples", [])
 
 	if examples.is_empty():
-		var empty := _make_label("No examples available yet.", 36, Global.get_theme_color("text_dim"), false)
+		var empty := _make_label("No examples available yet.", 36, _text_color(), false)
 		page.add_child(empty)
 		return page
 
@@ -280,7 +285,7 @@ func _make_topic_banner(icon: String, en: String, fa: String) -> PanelContainer:
 
 	var ic := Label.new()
 	ic.text = icon
-	ic.add_theme_font_size_override("font_size", 72)
+	ic.add_theme_font_size_override("font_size", int(72 * FONT_SCALE))
 	ic.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vb.add_child(ic)
@@ -317,8 +322,8 @@ func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelC
 	vb.add_theme_constant_override("separation", 6)
 
 	# Body text stays wrapped.
-	vb.add_child(_make_label(en, 36, Global.get_theme_color("text"), false))
-	vb.add_child(_make_fa_label(fa, 31, Global.get_theme_color("text_dim")))
+	vb.add_child(_make_label(en, 36, _text_color(), false))
+	vb.add_child(_make_fa_label(fa, 31, _text_color()))
 
 	card.add_child(vb)
 	return card
@@ -328,8 +333,8 @@ func _make_bullet(en: String, fa: String) -> VBoxContainer:
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 4)
 
-	vb.add_child(_make_label("•  " + en, 34, Global.get_theme_color("text"), false))
-	vb.add_child(_make_fa_label(fa, 29, Global.get_theme_color("text_dim")))
+	vb.add_child(_make_label("•  " + en, 34, _text_color(), false))
+	vb.add_child(_make_fa_label(fa, 29, _text_color()))
 
 	return vb
 
@@ -359,9 +364,9 @@ func _make_example_card(ex: Dictionary) -> PanelContainer:
 	rtl.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 
 	# Make the colored English word line much larger and bold.
-	rtl.add_theme_font_size_override("normal_font_size", 45)
-	rtl.add_theme_font_size_override("bold_font_size", 45)
-	rtl.add_theme_color_override("default_color", Global.get_theme_color("text"))
+	rtl.add_theme_font_size_override("normal_font_size", int(45 * FONT_SCALE))
+	rtl.add_theme_font_size_override("bold_font_size", int(45 * FONT_SCALE))
+	rtl.add_theme_color_override("default_color", _text_color())
 
 	# Slightly brighter colors improve visibility on the dark panel.
 	rtl.text = (
@@ -380,8 +385,8 @@ func _make_example_card(ex: Dictionary) -> PanelContainer:
 	var sentence: Dictionary = ex.get("sentence", {})
 	if not sentence.is_empty():
 		# Increase the English and Persian example sentences too.
-		vb.add_child(_make_label(str(sentence.get("en", "")), 42, Global.get_theme_color("text"), false))
-		vb.add_child(_make_fa_label(str(sentence.get("fa", "")), 36, Global.get_theme_color("text_dim")))
+		vb.add_child(_make_label(str(sentence.get("en", "")), 42, _text_color(), false))
+		vb.add_child(_make_fa_label(str(sentence.get("fa", "")), 36, _text_color()))
 
 	card.add_child(vb)
 	return card
@@ -420,7 +425,7 @@ func _make_reference_table(table: Array) -> PanelContainer:
 		var meaning_en := _make_label(
 			str(entry.get("meaning_en", "")),
 			32,
-			Global.get_theme_color("text"),
+			_text_color(),
 			false
 		)
 		meaning_en.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -429,7 +434,7 @@ func _make_reference_table(table: Array) -> PanelContainer:
 		var example := _make_label(
 			str(entry.get("example", "")),
 			30,
-			Global.get_theme_color("text_dim"),
+			_text_color(),
 			false
 		)
 		example.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -457,7 +462,7 @@ func _make_section_title(en: String) -> HBoxContainer:
 	row.add_child(bar)
 
 	# Section title: one line, no wrapping, fills horizontally.
-	var title := _make_label(en, 40, Global.get_theme_color("text"), true)
+	var title := _make_label(en, 40, _text_color(), true)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(title)
 
@@ -478,13 +483,14 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap
 		l.clip_text = false
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 
-	# Slightly shrink very long one-line titles so they fit better.
-	var final_size := font_size
+	# Apply global scale, then slightly shrink very long one-line titles.
+	var base := int(float(font_size) * FONT_SCALE)
+	var final_size := base
 	if not do_wrap:
 		if text.length() > 30:
-			final_size = int(float(font_size) * 0.85)
+			final_size = int(float(base) * 0.85)
 		if text.length() > 55:
-			final_size = int(float(font_size) * 0.72)
+			final_size = int(float(base) * 0.72)
 
 	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)
@@ -497,7 +503,7 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap
 	return l
 
 
-func _make_fa_label(text: String, font_size: int, color: Color = Global.get_theme_color("text_dim"), do_wrap := true) -> Label:
+func _make_fa_label(text: String, font_size: int, color: Color = Color.WHITE, do_wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.custom_minimum_size.x = 0
@@ -510,13 +516,14 @@ func _make_fa_label(text: String, font_size: int, color: Color = Global.get_them
 		l.clip_text = false
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 
-	# Slightly shrink very long one-line Persian titles.
-	var final_size := font_size
+	# Apply global scale, then slightly shrink very long one-line Persian titles.
+	var base := int(float(font_size) * FONT_SCALE)
+	var final_size := base
 	if not do_wrap:
 		if text.length() > 34:
-			final_size = int(float(font_size) * 0.85)
+			final_size = int(float(base) * 0.85)
 		if text.length() > 60:
-			final_size = int(float(font_size) * 0.72)
+			final_size = int(float(base) * 0.72)
 
 	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)

@@ -57,6 +57,16 @@ func _build_ui() -> void:
 		HORIZONTAL_ALIGNMENT_CENTER
 	)
 
+	# Let a long Persian instruction wrap inside the card instead of
+	# overflowing the screen.
+	instruction.autowrap_mode = (
+		TextServer.AUTOWRAP_WORD_SMART
+	)
+
+	instruction.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
+	)
+
 	instruction.add_theme_font_size_override(
 		"font_size",
 		GrammarTheme.BODY_SIZE
@@ -64,7 +74,7 @@ func _build_ui() -> void:
 
 	instruction.add_theme_color_override(
 		"font_color",
-		GrammarTheme.TEXT_SECONDARY
+		GrammarTheme.text_secondary_color()
 	)
 
 	root.add_child(
@@ -80,6 +90,12 @@ func _build_ui() -> void:
 	answer_container.custom_minimum_size = Vector2(
 		0,
 		110
+	)
+
+	# Constrain to the parent width so long text wraps inside the card
+	# instead of spilling past the screen edge.
+	answer_container.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
 	)
 
 	answer_container.add_theme_constant_override(
@@ -100,6 +116,12 @@ func _build_ui() -> void:
 
 	words_container.alignment = (
 		FlowContainer.ALIGNMENT_CENTER
+	)
+
+	# Constrain to the parent width so long words wrap inside the card
+	# instead of spilling past the screen edge.
+	words_container.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
 	)
 
 	words_container.add_theme_constant_override(
@@ -167,6 +189,52 @@ func _show_item() -> void:
 		_show_blanks_item(item)
 	else:
 		_show_sentence_item(item)
+
+	# After the container is laid out, cap every child's width to the
+	# available width so no long text/word can ever overflow the screen.
+	call_deferred("_constrain_flow_widths")
+
+
+func _constrain_flow_widths() -> void:
+	# Available width = this exercise's own width (the card's content
+	# area), with a tiny safety margin. Fall back to a sane value if the
+	# layout hasn't happened yet.
+	var avail: float = size.x
+	if avail <= 0.0:
+		avail = 1000.0
+	avail -= 8.0
+	_cap_flow_container(answer_container, avail)
+	_cap_flow_container(words_container, avail)
+
+
+func _cap_flow_container(container: Container, avail: float) -> void:
+	if container == null:
+		return
+	for child in container.get_children():
+		if child is Label:
+			# Only wrap text that would actually be wider than the card,
+			# so short inline segments keep their normal inline layout.
+			var font: Font = child.get_theme_font("font")
+			var fsize: int = child.get_theme_font_size("font_size")
+			var tw: Vector2 = GrammarTheme.measure_text(
+				font,
+				child.text,
+				fsize,
+				-1.0,
+				HORIZONTAL_ALIGNMENT_LEFT
+			)
+			if tw.x > avail:
+				# Give the wrapped text a real, bounded width so it wraps
+				# at word boundaries instead of spilling off the screen
+				# or collapsing into a narrow vertical strip.
+				child.custom_minimum_size = Vector2(avail, 0)
+				child.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		elif child is Button:
+			if child.custom_minimum_size.x > avail:
+				child.custom_minimum_size = Vector2(
+					avail,
+					child.custom_minimum_size.y
+				)
 
 
 func _measure_uniform_word_width(words: Array) -> int:
@@ -288,7 +356,7 @@ func _show_blanks_item(item: Dictionary) -> void:
 
 			label.add_theme_color_override(
 				"font_color",
-				GrammarTheme.TEXT
+				GrammarTheme.text_color()
 			)
 
 			answer_container.add_child(

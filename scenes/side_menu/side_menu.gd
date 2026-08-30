@@ -92,54 +92,53 @@ func _on_theme_changed(_mode: int) -> void:
 	_apply_theme()
 
 
+# The side menu keeps ONE fixed form in every theme (the original look):
+# dark-teal panel, dimming overlay, white text and translucent white chips.
+const MENU_PANEL_BG  := Color(0, 0.29, 0.29, 1)
+const MENU_OVERLAY   := Color(0, 0.29, 0.29, 1)
+const MENU_TEXT      := Color(1, 1, 1, 1)
+const MENU_DIM_TEXT  := Color(0.85, 0.92, 0.92, 1)
+const MENU_CHIP_BG   := Color(1, 1, 1, 0.06)
+const MENU_CHIP_HOVER := Color(1, 1, 1, 0.12)
+const MENU_CHIP_PRESSED := Color(1, 1, 1, 0.18)
+const MENU_CHIP_BORDER := Color(1, 1, 1, 0.10)
+
 func _apply_theme() -> void:
-	var dark := Global.theme_is_dark()
+	# Panel — fixed dark teal regardless of the global theme.
 	var st := StyleBoxFlat.new()
 	st.set_corner_radius_all(24)
-	if dark:
-		st.bg_color = Color(0, 0.29, 0.29, 1)
-		st.set_border_width_all(0)
-	else:
-		st.bg_color = Color(0.97, 0.98, 1, 1)
-		st.border_color = Color(0, 0, 0, 0.08)
-		st.set_border_width_all(1)
+	st.bg_color = MENU_PANEL_BG
+	st.set_border_width_all(0)
 	menu_panel.add_theme_stylebox_override("panel", st)
 
-	# Overlay dims the page behind — neutral in both themes.
-	overlay.color = Color(0, 0, 0, 1) if not dark else Color(0, 0.29, 0.29, 1)
+	# Overlay dims the page behind — fixed.
+	overlay.color = MENU_OVERLAY
 
-	# Button text + backgrounds must be readable on the panel in both themes.
-	var text_color: Color = Global.get_theme_color("text")
-
-	# Header title / subtitle / footer must be readable on the panel.
-	var dim_color: Color = Global.get_theme_color("text_dim")
+	# Header / footer text — fixed white.
 	for l in [user_name_label, version_label]:
 		if l.label_settings != null:
-			l.label_settings.font_color = text_color
+			l.label_settings.font_color = MENU_TEXT
 		else:
-			l.add_theme_color_override("font_color", text_color)
+			l.add_theme_color_override("font_color", MENU_TEXT)
 	if welcome_label.label_settings != null:
-		welcome_label.label_settings.font_color = dim_color
+		welcome_label.label_settings.font_color = MENU_DIM_TEXT
 	else:
-		welcome_label.add_theme_color_override("font_color", dim_color)
-	var btn_bg := Color(1, 1, 1, 0.08) if dark else Color(0, 0, 0, 0.05)
-	var btn_border := Color(1, 1, 1, 0.12) if dark else Color(0, 0, 0, 0.10)
-	var btn_hover_bg := Color(1, 1, 1, 0.15) if dark else Color(0.545, 0.361, 0.965, 0.12)
+		welcome_label.add_theme_color_override("font_color", MENU_DIM_TEXT)
 
 	for btn in [saved_words_button, leitner_button, purchase_button, settings_button, about_me_button]:
-		btn.add_theme_color_override("font_color", text_color)
-		btn.add_theme_color_override("font_hover_color", text_color)
-		btn.add_theme_color_override("font_pressed_color", text_color)
-		btn.add_theme_color_override("font_focus_color", text_color)
+		btn.add_theme_color_override("font_color", MENU_TEXT)
+		btn.add_theme_color_override("font_hover_color", MENU_TEXT)
+		btn.add_theme_color_override("font_pressed_color", MENU_TEXT)
+		btn.add_theme_color_override("font_focus_color", MENU_TEXT)
 
 		# The visible text is a child Label inside the button — recolor it too.
 		for lbl in btn.find_children("TextLabel", "Label", true, false):
-			lbl.add_theme_color_override("font_color", text_color)
+			lbl.add_theme_color_override("font_color", MENU_TEXT)
 
-		# Give the buttons a subtle, theme-appropriate backdrop.
+		# Fixed translucent-white chips with the purple hover accent.
 		var normal := StyleBoxFlat.new()
-		normal.bg_color = btn_bg
-		normal.border_color = btn_border
+		normal.bg_color = MENU_CHIP_BG
+		normal.border_color = MENU_CHIP_BORDER
 		normal.set_border_width_all(1)
 		normal.set_corner_radius_all(12)
 		normal.content_margin_left = 16
@@ -147,10 +146,11 @@ func _apply_theme() -> void:
 		normal.content_margin_top = 10
 		normal.content_margin_bottom = 10
 		var hover := normal.duplicate() as StyleBoxFlat
-		hover.bg_color = btn_hover_bg
+		hover.bg_color = MENU_CHIP_HOVER
 		hover.border_color = Color("#8B5CF6")
 		hover.set_border_width_all(2)
 		var pressed := hover.duplicate() as StyleBoxFlat
+		pressed.bg_color = MENU_CHIP_PRESSED
 		var focus := hover.duplicate() as StyleBoxFlat
 		btn.add_theme_stylebox_override("normal", normal)
 		btn.add_theme_stylebox_override("hover", hover)

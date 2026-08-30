@@ -12,6 +12,9 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
+# Global scale applied to every text size so fonts render larger.
+const FONT_SCALE := 1.25
+
 const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
@@ -90,9 +93,9 @@ func _ready() -> void:
 	if _data.is_empty():
 		return
 
-	page_view.add_page("concept", "Concept", "💡", _build_concept_page())
-	page_view.add_page("forms", "Forms", "📋", _build_forms_page())
-	page_view.add_page("practice", "Practice", "✏️", _build_practice_page())
+	page_view.add_page("concept", "مفهوم", "💡", _build_concept_page())
+	page_view.add_page("forms", "فرم‌ها", "📋", _build_forms_page())
+	page_view.add_page("practice", "تمرین", "✏️", _build_practice_page())
 
 	# Force themed backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
@@ -141,27 +144,30 @@ func _apply_theme() -> void:
 
 
 # ---------- Theme-aware color helpers ----------
-# Dark mode matches today's hardcoded palette; Light mode uses the app palette.
+# All colors resolve through Global (the single theme source).
 func _navy_bg() -> Color:
-	return Color("#2c387f") if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+	return Global.get_theme_color("bg_base")
 
 func _app_bg() -> Color:
-	return APP_BG if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+	return Global.get_theme_color("bg_base")
 
 func _panel_bg() -> Color:
-	return PANEL_BG if Global.theme_is_dark() else Global.get_theme_color("surface")
+	return Global.get_theme_color("surface")
 
 func _panel_border() -> Color:
-	return PANEL_BORDER if Global.theme_is_dark() else Global.get_theme_color("border")
+	return Global.get_theme_color("border")
 
 func _text_color() -> Color:
-	return TEXT_LIGHT if Global.theme_is_dark() else Global.get_theme_color("text")
+	# Pure white in dark theme, pure black in light theme — maximum contrast.
+	return Color.WHITE if Global.theme_is_dark() else Color.BLACK
 
 func _text_soft() -> Color:
-	return TEXT_SOFT if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+	# Pure white in dark theme, pure black in light theme — maximum contrast.
+	return Color.WHITE if Global.theme_is_dark() else Color.BLACK
 
 func _text_muted() -> Color:
-	return TEXT_MUTED if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+	# Pure white in dark theme, pure black in light theme — maximum contrast.
+	return Color.WHITE if Global.theme_is_dark() else Color.BLACK
 
 
 func _dark_tint(color: Color, amount := 0.16) -> Color:
@@ -337,7 +343,7 @@ func _make_topic_banner(icon: String, en: String, fa: String) -> PanelContainer:
 
 	var ic := Label.new()
 	ic.text = icon
-	ic.add_theme_font_size_override("font_size", 72)
+	ic.add_theme_font_size_override("font_size", int(72 * FONT_SCALE))
 	ic.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vb.add_child(ic)
@@ -413,7 +419,7 @@ func _make_category_card(category_name: Dictionary, examples: Array, color: Colo
 	badge.autowrap_mode = TextServer.AUTOWRAP_OFF
 	badge.clip_text = false
 	badge.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
-	badge.add_theme_font_size_override("font_size", 34)
+	badge.add_theme_font_size_override("font_size", int(34 * FONT_SCALE))
 	badge.add_theme_color_override("font_color", color.lightened(0.25))
 
 	if font_bold:
@@ -497,7 +503,7 @@ func _make_table_header(text: String) -> Label:
 	l.clip_text = false
 	l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 
-	l.add_theme_font_size_override("font_size", 30)
+	l.add_theme_font_size_override("font_size", int(30 * FONT_SCALE))
 	l.add_theme_color_override("font_color", _contrast_color(ACCENT))
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -518,7 +524,7 @@ func _make_table_header(text: String) -> Label:
 func _make_table_cell(text: String, color: Color, bold: bool) -> Label:
 	var l := Label.new()
 	l.text = text
-	l.add_theme_font_size_override("font_size", 30)
+	l.add_theme_font_size_override("font_size", int(30 * FONT_SCALE))
 	l.add_theme_color_override("font_color", color)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
@@ -579,13 +585,14 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap
 		l.clip_text = false
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 
-	# Slightly shrink very long one-line titles so they fit better.
-	var final_size := font_size
+	# Apply global scale, then slightly shrink very long one-line titles.
+	var base := int(float(font_size) * FONT_SCALE)
+	var final_size := base
 	if not do_wrap:
 		if text.length() > 30:
-			final_size = int(float(font_size) * 0.85)
+			final_size = int(float(base) * 0.85)
 		if text.length() > 55:
-			final_size = int(float(font_size) * 0.72)
+			final_size = int(float(base) * 0.72)
 
 	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)
@@ -611,13 +618,14 @@ func _make_fa_label(text: String, font_size: int, color: Color = TEXT_MUTED, do_
 		l.clip_text = false
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 
-	# Slightly shrink very long one-line Persian titles.
-	var final_size := font_size
+	# Apply global scale, then slightly shrink very long one-line Persian titles.
+	var base := int(float(font_size) * FONT_SCALE)
+	var final_size := base
 	if not do_wrap:
 		if text.length() > 34:
-			final_size = int(float(font_size) * 0.85)
+			final_size = int(float(base) * 0.85)
 		if text.length() > 60:
-			final_size = int(float(font_size) * 0.72)
+			final_size = int(float(base) * 0.72)
 
 	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)

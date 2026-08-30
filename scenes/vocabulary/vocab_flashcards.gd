@@ -42,8 +42,8 @@ const DOT_ACTIVE_W    := 24
 const DOT_INACTIVE_W  := 14
 const DOT_HEIGHT      := 6
 const DOT_RADIUS      := 3
-const DOT_ACTIVE_COLOR    := Color("#2563EB")
-const DOT_INACTIVE_COLOR  := Color("#CBD5E1")
+const DOT_ACTIVE_COLOR    := Color("#8B5CF6")  # matches the flashcard's violet
+const DOT_INACTIVE_COLOR  := Color(0.55, 0.60, 0.85, 0.45)
 
 # ---------- Scene paths ----------
 const SCENE_MAIN_MENU      := "res://scenes/main_menu/MainMenu.tscn"
@@ -82,10 +82,6 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var back_nav_button: Button           = $HeaderBar/HeaderContent/BackButton
 @onready var home_button: Button               = $HeaderBar/HeaderContent/HomeButton
 
-@onready var nav_book: TextureButton           = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavBook
-@onready var nav_list: TextureButton           = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavList
-@onready var nav_settings: TextureButton       = $MarginContainer/MainLayout/BottomMargin/BottomNav/IconsMargin/NavContent/NavSettings
-
 @onready var save_inactive = preload("res://images/save_button.png")
 @onready var save_active = preload("res://images/saved_button.png")
 
@@ -96,6 +92,46 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 
 const FLIP_DURATION := 0.18
 
+# ---------- Back-card palette (colorful rows, kept in both themes) ----------
+# Row panels on the back face: each field keeps its own accent so the card
+# reads as a set of colorful info pills instead of flat grey boxes.
+const BACK_ROW_ACCENTS := {
+	"WordRow":        Color("#059669"),  # emerald — the word itself
+	"MeaningEnRow":   Color("#2563EB"),  # blue      — English meaning
+	"MeaningFaRow":   Color("#7C3AED"),  # violet    — Persian meaning
+	"ExampleRow":     Color("#D97706"),  # amber     — example
+	"SynonymsPanel":  Color("#0D9488"),  # teal      — synonyms
+	"AntonymsPanel":  Color("#DC2626"),  # red       — antonyms
+}
+
+# Icon badges on the back face (solid accent chips with white text).
+const BACK_ICON_ACCENTS := {
+	"EnIcon":   Color("#2563EB"),
+	"FaIcon":   Color("#7C3AED"),
+	"ExIcon":   Color("#D97706"),
+	"SynIcon":  Color("#0D9488"),
+	"AntoIcon": Color("#DC2626"),
+}
+
+# Owned content labels on the back face (text color follows their row).
+const BACK_LABEL_ACCENTS := {
+	"BackWordLabel":   Color("#059669"),
+	"MeaningEnLabel":  Color("#2563EB"),
+	"MeaningFaLabel":  Color("#6D28D9"),
+	"ExampleLabel":    Color("#B45309"),
+	"SynonymsLabel":   Color("#0F766E"),
+	"AntonymsLabel":   Color("#B91C1C"),
+}
+
+# ---------- Happy flashcard gradient (the card's "main color") ----------
+# A cheerful violet → pink → sky gradient so the flashcards feel alive and
+# colorful in BOTH themes (deeper tones at night).
+const FLASH_GRAD_LIGHT := [Color("#A78BFA"), Color("#F9A8D4"), Color("#63B9F5")]
+const FLASH_GRAD_DARK  := [Color("#7B5CDB"), Color("#C0559E"), Color("#3E7FBF")]
+const FLASH_PRIMARY    := Color("#8B5CF6")   # used for dots + accents
+
+var _card_gradient_bg: TextureRect = null
+
 
 func _ready() -> void:
 	# Wire static buttons
@@ -103,19 +139,22 @@ func _ready() -> void:
 	prev_button.pressed.connect(_on_prev_pressed)
 	next_button.pressed.connect(_on_next_pressed)
 	save_button.pressed.connect(_on_save_pressed)
+	# Tactile hit feedback: squash on press, spring-pop on release.
+	prev_button.button_down.connect(_on_nav_press.bind(prev_button))
+	prev_button.button_up.connect(_on_nav_release.bind(prev_button))
+	next_button.button_down.connect(_on_nav_press.bind(next_button))
+	next_button.button_up.connect(_on_nav_release.bind(next_button))
+	save_button.button_down.connect(_on_nav_press.bind(save_button))
+	save_button.button_up.connect(_on_nav_release.bind(save_button))
 	audio_button.pressed.connect(_on_audio_pressed)
 	back_nav_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
-	nav_book.pressed.connect(_on_nav_book_pressed)
 	card_panel.gui_input.connect(_on_card_input)
 
 	audio_button.pivot_offset = audio_button.size / 2.0
 	back_nav_button.pivot_offset = back_nav_button.size / 2.0
 	next_button.pivot_offset = next_button.size / 2.0
 	prev_button.pivot_offset = prev_button.size / 2.0
-	nav_book.pivot_offset = nav_book.size / 2.0
-	nav_list.pivot_offset = nav_list.size / 2.0
-	nav_settings.pivot_offset = nav_settings.size / 2.0
 
 	# Theme awareness: restyle for Dark / Light and follow live toggles.
 	Global.on_theme_changed(_on_theme_changed)
@@ -136,22 +175,32 @@ func _on_theme_changed(_mode: int) -> void:
 
 
 func _apply_theme() -> void:
-	# Background ColorRect: dark in dark mode, light in light mode.
-	bg_rect.color = Color(0.055, 0.07, 0.13) if Global.theme_is_dark() else Color(0.955, 0.968, 0.98)
+	# Background ColorRect resolves through Global.
+	bg_rect.color = Global.get_theme_color("bg_base")
 	# Header bar, cards, labels, buttons walk the whole scene.
 	_theme_walk(self)
 	# Unified header bar styling last, so it wins over the generic walk.
 	if has_node("HeaderBar"):
 		Global.style_header($HeaderBar)
+	# Redesigned bottom controls last, so they win over the generic walk.
+	_style_bottom_controls()
 
 
 func _theme_walk(node: Node) -> void:
 	if node is ColorRect and node.name in ["BackgroundColor", "Bg", "TextureRect"]:
-		bg_rect.color = Color(0.055, 0.07, 0.13) if Global.theme_is_dark() else Color(0.955, 0.968, 0.98)
+		bg_rect.color = Global.get_theme_color("bg_base")
 	elif node is PanelContainer:
-		_theme_card(node)
+		if BACK_ROW_ACCENTS.has(node.name):
+			# Back-face info pills keep their colorful accent styling.
+			_theme_back_row(node)
+		else:
+			_theme_card(node)
 	elif node is Label:
-		_theme_label(node)
+		if BACK_ICON_ACCENTS.has(node.name):
+			# Back-face icon badges become solid accent chips.
+			_theme_back_icon(node)
+		else:
+			_theme_label(node)
 	elif node is Button:
 		_theme_button(node)
 	for child in node.get_children():
@@ -160,48 +209,193 @@ func _theme_walk(node: Node) -> void:
 
 func _theme_card(node: PanelContainer) -> void:
 	var dark := Global.theme_is_dark()
-	var old: StyleBox = node.get_theme_stylebox("panel")
+	# The flashcard itself gets a happy gradient + border/shadow frame.
+	if node == card_panel:
+		var frame := StyleBoxFlat.new()
+		frame.set_corner_radius_all(28)
+		frame.set_border_width_all(1)
+		frame.border_color = Color(0, 0, 0, 0.12) if not dark else Color(1, 1, 1, 0.16)
+		frame.shadow_color = Color(0.25, 0.15, 0.55, 0.22 if dark else 0.18)
+		frame.shadow_size = 20
+		frame.shadow_offset = Vector2(0, 10)
+		node.add_theme_stylebox_override("panel", frame)
+		_ensure_card_gradient(dark)
+		return
+	# Progress dots bar sits in a soft pill so it belongs to the card.
+	if node.name == "ProgressBackground":
+		var pst := StyleBoxFlat.new()
+		pst.set_corner_radius_all(30)
+		pst.set_border_width_all(1)
+		pst.border_color = Color(0.45, 0.42, 0.8, 0.18) if not dark else Color(1, 1, 1, 0.08)
+		pst.bg_color = Color(1, 1, 1, 0.65) if not dark else Color(0.12, 0.11, 0.26, 0.5)
+		node.add_theme_stylebox_override("panel", pst)
+		return
+	# Any other themed panel falls back to a clean surface card.
 	var style := StyleBoxFlat.new()
+	style.set_corner_radius_all(28)
+	style.set_border_width_all(1)
+	style.bg_color = Global.get_theme_color("surface")
+	style.border_color = Color(0, 0, 0, 0.10) if not dark else Color(1, 1, 1, 0.10)
+	node.add_theme_stylebox_override("panel", style)
+
+
+func _ensure_card_gradient(_dark: bool) -> void:
+	if _card_gradient_bg == null:
+		_card_gradient_bg = TextureRect.new()
+		_card_gradient_bg.name = "CardGradientBg"
+		_card_gradient_bg.stretch_mode = TextureRect.STRETCH_SCALE
+		card_panel.add_child(_card_gradient_bg)
+		card_panel.move_child(_card_gradient_bg, 0)  # behind the card content
+		card_panel.resized.connect(_refresh_card_gradient)
+	_refresh_card_gradient()
+
+
+func _refresh_card_gradient() -> void:
+	# Bake the gradient at the card's own (half) size so the rounded corners
+	# stretch uniformly and line up exactly with the card's rounded frame.
+	var sz: Vector2 = card_panel.size
+	if sz.x <= 2.0 or sz.y <= 2.0:
+		return
+	var dark := Global.theme_is_dark()
+	var half := Vector2i(roundi(sz.x / 2.0), roundi(sz.y / 2.0))
+	_card_gradient_bg.texture = _build_card_gradient(dark, half, 14)
+
+
+func _outside_rounded(x: float, y: float, w: float, h: float, r: float) -> bool:
+	# Signed "distance" to a rounded rectangle; > 0 means outside.
+	var qx := absf(x - w / 2.0) - (w / 2.0 - r)
+	var qy := absf(y - h / 2.0) - (h / 2.0 - r)
+	var ex := maxf(qx, 0.0)
+	var ey := maxf(qy, 0.0)
+	var d := sqrt(ex * ex + ey * ey) + minf(maxf(qx, qy), 0.0) - r
+	return d > 0.0
+
+
+func _optimize_icon(tex: Texture2D, max_edge: int = 256) -> Texture2D:
+	# Downscales oversized icon sources with high-quality interpolation and
+	# adds mipmaps so the icon renders with SMOOTH edges at display size
+	# instead of jagged/aliased ones (the heart is a 2500px source shown
+	# at ~120px). Falls back to the original if it can't be processed.
+	var img: Image = tex.get_image()
+	if img == null:
+		return tex
+	var w: int = img.get_width()
+	var h: int = img.get_height()
+	if w > max_edge or h > max_edge:
+		var s: float = float(max_edge) / float(maxf(w, h))
+		img.resize(roundi(w * s), roundi(h * s), Image.INTERPOLATE_LANCZOS)
+	img.generate_mipmaps()
+	return ImageTexture.create_from_image(img)
+
+
+func _build_card_gradient(dark: bool, img_size: Vector2i, radius: int) -> Texture2D:
+	var palette: Array = FLASH_GRAD_DARK if dark else FLASH_GRAD_LIGHT
+	var top: Color = palette[0]
+	var mid: Color = palette[1]
+	var bot: Color = palette[2]
+	# The card floats on the screen background, so fill the rounded corners
+	# with bg_base to blend seamlessly (no grey poking through in Dark).
+	var corner: Color = Global.get_theme_color("bg_base")
+	var img := Image.create(img_size.x, img_size.y, false, Image.FORMAT_RGBA8)
+	for y in img_size.y:
+		var t := float(y) / float(img_size.y - 1)
+		var col: Color
+		if t < 0.5:
+			col = top.lerp(mid, t * 2.0)
+		else:
+			col = mid.lerp(bot, (t - 0.5) * 2.0)
+		for x in img_size.x:
+			if _outside_rounded(float(x), float(y), float(img_size.x), float(img_size.y), float(radius)):
+				img.set_pixel(x, y, corner)
+			else:
+				img.set_pixel(x, y, col)
+	return ImageTexture.create_from_image(img)
+
+
+func _theme_back_row(panel: PanelContainer) -> void:
+	# A clean content "pill" on the colorful gradient card: near-white in
+	# Light / translucent dark in Dark, so the bright card stays colorful
+	# while the field text remains easy to read. The chips add the accents.
+	var dark := Global.theme_is_dark()
+	var st := StyleBoxFlat.new()
+	st.set_corner_radius_all(16)
+	st.set_border_width_all(1)
+	if dark:
+		st.bg_color = Color(0.09, 0.08, 0.20, 0.55)
+		st.border_color = Color(1, 1, 1, 0.16)
+	else:
+		st.bg_color = Color(1, 1, 1, 0.92)
+		st.border_color = Color(0, 0, 0, 0.10)
+	st.shadow_color = Color(0.2, 0.15, 0.5, 0.10 if dark else 0.05)
+	st.shadow_size = 4
+	st.shadow_offset = Vector2(0, 2)
+	var old: StyleBox = panel.get_theme_stylebox("panel")
 	if old is StyleBoxFlat:
 		var of := old as StyleBoxFlat
-		style.content_margin_left = of.content_margin_left
-		style.content_margin_top = of.content_margin_top
-		style.content_margin_right = of.content_margin_right
-		style.content_margin_bottom = of.content_margin_bottom
-		style.set_corner_radius_all(of.corner_radius_top_left if of.corner_radius_top_left > 0 else 20)
+		st.content_margin_left = of.content_margin_left
+		st.content_margin_top = of.content_margin_top
+		st.content_margin_right = of.content_margin_right
+		st.content_margin_bottom = of.content_margin_bottom
 	else:
-		style.set_corner_radius_all(20)
-	if dark:
-		style.bg_color = Global.get_theme_color("surface")
-		style.border_color = Color(1, 1, 1, 0.10)
-	else:
-		style.bg_color = Color(1, 1, 1, 1)
-		style.border_color = Color(0, 0, 0, 0.10)
-	style.set_border_width_all(1)
-	node.add_theme_stylebox_override("panel", style)
+		st.content_margin_left = 16
+		st.content_margin_right = 16
+		st.content_margin_top = 12
+		st.content_margin_bottom = 12
+	panel.add_theme_stylebox_override("panel", st)
+
+
+func _theme_back_icon(icon: Label) -> void:
+	# A solid accent chip (white text) that never washes out in either
+	# theme — replaces the old pale badge with a flat colored tile.
+	var accent: Color = BACK_ICON_ACCENTS.get(icon.name, Global.get_theme_color("accent"))
+	var st := StyleBoxFlat.new()
+	st.set_corner_radius_all(14)
+	st.bg_color = accent
+	st.content_margin_left = 10
+	st.content_margin_right = 10
+	st.content_margin_top = 4
+	st.content_margin_bottom = 4
+	icon.add_theme_stylebox_override("normal", st)
+	icon.add_theme_color_override("font_color", Color(1, 1, 1))
+	if icon.label_settings != null:
+		icon.label_settings.font_color = Color(1, 1, 1)
+		icon.label_settings.outline_size = 0
 
 
 func _theme_label(label: Label) -> void:
 	var n: String = label.name
-	var dark := Global.theme_is_dark()
 	var fill: Color
-	if n.ends_with("Title"):
+	if n == "WordLabel":
+		# The FRONT word sits directly on the colorful gradient — white so it
+		# pops, with a soft shadow for contrast on the bright card.
+		fill = Color(1, 1, 1)
+	elif n == "BackWordLabel":
+		# The BACK word sits on a white pill — accent so it stays the hero.
+		fill = Global.get_theme_color("accent")
+	elif n.ends_with("Title"):
 		fill = Global.get_theme_color("accent_bright")
 	elif n in ["PhoneticsLabel"]:
 		fill = Global.get_theme_color("text_dim")
 	else:
 		fill = Global.get_theme_color("text")
 	label.add_theme_color_override("font_color", fill)
-	# LabelSettings resources override the theme's font color — drive them
-	# explicitly so these labels follow the theme too.
+	# Drive LabelSettings explicitly so these labels follow the theme too.
 	if label.label_settings != null:
 		label.label_settings.font_color = fill
-		if not dark:
-			label.label_settings.outline_size = 0
-	# Glow outlines read as "hollow" text on light cards — drop them.
-	if not dark:
-		label.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0))
-		label.add_theme_constant_override("outline_size", 0)
+		label.label_settings.outline_size = 0
+		label.label_settings.shadow_color = Color(0, 0, 0, 0)
+		label.label_settings.shadow_offset = Vector2(0, 0)
+	# Drop any glow outlines/shadows — they read as hollow/halo text.
+	label.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0))
+	label.add_theme_constant_override("outline_size", 0)
+	label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0))
+	label.add_theme_constant_override("shadow_offset_x", 0)
+	label.add_theme_constant_override("shadow_offset_y", 0)
+	# Front word on the colorful gradient benefits from a soft drop shadow.
+	if n == "WordLabel":
+		label.add_theme_color_override("font_shadow_color", Color(0.25, 0.15, 0.5, 0.30))
+		label.add_theme_constant_override("shadow_offset_x", 1)
+		label.add_theme_constant_override("shadow_offset_y", 2)
 
 
 func _theme_button(btn: Button) -> void:
@@ -223,27 +417,91 @@ func _button_has_colored_bg(btn: Button) -> bool:
 
 
 # ----------------------------------------------------------------
+#  BOTTOM CONTROLS — redesigned prev / save / next bar (theme-aware)
+# ----------------------------------------------------------------
+func _style_bottom_controls() -> void:
+	var accent: Color = Global.get_theme_color("accent")
+
+	# The control dock itself is invisible — the flat icon buttons float.
+	var panel: PanelContainer = $MarginContainer/MainLayout/PanelContainer
+	var pst := StyleBoxFlat.new()
+	pst.bg_color = Color(0, 0, 0, 0)
+	pst.set_border_width_all(0)
+	pst.shadow_color = Color(0, 0, 0, 0)
+	pst.shadow_size = 0
+	panel.add_theme_stylebox_override("panel", pst)
+	panel.offset_transform_scale = Vector2.ONE
+
+	var controls: HBoxContainer = $MarginContainer/MainLayout/PanelContainer/BottomControls
+	controls.add_theme_constant_override("separation", 68)
+
+	# Optimize the arrow icons so their edges render smoothly.
+	prev_button.icon = _optimize_icon(load("res://images/prev.png"))
+	next_button.icon = _optimize_icon(load("res://images/next.png"))
+
+	_style_nav_button(prev_button, accent)
+	_style_nav_button(next_button, accent)
+	_style_save_button(save_button, accent)
+
+
+func _style_nav_button(btn: Button, accent: Color) -> void:
+	# Flat icon button — no persistent panel. A soft circular highlight only
+	# appears on hover/press for affordance, keeping the icons clean.
+	btn.flat = true
+	btn.expand_icon = true
+	btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	btn.add_theme_constant_override("icon_max_width", 200)
+	btn.add_theme_constant_override("icon_max_height", 200)
+	btn.custom_minimum_size = Vector2(180, 180)
+
+	var clear := StyleBoxFlat.new()
+	clear.bg_color = Color(0, 0, 0, 0)
+	clear.set_border_width_all(0)
+	var hover := StyleBoxFlat.new()
+	hover.set_corner_radius_all(80)
+	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.14)
+	var pressed := StyleBoxFlat.new()
+	pressed.set_corner_radius_all(80)
+	pressed.bg_color = Color(accent.r, accent.g, accent.b, 0.24)
+	btn.add_theme_stylebox_override("normal", clear)
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", pressed)
+	btn.add_theme_stylebox_override("focus", hover)
+
+
+func _style_save_button(btn: Button, _accent: Color) -> void:
+	# Flat heart toggle — no persistent panel, soft highlight on hover/press.
+	btn.flat = true
+	btn.expand_icon = true
+	btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	btn.add_theme_constant_override("icon_max_width", 200)
+	btn.add_theme_constant_override("icon_max_height", 200)
+	btn.custom_minimum_size = Vector2(200, 200)
+
+	var heart := Color(0.95, 0.38, 0.44)
+	var clear := StyleBoxFlat.new()
+	clear.bg_color = Color(0, 0, 0, 0)
+	clear.set_border_width_all(0)
+	var hover := StyleBoxFlat.new()
+	hover.set_corner_radius_all(100)
+	hover.bg_color = Color(heart.r, heart.g, heart.b, 0.14)
+	var pressed := StyleBoxFlat.new()
+	pressed.set_corner_radius_all(100)
+	pressed.bg_color = Color(heart.r, heart.g, heart.b, 0.24)
+	btn.add_theme_stylebox_override("normal", clear)
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", pressed)
+	btn.add_theme_stylebox_override("focus", hover)
+
+
+# ----------------------------------------------------------------
 #  MODE ENTRY POINTS
 # ----------------------------------------------------------------
 func _enter_lesson_mode() -> void:
 	mode = Mode.LESSON
 	audio_button.visible = true
-
-	if nav_list.pressed.is_connected(_on_remove_word_pressed):
-		nav_list.pressed.disconnect(_on_remove_word_pressed)
-	if nav_settings.pressed.is_connected(_on_review_pressed):
-		nav_settings.pressed.disconnect(_on_review_pressed)
-
-	nav_list.pressed.connect(_on_nav_list_lesson_pressed)
-	nav_settings.pressed.connect(_on_nav_settings_lesson_pressed)
-
-	nav_list.texture_normal = load("res://images/menu.png")
-	nav_list.texture_pressed = load("res://images/menu.png")
-	nav_list.tooltip_text = "Lesson List"
-	
-	nav_settings.texture_normal = load("res://images/setting.png")
-	nav_settings.texture_pressed = load("res://images/setting.png")
-	nav_settings.tooltip_text = "Settings"
 
 	var book: int   = Global.current_book
 	var lesson: int = Global.current_lesson
@@ -273,21 +531,7 @@ func _enter_saved_mode() -> void:
 	if FONT_FARSI != null:
 		lesson_title.add_theme_font_override("font", FONT_FARSI)
 
-	nav_list.texture_normal = load("res://images/delete.png")
-	nav_list.texture_pressed = load("res://images/delete.png")
-	
-	nav_settings.texture_normal = load("res://images/quiz.png")
-	nav_settings.texture_pressed = load("res://images/quiz.png")
-
-	if nav_list.pressed.is_connected(_on_nav_list_lesson_pressed):
-		nav_list.pressed.disconnect(_on_nav_list_lesson_pressed)
-	if nav_settings.pressed.is_connected(_on_nav_settings_lesson_pressed):
-		nav_settings.pressed.disconnect(_on_nav_settings_lesson_pressed)
-
-	nav_list.pressed.connect(_on_remove_word_pressed)
-	nav_settings.pressed.connect(_on_review_pressed)
-
-	save_button.icon = save_active
+	save_button.icon = _optimize_icon(save_active)
 	save_button.modulate = Color("#EF4444")
 	save_button.disabled = true
 
@@ -448,7 +692,7 @@ func _refresh_save_button(entry: Dictionary) -> void:
 	if mode != Mode.LESSON:
 		return
 	var saved := Global.is_word_saved(entry.get("word", ""), current_book, current_lesson)
-	save_button.icon     = save_active if saved else save_inactive
+	save_button.icon     = _optimize_icon(save_active if saved else save_inactive)
 	save_button.disabled = false
 
 
@@ -578,6 +822,21 @@ func _flip() -> void:
 	_play_flip(is_flipped)
 
 
+func _on_nav_press(btn: Button) -> void:
+	# Keep the scale centered on the button regardless of layout timing.
+	btn.pivot_offset = btn.size / 2.0
+	var tw := create_tween()
+	tw.tween_property(btn, "scale", Vector2(0.86, 0.86), 0.10) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+
+
+func _on_nav_release(btn: Button) -> void:
+	# Spring back with a slight overshoot so the tap feels snappy.
+	var tw := create_tween()
+	tw.tween_property(btn, "scale", Vector2.ONE, 0.28) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
 func _on_prev_pressed() -> void:
 	_button_slide(-1)
 
@@ -601,30 +860,6 @@ func _on_save_pressed() -> void:
 		data["lesson"] = current_lesson
 		Global.save_word(data)
 	_refresh_save_button(entry)
-
-
-# ----------------------------------------------------------------
-#  DEDICATED REMOVE (SAVED mode — 🗑 nav button)
-# ----------------------------------------------------------------
-func _on_remove_word_pressed() -> void:
-	if word_list.is_empty():
-		return
-	var entry : Dictionary = word_list[current_index]
-	Global.remove_word(
-		entry.get("word", ""),
-		entry.get("book", 0),
-		entry.get("lesson", 0)
-	)
-	word_list.remove_at(current_index)
-	if current_index >= word_list.size():
-		current_index = max(0, word_list.size() - 1)
-	var tween := create_tween()
-	tween.tween_property(save_button, "scale", Vector2(0.93, 0.93), 0.08) \
-	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(audio_button, "scale", Vector2.ONE, 0.12) \
-	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	_build_progress_dots()
-	_update_card(false)
 
 
 # ----------------------------------------------------------------
@@ -664,28 +899,6 @@ func _on_back_button_pressed() -> void:
 	var tween = create_tween()
 	tween.tween_property(back_nav_button, "scale", Vector2(0.96, 0.96), 0.08)
 
-
-func _on_nav_book_pressed() -> void:
-	Global.flashcard_mode = "lesson"
-	var tween = create_tween()
-	tween.tween_property(nav_book, "scale", Vector2(0.96, 0.96), 0.08)
-	TransitionManager.change_scene(SCENE_MAIN_MENU)
-
-
-func _on_nav_list_lesson_pressed() -> void:
-	var tween = create_tween()
-	tween.tween_property(nav_list, "scale", Vector2(0.96, 0.96), 0.08)
-	TransitionManager.change_scene(SCENE_LESSON_MENU)
-
-
-func _on_nav_settings_lesson_pressed() -> void:
-	var tween = create_tween()
-	tween.tween_property(nav_settings, "scale", Vector2(0.96, 0.96), 0.08)
-	TransitionManager.change_scene(SCENE_SETTINGS)
-
-
-func _on_review_pressed() -> void:
-	TransitionManager.change_scene(SCENE_REVIEW)
 
 func _on_android_back_pressed() -> void:
 	_on_back_button_pressed()

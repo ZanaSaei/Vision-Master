@@ -56,6 +56,16 @@ func _build_ui() -> void:
 		HORIZONTAL_ALIGNMENT_CENTER
 	)
 
+	# Let a long Persian instruction wrap inside the card instead of
+	# overflowing the screen.
+	instruction.autowrap_mode = (
+		TextServer.AUTOWRAP_WORD_SMART
+	)
+
+	instruction.size_flags_horizontal = (
+		Control.SIZE_EXPAND_FILL
+	)
+
 	instruction.add_theme_font_size_override(
 		"font_size",
 		GrammarTheme.BODY_SIZE
@@ -63,7 +73,7 @@ func _build_ui() -> void:
 
 	instruction.add_theme_color_override(
 		"font_color",
-		GrammarTheme.TEXT_SECONDARY
+		GrammarTheme.text_secondary_color()
 	)
 
 	root.add_child(instruction)

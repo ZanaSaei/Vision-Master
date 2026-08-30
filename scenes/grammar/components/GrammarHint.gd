@@ -59,7 +59,7 @@ func _build_ui() -> void:
 
 	_bubble = PanelContainer.new()
 	_bubble.visible = false
-	_bubble.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_bubble.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_bubble.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vbox.add_child(_bubble)
 
@@ -109,8 +109,8 @@ func _apply_theme() -> void:
 	# a bright warm yellow keeps the same friendly look. Dark text reads
 	# well on both fills.
 	var is_dark := Global.theme_is_dark()
-	var fill: Color = GrammarTheme.warning_color() if is_dark else Color(1.0, 0.84, 0.30)
-	var border: Color = Color(1.0, 0.92, 0.6, 0.6) if is_dark else Color(1.0, 0.80, 0.40, 0.9)
+	var fill: Color = GrammarTheme.warning_color() if is_dark else Global.get_theme_color("warning_soft")
+	var border: Color = Global.get_theme_color("warning")
 	_bubble.add_theme_stylebox_override(
 		"panel",
 		GrammarTheme.rounded_box(fill, 20, border, 2)

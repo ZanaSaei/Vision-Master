@@ -102,8 +102,8 @@ func _ready() -> void:
 
 	_speaking_data = data.get("speaking", {})
 
-	page_view.add_page("speaking", "Speaking", "🗣", _build_speaking_page(_speaking_data))
-	page_view.add_page("listening", "Listening", "🎧", _build_listening_page(data.get("listening", [])))
+	page_view.add_page("speaking", "صحبت کردن", "🗣", _build_speaking_page(_speaking_data))
+	page_view.add_page("listening", "شنیدن", "🎧", _build_listening_page(data.get("listening", [])))
 
 	# Force themed backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
@@ -185,24 +185,24 @@ func _dark_tint(color: Color, amount := 0.16) -> Color:
 
 
 # ---------- Theme-aware color helpers ----------
-# Dark mode matches today's hardcoded palette; Light mode uses the app palette.
+# All colors resolve through Global (the single theme source).
 func _navy_bg() -> Color:
-	return Color("#2c387f") if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+	return Global.get_theme_color("bg_base")
 
 func _app_bg() -> Color:
-	return APP_BG if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+	return Global.get_theme_color("bg_base")
 
 func _panel_bg() -> Color:
-	return PANEL_BG if Global.theme_is_dark() else Global.get_theme_color("surface")
+	return Global.get_theme_color("surface")
 
 func _text_color() -> Color:
-	return TEXT_LIGHT if Global.theme_is_dark() else Global.get_theme_color("text")
+	return Global.get_theme_color("text")
 
 func _text_soft() -> Color:
-	return TEXT_SOFT if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+	return Global.get_theme_color("text_dim")
 
 func _text_muted() -> Color:
-	return TEXT_MUTED if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+	return Global.get_theme_color("text_dim")
 
 
 func _get_en(val: Variant) -> String:
@@ -238,7 +238,7 @@ func _build_speaking_page(speaking: Dictionary) -> VBoxContainer:
 	# --- Useful patterns ---
 	var patterns: Array = speaking.get("patterns", [])
 	if not patterns.is_empty():
-		page.add_child(_make_section_title("Useful Patterns", SPEAK_ACCENT))
+		page.add_child(_make_section_title("الگوهای مفید", SPEAK_ACCENT))
 
 		for p in patterns:
 			page.add_child(_make_pattern_card(p))
@@ -247,12 +247,12 @@ func _build_speaking_page(speaking: Dictionary) -> VBoxContainer:
 	_turns = speaking.get("model_conversation", {}).get("turns", [])
 
 	if not _turns.is_empty():
-		var conversation_title := _get_en(
+		var conversation_title := _get_fa(
 			speaking.get("model_conversation", {}).get("title", "")
 		)
 
 		if conversation_title == "":
-			conversation_title = "Conversation"
+			conversation_title = "گفتگو"
 
 		page.add_child(_make_section_title(conversation_title, SPEAK_ACCENT))
 		_build_partner_controls(page)
@@ -261,7 +261,7 @@ func _build_speaking_page(speaking: Dictionary) -> VBoxContainer:
 	# --- Practice prompts ---
 	var practice: Dictionary = speaking.get("practice", {})
 	if not practice.get("prompts", []).is_empty():
-		page.add_child(_make_section_title("Your Turn to Answer", SPEAK_ACCENT))
+		page.add_child(_make_section_title("نوبت شما برای پاسخ", SPEAK_ACCENT))
 		_build_practice(page, practice)
 
 	return page
@@ -273,24 +273,24 @@ func _build_partner_controls(page: VBoxContainer) -> void:
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	# Model button now toggles between Play and Stop.
-	_model_btn = _make_button("▶  Hear the Model", Color("#64748B"))
+	_model_btn = _make_button("▶  شنیدن مدل", Color("#64748B"))
 	_model_btn.pressed.connect(_on_model_button_pressed)
 	box.add_child(_model_btn)
 
-	_action_btn = _make_button("🤝  Practice with the App", SPEAK_ACCENT)
+	_action_btn = _make_button("🤝  تمرین با برنامه", SPEAK_ACCENT)
 	_action_btn.pressed.connect(_on_action_pressed)
 	box.add_child(_action_btn)
 
 	page.add_child(box)
 
 	_status_label = Label.new()
-	_status_label.text = "Tap “Practice with the App” — it speaks Sara’s lines, you speak yours."
+	_status_label.text = "روی «تمرین با برنامه» بزنید — صدای سارا را اپ می‌گوید، شما جواب خود را می‌گویید."
 	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	_status_label.add_theme_font_size_override("font_size", 32)
-	_status_label.add_theme_color_override("font_color", _text_muted())
+	_status_label.add_theme_font_size_override("font_size", 40)
+	_status_label.add_theme_color_override("font_color", _text_color())
 
-	if font_regular:
-		_status_label.add_theme_font_override("font", font_regular)
+	if font_farsi:
+		_status_label.add_theme_font_override("font", font_farsi)
 
 	page.add_child(_status_label)
 
@@ -314,13 +314,13 @@ func _start_model() -> void:
 	_is_model_playing = true
 
 	if _model_btn:
-		_model_btn.text = "⏹  Stop the Audio"
+		_model_btn.text = "⏹  توقف صدا"
 
 	if _action_btn:
 		_action_btn.disabled = false
-		_action_btn.text = "🤝  Practice with the App"
+		_action_btn.text = "🤝  تمرین با برنامه"
 
-	_set_status("🔊 Playing the model conversation. Tap “Stop the Audio” to stop.")
+	_set_status("🔊 در حال پخش گفتگوی مدل. برای توقف، روی «توقف صدا» بزنید.")
 
 	_advance_turn()
 
@@ -350,13 +350,13 @@ func _stop_model_reading() -> void:
 	_current_turn = -1
 
 	if _model_btn:
-		_model_btn.text = "▶  Hear the Model"
+		_model_btn.text = "▶  شنیدن مدل"
 
 	if _action_btn:
 		_action_btn.disabled = false
-		_action_btn.text = "🤝  Practice with the App"
+		_action_btn.text = "🤝  تمرین با برنامه"
 
-	_set_status("⏹ Model audio stopped. Tap “Hear the Model” to play it again.")
+	_set_status("⏹ صدای مدل متوقف شد. برای پخش دوباره، روی «شنیدن مدل» بزنید.")
 
 func _build_turn_cards(page: VBoxContainer) -> void:
 	_turn_cards.clear()
@@ -388,7 +388,7 @@ func _build_turn_cards(page: VBoxContainer) -> void:
 		var role := Label.new()
 		role.text = ("🤖 " if is_app else "🎤 ") + str(turn.get("speaker", ""))
 		role.autowrap_mode = TextServer.AUTOWRAP_OFF
-		role.add_theme_font_size_override("font_size", 28)
+		role.add_theme_font_size_override("font_size", 36)
 		role.add_theme_color_override("font_color", accent)
 
 		if font_bold:
@@ -397,8 +397,8 @@ func _build_turn_cards(page: VBoxContainer) -> void:
 		vb.add_child(role)
 
 		# Conversation text stays wrapped.
-		vb.add_child(_make_label(str(turn.get("text", "")), 36, _text_color(), false))
-		vb.add_child(_make_fa_label(str(turn.get("fa", "")), 30, _text_muted()))
+		vb.add_child(_make_label(str(turn.get("text", "")), 44, _text_color(), false))
+		vb.add_child(_make_fa_label(str(turn.get("fa", "")), 40, _text_color()))
 
 		card.add_child(vb)
 		page.add_child(card)
@@ -437,7 +437,7 @@ func _advance_turn() -> void:
 
 	if is_app or not _partner_mode:
 		# The app speaks this line.
-		_set_status("🔊 Listen: “" + str(turn.get("text", "")) + "”")
+		_set_status("🔊 گوش دهید: «" + str(turn.get("text", "")) + "»")
 
 		if _action_btn:
 			_action_btn.disabled = true
@@ -445,11 +445,11 @@ func _advance_turn() -> void:
 		_speak(str(turn.get("text", "")), _advance_turn)
 	else:
 		# User's turn in partner mode.
-		_set_status("🎤 Your turn! Say: “" + str(turn.get("text", "")) + "”  —  then tap Next.")
+		_set_status("🎤 نوبت شماست! بگویید: «" + str(turn.get("text", "")) + "» — سپس روی «بعدی» بزنید.")
 
 		if _action_btn:
 			_action_btn.disabled = false
-			_action_btn.text = "➡  Next"
+			_action_btn.text = "➡  بعدی"
 
 func _start_partner() -> void:
 	_is_model_playing = false
@@ -462,7 +462,7 @@ func _start_partner() -> void:
 	_current_turn = -1
 
 	if _model_btn:
-		_model_btn.text = "▶  Hear the Model"
+		_model_btn.text = "▶  شنیدن مدل"
 
 	_advance_turn()
 
@@ -478,11 +478,11 @@ func _on_page_changed(_index: int, page_id: String) -> void:
 	_current_turn = -1
 
 	if _model_btn:
-		_model_btn.text = "▶  Hear the Model"
+		_model_btn.text = "▶  شنیدن مدل"
 
 	if _action_btn:
 		_action_btn.disabled = false
-		_action_btn.text = "🤝  Practice with the App"
+		_action_btn.text = "🤝  تمرین با برنامه"
 
 	# Stop listening playback too.
 	_stop_all_listening_players()
@@ -495,20 +495,20 @@ func _finish_conversation() -> void:
 	_is_model_playing = false
 
 	if _model_btn:
-		_model_btn.text = "▶  Hear the Model"
+		_model_btn.text = "▶  شنیدن مدل"
 
 	if _action_btn:
 		_action_btn.disabled = false
 
 		if _partner_mode:
-			_action_btn.text = "🤝  Practice Again"
+			_action_btn.text = "🤝  تمرین دوباره"
 		else:
-			_action_btn.text = "🤝  Practice with the App"
+			_action_btn.text = "🤝  تمرین با برنامه"
 
 	if _partner_mode:
-		_set_status("🎉 Great job! You just held a real English conversation. Swipe to Listening →")
+		_set_status("🎉 آفرین! یک گفتگوی واقعی انگلیسی انجام دادید. به صفحه «شنیدن» بروید ←")
 	else:
-		_set_status("That was the model. Now tap “Practice with the App” and take a role!")
+		_set_status("این گفتگوی مدل بود. حالا روی «تمرین با برنامه» بزنید و یک نقش را بگیرید!")
 
 func _highlight(index: int) -> void:
 	if index < 0 or index >= _turn_cards.size():
@@ -591,7 +591,7 @@ func _on_tts_utterance_ended(_utterance_id: int) -> void:
 # ---------- Practice prompts ----------
 
 func _build_practice(page: VBoxContainer, practice: Dictionary) -> void:
-	page.add_child(_make_label(_get_en(practice.get("instruction", "")), 33, _text_muted(), false))
+	page.add_child(_make_fa_label(_get_fa(practice.get("instruction", "")), 40, _text_color()))
 
 	var flow := HFlowContainer.new()
 	flow.add_theme_constant_override("h_separation", 12)
@@ -607,7 +607,7 @@ func _build_practice(page: VBoxContainer, practice: Dictionary) -> void:
 
 	var sample := _make_label(
 		"💡 " + str(practice.get("sample_yes", "")) + "   |   " + str(practice.get("sample_no", "")),
-		30,
+		38,
 		SUCCESS,
 		false
 	)
@@ -619,7 +619,7 @@ func _ask_prompt(prompt: String, practice: Dictionary) -> void:
 	var question := str(practice.get("question_frame", "Are you going to ___?"))
 	question = question.replace("___", prompt).replace("__", prompt)
 
-	_set_status("🤖 " + question + "   (answer aloud!)")
+	_set_status("🤖 " + question + "   (با صدای بلند جواب دهید!)")
 	_speak(question, Callable())
 
 
@@ -671,14 +671,14 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	head.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	# Conversation title: one line, no wrapping.
-	var title := _make_label(_get_en(conv.get("title", "")), 40, _text_color(), true, false)
+	var title := _make_label(_get_en(conv.get("title", "")), 50, _text_color(), true, false)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(title)
 
 	var badge := Label.new()
 	badge.text = "🔒 Not listened yet"
 	badge.autowrap_mode = TextServer.AUTOWRAP_OFF
-	badge.add_theme_font_size_override("font_size", 26)
+	badge.add_theme_font_size_override("font_size", 34)
 	badge.add_theme_color_override("font_color", _text_muted())
 
 	if font_bold:
@@ -688,7 +688,7 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	vb.add_child(head)
 
 	# Task instruction.
-	vb.add_child(_make_label(_get_en(conv.get("task", "")), 34, _text_soft(), false))
+	vb.add_child(_make_label(_get_en(conv.get("task", "")), 42, _text_soft(), false))
 
 	# ------------------------------------------------------------
 	# Audio player + play button.
@@ -696,7 +696,7 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	var player := AudioStreamPlayer.new()
 	add_child(player)
 
-	var play_btn := _make_button("▶  Play the Conversation", LISTEN_ACCENT)
+	var play_btn := _make_button("▶  پخش گفتگو", LISTEN_ACCENT)
 	play_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	# Store the button and badge so other cards can reset this one.
@@ -713,14 +713,14 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	var transcript_label := Label.new()
 	transcript_label.text = _get_en(conv.get("transcript", ""))
 	transcript_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	transcript_label.add_theme_font_size_override("font_size", 32)
+	transcript_label.add_theme_font_size_override("font_size", 40)
 	transcript_label.add_theme_color_override("font_color", _text_soft())
 	transcript_label.visible = false
 
 	if font_regular:
 		transcript_label.add_theme_font_override("font", font_regular)
 
-	var transcript_btn := _make_button("🔒  Listen first to unlock the transcript", Color("#64748B"))
+	var transcript_btn := _make_button("🔒  ابتدا گوش دهید تا متن باز شود", Color("#64748B"))
 	transcript_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	transcript_btn.disabled = true
 
@@ -728,9 +728,9 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 		transcript_label.visible = not transcript_label.visible
 
 		if transcript_label.visible:
-			transcript_btn.text = "🙈  Hide Transcript"
+			transcript_btn.text = "🙈  مخفی کردن متن"
 		else:
-			transcript_btn.text = "📜  Show Transcript"
+			transcript_btn.text = "📜  نمایش متن"
 	)
 
 	play_btn.pressed.connect(func():
@@ -745,13 +745,13 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 		_listened[conv_id] = true
 		_listening_tts_active_id = ""
 
-		play_btn.text = "🔁  Play Again"
+		play_btn.text = "🔁  پخش دوباره"
 
 		badge.text = "✅ Listened"
 		badge.add_theme_color_override("font_color", SUCCESS)
 
 		transcript_btn.disabled = false
-		transcript_btn.text = "📜  Show Transcript"
+		transcript_btn.text = "📜  نمایش متن"
 
 		_unlock_transcript_button(transcript_btn)
 	)
@@ -785,7 +785,7 @@ func _set_listening_entry_stopped(entry: Dictionary) -> void:
 	var entry_id := str(entry.get("id", ""))
 
 	if btn:
-		btn.text = "🔁  Play Again"
+		btn.text = "🔁  پخش دوباره"
 
 	if badge:
 		if _listened.get(entry_id, false):
@@ -818,13 +818,13 @@ func _on_listening_tts_finished(
 	_listening_tts_active_id = ""
 	_listened[conv_id] = true
 
-	play_btn.text = "🔁  Play Again"
+	play_btn.text = "🔁  پخش دوباره"
 
 	badge.text = "✅ Listened"
 	badge.add_theme_color_override("font_color", SUCCESS)
 
 	transcript_btn.disabled = false
-	transcript_btn.text = "📜  Show Transcript"
+	transcript_btn.text = "📜  نمایش متن"
 
 	_unlock_transcript_button(transcript_btn)
 
@@ -871,7 +871,7 @@ func _play_listening(
 			# User hit Stop while fallback TTS was reading.
 			_stop_tts()
 
-			play_btn.text = "🔁  Play Again"
+			play_btn.text = "🔁  پخش دوباره"
 
 			if _listened.get(conv_id, false):
 				badge.text = "✅ Listened"
@@ -884,7 +884,7 @@ func _play_listening(
 
 		_listening_tts_active_id = conv_id
 
-		play_btn.text = "⏹  Stop the Conversation"
+		play_btn.text = "⏹  توقف گفتگو"
 		badge.text = "🎧 Playing..."
 		badge.add_theme_color_override("font_color", LISTEN_ACCENT)
 
@@ -901,7 +901,7 @@ func _play_listening(
 		# User hit the button while audio was playing -> stop it.
 		player.stop()
 
-		play_btn.text = "🔁  Play Again"
+		play_btn.text = "🔁  پخش دوباره"
 
 		if _listened.get(conv_id, false):
 			badge.text = "✅ Listened"
@@ -916,7 +916,7 @@ func _play_listening(
 	player.stream = load(path)
 	player.play()
 
-	play_btn.text = "⏹  Stop the Conversation"
+	play_btn.text = "⏹  توقف گفتگو"
 	badge.text = "🎧 Playing..."
 	badge.add_theme_color_override("font_color", LISTEN_ACCENT)
 
@@ -946,7 +946,7 @@ func _make_banner(
 
 	var ic := Label.new()
 	ic.text = icon
-	ic.add_theme_font_size_override("font_size", 72)
+	ic.add_theme_font_size_override("font_size", 84)
 	ic.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	bv.add_child(ic)
@@ -959,11 +959,11 @@ func _make_banner(
 	var sub_color := Color(text_color.r, text_color.g, text_color.b, 0.85)
 
 	# Banner title: wraps so long titles never inflate the page width.
-	var en_l := _make_label(en, 50, text_color, true)
+	var en_l := _make_label(en, 62, text_color, true)
 	en_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	bv.add_child(en_l)
 
-	var fa_l := _make_fa_label(fa, 36, sub_color)
+	var fa_l := _make_fa_label(fa, 46, sub_color)
 	fa_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	bv.add_child(fa_l)
 
@@ -971,7 +971,7 @@ func _make_banner(
 	if desc_en != "":
 		bv.add_child(_make_label(
 			desc_en,
-			32,
+			40,
 			Color(text_color.r, text_color.g, text_color.b, 0.95),
 			false
 		))
@@ -979,7 +979,7 @@ func _make_banner(
 	if desc_fa != "":
 		bv.add_child(_make_fa_label(
 			desc_fa,
-			30,
+			38,
 			Color(text_color.r, text_color.g, text_color.b, 0.8)
 		))
 
@@ -1005,8 +1005,8 @@ func _make_pattern_card(p: Dictionary) -> PanelContainer:
 	var q_text := _get_en(p.get("q", ""))
 	var a_text := _get_en(p.get("a", ""))
 
-	vb.add_child(_make_label("❓  " + q_text, 34, _text_color(), true))
-	vb.add_child(_make_label("💬  " + a_text, 34, SUCCESS, false))
+	vb.add_child(_make_label("❓  " + q_text, 42, _text_color(), true))
+	vb.add_child(_make_label("💬  " + a_text, 42, SUCCESS, false))
 
 	card.add_child(vb)
 	return card
@@ -1017,16 +1017,18 @@ func _make_section_title(en: String, accent: Color) -> HBoxContainer:
 	row.add_theme_constant_override("separation", 14)
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
+	# Section title: wraps so it always fits the screen width.
+	# Now displayed in Persian (RTL/right-aligned), so the accent bar
+	# goes on the RIGHT side of the row.
+	var title := _make_fa_label(en, 50, _text_color(), true)
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(title)
+
 	var bar := ColorRect.new()
 	bar.color = accent
 	bar.custom_minimum_size = Vector2(6, 44)
 	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(bar)
-
-	# Section title: wraps so it always fits the screen width.
-	var title := _make_label(en, 40, _text_color(), true)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(title)
 
 	return row
 
@@ -1035,7 +1037,7 @@ func _make_button(text: String, color: Color) -> Button:
 	var btn := Button.new()
 	btn.text = text
 	btn.autowrap_mode = TextServer.AUTOWRAP_OFF
-	btn.add_theme_font_size_override("font_size", 32)
+	btn.add_theme_font_size_override("font_size", 40)
 	btn.add_theme_color_override("font_color", Color.WHITE)
 
 	var style := StyleBoxFlat.new()
@@ -1051,8 +1053,9 @@ func _make_button(text: String, color: Color) -> Button:
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", hover)
 
-	if font_bold:
-		btn.add_theme_font_override("font", font_bold)
+	# Buttons now display Persian labels, so use the Persian font.
+	if font_farsi:
+		btn.add_theme_font_override("font", font_farsi)
 
 	btn.pressed.connect(func():
 		btn.pivot_offset = btn.size / 2.0
@@ -1098,7 +1101,7 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap
 	return l
 
 
-func _make_fa_label(text: String, font_size: int, color: Color = TEXT_MUTED, do_wrap := true) -> Label:
+func _make_fa_label(text: String, font_size: int, color: Color = Color.WHITE, do_wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.custom_minimum_size.x = 0

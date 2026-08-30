@@ -4,6 +4,7 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_LESSON_MENU: String = "res://scenes/lesson_menu/LessonMenu.tscn"
 const SCENE_UNITS: String = "res://scenes/grammar/GrammarUnits.tscn"
 const SCENE_WORKBOOK: String = "res://scenes/workbook/Workbook.tscn"
+const SCENE_BOOK_EXERCISES: String = "res://scenes/grammar/GrammarBookExercises.tscn"
 const SCENE_GRAMMAR_EXAM: String = "res://scenes/grammar/GrammarExam.tscn"
 
 var _navigating: bool = false
@@ -60,8 +61,8 @@ func _build_ui() -> void:
 	var title_font: Font = GrammarTheme.get_fa_bold()
 	if title_font != null:
 		title_label.add_theme_font_override("font", title_font)
-	title_label.add_theme_font_size_override("font_size", 36)
-	title_label.add_theme_color_override("font_color", GrammarTheme.TEXT)
+	title_label.add_theme_font_size_override("font_size", 42)
+	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	header_row.add_child(title_label)
 
 	var spacer: Control = Control.new()
@@ -92,8 +93,8 @@ func _build_ui() -> void:
 	var subtitle_font: Font = GrammarTheme.get_fa_regular()
 	if subtitle_font != null:
 		subtitle.add_theme_font_override("font", subtitle_font)
-	subtitle.add_theme_font_size_override("font_size", 28)
-	subtitle.add_theme_color_override("font_color", GrammarTheme.TEXT_MUTED)
+	subtitle.add_theme_font_size_override("font_size", 36)
+	subtitle.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
 	content.add_child(subtitle)
 
 	var button_row: HBoxContainer = HBoxContainer.new()
@@ -223,7 +224,7 @@ func _on_workbook_pressed() -> void:
 		return
 	_navigating = true
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
-	TransitionManager.change_scene(SCENE_WORKBOOK)
+	TransitionManager.change_scene(SCENE_BOOK_EXERCISES)
 
 
 func _on_exam_pressed() -> void:

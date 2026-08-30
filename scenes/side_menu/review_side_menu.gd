@@ -196,11 +196,9 @@ func open() -> void:
 	
 	# Clear search when opening menu
 	_clear_search()
-	# Focus on search input after animation
-	tween.tween_callback(func(): 
-		if search_input:
-			search_input.grab_focus()
-	)
+	# NOTE: we deliberately do NOT grab focus on the search field here.
+	# On mobile that would immediately pop the soft keyboard; the user opens
+	# it by tapping the search box instead.
 
 func close() -> void:
 	if not is_open: 

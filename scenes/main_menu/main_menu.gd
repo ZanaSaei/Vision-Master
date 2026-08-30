@@ -142,19 +142,11 @@ func _on_theme_changed(_mode: int) -> void:
 
 
 func _apply_theme() -> void:
-	var dark := Global.theme_is_dark()
-
 	# Hamburger / menu button — keep it clearly readable on the theme backdrop.
-	var hb_bg := Color(0.0, 0.32, 0.42, 1.0) if dark else Color(0.30, 0.21, 0.78, 1.0)
-	var hb_style := StyleBoxFlat.new()
-	hb_style.bg_color = hb_bg
-	hb_style.set_corner_radius_all(20)
-	hb_style.content_margin_left = 24
-	hb_style.content_margin_right = 24
-	hb_style.content_margin_top = 12
-	hb_style.content_margin_bottom = 12
-	hb_style.border_color = Color(1, 1, 1, 0.30)
-	hb_style.set_border_width_all(1)
+	# The button itself stays chrome-free (transparent); the separate gloss
+	# tail panel behind it carries the box + border, so we must NOT paint a
+	# bordered stylebox here or it would draw a stray inner frame.
+	var hb_style := StyleBoxEmpty.new()
 	for s in ["normal", "hover", "pressed", "focus"]:
 		hamburger_button.add_theme_stylebox_override(s, hb_style)
 	hamburger_button.add_theme_color_override("font_color", Color.WHITE)

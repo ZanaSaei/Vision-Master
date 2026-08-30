@@ -16,7 +16,8 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 	title.text = str(unit.get("title_fa", ""))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", GrammarTheme.HEADING_SIZE)
-	title.add_theme_color_override("font_color", GrammarTheme.TEXT)
+	title.add_theme_color_override("font_color", GrammarTheme.text_color())
+	title.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	target.add_child(title)
 	GrammarAnimation.appear(title)
 
@@ -26,7 +27,8 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 	english_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	english_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	english_title.add_theme_font_size_override("font_size", GrammarTheme.BODY_SIZE)
-	english_title.add_theme_color_override("font_color", GrammarTheme.TEXT_SECONDARY)
+	english_title.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
+	english_title.add_theme_font_override("font", GrammarTheme.get_en_bold())
 	target.add_child(english_title)
 
 	# --- Explanation card ---
@@ -38,7 +40,8 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 	explanation.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	explanation.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	explanation.add_theme_font_size_override("font_size", GrammarTheme.BODY_SIZE)
-	explanation.add_theme_color_override("font_color", GrammarTheme.TEXT)
+	explanation.add_theme_color_override("font_color", GrammarTheme.text_color())
+	explanation.add_theme_font_override("font", GrammarTheme.get_fa_regular())
 	_add_to_card(explanation_card, explanation)
 
 	# --- Structure / example cards ---
@@ -51,7 +54,8 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 		section_title.text = "ساختار"
 		section_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		section_title.add_theme_font_size_override("font_size", GrammarTheme.SECTION_SIZE)
-		section_title.add_theme_color_override("font_color", GrammarTheme.TEXT_SECONDARY)
+		section_title.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
+		section_title.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 		target.add_child(section_title)
 
 	if structure_fallback != "":
@@ -60,7 +64,8 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 		structure_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		structure_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		structure_label.add_theme_font_size_override("font_size", GrammarTheme.BODY_LARGE_SIZE)
-		structure_label.add_theme_color_override("font_color", GrammarTheme.PRIMARY_DARK)
+		structure_label.add_theme_color_override("font_color", GrammarTheme.primary_dark_color())
+		structure_label.add_theme_font_override("font", GrammarTheme.get_en_bold())
 		target.add_child(structure_label)
 
 	for card in cards:
@@ -83,7 +88,7 @@ static func _add_structure_card(target: VBoxContainer, data: Dictionary) -> void
 	en.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	en.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	en.add_theme_font_size_override("font_size", GrammarTheme.BODY_LARGE_SIZE)
-	en.add_theme_color_override("font_color", GrammarTheme.PRIMARY_DARK)
+	en.add_theme_color_override("font_color", GrammarTheme.primary_dark_color())
 	en.add_theme_font_override("font", GrammarTheme.get_en_bold())
 	box.add_child(en)
 
@@ -92,7 +97,8 @@ static func _add_structure_card(target: VBoxContainer, data: Dictionary) -> void
 	fa.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	fa.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	fa.add_theme_font_size_override("font_size", GrammarTheme.BODY_SMALL_SIZE)
-	fa.add_theme_color_override("font_color", GrammarTheme.TEXT_SECONDARY)
+	fa.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
+	fa.add_theme_font_override("font", GrammarTheme.get_fa_regular())
 	box.add_child(fa)
 
 
@@ -100,7 +106,9 @@ static func _make_card(target: VBoxContainer, min_height: int) -> PanelContainer
 	var card := PanelContainer.new()
 	if min_height > 0:
 		card.custom_minimum_size = Vector2(0, min_height)
-	GrammarTheme.style_card(card)
+	# Use the raised info-card style (surface_alt) so the teaching boxes
+	# clearly contrast with the parent surface container in both themes.
+	card.add_theme_stylebox_override("panel", GrammarTheme.info_card_style())
 	target.add_child(card)
 	GrammarAnimation.appear(card, 0.05)
 	return card

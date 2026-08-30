@@ -11,6 +11,9 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
+# Global scale applied to every text size so fonts render larger.
+const FONT_SCALE := 1.25
+
 const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
@@ -58,7 +61,7 @@ func _ready() -> void:
 	if font_bold:
 		header_title.add_theme_font_override("font", font_bold)
 	# Keep header readable on the current theme.
-	header_title.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	header_title.add_theme_color_override("font_color", _text_color())
 	
 	back_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
@@ -87,8 +90,8 @@ func _ready() -> void:
 	if _data.is_empty():
 		return
 	
-	page_view.add_page("learn", "Learn", "👂", _build_learn_page())
-	page_view.add_page("practice", "Practice", "✏️", _build_practice_page())
+	page_view.add_page("learn", "یادگیری", "👂", _build_learn_page())
+	page_view.add_page("practice", "تمرین", "✏️", _build_practice_page())
 	# Force dark backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
 	_play_reveal(0)
@@ -121,16 +124,17 @@ func _dark_tint(color: Color, amount := 0.16) -> Color:
 	# Creates a panel color tinted by the given accent color (theme surface).
 	return Global.get_theme_color("surface").lerp(Color(color.r, color.g, color.b, 1.0), amount)
 
+func _text_color() -> Color:
+	# Pure white in dark theme, pure black in light theme — maximum contrast.
+	return Color.WHITE if Global.theme_is_dark() else Color.BLACK
+
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	header_title.add_theme_color_override("font_color", Global.get_theme_color("text"))
-	# Scene background (behind the header) — keep the current color in dark mode.
+	header_title.add_theme_color_override("font_color", _text_color())
+	# Scene background (behind the header) — from the theme source.
 	if background != null:
-		if Global.theme_is_dark():
-			background.color = Color("#2c387f")
-		else:
-			background.color = Global.get_theme_color("bg_base")
+		background.color = Global.get_theme_color("bg_base")
 	# PageView background behind the content.
 	if page_view.has_meta("dark_bg"):
 		var bg: ColorRect = page_view.get_meta("dark_bg")
@@ -200,8 +204,8 @@ func _make_pronunciation_card(item: Dictionary) -> PanelContainer:
 	rtl.fit_content = true
 	rtl.scroll_active = false
 	rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	rtl.add_theme_font_size_override("normal_font_size", SENTENCE_FONT_SIZE)
-	rtl.add_theme_color_override("default_color", Global.get_theme_color("text"))
+	rtl.add_theme_font_size_override("normal_font_size", int(SENTENCE_FONT_SIZE * FONT_SCALE))
+	rtl.add_theme_color_override("default_color", _text_color())
 	if font_bold:
 		rtl.add_theme_font_override("normal_font", font_bold)
 		# CHANGED: make sure [b] tags resolve to the real bold font
@@ -217,14 +221,14 @@ func _make_pronunciation_card(item: Dictionary) -> PanelContainer:
 		# CHANGED: bigger + bold + red + underlined so the stressed
 		# word (e.g. "going" in "Where are you going to go?") is
 		# impossible to miss.
-		var replacement := "[font_size=%d][color=#F87171][b][u]$1[/u][/b][/color][/font_size]" % STRESS_FONT_SIZE
+		var replacement := "[font_size=%d][color=#F87171][b][u]$1[/u][/b][/color][/font_size]" % int(STRESS_FONT_SIZE * FONT_SCALE)
 		marked_text = regex.sub(marked_text, replacement, true)
 	
 	rtl.text = marked_text + "  [color=#22D3EE][b]%s[/b][/color]" % arrow
 	vb.add_child(rtl)
 	
 	# Persian translation.
-	vb.add_child(_make_fa_label(str(item.get("fa", "")), 34, Global.get_theme_color("text_dim")))
+	vb.add_child(_make_fa_label(str(item.get("fa", "")), 34, _text_color()))
 	
 	# CHANGED: single Play/Stop button (the "Slow" button was removed).
 	vb.add_child(_make_play_btn(str(item.get("audio", "")), raw_text))
@@ -240,7 +244,7 @@ func _make_play_btn(audio_path: String, fallback_text: String) -> Button:
 	btn.text = "▶  Play"
 	btn.custom_minimum_size = Vector2(230, 0)
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	btn.add_theme_font_size_override("font_size", 30)
+	btn.add_theme_font_size_override("font_size", int(30 * FONT_SCALE))
 	
 	var text_color := Color.WHITE
 	if ACCENT.get_luminance() > 0.6:
@@ -406,7 +410,7 @@ func _make_topic_banner(icon: String, en: String, fa: String) -> PanelContainer:
 	
 	var ic := Label.new()
 	ic.text = icon
-	ic.add_theme_font_size_override("font_size", 72)
+	ic.add_theme_font_size_override("font_size", int(72 * FONT_SCALE))
 	ic.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vb.add_child(ic)
@@ -441,8 +445,8 @@ func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelC
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 6)
 	# Body text stays wrapped.
-	vb.add_child(_make_label(en, 36, Global.get_theme_color("text"), false))
-	vb.add_child(_make_fa_label(fa, 31, Global.get_theme_color("text_dim")))
+	vb.add_child(_make_label(en, 36, _text_color(), false))
+	vb.add_child(_make_fa_label(fa, 31, _text_color()))
 	card.add_child(vb)
 	return card
 
@@ -458,13 +462,14 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap
 		l.autowrap_mode = TextServer.AUTOWRAP_OFF
 		l.clip_text = false
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
-	# Slightly shrink very long one-line titles so they fit better.
-	var final_size := font_size
+	# Apply global scale, then slightly shrink very long one-line titles.
+	var base := int(float(font_size) * FONT_SCALE)
+	var final_size := base
 	if not do_wrap:
 		if text.length() > 30:
-			final_size = int(float(font_size) * 0.85)
+			final_size = int(float(base) * 0.85)
 		if text.length() > 55:
-			final_size = int(float(font_size) * 0.72)
+			final_size = int(float(base) * 0.72)
 	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)
 	if bold and font_bold:
@@ -473,7 +478,7 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap
 		l.add_theme_font_override("font", font_regular)
 	return l
 
-func _make_fa_label(text: String, font_size: int, color: Color = Global.get_theme_color("text_dim"), do_wrap := true) -> Label:
+func _make_fa_label(text: String, font_size: int, color: Color = Color.WHITE, do_wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.custom_minimum_size.x = 0
@@ -484,13 +489,14 @@ func _make_fa_label(text: String, font_size: int, color: Color = Global.get_them
 		l.autowrap_mode = TextServer.AUTOWRAP_OFF
 		l.clip_text = false
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
-	# Slightly shrink very long one-line Persian titles.
-	var final_size := font_size
+	# Apply global scale, then slightly shrink very long one-line Persian titles.
+	var base := int(float(font_size) * FONT_SCALE)
+	var final_size := base
 	if not do_wrap:
 		if text.length() > 34:
-			final_size = int(float(font_size) * 0.85)
+			final_size = int(float(base) * 0.85)
 		if text.length() > 60:
-			final_size = int(float(font_size) * 0.72)
+			final_size = int(float(base) * 0.72)
 	l.add_theme_font_size_override("font_size", final_size)
 	l.add_theme_color_override("font_color", color)
 	l.text_direction = Control.TEXT_DIRECTION_RTL

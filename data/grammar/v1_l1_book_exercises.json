@@ -1,0 +1,114 @@
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": {
+					"en": "Circle the correct answer.",
+					"fa": "گزینهٔ درست را دور بزنید."
+				},
+				"items": [
+					{
+						"question": {
+							"en": "His new car is ___ than my car.",
+							"fa": "ماشین جدید او از ماشین من ___ است."
+						},
+						"options": [
+							{ "en": "faster", "fa": "سریع‌تر" },
+							{ "en": "the fastest", "fa": "سریع‌ترین" }
+						],
+						"answer": 0,
+						"explanation": {
+							"en": "Use 'faster' when comparing two things.",
+							"fa": "برای مقایسهٔ دو چیز از «faster» استفاده می‌کنیم."
+						}
+					},
+					{
+						"question": {
+							"en": "Russia is ___ country of the world.",
+							"fa": "روسیه ___ کشور جهان است."
+						},
+						"options": [
+							{ "en": "bigger", "fa": "بزرگ‌تر" },
+							{ "en": "the biggest", "fa": "بزرگ‌ترین" }
+						],
+						"answer": 1,
+						"explanation": {
+							"en": "Use 'the biggest' for comparing more than two things.",
+							"fa": "برای مقایسهٔ بیش از دو چیز از «the biggest» استفاده می‌کنیم."
+						}
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": {
+					"en": "True or False?",
+					"fa": "درست یا نادرست؟"
+				},
+				"items": [
+					{
+						"statement": {
+							"en": "Learning about endangered animals is not important.",
+							"fa": "یادگیری دربارهٔ حیوانات در خطر انقراض مهم نیست."
+						},
+						"answer": false,
+						"correction": {
+							"en": "Learning about endangered animals is important.",
+							"fa": "یادگیری دربارهٔ حیوانات در خطر انقراض مهم است."
+						}
+					},
+					{
+						"statement": {
+							"en": "You can do voluntary work in wildlife parks.",
+							"fa": "شما می‌توانید در پارک‌های حیات وحش کار داوطلبانه انجام دهید."
+						},
+						"answer": true,
+						"correction": {
+							"en": "You can do voluntary work in wildlife parks.",
+							"fa": "شما می‌توانید در پارک‌های حیات وحش کار داوطلبانه انجام دهید."
+						}
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": {
+					"en": "Type the missing word.",
+					"fa": "کلمهٔ جاافتاده را بنویسید."
+				},
+				"items": [
+					{
+						"text": {
+							"en": "The whale is ___ (heavy) sea animal.",
+							"fa": "نهنگ ___ حیوان دریایی است."
+						},
+						"answer": ["the heaviest", "heaviest"],
+						"explanation": {
+							"en": "Superlative: the heaviest.",
+							"fa": "صفت عالی: the heaviest."
+						}
+					},
+					{
+						"text": {
+							"en": "She ___ (work) in a hospital every week.",
+							"fa": "او هر هفته در بیمارستان ___."
+						},
+						"answer": ["works"],
+						"explanation": {
+							"en": "Simple present with 'she': works.",
+							"fa": "حال ساده با «she»: works."
+						}
+					}
+				]
+			}
+		]
+	}
+}

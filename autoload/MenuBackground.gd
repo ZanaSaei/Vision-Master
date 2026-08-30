@@ -62,7 +62,7 @@ func enter_background() -> void:
 
 ############################################################
 # Retint the whole animated background for the active theme
-# (called by ThemeManager). base_color + wave gradient colors.
+# (called by Global, the single theme owner). base_color + wave gradient colors.
 ############################################################
 func apply_theme(bg: Color, wave_top: Color, wave_mid: Color, wave_bottom: Color) -> void:
 	if background == null:

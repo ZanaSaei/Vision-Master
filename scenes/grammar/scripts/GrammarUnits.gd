@@ -73,7 +73,7 @@ func _build_ui() -> void:
 	if title_font != null:
 		title_label.add_theme_font_override("font", title_font)
 	title_label.add_theme_font_size_override("font_size", 36)
-	title_label.add_theme_color_override("font_color", GrammarTheme.TEXT)
+	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	header_row.add_child(title_label)
 
 	var back_button: Button = _make_header_button("↩ قبلی", Callable(self, "_on_previous_pressed"))
@@ -108,7 +108,7 @@ func _build_ui() -> void:
 	if title_font != null:
 		lesson_title.add_theme_font_override("font", title_font)
 	lesson_title.add_theme_font_size_override("font_size", 30)
-	lesson_title.add_theme_color_override("font_color", GrammarTheme.TEXT)
+	lesson_title.add_theme_color_override("font_color", GrammarTheme.text_color())
 	content.add_child(lesson_title)
 
 	var body_font: Font = GrammarTheme.get_fa_regular()
@@ -121,7 +121,7 @@ func _build_ui() -> void:
 		if body_font != null:
 			xp_label.add_theme_font_override("font", body_font)
 		xp_label.add_theme_font_size_override("font_size", 26)
-		xp_label.add_theme_color_override("font_color", GrammarTheme.XP)
+		xp_label.add_theme_color_override("font_color", GrammarTheme.xp_color())
 		content.add_child(xp_label)
 
 		var hint: Label = Label.new()
@@ -131,7 +131,7 @@ func _build_ui() -> void:
 		if body_font != null:
 			hint.add_theme_font_override("font", body_font)
 		hint.add_theme_font_size_override("font_size", 24)
-		hint.add_theme_color_override("font_color", GrammarTheme.TEXT_MUTED)
+		hint.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
 		content.add_child(hint)
 
 	if units.is_empty():
@@ -155,7 +155,7 @@ func _build_ui() -> void:
 		if title_font != null:
 			empty_title.add_theme_font_override("font", title_font)
 		empty_title.add_theme_font_size_override("font_size", 32)
-		empty_title.add_theme_color_override("font_color", GrammarTheme.TEXT)
+		empty_title.add_theme_color_override("font_color", GrammarTheme.text_color())
 		empty_box.add_child(empty_title)
 
 		var empty_desc: Label = Label.new()
@@ -165,7 +165,7 @@ func _build_ui() -> void:
 		if body_font != null:
 			empty_desc.add_theme_font_override("font", body_font)
 		empty_desc.add_theme_font_size_override("font_size", 24)
-		empty_desc.add_theme_color_override("font_color", GrammarTheme.TEXT_MUTED)
+		empty_desc.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
 		empty_box.add_child(empty_desc)
 	else:
 		var scroll: ScrollContainer = ScrollContainer.new()
@@ -214,11 +214,11 @@ func _make_unit_button(index: int, unit: Dictionary) -> GrammarButton:
 	button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	button.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	button.add_theme_font_size_override("font_size", 28)
-	button.add_theme_color_override("font_color", GrammarTheme.TEXT)
-	button.add_theme_color_override("font_hover_color", GrammarTheme.TEXT)
-	button.add_theme_color_override("font_pressed_color", GrammarTheme.TEXT)
-	button.add_theme_color_override("font_focus_color", GrammarTheme.TEXT)
-	button.add_theme_color_override("font_disabled_color", GrammarTheme.TEXT_MUTED)
+	button.add_theme_color_override("font_color", GrammarTheme.text_color())
+	button.add_theme_color_override("font_hover_color", GrammarTheme.text_color())
+	button.add_theme_color_override("font_pressed_color", GrammarTheme.text_color())
+	button.add_theme_color_override("font_focus_color", GrammarTheme.text_color())
+	button.add_theme_color_override("font_disabled_color", GrammarTheme.locked_text_color())
 
 	var status: String = "🔒"
 	if completed:
@@ -241,20 +241,29 @@ func _make_unit_button(index: int, unit: Dictionary) -> GrammarButton:
 
 func _apply_unit_styles(button: GrammarButton, unlocked: bool) -> void:
 	if unlocked:
-		button.add_theme_stylebox_override("normal", _unit_style(GrammarTheme.PRIMARY_LIGHT, GrammarTheme.PRIMARY, 0.92, 0.22))
-		button.add_theme_stylebox_override("hover", _unit_style(GrammarTheme.PRIMARY_LIGHT.lightened(0.06), GrammarTheme.PRIMARY_DARK, 1.0, 0.28))
-		button.add_theme_stylebox_override("pressed", _unit_style(GrammarTheme.PRIMARY_LIGHT.darkened(0.06), GrammarTheme.PRIMARY, 0.84, 0.16))
-		button.add_theme_stylebox_override("focus", _unit_style(GrammarTheme.PRIMARY_LIGHT.lightened(0.08), GrammarTheme.PRIMARY_DARK, 1.0, 0.28))
+		# Unlocked units POP: thick solid accent border + opaque violet fill
+		# + strong glow so they clearly read as active in dark theme.
+		var normal := _unit_style(GrammarTheme.primary_light_color(), GrammarTheme.primary_color(), 1.0, 1.0, 3)
+		normal.shadow_color = Color(0.42, 0.47, 1.0, 0.45)
+		normal.shadow_size = 18
+		normal.shadow_offset = Vector2(0, 6)
+		button.add_theme_stylebox_override("normal", normal)
+		button.add_theme_stylebox_override("hover", _unit_style(GrammarTheme.primary_light_color().lightened(0.09), GrammarTheme.primary_dark_color(), 1.0, 1.0, 3))
+		button.add_theme_stylebox_override("pressed", _unit_style(GrammarTheme.primary_light_color().darkened(0.06), GrammarTheme.primary_color(), 1.0, 1.0, 3))
+		button.add_theme_stylebox_override("focus", _unit_style(GrammarTheme.primary_light_color().lightened(0.11), GrammarTheme.primary_dark_color(), 1.0, 1.0, 3))
 	else:
+		# Locked units stay clearly dim/faded: dark gray fill, faint border,
+		# no glow, and reduced opacity so they never read as active.
 		button.disabled = true
-		button.add_theme_stylebox_override("normal", _unit_style(GrammarTheme.DISABLED, GrammarTheme.TEXT_MUTED, 0.88, 0.14))
-		button.add_theme_stylebox_override("hover", _unit_style(GrammarTheme.DISABLED, GrammarTheme.TEXT_MUTED, 0.88, 0.14))
-		button.add_theme_stylebox_override("pressed", _unit_style(GrammarTheme.DISABLED, GrammarTheme.TEXT_MUTED, 0.88, 0.14))
-		button.add_theme_stylebox_override("focus", _unit_style(GrammarTheme.DISABLED, GrammarTheme.TEXT_MUTED, 0.88, 0.14))
+		var locked_fill: Color = GrammarTheme.disabled_color().darkened(0.15)
+		button.add_theme_stylebox_override("normal", _unit_style(locked_fill, GrammarTheme.locked_text_color(), 0.55, 0.18))
+		button.add_theme_stylebox_override("hover", _unit_style(locked_fill, GrammarTheme.locked_text_color(), 0.55, 0.18))
+		button.add_theme_stylebox_override("pressed", _unit_style(locked_fill, GrammarTheme.locked_text_color(), 0.55, 0.18))
+		button.add_theme_stylebox_override("focus", _unit_style(locked_fill, GrammarTheme.locked_text_color(), 0.55, 0.18))
 
 
-func _unit_style(color: Color, border_color: Color, alpha: float, border_alpha: float) -> StyleBoxFlat:
-	var style: StyleBoxFlat = GrammarTheme.rounded_box(Color(color.r, color.g, color.b, alpha), 26, Color(border_color.r, border_color.g, border_color.b, border_alpha), 2)
+func _unit_style(color: Color, border_color: Color, alpha: float, border_alpha: float, border_width: int = 2) -> StyleBoxFlat:
+	var style: StyleBoxFlat = GrammarTheme.rounded_box(Color(color.r, color.g, color.b, alpha), 26, Color(border_color.r, border_color.g, border_color.b, border_alpha), border_width)
 	style.shadow_color = Color(0.0, 0.0, 0.0, 0.24)
 	style.shadow_size = 12
 	style.shadow_offset = Vector2(0.0, 5.0)

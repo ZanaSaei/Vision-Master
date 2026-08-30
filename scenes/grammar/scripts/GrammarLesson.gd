@@ -38,13 +38,21 @@ var hint_bulb: GrammarHint
 # after the learner has failed twice.
 var _wrong_attempts := 0
 
-var _accent := GrammarTheme.PRIMARY
+# Multi-activity "group" units: the lesson plays each activity inside the
+# group in sequence, then awards XP / advances to the next unit.
+var _activities: Array = []
+var _activity_index := 0
+
+var _accent := GrammarTheme.primary_color()
 
 var _progress_tween: Tween
 
 
 func _animate_progress() -> void:
-	var target := (float(current_unit_index) / float(units.size())) * 100.0
+	# Progress reflects only the activities inside the CURRENT unit (a group
+	# may hold many activities; a plain unit holds one).
+	var total := maxi(_activities.size(), 1)
+	var target := (float(_activity_index) / float(total)) * 100.0
 	if _progress_tween != null and _progress_tween.is_valid():
 		_progress_tween.kill()
 	_progress_tween = create_tween()
@@ -69,7 +77,13 @@ func _ready() -> void:
 	if units.is_empty():
 		_show_no_content()
 		return
-	_show_unit()
+	# Build the first activity on the NEXT frame (after Global's one-time
+	# scene_changed style walk). If we build it synchronously here, the walker
+	# re-styles our theme-aware cards/labels to flat white + navy text right
+	# after _ready — the "dull first page" bug. Building deferred matches how
+	# every subsequent activity page is created (after the walk), so the first
+	# page now renders identically to the rest.
+	_show_unit.call_deferred()
 
 
 func _show_no_content() -> void:
@@ -83,7 +97,7 @@ func _show_no_content() -> void:
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	label.add_theme_font_size_override("font_size", 26)
-	label.add_theme_color_override("font_color", GrammarTheme.TEXT_MUTED)
+	label.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
 	var body_font: Font = GrammarTheme.get_fa_regular()
 	if body_font != null:
 		label.add_theme_font_override("font", body_font)
@@ -110,7 +124,7 @@ func _load_lesson() -> void:
 
 func _build_ui() -> void:
 	var background := ColorRect.new()
-	background.color = GrammarTheme.BACKGROUND
+	background.color = GrammarTheme.background_color()
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(background)
 
@@ -194,12 +208,12 @@ func _build_ui() -> void:
 	# tapped.
 	hint_bulb = GrammarHint.new()
 	hint_bulb.name = "HintBulb"
-	hint_bulb.anchor_left = 0.5
-	hint_bulb.anchor_right = 0.5
+	hint_bulb.anchor_left = 0.0
+	hint_bulb.anchor_right = 1.0
 	hint_bulb.anchor_top = 1.0
 	hint_bulb.anchor_bottom = 1.0
-	hint_bulb.offset_left = -210
-	hint_bulb.offset_right = 210
+	hint_bulb.offset_left = 20
+	hint_bulb.offset_right = -20
 	hint_bulb.offset_top = -230
 	hint_bulb.offset_bottom = -6
 	hint_bulb.grow_horizontal = Control.GROW_DIRECTION_BOTH
@@ -217,8 +231,8 @@ func _build_top_bar(main: VBoxContainer) -> void:
 	back_button.text = "‹"
 	back_button.custom_minimum_size = Vector2(64, 64)
 	back_button.add_theme_font_size_override("font_size", 40)
-	back_button.add_theme_color_override("font_color", GrammarTheme.TEXT)
-	back_button.add_theme_color_override("font_hover_color", GrammarTheme.PRIMARY_DARK)
+	back_button.add_theme_color_override("font_color", GrammarTheme.text_color())
+	back_button.add_theme_color_override("font_hover_color", GrammarTheme.primary_dark_color())
 	back_button.pressed.connect(_on_back_pressed)
 	GrammarTheme.style_secondary_button(back_button)
 	top_bar.add_child(back_button)
@@ -228,7 +242,7 @@ func _build_top_bar(main: VBoxContainer) -> void:
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.add_theme_font_size_override("font_size", GrammarTheme.SECTION_SIZE)
-	title_label.add_theme_color_override("font_color", GrammarTheme.TEXT)
+	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	title_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	top_bar.add_child(title_label)
 
@@ -239,7 +253,7 @@ func _build_top_bar(main: VBoxContainer) -> void:
 	xp_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	xp_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	xp_label.add_theme_font_size_override("font_size", GrammarTheme.BODY_SIZE)
-	xp_label.add_theme_color_override("font_color", GrammarTheme.XP)
+	xp_label.add_theme_color_override("font_color", GrammarTheme.xp_color())
 	xp_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	top_bar.add_child(xp_label)
 
@@ -257,7 +271,7 @@ func _build_progress(main: VBoxContainer) -> void:
 	progress_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	progress_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	progress_label.add_theme_font_size_override("font_size", GrammarTheme.CAPTION_SIZE)
-	progress_label.add_theme_color_override("font_color", GrammarTheme.TEXT_SECONDARY)
+	progress_label.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
 	row.add_child(progress_label)
 
 	progress_bar = ProgressBar.new()
@@ -265,7 +279,7 @@ func _build_progress(main: VBoxContainer) -> void:
 	progress_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	progress_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	progress_bar.custom_minimum_size = Vector2(0, 14)
-	progress_bar.add_theme_stylebox_override("background", GrammarTheme.rounded_box(GrammarTheme.DISABLED, 8))
+	progress_bar.add_theme_stylebox_override("background", GrammarTheme.rounded_box(GrammarTheme.disabled_color(), 8))
 	progress_bar.add_theme_stylebox_override("fill", GrammarTheme.rounded_box(_accent, 8))
 	row.add_child(progress_bar)
 
@@ -279,31 +293,63 @@ func _show_unit() -> void:
 		_finish_lesson()
 		return
 
+	var unit: Dictionary = units[current_unit_index]
+	var type := str(unit.get("type", ""))
+	if type == "group":
+		_activities = unit.get("activities", [])
+	else:
+		_activities = [unit]
+	_activity_index = 0
+
+	title_label.text = str(lesson_data.get("title_fa", "گرامر"))
+	_show_current_activity()
+
+
+# Renders the activity at _activity_index inside the current unit (a group
+# may hold several activities; a plain unit is treated as a single-activity
+# group so both flows share one path).
+func _show_current_activity() -> void:
 	for child in content_container.get_children():
 		child.queue_free()
 
-	var unit: Dictionary = units[current_unit_index]
-	var type := str(unit.get("type", ""))
+	if _activity_index >= _activities.size():
+		_on_activity_group_finished()
+		return
 
-	title_label.text = str(lesson_data.get("title_fa", "گرامر"))
-	progress_label.text = "%d / %d" % [current_unit_index + 1, units.size()]
+	# Caption shows ONLY the activities progress inside the current unit.
+	progress_label.text = "%d / %d" % [_activity_index + 1, _activities.size()]
 	_animate_progress()
 
-	# The hint bulb stays invisible until the learner gets an answer
-	# wrong; it then appears with a heartbeat pulse to offer help. It is
-	# hidden again at the start of each fresh question.
 	_wrong_attempts = 0
 	hint_bulb.visible = false
 	hint_bulb.stop_flash()
 	hint_bulb.hide_bubble()
 
+	var activity: Dictionary = _activities[_activity_index]
+	var type := str(activity.get("type", ""))
 	match type:
 		"learn":
-			_show_learning_unit(unit)
+			_show_learning_unit(activity)
 		"multiple_choice", "fill_blank", "true_false", "matching", "unscramble":
-			_show_exercise(unit)
+			_show_exercise(activity)
 		_:
-			push_warning("Unknown grammar unit type: " + type)
+			push_warning("Unknown grammar activity type: " + type)
+
+
+# Advances to the next activity inside the current unit/group. When the
+# group is exhausted, XP is awarded once and the unit is complete.
+func _advance_activity() -> void:
+	_activity_index += 1
+	if _activity_index < _activities.size():
+		_show_current_activity()
+	else:
+		_on_activity_group_finished()
+
+
+func _on_activity_group_finished() -> void:
+	_sync_grammar_progress()
+	_award_unit_xp()
+	_show_unit_completed_reward()
 
 
 func _show_learning_unit(unit: Dictionary) -> void:
@@ -404,15 +450,11 @@ func _on_skip_pressed() -> void:
 
 
 func _on_learning_continue() -> void:
-	_sync_grammar_progress()
-	_award_unit_xp()
-	_show_unit_completed_reward()
+	_advance_activity()
 
 
 func _on_exercise_completed() -> void:
-	_sync_grammar_progress()
-	_award_unit_xp()
-	_show_unit_completed_reward()
+	_advance_activity()
 
 
 # Awards XP for finishing the current بخش and persists it. Uses the

@@ -81,7 +81,7 @@ func _build_ui() -> void:
 
 	instruction_label.add_theme_color_override(
 		"font_color",
-		GrammarTheme.TEXT_SECONDARY
+		GrammarTheme.text_secondary_color()
 	)
 
 	instruction_label.add_theme_font_override(
@@ -117,7 +117,7 @@ func _build_ui() -> void:
 
 	question_label.add_theme_color_override(
 		"font_color",
-		GrammarTheme.TEXT
+		GrammarTheme.text_color()
 	)
 
 	main.add_child(question_label)

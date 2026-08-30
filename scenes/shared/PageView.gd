@@ -22,6 +22,12 @@ const FONT_BOLD_PATH := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 var _accent: Color = Color("#22D3EE")
 var font_bold: FontFile
 
+# Tab label typography. Adjustable per-instance so a scene (e.g. Workbook
+# with many tabs) can fall back to smaller sizing and avoid clipping.
+var tab_font_size := 40
+var tab_font_min := 30
+var tab_font_padding := 34.0
+
 # ---------- State ----------
 var _pages: Array = []
 var _current: int = 0
@@ -45,6 +51,8 @@ var _tab_bar: PanelContainer
 var _bg_style: StyleBoxFlat
 var _tab_style: StyleBoxFlat
 var _ind_style: StyleBoxFlat
+var _dots_panel: PanelContainer
+var _dots_panel_style: StyleBoxFlat
 
 # ---------- Drag / Swipe ----------
 var _touch_start: Vector2 = Vector2.ZERO
@@ -143,6 +151,12 @@ func _apply_theme() -> void:
 	if _indicator != null:
 		_indicator.add_theme_stylebox_override("panel", _ind_style)
 
+	# Dots panel.
+	if _dots_panel_style != null:
+		_dots_panel_style.bg_color = Global.get_theme_color("surface")
+	if _dots_panel != null:
+		_dots_panel.add_theme_stylebox_override("panel", _dots_panel_style)
+
 	# Page scrollbars / backgrounds.
 	for page in _pages:
 		var scroll := page.get("scroll") as ScrollContainer
@@ -165,6 +179,7 @@ func _build_skeleton() -> void:
 
 	_bg_style = StyleBoxFlat.new()
 	_bg_style.bg_color = Global.get_theme_color("bg_base")
+	_bg_style.set_corner_radius_all(32)
 
 	_bg.add_theme_stylebox_override("panel", _bg_style)
 	add_child(_bg)
@@ -174,6 +189,7 @@ func _build_skeleton() -> void:
 	# ------------------------------------------------------------
 	_vbox = VBoxContainer.new()
 	_vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_vbox.offset_top = 16.0   # gap between header bar and PageView content
 	_vbox.add_theme_constant_override("separation", 0)
 	_vbox.mouse_filter = Control.MOUSE_FILTER_PASS
 	add_child(_vbox)
@@ -185,15 +201,16 @@ func _build_skeleton() -> void:
 
 	_tab_style = StyleBoxFlat.new()
 	_tab_style.bg_color = Global.get_theme_color("surface")
-	_tab_style.set_content_margin_all(12)
-	_tab_style.border_width_bottom = 2
-	_tab_style.border_color = Global.get_theme_color("border")
+	_tab_style.set_content_margin_all(16)
+	_tab_style.corner_radius_top_left = 32
+	_tab_style.corner_radius_top_right = 32
+	# No bottom border — the accent indicator pill is the visual anchor.
 
 	_tab_bar.add_theme_stylebox_override("panel", _tab_style)
 	_vbox.add_child(_tab_bar)
 
 	_tab_inner = Control.new()
-	_tab_inner.custom_minimum_size = Vector2(0, 64)
+	_tab_inner.custom_minimum_size = Vector2(0, 76)
 	_tab_inner.mouse_filter = Control.MOUSE_FILTER_PASS
 	_tab_bar.add_child(_tab_inner)
 
@@ -202,7 +219,7 @@ func _build_skeleton() -> void:
 
 	_ind_style = StyleBoxFlat.new()
 	_ind_style.bg_color = _accent
-	_ind_style.set_corner_radius_all(16)
+	_ind_style.set_corner_radius_all(28)
 
 	_indicator.add_theme_stylebox_override("panel", _ind_style)
 	_tab_inner.add_child(_indicator)
@@ -228,14 +245,22 @@ func _build_skeleton() -> void:
 	_viewport.add_child(_slider)
 
 	# ------------------------------------------------------------
-	# Dots.
+	# Dots (wrapped in a bottom-rounded panel).
 	# ------------------------------------------------------------
+	_dots_panel = PanelContainer.new()
+	_dots_panel_style = StyleBoxFlat.new()
+	_dots_panel_style.bg_color = Global.get_theme_color("surface")
+	_dots_panel_style.corner_radius_bottom_left = 32
+	_dots_panel_style.corner_radius_bottom_right = 32
+	_dots_panel.add_theme_stylebox_override("panel", _dots_panel_style)
+	_vbox.add_child(_dots_panel)
+
 	_dots_row = HBoxContainer.new()
 	_dots_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	_dots_row.add_theme_constant_override("separation", 12)
-	_dots_row.custom_minimum_size = Vector2(0, 40)
+	_dots_row.add_theme_constant_override("separation", 16)
+	_dots_row.custom_minimum_size = Vector2(0, 52)
 	_dots_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_vbox.add_child(_dots_row)
+	_dots_panel.add_child(_dots_row)
 
 
 # ============================================================
@@ -311,19 +336,24 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 	btn.size_flags_stretch_ratio = maxf(1.0, float(btn.text.length()))
 
 	# Allow shrinking so the tab bar can fit horizontally.
-	btn.custom_minimum_size = Vector2(0, 64)
+	btn.custom_minimum_size = Vector2(0, 72)
 
 	# Keep tab titles on one line.
 	btn.autowrap_mode = TextServer.AUTOWRAP_OFF
 	btn.clip_text = true
 	btn.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 
-	btn.add_theme_font_size_override("font_size", 31)
+	btn.add_theme_font_size_override("font_size", tab_font_size)
 	btn.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 
 	btn.add_theme_stylebox_override("hover", StyleBoxEmpty.new())
 	btn.add_theme_stylebox_override("pressed", StyleBoxEmpty.new())
 	btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	# Compact horizontal padding so long/many tab labels fit without clipping.
+	var btn_normal := StyleBoxFlat.new()
+	btn_normal.content_margin_left = 12
+	btn_normal.content_margin_right = 12
+	btn.add_theme_stylebox_override("normal", btn_normal)
 
 	if font_bold:
 		btn.add_theme_font_override("font", font_bold)
@@ -342,10 +372,10 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 
 	var d_style := StyleBoxFlat.new()
 	d_style.bg_color = Global.get_theme_color("text_dim")
-	d_style.set_corner_radius_all(6)
+	d_style.set_corner_radius_all(7)
 
 	dot.add_theme_stylebox_override("panel", d_style)
-	dot.custom_minimum_size = Vector2(12, 12)
+	dot.custom_minimum_size = Vector2(14, 14)
 
 	_dots_row.add_child(dot)
 	_dot_controls.append(dot)
@@ -407,7 +437,7 @@ func set_accent(color: Color) -> void:
 
 	_ind_style = StyleBoxFlat.new()
 	_ind_style.bg_color = _accent
-	_ind_style.set_corner_radius_all(16)
+	_ind_style.set_corner_radius_all(28)
 	_indicator.add_theme_stylebox_override("panel", _ind_style)
 
 	# Update page scrollbars to match the new accent.
@@ -536,9 +566,9 @@ func _refresh_tab_fit() -> void:
 	if font == null:
 		font = ThemeDB.fallback_font
 
-	var base_size := 31
-	var min_size := 20
-	var padding := 26.0
+	var base_size := tab_font_size
+	var min_size := tab_font_min
+	var padding := tab_font_padding
 	var chosen := base_size
 
 	# Reduce the tab font size until all tabs roughly fit.
@@ -581,7 +611,7 @@ func _indicator_rect_for(float_index: float) -> Rect2:
 
 	var x := lerpf(r0.position.x, r1.position.x, t)
 	var w := lerpf(r0.size.x, r1.size.x, t)
-	var h := 48.0
+	var h := 58.0
 	var y := (r0.position.y + r0.size.y / 2.0) - h / 2.0
 
 	return Rect2(x, y, w, h)
@@ -637,10 +667,10 @@ func _update_dots(active: int) -> void:
 
 		var style := StyleBoxFlat.new()
 		style.bg_color = _accent if is_active else Global.get_theme_color("text_dim")
-		style.set_corner_radius_all(6)
+		style.set_corner_radius_all(7)
 		dot.add_theme_stylebox_override("panel", style)
 
-		var target_size := Vector2(30, 12) if is_active else Vector2(12, 12)
+		var target_size := Vector2(36, 14) if is_active else Vector2(14, 14)
 
 		var t := create_tween()
 		t.tween_property(

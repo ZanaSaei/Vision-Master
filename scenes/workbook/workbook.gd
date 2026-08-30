@@ -49,6 +49,11 @@ func _ready() -> void:
 	home_button.pressed.connect(_on_home_pressed)
 	translation_toggle.pressed.connect(_on_translation_toggle_pressed)
 	page_view.set_accent(ACCENT)
+	# Workbook has many tabs — use the smaller legacy font so every part name
+	# stays fully visible without clipping.
+	page_view.tab_font_size = 31
+	page_view.tab_font_min = 20
+	page_view.tab_font_padding = 26.0
 
 	_current_book = Global.current_book
 	_current_lesson = Global.current_lesson
@@ -82,8 +87,7 @@ func _apply_theme() -> void:
 	# Full-screen page background.
 	var background := get_node_or_null("Background") as ColorRect
 	if background:
-		background.color = Color(0.17254902, 0.21960784, 0.49803922, 1) \
-			if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+		background.color = Global.get_theme_color("bg_base")
 	# Restyle every dynamically built themed node for the current mode.
 	for target in _theme_targets:
 		target.call()
@@ -425,6 +429,16 @@ func _make_grammar_note_card(grammar_note: Dictionary) -> PanelContainer:
 	return card
 
 
+func _persian_numeral(num: int) -> String:
+	const PERSIAN := ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"]
+	var result := ""
+	var n := num
+	while n > 0:
+		result = PERSIAN[n % 10] + result
+		n /= 10
+	return result if result != "" else "۰"
+
+
 func _number_to_roman(num: int) -> String:
 	match num:
 		1: return "I"
@@ -461,7 +475,7 @@ func _on_translation_toggle_pressed() -> void:
 func _update_toggle_button_text() -> void:
 	if translation_toggle == null:
 		return
-	translation_toggle.text = "🔽 Hide Translation" if show_translation else "🔼 Show Translation"
+	Global.set_translation_toggle_state(translation_toggle, show_translation)
 
 
 # Returns the user to the main menu.

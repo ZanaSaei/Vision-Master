@@ -32,9 +32,8 @@ func _ready() -> void:
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	var dark := Global.theme_is_dark()
 	var panel_sb := StyleBoxFlat.new()
-	panel_sb.bg_color = Color(0.2627451, 0.21960784, 0.7921569, 1) if dark else Global.get_theme_color("surface")
+	panel_sb.bg_color = Global.get_theme_color("accent") if Global.theme_is_dark() else Global.get_theme_color("surface")
 	panel_sb.corner_radius_top_left = 150
 	panel_sb.corner_radius_top_right = 150
 	add_theme_stylebox_override("panel", panel_sb)

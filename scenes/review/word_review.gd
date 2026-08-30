@@ -161,7 +161,13 @@ func _theme_walk(node: Node) -> void:
 	if node.name == "ReviewSideMenu":
 		return
 	if node is ColorRect and node.name == "BackgroundColor":
-		background_color.color = Global.get_theme_color("bg_base")
+		background_color.color = _page_bg_color()
+	elif node.name == "HeaderBar" and node is PanelContainer:
+		# Use the app's unified header styling so this scene matches every
+		# other scene's header (bar, buttons and labels). It styles the whole
+		# subtree, so don't recurse into it afterwards.
+		Global.style_header(node)
+		return
 	elif node is PanelContainer:
 		_restyle_panel(node)
 	elif node is Label:
@@ -172,21 +178,73 @@ func _theme_walk(node: Node) -> void:
 		_theme_walk(child)
 
 
-# Re-tint an existing panel stylebox so its corner radius / margins /
-# shadows survive; only the bg + border are swapped per theme.
-func _restyle_panel(node: PanelContainer) -> void:
-	var style := node.get_theme_stylebox("panel") as StyleBoxFlat
-	if style == null:
-		style = StyleBoxFlat.new()
-	else:
-		style = style.duplicate() as StyleBoxFlat
+func _page_bg_color() -> Color:
 	if Global.theme_is_dark():
-		style.bg_color = Color(1, 1, 1, 0.06)
-		style.border_color = Color(1, 1, 1, 0.10)
-	else:
-		style.bg_color = Color(1, 1, 1, 0.85)
-		style.border_color = Color(0, 0, 0, 0.10)
-	style.set_border_width_all(1)
+		return Color(0.10, 0.11, 0.20, 1)   # deep indigo
+	return Color(0.91, 0.92, 0.98, 1)      # soft lavender-blue
+
+
+func _card_color(dark: bool) -> Color:
+	if dark:
+		return Color(0.12, 0.35, 0.38, 1)  # deep teal
+	return Color(0.34, 0.80, 0.74, 1)      # fresh mint/teal
+
+
+func _row_colors(dark: bool) -> Dictionary:
+	if dark:
+		return {
+			"WordRow":      Color(0.12, 0.42, 0.30, 1),
+			"PhoneticsRow": Color(0.42, 0.40, 0.09, 1),
+			"MeaningFaRow": Color(0.32, 0.23, 0.52, 1),
+			"ExampleRow":   Color(0.48, 0.33, 0.07, 1),
+			"Extra":        Color(0.16, 0.33, 0.52, 1),
+		}
+	return {
+		"WordRow":      Color(0.84, 0.99, 0.90, 1),
+		"PhoneticsRow": Color(0.86, 0.95, 0.60, 1),
+		"MeaningFaRow": Color(0.93, 0.90, 1.00, 1),
+		"ExampleRow":   Color(1.00, 0.97, 0.76, 1),
+		"Extra":        Color(0.85, 0.92, 1.00, 1),
+	}
+
+
+# Give each panel a theme-appropriate, colourful look. The Front word face
+# is transparent (no border) so it no longer draws an odd rectangle inside
+# the card.
+func _restyle_panel(node: PanelContainer) -> void:
+	var n: String = node.name
+	var dark := Global.theme_is_dark()
+	var style := StyleBoxFlat.new()
+
+	# The main card — vibrant in both themes.
+	if n == "CardPanel":
+		style.set_corner_radius_all(28)
+		style.bg_color = _card_color(dark)
+		style.shadow_color = Color(0, 0, 0, 0.25)
+		style.shadow_size = 18
+		style.shadow_offset = Vector2(0, 8)
+		node.add_theme_stylebox_override("panel", style)
+		return
+
+	# Front word face — fully transparent, no border.
+	if n == "Front":
+		var clear := StyleBoxFlat.new()
+		clear.bg_color = Color(0, 0, 0, 0)
+		clear.set_border_width_all(0)
+		node.add_theme_stylebox_override("panel", clear)
+		return
+
+	# Back-face information rows — colourful chips.
+	var row_colors := _row_colors(dark)
+	if row_colors.has(n):
+		style.set_corner_radius_all(16)
+		style.bg_color = row_colors[n]
+		node.add_theme_stylebox_override("panel", style)
+		return
+
+	# Fallback for any other panel.
+	style.set_corner_radius_all(12)
+	style.bg_color = Color(1, 1, 1, 0.85) if not dark else Color(1, 1, 1, 0.06)
 	node.add_theme_stylebox_override("panel", style)
 
 
@@ -196,28 +254,35 @@ func _theme_label(label: Label) -> void:
 	if n in ["PhonIcon", "FaIcon", "ExIcon", "ExtraIcon"]:
 		return
 	elif n == "WordLabel":
-		# On the card the main word reads best in accent in dark; in light use a
-		# solid dark colour and drop the glow outline so it never looks hollow.
+		# The main word reads crisply in white with a soft shadow on the
+		# colourful card in both themes.
 		var ls: LabelSettings = label.label_settings
-		if Global.theme_is_dark():
-			label.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
-			label.add_theme_color_override("font_outline_color", Color(0.24, 0.76, 0.5))
-			label.add_theme_constant_override("outline_size", 6)
-			if ls:
-				ls.font_color = Global.get_theme_color("accent_bright")
-				ls.outline_color = Color(0.24, 0.76, 0.5)
-				ls.outline_size = 6
-		else:
-			label.add_theme_color_override("font_color", Global.get_theme_color("text"))
-			label.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0))
-			label.add_theme_constant_override("outline_size", 0)
-			if ls:
-				ls.font_color = Global.get_theme_color("text")
-				ls.outline_size = 0
+		var white := Color(1, 1, 1, 1)
+		var shadow := Color(0, 0, 0, 0.40)
+		label.add_theme_color_override("font_color", white)
+		label.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0))
+		label.add_theme_constant_override("outline_size", 0)
+		label.add_theme_color_override("font_shadow_color", shadow)
+		label.add_theme_constant_override("shadow_offset_y", 5)
+		if ls:
+			ls.font_color = white
+			ls.outline_color = Color(1, 1, 1, 0)
+			ls.outline_size = 0
+			ls.shadow_color = shadow
+			ls.shadow_offset = Vector2(0, 5)
 	elif n in ["DueCounter", "BackWordLabel"]:
-		label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+		_set_label_color(label, Global.get_theme_color("text_dim"))
 	else:
-		label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+		_set_label_color(label, Global.get_theme_color("text"))
+
+
+# Sets both the theme override AND the LabelSettings font color, so the
+# hardcoded black label_settings from the scene never overrides the theme.
+func _set_label_color(label: Label, color: Color) -> void:
+	label.add_theme_color_override("font_color", color)
+	var ls: LabelSettings = label.label_settings
+	if ls:
+		ls.font_color = color
 
 
 func _theme_button(btn: Button) -> void:
@@ -231,6 +296,9 @@ func _theme_button(btn: Button) -> void:
 		var dark := Global.theme_is_dark()
 		var ham := StyleBoxFlat.new()
 		ham.set_corner_radius_all(30)
+		# Extend the pill far to the left so the handle sticks out past the
+		# left edge of the screen, like a tab of the side menu.
+		ham.expand_margin_left = 200
 		if dark:
 			ham.bg_color = Color(0, 0.29, 0.29, 1)
 			ham.border_color = Color(1, 1, 1, 0.10)

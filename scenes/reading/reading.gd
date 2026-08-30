@@ -176,7 +176,7 @@ func _build_reading_page(data: Dictionary) -> void:
 	else:
 		_build_reading(current_book, current_lesson, data)
 	
-	page_view.add_page("reading", "Reading", "📖", page)
+	page_view.add_page("reading", "خواندن", "📖", page)
 
 # ---------- PAGE 2: STRATEGY (Vision 2 & 3 only) ----------
 func _build_strategy_page(data: Dictionary) -> void:
@@ -199,7 +199,7 @@ func _build_strategy_page(data: Dictionary) -> void:
 	_build_practice(data.get("exercises", []), strategy_theme) #[cite: 2]
 	page.add_child(_make_page_spacer()) #[cite: 2]
 	
-	page_view.add_page("strategy", "Strategy", "🎯", page) #[cite: 2]
+	page_view.add_page("strategy", "راهبرد", "🎯", page) #[cite: 2]
 
 # ---------- PAGE 3: COMPREHENSION ----------
 func _build_comprehension_page(data: Dictionary) -> void:
@@ -216,7 +216,7 @@ func _build_comprehension_page(data: Dictionary) -> void:
 		engine.exercise_checked.connect(_on_exercise_checked) #[cite: 2]
 	
 	page.add_child(_make_page_spacer()) #[cite: 2]
-	page_view.add_page("practice", "Practice", "✏️", page) #[cite: 2]
+	page_view.add_page("practice", "تمرین", "✏️", page) #[cite: 2]
 
 
 # ---------- Replay strategy entrance the first time it's opened ----------
@@ -397,8 +397,8 @@ func _make_paragraph_card(text: String, translation: String, sentences: Array) -
 
 # ---------- Theme helpers ----------
 func _card_bg() -> Color:
-	# Dark: keep the current navy card background; Light: white card.
-	return PARA_BG_COLOR if Global.theme_is_dark() else Color(1, 1, 1, 1)
+	# Card background resolves through Global (theme surface).
+	return Global.get_theme_color("surface")
 
 func _make_paragraph_style() -> StyleBoxFlat:
 	var card_style := StyleBoxFlat.new()
@@ -550,10 +550,7 @@ func _on_popup_closed() -> void:
 
 
 func _update_toggle_button_text() -> void:
-	if show_translation: #[cite: 2]
-		translation_toggle.text = "🔽 Hide Translation" #[cite: 2]
-	else: #[cite: 2]
-		translation_toggle.text = "🔼 Show Translation" #[cite: 2]
+	Global.set_translation_toggle_state(translation_toggle, show_translation)
 
 
 func _on_translation_toggle_pressed() -> void:
@@ -855,11 +852,11 @@ func _make_section_title(en: String, fa: String, accent: Color, rtl_primary := f
 	
 	return row
 
-func _make_soft_card(soft: Color, accent: Color) -> PanelContainer:
+func _make_soft_card(_soft: Color, accent: Color) -> PanelContainer:
 	var card := PanelContainer.new()
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var style := StyleBoxFlat.new()
-	style.bg_color = soft if Global.theme_is_dark() else Color(1, 1, 1, 1)
+	style.bg_color = Global.get_theme_color("surface")
 	style.set_corner_radius_all(14)
 	style.border_width_left = 5
 	style.border_color = accent

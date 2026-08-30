@@ -261,15 +261,14 @@ func _ready() -> void:
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	var dark := Global.theme_is_dark()
-	popup_style.bg_color = Color("#FFFFFF") if dark else Global.get_theme_color("surface")
-	title_label.add_theme_color_override("font_color", Color("#0F172A") if dark else Global.get_theme_color("text"))
-	type_label.add_theme_color_override("font_color", Color("#64748B") if dark else Global.get_theme_color("text_dim"))
-	meaning_label.add_theme_color_override("font_color", Color("#334155") if dark else Global.get_theme_color("text"))
-	btn_close_popup.add_theme_color_override("font_color", Color("#475569") if dark else Global.get_theme_color("text_dim"))
-	btn_close_popup.add_theme_color_override("font_hover_color", Color("#475569") if dark else Global.get_theme_color("text_dim"))
-	close_style.bg_color = Color("#F1F5F9") if dark else Global.get_theme_color("surface_alt")
-	close_pressed.bg_color = Color("#E2E8F0") if dark else Global.get_theme_color("surface_alt")
+	popup_style.bg_color = Global.get_theme_color("surface")
+	title_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	type_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	meaning_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	btn_close_popup.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	btn_close_popup.add_theme_color_override("font_hover_color", Global.get_theme_color("text_dim"))
+	close_style.bg_color = Global.get_theme_color("surface_alt")
+	close_pressed.bg_color = Global.get_theme_color("surface_alt")
 
 
 func _on_theme_changed(_mode: int) -> void:

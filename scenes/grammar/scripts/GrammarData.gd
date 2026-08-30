@@ -78,6 +78,8 @@ static func load_lesson(book: int, lesson: int) -> Dictionary:
 
 static func unit_icon(unit: Dictionary) -> String:
 	match str(unit.get("type", "")):
+		"group":
+			return "🗂️"
 		"learn":
 			return "📚"
 		"multiple_choice":

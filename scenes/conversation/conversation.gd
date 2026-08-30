@@ -172,7 +172,7 @@ func _build_conversation_page() -> void:
 	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	page.add_child(spacer)
 
-	page_view.add_page("conversation", "Conversation", "💬", page)
+	page_view.add_page("conversation", "مکالمه", "💬", page)
 
 func _build_oral_page() -> void:
 	var page := VBoxContainer.new()
@@ -189,7 +189,7 @@ func _build_oral_page() -> void:
 	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	page.add_child(spacer)
 	
-	page_view.add_page("oral", "Oral Practice", "🗣️", page)
+	page_view.add_page("oral", "تمرین شفاهی", "🗣️", page)
 
 # ============================================================
 # INPUT & SCROLL TRACKING
@@ -245,15 +245,15 @@ func _apply_theme() -> void:
 
 
 # ---------- Theme-aware color helpers ----------
-# Dark mode matches today's hardcoded palette; Light mode uses the app palette.
+# All colors resolve through Global (the single theme source).
 func _page_bg() -> Color:
-	return Color("#2c387f") if Global.theme_is_dark() else Global.get_theme_color("bg_base")
+	return Global.get_theme_color("bg_base")
 
 func _text_color() -> Color:
-	return Color("#F1F5F9") if Global.theme_is_dark() else Global.get_theme_color("text")
+	return Global.get_theme_color("text")
 
 func _text_muted() -> Color:
-	return Color("#94A3B8") if Global.theme_is_dark() else Global.get_theme_color("text_dim")
+	return Global.get_theme_color("text_dim")
 
 func _speaker_bg(idx: int) -> Color:
 	if Global.theme_is_dark():
@@ -551,7 +551,7 @@ func _on_popup_closed() -> void:
 	_refresh_all_text()
 
 func _update_toggle_button_text() -> void:
-	translation_toggle.text = "🔽 Hide Translation" if show_translation else "🔼 Show Translation"
+	Global.set_translation_toggle_state(translation_toggle, show_translation)
 
 func _on_translation_toggle_pressed() -> void:
 	show_translation = !show_translation

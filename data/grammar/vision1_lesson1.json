@@ -1,1122 +1,1361 @@
 {
- "lesson": {
-  "id": "vision1_lesson1_saving_nature",
-  "book": "Vision 1",
-  "lesson_number": 1,
-  "title_en": "Saving Nature",
-  "title_fa": "حفاظت از طبیعت",
-  "icon": "🌱",
-  "theme_color": "#35B879",
-  "xp_per_correct": 10,
-  "units": [
-   {
-	"id": "true_false",
-	"type": "true_false",
-	"title_fa": "درست یا غلط؟",
-	"instruction_fa": "هر جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
-	"items": [
-	 {
-	  "statement": "After will, we use the base form of the verb.",
-	  "fa": "بعد از will از شکل ساده‌ی فعل استفاده می‌کنیم.",
-	  "answer": true,
-	  "explanation_fa": "درست است."
-	 },
-	 {
-	  "statement": "Won't is the short form of will not.",
-	  "fa": "Won't شکل کوتاه will not است.",
-	  "answer": true,
-	  "explanation_fa": "درست است."
-	 },
-	 {
-	  "statement": "Be going to changes according to the subject.",
-	  "fa": "در be going to، am/is/are با فاعل تغییر می‌کند.",
-	  "answer": true,
-	  "explanation_fa": "درست است."
-	 },
-	 {
-	  "statement": "We always use will for plans that were decided before.",
-	  "fa": "برای برنامه‌هایی که از قبل تصمیم‌گیری شده‌اند همیشه از will استفاده می‌کنیم.",
-	  "answer": false,
-	  "explanation_fa": "غلط است. برای برنامه‌ی قبلی معمولاً be going to مناسب‌تر است."
-	 }
-	]
-   },
-   {
-	"id": "will_basic",
-	"type": "learn",
-	"title_fa": "آینده با WILL",
-	"title_en": "Future with WILL",
-	"explanation": "برای صحبت درباره‌ی کارهایی که در آینده اتفاق می‌افتند، می‌توانیم از will استفاده کنیم.",
-	"structure": "Subject + will + base verb",
-	"examples": [
-	 {
-	  "en": "We will save nature.",
-	  "fa": "ما طبیعت را نجات خواهیم داد."
-	 },
-	 {
-	  "en": "She will protect nature.",
-	  "fa": "او از طبیعت محافظت خواهد کرد."
-	 },
-	 {
-	  "en": "They will travel tomorrow.",
-	  "fa": "آن‌ها فردا سفر خواهند کرد."
-	 }
-	]
-   },
-   {
-	"id": "will_basic_mc",
-	"type": "multiple_choice",
-	"title_fa": "تمرین WILL",
-	"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "Humans ______ destroy the natural homes of animals if we don't act now.",
-	  "options": [
-	   "will",
-	   "are",
-	   "do",
-       "did"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "آفرین! برای صحبت درباره‌ی آینده از will استفاده می‌کنیم.",
-	  "wrong_explanation_fa": "اینجا درباره‌ی آینده صحبت می‌کنیم، بنابراین will مناسب است."
-	 },
-	 {
-	  "question": "Next year, there ______ be a few more Iranian cheetahs.",
-	  "options": [
-	   "will",
-	   "is",
-	   "are",
-       "do"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "درست است! بعد از will فعل به شکل ساده می‌آید.",
-	  "wrong_explanation_fa": "برای آینده از will استفاده می‌کنیم."
-	 },
-	 {
-	  "question": "We ______ have clean air in the future if we work hard.",
-	  "options": [
-	   "will",
-	   "is going",
-	   "are will",
-       "going to"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "عالی! ساختار درست will + فعل ساده است.",
-	  "wrong_explanation_fa": "گزینه‌ی درست will است."
-	 }
-	]
-   },
-   {
-	"id": "will_golden_rule",
-	"type": "learn",
-	"title_fa": "قانون طلایی WILL",
-	"title_en": "The Golden Rule",
-	"explanation": "بعد از will همیشه شکل ساده‌ی فعل می‌آید.",
-	"examples": [
-	 {
-	  "en": "will go ✓",
-	  "fa": "درست"
-	 },
-	 {
-	  "en": "will goes ✗",
-	  "fa": "غلط"
-	 },
-	 {
-	  "en": "will going ✗",
-	  "fa": "غلط"
-	 },
-	 {
-	  "en": "will to go ✗",
-	  "fa": "غلط"
-	 }
-	]
-   },
-   {
-	"id": "will_negative",
-	"type": "learn",
-	"title_fa": "جمله‌ی منفی با WILL",
-	"title_en": "Negative with WILL",
-	"explanation": "برای منفی کردن will از will not استفاده می‌کنیم. شکل کوتاه آن won't است.",
-	"structure": "Subject + will not / won't + base verb",
-	"examples": [
-	 {
-	  "en": "I will not forget.",
-	  "fa": "من فراموش نخواهم کرد."
-	 },
-	 {
-	  "en": "They won't destroy the forest.",
-	  "fa": "آن‌ها جنگل را نابود نخواهند کرد."
-	 }
-	]
-   },
-   {
-	"id": "will_negative_practice",
-	"type": "multiple_choice",
-	"title_fa": "منفی با WILL",
-	"instruction_fa": "جمله‌ی درست را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "We ______ the injured animal.",
-	  "options": [
-	   "won't hurt",
-	   "not will hurt",
-	   "don't will hurt",
-       "isn't hurt"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "آفرین! won't شکل کوتاه will not است.",
-	  "wrong_explanation_fa": "شکل منفی درست will، یعنی will not یا won't است."
-	 },
-	 {
-	  "question": "They ______ in the yard tomorrow.",
-	  "options": [
-	   "won't play",
-	   "not will play",
-	   "doesn't play",
-       "isn't play"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "درست است! won't + فعل ساده.",
-	  "wrong_explanation_fa": "بعد از won't باید فعل ساده بیاید."
-	 }
-	]
-   },
-   {
-	"id": "will_questions",
-	"type": "learn",
-	"title_fa": "سؤال با WILL",
-	"title_en": "Questions with WILL",
-	"explanation": "برای ساختن سؤال، will را قبل از فاعل می‌آوریم.",
-	"structure": "Will + subject + base verb ...?",
-	"examples": [
-	 {
-	  "en": "Will you help me?",
-	  "fa": "آیا به من کمک خواهی کرد؟"
-	 },
-	 {
-	  "en": "Will they visit the museum?",
-	  "fa": "آیا آن‌ها از موزه دیدن خواهند کرد؟"
-	 }
-	]
-   },
-   {
-	"id": "will_questions_practice",
-	"type": "multiple_choice",
-	"title_fa": "سؤال‌های آینده",
-	"instruction_fa": "ساختار درست سؤال را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "______ you ______ protect the environment?",
-	  "options": [
-	   "Will / protect",
-	   "Do / protect",
-	   "Are / protect",
-       "Did / protect"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "آفرین! ساختار سؤال با will این است: Will + subject + base verb.",
-	  "wrong_explanation_fa": "برای سؤال با will، will قبل از فاعل قرار می‌گیرد."
-	 },
-	 {
-	  "question": "______ our family buy a new car next year?",
-	  "options": [
-	   "Is",
-	   "Will",
-	   "Does",
-       "Are"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "درست است! Will our family buy...?",
-	  "wrong_explanation_fa": "برای سؤال آینده از will استفاده می‌کنیم."
-	 }
-	]
-   },
-   {
-	"id": "wh_questions",
-	"type": "learn",
-	"title_fa": "سؤال‌های Wh با WILL",
-	"title_en": "Wh-questions with WILL",
-	"explanation": "برای پرسیدن اطلاعات بیشتر، کلمات Who، When، Where و What را قبل از will می‌آوریم.",
-	"structure": "Wh-word + will + subject + base verb?",
-	"examples": [
-	 {
-	  "en": "Who will visit Shiraz?",
-	  "fa": "چه کسی از شیراز دیدن خواهد کرد؟"
-	 },
-	 {
-	  "en": "When will the tourists visit Shiraz?",
-	  "fa": "گردشگران چه زمانی از شیراز دیدن خواهند کرد؟"
-	 },
-	 {
-	  "en": "Where will they go?",
-	  "fa": "آن‌ها کجا خواهند رفت؟"
-	 },
-	 {
-	  "en": "What will they do?",
-	  "fa": "آن‌ها چه کار خواهند کرد؟"
-	 }
-	]
-   },
-   {
-	"id": "wh_practice",
-	"type": "multiple_choice",
-	"title_fa": "تمرین Wh",
-	"instruction_fa": "کلمه‌ی پرسشی مناسب را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "______ will the tourists visit Shiraz?",
-	  "options": [
-	   "When",
-	   "Do",
-	   "Are",
-       "Did"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "آفرین! When برای پرسیدن زمان استفاده می‌شود.",
-	  "wrong_explanation_fa": "درباره‌ی زمان سؤال می‌کنیم، پس When مناسب است."
-	 },
-	 {
-	  "question": "______ will they go?",
-	  "options": [
-	   "Where",
-	   "Do",
-	   "Are",
-       "Did"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "درست است! Where برای پرسیدن مکان است.",
-	  "wrong_explanation_fa": "درباره‌ی مکان سؤال می‌کنیم، بنابراین Where مناسب است."
-	 }
-	]
-   },
-   {
-	"id": "will_uses",
-	"type": "learn",
-	"title_fa": "WILL را چه زمانی استفاده می‌کنیم؟",
-	"title_en": "Uses of WILL",
-	"explanation": "در این درس will را بیشتر برای پیش‌بینی، تصمیم لحظه‌ای، وعده، پیشنهاد کمک و درخواست می‌بینیم.",
-	"cards": [
-	 {
-	  "en": "I think people will protect more animals.",
-	  "fa": "پیش‌بینی"
-	 },
-	 {
-	  "en": "The phone is ringing. I'll answer it.",
-	  "fa": "تصمیم لحظه‌ای"
-	 },
-	 {
-	  "en": "I will help you.",
-	  "fa": "وعده"
-	 },
-	 {
-	  "en": "Don't worry. I will help you.",
-	  "fa": "پیشنهاد کمک"
-	 },
-	 {
-	  "en": "Will you close the door, please?",
-	  "fa": "درخواست"
-	 }
-	]
-   },
-   {
-	"id": "will_fill",
-	"type": "fill_blank",
-	"title_fa": "WILL را کامل کن",
-	"instruction_fa": "جای خالی را با شکل درست کامل کن.",
-	"items": [
-	 {
-	  "text": "I ______ (save) nature.",
-	  "answers": [
-       "will save"
-	  ]
-	 },
-	 {
-	  "text": "They ______ (destroy) the jungle.",
-	  "answers": [
-       "will destroy"
-	  ]
-	 },
-	 {
-	  "text": "We ______ (protect) endangered animals.",
-	  "answers": [
-       "will protect"
-	  ]
-	 },
-	 {
-	  "text": "The number of cheetahs ______ (increase).",
-	  "answers": [
-       "will increase"
-	  ]
-	 },
-	 {
-	  "text": "We ______ (not / hurt) the animals.",
-	  "answers": [
-	   "will not hurt",
-       "won't hurt"
-	  ]
-	 }
-	]
-   },
-   {
-	"id": "going_to_basic",
-	"type": "learn",
-	"title_fa": "آینده با BE GOING TO",
-	"title_en": "Future with BE GOING TO",
-	"explanation": "از be going to برای برنامه یا قصدی که از قبل داریم و همچنین پیش‌بینی بر اساس نشانه‌های موجود استفاده می‌کنیم.",
-	"structure": "Subject + am / is / are + going to + base verb",
-	"cards": [
-	 {
-	  "en": "I am going to study.",
-	  "fa": "I → am going to"
-	 },
-	 {
-	  "en": "She is going to visit the museum.",
-	  "fa": "She → is going to"
-	 },
-	 {
-	  "en": "We are going to protect wildlife.",
-	  "fa": "We → are going to"
-	 }
-	]
-   },
-   {
-	"id": "going_to_subject",
-	"type": "multiple_choice",
-	"title_fa": "AM / IS / ARE",
-	"instruction_fa": "فعل کمکی درست را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "I ______ going to study tonight.",
-	  "options": [
-	   "am",
-	   "is",
-	   "are",
-       "be"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "I با am می‌آید.",
-	  "wrong_explanation_fa": "برای I باید از am استفاده کنیم."
-	 },
-	 {
-	  "question": "She ______ going to visit the museum.",
-	  "options": [
-	   "am",
-	   "is",
-	   "are",
-       "be"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "She با is می‌آید.",
-	  "wrong_explanation_fa": "برای she باید از is استفاده کنیم."
-	 },
-	 {
-	  "question": "They ______ going to protect wildlife.",
-	  "options": [
-	   "am",
-	   "is",
-	   "are",
-       "be"
-	  ],
-	  "correct": 2,
-	  "explanation_fa": "They با are می‌آید.",
-	  "wrong_explanation_fa": "برای they باید از are استفاده کنیم."
-	 }
-	]
-   },
-   {
-	"id": "going_to_negative",
-	"type": "learn",
-	"title_fa": "منفی با BE GOING TO",
-	"title_en": "Negative with BE GOING TO",
-	"explanation": "برای منفی کردن be going to، not را بعد از am/is/are قرار می‌دهیم.",
-	"structure": "Subject + am/is/are + not + going to + base verb",
-	"examples": [
-	 {
-	  "en": "I am not going to watch TV.",
-	  "fa": "من قصد ندارم تلویزیون تماشا کنم."
-	 },
-	 {
-	  "en": "He isn't going to travel tomorrow.",
-	  "fa": "او فردا قصد سفر ندارد."
-	 },
-	 {
-	  "en": "They aren't going to destroy nature.",
-	  "fa": "آن‌ها قصد ندارند طبیعت را نابود کنند."
-	 }
-	]
-   },
-   {
-	"id": "going_to_negative_practice",
-	"type": "multiple_choice",
-	"title_fa": "تمرین منفی",
-	"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "Reza ______ going to watch TV tonight.",
-	  "options": [
-	   "isn't",
-	   "aren't",
-	   "won't",
-       "don't"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "آفرین! Reza با is می‌آید و شکل منفی آن isn't است.",
-	  "wrong_explanation_fa": "برای Reza باید از isn't going to استفاده کنیم."
-	 },
-	 {
-	  "question": "We ______ going to destroy nature.",
-	  "options": [
-	   "aren't",
-	   "isn't",
-	   "won't",
-       "doesn't"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "We با are می‌آید، پس شکل منفی aren’t است.",
-	  "wrong_explanation_fa": "برای We باید از aren't going to استفاده کنیم."
-	 }
-	]
-   },
-   {
-	"id": "going_to_questions",
-	"type": "learn",
-	"title_fa": "سؤال با BE GOING TO",
-	"title_en": "Questions with BE GOING TO",
-	"explanation": "در سؤال، am/is/are را قبل از فاعل می‌آوریم.",
-	"structure": "Am / Is / Are + subject + going to + base verb?",
-	"examples": [
-	 {
-	  "en": "Are you going to visit the museum?",
-	  "fa": "آیا قصد داری از موزه دیدن کنی؟"
-	 },
-	 {
-	  "en": "Is Alice going to read some poems?",
-	  "fa": "آیا آلیس قصد دارد چند شعر بخواند؟"
-	 }
-	]
-   },
-   {
-	"id": "going_to_questions_practice",
-	"type": "multiple_choice",
-	"title_fa": "سؤال با GOING TO",
-	"instruction_fa": "ساختار درست را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "______ you going to visit the museum?",
-	  "options": [
-	   "Are",
-	   "Will",
-	   "Do",
-       "Is"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "You با are می‌آید.",
-	  "wrong_explanation_fa": "ساختار درست: Are you going to...?"
-	 },
-	 {
-	  "question": "______ Alice going to read some poems?",
-	  "options": [
-	   "Are",
-	   "Is",
-	   "Will",
-       "Does"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "Alice با is می‌آید.",
-	  "wrong_explanation_fa": "برای Alice باید از Is استفاده کنیم."
-	 }
-	]
-   },
-   {
-	"id": "going_to_fill",
-	"type": "fill_blank",
-	"title_fa": "تمرین BE GOING TO",
-	"instruction_fa": "جمله‌ها را کامل کن.",
-	"items": [
-	 {
-	  "text": "Look at the clouds! It ______ (rain).",
-	  "answers": [
-       "is going to rain"
-	  ]
-	 },
-	 {
-	  "text": "We ______ (not / destroy) nature.",
-	  "answers": [
-
-       "aren't going to destroy"
-	  ]
-	 },
-	 {
-	  "text": "______ you ______ (visit) the museum?",
-	  "answers": [
-       "Are you going to visit"
-	  ]
-	 },
-	 {
-	  "text": "Alice ______ (read) some poems tonight.",
-	  "answers": [
-       "is going to read"
-	  ]
-	 },
-	 {
-	  "text": "Reza ______ (not / watch) TV.",
-	  "answers": [
-	   "is not going to watch",
-       "isn't going to watch"
-	  ]
-	 }
-	]
-   },
-   {
-	"id": "will_vs_going",
-	"type": "learn",
-	"title_fa": "WILL یا GOING TO؟",
-	"title_en": "WILL vs GOING TO",
-	"explanation": "برای انتخاب ساختار، به موقعیت نگاه کن.",
-	"cards": [
-	 {
-	  "en": "I think people will protect more animals.",
-	  "fa": "نظر یا پیش‌بینی → WILL"
-	 },
-	 {
-	  "en": "The phone is ringing. I'll answer it.",
-	  "fa": "تصمیم همین لحظه → WILL"
-	 },
-	 {
-	  "en": "We have already planned our trip.",
-	  "fa": "برنامه‌ی قبلی → GOING TO"
-	 },
-	 {
-	  "en": "Look at those dark clouds!",
-	  "fa": "نشانه‌ی واضح → GOING TO"
-	 }
-	]
-   },
-   {
-	"id": "will_vs_going_mc",
-	"type": "multiple_choice",
-	"title_fa": "کدام را انتخاب کنیم؟",
-	"instruction_fa": "با توجه به موقعیت، بهترین گزینه را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "Look at those dark clouds! It ______ rain.",
-	  "options": [
-	   "will",
-	   "is going to",
-	   "does",
-       "did"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "چون نشانه‌ی واضحی مثل ابرهای تیره داریم، از is going to استفاده می‌کنیم.",
-	  "wrong_explanation_fa": "اینجا شواهدی برای اتفاق آینده داریم؛ پس going to مناسب است."
-	 },
-	 {
-	  "question": "The phone is ringing. I ______ answer it.",
-	  "options": [
-	   "am going to",
-	   "will",
-	   "am",
-       "did"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "تصمیم همین لحظه گرفته شده، پس will مناسب است.",
-	  "wrong_explanation_fa": "تصمیم در همان لحظه گرفته می‌شود؛ بنابراین will انتخاب مناسب‌تری است."
-	 },
-	 {
-	  "question": "We have already planned our trip. We ______ visit Golestan Forest next month.",
-	  "options": [
-	   "will",
-	   "are going to",
-	   "do",
-       "did"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "چون برنامه از قبل وجود دارد، are going to مناسب است.",
-	  "wrong_explanation_fa": "عبارت have already planned نشان می‌دهد که این یک برنامه‌ی قبلی است."
-	 },
-	 {
-	  "question": "I think people ______ save more animals in the future.",
-	  "options": [
-	   "are going to",
-	   "will",
-	   "are",
-       "did"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "I think یک نظر یا پیش‌بینی را نشان می‌دهد، بنابراین will مناسب است.",
-	  "wrong_explanation_fa": "اینجا بیشتر درباره‌ی یک پیش‌بینی یا نظر صحبت می‌کنیم."
-	 }
-	]
-   },
-   {
-	"id": "both_possible",
-	"type": "learn",
-	"title_fa": "گاهی هر دو درست‌اند",
-	"title_en": "When Both Are Possible",
-	"explanation": "گاهی وقتی فقط درباره‌ی یک پیش‌بینی آینده صحبت می‌کنیم و برنامه یا شواهد مشخصی نداریم، هر دو ساختار می‌توانند استفاده شوند.",
-	"examples": [
-	 {
-	  "en": "In the future, there will be fewer wild animals.",
-	  "fa": "یک پیش‌بینی درباره‌ی آینده"
-	 },
-	 {
-	  "en": "In the future, there are going to be fewer wild animals.",
-	  "fa": "این جمله نیز می‌تواند همان پیش‌بینی را بیان کند."
-	 }
-	]
-   },
-   {
-	"id": "if_future",
-	"type": "learn",
-	"title_fa": "آینده با IF",
-	"title_en": "Future after IF",
-	"explanation": "وقتی درباره‌ی آینده صحبت می‌کنیم، بعد از if معمولاً Present Simple می‌آید، نه will.",
-	"structure": "If + Present Simple, ... will + base verb",
-	"examples": [
-	 {
-	  "en": "If people take care of cheetahs, their number will increase.",
-	  "fa": "اگر مردم از یوزپلنگ‌ها مراقبت کنند، تعدادشان افزایش خواهد یافت."
-	 },
-	 {
-	  "en": "If we don't protect nature, animals will suffer.",
-	  "fa": "اگر از طبیعت محافظت نکنیم، حیوانات آسیب خواهند دید."
-	 },
-	 {
-	  "en": "If it rains, we will stay home.",
-	  "fa": "اگر باران ببارد، در خانه می‌مانیم."
-	 }
-	]
-   },
-   {
-	"id": "if_practice",
-	"type": "multiple_choice",
-	"title_fa": "تمرین IF",
-	"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "If people take care of them, cheetahs ______ live longer.",
-	  "options": [
-	   "will",
-	   "going to",
-	   "are",
-       "do"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "آفرین! بعد از if از حال ساده استفاده می‌کنیم و در بخش نتیجه می‌توانیم will داشته باشیم.",
-	  "wrong_explanation_fa": "ساختار درست: If + Present Simple, will + base verb."
-	 },
-	 {
-	  "question": "Which sentence is correct?",
-	  "options": [
-	   "If people will take care of animals, they will live longer.",
-	   "If people take care of animals, they will live longer.",
-	   "If people taking care of animals, they will live longer.",
-       "If people takes care of animals, they will live longer."
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "درست است! بعد از if در این ساختار از Present Simple استفاده می‌کنیم.",
-	  "wrong_explanation_fa": "بعد از if نباید will بیاوریم."
-	 }
-	]
-   },
-   {
-	"id": "other_time_clauses",
-	"type": "learn",
-	"title_fa": "WHEN و کلمات زمانی",
-	"title_en": "Future Time Clauses",
-	"explanation": "در این ساختارها نیز بعد از when، before، after و as soon as معمولاً Present Simple می‌آید.",
-	"cards": [
-	 {
-	  "en": "When I finish school, I will travel around Iran.",
-	  "fa": "When + Present Simple → will"
-	 },
-	 {
-	  "en": "As soon as it stops raining, we will go outside.",
-	  "fa": "As soon as + Present Simple → will"
-	 }
-	]
-   },
-   {
-	"id": "contractions",
-	"type": "learn",
-	"title_fa": "شکل کوتاه WILL",
-	"title_en": "Contractions",
-	"explanation": "در انگلیسی روزمره شکل‌های کوتاه will بسیار رایج هستند.",
-	"cards": [
-	 {
-	  "en": "I will → I'll",
-	  "fa": "من خواهم..."
-	 },
-	 {
-	  "en": "you will → you'll",
-	  "fa": "تو / شما خواهید..."
-	 },
-	 {
-	  "en": "he will → he'll",
-	  "fa": "او خواهد..."
-	 },
-	 {
-	  "en": "she will → she'll",
-	  "fa": "او خواهد..."
-	 },
-	 {
-	  "en": "we will → we'll",
-	  "fa": "ما خواهیم..."
-	 },
-	 {
-	  "en": "they will → they'll",
-	  "fa": "آن‌ها خواهند..."
-	 },
-	 {
-	  "en": "will not → won't",
-	  "fa": "نخواهـد / نخواهیم..."
-	 }
-	]
-   },
-   {
-	"id": "mistakes",
-	"type": "multiple_choice",
-	"title_fa": "اشتباهات رایج",
-	"instruction_fa": "جمله‌ی درست را انتخاب کن.",
-	"questions": [
-	 {
-	  "question": "Choose the correct sentence.",
-	  "options": [
-	   "She will goes to school.",
-	   "She will go to school.",
-	   "She will going to school.",
-       "She will to go school."
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "بعد از will همیشه شکل ساده‌ی فعل می‌آید: will go.",
-	  "wrong_explanation_fa": "بعد از will نباید s، ing یا to بیاید."
-	 },
-	 {
-	  "question": "Choose the correct sentence.",
-	  "options": [
-	   "I am go to visit my friend.",
-	   "I am going to visit my friend.",
-	   "I going to visit my friend.",
-       "I am going visit my friend."
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "ساختار درست am going to + base verb است.",
-	  "wrong_explanation_fa": "بعد از am باید going to بیاید."
-	 },
-	 {
-	  "question": "Choose the correct sentence.",
-	  "options": [
-	   "Will you going to come?",
-	   "Will you come?",
-	   "Will you to come?",
-       "Will you coming?"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "ساختار سؤال با will: Will + subject + base verb.",
-	  "wrong_explanation_fa": "بعد از will باید فعل ساده بیاید."
-	 },
-	 {
-	  "question": "Choose the correct sentence.",
-	  "options": [
-	   "If it will rain, we will stay home.",
-	   "If it rains, we will stay home.",
-	   "If it raining, we will stay home.",
-       "If it rain, we will stay home."
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "بعد از if در این ساختار از Present Simple استفاده می‌کنیم.",
-	  "wrong_explanation_fa": "بعد از if نباید will بیاوریم."
-	 }
-	]
-   },
-   {
-	"id": "true_false",
-	"type": "true_false",
-	"title_fa": "درست یا غلط؟",
-	"instruction_fa": "هر جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
-	"items": [
-	 {
-	  "statement": "After will, we use the base form of the verb.",
-	  "fa": "بعد از will از شکل ساده‌ی فعل استفاده می‌کنیم.",
-	  "answer": true,
-	  "explanation_fa": "درست است."
-	 },
-	 {
-	  "statement": "Won't is the short form of will not.",
-	  "fa": "Won't شکل کوتاه will not است.",
-	  "answer": true,
-	  "explanation_fa": "درست است."
-	 },
-	 {
-	  "statement": "Be going to changes according to the subject.",
-	  "fa": "در be going to، am/is/are با فاعل تغییر می‌کند.",
-	  "answer": true,
-	  "explanation_fa": "درست است."
-	 },
-	 {
-	  "statement": "We always use will for plans that were decided before.",
-	  "fa": "برای برنامه‌هایی که از قبل تصمیم‌گیری شده‌اند همیشه از will استفاده می‌کنیم.",
-	  "answer": false,
-	  "explanation_fa": "غلط است. برای برنامه‌ی قبلی معمولاً be going to مناسب‌تر است."
-	 }
-	]
-   },
-   {
-	"id": "matching",
-	"type": "matching",
-	"title_fa": "جمله‌ها را به هم وصل کن",
-	"instruction_fa": "هر قسمت را با ادامه‌ی مناسبش جور کن.",
-	"items": [
-	 {
-	  "left": "If people protect nature,",
-	  "right": "animals will not die out."
-	 },
-	 {
-	  "left": "Look at the sky!",
-	  "right": "It's going to rain."
-	 },
-	 {
-	  "left": "We",
-	  "right": "are going to save the forest."
-	 },
-	 {
-	  "left": "The number of tigers",
-	  "right": "will increase in the future."
-	 },
-	 {
-	  "left": "Where",
-	  "right": "will you visit next summer?"
-	 }
-	]
-   },
-   {
-	"id": "unscramble",
-	"type": "unscramble",
-	"title_fa": "جمله را بساز",
-	"instruction_fa": "کلمات را به ترتیب درست قرار بده.",
-	"items": [
-	 {
-	  "words": [
-	   "will",
-	   "nature",
-	   "protect",
-       "we"
-	  ],
-	  "answer": "we will protect nature"
-	 },
-	 {
-	  "words": [
-	   "going",
-	   "to",
-	   "rain",
-	   "is",
-       "it"
-	  ],
-	  "answer": "it is going to rain"
-	 },
-	 {
-	  "words": [
-	   "will",
-	   "animals",
-	   "protect",
-       "they"
-	  ],
-	  "answer": "they will protect animals"
-	 },
-	 {
-	  "words": [
-	   "you",
-	   "will",
-	   "help",
-       "me"
-	  ],
-	  "answer": "will you help me"
-	 },
-	 {
-	  "template": "______ he ______ able to be here?",
-	  "options": [
-	   "be",
-       "Will"
-	  ],
-	  "answer": [
-	   "Will",
-       "be"
-	  ]
-	 }
-	]
-   },
-   {
-	"id": "mixed_practice",
-	"type": "multiple_choice",
-	"title_fa": "تمرین ترکیبی",
-	"instruction_fa": "همه‌ی چیزهایی را که یاد گرفتی به کار ببر.",
-	"questions": [
-	 {
-	  "question": "The number of endangered animals ______ increase in the future.",
-	  "options": [
-	   "is going to",
-	   "will",
-	   "both a and b",
-       "none"
-	  ],
-	  "correct": 2,
-	  "explanation_fa": "در این جمله هر دو ساختار می‌توانند یک پیش‌بینی آینده را بیان کنند.",
-	  "wrong_explanation_fa": "در این موقعیت، هر دو ساختار می‌توانند ممکن باشند."
-	 },
-	 {
-	  "question": "If humans take care of nature, wild animals ______ in number.",
-	  "options": [
-	   "will increase",
-	   "are increase",
-	   "will increasing",
-       "increase will"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "ساختار درست If + Present Simple, will + base verb است.",
-	  "wrong_explanation_fa": "بعد از if حال ساده و در نتیجه will + فعل ساده می‌آید."
-	 },
-	 {
-	  "question": "The phone is ringing! I ______ answer it.",
-	  "options": [
-	   "will",
-	   "am going to",
-	   "am",
-       "did"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "تصمیم همین لحظه گرفته شده است.",
-	  "wrong_explanation_fa": "تصمیم لحظه‌ای یکی از کاربردهای will است."
-	 },
-	 {
-	  "question": "Maryam is visiting the museum. She ______ going to learn about wildlife.",
-	  "options": [
-	   "is",
-	   "will",
-	   "do",
-       "are"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "She با is going to می‌آید.",
-	  "wrong_explanation_fa": "ساختار درست: She is going to..."
-	 }
-	]
-   },
-   {
-	"id": "master_check",
-	"type": "multiple_choice",
-	"title_fa": "🧠 آزمون تسلط",
-	"instruction_fa": "قبل از چالش نهایی، ببینیم واقعاً درس را یاد گرفته‌ای.",
-	"questions": [
-	 {
-	  "question": "After will, which form of the verb do we use?",
-	  "options": [
-	   "Base form",
-	   "-s form",
-	   "-ing form",
-       "to + verb"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "بعد از will همیشه شکل ساده‌ی فعل می‌آید."
-	 },
-	 {
-	  "question": "Which form changes with the subject in be going to?",
-	  "options": [
-	   "going",
-	   "to",
-	   "am / is / are",
-       "the main verb"
-	  ],
-	  "correct": 2,
-	  "explanation_fa": "am/is/are بر اساس فاعل تغییر می‌کند."
-	 },
-	 {
-	  "question": "Which is commonly used for a decision made at the moment of speaking?",
-	  "options": [
-	   "will",
-	   "be going to",
-	   "Past Simple",
-       "Present Perfect"
-	  ],
-	  "correct": 0,
-	  "explanation_fa": "will برای تصمیم لحظه‌ای یکی از کاربردهای اصلی آن در این درس است."
-	 },
-	 {
-	  "question": "What do we normally use after if when talking about the future?",
-	  "options": [
-	   "will",
-	   "Present Simple",
-	   "Past Simple",
-       "going"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "بعد از if در این ساختار از Present Simple استفاده می‌کنیم."
-	 }
-	]
-   },
-   {
-	"id": "final_challenge",
-	"type": "multiple_choice",
-	"title_fa": "🏆 چالش نهایی",
-	"instruction_fa": "آخرین مرحله! با دقت جواب بده.",
-	"questions": [
-	 {
-	  "question": "Look! The cheetah ______ run into the forest.",
-	  "options": [
-	   "will",
-	   "is going to",
-	   "does",
-       "can"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "نشانه‌ی واضحی وجود دارد، پس going to مناسب است."
-	 },
-	 {
-	  "question": "I think people ______ protect more animals in the future.",
-	  "options": [
-	   "are going to",
-	   "will",
-	   "are",
-       "did"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "I think یک پیش‌بینی یا نظر را نشان می‌دهد."
-	 },
-	 {
-	  "question": "Which sentence is correct?",
-	  "options": [
-	   "If people will take care of animals, they will live longer.",
-	   "If people take care of animals, they will live longer.",
-	   "If people taking care of animals, they will live longer.",
-       "If people takes care of animals, they will live longer."
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "بعد از if در این ساختار Present Simple می‌آید."
-	 },
-	 {
-	  "question": "Which sentence is correct?",
-	  "options": [
-	   "She will goes to school.",
-	   "She will go to school.",
-	   "She will going to school.",
-       "She will to go school."
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "بعد از will همیشه فعل ساده می‌آید."
-	 },
-	 {
-	  "question": "We have already planned our trip. We ______ visit Golestan Forest.",
-	  "options": [
-	   "will",
-	   "are going to",
-	   "do",
-       "did"
-	  ],
-	  "correct": 1,
-	  "explanation_fa": "چون برنامه از قبل وجود دارد، going to مناسب است."
-	 }
-	]
-   }
-  ]
- }
+	"lesson": {
+		"id": "vision1_lesson4_simple_future",
+		"book": "Vision 1",
+		"lesson_number": 4.0,
+		"title_en": "Simple Future with Will",
+		"title_fa": "آینده ساده با Will",
+		"icon": "🌤️",
+		"theme_color": "#F59E0B",
+		"xp_per_unit": 10.0,
+		"units": [
+			{
+				"id": "unit1",
+				"type": "group",
+				"title_fa": "آینده ساده با Will",
+				"title_en": "Simple Future with Will",
+				"activity_count": 18.0,
+				"activities": [
+					{
+						"id": "unit1_learn1",
+						"type": "learn",
+						"title_fa": "آینده ساده با Will",
+						"title_en": "Simple Future with Will",
+						"explanation": "برای صحبت درباره‌ی کارهایی که در آینده اتفاق می‌افتند از will استفاده می‌کنیم.",
+						"structure": "Subject + will + base verb",
+						"cards": [
+							{
+								"en": "I will help you.",
+								"fa": "من به تو کمک خواهم کرد."
+							},
+							{
+								"en": "They will travel tomorrow.",
+								"fa": "آن‌ها فردا سفر خواهند کرد."
+							}
+						]
+					},
+					{
+						"id": "unit1_learn2",
+						"type": "learn",
+						"title_fa": "ساختار جمله مثبت",
+						"title_en": "Affirmative Sentences",
+						"explanation": "در جملات مثبت، ساختار به صورت فاعل + will + شکل ساده فعل است.",
+						"structure": "Subject + will + base verb",
+						"cards": [
+							{
+								"en": "She will read a book.",
+								"fa": "او یک کتاب خواهد خواند."
+							},
+							{
+								"en": "We will play football.",
+								"fa": "ما فوتبال بازی خواهیم کرد."
+							}
+						]
+					},
+					{
+						"id": "unit1_unscramble_affirmative",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله مثبت",
+						"instruction_fa": "کلمات را مرتب کن تا ساختار جمله مثبت را کامل کنی. \nاز چپ به راست",
+						"items": [
+							{
+								"words": [
+									"فاعل",
+									"فعل ساده",
+									"will",
+									"."
+								],
+								"answer": "فاعل will فعل ساده .",
+								"hint_fa": "ساختار درست از چپ به راست:\nفعل ساده + will + فاعل"
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_will",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "I ______ help you with your homework.",
+								"options": [
+									"will",
+									"am",
+									"have",
+									"do"
+								],
+								"correct": 0.0,
+								"hint_fa": "برای آینده بعد از فاعل از will استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! will درست است.",
+								"wrong_explanation_fa": "بعد از فاعل برای آینده از will استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_base_verb",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب شکل ساده فعل",
+						"instruction_fa": "شکل ساده‌ی فعل درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "They will ______ to the park.",
+								"options": [
+									"gone",
+									"going",
+									"went",
+									"go"
+								],
+								"correct": 3.0,
+								"hint_fa": "بعد از will از شکل ساده‌ی فعل استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! go درست است.",
+								"wrong_explanation_fa": "بعد از will باید شکل ساده‌ی فعل بیاید."
+							}
+						]
+					},
+					{
+						"id": "unit1_learn3_contractions",
+						"type": "learn",
+						"title_fa": "شکل مخفف will",
+						"title_en": "Contractions",
+						"explanation": "در زبان محاوره‌ای، will را با ضمایر فاعلی به صورت مخفف می‌نویسیم.",
+						"structure": "I'll, You'll, He'll, She'll, It'll, We'll, They'll",
+						"cards": [
+							{
+								"en": "I'll call you later.",
+								"fa": "بعداً به تو زنگ می‌زنم."
+							},
+							{
+								"en": "She'll come to the party.",
+								"fa": "او به مهمانی خواهد آمد."
+							}
+						]
+					},
+					{
+						"id": "unit1_matching_contractions",
+						"type": "matching",
+						"title_fa": "اتصال کلمات با مخفف",
+						"instruction_fa": "هر کلمه را با مخفف درست آن جفت کن.",
+						"items": [
+							{
+								"left": "I will",
+								"right": "I'll"
+							},
+							{
+								"left": "You will",
+								"right": "You'll"
+							},
+							{
+								"left": "He will",
+								"right": "He'll"
+							},
+							{
+								"left": "She will",
+								"right": "She'll"
+							},
+							{
+								"left": "It will",
+								"right": "It'll"
+							},
+							{
+								"left": "We will",
+								"right": "We'll"
+							},
+							{
+								"left": "They will",
+								"right": "They'll"
+							}
+						]
+					},
+					{
+						"id": "unit1_learn4_negative",
+						"type": "learn",
+						"title_fa": "ساختار جمله منفی",
+						"title_en": "Negative Sentences",
+						"explanation": "برای ساختن جمله منفی، کلمه‌ی not را بعد از will می‌آوریم.",
+						"structure": "Subject + will + not + base verb",
+						"cards": [
+							{
+								"en": "I will not go there.",
+								"fa": "من به آنجا نخواهم رفت."
+							},
+							{
+								"en": "She will not eat meat.",
+								"fa": "او گوشت نخواهد خورد."
+							}
+						]
+					},
+					{
+						"id": "unit1_unscramble_negative",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله منفی",
+						"instruction_fa": "کلمات را مرتب کن تا ساختار جمله‌ی منفی درست بسازی. \nاز چپ به راست.",
+						"items": [
+							{
+								"words": [
+									"will",
+									"not",
+									"فعل ساده",
+									"فاعل",
+									"."
+								],
+								"answer": "فاعل will not فعل ساده .",
+								"hint_fa": "ساختار درست از چپ به راست: \nشکل ساده فعل + will + not + فاعل"
+							}
+						]
+					},
+					{
+						"id": "unit1_learn5_wont",
+						"type": "learn",
+						"title_fa": "شکل مخفف will not",
+						"title_en": "Won't",
+						"explanation": "شکل مخفف will not به صورت won't است که در زبان محاوره‌ای بسیار استفاده می‌شود.",
+						"structure": "Subject + won't + base verb",
+						"cards": [
+							{
+								"en": "I won't forget you.",
+								"fa": "تو را فراموش نمی‌کنم."
+							},
+							{
+								"en": "He won't be late.",
+								"fa": "او دیر نمی‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_wont_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "She ______ come to school tomorrow.",
+								"options": [
+									"isn't",
+									"will",
+									"won't",
+									"are"
+								],
+								"correct": 2.0,
+								"hint_fa": "جمله منفی است، باید از won't استفاده کنی.",
+								"explanation_fa": "آفرین! won't درست است.",
+								"wrong_explanation_fa": "برای جمله منفی از won't استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_wont_2",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "We ______ watch TV tonight.",
+								"options": [
+									"won't",
+									"don't",
+									"aren't",
+									"isn't"
+								],
+								"correct": 0.0,
+								"hint_fa": "جمله منفی است و درباره‌ی آینده است، باید از won't استفاده کنی.",
+								"explanation_fa": "آفرین! won't درست است.",
+								"wrong_explanation_fa": "برای آینده منفی از won't استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit1_learn6_questions",
+						"type": "learn",
+						"title_fa": "ساختار جمله سوالی",
+						"title_en": "Questions",
+						"explanation": "برای ساختن جمله سوالی، will را به اول جمله می‌آوریم.",
+						"structure": "Will + subject + base verb?",
+						"cards": [
+							{
+								"en": "Will you help me?",
+								"fa": "آیا به من کمک می‌کنی؟"
+							},
+							{
+								"en": "Will they come?",
+								"fa": "آیا آن‌ها خواهند آمد؟"
+							}
+						]
+					},
+					{
+						"id": "unit1_unscramble_question",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله سوالی",
+						"instruction_fa": "کلمات را مرتب کن تا ساختار جمله‌ی سوالی درست بسازی. از چپ به راست",
+						"items": [
+							{
+								"words": [
+									"فعل ساده",
+									"Will",
+									"فاعل",
+									"?"
+								],
+								"answer": "Will فاعل فعل ساده ?",
+								"hint_fa": "ساختار درست: Will + فاعل + شکل ساده فعل؟"
+							}
+						]
+					},
+					{
+						"id": "unit1_unscramble_drop",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله سوالی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی سوالی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"Will",
+									"she",
+									"study",
+									"tonight",
+									"?"
+								],
+								"answer": "Will she study tonight ?",
+								"hint_fa": "در جمله سوالی will اول می‌آید، سپس فاعل و بعد فعل."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_review_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "I ______ go to the store tomorrow.",
+								"options": [
+									"am not",
+									"will",
+									"am",
+									"are"
+								],
+								"correct": 1.0,
+								"hint_fa": "جمله مثبت است، باید از will استفاده کنی.",
+								"explanation_fa": "آفرین! will درست است.",
+								"wrong_explanation_fa": "برای جمله مثبت از will استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_review_2",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "He ______ finish his homework.",
+								"options": [
+									"won't",
+									"isn't",
+									"is",
+									"are"
+								],
+								"correct": 0.0,
+								"hint_fa": "جمله منفی است، باید از won't استفاده کنی.",
+								"explanation_fa": "آفرین! won't درست است.",
+								"wrong_explanation_fa": "برای جمله منفی از won't استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_review_3",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "______ you visit your friend?",
+								"options": [
+									"Will",
+									"Are",
+									"Do",
+									"Have"
+								],
+								"correct": 0.0,
+								"hint_fa": "در جمله سوالی will اول می‌آید.",
+								"explanation_fa": "آفرین! Will درست است و در اینجا Are اشتباهه چون فعل ساده است.",
+								"wrong_explanation_fa": "در سوالات آینده will اول می‌آید."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit2",
+				"type": "group",
+				"title_fa": "سوالات Wh با Will",
+				"title_en": "Wh-Questions with Will",
+				"activity_count": 9.0,
+				"activities": [
+					{
+						"id": "unit2_learn1_wh",
+						"type": "learn",
+						"title_fa": "سوالات Wh با Will",
+						"title_en": "Wh-Questions with Will",
+						"explanation": "در سوالات wh، کلمه‌ی سوالی در اول جمله می‌آید و سپس will + فاعل + شکل ساده فعل.",
+						"structure": "Wh-word + will + subject + base verb + rest?",
+						"cards": [
+							{
+								"en": "What will you eat?",
+								"fa": "چه چیزی می‌خوری؟"
+							},
+							{
+								"en": "Where will they go?",
+								"fa": "کجا می‌روند؟"
+							}
+						]
+					},
+					{
+						"id": "unit2_tf_wh_structure",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "ساختار زیر را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "Wh + subject + will + base verb",
+								"fa": "ساختار سوال wh به صورت Wh + فاعل + will + شکل ساده فعل است.",
+								"answer": false,
+								"hint_fa": "در سوال wh باید will بعد از کلمه wh و قبل از فاعل می‌آید.",
+								"explanation_fa": "غلط است. ساختار درست از سمت چپ: \nشکل ساده فعل + فاعل + Wh + will"
+							}
+						]
+					},
+					{
+						"id": "unit2_unscramble_wh_structure",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن ساختار سوال Wh",
+						"instruction_fa": "کلمات را مرتب کن تا ساختار درست جمله‌ی سوالی با wh ساخته شود. از چپ به راست",
+						"items": [
+							{
+								"words": [
+									"Wh",
+									"فاعل",
+									"will",
+									"شکل ساده فعل",
+									"?"
+								],
+								"answer": "Wh will فاعل شکل ساده فعل ?",
+								"hint_fa": "ساختار درست از سمت چپ: \nشکل ساده فعل + فاعل + Wh + will"
+							}
+						]
+					},
+					{
+						"id": "unit2_learn2_wh_meaning",
+						"type": "learn",
+						"title_fa": "معنی کلمات Wh",
+						"title_en": "Wh-Words Meanings",
+						"explanation": "کلمات پرسشی wh برای پرسیدن اطلاعات خاص استفاده می‌شوند.",
+						"structure": "What (چه), Where (کجا), When (کی), Why (چرا), Who (چه کسی)",
+						"cards": [
+							{
+								"en": "What - What is your name?",
+								"fa": "چه - اسم تو چیست؟"
+							},
+							{
+								"en": "Where - Where are you?",
+								"fa": "کجا - تو کجایی؟"
+							}
+						]
+					},
+					{
+						"id": "unit2_matching_wh",
+						"type": "matching",
+						"title_fa": "اتصال کلمات Wh با معنی",
+						"instruction_fa": "هر کلمه wh را با معنی فارسی آن جفت کن.",
+						"items": [
+							{
+								"left": "What",
+								"right": "چه"
+							},
+							{
+								"left": "Where",
+								"right": "کجا"
+							},
+							{
+								"left": "When",
+								"right": "کی"
+							},
+							{
+								"left": "Why",
+								"right": "چرا"
+							},
+							{
+								"left": "Who",
+								"right": "چه کسی"
+							}
+						]
+					},
+					{
+						"id": "unit2_learn3_wh_question",
+						"type": "learn",
+						"title_fa": "نحوه ساخت سوال با Wh",
+						"title_en": "Making Wh-Questions",
+						"explanation": "برای ساختن سوال wh، جمله را به سوال تبدیل می‌کنیم و کلمه wh را اول می‌آوریم.",
+						"structure": "Wh + will + subject + base verb + rest?",
+						"cards": [
+							{
+								"en": "He will visit Bukan next summer. → Where will he visit next summer?",
+								"fa": "او تابستان آینده به بوکان سفر خواهد کرد. → او تابستان آینده به کجا سفر خواهد کرد؟"
+							}
+						]
+					},
+					{
+						"id": "unit2_unscramble_when",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن سوال با When",
+						"instruction_fa": "با استفاده از when، جمله را به سوال تبدیل کن و کلمات را مرتب کن.",
+						"items": [
+							{
+								"words": [
+									"Visit",
+									"he",
+									"will",
+									"ٌWhen",
+									"Bukan",
+									"?"
+								],
+								"answer": "When will he visit Bukan ?",
+								"hint_fa": "کلمه wh اول می‌آید، سپس will، بعد فاعل و فعل."
+							}
+						]
+					},
+					{
+						"id": "unit2_learn4_who",
+						"type": "learn",
+						"title_fa": "نکته مهم درباره Who",
+						"title_en": "Who Questions",
+						"explanation": "در سوالات who، ممکن است فاعل حذف شود و ساختار به صورت Who + will + base verb باشد.",
+						"structure": "Who + will + base verb + بقیه جمله?",
+						"cards": [
+							{
+								"en": "Who will visit Bukan next summer?",
+								"fa": "چه کسی تابستان آینده به بوکان سفر خواهد کرد؟"
+							},
+							{
+								"en": "Who will help me?",
+								"fa": "چه کسی به من کمک خواهد کرد؟"
+							}
+						]
+					},
+					{
+						"id": "unit2_mc_who",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "______ will teach us English?",
+								"options": [
+									"ٌWhy",
+									"What",
+									"Who",
+									"When"
+								],
+								"correct": 2.0,
+								"hint_fa": "سوال درباره‌ی شخص است و فاعل در سوال وجود ندارد.",
+								"explanation_fa": "آفرین! Who درست است.",
+								"wrong_explanation_fa": "برای پرسیدن درباره‌ی شخص از Who استفاده می‌کنیم."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit3",
+				"type": "group",
+				"title_fa": "Be Going To",
+				"title_en": "Be Going To",
+				"activity_count": 23.0,
+				"activities": [
+					{
+						"id": "unit3_learn1_going_to",
+						"type": "learn",
+						"title_fa": "Be Going To",
+						"title_en": "Be Going To",
+						"explanation": "از be going to برای صحبت درباره‌ی کارهایی که قصد انجام آن‌ها را داریم یا بر اساس شواهد قرار است اتفاق بیفتند استفاده می‌کنیم.",
+						"structure": "Subject + be + going to + base verb",
+						"cards": [
+							{
+								"en": "I am going to study.",
+								"fa": "من قصد دارم درس بخوانم."
+							},
+							{
+								"en": "They are going to travel.",
+								"fa": "آن‌ها قصد سفر دارند."
+							}
+						]
+					},
+					{
+						"id": "unit3_learn2_affirmative",
+						"type": "learn",
+						"title_fa": "ساختار جمله مثبت",
+						"title_en": "Affirmative Sentences",
+						"explanation": "ساختار جمله مثبت با be going to به صورت فاعل + فعل be + going to + شکل ساده فعل است.",
+						"structure": "Subject + be + going to + base verb",
+						"cards": [
+							{
+								"en": "She is going to read.",
+								"fa": "او قصد دارد کتاب بخواند."
+							},
+							{
+								"en": "We are going to play.",
+								"fa": "ما قصد بازی داریم."
+							}
+						]
+					},
+					{
+						"id": "unit3_unscramble_going_to",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله با Be Going To",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"is",
+									"She",
+									"going",
+									"to",
+									"study",
+									"tonight",
+									"."
+								],
+								"answer": "She is going to study tonight .",
+								"hint_fa": "ساختار درست از چپ به راست: \nشکل ساده فعل + be + going to + فاعل"
+							}
+						]
+					},
+					{
+						"id": "unit3_tf_base_verb",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "در هر دو ساختار will و be going to، از شکل ساده فعل استفاده می‌کنیم.",
+								"answer": true,
+								"hint_fa": "بعد از will و going to هر دو شکل ساده فعل می‌آید.",
+								"explanation_fa": "درست است. در هر دو ساختار از شکل ساده فعل استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_base_verb_going",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب شکل ساده فعل",
+						"instruction_fa": "شکل ساده‌ی فعل درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "They are going to ______ football.",
+								"options": [
+									"plays",
+									"playing",
+									"played",
+									"play"
+								],
+								"correct": 3.0,
+								"hint_fa": "بعد از going to از شکل ساده‌ی فعل استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! play درست است.",
+								"wrong_explanation_fa": "بعد از going to باید شکل ساده‌ی فعل بیاید."
+							}
+						]
+					},
+					{
+						"id": "unit3_learn3_be_verb",
+						"type": "learn",
+						"title_fa": "فعل Be با فاعل‌ها",
+						"title_en": "Be Verbs with Subjects",
+						"explanation": "فعل be باید با فاعل مطابقت داشته باشد: I → am, He/She/It → is, We/You/They → are",
+						"structure": "I am, He/She/It is, We/You/They are",
+						"cards": [
+							{
+								"en": "I am going to eat.",
+								"fa": "من قصد دارم غذا بخورم."
+							},
+							{
+								"en": "She is going to sleep.",
+								"fa": "او قصد دارد بخوابد."
+							}
+						]
+					},
+					{
+						"id": "unit3_fill_be_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل be درست پر کن.",
+						"items": [
+							{
+								"text": "I ______ going to read a book.",
+								"answers": [
+									"am"
+								],
+								"hint_fa": "برای I از am استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! am درست است.",
+								"wrong_explanation_fa": "با I باید از am استفاده کنی."
+							}
+						]
+					},
+					{
+						"id": "unit3_fill_be_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل be درست پر کن.",
+						"items": [
+							{
+								"text": "She ______ going to travel.",
+								"answers": [
+									"is"
+								],
+								"hint_fa": "برای She از is استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! is درست است.",
+								"wrong_explanation_fa": "با She باید از is استفاده کنی."
+							}
+						]
+					},
+					{
+						"id": "unit3_fill_be_3",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل be درست پر کن.",
+						"items": [
+							{
+								"text": "They ______ going to play.",
+								"answers": [
+									"are"
+								],
+								"hint_fa": "برای They از are استفاده می‌کنیم. They یعنی آنها",
+								"explanation_fa": "آفرین! are درست است.",
+								"wrong_explanation_fa": "با They باید از are استفاده کنی."
+							}
+						]
+					},
+					{
+						"id": "unit3_learn_contractions_going",
+						"type": "learn",
+						"title_fa": "شکل مخفف Be",
+						"title_en": "Contractions",
+						"explanation": "در زبان محاوره‌ای، فعل be را با ضمایر فاعلی به صورت مخفف می‌نویسیم.",
+						"structure": "I'm, You're, He's, She's, It's, We're, They're",
+						"cards": [
+							{
+								"en": "I'm going to eat.",
+								"fa": "من می‌خواهم غذا بخورم."
+							},
+							{
+								"en": "She's going to sleep.",
+								"fa": "او می‌خواهد بخوابد."
+							}
+						]
+					},
+					{
+						"id": "unit3_matching_be_contractions",
+						"type": "matching",
+						"title_fa": "اتصال کلمات با مخفف",
+						"instruction_fa": "هر کلمه را با مخفف درست آن جفت کن.",
+						"items": [
+							{
+								"left": "I am",
+								"right": "I'm"
+							},
+							{
+								"left": "You are",
+								"right": "You're"
+							},
+							{
+								"left": "He is",
+								"right": "He's"
+							},
+							{
+								"left": "She is",
+								"right": "She's"
+							},
+							{
+								"left": "It is",
+								"right": "It's"
+							},
+							{
+								"left": "We are",
+								"right": "We're"
+							},
+							{
+								"left": "They are",
+								"right": "They're"
+							}
+						]
+					},
+					{
+						"id": "unit3_learn_negative_going",
+						"type": "learn",
+						"title_fa": "ساختار جمله منفی",
+						"title_en": "Negative Sentences",
+						"explanation": "برای ساختن جمله منفی، کلمه‌ی not را بعد از فعل be می‌آوریم.",
+						"structure": "Subject + be + not + going to + base verb",
+						"cards": [
+							{
+								"en": "I am not going to go.",
+								"fa": "من قصد ندارم بروم."
+							},
+							{
+								"en": "She is not going to eat.",
+								"fa": "او قصد ندارد غذا بخورد."
+							}
+						]
+					},
+					{
+						"id": "unit3_unscramble_negative_going",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله منفی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی منفی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"is",
+									"not",
+									"She",
+									"going",
+									"to",
+									"come",
+									"."
+								],
+								"answer": "She is not going to come .",
+								"hint_fa": "ساختار درست از چپ به راست: \nشکل ساده فعل + be + not + going to + فاعل"
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_going_review_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "I ______ going to study.",
+								"options": [
+									"is",
+									"am",
+									"are",
+									"will"
+								],
+								"correct": 1.0,
+								"hint_fa": "با I از am استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! am درست است.",
+								"wrong_explanation_fa": "با I باید از am استفاده کنی."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_going_review_2",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "They ______ going to travel.",
+								"options": [
+									"are",
+									"is",
+									"am",
+									"will"
+								],
+								"correct": 0.0,
+								"hint_fa": "با They از are استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! are درست است.",
+								"wrong_explanation_fa": "با They باید از are استفاده کنی."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_going_review_3",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "She is ______ going to eat.",
+								"options": [
+									"isn't",
+									"will",
+									"am",
+									"not"
+								],
+								"correct": 3.0,
+								"hint_fa": "جمله منفی است، باید از not استفاده کنی.",
+								"explanation_fa": "آفرین! not درست است.",
+								"wrong_explanation_fa": "برای جمله منفی از not بعد از فعل be استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit3_learn_questions_going",
+						"type": "learn",
+						"title_fa": "ساختار جمله سوالی",
+						"title_en": "Questions",
+						"explanation": "برای ساختن جمله سوالی، فعل be را به اول جمله می‌آوریم.",
+						"structure": "Be + subject + going to + base verb?",
+						"cards": [
+							{
+								"en": "Are you going to help?",
+								"fa": "آیا قصد کمک داری؟"
+							},
+							{
+								"en": "Is she going to come?",
+								"fa": "آیا او قصد آمدن دارد؟"
+							}
+						]
+					},
+					{
+						"id": "unit3_unscramble_question_going",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله سوالی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی سوالی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"going",
+									"?",
+									"Is",
+									"to",
+									"study",
+									"she"
+								],
+								"answer": "Is she going to study ?",
+								"hint_fa": "ساختار درست از چپ به راست: \nشکل ساده فعل + going to + فاعل + Be"
+							}
+						]
+					},
+					{
+						"id": "unit3_unscramble_drop_going",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله سوالی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی سوالی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"Are",
+									"you",
+									"going",
+									"to",
+									"eat",
+									"?"
+								],
+								"answer": "Are you going to eat ?",
+								"hint_fa": "فعل be اول می‌آید، سپس فاعل و going to و فعل."
+							}
+						]
+					},
+					{
+						"id": "unit3_fill_be_question",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل be درست پر کن.",
+						"items": [
+							{
+								"text": "______ she going to help?",
+								"answers": [
+									"Is"
+								],
+								"hint_fa": "در سوال، فعل be اول می‌آید و با She باید is بیاید.",
+								"explanation_fa": "آفرین! Is درست است.",
+								"wrong_explanation_fa": "با She در سوال از Is استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_going_review_4",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "______ you going to eat?",
+								"options": [
+									"Is",
+									"Are",
+									"Am",
+									"Will"
+								],
+								"correct": 1.0,
+								"hint_fa": "در سوال با You از Are استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! Are درست است.",
+								"wrong_explanation_fa": "با You در سوال از Are استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_going_review_5",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "We are going to ______ football.",
+								"options": [
+									"play",
+									"playing",
+									"plays",
+									"played"
+								],
+								"correct": 0.0,
+								"hint_fa": "بعد از going to از شکل ساده فعل استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! play درست است.",
+								"wrong_explanation_fa": "بعد از going to باید شکل ساده فعل بیاید."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_going_review_6",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "She ______ going to travel.",
+								"options": [
+									"are not",
+									"am not",
+									"is not",
+									"will not"
+								],
+								"correct": 2.0,
+								"hint_fa": "جمله منفی است و با She باید is not استفاده کنی.",
+								"explanation_fa": "آفرین! is not درست است.",
+								"wrong_explanation_fa": "با She در جمله منفی از is not استفاده می‌کنیم."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit4",
+				"type": "group",
+				"title_fa": "Will یا Be Going To؟",
+				"title_en": "Will vs Be Going To",
+				"activity_count": 6.0,
+				"activities": [
+					{
+						"id": "unit4_learn1_will_uses",
+						"type": "learn",
+						"title_fa": "موارد استفاده Will",
+						"title_en": "Uses of Will",
+						"explanation": "از will برای پیش‌بینی‌های بدون شواهد، تصمیمات لحظه‌ای، قول‌ها و پیشنهادات استفاده می‌کنیم.",
+						"structure": "Examples: I think it will rain. (پیش‌بینی), I will help you. (قول)",
+						"cards": [
+							{
+								"en": "I promise I will come.",
+								"fa": "قول می‌دهم می‌آیم."
+							},
+							{
+								"en": "I think it will be sunny.",
+								"fa": "فکر می‌کنم آفتابی باشد."
+							}
+						]
+					},
+					{
+						"id": "unit4_tf_will_uses",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "از will برای قول‌ها استفاده می‌کنیم.",
+								"answer": true,
+								"hint_fa": "یکی از کاربردهای will قول دادن است.",
+								"explanation_fa": "درست است."
+							},
+							{
+								"statement": "از will برای کارهای برنامه‌ریزی‌شده استفاده می‌کنیم.",
+								"answer": false,
+								"hint_fa": "برای کارهای برنامه‌ریزی‌شده از be going to استفاده می‌کنیم.",
+								"explanation_fa": "غلط است. برای کارهای برنامه‌ریزی‌شده از be going to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit4_learn2_going_to_uses",
+						"type": "learn",
+						"title_fa": "موارد استفاده Be Going To",
+						"title_en": "Uses of Be Going To",
+						"explanation": "از be going to برای برنامه‌ها، قصدها و پیش‌بینی‌های بر اساس شواهد استفاده می‌کنیم.",
+						"structure": "Examples: I'm going to visit my friend. (برنامه), Look at those clouds! It's going to rain. (شواهد)",
+						"cards": [
+							{
+								"en": "I am going to start a new job.",
+								"fa": "من قصد دارم شغل جدیدی شروع کنم."
+							},
+							{
+								"en": "It's going to snow.",
+								"fa": "برف خواهد بارید (بر اساس شواهد)."
+							}
+						]
+					},
+					{
+						"id": "unit4_tf_going_to_uses",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "از be going to برای پیش‌بینی‌های بر اساس شواهد استفاده می‌کنیم.",
+								"answer": true,
+								"hint_fa": "یکی از کاربردهای be going to پیش‌بینی بر اساس شواهد است.",
+								"explanation_fa": "درست است."
+							},
+							{
+								"statement": "از be going to برای تصمیمات لحظه‌ای استفاده می‌کنیم.",
+								"answer": false,
+								"hint_fa": "تصمیمات لحظه‌ای با will بیان می‌شوند.",
+								"explanation_fa": "غلط است. برای تصمیمات لحظه‌ای از will استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit4_mc_will_vs_going",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب ساختار درست",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "I promise I ______ help you.",
+								"options": [
+									"will",
+									"am going to",
+									"am",
+									"are"
+								],
+								"correct": 0.0,
+								"hint_fa": "برای قول‌ها از will استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! will درست است.",
+								"wrong_explanation_fa": "برای قول‌ها باید از will استفاده کنی."
+							},
+							{
+								"question": "Look at those clouds! It ______ rain.",
+								"options": [
+									"will",
+									"is going to",
+									"are",
+									"am"
+								],
+								"correct": 1.0,
+								"hint_fa": "برای پیش‌بینی بر اساس شواهد از is going to استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! is going to درست است.",
+								"wrong_explanation_fa": "برای پیش‌بینی بر اساس شواهد از is going to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit4_matching_will_going",
+						"type": "matching",
+						"title_fa": "تشخیص ساختار درست",
+						"instruction_fa": "هر جمله را با ساختار درست آن جفت کن.",
+						"items": [
+							{
+								"left": "I promise I'll come.",
+								"right": "will"
+							},
+							{
+								"left": "I'm going to travel next week.",
+								"right": "be going to"
+							},
+							{
+								"left": "I think it'll be cold.",
+								"right": "will"
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit5",
+				"type": "group",
+				"title_fa": "قیدهای زمان آینده",
+				"title_en": "Future Time Adverbs",
+				"activity_count": 3.0,
+				"activities": [
+					{
+						"id": "unit5_learn_time_adverbs",
+						"type": "learn",
+						"title_fa": "قیدهای زمان آینده",
+						"title_en": "Future Time Adverbs",
+						"explanation": "قیدهای زمان برای مشخص کردن زمان وقوع عمل در آینده استفاده می‌شوند.",
+						"structure": "tomorrow (فردا), next week (هفته آینده), next month (ماه آینده), next year (سال آینده), soon (به زودی)",
+						"cards": [
+							{
+								"en": "I will call you tomorrow.",
+								"fa": "فردا به تو زنگ می‌زنم."
+							},
+							{
+								"en": "They will travel next month.",
+								"fa": "آن‌ها ماه آینده سفر خواهند کرد."
+							}
+						]
+					},
+					{
+						"id": "unit5_matching_time_adverbs",
+						"type": "matching",
+						"title_fa": "اتصال قیدهای زمان به معنی",
+						"instruction_fa": "هر قید زمان را با معنی فارسی آن جفت کن.",
+						"items": [
+							{
+								"left": "tomorrow",
+								"right": "فردا"
+							},
+							{
+								"left": "next week",
+								"right": "هفته آینده"
+							},
+							{
+								"left": "next month",
+								"right": "ماه آینده"
+							},
+							{
+								"left": "next year",
+								"right": "سال آینده"
+							},
+							{
+								"left": "soon",
+								"right": "به زودی"
+							}
+						]
+					},
+					{
+						"id": "unit5_mc_time_adverbs",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب قید زمان درست",
+						"instruction_fa": "قید زمان درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "I will visit my grandma ______.",
+								"options": [
+									"last night",
+									"yesterday",
+									"tomorrow",
+									"now"
+								],
+								"correct": 2.0,
+								"hint_fa": "جمله درباره‌ی آینده است، به قید زمان آینده نیاز داریم.",
+								"explanation_fa": "آفرین! tomorrow درست است.",
+								"wrong_explanation_fa": "باید قید زمان آینده انتخاب کنی."
+							},
+							{
+								"question": "They are going to travel ______.",
+								"options": [
+									"next year",
+									"last year",
+									"yesterday",
+									"now"
+								],
+								"correct": 0.0,
+								"hint_fa": "جمله درباره‌ی آینده است، باید قید زمان آینده انتخاب کنی.",
+								"explanation_fa": "آفرین! next year درست است.",
+								"wrong_explanation_fa": "باید قید زمان آینده انتخاب کنی."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit6",
+				"type": "group",
+				"title_fa": "مرور و جمع‌بندی",
+				"title_en": "Review",
+				"activity_count": 5.0,
+				"activities": [
+					{
+						"id": "unit6_review",
+						"type": "learn",
+						"title_fa": "مرور Will و Be Going To",
+						"title_en": "Review: Will and Be Going To",
+						"explanation": "هر دو برای آینده استفاده می‌شوند اما: will برای پیش‌بینی‌های بدون شواهد، تصمیمات لحظه‌ای و قول‌ها؛ be going to برای برنامه‌ها، قصدها و پیش‌بینی‌های بر اساس شواهد.",
+						"structure": "will: Subject + will + base verb\nbe going to: Subject + be + going to + base verb",
+						"cards": [
+							{
+								"en": "I will help you. (Promise)",
+								"fa": "کمکت می‌کنم. (قول)"
+							},
+							{
+								"en": "I am going to study. (Plan)",
+								"fa": "قصد دارم درس بخوانم. (برنامه)"
+							}
+						]
+					},
+					{
+						"id": "unit6_mc_review_1",
+						"type": "multiple_choice",
+						"title_fa": "مرور - انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "I ______ help you with your project.",
+								"options": [
+									"am",
+									"am going",
+									"going",
+									"will"
+								],
+								"correct": 3.0,
+								"hint_fa": "این جمله یک قول است، باید از will استفاده کنی.",
+								"explanation_fa": "آفرین! will درست است.",
+								"wrong_explanation_fa": "برای قول‌ها از will استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit6_tf_review",
+						"type": "true_false",
+						"title_fa": "مرور - درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "از will برای کارهای برنامه‌ریزی‌شده استفاده می‌کنیم.",
+								"answer": false,
+								"hint_fa": "برای کارهای برنامه‌ریزی‌شده از be going to استفاده می‌کنیم.",
+								"explanation_fa": "غلط است. برای برنامه‌ها از be going to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit6_unscramble_review",
+						"type": "unscramble",
+						"title_fa": "مرور - مرتب‌کردن جمله",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"going",
+									"to",
+									"is",
+									"She",
+									"travel",
+									"next",
+									"week",
+									"."
+								],
+								"answer": "She is going to travel next week .",
+								"hint_fa": "ساختار درست: فاعل + فعل be + going to + فعل + قید زمان."
+							}
+						]
+					},
+					{
+						"id": "unit6_matching_review",
+						"type": "matching",
+						"title_fa": "مرور - اتصال ساختار به کاربرد",
+						"instruction_fa": "هر ساختار را با کاربرد درست آن جفت کن.",
+						"items": [
+							{
+								"left": "Will",
+								"right": "قول و تصمیمات لحظه ای"
+							},
+							{
+								"left": "Be going to",
+								"right": "برنامه ها و پیشبینی با مدرک"
+							}
+						]
+					}
+				]
+			}
+		],
+		"_group_note": "Each 'group' unit contains its activities; GrammarLesson plays them in sequence. Grouping is by id prefix (unit1..unit6)."
+	}
 }

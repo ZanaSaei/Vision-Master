@@ -3,84 +3,79 @@ extends RefCounted
 
 
 # ============================================================
-# COLORS
-# ============================================================
-
-# ============================================================
-# COLORS  —  eye-friendly DARK palette (soft, low contrast)
-# Surfaces are dark slate; text is warm light. Bright accent
-# colors are kept saturated but gentle so they read on dark.
-# ============================================================
-
-const BACKGROUND := Color("049797ff")
-const SURFACE := Color("0e2619ff")
-
-const PRIMARY := Color("#6C7AFF")
-const PRIMARY_DARK := Color("#8490FF")
-const PRIMARY_LIGHT := Color("#262B4D")
-
-const SECONDARY := Color("#6FD6C2")
-const SECONDARY_LIGHT := Color("#18332C")
-
-const TEXT := Color("ffffffff")
-const TEXT_SECONDARY := Color("ffffdcff")
-const TEXT_MUTED := Color("ffffebff")
-
-const SUCCESS := Color("#3CCF7E")
-const SUCCESS_LIGHT := Color("#173322")
-
-const ERROR := Color("#F26D86")
-const ERROR_LIGHT := Color("#3A1E27")
-
-const WARNING := Color("#FFC24D")
-const WARNING_LIGHT := Color("#3A2E14")
-
-const XP := Color("#FFC24D")
-
-const DISABLED := Color("#2A2F3D")
-
-
-# ============================================================
-# THEME-AWARE COLORS
+# GRAMMAR THEME  —  delegates 100% to the app-wide theme owner
 # ------------------------------------------------------------
-# The grammar palette, resolved per app theme mode. Dark mode
-# reproduces the legacy constants above exactly; Light mode
-# borrows the app-wide Global palette where a role maps 1:1 and
-# keeps grammar-specific accent / gold hues with a light variant.
-# All static style helpers below derive from these, so every
-# GrammarTheme-styled widget follows the current Dark / Light mode.
+# Grammar never defines its own colors. Every color in this
+# class resolves through Global.get_theme_color(role), where
+# Global.gd is the single source of truth for the app's Dark /
+# Light "universes". This keeps grammar screens pixel-consistent
+# with the rest of the app and removes the old hardcoded palette
+# that diverged from the global one.
+#
+# The only things defined here are the *non-color* grammar UI
+# constants (typography sizes, spacing, fonts) and the semantic
+# color accessors below, which simply map grammar-facing names to
+# Global's roles for readability.
 # ============================================================
 
-static func _pick(dark: Color, light: Color) -> Color:
-	return dark if Global.theme_is_dark() else light
+
+# ============================================================
+# SEMANTIC COLOR ACCESSORS  (theme-aware, all via Global)
+# ============================================================
+
+# Main app background behind everything.
+static func background_color() -> Color:
+	return Global.get_theme_color("bg")
+
+
+# Primary readable text.
+static func text_color() -> Color:
+	return Global.get_theme_color("text")
+
+
+# Secondary / dimmer text.
+static func text_secondary_color() -> Color:
+	return Global.get_theme_color("text_dim")
+
+
+# Muted / placeholder text.
+static func text_muted_color() -> Color:
+	return Global.get_theme_color("text_dim")
 
 
 # Primary brand accent (button fills, borders, selected markers).
 static func accent_color() -> Color:
-	return _pick(PRIMARY, Global.get_theme_color("accent"))
+	return Global.get_theme_color("accent")
 
 
 # Lighter accent used for hover fills / bright accents.
 static func accent_bright_color() -> Color:
-	return _pick(PRIMARY_DARK, Global.get_theme_color("accent_bright"))
+	return Global.get_theme_color("accent_bright")
 
 
 # Muted accent surface used for selected / hover chip backgrounds.
 static func accent_soft_color() -> Color:
-	return _pick(PRIMARY_LIGHT, Global.get_theme_color("accent_soft"))
+	return Global.get_theme_color("accent_soft")
 
 
-# Accent used as a *font* color (needs to read on a light surface).
+# Accent used as a *font* color (reads well on a surface).
 static func accent_font_color() -> Color:
-	return _pick(PRIMARY_DARK, Global.get_theme_color("accent"))
+	return Global.get_theme_color("accent")
 
 
-static func text_secondary_color() -> Color:
-	return _pick(TEXT_SECONDARY, Global.get_theme_color("text_dim"))
+# Alias of the primary accent (grammar's former "PRIMARY").
+static func primary_color() -> Color:
+	return Global.get_theme_color("accent")
 
 
-static func text_muted_color() -> Color:
-	return _pick(TEXT_MUTED, Global.get_theme_color("text_dim"))
+# Alias of the bright accent (grammar's former "PRIMARY_DARK").
+static func primary_dark_color() -> Color:
+	return Global.get_theme_color("accent_bright")
+
+
+# Alias of the muted accent surface (grammar's former "PRIMARY_LIGHT").
+static func primary_light_color() -> Color:
+	return Global.get_theme_color("accent_soft")
 
 
 static func success_color() -> Color:
@@ -88,7 +83,7 @@ static func success_color() -> Color:
 
 
 static func success_soft_color() -> Color:
-	return _pick(SUCCESS_LIGHT, Global.get_theme_color("success").lightened(0.82))
+	return Global.get_theme_color("success_soft")
 
 
 static func error_color() -> Color:
@@ -96,15 +91,30 @@ static func error_color() -> Color:
 
 
 static func error_soft_color() -> Color:
-	return _pick(ERROR_LIGHT, Global.get_theme_color("error").lightened(0.85))
+	return Global.get_theme_color("error_soft")
 
 
 static func warning_color() -> Color:
 	return Global.get_theme_color("warning")
 
 
+static func warning_soft_color() -> Color:
+	return Global.get_theme_color("warning_soft")
+
+
+# Gold / XP color (maps to the app-wide warning gold).
 static func xp_color() -> Color:
-	return _pick(XP, Color(0.62, 0.45, 0.0))
+	return Global.get_theme_color("warning")
+
+
+# Dimmed text for locked/disabled units.
+static func locked_text_color() -> Color:
+	return Global.get_theme_color("text_dim")
+
+
+# Disabled / muted surface fill.
+static func disabled_color() -> Color:
+	return Global.get_theme_color("surface_alt")
 
 
 # ============================================================
@@ -135,7 +145,7 @@ const BUTTON_FONT_SIZE_MATCHING := 24
 const SAFE_MARGIN := 60
 
 # Extra padding inside the main grammar content card.
-const CONTENT_MARGIN := 20
+const CONTENT_MARGIN := 50
 
 
 # ============================================================
@@ -156,7 +166,6 @@ const FONT_EN_REGULAR_PATH := \
 const FONT_EN_BOLD_PATH := \
 	"res://assets/fonts/Nunito-Bold.ttf"
 	
-
 
 static func get_fa_regular() -> Font:
 	return load(FONT_FA_REGULAR_PATH) as Font
@@ -234,9 +243,9 @@ static func rounded_box(
 
 static func card_style() -> StyleBoxFlat:
 	var style := rounded_box(
-		_pick(SURFACE, Global.get_theme_color("surface")),
+		Global.get_theme_color("surface"),
 		20,
-		_pick(Color("#2E3446"), Global.get_theme_color("border")),
+		Global.get_theme_color("border"),
 		1
 	)
 
@@ -249,6 +258,25 @@ static func card_style() -> StyleBoxFlat:
 
 	style.shadow_size = 10
 	style.shadow_offset = Vector2(0, 4)
+
+	return style
+
+
+# Raised info card used for the teaching content on a unit's first learning
+# page. Uses surface_alt so it clearly contrasts with the parent "surface"
+# container — this avoids the flat / dull "white-on-white" (light) or
+# "dark-on-dark" (dark) look that nested surface-on-surface boxes produce.
+static func info_card_style() -> StyleBoxFlat:
+	var style := rounded_box(
+		Global.get_theme_color("surface_alt"),
+		20,
+		Global.get_theme_color("border"),
+		1
+	)
+
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.25)
+	style.shadow_size = 8
+	style.shadow_offset = Vector2(0, 3)
 
 	return style
 
@@ -276,9 +304,9 @@ static func primary_button_pressed() -> StyleBoxFlat:
 
 static func secondary_button() -> StyleBoxFlat:
 	return rounded_box(
-		_pick(SURFACE, Global.get_theme_color("surface")),
+		Global.get_theme_color("surface"),
 		18,
-		_pick(Color("#3A4154"), Global.get_theme_color("border")),
+		Global.get_theme_color("border"),
 		2
 	)
 
@@ -312,7 +340,7 @@ static func selected_button() -> StyleBoxFlat:
 
 static func disabled_button() -> StyleBoxFlat:
 	return rounded_box(
-		_pick(DISABLED, Global.get_theme_color("surface_alt")),
+		disabled_color(),
 		18
 	)
 
@@ -455,11 +483,11 @@ static func style_card(
 # Professional raised header bar: a surface clearly different from the
 # background, with a soft drop shadow so it reads as floating above.
 static func header_style() -> StyleBoxFlat:
-	# Unified app header look: theme surface, rounded-bottom pill, violet underline.
+	# Unified app header look: theme surface, rounded-bottom pill, accent underline.
 	var style := rounded_box(
-		_pick(Color("#232B3E"), Global.get_theme_color("surface")),
+		Global.get_theme_color("surface"),
 		48,
-		_pick(Color("#303A50"), Global.get_theme_color("accent")),
+		Global.get_theme_color("accent"),
 		1
 	)
 	style.corner_radius_top_left = 10

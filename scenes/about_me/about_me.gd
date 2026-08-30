@@ -34,8 +34,7 @@ func _on_theme_changed(_mode: int) -> void:
 #  THEME AWARENESS — restyle this page for Dark / Light
 # ══════════════════════════════════════════════════════════════
 func _apply_theme() -> void:
-	var dark := Global.theme_is_dark()
-	bg.color = Color(0.012, 0.018, 0.055, 0.88) if dark else Color(0.955, 0.968, 0.98, 0.90)
+	bg.color = Color(Global.get_theme_color("bg"), 0.9)
 	back_button.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	_theme_walk(self)
 	# Unified header styling last, so it wins over the generic walk.
@@ -45,7 +44,7 @@ func _apply_theme() -> void:
 
 func _theme_walk(node: Node) -> void:
 	if node is ColorRect and node.name == "Bg":
-		bg.color = Color(0.012, 0.018, 0.055, 0.88) if Global.theme_is_dark() else Color(0.955, 0.968, 0.98, 0.90)
+		bg.color = Color(Global.get_theme_color("bg"), 0.9)
 	elif node is PanelContainer and node.name != "Avatar":
 		var style := StyleBoxFlat.new()
 		style.set_corner_radius_all(26)

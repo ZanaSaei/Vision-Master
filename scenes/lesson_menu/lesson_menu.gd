@@ -20,7 +20,6 @@ const SCENE_LISTENING_SPEAKING:= "res://scenes/listening_speaking/ListeningSpeak
 const SCENE_PRONUNCIATION     := "res://scenes/pronunciation/Pronunciation.tscn"
 const SCENE_WRITING           := "res://scenes/writing/Writing.tscn"
 const SCENE_WHAT_YOU_LEARNED  := "res://scenes/what_you_learned/WhatYouLearned.tscn"
-const SCENE_QUIZ              := "res://scenes/quiz/Quiz.tscn"
 const SCENE_WORKBOOK          := "res://scenes/workbook/Workbook.tscn"
 
 # Font paths for typography
@@ -49,7 +48,6 @@ const SECTIONS_VISION_1 := [
 	[ "Writing ",                  "📝 ", "WRITING" ],
 	[ "What You Learned ",         "🔄 ", "WHAT_YOU_LEARNED" ],
 	[ "Workbook ",                 "📝 ", "WORKBOOK" ],
-	[ "Quiz ",                     "❓ ", "QUIZ" ],
 ]
 
 # Section definitions for Vision 2 and 3 (includes Vocabulary Development)
@@ -64,7 +62,6 @@ const SECTIONS_VISION_2_3 := [
 	[ "Writing ",                  "📝 ", "WRITING" ],
 	[ "What You Learned ",         "🔄 ", "WHAT_YOU_LEARNED" ],
 	[ "Workbook ",                 "📝 ", "WORKBOOK" ],
-	[ "Quiz ",                     "❓ ", "QUIZ" ],
 ]
 
 # Background colors for section buttons (slightly tinted)
@@ -124,6 +121,10 @@ func _ready() -> void:
 
 	Global.on_theme_changed(_on_theme_changed)
 	_apply_theme()
+	# Global's one-time scene-style walk runs right after _ready and would
+	# paint the glossy section buttons with the theme text color; re-apply
+	# our white button fonts once the walk has finished.
+	_apply_theme.call_deferred()
 
 
 func _apply_theme() -> void:
@@ -135,6 +136,17 @@ func _apply_theme() -> void:
 		"font_color",
 		Color(0, 0, 0, 1) if Global.theme_is_dark() else Global.get_theme_color("text")
 	)
+	# BUTTONS ALWAYS RENDER WHITE TEXT in both Dark and Light — the glossy
+	# section cards need it, and the walker must not be able to change this.
+	_force_white_button_fonts(self)
+
+
+func _force_white_button_fonts(root: Node) -> void:
+	for child in root.get_children():
+		if child is Button:
+			for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+				child.add_theme_color_override(state, Color.WHITE)
+		_force_white_button_fonts(child)
 
 
 func _on_theme_changed(_mode: int) -> void:
@@ -308,7 +320,6 @@ func _on_section_pressed(scene_key: String) -> void:
 		"WRITING": SCENE_WRITING,
 		"WHAT_YOU_LEARNED": SCENE_WHAT_YOU_LEARNED,
 		"WORKBOOK": SCENE_WORKBOOK,
-		"QUIZ": SCENE_QUIZ,
 	}
 	
 	var path: String = scene_map.get(scene_key, "")

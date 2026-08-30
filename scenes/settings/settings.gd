@@ -116,19 +116,16 @@ func _apply_theme() -> void:
 	danger.content_margin_right = 26.0
 	danger.content_margin_bottom = 20.0
 	danger.set_border_width_all(1)
-	danger.border_color = Color(1, 0.5, 0.55, 1)
+	danger.border_color = Global.get_theme_color("error")
 	if Global.theme_is_dark():
-		danger.bg_color = Color(0.85, 0.16, 0.22, 0.30)
+		danger.bg_color = Color(Global.get_theme_color("error"), 0.30)
 	else:
-		danger.bg_color = Color(0.85, 0.16, 0.22, 1.0)
+		danger.bg_color = Global.get_theme_color("error")
 	reset_button.add_theme_stylebox_override("normal", danger)
 	reset_button.add_theme_stylebox_override("hover", danger)
 	reset_button.add_theme_stylebox_override("pressed", danger)
 	reset_button.add_theme_stylebox_override("focus", danger)
-	if Global.theme_is_dark():
-		reset_button.add_theme_color_override("font_color", Color(1, 0.75, 0.8))
-	else:
-		reset_button.add_theme_color_override("font_color", Color.WHITE)
+	reset_button.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
 
 	# The runtime confirm modal follows the palette too.
 	if _confirm_card != null:
@@ -148,7 +145,7 @@ func _theme_walk(node: Node) -> void:
 	if node == _modal_root:
 		return
 	if node is ColorRect and node_name == "Bg":
-		bg.color = Color(0.012, 0.018, 0.055, 0.88) if Global.theme_is_dark() else Color(0.955, 0.968, 0.98, 0.90)
+		bg.color = Color(Global.get_theme_color("bg"), 0.9)
 
 	elif node is PanelContainer:
 		var style := StyleBoxFlat.new()
