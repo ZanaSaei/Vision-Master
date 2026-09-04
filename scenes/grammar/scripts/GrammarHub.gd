@@ -32,6 +32,7 @@ func _build_ui() -> void:
 	main.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	main.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	main.add_theme_constant_override("separation", 24)
+	main.alignment = BoxContainer.ALIGNMENT_CENTER
 	root_margin.add_child(main)
 
 	var header_box: PanelContainer = PanelContainer.new()
@@ -50,12 +51,12 @@ func _build_ui() -> void:
 	header_row.add_theme_constant_override("separation", 16)
 	header_margin.add_child(header_row)
 
-	var back_button: Button = _make_header_button("🏠 منوی درس", Callable(self, "_on_back_pressed"))
+	var back_button: Button = GrammarTheme.make_header_icon_button("res://images/Back.png", Callable(self, "_on_back_pressed"))
 	header_row.add_child(back_button)
 
 	var title_label: Label = Label.new()
 	title_label.text = "یادگیری گرامر"
-	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var title_font: Font = GrammarTheme.get_fa_bold()
@@ -64,10 +65,6 @@ func _build_ui() -> void:
 	title_label.add_theme_font_size_override("font_size", 42)
 	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	header_row.add_child(title_label)
-
-	var spacer: Control = Control.new()
-	spacer.custom_minimum_size = Vector2(160.0, 1.0)
-	header_row.add_child(spacer)
 
 	var content_box: PanelContainer = PanelContainer.new()
 	GrammarTheme.style_card(content_box)

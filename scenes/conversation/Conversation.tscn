@@ -4,7 +4,6 @@
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_08em2"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_khtvf"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_3afir"]
-[ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="3_s57c2"]
 [ext_resource type="PackedScene" uid="uid://d077on3j3i6pd" path="res://scenes/shared/AudioPanel.tscn" id="5_3afir"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="5_jy5oa"]
 
@@ -34,7 +33,7 @@ color = Color(0.17254902, 0.21960784, 0.49803922, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 30.0
+offset_top = 0.0
 offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("2_08em2")
@@ -60,7 +59,7 @@ flat = true
 
 [node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
 layout_mode = 2
-text = "Conversation"
+text = "مکالمه"
 label_settings = SubResource("LabelSettings_swh16")
 
 [node name="TranslationToggleButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=223618354]
@@ -70,9 +69,9 @@ text = "Translate"
 
 [node name="AudioButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1020383883]
 layout_mode = 2
-icon = ExtResource("3_s57c2")
+theme_override_font_sizes/font_size = 30
+text = "صدا"
 flat = true
-icon_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1463495940]
 layout_mode = 1

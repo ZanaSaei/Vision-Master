@@ -36,7 +36,7 @@ color = Color(0.9372549, 0.9647059, 1, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 30.0
+offset_top = 0.0
 offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yhcqr")
@@ -54,7 +54,7 @@ flat = true
 
 [node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=2090702329]
 layout_mode = 2
-text = "Conversation"
+text = "مکالمه"
 label_settings = SubResource("LabelSettings_swh16")
 
 [node name="TranslationToggleButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1752625087]

@@ -1,314 +1,272 @@
 extends "res://autoload/BackButtonHandler.gd"
+
 ############################################################
-# LESSON MENU
-# Shows the section buttons for the current book + lesson.
-# Reads Global.current_book and Global.current_lesson.
-# Navigation uses the SLIDE transition:
-# section tap -> slide forward (content exits left)
-# back tap    -> slide back    (content exits right)
+# LESSON MENU — modern, friendly section picker.
+# Shows the section cards for Global.current_book + current_lesson.
+# Navigation: GRAMMAR slides forward; other sections fade.
 # The animated background lives in the MenuBackground autoload.
 ############################################################
 
-# Scene paths for all section types
-const SCENE_BOOK_MENU         := "res://scenes/book_menu/BookMenu.tscn"
-const SCENE_VOCAB             := "res://scenes/vocabulary/VocabFlashcards.tscn"
-const SCENE_CONVERSATION      := "res://scenes/conversation/Conversation.tscn"
-const SCENE_READING           := "res://scenes/reading/Reading.tscn"
-const SCENE_GRAMMAR           := "res://scenes/grammar/GrammarHub.tscn"
-const SCENE_VOCAB_DEVELOPMENT := "res://scenes/vocabulary_development/VocabularyDevelopment.tscn"
-const SCENE_LISTENING_SPEAKING:= "res://scenes/listening_speaking/ListeningSpeaking.tscn"
-const SCENE_PRONUNCIATION     := "res://scenes/pronunciation/Pronunciation.tscn"
-const SCENE_WRITING           := "res://scenes/writing/Writing.tscn"
-const SCENE_WHAT_YOU_LEARNED  := "res://scenes/what_you_learned/WhatYouLearned.tscn"
-const SCENE_WORKBOOK          := "res://scenes/workbook/Workbook.tscn"
+const SCENE_BOOK_MENU          := "res://scenes/book_menu/BookMenu.tscn"
+const SCENE_VOCAB              := "res://scenes/vocabulary/VocabFlashcards.tscn"
+const SCENE_CONVERSATION       := "res://scenes/conversation/Conversation.tscn"
+const SCENE_READING            := "res://scenes/reading/Reading.tscn"
+const SCENE_GRAMMAR            := "res://scenes/grammar/GrammarHub.tscn"
+const SCENE_VOCAB_DEVELOPMENT  := "res://scenes/vocabulary_development/VocabularyDevelopment.tscn"
+const SCENE_LISTENING_SPEAKING := "res://scenes/listening_speaking/ListeningSpeaking.tscn"
+const SCENE_PRONUNCIATION      := "res://scenes/pronunciation/Pronunciation.tscn"
+const SCENE_WRITING            := "res://scenes/writing/Writing.tscn"
+const SCENE_WHAT_YOU_LEARNED   := "res://scenes/what_you_learned/WhatYouLearned.tscn"
+const SCENE_WORKBOOK           := "res://scenes/workbook/Workbook.tscn"
+const BACK_ICON                := "res://images/Back.png"
 
-# Font paths for typography
-const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_JAKARTA_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-var font_regular: FontFile
-var font_bold: FontFile
-var _navigating := false
+const PERSIAN_DIGITS := ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۱۰"]
 
-# Lesson titles organized by book number
-const LESSON_TITLES := {
-	1: [ "Saving Nature ", "Wonders of Creation ",
-		 "The Value of Knowledge ", "Traveling the World "],
-	2: [ "Understanding People ", "A Healthy Lifestyle ", "Art and Culture "],
-	3: [ "Sense of Appreciation ", "Look It Up! ", "Renewable Energy "],
-}
-
-# Section definitions for Vision 1 (no Vocabulary Development section)
+# Section definitions: [English label, Persian label, emoji, scene key]
 const SECTIONS_VISION_1 := [
-	[ "Get Ready and New Words ",  "📚 ", "VOCAB" ],
-	[ "Conversation ",             "💬 ", "CONVERSATION" ],
-	[ "Reading ",                  "📖 ", "READING" ],
-	[ "Grammar ",                  "✏️ ", "GRAMMAR" ],
-	[ "Listening and Speaking ",   "🎧 ", "LISTENING_SPEAKING" ],
-	[ "Pronunciation ",            "🎙️ ", "PRONUNCIATION" ],
-	[ "Writing ",                  "📝 ", "WRITING" ],
-	[ "What You Learned ",         "🔄 ", "WHAT_YOU_LEARNED" ],
-	[ "Workbook ",                 "📝 ", "WORKBOOK" ],
+	["Get Ready and New Words", "لغات جدید",        "📚", "VOCAB"],
+	["Conversation",            "مکالمه",            "💬", "CONVERSATION"],
+	["Reading",                 "خواندن",            "📖", "READING"],
+	["Grammar",                 "گرامر",             "✏️", "GRAMMAR"],
+	["Listening and Speaking",  "شنیداری و گفتاری",  "🎧", "LISTENING_SPEAKING"],
+	["Pronunciation",           "تلفظ",              "🎙️", "PRONUNCIATION"],
+	["Writing",                 "نوشتن",             "📝", "WRITING"],
+	["What You Learned",        "آنچه آموختید",      "🔄", "WHAT_YOU_LEARNED"],
+	["Workbook",                "کتاب کار",          "📘", "WORKBOOK"],
 ]
 
-# Section definitions for Vision 2 and 3 (includes Vocabulary Development)
 const SECTIONS_VISION_2_3 := [
-	[ "Get Ready and New Words ",  "📚 ", "VOCAB" ],
-	[ "Conversation ",             "💬 ", "CONVERSATION" ],
-	[ "Reading ",                  "📖 ", "READING" ],
-	[ "Vocabulary Development ",   "🧠 ", "VOCAB_DEVELOPMENT" ],
-	[ "Grammar ",                  "✏️ ", "GRAMMAR" ],
-	[ "Listening and Speaking ",   "🎧 ", "LISTENING_SPEAKING" ],
-	[ "Pronunciation ",            "🎙️ ", "PRONUNCIATION" ],
-	[ "Writing ",                  "📝 ", "WRITING" ],
-	[ "What You Learned ",         "🔄 ", "WHAT_YOU_LEARNED" ],
-	[ "Workbook ",                 "📝 ", "WORKBOOK" ],
+	["Get Ready and New Words", "لغات جدید",        "📚", "VOCAB"],
+	["Conversation",            "مکالمه",            "💬", "CONVERSATION"],
+	["Reading",                 "خواندن",            "📖", "READING"],
+	["Vocabulary Development",  "توسعه واژگان",      "🧠", "VOCAB_DEVELOPMENT"],
+	["Grammar",                 "گرامر",             "✏️", "GRAMMAR"],
+	["Listening and Speaking",  "شنیداری و گفتاری",  "🎧", "LISTENING_SPEAKING"],
+	["Pronunciation",           "تلفظ",              "🎙️", "PRONUNCIATION"],
+	["Writing",                 "نوشتن",             "📝", "WRITING"],
+	["What You Learned",        "آنچه آموختید",      "🔄", "WHAT_YOU_LEARNED"],
+	["Workbook",                "کتاب کار",          "📘", "WORKBOOK"],
 ]
 
-# Background colors for section buttons (slightly tinted)
-const SECTION_COLORS: Array[Color] = [
-	Color("#EFF6FF"), Color("#F0FDF4"), Color("#FFF7ED"),
-	Color("#FDF4FF"), Color("#F0FDFA"), Color("#FFF1F2"),
-	Color("#F5F3FF"), Color("#FFFBEB"), Color("#F1F5F9"),
-	Color("#ECFEFF"),
-]
-
-# Accent colors for the glossy shine and border comet effects
 const SECTION_ACCENT_COLORS: Array[Color] = [
-	Color("#2563EB"), Color("#16A34A"), Color("#EA580C"),
+	Color("#2563EB"), Color("#0EA5A4"), Color("#F59E0B"),
 	Color("#9333EA"), Color("#0D9488"), Color("#E11D48"),
-	Color("#7C3AED"), Color("#D97706"), Color("#475569"),
+	Color("#7C3AED"), Color("#D97706"), Color("#64748B"),
 	Color("#0891B2"),
 ]
 
-# UI element references
-@onready var back_button: Button               = $PanelContainer/TopBar/BackButton
-@onready var top_bar_title: Label              = $PanelContainer/TopBar/TopBarTitle
-@onready var lesson_subtitle: Label            = $MainLayout/InnerLayout/LessonSubtitle
-@onready var sections_container: VBoxContainer = $MainLayout/InnerLayout/SectionsContainer
+const LESSON_TITLES := {
+	1: ["نجات طبیعت", "شگفتی‌های آفرینش", "ارزش دانش", "سفر به دور دنیا"],
+	2: ["درک مردم", "سبک زندگی سالم", "هنر و فرهنگ"],
+	3: ["حس قدردانی", "جستجو کن!", "انرژی تجدیدپذیر"],
+}
 
-# Glossy + border-comet state
-const CORNER_RADIUS := 26.0
-var _section_mats: Array[ShaderMaterial] = []
-var _section_btns: Array[Button]         = []
+var _navigating: bool = false
+var _book: int = 1
+var _lesson: int = 1
+
+# Built UI state.
+var _scroll: ScrollContainer = null
+var _col: VBoxContainer = null
+var _title_label: Label = null
+var _subtitle_badge: Label = null
+var _back_button: Button = null
+var _card_buttons: Array[Button] = []
+var _card_accents: Array[Color] = []
+
 
 func _ready() -> void:
-	# Remove old AnimatedBackground if it exists in this scene
-	var legacy_bg := get_node_or_null("AnimatedBackground")
-	if legacy_bg:
-		legacy_bg.visible = false
-		legacy_bg.queue_free()
+	_book = Global.current_book
+	_lesson = Global.current_lesson
 
-	# Set pivot for scale animations
-	back_button.pivot_offset = back_button.size / 2.0
+	_build_ui()
 
-	# Load fonts and apply to UI
-	_load_fonts()
-	_apply_fonts_to_labels()
-	back_button.pressed.connect(_on_back_button_pressed)
-
-	# Set up lesson information from global state
-	var book: int   = Global.current_book
-	var lesson: int = Global.current_lesson
-	top_bar_title.text   = "Lesson %d" % [lesson]
-	lesson_subtitle.text = _get_lesson_title(book, lesson)
-	_build_section_buttons(book)
-
-	# Save current scene for back navigation
+	# Save current scene for back navigation from drill-down scenes.
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
-
-	# Allow layout to settle before setting shader sizes
-	_finalize_shine_sizes()
 
 	Global.on_theme_changed(_on_theme_changed)
 	_apply_theme()
-	# Global's one-time scene-style walk runs right after _ready and would
-	# paint the glossy section buttons with the theme text color; re-apply
-	# our white button fonts once the walk has finished.
-	_apply_theme.call_deferred()
+
+	# Gentle entrance.
+	_scroll.modulate.a = 0.0
+	var tw := create_tween()
+	tw.tween_property(_scroll, "modulate:a", 1.0, 0.30) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 
-func _apply_theme() -> void:
-	if not is_inside_tree():
-		return
-	# Lesson subtitle: keep the current black text in dark mode, use the
-	# palette text color in light mode.
-	lesson_subtitle.add_theme_color_override(
-		"font_color",
-		Color(0, 0, 0, 1) if Global.theme_is_dark() else Global.get_theme_color("text")
+func _get_lesson_title() -> String:
+	var titles: Array = LESSON_TITLES.get(_book, [])
+	if _lesson - 1 < titles.size():
+		return titles[_lesson - 1]
+	return ""
+
+
+func _build_ui() -> void:
+	# ---- Scrollable content (behind the fixed header) ----
+	_scroll = ScrollContainer.new()
+	_scroll.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_scroll.offset_top = 0.0
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
+	add_child(_scroll)
+
+	# ---- Header bar (fixed on top, renders OVER the scroll) ----
+	var header := PanelContainer.new()
+	header.name = "HeaderBar"
+	header.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	header.offset_bottom = 260.0
+	header.mouse_filter = Control.MOUSE_FILTER_PASS
+	add_child(header)
+
+	var h_margin := MarginContainer.new()
+	h_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	h_margin.add_theme_constant_override("margin_left", 36)
+	h_margin.add_theme_constant_override("margin_right", 36)
+	h_margin.add_theme_constant_override("margin_top", 60)
+	h_margin.add_theme_constant_override("margin_bottom", 24)
+	header.add_child(h_margin)
+
+	var h_row := HBoxContainer.new()
+	h_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	h_row.add_theme_constant_override("separation", 20)
+	h_margin.add_child(h_row)
+
+	# Back button sits on the LEFT; the title column is centred between it
+	# and a right-hand spacer that mirrors the button's width.
+	_back_button = MenuStyle.make_back_button(BACK_ICON, 132)
+	_back_button.pressed.connect(_on_back_button_pressed)
+	MenuStyle.wire_microinteractions(_back_button)
+	h_row.add_child(_back_button)
+
+	var title_col := VBoxContainer.new()
+	title_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	title_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	title_col.add_theme_constant_override("separation", 4)
+	title_col.alignment = BoxContainer.ALIGNMENT_CENTER
+
+	_title_label = Label.new()
+	_title_label.text = MenuStyle.persian_digits("درس %d" % _lesson)
+	_title_label.add_theme_font_override("font", MenuStyle.vazir())
+	_title_label.add_theme_font_size_override("font_size", 70)
+	_title_label.add_theme_color_override("font_color", MenuStyle.accent())
+	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+	var lesson_title := _get_lesson_title()
+	_subtitle_badge = MenuStyle.pill_label(
+		MenuStyle.persian_digits(lesson_title if lesson_title != "" else "ویژن %d" % _book),
+		MenuStyle.accent(), 28
 	)
-	# BUTTONS ALWAYS RENDER WHITE TEXT in both Dark and Light — the glossy
-	# section cards need it, and the walker must not be able to change this.
-	_force_white_button_fonts(self)
+	_subtitle_badge.custom_minimum_size = Vector2(0, 56)
+	_subtitle_badge.add_theme_stylebox_override("normal", MenuStyle.icon_chip(MenuStyle.accent(), 26))
+	_subtitle_badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title_col.add_child(_title_label)
+	title_col.add_child(_subtitle_badge)
+
+	h_row.add_child(title_col)
+
+	# A right-hand spacer mirrors the back button's width so the title
+	# column stays perfectly centred in the header.
+	var right_pad := Control.new()
+	right_pad.custom_minimum_size = Vector2(132, 1)
+	h_row.add_child(right_pad)
+
+	# ---- Scrollable content (starts below the fixed header) ----
+	var outer := MarginContainer.new()
+	outer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	outer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	outer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	outer.add_theme_constant_override("margin_left", 40)
+	outer.add_theme_constant_override("margin_right", 40)
+	outer.add_theme_constant_override("margin_top", 260)
+	outer.add_theme_constant_override("margin_bottom", 72)
+	_scroll.add_child(outer)
+
+	_col = VBoxContainer.new()
+	_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_col.add_theme_constant_override("separation", 18)
+	outer.add_child(_col)
+
+	var hero := Label.new()
+	hero.text = "یک بخش را انتخاب کنید 👇"
+	hero.add_theme_font_override("font", MenuStyle.vazir())
+	hero.add_theme_font_size_override("font_size", 40)
+	hero.add_theme_color_override("font_color", MenuStyle.text_dim())
+	hero.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hero.custom_minimum_size = Vector2(0, 70)
+	_col.add_child(hero)
+
+	var sections: Array = SECTIONS_VISION_1 if _book == 1 else SECTIONS_VISION_2_3
+	for i in sections.size():
+		var sec: Array = sections[i]
+		var label_en: String = sec[0]
+		var label_fa: String = sec[1]
+		var emoji: String = sec[2]
+		var scene_key: String = sec[3]
+		var accent: Color = SECTION_ACCENT_COLORS[i % SECTION_ACCENT_COLORS.size()]
+
+		var card: Button = MenuStyle.make_card(label_en, label_fa, emoji, accent, 150, "", true)
+		card.pressed.connect(_on_section_pressed.bind(scene_key))
+		MenuStyle.wire_microinteractions(card)
+		_col.add_child(card)
+		_card_buttons.append(card)
+		_card_accents.append(accent)
+
+	var spacer := Control.new()
+	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	spacer.custom_minimum_size = Vector2(0, 40)
+	_col.add_child(spacer)
+
+	_col.add_child(MenuStyle.make_tip_card("بخشها را به ترتیب پیش ببر تا بهتر یاد بگیری 🌱", "🌟"))
 
 
-func _force_white_button_fonts(root: Node) -> void:
-	for child in root.get_children():
-		if child is Button:
-			for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-				child.add_theme_color_override(state, Color.WHITE)
-		_force_white_button_fonts(child)
-
-
+############################################################
+# THEME
+############################################################
 func _on_theme_changed(_mode: int) -> void:
 	if not is_inside_tree():
 		return
 	_apply_theme()
 
 
-func _load_fonts() -> void:
-	# Load custom fonts from assets
-	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
-	font_bold    = load(FONT_JAKARTA_BOLD_PATH)
-	if font_regular == null:
-		push_warning("Regular font not found at: " + FONT_JAKARTA_REGULAR_PATH)
-	if font_bold == null:
-		push_warning("Bold font not found at: " + FONT_JAKARTA_BOLD_PATH)
-
-func _apply_fonts_to_labels() -> void:
-	# Apply loaded fonts to title and subtitle labels
-	if font_bold != null:
-		top_bar_title.add_theme_font_override("font", font_bold)
-	if font_regular != null:
-		lesson_subtitle.add_theme_font_override("font", font_regular)
-
-func _get_lesson_title(book: int, lesson: int) -> String:
-	# Get the title for a specific lesson in a book
-	var titles: Array = LESSON_TITLES.get(book, [])
-	if lesson - 1 < titles.size():
-		return titles[lesson - 1]
-	return ""
-
-func _apply_glossy_style(btn: Button, accent: Color) -> void:
-	# Apply a glossy glass-morphism style to the button
-	if btn.pivot_offset == Vector2.ZERO:
-		btn.pivot_offset = btn.size / 2.0
-
-	# Calculate style colors based on accent
-	var fill := Color(accent.r, accent.g, accent.b, 0.34)
-	var rim: Color = accent.lerp(Color.WHITE, 0.55)
-	rim.a = 0.75
-	var glow := Color(accent.r * 0.35, accent.g * 0.35, accent.b * 0.35, 0.55)
-
-	# Normal state style
-	var style := StyleBoxFlat.new()
-	style.bg_color = fill
-	style.set_corner_radius_all(int(CORNER_RADIUS))
-	style.border_width_left = 2; style.border_width_top = 2
-	style.border_width_right = 1; style.border_width_bottom = 1
-	style.border_color  = rim
-	style.shadow_color  = glow
-	style.shadow_size   = 16
-	style.shadow_offset = Vector2(0, 6)
-	btn.add_theme_stylebox_override("normal", style)
-
-	# Hover state - brighter, larger shadow
-	var hover_style := style.duplicate() as StyleBoxFlat
-	hover_style.bg_color    = Color(accent.r, accent.g, accent.b, 0.50)
-	hover_style.shadow_size = 22
-	btn.add_theme_stylebox_override("hover", hover_style)
-
-	# Pressed state - darker, smaller shadow
-	var press_style := style.duplicate() as StyleBoxFlat
-	press_style.bg_color      = Color(accent.r, accent.g, accent.b, 0.24)
-	press_style.shadow_size   = 8
-	press_style.shadow_offset = Vector2(0, 2)
-	btn.add_theme_stylebox_override("pressed", press_style)
-
-	# Focus state - bright border
-	var focus_style := hover_style.duplicate() as StyleBoxFlat
-	focus_style.border_color = accent.lerp(Color.WHITE, 0.8)
-	focus_style.border_color.a = 0.9
-	btn.add_theme_stylebox_override("focus", focus_style)
+func _apply_theme() -> void:
+	if not is_inside_tree():
+		return
+	if _title_label:
+		_title_label.add_theme_color_override("font_color", MenuStyle.accent())
+	if _subtitle_badge:
+		_subtitle_badge.add_theme_stylebox_override("normal", MenuStyle.icon_chip(MenuStyle.accent(), 26))
+		_subtitle_badge.add_theme_color_override("font_color", MenuStyle.pill_text(MenuStyle.accent()))
+	var header: PanelContainer = get_node_or_null("HeaderBar") as PanelContainer
+	if header:
+		header.add_theme_stylebox_override("panel", MenuStyle.header_bar_style(44, true))
+	for i in _card_buttons.size():
+		var btn: Button = _card_buttons[i]
+		var accent: Color = _card_accents[i]
+		btn.add_theme_stylebox_override("normal", MenuStyle.card_style(accent, 26, false, true))
+		btn.add_theme_stylebox_override("hover", MenuStyle.card_hover_style(accent, 26, true))
+		btn.add_theme_stylebox_override("pressed", MenuStyle.card_pressed_style(accent, 26, true))
+		btn.add_theme_stylebox_override("focus", MenuStyle.card_hover_style(accent, 26, true))
+		var tl: Label = btn.get_node_or_null("Margin/Row/TextColumn/TitleLabel") as Label
+		if tl:
+			tl.add_theme_color_override("font_color", MenuStyle.text())
+		var sl: Label = btn.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
+		if sl:
+			sl.add_theme_color_override("font_color", MenuStyle.subtitle_color())
 
 
-func _set_btn_border_size(mat: ShaderMaterial, btn: Button) -> void:
-	# Update shader with current button size
-	var rs := btn.size
-	if rs.x < 1.0 or rs.y < 1.0:
-		rs = Vector2(600.0, 150.0)
-	mat.set_shader_parameter("rect_size", rs)
-
-func _finalize_shine_sizes() -> void:
-	# Wait for layout to complete, then update all shader sizes
-	await get_tree().process_frame
-	await get_tree().process_frame
-	for i in range(_section_mats.size()):
-		_set_btn_border_size(_section_mats[i], _section_btns[i])
-
-func _build_section_buttons(book: int) -> void:
-	# Build section buttons based on the current book version
-	var sections: Array
-	if book == 1:
-		sections = SECTIONS_VISION_1
-	else:
-		sections = SECTIONS_VISION_2_3
-
-	for i in sections.size():
-		# Extract section data
-		var section_info: Array = sections[i]
-		var label: String    = section_info[0]
-		var icon: String     = section_info[1]
-		var scene_key: String = section_info[2]
-		var accent: Color    = SECTION_ACCENT_COLORS[i % SECTION_ACCENT_COLORS.size()]
-
-		# Create and configure the button
-		var btn := Button.new()
-		btn.text = "%s  %s" % [icon, label]
-		btn.custom_minimum_size = Vector2(0, 80)
-		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-
-		# Apply glossy glass fill style
-		_apply_glossy_style(btn, accent)
-
-		# Configure typography
-		if font_regular != null:
-			btn.add_theme_font_override("font", font_regular)
-		btn.add_theme_font_size_override("font_size", 60)
-		btn.add_theme_color_override("font_color", Color.WHITE)
-		btn.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.5))
-		btn.add_theme_constant_override("outline_size", 2)
-
-		# Connect button signals
-		btn.pressed.connect(_on_section_pressed.bind(scene_key))
-		sections_container.add_child(btn)
-
-		# Connect hover/press micro-interaction signals
-		btn.mouse_entered.connect(_on_hover.bind(btn, true))
-		btn.mouse_exited.connect(_on_hover.bind(btn, false))
-		btn.button_down.connect(_on_press.bind(btn))
-		btn.button_up.connect(_on_release.bind(btn))
-
-func _on_hover(btn: Button, hovering: bool) -> void:
-	# Scale button slightly on hover for visual feedback
-	var s := 1.03 if hovering else 1.0
-	var tw := create_tween()
-	tw.tween_property(btn, "scale", Vector2(s, s), 0.18) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
-func _on_press(btn: Button) -> void:
-	# Scale button down when pressed
-	var tw := create_tween()
-	tw.tween_property(btn, "scale", Vector2(0.96, 0.96), 0.08) \
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-
-func _on_release(btn: Button) -> void:
-	# Scale button back to normal when released
-	var tw := create_tween()
-	tw.tween_property(btn, "scale", Vector2.ONE, 0.18) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
+############################################################
+# NAVIGATION
+############################################################
 func _on_section_pressed(scene_key: String) -> void:
-	# Navigate to the appropriate scene when a section is pressed
 	if _navigating:
 		return
 	_navigating = true
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
-	
-	# Set flashcard mode for vocabulary sections
+
 	if scene_key == "VOCAB":
 		Global.flashcard_mode = "lesson"
-	
-	# Map section keys to scene paths
+
 	var scene_map := {
 		"VOCAB": SCENE_VOCAB,
 		"CONVERSATION": SCENE_CONVERSATION,
@@ -321,31 +279,33 @@ func _on_section_pressed(scene_key: String) -> void:
 		"WHAT_YOU_LEARNED": SCENE_WHAT_YOU_LEARNED,
 		"WORKBOOK": SCENE_WORKBOOK,
 	}
-	
 	var path: String = scene_map.get(scene_key, "")
 	if path == "":
 		push_error("No scene path for key: " + scene_key)
 		_navigating = false
 		return
 
-	# Grammar is part of the main menu flow (book -> lesson -> grammar), so
-	# it slides FORWARD exactly like book-menu -> lesson-menu does. The other
-	# drill-downs keep the fade transition.
+	await get_tree().create_timer(0.10).timeout
+	if not is_inside_tree():
+		return
+
+	# Grammar is part of the main menu flow, so it slides FORWARD like
+	# book-menu -> lesson-menu. Other drill-downs keep the fade transition.
 	if scene_key == "GRAMMAR":
 		TransitionManager.slide_change_scene(path, TransitionManager.Slide.FORWARD)
 	else:
 		TransitionManager.change_scene(path)
 
+
 func _on_back_button_pressed() -> void:
-	# Navigate back to book menu with slide animation
 	if _navigating:
 		return
 	_navigating = true
-	var tween := create_tween()
-	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
-	await tween.finished
+	await get_tree().create_timer(0.10).timeout
+	if not is_inside_tree():
+		return
 	TransitionManager.slide_change_scene(SCENE_BOOK_MENU, TransitionManager.Slide.BACK)
 
+
 func _on_android_back_pressed() -> void:
-	# Handle Android back button press
 	_on_back_button_pressed()

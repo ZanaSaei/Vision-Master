@@ -8,13 +8,86 @@ signal exit_finished
 
 var _waves: Array[CornerWave] = []
 var _is_animating: bool = false
+var _shader_layer: ShaderQuad = null
+var _shader_mat: ShaderMaterial = null
+
+# Full-screen ambient shader used as the backdrop layer (behind the waves).
+const BG_SHADER := preload("res://scenes/dynamic_background/dynamic_background.gdshader")
 
 func _ready() -> void:
+	_build_shader_layer()
 	_build_waves()
 	get_viewport().size_changed.connect(_on_viewport_resized)
 
+func _process(_delta: float) -> void:
+	if _shader_mat == null:
+		return
+	_shader_mat.set_shader_parameter("u_time", Time.get_ticks_msec() * 0.001)
+
 func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, get_viewport_rect().size), base_color)
+
+## Full-screen shader quad behind the corner waves. Provides the base
+## gradient, breathing glow, drifting aurora bands and vignette. Starts
+## transparent and fades in with play_enter().
+func _build_shader_layer() -> void:
+	_shader_mat = ShaderMaterial.new()
+	_shader_mat.shader = BG_SHADER
+	# Dark-palette defaults; apply_theme() retints to the active theme.
+	_set_shader_colors(
+		Color(0.028, 0.036, 0.11),
+		Color(0.32, 0.21, 0.66),
+		Color(0.20, 0.24, 0.66),
+		Color(0.09, 0.12, 0.42)
+	)
+	# Node2D-based quad (NOT a Control): Controls don't auto-size to the
+	# viewport when their parent is a Node2D, so a full-screen shader layer
+	# must size and redraw itself from the viewport rect.
+	_shader_layer = ShaderQuad.new()
+	_shader_layer.material = _shader_mat
+	_shader_layer.set_quad_size(get_viewport_rect().size)
+	_shader_layer.modulate.a = 0.0
+	_shader_layer.name = "AmbientShaderLayer"
+	add_child(_shader_layer)
+
+## Derive the shader's color palette from the theme's bg + wave colors so the
+## ambient layer follows Dark ("Midnight Nebula") and Light ("Morning
+## Periwinkle") automatically.
+func _set_shader_colors(bg: Color, wave_top: Color, wave_mid: Color, wave_bottom: Color) -> void:
+	if _shader_mat == null:
+		return
+	var light: bool = bg.get_luminance() > 0.5
+	var top: Color
+	var bottom: Color
+	if light:
+		# Light theme: bright, airy top fading into a deeper periwinkle base.
+		top = bg.lightened(0.08)
+		bottom = bg.darkened(0.20)
+	else:
+		# Dark theme: indigo-tinted top, deep navy bottom.
+		top = bg.lerp(wave_top, 0.55).lightened(0.30)
+		bottom = bg.darkened(0.22)
+	_shader_mat.set_shader_parameter("u_col_top", top)
+	_shader_mat.set_shader_parameter("u_col_bottom", bottom)
+	_shader_mat.set_shader_parameter("u_col_glow", wave_top)
+	_shader_mat.set_shader_parameter("u_col_band_a", wave_mid)
+	_shader_mat.set_shader_parameter("u_col_band_b", wave_bottom)
+	_shader_mat.set_shader_parameter("u_glow_strength", 0.30 if light else 0.42)
+	_shader_mat.set_shader_parameter("u_vignette", 0.40 if light else 0.60)
+
+## A Node2D that draws a full-screen white quad so the ambient shader has
+## geometry to shade. Sized manually from the viewport rect (Controls don't
+## auto-stretch under a Node2D parent).
+class ShaderQuad extends Node2D:
+	var quad_size: Vector2 = Vector2.ZERO
+
+	func set_quad_size(s: Vector2) -> void:
+		quad_size = s
+		queue_redraw()
+
+	func _draw() -> void:
+		if quad_size.x > 0.0 and quad_size.y > 0.0:
+			draw_rect(Rect2(Vector2.ZERO, quad_size), Color.WHITE)
 
 func _build_waves() -> void:
 	# Each wave is authored in "canonical top-left corner space":
@@ -117,6 +190,8 @@ func _build_waves() -> void:
 
 func _on_viewport_resized() -> void:
 	queue_redraw()
+	if _shader_layer != null:
+		_shader_layer.set_quad_size(get_viewport_rect().size)
 	for wave in _waves:
 		wave.rebuild()
 
@@ -125,6 +200,7 @@ func _on_viewport_resized() -> void:
 ## Each wave gets a rich 3-stop gradient (top → mid → bottom).
 func apply_theme(bg: Color, wave_top: Color, wave_mid: Color, wave_bottom: Color) -> void:
 	base_color = bg
+	_set_shader_colors(bg, wave_top, wave_mid, wave_bottom)
 	for i in range(_waves.size()):
 		var wave: CornerWave = _waves[i]
 		wave.top_color = wave_top
@@ -142,6 +218,8 @@ func play_enter(stagger: float = 0.07, duration: float = 0.7) -> void:
 	_is_animating = true
 	var tween: Tween = create_tween()
 	tween.set_parallel(true)
+	if _shader_layer != null:
+		tween.tween_property(_shader_layer, "modulate:a", 1.0, duration * 0.8)
 	for i in range(_waves.size()):
 		var wave: CornerWave = _waves[i]
 		tween.tween_property(wave, "position", wave.rest_position, duration) \
@@ -158,6 +236,8 @@ func play_exit(stagger: float = 0.05, duration: float = 0.5) -> void:
 	_is_animating = true
 	var tween: Tween = create_tween()
 	tween.set_parallel(true)
+	if _shader_layer != null:
+		tween.tween_property(_shader_layer, "modulate:a", 0.0, duration * 0.8)
 	for i in range(_waves.size()):
 		var wave: CornerWave = _waves[i]
 		tween.tween_property(wave, "position", wave.enter_from, duration) \

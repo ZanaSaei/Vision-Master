@@ -157,16 +157,19 @@ func _add_badge() -> void:
 
 	var badge := Label.new()
 	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	badge.text = str(meta["badge"])
-	badge.add_theme_font_size_override("font_size", 32)
-	# Use white text on a solid accent background for maximum visibility.
+	badge.text = "  " + str(meta["badge"]) + "  "
+	badge.add_theme_font_size_override("font_size", 30)
 	badge.add_theme_color_override("font_color", Color.WHITE)
 
 	var badge_style := StyleBoxFlat.new()
-	# Solid accent background so the badge is always clearly visible.
 	badge_style.bg_color = accent
-	badge_style.set_corner_radius_all(20)
+	badge_style.set_corner_radius_all(40)
 	badge_style.set_content_margin_all(10)
+	badge_style.content_margin_left = 20
+	badge_style.content_margin_right = 20
+	badge_style.shadow_color = Color(accent.r, accent.g, accent.b, 0.35)
+	badge_style.shadow_size = 8
+	badge_style.shadow_offset = Vector2(0, 3)
 	badge.add_theme_stylebox_override("normal", badge_style)
 
 	if _font_bold:
@@ -183,23 +186,27 @@ func _create_master_panel() -> void:
 
 	var style := StyleBoxFlat.new()
 	style.bg_color = _c_surface()
-	style.set_corner_radius_all(16)
+	style.set_corner_radius_all(24)
 	_master_panel_style = style
 
 	var type := str(_exercise.get("type", "open_ended"))
 	var meta: Dictionary = TYPE_META.get(type, TYPE_META["open_ended"])
-	style.border_width_left = 8
+	# Left accent stripe is thicker (10px) for a stronger visual anchor.
+	style.border_width_left = 10
 	style.border_color = meta["color"]
-	style.shadow_color = Color(0, 0, 0, 0.4)
-	style.shadow_size = 12
-	style.shadow_offset = Vector2(0, 4)
-	style.set_content_margin_all(24)
+	style.shadow_color = Color(0, 0, 0, 0.25)
+	style.shadow_size = 18
+	style.shadow_offset = Vector2(0, 6)
+	style.content_margin_left = 28
+	style.content_margin_right = 28
+	style.content_margin_top = 28
+	style.content_margin_bottom = 28
 
 	panel.add_theme_stylebox_override("panel", style)
 
 	_active_vbox = VBoxContainer.new()
 	_active_vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_active_vbox.add_theme_constant_override("separation", 32)
+	_active_vbox.add_theme_constant_override("separation", 28)
 	_active_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	panel.add_child(_active_vbox)

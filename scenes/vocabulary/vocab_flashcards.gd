@@ -51,6 +51,7 @@ const SCENE_LESSON_MENU    := "res://scenes/lesson_menu/LessonMenu.tscn"
 const SCENE_SETTINGS       := "res://scenes/settings/Settings.tscn"
 const SCENE_REVIEW           := "res://scenes/review/WordReview.tscn"
 const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
+const SCENE_FLASHCARDS     := "res://scenes/vocabulary/VocabFlashcards.tscn"
 
 # ---------- Node references ----------
 @onready var lesson_title: Label               = $HeaderBar/HeaderContent/HeaderSpacer/LessonTitle
@@ -81,6 +82,7 @@ const SCENE_NO_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 @onready var audio_button: Button              = $HeaderBar/HeaderContent/AudioButton
 @onready var back_nav_button: Button           = $HeaderBar/HeaderContent/BackButton
 @onready var home_button: Button               = $HeaderBar/HeaderContent/HomeButton
+@onready var leitner_button: Button            = $HeaderBar/HeaderContent/LeitnerButton
 
 @onready var save_inactive = preload("res://images/save_button.png")
 @onready var save_active = preload("res://images/saved_button.png")
@@ -96,41 +98,41 @@ const FLIP_DURATION := 0.18
 # Row panels on the back face: each field keeps its own accent so the card
 # reads as a set of colorful info pills instead of flat grey boxes.
 const BACK_ROW_ACCENTS := {
-	"WordRow":        Color("#059669"),  # emerald — the word itself
-	"MeaningEnRow":   Color("#2563EB"),  # blue      — English meaning
-	"MeaningFaRow":   Color("#7C3AED"),  # violet    — Persian meaning
-	"ExampleRow":     Color("#D97706"),  # amber     — example
-	"SynonymsPanel":  Color("#0D9488"),  # teal      — synonyms
-	"AntonymsPanel":  Color("#DC2626"),  # red       — antonyms
+	"WordRow":        Color("#10B981"),  # Emerald
+	"MeaningEnRow":   Color("#3B82F6"),  # Blue
+	"MeaningFaRow":   Color("#8B5CF6"),  # Violet
+	"ExampleRow":     Color("#F59E0B"),  # Amber
+	"SynonymsPanel":  Color("#14B8A6"),  # Teal
+	"AntonymsPanel":  Color("#EF4444"),  # Red
 }
 
 # Icon badges on the back face (solid accent chips with white text).
 const BACK_ICON_ACCENTS := {
-	"EnIcon":   Color("#2563EB"),
-	"FaIcon":   Color("#7C3AED"),
-	"ExIcon":   Color("#D97706"),
-	"SynIcon":  Color("#0D9488"),
-	"AntoIcon": Color("#DC2626"),
+	"EnIcon":   Color("#3B82F6"),
+	"FaIcon":   Color("#8B5CF6"),
+	"ExIcon":   Color("#F59E0B"),
+	"SynIcon":  Color("#14B8A6"),
+	"AntoIcon": Color("#EF4444"),
 }
 
 # Owned content labels on the back face (text color follows their row).
 const BACK_LABEL_ACCENTS := {
-	"BackWordLabel":   Color("#059669"),
-	"MeaningEnLabel":  Color("#2563EB"),
-	"MeaningFaLabel":  Color("#6D28D9"),
-	"ExampleLabel":    Color("#B45309"),
-	"SynonymsLabel":   Color("#0F766E"),
-	"AntonymsLabel":   Color("#B91C1C"),
+	"BackWordLabel":   Color("#10B981"),
+	"MeaningEnLabel":  Color("#3B82F6"),
+	"MeaningFaLabel":  Color("#8B5CF6"),
+	"ExampleLabel":    Color("#F59E0B"),
+	"SynonymsLabel":   Color("#14B8A6"),
+	"AntonymsLabel":   Color("#EF4444"),
 }
 
 # ---------- Happy flashcard gradient (the card's "main color") ----------
-# A cheerful violet → pink → sky gradient so the flashcards feel alive and
-# colorful in BOTH themes (deeper tones at night).
-const FLASH_GRAD_LIGHT := [Color("#A78BFA"), Color("#F9A8D4"), Color("#63B9F5")]
-const FLASH_GRAD_DARK  := [Color("#7B5CDB"), Color("#C0559E"), Color("#3E7FBF")]
-const FLASH_PRIMARY    := Color("#8B5CF6")   # used for dots + accents
+# A modern, energetic gradient (Indigo -> Purple -> Pink) for both themes.
+# It makes the flashcards extremely vibrant and educational-friendly.
+const FLASH_GRAD_LIGHT := [Color("#4F46E5"), Color("#9333EA"), Color("#DB2777")]
+const FLASH_GRAD_DARK  := [Color("#3730A3"), Color("#6B21A8"), Color("#9D174D")]
+const FLASH_PRIMARY    := Color("#6366F1")   # used for dots + accents
 
-var _card_gradient_bg: TextureRect = null
+var _card_gradient_bg: ColorRect = null
 
 
 func _ready() -> void:
@@ -149,6 +151,7 @@ func _ready() -> void:
 	audio_button.pressed.connect(_on_audio_pressed)
 	back_nav_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
+	leitner_button.pressed.connect(_on_leitner_pressed)
 	card_panel.gui_input.connect(_on_card_input)
 
 	audio_button.pivot_offset = audio_button.size / 2.0
@@ -241,9 +244,45 @@ func _theme_card(node: PanelContainer) -> void:
 
 func _ensure_card_gradient(_dark: bool) -> void:
 	if _card_gradient_bg == null:
-		_card_gradient_bg = TextureRect.new()
+		_card_gradient_bg = ColorRect.new()
 		_card_gradient_bg.name = "CardGradientBg"
-		_card_gradient_bg.stretch_mode = TextureRect.STRETCH_SCALE
+		_card_gradient_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		
+		var shader := Shader.new()
+		shader.code = """
+shader_type canvas_item;
+uniform vec4 top_color : source_color;
+uniform vec4 mid_color : source_color;
+uniform vec4 bot_color : source_color;
+uniform vec4 corner_color : source_color;
+uniform float corner_radius = 28.0;
+uniform vec2 rect_size;
+
+float sdRoundedBox(vec2 p, vec2 b, float r) {
+	vec2 q = abs(p) - b + vec2(r);
+	return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
+}
+
+void fragment() {
+	vec4 col;
+	if (UV.y < 0.5) {
+		col = mix(top_color, mid_color, UV.y * 2.0);
+	} else {
+		col = mix(mid_color, bot_color, (UV.y - 0.5) * 2.0);
+	}
+	
+	vec2 p = UV * rect_size - rect_size * 0.5;
+	vec2 b = rect_size * 0.5;
+	float d = sdRoundedBox(p, b, corner_radius);
+	
+	float blend = clamp(0.5 - d, 0.0, 1.0);
+	COLOR = mix(corner_color, col, blend);
+}
+"""
+		var mat := ShaderMaterial.new()
+		mat.shader = shader
+		_card_gradient_bg.material = mat
+		
 		card_panel.add_child(_card_gradient_bg)
 		card_panel.move_child(_card_gradient_bg, 0)  # behind the card content
 		card_panel.resized.connect(_refresh_card_gradient)
@@ -251,24 +290,19 @@ func _ensure_card_gradient(_dark: bool) -> void:
 
 
 func _refresh_card_gradient() -> void:
-	# Bake the gradient at the card's own (half) size so the rounded corners
-	# stretch uniformly and line up exactly with the card's rounded frame.
 	var sz: Vector2 = card_panel.size
-	if sz.x <= 2.0 or sz.y <= 2.0:
+	if sz.x <= 2.0 or sz.y <= 2.0 or not is_instance_valid(_card_gradient_bg):
 		return
 	var dark := Global.theme_is_dark()
-	var half := Vector2i(roundi(sz.x / 2.0), roundi(sz.y / 2.0))
-	_card_gradient_bg.texture = _build_card_gradient(dark, half, 14)
-
-
-func _outside_rounded(x: float, y: float, w: float, h: float, r: float) -> bool:
-	# Signed "distance" to a rounded rectangle; > 0 means outside.
-	var qx := absf(x - w / 2.0) - (w / 2.0 - r)
-	var qy := absf(y - h / 2.0) - (h / 2.0 - r)
-	var ex := maxf(qx, 0.0)
-	var ey := maxf(qy, 0.0)
-	var d := sqrt(ex * ex + ey * ey) + minf(maxf(qx, qy), 0.0) - r
-	return d > 0.0
+	var palette: Array = FLASH_GRAD_DARK if dark else FLASH_GRAD_LIGHT
+	var mat = _card_gradient_bg.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("rect_size", sz)
+		mat.set_shader_parameter("top_color", palette[0])
+		mat.set_shader_parameter("mid_color", palette[1])
+		mat.set_shader_parameter("bot_color", palette[2])
+		mat.set_shader_parameter("corner_color", Global.get_theme_color("bg_base"))
+		mat.set_shader_parameter("corner_radius", 28.0)
 
 
 func _optimize_icon(tex: Texture2D, max_edge: int = 256) -> Texture2D:
@@ -288,47 +322,23 @@ func _optimize_icon(tex: Texture2D, max_edge: int = 256) -> Texture2D:
 	return ImageTexture.create_from_image(img)
 
 
-func _build_card_gradient(dark: bool, img_size: Vector2i, radius: int) -> Texture2D:
-	var palette: Array = FLASH_GRAD_DARK if dark else FLASH_GRAD_LIGHT
-	var top: Color = palette[0]
-	var mid: Color = palette[1]
-	var bot: Color = palette[2]
-	# The card floats on the screen background, so fill the rounded corners
-	# with bg_base to blend seamlessly (no grey poking through in Dark).
-	var corner: Color = Global.get_theme_color("bg_base")
-	var img := Image.create(img_size.x, img_size.y, false, Image.FORMAT_RGBA8)
-	for y in img_size.y:
-		var t := float(y) / float(img_size.y - 1)
-		var col: Color
-		if t < 0.5:
-			col = top.lerp(mid, t * 2.0)
-		else:
-			col = mid.lerp(bot, (t - 0.5) * 2.0)
-		for x in img_size.x:
-			if _outside_rounded(float(x), float(y), float(img_size.x), float(img_size.y), float(radius)):
-				img.set_pixel(x, y, corner)
-			else:
-				img.set_pixel(x, y, col)
-	return ImageTexture.create_from_image(img)
-
-
 func _theme_back_row(panel: PanelContainer) -> void:
-	# A clean content "pill" on the colorful gradient card: near-white in
-	# Light / translucent dark in Dark, so the bright card stays colorful
-	# while the field text remains easy to read. The chips add the accents.
+	# A clean content "pill" on the colorful gradient card.
 	var dark := Global.theme_is_dark()
 	var st := StyleBoxFlat.new()
-	st.set_corner_radius_all(16)
+	st.set_corner_radius_all(18)
 	st.set_border_width_all(1)
 	if dark:
-		st.bg_color = Color(0.09, 0.08, 0.20, 0.55)
-		st.border_color = Color(1, 1, 1, 0.16)
+		# A deep slate pill to contrast against the vibrant dark gradient
+		st.bg_color = Color("#1E293B")
+		st.bg_color.a = 0.95
+		st.border_color = Color(1, 1, 1, 0.15)
 	else:
-		st.bg_color = Color(1, 1, 1, 0.92)
-		st.border_color = Color(0, 0, 0, 0.10)
-	st.shadow_color = Color(0.2, 0.15, 0.5, 0.10 if dark else 0.05)
-	st.shadow_size = 4
-	st.shadow_offset = Vector2(0, 2)
+		st.bg_color = Color(1, 1, 1, 0.95)
+		st.border_color = Color(0, 0, 0, 0.08)
+	st.shadow_color = Color(0, 0, 0, 0.2 if dark else 0.08)
+	st.shadow_size = 8
+	st.shadow_offset = Vector2(0, 4)
 	var old: StyleBox = panel.get_theme_stylebox("panel")
 	if old is StyleBoxFlat:
 		var of := old as StyleBoxFlat
@@ -337,10 +347,10 @@ func _theme_back_row(panel: PanelContainer) -> void:
 		st.content_margin_right = of.content_margin_right
 		st.content_margin_bottom = of.content_margin_bottom
 	else:
-		st.content_margin_left = 16
-		st.content_margin_right = 16
-		st.content_margin_top = 12
-		st.content_margin_bottom = 12
+		st.content_margin_left = 20
+		st.content_margin_right = 20
+		st.content_margin_top = 16
+		st.content_margin_bottom = 16
 	panel.add_theme_stylebox_override("panel", st)
 
 
@@ -365,19 +375,24 @@ func _theme_back_icon(icon: Label) -> void:
 func _theme_label(label: Label) -> void:
 	var n: String = label.name
 	var fill: Color
+	var dark := Global.theme_is_dark()
+	
 	if n == "WordLabel":
 		# The FRONT word sits directly on the colorful gradient — white so it
 		# pops, with a soft shadow for contrast on the bright card.
 		fill = Color(1, 1, 1)
-	elif n == "BackWordLabel":
-		# The BACK word sits on a white pill — accent so it stays the hero.
-		fill = Global.get_theme_color("accent")
+	elif BACK_LABEL_ACCENTS.has(n):
+		fill = BACK_LABEL_ACCENTS[n]
+		if dark:
+			# Lighten and desaturate slightly for better contrast on dark pill
+			fill = fill.lerp(Color(1, 1, 1), 0.2)
 	elif n.ends_with("Title"):
 		fill = Global.get_theme_color("accent_bright")
 	elif n in ["PhoneticsLabel"]:
 		fill = Global.get_theme_color("text_dim")
 	else:
 		fill = Global.get_theme_color("text")
+		
 	label.add_theme_color_override("font_color", fill)
 	# Drive LabelSettings explicitly so these labels follow the theme too.
 	if label.label_settings != null:
@@ -393,9 +408,9 @@ func _theme_label(label: Label) -> void:
 	label.add_theme_constant_override("shadow_offset_y", 0)
 	# Front word on the colorful gradient benefits from a soft drop shadow.
 	if n == "WordLabel":
-		label.add_theme_color_override("font_shadow_color", Color(0.25, 0.15, 0.5, 0.30))
-		label.add_theme_constant_override("shadow_offset_x", 1)
-		label.add_theme_constant_override("shadow_offset_y", 2)
+		label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.25))
+		label.add_theme_constant_override("shadow_offset_x", 0)
+		label.add_theme_constant_override("shadow_offset_y", 4)
 
 
 func _theme_button(btn: Button) -> void:
@@ -470,8 +485,8 @@ func _style_nav_button(btn: Button, accent: Color) -> void:
 	btn.add_theme_stylebox_override("focus", hover)
 
 
-func _style_save_button(btn: Button, _accent: Color) -> void:
-	# Flat heart toggle — no persistent panel, soft highlight on hover/press.
+func _style_save_button(btn: Button, accent: Color) -> void:
+	# Flat heart/remove toggle — no persistent panel, soft highlight on hover/press.
 	btn.flat = true
 	btn.expand_icon = true
 	btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -480,16 +495,15 @@ func _style_save_button(btn: Button, _accent: Color) -> void:
 	btn.add_theme_constant_override("icon_max_height", 200)
 	btn.custom_minimum_size = Vector2(200, 200)
 
-	var heart := Color(0.95, 0.38, 0.44)
 	var clear := StyleBoxFlat.new()
 	clear.bg_color = Color(0, 0, 0, 0)
 	clear.set_border_width_all(0)
 	var hover := StyleBoxFlat.new()
 	hover.set_corner_radius_all(100)
-	hover.bg_color = Color(heart.r, heart.g, heart.b, 0.14)
+	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.14)
 	var pressed := StyleBoxFlat.new()
 	pressed.set_corner_radius_all(100)
-	pressed.bg_color = Color(heart.r, heart.g, heart.b, 0.24)
+	pressed.bg_color = Color(accent.r, accent.g, accent.b, 0.24)
 	btn.add_theme_stylebox_override("normal", clear)
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", pressed)
@@ -502,12 +516,13 @@ func _style_save_button(btn: Button, _accent: Color) -> void:
 func _enter_lesson_mode() -> void:
 	mode = Mode.LESSON
 	audio_button.visible = true
+	leitner_button.visible = false
 
 	var book: int   = Global.current_book
 	var lesson: int = Global.current_lesson
 	var lesson_data := Global.load_vocabulary(book, lesson)
 	
-	lesson_title.text = "Vision %d\nLesson %s" % [book, lesson]
+	lesson_title.text = MenuStyle.persian_digits("ویژن %d\nدرس %s" % [book, lesson])
 	
 	if lesson_data.is_empty():
 		push_error("Failed to load lesson %d from book %d" % [lesson, book])
@@ -527,13 +542,16 @@ func _enter_saved_mode() -> void:
 	mode = Mode.SAVED
 	audio_button.visible = true # Brought this back for saved mode
 
-	lesson_title.text = "کلمات ذخیره شده"
+	lesson_title.text = "فلش کارت"
+	# Smaller title so it fits the header without overlapping the buttons.
+	lesson_title.add_theme_font_size_override("font_size", 44)
 	if FONT_FARSI != null:
 		lesson_title.add_theme_font_override("font", FONT_FARSI)
 
-	save_button.icon = _optimize_icon(save_active)
-	save_button.modulate = Color("#EF4444")
-	save_button.disabled = true
+	leitner_button.visible = true
+	save_button.icon = _optimize_icon(load("res://images/Remove.png"))
+	save_button.modulate = Color(1, 1, 1, 1)
+	save_button.disabled = false
 
 	var saved_copy = Global.get_saved_words().duplicate()
 	setup(saved_copy, 0, 0, "", Mode.SAVED)
@@ -849,6 +867,10 @@ func _on_next_pressed() -> void:
 #  SAVE / REMOVE (heart button)
 # ----------------------------------------------------------------
 func _on_save_pressed() -> void:
+	# In SAVED mode the centre button removes the current word.
+	if mode == Mode.SAVED:
+		_on_remove_pressed()
+		return
 	if mode != Mode.LESSON or word_list.is_empty():
 		return
 	var entry: Dictionary = word_list[current_index]
@@ -860,6 +882,18 @@ func _on_save_pressed() -> void:
 		data["lesson"] = current_lesson
 		Global.save_word(data)
 	_refresh_save_button(entry)
+
+
+func _on_remove_pressed() -> void:
+	# Remove the current word from saved words (SAVED mode only).
+	if mode != Mode.SAVED or word_list.is_empty():
+		return
+	var entry: Dictionary = word_list[current_index]
+	Global.remove_word(entry.get("word", ""), entry.get("book", 0), entry.get("lesson", 0))
+	word_list.remove_at(current_index)
+	if current_index > 0 and current_index >= word_list.size():
+		current_index = word_list.size() - 1
+	_update_card(false)
 
 
 # ----------------------------------------------------------------
@@ -889,6 +923,13 @@ func _on_audio_pressed() -> void:
 func _on_home_pressed() -> void:
 	Global.flashcard_mode = "lesson"
 	TransitionManager.change_scene(SCENE_MAIN_MENU)
+
+
+func _on_leitner_pressed() -> void:
+	# Record where the review session came from so WordReview's back button
+	# returns here (saved-words flashcards).
+	Global.word_review_return = SCENE_FLASHCARDS
+	TransitionManager.change_scene(SCENE_REVIEW)
 
 func _on_back_button_pressed() -> void:
 	Global.flashcard_mode = "lesson"

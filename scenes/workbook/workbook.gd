@@ -57,7 +57,7 @@ func _ready() -> void:
 
 	_current_book = Global.current_book
 	_current_lesson = Global.current_lesson
-	header_title.text = "Lesson %d\nWorkbook" % _current_lesson
+	header_title.text = MenuStyle.persian_digits("درس %d\nکتاب کار" % _current_lesson)
 	_update_toggle_button_text()
 
 	Global.on_theme_changed(_on_theme_changed)

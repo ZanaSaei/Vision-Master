@@ -93,33 +93,48 @@ func _on_theme_changed(_mode: int) -> void:
 
 
 # The side menu keeps ONE fixed form in every theme (the original look):
-# dark-teal panel, dimming overlay, white text and translucent white chips.
-const MENU_PANEL_BG  := Color(0, 0.29, 0.29, 1)
-const MENU_OVERLAY   := Color(0, 0.29, 0.29, 1)
+# deep-navy panel (matches the modern menu cards), dimming scrim overlay,
+# white text and translucent white chips with an accent hover.
+const MENU_PANEL_BG  := Color(0.055, 0.065, 0.13, 1)
+const MENU_OVERLAY   := Color(0.02, 0.03, 0.07, 0.62)
 const MENU_TEXT      := Color(1, 1, 1, 1)
-const MENU_DIM_TEXT  := Color(0.85, 0.92, 0.92, 1)
+const MENU_DIM_TEXT  := Color(0.80, 0.84, 0.93, 1)
 const MENU_CHIP_BG   := Color(1, 1, 1, 0.06)
 const MENU_CHIP_HOVER := Color(1, 1, 1, 0.12)
 const MENU_CHIP_PRESSED := Color(1, 1, 1, 0.18)
 const MENU_CHIP_BORDER := Color(1, 1, 1, 0.10)
 
 func _apply_theme() -> void:
-	# Panel — fixed dark teal regardless of the global theme.
+	# Panel — fixed deep navy regardless of the global theme, rounded on the
+	# side facing the page, with a soft shadow + hairline border.
 	var st := StyleBoxFlat.new()
-	st.set_corner_radius_all(24)
+	st.set_corner_radius_all(26)
+	st.corner_radius_top_right = 0
+	st.corner_radius_bottom_right = 0
 	st.bg_color = MENU_PANEL_BG
 	st.set_border_width_all(0)
+	st.border_width_left = 1
+	st.border_color = Color(1, 1, 1, 0.10)
+	st.shadow_color = Color(0, 0, 0, 0.35)
+	st.shadow_size = 24
+	st.shadow_offset = Vector2(-6, 0)
 	menu_panel.add_theme_stylebox_override("panel", st)
 
 	# Overlay dims the page behind — fixed.
 	overlay.color = MENU_OVERLAY
 
 	# Header / footer text — fixed white.
+	user_name_label.text = "سلام! 👋"
+	welcome_label.text = "چطور میتوانم کمکت کنم؟"
 	for l in [user_name_label, version_label]:
 		if l.label_settings != null:
 			l.label_settings.font_color = MENU_TEXT
 		else:
 			l.add_theme_color_override("font_color", MENU_TEXT)
+	# Menu titles stay centred in the drawer.
+	user_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	welcome_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	version_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	if welcome_label.label_settings != null:
 		welcome_label.label_settings.font_color = MENU_DIM_TEXT
 	else:
@@ -140,11 +155,11 @@ func _apply_theme() -> void:
 		normal.bg_color = MENU_CHIP_BG
 		normal.border_color = MENU_CHIP_BORDER
 		normal.set_border_width_all(1)
-		normal.set_corner_radius_all(12)
-		normal.content_margin_left = 16
-		normal.content_margin_right = 16
-		normal.content_margin_top = 10
-		normal.content_margin_bottom = 10
+		normal.set_corner_radius_all(18)
+		normal.content_margin_left = 18
+		normal.content_margin_right = 18
+		normal.content_margin_top = 12
+		normal.content_margin_bottom = 12
 		var hover := normal.duplicate() as StyleBoxFlat
 		hover.bg_color = MENU_CHIP_HOVER
 		hover.border_color = Color("#8B5CF6")
@@ -215,15 +230,12 @@ func _apply_modern_style(btn: Button) -> void:
 	hover.bg_color = Color(1.0, 1.0, 1.0, 0.12)
 	hover.border_color = ACCENT
 	hover.set_border_width_all(2)
-	hover.shadow_color = Color(ACCENT.r, ACCENT.g, ACCENT.b, 0.35)
-	hover.shadow_size = 10
-	hover.shadow_offset = Vector2.ZERO
+	# Flat: no glow shadow, just the brightened fill + accent border.
 
 	# --- Pressed state ---
 	var pressed := hover.duplicate() as StyleBoxFlat
 	pressed.bg_color = Color(1.0, 1.0, 1.0, 0.18)
 	pressed.border_color = ACCENT_HOVER
-	pressed.shadow_size = 6
 
 	# --- Focus state ---
 	var focus := hover.duplicate() as StyleBoxFlat
@@ -285,7 +297,8 @@ func _tween_scale(btn: Button, target: Vector2, duration: float) -> void:
 # ─── Menu open / close ─────────────────────────────────────────
 func set_hamburger_button(button: Button) -> void:
 	hamburger_button = button
-	hamburger_original_position = hamburger_button.position
+	# Position is captured lazily on the first open() — by then the button is
+	# laid out (a floating control may still be settling in _ready).
 
 
 func toggle() -> void:
@@ -307,11 +320,16 @@ func open() -> void:
 	tween = create_tween().set_parallel(true)
 	tween.tween_property(menu_panel, "position:x", menu_open_position, 0.4) \
 		.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	tween.tween_property(overlay, "modulate:a", 0.5, 0.4)
+	tween.tween_property(overlay, "modulate:a", 0.85, 0.4)
 
 	if hamburger_button:
+		if hamburger_original_position == Vector2.ZERO:
+			hamburger_original_position = hamburger_button.position
 		var target_btn_x := hamburger_original_position.x - menu_panel.size.x
 		tween.tween_property(hamburger_button, "position:x", target_btn_x, 0.4) \
+			.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+		# Counter-clockwise 90° so the ☰ turns into a vertical "close" glyph.
+		tween.tween_property(hamburger_button, "rotation_degrees", -90.0, 0.4) \
 			.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 
 

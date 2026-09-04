@@ -131,7 +131,7 @@ color = Color(0.012, 0.018, 0.055, 0.88)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 170.0
+offset_bottom = 250.0
 grow_horizontal = 2
 
 [node name="Margin" type="MarginContainer" parent="Header" unique_id=1643775161]
@@ -142,7 +142,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 26
+theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 26
 
@@ -151,7 +151,7 @@ layout_mode = 2
 theme_override_constants/separation = 24
 
 [node name="BackButton" type="Button" parent="Header/Margin/HBox" unique_id=385981541]
-custom_minimum_size = Vector2(190, 96)
+custom_minimum_size = Vector2(230, 120)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_font")
@@ -171,7 +171,7 @@ theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 56
 text = "درباره من"
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Scroll" type="ScrollContainer" parent="." unique_id=1665583781]
@@ -179,7 +179,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 170.0
+offset_top = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 

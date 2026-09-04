@@ -3,11 +3,9 @@
 [ext_resource type="Script" uid="uid://drvqgo4f36upv" path="res://scenes/vocabulary/vocab_flashcards.gd" id="1_tpk77"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_egq7b"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_fdnt6"]
-[ext_resource type="Texture2D" uid="uid://bepy1pldp4s2s" path="res://images/audio.png" id="3_egq7b"]
 [ext_resource type="Texture2D" uid="uid://ckihf4m1yrm16" path="res://images/prev.png" id="3_l3ryj"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_t0aqf"]
 [ext_resource type="Texture2D" uid="uid://dvhje7arnej0d" path="res://images/next.png" id="4_egq7b"]
-[ext_resource type="Texture2D" uid="uid://3w4stlwu0rek" path="res://images/Next_prev_background.png" id="4_gnf4q"]
 [ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_opycv"]
 [ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="6_pjroj"]
 [ext_resource type="FontFile" uid="uid://cd8w2vgcrha3v" path="res://assets/fonts/PlayfairDisplaySC-Bold.ttf" id="7_yjxky"]
@@ -222,10 +220,12 @@ font = ExtResource("4_opycv")
 font_size = 40
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ujfs"]
-texture = ExtResource("4_gnf4q")
-texture_margin_bottom = 35.0
-expand_margin_top = 65.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxTexture_7ujfs"]
+bg_color = Color(0.92, 0.95, 0.98, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0aqf"]
 bg_color = Color(0.9372549, 0.9647059, 1, 1)
@@ -277,7 +277,7 @@ color = Color(0.972549, 0.98039216, 0.9882353, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 30.0
+offset_top = 0.0
 offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("2_fdnt6")
@@ -285,7 +285,7 @@ theme_override_styles/panel = ExtResource("2_fdnt6")
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1640705547]
 layout_mode = 2
 theme_override_constants/separation = 11
-alignment = 1
+alignment = 0
 
 [node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=26320774]
 custom_minimum_size = Vector2(80, 80)
@@ -302,34 +302,33 @@ theme_override_font_sizes/font_size = 44
 text = "🏠"
 flat = true
 
-[node name="HeaderSpacer" type="Control" parent="HeaderBar/HeaderContent" unique_id=332775269]
-custom_minimum_size = Vector2(550, 0)
-layout_mode = 2
-
-[node name="LessonTitle" type="Label" parent="HeaderBar/HeaderContent/HeaderSpacer" unique_id=950076530]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -11.5
-offset_right = 0.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-label_settings = SubResource("LabelSettings_7ujfs")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="AudioButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=2085601035]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 34
 theme_override_styles/normal = SubResource("StyleBoxFlat_tg8v8")
-icon = ExtResource("3_egq7b")
+text = "صدا"
 flat = true
+
+[node name="LeitnerButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=338817001]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+flat = true
+
+[node name="HeaderSpacer" type="Control" parent="HeaderBar/HeaderContent" unique_id=332775269]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LessonTitle" type="Label" parent="HeaderBar/HeaderContent/HeaderSpacer" unique_id=950076530]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_7ujfs")
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1824064392]
 layout_mode = 1

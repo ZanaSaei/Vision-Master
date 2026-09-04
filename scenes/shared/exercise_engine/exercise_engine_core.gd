@@ -72,41 +72,41 @@ const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
 const SAVE_PATH := "user://exercise_saves.json"
 
 const TYPE_META := {
-	"multiple_choice":          { "badge": "Multiple Choice",         "color": Color("#2563EB") },
-	"true_false":               { "badge": "True / False",            "color": Color("#7C3AED") },
-	"matching":                 { "badge": "Matching",                "color": Color("#0891B2") },
-	"fill_blank":               { "badge": "Fill in the Blank",       "color": Color("#EA580C") },
-	"cloze":                    { "badge": "Choose the Best Form",    "color": Color("#DB2777") },
-	"ordering":                 { "badge": "Put in Order",            "color": Color("#CA8A04") },
-	"categorize":               { "badge": "Categorize",              "color": Color("#059669") },
+	"multiple_choice":          { "badge": "Multiple Choice",         "color": Color("#6366F1") },
+	"true_false":               { "badge": "True / False",            "color": Color("#8B5CF6") },
+	"matching":                 { "badge": "Matching",                "color": Color("#0EA5E9") },
+	"fill_blank":               { "badge": "Fill in the Blank",       "color": Color("#F97316") },
+	"cloze":                    { "badge": "Choose the Best Form",    "color": Color("#EC4899") },
+	"ordering":                 { "badge": "Put in Order",            "color": Color("#EAB308") },
+	"categorize":               { "badge": "Categorize",              "color": Color("#10B981") },
 	"open_ended":               { "badge": "Your Turn",               "color": Color("#64748B") },
 	"pronunciation":            { "badge": "Pronunciation",           "color": Color("#64748B") },
 	"writing":                  { "badge": "Writing",                 "color": Color("#64748B") },
-	"passage":                  { "badge": "Reading",                 "color": Color("#334155") },
-	"reading":                  { "badge": "Reading",                 "color": Color("#334155") },
-	"word_bank":                { "badge": "Word Bank",               "color": Color("#0D9488") },
-	"sentence_ordering":        { "badge": "Unscramble the Sentence", "color": Color("#9333EA") },
-	"sentence_unscramble":      { "badge": "Unscramble the Sentence", "color": Color("#9333EA") },
+	"passage":                  { "badge": "Reading",                 "color": Color("#475569") },
+	"reading":                  { "badge": "Reading",                 "color": Color("#475569") },
+	"word_bank":                { "badge": "Word Bank",               "color": Color("#14B8A6") },
+	"sentence_ordering":        { "badge": "Unscramble the Sentence", "color": Color("#A855F7") },
+	"sentence_unscramble":      { "badge": "Unscramble the Sentence", "color": Color("#A855F7") },
 	"letter_scramble":          { "badge": "Unscramble the Word",     "color": Color("#F59E0B") },
-	"table_fill":               { "badge": "Complete the Table",      "color": Color("#4338CA") },
-	"table_fill_advanced":      { "badge": "Complete the Table",      "color": Color("#4338CA") },
-	"text_highlight":           { "badge": "Find & Mark",             "color": Color("#0EA5E9") },
-	"text_highlight_multi":     { "badge": "Find & Mark",             "color": Color("#0EA5E9") },
-	"transformation":           { "badge": "Rewrite the Sentence",    "color": Color("#BE123C") },
-	"error_correction":         { "badge": "Find the Mistake",        "color": Color("#B91C1C") },
-	"word_building":            { "badge": "Build the Word",          "color": Color("#65A30D") },
-	"word_search":              { "badge": "Word Search",             "color": Color("#7C2D12") },
-	"word_find":                { "badge": "Word Search",             "color": Color("#7C2D12") },
-	"chart_fill":               { "badge": "Complete the Chart",      "color": Color("#1E40AF") },
-	"odd_one_out":              { "badge": "Odd One Out",             "color": Color("#F97316") },
+	"table_fill":               { "badge": "Complete the Table",      "color": Color("#4F46E5") },
+	"table_fill_advanced":      { "badge": "Complete the Table",      "color": Color("#4F46E5") },
+	"text_highlight":           { "badge": "Find & Mark",             "color": Color("#38BDF8") },
+	"text_highlight_multi":     { "badge": "Find & Mark",             "color": Color("#38BDF8") },
+	"transformation":           { "badge": "Rewrite the Sentence",    "color": Color("#E11D48") },
+	"error_correction":         { "badge": "Find the Mistake",        "color": Color("#DC2626") },
+	"word_building":            { "badge": "Build the Word",          "color": Color("#84CC16") },
+	"word_search":              { "badge": "Word Search",             "color": Color("#B45309") },
+	"word_find":                { "badge": "Word Search",             "color": Color("#B45309") },
+	"chart_fill":               { "badge": "Complete the Chart",      "color": Color("#1D4ED8") },
+	"odd_one_out":              { "badge": "Odd One Out",             "color": Color("#EA580C") },
 	"grammar_choice":           { "badge": "Grammar Choice",          "color": Color("#06B6D4") },
-	"passive_transformation":   { "badge": "Passive Transformation",  "color": Color("#8B5CF6") },
-	"grammar_identification":   { "badge": "Grammar Identification",  "color": Color("#EC4899") },
-	"question_formation":       { "badge": "Question Formation",      "color": Color("#14B8A6") },
+	"passive_transformation":   { "badge": "Passive Transformation",  "color": Color("#7C3AED") },
+	"grammar_identification":   { "badge": "Grammar Identification",  "color": Color("#DB2777") },
+	"question_formation":       { "badge": "Question Formation",      "color": Color("#0D9488") },
 	"token_label":              { "badge": "Label the Sentence",      "color": Color("#7C3AED") },
-	"image_choice":             { "badge": "Choose the Picture",      "color": Color("#0284C7") },
+	"image_choice":             { "badge": "Choose the Picture",      "color": Color("#0369A1") },
 	"image_match":              { "badge": "Match Pictures",          "color": Color("#0891B2") },
-	"image_hotspot":            { "badge": "Mark the Image",          "color": Color("#B45309") },
+	"image_hotspot":            { "badge": "Mark the Image",          "color": Color("#92400E") },
 }
 
 # ------------------------------------------------------------
@@ -224,14 +224,19 @@ var _cloze_active := -1             # blank index whose popup is open
 var _drag_source: Control = null
 var _drag_active := false
 var _press_pos := Vector2.ZERO
-const _DRAG_THRESHOLD := 28.0
+# Reduced from 28 → 14 px so even a tiny finger-shift on Android starts
+# a scroll rather than accidentally selecting a button or typing field.
+const _DRAG_THRESHOLD := 14.0
 
 
 
 
 # Gesture thresholds.
-const _GESTURE_THRESHOLD := 24.0
-const _HOLD_MAX_MSEC := 350
+const _GESTURE_THRESHOLD := 14.0
+# Reduced from 350 → 180 ms. At 350 ms a held-and-released tap still
+# opened the keyboard / pressed buttons. 180 ms distinguishes a deliberate
+# tap from a press-hold-drag reliably on touchscreen devices.
+const _HOLD_MAX_MSEC := 180
 
 # Press timing for long-press prevention.
 var _press_time_msec := 0

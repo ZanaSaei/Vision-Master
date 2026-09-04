@@ -127,6 +127,34 @@ func _apply_theme() -> void:
 	reset_button.add_theme_stylebox_override("focus", danger)
 	reset_button.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
 
+	# The two "clear" buttons: the scene's default white-on-white styles only
+	# read on dark cards, so in Light theme they get a visible outline + fill.
+	# (Hover states are irrelevant on touch devices, so every state is the same.)
+	var clear_style := StyleBoxFlat.new()
+	clear_style.set_corner_radius_all(18)
+	clear_style.content_margin_left = 26.0
+	clear_style.content_margin_top = 20.0
+	clear_style.content_margin_right = 26.0
+	clear_style.content_margin_bottom = 20.0
+	clear_style.set_border_width_all(2)
+	if dark:
+		clear_style.bg_color = Color(1, 1, 1, 0.09)
+		clear_style.border_color = Color(1, 1, 1, 0.14)
+	else:
+		clear_style.bg_color = Color(0.97, 0.965, 1.0)
+		clear_style.border_color = Global.get_theme_color("accent")
+	clear_saved_button.add_theme_stylebox_override("normal", clear_style)
+	clear_saved_button.add_theme_stylebox_override("hover", clear_style)
+	clear_saved_button.add_theme_stylebox_override("pressed", clear_style)
+	clear_saved_button.add_theme_stylebox_override("focus", clear_style)
+	clear_review_button.add_theme_stylebox_override("normal", clear_style)
+	clear_review_button.add_theme_stylebox_override("hover", clear_style)
+	clear_review_button.add_theme_stylebox_override("pressed", clear_style)
+	clear_review_button.add_theme_stylebox_override("focus", clear_style)
+	var clear_fc: Color = Color(1, 1, 1) if dark else Global.get_theme_color("accent")
+	clear_saved_button.add_theme_color_override("font_color", clear_fc)
+	clear_review_button.add_theme_color_override("font_color", clear_fc)
+
 	# The runtime confirm modal follows the palette too.
 	if _confirm_card != null:
 		var p := _confirm_card.get_theme_stylebox("panel") as StyleBoxFlat

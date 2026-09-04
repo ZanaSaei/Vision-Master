@@ -172,58 +172,56 @@ var _theme_font: Font
 
 const THEME_PALETTES := {
 	# ---------------------------------------------------------------
-	# DARK  — "Midnight Nebula": deep indigo-navy base, violet accent,
-	#         teal success, rich violet→indigo gradient waves.
+	# DARK  — Modern Deep Slate & Vibrant Neon Indigo
 	# ---------------------------------------------------------------
 	ThemeMode.DARK: {
-		"bg":            Color(0.055, 0.062, 0.125),
-		"surface":       Color(0.088, 0.102, 0.20),
-		"surface_alt":   Color(0.135, 0.150, 0.29),
-		"border":        Color(1, 1, 1, 0.10),
-		"text":          Color(0.90, 0.915, 1.0),
-		"text_dim":      Color(0.60, 0.63, 0.82),
-		"accent":        Color(0.545, 0.361, 0.965),
-		"accent_bright": Color(0.80, 0.66, 1.0),
-		"accent_soft":   Color(0.545, 0.361, 0.965, 0.16),
-		"on_accent":     Color(1, 1, 1, 1),
-		"success":       Color(0.30, 0.84, 0.60),
-		"error":         Color(1.0, 0.40, 0.46),
-		"warning":       Color(1.0, 0.80, 0.36),
-		"success_soft":  Color(0.09, 0.20, 0.13),
-		"error_soft":    Color(0.23, 0.12, 0.15),
-		"warning_soft":  Color(0.23, 0.18, 0.08),
-		"overlay":       Color(0, 0, 0, 0.6),
-		"bg_base":       Color(0.028, 0.036, 0.11),
-		"wave_top":      Color(0.32, 0.21, 0.66),
-		"wave_mid":      Color(0.20, 0.24, 0.66),
-		"wave_bottom":   Color(0.09, 0.12, 0.42),
+		"bg":            Color("#0F172A"),
+		"surface":       Color("#1E293B"),
+		"surface_alt":   Color("#334155"),
+		"border":        Color(1.0, 1.0, 1.0, 0.12),
+		"text":          Color("#F8FAFC"),
+		"text_dim":      Color("#94A3B8"),
+		"accent":        Color("#818CF8"),
+		"accent_bright": Color("#A5B4FC"),
+		"accent_soft":   Color(0.5, 0.55, 0.97, 0.15),
+		"on_accent":     Color("#FFFFFF"),
+		"success":       Color("#34D399"),
+		"error":         Color("#F87171"),
+		"warning":       Color("#FBBF24"),
+		"success_soft":  Color(0.2, 0.82, 0.6, 0.15),
+		"error_soft":    Color(0.97, 0.44, 0.44, 0.15),
+		"warning_soft":  Color(0.98, 0.75, 0.14, 0.15),
+		"overlay":       Color(0, 0, 0, 0.65),
+		"bg_base":       Color("#0B1120"),
+		"wave_top":      Color("#3730A3"),
+		"wave_mid":      Color("#312E81"),
+		"wave_bottom":   Color("#1E1B4B"),
 	},
 	# ---------------------------------------------------------------
-	# LIGHT — "Morning Periwinkle": soft periwinkle base, crisp white
-	#         surfaces, violet accent, light lavender gradient waves.
+	# LIGHT — Crisp Clean White & Playful Punchy Indigo
 	# ---------------------------------------------------------------
 	ThemeMode.LIGHT: {
-		"bg":            Color(0.955, 0.960, 0.99),
-		"surface":       Color(1, 1, 1, 1),
-		"surface_alt":   Color(0.90, 0.912, 0.97),
-		"border":        Color(0.10, 0.11, 0.25, 0.14),
-		"text":          Color(0.10, 0.115, 0.23),
-		"text_dim":      Color(0.36, 0.39, 0.55),
-		"accent":        Color(0.40, 0.26, 0.92),
-		"accent_bright": Color(0.50, 0.36, 1.0),
-		"accent_soft":   Color(0.40, 0.26, 0.92, 0.10),
-		"on_accent":     Color(1, 1, 1, 1),
-		"success":       Color(0.12, 0.60, 0.42),
-		"error":         Color(0.86, 0.20, 0.32),
-		"warning":       Color(0.84, 0.58, 0.04),
-		"success_soft":  Color(0.85, 0.96, 0.88),
-		"error_soft":    Color(0.99, 0.90, 0.92),
-		"warning_soft":  Color(0.99, 0.96, 0.85),
-		"overlay":       Color(0.05, 0.06, 0.16, 0.35),
-		"bg_base":       Color(0.92, 0.925, 0.99),
-		"wave_top":      Color(0.60, 0.55, 0.98),
-		"wave_mid":      Color(0.74, 0.66, 1.0),
-		"wave_bottom":   Color(0.84, 0.82, 1.0),
+		"bg":            Color("#F8FAFC"),
+		"surface":       Color("#FFFFFF"),
+		"surface_alt":   Color("#F1F5F9"),
+		"border":        Color(0.0, 0.0, 0.0, 0.10),
+		"text":          Color("#0F172A"),
+		"text_dim":      Color("#64748B"),
+		"accent":        Color("#4F46E5"),
+		"accent_bright": Color("#4338CA"),
+		"accent_soft":   Color(0.31, 0.27, 0.90, 0.10),
+		"on_accent":     Color("#FFFFFF"),
+		"success":       Color("#10B981"),
+		"error":         Color("#EF4444"),
+		"warning":       Color("#F59E0B"),
+		"success_soft":  Color(0.06, 0.72, 0.5, 0.15),
+		"error_soft":    Color(0.93, 0.26, 0.26, 0.15),
+		"warning_soft":  Color(0.96, 0.62, 0.04, 0.15),
+		"overlay":       Color(0, 0, 0, 0.4),
+		"bg_base":       Color("#F1F5F9"),
+		"wave_top":      Color("#818CF8"),
+		"wave_mid":      Color("#A5B4FC"),
+		"wave_bottom":   Color("#E0E7FF"),
 	},
 }
 
@@ -423,6 +421,8 @@ const SELF_THEMED_SCRIPTS := [
 	"grammar_units.gd",
 	"main_menu.gd",
 	"word_review.gd",
+	"book_menu.gd",
+	"lesson_menu.gd",
 ]
 
 # Labels that read better muted in both themes.
@@ -606,6 +606,8 @@ func style_header(header: Node) -> void:
 		bg.add_theme_stylebox_override("panel", bar.duplicate())
 
 	# 2) Normalise layout rhythm across every header (consistent spacing).
+	#    Buttons are pinned to the LEFT (Back button always first) and title
+	#    labels are pushed to the RIGHT — a unified layout across all scenes.
 	if header is BoxContainer:
 		# Container headers (TopBar rows) pin their buttons to the same left
 		# position as every other scene; titles expand into the rest.
@@ -613,14 +615,22 @@ func style_header(header: Node) -> void:
 		bc.add_theme_constant_override("separation", 24)
 		bc.alignment = BoxContainer.ALIGNMENT_BEGIN
 		bc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		for c in bc.get_children():
-			if c is Label:
-				(c as Control).size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				(c as Label).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		_reorder_header_children(bc)
 	for hb in header.find_children("*", "HBoxContainer", true, false):
 		(hb as HBoxContainer).add_theme_constant_override("separation", 24)
+		(hb as HBoxContainer).alignment = BoxContainer.ALIGNMENT_BEGIN
+		# Fill the whole bar so the title label can reach the far right edge
+		# (some scenes ship SHRINK_CENTER, which centres the whole cluster).
+		(hb as HBoxContainer).size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_reorder_header_children(hb)
 	for hb in header.find_children("*", "VBoxContainer", true, false):
 		(hb as VBoxContainer).add_theme_constant_override("separation", 10)
+
+	# Header titles always expand and sit on the RIGHT (unified layout).
+	for hl in header.find_children("*", "Label", true, false):
+		if hl.name in ["HeaderTitle", "LessonTitle", "Title"]:
+			(hl as Label).size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			(hl as Label).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
 	# 3) Style every button + label inside the header subtree.
 	var stack: Array = [header]
@@ -632,6 +642,38 @@ func style_header(header: Node) -> void:
 			_style_header_label(n)
 		for c in n.get_children():
 			stack.push_back(c)
+
+
+func _reorder_header_children(bc: BoxContainer) -> void:
+	# Unified header layout: every button pinned to the LEFT (Back button
+	# first), then any in-between controls, then title labels pushed to the
+	# RIGHT. Idempotent — safe to run on every scene change.
+	var buttons: Array[Node] = []
+	var others: Array[Node] = []
+	var labels: Array[Node] = []
+	for c in bc.get_children():
+		if c is Button:
+			buttons.append(c)
+		elif c is Label:
+			labels.append(c)
+		else:
+			others.append(c)
+	if buttons.is_empty() and labels.is_empty():
+		return
+	# The Back button is always the first button from the left.
+	var back_first: Array[Node] = []
+	var rest: Array[Node] = []
+	for b in buttons:
+		if _header_button_kind(b as Button) == "back":
+			back_first.append(b)
+		else:
+			rest.append(b)
+	buttons = back_first + rest
+	var ordered: Array[Node] = buttons + others + labels
+	var idx := 0
+	for c in ordered:
+		bc.move_child(c, idx)
+		idx += 1
 
 
 func _header_bar_stylebox(dark: bool, accent: Color) -> StyleBoxFlat:
@@ -660,17 +702,18 @@ func _header_bar_stylebox(dark: bool, accent: Color) -> StyleBoxFlat:
 	bar.content_margin_bottom = 12
 	return bar
 
-# Every header button uses the SAME method: "Emoji + Persian label", and the
-# SAME pill size — so a header always reads as a neat, uniform row of chips.
-const HEADER_BUTTON_LABELS := {
-	"back": "⬅️ بازگشت",
-	"home": "🏠 خانه",
-	"translation": "🌐 ترجمه",
-	"audio": "🔊 صدا",
+# Header buttons are flat icon buttons using the badge-style PNGs in
+# res://images/. Every header button now has a dedicated icon — the
+# translation toggle uses Translate.png instead of a text chip.
+const HEADER_ICONS := {
+	"back":        "res://images/Back.png",
+	"home":        "res://images/Main_Menu.png",
+	"audio":       "res://images/audio_play.png",
+	"leitner":     "res://images/Leitner.png",
+	"translation": "res://images/Translate.png",
 }
-
-const HEADER_BUTTON_HEIGHT := 76.0
-const HEADER_BUTTON_FONT := 24
+const HEADER_BUTTON_SIZE := 168.0
+const HEADER_TRANSLATION_LABEL := "ترجمه"
 
 func _header_button_kind(btn: Button) -> String:
 	var n := String(btn.name).to_lower()
@@ -680,89 +723,46 @@ func _header_button_kind(btn: Button) -> String:
 		return "home"
 	if n.contains("translation") or n.contains("toggle"):
 		return "translation"
+	if n.contains("leitner"):
+		return "leitner"
 	if n.contains("audio"):
 		return "audio"
 	return ""
 
 func _style_header_button(btn: Button) -> void:
-	var dark := theme_is_dark()
 	var accent := get_theme_color("accent")
 	var kind := _header_button_kind(btn)
-	var is_back := kind == "back"
 
-	btn.flat = false
-	btn.expand_icon = true
 	btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 
-	# ── Glossy pill chip (same rich look as the lesson‑menu buttons) ──
-	var chip := StyleBoxFlat.new()
-	chip.set_corner_radius_all(int(HEADER_BUTTON_HEIGHT / 2.0))
-	var rim: Color = accent.lerp(Color.WHITE, 0.60)
-	rim.a = 0.82
-	if is_back:
-		chip.bg_color = Color(accent.r, accent.g, accent.b, 0.68)
-	else:
-		if dark:
-			chip.bg_color = Color(1, 1, 1, 0.14)
-		else:
-			chip.bg_color = Color(0.94, 0.945, 0.99)
-		rim = accent.lerp(Color.WHITE, 0.40)
-		rim.a = 0.55
-	chip.border_color = rim
-	chip.border_width_left = 2; chip.border_width_top = 2
-	chip.border_width_right = 1; chip.border_width_bottom = 1
-	chip.shadow_color = Color(accent.r * 0.42, accent.g * 0.42, accent.b * 0.42, 0.60)
-	chip.shadow_size = 16
-	chip.shadow_offset = Vector2(0, 5)
-	chip.content_margin_left = 16
-	chip.content_margin_right = 16
-	chip.content_margin_top = 10
-	chip.content_margin_bottom = 10
-	for state in ["normal", "pressed", "focus"]:
-		btn.add_theme_stylebox_override(state, chip)
-
-	# Hover — lifts with larger glow.
-	var hover := chip.duplicate() as StyleBoxFlat
-	if is_back:
-		hover.bg_color = Color(accent.r, accent.g, accent.b, 0.78)
-	else:
-		hover.bg_color = Color(1, 1, 1, 0.22) if dark else Color(0.86, 0.84, 1.0)
-	hover.shadow_size = 20
+	# All header buttons are flat icon buttons — soft hover/press disc.
+	btn.flat = true
+	btn.expand_icon = true
+	btn.custom_minimum_size = Vector2(HEADER_BUTTON_SIZE, HEADER_BUTTON_SIZE)
+	btn.add_theme_constant_override("icon_max_width", int(HEADER_BUTTON_SIZE))
+	btn.add_theme_constant_override("icon_max_height", int(HEADER_BUTTON_SIZE))
+	var clear := StyleBoxFlat.new()
+	clear.bg_color = Color(0, 0, 0, 0)
+	clear.set_border_width_all(0)
+	var hover := StyleBoxFlat.new()
+	hover.set_corner_radius_all(int(HEADER_BUTTON_SIZE / 2.0))
+	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.16)
+	var press := StyleBoxFlat.new()
+	press.set_corner_radius_all(int(HEADER_BUTTON_SIZE / 2.0))
+	press.bg_color = Color(accent.r, accent.g, accent.b, 0.26)
+	btn.add_theme_stylebox_override("normal", clear)
 	btn.add_theme_stylebox_override("hover", hover)
-
-	# Press — sinks slightly.
-	var press := chip.duplicate() as StyleBoxFlat
-	if is_back:
-		press.bg_color = Color(accent.r, accent.g, accent.b, 0.44)
-	else:
-		press.bg_color = Color(1, 1, 1, 0.10) if dark else Color(0.80, 0.78, 0.98)
-	press.shadow_size = 6
-	press.shadow_offset = Vector2(0, 2)
 	btn.add_theme_stylebox_override("pressed", press)
-
-	# Same height for every button.
-	btn.custom_minimum_size = Vector2(0, HEADER_BUTTON_HEIGHT)
-
-	# Text.
-	var fc: Color = Color(1, 1, 1, 1) if (dark or is_back) else get_theme_color("text")
-	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-		btn.add_theme_color_override(state, fc)
-	btn.add_theme_font_size_override("font_size", HEADER_BUTTON_FONT)
-
-	# Emoji + Persian label.
-	if HEADER_BUTTON_LABELS.has(kind):
-		btn.icon = null
-		btn.text = HEADER_BUTTON_LABELS[kind]
+	btn.add_theme_stylebox_override("focus", hover)
+	btn.icon = load(HEADER_ICONS[kind]) if HEADER_ICONS.has(kind) else null
+	btn.text = ""
 
 
-# Keeps the header translation button in its unified Emoji + Persian form no
-# matter how many times it is toggled. The on/off state is shown by tinting
-# the chip (accent = translations visible) instead of swapping the label.
+# Translation toggle is now an icon (Translate.png) — tint conveys on/off.
 func set_translation_toggle_state(btn: Button, active: bool) -> void:
 	if btn == null:
 		return
-	btn.text = HEADER_BUTTON_LABELS["translation"]
 	var accent := get_theme_color("accent")
 	if active:
 		btn.modulate = accent.lightened(0.35) if theme_is_dark() else accent

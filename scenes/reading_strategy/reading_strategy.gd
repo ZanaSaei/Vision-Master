@@ -50,7 +50,7 @@ func _ready() -> void:
 	
 	var book: int = Global.current_book
 	var lesson: int = Global.current_lesson
-	header_title.text = "Lesson %d\nReading Strategy" % lesson
+	header_title.text = MenuStyle.persian_digits("درس %d\nراهبرد خواندن" % lesson)
 	
 	var data: Dictionary = Global.load_category("reading_strategies", book, lesson)
 	if data.is_empty() or not data.has("strategy"):

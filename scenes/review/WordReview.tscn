@@ -149,7 +149,7 @@ color = Color(0.17254902, 0.21960784, 0.49803922, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 30.0
+offset_top = 0.0
 offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("2_hx4ce")
@@ -160,8 +160,8 @@ theme_override_constants/margin_right = 35
 
 [node name="Header" type="HBoxContainer" parent="HeaderBar/MarginContainer" unique_id=1880404803]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 160
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
 
 [node name="BackButton" type="Button" parent="HeaderBar/MarginContainer/Header" unique_id=59771729]
 layout_mode = 2
@@ -170,7 +170,9 @@ flat = true
 
 [node name="DueCounter" type="Label" parent="HeaderBar/MarginContainer/Header" unique_id=1268915219]
 layout_mode = 2
-text = "Conversation"
+size_flags_horizontal = 3
+text = "مکالمه"
+horizontal_alignment = 2
 label_settings = SubResource("LabelSettings_gfdwm")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=925536739]

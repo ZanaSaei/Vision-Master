@@ -159,42 +159,43 @@ func _make_option_button(text: String, group: ButtonGroup) -> Button:
 func _make_select_button(text: String, group: ButtonGroup, accent: Color) -> Button:
 	var b := Button.new()
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
-	b.text = "    " + text
+	b.text = "   " + text
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	b.toggle_mode = true
 	b.button_group = group
 	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	# Lets the button stretch inside grids so columns fill the screen.
 	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	b.custom_minimum_size = Vector2(0, 0)
+	b.custom_minimum_size = Vector2(0, 72)
 	b.add_theme_font_size_override("font_size", 40)
 	b.add_theme_color_override("font_color", _c_text())
 	b.add_theme_color_override("font_hover_color", accent)
-	b.add_theme_color_override("font_pressed_color", accent)
+	b.add_theme_color_override("font_pressed_color", Color.WHITE)
 
 	var normal := StyleBoxFlat.new()
 	normal.bg_color = _c_surface()
-	normal.set_corner_radius_all(10)
-	normal.border_width_left = 1
-	normal.border_width_right = 1
-	normal.border_width_top = 1
-	normal.border_width_bottom = 1
+	normal.set_corner_radius_all(16)
+	normal.set_border_width_all(2)
 	normal.border_color = _c_border()
-	normal.set_content_margin_all(14)
+	normal.set_content_margin_all(16)
+	normal.shadow_color = Color(0, 0, 0, 0.10)
+	normal.shadow_size = 4
+	normal.shadow_offset = Vector2(0, 2)
 	b.add_theme_stylebox_override("normal", normal)
 
 	var hover: StyleBoxFlat = normal.duplicate()
-	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.15)
-	hover.border_color = accent.lightened(0.35)
+	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.12)
+	hover.border_color = accent
+	hover.border_width_left = 3
+	hover.border_width_right = 3
+	hover.border_width_top = 3
+	hover.border_width_bottom = 3
 	b.add_theme_stylebox_override("hover", hover)
 
 	var pressed: StyleBoxFlat = normal.duplicate()
-	pressed.bg_color = Color(accent.r, accent.g, accent.b, 0.25)
+	pressed.bg_color = Color(accent.r, accent.g, accent.b, 1.0)
 	pressed.border_color = accent
-	pressed.border_width_left = 2
-	pressed.border_width_right = 2
-	pressed.border_width_top = 2
-	pressed.border_width_bottom = 2
+	pressed.set_border_width_all(3)
+	pressed.shadow_size = 8
 	b.add_theme_stylebox_override("pressed", pressed)
 
 	if _font_regular:
@@ -209,15 +210,14 @@ func _make_image_option_button(opt: Variant, group: ButtonGroup) -> Button:
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
 	b.toggle_mode = true
 	b.button_group = group
-	b.custom_minimum_size = Vector2(190, 160)
+	b.custom_minimum_size = Vector2(190, 170)
 	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	b.text = _get_option_text(opt)
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	b.add_theme_font_size_override("font_size", 34)
-	# Dark image option button needs light text.
 	b.add_theme_color_override("font_color", _c_text())
 	b.add_theme_color_override("font_hover_color", C_PRIMARY)
-	b.add_theme_color_override("font_pressed_color", C_PRIMARY)
+	b.add_theme_color_override("font_pressed_color", Color.WHITE)
 
 	if opt is Dictionary:
 		var path := str(opt.get("image", opt.get("path", "")))
@@ -229,29 +229,27 @@ func _make_image_option_button(opt: Variant, group: ButtonGroup) -> Button:
 				b.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 	var normal := StyleBoxFlat.new()
-	# Dark button background instead of white.
 	normal.bg_color = _c_surface()
-	normal.set_corner_radius_all(12)
-	normal.border_width_left = 1
-	normal.border_width_right = 1
-	normal.border_width_top = 1
-	normal.border_width_bottom = 1
+	normal.set_corner_radius_all(16)
+	normal.set_border_width_all(2)
 	normal.border_color = _c_border()
-	normal.set_content_margin_all(12)
+	normal.set_content_margin_all(14)
+	normal.shadow_color = Color(0, 0, 0, 0.10)
+	normal.shadow_size = 4
+	normal.shadow_offset = Vector2(0, 2)
 	b.add_theme_stylebox_override("normal", normal)
 
 	var hover: StyleBoxFlat = normal.duplicate()
-	hover.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.07)
-	hover.border_color = C_PRIMARY.lightened(0.35)
+	hover.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.12)
+	hover.border_color = C_PRIMARY
+	hover.set_border_width_all(3)
 	b.add_theme_stylebox_override("hover", hover)
 
 	var pressed: StyleBoxFlat = normal.duplicate()
-	pressed.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.14)
+	pressed.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 1.0)
 	pressed.border_color = C_PRIMARY
-	pressed.border_width_left = 2
-	pressed.border_width_right = 2
-	pressed.border_width_top = 2
-	pressed.border_width_bottom = 2
+	pressed.set_border_width_all(3)
+	pressed.shadow_size = 8
 	b.add_theme_stylebox_override("pressed", pressed)
 
 	if _font_regular:
@@ -287,21 +285,27 @@ func _make_line_edit(placeholder: String) -> LineEdit:
 
 	var le_style := StyleBoxFlat.new()
 	le_style.bg_color = _c_surface()
-	le_style.set_corner_radius_all(10)
-	le_style.border_width_bottom = 2
-	le_style.border_color = C_PRIMARY.lightened(0.3)
-	le_style.set_content_margin_all(14)
+	le_style.set_corner_radius_all(16)
+	le_style.set_border_width_all(2)
+	le_style.border_color = _c_border()
+	le_style.set_content_margin_all(18)
+	le_style.shadow_color = Color(0, 0, 0, 0.08)
+	le_style.shadow_size = 4
+	le_style.shadow_offset = Vector2(0, 2)
 	le.add_theme_stylebox_override("normal", le_style)
 
 	var le_hover: StyleBoxFlat = le_style.duplicate()
-	le_hover.border_color = C_PRIMARY
+	le_hover.border_color = C_PRIMARY.lightened(0.2)
 	le.add_theme_stylebox_override("hover", le_hover)
 
 	var le_focus: StyleBoxFlat = le_style.duplicate()
 	le_focus.border_color = C_PRIMARY
+	le_focus.shadow_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.20)
+	le_focus.shadow_size = 8
 	le.add_theme_stylebox_override("focus", le_focus)
 
 	le.add_theme_color_override("caret_color", C_PRIMARY)
+	le.add_theme_color_override("selection_color", Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.35))
 	_register_scroll_control(le)
 	return le
 
@@ -311,11 +315,9 @@ func _make_chart_input(placeholder: String) -> LineEdit:
 	le.mouse_filter = Control.MOUSE_FILTER_PASS
 	le.placeholder_text = placeholder
 	le.add_theme_font_size_override("font_size", 38)
-	# Dark input field: light text, muted placeholder, visible caret.
 	le.add_theme_color_override("font_color", _c_text())
 	le.add_theme_color_override("font_placeholder_color", _c_text_dim())
 	le.add_theme_color_override("caret_color", C_PRIMARY)
-	# Keep selected text readable.
 	le.add_theme_color_override(
 		"selection_color",
 		Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.35)
@@ -326,16 +328,19 @@ func _make_chart_input(placeholder: String) -> LineEdit:
 		le.add_theme_font_override("font", _font_regular)
 
 	var le_style := StyleBoxFlat.new()
-	# Use the same dark background as the other input fields.
 	le_style.bg_color = _c_surface()
-	le_style.set_corner_radius_all(8)
-	le_style.border_width_bottom = 2
+	le_style.set_corner_radius_all(12)
+	le_style.set_border_width_all(2)
 	le_style.border_color = _c_border()
-	le_style.set_content_margin_all(10)
+	le_style.set_content_margin_all(12)
+	le_style.shadow_color = Color(0, 0, 0, 0.08)
+	le_style.shadow_size = 3
 	le.add_theme_stylebox_override("normal", le_style)
 
 	var le_focus: StyleBoxFlat = le_style.duplicate()
 	le_focus.border_color = C_PRIMARY
+	le_focus.shadow_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.20)
+	le_focus.shadow_size = 7
 	le.add_theme_stylebox_override("focus", le_focus)
 
 	_register_scroll_control(le)
@@ -347,24 +352,25 @@ func _make_chip_button(text: String, filled := false) -> Button:
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
 	b.text = text
 	b.add_theme_font_size_override("font_size", 38)
-	b.add_theme_color_override("font_color", Color("#000000") if filled else _c_text())
-	b.add_theme_color_override("font_hover_color", Color("#000000") if filled else C_PRIMARY)
+	b.add_theme_color_override("font_color", Color.WHITE if filled else _c_text())
+	b.add_theme_color_override("font_hover_color", Color.WHITE)
 	if _font_regular:
 		b.add_theme_font_override("font", _font_regular)
 
 	var style := StyleBoxFlat.new()
 	style.bg_color = C_PRIMARY if filled else _c_surface()
-	style.set_corner_radius_all(10)
-	style.border_width_left = 1
-	style.border_width_right = 1
-	style.border_width_top = 1
-	style.border_width_bottom = 1
-	style.border_color = C_PRIMARY if filled else _c_border()
-	style.set_content_margin_all(12)
+	style.set_corner_radius_all(40)
+	style.set_border_width_all(2)
+	style.border_color = C_PRIMARY
+	style.set_content_margin_all(14)
+	style.shadow_color = Color(0, 0, 0, 0.15)
+	style.shadow_size = 5
+	style.shadow_offset = Vector2(0, 2)
 	b.add_theme_stylebox_override("normal", style)
 
 	var hover: StyleBoxFlat = style.duplicate()
-	hover.bg_color = style.bg_color.lightened(0.15)
+	hover.bg_color = C_PRIMARY if filled else Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.15)
+	hover.shadow_size = 8
 	b.add_theme_stylebox_override("hover", hover)
 	b.add_theme_stylebox_override("pressed", hover)
 
@@ -390,22 +396,25 @@ func _make_word_toggle(word: String, compact := false) -> Button:
 	else:
 		b.add_theme_font_size_override("font_size", 40)
 	b.add_theme_color_override("font_color", _c_text())
-	b.add_theme_color_override("font_pressed_color", Color("#000000"))
+	b.add_theme_color_override("font_pressed_color", Color.WHITE)
 	b.add_theme_color_override("font_hover_color", C_PRIMARY)
 	if _font_regular:
 		b.add_theme_font_override("font", _font_regular)
 
 	var normal := StyleBoxFlat.new()
 	normal.bg_color = Color(0, 0, 0, 0)
-	normal.set_corner_radius_all(6)
-	normal.set_content_margin_all(3 if compact else 6)
+	normal.set_corner_radius_all(8)
+	normal.set_content_margin_all(3 if compact else 8)
 	b.add_theme_stylebox_override("normal", normal)
 	b.add_theme_stylebox_override("hover", normal.duplicate())
 
 	var pressed := StyleBoxFlat.new()
-	pressed.bg_color = Color("#fbbf24")
-	pressed.set_corner_radius_all(6)
-	pressed.set_content_margin_all(3 if compact else 6)
+	pressed.bg_color = C_WARNING
+	pressed.set_corner_radius_all(8)
+	pressed.set_content_margin_all(3 if compact else 8)
+	pressed.shadow_color = Color(C_WARNING.r, C_WARNING.g, C_WARNING.b, 0.35)
+	pressed.shadow_size = 6
+	pressed.shadow_offset = Vector2(0, 2)
 	b.add_theme_stylebox_override("pressed", pressed)
 
 	_register_scroll_control(b)
@@ -574,8 +583,9 @@ func _make_button(text: String, color: Color) -> Button:
 	var btn := Button.new()
 	btn.mouse_filter = Control.MOUSE_FILTER_PASS
 	btn.text = text
-	btn.add_theme_font_size_override("font_size", 38)
+	btn.add_theme_font_size_override("font_size", 40)
 	btn.add_theme_color_override("font_color", Color.WHITE)
+	btn.custom_minimum_size = Vector2(0, 72)
 	_set_button_color(btn, color)
 	if _font_bold:
 		btn.add_theme_font_override("font", _font_bold)
@@ -586,13 +596,14 @@ func _make_button(text: String, color: Color) -> Button:
 func _set_button_color(btn: Button, color: Color) -> void:
 	var style := StyleBoxFlat.new()
 	style.bg_color = color
-	style.set_corner_radius_all(12)
-	style.set_content_margin_all(16)
-	style.shadow_color = Color(0, 0, 0, 0.3)
-	style.shadow_size = 6
-	style.shadow_offset = Vector2(0, 3)
+	style.set_corner_radius_all(20)
+	style.set_content_margin_all(18)
+	style.shadow_color = Color(color.r, color.g, color.b, 0.35)
+	style.shadow_size = 10
+	style.shadow_offset = Vector2(0, 4)
 	btn.add_theme_stylebox_override("normal", style)
 	var hover := style.duplicate()
-	hover.bg_color = color.lightened(0.15)
+	hover.bg_color = color.lightened(0.12)
+	hover.shadow_size = 14
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", hover)

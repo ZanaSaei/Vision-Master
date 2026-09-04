@@ -82,7 +82,7 @@ func _ready() -> void:
 	Global.on_theme_changed(_apply_theme)
 	_apply_theme()
 
-	header_title.text = "Lesson %d\nWriting" % Global.current_lesson
+	header_title.text = MenuStyle.persian_digits("درس %d\nنوشتن" % Global.current_lesson)
 
 	_data = Global.load_category(
 		"writing",

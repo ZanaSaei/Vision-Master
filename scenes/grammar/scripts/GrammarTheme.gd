@@ -509,3 +509,38 @@ static func style_header_box(
 		"panel",
 		header_style()
 	)
+
+
+# Flat icon button used in grammar header bars — matches the app-wide header
+# icon look (transparent resting state, soft accent hover/press disc).
+static func make_header_icon_button(
+	icon_path: String,
+	callback: Callable,
+	size: float = 112.0
+) -> Button:
+	var button := Button.new()
+	button.flat = true
+	button.expand_icon = true
+	button.custom_minimum_size = Vector2(size, size)
+	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	button.focus_mode = Control.FOCUS_ALL
+	button.add_theme_constant_override("icon_max_width", int(size))
+	button.add_theme_constant_override("icon_max_height", int(size))
+	var accent: Color = accent_color()
+	var clear := StyleBoxFlat.new()
+	clear.bg_color = Color(0, 0, 0, 0)
+	clear.set_border_width_all(0)
+	var hover := StyleBoxFlat.new()
+	hover.set_corner_radius_all(int(size / 2.0))
+	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.16)
+	var press := StyleBoxFlat.new()
+	press.set_corner_radius_all(int(size / 2.0))
+	press.bg_color = Color(accent.r, accent.g, accent.b, 0.26)
+	button.add_theme_stylebox_override("normal", clear)
+	button.add_theme_stylebox_override("hover", hover)
+	button.add_theme_stylebox_override("pressed", press)
+	button.add_theme_stylebox_override("focus", hover)
+	button.icon = load(icon_path)
+	button.text = ""
+	button.pressed.connect(callback)
+	return button

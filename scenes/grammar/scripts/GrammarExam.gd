@@ -150,21 +150,13 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 	header_row.add_theme_constant_override("separation", 16)
 	header_margin.add_child(header_row)
 
-	var back_button: Button = Button.new()
-	back_button.text = "↩ قبلی"
-	back_button.custom_minimum_size = Vector2(160.0, 64.0)
-	back_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	GrammarTheme.style_secondary_button(back_button)
-	var font: Font = GrammarTheme.get_fa_bold()
-	if font != null:
-		back_button.add_theme_font_override("font", font)
-	back_button.add_theme_font_size_override("font_size", 26)
-	back_button.pressed.connect(_on_back_pressed)
+	var back_button: Button = GrammarTheme.make_header_icon_button("res://images/Back.png", Callable(self, "_on_back_pressed"))
 	header_row.add_child(back_button)
 
+	var font: Font = GrammarTheme.get_fa_bold()
 	var title_label: Label = Label.new()
 	title_label.text = str(data.get("title_fa", "امتحان گرامر"))
-	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -173,10 +165,6 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 	title_label.add_theme_font_size_override("font_size", 36)
 	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	header_row.add_child(title_label)
-
-	var spacer: Control = Control.new()
-	spacer.custom_minimum_size = Vector2(160.0, 1.0)
-	header_row.add_child(spacer)
 
 
 # ============================================================

@@ -123,7 +123,7 @@ func _ready() -> void:
 	
 	current_book = Global.current_book #[cite: 2]
 	current_lesson = Global.current_lesson #[cite: 2]
-	header_title.text = "Lesson %d\nReading" % current_lesson #[cite: 2]
+	header_title.text = MenuStyle.persian_digits("درس %d\nخواندن" % current_lesson) #[cite: 2]
 	
 	var data: Dictionary          = Global.load_reading(current_book, current_lesson) #[cite: 2]
 	var strategy_data: Dictionary = Global.load_category("reading_strategies", current_book, current_lesson) #[cite: 2]
@@ -485,7 +485,13 @@ func _refresh_all_text() -> void:
 			var en_text = s.get("en", "") #[cite: 2]
 			var clickable_sentence = _format_clickable_text(en_text, current_highlighted_word) #[cite: 2]
 			if _last_active_sentence.has("block_idx") and _last_active_sentence["block_idx"] == block_idx and _last_active_sentence["sentence_idx"] == s_idx: #[cite: 2]
-				new_bbcode += "[bgcolor=#bfdbfe]" + clickable_sentence + "[/bgcolor] " #[cite: 2]
+				# Read-along sentence highlight: opaque bright amber + dark text in
+				# dark theme so it stands out; light theme keeps the soft light-blue
+				# tint, which already reads well.
+				if Global.theme_is_dark():
+					new_bbcode += "[bgcolor=#fbbf24][color=#111111]" + clickable_sentence + "[/color][/bgcolor] " #[cite: 2]
+				else:
+					new_bbcode += "[bgcolor=#bfdbfe]" + clickable_sentence + "[/bgcolor] " #[cite: 2]
 			else: #[cite: 2]
 				new_bbcode += clickable_sentence + " " #[cite: 2]
 		rtl.text = new_bbcode.strip_edges() #[cite: 2]

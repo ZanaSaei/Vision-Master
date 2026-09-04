@@ -1,99 +1,12 @@
 [gd_scene format=3 uid="uid://cc5bggnhxrx5e"]
 
-[ext_resource type="Script" uid="uid://bup0mtxrin4q2" path="res://scenes/book_menu/book_menu.gd" id="1_fjcg3"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_1vrhx"]
-[ext_resource type="PackedScene" uid="uid://b4q4amyvxdy0n" path="res://scenes/dynamic_background/animated_background.tscn" id="2_5241p"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_rdkw2"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_vlp4y"]
+[ext_resource type="Script" path="res://scenes/book_menu/book_menu.gd" id="1_book"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjcg3"]
-bg_color = Color(0.2627451, 0.21960784, 0.7921569, 0)
-corner_radius_bottom_right = 150
-corner_radius_bottom_left = 150
-expand_margin_top = 45.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_1vrhx"]
-font = ExtResource("3_rdkw2")
-font_size = 68
-
-[sub_resource type="LabelSettings" id="LabelSettings_rdkw2"]
-font = ExtResource("4_vlp4y")
-font_size = 59
-font_color = Color(0, 0, 0, 1)
-outline_size = 15
-
-[node name="BookMenu" type="Control" unique_id=848591687]
+[node name="BookMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fjcg3")
-
-[node name="AnimatedBackground" parent="." unique_id=1120716659 instance=ExtResource("2_5241p")]
-
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=112643346]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 30.0
-offset_bottom = 320.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fjcg3")
-
-[node name="TopBar" type="HBoxContainer" parent="PanelContainer" unique_id=1356899270]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 530
-alignment = 1
-
-[node name="BackButton" type="Button" parent="PanelContainer/TopBar" unique_id=457065337]
-layout_mode = 2
-icon = ExtResource("2_1vrhx")
-flat = true
-icon_alignment = 1
-
-[node name="TopBarTitle" type="Label" parent="PanelContainer/TopBar" unique_id=45067173]
-layout_mode = 2
-size_flags_horizontal = 4
-offset_transform_enabled = true
-text = "Vision 1
-"
-label_settings = SubResource("LabelSettings_1vrhx")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainLayout" type="MarginContainer" parent="." unique_id=1267984520]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 187.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 240
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="InnerLayout" type="VBoxContainer" parent="MainLayout" unique_id=1592577916]
-layout_mode = 2
-theme_override_constants/separation = 60
-
-[node name="HeroLabel" type="Label" parent="MainLayout/InnerLayout" unique_id=1359595524]
-layout_mode = 2
-text = "درس مورد نظر را انتخاب کنید."
-label_settings = SubResource("LabelSettings_rdkw2")
-horizontal_alignment = 1
-
-[node name="LessonsContainer" type="VBoxContainer" parent="MainLayout/InnerLayout" unique_id=807170019]
-layout_mode = 2
-theme_override_constants/separation = 120
-
-[node name="BottomSpacer" type="Control" parent="MainLayout/InnerLayout" unique_id=383772796]
-layout_mode = 2
-size_flags_vertical = 3
-
-[connection signal="pressed" from="PanelContainer/TopBar/BackButton" to="." method="_on_back_button_pressed"]
+script = ExtResource("1_book")

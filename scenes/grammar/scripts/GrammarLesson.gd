@@ -227,19 +227,12 @@ func _build_top_bar(main: VBoxContainer) -> void:
 	top_bar.custom_minimum_size = Vector2(0, 64)
 	main.add_child(top_bar)
 
-	var back_button := Button.new()
-	back_button.text = "‹"
-	back_button.custom_minimum_size = Vector2(64, 64)
-	back_button.add_theme_font_size_override("font_size", 40)
-	back_button.add_theme_color_override("font_color", GrammarTheme.text_color())
-	back_button.add_theme_color_override("font_hover_color", GrammarTheme.primary_dark_color())
-	back_button.pressed.connect(_on_back_pressed)
-	GrammarTheme.style_secondary_button(back_button)
+	var back_button: Button = GrammarTheme.make_header_icon_button("res://images/Back.png", Callable(self, "_on_back_pressed"))
 	top_bar.add_child(back_button)
 
 	title_label = Label.new()
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.add_theme_font_size_override("font_size", GrammarTheme.SECTION_SIZE)
 	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())

@@ -103,7 +103,7 @@ func _ready() -> void:
 	
 	current_book = Global.current_book
 	current_lesson = Global.current_lesson
-	header_title.text = "Lesson %d\nConversation" % [current_lesson]
+	header_title.text = MenuStyle.persian_digits("درس %d\nمکالمه" % [current_lesson])
 	current_data = Global.load_conversation(current_book, current_lesson)
 	
 	# ---- Build the two pages ----
@@ -261,8 +261,16 @@ func _speaker_bg(idx: int) -> Color:
 		return SPEAKER_BG_COLORS[idx]
 	return Global.get_theme_color("surface").lerp(SPEAKER_COLORS[idx], 0.08)
 
+func _highlight_bg_color() -> String:
+	# Read-along sentence highlight. Dark theme gets a fully opaque bright
+	# amber so it stands out against the dark card; light theme keeps the
+	# softer translucent tint, which already reads well.
+	return "#fbbf24" if Global.theme_is_dark() else "#fbbf2480"
+
 func _highlight_text_color() -> String:
-	return "#ffffff" if Global.theme_is_dark() else "#111111"
+	# Dark text reads best on the bright amber highlight in both themes
+	# (white text on dim amber is what made dark mode barely visible).
+	return "#111111"
 
 # ============================================================
 # DATA LOADING & AUDIO SYNC LOGIC
@@ -469,7 +477,7 @@ func _refresh_all_text() -> void:
 		var clickable_sentence = _format_clickable_text(en_text, current_highlighted_word)
 		
 		if _last_active_sentence.has("type") and _last_active_sentence["type"] == "intro" and _last_active_sentence["sentence_idx"] == i:
-			new_intro_bbcode += "[bgcolor=#fbbf2480][color=%s]" % _highlight_text_color() + clickable_sentence + "[/color][/bgcolor] "
+			new_intro_bbcode += "[bgcolor=%s][color=%s]" % [_highlight_bg_color(), _highlight_text_color()] + clickable_sentence + "[/color][/bgcolor] "
 		else:
 			new_intro_bbcode += clickable_sentence + " "
 			
@@ -489,7 +497,7 @@ func _refresh_all_text() -> void:
 			var clickable_sentence = _format_clickable_text(en_text, current_highlighted_word)
 			
 			if _last_active_sentence.has("type") and _last_active_sentence["type"] == "line" and _last_active_sentence["block_idx"] == block_idx and _last_active_sentence["sentence_idx"] == s_idx:
-				new_bbcode += "[bgcolor=#fbbf2480][color=%s]" % _highlight_text_color() + clickable_sentence + "[/color][/bgcolor] "
+				new_bbcode += "[bgcolor=%s][color=%s]" % [_highlight_bg_color(), _highlight_text_color()] + clickable_sentence + "[/color][/bgcolor] "
 			else:
 				new_bbcode += clickable_sentence + " "
 				

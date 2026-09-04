@@ -76,7 +76,7 @@ func _ready() -> void:
 	# Put a dark background behind the whole PageView.
 	_add_page_view_background()
 
-	header_title.text = "Lesson %d\nReview" % Global.current_lesson
+	header_title.text = MenuStyle.persian_digits("درس %d\nآنچه آموختید" % Global.current_lesson)
 
 	_data = Global.load_category(
 		"what_you_learned",

@@ -81,7 +81,7 @@ func _ready() -> void:
 	if DisplayServer.has_signal("tts_ended"):
 		DisplayServer.connect("tts_ended", _on_tts_ended)
 	
-	header_title.text = "Lesson %d\nPronunciation" % Global.current_lesson
+	header_title.text = MenuStyle.persian_digits("درس %d\nتلفظ" % Global.current_lesson)
 	_data = Global.load_category(
 		"pronunciation",
 		Global.current_book,

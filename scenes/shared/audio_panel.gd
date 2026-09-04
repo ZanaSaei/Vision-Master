@@ -5,14 +5,18 @@ signal audio_closed
 signal audio_finished
 
 const SEEK_STEP: float = 10.0 #
+const TAP_PRESS_SCALE: Vector2 = Vector2(0.85, 0.85)
+const TAP_PRESS_DURATION: float = 0.06
+const TAP_RELEASE_DURATION: float = 0.26
+const GRABBER_TEXTURE: Texture2D = preload("res://images/audio_grabber.png")
 var is_dragging_slider: bool = false #
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var audio_slider: HSlider = $MarginContainer/AudioUILayout/AudioSlider
-@onready var rewind_button: Button = $MarginContainer/AudioUILayout/ControlsLayout/RewindButton
-@onready var play_pause_button: Button = $MarginContainer/AudioUILayout/ControlsLayout/PlayPauseButton
-@onready var forward_button: Button = $MarginContainer/AudioUILayout/ControlsLayout/ForwardButton
-@onready var close_audio_button: Button = $MarginContainer/AudioUILayout/ControlsLayout/CloseAudioButton
+@onready var rewind_button: TextureButton = $MarginContainer/AudioUILayout/ControlsLayout/RewindButton
+@onready var play_pause_button: TextureButton = $MarginContainer/AudioUILayout/ControlsLayout/PlayPauseButton
+@onready var forward_button: TextureButton = $MarginContainer/AudioUILayout/ControlsLayout/ForwardButton
+@onready var close_audio_button: TextureButton = $MarginContainer/AudioUILayout/ControlsLayout/CloseAudioButton
 
 func _ready() -> void:
 	# Connect internal signals[cite: 2, 3]
@@ -25,8 +29,13 @@ func _ready() -> void:
 	audio_slider.drag_ended.connect(_on_slider_drag_ended)
 	audio_player.finished.connect(_on_audio_finished)
 
+	# Juicy tap animations on every control button.
+	for button: TextureButton in [rewind_button, play_pause_button, forward_button, close_audio_button]:
+		_wire_tap_animation(button)
+
 	Global.on_theme_changed(_on_theme_changed)
 	_apply_theme()
+	_apply_slider_theme()
 
 
 func _apply_theme() -> void:
@@ -39,10 +48,80 @@ func _apply_theme() -> void:
 	add_theme_stylebox_override("panel", panel_sb)
 
 
+func _apply_slider_theme() -> void:
+	if not is_inside_tree():
+		return
+	var dark: bool = Global.theme_is_dark()
+	# Thick rounded track (unplayed portion).
+	var track := StyleBoxFlat.new()
+	track.bg_color = Color(1.0, 1.0, 1.0, 0.28) if dark else Color(0.0, 0.0, 0.0, 0.12)
+	track.content_margin_top = 10
+	track.content_margin_bottom = 10
+	track.corner_radius_top_left = 10
+	track.corner_radius_top_right = 10
+	track.corner_radius_bottom_left = 10
+	track.corner_radius_bottom_right = 10
+	audio_slider.add_theme_stylebox_override("slider", track)
+	# Played portion fill.
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = Color.WHITE if dark else Global.get_theme_color("accent")
+	fill.content_margin_top = 10
+	fill.content_margin_bottom = 10
+	fill.corner_radius_top_left = 10
+	fill.corner_radius_top_right = 10
+	fill.corner_radius_bottom_left = 10
+	fill.corner_radius_bottom_right = 10
+	audio_slider.add_theme_stylebox_override("grabber_area", fill)
+	audio_slider.add_theme_stylebox_override("grabber_area_highlight", fill)
+	# Big finger-friendly thumb.
+	audio_slider.add_theme_icon_override("grabber", GRABBER_TEXTURE)
+	audio_slider.add_theme_icon_override("grabber_highlight", GRABBER_TEXTURE)
+
+
 func _on_theme_changed(_mode: int) -> void:
 	if not is_inside_tree():
 		return
 	_apply_theme()
+	_apply_slider_theme()
+
+# ==========================================
+# TAP ANIMATIONS
+# ==========================================
+func _wire_tap_animation(button: TextureButton) -> void:
+	button.pivot_offset = button.size * 0.5
+	button.resized.connect(func() -> void: button.pivot_offset = button.size * 0.5)
+	button.button_down.connect(func() -> void: _animate_button_press(button))
+	button.button_up.connect(func() -> void: _animate_button_release(button))
+
+
+func _animate_button_press(button: TextureButton) -> void:
+	_stop_tap_tween(button)
+	var tween: Tween = button.create_tween()
+	button.set_meta("tap_tween", tween)
+	tween.tween_property(button, "scale", TAP_PRESS_SCALE, TAP_PRESS_DURATION) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+
+func _animate_button_release(button: TextureButton) -> void:
+	_stop_tap_tween(button)
+	var tween: Tween = button.create_tween()
+	button.set_meta("tap_tween", tween)
+	tween.tween_property(button, "scale", Vector2.ONE, TAP_RELEASE_DURATION) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+func _stop_tap_tween(button: TextureButton) -> void:
+	if button.has_meta("tap_tween"):
+		var tween: Tween = button.get_meta("tap_tween") as Tween
+		if is_instance_valid(tween):
+			tween.kill()
+		button.remove_meta("tap_tween")
+
+
+func _reset_button_scales() -> void:
+	for button: TextureButton in [rewind_button, play_pause_button, forward_button, close_audio_button]:
+		_stop_tap_tween(button)
+		button.scale = Vector2.ONE
 
 func _process(_delta: float) -> void:
 	# Broadcast the current time for syncing text[cite: 2, 3]
@@ -60,10 +139,10 @@ func load_and_play(audio_path: String) -> void:
 		return
 		
 	show()
+	_reset_button_scales()
 	audio_player.stream = load(audio_path)
 	audio_player.play()
 	audio_player.stream_paused = false
-	play_pause_button.text = "Pause"
 	audio_slider.max_value = audio_player.stream.get_length()
 	audio_slider.value = 0.0
 
@@ -81,12 +160,10 @@ func _on_play_pause_pressed() -> void:
 	
 	if audio_player.stream_paused:
 		audio_player.stream_paused = false
-		play_pause_button.text = "Pause"
 		if not audio_player.playing: 
 			audio_player.play(audio_slider.value)
 	elif audio_player.playing:
 		audio_player.stream_paused = true
-		play_pause_button.text = "Play"
 
 func _on_rewind_pressed() -> void:
 	if audio_player.stream != null:
@@ -103,11 +180,11 @@ func _on_close_audio_pressed() -> void:
 	audio_player.stop() #[cite: 2, 3]
 	audio_player.stream_paused = false #[cite: 2, 3]
 	audio_slider.value = 0.0 #[cite: 2, 3]
+	_reset_button_scales()
 	hide()
 	audio_closed.emit()
 
 func _on_audio_finished() -> void:
-	play_pause_button.text = "Play" #[cite: 2, 3]
 	audio_finished.emit()
 
 func _on_slider_drag_started() -> void: 

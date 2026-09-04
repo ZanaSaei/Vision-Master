@@ -89,7 +89,7 @@ func _ready() -> void:
 	Global.on_theme_changed(_apply_theme)
 	_apply_theme()
 
-	header_title.text = "Lesson %d\nListening & Speaking" % Global.current_lesson
+	header_title.text = MenuStyle.persian_digits("درس %d\nشنیداری و گفتاری" % Global.current_lesson)
 
 	var data: Dictionary = Global.load_category(
 		"listening_speaking",
