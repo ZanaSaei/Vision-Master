@@ -441,10 +441,6 @@ func _on_back_button_pressed() -> void:
 	if target == "":
 		target = SCENE_SAVED_WORDS   # safe fallback if never set
 	TransitionManager.change_scene(target)
-	
-	# Keep the little press feedback
-	var tween = create_tween()
-	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
 
 
 func _on_android_back_pressed() -> void:

@@ -937,8 +937,6 @@ func _on_back_button_pressed() -> void:
 		TransitionManager.change_scene(SCENE_MAIN_MENU)
 	else:
 		TransitionManager.change_scene(SCENE_LESSON_MENU)
-	var tween = create_tween()
-	tween.tween_property(back_nav_button, "scale", Vector2(0.96, 0.96), 0.08)
 
 
 func _on_android_back_pressed() -> void:

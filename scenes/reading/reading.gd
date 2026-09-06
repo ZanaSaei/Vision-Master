@@ -1002,8 +1002,6 @@ func _on_home_pressed() -> void:
 func _on_back_button_pressed() -> void:
 	audio_panel.stop_and_close()
 	TransitionManager.change_scene(SCENE_LESSON_MENU) #[cite: 2]
-	var tween = create_tween() #[cite: 2]
-	tween.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08) #[cite: 2]
 
 
 func _on_android_back_pressed() -> void:

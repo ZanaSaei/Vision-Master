@@ -17,7 +17,11 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_BACK:
+		if event.echo:
+			return
+		# Android's back button can surface as either keycode or
+		# physical_keycode depending on the device/platform — check both.
+		if event.pressed and (event.keycode == KEY_BACK or event.physical_keycode == KEY_BACK):
 			_on_android_back_pressed()
 
 

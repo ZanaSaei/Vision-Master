@@ -11,6 +11,7 @@ extends Node
 # ============================================================
 
 const DIR := "res://assets/audio/ui/"
+const MAX_PLAYERS := 8   # cap the pool so it can never grow unbounded
 
 var _players: Array[AudioStreamPlayer] = []
 
@@ -19,6 +20,9 @@ func _get_player() -> AudioStreamPlayer:
 	for p in _players:
 		if not p.playing:
 			return p
+	if _players.size() >= MAX_PLAYERS:
+		# Reuse the oldest player instead of growing the pool forever.
+		return _players[0]
 	var player := AudioStreamPlayer.new()
 	add_child(player)
 	_players.append(player)

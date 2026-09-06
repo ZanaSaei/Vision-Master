@@ -248,7 +248,7 @@ func _on_clear_review_pressed() -> void:
 	Sfx.click()
 	_confirm(
 		"پاک کردن لایتنر",
-		"همه لغات در نوبت مرور (لایتنر) پاک خواهد شد. ادامه می‌دهید؟",
+		"همه لغات در نوبت مرور (لایتنر) پاک خواهد شد.\nتوجه: با توجه به همگام‌بودن لیست‌ها، لغات ذخیره‌شده (فلش‌کارت‌ها) هم پاک می‌شوند. این عمل قابل بازگشت نیست.\nادامه می‌دهید؟",
 		func() -> void:
 			Global.clear_review_words()
 			_show_toast("نوبت مرور پاک شد ✓")
@@ -475,6 +475,12 @@ func _show_toast(text: String) -> void:
 	add_child(panel)
 	panel.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	panel.position.y -= 150
+	# `panel.size` is still (0,0) right after add_child — wait one frame so
+	# the pivot is centered on the real size, then pop the animation in.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not is_instance_valid(panel):
+		return
 	panel.pivot_offset = panel.size / 2.0
 	panel.scale = Vector2(0.82, 0.82)
 	panel.modulate.a = 0.0

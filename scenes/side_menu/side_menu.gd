@@ -63,8 +63,11 @@ func _ready() -> void:
 	overlay.visible = false
 
 	# Calculate positions based on viewport
-	menu_closed_position = get_viewport().get_visible_rect().size.x
-	menu_open_position = get_viewport().get_visible_rect().size.x - menu_panel.size.x
+	_update_menu_positions()
+
+	# Recompute if the window/viewport is ever resized (desktop testing,
+	# foldables) so the panel always parks fully off/on screen.
+	get_viewport().size_changed.connect(_update_menu_positions)
 
 	# Set initial position (off-screen right)
 	menu_panel.position.x = menu_closed_position
@@ -83,6 +86,17 @@ func _ready() -> void:
 
 	Global.on_theme_changed(_on_theme_changed)
 	_apply_theme()
+
+
+# Recomputes the off-screen / on-screen X positions from the current
+# viewport size. Called in _ready and again whenever the viewport resizes
+# so the drawer always parks exactly at the right edge.
+func _update_menu_positions() -> void:
+	menu_closed_position = get_viewport().get_visible_rect().size.x
+	menu_open_position = get_viewport().get_visible_rect().size.x - menu_panel.size.x
+	# If the drawer is currently closed, keep it fully off-screen.
+	if not is_open:
+		menu_panel.position.x = menu_closed_position
 
 
 # ══════════════════════════════════════════════════════════════

@@ -34,6 +34,8 @@ const ENTER_SCALE      := 1.04    # new screen arrives slightly big, settles to 
 
 # Guards against double-taps starting a second slide mid-transition.
 var _slide_busy := false
+# Same guard for the fade transition (change_scene).
+var _fade_busy := false
 
 
 func _ready() -> void:
@@ -58,6 +60,11 @@ func _ready() -> void:
 # Side-menu buttons keep using this, per your requirement.
 ############################################################
 func change_scene(scene_path: String) -> void:
+	# Guard: a second tap while a fade is running would start an
+	# overlapping fade and double-swap the scene. Ignore it.
+	if _fade_busy:
+		return
+	_fade_busy = true
 	# 1. Fade to black over the current scene.
 	await _fade_out()
 	# 2. Swap the scene while nothing is visible.
@@ -67,6 +74,7 @@ func change_scene(scene_path: String) -> void:
 	await get_tree().process_frame
 	# 4. Fade back in.
 	await _fade_in()
+	_fade_busy = false
 
 
 func _fade_out() -> void:

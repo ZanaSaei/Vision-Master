@@ -1,9 +1,13 @@
-[gd_scene format=3 uid="uid://qvx0q2vcn6ni"]
+[gd_scene load_steps=2 format=3 uid="uid://qvx0q2vcn6ni"]
 
-[node name="Purchase" type="Control" unique_id=2065389278]
+[ext_resource type="Script" path="res://scenes/purchase/purchase.gd" id="1_pu"]
+
+[node name="Purchase" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pu")
+

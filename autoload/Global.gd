@@ -106,7 +106,10 @@ func _lookup_lesson_entry(path: String, book_number: int, lesson_number: int) ->
 			if b < 0 or l < 0:
 				continue
 			index["%d_%d" % [b, l]] = entry
-	return _lesson_index_cache[path].get("%d_%d" % [book_number, lesson_number], {})
+	# Return a deep copy: the cache must stay pristine so any scene that
+	# mutates the returned entry (tagging book/lesson, etc.) can't poison
+	# the cached data for the rest of the session.
+	return _lesson_index_cache[path].get("%d_%d" % [book_number, lesson_number], {}).duplicate(true)
 
 
 # Joins an array of sentence objects ({"en":..., "fa":..., "start":..., "end":...})
@@ -798,6 +801,9 @@ func save_settings() -> void:
 		"theme_mode": theme_mode,
 	}
 	var file := FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
+	if file == null:
+		push_error("Could not open %s for writing (error %d) — settings not saved." % [SETTINGS_PATH, FileAccess.get_open_error()])
+		return
 	file.store_string(JSON.stringify(data))
 	file.close()
 
@@ -940,6 +946,18 @@ func mark_unit_completed(book: int, lesson: int, unit_index: int, unit_id: Strin
 
 # ---------- PROGRESS PERSISTENCE ----------
 
+# Central, crash-safe write helper: every persist path goes through here so
+# a failed FileAccess.open (storage full, permission error on Android, etc.)
+# logs a clear error instead of crashing on a null object.
+func _write_json_file(path: String, data: Variant) -> void:
+	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		push_error("Could not open %s for writing (error %d) — data not saved." % [path, FileAccess.get_open_error()])
+		return
+	file.store_string(JSON.stringify(data))
+	file.close()
+
+
 func _save_progress() -> void:
 	var data: Dictionary = {
 		"last_scene": _last_scene,
@@ -947,9 +965,7 @@ func _save_progress() -> void:
 		"grammar_xp": grammar_xp,
 		"grammar_completed_units": grammar_completed_units,
 	}
-	var file: FileAccess = FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
-	file.store_string(JSON.stringify(data))
-	file.close()
+	_write_json_file(PROGRESS_PATH, data)
 
 
 func _load_progress() -> void:
@@ -1005,14 +1021,10 @@ func _load_review_words() -> void:
 		review_words = []
 
 func _persist_saved_words() -> void:
-	var file := FileAccess.open(SAVED_WORDS_PATH, FileAccess.WRITE)
-	file.store_string(JSON.stringify(saved_words))
-	file.close()
+	_write_json_file(SAVED_WORDS_PATH, saved_words)
 
 func _persist_review_words() -> void:
-	var file := FileAccess.open(REVIEW_WORDS_PATH, FileAccess.WRITE)
-	file.store_string(JSON.stringify(review_words))
-	file.close()
+	_write_json_file(REVIEW_WORDS_PATH, review_words)
 
 func is_word_saved(word: String, book: int, lesson: int) -> bool:
 	for entry in saved_words:
@@ -1203,16 +1215,21 @@ func get_word_definition(word: String) -> Dictionary:
 		if word_database.has(base_word.to_lower()):
 			return word_database[base_word.to_lower()]
 
-	# Try removing plural 's' for nouns
+	# Try removing plural 's' / 'es' / 'ies' for nouns
 	if key.ends_with("s") and len(key) > 1:
-		var singular = key.trim_suffix("s")
-		if word_database.has(singular):
-			return word_database[singular]
-		# Check if it's a verb form with 's'
-		if verb_forms.has(singular):
-			var base_word = verb_forms[singular]
-			if word_database.has(base_word.to_lower()):
-				return word_database[base_word.to_lower()]
+		var candidates: Array[String] = [key.trim_suffix("s")]          # cats -> cat
+		if key.ends_with("es"):
+			candidates.append(key.trim_suffix("es"))                    # boxes -> box
+		if key.ends_with("ies"):
+			candidates.append(key.trim_suffix("ies") + "y")             # studies -> study
+		for singular in candidates:
+			if word_database.has(singular):
+				return word_database[singular]
+			# Check if it's a verb form with 's'
+			if verb_forms.has(singular):
+				var base_word = verb_forms[singular]
+				if word_database.has(base_word.to_lower()):
+					return word_database[base_word.to_lower()]
 
 	# Try removing 'ing' for verbs
 	if key.ends_with("ing") and len(key) > 3:

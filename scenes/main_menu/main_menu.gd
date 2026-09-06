@@ -45,6 +45,7 @@ var _card_buttons: Array[Button] = []
 var _card_accents: Array[Color] = []
 var _hamburger: Button = null
 var _side_menu: Node = null
+var _back_message_nodes: Array[Node] = []   # active exit-confirmation overlays
 
 @onready var _root_scroll: ScrollContainer = null
 @onready var _main_col: VBoxContainer = null
@@ -441,6 +442,10 @@ func _on_android_back_pressed() -> void:
 
 
 func _show_back_message() -> void:
+	# Only one exit message at a time — pressing back again while it shows
+	# either quits (double-press) or is ignored, never stacks overlays.
+	if not _back_message_nodes.is_empty():
+		return
 	var message := Label.new()
 	message.text = "برای خروج دوباره دکمه برگشت را بزنید"
 	message.add_theme_font_override("font", MenuStyle.vazir())
@@ -465,6 +470,8 @@ func _show_back_message() -> void:
 	add_child(bg)
 	move_child(bg, 0)
 
+	_back_message_nodes = [bg, message]
+
 	await get_tree().create_timer(1.5).timeout
 	if not is_inside_tree():
 		return
@@ -478,3 +485,4 @@ func _show_back_message() -> void:
 
 	bg.queue_free()
 	message.queue_free()
+	_back_message_nodes.clear()

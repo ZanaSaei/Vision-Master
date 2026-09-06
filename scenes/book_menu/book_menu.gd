@@ -62,10 +62,10 @@ func _ready() -> void:
 	_apply_theme()
 
 	# Gentle entrance.
+	_scroll.modulate.a = 0.0
 	var tw := create_tween()
 	tw.tween_property(_scroll, "modulate:a", 1.0, 0.30) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	_scroll.modulate.a = 0.0
 
 
 func _build_ui() -> void:
