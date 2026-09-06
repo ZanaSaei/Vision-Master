@@ -13,7 +13,7 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 
 	# --- Title (Persian) ---
 	var title := Label.new()
-	title.text = str(unit.get("title_fa", ""))
+	GrammarTheme.set_bidi_text(title, str(unit.get("title_fa", "")))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", GrammarTheme.HEADING_SIZE)
 	title.add_theme_color_override("font_color", GrammarTheme.text_color())
@@ -37,7 +37,7 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 	# --- Explanation card ---
 	var explanation_card := _make_card(target, 0)
 	var explanation := Label.new()
-	explanation.text = str(unit.get("explanation", ""))
+	GrammarTheme.set_bidi_text(explanation, str(unit.get("explanation", "")))
 	explanation.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	explanation.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	explanation.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -63,7 +63,7 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 
 	if structure_fallback != "":
 		var structure_label := Label.new()
-		structure_label.text = structure_fallback
+		GrammarTheme.set_bidi_text(structure_label, structure_fallback)
 		structure_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		structure_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		structure_label.add_theme_font_size_override("font_size", GrammarTheme.BODY_LARGE_SIZE)
@@ -96,7 +96,7 @@ static func _add_structure_card(target: VBoxContainer, data: Dictionary) -> void
 	box.add_child(en)
 
 	var fa := Label.new()
-	fa.text = str(data.get("fa", ""))
+	GrammarTheme.set_bidi_text(fa, str(data.get("fa", "")))
 	fa.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	fa.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	fa.add_theme_font_size_override("font_size", GrammarTheme.BODY_SMALL_SIZE)

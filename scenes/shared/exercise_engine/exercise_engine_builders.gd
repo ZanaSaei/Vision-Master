@@ -300,7 +300,7 @@ func _add_instruction() -> void:
 
 	var instruction := Label.new()
 	instruction.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	instruction.text = final_text
+	instruction.text = GrammarTheme.bidi_fix(final_text)
 	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD
 	instruction.add_theme_font_size_override("font_size", 44)
 	instruction.add_theme_color_override("font_color", _c_text())

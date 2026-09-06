@@ -252,7 +252,10 @@ func show_correct(
 		GrammarTheme.success_color()
 	)
 
-	explanation_label.text = explanation
+	GrammarTheme.set_bidi_text(
+		explanation_label,
+		explanation
+	)
 
 	continue_button.text = "ادامه"
 
@@ -278,7 +281,10 @@ func show_wrong(
 		GrammarTheme.warning_color()
 	)
 
-	explanation_label.text = "اشکالی نداره! دوباره امتحان کن.\nمی‌تونی از چراغ راهنما 💡 کمک بگیری."
+	GrammarTheme.set_bidi_text(
+		explanation_label,
+		"اشکالی نداره! دوباره امتحان کن.\nمی‌تونی از چراغ راهنما 💡 کمک بگیری."
+	)
 
 	continue_button.text = "دوباره امتحان کن"
 

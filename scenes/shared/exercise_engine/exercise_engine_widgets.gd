@@ -105,6 +105,7 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool) -> Labe
 	l.add_theme_font_size_override("font_size", maxi(font_size, MIN_FONT))
 	l.add_theme_color_override("font_color", color)
 	var fa_dominant := _is_fa_dominant(text)
+	l.text = GrammarTheme.bidi_fix(text)
 	l.text_direction = Control.TEXT_DIRECTION_RTL if fa_dominant else Control.TEXT_DIRECTION_LTR
 	if fa_dominant and _font_farsi:
 		l.add_theme_font_override("font", _font_farsi)
@@ -128,7 +129,7 @@ func _add_fa_label(fa_text: String, font_size: int = 32, color: Color = Color(0,
 		color = _c_text_dim()
 	var label := Label.new()
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.text = clean
+	label.text = GrammarTheme.bidi_fix(clean)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	label.add_theme_font_size_override("font_size", maxi(font_size, MIN_FONT))
 	label.add_theme_color_override("font_color", color)

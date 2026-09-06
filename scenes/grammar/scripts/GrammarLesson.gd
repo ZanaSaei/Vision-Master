@@ -294,7 +294,10 @@ func _show_unit() -> void:
 		_activities = [unit]
 	_activity_index = 0
 
-	title_label.text = str(lesson_data.get("title_fa", "گرامر"))
+	GrammarTheme.set_bidi_text(
+		title_label,
+		str(lesson_data.get("title_fa", "گرامر"))
+	)
 	_show_current_activity()
 
 

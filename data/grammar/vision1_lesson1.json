@@ -22,7 +22,7 @@
 						"title_fa": "آینده ساده با Will",
 						"title_en": "Simple Future with Will",
 						"explanation": "برای صحبت درباره‌ی کارهایی که در آینده اتفاق می‌افتند از will استفاده می‌کنیم.",
-						"structure": "Subject + will + base verb",
+						"structure": "فعل ساده + will + فاعل",
 						"cards": [
 							{
 								"en": "I will help you.",
@@ -40,7 +40,7 @@
 						"title_fa": "ساختار جمله مثبت",
 						"title_en": "Affirmative Sentences",
 						"explanation": "در جملات مثبت، ساختار به صورت فاعل + will + شکل ساده فعل است.",
-						"structure": "Subject + will + base verb",
+						"structure": "فعل ساده + will + فاعل",
 						"cards": [
 							{
 								"en": "She will read a book.",
@@ -62,10 +62,9 @@
 								"words": [
 									"فاعل",
 									"فعل ساده",
-									"will",
-									"."
+									"will"
 								],
-								"answer": "فاعل will فعل ساده .",
+								"answer": "فاعل will فعل ساده",
 								"hint_fa": "ساختار درست از چپ به راست:\nفعل ساده + will + فاعل"
 							}
 						]
@@ -172,7 +171,7 @@
 						"title_fa": "ساختار جمله منفی",
 						"title_en": "Negative Sentences",
 						"explanation": "برای ساختن جمله منفی، کلمه‌ی not را بعد از will می‌آوریم.",
-						"structure": "Subject + will + not + base verb",
+						"structure": "فعل ساده + will + not + فاعل",
 						"cards": [
 							{
 								"en": "I will not go there.",
@@ -195,11 +194,10 @@
 									"will",
 									"not",
 									"فعل ساده",
-									"فاعل",
-									"."
+									"فاعل"
 								],
-								"answer": "فاعل will not فعل ساده .",
-								"hint_fa": "ساختار درست از چپ به راست: \nشکل ساده فعل + will + not + فاعل"
+								"answer": "فاعل will not فعل ساده",
+								"hint_fa": "ساختار درست از چپ به راست: \nفعل ساده + will + not + فاعل"
 							}
 						]
 					},
@@ -209,7 +207,7 @@
 						"title_fa": "شکل مخفف will not",
 						"title_en": "Won't",
 						"explanation": "شکل مخفف will not به صورت won't است که در زبان محاوره‌ای بسیار استفاده می‌شود.",
-						"structure": "Subject + won't + base verb",
+						"structure": "فعل ساده + won't + فاعل",
 						"cards": [
 							{
 								"en": "I won't forget you.",
@@ -295,7 +293,7 @@
 									"?"
 								],
 								"answer": "Will فاعل فعل ساده ?",
-								"hint_fa": "ساختار درست: Will + فاعل + شکل ساده فعل؟"
+								"hint_fa": "ساختار درست از چپ به راست: ?فعل ساده + فاعل + Will"
 							}
 						]
 					},
@@ -419,7 +417,7 @@
 								"fa": "ساختار سوال wh به صورت Wh + فاعل + will + شکل ساده فعل است.",
 								"answer": false,
 								"hint_fa": "در سوال wh باید will بعد از کلمه wh و قبل از فاعل می‌آید.",
-								"explanation_fa": "غلط است. ساختار درست از سمت چپ: \nشکل ساده فعل + فاعل + Wh + will"
+								"explanation_fa": "غلط است. ساختار درست از سمت چپ: \n فعل ساده + فاعل + will + کلمه Wh"
 							}
 						]
 					},
@@ -438,7 +436,7 @@
 									"?"
 								],
 								"answer": "Wh will فاعل شکل ساده فعل ?",
-								"hint_fa": "ساختار درست از سمت چپ: \nشکل ساده فعل + فاعل + Wh + will"
+								"hint_fa": "ساختار درست از سمت چپ: \n فعل ساده + فاعل + will + کلمه Wh"
 							}
 						]
 					},
@@ -623,7 +621,7 @@
 									"."
 								],
 								"answer": "She is going to study tonight .",
-								"hint_fa": "ساختار درست از چپ به راست: \nشکل ساده فعل + be + going to + فاعل"
+								"hint_fa": "ساختار درست از چپ به راست: \nفعل ساده + be + going to + فاعل"
 							}
 						]
 					},
@@ -820,7 +818,7 @@
 									"."
 								],
 								"answer": "She is not going to come .",
-								"hint_fa": "ساختار درست از چپ به راست: \nشکل ساده فعل + be + not + going to + فاعل"
+								"hint_fa": "ساختار درست از چپ به راست: \nفعل ساده + be + not + going to + فاعل"
 							}
 						]
 					},
@@ -921,7 +919,7 @@
 									"she"
 								],
 								"answer": "Is she going to study ?",
-								"hint_fa": "ساختار درست از چپ به راست: \nشکل ساده فعل + going to + فاعل + Be"
+								"hint_fa": "ساختار درست از چپ به راست: \nفعل ساده + going to + فاعل + فعل Be"
 							}
 						]
 					},

@@ -80,6 +80,15 @@ func _build_ui() -> void:
 		GrammarTheme.text_secondary_color()
 	)
 
+	# Instructions are Persian; force the RTL base direction so embedded
+	# English tokens (will, going to, ...) cannot scramble the line.
+	instruction.text = GrammarTheme.bidi_fix(
+		instruction.text
+	)
+	instruction.text_direction = (
+		Control.TEXT_DIRECTION_RTL
+	)
+
 	root.add_child(
 		instruction
 	)
@@ -347,7 +356,10 @@ func _show_blanks_item(item: Dictionary) -> void:
 
 			var label := Label.new()
 
-			label.text = part
+			GrammarTheme.set_bidi_text(
+				label,
+				part
+			)
 
 			# Deliberately NO autowrap: inside the HFlowContainer, an
 			# autowrapping label collapses to its minimum (single-letter)

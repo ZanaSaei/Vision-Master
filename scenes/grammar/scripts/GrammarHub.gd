@@ -136,7 +136,7 @@ func _build_ui() -> void:
 
 func _make_header_button(text: String, callback: Callable) -> Button:
 	var button: Button = Button.new()
-	button.text = text
+	GrammarTheme.set_bidi_text(button, text)
 	button.custom_minimum_size = Vector2(160.0, 64.0)
 	button.focus_mode = Control.FOCUS_ALL
 	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -153,7 +153,7 @@ func _make_feature_button(text: String, accent: Color, font_size: int, callback:
 	var button: GrammarButton = GrammarButton.new()
 	button.variant = GrammarButton.ButtonVariant.PRIMARY
 	button.no_clip = true
-	button.text = text
+	GrammarTheme.set_bidi_text(button, text)
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	button.custom_minimum_size = Vector2(0.0, 260.0)
@@ -181,7 +181,7 @@ func _make_full_button(text: String, accent: Color, font_size: int, callback: Ca
 	var button: GrammarButton = GrammarButton.new()
 	button.variant = GrammarButton.ButtonVariant.PRIMARY
 	button.no_clip = true
-	button.text = text
+	GrammarTheme.set_bidi_text(button, text)
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	button.custom_minimum_size = Vector2(0.0, 150.0)

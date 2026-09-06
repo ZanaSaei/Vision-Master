@@ -3,6 +3,82 @@ extends RefCounted
 
 
 # ============================================================
+# BIDI (mixed Persian/English) HELPER
+# ------------------------------------------------------------
+# Farsi-dominant lines that embed English tokens (will, going to,
+# as...as, ...) render with a RTL base direction. Without help the
+# Unicode bidi algorithm visually reorders the Latin fragments and
+# any "+"-chained structure around them, producing scrambled text.
+# Wrapping every contiguous Latin run in directional ISOLATES
+# (LRI U+2066 ... PDI U+2069) pins each run's internal order and
+# its position, no matter what surrounds it. Display-only: this
+# must never be applied to strings used for answer comparison.
+# ============================================================
+# Returns true when Persian characters outnumber Latin ones in `text`.
+# Same rule the shared exercise engine uses to pick the base direction.
+static func is_fa_dominant(text: String) -> bool:
+	var fa := 0
+	var lat := 0
+	for i in text.length():
+		var u := text.unicode_at(i)
+		if u >= 0x0600 and u <= 0x06FF:
+			fa += 1
+		elif (u >= 0x41 and u <= 0x5A) or (u >= 0x61 and u <= 0x7A) or (u >= 0xC0 and u <= 0x24F):
+			lat += 1
+	return fa > 0 and fa >= lat
+
+
+# One-call way to display any (possibly mixed Persian/English) string on a
+# Label or Button: applies bidi isolates and picks the correct base
+# direction. Use this for every JSON-driven text in the grammar system.
+static func set_bidi_text(control: Control, text: String) -> void:
+	control.text = bidi_fix(text)
+	control.text_direction = (
+		Control.TEXT_DIRECTION_RTL if is_fa_dominant(text) else Control.TEXT_DIRECTION_LTR
+	)
+
+
+static func bidi_fix(text: String) -> String:
+	if text.is_empty():
+		return text
+	var fa := 0
+	var lat := 0
+	for i in text.length():
+		var u := text.unicode_at(i)
+		if u >= 0x0600 and u <= 0x06FF:
+			fa += 1
+		elif (u >= 0x41 and u <= 0x5A) or (u >= 0x61 and u <= 0x7A) or (u >= 0xC0 and u <= 0x24F):
+			lat += 1
+	# Only Farsi-dominant lines need isolates; pure or Latin-dominant
+	# lines already render correctly with an LTR base direction.
+	if fa == 0 or fa < lat:
+		return text
+	var lri := char(0x2066)
+	var pdi := char(0x2069)
+	var out := ""
+	var in_run := false
+	for i in text.length():
+		var u := text.unicode_at(i)
+		var is_lat := (u >= 0x41 and u <= 0x5A) or (u >= 0x61 and u <= 0x7A) or (u >= 0xC0 and u <= 0x24F)
+		# Digits, apostrophes and hyphens stay glued to an open run so
+		# tokens like "be going to" or "I'll" are not split apart.
+		var keep := in_run and ((u >= 0x30 and u <= 0x39) or u == 0x27 or u == 0x2019 or u == 0x2D or u == 0x200C)
+		if is_lat or keep:
+			if not in_run:
+				out += lri
+				in_run = true
+			out += text[i]
+		else:
+			if in_run:
+				out += pdi
+				in_run = false
+			out += text[i]
+	if in_run:
+		out += pdi
+	return out
+
+
+# ============================================================
 # GRAMMAR THEME  —  delegates 100% to the app-wide theme owner
 # ------------------------------------------------------------
 # Grammar never defines its own colors. Every color in this

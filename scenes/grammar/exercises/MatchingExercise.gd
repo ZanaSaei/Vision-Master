@@ -45,10 +45,13 @@ func _build_ui() -> void:
 
 	var instruction := Label.new()
 
-	instruction.text = str(
-		exercise_data.get(
-			"instruction_fa",
-			"جفت‌های درست را پیدا کن."
+	GrammarTheme.set_bidi_text(
+		instruction,
+		str(
+			exercise_data.get(
+				"instruction_fa",
+				"جفت‌های درست را پیدا کن."
+			)
 		)
 	)
 
@@ -208,7 +211,10 @@ func _create_button(
 	button.play_click_sound = false
 	button.neutral_states = true
 
-	button.text = text_value
+	GrammarTheme.set_bidi_text(
+		button,
+		text_value
+	)
 
 	button.custom_minimum_size = Vector2(
 		0,

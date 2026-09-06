@@ -64,10 +64,13 @@ func _build_ui() -> void:
 
 	var instruction := Label.new()
 
-	instruction.text = str(
-		exercise_data.get(
-			"instruction_fa",
-			"درست یا غلط؟"
+	GrammarTheme.set_bidi_text(
+		instruction,
+		str(
+			exercise_data.get(
+				"instruction_fa",
+				"درست یا غلط؟"
+			)
 		)
 	)
 
@@ -227,10 +230,13 @@ func _show_item() -> void:
 		current_index
 	]
 
-	statement_label.text = str(
-		item.get(
-			"statement",
-			""
+	GrammarTheme.set_bidi_text(
+		statement_label,
+		str(
+			item.get(
+				"statement",
+				""
+			)
 		)
 	)
 

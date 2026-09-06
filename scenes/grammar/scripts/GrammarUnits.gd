@@ -99,7 +99,7 @@ func _build_ui() -> void:
 	content_margin.add_child(content)
 
 	var lesson_title: Label = Label.new()
-	lesson_title.text = str(lesson_data.get("title_fa", ""))
+	GrammarTheme.set_bidi_text(lesson_title, str(lesson_data.get("title_fa", "")))
 	if lesson_title.text.is_empty():
 		lesson_title.text = str(lesson_data.get("title_en", ""))
 	if lesson_title.text.is_empty():
@@ -233,7 +233,10 @@ func _make_unit_button(index: int, unit: Dictionary) -> GrammarButton:
 		status = "▶"
 
 	var label: String = GrammarData.unit_title(unit)
-	button.text = "%s %s\nبخش %d\n%s" % [status, GrammarData.unit_icon(unit), index + 1, label]
+	GrammarTheme.set_bidi_text(
+		button,
+		"%s %s\nبخش %d\n%s" % [status, GrammarData.unit_icon(unit), index + 1, label]
+	)
 
 	if unlocked:
 		button.pressed.connect(_on_unit_pressed.bind(index))

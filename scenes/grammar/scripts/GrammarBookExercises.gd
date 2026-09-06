@@ -131,7 +131,7 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 
 	var font: Font = GrammarTheme.get_fa_bold()
 	var title_label: Label = Label.new()
-	title_label.text = str(data.get("title_fa", "تمرینات کتاب"))
+	GrammarTheme.set_bidi_text(title_label, str(data.get("title_fa", "تمرینات کتاب")))
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -148,7 +148,7 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 # ============================================================
 func _build_content(content: VBoxContainer, data: Dictionary, sections: Array) -> void:
 	var subtitle: Label = Label.new()
-	subtitle.text = str(data.get("subtitle_fa", "تمرین‌های این بخش را کامل کنید."))
+	GrammarTheme.set_bidi_text(subtitle, str(data.get("subtitle_fa", "تمرین‌های این بخش را کامل کنید.")))
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var body_font: Font = GrammarTheme.get_fa_regular()

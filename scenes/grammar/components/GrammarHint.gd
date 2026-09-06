@@ -136,7 +136,8 @@ func _on_theme_changed(_mode: int) -> void:
 
 func set_hint(text: String) -> void:
 	if _bubble_label != null:
-		_bubble_label.text = text
+		_bubble_label.text = GrammarTheme.bidi_fix(text)
+		_bubble_label.text_direction = Control.TEXT_DIRECTION_RTL
 
 
 func show_bubble() -> void:

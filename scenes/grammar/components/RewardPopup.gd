@@ -116,9 +116,9 @@ func _on_theme_changed(_mode: int) -> void:
 
 
 func show_reward(title: String, awarded_xp: int, next_text: String = "ادامه", show_back: bool = false) -> void:
-	title_label.text = title
+	GrammarTheme.set_bidi_text(title_label, title)
 	reward_label.text = "⭐ +%d XP" % awarded_xp
-	next_button.text = next_text
+	GrammarTheme.set_bidi_text(next_button, next_text)
 	back_button.visible = show_back
 	# Only play the reward jingle when XP was actually earned (a replay of an
 	# already-completed بخش grants +0 XP, so no fanfare).

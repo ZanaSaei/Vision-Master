@@ -160,17 +160,23 @@ func _show_question() -> void:
 		current_index
 	]
 
-	instruction_label.text = str(
-		exercise_data.get(
-			"instruction_fa",
-			"گزینهٔ درست را انتخاب کن."
+	GrammarTheme.set_bidi_text(
+		instruction_label,
+		str(
+			exercise_data.get(
+				"instruction_fa",
+				"گزینهٔ درست را انتخاب کن."
+			)
 		)
 	)
 
-	question_label.text = str(
-		question.get(
-			"question",
-			""
+	GrammarTheme.set_bidi_text(
+		question_label,
+		str(
+			question.get(
+				"question",
+				""
+			)
 		)
 	)
 
@@ -264,8 +270,11 @@ func _show_question() -> void:
 				Control.SIZE_EXPAND_FILL
 			)
 
-		button.text = str(
-			options[i]
+		GrammarTheme.set_bidi_text(
+			button,
+			str(
+				options[i]
+			)
 		)
 
 		button.set_meta(

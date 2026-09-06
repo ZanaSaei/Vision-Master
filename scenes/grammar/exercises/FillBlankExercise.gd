@@ -35,12 +35,13 @@ func _build_ui() -> void:
 
 	var title := Label.new()
 
-	title.text = str(
+	title.text = GrammarTheme.bidi_fix(str(
 		exercise_data.get(
 			"instruction_fa",
 			"جمله را کامل کن."
 		)
-	)
+	))
+	title.text_direction = Control.TEXT_DIRECTION_RTL
 
 	title.horizontal_alignment = (
 		HORIZONTAL_ALIGNMENT_CENTER
@@ -159,11 +160,16 @@ func _show_item() -> void:
 		current_index
 	]
 
-	prompt_label.text = str(
+	prompt_label.text = GrammarTheme.bidi_fix(str(
 		item.get(
 			"text",
 			""
 		)
+	))
+	prompt_label.text_direction = (
+		Control.TEXT_DIRECTION_RTL
+		if GrammarTheme.is_fa_dominant(prompt_label.text)
+		else Control.TEXT_DIRECTION_LTR
 	)
 
 	GrammarAnimation.appear(

@@ -155,7 +155,7 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 
 	var font: Font = GrammarTheme.get_fa_bold()
 	var title_label: Label = Label.new()
-	title_label.text = str(data.get("title_fa", "امتحان گرامر"))
+	GrammarTheme.set_bidi_text(title_label, str(data.get("title_fa", "امتحان گرامر")))
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -172,7 +172,7 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 # ============================================================
 func _build_exam_content(content: VBoxContainer, data: Dictionary, blocks: Array) -> void:
 	var subtitle: Label = Label.new()
-	subtitle.text = str(data.get("subtitle_fa", "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید."))
+	GrammarTheme.set_bidi_text(subtitle, str(data.get("subtitle_fa", "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید.")))
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var body_font: Font = GrammarTheme.get_fa_regular()
@@ -221,7 +221,7 @@ func _build_exam_content(content: VBoxContainer, data: Dictionary, blocks: Array
 # Renders a bold section divider (the JSON "h4" blocks, e.g. "Part 1 — ...").
 func _add_section_header(content: VBoxContainer, block: Dictionary) -> void:
 	var header: Label = Label.new()
-	header.text = str(block.get("text", ""))
+	GrammarTheme.set_bidi_text(header, str(block.get("text", "")))
 	header.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var bold: Font = GrammarTheme.get_fa_bold()
