@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://csjykfgswhgaf"]
 
-[ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://dp1p468gjieln" path="res://scenes/main_menu/main_menu.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://b2onop4jk0ebo" path="res://scenes/side_menu/SideMenu.tscn" id="2_side"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=117377103]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,4 +12,4 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_main")
 
-[node name="SideMenu" parent="." instance=ExtResource("2_side")]
+[node name="SideMenu" parent="." unique_id=2005345806 instance=ExtResource("2_side")]

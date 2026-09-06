@@ -44,6 +44,7 @@ func build(exercise: Dictionary, _increment_group := true) -> void:
 	_audio_path = ""
 	_drag_source = null
 	_drag_active = false
+	_clear_order_drag_state()
 
 	var type := str(exercise.get("type", "open_ended"))
 	_is_open_ended = type == "open_ended" or type == "pronunciation" or type == "writing"
@@ -490,6 +491,9 @@ func _add_footer_buttons() -> void:
 		btn_row.add_child(_done_btn)
 	elif graded_count > 0:
 		_check_btn = _make_button(_t("check_answer"), C_PRIMARY)
+		# Bigger check button, consistent with the grammar "بررسی" buttons.
+		_check_btn.custom_minimum_size = Vector2(0, 112)
+		_check_btn.add_theme_font_size_override("font_size", 46)
 		_apply_fa_meta(_check_btn, "check_answer")
 		_check_btn.pressed.connect(_on_check_pressed)
 		btn_row.add_child(_check_btn)
@@ -968,8 +972,35 @@ func _apply_cloze_feedback() -> void:
 
 
 # ------------------------------------------------------------
-# ORDERING WITH UP/DOWN ARROWS
+# ORDERING — CARD LIST WITH DRAG HANDLES + UP/DOWN ARROWS
 # ------------------------------------------------------------
+
+# ---------- Ordering drag-and-drop state ----------
+# Each card has a grab handle (≡) on its left. Reordering by finger is
+# enabled ONLY after the finger is held still on the handle for
+# _ORDER_DRAG_HOLD_MSEC; a quick tap or quick swipe on the handle does
+# nothing (and PageView is told to ignore the handle, so it never turns a
+# handle press into a page scroll). Once the hold is recognised the grabbed
+# card lifts, follows the finger, and the list reorders live as it passes
+# the other cards; releasing drops it. The up/down arrows remain for
+# precise single-step moves.
+var _order_drag_active := false
+var _order_drag_hold_armed := false
+var _order_drag_handle: Control = null
+var _order_drag_card: PanelContainer = null
+var _order_drag_list: VBoxContainer = null
+var _order_drag_current_order: Array = []
+var _order_drag_original_order: Array = []
+var _order_drag_item_texts: Array = []
+var _order_drag_pos := 0
+var _order_drag_press_msec := 0
+var _order_drag_grab_offset := 0.0
+# Last finger/cursor position seen during a drag. InputEventMouseMotion from
+# some synthetic pipelines carries only a relative delta, so the cursor
+# position is accumulated from it when no absolute position is reported.
+var _order_drag_last_pos := Vector2.ZERO
+const _ORDER_DRAG_HOLD_MSEC := 300
+
 func _build_ordering() -> void:
 	var raw_items: Array = _exercise.get("items", [])
 	var item_texts: Array = []
@@ -1007,11 +1038,11 @@ func _build_ordering() -> void:
 
 	var list_vbox := VBoxContainer.new()
 	list_vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	list_vbox.add_theme_constant_override("separation", 10)
+	list_vbox.add_theme_constant_override("separation", 12)
 	container.add_child(list_vbox)
 
 	var fb := _make_feedback(container)
-	_rebuild_ordering_list(list_vbox, current_order, item_texts)
+	_rebuild_ordering_list(list_vbox, current_order, item_texts, true)
 
 	var ordered_texts: Array = []
 	for idx in answer_order:
@@ -1030,49 +1061,423 @@ func _build_ordering() -> void:
 	})
 
 
-func _rebuild_ordering_list(list_vbox: VBoxContainer, current_order: Array, item_texts: Array) -> void:
+# ============================================================
+# ORDERING ("Put in Order") — modern card list.
+# Each item is a card: [position chip][item text][↑][↓].
+# - Position chips update live so the learner always sees which
+#   slot each item occupies.
+# - All arrows are identical big ghost buttons (no disabled/greyed
+#   states); out-of-range taps are ignored by _on_order_move.
+# - Micro-interactions: the moved card flashes amber briefly and
+#   cards fade in with a stagger when the list first appears.
+# ============================================================
+func _rebuild_ordering_list(list_vbox: VBoxContainer, current_order: Array, item_texts: Array, with_entrance := false) -> void:
 	for c in list_vbox.get_children():
 		list_vbox.remove_child(c)
 		c.queue_free()
 
 	for pos in current_order.size():
 		var idx := int(current_order[pos])
-		var row := HBoxContainer.new()
-		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		row.add_theme_constant_override("separation", 10)
-		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		list_vbox.add_child(row)
+		var card := _make_order_card(pos, idx, item_texts, list_vbox, current_order)
+		list_vbox.add_child(card)
 
-		var num := _make_label("%d." % (pos + 1), 34, _c_text_dim(), true)
-		num.custom_minimum_size.x = 60
-		row.add_child(num)
+		if with_entrance:
+			# Gentle staggered fade-in, once, when the list first appears.
+			card.modulate = Color(1, 1, 1, 0)
+			var tw := card.create_tween()
+			tw.tween_interval(0.05 * pos)
+			tw.tween_property(card, "modulate:a", 1.0, 0.22)
 
-		var txt := _make_label(str(item_texts[idx]), 36, _c_text(), false)
-		txt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(txt)
 
-		# Use arrow symbols instead of "Up" / "Down"
-		var up := _make_button("↑", _c_text_dim())
-		up.custom_minimum_size = Vector2(70, 60)
-		up.disabled = (pos == 0)
-		up.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, -1))
-		row.add_child(up)
+func _make_order_card(pos: int, idx: int, item_texts: Array, list_vbox: VBoxContainer, current_order: Array) -> PanelContainer:
+	var card := PanelContainer.new()
+	card.mouse_filter = Control.MOUSE_FILTER_PASS
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card.add_theme_stylebox_override("panel", _make_order_card_style())
+	_register_scroll_control(card)
 
-		var down := _make_button("↓", _c_text_dim())
-		down.custom_minimum_size = Vector2(70, 60)
-		down.disabled = (pos == current_order.size() - 1)
-		down.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, 1))
-		row.add_child(down)
+	var row := HBoxContainer.new()
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_theme_constant_override("separation", 14)
+	card.add_child(row)
+
+	# Grab handle (≡) — hold it to drag this card into a new position.
+	row.add_child(_make_order_handle(list_vbox, current_order, item_texts, pos, idx))
+
+	# Position chip: shows the slot this item currently occupies.
+	var chip := PanelContainer.new()
+	chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	chip.custom_minimum_size = Vector2(56, 56)
+	chip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	chip.add_theme_stylebox_override("panel", _make_order_chip_style())
+	var chip_lbl := _make_label(str(pos + 1), 32, C_PRIMARY, true)
+	chip_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	chip_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	chip.add_child(chip_lbl)
+	row.add_child(chip)
+
+	# Item text.
+	var txt := _make_label(str(item_texts[idx]), 36, _c_text(), false)
+	txt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	txt.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	txt.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	row.add_child(txt)
+
+	# Reorder controls. All arrows share the same big size and enabled
+	# look — tapping an out-of-range arrow is simply ignored by
+	# _on_order_move's guard.
+	var up := _make_order_arrow_button("↑")
+	up.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, -1))
+	row.add_child(up)
+
+	var down := _make_order_arrow_button("↓")
+	down.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, 1))
+	row.add_child(down)
+
+	return card
 
 
 func _on_order_move(list_vbox: VBoxContainer, current_order: Array, item_texts: Array, pos: int, delta: int) -> void:
 	var new_pos := pos + delta
 	if new_pos < 0 or new_pos >= current_order.size():
 		return
-	var tmp: int = int(current_order[pos])
+	var moved: int = int(current_order[pos])
 	current_order[pos] = current_order[new_pos]
-	current_order[new_pos] = tmp
+	current_order[new_pos] = moved
 	_rebuild_ordering_list(list_vbox, current_order, item_texts)
+	_flash_order_row(list_vbox, new_pos)
+
+
+# Brief amber highlight on the card that just moved, fading back to normal.
+func _flash_order_row(list_vbox: VBoxContainer, pos: int) -> void:
+	if pos < 0 or pos >= list_vbox.get_child_count():
+		return
+	var card := list_vbox.get_child(pos) as Control
+	if card == null:
+		return
+	card.modulate = Color(1.0, 0.93, 0.62, 1.0)
+	var tw := card.create_tween()
+	tw.tween_property(card, "modulate", Color.WHITE, 0.4)
+
+
+# ---------- ordering card / chip / arrow / handle styling ----------
+func _make_order_card_style(dragging := false) -> StyleBoxFlat:
+	var st := StyleBoxFlat.new()
+	st.bg_color = _c_surface_alt()
+	st.set_corner_radius_all(18)
+	st.set_border_width_all(2)
+	var border := _c_border()
+	st.border_color = C_PRIMARY if dragging else Color(border.r, border.g, border.b, 0.45)
+	st.content_margin_left = 18
+	st.content_margin_right = 14
+	st.content_margin_top = 12
+	st.content_margin_bottom = 12
+	if dragging:
+		st.shadow_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.35)
+		st.shadow_size = 14
+		st.shadow_offset = Vector2(0, 6)
+	else:
+		st.shadow_color = Color(0, 0, 0, 0.12)
+		st.shadow_size = 6
+		st.shadow_offset = Vector2(0, 3)
+	return st
+
+
+func _make_order_chip_style() -> StyleBoxFlat:
+	var st := StyleBoxFlat.new()
+	st.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.16)
+	st.set_corner_radius_all(16)
+	st.set_border_width_all(2)
+	st.border_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.55)
+	st.set_content_margin_all(4)
+	return st
+
+
+func _make_order_arrow_button(glyph: String) -> Button:
+	var b := Button.new()
+	b.mouse_filter = Control.MOUSE_FILTER_PASS
+	b.text = glyph
+	b.custom_minimum_size = Vector2(88, 88)
+	b.add_theme_font_size_override("font_size", 44)
+	b.add_theme_color_override("font_color", _c_text_dim())
+	b.add_theme_color_override("font_hover_color", C_PRIMARY)
+	b.add_theme_color_override("font_pressed_color", C_PRIMARY)
+	b.add_theme_color_override("font_focus_color", _c_text_dim())
+	b.add_theme_color_override("font_hover_pressed_color", C_PRIMARY)
+	if _font_bold:
+		b.add_theme_font_override("font", _font_bold)
+
+	var accent := C_PRIMARY
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = Color(accent.r, accent.g, accent.b, 0.05)
+	normal.set_corner_radius_all(18)
+	normal.set_border_width_all(2)
+	normal.border_color = Color(_c_border().r, _c_border().g, _c_border().b, 0.5)
+	normal.set_content_margin_all(8)
+	b.add_theme_stylebox_override("normal", normal)
+
+	var hover := StyleBoxFlat.new()
+	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.12)
+	hover.set_corner_radius_all(18)
+	hover.set_border_width_all(2)
+	hover.border_color = accent
+	hover.set_content_margin_all(8)
+	b.add_theme_stylebox_override("hover", hover)
+
+	var pressed := StyleBoxFlat.new()
+	pressed.bg_color = Color(accent.r, accent.g, accent.b, 0.24)
+	pressed.set_corner_radius_all(18)
+	pressed.set_border_width_all(2)
+	pressed.border_color = accent
+	pressed.set_content_margin_all(8)
+	b.add_theme_stylebox_override("pressed", pressed)
+
+	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	_register_scroll_control(b)
+	return b
+
+
+# ---------- ordering grab handle + drag-and-drop ----------
+
+# The grab handle is the ONLY place a reorder-drag can start. It is a
+# dedicated gesture zone: a press on it is reported to PageView as a swipe
+# blocker, so PageView never turns a handle touch into a page scroll. The
+# handle itself only begins a drag after the finger has been held still on
+# it for _ORDER_DRAG_HOLD_MSEC (see _on_order_handle_input).
+func _make_order_handle(list_vbox: VBoxContainer, current_order: Array, item_texts: Array, pos: int, idx: int) -> PanelContainer:
+	var handle := PanelContainer.new()
+	handle.mouse_filter = Control.MOUSE_FILTER_STOP
+	handle.custom_minimum_size = Vector2(56, 56)
+	handle.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	handle.add_theme_stylebox_override("panel", _make_order_handle_style())
+	handle.add_child(_make_order_grip_bars())
+	handle.gui_input.connect(_on_order_handle_input.bind(handle, list_vbox, current_order, item_texts, pos, idx))
+	# PageView must never turn a handle press into a page scroll/swipe. Handles
+	# live in a dedicated group (they can be created before the engine is under
+	# the PageView, so the group is checked by PageView at press time instead of
+	# relying on registration order). Rebuilt handles re-join the group.
+	handle.add_to_group("order_drag_handles")
+	return handle
+
+
+func _make_order_handle_style() -> StyleBoxFlat:
+	var st := StyleBoxFlat.new()
+	var accent := C_PRIMARY
+	st.bg_color = Color(accent.r, accent.g, accent.b, 0.05)
+	st.set_corner_radius_all(16)
+	st.set_border_width_all(2)
+	var border := _c_border()
+	st.border_color = Color(border.r, border.g, border.b, 0.5)
+	return st
+
+
+# The "≡" grip: three short horizontal bars, drawn as ColorRects so the
+# glyph renders identically regardless of font coverage.
+func _make_order_grip_bars() -> Control:
+	var bars := VBoxContainer.new()
+	bars.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bars.alignment = BoxContainer.ALIGNMENT_CENTER
+	bars.add_theme_constant_override("separation", 5)
+	bars.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	bars.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var color := _c_text_dim()
+	for i in 3:
+		var bar := ColorRect.new()
+		bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		bar.color = color
+		bar.custom_minimum_size = Vector2(30, 4)
+		bars.add_child(bar)
+	return bars
+
+
+func _on_order_handle_input(event: InputEvent, handle: Control, list_vbox: VBoxContainer, current_order: Array, item_texts: Array, pos: int, _idx: int) -> void:
+	var is_press := false
+	var is_release := false
+	var event_pos := Vector2.ZERO
+
+	if event is InputEventScreenTouch:
+		is_press = event.pressed
+		is_release = not event.pressed
+		event_pos = event.position
+	elif event is InputEventScreenDrag:
+		event_pos = event.position
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		is_press = event.pressed
+		is_release = not event.pressed
+		event_pos = event.global_position
+	elif event is InputEventMouseMotion:
+		if event.global_position != Vector2.ZERO:
+			_order_drag_last_pos = event.global_position
+		else:
+			_order_drag_last_pos += event.relative
+		event_pos = _order_drag_last_pos
+
+	if is_press:
+		# Safety net: drop any stale drag before starting a fresh one.
+		_cancel_order_drag()
+		var card := list_vbox.get_child(pos) as PanelContainer
+		if card == null:
+			return
+		_order_drag_handle = handle
+		_order_drag_card = card
+		_order_drag_list = list_vbox
+		_order_drag_current_order = current_order
+		_order_drag_original_order = current_order.duplicate()
+		_order_drag_item_texts = item_texts
+		_order_drag_pos = pos
+		_order_drag_press_msec = Time.get_ticks_msec()
+		_order_drag_grab_offset = event_pos.y - card.get_global_rect().position.y
+		_order_drag_last_pos = event_pos
+		_order_drag_hold_armed = true
+		_order_drag_active = false
+		return
+
+	if _order_drag_handle == null or not is_instance_valid(_order_drag_handle) or _order_drag_handle != handle:
+		return
+
+	if event is InputEventScreenDrag or event is InputEventMouseMotion:
+		if not _order_drag_hold_armed:
+			return
+		if not _order_drag_active:
+			if Time.get_ticks_msec() - _order_drag_press_msec < _ORDER_DRAG_HOLD_MSEC:
+				return  # finger is moving too soon — not a reorder yet.
+			_begin_order_drag()
+		_update_order_drag(event_pos)
+		return
+
+	if is_release:
+		if _order_drag_active:
+			_finish_order_drag()
+		else:
+			_cancel_order_drag()
+
+
+# Visually "grabs" the card: lift it above its siblings, tint its border,
+# dim the rest. Called the first time the finger moves after the hold.
+func _begin_order_drag() -> void:
+	_order_drag_active = true
+	if _order_drag_card == null or not is_instance_valid(_order_drag_card):
+		return
+	_order_drag_card.z_index = 50
+	_order_drag_card.add_theme_stylebox_override("panel", _make_order_card_style(true))
+	_order_drag_card.modulate = Color.WHITE
+	_order_drag_card.scale = Vector2(1.03, 1.03)
+	if _order_drag_list != null and is_instance_valid(_order_drag_list):
+		for i in _order_drag_list.get_child_count():
+			var c := _order_drag_list.get_child(i) as Control
+			if c != null and c != _order_drag_card:
+				c.modulate = Color(1, 1, 1, 0.6)
+
+
+# Live reorder: whichever card the finger's grab point currently covers
+# becomes the new slot; the grabbed card follows the finger vertically.
+func _update_order_drag(event_pos: Vector2) -> void:
+	var list := _order_drag_list
+	var card := _order_drag_card
+	if list == null or card == null or not is_instance_valid(list) or not is_instance_valid(card):
+		return
+	var count := list.get_child_count()
+	if count == 0:
+		return
+
+	var grab_y := event_pos.y - _order_drag_grab_offset
+	var target := _order_drag_pos
+	for i in count:
+		if i == _order_drag_pos:
+			continue
+		var c := list.get_child(i) as Control
+		if c == null:
+			continue
+		var r := c.get_global_rect()
+		if grab_y >= r.position.y and grab_y <= r.position.y + r.size.y:
+			target = i
+			break
+
+	if target != _order_drag_pos:
+		var moved_idx: int = int(_order_drag_current_order[_order_drag_pos])
+		_order_drag_current_order.remove_at(_order_drag_pos)
+		_order_drag_current_order.insert(target, moved_idx)
+		list.move_child(card, target)
+		_order_drag_pos = target
+		_renumber_order_chips(list)
+
+	# The grabbed card tracks the finger (in list-local coordinates, so it
+	# stays correct regardless of the list's scroll offset).
+	card.position.y = event_pos.y - list.get_global_rect().position.y - _order_drag_grab_offset
+	# Keep it within the list's vertical span.
+	var top := 0.0
+	var bottom := 0.0
+	var first := list.get_child(0) as Control
+	if first != null:
+		top = first.position.y
+	var last := list.get_child(count - 1) as Control
+	if last != null:
+		bottom = last.position.y + last.size.y - card.size.y
+	card.position.y = clampf(card.position.y, top, bottom)
+
+
+# Drop: rebuild the list in the final order (fresh, normal styles) and flash
+# the card that landed in the released slot.
+func _finish_order_drag() -> void:
+	var list := _order_drag_list
+	var final_pos := _order_drag_pos
+	if list != null and is_instance_valid(list):
+		_rebuild_ordering_list(list, _order_drag_current_order, _order_drag_item_texts)
+		_flash_order_row(list, final_pos)
+	_clear_order_drag_state()
+
+
+# Abort without reordering: restore the pre-drag order if a drag had started.
+func _cancel_order_drag() -> void:
+	if _order_drag_active and _order_drag_list != null and is_instance_valid(_order_drag_list):
+		var cur: Array = _order_drag_current_order
+		var orig: Array = _order_drag_original_order
+		cur.clear()
+		for v in orig:
+			cur.append(v)
+		_rebuild_ordering_list(_order_drag_list, cur, _order_drag_item_texts)
+	_clear_order_drag_state()
+
+
+func _clear_order_drag_state() -> void:
+	_order_drag_active = false
+	_order_drag_hold_armed = false
+	_order_drag_handle = null
+	_order_drag_card = null
+	_order_drag_list = null
+	_order_drag_current_order = []
+	_order_drag_original_order = []
+	_order_drag_item_texts = []
+	_order_drag_pos = 0
+	_order_drag_press_msec = 0
+	_order_drag_grab_offset = 0.0
+	_order_drag_last_pos = Vector2.ZERO
+
+
+func _renumber_order_chips(list: VBoxContainer) -> void:
+	for i in list.get_child_count():
+		var card := list.get_child(i) as PanelContainer
+		if card == null:
+			continue
+		var row := card.get_child(0) as HBoxContainer
+		if row == null:
+			continue
+		var chip := row.get_child(1) as PanelContainer
+		if chip == null:
+			continue
+		var lbl := chip.get_child(0) as Label
+		if lbl != null:
+			lbl.text = str(i + 1)
+
+
+# When PageView takes over a gesture (e.g. a second finger swipes the page
+# while a card is being dragged), finish the drag in place rather than
+# leaving it hanging.
+func _on_gesture_cancelled_by_page() -> void:
+	if _order_drag_active:
+		_finish_order_drag()
+	else:
+		_cancel_order_drag()
 
 
 # ------------------------------------------------------------

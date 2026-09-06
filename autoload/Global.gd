@@ -851,7 +851,16 @@ func _grammar_unlock_key(book: int, lesson: int) -> String:
 
 func get_grammar_unlocked_units(book: int, lesson: int, total_units: int = 0) -> int:
 	var key: String = _grammar_unlock_key(book, lesson)
-	var unlocked: int = int(grammar_unlocked_units.get(key, 1))
+	# Derive the unlock count from the completed set so reordering or editing
+	# units in a lesson JSON can never leave a stale unlock count: each
+	# completed unit grants one more unlocked unit (legacy index-based entries
+	# still count, so old saves keep working).
+	var completed: Array = grammar_completed_units.get(key, [])
+	var unlocked: int = completed.size() + 1
+	# Also honor any previously stored (legacy / deep-link) unlock value so
+	# we never regress progress that was recorded before this derivation.
+	var stored: int = int(grammar_unlocked_units.get(key, 1))
+	unlocked = maxi(unlocked, stored)
 	if total_units > 0:
 		unlocked = clampi(unlocked, 1, total_units)
 	else:
@@ -896,19 +905,37 @@ func get_total_grammar_xp() -> int:
 
 # ---------- GRAMMAR COMPLETED UNITS ----------
 
-func is_unit_completed(book: int, lesson: int, unit_index: int) -> bool:
+func is_unit_completed(book: int, lesson: int, unit_index: int, unit_id: String = "") -> bool:
 	var key: String = _grammar_unlock_key(book, lesson)
 	var completed: Array = grammar_completed_units.get(key, [])
+	# Match by stable id first (content edits / reorders stay consistent),
+	# then fall back to the legacy index for old saves.
+	if unit_id != "" and unit_id in completed:
+		return true
 	return unit_index in completed
 
 
-func mark_unit_completed(book: int, lesson: int, unit_index: int) -> void:
+func mark_unit_completed(book: int, lesson: int, unit_index: int, unit_id: String = "") -> void:
 	var key: String = _grammar_unlock_key(book, lesson)
 	var completed: Array = grammar_completed_units.get(key, [])
-	if not (unit_index in completed):
+	if unit_id != "":
+		if unit_id in completed:
+			return
+		# If the legacy index form is already present, upgrade it in place to
+		# the stable id instead of appending a duplicate — the completed set
+		# must stay a set so the unlock count (derived from its size) never
+		# over-counts the same unit.
+		var legacy_at := completed.find(unit_index)
+		if legacy_at >= 0:
+			completed[legacy_at] = unit_id
+		else:
+			completed.append(unit_id)
+	else:
+		if unit_index in completed:
+			return
 		completed.append(unit_index)
-		grammar_completed_units[key] = completed
-		_save_progress()
+	grammar_completed_units[key] = completed
+	_save_progress()
 
 
 # ---------- PROGRESS PERSISTENCE ----------

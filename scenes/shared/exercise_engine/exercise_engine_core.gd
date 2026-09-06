@@ -224,6 +224,14 @@ var _cloze_active := -1             # blank index whose popup is open
 var _drag_source: Control = null
 var _drag_active := false
 var _press_pos := Vector2.ZERO
+# A toggle option button whose toggle_mode we disable for the duration of a
+# hold-and-drag (scroll gesture). A drag that ends on a toggle button would
+# otherwise flip button_pressed on release; with toggle_mode disabled the
+# release can't toggle, so a drag never changes the answer. For toggle buttons
+# we leave signals unblocked so the release handler restores toggle_mode; the
+# press-safety-net in _on_scroll_child_gui_input covers any release that is
+# consumed elsewhere (e.g. a PageView swipe).
+var _dragged_toggle: BaseButton = null
 # Reduced from 28 → 14 px so even a tiny finger-shift on Android starts
 # a scroll rather than accidentally selecting a button or typing field.
 const _DRAG_THRESHOLD := 14.0
@@ -342,7 +350,10 @@ func _process(_delta: float) -> void:
 
 	if Time.get_ticks_msec() - _press_time_msec > _HOLD_MAX_MSEC:
 		_hold_blocked = true
-		_drag_source.set_block_signals(true)
+		if _drag_source is BaseButton and (_drag_source as BaseButton).toggle_mode:
+			_disable_toggle_for_drag(_drag_source)
+		else:
+			_drag_source.set_block_signals(true)
 
 		# If a typing field or another editable field is focused, close the keyboard.
 		var vp := get_viewport()
@@ -433,7 +444,10 @@ func cancel_active_gesture() -> void:
 	if _drag_source != null and is_instance_valid(_drag_source):
 		_drag_active = true
 		_hold_blocked = true
-		_drag_source.set_block_signals(true)
+		if _drag_source is BaseButton and (_drag_source as BaseButton).toggle_mode:
+			_disable_toggle_for_drag(_drag_source)
+		else:
+			_drag_source.set_block_signals(true)
 
 	# Always close the keyboard when PageView takes over the gesture.
 	var vp := get_viewport()
@@ -443,16 +457,42 @@ func cancel_active_gesture() -> void:
 			focused.release_focus()
 
 	_hide_virtual_keyboard()
+	_on_gesture_cancelled_by_page()
 
 
 func reset_active_gesture() -> void:
 	# Called by PageView after it finishes a gesture that it consumed.
 	if _drag_source != null and is_instance_valid(_drag_source):
 		_drag_source.call_deferred("set_block_signals", false)
+	_restore_dragged_toggle()
 
 	_drag_source = null
 	_drag_active = false
 	_hold_blocked = false
+	_on_gesture_cancelled_by_page()
+
+
+# Hook for descendant layers (e.g. the ordering drag-and-drop) to react when
+# PageView takes over a gesture (scroll/swipe) that this engine was tracking.
+# The base implementation does nothing; the builders layer overrides it.
+func _on_gesture_cancelled_by_page() -> void:
+	pass
+
+
+# A drag/scroll gesture must never select or unselect a toggle option button.
+# The button would flip button_pressed on release; disabling toggle_mode for
+# the gesture stops the release from toggling. toggle_mode is restored by the
+# release handler (or the next press if the release is consumed elsewhere).
+func _disable_toggle_for_drag(ctrl: Control) -> void:
+	if ctrl is BaseButton and (ctrl as BaseButton).toggle_mode:
+		(ctrl as BaseButton).toggle_mode = false
+		_dragged_toggle = ctrl
+
+
+func _restore_dragged_toggle() -> void:
+	if _dragged_toggle != null and is_instance_valid(_dragged_toggle):
+		_dragged_toggle.toggle_mode = true
+	_dragged_toggle = null
 
 func _get_scroll_target() -> ScrollContainer:
 	# Prefer our own wrapper, otherwise walk up to the workbook's
@@ -486,7 +526,15 @@ func _on_scroll_child_gui_input(event: InputEvent, source: Control) -> void:
 			_drag_active = true
 
 			if is_instance_valid(source):
-				source.set_block_signals(true)
+				if source is BaseButton and (source as BaseButton).toggle_mode:
+					# Toggle option button: disabling toggle_mode stops the
+					# release from flipping button_pressed (a scroll gesture
+					# must not select it). Signals stay flowing so the release
+					# handler can restore it; option buttons have no
+					# pressed/toggled listeners to guard against.
+					_disable_toggle_for_drag(source)
+				else:
+					source.set_block_signals(true)
 
 			# Hide the keyboard if a drag starts while typing is focused.
 			if _is_editable_control(source):
@@ -521,9 +569,11 @@ func _on_scroll_child_gui_input(event: InputEvent, source: Control) -> void:
 		press_pos = event.position
 
 	if is_press:
-		# Safety net: unblock any previous gesture that may still be active.
+		# Safety net: unblock any previous gesture that may still be active,
+		# and restore a toggle_mode we disabled for an earlier drag.
 		if _drag_source != null and is_instance_valid(_drag_source):
 			_drag_source.call_deferred("set_block_signals", false)
+		_restore_dragged_toggle()
 
 		_drag_source = source
 		_drag_active = false
@@ -542,8 +592,12 @@ func _on_scroll_child_gui_input(event: InputEvent, source: Control) -> void:
 	elif is_release:
 		if source != null and is_instance_valid(source) and _drag_source == source:
 			if _drag_active or _hold_blocked:
-				# Unblock after this input event is fully processed.
+				# A drag/scroll gesture must NOT select or unselect a toggle
+				# option. The button's toggle_mode was disabled for the drag
+				# (see _disable_toggle_for_drag), so its release can't flip
+				# button_pressed; restore it here for the next interaction.
 				source.call_deferred("set_block_signals", false)
+				_restore_dragged_toggle()
 			elif _is_editable_control(source):
 				# Only a fast, clean tap opens the keyboard.
 				var duration := Time.get_ticks_msec() - _press_time_msec

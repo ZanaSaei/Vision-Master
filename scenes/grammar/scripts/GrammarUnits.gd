@@ -160,7 +160,7 @@ func _build_ui() -> void:
 		empty_box.add_child(empty_title)
 
 		var empty_desc: Label = Label.new()
-		empty_desc.text = "محتوای گرامر برای این درس هنوز آماده نشده است.\nفقط برای کتاب ۱ درس ۱ در دسترس است."
+		empty_desc.text = "محتوای گرامر برای این درس هنوز آماده نشده است."
 		empty_desc.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		empty_desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		if body_font != null:
@@ -205,7 +205,12 @@ func _make_header_button(text: String, callback: Callable) -> Button:
 
 func _make_unit_button(index: int, unit: Dictionary) -> GrammarButton:
 	var unlocked: bool = index < unlocked_units
-	var completed: bool = index < unlocked_units - 1
+	# Check completion against the stable unit id (falling back to the index
+	# for legacy data) instead of assuming sequential completion, so a lesson
+	# whose units were reordered/edited never shows the wrong badges.
+	var completed: bool = Global.is_unit_completed(
+		Global.current_book, Global.current_lesson, index, str(unit.get("id", ""))
+	)
 	var button: GrammarButton = GrammarButton.new()
 	button.no_clip = true
 	button.variant = GrammarButton.ButtonVariant.SECONDARY

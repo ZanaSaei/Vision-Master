@@ -128,6 +128,10 @@ func _build_ui() -> void:
 
 	submit_button.text = "بررسی ✓"
 
+	submit_button.min_height = 112
+
+	submit_button.font_size = 46
+
 	submit_button.pressed.connect(
 		_check_answer
 	)
@@ -195,16 +199,16 @@ func _check_answer() -> void:
 		[]
 	)
 
-	var normalized_user := (
-		user_answer.to_lower()
+	var normalized_user := _normalize_answer(
+		user_answer
 	)
 
 	var correct := false
 
 	for answer in answers:
-		var normalized_answer := str(
-			answer
-		).strip_edges().to_lower()
+		var normalized_answer := _normalize_answer(
+			str(answer)
+		)
 
 		if normalized_user == normalized_answer:
 			correct = true
@@ -255,3 +259,16 @@ func get_current_hint() -> String:
 	if hint.is_empty():
 		hint = "به معنای جمله فکر کن و جای خالی را با کلمهٔ مناسب پر کن."
 	return hint
+
+
+# Normalizes a typed answer so grading is robust to common keyboard noise:
+# trimming, lowercasing, collapsing repeated spaces (a learner often types
+# "was  talking" for the "was talking" answer), and folding smart/curly
+# apostrophes to the ASCII one.
+func _normalize_answer(s: String) -> String:
+	var out := s.strip_edges().to_lower()
+	out = out.replace(char(0x2019), "'")
+	out = out.replace(char(0x2018), "'")
+	while out.contains("  "):
+		out = out.replace("  ", " ")
+	return out.strip_edges()

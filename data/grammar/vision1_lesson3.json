@@ -1,0 +1,1810 @@
+{
+	"lesson": {
+		"_group_note": "Each source unit becomes a 'group' unit whose 'activities' are its pages converted to learn/exercise activities. GrammarLesson plays them in sequence.",
+		"book": "Vision 1",
+		"icon": "⏳",
+		"id": "vision1_lesson3_past_progressive",
+		"lesson_number": 3.0,
+		"source": "Vision 1 - Lesson 3 (The Value of Knowledge)",
+		"theme_color": "#7C3AED",
+		"title_en": "Past Progressive",
+		"title_fa": "گذشته استمراری",
+		"units": [
+			{
+				"activities": [
+					{
+						"cards": [
+							{
+								"en": "The scientist was doing research in his laboratory during 1370.",
+								"fa": "آن دانشمند در سال ۱۳۷۰ در آزمایشگاهش مشغول تحقیق بود."
+							},
+							{
+								"en": "We were working on a difficult problem at 4.",
+								"fa": "ما ساعت ۴ روی یک مسئله‌ی سخت کار می‌کردیم."
+							}
+						],
+						"explanation": "برای بیان کاری که در یک لحظه‌ی خاص در گذشته در حال انجام بود، از was/were + فعل‌ing استفاده می‌کنیم.",
+						"highlight_word": "was doing",
+						"id": "u1_p1",
+						"title_en": "",
+						"title_fa": "was/were + فعل + ing",
+						"type": "learn"
+					},
+					{
+						"id": "u1_p2",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"was"
+								],
+								"explanation_fa": "فاعل 'the scientist' مفرد است، پس was می‌گیرد.",
+								"hint_fa": "فاعل 'the scientist' مفرد است، پس was می‌گیرد.",
+								"text": "The scientist ___ doing research in his laboratory."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u1_p3",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "فاعل 'We' جمع است، پس were می‌گیرد.",
+								"hint_fa": "فاعل 'We' جمع است، پس were می‌گیرد.",
+								"options": [
+									"was",
+									"were",
+									"is",
+									"are"
+								],
+								"question": "جای خالی را کامل کن: We ___ working on a difficult problem at 4."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"cards": [
+							{
+								"en": "I was working.",
+								"fa": "من داشتم کار می‌کردم."
+							},
+							{
+								"en": "They were talking.",
+								"fa": "آن‌ها داشتند صحبت می‌کردند."
+							}
+						],
+						"explanation": "با فاعل‌های مفرد (I, he, she, it) از was و با فاعل‌های جمع (we, you, they) از were استفاده می‌کنیم.",
+						"highlight_word": "was/were",
+						"id": "u1_p4",
+						"title_en": "",
+						"title_fa": "was برای مفرد، were برای جمع",
+						"type": "learn"
+					},
+					{
+						"hint_fa": "I/he/she/it → was  |  we/you/they → were",
+						"id": "u1_p5",
+						"instruction_fa": "فاعل را به شکل درست فعل be وصل کن",
+						"items": [
+							{
+								"left": "I",
+								"right": "was"
+							},
+							{
+								"left": "He",
+								"right": "was"
+							},
+							{
+								"left": "We",
+								"right": "were"
+							},
+							{
+								"left": "They",
+								"right": "were"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "matching"
+					},
+					{
+						"id": "u1_p6",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "با فاعل جمع 'They' باید were به‌کار رود: They were working.",
+								"hint_fa": "با فاعل جمع 'They' باید were به‌کار رود: They were working.",
+								"statement": "'They was working' is a correct sentence."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u1_p7",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "فاعل 'Newton' مفرد است: was sitting.",
+								"hint_fa": "فاعل 'Newton' مفرد است: was sitting.",
+								"options": [
+									"was",
+									"were",
+									"is",
+									"did"
+								],
+								"question": "جای خالی را کامل کن: Newton ___ sitting under a tree when an apple hit his head."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u1_p8",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"was"
+								],
+								"explanation_fa": "Mahsa فاعل مفرد است: was.",
+								"hint_fa": "Mahsa فاعل مفرد است: was.",
+								"text": "Mahsa ___ doing her homework."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"hint_fa": "دقت کن کدام فاعل مفرد و کدام جمع است.",
+						"id": "u1_p9",
+						"instruction_fa": "فاعل را به شکل درست فعل be وصل کن",
+						"items": [
+							{
+								"left": "You",
+								"right": "were"
+							},
+							{
+								"left": "She",
+								"right": "was"
+							},
+							{
+								"left": "We",
+								"right": "were"
+							},
+							{
+								"left": "It",
+								"right": "was"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "matching"
+					},
+					{
+						"id": "u1_p10",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "برای فاعل‌های جمع از were استفاده می‌کنیم، نه was.",
+								"hint_fa": "برای فاعل‌های جمع از were استفاده می‌کنیم، نه was.",
+								"statement": "برای فاعل جمع مثل we، you، they از was استفاده می‌کنیم."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u1_p11",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "فاعل 'I' با was به‌کار می‌رود.",
+								"hint_fa": "فاعل 'I' با was به‌کار می‌رود.",
+								"options": [
+									"was",
+									"were",
+									"am",
+									"is"
+								],
+								"question": "کدام شکل درست است؟ 'I ___ reading a book.'"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u1_p12",
+						"instruction_fa": "جمله را کامل کن",
+						"items": [
+							{
+								"answers": [
+									"were"
+								],
+								"explanation_fa": "فاعل 'They' جمع است: were.",
+								"hint_fa": "فاعل 'They' جمع است: were.",
+								"text": "They ___ talking when the teacher came in."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					}
+				],
+				"activity_count": 12.0,
+				"id": "v1_l3_u1",
+				"title_en": "",
+				"title_fa": "ساختار مثبت گذشته استمراری",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"cards": [
+							{
+								"en": "Tina wasn't reading a novel when her mother came in.",
+								"fa": "تینا وقتی مادرش وارد شد، رمان نمی‌خواند."
+							},
+							{
+								"en": "Reza was not doing an experiment when the phone rang.",
+								"fa": "رضا وقتی تلفن زنگ زد، آزمایش انجام نمی‌داد."
+							}
+						],
+						"explanation": "برای منفی کردن گذشته استمراری، از wasn't (was not) برای مفرد و weren't (were not) برای جمع استفاده می‌کنیم.",
+						"highlight_word": "wasn't",
+						"id": "u2_p1",
+						"title_en": "",
+						"title_fa": "wasn't / weren't + فعل + ing",
+						"type": "learn"
+					},
+					{
+						"id": "u2_p2",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"wasn't"
+								],
+								"explanation_fa": "فاعل مفرد + منفی گذشته استمراری = wasn't.",
+								"hint_fa": "فاعل مفرد + منفی گذشته استمراری = wasn't.",
+								"text": "Tina ___ reading a novel when her mother came in."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u2_p3",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "فاعل جمع 'They' با weren't منفی می‌شود.",
+								"hint_fa": "فاعل جمع 'They' با weren't منفی می‌شود.",
+								"options": [
+									"wasn't",
+									"weren't",
+									"didn't",
+									"isn't"
+								],
+								"question": "جای خالی را کامل کن: They ___ playing in the yard."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"cards": [
+							{
+								"en": "Reza was not doing an experiment when the phone rang. He was solving a math problem.",
+								"fa": "رضا آزمایش انجام نمی‌داد؛ او داشت یک مسئله‌ی ریاضی حل می‌کرد."
+							}
+						],
+						"explanation": "وقتی می‌گوییم کسی کاری را انجام نمی‌داد، معمولاً بعد از آن جمله‌ی دیگری می‌آوریم که بگوید واقعاً چه کاری می‌کرد.",
+						"highlight_word": "was solving",
+						"id": "u2_p4",
+						"title_en": "",
+						"title_fa": "بعد از جمله‌ی منفی، اغلب کار واقعی گفته می‌شود",
+						"type": "learn"
+					},
+					{
+						"id": "u2_p5",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "منفی‌بودن یک فعل به معنای انجام‌ندادن هیچ کاری نیست؛ او کار دیگری می‌کرد.",
+								"hint_fa": "منفی‌بودن یک فعل به معنای انجام‌ندادن هیچ کاری نیست؛ او کار دیگری می‌کرد.",
+								"statement": "'Reza was not doing an experiment' means Reza was doing nothing at all."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u2_p6",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"weren't"
+								],
+								"explanation_fa": "فاعل جمع 'The children' با weren't منفی می‌شود.",
+								"hint_fa": "فاعل جمع 'The children' با weren't منفی می‌شود.",
+								"text": "The children ___ playing in the yard."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u2_p7",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "فاعل 'I' با wasn't منفی می‌شود.",
+								"hint_fa": "فاعل 'I' با wasn't منفی می‌شود.",
+								"options": [
+									"I wasn't sleeping.",
+									"I weren't sleeping.",
+									"I didn't sleeping.",
+									"I amn't sleeping."
+								],
+								"question": "کدام جمله درست است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u2_p8",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"wasn't"
+								],
+								"explanation_fa": "فاعل مفرد 'She' با wasn't منفی می‌شود.",
+								"hint_fa": "فاعل مفرد 'She' با wasn't منفی می‌شود.",
+								"text": "She ___ studying when I called her."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u2_p9",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "he/she با wasn't منفی می‌شود، نه weren't.",
+								"hint_fa": "he/she با wasn't منفی می‌شود، نه weren't.",
+								"statement": "'weren't' is used with 'he' and 'she'."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u2_p10",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! این قانون اصلی منفی‌سازی گذشته استمراری است.",
+								"hint_fa": "درسته! این قانون اصلی منفی‌سازی گذشته استمراری است.",
+								"statement": "برای منفی کردن گذشته استمراری با فاعل مفرد از wasn't و با فاعل جمع از weren't استفاده می‌کنیم."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u2_p11",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "فاعل مفرد 'She' با wasn't منفی می‌شود.",
+								"hint_fa": "فاعل مفرد 'She' با wasn't منفی می‌شود.",
+								"options": [
+									"She weren't sleeping.",
+									"She wasn't sleeping.",
+									"She isn't sleeping.",
+									"She didn't sleeping."
+								],
+								"question": "کدام جمله درست است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u2_p12",
+						"instruction_fa": "جمله را کامل کن",
+						"items": [
+							{
+								"answers": [
+									"weren't"
+								],
+								"explanation_fa": "فاعل جمع 'They' با weren't منفی می‌شود.",
+								"hint_fa": "فاعل جمع 'They' با weren't منفی می‌شود.",
+								"text": "They ___ working when I arrived."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					}
+				],
+				"activity_count": 12.0,
+				"id": "v1_l3_u2",
+				"title_en": "",
+				"title_fa": "ساختار منفی گذشته استمراری",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"cards": [
+							{
+								"en": "Was Mahsa doing her homework when her mother called?",
+								"fa": "آیا مهسا وقتی مادرش زنگ زد، مشغول تکالیفش بود؟"
+							},
+							{
+								"en": "Were they talking when the teacher came in?",
+								"fa": "آیا آن‌ها وقتی معلم وارد شد، صحبت می‌کردند؟"
+							}
+						],
+						"explanation": "برای ساخت سؤال در گذشته استمراری، was یا were را به ابتدای جمله می‌آوریم.",
+						"highlight_word": "Was...doing",
+						"id": "u3_p1",
+						"title_en": "",
+						"title_fa": "Was/Were + فاعل + فعل + ing؟",
+						"type": "learn"
+					},
+					{
+						"id": "u3_p2",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"Was"
+								],
+								"explanation_fa": "فاعل مفرد 'Mahsa' با Was سؤالی می‌شود.",
+								"hint_fa": "فاعل مفرد 'Mahsa' با Was سؤالی می‌شود.",
+								"text": "___ Mahsa doing her homework when her mother called?"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u3_p3",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "فاعل جمع 'they' با Were سؤالی می‌شود.",
+								"hint_fa": "فاعل جمع 'they' با Were سؤالی می‌شود.",
+								"options": [
+									"Was",
+									"Were",
+									"Did",
+									"Is"
+								],
+								"question": "جای خالی را کامل کن: ___ they talking when the teacher came in?"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"cards": [
+							{
+								"en": "Was Mahsa doing her homework? Yes, she was.",
+								"fa": "آیا مهسا تکالیفش را انجام می‌داد؟ بله."
+							},
+							{
+								"en": "Were they talking? No, they weren't.",
+								"fa": "آیا آن‌ها صحبت می‌کردند؟ نه."
+							}
+						],
+						"explanation": "برای پاسخ کوتاه از was/wasn't یا were/weren't استفاده می‌کنیم، بدون تکرار فعل اصلی.",
+						"highlight_word": "Yes, she was.",
+						"id": "u3_p4",
+						"title_en": "",
+						"title_fa": "پاسخ کوتاه به سؤالات گذشته استمراری",
+						"type": "learn"
+					},
+					{
+						"id": "u3_p5",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "در پاسخ کوتاه فقط از was/were استفاده می‌شود.",
+								"hint_fa": "در پاسخ کوتاه فقط از was/were استفاده می‌شود.",
+								"options": [
+									"was",
+									"were",
+									"did",
+									"is"
+								],
+								"question": "جای خالی را کامل کن: Was Mahsa doing her homework? Yes, she ___."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u3_p6",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "فاعل جمع 'they' باید با were پاسخ داده شود: Yes, they were.",
+								"hint_fa": "فاعل جمع 'they' باید با were پاسخ داده شود: Yes, they were.",
+								"statement": "'Yes, they was.' is a correct short answer."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u3_p7",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"Were"
+								],
+								"explanation_fa": "فاعل 'you' با Were سؤالی می‌شود.",
+								"hint_fa": "فاعل 'you' با Were سؤالی می‌شود.",
+								"text": "___ you sleeping at 10 last night?"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u3_p8",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "فاعل مفرد 'he' با Was سؤالی می‌شود.",
+								"hint_fa": "فاعل مفرد 'he' با Was سؤالی می‌شود.",
+								"options": [
+									"Was",
+									"Were",
+									"Did",
+									"Is"
+								],
+								"question": "جای خالی را کامل کن: ___ he working when you called?"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u3_p9",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! این ساختار اصلی سؤالی‌سازی گذشته استمراری است.",
+								"hint_fa": "درسته! این ساختار اصلی سؤالی‌سازی گذشته استمراری است.",
+								"statement": "Questions in past progressive start with Was or Were."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u3_p10",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! مثل: Were they talking?",
+								"hint_fa": "درسته! مثل: Were they talking?",
+								"statement": "برای ساخت سؤال در گذشته استمراری، was یا were را ابتدای جمله می‌آوریم."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u3_p11",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "فاعل جمع 'they' با Were سؤالی می‌شود.",
+								"hint_fa": "فاعل جمع 'they' با Were سؤالی می‌شود.",
+								"options": [
+									"Was they talking?",
+									"Were they talking?",
+									"Did they talking?",
+									"Are they talking?"
+								],
+								"question": "کدام جمله سؤالی درست است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u3_p12",
+						"instruction_fa": "جمله را کامل کن",
+						"items": [
+							{
+								"answers": [
+									"Was"
+								],
+								"explanation_fa": "فاعل مفرد 'she' با Was سؤالی می‌شود.",
+								"hint_fa": "فاعل مفرد 'she' با Was سؤالی می‌شود.",
+								"text": "___ she reading when you arrived?"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					}
+				],
+				"activity_count": 12.0,
+				"id": "v1_l3_u3",
+				"title_en": "",
+				"title_fa": "ساختار سؤالی گذشته استمراری",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"cards": [
+							{
+								"en": "Newton was sitting under a tree when an apple hit his head.",
+								"fa": "نیوتون زیر درخت نشسته بود که یک سیب به سرش خورد."
+							}
+						],
+						"explanation": "وقتی کاری در حال انجام بود که ناگهان کار دیگری آن را قطع کرد، از گذشته استمراری برای کار طولانی‌تر و از گذشته‌ی ساده برای کار ناگهانی استفاده می‌کنیم؛ معمولاً با when.",
+						"highlight_word": "when",
+						"id": "u4_p1",
+						"title_en": "",
+						"title_fa": "گذشته استمراری برای کار طولانی‌تر، گذشته ساده برای کار ناگهانی",
+						"type": "learn"
+					},
+					{
+						"id": "u4_p2",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "کار طولانی‌تر (نشستن) گذشته استمراری می‌گیرد: was sitting.",
+								"hint_fa": "کار طولانی‌تر (نشستن) گذشته استمراری می‌گیرد: was sitting.",
+								"options": [
+									"was",
+									"were",
+									"is",
+									"did"
+								],
+								"question": "جای خالی را کامل کن: Newton ___ sitting under a tree when an apple hit his head."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u4_p3",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "'hit' فعل کار ناگهانی است و در گذشته‌ی ساده می‌آید، نه گذشته استمراری.",
+								"hint_fa": "'hit' فعل کار ناگهانی است و در گذشته‌ی ساده می‌آید، نه گذشته استمراری.",
+								"statement": "In 'Newton was sitting under a tree when an apple hit his head', the word 'hit' is in past progressive."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"cards": [
+							{
+								"en": "Reza was not doing an experiment when the phone rang.",
+								"fa": "رضا آزمایش نمی‌کرد که تلفن زنگ خورد."
+							}
+						],
+						"explanation": "فعلی که طولانی‌تر بوده و در حال انجام بود، گذشته استمراری می‌شود؛ فعلی که ناگهان اتفاق افتاد و آن را قطع کرد، گذشته‌ی ساده می‌شود.",
+						"highlight_word": "rang",
+						"id": "u4_p4",
+						"title_en": "",
+						"title_fa": "تشخیص فعل طولانی از فعل ناگهانی",
+						"type": "learn"
+					},
+					{
+						"id": "u4_p5",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "'came in' فعل کوتاه و ناگهانی است، در گذشته‌ی ساده.",
+								"hint_fa": "'came in' فعل کوتاه و ناگهانی است، در گذشته‌ی ساده.",
+								"options": [
+									"wasn't reading",
+									"came in",
+									"novel",
+									"mother"
+								],
+								"question": "در جمله‌ی 'Tina wasn't reading a novel when her mother came in'، کدام فعل کار ناگهانی است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u4_p6",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"rang"
+								],
+								"explanation_fa": "فعل ناگهانی در این ساختار به شکل گذشته ساده می‌آید: rang.",
+								"hint_fa": "فعل ناگهانی در این ساختار به شکل گذشته ساده می‌آید: rang.",
+								"text": "Reza was not doing an experiment when the phone ___."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u4_p7",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "کار طولانی‌تر (راه رفتن) گذشته استمراری می‌گیرد.",
+								"hint_fa": "کار طولانی‌تر (راه رفتن) گذشته استمراری می‌گیرد.",
+								"options": [
+									"was",
+									"were",
+									"am",
+									"is"
+								],
+								"question": "جای خالی را کامل کن: I ___ walking home when it started to rain."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u4_p8",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "فقط یک فعل (sitting) گذشته استمراری است؛ فعل دیگر (hit) گذشته ساده است.",
+								"hint_fa": "فقط یک فعل (sitting) گذشته استمراری است؛ فعل دیگر (hit) گذشته ساده است.",
+								"statement": "In 'Newton was sitting under a tree when an apple hit his head', both verbs are in past progressive."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u4_p9",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"was"
+								],
+								"explanation_fa": "کار طولانی‌تر (پختن) گذشته استمراری می‌گیرد.",
+								"hint_fa": "کار طولانی‌تر (پختن) گذشته استمراری می‌گیرد.",
+								"text": "She ___ cooking dinner when the guests arrived."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u4_p10",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! این کاربرد اصلی گذشته استمراری همراه با when است.",
+								"hint_fa": "درسته! این کاربرد اصلی گذشته استمراری همراه با when است.",
+								"statement": "برای بیان کاری که در حال انجام بود و ناگهان کار دیگری آن را قطع کرد، از گذشته استمراری برای کار طولانی‌تر استفاده می‌کنیم."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u4_p11",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "'hit' فعل کوتاه و ناگهانی است.",
+								"hint_fa": "'hit' فعل کوتاه و ناگهانی است.",
+								"options": [
+									"was sitting",
+									"hit",
+									"an apple",
+									"a tree"
+								],
+								"question": "در جمله‌ی 'Newton was sitting under a tree when an apple hit his head'، کدام فعل کار ناگهانی است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u4_p12",
+						"instruction_fa": "جمله را کامل کن",
+						"items": [
+							{
+								"answers": [
+									"was"
+								],
+								"explanation_fa": "کار طولانی‌تر (پختن غذا) گذشته استمراری می‌گیرد.",
+								"hint_fa": "کار طولانی‌تر (پختن غذا) گذشته استمراری می‌گیرد.",
+								"text": "She ___ cooking dinner when the phone rang."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					}
+				],
+				"activity_count": 12.0,
+				"id": "v1_l3_u4",
+				"title_en": "",
+				"title_fa": "کاربرد when: پس‌زمینه‌ی یک اتفاق ناگهانی",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"cards": [
+							{
+								"en": "Alexander Graham Bell invented the telephone himself.",
+								"fa": "الکساندر گراهام بل خودش تلفن را اختراع کرد."
+							},
+							{
+								"en": "Marie Curie found uranium herself.",
+								"fa": "ماری کوری خودش اورانیوم را کشف کرد."
+							}
+						],
+						"explanation": "وقتی فاعل و مفعول جمله یک نفر یا یک چیز هستند، یا می‌خواهیم روی فاعل تأکید کنیم، از ضمایر انعکاسی استفاده می‌کنیم.",
+						"highlight_word": "himself",
+						"id": "u5_p1",
+						"title_en": "",
+						"title_fa": "ضمایر انعکاسی: myself, yourself, herself, himself, itself",
+						"type": "learn"
+					},
+					{
+						"hint_fa": "هر فاعل ضمیر انعکاسی مخصوص به خودش را دارد.",
+						"id": "u5_p2",
+						"instruction_fa": "فاعل را به ضمیر انعکاسی مناسب وصل کن",
+						"items": [
+							{
+								"left": "I",
+								"right": "myself"
+							},
+							{
+								"left": "You",
+								"right": "yourself"
+							},
+							{
+								"left": "Zahra",
+								"right": "herself"
+							},
+							{
+								"left": "Amir",
+								"right": "himself"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "matching"
+					},
+					{
+						"id": "u5_p3",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"herself"
+								],
+								"explanation_fa": "Marie Curie یک زن است: herself.",
+								"hint_fa": "Marie Curie یک زن است: herself.",
+								"text": "Marie Curie found uranium ___."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"cards": [
+							{
+								"en": "Alexander Graham Bell himself invented the telephone.",
+								"fa": "خود الکساندر گراهام بل تلفن را اختراع کرد."
+							},
+							{
+								"en": "The computer itself did the experiment.",
+								"fa": "خود کامپیوتر آزمایش را انجام داد."
+							}
+						],
+						"explanation": "ضمیر انعکاسی می‌تواند در انتهای جمله یا درست بعد از فاعل بیاید؛ معنا یکسان است.",
+						"highlight_word": "itself",
+						"id": "u5_p4",
+						"title_en": "",
+						"title_fa": "جای ضمیر انعکاسی: بعد از فعل یا بعد از فاعل",
+						"type": "learn"
+					},
+					{
+						"hint_fa": "برای فاعل‌های جمع از ourselves، yourselves یا themselves استفاده می‌شود.",
+						"id": "u5_p5",
+						"instruction_fa": "فاعل را به ضمیر انعکاسی مناسب وصل کن",
+						"items": [
+							{
+								"left": "The computer",
+								"right": "itself"
+							},
+							{
+								"left": "Maryam and I",
+								"right": "ourselves"
+							},
+							{
+								"left": "You and your friends",
+								"right": "yourselves"
+							},
+							{
+								"left": "The scientists",
+								"right": "themselves"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "matching"
+					},
+					{
+						"id": "u5_p6",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! themselves برای فاعل جمع سوم شخص است.",
+								"hint_fa": "درسته! themselves برای فاعل جمع سوم شخص است.",
+								"statement": "'themselves' is used for a plural subject like 'the scientists'."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u5_p7",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "فاعل 'We' ضمیر انعکاسی ourselves می‌گیرد.",
+								"hint_fa": "فاعل 'We' ضمیر انعکاسی ourselves می‌گیرد.",
+								"options": [
+									"ourselves",
+									"themselves",
+									"herself",
+									"itself"
+								],
+								"question": "جای خالی را کامل کن: We did the experiment ___."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u5_p8",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"yourself"
+								],
+								"explanation_fa": "برای مخاطب مفرد از yourself استفاده می‌شود.",
+								"hint_fa": "برای مخاطب مفرد از yourself استفاده می‌شود.",
+								"text": "You should do your homework ___."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"hint_fa": "دقت کن کدام فاعل مفرد و کدام جمع است.",
+						"id": "u5_p9",
+						"instruction_fa": "فاعل را به ضمیر انعکاسی مناسب وصل کن",
+						"items": [
+							{
+								"left": "Zahra",
+								"right": "herself"
+							},
+							{
+								"left": "The scientists",
+								"right": "themselves"
+							},
+							{
+								"left": "I",
+								"right": "myself"
+							},
+							{
+								"left": "We",
+								"right": "ourselves"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "matching"
+					},
+					{
+						"id": "u5_p10",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! این دقیقاً کاربرد ضمایر انعکاسی است.",
+								"hint_fa": "درسته! این دقیقاً کاربرد ضمایر انعکاسی است.",
+								"statement": "ضمیر انعکاسی وقتی استفاده می‌شود که فاعل و مفعول جمله یکی باشند یا بخواهیم روی فاعل تأکید کنیم."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u5_p11",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 3,
+								"explanation_fa": "'the scientists' فاعل جمع است: themselves.",
+								"hint_fa": "'the scientists' فاعل جمع است: themselves.",
+								"options": [
+									"himself",
+									"herself",
+									"itself",
+									"themselves"
+								],
+								"question": "ضمیر انعکاسی مناسب برای 'the scientists' کدام است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u5_p12",
+						"instruction_fa": "جمله را کامل کن (تأکید بر خود امیر)",
+						"items": [
+							{
+								"answers": [
+									"himself"
+								],
+								"explanation_fa": "Amir فاعل مذکر مفرد است: himself.",
+								"hint_fa": "Amir فاعل مذکر مفرد است: himself.",
+								"text": "Amir did the experiment ___."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					}
+				],
+				"activity_count": 12.0,
+				"id": "v1_l3_u5",
+				"title_en": "",
+				"title_fa": "ضمایر انعکاسی (Self Pronouns)",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"cards": [
+							{
+								"en": "He is writing a letter.",
+								"fa": "او دارد نامه می‌نویسد."
+							},
+							{
+								"en": "My brother drinks milk every day.",
+								"fa": "برادرم هر روز شیر می‌خورد."
+							}
+						],
+						"explanation": "افعال حرکتی فعل‌هایی هستند که یک عمل یا کار مشخص را نشان می‌دهند، مثل write، go، drink.",
+						"highlight_word": "writing",
+						"id": "u6_p1",
+						"title_en": "",
+						"title_fa": "افعال حرکتی (Action Verbs)",
+						"type": "learn"
+					},
+					{
+						"id": "u6_p2",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 2,
+								"explanation_fa": "'write' یک عمل فیزیکی است، پس فعل حرکتی است.",
+								"hint_fa": "'write' یک عمل فیزیکی است، پس فعل حرکتی است.",
+								"options": [
+									"believe",
+									"love",
+									"write",
+									"feel"
+								],
+								"question": "کدام فعل، فعل حرکتی (Action) است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u6_p3",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! 'drink' یک عمل فیزیکی است.",
+								"hint_fa": "درسته! 'drink' یک عمل فیزیکی است.",
+								"statement": "'drink' is an action verb."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"cards": [
+							{
+								"en": "We believe in Allah.",
+								"fa": "ما به خدا اعتقاد داریم."
+							},
+							{
+								"en": "She feels happy.",
+								"fa": "او احساس خوشحالی می‌کند."
+							}
+						],
+						"explanation": "افعال حالتی فعل‌هایی هستند که یک حالت، احساس، فکر یا باور را نشان می‌دهند نه یک عمل فیزیکی، مثل believe، love، feel، know، want.",
+						"highlight_word": "believe",
+						"id": "u6_p4",
+						"title_en": "",
+						"title_fa": "افعال حالتی (State Verbs)",
+						"type": "learn"
+					},
+					{
+						"id": "u6_p5",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 2,
+								"explanation_fa": "'love' یک احساس است، پس فعل حالتی است.",
+								"hint_fa": "'love' یک احساس است، پس فعل حالتی است.",
+								"options": [
+									"run",
+									"jump",
+									"love",
+									"write"
+								],
+								"question": "کدام فعل، فعل حالتی (State) است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u6_p6",
+						"instruction_fa": "جای خالی را پر کن (love - فعل حالتی)",
+						"items": [
+							{
+								"answers": [
+									"love"
+								],
+								"explanation_fa": "افعال حالتی مثل love به شکل ساده به‌کار می‌روند.",
+								"hint_fa": "افعال حالتی مثل love به شکل ساده به‌کار می‌روند.",
+								"text": "Kids ___ chocolate."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "u6_p7",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "'know' یک فکر/دانش است، فعل حالتی است.",
+								"hint_fa": "'know' یک فکر/دانش است، فعل حالتی است.",
+								"options": [
+									"swim",
+									"know",
+									"read",
+									"play"
+								],
+								"question": "کدام فعل، فعل حالتی است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u6_p8",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "'feel' یک حالت/احساس را نشان می‌دهد، نه یک عمل.",
+								"hint_fa": "'feel' یک حالت/احساس را نشان می‌دهد، نه یک عمل.",
+								"statement": "'feel' in 'She feels happy' shows an action."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"hint_fa": "افعال حرکتی عمل فیزیکی، افعال حالتی احساس/فکر نشان می‌دهند.",
+						"id": "u6_p9",
+						"instruction_fa": "فعل را به نوع درست آن (Action یا State) وصل کن",
+						"items": [
+							{
+								"left": "write",
+								"right": "Action"
+							},
+							{
+								"left": "believe",
+								"right": "State"
+							},
+							{
+								"left": "drink",
+								"right": "Action"
+							},
+							{
+								"left": "love",
+								"right": "State"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "matching"
+					},
+					{
+						"id": "u6_p10",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! مثل write، go، drink.",
+								"hint_fa": "درسته! مثل write، go، drink.",
+								"statement": "افعال حرکتی (Action Verbs) یک کار یا عمل فیزیکی را نشان می‌دهند."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u6_p11",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! مثل believe، love، feel، know.",
+								"hint_fa": "درسته! مثل believe، love، feel، know.",
+								"statement": "افعال حالتی (State Verbs) معمولاً به احساسات، افکار و باورها مربوط‌اند."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u6_p12",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 2,
+								"explanation_fa": "'believe' یک باور است، فعل حالتی است.",
+								"hint_fa": "'believe' یک باور است، فعل حالتی است.",
+								"options": [
+									"run",
+									"write",
+									"believe",
+									"drink"
+								],
+								"question": "کدام فعل، فعل حالتی (State) است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					}
+				],
+				"activity_count": 12.0,
+				"id": "v1_l3_u6",
+				"title_en": "",
+				"title_fa": "افعال حرکتی در برابر افعال حالتی",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"cards": [
+							{
+								"en": "I cleaned my room yesterday.",
+								"fa": "دیروز اتاقم را تمیز کردم."
+							},
+							{
+								"en": "I am cleaning my room now.",
+								"fa": "الان دارم اتاقم را تمیز می‌کنم."
+							}
+						],
+						"explanation": "افعال حرکتی می‌توانند هم به شکل ساده و هم به شکل استمراری بیایند.",
+						"highlight_word": "cleaning",
+						"id": "u7_p1",
+						"title_en": "",
+						"title_fa": "افعال حرکتی: هم ساده هم استمراری",
+						"type": "learn"
+					},
+					{
+						"id": "u7_p2",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! افعال حرکتی هم ساده و هم استمراری می‌گیرند.",
+								"hint_fa": "درسته! افعال حرکتی هم ساده و هم استمراری می‌گیرند.",
+								"statement": "Action verbs can be used in both simple and continuous forms."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u7_p3",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "'cleaning' فعل حرکتی است و می‌تواند استمراری بیاید.",
+								"hint_fa": "'cleaning' فعل حرکتی است و می‌تواند استمراری بیاید.",
+								"options": [
+									"I am cleaning my room.",
+									"I know the answer.",
+									"She loves music.",
+									"We believe in Allah."
+								],
+								"question": "کدام جمله از فعل حرکتی در شکل استمراری استفاده کرده؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"cards": [
+							{
+								"en": "I don't know the name of the street.",
+								"fa": "اسم خیابان را نمی‌دانم."
+							},
+							{
+								"en": "Kids love chocolate.",
+								"fa": "بچه‌ها شکلات دوست دارند."
+							}
+						],
+						"explanation": "افعال حالتی معمولاً به شکل استمراری نمی‌آیند و فقط به شکل ساده استفاده می‌شوند.",
+						"highlight_word": "don't know",
+						"id": "u7_p4",
+						"title_en": "",
+						"title_fa": "افعال حالتی: معمولاً فقط ساده",
+						"type": "learn"
+					},
+					{
+						"id": "u7_p5",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "'know' فعل حالتی است و استمراری نمی‌گیرد؛ درست: I know the answer.",
+								"hint_fa": "'know' فعل حالتی است و استمراری نمی‌گیرد؛ درست: I know the answer.",
+								"statement": "'I am knowing the answer' is a correct sentence."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u7_p6",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "'want' فعل حالتی است، فقط شکل ساده به‌کار می‌رود.",
+								"hint_fa": "'want' فعل حالتی است، فقط شکل ساده به‌کار می‌رود.",
+								"options": [
+									"I am wanting a coffee.",
+									"I want a coffee.",
+									"I wanting a coffee.",
+									"I am want a coffee."
+								],
+								"question": "کدام جمله درست است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u7_p7",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 0,
+								"explanation_fa": "'need' فعل حالتی است: needed (ساده).",
+								"hint_fa": "'need' فعل حالتی است: needed (ساده).",
+								"options": [
+									"needed",
+									"was needing",
+									"am needing",
+									"needing"
+								],
+								"question": "جای خالی را کامل کن: At 3 o'clock yesterday, I ___ a taxi."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u7_p8",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! افعال حالتی معمولاً استمراری نمی‌گیرند.",
+								"hint_fa": "درسته! افعال حالتی معمولاً استمراری نمی‌گیرند.",
+								"statement": "State verbs are usually not used in continuous form."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u7_p9",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 2,
+								"explanation_fa": "'watch' فعل حرکتی است و در حال حاضر می‌تواند استمراری باشد: is watching.",
+								"hint_fa": "'watch' فعل حرکتی است و در حال حاضر می‌تواند استمراری باشد: is watching.",
+								"options": [
+									"watches",
+									"watch",
+									"is watching",
+									"was watch"
+								],
+								"question": "جای خالی را کامل کن: She ___ television at the moment."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "u7_p10",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! مثل clean → cleaned / am cleaning.",
+								"hint_fa": "درسته! مثل clean → cleaned / am cleaning.",
+								"statement": "افعال حرکتی می‌توانند هم به شکل ساده و هم استمراری بیایند."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u7_p11",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! مثل know، want، love، feel.",
+								"hint_fa": "درسته! مثل know، want، love، feel.",
+								"statement": "افعال حالتی معمولاً به شکل استمراری استفاده نمی‌شوند."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "u7_p12",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "'know' فعل حالتی است، فقط شکل ساده درست است.",
+								"hint_fa": "'know' فعل حالتی است، فقط شکل ساده درست است.",
+								"options": [
+									"I am knowing him.",
+									"I know him.",
+									"I knowing him.",
+									"I am know him."
+								],
+								"question": "کدام جمله درست است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					}
+				],
+				"activity_count": 12.0,
+				"id": "v1_l3_u7",
+				"title_en": "",
+				"title_fa": "شکل ساده در مقابل استمراری",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"cards": [],
+						"explanation": "۱) مثبت: was/were + فعل‌ing\n۲) منفی: wasn't/weren't + فعل‌ing\n۳) سؤالی: Was/Were + فاعل + فعل‌ing؟\n۴) کاربرد با when برای پس‌زمینه‌ی یک اتفاق ناگهانی (کار طولانی = استمراری، کار ناگهانی = ساده)\n۵) ضمایر انعکاسی: myself, yourself, herself, himself, itself, ourselves, yourselves, themselves\n۶) افعال حرکتی (action) در مقابل افعال حالتی (state)\n۷) افعال حالتی معمولاً استمراری نمی‌گیرند",
+						"id": "rv_p1",
+						"title_en": "",
+						"title_fa": "خلاصه‌ی قوانین درس",
+						"type": "learn"
+					},
+					{
+						"id": "rv_p2",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "فاعل جمع 'We' با were.",
+								"hint_fa": "فاعل جمع 'We' با were.",
+								"options": [
+									"was",
+									"were",
+									"is",
+									"are"
+								],
+								"question": "جای خالی را کامل کن: We ___ working on a difficult problem at 4."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "rv_p3",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"wasn't"
+								],
+								"explanation_fa": "فاعل مفرد + منفی = wasn't.",
+								"hint_fa": "فاعل مفرد + منفی = wasn't.",
+								"text": "Tina ___ reading a novel when her mother came in."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "rv_p4",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "فاعل جمع 'they' با Were سؤالی می‌شود.",
+								"hint_fa": "فاعل جمع 'they' با Were سؤالی می‌شود.",
+								"options": [
+									"Was",
+									"Were",
+									"Did",
+									"Is"
+								],
+								"question": "جای خالی را کامل کن: ___ they talking when the teacher came in?"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "rv_p5",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": true,
+								"explanation_fa": "درسته! 'was sitting' پس‌زمینه است و 'hit' اتفاق ناگهانی.",
+								"hint_fa": "درسته! 'was sitting' پس‌زمینه است و 'hit' اتفاق ناگهانی.",
+								"statement": "'Newton was sitting under a tree when an apple hit his head' shows a background action interrupted by a sudden one."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"hint_fa": "هر فاعل ضمیر انعکاسی مخصوص به خودش را دارد.",
+						"id": "rv_p6",
+						"instruction_fa": "فاعل را به ضمیر انعکاسی مناسب وصل کن",
+						"items": [
+							{
+								"left": "I",
+								"right": "myself"
+							},
+							{
+								"left": "We",
+								"right": "ourselves"
+							},
+							{
+								"left": "The scientists",
+								"right": "themselves"
+							},
+							{
+								"left": "Zahra",
+								"right": "herself"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "matching"
+					},
+					{
+						"id": "rv_p7",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 2,
+								"explanation_fa": "'believe' یک باور است، فعل حالتی.",
+								"hint_fa": "'believe' یک باور است، فعل حالتی.",
+								"options": [
+									"run",
+									"write",
+									"believe",
+									"drink"
+								],
+								"question": "کدام فعل، فعل حالتی (State) است؟"
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					},
+					{
+						"id": "rv_p8",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"answer": false,
+								"explanation_fa": "افعال حالتی مثل know استمراری نمی‌گیرند.",
+								"hint_fa": "افعال حالتی مثل know استمراری نمی‌گیرند.",
+								"statement": "'I am knowing the answer' is correct."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "true_false"
+					},
+					{
+						"id": "rv_p9",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"answers": [
+									"was"
+								],
+								"explanation_fa": "کار طولانی‌تر گذشته استمراری می‌گیرد: was cooking.",
+								"hint_fa": "کار طولانی‌تر گذشته استمراری می‌گیرد: was cooking.",
+								"text": "She ___ cooking dinner when the guests arrived."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "fill_blank"
+					},
+					{
+						"id": "rv_p10",
+						"instruction_fa": "",
+						"questions": [
+							{
+								"correct": 1,
+								"explanation_fa": "فاعل جمع 'They' با weren't منفی می‌شود.",
+								"hint_fa": "فاعل جمع 'They' با weren't منفی می‌شود.",
+								"options": [
+									"wasn't",
+									"weren't",
+									"didn't",
+									"isn't"
+								],
+								"question": "جای خالی را کامل کن: They ___ playing in the yard."
+							}
+						],
+						"title_en": "",
+						"title_fa": "",
+						"type": "multiple_choice"
+					}
+				],
+				"activity_count": 10.0,
+				"id": "v1_l3_review",
+				"title_en": "",
+				"title_fa": "مرور کل درس: گذشته استمراری",
+				"type": "group"
+			}
+		],
+		"xp_per_unit": 10.0
+	}
+}

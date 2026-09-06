@@ -12,6 +12,9 @@ enum ButtonVariant {
 # Minimum button height. Defaults to the theme button height; compact
 # chip buttons (e.g. unscramble word slots) set a smaller value.
 @export var min_height: int = GrammarTheme.BUTTON_HEIGHT
+# Optional larger font size override. 0 (default) uses the theme button
+# font size set by the applied style; any positive value wins over it.
+@export var font_size: int = 0
 @export var enable_press_animation := true
 # When false, no click sound plays on press. Used for answer-choice
 # buttons so the ONLY sound after answering is the feedback sound.
@@ -70,6 +73,14 @@ func _notification(what: int) -> void:
 		pivot_offset = size * 0.5
 
 
+func _exit_tree() -> void:
+	# Stop following live theme changes so a freed button never leaks a
+	# callback on the Global.theme_changed signal (it persists for the whole
+	# app session and would otherwise keep calling into a freed object).
+	if is_instance_valid(Global) and Global.theme_changed.is_connected(_on_theme_changed):
+		Global.theme_changed.disconnect(_on_theme_changed)
+
+
 func _apply_theme() -> void:
 
 	if variant == ButtonVariant.PRIMARY:
@@ -82,6 +93,14 @@ func _apply_theme() -> void:
 
 		GrammarTheme.style_secondary_button(
 			self
+		)
+
+	# A positive font_size export overrides the theme default (so larger
+	# action buttons like "بررسی" keep their size after theme changes).
+	if font_size > 0:
+		add_theme_font_size_override(
+			"font_size",
+			font_size
 		)
 
 	if neutral_states:
@@ -176,6 +195,14 @@ func set_wrong_state() -> void:
 
 	add_theme_color_override(
 		"font_color",
+		GrammarTheme.error_color()
+	)
+
+	# A wrong option is left interactive so the learner can re-pick, but if a
+	# caller disables it (e.g. after a second attempt) the text must stay the
+	# error red rather than snapping back to the default disabled gray.
+	add_theme_color_override(
+		"font_disabled_color",
 		GrammarTheme.error_color()
 	)
 

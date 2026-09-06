@@ -955,6 +955,17 @@ func _is_touch_blocked(global_pos: Vector2) -> bool:
 			if blocker.get_global_rect().has_point(global_pos):
 				return true
 
+	# Ordering drag handles (≡): presses on a grab handle must never start a
+	# page scroll/swipe — the exercise engine owns the gesture there. Handles
+	# are added to this group by the engine (timing-independent, rebuilt
+	# handles re-join automatically).
+	var handles := get_tree().get_nodes_in_group("order_drag_handles")
+	for h in handles:
+		var handle_ctrl := h as Control
+		if handle_ctrl != null and handle_ctrl.is_visible_in_tree():
+			if handle_ctrl.get_global_rect().has_point(global_pos):
+				return true
+
 	return false
 
 func _exercise_request_keyboard_visibility() -> void:

@@ -29,6 +29,9 @@ static func render(target: VBoxContainer, unit: Dictionary) -> void:
 	english_title.add_theme_font_size_override("font_size", GrammarTheme.BODY_SIZE)
 	english_title.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
 	english_title.add_theme_font_override("font", GrammarTheme.get_en_bold())
+	# Converted lessons may carry no per-activity English title; skip the
+	# empty placeholder so the learn page does not show a blank line.
+	english_title.visible = not english_title.text.strip_edges().is_empty()
 	target.add_child(english_title)
 
 	# --- Explanation card ---

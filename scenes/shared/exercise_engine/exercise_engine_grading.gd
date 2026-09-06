@@ -30,6 +30,20 @@ func _on_check_pressed() -> void:
 	if _is_graded:
 		_reset_for_retry()
 		return
+	_grade_all()
+
+
+# Public API used by harnesses (e.g. the grammar exam) that want to grade
+# every item without touching the engine's own check button. Unlike
+# _on_check_pressed this never enters the retry/rebuild path, so it can be
+# called again after the learner corrects an answer to re-grade in place.
+func grade_all() -> void:
+	if _is_graded:
+		_is_graded = false
+	_grade_all()
+
+
+func _grade_all() -> void:
 	# Word Search uses its own visual grading.
 	if str(_exercise.get("type", "")) in ["word_search", "word_find"]:
 		_grade_word_search()

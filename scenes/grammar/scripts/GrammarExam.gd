@@ -210,9 +210,10 @@ func _build_exam_content(content: VBoxContainer, data: Dictionary, blocks: Array
 		return
 	_check_btn = Button.new()
 	_check_btn.text = "بررسی پاسخ‌ها"
-	_check_btn.custom_minimum_size = Vector2(0, GrammarTheme.BUTTON_HEIGHT)
+	_check_btn.custom_minimum_size = Vector2(0, 112)
 	_check_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	GrammarTheme.style_primary_button(_check_btn)
+	_check_btn.add_theme_font_size_override("font_size", 46)
 	_check_btn.pressed.connect(_on_check_pressed)
 	content.add_child(_check_btn)
 
@@ -261,7 +262,9 @@ func _on_check_pressed() -> void:
 	_correct_total = 0
 	_items_total = 0
 	for engine in _engines:
-		engine._on_check_pressed()
+		# Public API: grades every item in place (never enters the engine's
+		# retry/rebuild path) and re-emits exercise_checked for scoring.
+		engine.grade_all()
 	_check_btn.disabled = true
 	_check_btn.text = "پاسخ‌ها بررسی شد ✓"
 

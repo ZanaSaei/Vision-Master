@@ -43,6 +43,11 @@ func _ready() -> void:
 	set_process(true)
 
 
+func _exit_tree() -> void:
+	if is_instance_valid(Global) and Global.theme_changed.is_connected(_on_theme_changed):
+		Global.theme_changed.disconnect(_on_theme_changed)
+
+
 func _build_ui() -> void:
 	var vbox := VBoxContainer.new()
 	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

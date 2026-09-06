@@ -90,7 +90,7 @@ func _show_no_content() -> void:
 	# No grammar JSON exists for this book/lesson: never fall back to the
 	# bundled Vision 1 / Lesson 1 sample. Show a friendly message instead.
 	var label: Label = Label.new()
-	label.text = "📭\nهنوز محتوایی نیست\n\nمحتوای گرامر برای این درس هنوز آماده نشده است.\nفقط برای کتاب ۱ درس ۱ در دسترس است."
+	label.text = "📭\nهنوز محتوایی نیست\n\nمحتوای گرامر برای این درس هنوز آماده نشده است."
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -326,7 +326,12 @@ func _show_current_activity() -> void:
 		"multiple_choice", "fill_blank", "true_false", "matching", "unscramble":
 			_show_exercise(activity)
 		_:
-			push_warning("Unknown grammar activity type: " + type)
+			# Unknown activity type: never award XP / progress for it. Skip to
+			# the next activity (or finish the unit if this was the last one)
+			# and warn loudly so authoring mistakes are visible in logs.
+			push_warning("Unknown grammar activity type: %s (skipped)" % type)
+			_advance_activity()
+			return
 
 
 # Advances to the next activity inside the current unit/group. When the
@@ -350,9 +355,10 @@ func _show_learning_unit(unit: Dictionary) -> void:
 
 	var next_button := Button.new()
 	next_button.text = "متوجه شدم ✓"
-	next_button.custom_minimum_size = Vector2(0, GrammarTheme.BUTTON_HEIGHT)
+	next_button.custom_minimum_size = Vector2(0, 112)
 	next_button.pressed.connect(_on_learning_continue)
 	GrammarTheme.style_primary_button(next_button)
+	next_button.add_theme_font_size_override("font_size", 46)
 	content_container.add_child(next_button)
 	GrammarAnimation.appear(next_button, 0.2)
 
@@ -454,11 +460,13 @@ func _on_exercise_completed() -> void:
 # lesson's xp_per_unit value (default 10). XP is only granted the FIRST
 # time a بخش is completed — replaying it grants nothing.
 func _award_unit_xp() -> void:
+	var unit: Dictionary = units[current_unit_index] if current_unit_index < units.size() else {}
+	var unit_id := str(unit.get("id", ""))
 	var already_done: bool = Global.is_unit_completed(
-		Global.current_book, Global.current_lesson, current_unit_index
+		Global.current_book, Global.current_lesson, current_unit_index, unit_id
 	)
 	Global.mark_unit_completed(
-		Global.current_book, Global.current_lesson, current_unit_index
+		Global.current_book, Global.current_lesson, current_unit_index, unit_id
 	)
 	if already_done:
 		_last_award = 0

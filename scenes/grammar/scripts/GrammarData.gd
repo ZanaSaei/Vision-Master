@@ -73,7 +73,23 @@ static func load_lesson(book: int, lesson: int) -> Dictionary:
 		push_error("Grammar JSON root must be a Dictionary: " + path)
 		return {}
 
-	return (data as Dictionary).get("lesson", {})
+	var lesson_dict: Dictionary = (data as Dictionary).get("lesson", {})
+	# Validate units up front so a malformed file can never silently award
+	# XP / progress for an empty group (see GrammarLesson._show_current_activity):
+	# drop group units that carry no activities and warn loudly instead.
+	var units: Array = lesson_dict.get("units", [])
+	var valid: Array = []
+	for unit in units:
+		if not unit is Dictionary:
+			push_warning("GrammarData: skipping non-dictionary unit in " + path)
+			continue
+		var unit_type := str(unit.get("type", ""))
+		if unit_type == "group" and not (unit.get("activities", []) is Array and not (unit.get("activities", []) as Array).is_empty()):
+			push_warning("GrammarData: group unit '%s' has no activities; skipped in %s" % [str(unit.get("id", "?")), path])
+			continue
+		valid.append(unit)
+	lesson_dict["units"] = valid
+	return lesson_dict
 
 
 static func unit_icon(unit: Dictionary) -> String:

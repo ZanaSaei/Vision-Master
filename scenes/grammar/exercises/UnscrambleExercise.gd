@@ -13,6 +13,9 @@ var selected_words: Array[String] = []
 var _blanks_mode := false
 var _blank_words: Array[String] = []
 var _blank_buttons: Array[GrammarButton] = []
+# The exact bank button that currently fills each blank, so re-enabling on
+# removal is precise even when the word bank contains duplicate words.
+var _blank_sources: Array = []
 var _bank_buttons := {}
 var _word_button_width: int = 0
 
@@ -146,6 +149,10 @@ func _build_ui() -> void:
 
 	check_button.text = "بررسی ✓"
 
+	check_button.min_height = 112
+
+	check_button.font_size = 46
+
 	check_button.pressed.connect(
 		_check_answer
 	)
@@ -180,6 +187,7 @@ func _show_item() -> void:
 	_blanks_mode = false
 	_blank_words.clear()
 	_blank_buttons.clear()
+	_blank_sources.clear()
 	_bank_buttons.clear()
 
 	var item: Dictionary = items[current_index]
@@ -416,6 +424,7 @@ func _show_blanks_item(item: Dictionary) -> void:
 			)
 
 			_blank_words.append("")
+			_blank_sources.append(null)
 
 	var options: Array = item.get(
 		"options",
@@ -486,6 +495,8 @@ func _fill_blank(btn: GrammarButton, word: String) -> void:
 			_blank_words[i] = word
 			_blank_buttons[i].text = word
 			btn.disabled = true
+			if i < _blank_sources.size():
+				_blank_sources[i] = btn
 			return
 
 
@@ -508,10 +519,13 @@ func _remove_blank(blank: GrammarButton) -> void:
 
 	blank.text = "%d" % (i + 1)
 
-	var bank_btn = _bank_buttons.get(word)
-
-	if bank_btn is GrammarButton:
+	# Re-enable the exact bank button that filled this blank. Using the
+	# recorded source (not a word->button lookup) keeps duplicate words in
+	# the bank from re-enabling the wrong chip.
+	if i < _blank_sources.size() and _blank_sources[i] is GrammarButton:
+		var bank_btn: GrammarButton = _blank_sources[i]
 		bank_btn.disabled = false
+		_blank_sources[i] = null
 
 
 func _select_word(

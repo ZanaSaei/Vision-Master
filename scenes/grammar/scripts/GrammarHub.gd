@@ -108,21 +108,30 @@ func _build_ui() -> void:
 	)
 	button_row.add_child(learning_button)
 
-	var workbook_button: GrammarButton = _make_feature_button(
-		"📘\nتمرینات کتاب",
-		Color("#0EA5A4"),
-		56,
-		Callable(self, "_on_workbook_pressed")
-	)
-	button_row.add_child(workbook_button)
+	var data_dir := "res://data/grammar/"
+	# Only surface the workbook / exam buttons when their per-book/lesson JSON
+	# files exist, so a lesson that has no exam or workbook content does not
+	# show a button that just opens an "هنوز چیزی نیست" dead end.
+	var workbook_path := "%sv%d_l%d_book_exercises.json" % [data_dir, Global.current_book, Global.current_lesson]
+	var exam_path := "%sv%d_l%d_grammar_exam.json" % [data_dir, Global.current_book, Global.current_lesson]
 
-	var exam_button: GrammarButton = _make_full_button(
-		"🎓\nامتحان گرامر",
-		Color("#D97706"),
-		52,
-		Callable(self, "_on_exam_pressed")
-	)
-	content.add_child(exam_button)
+	if FileAccess.file_exists(workbook_path):
+		var workbook_button: GrammarButton = _make_feature_button(
+			"📘\nتمرینات کتاب",
+			Color("#0EA5A4"),
+			56,
+			Callable(self, "_on_workbook_pressed")
+		)
+		button_row.add_child(workbook_button)
+
+	if FileAccess.file_exists(exam_path):
+		var exam_button: GrammarButton = _make_full_button(
+			"🎓\nامتحان گرامر",
+			Color("#D97706"),
+			52,
+			Callable(self, "_on_exam_pressed")
+		)
+		content.add_child(exam_button)
 
 
 func _make_header_button(text: String, callback: Callable) -> Button:

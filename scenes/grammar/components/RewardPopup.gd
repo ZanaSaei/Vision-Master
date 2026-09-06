@@ -23,6 +23,11 @@ func _ready() -> void:
 	hide()
 
 
+func _exit_tree() -> void:
+	if is_instance_valid(Global) and Global.theme_changed.is_connected(_on_theme_changed):
+		Global.theme_changed.disconnect(_on_theme_changed)
+
+
 func _build_ui() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -115,7 +120,10 @@ func show_reward(title: String, awarded_xp: int, next_text: String = "ادامه
 	reward_label.text = "⭐ +%d XP" % awarded_xp
 	next_button.text = next_text
 	back_button.visible = show_back
-	Sfx.reward()
+	# Only play the reward jingle when XP was actually earned (a replay of an
+	# already-completed بخش grants +0 XP, so no fanfare).
+	if awarded_xp > 0:
+		Sfx.reward()
 	show()
 	GrammarAnimation.pop(get_child(1).get_child(0))
 
