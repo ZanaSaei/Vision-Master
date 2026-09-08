@@ -8,11 +8,13 @@ const SEEK_STEP: float = 10.0 #
 const TAP_PRESS_SCALE: Vector2 = Vector2(0.85, 0.85)
 const TAP_PRESS_DURATION: float = 0.06
 const TAP_RELEASE_DURATION: float = 0.26
-const GRABBER_TEXTURE: Texture2D = preload("res://images/audio_grabber.png")
 var is_dragging_slider: bool = false #
+var _transparent_tex: ImageTexture = null
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
-@onready var audio_slider: HSlider = $MarginContainer/AudioUILayout/AudioSlider
+@onready var audio_slider: HSlider = $MarginContainer/AudioUILayout/TimeRow/AudioSlider
+@onready var current_time_label: Label = $MarginContainer/AudioUILayout/TimeRow/CurrentTimeLabel
+@onready var total_time_label: Label = $MarginContainer/AudioUILayout/TimeRow/TotalTimeLabel
 @onready var rewind_button: TextureButton = $MarginContainer/AudioUILayout/ControlsLayout/RewindButton
 @onready var play_pause_button: TextureButton = $MarginContainer/AudioUILayout/ControlsLayout/PlayPauseButton
 @onready var forward_button: TextureButton = $MarginContainer/AudioUILayout/ControlsLayout/ForwardButton
@@ -27,6 +29,7 @@ func _ready() -> void:
 	
 	audio_slider.drag_started.connect(_on_slider_drag_started)
 	audio_slider.drag_ended.connect(_on_slider_drag_ended)
+	audio_slider.value_changed.connect(_on_slider_value_changed)
 	audio_player.finished.connect(_on_audio_finished)
 
 	# Juicy tap animations on every control button.
@@ -36,6 +39,7 @@ func _ready() -> void:
 	Global.on_theme_changed(_on_theme_changed)
 	_apply_theme()
 	_apply_slider_theme()
+	_setup_animated_dot()
 
 
 func _apply_theme() -> void:
@@ -46,6 +50,10 @@ func _apply_theme() -> void:
 	panel_sb.corner_radius_top_left = 150
 	panel_sb.corner_radius_top_right = 150
 	add_theme_stylebox_override("panel", panel_sb)
+
+	# Time labels (current on the left, total on the right).
+	current_time_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	total_time_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 
 
 func _apply_slider_theme() -> void:
@@ -73,9 +81,32 @@ func _apply_slider_theme() -> void:
 	fill.corner_radius_bottom_right = 10
 	audio_slider.add_theme_stylebox_override("grabber_area", fill)
 	audio_slider.add_theme_stylebox_override("grabber_area_highlight", fill)
-	# Big finger-friendly thumb.
-	audio_slider.add_theme_icon_override("grabber", GRABBER_TEXTURE)
-	audio_slider.add_theme_icon_override("grabber_highlight", GRABBER_TEXTURE)
+	# The visible dot is drawn by an overlay (AudioSliderDot) so it can be hidden
+	# and animated; the slider's own grabber stays invisible.
+	audio_slider.add_theme_icon_override("grabber", _make_transparent_texture())
+	audio_slider.add_theme_icon_override("grabber_highlight", _make_transparent_texture())
+	# Center the grabber on the fill edge so the dot travels the full width
+	# of the track (reaches the very start and the very end of the slide).
+	audio_slider.add_theme_constant_override("center_grabber", 1)
+
+
+func _setup_animated_dot() -> void:
+	# Replace the slider's built-in grabber with an overlay dot that is only
+	# visible (and animated) while the user touches the bar.
+	var dot := AudioSliderDot.new()
+	audio_slider.add_child(dot)
+	dot.setup(audio_slider)
+
+	audio_slider.drag_started.connect(dot.show_dot)
+	audio_slider.drag_ended.connect(func(_changed: bool) -> void: dot.hide_dot())
+
+
+func _make_transparent_texture() -> ImageTexture:
+	if _transparent_tex == null:
+		var img := Image.create(1, 1, false, Image.FORMAT_RGBA8)
+		img.fill(Color(0.0, 0.0, 0.0, 0.0))
+		_transparent_tex = ImageTexture.create_from_image(img)
+	return _transparent_tex
 
 
 func _on_theme_changed(_mode: int) -> void:
@@ -144,6 +175,7 @@ func load_and_play(audio_path: String) -> void:
 	audio_player.play()
 	audio_player.stream_paused = false
 	audio_slider.max_value = audio_player.stream.get_length()
+	total_time_label.text = _format_time(audio_player.stream.get_length())
 	audio_slider.value = 0.0
 
 func stop_and_close() -> void:
@@ -164,6 +196,10 @@ func _on_play_pause_pressed() -> void:
 			audio_player.play(audio_slider.value)
 	elif audio_player.playing:
 		audio_player.stream_paused = true
+	else:
+		# Stream finished (or was stopped): hit play again to replay from the start.
+		audio_slider.value = 0.0
+		audio_player.play()
 
 func _on_rewind_pressed() -> void:
 	if audio_player.stream != null:
@@ -185,6 +221,8 @@ func _on_close_audio_pressed() -> void:
 	audio_closed.emit()
 
 func _on_audio_finished() -> void:
+	# Snap the slider to the very end so the dot lands on the far edge.
+	audio_slider.value = audio_slider.max_value
 	audio_finished.emit()
 
 func _on_slider_drag_started() -> void: 
@@ -194,3 +232,17 @@ func _on_slider_drag_ended(_value_changed: bool) -> void:
 	is_dragging_slider = false #[cite: 2, 3]
 	if audio_player.stream != null: 
 		audio_player.seek(audio_slider.value) #[cite: 2, 3]
+
+
+func _on_slider_value_changed(value: float) -> void:
+	current_time_label.text = _format_time(value)
+
+
+func _format_time(seconds: float) -> String:
+	var total: int = maxi(0, int(floor(seconds)))
+	var hours: int = floori(total / 3600.0)
+	var minutes: int = floori((total % 3600) / 60.0)
+	var secs: int = total % 60
+	if hours > 0:
+		return "%d:%02d:%02d" % [hours, minutes, secs]
+	return "%d:%02d" % [minutes, secs]

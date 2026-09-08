@@ -38,6 +38,22 @@ static func set_bidi_text(control: Control, text: String) -> void:
 	)
 
 
+static func _is_farsi(u: int) -> bool:
+	return u >= 0x0600 and u <= 0x06FF
+
+
+static func _is_latin(u: int) -> bool:
+	return (u >= 0x41 and u <= 0x5A) or (u >= 0x61 and u <= 0x7A) or (u >= 0xC0 and u <= 0x24F)
+
+
+# Characters that belong INSIDE an English phrase: letters, digits,
+# apostrophes, hyphens and ZWNJ keep tokens like "be going to", "I'll",
+# "well-known" from being split apart.
+static func _is_run_char(u: int) -> bool:
+	return _is_latin(u) or (u >= 0x30 and u <= 0x39) \
+			or u == 0x27 or u == 0x2019 or u == 0x2D or u == 0x200C
+
+
 static func bidi_fix(text: String) -> String:
 	if text.is_empty():
 		return text
@@ -45,9 +61,9 @@ static func bidi_fix(text: String) -> String:
 	var lat := 0
 	for i in text.length():
 		var u := text.unicode_at(i)
-		if u >= 0x0600 and u <= 0x06FF:
+		if _is_farsi(u):
 			fa += 1
-		elif (u >= 0x41 and u <= 0x5A) or (u >= 0x61 and u <= 0x7A) or (u >= 0xC0 and u <= 0x24F):
+		elif _is_latin(u):
 			lat += 1
 	# Only Farsi-dominant lines need isolates; pure or Latin-dominant
 	# lines already render correctly with an LTR base direction.
@@ -56,25 +72,41 @@ static func bidi_fix(text: String) -> String:
 	var lri := char(0x2066)
 	var pdi := char(0x2069)
 	var out := ""
-	var in_run := false
-	for i in text.length():
-		var u := text.unicode_at(i)
-		var is_lat := (u >= 0x41 and u <= 0x5A) or (u >= 0x61 and u <= 0x7A) or (u >= 0xC0 and u <= 0x24F)
-		# Digits, apostrophes and hyphens stay glued to an open run so
-		# tokens like "be going to" or "I'll" are not split apart.
-		var keep := in_run and ((u >= 0x30 and u <= 0x39) or u == 0x27 or u == 0x2019 or u == 0x2D or u == 0x200C)
-		if is_lat or keep:
-			if not in_run:
-				out += lri
-				in_run = true
-			out += text[i]
+	var i := 0
+	var n := text.length()
+	while i < n:
+		if _is_run_char(text.unicode_at(i)):
+			# Start of an English phrase: swallow the WHOLE segment up to
+			# the next Farsi character — including spaces between English
+			# words and attached punctuation — so a multi-word phrase like
+			# "May I ....?" becomes ONE LTR island. Wrapping each word in
+			# its own isolate lets the neutral gaps between them resolve
+			# to the RTL paragraph direction and visually scramble the
+			# phrase into "?.... I May".
+			var j := i
+			while j < n and not _is_farsi(text.unicode_at(j)):
+				j += 1
+			# Trailing whitespace / bare connectors ("+", "=") / opening
+			# brackets belong to the gap between the phrase and the
+			# Persian text, not to the phrase itself.
+			var end_i := j
+			while end_i > i:
+				var prev := text.unicode_at(end_i - 1)
+				if prev == 0x20 or prev == 0x09 or prev == 0x0A \
+						or prev == 0x2B or prev == 0x3D \
+						or prev == 0x28 or prev == 0x5B or prev == 0x7B:
+					end_i -= 1
+				else:
+					break
+			out += lri + text.substr(i, end_i - i) + pdi
+			# Emit the trailing neutrals we trimmed, outside the island.
+			while end_i < j:
+				out += text[end_i]
+				end_i += 1
+			i = j
 		else:
-			if in_run:
-				out += pdi
-				in_run = false
 			out += text[i]
-	if in_run:
-		out += pdi
+			i += 1
 	return out
 
 

@@ -230,6 +230,28 @@ func _show_question() -> void:
 		options_container
 	)
 
+	# For long options, compute the shared button height NOW, synchronously,
+	# so the buttons are created at their final size. (The old code created
+	# them at the base 78px and only measured the real height in the deferred
+	# _equalize_long_mode_buttons — so every rebuild, including right after a
+	# wrong answer, rendered the options ~14% smaller for a frame or two
+	# before they grew back, which read as "the options suddenly shrink".)
+	var long_mode_height: int = 0
+
+	if long_mode:
+		# Measure the exact strings the buttons will render (bidi-fixed),
+		# so this synchronous height always matches the deferred re-measure.
+		var texts: Array = []
+
+		for i in range(options.size()):
+			texts.append(
+				GrammarTheme.bidi_fix(
+					str(options[i])
+				)
+			)
+
+		long_mode_height = _long_mode_button_height(texts)
+
 	for i in range(options.size()):
 		var button := GrammarButton.new()
 
@@ -245,7 +267,7 @@ func _show_question() -> void:
 			# based on the tallest wrapped sentence.
 			button.custom_minimum_size = Vector2(
 				0,
-				78
+				long_mode_height
 			)
 
 			button.size_flags_horizontal = (
@@ -306,24 +328,36 @@ func _show_question() -> void:
 	)
 
 
-func _equalize_long_mode_buttons() -> void:
-	if _long_mode_buttons.is_empty():
-		return
+# Best-guess wrap width for a long option while its container is not laid
+# out yet: the exercise's own content width when we have one (a retry
+# rebuild happens inside an already-laid-out exercise), otherwise the
+# viewport minus the known app margins.
+func _long_mode_available_width() -> float:
+	var available_width: float = float(
+		_main.size.x if is_instance_valid(_main) else 0.0
+	)
 
-	var available_width: float = float(options_container.size.x)
 	if available_width <= 0.0:
 		available_width = float(get_viewport_rect().size.x)
 		available_width -= float(GrammarTheme.SAFE_MARGIN * 2)
 		available_width -= float(GrammarTheme.CONTENT_MARGIN * 2)
 		available_width -= 24.0
 
+	return available_width
+
+
+# Measures every option and returns the shared button height so the whole
+# sentence fits (min 78px). Used both synchronously at build time and by
+# the deferred _equalize_long_mode_buttons re-measure.
+func _long_mode_button_height(texts: Array) -> int:
+	var available_width: float = _long_mode_available_width()
 	var font: Font = GrammarTheme.get_fa_bold()
 	var tallest: float = 0.0
 
-	for button in _long_mode_buttons:
+	for i in range(texts.size()):
 		var measured := GrammarTheme.measure_text(
 			font,
-			button.text,
+			str(texts[i]),
 			GrammarTheme.BUTTON_FONT_SIZE,
 			maxf(240.0, available_width - 24.0),
 			HORIZONTAL_ALIGNMENT_CENTER
@@ -333,6 +367,20 @@ func _equalize_long_mode_buttons() -> void:
 	var final_height := int(ceil(tallest + 34.0))
 	if final_height < 78:
 		final_height = 78
+
+	return final_height
+
+
+func _equalize_long_mode_buttons() -> void:
+	if _long_mode_buttons.is_empty():
+		return
+
+	var texts: Array = []
+
+	for button in _long_mode_buttons:
+		texts.append(button.text)
+
+	var final_height := _long_mode_button_height(texts)
 
 	for button in _long_mode_buttons:
 		button.custom_minimum_size = Vector2(

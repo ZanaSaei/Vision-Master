@@ -16,7 +16,11 @@ config/auto_accept_quit=false
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Mobile")
 run/max_fps="60"
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.003921569, 0.047058824, 0.16862746, 1)
+boot_splash/stretch_mode=0
+boot_splash/image="uid://ds0litfms2cyf"
+boot_splash/minimum_display_time=1000
+config/use_safe_save=false
 
 [audio]
 

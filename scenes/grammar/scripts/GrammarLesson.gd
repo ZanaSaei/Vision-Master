@@ -61,6 +61,19 @@ func _animate_progress() -> void:
 	_progress_tween.tween_property(progress_bar, "value", target, 0.6)
 
 
+# Fills the unit progress bar completely. Called when every activity in the
+# current unit has been finished, so the bar reaches 100% (instead of being
+# left at the last activity's partial position). Matches _animate_progress's
+# easing so the final stretch glides the same way the rest does.
+func _fill_progress_bar() -> void:
+	if _progress_tween != null and _progress_tween.is_valid():
+		_progress_tween.kill()
+	_progress_tween = create_tween()
+	_progress_tween.set_trans(Tween.TRANS_QUAD)
+	_progress_tween.set_ease(Tween.EASE_OUT)
+	_progress_tween.tween_property(progress_bar, "value", 100.0, 0.6)
+
+
 func _ready() -> void:
 	super._ready()
 	_load_lesson()
@@ -350,6 +363,13 @@ func _advance_activity() -> void:
 func _on_activity_group_finished() -> void:
 	_sync_grammar_progress()
 	_award_unit_xp()
+	# Every activity in the unit is done: fill the progress bar all the way
+	# and give it a beat to visibly complete before the reward popup covers
+	# the screen.
+	_fill_progress_bar()
+	await get_tree().create_timer(0.75).timeout
+	if not is_inside_tree():
+		return
 	_show_unit_completed_reward()
 
 
@@ -515,12 +535,7 @@ func _finish_lesson() -> void:
 		hint_bulb.stop_flash()
 		hint_bulb.hide_bubble()
 
-	if _progress_tween != null and _progress_tween.is_valid():
-		_progress_tween.kill()
-	_progress_tween = create_tween()
-	_progress_tween.set_trans(Tween.TRANS_QUAD)
-	_progress_tween.set_ease(Tween.EASE_OUT)
-	_progress_tween.tween_property(progress_bar, "value", 100.0, 0.6)
+	_fill_progress_bar()
 
 	_update_xp_label()
 

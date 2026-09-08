@@ -1,0 +1,12 @@
+{
+    "godotTools.editorPath.godot4": "d:\\Program\\Software\\Gaming\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64.exe",
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        ".",
+        "-p",
+        "*test.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
+}

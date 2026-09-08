@@ -1,0 +1,1594 @@
+{
+	"lesson": {
+		"_group_note": "Each source unit becomes a 'group' unit whose 'activities' are its pages converted to learn/exercise activities. GrammarLesson plays them in sequence.",
+		"book": "Vision 2",
+		"icon": "👥",
+		"id": "vision2_lesson1_countable_uncountable_nouns",
+		"lesson_number": 1,
+		"source": "Vision 2 - Lesson 1 (Understanding People)",
+		"theme_color": "#0EA5E9",
+		"title_en": "Countable and Uncountable Nouns",
+		"title_fa": "اسم‌های قابل‌شمارش و غیرقابل‌شمارش",
+		"units": [
+			{
+				"activities": [
+					{
+						"id": "u1_p1",
+						"type": "learn",
+						"title_fa": "اسم قابل شمارش مفرد: a/an + اسم",
+						"title_en": "",
+						"explanation": "اسم‌های قابل شمارش (Countable) چیزهایی هستند که می‌توان آن‌ها را شمرد. حالت مفرد آن‌ها با a یا an می‌آید.",
+						"cards": [
+							{
+								"en": "a car",
+								"fa": "یک ماشین"
+							},
+							{
+								"en": "a book",
+								"fa": "یک کتاب"
+							},
+							{
+								"en": "an apple",
+								"fa": "یک سیب"
+							}
+						],
+						"highlight_word": "a car"
+					},
+					{
+						"id": "u1_p2",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام شکل برای اسم قابل شمارش مفرد درست است؟",
+						"questions": [
+							{
+								"question": "کدام شکل برای اسم قابل شمارش مفرد درست است؟",
+								"options": [
+									"car",
+									"a car",
+									"cars",
+									"the cars"
+								],
+								"correct": 1,
+								"hint_fa": "برای مفرد قابل شمارش از a/an استفاده می‌کنیم: a car.",
+								"explanation_fa": "برای مفرد قابل شمارش از a/an استفاده می‌کنیم: a car."
+							}
+						]
+					},
+					{
+						"id": "u1_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "I have ___ book.",
+								"answers": [
+									"a"
+								],
+								"hint_fa": "book با حرف صامت شروع می‌شود: a book.",
+								"explanation_fa": "book با حرف صامت شروع می‌شود: a book."
+							}
+						]
+					},
+					{
+						"id": "u1_p4",
+						"type": "learn",
+						"title_fa": "اسم قابل شمارش جمع: اضافه کردن s",
+						"title_en": "",
+						"explanation": "برای جمع بستن اسم‌های قابل شمارش معمولاً s به آخر آن‌ها اضافه می‌کنیم.",
+						"cards": [
+							{
+								"en": "cars",
+								"fa": "ماشین‌ها"
+							},
+							{
+								"en": "books",
+								"fa": "کتاب‌ها"
+							},
+							{
+								"en": "birds",
+								"fa": "پرنده‌ها"
+							}
+						],
+						"highlight_word": "cars"
+					},
+					{
+						"id": "u1_p5",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (car)",
+						"items": [
+							{
+								"text": "There are two ___ in the street.",
+								"answers": [
+									"cars"
+								],
+								"hint_fa": "با عدد دو، اسم جمع می‌شود: cars.",
+								"explanation_fa": "با عدد دو، اسم جمع می‌شود: cars."
+							}
+						]
+					},
+					{
+						"id": "u1_p6",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'a books' is correct.",
+								"answer": false,
+								"hint_fa": "a فقط با اسم مفرد می‌آید، نه جمع.",
+								"explanation_fa": "a فقط با اسم مفرد می‌آید، نه جمع."
+							}
+						]
+					},
+					{
+						"id": "u1_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: How many ___ are there in the street?",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: How many ___ are there in the street?",
+								"options": [
+									"car",
+									"a car",
+									"cars",
+									"much car"
+								],
+								"correct": 2,
+								"hint_fa": "بعد از how many اسم جمع می‌آید: cars.",
+								"explanation_fa": "بعد از how many اسم جمع می‌آید: cars."
+							}
+						]
+					},
+					{
+						"id": "u1_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (pencil)",
+						"items": [
+							{
+								"text": "I need three ___.",
+								"answers": [
+									"pencils"
+								],
+								"hint_fa": "با عدد سه، اسم جمع می‌شود: pencils.",
+								"explanation_fa": "با عدد سه، اسم جمع می‌شود: pencils."
+							}
+						]
+					},
+					{
+						"id": "u1_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "Countable nouns have both singular and plural forms.",
+								"answer": true,
+								"hint_fa": "درسته! اسم قابل شمارش هم مفرد و هم جمع دارد.",
+								"explanation_fa": "درسته! اسم قابل شمارش هم مفرد و هم جمع دارد."
+							}
+						]
+					},
+					{
+						"id": "u1_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "اسم‌های قابل شمارش (Countable) چیزهایی هستند که می‌توان آن‌ها را شمرد.",
+								"answer": true,
+								"hint_fa": "درسته! مثل car، book، pencil.",
+								"explanation_fa": "درسته! مثل car، book، pencil."
+							}
+						]
+					},
+					{
+						"id": "u1_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "جمع اسم قابل شمارش معمولاً با اضافه کردن s ساخته می‌شود.",
+								"answer": true,
+								"hint_fa": "درسته! book → books",
+								"explanation_fa": "درسته! book → books"
+							}
+						]
+					},
+					{
+						"id": "u1_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام گزینه شکل جمع صحیح 'bird' است؟",
+						"questions": [
+							{
+								"question": "کدام گزینه شکل جمع صحیح 'bird' است؟",
+								"options": [
+									"bird",
+									"birds",
+									"a bird",
+									"the bird"
+								],
+								"correct": 1,
+								"hint_fa": "bird + s = birds",
+								"explanation_fa": "bird + s = birds"
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l1_u1",
+				"title_en": "",
+				"title_fa": "اسم قابل شمارش: مفرد و جمع",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u2_p1",
+						"type": "learn",
+						"title_fa": "اسم غیرقابل شمارش: بدون a/an و بدون جمع",
+						"title_en": "",
+						"explanation": "اسم‌های غیرقابل شمارش (Uncountable) چیزهایی هستند که نمی‌توان آن‌ها را تک‌تک شمرد؛ هرگز با a/an یا s جمع نمی‌آیند.",
+						"cards": [
+							{
+								"en": "water",
+								"fa": "آب"
+							},
+							{
+								"en": "information",
+								"fa": "اطلاعات"
+							},
+							{
+								"en": "bread",
+								"fa": "نان"
+							}
+						],
+						"highlight_word": "information"
+					},
+					{
+						"id": "u2_p2",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'an information' is correct.",
+								"answer": false,
+								"hint_fa": "information غیرقابل شمارش است و با an نمی‌آید.",
+								"explanation_fa": "information غیرقابل شمارش است و با an نمی‌آید."
+							}
+						]
+					},
+					{
+						"id": "u2_p3",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام یک از این‌ها غیرقابل شمارش است؟",
+						"questions": [
+							{
+								"question": "کدام یک از این‌ها غیرقابل شمارش است؟",
+								"options": [
+									"book",
+									"car",
+									"water",
+									"pencil"
+								],
+								"correct": 2,
+								"hint_fa": "water را نمی‌توان تک‌تک شمرد.",
+								"explanation_fa": "water را نمی‌توان تک‌تک شمرد."
+							}
+						]
+					},
+					{
+						"id": "u2_p4",
+						"type": "learn",
+						"title_fa": "افعال با اسم غیرقابل شمارش مفرد در نظر گرفته می‌شوند",
+						"title_en": "",
+						"explanation": "چون اسم غیرقابل شمارش جمع بسته نمی‌شود، فعل آن مثل حالت مفرد صرف می‌شود.",
+						"cards": [
+							{
+								"en": "There is bread in the kitchen.",
+								"fa": "در آشپزخانه نان هست."
+							},
+							{
+								"en": "Bread is here.",
+								"fa": "نان اینجاست."
+							}
+						],
+						"highlight_word": "There is bread"
+					},
+					{
+						"id": "u2_p5",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: ___ some bread in the kitchen.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: ___ some bread in the kitchen.",
+								"options": [
+									"There is",
+									"There are"
+								],
+								"correct": 0,
+								"hint_fa": "bread غیرقابل شمارش است، پس با is می‌آید.",
+								"explanation_fa": "bread غیرقابل شمارش است، پس با is می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u2_p6",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "There ___ some information in the book.",
+								"answers": [
+									"is"
+								],
+								"hint_fa": "information غیرقابل شمارش است، پس با is می‌آید.",
+								"explanation_fa": "information غیرقابل شمارش است، پس با is می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u2_p7",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'informations' is a correct plural word.",
+								"answer": false,
+								"hint_fa": "information غیرقابل شمارش است و جمع نمی‌بندد.",
+								"explanation_fa": "information غیرقابل شمارش است و جمع نمی‌بندد."
+							}
+						]
+					},
+					{
+						"id": "u2_p8",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام اسم را نمی‌توان مستقیم شمرد؟",
+						"questions": [
+							{
+								"question": "کدام اسم را نمی‌توان مستقیم شمرد؟",
+								"options": [
+									"book",
+									"traffic",
+									"car",
+									"pencil"
+								],
+								"correct": 1,
+								"hint_fa": "traffic غیرقابل شمارش است.",
+								"explanation_fa": "traffic غیرقابل شمارش است."
+							}
+						]
+					},
+					{
+						"id": "u2_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'rice' is a countable noun.",
+								"answer": false,
+								"hint_fa": "rice غیرقابل شمارش است.",
+								"explanation_fa": "rice غیرقابل شمارش است."
+							}
+						]
+					},
+					{
+						"id": "u2_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "اسم‌های غیرقابل شمارش هرگز با a/an یا s جمع نمی‌آیند.",
+								"answer": true,
+								"hint_fa": "درسته! مثل water، information، bread.",
+								"explanation_fa": "درسته! مثل water، information، bread."
+							}
+						]
+					},
+					{
+						"id": "u2_p11",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام گزینه یک اسم غیرقابل شمارش است؟",
+						"questions": [
+							{
+								"question": "کدام گزینه یک اسم غیرقابل شمارش است؟",
+								"options": [
+									"book",
+									"pencil",
+									"water",
+									"car"
+								],
+								"correct": 2,
+								"hint_fa": "water را نمی‌توان تک‌تک شمرد.",
+								"explanation_fa": "water را نمی‌توان تک‌تک شمرد."
+							}
+						]
+					},
+					{
+						"id": "u2_p12",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "می‌توان گفت 'two breads' برای اشاره به دو نان.",
+								"answer": false,
+								"hint_fa": "bread غیرقابل شمارش است و مستقیماً شمرده نمی‌شود؛ باید از واحد اندازه‌گیری استفاده کرد (two loaves of bread).",
+								"explanation_fa": "bread غیرقابل شمارش است و مستقیماً شمرده نمی‌شود؛ باید از واحد اندازه‌گیری استفاده کرد (two loaves of bread)."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l1_u2",
+				"title_en": "",
+				"title_fa": "اسم غیرقابل شمارش",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u3_p1",
+						"type": "learn",
+						"title_fa": "many + اسم قابل شمارش جمع",
+						"title_en": "",
+						"explanation": "برای پرسیدن تعداد اسم‌های قابل شمارش از how many + اسم جمع استفاده می‌کنیم.",
+						"cards": [
+							{
+								"en": "How many cars are there in the street?",
+								"fa": "چند ماشین در خیابان هست؟"
+							}
+						],
+						"highlight_word": "How many"
+					},
+					{
+						"id": "u3_p2",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "___ books do you need?",
+								"answers": [
+									"How many"
+								],
+								"hint_fa": "books اسم جمع است، پس با how many می‌آید.",
+								"explanation_fa": "books اسم جمع است، پس با how many می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u3_p3",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: How ___ pencils do you have?",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: How ___ pencils do you have?",
+								"options": [
+									"many",
+									"much"
+								],
+								"correct": 0,
+								"hint_fa": "pencils اسم جمع قابل شمارش است: how many.",
+								"explanation_fa": "pencils اسم جمع قابل شمارش است: how many."
+							}
+						]
+					},
+					{
+						"id": "u3_p4",
+						"type": "learn",
+						"title_fa": "much + اسم غیرقابل شمارش",
+						"title_en": "",
+						"explanation": "برای پرسیدن مقدار اسم‌های غیرقابل شمارش از how much + اسم مفرد استفاده می‌کنیم.",
+						"cards": [
+							{
+								"en": "How much information does your teacher need?",
+								"fa": "معلمت چقدر اطلاعات نیاز دارد؟"
+							}
+						],
+						"highlight_word": "How much"
+					},
+					{
+						"id": "u3_p5",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: How ___ bread is there in the kitchen?",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: How ___ bread is there in the kitchen?",
+								"options": [
+									"many",
+									"much"
+								],
+								"correct": 1,
+								"hint_fa": "bread غیرقابل شمارش است: how much.",
+								"explanation_fa": "bread غیرقابل شمارش است: how much."
+							}
+						]
+					},
+					{
+						"id": "u3_p6",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'much' is used with uncountable nouns.",
+								"answer": true,
+								"hint_fa": "درسته! much با اسم غیرقابل شمارش می‌آید.",
+								"explanation_fa": "درسته! much با اسم غیرقابل شمارش می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u3_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: How ___ money do you have?",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: How ___ money do you have?",
+								"options": [
+									"many",
+									"much"
+								],
+								"correct": 1,
+								"hint_fa": "money غیرقابل شمارش است: how much.",
+								"explanation_fa": "money غیرقابل شمارش است: how much."
+							}
+						]
+					},
+					{
+						"id": "u3_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "How ___ students are in the class?",
+								"answers": [
+									"many"
+								],
+								"hint_fa": "students اسم جمع قابل شمارش است: how many.",
+								"explanation_fa": "students اسم جمع قابل شمارش است: how many."
+							}
+						]
+					},
+					{
+						"id": "u3_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'many' is used with countable plural nouns.",
+								"answer": true,
+								"hint_fa": "درسته! many با اسم جمع قابل شمارش می‌آید.",
+								"explanation_fa": "درسته! many با اسم جمع قابل شمارش می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u3_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "many با اسم‌های قابل شمارش جمع به کار می‌رود.",
+								"answer": true,
+								"hint_fa": "درسته! how many books",
+								"explanation_fa": "درسته! how many books"
+							}
+						]
+					},
+					{
+						"id": "u3_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "much با اسم‌های غیرقابل شمارش به کار می‌رود.",
+								"answer": true,
+								"hint_fa": "درسته! how much water",
+								"explanation_fa": "درسته! how much water"
+							}
+						]
+					},
+					{
+						"id": "u3_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام سؤال درست است برای پرسیدن مقدار آب؟",
+						"questions": [
+							{
+								"question": "کدام سؤال درست است برای پرسیدن مقدار آب؟",
+								"options": [
+									"How many water?",
+									"How much water?",
+									"How many waters?",
+									"How much waters?"
+								],
+								"correct": 1,
+								"hint_fa": "water غیرقابل شمارش است: how much water?",
+								"explanation_fa": "water غیرقابل شمارش است: how much water?"
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l1_u3",
+				"title_en": "",
+				"title_fa": "many و much (سؤال با how)",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u4_p1",
+						"type": "learn",
+						"title_fa": "some با هر دو نوع اسم می‌آید",
+						"title_en": "",
+						"explanation": "کلمه‌ی some هم با اسم‌های قابل شمارش جمع و هم با اسم‌های غیرقابل شمارش استفاده می‌شود.",
+						"cards": [
+							{
+								"en": "some books",
+								"fa": "چند کتاب"
+							},
+							{
+								"en": "some bread",
+								"fa": "کمی نان"
+							}
+						],
+						"highlight_word": "some"
+					},
+					{
+						"id": "u4_p2",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "I need ___ books for my project.",
+								"answers": [
+									"some"
+								],
+								"hint_fa": "some با اسم جمع می‌آید.",
+								"explanation_fa": "some با اسم جمع می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u4_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "There is ___ bread in the kitchen.",
+								"answers": [
+									"some"
+								],
+								"hint_fa": "some با اسم غیرقابل شمارش هم می‌آید.",
+								"explanation_fa": "some با اسم غیرقابل شمارش هم می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u4_p4",
+						"type": "learn",
+						"title_fa": "a lot of و lots of هم‌معنی هستند",
+						"title_en": "",
+						"explanation": "a lot of و lots of معنای یکسانی دارند و برای مقدار یا تعداد زیاد، با هر دو نوع اسم استفاده می‌شوند.",
+						"cards": [
+							{
+								"en": "There are lots of birds in the park.",
+								"fa": "پرنده‌های زیادی در پارک هستند."
+							},
+							{
+								"en": "There is a lot of traffic on the road.",
+								"fa": "ترافیک زیادی در جاده هست."
+							}
+						],
+						"highlight_word": "a lot of"
+					},
+					{
+						"id": "u4_p5",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'a lot of' can be used with both countable and uncountable nouns.",
+								"answer": true,
+								"hint_fa": "درسته! مثل a lot of books و a lot of water.",
+								"explanation_fa": "درسته! مثل a lot of books و a lot of water."
+							}
+						]
+					},
+					{
+						"id": "u4_p6",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: There is ___ traffic on the road today.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: There is ___ traffic on the road today.",
+								"options": [
+									"many",
+									"a lot of",
+									"few"
+								],
+								"correct": 1,
+								"hint_fa": "traffic غیرقابل شمارش است؛ a lot of با آن می‌آید نه many.",
+								"explanation_fa": "traffic غیرقابل شمارش است؛ a lot of با آن می‌آید نه many."
+							}
+						]
+					},
+					{
+						"id": "u4_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: We have ___ homework tonight.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: We have ___ homework tonight.",
+								"options": [
+									"many",
+									"a lot of",
+									"few"
+								],
+								"correct": 1,
+								"hint_fa": "homework غیرقابل شمارش است؛ a lot of می‌آید.",
+								"explanation_fa": "homework غیرقابل شمارش است؛ a lot of می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u4_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (زیاد)",
+						"items": [
+							{
+								"text": "There are ___ students in the class.",
+								"answers": [
+									"lots of"
+								],
+								"hint_fa": "lots of برای تعداد زیاد استفاده می‌شود.",
+								"explanation_fa": "lots of برای تعداد زیاد استفاده می‌شود."
+							}
+						]
+					},
+					{
+						"id": "u4_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'some' can be used with uncountable nouns like 'water'.",
+								"answer": true,
+								"hint_fa": "درسته! some water درست است.",
+								"explanation_fa": "درسته! some water درست است."
+							}
+						]
+					},
+					{
+						"id": "u4_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "some با هر دو نوع اسم (قابل و غیرقابل شمارش) به کار می‌رود.",
+								"answer": true,
+								"hint_fa": "درسته! some books، some bread",
+								"explanation_fa": "درسته! some books، some bread"
+							}
+						]
+					},
+					{
+						"id": "u4_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "a lot of و lots of فقط با اسم‌های قابل شمارش به کار می‌روند.",
+								"answer": false,
+								"hint_fa": "این کلمات با هر دو نوع اسم به کار می‌روند، نه فقط قابل شمارش.",
+								"explanation_fa": "این کلمات با هر دو نوع اسم به کار می‌روند، نه فقط قابل شمارش."
+							}
+						]
+					},
+					{
+						"id": "u4_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام جمله درست است؟",
+						"questions": [
+							{
+								"question": "کدام جمله درست است؟",
+								"options": [
+									"There is lots of information.",
+									"There are lots of informations.",
+									"There is lot information.",
+									"There are lots information."
+								],
+								"correct": 0,
+								"hint_fa": "information غیرقابل شمارش است: There is lots of information.",
+								"explanation_fa": "information غیرقابل شمارش است: There is lots of information."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l1_u4",
+				"title_en": "",
+				"title_fa": "some / a lot of / lots of",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u5_p1",
+						"type": "learn",
+						"title_fa": "a few (کمی، کافی) و few (خیلی کم) - با اسم قابل شمارش",
+						"title_en": "",
+						"explanation": "a few یعنی مقداری کم اما کافی؛ few یعنی خیلی کم و تقریباً ناکافی. هر دو با اسم قابل شمارش جمع می‌آیند.",
+						"cards": [
+							{
+								"en": "There are a few Iranian cheetahs.",
+								"fa": "چند یوزپلنگ ایرانی هست (خوبه، هست)."
+							},
+							{
+								"en": "Few men understood the problem.",
+								"fa": "خیلی کم مرد آن مسئله را فهمیدند."
+							}
+						],
+						"highlight_word": "a few"
+					},
+					{
+						"id": "u5_p2",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (مقداری، مثبت): I have ___ good friends.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (مقداری، مثبت): I have ___ good friends.",
+								"options": [
+									"a few",
+									"few"
+								],
+								"correct": 0,
+								"hint_fa": "a few یعنی مقداری کافی و مثبت.",
+								"explanation_fa": "a few یعنی مقداری کافی و مثبت."
+							}
+						]
+					},
+					{
+						"id": "u5_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (خیلی کم)",
+						"items": [
+							{
+								"text": "___ people came to the party.",
+								"answers": [
+									"Few"
+								],
+								"hint_fa": "few یعنی خیلی کم و ناکافی.",
+								"explanation_fa": "few یعنی خیلی کم و ناکافی."
+							}
+						]
+					},
+					{
+						"id": "u5_p4",
+						"type": "learn",
+						"title_fa": "a little (کمی، کافی) و little (خیلی کم) - با اسم غیرقابل شمارش",
+						"title_en": "",
+						"explanation": "a little یعنی مقداری کم اما کافی؛ little یعنی خیلی کم. هر دو با اسم غیرقابل شمارش می‌آیند.",
+						"cards": [
+							{
+								"en": "There is a little bread left.",
+								"fa": "کمی نان مانده است (کافیه)."
+							},
+							{
+								"en": "There is little hope.",
+								"fa": "امید خیلی کمی هست."
+							}
+						],
+						"highlight_word": "a little"
+					},
+					{
+						"id": "u5_p5",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (خیلی کم، نگران‌کننده): We have ___ time to finish this.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (خیلی کم، نگران‌کننده): We have ___ time to finish this.",
+								"options": [
+									"a little",
+									"little"
+								],
+								"correct": 1,
+								"hint_fa": "little یعنی خیلی کم و ناکافی.",
+								"explanation_fa": "little یعنی خیلی کم و ناکافی."
+							}
+						]
+					},
+					{
+						"id": "u5_p6",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (مقداری، کافی)",
+						"items": [
+							{
+								"text": "There is ___ milk in the fridge.",
+								"answers": [
+									"a little"
+								],
+								"hint_fa": "a little یعنی مقداری کافی.",
+								"explanation_fa": "a little یعنی مقداری کافی."
+							}
+						]
+					},
+					{
+						"id": "u5_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (مقداری، کافی): I have ___ money, so I can buy this.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (مقداری، کافی): I have ___ money, so I can buy this.",
+								"options": [
+									"a little",
+									"little"
+								],
+								"correct": 0,
+								"hint_fa": "a little یعنی کافی است.",
+								"explanation_fa": "a little یعنی کافی است."
+							}
+						]
+					},
+					{
+						"id": "u5_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (خیلی کم)",
+						"items": [
+							{
+								"text": "___ students passed the difficult exam.",
+								"answers": [
+									"Few"
+								],
+								"hint_fa": "few با اسم قابل شمارش جمع و برای خیلی کم به‌کار می‌رود.",
+								"explanation_fa": "few با اسم قابل شمارش جمع و برای خیلی کم به‌کار می‌رود."
+							}
+						]
+					},
+					{
+						"id": "u5_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'a few' is used with countable nouns and 'a little' with uncountable nouns.",
+								"answer": true,
+								"hint_fa": "درسته! این تفاوت اصلی این دو کلمه است.",
+								"explanation_fa": "درسته! این تفاوت اصلی این دو کلمه است."
+							}
+						]
+					},
+					{
+						"id": "u5_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "a few و few با اسم‌های قابل شمارش به کار می‌روند.",
+								"answer": true,
+								"hint_fa": "درسته! مثل a few friends.",
+								"explanation_fa": "درسته! مثل a few friends."
+							}
+						]
+					},
+					{
+						"id": "u5_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "a little و little با اسم‌های غیرقابل شمارش به کار می‌روند.",
+								"answer": true,
+								"hint_fa": "درسته! مثل a little bread.",
+								"explanation_fa": "درسته! مثل a little bread."
+							}
+						]
+					},
+					{
+						"id": "u5_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام گزینه معنای 'مقدار کم اما کافی' را می‌رساند؟",
+						"questions": [
+							{
+								"question": "کدام گزینه معنای 'مقدار کم اما کافی' را می‌رساند؟",
+								"options": [
+									"few",
+									"a few",
+									"no",
+									"none"
+								],
+								"correct": 1,
+								"hint_fa": "a few یعنی مقداری کم اما کافی، برخلاف few که منفی‌تر است.",
+								"explanation_fa": "a few یعنی مقداری کم اما کافی، برخلاف few که منفی‌تر است."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l1_u5",
+				"title_en": "",
+				"title_fa": "a few/few و a little/little",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u6_p1",
+						"type": "learn",
+						"title_fa": "واحدهای اندازه‌گیری برای اسم‌های غیرقابل شمارش",
+						"title_en": "",
+						"explanation": "برای شمردن اسم‌های غیرقابل شمارش از واحدهای اندازه‌گیری مثل a bottle of، a cup of، a glass of، a bag of استفاده می‌کنیم.",
+						"cards": [
+							{
+								"en": "a bottle of water",
+								"fa": "یک بطری آب"
+							},
+							{
+								"en": "a cup of tea",
+								"fa": "یک فنجان چای"
+							},
+							{
+								"en": "a bag of rice",
+								"fa": "یک کیسه برنج"
+							}
+						],
+						"highlight_word": "a bottle of"
+					},
+					{
+						"id": "u6_p2",
+						"type": "matching",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "اسم را به واحد اندازه‌گیری مناسب وصل کن",
+						"items": [
+							{
+								"left": "water",
+								"right": "a bottle of"
+							},
+							{
+								"left": "tea",
+								"right": "a cup of"
+							},
+							{
+								"left": "juice",
+								"right": "a glass of"
+							},
+							{
+								"left": "rice",
+								"right": "a bag of"
+							}
+						],
+						"hint_fa": "هر ماده‌ی غیرقابل شمارش واحد اندازه‌گیری مخصوص به خودش را دارد."
+					},
+					{
+						"id": "u6_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "I'd like a ___ of tea, please.",
+								"answers": [
+									"cup"
+								],
+								"hint_fa": "برای tea از cup استفاده می‌کنیم.",
+								"explanation_fa": "برای tea از cup استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u6_p4",
+						"type": "learn",
+						"title_fa": "واحدهای بیشتر: piece, slice, kilo, loaf",
+						"title_en": "",
+						"explanation": "برای چیزهای دیگر از واحدهایی مثل a piece of (تکه)، a slice of (برش)، a kilo of (کیلو)، a loaf of (قرص نان) استفاده می‌کنیم.",
+						"cards": [
+							{
+								"en": "a piece of cake",
+								"fa": "یک تکه کیک"
+							},
+							{
+								"en": "a slice of melon",
+								"fa": "یک برش خربزه"
+							},
+							{
+								"en": "a loaf of bread",
+								"fa": "یک قرص نان"
+							}
+						],
+						"highlight_word": "a slice of"
+					},
+					{
+						"id": "u6_p5",
+						"type": "matching",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "اسم را به واحد اندازه‌گیری مناسب وصل کن",
+						"items": [
+							{
+								"left": "cake",
+								"right": "a piece of"
+							},
+							{
+								"left": "melon",
+								"right": "a slice of"
+							},
+							{
+								"left": "meat",
+								"right": "a kilo of"
+							},
+							{
+								"left": "bread",
+								"right": "a loaf of"
+							}
+						],
+						"hint_fa": "هر ماده واحد اندازه‌گیری خاص خودش را دارد."
+					},
+					{
+						"id": "u6_p6",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'a loaf of bread' means one whole bread.",
+								"answer": true,
+								"hint_fa": "درسته! loaf یعنی یک قرص کامل نان.",
+								"explanation_fa": "درسته! loaf یعنی یک قرص کامل نان."
+							}
+						]
+					},
+					{
+						"id": "u6_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (کیلو): I bought two ___ of rice.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (کیلو): I bought two ___ of rice.",
+								"options": [
+									"kilos",
+									"kilo",
+									"piece",
+									"bag"
+								],
+								"correct": 0,
+								"hint_fa": "با عدد دو، kilo هم جمع می‌بندد: kilos.",
+								"explanation_fa": "با عدد دو، kilo هم جمع می‌بندد: kilos."
+							}
+						]
+					},
+					{
+						"id": "u6_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "Can I have a ___ of water?",
+								"answers": [
+									"bottle"
+								],
+								"hint_fa": "برای water از bottle استفاده می‌کنیم.",
+								"explanation_fa": "برای water از bottle استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u6_p9",
+						"type": "matching",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "اسم را به واحد اندازه‌گیری مناسب وصل کن",
+						"items": [
+							{
+								"left": "paper",
+								"right": "a piece of"
+							},
+							{
+								"left": "banana",
+								"right": "a slice of"
+							},
+							{
+								"left": "sugar",
+								"right": "a bag of"
+							},
+							{
+								"left": "coffee",
+								"right": "a cup of"
+							}
+						],
+						"hint_fa": "دقت کن کدام واحد با کدام ماده جور در می‌آید."
+					},
+					{
+						"id": "u6_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "برای شمردن اسم‌های غیرقابل شمارش از واحدهای اندازه‌گیری مثل a bottle of یا a cup of استفاده می‌کنیم.",
+								"answer": true,
+								"hint_fa": "درسته! این‌ها به ما کمک می‌کنند مقدار را بشماریم.",
+								"explanation_fa": "درسته! این‌ها به ما کمک می‌کنند مقدار را بشماریم."
+							}
+						]
+					},
+					{
+						"id": "u6_p11",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "واحد مناسب برای 'bread' کدام است؟",
+						"questions": [
+							{
+								"question": "واحد مناسب برای 'bread' کدام است؟",
+								"options": [
+									"a bottle of",
+									"a loaf of",
+									"a cup of",
+									"a glass of"
+								],
+								"correct": 1,
+								"hint_fa": "نان با واحد a loaf of شمرده می‌شود.",
+								"explanation_fa": "نان با واحد a loaf of شمرده می‌شود."
+							}
+						]
+					},
+					{
+						"id": "u6_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "واحد مناسب برای 'tea' کدام است؟",
+						"questions": [
+							{
+								"question": "واحد مناسب برای 'tea' کدام است؟",
+								"options": [
+									"a bag of",
+									"a cup of",
+									"a piece of",
+									"a kilo of"
+								],
+								"correct": 1,
+								"hint_fa": "چای با واحد a cup of شمرده می‌شود.",
+								"explanation_fa": "چای با واحد a cup of شمرده می‌شود."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l1_u6",
+				"title_en": "",
+				"title_fa": "واحدهای اندازه‌گیری (Measure Words)",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u7_p1",
+						"type": "learn",
+						"title_fa": "هر جمله‌ی ساده حداقل فاعل و فعل دارد",
+						"title_en": "",
+						"explanation": "فاعل کسی یا چیزی است که جمله درباره‌ی آن صحبت می‌کند؛ فعل کاری است که فاعل انجام می‌دهد یا حالتی که دارد.",
+						"cards": [
+							{
+								"en": "Mahan is sleeping.",
+								"fa": "ماهان خوابیده است."
+							},
+							{
+								"en": "The bird does not sing.",
+								"fa": "پرنده آواز نمی‌خواند."
+							}
+						],
+						"highlight_word": "Mahan"
+					},
+					{
+						"id": "u7_p2",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "فاعل جمله‌ی 'Mahan is sleeping' کدام است؟",
+						"questions": [
+							{
+								"question": "فاعل جمله‌ی 'Mahan is sleeping' کدام است؟",
+								"options": [
+									"Mahan",
+									"is",
+									"sleeping",
+									"هیچ‌کدام"
+								],
+								"correct": 0,
+								"hint_fa": "فاعل کسی است که جمله درباره‌ی او صحبت می‌کند: Mahan.",
+								"explanation_fa": "فاعل کسی است که جمله درباره‌ی او صحبت می‌کند: Mahan."
+							}
+						]
+					},
+					{
+						"id": "u7_p3",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "Every simple sentence must have at least a subject and a verb.",
+								"answer": true,
+								"hint_fa": "درسته! این تعریف اصلی جمله‌ی ساده است.",
+								"explanation_fa": "درسته! این تعریف اصلی جمله‌ی ساده است."
+							}
+						]
+					},
+					{
+						"id": "u7_p4",
+						"type": "learn",
+						"title_fa": "جمله‌ی ساده می‌تواند مفعول هم داشته باشد",
+						"title_en": "",
+						"explanation": "مفعول اسمی است که عمل فعل روی آن انجام می‌شود. برای پیدا کردن مفعول از خودمان می‌پرسیم 'چه کسی' یا 'چه چیزی' عمل را دریافت می‌کند.",
+						"cards": [
+							{
+								"en": "The students are drinking milk.",
+								"fa": "دانش‌آموزان دارند شیر می‌خورند."
+							},
+							{
+								"en": "Mahdi visited his doctor.",
+								"fa": "مهدی به دکترش سر زد."
+							}
+						],
+						"highlight_word": "milk"
+					},
+					{
+						"id": "u7_p5",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "مفعول جمله‌ی 'Mina speaks English' کدام است؟",
+						"questions": [
+							{
+								"question": "مفعول جمله‌ی 'Mina speaks English' کدام است؟",
+								"options": [
+									"Mina",
+									"speaks",
+									"English",
+									"هیچ‌کدام"
+								],
+								"correct": 2,
+								"hint_fa": "مفعول چیزی است که فعل روی آن انجام می‌شود: English.",
+								"explanation_fa": "مفعول چیزی است که فعل روی آن انجام می‌شود: English."
+							}
+						]
+					},
+					{
+						"id": "u7_p6",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "In 'Ali is a smart student', there is no object.",
+								"answer": true,
+								"hint_fa": "درسته! این جمله فاعل و فعل و مکمل دارد، نه مفعول.",
+								"explanation_fa": "درسته! این جمله فاعل و فعل و مکمل دارد، نه مفعول."
+							}
+						]
+					},
+					{
+						"id": "u7_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "فاعل جمله‌ی 'The apple fell down' کدام است؟",
+						"questions": [
+							{
+								"question": "فاعل جمله‌ی 'The apple fell down' کدام است؟",
+								"options": [
+									"The apple",
+									"fell",
+									"down",
+									"هیچ‌کدام"
+								],
+								"correct": 0,
+								"hint_fa": "فاعل چیزی است که جمله درباره‌ی آن صحبت می‌کند: The apple.",
+								"explanation_fa": "فاعل چیزی است که جمله درباره‌ی آن صحبت می‌کند: The apple."
+							}
+						]
+					},
+					{
+						"id": "u7_p8",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "A simple sentence can also have additional information like time or place.",
+								"answer": true,
+								"hint_fa": "درسته! مثل 'Ali will have an exam next week' که 'next week' اطلاعات اضافه است.",
+								"explanation_fa": "درسته! مثل 'Ali will have an exam next week' که 'next week' اطلاعات اضافه است."
+							}
+						]
+					},
+					{
+						"id": "u7_p9",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "مفعول جمله‌ی 'Children should not eat junk food' کدام است؟",
+						"questions": [
+							{
+								"question": "مفعول جمله‌ی 'Children should not eat junk food' کدام است؟",
+								"options": [
+									"Children",
+									"should not eat",
+									"junk food",
+									"هیچ‌کدام"
+								],
+								"correct": 2,
+								"hint_fa": "مفعول چیزی است که عمل خوردن روی آن انجام می‌شود: junk food.",
+								"explanation_fa": "مفعول چیزی است که عمل خوردن روی آن انجام می‌شود: junk food."
+							}
+						]
+					},
+					{
+						"id": "u7_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "هر جمله‌ی ساده حداقل باید یک فاعل و یک فعل داشته باشد.",
+								"answer": true,
+								"hint_fa": "درسته! این تعریف اصلی جمله‌ی ساده است.",
+								"explanation_fa": "درسته! این تعریف اصلی جمله‌ی ساده است."
+							}
+						]
+					},
+					{
+						"id": "u7_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "مفعول در هر جمله‌ای اجباری است.",
+								"answer": false,
+								"hint_fa": "برخی جمله‌ها فقط فاعل و فعل دارند و مفعول ندارند.",
+								"explanation_fa": "برخی جمله‌ها فقط فاعل و فعل دارند و مفعول ندارند."
+							}
+						]
+					},
+					{
+						"id": "u7_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "در جمله‌ی 'Mahdi visited his doctor'، فاعل کدام است؟",
+						"questions": [
+							{
+								"question": "در جمله‌ی 'Mahdi visited his doctor'، فاعل کدام است؟",
+								"options": [
+									"Mahdi",
+									"visited",
+									"his doctor",
+									"هیچ‌کدام"
+								],
+								"correct": 0,
+								"hint_fa": "فاعل کسی است که کار را انجام می‌دهد: Mahdi.",
+								"explanation_fa": "فاعل کسی است که کار را انجام می‌دهد: Mahdi."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l1_u7",
+				"title_en": "",
+				"title_fa": "جمله‌ی ساده (Simple Sentence)",
+				"type": "group"
+			}
+		],
+		"xp_per_unit": 10
+	}
+}

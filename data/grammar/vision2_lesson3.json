@@ -1,0 +1,1556 @@
+{
+	"lesson": {
+		"_group_note": "Each source unit becomes a 'group' unit whose 'activities' are its pages converted to learn/exercise activities. GrammarLesson plays them in sequence.",
+		"book": "Vision 2",
+		"icon": "🎭",
+		"id": "vision2_lesson3_conditional_type_i",
+		"lesson_number": 3,
+		"source": "Vision 2 - Lesson 3 (Art and Culture)",
+		"theme_color": "#A855F7",
+		"title_en": "Conditional Type I",
+		"title_fa": "جمله شرطی نوع اول",
+		"units": [
+			{
+				"activities": [
+					{
+						"id": "u1_p1",
+						"type": "learn",
+						"title_fa": "If + حال ساده، ... will + فعل ساده",
+						"title_en": "",
+						"explanation": "برای بیان یک شرط واقعی و نتیجه‌ی احتمالی آن در آینده، از If + فعل حال ساده در جمله‌ی شرط و will + فعل ساده در جمله‌ی نتیجه استفاده می‌کنیم.",
+						"cards": [
+							{
+								"en": "If you study hard, you will pass the exams.",
+								"fa": "اگر سخت درس بخوانی، در امتحانات قبول می‌شوی."
+							},
+							{
+								"en": "If my friends come, I will become happy.",
+								"fa": "اگر دوستانم بیایند، خوشحال می‌شوم."
+							}
+						],
+						"highlight_word": "If...will"
+					},
+					{
+						"id": "u1_p2",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "If you study hard, you ___ pass the exams.",
+								"answers": [
+									"will"
+								],
+								"hint_fa": "در جمله‌ی نتیجه از will استفاده می‌کنیم.",
+								"explanation_fa": "در جمله‌ی نتیجه از will استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u1_p3",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: If Reza goes to Rey, he ___ visit the bazaar.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: If Reza goes to Rey, he ___ visit the bazaar.",
+								"options": [
+									"will",
+									"would",
+									"is",
+									"was"
+								],
+								"correct": 0,
+								"hint_fa": "جمله‌ی نتیجه با will ساخته می‌شود.",
+								"explanation_fa": "جمله‌ی نتیجه با will ساخته می‌شود."
+							}
+						]
+					},
+					{
+						"id": "u1_p4",
+						"type": "learn",
+						"title_fa": "فعل بعد از if همیشه به شکل حال ساده است",
+						"title_en": "",
+						"explanation": "در جمله‌ی شرط (بعد از if)، فعل به شکل حال ساده می‌آید، نه آینده.",
+						"cards": [
+							{
+								"en": "If my friends come, I will become happy.",
+								"fa": "اگر دوستانم بیایند (نه will come)، خوشحال می‌شوم."
+							}
+						],
+						"highlight_word": "come"
+					},
+					{
+						"id": "u1_p5",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'If my friends will come, I will become happy' is correct.",
+								"answer": false,
+								"hint_fa": "بعد از if از حال ساده استفاده می‌شود، نه will.",
+								"explanation_fa": "بعد از if از حال ساده استفاده می‌شود، نه will."
+							}
+						]
+					},
+					{
+						"id": "u1_p6",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (answer)",
+						"items": [
+							{
+								"text": "If Maryam ___ the question correctly, she will get a prize.",
+								"answers": [
+									"answers"
+								],
+								"hint_fa": "بعد از if فعل حال ساده می‌آید و با فاعل سوم‌شخص s می‌گیرد: answers.",
+								"explanation_fa": "بعد از if فعل حال ساده می‌آید و با فاعل سوم‌شخص s می‌گیرد: answers."
+							}
+						]
+					},
+					{
+						"id": "u1_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: I'll phone you if I ___ time.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: I'll phone you if I ___ time.",
+								"options": [
+									"have",
+									"will have",
+									"had"
+								],
+								"correct": 0,
+								"hint_fa": "بعد از if فعل حال ساده می‌آید: have.",
+								"explanation_fa": "بعد از if فعل حال ساده می‌آید: have."
+							}
+						]
+					},
+					{
+						"id": "u1_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (jump)",
+						"items": [
+							{
+								"text": "You'll hurt yourself if you ___ into the river.",
+								"answers": [
+									"jump"
+								],
+								"hint_fa": "بعد از if فعل حال ساده می‌آید: jump.",
+								"explanation_fa": "بعد از if فعل حال ساده می‌آید: jump."
+							}
+						]
+					},
+					{
+						"id": "u1_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "The verb after 'if' is always in the simple present in Conditional Type I.",
+								"answer": true,
+								"hint_fa": "درسته! این قانون اصلی شرطی نوع اول است.",
+								"explanation_fa": "درسته! این قانون اصلی شرطی نوع اول است."
+							}
+						]
+					},
+					{
+						"id": "u1_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "در جمله‌ی شرطی نوع اول، فعل بعد از if همیشه به شکل حال ساده است.",
+								"answer": true,
+								"hint_fa": "درسته! هرگز بعد از if از will استفاده نمی‌کنیم.",
+								"explanation_fa": "درسته! هرگز بعد از if از will استفاده نمی‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u1_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "در جمله‌ی نتیجه (بخش اصلی جمله)، از will + فعل ساده استفاده می‌کنیم.",
+								"answer": true,
+								"hint_fa": "درسته! مثل: you will pass the exams.",
+								"explanation_fa": "درسته! مثل: you will pass the exams."
+							}
+						]
+					},
+					{
+						"id": "u1_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام جمله درست است؟",
+						"questions": [
+							{
+								"question": "کدام جمله درست است؟",
+								"options": [
+									"If it rains, I will stay home.",
+									"If it will rain, I will stay home.",
+									"If it rains, I stay home tomorrow.",
+									"If it rain, I will stay home."
+								],
+								"correct": 0,
+								"hint_fa": "بعد از if حال ساده و در جمله‌ی نتیجه will می‌آید.",
+								"explanation_fa": "بعد از if حال ساده و در جمله‌ی نتیجه will می‌آید."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l3_u1",
+				"title_en": "",
+				"title_fa": "شرطی نوع اول: ساختار پایه",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u2_p1",
+						"type": "learn",
+						"title_fa": "جمله‌ی نتیجه می‌تواند قبل از if بیاید",
+						"title_en": "",
+						"explanation": "می‌توانیم ترتیب دو بخش جمله‌ی شرطی را عوض کنیم؛ در این حالت وقتی جمله‌ی نتیجه اول بیاید، دیگر نیازی به کاما نیست.",
+						"cards": [
+							{
+								"en": "I'll phone you if I have time.",
+								"fa": "بهت زنگ می‌زنم اگر وقت داشته باشم."
+							},
+							{
+								"en": "You'll hurt yourself if you jump into the river.",
+								"fa": "اگر داخل رودخانه بپری، صدمه می‌بینی."
+							}
+						],
+						"highlight_word": "if I have time"
+					},
+					{
+						"id": "u2_p2",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "A comma is needed when the result clause comes first, like 'I'll phone you if I have time'.",
+								"answer": false,
+								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
+							}
+						]
+					},
+					{
+						"id": "u2_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (answer)",
+						"items": [
+							{
+								"text": "Maryam will get a prize if she ___ the question correctly.",
+								"answers": [
+									"answers"
+								],
+								"hint_fa": "بعد از if فعل حال ساده می‌آید: answers.",
+								"explanation_fa": "بعد از if فعل حال ساده می‌آید: answers."
+							}
+						]
+					},
+					{
+						"id": "u2_p4",
+						"type": "learn",
+						"title_fa": "کاما فقط وقتی لازم است که جمله‌ی if اول بیاید",
+						"title_en": "",
+						"explanation": "اگر جمله‌ی شرطی با if شروع شود، بعد از آن کاما می‌آید. اگر جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+						"cards": [
+							{
+								"en": "If you study hard, you will pass the exams.",
+								"fa": "(با کاما)"
+							},
+							{
+								"en": "You will pass the exams if you study hard.",
+								"fa": "(بدون کاما)"
+							}
+						],
+						"highlight_word": "comma"
+					},
+					{
+						"id": "u2_p5",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'If you study hard you will pass the exams' needs a comma after 'hard'.",
+								"answer": true,
+								"hint_fa": "چون جمله با if شروع شده، بعد از قسمت شرط کاما لازم است.",
+								"explanation_fa": "چون جمله با if شروع شده، بعد از قسمت شرط کاما لازم است."
+							}
+						]
+					},
+					{
+						"id": "u2_p6",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام جمله نیازی به کاما ندارد؟",
+						"questions": [
+							{
+								"question": "کدام جمله نیازی به کاما ندارد؟",
+								"options": [
+									"If it rains, we will stay home.",
+									"We will stay home if it rains."
+								],
+								"correct": 1,
+								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
+							}
+						]
+					},
+					{
+						"id": "u2_p7",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'You will hurt yourself, if you jump into the river' has correct comma usage.",
+								"answer": false,
+								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
+							}
+						]
+					},
+					{
+						"id": "u2_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (come)",
+						"items": [
+							{
+								"text": "I will become happy if my friends ___.",
+								"answers": [
+									"come"
+								],
+								"hint_fa": "بعد از if فعل حال ساده می‌آید: come.",
+								"explanation_fa": "بعد از if فعل حال ساده می‌آید: come."
+							}
+						]
+					},
+					{
+						"id": "u2_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "Both orders (if-clause first or result-clause first) have the same meaning.",
+								"answer": true,
+								"hint_fa": "درسته! فقط ترتیب و کاما فرق می‌کند، نه معنا.",
+								"explanation_fa": "درسته! فقط ترتیب و کاما فرق می‌کند، نه معنا."
+							}
+						]
+					},
+					{
+						"id": "u2_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "جمله‌ی شرطی می‌تواند با if شروع شود یا با جمله‌ی نتیجه.",
+								"answer": true,
+								"hint_fa": "درسته! هر دو ترتیب درست است.",
+								"explanation_fa": "درسته! هر دو ترتیب درست است."
+							}
+						]
+					},
+					{
+						"id": "u2_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "وقتی جمله با if شروع می‌شود، بعد از آن کاما لازم است.",
+								"answer": true,
+								"hint_fa": "درسته! مثل: If you study hard, you will pass.",
+								"explanation_fa": "درسته! مثل: If you study hard, you will pass."
+							}
+						]
+					},
+					{
+						"id": "u2_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام جمله از نظر نگارشی درست است؟",
+						"questions": [
+							{
+								"question": "کدام جمله از نظر نگارشی درست است؟",
+								"options": [
+									"You will pass the exams, if you study hard.",
+									"You will pass the exams if you study hard.",
+									"If you study hard you will pass, the exams.",
+									"If, you study hard, you will pass the exams."
+								],
+								"correct": 1,
+								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l3_u2",
+				"title_en": "",
+				"title_fa": "ترتیب معکوس جمله‌ی شرطی",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u3_p1",
+						"type": "learn",
+						"title_fa": "صفت‌هایی که از قسمت سوم فعل ساخته می‌شوند",
+						"title_en": "",
+						"explanation": "بسیاری از صفت‌هایی که احساس یک فرد را نشان می‌دهند، از قسمت سوم فعل ساخته می‌شوند، مثل bored، excited، confused، depressed.",
+						"cards": [
+							{
+								"en": "Amir is bored with his present job.",
+								"fa": "امیر از شغل فعلی‌اش خسته است."
+							},
+							{
+								"en": "I'm so excited that we're going to Yazd.",
+								"fa": "خیلی هیجان‌زده‌ام که داریم به یزد می‌رویم."
+							}
+						],
+						"highlight_word": "bored"
+					},
+					{
+						"id": "u3_p2",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام کلمه یک احساس را نشان می‌دهد؟",
+						"questions": [
+							{
+								"question": "کدام کلمه یک احساس را نشان می‌دهد؟",
+								"options": [
+									"bore",
+									"bored",
+									"boring",
+									"to bore"
+								],
+								"correct": 1,
+								"hint_fa": "bored شکل صفتی احساس خسته‌بودن است.",
+								"explanation_fa": "bored شکل صفتی احساس خسته‌بودن است."
+							}
+						]
+					},
+					{
+						"id": "u3_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (confuse)",
+						"items": [
+							{
+								"text": "I'm totally ___.",
+								"answers": [
+									"confused"
+								],
+								"hint_fa": "confused شکل صفتی احساس گیج‌بودن است.",
+								"explanation_fa": "confused شکل صفتی احساس گیج‌بودن است."
+							}
+						]
+					},
+					{
+						"id": "u3_p4",
+						"type": "learn",
+						"title_fa": "این صفت‌ها معمولاً بعد از فعل be یا get می‌آیند",
+						"title_en": "",
+						"explanation": "صفت‌های احساسی ساخته‌شده از قسمت سوم فعل معمولاً بعد از افعال be یا get می‌آیند.",
+						"cards": [
+							{
+								"en": "Mina got amused by the story.",
+								"fa": "مینا از داستان خوشش آمد."
+							},
+							{
+								"en": "He often gets depressed about his weight.",
+								"fa": "او اغلب درباره‌ی وزنش افسرده می‌شود."
+							}
+						],
+						"highlight_word": "got amused"
+					},
+					{
+						"id": "u3_p5",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: He often gets ___ about his weight.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: He often gets ___ about his weight.",
+								"options": [
+									"depress",
+									"depressed",
+									"depressing",
+									"to depress"
+								],
+								"correct": 1,
+								"hint_fa": "get + صفت احساسی: gets depressed.",
+								"explanation_fa": "get + صفت احساسی: gets depressed."
+							}
+						]
+					},
+					{
+						"id": "u3_p6",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'surprised' can describe how a person feels.",
+								"answer": true,
+								"hint_fa": "درسته! surprised یعنی احساس تعجب.",
+								"explanation_fa": "درسته! surprised یعنی احساس تعجب."
+							}
+						]
+					},
+					{
+						"id": "u3_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (frighten): I was ___ to death.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (frighten): I was ___ to death.",
+								"options": [
+									"frighten",
+									"frightened",
+									"frightening",
+									"to frighten"
+								],
+								"correct": 1,
+								"hint_fa": "frightened شکل صفتی احساس ترس است.",
+								"explanation_fa": "frightened شکل صفتی احساس ترس است."
+							}
+						]
+					},
+					{
+						"id": "u3_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (surprise)",
+						"items": [
+							{
+								"text": "They were greatly ___ at the news.",
+								"answers": [
+									"surprised"
+								],
+								"hint_fa": "surprised شکل صفتی احساس تعجب است.",
+								"explanation_fa": "surprised شکل صفتی احساس تعجب است."
+							}
+						]
+					},
+					{
+						"id": "u3_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'I'm tired of watching television' shows a feeling.",
+								"answer": true,
+								"hint_fa": "درسته! tired احساس خستگی را نشان می‌دهد.",
+								"explanation_fa": "درسته! tired احساس خستگی را نشان می‌دهد."
+							}
+						]
+					},
+					{
+						"id": "u3_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "بسیاری از صفت‌های احساسی از قسمت سوم فعل ساخته می‌شوند.",
+								"answer": true,
+								"hint_fa": "درسته! مثل bored، excited، confused.",
+								"explanation_fa": "درسته! مثل bored، excited، confused."
+							}
+						]
+					},
+					{
+						"id": "u3_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "این صفت‌ها معمولاً بعد از افعال be یا get می‌آیند.",
+								"answer": true,
+								"hint_fa": "درسته! مثل: I am bored. یا He gets depressed.",
+								"explanation_fa": "درسته! مثل: I am bored. یا He gets depressed."
+							}
+						]
+					},
+					{
+						"id": "u3_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام گزینه یک صفت احساسی درست است؟",
+						"questions": [
+							{
+								"question": "کدام گزینه یک صفت احساسی درست است؟",
+								"options": [
+									"excite",
+									"excited",
+									"exciting",
+									"to excite"
+								],
+								"correct": 1,
+								"hint_fa": "excited شکل صفتی احساس هیجان‌زدگی است.",
+								"explanation_fa": "excited شکل صفتی احساس هیجان‌زدگی است."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l3_u3",
+				"title_en": "",
+				"title_fa": "صفت‌های احساسی از قسمت سوم فعل",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u4_p1",
+						"type": "learn",
+						"title_fa": "هر صفت احساسی حرف اضافه‌ی خاص خودش را دارد",
+						"title_en": "",
+						"explanation": "صفت‌های احساسی معمولاً با حروف اضافه‌ی خاصی می‌آیند؛ مثلاً interested in، bored with، tired of، surprised at.",
+						"cards": [
+							{
+								"en": "I've always been interested in football.",
+								"fa": "همیشه به فوتبال علاقه‌مند بوده‌ام."
+							},
+							{
+								"en": "I'm tired of watching television.",
+								"fa": "از تماشای تلویزیون خسته‌ام."
+							}
+						],
+						"highlight_word": "interested in"
+					},
+					{
+						"id": "u4_p2",
+						"type": "matching",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "صفت را به حرف اضافه‌ی مناسب آن وصل کن",
+						"items": [
+							{
+								"left": "interested",
+								"right": "in"
+							},
+							{
+								"left": "bored",
+								"right": "with"
+							},
+							{
+								"left": "tired",
+								"right": "of"
+							},
+							{
+								"left": "surprised",
+								"right": "at"
+							}
+						],
+						"hint_fa": "هر صفت احساسی حرف اضافه‌ی ثابت خودش را دارد."
+					},
+					{
+						"id": "u4_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "I've always been interested ___ football.",
+								"answers": [
+									"in"
+								],
+								"hint_fa": "interested همیشه با in می‌آید.",
+								"explanation_fa": "interested همیشه با in می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u4_p4",
+						"type": "learn",
+						"title_fa": "چند حرف اضافه‌ی دیگر: about, to, that",
+						"title_en": "",
+						"explanation": "برخی صفت‌های احساسی با about، to یا حرف ربط that می‌آیند: depressed about، frightened to (death)، excited that.",
+						"cards": [
+							{
+								"en": "He often gets depressed about his weight.",
+								"fa": "او اغلب درباره‌ی وزنش افسرده می‌شود."
+							},
+							{
+								"en": "I'm so excited that we're going to Yazd.",
+								"fa": "خیلی هیجان‌زده‌ام که داریم به یزد می‌رویم."
+							}
+						],
+						"highlight_word": "depressed about"
+					},
+					{
+						"id": "u4_p5",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "He often gets depressed ___ his weight.",
+								"answers": [
+									"about"
+								],
+								"hint_fa": "depressed معمولاً با about می‌آید.",
+								"explanation_fa": "depressed معمولاً با about می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u4_p6",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: I'm so excited ___ we're going to Yazd.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: I'm so excited ___ we're going to Yazd.",
+								"options": [
+									"in",
+									"of",
+									"that",
+									"at"
+								],
+								"correct": 2,
+								"hint_fa": "excited می‌تواند با حرف ربط that بیاید.",
+								"explanation_fa": "excited می‌تواند با حرف ربط that بیاید."
+							}
+						]
+					},
+					{
+						"id": "u4_p7",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن",
+						"items": [
+							{
+								"text": "Amir is bored ___ his present job.",
+								"answers": [
+									"with"
+								],
+								"hint_fa": "bored معمولاً با with می‌آید.",
+								"explanation_fa": "bored معمولاً با with می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u4_p8",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن: They were greatly surprised ___ the news.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن: They were greatly surprised ___ the news.",
+								"options": [
+									"in",
+									"of",
+									"at",
+									"that"
+								],
+								"correct": 2,
+								"hint_fa": "surprised معمولاً با at می‌آید.",
+								"explanation_fa": "surprised معمولاً با at می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u4_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'interested' is usually followed by 'in'.",
+								"answer": true,
+								"hint_fa": "درسته! interested in است.",
+								"explanation_fa": "درسته! interested in است."
+							}
+						]
+					},
+					{
+						"id": "u4_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "هر صفت احساسی حرف اضافه‌ی خاص خودش را دارد.",
+								"answer": true,
+								"hint_fa": "درسته! باید حرف اضافه‌ی هر صفت را جداگانه یاد بگیریم.",
+								"explanation_fa": "درسته! باید حرف اضافه‌ی هر صفت را جداگانه یاد بگیریم."
+							}
+						]
+					},
+					{
+						"id": "u4_p11",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "حرف اضافه‌ی مناسب بعد از 'interested' کدام است؟",
+						"questions": [
+							{
+								"question": "حرف اضافه‌ی مناسب بعد از 'interested' کدام است؟",
+								"options": [
+									"at",
+									"in",
+									"of",
+									"with"
+								],
+								"correct": 1,
+								"hint_fa": "interested in",
+								"explanation_fa": "interested in"
+							}
+						]
+					},
+					{
+						"id": "u4_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "حرف اضافه‌ی مناسب بعد از 'tired' کدام است؟",
+						"questions": [
+							{
+								"question": "حرف اضافه‌ی مناسب بعد از 'tired' کدام است؟",
+								"options": [
+									"of",
+									"at",
+									"in",
+									"about"
+								],
+								"correct": 0,
+								"hint_fa": "tired of",
+								"explanation_fa": "tired of"
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l3_u4",
+				"title_en": "",
+				"title_fa": "حروف اضافه‌ی رایج با صفت‌های احساسی",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u5_p1",
+						"type": "learn",
+						"title_fa": "مصدر با to چیست؟",
+						"title_en": "",
+						"explanation": "مصدر با to شکل 'to + فعل ساده' است، مثل to study. می‌تواند به‌عنوان مفعول بعد از برخی افعال بیاید.",
+						"cards": [
+							{
+								"en": "I like to watch this movie.",
+								"fa": "دوست دارم این فیلم را ببینم."
+							},
+							{
+								"en": "She wanted to buy an Iranian handicraft.",
+								"fa": "او می‌خواست یک صنایع‌دستی ایرانی بخرد."
+							}
+						],
+						"highlight_word": "to watch"
+					},
+					{
+						"id": "u5_p2",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (watch): I like ___ this movie.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (watch): I like ___ this movie.",
+								"options": [
+									"watch",
+									"watching",
+									"to watch",
+									"watched"
+								],
+								"correct": 2,
+								"hint_fa": "بعد از like می‌توان از مصدر با to استفاده کرد: to watch.",
+								"explanation_fa": "بعد از like می‌توان از مصدر با to استفاده کرد: to watch."
+							}
+						]
+					},
+					{
+						"id": "u5_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (buy)",
+						"items": [
+							{
+								"text": "She wanted ___ an Iranian handicraft.",
+								"answers": [
+									"to buy"
+								],
+								"hint_fa": "بعد از want از مصدر با to استفاده می‌کنیم: to buy.",
+								"explanation_fa": "بعد از want از مصدر با to استفاده می‌کنیم: to buy."
+							}
+						]
+					},
+					{
+						"id": "u5_p4",
+						"type": "learn",
+						"title_fa": "بعد از برخی افعال خاص، مصدر با to می‌آید",
+						"title_en": "",
+						"explanation": "افعالی مثل choose، decide، want، promise، forget، wait، expect، remember، try، attempt، agree، learn معمولاً با مصدر با to همراه هستند.",
+						"cards": [
+							{
+								"en": "I have decided to learn Spanish.",
+								"fa": "تصمیم گرفته‌ام اسپانیایی یاد بگیرم."
+							}
+						],
+						"highlight_word": "decided to learn"
+					},
+					{
+						"id": "u5_p5",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (learn): I have decided ___ Spanish.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (learn): I have decided ___ Spanish.",
+								"options": [
+									"learn",
+									"learning",
+									"to learn",
+									"learned"
+								],
+								"correct": 2,
+								"hint_fa": "بعد از decide از مصدر با to استفاده می‌کنیم: to learn.",
+								"explanation_fa": "بعد از decide از مصدر با to استفاده می‌کنیم: to learn."
+							}
+						]
+					},
+					{
+						"id": "u5_p6",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (turn off)",
+						"items": [
+							{
+								"text": "Remember ___ the lights.",
+								"answers": [
+									"to turn off"
+								],
+								"hint_fa": "بعد از remember از مصدر با to استفاده می‌کنیم.",
+								"explanation_fa": "بعد از remember از مصدر با to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u5_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (do): I have decided ___ my homework first.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (do): I have decided ___ my homework first.",
+								"options": [
+									"do",
+									"doing",
+									"to do",
+									"did"
+								],
+								"correct": 2,
+								"hint_fa": "بعد از decide مصدر با to می‌آید.",
+								"explanation_fa": "بعد از decide مصدر با to می‌آید."
+							}
+						]
+					},
+					{
+						"id": "u5_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (study)",
+						"items": [
+							{
+								"text": "Ali promised ___ hard.",
+								"answers": [
+									"to study"
+								],
+								"hint_fa": "بعد از promise از مصدر با to استفاده می‌کنیم.",
+								"explanation_fa": "بعد از promise از مصدر با to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u5_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'I ran fast to catch the bus' uses an infinitive.",
+								"answer": true,
+								"hint_fa": "درسته! 'to catch' مصدر با to است.",
+								"explanation_fa": "درسته! 'to catch' مصدر با to است."
+							}
+						]
+					},
+					{
+						"id": "u5_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "مصدر با to شکل 'to + فعل ساده' است و می‌تواند مفعول جمله باشد.",
+								"answer": true,
+								"hint_fa": "درسته! مثل to watch، to buy.",
+								"explanation_fa": "درسته! مثل to watch، to buy."
+							}
+						]
+					},
+					{
+						"id": "u5_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "بعد از افعالی مثل decide، want، promise معمولاً از مصدر با to استفاده می‌شود.",
+								"answer": true,
+								"hint_fa": "درسته! این افعال معمولاً با to + فعل ساده می‌آیند.",
+								"explanation_fa": "درسته! این افعال معمولاً با to + فعل ساده می‌آیند."
+							}
+						]
+					},
+					{
+						"id": "u5_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام جمله درست است؟",
+						"questions": [
+							{
+								"question": "کدام جمله درست است؟",
+								"options": [
+									"She wanted buy a gift.",
+									"She wanted buying a gift.",
+									"She wanted to buy a gift.",
+									"She wanted bought a gift."
+								],
+								"correct": 2,
+								"hint_fa": "بعد از want از مصدر با to استفاده می‌کنیم.",
+								"explanation_fa": "بعد از want از مصدر با to استفاده می‌کنیم."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l3_u5",
+				"title_en": "",
+				"title_fa": "مصدر با to به‌عنوان مفعول",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u6_p1",
+						"type": "learn",
+						"title_fa": "not + to + فعل",
+						"title_en": "",
+						"explanation": "برای منفی کردن مصدر با to، کلمه‌ی not را قبل از to می‌آوریم.",
+						"cards": [
+							{
+								"en": "I told the children not to make so much noise.",
+								"fa": "به بچه‌ها گفتم سروصدا نکنند."
+							},
+							{
+								"en": "My dad tries not to forget the phone numbers.",
+								"fa": "پدرم سعی می‌کند شماره‌تلفن‌ها را فراموش نکند."
+							}
+						],
+						"highlight_word": "not to make"
+					},
+					{
+						"id": "u6_p2",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی‌ها را پر کن",
+						"items": [
+							{
+								"text": "I told the children ___ ___ so much noise.",
+								"answers": [
+									"not to"
+								],
+								"hint_fa": "ترتیب درست: not + to + فعل.",
+								"explanation_fa": "ترتیب درست: not + to + فعل."
+							}
+						]
+					},
+					{
+						"id": "u6_p3",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (not forget): My dad tries ___ the phone numbers.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (not forget): My dad tries ___ the phone numbers.",
+								"options": [
+									"not to forget",
+									"to not forget",
+									"forget not",
+									"not forgetting"
+								],
+								"correct": 0,
+								"hint_fa": "ترتیب درست: not + to + فعل.",
+								"explanation_fa": "ترتیب درست: not + to + فعل."
+							}
+						]
+					},
+					{
+						"id": "u6_p4",
+						"type": "learn",
+						"title_fa": "not همیشه قبل از to می‌آید، نه بعد از آن",
+						"title_en": "",
+						"explanation": "ترتیب درست همیشه not + to + فعل است؛ هرگز to + not + فعل نمی‌گوییم.",
+						"cards": [
+							{
+								"en": "I told the children not to make so much noise.",
+								"fa": "(نه: to not make)"
+							}
+						],
+						"highlight_word": "not to"
+					},
+					{
+						"id": "u6_p5",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'to not make noise' is the correct order.",
+								"answer": false,
+								"hint_fa": "ترتیب درست: not to make، نه to not make.",
+								"explanation_fa": "ترتیب درست: not to make، نه to not make."
+							}
+						]
+					},
+					{
+						"id": "u6_p6",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی‌ها را پر کن (not/to)",
+						"items": [
+							{
+								"text": "He decided ___ ___ give up.",
+								"answers": [
+									"not to"
+								],
+								"hint_fa": "ترتیب درست: not + to + فعل.",
+								"explanation_fa": "ترتیب درست: not + to + فعل."
+							}
+						]
+					},
+					{
+						"id": "u6_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (not be): She asked me ___ late.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (not be): She asked me ___ late.",
+								"options": [
+									"not to be",
+									"to not be",
+									"be not to"
+								],
+								"correct": 0,
+								"hint_fa": "ترتیب درست: not to be.",
+								"explanation_fa": "ترتیب درست: not to be."
+							}
+						]
+					},
+					{
+						"id": "u6_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی‌ها را پر کن (not/to)",
+						"items": [
+							{
+								"text": "They promised ___ ___ leave early.",
+								"answers": [
+									"not to"
+								],
+								"hint_fa": "ترتیب درست: not + to + فعل.",
+								"explanation_fa": "ترتیب درست: not + to + فعل."
+							}
+						]
+					},
+					{
+						"id": "u6_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'not to' always comes before the base verb in a negative infinitive.",
+								"answer": true,
+								"hint_fa": "درسته! ترتیب همیشه not to + فعل است.",
+								"explanation_fa": "درسته! ترتیب همیشه not to + فعل است."
+							}
+						]
+					},
+					{
+						"id": "u6_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "برای منفی کردن مصدر با to، not را قبل از to می‌آوریم.",
+								"answer": true,
+								"hint_fa": "درسته! مثل not to make.",
+								"explanation_fa": "درسته! مثل not to make."
+							}
+						]
+					},
+					{
+						"id": "u6_p11",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "می‌توان گفت 'to not go' به‌جای 'not to go'.",
+								"answer": false,
+								"hint_fa": "ترتیب درست همیشه not to است، نه to not.",
+								"explanation_fa": "ترتیب درست همیشه not to است، نه to not."
+							}
+						]
+					},
+					{
+						"id": "u6_p12",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام جمله درست است؟",
+						"questions": [
+							{
+								"question": "کدام جمله درست است؟",
+								"options": [
+									"I told him to not worry.",
+									"I told him not to worry.",
+									"I told him worry not to.",
+									"I told him not worry to."
+								],
+								"correct": 1,
+								"hint_fa": "ترتیب درست: not to worry.",
+								"explanation_fa": "ترتیب درست: not to worry."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l3_u6",
+				"title_en": "",
+				"title_fa": "منفی کردن مصدر با to",
+				"type": "group"
+			},
+			{
+				"activities": [
+					{
+						"id": "u7_p1",
+						"type": "learn",
+						"title_fa": "بعد از برخی صفت‌ها، مصدر با to می‌آید",
+						"title_en": "",
+						"explanation": "بعد از صفت‌هایی مثل happy، sad، glad، surprised، careful، certain، ashamed، fortunate، lucky، shocked، sorry از مصدر با to استفاده می‌کنیم.",
+						"cards": [
+							{
+								"en": "She became happy to see her classmate after ten years.",
+								"fa": "او از دیدن هم‌کلاسی‌اش بعد از ده سال خوشحال شد."
+							},
+							{
+								"en": "Ali was really sad to leave us soon.",
+								"fa": "علی از اینکه به‌زودی ما را ترک می‌کرد ناراحت بود."
+							}
+						],
+						"highlight_word": "happy to see"
+					},
+					{
+						"id": "u7_p2",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (see): She became happy ___ her classmate.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (see): She became happy ___ her classmate.",
+								"options": [
+									"see",
+									"seeing",
+									"to see",
+									"saw"
+								],
+								"correct": 2,
+								"hint_fa": "بعد از happy از مصدر با to استفاده می‌کنیم: to see.",
+								"explanation_fa": "بعد از happy از مصدر با to استفاده می‌کنیم: to see."
+							}
+						]
+					},
+					{
+						"id": "u7_p3",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (leave)",
+						"items": [
+							{
+								"text": "Ali was really sad ___ us soon.",
+								"answers": [
+									"to leave"
+								],
+								"hint_fa": "بعد از sad از مصدر با to استفاده می‌کنیم.",
+								"explanation_fa": "بعد از sad از مصدر با to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u7_p4",
+						"type": "learn",
+						"title_fa": "چند صفت دیگر با همین ساختار",
+						"title_en": "",
+						"explanation": "صفت‌های دیگری مثل amazed، certain، glad، shocked، sorry، fortunate، lucky هم با مصدر با to می‌آیند.",
+						"cards": [
+							{
+								"en": "I was amazed to hear the news.",
+								"fa": "از شنیدن آن خبر شگفت‌زده شدم."
+							},
+							{
+								"en": "We are lucky to have such a good teacher.",
+								"fa": "خوش‌شانسیم که چنین معلم خوبی داریم."
+							}
+						],
+						"highlight_word": "lucky to have"
+					},
+					{
+						"id": "u7_p5",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (have): We are lucky ___ such a good teacher.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (have): We are lucky ___ such a good teacher.",
+								"options": [
+									"have",
+									"having",
+									"to have",
+									"had"
+								],
+								"correct": 2,
+								"hint_fa": "بعد از lucky از مصدر با to استفاده می‌کنیم.",
+								"explanation_fa": "بعد از lucky از مصدر با to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u7_p6",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "'I was amazed to hear the news' uses an infinitive after an adjective.",
+								"answer": true,
+								"hint_fa": "درسته! 'to hear' مصدر با to بعد از صفت amazed است.",
+								"explanation_fa": "درسته! 'to hear' مصدر با to بعد از صفت amazed است."
+							}
+						]
+					},
+					{
+						"id": "u7_p7",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را کامل کن (bother): I'm sorry ___ you.",
+						"questions": [
+							{
+								"question": "جای خالی را کامل کن (bother): I'm sorry ___ you.",
+								"options": [
+									"bother",
+									"bothering",
+									"to bother",
+									"bothered"
+								],
+								"correct": 2,
+								"hint_fa": "بعد از sorry از مصدر با to استفاده می‌کنیم.",
+								"explanation_fa": "بعد از sorry از مصدر با to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u7_p8",
+						"type": "fill_blank",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "جای خالی را پر کن (see)",
+						"items": [
+							{
+								"text": "He was shocked ___ the accident.",
+								"answers": [
+									"to see"
+								],
+								"hint_fa": "بعد از shocked از مصدر با to استفاده می‌کنیم.",
+								"explanation_fa": "بعد از shocked از مصدر با to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u7_p9",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "Adjectives like 'happy', 'sad', and 'glad' can be followed by an infinitive.",
+								"answer": true,
+								"hint_fa": "درسته! مثل happy to see، sad to leave.",
+								"explanation_fa": "درسته! مثل happy to see، sad to leave."
+							}
+						]
+					},
+					{
+						"id": "u7_p10",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "بعد از صفت‌هایی مثل happy، sad، glad، surprised از مصدر با to استفاده می‌کنیم.",
+								"answer": true,
+								"hint_fa": "درسته! مثل: happy to see.",
+								"explanation_fa": "درسته! مثل: happy to see."
+							}
+						]
+					},
+					{
+						"id": "u7_p11",
+						"type": "multiple_choice",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "کدام جمله درست است؟",
+						"questions": [
+							{
+								"question": "کدام جمله درست است؟",
+								"options": [
+									"She was happy see her friend.",
+									"She was happy seeing her friend.",
+									"She was happy to see her friend.",
+									"She was happy saw her friend."
+								],
+								"correct": 2,
+								"hint_fa": "بعد از happy از مصدر با to استفاده می‌کنیم.",
+								"explanation_fa": "بعد از happy از مصدر با to استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "u7_p12",
+						"type": "true_false",
+						"title_fa": "",
+						"title_en": "",
+						"instruction_fa": "درست یا غلط",
+						"items": [
+							{
+								"statement": "صفت 'lucky' هم می‌تواند با مصدر با to بیاید.",
+								"answer": true,
+								"hint_fa": "درسته! مثل: lucky to have.",
+								"explanation_fa": "درسته! مثل: lucky to have."
+							}
+						]
+					}
+				],
+				"activity_count": 12,
+				"id": "v2_l3_u7",
+				"title_en": "",
+				"title_fa": "مصدر با to بعد از صفت‌های خاص",
+				"type": "group"
+			}
+		],
+		"xp_per_unit": 10
+	}
+}

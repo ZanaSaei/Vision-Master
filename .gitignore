@@ -2,5 +2,6 @@
 .import/
 addons/
 export_presets.cfg
+build/
 
 *.translation
