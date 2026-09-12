@@ -14,12 +14,12 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttw17"]
 bg_color = Color(0.14509805, 0.3882353, 0.92156863, 0.39215687)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tg8v8"]
+bg_color = Color(0.14509805, 0.3882353, 0.92156863, 0.39215687)
+
 [sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
 font = ExtResource("3_t0aqf")
 font_size = 55
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tg8v8"]
-bg_color = Color(0.14509805, 0.3882353, 0.92156863, 0.39215687)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kaaem"]
 content_margin_top = 20.0
@@ -277,7 +277,6 @@ color = Color(0.972549, 0.98039216, 0.9882353, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 0.0
 offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("2_fdnt6")
@@ -285,7 +284,6 @@ theme_override_styles/panel = ExtResource("2_fdnt6")
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1640705547]
 layout_mode = 2
 theme_override_constants/separation = 11
-alignment = 0
 
 [node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=26320774]
 custom_minimum_size = Vector2(80, 80)

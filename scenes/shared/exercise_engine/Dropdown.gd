@@ -132,15 +132,21 @@ func _populate(wrap_w: float) -> void:
 		var is_sel := (i == selected)
 		var is_placeholder := (i == 0)
 		var display: String = ("✓  " + str(labels[i])) if is_sel else str(labels[i])
+		# Mixed Farsi/English dropdown items need bidi isolates + direction.
+		var face := GrammarTheme.bidi_fix(display)
+		var fa_dir := GrammarTheme.is_fa_dominant(display)
 
 		var row := Button.new()
 		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.custom_minimum_size.y = f.get_multiline_string_size(
-			display,
-			HORIZONTAL_ALIGNMENT_LEFT,
-			wrap_w,
-			_ITEM_FONT
-		).y + _PAD_V * 2
+		row.custom_minimum_size.y = maxf(
+			f.get_multiline_string_size(
+				face,
+				HORIZONTAL_ALIGNMENT_LEFT,
+				wrap_w,
+				_ITEM_FONT
+			).y + _PAD_V * 2,
+			76.0
+		)
 
 		var normal := StyleBoxFlat.new()
 		if is_sel:
@@ -163,11 +169,12 @@ func _populate(wrap_w: float) -> void:
 		row.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 
 		var lbl := Label.new()
-		lbl.text = display
+		lbl.text = face
 		lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		lbl.add_theme_font_size_override("font_size", _ITEM_FONT)
+		lbl.text_direction = Control.TEXT_DIRECTION_RTL if fa_dir else Control.TEXT_DIRECTION_LTR
 		var base_color: Color = preload("res://scenes/shared/exercise_engine/exercise_theme.gd")._c_text_dim() if is_placeholder else preload("res://scenes/shared/exercise_engine/exercise_theme.gd")._c_text()
 		lbl.add_theme_color_override("font_color", base_color)
 		if _font:
@@ -205,4 +212,7 @@ func _on_row_pressed(index: int) -> void:
 	item_selected.emit(index)
 
 func _refresh_face() -> void:
-	text = get_item_text(selected) + "   ▾"
+	var face := get_item_text(selected) + "   ▾"
+	# Bidi-safe face text so mixed Farsi/English items never scramble.
+	text = GrammarTheme.bidi_fix(face)
+	text_direction = Control.TEXT_DIRECTION_RTL if GrammarTheme.is_fa_dominant(face) else Control.TEXT_DIRECTION_LTR

@@ -1,0 +1,333 @@
+{
+	"lessons": [
+		{
+			"accent": "#EA580C",
+			"exam_exercises": [
+				{
+					"text": "Part 1 — Multiple Choice (۲۰ نمره — هر سؤال ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the best answer.",
+					"items": [
+						{
+							"answer": 1,
+							"options": [
+								"read",
+								"was read",
+								"reads",
+								"is read"
+							],
+							"question": "Dr. Gharib's textbook ______ by thousands of students."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"founded",
+								"was founded",
+								"founds",
+								"is found"
+							],
+							"question": "This center ______ by Dr. Gharib and his friend."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"is she",
+								"isn't she",
+								"does she",
+								"doesn't she"
+							],
+							"question": "She is a kind nurse, ______?"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"is",
+								"are",
+								"was",
+								"has"
+							],
+							"question": "Many children ______ treated in this hospital every year."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"did he",
+								"didn't he",
+								"does he",
+								"do he"
+							],
+							"question": "He didn't visit the museum, ______?"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"hasn't discovered",
+								"hasn't been discovered",
+								"wasn't discovered",
+								"didn't discover"
+							],
+							"question": "This medicine ______ (not/discover) yet."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"was he",
+								"wasn't he",
+								"is he",
+								"isn't he"
+							],
+							"question": "The old man was regarded as a great physician, ______?"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"is",
+								"are",
+								"was",
+								"has"
+							],
+							"question": "New medicines ______ made every year to help patients."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"has she",
+								"hasn't she",
+								"does she",
+								"doesn't she"
+							],
+							"question": "Sara has finished her studies, ______?"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"is",
+								"do",
+								"was",
+								"has"
+							],
+							"question": "The professor ______ respected by all his students."
+						}
+					],
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 2 — Change the Active Sentences to Passive (۱۵ نمره — هر جمله ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Change the Active Sentences to Passive",
+					"items": [
+						{
+							"answer": "Patients are treated with care (by doctors).",
+							"text": "Doctors treat patients with care. → ______________________________"
+						},
+						{
+							"answer": "The first Persian textbook on children's diseases was written by Dr. Gharib.",
+							"text": "Dr. Gharib wrote the first Persian textbook on children's diseases. → ______________________________"
+						},
+						{
+							"answer": "Kind physicians are respected by many people.",
+							"text": "Many people respect kind physicians. → ______________________________"
+						},
+						{
+							"answer": "The patient's temperature has been taken (by the nurse).",
+							"text": "The nurse has taken the patient's temperature. → ______________________________"
+						},
+						{
+							"answer": "A new medicine was discovered last year (by scientists).",
+							"text": "Scientists discovered a new medicine last year. → ______________________________"
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 3 — Complete with the Correct Tag Question (۱۵ نمره — هر سؤال ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Complete with the Correct Tag Question",
+					"items": [
+						{
+							"answer": "wasn't he",
+							"text": "Dr. Gharib was a generous man, ______?"
+						},
+						{
+							"answer": "didn't he",
+							"text": "He taught medicine to many students, ______?"
+						},
+						{
+							"answer": "is she",
+							"text": "She isn't a doctor, ______?"
+						},
+						{
+							"answer": "haven't they",
+							"text": "They have built a new hospital, ______?"
+						},
+						{
+							"answer": "won't she",
+							"text": "Your sister will become a nurse, ______?"
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره — هر جمله ۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Rewrite the sentence as instructed.",
+					"items": [
+						{
+							"answer": "This medical center was founded by a famous physician.",
+							"task": "Rewrite in the passive voice:",
+							"text": "A famous physician founded this medical center."
+						},
+						{
+							"answer": "Thousands of patients have been cured (by doctors).",
+							"task": "Rewrite in the passive voice, present perfect:",
+							"text": "Doctors have cured thousands of patients."
+						},
+						{
+							"answer": "wasn't he",
+							"task": "Add the correct tag question:",
+							"text": ""
+						}
+					],
+					"type": "transformation"
+				},
+				{
+					"text": "Part 5 — Reading and Choosing the Best Word (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Read the paragraph and choose the correct word.",
+					"items": [
+						{
+							"answer": 1,
+							"options": [
+								"is",
+								"was"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"is regarded",
+								"regarded"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"was written",
+								"wrote"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"taught",
+								"was taught"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"isn't he",
+								"is he"
+							],
+							"question": "Choose the correct word:"
+						}
+					],
+					"passage": "Dr. Gharib is/was a famous physician. He is regarded/regarded as a kind and generous man. The first Persian textbook on children's diseases was written/wrote by him. He taught/was taught medicine to thousands of students. He is a great person, isn't he/is he?",
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 6 — Matching (۱۰ نمره — هر مورد ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Match column A with column B.",
+					"items": [
+						{
+							"answer": "b) by Alexander Fleming.",
+							"options": [
+								"a) haven't they?",
+								"b) by Alexander Fleming.",
+								"c) isn't he?",
+								"d) by a generous physician.",
+								"e) have they?"
+							],
+							"text": "1. Penicillin was discovered"
+						},
+						{
+							"answer": "d) by a generous physician.",
+							"options": [
+								"a) haven't they?",
+								"b) by Alexander Fleming.",
+								"c) isn't he?",
+								"d) by a generous physician.",
+								"e) have they?"
+							],
+							"text": "2. This hospital was founded"
+						},
+						{
+							"answer": "c) isn't he?",
+							"options": [
+								"a) haven't they?",
+								"b) by Alexander Fleming.",
+								"c) isn't he?",
+								"d) by a generous physician.",
+								"e) have they?"
+							],
+							"text": "3. He is a kind doctor,"
+						},
+						{
+							"answer": "e) have they?",
+							"options": [
+								"a) haven't they?",
+								"b) by Alexander Fleming.",
+								"c) isn't he?",
+								"d) by a generous physician.",
+								"e) have they?"
+							],
+							"text": "4. They haven't visited the doctor,"
+						},
+						{
+							"answer": "a) haven't they?",
+							"options": [
+								"a) haven't they?",
+								"b) by Alexander Fleming.",
+								"c) isn't he?",
+								"d) by a generous physician.",
+								"e) have they?"
+							],
+							"text": "5. The students have learned a lot,"
+						}
+					],
+					"type": "matching"
+				},
+				{
+					"text": "Part 7 — Short Writing (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "In 3-4 complete sentences, write about a famous person you respect. Use at least one passive voice sentence and one tag question. ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________",
+					"items": [
+						{
+							"text": "In 3-4 complete sentences, write about a famous person you respect. Use at least one passive voice sentence and one tag question. ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________"
+						}
+					],
+					"type": "open_ended"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,341 @@
+{
+	"lessons": [
+		{
+			"accent": "#16A34A",
+			"exam_exercises": [
+				{
+					"text": "Part 1 — Multiple Choice (۲۰ نمره — هر سؤال ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the best answer.",
+					"items": [
+						{
+							"answer": 1,
+							"options": [
+								"can",
+								"can be",
+								"can being",
+								"is can"
+							],
+							"question": "Solar energy ______ used to heat water."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"must be",
+								"must",
+								"must being",
+								"is must"
+							],
+							"question": "This wind turbine ______ repaired next week."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"had used",
+								"used",
+								"have used",
+								"use"
+							],
+							"question": "Before scientists found clean energy, people ______ only fossil fuels."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"may be",
+								"may",
+								"may being",
+								"is may"
+							],
+							"question": "Dangerous gases ______ produced when we burn garbage."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"has",
+								"have",
+								"had",
+								"did"
+							],
+							"question": "She ______ never seen a wind farm before this trip."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"can",
+								"do",
+								"must",
+								"is"
+							],
+							"question": "Fossil fuels ______ not last forever."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"has",
+								"had",
+								"have",
+								"did"
+							],
+							"question": "When we reached the solar farm, the workers ______ already left."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"will be",
+								"will",
+								"will being",
+								"is will"
+							],
+							"question": "New solar panels ______ installed on our school roof."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"has",
+								"have",
+								"had",
+								"did"
+							],
+							"question": "He ______ studied renewable energy before he became an engineer."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"can be",
+								"can",
+								"can being",
+								"is can"
+							],
+							"question": "Waste ______ changed into useful energy in some factories."
+						}
+					],
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 2 — Change the Active Sentences to Passive with Modals (۱۵ نمره — هر جمله ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Change the Active Sentences to Passive with Modals",
+					"items": [
+						{
+							"answer": "Renewable resources should be protected.",
+							"text": "We should protect renewable resources. → ______________________________"
+						},
+						{
+							"answer": "Wind can be converted into electricity.",
+							"text": "Engineers can convert wind into electricity. → ______________________________"
+						},
+						{
+							"answer": "Energy must be saved every day.",
+							"text": "People must save energy every day. → ______________________________"
+						},
+						{
+							"answer": "New clean energy sources may be discovered.",
+							"text": "Scientists may discover new clean energy sources. → ______________________________"
+						},
+						{
+							"answer": "The use of fossil fuels should be reduced.",
+							"text": "We should reduce the use of fossil fuels. → ______________________________"
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 3 — Choose the Correct Verb Form: Simple Past or Past Perfect (۱۵ نمره — هر سؤال ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the Correct Verb Form: Simple Past or Past Perfect",
+					"items": [
+						{
+							"answer": "had learned",
+							"text": "Before we visited the wind farm, we ______ (learn/had learned) about wind energy."
+						},
+						{
+							"answer": "had already risen",
+							"text": "When the workers arrived, the sun ______ (rose/had already risen)."
+						},
+						{
+							"answer": "had installed",
+							"text": "She ______ (installed/had installed) solar panels before she moved to that house."
+						},
+						{
+							"answer": "stopped",
+							"text": "After the storm ______ (stopped/had stopped), we went outside."
+						},
+						{
+							"answer": "had never",
+							"text": "I ______ (never/had never) used solar energy before last year."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره — هر جمله ۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Rewrite the sentence as instructed.",
+					"items": [
+						{
+							"answer": "Energy must be saved for future generations.",
+							"task": "Rewrite in the passive voice with a modal:",
+							"text": "We must save energy for future generations."
+						},
+						{
+							"answer": "Before we discovered clean energy, we had used only fossil fuels.",
+							"task": "Combine using \"before\":",
+							"text": "We discovered clean energy. Before that, we used only fossil fuels."
+						},
+						{
+							"answer": "She had never seen a solar panel before.",
+							"task": "Correct the mistake:",
+							"text": "She had never see a solar panel before."
+						}
+					],
+					"type": "transformation"
+				},
+				{
+					"text": "Part 5 — Reading and Choosing the Best Word (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Read the paragraph and choose the correct word.",
+					"items": [
+						{
+							"answer": 1,
+							"options": [
+								"should",
+								"should be"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"discovered",
+								"had discovered"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"used",
+								"had used"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"can",
+								"can be"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"may",
+								"may be"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"must",
+								"must be"
+							],
+							"question": "Choose the correct word:"
+						}
+					],
+					"passage": "Clean energy should/should be used more often. Before scientists discovered/had discovered solar power, people used/had used only fossil fuels for many years. Wind can/can be changed into electricity by wind turbines. Dangerous gases may/may be produced when we burn garbage, so we must/must be find better ways to make energy.",
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 6 — Matching (۱۰ نمره — هر مورد ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Match column A with column B.",
+					"items": [
+						{
+							"answer": "b) should be used more.",
+							"options": [
+								"a) had already left.",
+								"b) should be used more.",
+								"c) must be paid before leaving.",
+								"d) can be changed into electricity.",
+								"e) a wind turbine before that day."
+							],
+							"text": "1. Clean energy"
+						},
+						{
+							"answer": "d) can be changed into electricity.",
+							"options": [
+								"a) had already left.",
+								"b) should be used more.",
+								"c) must be paid before leaving.",
+								"d) can be changed into electricity.",
+								"e) a wind turbine before that day."
+							],
+							"text": "2. Wind"
+						},
+						{
+							"answer": "a) had already left.",
+							"options": [
+								"a) had already left.",
+								"b) should be used more.",
+								"c) must be paid before leaving.",
+								"d) can be changed into electricity.",
+								"e) a wind turbine before that day."
+							],
+							"text": "3. Before we arrived, the workers"
+						},
+						{
+							"answer": "e) a wind turbine before that day.",
+							"options": [
+								"a) had already left.",
+								"b) should be used more.",
+								"c) must be paid before leaving.",
+								"d) can be changed into electricity.",
+								"e) a wind turbine before that day."
+							],
+							"text": "4. She had never seen"
+						},
+						{
+							"answer": "c) must be paid before leaving.",
+							"options": [
+								"a) had already left.",
+								"b) should be used more.",
+								"c) must be paid before leaving.",
+								"d) can be changed into electricity.",
+								"e) a wind turbine before that day."
+							],
+							"text": "5. The bill"
+						}
+					],
+					"type": "matching"
+				},
+				{
+					"text": "Part 7 — Short Writing (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "In 3-4 complete sentences, write about renewable energy and something you had done or learned before you studied this lesson. Use at least one passive-with-modal sentence and one past perfect sentence. ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________",
+					"items": [
+						{
+							"text": "In 3-4 complete sentences, write about renewable energy and something you had done or learned before you studied this lesson. Use at least one passive-with-modal sentence and one past perfect sentence. ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________"
+						}
+					],
+					"type": "open_ended"
+				}
+			]
+		}
+	]
+}

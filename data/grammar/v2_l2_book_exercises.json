@@ -1,0 +1,70 @@
+ 
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": { "en": "Circle the correct answer.", "fa": "گزینهٔ درست را دور بزنید." },
+				"items": [
+					{
+						"question": { "en": "I ___ that movie before.", "fa": "من قبلاً ___ آن فیلم." },
+						"options": [
+							{ "en": "have watched", "fa": "دیده‌ام" },
+							{ "en": "watched", "fa": "دیدم" }
+						],
+						"answer": 0,
+						"explanation": { "en": "With 'before' (an unfinished time), use the present perfect: have watched.", "fa": "با کلمهٔ «before» (زمان ناتمام) از ماضی نقلی استفاده می‌کنیم: have watched." }
+					},
+					{
+						"question": { "en": "He ___ her since 2015.", "fa": "او از سال ۲۰۱۵ ___ او را می‌شناسد." },
+						"options": [
+							{ "en": "has known", "fa": "شناخته است" },
+							{ "en": "knows", "fa": "می‌شناسد (حال ساده)" }
+						],
+						"answer": 0,
+						"explanation": { "en": "With 'since + a point in time', use the present perfect: has known.", "fa": "با «since + نقطهٔ زمانی» از ماضی نقلی استفاده می‌کنیم: has known." }
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": { "en": "True or False?", "fa": "درست یا نادرست؟" },
+				"items": [
+					{
+						"statement": { "en": "We use 'for' with a point in time, like 'for 2008'.", "fa": "با نقطهٔ زمانی از «for» استفاده می‌کنیم، مثل «for 2008»." },
+						"answer": false,
+						"correction": { "en": "We use 'since' with a point in time (since 2008) and 'for' with a period (for 20 years).", "fa": "با نقطهٔ زمانی از «since» (since 2008) و با بازهٔ زمانی از «for» (for 20 years) استفاده می‌کنیم." }
+					},
+					{
+						"statement": { "en": "'Yet' is used in negative sentences and questions.", "fa": "«yet» در جمله‌های منفی و پرسشی به کار می‌رود." },
+						"answer": true,
+						"correction": { "en": "'Yet' is common in negatives and questions in the present perfect.", "fa": "«yet» در ماضی نقلی، در جمله‌های منفی و پرسشی به کار می‌رود." }
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": { "en": "Type the missing word (since, for).", "fa": "کلمهٔ جاافتاده را بنویسید (since، for)." },
+				"items": [
+					{
+						"text": { "en": "I've known them ___ 2008.", "fa": "من ___ سال ۲۰۰۸ آن‌ها را می‌شناسم." },
+						"answer": ["since"],
+						"explanation": { "en": "'Since' is used with a point in time: since 2008.", "fa": "«since» با نقطهٔ زمانی به کار می‌رود: since 2008." }
+					},
+					{
+						"text": { "en": "We've lived here ___ 20 years.", "fa": "ما ___ ۲۰ سال اینجا زندگی کرده‌ایم." },
+						"answer": ["for"],
+						"explanation": { "en": "'For' is used with a period of time: for 20 years.", "fa": "«for» با بازهٔ زمانی به کار می‌رود: for 20 years." }
+					}
+				]
+			}
+		]
+	}
+}

@@ -1,0 +1,70 @@
+ 
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": { "en": "Circle the correct answer.", "fa": "گزینهٔ درست را دور بزنید." },
+				"items": [
+					{
+						"question": { "en": "If it rains tomorrow, I ___ home.", "fa": "اگر فردا باران ببارد، من ___ خانه می‌مانم." },
+						"options": [
+							{ "en": "will stay", "fa": "خواهم ماند" },
+							{ "en": "stay", "fa": "می‌مانم" }
+						],
+						"answer": 0,
+						"explanation": { "en": "The result clause of Conditional Type I uses will + base verb.", "fa": "بند نتیجه در جملهٔ شرطی نوع یک از will + فعل ساده استفاده می‌کند." }
+					},
+					{
+						"question": { "en": "This movie is really ___. I love it.", "fa": "این فیلم واقعاً ___ است. عاشقش هستم." },
+						"options": [
+							{ "en": "interesting", "fa": "جالب" },
+							{ "en": "interested", "fa": "علاقه‌مند" }
+						],
+						"answer": 0,
+						"explanation": { "en": "'Interesting' describes the thing that causes the feeling.", "fa": "«interesting» چیزی را توصیف می‌کند که احساس را ایجاد می‌کند." }
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": { "en": "True or False?", "fa": "درست یا نادرست؟" },
+				"items": [
+					{
+						"statement": { "en": "In Conditional Type I, we use 'will' in the if-clause.", "fa": "در جملهٔ شرطی نوع یک، در بند if از «will» استفاده می‌کنیم." },
+						"answer": false,
+						"correction": { "en": "The if-clause uses the present simple: If it rains, we will stay home.", "fa": "بند if از حال ساده استفاده می‌کند: If it rains, we will stay home." }
+					},
+					{
+						"statement": { "en": "'Bored' describes a person's feeling.", "fa": "«bored» احساس یک شخص را توصیف می‌کند." },
+						"answer": true,
+						"correction": { "en": "'Bored' (ed-form) describes the person's feeling.", "fa": "«bored» (فرم ed) احساس شخص را توصیف می‌کند." }
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": { "en": "Type the missing word.", "fa": "کلمهٔ جاافتاده را بنویسید." },
+				"items": [
+					{
+						"text": { "en": "I am really ___ about our trip to Yazd.", "fa": "من واقعاً ___ دربارهٔ سفرمان به یزد." },
+						"answer": ["excited"],
+						"explanation": { "en": "Past participle adjective for a person's feeling: excited.", "fa": "صفت قسمت سوم فعل برای احساس شخص: excited." }
+					},
+					{
+						"text": { "en": "If I ___ (study) hard, I will pass my exams.", "fa": "اگر ___ سخت درس بخوانم، در امتحان‌هایم قبول می‌شوم." },
+						"answer": ["study"],
+						"explanation": { "en": "The if-clause uses the present simple: study.", "fa": "بند if از حال ساده استفاده می‌کند: study." }
+					}
+				]
+			}
+		]
+	}
+}

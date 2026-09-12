@@ -120,7 +120,7 @@
 								"answer": false,
 								"explanation_fa": "با فاعل جمع 'They' باید were به‌کار رود: They were working.",
 								"hint_fa": "با فاعل جمع 'They' باید were به‌کار رود: They were working.",
-								"statement": "'They was working' is a correct sentence."
+								"statement": "جمله‌ی «They was working» درست است."
 							}
 						],
 						"title_en": "",
@@ -331,7 +331,7 @@
 								"answer": false,
 								"explanation_fa": "منفی‌بودن یک فعل به معنای انجام‌ندادن هیچ کاری نیست؛ او کار دیگری می‌کرد.",
 								"hint_fa": "منفی‌بودن یک فعل به معنای انجام‌ندادن هیچ کاری نیست؛ او کار دیگری می‌کرد.",
-								"statement": "'Reza was not doing an experiment' means Reza was doing nothing at all."
+								"statement": "جمله‌ی «Reza was not doing an experiment» یعنی رضا اصلاً هیچ کاری انجام نمی‌داد."
 							}
 						],
 						"title_en": "",
@@ -401,7 +401,7 @@
 								"answer": false,
 								"explanation_fa": "he/she با wasn't منفی می‌شود، نه weren't.",
 								"hint_fa": "he/she با wasn't منفی می‌شود، نه weren't.",
-								"statement": "'weren't' is used with 'he' and 'she'."
+								"statement": "«weren't» با «he» و «she» استفاده می‌شود."
 							}
 						],
 						"title_en": "",
@@ -573,7 +573,7 @@
 								"answer": false,
 								"explanation_fa": "فاعل جمع 'they' باید با were پاسخ داده شود: Yes, they were.",
 								"hint_fa": "فاعل جمع 'they' باید با were پاسخ داده شود: Yes, they were.",
-								"statement": "'Yes, they was.' is a correct short answer."
+								"statement": "«Yes, they was.» یک پاسخ کوتاه درست است."
 							}
 						],
 						"title_en": "",
@@ -626,7 +626,7 @@
 								"answer": true,
 								"explanation_fa": "درسته! این ساختار اصلی سؤالی‌سازی گذشته استمراری است.",
 								"hint_fa": "درسته! این ساختار اصلی سؤالی‌سازی گذشته استمراری است.",
-								"statement": "Questions in past progressive start with Was or Were."
+								"statement": "سوالات گذشته استمراری با Was یا Were شروع می‌شوند."
 							}
 						],
 						"title_en": "",
@@ -738,7 +738,7 @@
 								"answer": false,
 								"explanation_fa": "'hit' فعل کار ناگهانی است و در گذشته‌ی ساده می‌آید، نه گذشته استمراری.",
 								"hint_fa": "'hit' فعل کار ناگهانی است و در گذشته‌ی ساده می‌آید، نه گذشته استمراری.",
-								"statement": "In 'Newton was sitting under a tree when an apple hit his head', the word 'hit' is in past progressive."
+								"statement": "در جمله‌ی «Newton was sitting under a tree when an apple hit his head»، فعل «hit» گذشته استمراری است."
 							}
 						],
 						"title_en": "",
@@ -826,7 +826,7 @@
 								"answer": false,
 								"explanation_fa": "فقط یک فعل (sitting) گذشته استمراری است؛ فعل دیگر (hit) گذشته ساده است.",
 								"hint_fa": "فقط یک فعل (sitting) گذشته استمراری است؛ فعل دیگر (hit) گذشته ساده است.",
-								"statement": "In 'Newton was sitting under a tree when an apple hit his head', both verbs are in past progressive."
+								"statement": "در جمله‌ی «Newton was sitting under a tree when an apple hit his head»، هر دو فعل گذشته استمراری هستند."
 							}
 						],
 						"title_en": "",
@@ -1025,7 +1025,7 @@
 								"answer": true,
 								"explanation_fa": "درسته! themselves برای فاعل جمع سوم شخص است.",
 								"hint_fa": "درسته! themselves برای فاعل جمع سوم شخص است.",
-								"statement": "'themselves' is used for a plural subject like 'the scientists'."
+								"statement": "«themselves» برای فاعل جمع مثل «the scientists» استفاده می‌شود."
 							}
 						],
 						"title_en": "",
@@ -1205,7 +1205,7 @@
 								"answer": true,
 								"explanation_fa": "درسته! 'drink' یک عمل فیزیکی است.",
 								"hint_fa": "درسته! 'drink' یک عمل فیزیکی است.",
-								"statement": "'drink' is an action verb."
+								"statement": "«drink» یک فعل عملی است."
 							}
 						],
 						"title_en": "",
@@ -1297,7 +1297,7 @@
 								"answer": false,
 								"explanation_fa": "'feel' یک حالت/احساس را نشان می‌دهد، نه یک عمل.",
 								"hint_fa": "'feel' یک حالت/احساس را نشان می‌دهد، نه یک عمل.",
-								"statement": "'feel' in 'She feels happy' shows an action."
+								"statement": "«feel» در جمله‌ی «She feels happy» یک عمل را نشان می‌دهد."
 							}
 						],
 						"title_en": "",
@@ -1416,7 +1416,7 @@
 								"answer": true,
 								"explanation_fa": "درسته! افعال حرکتی هم ساده و هم استمراری می‌گیرند.",
 								"hint_fa": "درسته! افعال حرکتی هم ساده و هم استمراری می‌گیرند.",
-								"statement": "Action verbs can be used in both simple and continuous forms."
+								"statement": "افعال عملی هم در حالت ساده و هم در حالت استمراری استفاده می‌شوند."
 							}
 						],
 						"title_en": "",
@@ -1470,7 +1470,7 @@
 								"answer": false,
 								"explanation_fa": "'know' فعل حالتی است و استمراری نمی‌گیرد؛ درست: I know the answer.",
 								"hint_fa": "'know' فعل حالتی است و استمراری نمی‌گیرد؛ درست: I know the answer.",
-								"statement": "'I am knowing the answer' is a correct sentence."
+								"statement": "جمله‌ی «I am knowing the answer» درست است."
 							}
 						],
 						"title_en": "",
@@ -1527,7 +1527,7 @@
 								"answer": true,
 								"explanation_fa": "درسته! افعال حالتی معمولاً استمراری نمی‌گیرند.",
 								"hint_fa": "درسته! افعال حالتی معمولاً استمراری نمی‌گیرند.",
-								"statement": "State verbs are usually not used in continuous form."
+								"statement": "افعال حالتی معمولاً در حالت استمراری استفاده نمی‌شوند."
 							}
 						],
 						"title_en": "",
@@ -1690,7 +1690,7 @@
 								"answer": true,
 								"explanation_fa": "درسته! 'was sitting' پس‌زمینه است و 'hit' اتفاق ناگهانی.",
 								"hint_fa": "درسته! 'was sitting' پس‌زمینه است و 'hit' اتفاق ناگهانی.",
-								"statement": "'Newton was sitting under a tree when an apple hit his head' shows a background action interrupted by a sudden one."
+								"statement": "جمله‌ی «Newton was sitting under a tree when an apple hit his head» یک عمل پس‌زمینه‌ای را نشان می‌دهد که با یک عمل ناگهانی قطع شده است."
 							}
 						],
 						"title_en": "",
@@ -1752,7 +1752,7 @@
 								"answer": false,
 								"explanation_fa": "افعال حالتی مثل know استمراری نمی‌گیرند.",
 								"hint_fa": "افعال حالتی مثل know استمراری نمی‌گیرند.",
-								"statement": "'I am knowing the answer' is correct."
+								"statement": "جمله‌ی «I am knowing the answer» درست است."
 							}
 						],
 						"title_en": "",

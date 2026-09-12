@@ -119,7 +119,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'a books' is correct.",
+								"statement": "«a books» درست است.",
 								"answer": false,
 								"hint_fa": "a فقط با اسم مفرد می‌آید، نه جمع.",
 								"explanation_fa": "a فقط با اسم مفرد می‌آید، نه جمع."
@@ -172,7 +172,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "Countable nouns have both singular and plural forms.",
+								"statement": "اسم‌های قابل‌شمارش هم شکل مفرد دارند و هم شکل جمع.",
 								"answer": true,
 								"hint_fa": "درسته! اسم قابل شمارش هم مفرد و هم جمع دارد.",
 								"explanation_fa": "درسته! اسم قابل شمارش هم مفرد و هم جمع دارد."
@@ -269,7 +269,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'an information' is correct.",
+								"statement": "«an information» درست است.",
 								"answer": false,
 								"hint_fa": "information غیرقابل شمارش است و با an نمی‌آید.",
 								"explanation_fa": "information غیرقابل شمارش است و با an نمی‌آید."
@@ -359,7 +359,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'informations' is a correct plural word.",
+								"statement": "«informations» یک جمع درست است.",
 								"answer": false,
 								"hint_fa": "information غیرقابل شمارش است و جمع نمی‌بندد.",
 								"explanation_fa": "information غیرقابل شمارش است و جمع نمی‌بندد."
@@ -395,7 +395,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'rice' is a countable noun.",
+								"statement": "«rice» یک اسم قابل‌شمارش است.",
 								"answer": false,
 								"hint_fa": "rice غیرقابل شمارش است.",
 								"explanation_fa": "rice غیرقابل شمارش است."
@@ -553,7 +553,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'much' is used with uncountable nouns.",
+								"statement": "«much» با اسم‌های غیرقابل‌شمارش استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! much با اسم غیرقابل شمارش می‌آید.",
 								"explanation_fa": "درسته! much با اسم غیرقابل شمارش می‌آید."
@@ -604,7 +604,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'many' is used with countable plural nouns.",
+								"statement": "«many» با اسم‌های قابل‌شمارشِ جمع استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! many با اسم جمع قابل شمارش می‌آید.",
 								"explanation_fa": "درسته! many با اسم جمع قابل شمارش می‌آید."
@@ -749,7 +749,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'a lot of' can be used with both countable and uncountable nouns.",
+								"statement": "«a lot of» هم با اسم‌های قابل‌شمارش و هم غیرقابل‌شمارش استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! مثل a lot of books و a lot of water.",
 								"explanation_fa": "درسته! مثل a lot of books و a lot of water."
@@ -821,7 +821,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'some' can be used with uncountable nouns like 'water'.",
+								"statement": "«some» با اسم‌های غیرقابل‌شمارش مثل «water» استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! some water درست است.",
 								"explanation_fa": "درسته! some water درست است."
@@ -1040,7 +1040,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'a few' is used with countable nouns and 'a little' with uncountable nouns.",
+								"statement": "«a few» با اسم‌های قابل‌شمارش و «a little» با اسم‌های غیرقابل‌شمارش استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! این تفاوت اصلی این دو کلمه است.",
 								"explanation_fa": "درسته! این تفاوت اصلی این دو کلمه است."
@@ -1228,7 +1228,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'a loaf of bread' means one whole bread.",
+								"statement": "«a loaf of bread» یعنی یک نان کامل.",
 								"answer": true,
 								"hint_fa": "درسته! loaf یعنی یک قرص کامل نان.",
 								"explanation_fa": "درسته! loaf یعنی یک قرص کامل نان."
@@ -1412,7 +1412,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "Every simple sentence must have at least a subject and a verb.",
+								"statement": "هر جمله‌ی ساده حداقل باید فاعل و فعل داشته باشد.",
 								"answer": true,
 								"hint_fa": "درسته! این تعریف اصلی جمله‌ی ساده است.",
 								"explanation_fa": "درسته! این تعریف اصلی جمله‌ی ساده است."
@@ -1466,7 +1466,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "In 'Ali is a smart student', there is no object.",
+								"statement": "در جمله‌ی «Ali is a smart student»، مفعول وجود ندارد.",
 								"answer": true,
 								"hint_fa": "درسته! این جمله فاعل و فعل و مکمل دارد، نه مفعول.",
 								"explanation_fa": "درسته! این جمله فاعل و فعل و مکمل دارد، نه مفعول."
@@ -1502,7 +1502,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "A simple sentence can also have additional information like time or place.",
+								"statement": "جمله‌ی ساده می‌تواند اطلاعات اضافه‌ای مثل زمان یا مکان هم داشته باشد.",
 								"answer": true,
 								"hint_fa": "درسته! مثل 'Ali will have an exam next week' که 'next week' اطلاعات اضافه است.",
 								"explanation_fa": "درسته! مثل 'Ali will have an exam next week' که 'next week' اطلاعات اضافه است."

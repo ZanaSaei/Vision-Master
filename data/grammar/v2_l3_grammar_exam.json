@@ -1,0 +1,341 @@
+{
+	"lessons": [
+		{
+			"accent": "#CA8A04",
+			"exam_exercises": [
+				{
+					"text": "Part 1 — Multiple Choice (۲۰ نمره — هر سؤال ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the best answer.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"practice",
+								"practices",
+								"will practice",
+								"practicing"
+							],
+							"question": "If you ______ hard, you will become a good artist."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"is",
+								"will be",
+								"be",
+								"being"
+							],
+							"question": "We will buy that carpet if it ______ not too expensive."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"will",
+								"do",
+								"can to",
+								"going"
+							],
+							"question": "If people appreciate art, they ______ protect it."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"surprise",
+								"surprised",
+								"surprising",
+								"surprises"
+							],
+							"question": "She was really ______ when she saw the beautiful painting."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"interested",
+								"interesting",
+								"interest",
+								"interests"
+							],
+							"question": "This handicraft is very ______. I want to buy it."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"will",
+								"do",
+								"can to",
+								"going"
+							],
+							"question": "If we visit Isfahan, we ______ see amazing tilework."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"tire",
+								"tired",
+								"tiring",
+								"tires"
+							],
+							"question": "He felt ______ after finishing his artwork."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"will",
+								"do",
+								"can to",
+								"improve"
+							],
+							"question": "If the artist works hard, his art ______ improve."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"excite",
+								"excited",
+								"exciting",
+								"excites"
+							],
+							"question": "I am ______ about learning calligraphy this year."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"will",
+								"do",
+								"can to",
+								"respect"
+							],
+							"question": "If tourists respect our culture, they ______ enjoy their trip more."
+						}
+					],
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 2 — Fill in the Blanks with the Correct Verb Form (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Fill in the Blanks with the Correct Verb Form",
+					"items": [
+						{
+							"answer": "visit",
+							"text": "If you ______ (visit) the museum, you will see many handicrafts."
+						},
+						{
+							"answer": "buy",
+							"text": "She will ______ (buy) a carpet if she has enough money."
+						},
+						{
+							"answer": "appreciate",
+							"text": "If people ______ (appreciate) art, they will support artists."
+						},
+						{
+							"answer": "feel",
+							"text": "I will ______ (feel) happy if I learn calligraphy."
+						},
+						{
+							"answer": "learn",
+							"text": "If we practice every day, we will ______ (learn) faster."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 3 — Choose the Correct Adjective Form (۱۵ نمره — هر سؤال ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the Correct Adjective Form",
+					"items": [
+						{
+							"answer": "interested",
+							"text": "I am really (interested/interesting) in Persian handicrafts."
+						},
+						{
+							"answer": "amazing",
+							"text": "This artwork is very (amazed/amazing)."
+						},
+						{
+							"answer": "bored",
+							"text": "He felt (bored/boring) at the museum because he didn't like art."
+						},
+						{
+							"answer": "surprised",
+							"text": "We were (surprised/surprising) by the beautiful tilework."
+						},
+						{
+							"answer": "exciting",
+							"text": "That painting is (excited/exciting) to look at."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره — هر جمله ۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Rewrite the sentence as instructed.",
+					"items": [
+						{
+							"answer": "If you study calligraphy, you will become a good artist.",
+							"task": "Combine into a Conditional Type I sentence:",
+							"text": "You study calligraphy. You will become a good artist."
+						},
+						{
+							"answer": "If it doesn't rain, we won't stay home.",
+							"task": "Rewrite in the negative if-clause form:",
+							"text": "If it rains, we will stay home."
+						},
+						{
+							"answer": "The news made us feel surprised.",
+							"task": "Rewrite using the correct past participle adjective:",
+							"text": "The news made us feel surprise."
+						}
+					],
+					"type": "transformation"
+				},
+				{
+					"text": "Part 5 — Reading and Choosing the Best Word (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Read the paragraph and choose the correct word.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"visit",
+								"will visit"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"see",
+								"will see"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"excited",
+								"exciting"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"appreciate",
+								"will appreciate"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"help",
+								"will help"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"interested",
+								"interesting"
+							],
+							"question": "Choose the correct word:"
+						}
+					],
+					"passage": "If you visit/will visit Isfahan, you see/will see many beautiful handicrafts. I am always excited/exciting when I look at Persian art. If people appreciate/will appreciate art, they help/will help artists continue their work. Art can be really interested/interesting for everyone.",
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 6 — Matching (۱۰ نمره — هر مورد ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Match column A with column B.",
+					"items": [
+						{
+							"answer": "b) you will understand it better.",
+							"options": [
+								"a) will improve his skills.",
+								"b) you will understand it better.",
+								"c) when she saw the painting.",
+								"d) about visiting art museums.",
+								"e) truly amazing."
+							],
+							"text": "1. If you study art,"
+						},
+						{
+							"answer": "c) when she saw the painting.",
+							"options": [
+								"a) will improve his skills.",
+								"b) you will understand it better.",
+								"c) when she saw the painting.",
+								"d) about visiting art museums.",
+								"e) truly amazing."
+							],
+							"text": "2. She was surprised"
+						},
+						{
+							"answer": "d) about visiting art museums.",
+							"options": [
+								"a) will improve his skills.",
+								"b) you will understand it better.",
+								"c) when she saw the painting.",
+								"d) about visiting art museums.",
+								"e) truly amazing."
+							],
+							"text": "3. I am always excited"
+						},
+						{
+							"answer": "a) will improve his skills.",
+							"options": [
+								"a) will improve his skills.",
+								"b) you will understand it better.",
+								"c) when she saw the painting.",
+								"d) about visiting art museums.",
+								"e) truly amazing."
+							],
+							"text": "4. If the artist practices, he"
+						},
+						{
+							"answer": "e) truly amazing.",
+							"options": [
+								"a) will improve his skills.",
+								"b) you will understand it better.",
+								"c) when she saw the painting.",
+								"d) about visiting art museums.",
+								"e) truly amazing."
+							],
+							"text": "5. This handicraft is"
+						}
+					],
+					"type": "matching"
+				},
+				{
+					"text": "Part 7 — Short Writing (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "In 3-4 complete sentences, write about **what will happen if you practice a skill (like art, music, or a sport)**. Use at least one Conditional Type I sentence and one past participle adjective (like interested, excited, surprised). ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________",
+					"items": [
+						{
+							"text": "In 3-4 complete sentences, write about **what will happen if you practice a skill (like art, music, or a sport)**. Use at least one Conditional Type I sentence and one past participle adjective (like interested, excited, surprised). ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________"
+						}
+					],
+					"type": "open_ended"
+				}
+			]
+		}
+	]
+}

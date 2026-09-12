@@ -32,6 +32,9 @@ Global="*uid://b3q8f06t1vj73"
 TransitionManager="*uid://b3bmr0hvx2x7n"
 MenuBackground="*uid://xuhqxtyibmvw"
 Sfx="*res://autoload/Sfx.gd"
+API="*res://autoload/ApiClient.gd"
+Content="*res://autoload/ContentManager.gd"
+Sync="*res://autoload/SyncManager.gd"
 
 [display]
 
@@ -46,6 +49,10 @@ window/handheld/orientation=1
 naming/scene_name_casing=1
 naming/script_name_casing=2
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/com.gladekit.mcp-bridge/plugin.cfg")
+
 [gui]
 
 theme/custom_font="res://assets/fonts/Vazirmatn-Regular.ttf"
@@ -59,3 +66,7 @@ theme/custom_font="res://assets/fonts/Vazirmatn-Regular.ttf"
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+
+[vision_master]
+
+api_base_url=""

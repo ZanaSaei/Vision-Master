@@ -124,6 +124,8 @@ func _ready() -> void:
 	current_book = Global.current_book #[cite: 2]
 	current_lesson = Global.current_lesson #[cite: 2]
 	header_title.text = MenuStyle.persian_digits("درس %d\nخواندن" % current_lesson) #[cite: 2]
+	# Fetch this lesson's media (reading audio) if it hasn't been downloaded yet.
+	Content.ensure_lesson(current_book, current_lesson)
 	
 	var data: Dictionary          = Global.load_reading(current_book, current_lesson) #[cite: 2]
 	var strategy_data: Dictionary = Global.load_category("reading_strategies", current_book, current_lesson) #[cite: 2]

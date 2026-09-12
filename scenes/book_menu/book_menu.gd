@@ -32,16 +32,16 @@ const LESSON_DATA := {
 }
 
 const BOOK_COLORS := {
-	1: Color("#2563EB"),   # Vision 1 — blue
-	2: Color("#16A34A"),   # Vision 2 — green
-	3: Color("#EA580C"),   # Vision 3 — orange
+	1: Color("#3B82F6"),   # Vision 1 — solid light blue
+	2: Color("#22C55E"),   # Vision 2 — solid green
+	3: Color("#EF4444"),   # Vision 3 — solid red
 }
 
 const PERSIAN_DIGITS := ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"]
 
 var _navigating: bool = false
 var _book: int = 1
-var _accent: Color = Color("#2563EB")
+var _accent: Color = Color("#3B82F6")
 
 # Built UI state.
 var _scroll: ScrollContainer = null

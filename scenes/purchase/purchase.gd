@@ -15,6 +15,10 @@ func _ready() -> void:
 	_build_ui()
 	_apply_theme()
 	Global.on_theme_changed(_on_theme_changed)
+	_refresh_status()
+	API.logged_in.connect(func(_user: Dictionary) -> void: _refresh_status())
+	API.logged_out.connect(_refresh_status)
+	API.subscription_updated.connect(func(_sub: Dictionary) -> void: _refresh_status())
 
 
 func _build_ui() -> void:
@@ -57,6 +61,7 @@ func _build_ui() -> void:
 	h_row.add_child(title)
 
 	var center := VBoxContainer.new()
+	center.name = "CenterBox"
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
 	center.alignment = BoxContainer.ALIGNMENT_CENTER
 	center.add_theme_constant_override("separation", 28)
@@ -131,6 +136,23 @@ func _apply_theme() -> void:
 		home_btn.add_theme_stylebox_override("hover", style)
 		home_btn.add_theme_stylebox_override("pressed", style)
 		home_btn.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
+
+
+func _refresh_status() -> void:
+	var msg: Label = get_node_or_null("CenterBox/MessageLabel")
+	var sub: Label = get_node_or_null("CenterBox/SubLabel")
+	if msg == null or sub == null:
+		return
+	var tier := str(API.get_subscription().get("tier", "free"))
+	if not API.is_logged_in():
+		msg.text = "برای مشاهده و فعال‌سازی اشتراک وارد حساب شوید."
+		sub.text = "با ورود به حساب، وضعیت اشتراک شما اینجا نمایش داده می‌شود."
+	elif tier != "free":
+		msg.text = "اشتراک ویژه فعال است ✓"
+		sub.text = "به همه بخش‌های آموزشی دسترسی کامل دارید."
+	else:
+		msg.text = "اشتراک فعلی: رایگان"
+		sub.text = "همه بخش‌های آموزشی فعلاً رایگان هستند."
 
 
 func _on_theme_changed(_mode: int) -> void:

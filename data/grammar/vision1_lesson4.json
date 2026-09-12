@@ -115,7 +115,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'May I sit down?' is used to ask for permission.",
+								"statement": "«May I sit down?» برای درخواست اجازه استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! may برای گرفتن اجازه به کار می‌رود.",
 								"explanation_fa": "درسته! may برای گرفتن اجازه به کار می‌رود."
@@ -168,7 +168,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'can' is used to talk about ability.",
+								"statement": "«can» برای صحبت درباره‌ی توانایی استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! can برای بیان توانایی است.",
 								"explanation_fa": "درسته! can برای بیان توانایی است."
@@ -338,7 +338,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'should' shows a stronger obligation than 'must'.",
+								"statement": "«should» الزام قوی‌تری از «must» نشان می‌دهد.",
 								"answer": false,
 								"hint_fa": "must الزام قوی‌تری نسبت به should نشان می‌دهد.",
 								"explanation_fa": "must الزام قوی‌تری نسبت به should نشان می‌دهد."
@@ -391,7 +391,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'must' shows a stronger obligation than 'should'.",
+								"statement": "«must» الزام قوی‌تری از «should» نشان می‌دهد.",
 								"answer": true,
 								"hint_fa": "درسته! must الزام قوی‌تری از should دارد.",
 								"explanation_fa": "درسته! must الزام قوی‌تری از should دارد."
@@ -561,7 +561,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'must not' means something is forbidden.",
+								"statement": "«must not» یعنی انجام کاری ممنوع است.",
 								"answer": true,
 								"hint_fa": "درسته! must not یعنی ممنوع بودن یک کار.",
 								"explanation_fa": "درسته! must not یعنی ممنوع بودن یک کار."
@@ -614,7 +614,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'may not' is used to say something is not allowed.",
+								"statement": "«may not» برای گفتن اینکه کاری مجاز نیست استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! may not یعنی اجازه نداریم.",
 								"explanation_fa": "درسته! may not یعنی اجازه نداریم."
@@ -784,7 +784,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'Should your friend help you?' is asking about ability.",
+								"statement": "جمله‌ی «Should your friend help you?» درباره‌ی توانایی سوال می‌کند.",
 								"answer": false,
 								"hint_fa": "این سؤال درباره‌ی توصیه است، نه توانایی.",
 								"explanation_fa": "این سؤال درباره‌ی توصیه است، نه توانایی."
@@ -837,7 +837,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'Must we drive fast?' asks about obligation.",
+								"statement": "جمله‌ی «Must we drive fast?» درباره‌ی الزام سوال می‌کند.",
 								"answer": true,
 								"hint_fa": "درسته! Must درباره‌ی الزام می‌پرسد.",
 								"explanation_fa": "درسته! Must درباره‌ی الزام می‌پرسد."
@@ -1017,7 +1017,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'on Friday' is correct.",
+								"statement": "«on Friday» درست است.",
 								"answer": true,
 								"hint_fa": "درسته! برای روزهای هفته از on استفاده می‌کنیم.",
 								"explanation_fa": "درسته! برای روزهای هفته از on استفاده می‌کنیم."
@@ -1070,7 +1070,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'at' is used with days of the week like Friday.",
+								"statement": "«at» با روزهای هفته مثل جمعه (Friday) استفاده می‌شود.",
 								"answer": false,
 								"hint_fa": "برای روزهای هفته از on استفاده می‌شود، نه at.",
 								"explanation_fa": "برای روزهای هفته از on استفاده می‌شود، نه at."
@@ -1248,7 +1248,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'in front of' means 'beside'.",
+								"statement": "«in front of» یعنی «کنار».",
 								"answer": false,
 								"hint_fa": "in front of یعنی روبروی، نه کنار.",
 								"explanation_fa": "in front of یعنی روبروی، نه کنار."
@@ -1301,7 +1301,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'on the table' means the object is inside the table.",
+								"statement": "«on the table» یعنی شیء داخل میز است.",
 								"answer": false,
 								"hint_fa": "'on the table' یعنی روی میز، نه داخل آن.",
 								"explanation_fa": "'on the table' یعنی روی میز، نه داخل آن."
@@ -1479,7 +1479,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "The adverb of 'good' is 'goodly'.",
+								"statement": "قیدِ کلمه‌ی «good»، «goodly» است.",
 								"answer": false,
 								"hint_fa": "good یک قید بی‌قاعده دارد: well.",
 								"explanation_fa": "good یک قید بی‌قاعده دارد: well."
@@ -1532,7 +1532,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'fast' has the same form for both adjective and adverb.",
+								"statement": "«fast» برای صفت و قید به یک شکل استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! fast هم صفت هم قید است (بدون تغییر).",
 								"explanation_fa": "درسته! fast هم صفت هم قید است (بدون تغییر)."

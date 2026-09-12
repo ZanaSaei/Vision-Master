@@ -1,0 +1,70 @@
+ 
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": { "en": "Circle the correct answer.", "fa": "گزینهٔ درست را دور بزنید." },
+				"items": [
+					{
+						"question": { "en": "The dictionary ___ is on the shelf helps students.", "fa": "لغت‌نامه‌ای که ___ روی قفسه است به دانش‌آموزان کمک می‌کند." },
+						"options": [
+							{ "en": "which", "fa": "که (برای اشیا)" },
+							{ "en": "who", "fa": "که (برای افراد)" }
+						],
+						"answer": 0,
+						"explanation": { "en": "We use 'which' for things and objects.", "fa": "برای اشیا از «which» استفاده می‌کنیم." }
+					},
+					{
+						"question": { "en": "The teacher ___ is very kind explains new words.", "fa": "معلمی که ___ خیلی مهربان است، کلمات جدید را توضیح می‌دهد." },
+						"options": [
+							{ "en": "who", "fa": "که (برای افراد)" },
+							{ "en": "which", "fa": "که (برای اشیا)" }
+						],
+						"answer": 0,
+						"explanation": { "en": "We use 'who' for people.", "fa": "برای افراد از «who» استفاده می‌کنیم." }
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": { "en": "True or False?", "fa": "درست یا نادرست؟" },
+				"items": [
+					{
+						"statement": { "en": "We use 'who' for people and 'which' for things.", "fa": "برای افراد از «who» و برای اشیا از «which» استفاده می‌کنیم." },
+						"answer": true,
+						"correction": { "en": "'Who' is for people; 'which' is for things.", "fa": "«who» برای افراد و «which» برای اشیا است." }
+					},
+					{
+						"statement": { "en": "In Conditional Type II, we use 'will' in the if-clause.", "fa": "در جملهٔ شرطی نوع دو، در بند if از «will» استفاده می‌کنیم." },
+						"answer": false,
+						"correction": { "en": "The if-clause of Conditional Type II uses the simple past (had, were).", "fa": "بند if در شرطی نوع دو از گذشتهٔ ساده استفاده می‌کند (had، were)." }
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": { "en": "Type the missing word.", "fa": "کلمهٔ جاافتاده را بنویسید." },
+				"items": [
+					{
+						"text": { "en": "If I ___ (have) a good dictionary, I would understand this word.", "fa": "اگر ___ لغت‌نامهٔ خوبی داشتم، این کلمه را می‌فهمیدم." },
+						"answer": ["had"],
+						"explanation": { "en": "Conditional Type II if-clause uses the simple past: had.", "fa": "بند if در شرطی نوع دو از گذشتهٔ ساده استفاده می‌کند: had." }
+					},
+					{
+						"text": { "en": "If he ___ (be) here, he could help us.", "fa": "اگر ___ اینجا بود، می‌توانست به ما کمک کند." },
+						"answer": ["were", "was"],
+						"explanation": { "en": "With 'he', Conditional Type II usually uses 'were'.", "fa": "با «he» در شرطی نوع دو معمولاً از «were» استفاده می‌شود." }
+					}
+				]
+			}
+		]
+	}
+}

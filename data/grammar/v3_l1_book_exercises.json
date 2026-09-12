@@ -1,0 +1,70 @@
+ 
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": { "en": "Circle the correct answer.", "fa": "گزینهٔ درست را دور بزنید." },
+				"items": [
+					{
+						"question": { "en": "Penicillin ___ quite accidentally.", "fa": "پنیسیلین ___ به‌طور کاملاً اتفاقی." },
+						"options": [
+							{ "en": "was discovered", "fa": "کشف شد" },
+							{ "en": "discovered", "fa": "کشف کرد" }
+						],
+						"answer": 0,
+						"explanation": { "en": "Passive voice: be + past participle (was discovered).", "fa": "جملهٔ مجهول: be + قسمت سوم فعل (was discovered)." }
+					},
+					{
+						"question": { "en": "Mina is happy, ___?", "fa": "مینا خوشحال است، ___؟" },
+						"options": [
+							{ "en": "isn't she", "fa": "مگر نه؟" },
+							{ "en": "is she", "fa": "آیا هست؟" }
+						],
+						"answer": 0,
+						"explanation": { "en": "A positive statement takes a negative tag: isn't she?", "fa": "جملهٔ مثبت tag منفی می‌گیرد: isn't she?" }
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": { "en": "True or False?", "fa": "درست یا نادرست؟" },
+				"items": [
+					{
+						"statement": { "en": "A positive statement takes a positive tag question.", "fa": "جملهٔ مثبت tag مثبت می‌گیرد." },
+						"answer": false,
+						"correction": { "en": "A positive statement takes a negative tag question.", "fa": "جملهٔ مثبت tag منفی می‌گیرد." }
+					},
+					{
+						"statement": { "en": "In passive voice, we always need the verb 'be'.", "fa": "در جملهٔ مجهول، همیشه به فعل «be» نیاز داریم." },
+						"answer": true,
+						"correction": { "en": "The passive always uses a form of 'be' + past participle.", "fa": "مجهول همیشه از شکلی از «be» + قسمت سوم فعل استفاده می‌کند." }
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": { "en": "Type the missing word.", "fa": "کلمهٔ جاافتاده را بنویسید." },
+				"items": [
+					{
+						"text": { "en": "Many products ___ (develop) each year.", "fa": "هر سال ___ محصولات زیادی ساخته می‌شوند." },
+						"answer": ["are developed"],
+						"explanation": { "en": "Present passive: are + past participle (are developed).", "fa": "مجهول حال: are + قسمت سوم فعل (are developed)." }
+					},
+					{
+						"text": { "en": "George wasn't hungry, ___?", "fa": "جورج گرسنه نبود، ___؟" },
+						"answer": ["was he"],
+						"explanation": { "en": "A negative statement takes a positive tag: was he?", "fa": "جملهٔ منفی tag مثبت می‌گیرد: was he?" }
+					}
+				]
+			}
+		]
+	}
+}

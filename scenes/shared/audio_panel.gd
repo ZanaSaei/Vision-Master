@@ -165,17 +165,26 @@ func _process(_delta: float) -> void:
 # PUBLIC API (Called by Parent Scenes)
 # ==========================================
 func load_and_play(audio_path: String) -> void:
-	if audio_path == "" or not ResourceLoader.exists(audio_path):
+	if audio_path == "":
 		push_warning("Audio not found: " + audio_path)
 		return
-		
+
+	# Content resolves the clip whether it is bundled (res://) or was
+	# downloaded on demand into user://content/.
+	var stream: AudioStream = null
+	if Content.has_asset(audio_path):
+		stream = Content.load_audio(audio_path)
+	if stream == null:
+		push_warning("Audio not available yet: " + audio_path)
+		return
+
 	show()
 	_reset_button_scales()
-	audio_player.stream = load(audio_path)
+	audio_player.stream = stream
 	audio_player.play()
 	audio_player.stream_paused = false
-	audio_slider.max_value = audio_player.stream.get_length()
-	total_time_label.text = _format_time(audio_player.stream.get_length())
+	audio_slider.max_value = stream.get_length()
+	total_time_label.text = _format_time(stream.get_length())
 	audio_slider.value = 0.0
 
 func stop_and_close() -> void:

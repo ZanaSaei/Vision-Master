@@ -520,8 +520,8 @@ func _get_or_create_audio_panel() -> Node:
 
 
 func _on_listen_audio_pressed() -> void:
-	# No valid audio file for this lesson -> show "No Audio" and stop.
-	if _listen_audio_path == "" or not ResourceLoader.exists(_listen_audio_path):
+	# No available audio for this lesson -> show "No Audio" and stop.
+	if _listen_audio_path == "" or not Content.has_asset(_listen_audio_path):
 		_set_listen_button_no_audio()
 		return
 	

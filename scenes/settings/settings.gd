@@ -51,6 +51,7 @@ func _ready() -> void:
 	clear_review_button.pressed.connect(_on_clear_review_pressed)
 	reset_button.pressed.connect(_on_reset_pressed)
 
+	_build_extra_sections()
 	_build_confirm_dialog()
 	_apply_theme()
 
@@ -166,6 +167,8 @@ func _apply_theme() -> void:
 	# Unified header styling last, so it wins over the generic walk.
 	if has_node("Header"):
 		Global.style_header($Header)
+
+	_style_extra_buttons()
 
 
 func _theme_walk(node: Node) -> void:
@@ -492,6 +495,244 @@ func _show_toast(text: String) -> void:
 	tw.tween_interval(1.4)
 	tw.tween_property(panel, "modulate:a", 0.0, 0.45)
 	tw.tween_callback(panel.queue_free)
+
+
+# ══════════════════════════════════════════════════════════════
+#  ACCOUNT + CONTENT DOWNLOADS (built at runtime)
+# ══════════════════════════════════════════════════════════════
+const SCENE_AUTH := "res://scenes/auth/Auth.tscn"
+
+var _account_status: Label
+var _account_button: Button
+var _account_logout_button: Button
+var _download_info: Label
+var _download_progress_label: Label
+var _download_button: Button
+var _clear_content_button: Button
+
+
+func _build_extra_sections() -> void:
+	var layout: VBoxContainer = $Scroll/Margin/Layout
+	layout.add_child(_build_account_card())
+	layout.add_child(_build_downloads_card())
+	# Surface account + content downloads at the top of the screen.
+	layout.move_child(layout.get_node("AccountCard"), 0)
+	layout.move_child(layout.get_node("DownloadsCard"), 1)
+
+	_refresh_account_section()
+	_refresh_downloads_section()
+
+	API.logged_in.connect(func(_user: Dictionary) -> void: _refresh_account_section())
+	API.logged_out.connect(_refresh_account_section)
+	API.subscription_updated.connect(func(_sub: Dictionary) -> void: _refresh_account_section())
+	Content.manifest_ready.connect(_refresh_downloads_section)
+	Content.download_progress.connect(_on_download_progress)
+	Content.download_finished.connect(_on_download_finished)
+
+
+func _build_account_card() -> PanelContainer:
+	var card := PanelContainer.new()
+	card.name = "AccountCard"
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 24)
+	card.add_child(vbox)
+
+	vbox.add_child(_section_title("حساب کاربری"))
+
+	_account_status = _section_body("")
+	vbox.add_child(_account_status)
+
+	_account_button = _section_button("ورود / ثبت‌نام")
+	_account_button.pressed.connect(_on_account_pressed)
+	vbox.add_child(_account_button)
+
+	_account_logout_button = _section_button("خروج از حساب")
+	_account_logout_button.pressed.connect(_on_logout_pressed)
+	vbox.add_child(_account_logout_button)
+	return card
+
+
+func _build_downloads_card() -> PanelContainer:
+	var card := PanelContainer.new()
+	card.name = "DownloadsCard"
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 24)
+	card.add_child(vbox)
+
+	vbox.add_child(_section_title("دانلود محتوا"))
+
+	_download_info = _section_body("")
+	vbox.add_child(_download_info)
+
+	_download_progress_label = _section_body("")
+	vbox.add_child(_download_progress_label)
+
+	_download_button = _section_button("دانلود همه محتوا")
+	_download_button.pressed.connect(_on_download_all_pressed)
+	vbox.add_child(_download_button)
+
+	_clear_content_button = _section_button("پاک کردن محتوای دانلودشده")
+	_clear_content_button.pressed.connect(_on_clear_content_pressed)
+	vbox.add_child(_clear_content_button)
+	return card
+
+
+func _section_title(text: String) -> Label:
+	var lbl := Label.new()
+	lbl.text = text
+	lbl.add_theme_font_override("font", MenuStyle.vazir())
+	lbl.add_theme_font_size_override("font_size", 42)
+	lbl.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
+	return lbl
+
+
+func _section_body(text: String) -> Label:
+	var lbl := Label.new()
+	lbl.text = text
+	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+	lbl.add_theme_font_override("font", MenuStyle.vazir())
+	lbl.add_theme_font_size_override("font_size", 30)
+	lbl.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	return lbl
+
+
+func _section_button(text: String) -> Button:
+	var btn := Button.new()
+	btn.text = text
+	btn.custom_minimum_size = Vector2(0, 92)
+	btn.add_theme_font_override("font", MenuStyle.vazir())
+	btn.add_theme_font_size_override("font_size", 34)
+	MenuStyle.wire_microinteractions(btn)
+	return btn
+
+
+func _style_extra_buttons() -> void:
+	if _account_button == null:
+		return
+	_style_action_button(_account_button, true)
+	_style_action_button(_account_logout_button, false)
+	_style_action_button(_download_button, true)
+	_style_action_button(_clear_content_button, false)
+	if _account_status != null:
+		_account_status.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	if _download_info != null:
+		_download_info.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	if _download_progress_label != null:
+		_download_progress_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+
+
+func _style_action_button(btn: Button, primary: bool) -> void:
+	var style := StyleBoxFlat.new()
+	style.set_corner_radius_all(18)
+	style.content_margin_left = 26.0
+	style.content_margin_top = 20.0
+	style.content_margin_right = 26.0
+	style.content_margin_bottom = 20.0
+	if primary:
+		style.bg_color = Global.get_theme_color("accent")
+		style.border_color = Global.get_theme_color("accent_bright")
+		style.set_border_width_all(2)
+		btn.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
+	else:
+		style.bg_color = Global.get_theme_color("surface_alt")
+		style.border_color = Global.get_theme_color("border")
+		style.set_border_width_all(1)
+		btn.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	btn.add_theme_stylebox_override("normal", style)
+	btn.add_theme_stylebox_override("hover", style)
+	btn.add_theme_stylebox_override("pressed", style)
+	btn.add_theme_stylebox_override("focus", style)
+
+
+func _refresh_account_section() -> void:
+	if _account_status == null:
+		return
+	if API.is_logged_in():
+		var phone := MenuStyle.persian_digits(API.get_phone())
+		var tier := str(API.get_subscription().get("tier", "free"))
+		var tier_fa := "ویژه" if tier != "free" else "رایگان"
+		_account_status.text = "شماره: %s\nوضعیت اشتراک: %s" % [phone, tier_fa]
+		_account_button.visible = false
+		_account_logout_button.visible = true
+	else:
+		_account_status.text = "برای همگام‌سازی پیشرفت و دانلود محتوا با شماره موبایل وارد شوید."
+		_account_button.visible = true
+		_account_logout_button.visible = false
+
+
+func _refresh_downloads_section() -> void:
+	if _download_info == null:
+		return
+	var size_text := MenuStyle.persian_digits(_format_mb(Content.total_downloaded_bytes()))
+	if Content.has_manifest():
+		_download_info.text = "حجم دانلودشده: %s" % size_text
+	else:
+		_download_info.text = "حجم دانلودشده: %s\n(برای دانلود، وارد حساب شوید)" % size_text
+
+
+func _format_mb(bytes: int) -> String:
+	if bytes < 1048576:
+		return "%d کیلوبایت" % int(bytes / 1024.0)
+	return "%.1f مگابایت" % (float(bytes) / 1048576.0)
+
+
+func _on_account_pressed() -> void:
+	Sfx.click()
+	TransitionManager.change_scene(SCENE_AUTH)
+
+
+func _on_logout_pressed() -> void:
+	Sfx.click()
+	_confirm(
+		"خروج از حساب",
+		"از حساب خود خارج می‌شوید. پیشرفت محلی حفظ می‌شود.\nادامه می‌دهید؟",
+		func() -> void:
+			API.logout()
+			_show_toast("از حساب خارج شدید ✓")
+	)
+
+
+func _on_download_all_pressed() -> void:
+	Sfx.click()
+	if not API.is_logged_in():
+		_show_toast("ابتدا وارد حساب شوید تا محتوا دانلود شود")
+		return
+	_download_button.disabled = true
+	_download_progress_label.text = "در حال آماده‌سازی دانلود…"
+	Content.download_all()
+
+
+func _on_clear_content_pressed() -> void:
+	Sfx.click()
+	_confirm(
+		"پاک کردن محتوای دانلودشده",
+		"همه فایل‌های صوتی و تصویری دانلودشده حذف می‌شوند.\nبا باز کردن هر درس دوباره دانلود خواهند شد. ادامه می‌دهید؟",
+		func() -> void:
+			Content.clear_downloads()
+			_refresh_downloads_section()
+			_download_progress_label.text = ""
+			_show_toast("محتوای دانلودشده پاک شد ✓")
+	)
+
+
+func _on_download_progress(done_count: int, total_count: int, done_bytes: int, total_bytes: int) -> void:
+	if _download_progress_label == null:
+		return
+	if total_count == 0:
+		return
+	_download_progress_label.text = "دانلود %d از %d فایل  (%s از %s)" % [
+		done_count, total_count,
+		MenuStyle.persian_digits(_format_mb(done_bytes)),
+		MenuStyle.persian_digits(_format_mb(total_bytes)),
+	]
+
+
+func _on_download_finished(success: bool) -> void:
+	if _download_button == null:
+		return
+	_download_button.disabled = false
+	_download_progress_label.text = "دانلود کامل شد ✓" if success else "دانلود با خطا مواجه شد — دوباره تلاش کنید."
+	_refresh_downloads_section()
 
 
 # ══════════════════════════════════════════════════════════════

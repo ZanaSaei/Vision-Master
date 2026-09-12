@@ -160,13 +160,18 @@ func _make_option_button(text: String, group: ButtonGroup) -> Button:
 func _make_select_button(text: String, group: ButtonGroup, accent: Color) -> Button:
 	var b := Button.new()
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
-	b.text = "   " + text
+	# Mixed Farsi/English option text needs bidi isolates and a matching
+	# base direction, otherwise Latin fragments inside a Farsi line (or
+	# Farsi words inside an English line) visually scramble.
+	b.text = "   " + GrammarTheme.bidi_fix(text)
+	b.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(text) else Control.TEXT_DIRECTION_LTR
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	b.toggle_mode = true
 	b.button_group = group
 	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	b.custom_minimum_size = Vector2(0, 72)
+	# Big, finger-friendly tap target for every answer option.
+	b.custom_minimum_size = Vector2(0, 96)
 	b.add_theme_font_size_override("font_size", 40)
 	b.add_theme_color_override("font_color", _c_text())
 	b.add_theme_color_override("font_hover_color", accent)
@@ -351,10 +356,14 @@ func _make_chart_input(placeholder: String) -> LineEdit:
 func _make_chip_button(text: String, filled := false) -> Button:
 	var b := Button.new()
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
-	b.text = text
+	# Bidi-safe display for mixed Farsi/English chips.
+	b.text = GrammarTheme.bidi_fix(text)
+	b.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(text) else Control.TEXT_DIRECTION_LTR
 	b.add_theme_font_size_override("font_size", 38)
 	b.add_theme_color_override("font_color", Color.WHITE if filled else _c_text())
 	b.add_theme_color_override("font_hover_color", Color.WHITE)
+	# Keep chips comfortably tappable.
+	b.custom_minimum_size = Vector2(0, 76)
 	if _font_regular:
 		b.add_theme_font_override("font", _font_regular)
 
@@ -389,13 +398,17 @@ func _make_chip_button(text: String, filled := false) -> Button:
 func _make_word_toggle(word: String, compact := false) -> Button:
 	var b := Button.new()
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
-	b.text = word
+	# Bidi-safe display for mixed Farsi/English words.
+	b.text = GrammarTheme.bidi_fix(word)
+	b.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(word) else Control.TEXT_DIRECTION_LTR
 	b.toggle_mode = true
 	if compact:
 		b.add_theme_font_size_override("font_size", 34)
-		b.custom_minimum_size = Vector2(36, 44)
+		# Even dense grid tiles stay at/above the minimum tap size.
+		b.custom_minimum_size = Vector2(48, 56)
 	else:
 		b.add_theme_font_size_override("font_size", 40)
+		b.custom_minimum_size = Vector2(0, 76)
 	b.add_theme_color_override("font_color", _c_text())
 	b.add_theme_color_override("font_pressed_color", Color.WHITE)
 	b.add_theme_color_override("font_hover_color", C_PRIMARY)
@@ -583,10 +596,13 @@ func _on_audio_panel_closed() -> void:
 func _make_button(text: String, color: Color) -> Button:
 	var btn := Button.new()
 	btn.mouse_filter = Control.MOUSE_FILTER_PASS
-	btn.text = text
+	# Bidi-safe display for mixed Farsi/English button labels.
+	btn.text = GrammarTheme.bidi_fix(text)
+	btn.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(text) else Control.TEXT_DIRECTION_LTR
 	btn.add_theme_font_size_override("font_size", 40)
 	btn.add_theme_color_override("font_color", Color.WHITE)
-	btn.custom_minimum_size = Vector2(0, 72)
+	# Comfortable tap target for action buttons.
+	btn.custom_minimum_size = Vector2(0, 88)
 	_set_button_color(btn, color)
 	if _font_bold:
 		btn.add_theme_font_override("font", _font_bold)

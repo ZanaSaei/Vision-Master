@@ -1,0 +1,1076 @@
+{
+	"lesson": {
+		"id": "vision3_lesson1_passive_voice",
+		"book": "Vision 3",
+		"lesson_number": 1.0,
+		"title_en": "Passive Voice",
+		"title_fa": "صدای مجهول",
+		"icon": "🔄",
+		"theme_color": "#8B5CF6",
+		"xp_per_unit": 10.0,
+		"units": [
+			{
+				"id": "unit1",
+				"type": "group",
+				"title_fa": "مجهول در حال ساده",
+				"title_en": "Passive Voice: Present Simple",
+				"activity_count": 10.0,
+				"activities": [
+					{
+						"id": "unit1_learn1",
+						"type": "learn",
+						"title_fa": "صدای مجهول چیست؟",
+						"title_en": "What is Passive Voice?",
+						"explanation": "در جمله‌ی معلوم، فاعل کار را انجام می‌دهد. در جمله‌ی مجهول، مفعول جمله‌ی معلوم به فاعل جدید تبدیل می‌شود و تمرکز روی خودِ کار است، نه انجام‌دهنده‌ی آن.",
+						"structure": "معلوم: فاعل + فعل + مفعول  →  مجهول: مفعول + am/is/are + قسمت سوم فعل",
+						"cards": [
+							{
+								"en": "Active: She makes pancakes.",
+								"fa": "معلوم: او پنکیک درست می‌کند."
+							},
+							{
+								"en": "Passive: Pancakes are made.",
+								"fa": "مجهول: پنکیک‌ها درست می‌شوند."
+							}
+						]
+					},
+					{
+						"id": "unit1_learn2",
+						"type": "learn",
+						"title_fa": "ساختار مجهول حال ساده",
+						"title_en": "Present Simple Passive Structure",
+						"explanation": "برای ساخت مجهول در زمان حال ساده، از am/is/are + قسمت سوم فعل استفاده می‌کنیم.",
+						"structure": "فاعل + am/is/are + قسمت سوم فعل",
+						"cards": [
+							{
+								"en": "Solutions are found by scientists.",
+								"fa": "راه‌حل‌ها توسط دانشمندان پیدا می‌شوند."
+							},
+							{
+								"en": "The window is cleaned every day.",
+								"fa": "پنجره هر روز تمیز می‌شود."
+							}
+						]
+					},
+					{
+						"id": "unit1_unscramble_structure",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن ساختار مجهول",
+						"instruction_fa": "کلمات را مرتب کن تا ساختار مجهول حال ساده کامل شود. از چپ به راست",
+						"items": [
+							{
+								"words": [
+									"قسمت سوم فعل",
+									"فاعل",
+									"am/is/are"
+								],
+								"answer": "فاعل am/is/are قسمت سوم فعل",
+								"hint_fa": "ساختار درست از چپ به راست:\nفاعل + am/is/are + قسمت سوم فعل"
+							}
+						]
+					},
+					{
+						"id": "unit1_matching_beforms",
+						"type": "matching",
+						"title_fa": "اتصال فاعل به فعل be مناسب",
+						"instruction_fa": "هر فاعل را با فعل be درست آن جفت کن.",
+						"items": [
+							{
+								"left": "Pancakes",
+								"right": "are"
+							},
+							{
+								"left": "The window",
+								"right": "is"
+							},
+							{
+								"left": "I",
+								"right": "am"
+							},
+							{
+								"left": "Solutions",
+								"right": "are"
+							}
+						]
+					},
+					{
+						"id": "unit1_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل be درست پر کن.",
+						"items": [
+							{
+								"text": "Pancakes ______ made every morning.",
+								"answers": [
+									"are"
+								],
+								"hint_fa": "فاعل جمع 'Pancakes' با are می‌آید.",
+								"explanation_fa": "آفرین! are درست است.",
+								"wrong_explanation_fa": "فاعل جمع در مجهول حال ساده با are می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit1_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل be درست پر کن.",
+						"items": [
+							{
+								"text": "Solutions to problems ______ found by scientists.",
+								"answers": [
+									"are"
+								],
+								"hint_fa": "فاعل جمع 'Solutions' با are می‌آید.",
+								"explanation_fa": "آفرین! are درست است.",
+								"wrong_explanation_fa": "فاعل جمع در مجهول حال ساده با are می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "Active: 'Scientists find solutions.' Passive: 'Solutions ___ found.'",
+								"options": [
+									"is",
+									"are",
+									"was",
+									"were"
+								],
+								"correct": 1.0,
+								"hint_fa": "فاعل جمع 'Solutions' چه فعل be‌ای می‌گیرد؟",
+								"explanation_fa": "آفرین! are درست است.",
+								"wrong_explanation_fa": "فاعل جمع در مجهول حال ساده با are می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit1_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "در حالت مجهول، فاعلِ جمله‌ی معلوم، فاعلِ جدیدِ جمله‌ی مجهول می‌شود.",
+								"fa": "در جمله‌ی مجهول، فاعل جمله‌ی معلوم به فاعل جدید تبدیل می‌شود.",
+								"answer": false,
+								"hint_fa": "در مجهول، این مفعول جمله‌ی معلوم است که به فاعل جدید تبدیل می‌شود.",
+								"explanation_fa": "غلط است. مفعول جمله‌ی معلوم به فاعل جمله‌ی مجهول تبدیل می‌شود، نه فاعل."
+							}
+						]
+					},
+					{
+						"id": "unit1_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله مجهول",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی مجهول درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"made",
+									"Pancakes",
+									"every",
+									"are",
+									"morning",
+									"."
+								],
+								"answer": "Pancakes are made every morning .",
+								"hint_fa": "فاعل (Pancakes) + are + قسمت سوم فعل (made) در ابتدا می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام جمله مجهول است؟",
+								"options": [
+									"She makes pancakes.",
+									"Pancakes are made.",
+									"She is making pancakes.",
+									"She made pancakes."
+								],
+								"correct": 1.0,
+								"hint_fa": "کدام جمله فاعل و فعل مجهول (be + قسمت سوم فعل) دارد؟",
+								"explanation_fa": "آفرین! 'Pancakes are made' جمله‌ی مجهول است.",
+								"wrong_explanation_fa": "جمله‌ی مجهول باید ساختار be + قسمت سوم فعل داشته باشد."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit2",
+				"type": "group",
+				"title_fa": "مجهول در گذشته ساده",
+				"title_en": "Passive Voice: Past Simple",
+				"activity_count": 8.0,
+				"activities": [
+					{
+						"id": "unit2_learn1",
+						"type": "learn",
+						"title_fa": "ساختار مجهول گذشته ساده",
+						"title_en": "Past Simple Passive Structure",
+						"explanation": "برای ساخت مجهول در گذشته ساده از was/were + قسمت سوم فعل استفاده می‌کنیم.",
+						"structure": "فاعل + was/were + قسمت سوم فعل",
+						"cards": [
+							{
+								"en": "The window was broken yesterday.",
+								"fa": "پنجره دیروز شکسته شد."
+							},
+							{
+								"en": "The cars were fixed.",
+								"fa": "ماشین‌ها تعمیر شدند."
+							}
+						]
+					},
+					{
+						"id": "unit2_matching_beforms",
+						"type": "matching",
+						"title_fa": "اتصال فاعل به was یا were",
+						"instruction_fa": "هر فاعل را با فعل be گذشته‌ی درست آن جفت کن.",
+						"items": [
+							{
+								"left": "The window",
+								"right": "was"
+							},
+							{
+								"left": "The cars",
+								"right": "were"
+							},
+							{
+								"left": "Penicillin",
+								"right": "was"
+							},
+							{
+								"left": "The books",
+								"right": "were"
+							}
+						]
+					},
+					{
+						"id": "unit2_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با was یا were پر کن.",
+						"items": [
+							{
+								"text": "The window ______ broken yesterday.",
+								"answers": [
+									"was"
+								],
+								"hint_fa": "فاعل مفرد 'The window' با was می‌آید.",
+								"explanation_fa": "آفرین! was درست است.",
+								"wrong_explanation_fa": "فاعل مفرد در مجهول گذشته ساده با was می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit2_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با was یا were پر کن.",
+						"items": [
+							{
+								"text": "The cars ______ fixed yesterday.",
+								"answers": [
+									"were"
+								],
+								"hint_fa": "فاعل جمع 'The cars' با were می‌آید.",
+								"explanation_fa": "آفرین! were درست است.",
+								"wrong_explanation_fa": "فاعل جمع در مجهول گذشته ساده با were می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit2_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "Active: 'Alexander Fleming discovered penicillin.' Passive: 'Penicillin ___ discovered.'",
+								"options": [
+									"is",
+									"are",
+									"was",
+									"were"
+								],
+								"correct": 2.0,
+								"hint_fa": "فاعل مفرد 'Penicillin' چه فعل be‌ای می‌گیرد؟",
+								"explanation_fa": "آفرین! was درست است.",
+								"wrong_explanation_fa": "فاعل مفرد در مجهول گذشته ساده با was می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit2_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "جمله‌ی «The window were broken» درست است.",
+								"fa": "جمله‌ی 'The window were broken' از نظر گرامری درست است.",
+								"answer": false,
+								"hint_fa": "فاعل مفرد 'The window' با was می‌آید، نه were.",
+								"explanation_fa": "غلط است. درست: The window was broken."
+							}
+						]
+					},
+					{
+						"id": "unit2_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله مجهول",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی مجهول درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"broken",
+									"window",
+									"was",
+									"The",
+									"yesterday",
+									"."
+								],
+								"answer": "The window was broken yesterday .",
+								"hint_fa": "فاعل (The window) + was + قسمت سوم فعل (broken) در ابتدا می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit2_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام جمله در حالت مجهولِ گذشته است؟",
+								"options": [
+									"The cars are fixed.",
+									"The cars were fixed.",
+									"The cars have been fixed.",
+									"The cars will be fixed."
+								],
+								"correct": 1.0,
+								"hint_fa": "کدام جمله was/were + قسمت سوم فعل دارد؟",
+								"explanation_fa": "آفرین! 'The cars were fixed' مجهول گذشته ساده است.",
+								"wrong_explanation_fa": "مجهول گذشته ساده با was/were + قسمت سوم فعل ساخته می‌شود."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit3",
+				"type": "group",
+				"title_fa": "مجهول در حال کامل",
+				"title_en": "Passive Voice: Present Perfect",
+				"activity_count": 8.0,
+				"activities": [
+					{
+						"id": "unit3_learn1",
+						"type": "learn",
+						"title_fa": "ساختار مجهول حال کامل",
+						"title_en": "Present Perfect Passive Structure",
+						"explanation": "برای ساخت مجهول در حال کامل از have/has been + قسمت سوم فعل استفاده می‌کنیم.",
+						"structure": "فاعل + have/has + been + قسمت سوم فعل",
+						"cards": [
+							{
+								"en": "The cars have been fixed.",
+								"fa": "ماشین‌ها تعمیر شده‌اند."
+							},
+							{
+								"en": "A new medicine has been made.",
+								"fa": "یک داروی جدید ساخته شده است."
+							}
+						]
+					},
+					{
+						"id": "unit3_matching_beforms",
+						"type": "matching",
+						"title_fa": "اتصال فاعل به has been یا have been",
+						"instruction_fa": "هر فاعل را با شکل درست آن جفت کن.",
+						"items": [
+							{
+								"left": "The cars",
+								"right": "have been"
+							},
+							{
+								"left": "A new medicine",
+								"right": "has been"
+							},
+							{
+								"left": "The books",
+								"right": "have been"
+							},
+							{
+								"left": "The window",
+								"right": "has been"
+							}
+						]
+					},
+					{
+						"id": "unit3_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با has یا have پر کن.",
+						"items": [
+							{
+								"text": "The cars ______ been fixed.",
+								"answers": [
+									"have"
+								],
+								"hint_fa": "فاعل جمع 'The cars' با have been می‌آید.",
+								"explanation_fa": "آفرین! have درست است.",
+								"wrong_explanation_fa": "فاعل جمع در مجهول حال کامل با have been می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit3_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با کلمه‌ی درست پر کن.",
+						"items": [
+							{
+								"text": "A new medicine has ______ made by doctors.",
+								"answers": [
+									"been"
+								],
+								"hint_fa": "بعد از has در مجهول حال کامل، been می‌آید.",
+								"explanation_fa": "آفرین! been درست است.",
+								"wrong_explanation_fa": "ساختار مجهول حال کامل: has/have + been + قسمت سوم فعل."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "Active: 'Doctors have made a new medicine.' Passive: 'A new medicine ___ been made.'",
+								"options": [
+									"has",
+									"have"
+								],
+								"correct": 0.0,
+								"hint_fa": "فاعل مفرد 'A new medicine' چه فعلی می‌گیرد؟",
+								"explanation_fa": "آفرین! has درست است.",
+								"wrong_explanation_fa": "فاعل مفرد در مجهول حال کامل با has been می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit3_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "جمله‌ی «The cars has been fixed» درست است.",
+								"fa": "جمله‌ی 'The cars has been fixed' از نظر گرامری درست است.",
+								"answer": false,
+								"hint_fa": "فاعل جمع 'The cars' با have been می‌آید، نه has been.",
+								"explanation_fa": "غلط است. درست: The cars have been fixed."
+							}
+						]
+					},
+					{
+						"id": "unit3_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله مجهول",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی مجهول درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"been",
+									"cars",
+									"have",
+									"The",
+									"fixed",
+									"."
+								],
+								"answer": "The cars have been fixed .",
+								"hint_fa": "فاعل (The cars) + have + been + قسمت سوم فعل (fixed) در ابتدا می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "شکل درستِ مجهولِ ماضی نقلی برای جمله‌ی «They have fixed the cars» کدام است؟",
+								"options": [
+									"The cars are fixed.",
+									"The cars were fixed.",
+									"The cars have been fixed.",
+									"The cars will be fixed."
+								],
+								"correct": 2.0,
+								"hint_fa": "کدام جمله have/has been + قسمت سوم فعل دارد؟",
+								"explanation_fa": "آفرین! 'The cars have been fixed' مجهول حال کامل است.",
+								"wrong_explanation_fa": "مجهول حال کامل با have/has been + قسمت سوم فعل ساخته می‌شود."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit4",
+				"type": "group",
+				"title_fa": "By + عامل انجام‌دهنده",
+				"title_en": "By + Agent",
+				"activity_count": 6.0,
+				"activities": [
+					{
+						"id": "unit4_learn1",
+						"type": "learn",
+						"title_fa": "by + عامل انجام‌دهنده",
+						"title_en": "By + Agent",
+						"explanation": "برای گفتن اینکه چه کسی کار را انجام داده، بعد از فعل مجهول از by + عامل استفاده می‌کنیم. اگر عامل مهم یا مشخص نباشد، می‌توان آن را حذف کرد.",
+						"structure": "فعل مجهول + by + عامل",
+						"cards": [
+							{
+								"en": "Penicillin was discovered by Alexander Fleming.",
+								"fa": "پنی‌سیلین توسط الکساندر فلمینگ کشف شد."
+							},
+							{
+								"en": "Pancakes are made every morning.",
+								"fa": "پنکیک‌ها هر روز صبح درست می‌شوند (بدون ذکر عامل)."
+							}
+						]
+					},
+					{
+						"id": "unit4_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با حرف اضافه‌ی درست پر کن.",
+						"items": [
+							{
+								"text": "Penicillin was discovered ______ Alexander Fleming.",
+								"answers": [
+									"by"
+								],
+								"hint_fa": "عامل انجام‌دهنده با by معرفی می‌شود.",
+								"explanation_fa": "آفرین! by درست است.",
+								"wrong_explanation_fa": "عامل انجام‌دهنده‌ی کار در مجهول با by معرفی می‌شود."
+							}
+						]
+					},
+					{
+						"id": "unit4_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "در جمله‌ی مجهول همیشه باید از «by» استفاده شود.",
+								"fa": "ذکر by + عامل در هر جمله‌ی مجهولی اجباری است.",
+								"answer": false,
+								"hint_fa": "وقتی عامل مهم یا مشخص نباشد، ذکر آن لازم نیست.",
+								"explanation_fa": "غلط است. مثل: Pancakes are made every morning (بدون ذکر by)."
+							}
+						]
+					},
+					{
+						"id": "unit4_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام جمله نیازی به ذکر «by» ندارد؟",
+								"options": [
+									"Pancakes are made every morning.",
+									"Penicillin was discovered by Alexander Fleming."
+								],
+								"correct": 0.0,
+								"hint_fa": "کدام جمله عامل انجام‌دهنده‌ی مهمی ندارد؟",
+								"explanation_fa": "آفرین! چون عامل مهم نیست، ذکر by لازم نیست.",
+								"wrong_explanation_fa": "وقتی عامل انجام‌دهنده مهم نباشد، نیازی به ذکر by نیست."
+							}
+						]
+					},
+					{
+						"id": "unit4_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله مجهول",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی مجهول درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"discovered",
+									"by",
+									"was",
+									"Penicillin",
+									"Alexander",
+									"Fleming",
+									"."
+								],
+								"answer": "Penicillin was discovered by Alexander Fleming .",
+								"hint_fa": "فاعل (Penicillin) + was + قسمت سوم فعل (discovered) + by + عامل در انتها می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit4_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام جمله عامل انجام‌دهنده را نشان می‌دهد؟",
+								"options": [
+									"The window was broken.",
+									"Penicillin was discovered by Alexander Fleming.",
+									"The cars have been fixed.",
+									"Solutions are found."
+								],
+								"correct": 1.0,
+								"hint_fa": "کدام جمله با by، مشخص می‌کند چه کسی کار را انجام داده؟",
+								"explanation_fa": "آفرین! این جمله با by، عامل (Alexander Fleming) را نشان می‌دهد.",
+								"wrong_explanation_fa": "فقط جمله‌ای که with by بیاید عامل انجام‌دهنده را نشان می‌دهد."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit5",
+				"type": "group",
+				"title_fa": "دنباله‌ی سؤالی (Tag Questions)",
+				"title_en": "Tag Questions",
+				"activity_count": 12.0,
+				"activities": [
+					{
+						"id": "unit5_learn1",
+						"type": "learn",
+						"title_fa": "جمله مثبت + دنباله‌ی منفی",
+						"title_en": "Positive Statement + Negative Tag",
+						"explanation": "وقتی جمله‌ی اصلی مثبت است، دنباله‌ی سؤالی (tag) آن منفی می‌شود.",
+						"structure": "جمله‌ی مثبت + , + فعل کمکی منفی + فاعل ضمیری؟",
+						"cards": [
+							{
+								"en": "Mina is happy, isn't she?",
+								"fa": "مینا خوشحال است، نه؟"
+							},
+							{
+								"en": "He's writing an email, isn't he?",
+								"fa": "او دارد ایمیل می‌نویسد، نه؟"
+							}
+						]
+					},
+					{
+						"id": "unit5_learn2",
+						"type": "learn",
+						"title_fa": "جمله منفی + دنباله‌ی مثبت",
+						"title_en": "Negative Statement + Positive Tag",
+						"explanation": "وقتی جمله‌ی اصلی منفی است، دنباله‌ی سؤالی (tag) آن مثبت می‌شود.",
+						"structure": "جمله‌ی منفی + , + فعل کمکی مثبت + فاعل ضمیری؟",
+						"cards": [
+							{
+								"en": "George wasn't hungry, was he?",
+								"fa": "جورج گرسنه نبود، بود؟"
+							},
+							{
+								"en": "His father won't buy a new car, will he?",
+								"fa": "پدرش ماشین جدید نمی‌خرد، می‌خرد؟"
+							}
+						]
+					},
+					{
+						"id": "unit5_matching_tags",
+						"type": "matching",
+						"title_fa": "اتصال جمله به دنباله‌ی سؤالی درست",
+						"instruction_fa": "هر جمله را با دنباله‌ی سؤالی درست آن جفت کن.",
+						"items": [
+							{
+								"left": "Mina is happy,",
+								"right": "isn't she?"
+							},
+							{
+								"left": "George wasn't hungry,",
+								"right": "was he?"
+							},
+							{
+								"left": "They are going to Hamedan,",
+								"right": "aren't they?"
+							},
+							{
+								"left": "His father won't buy a car,",
+								"right": "will he?"
+							}
+						]
+					},
+					{
+						"id": "unit5_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل کمکی درست پر کن.",
+						"items": [
+							{
+								"text": "Mina is happy, ______ she?",
+								"answers": [
+									"isn't"
+								],
+								"hint_fa": "جمله مثبت است، پس دنباله منفی می‌شود.",
+								"explanation_fa": "آفرین! isn't درست است.",
+								"wrong_explanation_fa": "جمله‌ی مثبت دنباله‌ی سؤالی منفی می‌گیرد."
+							}
+						]
+					},
+					{
+						"id": "unit5_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل کمکی درست پر کن.",
+						"items": [
+							{
+								"text": "George wasn't hungry, ______ he?",
+								"answers": [
+									"was"
+								],
+								"hint_fa": "جمله منفی است، پس دنباله مثبت می‌شود.",
+								"explanation_fa": "آفرین! was درست است.",
+								"wrong_explanation_fa": "جمله‌ی منفی دنباله‌ی سؤالی مثبت می‌گیرد."
+							}
+						]
+					},
+					{
+						"id": "unit5_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "جمله‌ی منفی، سوال تعقیبی (tag) منفی می‌گیرد.",
+								"fa": "جمله‌ی منفی، دنباله‌ی سؤالی منفی می‌گیرد.",
+								"answer": false,
+								"hint_fa": "جمله‌ی منفی دنباله‌ی مثبت می‌گیرد، نه منفی.",
+								"explanation_fa": "غلط است. جمله‌ی منفی دنباله‌ی سؤالی مثبت می‌گیرد."
+							}
+						]
+					},
+					{
+						"id": "unit5_learn3",
+						"type": "learn",
+						"title_fa": "فعل کمکی دنباله باید مثل جمله‌ی اصلی باشد",
+						"title_en": "Matching Auxiliary Verb",
+						"explanation": "دنباله‌ی سؤالی باید از همان فعل کمکی جمله‌ی اصلی (be, have, will, ...) استفاده کند. اگر جمله فعل کمکی نداشته باشد، از do/does/did استفاده می‌کنیم.",
+						"structure": "جمله + , + همان فعل کمکی (مثبت/منفی) + فاعل ضمیری؟",
+						"cards": [
+							{
+								"en": "The boys have broken the window, haven't they?",
+								"fa": "پسرها پنجره را شکسته‌اند، نه؟"
+							},
+							{
+								"en": "Reza plays football every day, doesn't he?",
+								"fa": "رضا هر روز فوتبال بازی می‌کند، نه؟"
+							}
+						]
+					},
+					{
+						"id": "unit5_fill_3",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل کمکی درست پر کن.",
+						"items": [
+							{
+								"text": "The boys have broken the window, ______ they?",
+								"answers": [
+									"haven't"
+								],
+								"hint_fa": "فعل کمکی جمله have است، پس دنباله haven't می‌شود.",
+								"explanation_fa": "آفرین! haven't درست است.",
+								"wrong_explanation_fa": "دنباله‌ی سؤالی از همان فعل کمکی جمله استفاده می‌کند."
+							}
+						]
+					},
+					{
+						"id": "unit5_fill_4",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل کمکی درست پر کن.",
+						"items": [
+							{
+								"text": "Reza plays football every day, ______ he?",
+								"answers": [
+									"doesn't"
+								],
+								"hint_fa": "جمله فعل کمکی ندارد، پس از doesn't استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! doesn't درست است.",
+								"wrong_explanation_fa": "وقتی جمله فعل کمکی ندارد، از do/does/did استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit5_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "Your sister has passed the exam, ___ she?",
+								"options": [
+									"hasn't",
+									"haven't",
+									"doesn't"
+								],
+								"correct": 0.0,
+								"hint_fa": "فعل کمکی جمله has است، پس دنباله چه شکلی می‌شود؟",
+								"explanation_fa": "آفرین! hasn't درست است.",
+								"wrong_explanation_fa": "دنباله‌ی سؤالی از همان فعل کمکی جمله استفاده می‌کند: has → hasn't."
+							}
+						]
+					},
+					{
+						"id": "unit5_tf_2",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "اگر جمله‌ی اصلی فعل کمکی نداشته باشد، در سوال تعقیبی از do/does/did استفاده می‌کنیم.",
+								"fa": "اگر جمله‌ی اصلی فعل کمکی نداشته باشد، در دنباله‌ی سؤالی از do/does/did استفاده می‌کنیم.",
+								"answer": true,
+								"hint_fa": "مثل جمله‌ی 'Reza plays football, doesn't he?'",
+								"explanation_fa": "درست است! این قانون اصلی ساخت دنباله‌ی سؤالی برای جملات بدون فعل کمکی است."
+							}
+						]
+					},
+					{
+						"id": "unit5_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "دنباله‌ی سؤالی درست برای 'They visited Yazd last year' کدام است؟",
+								"options": [
+									"visited they?",
+									"didn't they?",
+									"weren't they?",
+									"haven't they?"
+								],
+								"correct": 1.0,
+								"hint_fa": "جمله در گذشته ساده و بدون فعل کمکی است.",
+								"explanation_fa": "آفرین! didn't they؟ درست است.",
+								"wrong_explanation_fa": "برای جمله‌ی گذشته‌ی ساده بدون فعل کمکی، از didn't استفاده می‌کنیم."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit6",
+				"type": "group",
+				"title_fa": "جمله مرکب (Compound Sentences)",
+				"title_en": "Compound Sentences",
+				"activity_count": 10.0,
+				"activities": [
+					{
+						"id": "unit6_learn1",
+						"type": "learn",
+						"title_fa": "and (شباهت) و but (تضاد)",
+						"title_en": "And / But",
+						"explanation": "جمله‌ی مرکب از دو یا چند جمله‌ی ساده با یک کلمه‌ی ربط ساخته می‌شود. از and برای دو فعالیت یا احساس مشابه و از but برای نشان دادن تضاد استفاده می‌کنیم.",
+						"structure": "جمله‌ی ساده + , + and/but + جمله‌ی ساده",
+						"cards": [
+							{
+								"en": "I get up early, and I make an omelet myself.",
+								"fa": "صبح زود بیدار می‌شوم و خودم املت درست می‌کنم."
+							},
+							{
+								"en": "The book was boring, but Tom had to read it.",
+								"fa": "کتاب خسته‌کننده بود، اما تام مجبور بود آن را بخواند."
+							}
+						]
+					},
+					{
+						"id": "unit6_learn2",
+						"type": "learn",
+						"title_fa": "or (انتخاب) و so (نتیجه)",
+						"title_en": "Or / So",
+						"explanation": "از or برای نشان دادن دو انتخاب و از so برای نشان دادن نتیجه‌ی یک جمله استفاده می‌کنیم.",
+						"structure": "جمله‌ی ساده + , + or/so + جمله‌ی ساده",
+						"cards": [
+							{
+								"en": "You should do your homework, or you should wash the dishes.",
+								"fa": "یا باید تکالیفت را انجام بدهی یا ظرف‌ها را بشویی."
+							},
+							{
+								"en": "Saeed studied hard, so he passed the exam.",
+								"fa": "سعید سخت درس خواند، پس قبول شد."
+							}
+						]
+					},
+					{
+						"id": "unit6_matching_connectors",
+						"type": "matching",
+						"title_fa": "اتصال کلمه‌ی ربط به کاربردش",
+						"instruction_fa": "هر کلمه‌ی ربط را با کاربرد درست آن جفت کن.",
+						"items": [
+							{
+								"left": "and",
+								"right": "شباهت"
+							},
+							{
+								"left": "but",
+								"right": "تضاد"
+							},
+							{
+								"left": "or",
+								"right": "انتخاب"
+							},
+							{
+								"left": "so",
+								"right": "نتیجه"
+							}
+						]
+					},
+					{
+						"id": "unit6_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با کلمه‌ی ربط درست پر کن (شباهت).",
+						"items": [
+							{
+								"text": "We went to the park, ______ we had a wonderful time.",
+								"answers": [
+									"and"
+								],
+								"hint_fa": "دو فعالیت مشابه با and به هم وصل می‌شوند.",
+								"explanation_fa": "آفرین! and درست است.",
+								"wrong_explanation_fa": "برای نشان دادن شباهت از and استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit6_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با کلمه‌ی ربط درست پر کن (تضاد).",
+						"items": [
+							{
+								"text": "Susan has a pink dress, ______ she never wears it.",
+								"answers": [
+									"but"
+								],
+								"hint_fa": "این جمله یک تضاد نشان می‌دهد.",
+								"explanation_fa": "آفرین! but درست است.",
+								"wrong_explanation_fa": "برای نشان دادن تضاد از but استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit6_fill_3",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با کلمه‌ی ربط درست پر کن (انتخاب).",
+						"items": [
+							{
+								"text": "I go out tonight, ______ I take a rest.",
+								"answers": [
+									"or"
+								],
+								"hint_fa": "این جمله دو انتخاب را نشان می‌دهد.",
+								"explanation_fa": "آفرین! or درست است.",
+								"wrong_explanation_fa": "برای نشان دادن دو انتخاب از or استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit6_fill_4",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با کلمه‌ی ربط درست پر کن (نتیجه).",
+						"items": [
+							{
+								"text": "That dictionary is expensive, ______ I can't buy it.",
+								"answers": [
+									"so"
+								],
+								"hint_fa": "این جمله یک نتیجه نشان می‌دهد.",
+								"explanation_fa": "آفرین! so درست است.",
+								"wrong_explanation_fa": "برای نشان دادن نتیجه از so استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit6_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "وقتی دو جمله را با and/but/or/so ترکیب می‌کنیم، قبل از آن‌ها ویرگول می‌گذاریم.",
+								"fa": "قبل از and/but/or/so هنگام وصل کردن دو جمله، از کاما استفاده می‌شود.",
+								"answer": true,
+								"hint_fa": "این یک قانون نگارشی ثابت برای جمله‌ی مرکب است.",
+								"explanation_fa": "درست است! قبل از این کلمات ربط، کاما می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit6_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله مرکب",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی مرکب درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"hard",
+									"Saeed",
+									",",
+									"studied",
+									"so",
+									"passed",
+									"he",
+									"the",
+									"exam",
+									"."
+								],
+								"answer": "Saeed studied hard , so he passed the exam .",
+								"hint_fa": "جمله‌ی اول، کاما، کلمه‌ی ربط so، و جمله‌ی نتیجه در ادامه می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit6_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام کلمه‌ی ربط برای نشان دادن نتیجه استفاده می‌شود؟",
+								"options": [
+									"and",
+									"but",
+									"or",
+									"so"
+								],
+								"correct": 3.0,
+								"hint_fa": "کدام کلمه به معنای 'پس' یا 'در نتیجه' است؟",
+								"explanation_fa": "آفرین! so برای نشان دادن نتیجه به کار می‌رود.",
+								"wrong_explanation_fa": "so کلمه‌ی ربطی است که نتیجه‌ی یک جمله را نشان می‌دهد."
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

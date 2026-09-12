@@ -1,0 +1,114 @@
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": {
+					"en": "Circle the correct answer.",
+					"fa": "گزینهٔ درست را دور بزنید."
+				},
+				"items": [
+					{
+						"question": {
+							"en": "It was raining yesterday. I ___ in the living room.",
+							"fa": "دیروز باران می‌بارید. من ___ در اتاق نشیمن بودم."
+						},
+						"options": [
+							{ "en": "was sitting", "fa": "نشسته بودم" },
+							{ "en": "sit", "fa": "می‌نشینم" }
+						],
+						"answer": 0,
+						"explanation": {
+							"en": "Use 'was sitting' for an action in progress at a past time.",
+							"fa": "برای کاری که در زمانی مشخص در گذشته در جریان بوده از «was sitting» استفاده می‌کنیم."
+						}
+					},
+					{
+						"question": {
+							"en": "I ___ a movie when my friend called.",
+							"fa": "وقتی دوستم زنگ زد، من ___ فیلم تماشا می‌کردم."
+						},
+						"options": [
+							{ "en": "watched", "fa": "تماشا کردم" },
+							{ "en": "was watching", "fa": "داشتم تماشا می‌کردم" }
+						],
+						"answer": 1,
+						"explanation": {
+							"en": "The action was in progress when the other action happened: was watching.",
+							"fa": "وقتی کار دیگری اتفاق افتاد، این کار در جریان بود: was watching."
+						}
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": {
+					"en": "True or False?",
+					"fa": "درست یا نادرست؟"
+				},
+				"items": [
+					{
+						"statement": {
+							"en": "Past progressive describes an action that was in progress at a past time.",
+							"fa": "گذشتهٔ استمراری کاری را توصیف می‌کند که در زمانی مشخص در گذشته در جریان بوده است."
+						},
+						"answer": true,
+						"correction": {
+							"en": "Past progressive describes an action in progress at a past time.",
+							"fa": "گذشتهٔ استمراری کاری را توصیف می‌کند که در گذشته در جریان بوده است."
+						}
+					},
+					{
+						"statement": {
+							"en": "The reflexive pronoun for 'they' is 'theirselves'.",
+							"fa": "ضمیر انعکاسی برای «they» کلمهٔ «theirselves» است."
+						},
+						"answer": false,
+						"correction": {
+							"en": "The reflexive pronoun for 'they' is 'themselves'.",
+							"fa": "ضمیر انعکاسی برای «they» کلمهٔ «themselves» است."
+						}
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": {
+					"en": "Type the missing word.",
+					"fa": "کلمهٔ جاافتاده را بنویسید."
+				},
+				"items": [
+					{
+						"text": {
+							"en": "Alexander Graham Bell invented the telephone ___.",
+							"fa": "الکساندر گراهام بل تلفن را ___ اختراع کرد."
+						},
+						"answer": ["himself"],
+						"explanation": {
+							"en": "Reflexive pronoun for 'he': himself.",
+							"fa": "ضمیر انعکاسی برای «he»: himself."
+						}
+					},
+					{
+						"text": {
+							"en": "At 4 o'clock yesterday, I ___ (study) for my exam.",
+							"fa": "دیگر ساعت ۴ دیروز، من ___ برای امتحانم."
+						},
+						"answer": ["was studying"],
+						"explanation": {
+							"en": "Past progressive: was + verb-ing.",
+							"fa": "گذشتهٔ استمراری: was + فعل ingدار."
+						}
+					}
+				]
+			}
+		]
+	}
+}

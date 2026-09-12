@@ -131,9 +131,11 @@ static func bidi_fix(text: String) -> String:
 # SEMANTIC COLOR ACCESSORS  (theme-aware, all via Global)
 # ============================================================
 
-# Main app background behind everything.
+# Main app background behind everything — light blue in Light theme.
 static func background_color() -> Color:
-	return Global.get_theme_color("bg")
+	if Global.theme_is_dark():
+		return Global.get_theme_color("bg")
+	return Color("#BFDBFE")
 
 
 # Primary readable text.
@@ -240,7 +242,7 @@ const SPACING_SM := 50
 const SPACING_MD := 100
 const SPACING_LG := 30
 
-const BUTTON_HEIGHT := 78
+const BUTTON_HEIGHT := 88
 const CARD_RADIUS := 24
 
 # Shared font size for question answer buttons. Matching uses its own
@@ -591,9 +593,9 @@ static func style_card(
 # Professional raised header bar: a surface clearly different from the
 # background, with a soft drop shadow so it reads as floating above.
 static func header_style() -> StyleBoxFlat:
-	# Unified app header look: theme surface, rounded-bottom pill, accent underline.
+	# Unified app header look: light blue background, rounded-bottom pill, accent underline.
 	var style := rounded_box(
-		Global.get_theme_color("surface"),
+		Color("#BFDBFE"),
 		48,
 		Global.get_theme_color("accent"),
 		1

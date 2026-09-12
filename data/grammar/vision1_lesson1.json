@@ -413,7 +413,7 @@
 						"instruction_fa": "ساختار زیر را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "Wh + subject + will + base verb",
+								"statement": "ساختار سوال: Wh + فاعل + will + فعل ساده",
 								"fa": "ساختار سوال wh به صورت Wh + فاعل + will + شکل ساده فعل است.",
 								"answer": false,
 								"hint_fa": "در سوال wh باید will بعد از کلمه wh و قبل از فاعل می‌آید.",

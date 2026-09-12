@@ -1,0 +1,341 @@
+{
+	"lessons": [
+		{
+			"accent": "#0891B2",
+			"exam_exercises": [
+				{
+					"text": "Part 1 — Multiple Choice (۲۰ نمره — هر سؤال ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the best answer.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"who",
+								"which",
+								"whom",
+								"whose"
+							],
+							"question": "Majid needs a dictionary ______ can help him with English words."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"which",
+								"who",
+								"whom",
+								"does"
+							],
+							"question": "The teacher ______ recommended a dictionary is very helpful."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"have",
+								"had",
+								"has",
+								"will have"
+							],
+							"question": "If I ______ a good dictionary, I would learn new words faster."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"is",
+								"was",
+								"were",
+								"be"
+							],
+							"question": "If he ______ more careful, he wouldn't make mistakes."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"who",
+								"which",
+								"whom",
+								"does"
+							],
+							"question": "The pocket dictionary ______ Majid bought is very useful."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"am",
+								"was",
+								"were",
+								"be"
+							],
+							"question": "If I ______ you, I would buy an elementary dictionary."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"which",
+								"who",
+								"whose",
+								"whom"
+							],
+							"question": "This is the student ______ found the meaning of the word."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"will",
+								"would",
+								"can",
+								"do"
+							],
+							"question": "If she had more time, she ______ read every day."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"who",
+								"which",
+								"whom",
+								"does"
+							],
+							"question": "The app ______ helps with pronunciation is free."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"are",
+								"were",
+								"will be",
+								"be"
+							],
+							"question": "If we ______ more patient, we would understand better."
+						}
+					],
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 2 — Combine the Sentences Using Relative Pronouns (۱۵ نمره — هر جمله ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Combine the Sentences Using Relative Pronouns",
+					"items": [
+						{
+							"answer": "The teacher who is very patient explains new words.",
+							"text": "The teacher explains new words. She is very patient. → ______________________________"
+						},
+						{
+							"answer": "The dictionary which I use every day has many examples.",
+							"text": "The dictionary has many examples. I use it every day. → ______________________________"
+						},
+						{
+							"answer": "The student who studied hard learned English quickly.",
+							"text": "The student learned English quickly. He studied hard. → ______________________________"
+						},
+						{
+							"answer": "The app which helps with pronunciation is free.",
+							"text": "The app helps with pronunciation. It is free. → ______________________________"
+						},
+						{
+							"answer": "The book which I bought has a good introduction.",
+							"text": "The book has a good introduction. I bought the book. → ______________________________"
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 3 — Choose the Correct Verb Form for Conditional Type II (۱۵ نمره — هر سؤال ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the Correct Verb Form for Conditional Type II",
+					"items": [
+						{
+							"answer": "had",
+							"text": "If I ______ (have) more time, I would read more books."
+						},
+						{
+							"answer": "were",
+							"text": "If she ______ (be) here, she could help us with our homework."
+						},
+						{
+							"answer": "would learn",
+							"text": "We ______ (learn) faster if we practiced every day."
+						},
+						{
+							"answer": "knew",
+							"text": "If he ______ (know) the meaning, he would tell us."
+						},
+						{
+							"answer": "had",
+							"text": "If they ______ (have) a good dictionary, they would understand the text."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره — هر جمله ۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Rewrite the sentence as instructed.",
+					"items": [
+						{
+							"answer": "The man who helped me find a book works at the library.",
+							"task": "Combine using \"who\":",
+							"text": "The man works at the library. He helped me find a book."
+						},
+						{
+							"answer": "If I knew the answer, I would help you.",
+							"task": "Rewrite as Conditional Type II:",
+							"text": "I don't know the answer, so I can't help you."
+						},
+						{
+							"answer": "If I were a teacher, I would explain grammar clearly.",
+							"task": "Correct the mistake:",
+							"text": "If I was a teacher, I would explain grammar clearly."
+						}
+					],
+					"type": "transformation"
+				},
+				{
+					"text": "Part 5 — Reading and Choosing the Best Word (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Read the paragraph and choose the correct word.",
+					"items": [
+						{
+							"answer": 1,
+							"options": [
+								"who",
+								"which"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"who",
+								"which"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"has",
+								"had"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"will",
+								"would"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"am",
+								"were"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"will",
+								"would"
+							],
+							"question": "Choose the correct word:"
+						}
+					],
+					"passage": "Majid needs a dictionary who/which can help him learn new words. He found a teacher who/which recommended a good dictionary for him. If Majid has/had more money, he will/would buy an advanced dictionary. If I am/were Majid, I will/would start with an elementary one.",
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 6 — Matching (۱۰ نمره — هر مورد ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Match column A with column B.",
+					"items": [
+						{
+							"answer": "b) which helped me is on the desk.",
+							"options": [
+								"a) who plays golf lives at No. 10.",
+								"b) which helped me is on the desk.",
+								"c) I would read every day.",
+								"d) which I lost yesterday.",
+								"e) she could help us."
+							],
+							"text": "1. The dictionary"
+						},
+						{
+							"answer": "c) I would read every day.",
+							"options": [
+								"a) who plays golf lives at No. 10.",
+								"b) which helped me is on the desk.",
+								"c) I would read every day.",
+								"d) which I lost yesterday.",
+								"e) she could help us."
+							],
+							"text": "2. If I had more time,"
+						},
+						{
+							"answer": "a) who plays golf lives at No. 10.",
+							"options": [
+								"a) who plays golf lives at No. 10.",
+								"b) which helped me is on the desk.",
+								"c) I would read every day.",
+								"d) which I lost yesterday.",
+								"e) she could help us."
+							],
+							"text": "3. The man"
+						},
+						{
+							"answer": "e) she could help us.",
+							"options": [
+								"a) who plays golf lives at No. 10.",
+								"b) which helped me is on the desk.",
+								"c) I would read every day.",
+								"d) which I lost yesterday.",
+								"e) she could help us."
+							],
+							"text": "4. If she were here,"
+						},
+						{
+							"answer": "d) which I lost yesterday.",
+							"options": [
+								"a) who plays golf lives at No. 10.",
+								"b) which helped me is on the desk.",
+								"c) I would read every day.",
+								"d) which I lost yesterday.",
+								"e) she could help us."
+							],
+							"text": "5. I found the keys"
+						}
+					],
+					"type": "matching"
+				},
+				{
+					"text": "Part 7 — Short Writing (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "In 3-4 complete sentences, describe a dictionary or app you use, and write what you would do if you had a better one. Use at least one relative clause and one Conditional Type II sentence. ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________",
+					"items": [
+						{
+							"text": "In 3-4 complete sentences, describe a dictionary or app you use, and write what you would do if you had a better one. Use at least one relative clause and one Conditional Type II sentence. ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________"
+						}
+					],
+					"type": "open_ended"
+				}
+			]
+		}
+	]
+}

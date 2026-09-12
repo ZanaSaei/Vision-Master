@@ -1,0 +1,70 @@
+ 
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": { "en": "Circle the correct answer.", "fa": "گزینهٔ درست را دور بزنید." },
+				"items": [
+					{
+						"question": { "en": "The students need to read ___ books about history.", "fa": "دانش‌آموزان باید ___ کتاب دربارهٔ تاریخ بخوانند." },
+						"options": [
+							{ "en": "many", "fa": "بسیاری" },
+							{ "en": "much", "fa": "مقدار زیادی" }
+						],
+						"answer": 0,
+						"explanation": { "en": "'Books' is countable, so we use 'many'.", "fa": "«books» قابل‌شمارش است، پس از «many» استفاده می‌کنیم." }
+					},
+					{
+						"question": { "en": "Could you please bring me ___ water?", "fa": "لطفاً می‌توانی ___ آب برایم بیاوری؟" },
+						"options": [
+							{ "en": "a glass of", "fa": "یک لیوان" },
+							{ "en": "a piece of", "fa": "یک تکه" }
+						],
+						"answer": 0,
+						"explanation": { "en": "Water is a liquid, so we measure it with 'a glass of'.", "fa": "آب مایع است، پس با «a glass of» اندازه‌گیری می‌شود." }
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": { "en": "True or False?", "fa": "درست یا نادرست؟" },
+				"items": [
+					{
+						"statement": { "en": "'Information' is an uncountable noun.", "fa": "کلمهٔ «information» اسم غیرقابل‌شمارش است." },
+						"answer": true,
+						"correction": { "en": "'Information' is uncountable and never takes an -s.", "fa": "«information» غیرقابل‌شمارش است و هرگز جمع بسته نمی‌شود." }
+					},
+					{
+						"statement": { "en": "We can say 'two breads' to buy bread.", "fa": "برای خرید نان می‌توانیم بگوییم «two breads»." },
+						"answer": false,
+						"correction": { "en": "Bread is uncountable: we say 'two loaves of bread' or 'some bread'.", "fa": "نان غیرقابل‌شمارش است: می‌گوییم «two loaves of bread» یا «some bread»." }
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": { "en": "Type the missing word or phrase.", "fa": "کلمه یا عبارت جاافتاده را بنویسید." },
+				"items": [
+					{
+						"text": { "en": "Please buy ___ bread for breakfast.", "fa": "لطفاً ___ نان برای صبحانه بخر." },
+						"answer": ["a loaf of"],
+						"explanation": { "en": "Bread is uncountable, so we use the measure word 'a loaf of'.", "fa": "نان غیرقابل‌شمارش است، پس از واحد اندازه‌گیری «a loaf of» استفاده می‌کنیم." }
+					},
+					{
+						"text": { "en": "Children should drink ___ milk.", "fa": "کودکان باید ___ شیر بنوشند." },
+						"answer": ["a lot of"],
+						"explanation": { "en": "Milk is uncountable, so we use 'a lot of' (not 'a few').", "fa": "شیر غیرقابل‌شمارش است، پس از «a lot of» استفاده می‌کنیم (نه a few)." }
+					}
+				]
+			}
+		]
+	}
+}

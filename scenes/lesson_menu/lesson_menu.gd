@@ -49,11 +49,17 @@ const SECTIONS_VISION_2_3 := [
 ]
 
 const SECTION_ACCENT_COLORS: Array[Color] = [
-	Color("#2563EB"), Color("#0EA5A4"), Color("#F59E0B"),
+	Color("#3B82F6"), Color("#22C55E"), Color("#EF4444"),
 	Color("#9333EA"), Color("#0D9488"), Color("#E11D48"),
 	Color("#7C3AED"), Color("#D97706"), Color("#64748B"),
 	Color("#0891B2"),
 ]
+
+const BOOK_COLORS := {
+	1: Color("#3B82F6"),   # Vision 1 — solid light blue
+	2: Color("#22C55E"),   # Vision 2 — solid green
+	3: Color("#EF4444"),   # Vision 3 — solid red
+}
 
 const LESSON_TITLES := {
 	1: ["نجات طبیعت", "شگفتی‌های آفرینش", "ارزش دانش", "سفر به دور دنیا"],
@@ -78,6 +84,10 @@ var _card_accents: Array[Color] = []
 func _ready() -> void:
 	_book = Global.current_book
 	_lesson = Global.current_lesson
+
+	# Kick off the on-demand download of this lesson's media (audio + images)
+	# so every section opened from here has its files locally.
+	Content.ensure_lesson(_book, _lesson)
 
 	_build_ui()
 
@@ -232,11 +242,12 @@ func _on_theme_changed(_mode: int) -> void:
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
+	var book_accent: Color = BOOK_COLORS.get(_book, MenuStyle.accent())
 	if _title_label:
-		_title_label.add_theme_color_override("font_color", MenuStyle.accent())
+		_title_label.add_theme_color_override("font_color", book_accent)
 	if _subtitle_badge:
-		_subtitle_badge.add_theme_stylebox_override("normal", MenuStyle.icon_chip(MenuStyle.accent(), 26))
-		_subtitle_badge.add_theme_color_override("font_color", MenuStyle.pill_text(MenuStyle.accent()))
+		_subtitle_badge.add_theme_stylebox_override("normal", MenuStyle.icon_chip(book_accent, 26))
+		_subtitle_badge.add_theme_color_override("font_color", MenuStyle.pill_text(book_accent))
 	var header: PanelContainer = get_node_or_null("HeaderBar") as PanelContainer
 	if header:
 		header.add_theme_stylebox_override("panel", MenuStyle.header_bar_style(44, true))

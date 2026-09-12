@@ -1,0 +1,333 @@
+{
+	"lessons": [
+		{
+			"accent": "#7C3AED",
+			"exam_exercises": [
+				{
+					"text": "Part 1 — Multiple Choice (۲۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the best answer.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"taught",
+								"was teaching",
+								"teach",
+								"teaches"
+							],
+							"question": "Razi ______ medicine to young people in Ray Hospital."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"find",
+								"were finding",
+								"found",
+								"finds"
+							],
+							"question": "When the flu was getting around, doctors ______ a new medicine."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"Was",
+								"Were",
+								"Did",
+								"Do"
+							],
+							"question": "______ you doing an experiment at 4 o'clock yesterday?"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"was",
+								"did",
+								"does",
+								"is"
+							],
+							"question": "Edison ______ not attend school. He learned science by himself."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"did",
+								"was doing",
+								"does",
+								"do"
+							],
+							"question": "While the scientist ______ research, his students were taking notes."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"himself",
+								"herself",
+								"itself",
+								"themselves"
+							],
+							"question": "Nasireddin Toosi built the observatory ______."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"was",
+								"were",
+								"did",
+								"are"
+							],
+							"question": "The students ______ working in the laboratory when the bell rang."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"found",
+								"was finding",
+								"find",
+								"finds"
+							],
+							"question": "Alexander Fleming ______ penicillin when he was working on bacteria."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"himself",
+								"herself",
+								"themselves",
+								"itself"
+							],
+							"question": "My classmates taught ______ how to use the microscope."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"was",
+								"were",
+								"did",
+								"does"
+							],
+							"question": "What ______ Mahsa doing when her mother called?"
+						}
+					],
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 2 — Fill in the Blanks (۱۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Fill in the blanks with the correct form (solve, develop, quit, research, believe).",
+					"items": [
+						{
+							"answer": "develops",
+							"text": "Human knowledge ______ (develop) with scientists' hard work."
+						},
+						{
+							"answer": "quit",
+							"text": "Edison never ______ (quit) trying to find answers."
+						},
+						{
+							"answer": "were doing",
+							"text": "At that time, scientists ______ (do) research on medicine."
+						},
+						{
+							"answer": "solved",
+							"text": "He ______ (solve) the problem while his friend was watching."
+						},
+						{
+							"answer": "believe",
+							"text": "Great scientists always ______ (believe) in themselves."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 3 — Simple Past or Past Progressive (۱۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the correct form: Simple Past or Past Progressive.",
+					"items": [
+						{
+							"answer": "was studying",
+							"text": "When the power went out, I ______ (study / was studying)."
+						},
+						{
+							"answer": "was working",
+							"text": "Edison ______ (worked / was working) as a young boy."
+						},
+						{
+							"answer": "was reading",
+							"text": "She ______ (read / was reading) when the phone rang."
+						},
+						{
+							"answer": "was doing",
+							"text": "The scientist ______ (did / was doing) an experiment when he found the answer."
+						},
+						{
+							"answer": "was sitting",
+							"text": "Newton ______ (sat / was sitting) under a tree when the apple fell."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Rewrite the sentence as instructed.",
+					"items": [
+						{
+							"answer": "Reza was solving a math problem when the phone rang.",
+							"task": "Combine using \"when\":",
+							"text": "Reza was solving a math problem. The phone rang."
+						},
+						{
+							"answer": "Were the scientists doing research in 1928?",
+							"task": "Rewrite as a question:",
+							"text": "The scientists were doing research in 1928."
+						},
+						{
+							"answer": "Marie Curie found uranium herself.",
+							"task": "Rewrite using a self pronoun for emphasis:",
+							"text": "Marie Curie found uranium. Nobody helped her."
+						}
+					],
+					"type": "transformation"
+				},
+				{
+					"text": "Part 5 — Reading (۱۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Read the passage and choose the best verb form.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"was",
+								"is"
+							],
+							"question": "Choose the best form:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"was doing",
+								"did"
+							],
+							"question": "Choose the best form:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"was trying",
+								"tried"
+							],
+							"question": "Choose the best form:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"found",
+								"was finding"
+							],
+							"question": "Choose the best form:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"was working",
+								"worked"
+							],
+							"question": "Choose the best form:"
+						}
+					],
+					"passage": "Alexander Fleming _____ a great researcher. He _____ research in his laboratory in winter 1928. He _____ to find a new medicine to save people's lives. He _____ a new medicine when he _____ on antibiotics. This was the amazing penicillin.",
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 6 — Matching (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Match column A with column B to make correct sentences.",
+					"items": [
+						{
+							"answer": "when an apple hit his head.",
+							"options": [
+								"he became a famous scientist.",
+								"when an apple hit his head.",
+								"himself by reading books.",
+								"themselves.",
+								"when they found the medicine."
+							],
+							"text": "Newton was sitting under a tree"
+						},
+						{
+							"answer": "himself by reading books.",
+							"options": [
+								"he became a famous scientist.",
+								"when an apple hit his head.",
+								"himself by reading books.",
+								"themselves.",
+								"when they found the medicine."
+							],
+							"text": "Edison taught"
+						},
+						{
+							"answer": "when they found the medicine.",
+							"options": [
+								"he became a famous scientist.",
+								"when an apple hit his head.",
+								"himself by reading books.",
+								"themselves.",
+								"when they found the medicine."
+							],
+							"text": "The scientists were doing research"
+						},
+						{
+							"answer": "he became a famous scientist.",
+							"options": [
+								"he became a famous scientist.",
+								"when an apple hit his head.",
+								"himself by reading books.",
+								"themselves.",
+								"when they found the medicine."
+							],
+							"text": "After years of hard work,"
+						},
+						{
+							"answer": "themselves.",
+							"options": [
+								"he became a famous scientist.",
+								"when an apple hit his head.",
+								"himself by reading books.",
+								"themselves.",
+								"when they found the medicine."
+							],
+							"text": "Marie Curie found uranium"
+						}
+					],
+					"type": "matching"
+				},
+				{
+					"text": "Part 7 — Short Writing (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Write in 3-4 complete sentences. Use at least one past progressive sentence and one self pronoun.",
+					"items": [
+						{
+							"text": "Write about what you were doing yesterday at 8 o'clock in the evening, and describe one thing you did by yourself."
+						}
+					],
+					"type": "open_ended"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,337 @@
+{
+	"lessons": [
+		{
+			"accent": "#EA580C",
+			"exam_exercises": [
+				{
+					"text": "Part 1 — Multiple Choice (۲۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the best answer.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"can",
+								"cans",
+								"canning",
+								"to can"
+							],
+							"question": "Tourists ______ visit the historical sites of the city."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"Must",
+								"May",
+								"Do",
+								"Am"
+							],
+							"question": "______ I take a picture of the pyramids?"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"should",
+								"shoulds",
+								"musting",
+								"can to"
+							],
+							"question": "Travelers ______ be polite and respect local customs."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"must not",
+								"may",
+								"can",
+								"should to"
+							],
+							"question": "You ______ break the rules when you travel abroad."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"in / on",
+								"on / at",
+								"at / in",
+								"in / at"
+							],
+							"question": "My family will travel ______ summer ______ Friday."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"can",
+								"cans",
+								"musting",
+								"do can"
+							],
+							"question": "Diego ______ speak Spanish very well because he is from Spain."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"must",
+								"mustn't",
+								"may not",
+								"don't must"
+							],
+							"question": "We ______ get a visa to visit some countries."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"at",
+								"on",
+								"in",
+								"next to"
+							],
+							"question": "The travel agent works ______ Madrid."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"should / at",
+								"should / in",
+								"can / on",
+								"may / next to"
+							],
+							"question": "Passengers ______ arrive at the airport ______ 6 o'clock."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"must not",
+								"can",
+								"may",
+								"should"
+							],
+							"question": "You ______ hurt animals or plants when you travel."
+						}
+					],
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 2 — Fill in the Blanks (۱۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Fill in the blanks with the correct modal (can, may, must, should, must not).",
+					"items": [
+						{
+							"answer": "can",
+							"text": "Tourists ______ find many beautiful sites in Iran."
+						},
+						{
+							"answer": "must",
+							"text": "You ______ get a passport before your trip."
+						},
+						{
+							"answer": "May",
+							"text": "______ I ask you a question about your vacation?"
+						},
+						{
+							"answer": "should",
+							"text": "Travelers ______ protect nature and historical sites."
+						},
+						{
+							"answer": "must not",
+							"text": "You ______ say bad things about a country's culture."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 3 — Prepositions (۱۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the correct preposition.",
+					"items": [
+						{
+							"answer": "in",
+							"text": "My cousin's vacation is ______ August."
+						},
+						{
+							"answer": "at",
+							"text": "We will meet ______ the airport."
+						},
+						{
+							"answer": "at",
+							"text": "We will meet at the airport ______ 7 o'clock."
+						},
+						{
+							"answer": "in",
+							"text": "There are many pyramids ______ Egypt."
+						},
+						{
+							"answer": "on",
+							"text": "Our flight leaves ______ Wednesday morning."
+						},
+						{
+							"answer": "next to",
+							"text": "The hotel is ______ the train station."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Rewrite the sentence as instructed.",
+					"items": [
+						{
+							"answer": "Must tourists carry their passports?",
+							"task": "Rewrite as a question:",
+							"text": "Tourists must carry their passports."
+						},
+						{
+							"answer": "You may not take photos here.",
+							"task": "Rewrite in the negative form:",
+							"text": "You may take photos here."
+						},
+						{
+							"answer": "You should buy tickets online.",
+							"task": "Rewrite using \"should\":",
+							"text": "It is a good idea to buy tickets online."
+						}
+					],
+					"type": "transformation"
+				},
+				{
+					"text": "Part 5 — Reading (۱۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Read the passage and choose the best modal.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"must",
+								"mustn't"
+							],
+							"question": "Choose the best form:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"should",
+								"shouldn't"
+							],
+							"question": "Choose the best form:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"can",
+								"must not"
+							],
+							"question": "Choose the best form:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"should",
+								"shouldn't"
+							],
+							"question": "Choose the best form:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"must not",
+								"may"
+							],
+							"question": "Choose the best form:"
+						}
+					],
+					"passage": "Before traveling abroad, tourists _____ get a passport and a visa. They _____ learn about their destination before the trip. Travelers _____ ask a travel agency for help with tickets and hotels. When they arrive, they _____ respect the local culture. They _____ hurt animals or damage historical sites.",
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 6 — Matching (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Match column A with column B to make correct sentences.",
+					"items": [
+						{
+							"answer": "get a passport before traveling.",
+							"options": [
+								"at 8 o'clock in the morning.",
+								"speak four languages fluently.",
+								"get a passport before traveling.",
+								"next to the old museum.",
+								"respect other people's culture."
+							],
+							"text": "Tourists must"
+						},
+						{
+							"answer": "at 8 o'clock in the morning.",
+							"options": [
+								"at 8 o'clock in the morning.",
+								"speak four languages fluently.",
+								"get a passport before traveling.",
+								"next to the old museum.",
+								"respect other people's culture."
+							],
+							"text": "The plane leaves"
+						},
+						{
+							"answer": "respect other people's culture.",
+							"options": [
+								"at 8 o'clock in the morning.",
+								"speak four languages fluently.",
+								"get a passport before traveling.",
+								"next to the old museum.",
+								"respect other people's culture."
+							],
+							"text": "You should"
+						},
+						{
+							"answer": "speak four languages fluently.",
+							"options": [
+								"at 8 o'clock in the morning.",
+								"speak four languages fluently.",
+								"get a passport before traveling.",
+								"next to the old museum.",
+								"respect other people's culture."
+							],
+							"text": "My teacher can"
+						},
+						{
+							"answer": "next to the old museum.",
+							"options": [
+								"at 8 o'clock in the morning.",
+								"speak four languages fluently.",
+								"get a passport before traveling.",
+								"next to the old museum.",
+								"respect other people's culture."
+							],
+							"text": "The travel agency is"
+						}
+					],
+					"type": "matching"
+				},
+				{
+					"text": "Part 7 — Short Writing (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Write in 3-4 complete sentences. Use at least two different modals (can, may, must, should).",
+					"items": [
+						{
+							"text": "Write about things a tourist should/must/can do when visiting your country."
+						}
+					],
+					"type": "open_ended"
+				}
+			]
+		}
+	]
+}

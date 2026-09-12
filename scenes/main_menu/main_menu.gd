@@ -11,6 +11,7 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_BOOK_MENU    := "res://scenes/book_menu/BookMenu.tscn"
 const SCENE_SAVED_WORDS  := "res://scenes/saved_words/SavedWords.tscn"
 const SCENE_SETTINGS     := "res://scenes/settings/Settings.tscn"
+const SCENE_ACCOUNT      := "res://scenes/auth/Auth.tscn"
 const SCENE_FINAL_EXAMS  := "res://scenes/exam/FinalExams.tscn"
 const SCENE_PURCHASE     := "res://scenes/purchase/Purchase.tscn"
 const SCENE_LEITNER      := "res://scenes/review/WordReview.tscn"
@@ -18,9 +19,9 @@ const SCENE_ABOUT_ME     := "res://scenes/about_me/AboutMe.tscn"
 const SCENE_MAIN_MENU    := "res://scenes/main_menu/MainMenu.tscn"
 
 # --- Per-book accent identities (friendly, modern) ---
-const COLOR_BOOK1 := Color("#2563EB")   # Vision 1 — blue
-const COLOR_BOOK2 := Color("#16A34A")   # Vision 2 — green
-const COLOR_BOOK3 := Color("#EA580C")   # Vision 3 — orange
+const COLOR_BOOK1 := Color("#3B82F6")   # Vision 1 — solid light blue
+const COLOR_BOOK2 := Color("#22C55E")   # Vision 2 — solid green
+const COLOR_BOOK3 := Color("#EF4444")   # Vision 3 — solid red
 const COLOR_EXAM  := Color("#7C3AED")   # Final exams — violet
 
 # --- Book metadata ---
@@ -63,6 +64,7 @@ func _ready() -> void:
 	_hamburger.pressed.connect(_side_menu.toggle)
 	_side_menu.saved_words_pressed.connect(_on_side_menu_saved_words_pressed)
 	_side_menu.settings_pressed.connect(_on_side_menu_settings_pressed)
+	_side_menu.account_pressed.connect(_on_side_menu_account_pressed)
 	_side_menu.purchase_pressed.connect(_on_side_menu_purchase_pressed)
 	_side_menu.leitner_pressed.connect(_on_side_menu_leitner_pressed)
 	_side_menu.about_me_pressed.connect(_on_side_menu_about_me_pressed)
@@ -212,7 +214,7 @@ func _build_hero() -> VBoxContainer:
 
 	var subtitle := Label.new()
 	subtitle.name = "AppSubtitle"
-	subtitle.text = "یادگیری زبان انگلیسی · دبیرستان"
+	subtitle.text = "یادگیری زبان انگلیسی مدرسه · متوسطه دوم"
 	subtitle.add_theme_font_override("font", MenuStyle.vazir())
 	subtitle.add_theme_font_size_override("font_size", 38)
 	subtitle.add_theme_color_override("font_color", MenuStyle.subtitle_color())
@@ -246,7 +248,7 @@ func _apply_hamburger_style() -> void:
 		return
 	var dark := MenuStyle.is_dark()
 	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(1, 1, 1, 0.96) if not dark else Color(0.09, 0.10, 0.20, 0.96)
+	normal.bg_color = Color("#FFF7BA", 0.96) if not dark else Color(0.09, 0.10, 0.20, 0.96)
 	normal.set_corner_radius_all(48)
 	normal.set_border_width_all(1)
 	normal.border_color = MenuStyle.accent() if not dark else Color(1, 1, 1, 0.18)
@@ -397,6 +399,13 @@ func _on_side_menu_about_me_pressed() -> void:
 		return
 	_navigating = true
 	TransitionManager.change_scene(SCENE_ABOUT_ME)
+
+
+func _on_side_menu_account_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	TransitionManager.change_scene(SCENE_ACCOUNT)
 
 
 func _on_side_menu_saved_words_pressed() -> void:

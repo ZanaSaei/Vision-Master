@@ -3,5 +3,5 @@
 addons/
 export_presets.cfg
 build/
-
+assets/
 *.translation

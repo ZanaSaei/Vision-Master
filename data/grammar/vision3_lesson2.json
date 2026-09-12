@@ -1,0 +1,1014 @@
+{
+	"lesson": {
+		"id": "vision3_lesson2_relative_clauses",
+		"book": "Vision 3",
+		"lesson_number": 2.0,
+		"title_en": "Relative Clauses",
+		"title_fa": "جملات وصفی",
+		"icon": "🔍",
+		"theme_color": "#0EA5E9",
+		"xp_per_unit": 10.0,
+		"units": [
+			{
+				"id": "unit1",
+				"type": "group",
+				"title_fa": "who برای اشخاص (فاعل جمله وصفی)",
+				"title_en": "Who for People (Subject)",
+				"activity_count": 9.0,
+				"activities": [
+					{
+						"id": "unit1_learn1",
+						"type": "learn",
+						"title_fa": "who برای معرفی اشخاص",
+						"title_en": "Who for People",
+						"explanation": "جمله‌ی وصفی به اسم قبل از خودش اطلاعات بیشتری می‌دهد. از who برای معرفی اشخاص در جمله‌ی وصفی، وقتی who فاعل آن جمله است، استفاده می‌کنیم.",
+						"structure": "اسم (شخص) + who + فعل",
+						"cards": [
+							{
+								"en": "The man who plays golf lives at No. 10.",
+								"fa": "مردی که گلف بازی می‌کند در شماره‌ی ۱۰ زندگی می‌کند."
+							},
+							{
+								"en": "The woman who works there is my aunt.",
+								"fa": "زنی که آنجا کار می‌کند خاله‌ی من است."
+							}
+						]
+					},
+					{
+						"id": "unit1_matching_who",
+						"type": "matching",
+						"title_fa": "اتصال جمله وصفی به اسم مناسب",
+						"instruction_fa": "هر توصیف را به اسمی که به آن اشاره دارد وصل کن.",
+						"items": [
+							{
+								"left": "who plays golf",
+								"right": "The man"
+							},
+							{
+								"left": "who works there",
+								"right": "The woman"
+							},
+							{
+								"left": "who helps us",
+								"right": "The teacher"
+							},
+							{
+								"left": "who lives near us",
+								"right": "Our neighbor"
+							}
+						]
+					},
+					{
+						"id": "unit1_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با ضمیر وصفی درست پر کن.",
+						"items": [
+							{
+								"text": "The man ______ plays golf lives at No. 10.",
+								"answers": [
+									"who"
+								],
+								"hint_fa": "برای اشخاص وقتی فاعل جمله‌ی وصفی هستند از who استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! who درست است.",
+								"wrong_explanation_fa": "برای اشخاص (فاعل جمله‌ی وصفی) از who استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit1_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با ضمیر وصفی درست پر کن.",
+						"items": [
+							{
+								"text": "The teacher ______ helps us is very kind.",
+								"answers": [
+									"who"
+								],
+								"hint_fa": "برای اشخاص از who استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! who درست است.",
+								"wrong_explanation_fa": "برای اشخاص (فاعل جمله‌ی وصفی) از who استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام کلمه جمله‌ی وصفی درباره‌ی یک شخص در نقش فاعل را شروع می‌کند؟",
+								"options": [
+									"which",
+									"who",
+									"whom",
+									"whose"
+								],
+								"correct": 1.0,
+								"hint_fa": "کدام کلمه برای اشخاص و به‌عنوان فاعل جمله‌ی وصفی به کار می‌رود؟",
+								"explanation_fa": "آفرین! who درست است.",
+								"wrong_explanation_fa": "برای اشخاص در نقش فاعل جمله‌ی وصفی از who استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit1_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "«who» در جملات وصفی برای افراد استفاده می‌شود.",
+								"fa": "کلمه‌ی who می‌تواند برای اشخاص در جمله‌ی وصفی استفاده شود.",
+								"answer": true,
+								"hint_fa": "who مخصوص اشخاص است.",
+								"explanation_fa": "درست است! who برای معرفی اشخاص به کار می‌رود."
+							}
+						]
+					},
+					{
+						"id": "unit1_tf_2",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "«who» می‌تواند برای توصیف شیءای مثل کتاب یا ماشین استفاده شود.",
+								"fa": "who می‌تواند برای توصیف یک شیء مثل کتاب یا ماشین استفاده شود.",
+								"answer": false,
+								"hint_fa": "who فقط برای اشخاص است، نه اشیا.",
+								"explanation_fa": "غلط است! who فقط برای اشخاص به کار می‌رود؛ برای اشیا از which استفاده می‌شود."
+							}
+						]
+					},
+					{
+						"id": "unit1_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله وصفی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"golf",
+									"who",
+									"man",
+									"plays",
+									"The",
+									"lives",
+									"at",
+									"No.",
+									"10",
+									"."
+								],
+								"answer": "The man who plays golf lives at No. 10 .",
+								"hint_fa": "اسم (The man) + who + فعل (plays golf) در ابتدا می‌آید، سپس فعل اصلی جمله."
+							}
+						]
+					},
+					{
+						"id": "unit1_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "The doctor ___ works in this hospital is very kind.",
+								"options": [
+									"which",
+									"who",
+									"whom",
+									"what"
+								],
+								"correct": 1.0,
+								"hint_fa": "The doctor یک شخص است و فاعل جمله‌ی وصفی است.",
+								"explanation_fa": "آفرین! who درست است.",
+								"wrong_explanation_fa": "برای اشخاص در نقش فاعل جمله‌ی وصفی از who استفاده می‌کنیم."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit2",
+				"type": "group",
+				"title_fa": "whom برای اشخاص (مفعول جمله وصفی)",
+				"title_en": "Whom for People (Object)",
+				"activity_count": 8.0,
+				"activities": [
+					{
+						"id": "unit2_learn1",
+						"type": "learn",
+						"title_fa": "whom برای اشخاص در نقش مفعول",
+						"title_en": "Whom for People as Object",
+						"explanation": "از whom برای اشخاص وقتی مفعول جمله‌ی وصفی هستند استفاده می‌کنیم؛ این شکل رسمی‌تر از who است و در محاوره اغلب حذف یا با who جایگزین می‌شود.",
+						"structure": "اسم (شخص) + who(m) + فاعل + فعل",
+						"cards": [
+							{
+								"en": "The woman who(m) you met yesterday is coming to dinner.",
+								"fa": "زنی که دیروز او را ملاقات کردی برای شام می‌آید."
+							},
+							{
+								"en": "The man whom I called is my teacher.",
+								"fa": "مردی که به او زنگ زدم معلم من است."
+							}
+						]
+					},
+					{
+						"id": "unit2_matching_who_whom",
+						"type": "matching",
+						"title_fa": "اتصال جمله وصفی به نقش آن",
+						"instruction_fa": "هر جمله‌ی وصفی را به نقش who در آن (فاعل یا مفعول) وصل کن.",
+						"items": [
+							{
+								"left": "The man who plays golf",
+								"right": "فاعل"
+							},
+							{
+								"left": "The woman whom you met",
+								"right": "مفعول"
+							},
+							{
+								"left": "The teacher who helps us",
+								"right": "فاعل"
+							},
+							{
+								"left": "The man whom I called",
+								"right": "مفعول"
+							}
+						]
+					},
+					{
+						"id": "unit2_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با ضمیر وصفی درست پر کن.",
+						"items": [
+							{
+								"text": "The man ______ I called is my teacher.",
+								"answers": [
+									"whom",
+									"who"
+								],
+								"hint_fa": "'the man' مفعول جمله‌ی وصفی است ('I called him')، پس whom مناسب‌تر است (who هم در محاوره پذیرفته می‌شود).",
+								"explanation_fa": "آفرین! پاسخ درست است.",
+								"wrong_explanation_fa": "چون 'the man' مفعول جمله‌ی وصفی است، whom (یا who در محاوره) درست است."
+							}
+						]
+					},
+					{
+						"id": "unit2_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "«whom» برای اشاره به مفعولِ جمله‌ی وصفی، رسمی‌تر از «who» است.",
+								"fa": "whom نسبت به who رسمی‌تر است وقتی به مفعول جمله‌ی وصفی اشاره می‌کند.",
+								"answer": true,
+								"hint_fa": "whom در نوشتار رسمی به‌جای who برای مفعول استفاده می‌شود.",
+								"explanation_fa": "درست است! whom شکل رسمی‌تر who برای مفعول است."
+							}
+						]
+					},
+					{
+						"id": "unit2_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "در جمله‌ی «The woman who(m) you met yesterday is coming to dinner»، نقش «the woman» در جمله‌ی وصفی چیست؟",
+								"options": [
+									"فاعل جمله وصفی",
+									"مفعول جمله وصفی",
+									"فعل جمله وصفی",
+									"هیچ‌کدام"
+								],
+								"correct": 1.0,
+								"hint_fa": "جمله‌ی وصفی 'you met her' است؛ 'her' مفعول است.",
+								"explanation_fa": "آفرین! 'the woman' مفعول جمله‌ی وصفی است.",
+								"wrong_explanation_fa": "در جمله‌ی 'you met her'، the woman همان 'her' است و مفعول محسوب می‌شود."
+							}
+						]
+					},
+					{
+						"id": "unit2_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله وصفی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"met",
+									"woman",
+									"who",
+									"yesterday",
+									"The",
+									"you",
+									"is",
+									"coming",
+									"to",
+									"dinner",
+									"."
+								],
+								"answer": "The woman who you met yesterday is coming to dinner .",
+								"hint_fa": "اسم (The woman) + who + فاعل و فعل جمله‌ی وصفی (you met yesterday) در ابتدا می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit2_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام جمله از who به‌درستی در نقش فاعل استفاده کرده؟",
+								"options": [
+									"The man who plays golf lives at No. 10.",
+									"The man who I called is my teacher.",
+									"The man plays golf who lives.",
+									"The man who's plays golf."
+								],
+								"correct": 0.0,
+								"hint_fa": "در کدام جمله who خودش فاعل فعل بعدی است؟",
+								"explanation_fa": "آفرین! در این جمله who فاعل 'plays' است.",
+								"wrong_explanation_fa": "وقتی who مستقیم قبل از فعل بیاید، فاعل جمله‌ی وصفی است."
+							}
+						]
+					},
+					{
+						"id": "unit2_tf_2",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "در انگلیسی محاوره‌ای روزمره، معمولاً به‌جای «whom» از «who» استفاده می‌شود.",
+								"fa": "در انگلیسی محاوره‌ای روزمره، اغلب who به‌جای whom استفاده می‌شود.",
+								"answer": true,
+								"hint_fa": "whom بیشتر در نوشتار رسمی به کار می‌رود.",
+								"explanation_fa": "درست است! در محاوره، who جای whom را هم می‌گیرد."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit3",
+				"type": "group",
+				"title_fa": "which برای اشیا و حیوانات",
+				"title_en": "Which for Things and Animals",
+				"activity_count": 8.0,
+				"activities": [
+					{
+						"id": "unit3_learn1",
+						"type": "learn",
+						"title_fa": "which برای اشیا و حیوانات",
+						"title_en": "Which for Things and Animals",
+						"explanation": "از which برای معرفی اشیا و حیوانات در جمله‌ی وصفی استفاده می‌کنیم، چه فاعل باشد چه مفعول.",
+						"structure": "اسم (شیء/حیوان) + which + فعل / (فاعل + فعل)",
+						"cards": [
+							{
+								"en": "The cat which lives near us was drinking milk.",
+								"fa": "گربه‌ای که نزدیک ما زندگی می‌کند داشت شیر می‌خورد."
+							},
+							{
+								"en": "I found the keys which I lost yesterday.",
+								"fa": "کلیدهایی که دیروز گم کرده بودم را پیدا کردم."
+							}
+						]
+					},
+					{
+						"id": "unit3_matching_which",
+						"type": "matching",
+						"title_fa": "اتصال جمله وصفی به اسم مناسب",
+						"instruction_fa": "هر توصیف را به اسمی که به آن اشاره دارد وصل کن.",
+						"items": [
+							{
+								"left": "which lives near us",
+								"right": "The cat"
+							},
+							{
+								"left": "which I lost yesterday",
+								"right": "The keys"
+							},
+							{
+								"left": "which is on the desk",
+								"right": "The book"
+							},
+							{
+								"left": "which plays golf",
+								"right": "هیچ‌کدام (which برای اشخاص نیست)"
+							}
+						]
+					},
+					{
+						"id": "unit3_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با ضمیر وصفی درست پر کن.",
+						"items": [
+							{
+								"text": "The cat ______ lives near us was drinking milk.",
+								"answers": [
+									"which"
+								],
+								"hint_fa": "cat یک حیوان است، پس از which استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! which درست است.",
+								"wrong_explanation_fa": "برای اشیا و حیوانات از which استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit3_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با ضمیر وصفی درست پر کن.",
+						"items": [
+							{
+								"text": "I found the keys ______ I lost yesterday.",
+								"answers": [
+									"which"
+								],
+								"hint_fa": "keys یک شیء است، پس از which استفاده می‌کنیم.",
+								"explanation_fa": "آفرین! which درست است.",
+								"wrong_explanation_fa": "برای اشیا از which استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit3_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "«which» می‌تواند برای افراد استفاده شود.",
+								"fa": "which می‌تواند برای اشخاص استفاده شود.",
+								"answer": false,
+								"hint_fa": "which فقط برای اشیا و حیوانات است، نه اشخاص.",
+								"explanation_fa": "غلط است! برای اشخاص از who استفاده می‌کنیم، نه which."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "ضمیر وصفی درست را انتخاب کن: «This is the book ___ I bought yesterday.»",
+								"options": [
+									"who",
+									"whom",
+									"which",
+									"whose"
+								],
+								"correct": 2.0,
+								"hint_fa": "book یک شیء است.",
+								"explanation_fa": "آفرین! which درست است.",
+								"wrong_explanation_fa": "برای اشیا از which استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit3_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله وصفی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"which",
+									"cat",
+									"The",
+									"near",
+									"lives",
+									"us",
+									"was",
+									"drinking",
+									"milk",
+									"."
+								],
+								"answer": "The cat which lives near us was drinking milk .",
+								"hint_fa": "اسم (The cat) + which + فعل (lives near us) در ابتدا می‌آید، سپس فعل اصلی جمله."
+							}
+						]
+					},
+					{
+						"id": "unit3_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام ضمیر وصفی برای 'the dog ___ barks at night' مناسب است؟",
+								"options": [
+									"who",
+									"whom",
+									"which",
+									"whose"
+								],
+								"correct": 2.0,
+								"hint_fa": "dog یک حیوان است.",
+								"explanation_fa": "آفرین! which درست است.",
+								"wrong_explanation_fa": "برای حیوانات از which استفاده می‌کنیم."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit4",
+				"type": "group",
+				"title_fa": "that به‌جای who یا which",
+				"title_en": "That instead of Who/Which",
+				"activity_count": 7.0,
+				"activities": [
+					{
+						"id": "unit4_learn1",
+						"type": "learn",
+						"title_fa": "that جایگزین who و which",
+						"title_en": "That as a Universal Relative Pronoun",
+						"explanation": "کلمه‌ی that می‌تواند به‌جای who (برای اشخاص) یا which (برای اشیا و حیوانات) به کار رود؛ این حالت رایج‌تر و کمی محاوره‌ای‌تر است.",
+						"structure": "اسم (شخص/شیء/حیوان) + that + فعل",
+						"cards": [
+							{
+								"en": "The man that plays golf lives at No. 10.",
+								"fa": "مردی که گلف بازی می‌کند در شماره‌ی ۱۰ زندگی می‌کند."
+							},
+							{
+								"en": "The cat that lives near us was drinking milk.",
+								"fa": "گربه‌ای که نزدیک ما زندگی می‌کند داشت شیر می‌خورد."
+							}
+						]
+					},
+					{
+						"id": "unit4_matching_equivalents",
+						"type": "matching",
+						"title_fa": "اتصال جمله به معادل آن با that",
+						"instruction_fa": "هر جمله را به معادل درست آن با that وصل کن.",
+						"items": [
+							{
+								"left": "The man who plays golf",
+								"right": "The man that plays golf"
+							},
+							{
+								"left": "The cat which lives near us",
+								"right": "The cat that lives near us"
+							},
+							{
+								"left": "The keys which I lost",
+								"right": "The keys that I lost"
+							},
+							{
+								"left": "The woman who you met",
+								"right": "The woman that you met"
+							}
+						]
+					},
+					{
+						"id": "unit4_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با ضمیر وصفی درست پر کن.",
+						"items": [
+							{
+								"text": "I found the keys ______ I lost yesterday.",
+								"answers": [
+									"that",
+									"which"
+								],
+								"hint_fa": "برای اشیا می‌توان از that یا which استفاده کرد.",
+								"explanation_fa": "آفرین! پاسخ درست است.",
+								"wrong_explanation_fa": "برای اشیا، that یا which هر دو درست‌اند."
+							}
+						]
+					},
+					{
+						"id": "unit4_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "«that» در جملات وصفی هم برای افراد و هم برای اشیا استفاده می‌شود.",
+								"fa": "that می‌تواند هم برای اشخاص و هم برای اشیا در جمله‌ی وصفی استفاده شود.",
+								"answer": true,
+								"hint_fa": "that جایگزین هر دوی who و which می‌شود.",
+								"explanation_fa": "درست است! that یک ضمیر وصفی عمومی است."
+							}
+						]
+					},
+					{
+						"id": "unit4_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام کلمه می‌تواند هم جایگزین «who» و هم «which» در جمله‌ی وصفی باشد؟",
+								"options": [
+									"whom",
+									"whose",
+									"that",
+									"what"
+								],
+								"correct": 2.0,
+								"hint_fa": "این کلمه هم برای اشخاص و هم برای اشیا/حیوانات به کار می‌رود.",
+								"explanation_fa": "آفرین! that درست است.",
+								"wrong_explanation_fa": "that می‌تواند جایگزین who یا which شود."
+							}
+						]
+					},
+					{
+						"id": "unit4_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله وصفی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"that",
+									"golf",
+									"man",
+									"plays",
+									"The",
+									"lives",
+									"at",
+									"No.",
+									"10",
+									"."
+								],
+								"answer": "The man that plays golf lives at No. 10 .",
+								"hint_fa": "اسم (The man) + that + فعل (plays golf) در ابتدا می‌آید، سپس فعل اصلی جمله."
+							}
+						]
+					},
+					{
+						"id": "unit4_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام جمله از نظر گرامری درست است؟",
+								"options": [
+									"The book that I bought is interesting.",
+									"The book whom I bought is interesting.",
+									"The book who I bought is interesting.",
+									"The book whose I bought is interesting."
+								],
+								"correct": 0.0,
+								"hint_fa": "book یک شیء است؛ کدام ضمیر برای اشیا مناسب است؟",
+								"explanation_fa": "آفرین! that برای اشیا درست است.",
+								"wrong_explanation_fa": "برای اشیا از that یا which استفاده می‌کنیم، نه who یا whom."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit5",
+				"type": "group",
+				"title_fa": "شرطی نوع دوم: ساختار پایه",
+				"title_en": "Conditional Type II: Basic Structure",
+				"activity_count": 9.0,
+				"activities": [
+					{
+						"id": "unit5_learn1",
+						"type": "learn",
+						"title_fa": "If + گذشته ساده، ... would + فعل ساده",
+						"title_en": "If + Past Simple, ... Would + Base Verb",
+						"explanation": "برای بیان موقعیت‌های فرضی یا غیرواقعی در زمان حال، از If + فعل گذشته‌ی ساده در جمله‌ی شرط و would + فعل ساده در جمله‌ی نتیجه استفاده می‌کنیم. این شرایط معمولاً واقعیت ندارند یا بعید هستند.",
+						"structure": "If + فاعل + فعل گذشته ساده، فاعل + would + فعل ساده",
+						"cards": [
+							{
+								"en": "They would be healthier if they lived in a village.",
+								"fa": "اگر آن‌ها در روستا زندگی می‌کردند، سالم‌تر بودند (اما زندگی نمی‌کنند)."
+							},
+							{
+								"en": "If it got warmer, they would travel to the north.",
+								"fa": "اگر هوا گرم‌تر می‌شد، آن‌ها به شمال سفر می‌کردند."
+							}
+						]
+					},
+					{
+						"id": "unit5_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "شرطی نوع دوم برای صحبت درباره‌ی واقعیت‌های واقعی و فعلی استفاده می‌شود.",
+								"fa": "شرطی نوع دوم برای صحبت درباره‌ی حقایق واقعی و فعلی استفاده می‌شود.",
+								"answer": false,
+								"hint_fa": "شرطی نوع دوم برای موقعیت‌های فرضی و غیرواقعی به کار می‌رود.",
+								"explanation_fa": "غلط است! شرطی نوع دوم برای موقعیت‌های فرضی یا خلاف واقع است."
+							}
+						]
+					},
+					{
+						"id": "unit5_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل کمکی درست پر کن.",
+						"items": [
+							{
+								"text": "They ______ be healthier if they lived in a village.",
+								"answers": [
+									"would"
+								],
+								"hint_fa": "جمله‌ی نتیجه در شرطی نوع دوم با would می‌آید.",
+								"explanation_fa": "آفرین! would درست است.",
+								"wrong_explanation_fa": "در جمله‌ی نتیجه‌ی شرطی نوع دوم از would استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit5_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با شکل درست فعل پر کن (get).",
+						"items": [
+							{
+								"text": "If it ______ warmer, they would travel to the north.",
+								"answers": [
+									"got"
+								],
+								"hint_fa": "بعد از if در شرطی نوع دوم، فعل گذشته‌ی ساده می‌آید.",
+								"explanation_fa": "آفرین! got درست است.",
+								"wrong_explanation_fa": "بعد از if در شرطی نوع دوم از گذشته‌ی ساده استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit5_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "If I had more time, I ___ learn French.",
+								"options": [
+									"will",
+									"would",
+									"can",
+									"do"
+								],
+								"correct": 1.0,
+								"hint_fa": "این یک جمله‌ی شرطی نوع دوم است.",
+								"explanation_fa": "آفرین! would درست است.",
+								"wrong_explanation_fa": "در جمله‌ی نتیجه‌ی شرطی نوع دوم از would استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit5_unscramble_structure",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن ساختار شرطی نوع دوم",
+						"instruction_fa": "کلمات را مرتب کن تا ساختار شرطی نوع دوم کامل شود. از چپ به راست",
+						"items": [
+							{
+								"words": [
+									"فعل ساده",
+									"would",
+									"If",
+									"فعل گذشته ساده",
+									"فاعل"
+								],
+								"answer": "If فاعل فعل گذشته ساده فاعل would فعل ساده",
+								"hint_fa": "ساختار درست: If + فاعل + فعل گذشته ساده، فاعل + would + فعل ساده"
+							}
+						]
+					},
+					{
+						"id": "unit5_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله شرطی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی شرطی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"lived",
+									"they",
+									"village",
+									"a",
+									"in",
+									"if",
+									"healthier",
+									"They",
+									"be",
+									"would",
+									"."
+								],
+								"answer": "They would be healthier if they lived in a village .",
+								"hint_fa": "جمله‌ی نتیجه (They would be healthier) می‌تواند قبل از if بیاید."
+							}
+						]
+					},
+					{
+						"id": "unit5_tf_2",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "جمله‌ی «If I have more time, I would learn French» از نظر گرامری درست است.",
+								"fa": "جمله‌ی 'If I have more time, I would learn French' از نظر گرامری درست است.",
+								"answer": false,
+								"hint_fa": "بعد از if در شرطی نوع دوم باید گذشته‌ی ساده بیاید، نه حال ساده.",
+								"explanation_fa": "غلط است! درست: If I had more time, I would learn French."
+							}
+						]
+					},
+					{
+						"id": "unit5_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "جمله‌ی درستِ شرطی نوع دوم را انتخاب کن.",
+								"options": [
+									"If it gets warmer, they will travel to the north.",
+									"If it got warmer, they would travel to the north.",
+									"If it will get warmer, they would travel to the north.",
+									"If it got warmer, they will travel to the north."
+								],
+								"correct": 1.0,
+								"hint_fa": "بعد از if گذشته‌ی ساده و در جمله‌ی نتیجه would می‌آید.",
+								"explanation_fa": "آفرین! این جمله ساختار شرطی نوع دوم را درست رعایت کرده.",
+								"wrong_explanation_fa": "شرطی نوع دوم: If + گذشته ساده، would + فعل ساده."
+							}
+						]
+					}
+				]
+			},
+			{
+				"id": "unit6",
+				"type": "group",
+				"title_fa": "شرطی نوع دوم: were و could",
+				"title_en": "Conditional Type II: Were and Could",
+				"activity_count": 8.0,
+				"activities": [
+					{
+						"id": "unit6_learn1",
+						"type": "learn",
+						"title_fa": "استفاده از were به‌جای was",
+						"title_en": "Using 'were' instead of 'was'",
+						"explanation": "در جمله‌ی شرطی نوع دوم، برای فعل be در جمله‌ی شرط، به‌جای was از were برای همه‌ی فاعل‌ها (حتی I, he, she, it) استفاده می‌کنیم؛ این نکته‌ای است که شرطی نوع دوم را از گذشته‌ی ساده‌ی معمولی متمایز می‌کند.",
+						"structure": "If + فاعل + were + ...، فاعل + would + فعل ساده",
+						"cards": [
+							{
+								"en": "If I were you, I would buy a house.",
+								"fa": "اگر جای تو بودم، خانه می‌خریدم."
+							},
+							{
+								"en": "If my mother were here, I would ask her for help.",
+								"fa": "اگر مادرم اینجا بود، از او کمک می‌خواستم."
+							}
+						]
+					},
+					{
+						"id": "unit6_fill_1",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با شکل درست فعل be پر کن.",
+						"items": [
+							{
+								"text": "If I ______ you, I would buy a house.",
+								"answers": [
+									"were"
+								],
+								"hint_fa": "در شرطی نوع دوم، با تمام فاعل‌ها از were استفاده می‌کنیم، نه was.",
+								"explanation_fa": "آفرین! were درست است.",
+								"wrong_explanation_fa": "در شرطی نوع دوم همیشه از were استفاده می‌کنیم، حتی با I."
+							}
+						]
+					},
+					{
+						"id": "unit6_tf_1",
+						"type": "true_false",
+						"title_fa": "درست یا غلط",
+						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
+						"items": [
+							{
+								"statement": "«If I was you» شکل استاندارد در شرطی نوع دوم است.",
+								"fa": "'If I was you' شکل استاندارد در شرطی نوع دوم است.",
+								"answer": false,
+								"hint_fa": "شکل استاندارد were است، نه was، حتی با فاعل I.",
+								"explanation_fa": "غلط است! شکل درست و استاندارد 'If I were you' است."
+							}
+						]
+					},
+					{
+						"id": "unit6_learn2",
+						"type": "learn",
+						"title_fa": "could به‌جای would (توانایی فرضی)",
+						"title_en": "Could instead of Would",
+						"explanation": "در جمله‌ی نتیجه‌ی شرطی نوع دوم، می‌توان به‌جای would از could استفاده کرد تا یک توانایی فرضی را نشان دهیم.",
+						"structure": "If + فاعل + فعل گذشته ساده، فاعل + could + فعل ساده",
+						"cards": [
+							{
+								"en": "John could fix the car if he were home.",
+								"fa": "اگر جان خانه بود، می‌توانست ماشین را تعمیر کند."
+							},
+							{
+								"en": "If the old man had his glasses, he could read the paper.",
+								"fa": "اگر پیرمرد عینکش را داشت، می‌توانست روزنامه را بخواند."
+							}
+						]
+					},
+					{
+						"id": "unit6_fill_2",
+						"type": "fill_blank",
+						"title_fa": "پر کردن جای خالی",
+						"instruction_fa": "جای خالی را با فعل کمکی درست پر کن (توانایی فرضی).",
+						"items": [
+							{
+								"text": "If the old man had his glasses, he ______ read the paper.",
+								"answers": [
+									"could"
+								],
+								"hint_fa": "این جمله یک توانایی فرضی را نشان می‌دهد، پس could مناسب‌تر است.",
+								"explanation_fa": "آفرین! could درست است.",
+								"wrong_explanation_fa": "برای بیان توانایی فرضی در شرطی نوع دوم از could استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit6_mc_1",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "John ___ fix the car if he were home.",
+								"options": [
+									"will",
+									"could",
+									"do",
+									"is"
+								],
+								"correct": 1.0,
+								"hint_fa": "این جمله یک توانایی فرضی را نشان می‌دهد.",
+								"explanation_fa": "آفرین! could درست است.",
+								"wrong_explanation_fa": "برای توانایی فرضی در شرطی نوع دوم از could استفاده می‌کنیم."
+							}
+						]
+					},
+					{
+						"id": "unit6_unscramble_sentence",
+						"type": "unscramble",
+						"title_fa": "مرتب‌کردن جمله شرطی",
+						"instruction_fa": "کلمات را مرتب کن تا یک جمله‌ی شرطی درست بسازی.",
+						"items": [
+							{
+								"words": [
+									"he",
+									"fix",
+									"John",
+									"the",
+									"car",
+									"could",
+									"were",
+									"if",
+									"home",
+									"."
+								],
+								"answer": "John could fix the car if he were home .",
+								"hint_fa": "جمله‌ی نتیجه (John could fix the car) قبل از if می‌آید."
+							}
+						]
+					},
+					{
+						"id": "unit6_mc_review",
+						"type": "multiple_choice",
+						"title_fa": "انتخاب گزینه",
+						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"questions": [
+							{
+								"question": "کدام جمله از نظر گرامری درست است؟",
+								"options": [
+									"If I was you, I would buy a house.",
+									"If I were you, I would buy a house.",
+									"If I am you, I would buy a house.",
+									"If I were you, I will buy a house."
+								],
+								"correct": 1.0,
+								"hint_fa": "در شرطی نوع دوم از were با تمام فاعل‌ها استفاده می‌کنیم و در نتیجه would می‌آید.",
+								"explanation_fa": "آفرین! این جمله ساختار شرطی نوع دوم را درست رعایت کرده.",
+								"wrong_explanation_fa": "شرطی نوع دوم: If + فاعل + were، فاعل + would + فعل ساده."
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

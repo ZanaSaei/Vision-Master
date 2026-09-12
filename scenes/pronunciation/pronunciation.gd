@@ -279,9 +279,12 @@ func _on_play_btn_pressed(btn: Button, audio_path: String, fallback_text: String
 	_playing_btn = btn
 	_apply_play_btn_state(btn, true)
 	
-	if audio_path != "" and ResourceLoader.exists(audio_path):
+	var stream: AudioStream = null
+	if audio_path != "" and Content.has_asset(audio_path):
+		stream = Content.load_audio(audio_path)
+	if stream != null:
 		_tts_active = false
-		_audio_player.stream = load(audio_path)
+		_audio_player.stream = stream
 		_audio_player.pitch_scale = 1.0
 		_audio_player.play()
 	else:

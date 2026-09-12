@@ -1,0 +1,70 @@
+ 
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": { "en": "Circle the correct answer.", "fa": "گزینهٔ درست را دور بزنید." },
+				"items": [
+					{
+						"question": { "en": "Clean energy ___ used more in the future.", "fa": "انرژی پاک ___ در آینده بیشتر استفاده شود." },
+						"options": [
+							{ "en": "should be", "fa": "باید شود" },
+							{ "en": "should", "fa": "باید" }
+						],
+						"answer": 0,
+						"explanation": { "en": "Passive with modals: modal + be + past participle.", "fa": "مجهول با modal: modal + be + قسمت سوم فعل." }
+					},
+					{
+						"question": { "en": "Wind ___ changed into electricity.", "fa": "باد ___ به برق تبدیل می‌شود." },
+						"options": [
+							{ "en": "can be", "fa": "می‌تواند شود" },
+							{ "en": "can", "fa": "می‌تواند" }
+						],
+						"answer": 0,
+						"explanation": { "en": "After a modal in the passive, 'be' is required: can be changed.", "fa": "بعد از modal در جملهٔ مجهول، «be» لازم است: can be changed." }
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": { "en": "True or False?", "fa": "درست یا نادرست؟" },
+				"items": [
+					{
+						"statement": { "en": "Passive with modals uses 'modal + be + past participle'.", "fa": "مجهول با modal از ساختار «modal + be + قسمت سوم فعل» استفاده می‌کند." },
+						"answer": true,
+						"correction": { "en": "The structure is modal + be + past participle.", "fa": "ساختار عبارت است از modal + be + قسمت سوم فعل." }
+					},
+					{
+						"statement": { "en": "Past perfect describes an action that happened after another past action.", "fa": "ماضی بعید کاری را توصیف می‌کند که بعد از یک کار دیگر در گذشته اتفاق افتاده است." },
+						"answer": false,
+						"correction": { "en": "Past perfect describes an action that happened BEFORE another past action.", "fa": "ماضی بعید کاری را توصیف می‌کند که قبل از یک کار دیگر در گذشته اتفاق افتاده است." }
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": { "en": "Type the missing verb form.", "fa": "شکل جاافتادهٔ فعل را بنویسید." },
+				"items": [
+					{
+						"text": { "en": "Before I came to school, I ___ (have) breakfast.", "fa": "قبل از اینکه به مدرسه بیایم، ___ صبحانه خورده بودم." },
+						"answer": ["had had"],
+						"explanation": { "en": "Past perfect of 'have': had had.", "fa": "ماضی بعید فعل «have»: had had." }
+					},
+					{
+						"text": { "en": "After I ___ (finish) my homework, I watched TV.", "fa": "بعد از اینکه ___ تکالیفم را تمام کرده بودم، تلویزیون تماشا کردم." },
+						"answer": ["had finished"],
+						"explanation": { "en": "The earlier action takes the past perfect: had finished.", "fa": "اتفاق زودتر ماضی بعید می‌گیرد: had finished." }
+					}
+				]
+			}
+		]
+	}
+}

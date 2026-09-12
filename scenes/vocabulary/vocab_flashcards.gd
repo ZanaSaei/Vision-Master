@@ -106,6 +106,11 @@ const BACK_ROW_ACCENTS := {
 	"AntonymsPanel":  Color("#EF4444"),  # Red
 }
 
+# How much extra padding to add around every back-card label pill. This makes
+# the label boxes a little bigger visually while leaving the actual text size
+# untouched (the request: bigger labels, same-sized text).
+const BACK_ROW_PAD_BOOST := 6.0
+
 # Icon badges on the back face (solid accent chips with white text).
 const BACK_ICON_ACCENTS := {
 	"EnIcon":   Color("#3B82F6"),
@@ -125,14 +130,8 @@ const BACK_LABEL_ACCENTS := {
 	"AntonymsLabel":   Color("#EF4444"),
 }
 
-# ---------- Happy flashcard gradient (the card's "main color") ----------
-# A modern, energetic gradient (Indigo -> Purple -> Pink) for both themes.
-# It makes the flashcards extremely vibrant and educational-friendly.
-const FLASH_GRAD_LIGHT := [Color("#4F46E5"), Color("#9333EA"), Color("#DB2777")]
-const FLASH_GRAD_DARK  := [Color("#3730A3"), Color("#6B21A8"), Color("#9D174D")]
-const FLASH_PRIMARY    := Color("#6366F1")   # used for dots + accents
-
-var _card_gradient_bg: ColorRect = null
+# ---------- Solid lively flashcard color ----------
+const FLASH_SOLID_COLOR := Color("#3B82F6")  # Bright Blue - lively and educational
 
 
 func _ready() -> void:
@@ -212,17 +211,17 @@ func _theme_walk(node: Node) -> void:
 
 func _theme_card(node: PanelContainer) -> void:
 	var dark := Global.theme_is_dark()
-	# The flashcard itself gets a happy gradient + border/shadow frame.
+	# The flashcard itself gets a solid lively color + border/shadow frame.
 	if node == card_panel:
 		var frame := StyleBoxFlat.new()
-		frame.set_corner_radius_all(28)
+		frame.set_corner_radius_all(50)
 		frame.set_border_width_all(1)
+		frame.bg_color = FLASH_SOLID_COLOR
 		frame.border_color = Color(0, 0, 0, 0.12) if not dark else Color(1, 1, 1, 0.16)
 		frame.shadow_color = Color(0.25, 0.15, 0.55, 0.22 if dark else 0.18)
 		frame.shadow_size = 20
 		frame.shadow_offset = Vector2(0, 10)
 		node.add_theme_stylebox_override("panel", frame)
-		_ensure_card_gradient(dark)
 		return
 	# Progress dots bar sits in a soft pill so it belongs to the card.
 	if node.name == "ProgressBackground":
@@ -240,69 +239,6 @@ func _theme_card(node: PanelContainer) -> void:
 	style.bg_color = Global.get_theme_color("surface")
 	style.border_color = Color(0, 0, 0, 0.10) if not dark else Color(1, 1, 1, 0.10)
 	node.add_theme_stylebox_override("panel", style)
-
-
-func _ensure_card_gradient(_dark: bool) -> void:
-	if _card_gradient_bg == null:
-		_card_gradient_bg = ColorRect.new()
-		_card_gradient_bg.name = "CardGradientBg"
-		_card_gradient_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		
-		var shader := Shader.new()
-		shader.code = """
-shader_type canvas_item;
-uniform vec4 top_color : source_color;
-uniform vec4 mid_color : source_color;
-uniform vec4 bot_color : source_color;
-uniform vec4 corner_color : source_color;
-uniform float corner_radius = 28.0;
-uniform vec2 rect_size;
-
-float sdRoundedBox(vec2 p, vec2 b, float r) {
-	vec2 q = abs(p) - b + vec2(r);
-	return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
-}
-
-void fragment() {
-	vec4 col;
-	if (UV.y < 0.5) {
-		col = mix(top_color, mid_color, UV.y * 2.0);
-	} else {
-		col = mix(mid_color, bot_color, (UV.y - 0.5) * 2.0);
-	}
-	
-	vec2 p = UV * rect_size - rect_size * 0.5;
-	vec2 b = rect_size * 0.5;
-	float d = sdRoundedBox(p, b, corner_radius);
-	
-	float blend = clamp(0.5 - d, 0.0, 1.0);
-	COLOR = mix(corner_color, col, blend);
-}
-"""
-		var mat := ShaderMaterial.new()
-		mat.shader = shader
-		_card_gradient_bg.material = mat
-		
-		card_panel.add_child(_card_gradient_bg)
-		card_panel.move_child(_card_gradient_bg, 0)  # behind the card content
-		card_panel.resized.connect(_refresh_card_gradient)
-	_refresh_card_gradient()
-
-
-func _refresh_card_gradient() -> void:
-	var sz: Vector2 = card_panel.size
-	if sz.x <= 2.0 or sz.y <= 2.0 or not is_instance_valid(_card_gradient_bg):
-		return
-	var dark := Global.theme_is_dark()
-	var palette: Array = FLASH_GRAD_DARK if dark else FLASH_GRAD_LIGHT
-	var mat = _card_gradient_bg.material as ShaderMaterial
-	if mat:
-		mat.set_shader_parameter("rect_size", sz)
-		mat.set_shader_parameter("top_color", palette[0])
-		mat.set_shader_parameter("mid_color", palette[1])
-		mat.set_shader_parameter("bot_color", palette[2])
-		mat.set_shader_parameter("corner_color", Global.get_theme_color("bg_base"))
-		mat.set_shader_parameter("corner_radius", 28.0)
 
 
 func _optimize_icon(tex: Texture2D, max_edge: int = 256) -> Texture2D:
@@ -339,18 +275,34 @@ func _theme_back_row(panel: PanelContainer) -> void:
 	st.shadow_color = Color(0, 0, 0, 0.2 if dark else 0.08)
 	st.shadow_size = 8
 	st.shadow_offset = Vector2(0, 4)
-	var old: StyleBox = panel.get_theme_stylebox("panel")
-	if old is StyleBoxFlat:
-		var of := old as StyleBoxFlat
-		st.content_margin_left = of.content_margin_left
-		st.content_margin_top = of.content_margin_top
-		st.content_margin_right = of.content_margin_right
-		st.content_margin_bottom = of.content_margin_bottom
+
+	# Make the label boxes a little bigger (more padding) while leaving the text
+	# size untouched. The base (scene) margins are cached once, so re-theming
+	# never doubles the boost.
+	var ml := 20.0
+	var mr := 20.0
+	var mt := 16.0
+	var mb := 16.0
+	if panel.has_meta("back_row_margins"):
+		var base_m: Array = panel.get_meta("back_row_margins") as Array
+		ml = base_m[0]
+		mr = base_m[1]
+		mt = base_m[2]
+		mb = base_m[3]
 	else:
-		st.content_margin_left = 20
-		st.content_margin_right = 20
-		st.content_margin_top = 16
-		st.content_margin_bottom = 16
+		var old: StyleBox = panel.get_theme_stylebox("panel")
+		if old is StyleBoxFlat:
+			var of := old as StyleBoxFlat
+			ml = of.content_margin_left
+			mr = of.content_margin_right
+			mt = of.content_margin_top
+			mb = of.content_margin_bottom
+		panel.set_meta("back_row_margins", [ml, mr, mt, mb])
+
+	st.content_margin_left = ml + BACK_ROW_PAD_BOOST
+	st.content_margin_right = mr + BACK_ROW_PAD_BOOST
+	st.content_margin_top = mt + BACK_ROW_PAD_BOOST
+	st.content_margin_bottom = mb + BACK_ROW_PAD_BOOST
 	panel.add_theme_stylebox_override("panel", st)
 
 

@@ -218,7 +218,7 @@ func _create_button(
 
 	button.custom_minimum_size = Vector2(
 		0,
-		65
+		80
 	)
 
 	button.size_flags_horizontal = (
@@ -278,8 +278,8 @@ func _equalize_button_heights() -> void:
 		tallest = maxf(tallest, measured.y)
 
 	var final_height := int(ceil(tallest + 28.0))
-	if final_height < 65:
-		final_height = 65
+	if final_height < 80:
+		final_height = 80
 
 	for button in all_buttons:
 		button.custom_minimum_size = Vector2(

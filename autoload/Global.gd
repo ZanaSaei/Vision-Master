@@ -1,6 +1,10 @@
 extends Node
 
 signal review_words_changed()
+# Emitted whenever local progression changes and needs to reach the server
+# (see SyncManager). Suspended while applying a server snapshot so a remote
+# apply doesn't immediately bounce back as a local change.
+signal progress_dirty()
 
 # ============================================================
 #  GLOBAL.GD — Autoload Singleton
@@ -153,6 +157,15 @@ var grammar_xp: Dictionary = {}
 # Per lesson ("book_lesson") -> Array of بخش indices already completed, so XP
 # is only awarded once per unit (never on replays).
 var grammar_completed_units: Dictionary = {}
+
+# Suppresses progress_dirty while a server snapshot is being applied.
+var _suspend_dirty: bool = false
+
+
+func _emit_dirty() -> void:
+	if not _suspend_dirty:
+		progress_dirty.emit()
+
 
 # ---------- APP SETTINGS ----------
 const SETTINGS_PATH := "user://settings.json"
@@ -688,7 +701,7 @@ func _header_bar_stylebox(dark: bool, accent: Color) -> StyleBoxFlat:
 	if dark:
 		bar.bg_color = Color(0.06, 0.08, 0.16, 0.88)
 	else:
-		bar.bg_color = Color(1, 1, 1, 0.68)
+		bar.bg_color = Color("#BFDBFE")
 	# Bright rim — thicker top/left catches the light.
 	bar.border_width_left = 2; bar.border_width_top = 2
 	bar.border_width_right = 1; bar.border_width_bottom = 3
@@ -966,6 +979,7 @@ func _save_progress() -> void:
 		"grammar_completed_units": grammar_completed_units,
 	}
 	_write_json_file(PROGRESS_PATH, data)
+	_emit_dirty()
 
 
 func _load_progress() -> void:
@@ -987,6 +1001,49 @@ func _load_progress() -> void:
 		var completed_data: Variant = data.get("grammar_completed_units", {})
 		if completed_data is Dictionary:
 			grammar_completed_units = completed_data
+
+
+# ------------------------------------------------------------
+# PROGRESS SNAPSHOT (used by SyncManager to sync with the server)
+# ------------------------------------------------------------
+
+## The full local progression as a single serialisable dictionary.
+func get_progress_snapshot() -> Dictionary:
+	return {
+		"last_scene": _last_scene,
+		"grammar_unlocked_units": grammar_unlocked_units.duplicate(true),
+		"grammar_xp": grammar_xp.duplicate(true),
+		"grammar_completed_units": grammar_completed_units.duplicate(true),
+		"saved_words": saved_words.duplicate(true),
+		"review_words": review_words.duplicate(true),
+	}
+
+
+## Replace the local progression with an already-merged snapshot and persist it.
+## Does not emit progress_dirty (the merge result is what we're syncing).
+func apply_progress_snapshot(data: Dictionary) -> void:
+	if data == null or data.is_empty():
+		return
+	_suspend_dirty = true
+	_last_scene = str(data.get("last_scene", _last_scene))
+	var unlocked: Variant = data.get("grammar_unlocked_units", null)
+	if unlocked is Dictionary:
+		grammar_unlocked_units = unlocked
+	var xp_data: Variant = data.get("grammar_xp", null)
+	if xp_data is Dictionary:
+		grammar_xp = xp_data
+	var completed: Variant = data.get("grammar_completed_units", null)
+	if completed is Dictionary:
+		grammar_completed_units = completed
+	if data.get("saved_words") is Array:
+		saved_words = data["saved_words"]
+	if data.get("review_words") is Array:
+		review_words = data["review_words"]
+	_save_progress()
+	_persist_saved_words()
+	_persist_review_words()
+	_suspend_dirty = false
+	review_words_changed.emit()
 
 
 func _load_saved_words() -> void:
@@ -1022,9 +1079,11 @@ func _load_review_words() -> void:
 
 func _persist_saved_words() -> void:
 	_write_json_file(SAVED_WORDS_PATH, saved_words)
+	_emit_dirty()
 
 func _persist_review_words() -> void:
 	_write_json_file(REVIEW_WORDS_PATH, review_words)
+	_emit_dirty()
 
 func is_word_saved(word: String, book: int, lesson: int) -> bool:
 	for entry in saved_words:
@@ -1475,28 +1534,26 @@ func play_word_audio(audio_filename: String, word_text: String = "") -> void:
 		if word_text != "":
 			speak_word(word_text)
 		return
-		
+
 	var path: String = "res://assets/audio/Vocabularies/%s" % audio_filename
-		
-	# 2. Check if the file actually exists in the project
-	if not ResourceLoader.exists(path):
-		push_warning("Audio file not found: " + path + ". Falling back to TTS.")
+
+	# 2. Load through Content so it works whether the clip is bundled or was
+	#    downloaded to user://content/. A word clip that hasn't been fetched yet
+	#    (on-demand model) falls back to TTS — no error. Resolved at runtime so
+	#    this autoload has no load-order dependency on the Content singleton.
+	var content := get_node_or_null("/root/Content")
+	var stream: AudioStream = null
+	if content != null and content.has_asset(path):
+		stream = content.load_audio(path)
+	if stream == null:
 		if word_text != "":
 			speak_word(word_text)
 		return
-		
-	# 3. Try to load and play the audio file
-	var stream = load(path)
-	if stream is AudioStream:
-		if audio_player.playing:
-			audio_player.stop() # Stop current audio if it's still playing
-		audio_player.stream = stream
-		audio_player.play()
-	else:
-		# 4. Fallback if the file exists but fails to load (e.g., corrupted file)
-		push_error("Failed to load audio stream from: " + path + ". Falling back to TTS.")
-		if word_text != "":
-			speak_word(word_text)
+
+	if audio_player.playing:
+		audio_player.stop() # Stop current audio if it's still playing
+	audio_player.stream = stream
+	audio_player.play()
 
 func _init_tts() -> void:
 	# Ask the OS directly for English voices.

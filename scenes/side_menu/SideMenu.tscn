@@ -87,6 +87,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")
 text = "خرید اشتراک"
 
+[node name="AccountButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=777001001]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_jtoru")
+text = "حساب کاربری"
+
 [node name="SettingsButton" type="Button" parent="MenuPanel/MarginContainer/VBoxContainer" unique_id=53408693]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_jtoru")

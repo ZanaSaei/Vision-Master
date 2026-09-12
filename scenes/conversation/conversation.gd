@@ -104,6 +104,8 @@ func _ready() -> void:
 	current_book = Global.current_book
 	current_lesson = Global.current_lesson
 	header_title.text = MenuStyle.persian_digits("درس %d\nمکالمه" % [current_lesson])
+	# Fetch this lesson's media (conversation/reading audio + images) if missing.
+	Content.ensure_lesson(current_book, current_lesson)
 	current_data = Global.load_conversation(current_book, current_lesson)
 	
 	# ---- Build the two pages ----
@@ -279,12 +281,13 @@ func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 	all_sentences_sync.clear()
 	_sync_index = 0
 	var image_path := "res://assets/images/%s" % data.get("image", "")
-	if ResourceLoader.exists(image_path):
-		conversation_image.texture = load(image_path)
+	var lesson_texture: Texture2D = Content.load_image(image_path)
+	if lesson_texture != null:
+		conversation_image.texture = lesson_texture
 		conversation_image.visible = true
 	else:
 		conversation_image.visible = false
-		conversation_image.custom_minimum_size = Vector2(0, 0) # Hide if no image
+		conversation_image.custom_minimum_size = Vector2(0, 0) # Hidden until downloaded
 		
 	# --- Intro with translation ---
 	var intro_data: Dictionary = data.get("intro", {})

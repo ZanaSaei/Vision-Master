@@ -1,0 +1,114 @@
+{
+	"book_exercises": {
+		"title_fa": "تمرینات کتاب",
+		"title_en": "Book Exercises",
+		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+		"sections": [
+			{
+				"type": "multiple_choice",
+				"exercise_id": "book_ex1",
+				"instruction": {
+					"en": "Circle the correct answer.",
+					"fa": "گزینهٔ درست را دور بزنید."
+				},
+				"items": [
+					{
+						"question": {
+							"en": "When people get the flu, they ___ visit a doctor.",
+							"fa": "وقتی مردم آنفولانزا می‌گیرند، ___ به پزشک مراجعه کنند."
+						},
+						"options": [
+							{ "en": "must", "fa": "باید (اجبار)" },
+							{ "en": "may", "fa": "ممکن است" }
+						],
+						"answer": 0,
+						"explanation": {
+							"en": "'Must' expresses strong obligation or necessity.",
+							"fa": "«must» برای اجبار و ضرورت به کار می‌رود."
+						}
+					},
+					{
+						"question": {
+							"en": "There are many clouds in the sky. It ___ rain.",
+							"fa": "آسمان پر ابر است. ___ باران ببارد."
+						},
+						"options": [
+							{ "en": "may", "fa": "ممکن است" },
+							{ "en": "must", "fa": "حتماً باید" }
+						],
+						"answer": 0,
+						"explanation": {
+							"en": "'May' expresses possibility: it is possible that it will rain.",
+							"fa": "«may» برای احتمال به کار می‌رود: ممکن است باران ببارد."
+						}
+					}
+				]
+			},
+			{
+				"type": "true_false",
+				"exercise_id": "book_ex2",
+				"instruction": {
+					"en": "True or False?",
+					"fa": "درست یا نادرست؟"
+				},
+				"items": [
+					{
+						"statement": {
+							"en": "We use 'at' before days of the week, like 'at Friday'.",
+							"fa": "قبل از روزهای هفته از «at» استفاده می‌کنیم، مثل «at Friday»."
+						},
+						"answer": false,
+						"correction": {
+							"en": "We use 'on' before days: on Friday.",
+							"fa": "قبل از روزها از «on» استفاده می‌کنیم: on Friday."
+						}
+					},
+					{
+						"statement": {
+							"en": "Modals never change for he/she/it.",
+							"fa": "افعال modal برای he/she/it هیچ‌گاه تغییر نمی‌کنند."
+						},
+						"answer": true,
+						"correction": {
+							"en": "Modals stay the same for all subjects.",
+							"fa": "افعال modal برای همهٔ فاعل‌ها یکسان می‌مانند."
+						}
+					}
+				]
+			},
+			{
+				"type": "fill_blank",
+				"exercise_id": "book_ex3",
+				"instruction": {
+					"en": "Type the missing preposition (in, at, on).",
+					"fa": "حرف اضافهٔ جاافتاده را بنویسید (in، at، on)."
+				},
+				"items": [
+					{
+						"text": {
+							"en": "We usually travel ___ summer.",
+							"fa": "معمولاً ___ تابستان سفر می‌کنیم."
+						},
+						"answer": ["in"],
+						"explanation": {
+							"en": "Use 'in' with seasons: in summer.",
+							"fa": "با فصل‌ها از «in» استفاده می‌کنیم: in summer."
+						}
+					},
+					{
+						"text": {
+							"en": "The plane leaves ___ 8 o'clock.",
+							"fa": "هواپیما ___ ساعت ۸ حرکت می‌کند."
+						},
+						"answer": ["at"],
+						"explanation": {
+							"en": "Use 'at' with clock times: at 8 o'clock.",
+							"fa": "با ساعت دقیق از «at» استفاده می‌کنیم: at 8 o'clock."
+						}
+					}
+				]
+			}
+		]
+	}
+}

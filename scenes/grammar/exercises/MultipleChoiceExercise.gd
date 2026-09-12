@@ -282,10 +282,11 @@ func _show_question() -> void:
 
 			_long_mode_buttons.append(button)
 		else:
-			# Half-width cells in the 2-column grid.
+			# Half-width cells in the 2-column grid. Generous 88px height
+			# so every option is an easy, finger-friendly tap target.
 			button.custom_minimum_size = Vector2(
 				0,
-				72
+				88
 			)
 
 			button.size_flags_horizontal = (
@@ -338,7 +339,10 @@ func _long_mode_available_width() -> float:
 	)
 
 	if available_width <= 0.0:
-		available_width = float(get_viewport_rect().size.x)
+		if is_inside_tree():
+			available_width = float(get_viewport_rect().size.x)
+		else:
+			available_width = 800.0
 		available_width -= float(GrammarTheme.SAFE_MARGIN * 2)
 		available_width -= float(GrammarTheme.CONTENT_MARGIN * 2)
 		available_width -= 24.0
@@ -365,8 +369,8 @@ func _long_mode_button_height(texts: Array) -> int:
 		tallest = maxf(tallest, measured.y)
 
 	var final_height := int(ceil(tallest + 34.0))
-	if final_height < 78:
-		final_height = 78
+	if final_height < 88:
+		final_height = 88
 
 	return final_height
 

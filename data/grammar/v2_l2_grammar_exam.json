@@ -1,0 +1,333 @@
+{
+	"lessons": [
+		{
+			"accent": "#DB2777",
+			"exam_exercises": [
+				{
+					"text": "Part 1 — Multiple Choice (۲۰ نمره — هر سؤال ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the best answer.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"have",
+								"has",
+								"had",
+								"having"
+							],
+							"question": "I ______ a healthy lifestyle since last year."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"has",
+								"have",
+								"did",
+								"is"
+							],
+							"question": "She ______ never smoked in her life."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"Do",
+								"Did",
+								"Have",
+								"Are"
+							],
+							"question": "______ you ever exercised every day for a month?"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"have visited",
+								"visited",
+								"visit",
+								"has visited"
+							],
+							"question": "We ______ our doctor yesterday."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"already",
+								"yet",
+								"since",
+								"ago"
+							],
+							"question": "He hasn't finished his exercise ______ ."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"went",
+								"have gone",
+								"has gone",
+								"goes"
+							],
+							"question": "They ______ jogging in the park this morning."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"for",
+								"since",
+								"yet",
+								"ago"
+							],
+							"question": "My sister has lived a healthy life ______ she was young."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"Do",
+								"Has",
+								"Did",
+								"Is"
+							],
+							"question": "______ your brother ever tried yoga?"
+						},
+						{
+							"answer": 2,
+							"options": [
+								"eat",
+								"ate",
+								"eaten",
+								"eating"
+							],
+							"question": "I have already ______ my breakfast."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"since",
+								"for",
+								"ago",
+								"yet"
+							],
+							"question": "She hasn't visited the gym ______ two weeks."
+						}
+					],
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 2 — Fill in the Blanks with the Present Perfect (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Fill in the Blanks with the Present Perfect",
+					"items": [
+						{
+							"answer": "has gained",
+							"text": "Sina ______ (gain) five kilos in three months."
+						},
+						{
+							"answer": "have read",
+							"text": "I ______ (read) about healthy food somewhere."
+						},
+						{
+							"answer": "quit",
+							"text": "My father ______ (quit) smoking two years ago."
+						},
+						{
+							"answer": "have exercised",
+							"text": "We ______ (exercise) every day this month."
+						},
+						{
+							"answer": "hasn't slept",
+							"text": "She ______ not ______ (sleep) well this week."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 3 — Choose since or for (۱۵ نمره — هر سؤال ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose since or for",
+					"items": [
+						{
+							"answer": "for",
+							"text": "I have known him ______ ten years."
+						},
+						{
+							"answer": "since",
+							"text": "She has been healthy ______ she changed her diet."
+						},
+						{
+							"answer": "since",
+							"text": "We have lived a healthy lifestyle ______ 2020."
+						},
+						{
+							"answer": "for",
+							"text": "He hasn't smoked ______ two months."
+						},
+						{
+							"answer": "for",
+							"text": "They have exercised ______ a long time."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره — هر جمله ۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Rewrite the sentence as instructed.",
+					"items": [
+						{
+							"answer": "Have you ever tried a healthy diet?",
+							"task": "Rewrite as a question with \"ever\":",
+							"text": "You have tried a healthy diet."
+						},
+						{
+							"answer": "He hasn't quit smoking.",
+							"task": "Rewrite in the negative form:",
+							"text": "He has quit smoking."
+						},
+						{
+							"answer": "I have jogged since 2020.",
+							"task": "Rewrite using \"since\":",
+							"text": "I started jogging in 2020. I still jog now."
+						}
+					],
+					"type": "transformation"
+				},
+				{
+					"text": "Part 5 — Reading and Choosing the Best Verb Form (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Read the paragraph and choose the correct word.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"has",
+								"have"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"has never smoked",
+								"never smoked"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"has started",
+								"started"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"has lost",
+								"lost"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"hasn't eaten",
+								"didn't eat"
+							],
+							"question": "Choose the correct word:"
+						}
+					],
+					"passage": "Behzad has/have always cared about his health. He has never smoked/never smoked in his life. Last year, he has started/started doing daily exercise. He has lost/lost five kilos since then. He hasn't eaten/didn't eat fast food for six months now.",
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 6 — Matching (۱۰ نمره — هر مورد ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Match column A with column B.",
+					"items": [
+						{
+							"answer": "b) since 2015.",
+							"options": [
+								"a) for two years.",
+								"b) since 2015.",
+								"c) yet.",
+								"d) tried yoga?",
+								"e) smoked in his life."
+							],
+							"text": "1. I have known her"
+						},
+						{
+							"answer": "c) yet.",
+							"options": [
+								"a) for two years.",
+								"b) since 2015.",
+								"c) yet.",
+								"d) tried yoga?",
+								"e) smoked in his life."
+							],
+							"text": "2. She hasn't visited the doctor"
+						},
+						{
+							"answer": "d) tried yoga?",
+							"options": [
+								"a) for two years.",
+								"b) since 2015.",
+								"c) yet.",
+								"d) tried yoga?",
+								"e) smoked in his life."
+							],
+							"text": "3. Have you ever"
+						},
+						{
+							"answer": "a) for two years.",
+							"options": [
+								"a) for two years.",
+								"b) since 2015.",
+								"c) yet.",
+								"d) tried yoga?",
+								"e) smoked in his life."
+							],
+							"text": "4. We have exercised together"
+						},
+						{
+							"answer": "e) smoked in his life.",
+							"options": [
+								"a) for two years.",
+								"b) since 2015.",
+								"c) yet.",
+								"d) tried yoga?",
+								"e) smoked in his life."
+							],
+							"text": "5. He has never"
+						}
+					],
+					"type": "matching"
+				},
+				{
+					"text": "Part 7 — Short Writing (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "In 3-4 complete sentences, write about **healthy habits you have or haven't done**. Use \"since\", \"for\", \"ever\" or \"yet\" in your sentences. ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________",
+					"items": [
+						{
+							"text": "In 3-4 complete sentences, write about **healthy habits you have or haven't done**. Use \"since\", \"for\", \"ever\" or \"yet\" in your sentences. ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________"
+						}
+					],
+					"type": "open_ended"
+				}
+			]
+		}
+	]
+}

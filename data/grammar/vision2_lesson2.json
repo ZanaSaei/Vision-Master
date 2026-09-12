@@ -120,7 +120,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'They has finished their homework' is correct.",
+								"statement": "جمله‌ی «They has finished their homework» درست است.",
 								"answer": false,
 								"hint_fa": "فاعل جمع 'They' باید با have بیاید: They have finished.",
 								"explanation_fa": "فاعل جمع 'They' باید با have بیاید: They have finished."
@@ -171,7 +171,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'has' is used with 'she'.",
+								"statement": "«has» با «she» استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! she سوم‌شخص مفرد است.",
 								"explanation_fa": "درسته! she سوم‌شخص مفرد است."
@@ -314,7 +314,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'yet' usually comes at the end of a negative present perfect sentence.",
+								"statement": "«yet» معمولاً در انتهای جمله‌ی منفی ماضی نقلی می‌آید.",
 								"answer": true,
 								"hint_fa": "درسته! مثل: He hasn't got a job yet.",
 								"explanation_fa": "درسته! مثل: He hasn't got a job yet."
@@ -382,7 +382,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'haven't' is the short form of 'have not'.",
+								"statement": "«haven't» شکل کوتاه‌شده‌ی «have not» است.",
 								"answer": true,
 								"hint_fa": "درسته! haven't = have not",
 								"explanation_fa": "درسته! haven't = have not"
@@ -544,7 +544,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'ever' usually comes right after the subject in present perfect questions.",
+								"statement": "«ever» در سوالات ماضی نقلی معمولاً بلافاصله بعد از فاعل می‌آید.",
 								"answer": true,
 								"hint_fa": "درسته! مثل: Have they ever traveled...?",
 								"explanation_fa": "درسته! مثل: Have they ever traveled...?"
@@ -595,7 +595,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'Has Mr. Ahmadi produce that movie?' is grammatically correct.",
+								"statement": "جمله‌ی «Has Mr. Ahmadi produce that movie?» از نظر گرامری درست است.",
 								"answer": false,
 								"hint_fa": "درست باید بگوییم: Has Mr. Ahmadi produced that movie? (قسمت سوم فعل)",
 								"explanation_fa": "درست باید بگوییم: Has Mr. Ahmadi produced that movie? (قسمت سوم فعل)"
@@ -742,7 +742,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'yet' is usually used in affirmative sentences.",
+								"statement": "«yet» معمولاً در جملات مثبت استفاده می‌شود.",
 								"answer": false,
 								"hint_fa": "yet معمولاً در جملات منفی و سؤالی به کار می‌رود.",
 								"explanation_fa": "yet معمولاً در جملات منفی و سؤالی به کار می‌رود."
@@ -810,7 +810,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'ever' is mostly used in questions with present perfect.",
+								"statement": "«ever» بیشتر در سوالات ماضی نقلی استفاده می‌شود.",
 								"answer": true,
 								"hint_fa": "درسته! مثل: Have you ever...?",
 								"explanation_fa": "درسته! مثل: Have you ever...?"
@@ -978,7 +978,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'wake up' means 'to fall asleep'.",
+								"statement": "«wake up» یعنی «به خواب رفتن».",
 								"answer": false,
 								"hint_fa": "wake up یعنی بیدار شدن، نه به خواب رفتن.",
 								"explanation_fa": "wake up یعنی بیدار شدن، نه به خواب رفتن."
@@ -1031,7 +1031,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'call back' means to call someone again later.",
+								"statement": "«call back» یعنی بعداً دوباره با کسی تماس بگیریم.",
 								"answer": true,
 								"hint_fa": "درسته! call back یعنی دوباره تماس گرفتن.",
 								"explanation_fa": "درسته! call back یعنی دوباره تماس گرفتن."
@@ -1205,7 +1205,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'Cycling and jogging is my favorite sports' is correct.",
+								"statement": "جمله‌ی «Cycling and jogging is my favorite sports» درست است.",
 								"answer": false,
 								"hint_fa": "دو جرأند با هم فاعل جمع می‌گیرند: Cycling and jogging are...",
 								"explanation_fa": "دو جرأند با هم فاعل جمع می‌گیرند: Cycling and jogging are..."
@@ -1256,7 +1256,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "A single gerund subject takes a singular verb.",
+								"statement": "فاعل gerund مفرد، فعل مفرد می‌گیرد.",
 								"answer": true,
 								"hint_fa": "درسته! مثل: Swimming is...",
 								"explanation_fa": "درسته! مثل: Swimming is..."
@@ -1481,7 +1481,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "After prepositions like 'about' or 'for', we use a gerund.",
+								"statement": "بعد از حروف اضافه‌ای مثل «about» یا «for»، از gerund استفاده می‌کنیم.",
 								"answer": true,
 								"hint_fa": "درسته! بعد از حروف اضافه همیشه جرأند می‌آید.",
 								"explanation_fa": "درسته! بعد از حروف اضافه همیشه جرأند می‌آید."

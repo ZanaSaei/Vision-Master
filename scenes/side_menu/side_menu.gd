@@ -4,23 +4,27 @@ signal saved_words_pressed
 signal leitner_pressed
 signal purchase_pressed
 signal settings_pressed
+signal account_pressed
 signal about_me_pressed
 
 const SCENE_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 const SCENE_SETTINGS    := "res://scenes/settings/Settings.tscn"
 const SCENE_LEITNER     := "res://scenes/review/WordReview.tscn"
 const SCENE_PURCHASE    := "res://scenes/purchase/Purchase.tscn"
+const SCENE_ACCOUNT     := "res://scenes/auth/Auth.tscn"
 const SCENE_ABOUT_ME    := "res://scenes/about_me/AboutMe.tscn"
 
 # ─── Node References ───────────────────────────────────────────
 @onready var overlay: ColorRect = $Overlay
 @onready var menu_panel: Control = $MenuPanel
+var _panel_stylebox: StyleBoxFlat
 
 # Buttons
 @onready var saved_words_button: Button = $MenuPanel/MarginContainer/VBoxContainer/SavedWordsButton
 @onready var purchase_button: Button = $MenuPanel/MarginContainer/VBoxContainer/PurchaseButton
 @onready var leitner_button: Button = $MenuPanel/MarginContainer/VBoxContainer/LeitnerButton
 @onready var settings_button: Button = $MenuPanel/MarginContainer/VBoxContainer/SettingsButton
+@onready var account_button: Button = $MenuPanel/MarginContainer/VBoxContainer/AccountButton
 @onready var about_me_button: Button = $MenuPanel/MarginContainer/VBoxContainer/AboutMeButton
 
 # Header / footer labels (use LabelSettings that override the theme — recolor them)
@@ -40,6 +44,7 @@ const BUTTON_EMOJIS := {
 	"SavedWords": "📚",
 	"Leitner":    "🧠",
 	"Purchase":   "💎",
+	"Account":    "📱",
 	"Settings":   "⚙️",
 	"AboutMe":    "👤",
 }
@@ -71,15 +76,16 @@ func _ready() -> void:
 
 	# Set initial position (off-screen right)
 	menu_panel.position.x = menu_closed_position
-
-	# Now show the menu (it's off-screen so won't be visible)
-	menu_panel.visible = true
+	# Keep the closed drawer hidden. It is shown only by open(), so a fresh
+	# MainMenu never draws a parked sliver or a shadow bleed on the edge.
+	menu_panel.visible = false
 
 	overlay.gui_input.connect(_on_overlay_gui_input)
 	saved_words_button.pressed.connect(func(): emit_signal("saved_words_pressed"); close())
 	leitner_button.pressed.connect(func(): emit_signal("leitner_pressed"); close())
 	purchase_button.pressed.connect(func(): emit_signal("purchase_pressed"); close())
 	settings_button.pressed.connect(func(): emit_signal("settings_pressed"); close())
+	account_button.pressed.connect(func(): emit_signal("account_pressed"); close())
 	about_me_button.pressed.connect(func(): emit_signal("about_me_pressed"); close())
 
 	_setup_modern_buttons()
@@ -88,11 +94,19 @@ func _ready() -> void:
 	_apply_theme()
 
 
+# How far past the right viewport edge the closed drawer is parked. A plain
+# "viewport width" is NOT enough: the panel is laid out from its offsets each
+# frame and actually settles a few px on-screen (and its shadow bleeds further),
+# which shows a sliver of the menu on the fresh MainMenu after leaving a
+# side-menu destination and coming back. Pushing it off with a margin — and
+# keeping it invisible while closed — guarantees nothing is ever drawn.
+const CLOSED_OFFSCREEN_MARGIN := 60.0
+
 # Recomputes the off-screen / on-screen X positions from the current
 # viewport size. Called in _ready and again whenever the viewport resizes
 # so the drawer always parks exactly at the right edge.
 func _update_menu_positions() -> void:
-	menu_closed_position = get_viewport().get_visible_rect().size.x
+	menu_closed_position = get_viewport().get_visible_rect().size.x + CLOSED_OFFSCREEN_MARGIN
 	menu_open_position = get_viewport().get_visible_rect().size.x - menu_panel.size.x
 	# If the drawer is currently closed, keep it fully off-screen.
 	if not is_open:
@@ -106,85 +120,81 @@ func _on_theme_changed(_mode: int) -> void:
 	_apply_theme()
 
 
-# The side menu keeps ONE fixed form in every theme (the original look):
-# deep-navy panel (matches the modern menu cards), dimming scrim overlay,
-# white text and translucent white chips with an accent hover.
-const MENU_PANEL_BG  := Color(0.055, 0.065, 0.13, 1)
-const MENU_OVERLAY   := Color(0.02, 0.03, 0.07, 0.62)
-const MENU_TEXT      := Color(1, 1, 1, 1)
-const MENU_DIM_TEXT  := Color(0.80, 0.84, 0.93, 1)
-const MENU_CHIP_BG   := Color(1, 1, 1, 0.06)
-const MENU_CHIP_HOVER := Color(1, 1, 1, 0.12)
-const MENU_CHIP_PRESSED := Color(1, 1, 1, 0.18)
-const MENU_CHIP_BORDER := Color(1, 1, 1, 0.10)
+# The side menu panel uses cream in Light theme and deep navy in Dark theme.
+const MENU_PANEL_BG_DARK  := Color(0.055, 0.065, 0.13, 1)
+const MENU_PANEL_BG_LIGHT := Color("#FFF7BA")
+const MENU_OVERLAY_DARK   := Color(0.02, 0.03, 0.07, 0.62)
+const MENU_OVERLAY_LIGHT  := Color(0, 0, 0, 0.3)
+const MENU_TEXT_DARK      := Color(1, 1, 1, 1)
+const MENU_TEXT_LIGHT     := Color("#1E1E1E")
+const MENU_DIM_TEXT_DARK  := Color(0.80, 0.84, 0.93, 1)
+const MENU_DIM_TEXT_LIGHT := Color("#444444")
+const MENU_CHIP_BG_DARK   := Color(1, 1, 1, 0.06)
+const MENU_CHIP_BG_LIGHT  := Color("#FFF7BA", 0.20)
+const MENU_CHIP_HOVER_DARK := Color(1, 1, 1, 0.12)
+const MENU_CHIP_HOVER_LIGHT := Color("#FFF7BA", 0.35)
+const MENU_CHIP_PRESSED_DARK := Color(1, 1, 1, 0.18)
+const MENU_CHIP_PRESSED_LIGHT := Color("#FFF7BA", 0.45)
+const MENU_CHIP_BORDER_DARK := Color(1, 1, 1, 0.10)
+const MENU_CHIP_BORDER_LIGHT := Color("#FFF7BA", 0.30)
 
 func _apply_theme() -> void:
-	# Panel — fixed deep navy regardless of the global theme, rounded on the
-	# side facing the page, with a soft shadow + hairline border.
+	var dark := Global.theme_is_dark()
+	var panel_bg := MENU_PANEL_BG_DARK if dark else MENU_PANEL_BG_LIGHT
+	var overlay_col := MENU_OVERLAY_DARK if dark else MENU_OVERLAY_LIGHT
+	var text_col := MENU_TEXT_DARK if dark else MENU_TEXT_LIGHT
+	var dim_text_col := MENU_DIM_TEXT_DARK if dark else MENU_DIM_TEXT_LIGHT
+	# Panel — cream in Light theme, deep navy in Dark theme.
 	var st := StyleBoxFlat.new()
 	st.set_corner_radius_all(26)
 	st.corner_radius_top_right = 0
 	st.corner_radius_bottom_right = 0
-	st.bg_color = MENU_PANEL_BG
+	st.bg_color = panel_bg
 	st.set_border_width_all(0)
 	st.border_width_left = 1
-	st.border_color = Color(1, 1, 1, 0.10)
-	st.shadow_color = Color(0, 0, 0, 0.35)
+	st.border_color = Color(1, 1, 1, 0.10) if dark else Color("#FFF7BA", 0.20)
+	st.shadow_color = Color(0, 0, 0, 0.35) if dark else Color(0, 0, 0, 0.15)
 	st.shadow_size = 24
 	st.shadow_offset = Vector2(-6, 0)
+	_panel_stylebox = st
 	menu_panel.add_theme_stylebox_override("panel", st)
 
-	# Overlay dims the page behind — fixed.
-	overlay.color = MENU_OVERLAY
+	# While the drawer is closed its panel hides off-screen; keep the shadow
+	# disabled so it can't cast a visible strip onto the scene edge. open()
+	# re-enables it, close() keeps it off.
+	if not is_open:
+		st.shadow_size = 0
+		st.shadow_offset = Vector2.ZERO
 
-	# Header / footer text — fixed white.
+	# Overlay dims the page behind.
+	overlay.color = overlay_col
+
+	# Header / footer text.
 	user_name_label.text = "سلام! 👋"
 	welcome_label.text = "چطور میتوانم کمکت کنم؟"
 	for l in [user_name_label, version_label]:
 		if l.label_settings != null:
-			l.label_settings.font_color = MENU_TEXT
+			l.label_settings.font_color = text_col
 		else:
-			l.add_theme_color_override("font_color", MENU_TEXT)
+			l.add_theme_color_override("font_color", text_col)
 	# Menu titles stay centred in the drawer.
 	user_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	welcome_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	version_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	if welcome_label.label_settings != null:
-		welcome_label.label_settings.font_color = MENU_DIM_TEXT
+		welcome_label.label_settings.font_color = dim_text_col
 	else:
-		welcome_label.add_theme_color_override("font_color", MENU_DIM_TEXT)
+		welcome_label.add_theme_color_override("font_color", dim_text_col)
 
-	for btn in [saved_words_button, leitner_button, purchase_button, settings_button, about_me_button]:
-		btn.add_theme_color_override("font_color", MENU_TEXT)
-		btn.add_theme_color_override("font_hover_color", MENU_TEXT)
-		btn.add_theme_color_override("font_pressed_color", MENU_TEXT)
-		btn.add_theme_color_override("font_focus_color", MENU_TEXT)
+	for btn in [saved_words_button, leitner_button, purchase_button, settings_button, account_button, about_me_button]:
+		btn.add_theme_color_override("font_color", text_col)
+		btn.add_theme_color_override("font_hover_color", text_col)
+		btn.add_theme_color_override("font_pressed_color", text_col)
+		btn.add_theme_color_override("font_focus_color", text_col)
 
 		# The visible text is a child Label inside the button — recolor it too.
 		for lbl in btn.find_children("TextLabel", "Label", true, false):
-			lbl.add_theme_color_override("font_color", MENU_TEXT)
-
-		# Fixed translucent-white chips with the purple hover accent.
-		var normal := StyleBoxFlat.new()
-		normal.bg_color = MENU_CHIP_BG
-		normal.border_color = MENU_CHIP_BORDER
-		normal.set_border_width_all(1)
-		normal.set_corner_radius_all(18)
-		normal.content_margin_left = 18
-		normal.content_margin_right = 18
-		normal.content_margin_top = 12
-		normal.content_margin_bottom = 12
-		var hover := normal.duplicate() as StyleBoxFlat
-		hover.bg_color = MENU_CHIP_HOVER
-		hover.border_color = Color("#8B5CF6")
-		hover.set_border_width_all(2)
-		var pressed := hover.duplicate() as StyleBoxFlat
-		pressed.bg_color = MENU_CHIP_PRESSED
-		var focus := hover.duplicate() as StyleBoxFlat
-		btn.add_theme_stylebox_override("normal", normal)
-		btn.add_theme_stylebox_override("hover", hover)
-		btn.add_theme_stylebox_override("pressed", pressed)
-		btn.add_theme_stylebox_override("focus", focus)
+			lbl.add_theme_color_override("font_color", text_col)
 
 
 # ══════════════════════════════════════════════════════════════
@@ -192,7 +202,6 @@ func _apply_theme() -> void:
 # ══════════════════════════════════════════════════════════════
 const ACCENT       := Color("#8B5CF6")
 const ACCENT_HOVER := Color("#A78BFA")
-const TEXT_COLOR   := Color("#FFFFFF")
 
 
 func _setup_modern_buttons() -> void:
@@ -200,6 +209,7 @@ func _setup_modern_buttons() -> void:
 		{"button": saved_words_button, "key": "SavedWords"},
 		{"button": leitner_button,     "key": "Leitner"},
 		{"button": purchase_button,    "key": "Purchase"},
+		{"button": account_button,     "key": "Account"},
 		{"button": settings_button,    "key": "Settings"},
 		{"button": about_me_button,    "key": "AboutMe"},
 	]
@@ -230,26 +240,37 @@ func _apply_modern_style(btn: Button) -> void:
 
 	# --- Normal state ---
 	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(1.0, 1.0, 1.0, 0.06)
+	normal.bg_color = Color("#FFF7BA", 0.30)
 	normal.set_corner_radius_all(12)
-	normal.set_border_width_all(1)
-	normal.border_color = Color(1.0, 1.0, 1.0, 0.10)
+	normal.set_border_width_all(2)
+	normal.border_color = ACCENT
 	normal.content_margin_left = 16
 	normal.content_margin_right = 16
 	normal.content_margin_top = 10
 	normal.content_margin_bottom = 10
 
 	# --- Hover state ---
-	var hover := normal.duplicate() as StyleBoxFlat
-	hover.bg_color = Color(1.0, 1.0, 1.0, 0.12)
-	hover.border_color = ACCENT
+	var hover := StyleBoxFlat.new()
+	hover.bg_color = Color("#FFF7BA", 0.45)
+	hover.set_corner_radius_all(12)
 	hover.set_border_width_all(2)
-	# Flat: no glow shadow, just the brightened fill + accent border.
+	hover.border_color = ACCENT_HOVER
+	hover.content_margin_left = 16
+	hover.content_margin_right = 16
+	hover.content_margin_top = 10
+	hover.content_margin_bottom = 10
+	# Flat: accent border + visible fill on cream background.
 
 	# --- Pressed state ---
-	var pressed := hover.duplicate() as StyleBoxFlat
-	pressed.bg_color = Color(1.0, 1.0, 1.0, 0.18)
+	var pressed := StyleBoxFlat.new()
+	pressed.bg_color = Color("#FFF7BA", 0.55)
+	pressed.set_corner_radius_all(12)
+	pressed.set_border_width_all(2)
 	pressed.border_color = ACCENT_HOVER
+	pressed.content_margin_left = 16
+	pressed.content_margin_right = 16
+	pressed.content_margin_top = 10
+	pressed.content_margin_bottom = 10
 
 	# --- Focus state ---
 	var focus := hover.duplicate() as StyleBoxFlat
@@ -261,10 +282,11 @@ func _apply_modern_style(btn: Button) -> void:
 	t.set_stylebox("disabled", "Button", normal)
 
 	# --- Typography ---
-	t.set_color("font_color",         "Button", TEXT_COLOR)
-	t.set_color("font_hover_color",   "Button", TEXT_COLOR)
-	t.set_color("font_pressed_color", "Button", TEXT_COLOR)
-	t.set_color("font_focus_color",   "Button", TEXT_COLOR)
+	var btn_text_color := Color("#FFFFFF") if Global.theme_is_dark() else Color("#1E1E1E")
+	t.set_color("font_color",         "Button", btn_text_color)
+	t.set_color("font_hover_color",   "Button", btn_text_color)
+	t.set_color("font_pressed_color", "Button", btn_text_color)
+	t.set_color("font_focus_color",   "Button", btn_text_color)
 	t.set_font_size("font_size", "Button", 16)
 	t.set_constant("h_separation", "Button", 10)
 
@@ -326,6 +348,12 @@ func open() -> void:
 	if is_open:
 		return
 	is_open = true
+	menu_panel.visible = true
+
+	# Restore shadow for the open animation.
+	if _panel_stylebox:
+		_panel_stylebox.shadow_size = 24
+		_panel_stylebox.shadow_offset = Vector2(-6, 0)
 
 	overlay.visible = true
 	if tween:
@@ -352,6 +380,11 @@ func close() -> void:
 		return
 	is_open = false
 
+	# Kill shadow immediately so it can't bleed onto the next scene.
+	if _panel_stylebox:
+		_panel_stylebox.shadow_size = 0
+		_panel_stylebox.shadow_offset = Vector2.ZERO
+
 	if tween:
 		tween.kill()
 
@@ -366,7 +399,12 @@ func close() -> void:
 		tween.tween_property(hamburger_button, "rotation_degrees", 0.0, 0.4) \
 			.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 
-	tween.chain().tween_callback(func(): overlay.visible = false)
+	tween.chain().tween_callback(_on_close_tween_complete)
+
+
+func _on_close_tween_complete() -> void:
+	overlay.visible = false
+	menu_panel.visible = false
 
 
 func _on_overlay_gui_input(event: InputEvent) -> void:
@@ -443,7 +481,7 @@ func _rebuild_button_content(btn: Button, emoji_key: String) -> void:
 	text_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	text_label.size_flags_vertical = Control.SIZE_FILL
 	text_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	text_label.add_theme_color_override("font_color", TEXT_COLOR)
+	text_label.add_theme_color_override("font_color", Color("#FFFFFF") if Global.theme_is_dark() else Color("#1E1E1E"))
 	text_label.add_theme_font_size_override("font_size", BUTTON_TEXT_FONT_SIZE)
 	row.add_child(text_label)
 

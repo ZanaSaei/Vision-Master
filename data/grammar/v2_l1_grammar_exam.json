@@ -1,0 +1,341 @@
+{
+	"lessons": [
+		{
+			"accent": "#059669",
+			"exam_exercises": [
+				{
+					"text": "Part 1 — Multiple Choice (۲۰ نمره — هر سؤال ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the best answer.",
+					"items": [
+						{
+							"answer": 1,
+							"options": [
+								"much",
+								"many",
+								"a little",
+								"a few"
+							],
+							"question": "How ______ languages are spoken in Africa?"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"many",
+								"much",
+								"a few",
+								"few"
+							],
+							"question": "There isn't ______ information about this endangered language."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"a bottle of",
+								"a kilo of",
+								"a slice of",
+								"a cup of"
+							],
+							"question": "We need ______ rice for dinner tonight."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"much",
+								"a little",
+								"a few",
+								"little"
+							],
+							"question": "My grandmother only speaks ______ words of English."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"glasses",
+								"loaves",
+								"bags",
+								"cups"
+							],
+							"question": "Please buy two ______ of bread from the shop."
+						},
+						{
+							"answer": 2,
+							"options": [
+								"much",
+								"a little",
+								"a few",
+								"little"
+							],
+							"question": "There are ______ people in this village who speak the old language."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"many",
+								"much",
+								"a few",
+								"numbers"
+							],
+							"question": "How ______ water should we drink every day?"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"piece",
+								"slice",
+								"bottle",
+								"loaf"
+							],
+							"question": "The teacher gave us a ______ of good advice about learning languages."
+						},
+						{
+							"answer": 1,
+							"options": [
+								"many",
+								"much",
+								"a few",
+								"numbers of"
+							],
+							"question": "This city doesn't have ______ traffic in the morning."
+						},
+						{
+							"answer": 0,
+							"options": [
+								"cup",
+								"bag",
+								"loaf",
+								"slice"
+							],
+							"question": "Would you like a ______ of tea while we talk?"
+						}
+					],
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 2 — Fill in the Blanks with much / many / a little / a few (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Fill in the Blanks with much / many / a little / a few",
+					"items": [
+						{
+							"answer": "many",
+							"text": "There are ______ (many/much) languages in Asia."
+						},
+						{
+							"answer": "much",
+							"text": "We don't have ______ (a few/much) time to learn a new language."
+						},
+						{
+							"answer": "a little",
+							"text": "I know ______ (a little/a few) words in French."
+						},
+						{
+							"answer": "many",
+							"text": "How ______ (many/much) people speak Chinese in the world?"
+						},
+						{
+							"answer": "a few",
+							"text": "She has ______ (a little/a few) friends who speak Russian."
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 3 — Choose the Correct Measure Word (۱۵ نمره — هر سؤال ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Choose the Correct Measure Word",
+					"items": [
+						{
+							"answer": "bottle",
+							"text": "a ______ of water (bottle/loaf)"
+						},
+						{
+							"answer": "loaf",
+							"text": "a ______ of bread (piece/loaf)"
+						},
+						{
+							"answer": "bag",
+							"text": "a ______ of sugar (bag/cup)"
+						},
+						{
+							"answer": "cup",
+							"text": "a ______ of tea (cup/slice)"
+						},
+						{
+							"answer": "piece",
+							"text": "a ______ of cake (piece/bottle)"
+						}
+					],
+					"type": "fill_blank"
+				},
+				{
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره — هر جمله ۵ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Rewrite the sentence as instructed.",
+					"items": [
+						{
+							"answer": "How many languages are there in the world?",
+							"task": "Rewrite as a question with \"how many\":",
+							"text": "There are seven thousand languages in the world."
+						},
+						{
+							"answer": "How much information do we need about this language?",
+							"task": "Rewrite as a question with \"how much\":",
+							"text": "We need some information about this language."
+						},
+						{
+							"answer": "She bought a loaf of bread and a bag of sugar.",
+							"task": "Add a correct measure word:",
+							"text": "She bought ______ bread and ______ sugar. (bread / sugar)"
+						}
+					],
+					"type": "transformation"
+				},
+				{
+					"text": "Part 5 — Reading and Choosing the Correct Word (۱۵ نمره — هر جای خالی ۳ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Read the paragraph and choose the correct word.",
+					"items": [
+						{
+							"answer": 0,
+							"options": [
+								"many",
+								"much"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"a few",
+								"a little"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"many",
+								"much"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"many",
+								"much"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 1,
+							"options": [
+								"a few",
+								"a little"
+							],
+							"question": "Choose the correct word:"
+						},
+						{
+							"answer": 0,
+							"options": [
+								"a little",
+								"a few"
+							],
+							"question": "Choose the correct word:"
+						}
+					],
+					"passage": "There are many/much languages in the world today. Some languages have a few/a little speakers, while others have many/much millions of speakers. If you want to learn a new language, you need many/much practice and a few/a little patience. Learning even a little/a few words every day can really help.",
+					"type": "multiple_choice"
+				},
+				{
+					"text": "Part 6 — Matching (۱۰ نمره — هر مورد ۲ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "Match column A with column B.",
+					"items": [
+						{
+							"answer": "d) water",
+							"options": [
+								"a) sugar",
+								"b) tea",
+								"c) cake",
+								"d) water",
+								"e) bread"
+							],
+							"text": "1. a bottle of"
+						},
+						{
+							"answer": "e) bread",
+							"options": [
+								"a) sugar",
+								"b) tea",
+								"c) cake",
+								"d) water",
+								"e) bread"
+							],
+							"text": "2. a loaf of"
+						},
+						{
+							"answer": "a) sugar",
+							"options": [
+								"a) sugar",
+								"b) tea",
+								"c) cake",
+								"d) water",
+								"e) bread"
+							],
+							"text": "3. a bag of"
+						},
+						{
+							"answer": "b) tea",
+							"options": [
+								"a) sugar",
+								"b) tea",
+								"c) cake",
+								"d) water",
+								"e) bread"
+							],
+							"text": "4. a cup of"
+						},
+						{
+							"answer": "c) cake",
+							"options": [
+								"a) sugar",
+								"b) tea",
+								"c) cake",
+								"d) water",
+								"e) bread"
+							],
+							"text": "5. a piece of"
+						}
+					],
+					"type": "matching"
+				},
+				{
+					"text": "Part 7 — Short Writing (۱۰ نمره)",
+					"type": "h4"
+				},
+				{
+					"instruction": "In 3-4 complete sentences, write about a language you would like to learn. Use at least one countable noun with \"many/a few\" and one uncountable noun with \"much/a little\". ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________",
+					"items": [
+						{
+							"text": "In 3-4 complete sentences, write about a language you would like to learn. Use at least one countable noun with \"many/a few\" and one uncountable noun with \"much/a little\". ______________________________________________________________ ______________________________________________________________ ______________________________________________________________ ______________________________________________________________"
+						}
+					],
+					"type": "open_ended"
+				}
+			]
+		}
+	]
+}

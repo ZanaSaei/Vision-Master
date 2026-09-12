@@ -90,7 +90,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'If my friends will come, I will become happy' is correct.",
+								"statement": "جمله‌ی «If my friends will come, I will become happy» درست است.",
 								"answer": false,
 								"hint_fa": "بعد از if از حال ساده استفاده می‌شود، نه will.",
 								"explanation_fa": "بعد از if از حال ساده استفاده می‌شود، نه will."
@@ -159,7 +159,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "The verb after 'if' is always in the simple present in Conditional Type I.",
+								"statement": "در شرطی نوع اول، فعل بعد از «if» همیشه زمان حال ساده است.",
 								"answer": true,
 								"hint_fa": "درسته! این قانون اصلی شرطی نوع اول است.",
 								"explanation_fa": "درسته! این قانون اصلی شرطی نوع اول است."
@@ -252,7 +252,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "A comma is needed when the result clause comes first, like 'I'll phone you if I have time'.",
+								"statement": "وقتی جمله‌ی نتیجه اول بیاید، ویرگول لازم است؛ مثل «I'll phone you if I have time».",
 								"answer": false,
 								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
 								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
@@ -302,7 +302,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'If you study hard you will pass the exams' needs a comma after 'hard'.",
+								"statement": "جمله‌ی «If you study hard you will pass the exams» بعد از «hard» به ویرگول نیاز دارد.",
 								"answer": true,
 								"hint_fa": "چون جمله با if شروع شده، بعد از قسمت شرط کاما لازم است.",
 								"explanation_fa": "چون جمله با if شروع شده، بعد از قسمت شرط کاما لازم است."
@@ -336,7 +336,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'You will hurt yourself, if you jump into the river' has correct comma usage.",
+								"statement": "در جمله‌ی «You will hurt yourself, if you jump into the river» استفاده از ویرگول درست است.",
 								"answer": false,
 								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
 								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
@@ -368,7 +368,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "Both orders (if-clause first or result-clause first) have the same meaning.",
+								"statement": "هر دو ترتیب (اول جمله‌ی شرط یا اول جمله‌ی نتیجه) معنای یکسانی دارند.",
 								"answer": true,
 								"hint_fa": "درسته! فقط ترتیب و کاما فرق می‌کند، نه معنا.",
 								"explanation_fa": "درسته! فقط ترتیب و کاما فرق می‌کند، نه معنا."
@@ -538,7 +538,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'surprised' can describe how a person feels.",
+								"statement": "«surprised» می‌تواند احساس یک شخص را توصیف کند.",
 								"answer": true,
 								"hint_fa": "درسته! surprised یعنی احساس تعجب.",
 								"explanation_fa": "درسته! surprised یعنی احساس تعجب."
@@ -591,7 +591,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'I'm tired of watching television' shows a feeling.",
+								"statement": "جمله‌ی «I'm tired of watching television» یک احساس را نشان می‌دهد.",
 								"answer": true,
 								"hint_fa": "درسته! tired احساس خستگی را نشان می‌دهد.",
 								"explanation_fa": "درسته! tired احساس خستگی را نشان می‌دهد."
@@ -821,7 +821,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'interested' is usually followed by 'in'.",
+								"statement": "«interested» معمولاً با «in» ادامه پیدا می‌کند.",
 								"answer": true,
 								"hint_fa": "درسته! interested in است.",
 								"explanation_fa": "درسته! interested in است."
@@ -1048,7 +1048,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'I ran fast to catch the bus' uses an infinitive.",
+								"statement": "جمله‌ی «I ran fast to catch the bus» از مصدر استفاده می‌کند.",
 								"answer": true,
 								"hint_fa": "درسته! 'to catch' مصدر با to است.",
 								"explanation_fa": "درسته! 'to catch' مصدر با to است."
@@ -1193,7 +1193,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'to not make noise' is the correct order.",
+								"statement": "ترتیب «to not make noise» درست است.",
 								"answer": false,
 								"hint_fa": "ترتیب درست: not to make، نه to not make.",
 								"explanation_fa": "ترتیب درست: not to make، نه to not make."
@@ -1262,7 +1262,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'not to' always comes before the base verb in a negative infinitive.",
+								"statement": "در مصدر منفی، «not to» همیشه قبل از شکل ساده‌ی فعل می‌آید.",
 								"answer": true,
 								"hint_fa": "درسته! ترتیب همیشه not to + فعل است.",
 								"explanation_fa": "درسته! ترتیب همیشه not to + فعل است."
@@ -1432,7 +1432,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "'I was amazed to hear the news' uses an infinitive after an adjective.",
+								"statement": "جمله‌ی «I was amazed to hear the news» بعد از صفت از مصدر استفاده می‌کند.",
 								"answer": true,
 								"hint_fa": "درسته! 'to hear' مصدر با to بعد از صفت amazed است.",
 								"explanation_fa": "درسته! 'to hear' مصدر با to بعد از صفت amazed است."
@@ -1485,7 +1485,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "Adjectives like 'happy', 'sad', and 'glad' can be followed by an infinitive.",
+								"statement": "صفت‌هایی مثل «happy»، «sad» و «glad» می‌توانند با مصدر ادامه پیدا کنند.",
 								"answer": true,
 								"hint_fa": "درسته! مثل happy to see، sad to leave.",
 								"explanation_fa": "درسته! مثل happy to see، sad to leave."

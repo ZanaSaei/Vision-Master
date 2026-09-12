@@ -6,6 +6,7 @@ const SCENE_UNITS: String = "res://scenes/grammar/GrammarUnits.tscn"
 const SCENE_WORKBOOK: String = "res://scenes/workbook/Workbook.tscn"
 const SCENE_BOOK_EXERCISES: String = "res://scenes/grammar/GrammarBookExercises.tscn"
 const SCENE_GRAMMAR_EXAM: String = "res://scenes/grammar/GrammarExam.tscn"
+const SCENE_MAIN_MENU: String = "res://scenes/main_menu/MainMenu.tscn"
 
 var _navigating: bool = false
 
@@ -53,6 +54,9 @@ func _build_ui() -> void:
 
 	var back_button: Button = GrammarTheme.make_header_icon_button("res://images/Back.png", Callable(self, "_on_back_pressed"))
 	header_row.add_child(back_button)
+
+	var home_button: Button = GrammarTheme.make_header_icon_button("res://images/Main_Menu.png", Callable(self, "_on_main_menu_pressed"))
+	header_row.add_child(home_button)
 
 	var title_label: Label = Label.new()
 	title_label.text = "یادگیری گرامر"
@@ -239,6 +243,13 @@ func _on_exam_pressed() -> void:
 	_navigating = true
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
 	TransitionManager.change_scene(SCENE_GRAMMAR_EXAM)
+
+
+func _on_main_menu_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	TransitionManager.change_scene(SCENE_MAIN_MENU)
 
 
 func _on_back_pressed() -> void:

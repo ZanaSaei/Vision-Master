@@ -1,0 +1,21 @@
+{
+  "name": "vision-master-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend for Vision Master: phone OTP auth (Kavenegar), progress sync, and content delivery.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "migrate": "node src/migrate.js",
+    "manifest": "node scripts/make_manifest.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.12.0"
+  }
+}

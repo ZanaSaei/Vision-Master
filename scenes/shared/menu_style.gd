@@ -81,11 +81,11 @@ static func border() -> Color:
 	return c("border")
 
 
-## Card fill: crisp white in Light, deep indigo-navy in Dark.
+## Card fill: cream (from Background.png) in Light, deep indigo-navy in Dark.
 static func card_bg() -> Color:
 	if is_dark():
 		return Color(0.078, 0.088, 0.17)
-	return Color(1, 1, 1)
+	return Color("#FFF7BA")
 
 
 ## Foreground colour that reads well on a saturated accent fill.
@@ -194,7 +194,7 @@ static func make_tip_card(message: String, emoji: String = "💡") -> PanelConta
 	if is_dark():
 		style.bg_color = Color(0.078, 0.088, 0.17, 0.7)
 	else:
-		style.bg_color = Color(1, 1, 1, 0.6)
+		style.bg_color = Color("#FFF7BA", 0.6)
 	style.set_corner_radius_all(24)
 	style.set_border_width_all(1)
 	if is_dark():
@@ -412,7 +412,7 @@ static func header_bar_style(radius_bottom: int = 44, flat: bool = false) -> Sty
 	if is_dark():
 		s.bg_color = Color(0.078, 0.088, 0.17, 0.94)
 	else:
-		s.bg_color = Color(1, 1, 1, 0.9)
+		s.bg_color = Color("#BFDBFE")
 	s.corner_radius_bottom_left = radius_bottom
 	s.corner_radius_bottom_right = radius_bottom
 	if not flat:

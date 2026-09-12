@@ -119,7 +119,7 @@
 								"answer": false,
 								"explanation_fa": "'tall' ویژگی 'man' را توصیف می‌کند، پس صفت است نه اسم.",
 								"hint_fa": "'tall' ویژگی 'man' را توصیف می‌کند، پس صفت است نه اسم.",
-								"statement": "In the sentence 'Robert's father is a very tall man', the word 'tall' is a noun."
+								"statement": "در جمله‌ی «Robert's father is a very tall man»، کلمه‌ی «tall» اسم است."
 							}
 						],
 						"title_en": "",
@@ -331,7 +331,7 @@
 								"answer": false,
 								"explanation_fa": "در as...as از شکل ساده‌ی صفت (tall) استفاده می‌شود، نه comparative (taller).",
 								"hint_fa": "در as...as از شکل ساده‌ی صفت (tall) استفاده می‌شود، نه comparative (taller).",
-								"statement": "'as taller as' is a correct English structure."
+								"statement": "«as taller as» ساختار درستی در انگلیسی است."
 							}
 						],
 						"title_en": "",
@@ -401,7 +401,7 @@
 								"answer": true,
 								"explanation_fa": "as...as یعنی برابری کامل در آن ویژگی.",
 								"hint_fa": "as...as یعنی برابری کامل در آن ویژگی.",
-								"statement": "'His grandfather is as old as my grandfather' means the two grandfathers have the same age."
+								"statement": "جمله‌ی «His grandfather is as old as my grandfather» یعنی این دو پدربزرگ هم‌سن هستند."
 							}
 						],
 						"title_en": "",
@@ -570,7 +570,7 @@
 								"answer": true,
 								"explanation_fa": "ساختار comparative + than برای مقایسه‌ی دو چیز استفاده می‌شود.",
 								"hint_fa": "ساختار comparative + than برای مقایسه‌ی دو چیز استفاده می‌شود.",
-								"statement": "'older than' is used to compare two things."
+								"statement": "«older than» برای مقایسه‌ی دو چیز استفاده می‌شود."
 							}
 						],
 						"title_en": "",
@@ -803,7 +803,7 @@
 								"answer": false,
 								"explanation_fa": "صفت عالی (superlative) برای مقایسه‌ی سه چیز یا بیشتر استفاده می‌شود، نه فقط دو تا.",
 								"hint_fa": "صفت عالی (superlative) برای مقایسه‌ی سه چیز یا بیشتر استفاده می‌شود، نه فقط دو تا.",
-								"statement": "'the tallest' is used when comparing only two things."
+								"statement": "«the tallest» وقتی استفاده می‌شود که فقط دو چیز را مقایسه می‌کنیم."
 							}
 						],
 						"title_en": "",
@@ -1293,7 +1293,7 @@
 								"answer": false,
 								"explanation_fa": "برای صفت‌های بلند مثل expensive نمی‌توان est اضافه کرد؛ باید گفت the most expensive.",
 								"hint_fa": "برای صفت‌های بلند مثل expensive نمی‌توان est اضافه کرد؛ باید گفت the most expensive.",
-								"statement": "'expensivest' is a correct English word."
+								"statement": "«expensivest» یک کلمه‌ی درست در انگلیسی است."
 							}
 						],
 						"title_en": "",
@@ -1554,7 +1554,7 @@
 								"answer": false,
 								"explanation_fa": "good بی‌قاعده است؛ شکل درست آن better و the best است.",
 								"hint_fa": "good بی‌قاعده است؛ شکل درست آن better و the best است.",
-								"statement": "'gooder' is a correct English word."
+								"statement": "«gooder» یک کلمه‌ی درست در انگلیسی است."
 							}
 						],
 						"title_en": "",
