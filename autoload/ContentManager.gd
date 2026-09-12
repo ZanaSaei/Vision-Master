@@ -224,6 +224,38 @@ func failed_downloads() -> Array:
 	return _failed.duplicate()
 
 
+## Cancel the current download batch: stops the in-flight request, clears the
+## queue and progress, and returns to idle. Already-stored files are kept.
+func cancel_downloads() -> void:
+	if _http != null and _active:
+		_http.cancel_request()
+	_active = false
+	_queue.clear()
+	_pending_lessons.clear()
+	_dl_total_count = 0
+	_dl_done_count = 0
+	_dl_total_bytes = 0
+	_dl_done_bytes = 0
+	_emit_progress()
+
+
+## Per-file state: "bundled" | "downloaded" | "queued" | "failed" | "missing".
+func file_status(rel: String) -> String:
+	var bundled := "res://" + rel
+	if FileAccess.file_exists(bundled):
+		return "bundled"
+	var local := _local_for(rel)
+	if FileAccess.file_exists(local):
+		return "downloaded"
+	for entry in _queue:
+		if str(entry.get("path", "")) == rel:
+			return "queued"
+	for entry in _failed:
+		if str(entry.get("path", "")) == rel:
+			return "failed"
+	return "missing"
+
+
 func _reset_if_idle() -> void:
 	if not _active and _queue.is_empty() and _failed.is_empty():
 		_dl_total_count = 0
@@ -336,6 +368,14 @@ func _store_file(entry: Dictionary, bytes: PackedByteArray) -> bool:
 	var rel := str(entry.get("path", ""))
 	if rel == "":
 		return false
+	# Verify the payload against the manifest checksum BEFORE touching disk, so
+	# a truncated/corrupt download is retried instead of poisoning the cache.
+	var expected := str(entry.get("sha256", ""))
+	if expected != "":
+		var actual := _sha256(bytes)
+		if actual.to_lower() != expected.to_lower():
+			push_error("Content: checksum mismatch for %s (got %s, want %s) — not storing." % [rel, actual, expected])
+			return false
 	var local := _local_for(rel)
 	var dir := local.get_base_dir()
 	if not DirAccess.dir_exists_absolute(dir):
@@ -349,7 +389,7 @@ func _store_file(entry: Dictionary, bytes: PackedByteArray) -> bool:
 		return false
 	file.store_buffer(bytes)
 	file.close()
-	_index[rel] = {"sha256": str(entry.get("sha256", "")), "size": bytes.size()}
+	_index[rel] = {"sha256": expected, "size": bytes.size()}
 	_save_index()
 	return true
 
@@ -361,6 +401,51 @@ func _save_index() -> void:
 		return
 	file.store_string(JSON.stringify(_index))
 	file.close()
+
+
+## SHA-256 of a byte buffer, hex-encoded lowercase. Used to verify downloads.
+func _sha256(data: PackedByteArray) -> String:
+	var ctx := HashingContext.new()
+	ctx.start(HashingContext.HASH_SHA256)
+	ctx.update(data)
+	return ctx.finish().hex_encode()
+
+
+## Re-verify every cached file against the manifest checksum and re-queue the
+## ones that rot on disk (power loss mid-write, storage corruption, ...).
+## Returns the count of files that were re-queued.
+func validate_downloads() -> int:
+	if not has_manifest():
+		return 0
+	var bad_rels: Array = []
+	for entry in _manifest.get("files", []):
+		var expected := str(entry.get("sha256", ""))
+		if expected == "":
+			continue
+		var rel := str(entry.get("path", ""))
+		if rel == "":
+			continue
+		if not _index.has(rel):
+			continue
+		var local := _local_for(rel)
+		if not FileAccess.file_exists(local):
+			continue
+		var f := FileAccess.open(local, FileAccess.READ)
+		if f == null:
+			continue
+		var bytes := f.get_buffer(f.get_length())
+		f.close()
+		if _sha256(bytes).to_lower() != expected.to_lower():
+			push_warning("Content: %s is corrupt on disk; re-queuing." % rel)
+			bad_rels.append(entry)
+			_index.erase(rel)
+	if not bad_rels.is_empty():
+		_save_index()
+		_reset_if_idle()
+		for entry in bad_rels:
+			_enqueue(entry)
+		_pump()
+	return bad_rels.size()
 
 
 func _load_index() -> void:

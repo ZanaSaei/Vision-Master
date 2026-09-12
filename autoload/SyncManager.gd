@@ -108,32 +108,134 @@ func _flush() -> void:
 # MERGE
 # ------------------------------------------------------------
 
+## Version of the progress snapshot shape we currently emit. Old blobs (v0/v1)
+## lacking a version are upgraded through `migrate()` before merge so a legacy
+## install never ships an incompatible blob to the server unexpectedly.
+const SCHEMA_VERSION := 2
+
+
 ## Merge a local and a server snapshot into one, keeping both sides' progress.
+##
+## v2 rule: when the payload carries per-key updated_at timestamps and one
+## side edited a key *strictly later* than the other, that side wins (true
+## last-writer-wins). When both sides wrote at the same time (or no timestamps
+## exist yet, as with legacy v1 blobs), we fall back to the safe combiners:
+## per-key max for counters, set union for completed units, union/keep-further
+## for the word lists — so nothing can ever regress mid-migration.
 func merge(local: Dictionary, server: Dictionary) -> Dictionary:
 	if server == null or server.is_empty():
-		return local.duplicate(true)
+		return _stamp_v2(migrate(local))
 	if local == null or local.is_empty():
-		return server.duplicate(true)
+		return _stamp_v2(migrate(server))
 
-	var out := local.duplicate(true)
+	var l: Dictionary = migrate(local)
+	var s: Dictionary = migrate(server)
+	var out := l.duplicate(true)
+	var lts: Dictionary = l.get("key_updated_at", {})
+	var sts: Dictionary = s.get("key_updated_at", {})
 
-	if str(out.get("last_scene", "")) == "":
-		out["last_scene"] = str(server.get("last_scene", ""))
+	# last_scene: prefer whichever side changed it more recently; fall back to
+	# "fill from the other side only when local is empty".
+	var picked: Variant = _pick_newer("last_scene",
+		str(l.get("last_scene", "")), str(s.get("last_scene", "")), lts, sts)
+	if picked != null:
+		out["last_scene"] = picked
+	elif str(out.get("last_scene", "")) == "":
+		out["last_scene"] = str(s.get("last_scene", ""))
 
-	out["grammar_xp"] = _merge_max_dict(
-		local.get("grammar_xp", {}), server.get("grammar_xp", {}))
-	out["grammar_unlocked_units"] = _merge_max_dict(
-		local.get("grammar_unlocked_units", {}), server.get("grammar_unlocked_units", {}))
-	out["grammar_completed_units"] = _merge_union_dict(
-		local.get("grammar_completed_units", {}), server.get("grammar_completed_units", {}))
+	# Grammar counters & unlocked units: per-key max, but a strictly newer
+	# side overrides the counter entirely (LWW).
+	out["grammar_xp"] = _merge_max_lww("grammar_xp",
+		l.get("grammar_xp", {}), s.get("grammar_xp", {}), lts, sts)
+	out["grammar_unlocked_units"] = _merge_max_lww("grammar_unlocked_units",
+		l.get("grammar_unlocked_units", {}), s.get("grammar_unlocked_units", {}), lts, sts)
 
-	out["saved_words"] = _merge_word_list(
-		local.get("saved_words", []), server.get("saved_words", []))
-	out["review_words"] = _merge_review_list(
-		local.get("review_words", []), server.get("review_words", []))
+	# Completed units: set union unless one side is strictly newer.
+	out["grammar_completed_units"] = _merge_union_lww("grammar_completed_units",
+		l.get("grammar_completed_units", {}), s.get("grammar_completed_units", {}), lts, sts)
 
-	out["updated_at"] = int(Time.get_unix_time_from_system())
+	# Word lists: union / keep-further, unless a strictly newer side overrides.
+	out["saved_words"] = _merge_words_lww("saved_words",
+		l.get("saved_words", []), s.get("saved_words", []), lts, sts)
+	out["review_words"] = _merge_words_lww("review_words",
+		l.get("review_words", []), s.get("review_words", []), lts, sts)
+
+	return _stamp_v2(out)
+
+
+## Upgrade an older/differently-shaped blob to the current schema. v1 already
+## matches our field names, so for now this normalises a few legacy shapes and
+## stamps the version. Future migrations (e.g. splitting review_words) belong
+## here and run ahead of every merge + every push.
+func migrate(data: Dictionary) -> Dictionary:
+	if data == null or data.is_empty():
+		return {}
+	var out := data.duplicate(true)
+	# Ensure word entries at least carry word/book/lesson so the merge keys and
+	# the SRS logic never hit a bare dict from a very old build.
+	for list_key in ["saved_words", "review_words"]:
+		if out.get(list_key, null) is Array:
+			var rows: Array = out[list_key]
+			for row in rows:
+				if row is Dictionary:
+					row["word"] = str(row.get("word", ""))
+					row["book"] = int(row.get("book", 0))
+					row["lesson"] = int(row.get("lesson", 0))
+	out[SCHEMA_VERSION_KEY] = SCHEMA_VERSION
 	return out
+
+
+func _stamp_v2(blob: Dictionary) -> Dictionary:
+	if blob.is_empty():
+		return {}
+	var out := blob.duplicate(true)
+	out[SCHEMA_VERSION_KEY] = SCHEMA_VERSION
+	out["updated_at"] = int(Time.get_unix_time_from_system())
+	# Fold per-key timestamps into a shallow map so _pick_newer can read both
+	# sides without duplicating the counts arrays.
+	if not out.has("key_updated_at"):
+		out["key_updated_at"] = {}
+	return out
+
+
+## Last-writer-wins picker. Returns the value from the newer side when one side
+## edited `key` strictly later, or null on a tie (caller then applies combiner).
+func _pick_newer(key: String, vout: Variant, valt: Variant, lts: Dictionary, sts: Dictionary) -> Variant:
+	var lt := int(lts.get(key, 0))
+	var st := int(sts.get(key, 0))
+	if lt > st:
+		return vout
+	if st > lt:
+		return valt
+	return null
+
+
+## Per-key max with an LWW short-circuit (used for counters).
+func _merge_max_lww(key: String, a: Variant, b: Variant, lts: Dictionary, sts: Dictionary) -> Dictionary:
+	var winner: Variant = _pick_newer(key, a, b, lts, sts)
+	if winner != null:
+		return (winner as Dictionary).duplicate(true) if winner is Dictionary else {}
+	return _merge_max_dict(a, b)
+
+
+## Set union with LWW short-circuit.
+func _merge_union_lww(key: String, a: Variant, b: Variant, lts: Dictionary, sts: Dictionary) -> Dictionary:
+	var winner: Variant = _pick_newer(key, a, b, lts, sts)
+	if winner != null:
+		return (winner as Dictionary).duplicate(true) if winner is Dictionary else {}
+	return _merge_union_dict(a, b)
+
+
+func _merge_words_lww(key: String, a: Variant, b: Variant, lts: Dictionary, sts: Dictionary) -> Array:
+	var winner: Variant = _pick_newer(key, a, b, lts, sts)
+	if winner is Array:
+		return (winner as Array).duplicate(true)
+	if key == "review_words":
+		return _merge_review_list(a, b)
+	return _merge_word_list(a, b)
+
+
+const SCHEMA_VERSION_KEY := "schema_version"
 
 
 func _merge_max_dict(a: Variant, b: Variant) -> Dictionary:

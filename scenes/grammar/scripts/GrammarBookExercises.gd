@@ -142,6 +142,9 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	header_row.add_child(title_label)
 
+	# Same item grid as every other header in the app.
+	GrammarTheme.unify_header_row(header_row)
+
 
 # ============================================================
 # CONTENT

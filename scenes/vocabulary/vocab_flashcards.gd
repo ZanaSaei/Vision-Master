@@ -3,13 +3,13 @@ extends "res://autoload/BackButtonHandler.gd"
 # ============================================================
 #  VOCAB FLASHCARDS — handles both LESSON and SAVED modes.
 #
-#  LESSON mode (Global.flashcard_mode == "lesson"):
+#  LESSON mode (AppRouter arg `mode` == "lesson"):
 #    - Loads words from the current lesson's JSON
 #    - Header: back arrow + audio button
 #    - Bottom nav: 📖 home | ☰ lesson list | ⚙ settings
 #    - Heart: toggles save / unsave
 #
-#  SAVED mode (Global.flashcard_mode == "saved"):
+#  SAVED mode (AppRouter arg `mode` == "saved"):
 #    - Loads all words from Global.get_saved_words()
 #    - Header: back arrow + audio button (dynamically loads lesson audio)
 #    - Bottom nav: 📖 home | 🗑 Remove Word | 📝 Quiz
@@ -162,8 +162,8 @@ func _ready() -> void:
 	Global.on_theme_changed(_on_theme_changed)
 	_apply_theme()
 
-	if Global.flashcard_mode == "saved":
-		Global.word_review_return = "res://scenes/vocabulary/VocabFlashcards.tscn"
+	if str(AppRouter.get_arg("mode", "lesson")) == "saved":
+		AppRouter.set_args({"return_route": SCENE_FLASHCARDS})
 		_enter_saved_mode()
 	else:
 		_enter_lesson_mode()
@@ -873,18 +873,18 @@ func _on_audio_pressed() -> void:
 #  NAVIGATION
 # ----------------------------------------------------------------
 func _on_home_pressed() -> void:
-	Global.flashcard_mode = "lesson"
+	AppRouter.set_args({"mode": "lesson"})
 	TransitionManager.change_scene(SCENE_MAIN_MENU)
 
 
 func _on_leitner_pressed() -> void:
 	# Record where the review session came from so WordReview's back button
 	# returns here (saved-words flashcards).
-	Global.word_review_return = SCENE_FLASHCARDS
+	AppRouter.set_args({"return_route": SCENE_FLASHCARDS})
 	TransitionManager.change_scene(SCENE_REVIEW)
 
 func _on_back_button_pressed() -> void:
-	Global.flashcard_mode = "lesson"
+	AppRouter.set_args({"mode": "lesson"})
 	if mode == Mode.SAVED:
 		TransitionManager.change_scene(SCENE_MAIN_MENU)
 	else:

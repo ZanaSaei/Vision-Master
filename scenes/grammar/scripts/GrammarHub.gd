@@ -70,6 +70,9 @@ func _build_ui() -> void:
 	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	header_row.add_child(title_label)
 
+	# Same item grid as every other header in the app.
+	GrammarTheme.unify_header_row(header_row)
+
 	var content_box: PanelContainer = PanelContainer.new()
 	GrammarTheme.style_card(content_box)
 	main.add_child(content_box)

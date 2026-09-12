@@ -437,7 +437,7 @@ func _show_no_words_saved() -> void:
 
 func _on_back_button_pressed() -> void:
 	# Return to whichever scene opened this review session
-	var target: String = Global.word_review_return
+	var target: String = str(AppRouter.get_arg("return_route", ""))
 	if target == "":
 		target = SCENE_SAVED_WORDS   # safe fallback if never set
 	TransitionManager.change_scene(target)

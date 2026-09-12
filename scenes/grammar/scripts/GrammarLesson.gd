@@ -263,6 +263,10 @@ func _build_top_bar(main: VBoxContainer) -> void:
 	xp_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	top_bar.add_child(xp_label)
 
+	# Same item grid as every other header in the app: back left, title
+	# centred, the XP badge on the right.
+	GrammarTheme.unify_header_row(top_bar)
+
 
 func _build_progress(main: VBoxContainer) -> void:
 	var row := HBoxContainer.new()

@@ -187,7 +187,7 @@ func _build_ui() -> void:
 	outer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	outer.add_theme_constant_override("margin_left", 40)
 	outer.add_theme_constant_override("margin_right", 40)
-	outer.add_theme_constant_override("margin_top", 260)
+	outer.add_theme_constant_override("margin_top", int(ThemeService.HEADER_BAR_HEIGHT))
 	outer.add_theme_constant_override("margin_bottom", 72)
 	_scroll.add_child(outer)
 
@@ -248,8 +248,11 @@ func _apply_theme() -> void:
 	if _subtitle_badge:
 		_subtitle_badge.add_theme_stylebox_override("normal", MenuStyle.icon_chip(book_accent, 26))
 		_subtitle_badge.add_theme_color_override("font_color", MenuStyle.pill_text(book_accent))
+	# Unified header geometry (bar height, padding, item order/positions).
 	var header: PanelContainer = get_node_or_null("HeaderBar") as PanelContainer
 	if header:
+		Global.style_header(header)
+		# Flat menu-screen background on top of it.
 		header.add_theme_stylebox_override("panel", MenuStyle.header_bar_style(44, true))
 	for i in _card_buttons.size():
 		var btn: Button = _card_buttons[i]
@@ -276,7 +279,7 @@ func _on_section_pressed(scene_key: String) -> void:
 	Global.set_last_scene(get_tree().current_scene.scene_file_path)
 
 	if scene_key == "VOCAB":
-		Global.flashcard_mode = "lesson"
+		AppRouter.set_args({"mode": "lesson"})
 
 	var scene_map := {
 		"VOCAB": SCENE_VOCAB,

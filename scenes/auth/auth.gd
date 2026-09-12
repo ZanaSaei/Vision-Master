@@ -59,7 +59,7 @@ func _build_ui() -> void:
 	var header := PanelContainer.new()
 	header.name = "HeaderBar"
 	header.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	header.offset_bottom = 220.0
+	header.offset_bottom = ThemeService.HEADER_BAR_HEIGHT
 	header.mouse_filter = Control.MOUSE_FILTER_PASS
 	add_child(header)
 
@@ -95,7 +95,7 @@ func _build_ui() -> void:
 	# ---- Centered card ----
 	var center := CenterContainer.new()
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
-	center.offset_top = 220.0
+	center.offset_top = ThemeService.HEADER_BAR_HEIGHT
 	add_child(center)
 
 	var card := PanelContainer.new()

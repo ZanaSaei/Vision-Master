@@ -412,7 +412,7 @@ func _on_side_menu_saved_words_pressed() -> void:
 	if _navigating:
 		return
 	_navigating = true
-	Global.flashcard_mode = "saved"
+	AppRouter.set_args({"mode": "saved"})
 	TransitionManager.change_scene(SCENE_SAVED_WORDS)
 
 
@@ -420,7 +420,7 @@ func _on_side_menu_leitner_pressed() -> void:
 	if _navigating:
 		return
 	_navigating = true
-	Global.word_review_return = SCENE_MAIN_MENU
+	AppRouter.set_args({"return_route": SCENE_MAIN_MENU})
 	TransitionManager.change_scene(SCENE_LEITNER)
 
 

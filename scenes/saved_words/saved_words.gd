@@ -21,7 +21,7 @@ func _ready() -> void:
 		empty_state.visible = true
 	else:
 		# Words exist — hand off to VocabFlashcards in SAVED mode
-		Global.flashcard_mode = "saved"
+		AppRouter.set_args({"mode": "saved"})
 		TransitionManager.change_scene(SCENE_FLASHCARDS)
 
 

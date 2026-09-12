@@ -25,7 +25,6 @@ var _word_db_loaded := false
 
 const DICTIONARY_PATH := "res://data/v_dictionary.json"
 
-var word_review_return: String = ""
 # ---------- VOCABULARY DATA LOADING ----------
 
 var intro_animation_played := false
@@ -147,7 +146,6 @@ const REVIEW_WORDS_PATH  := "user://review_words.json"
 
 var current_book: int   = 1
 var current_lesson: int = 1
-var flashcard_mode: String = "lesson"
 var _last_scene: String = ""
 var saved_words: Array = []
 var review_words: Array = []
@@ -161,6 +159,23 @@ var grammar_completed_units: Dictionary = {}
 # Suppresses progress_dirty while a server snapshot is being applied.
 var _suspend_dirty: bool = false
 
+# == SCHEMA ==============================================================
+# Mirrors SyncManager.SCHEMA_VERSION so the local snapshot is stamped before
+# it ever reaches the server. Kept in sync with the sync layer; bump both.
+const SCHEMA_VERSION := 2
+
+# Last-writer-wins metadata: entity key ("grammar_xp", "saved_words", ...) ->
+# unix time the entity was last touched locally. The sync merge uses these to
+# decide which side wins when both devices edited the same key, instead of a
+# blind whole-blob overwrite.
+var _key_updated_at: Dictionary = {}
+
+
+func _touch_progress_key(key: String) -> void:
+	# Records when an entity changed so the sync merge can do last-writer-wins.
+	# The calling mutator is responsible for persisting + emitting dirty.
+	_key_updated_at[key] = int(Time.get_unix_time_from_system())
+
 
 func _emit_dirty() -> void:
 	if not _suspend_dirty:
@@ -173,624 +188,45 @@ var sound_enabled: bool = true   # UI sound effects (Sfx autoload)
 var tts_enabled: bool = true     # English text-to-speech pronunciation
 var theme_mode: int = 0          # 0 = Dark, 1 = Light
 
-# ---------- THEME SYSTEM (Dark / Light universes) ----------
-# Exposed on Global (an already-registered autoload) so every scene can
-# call Global.* without depending on a newly-registered global name.
+
+var _theme: Node = null
+
+# ---------- THEME SYSTEM (delegated to ThemeService, owned by Global) ----------
 signal theme_changed(mode: int)
 
 enum ThemeMode { DARK, LIGHT }
 
-const THEME_FONT := "res://assets/fonts/Vazirmatn-Regular.ttf"
-
-var theme_palette: Dictionary = {}
-var _theme: Theme = Theme.new()
-var _theme_font: Font
-
-const THEME_PALETTES := {
-	# ---------------------------------------------------------------
-	# DARK  — Modern Deep Slate & Vibrant Neon Indigo
-	# ---------------------------------------------------------------
-	ThemeMode.DARK: {
-		"bg":            Color("#0F172A"),
-		"surface":       Color("#1E293B"),
-		"surface_alt":   Color("#334155"),
-		"border":        Color(1.0, 1.0, 1.0, 0.12),
-		"text":          Color("#F8FAFC"),
-		"text_dim":      Color("#94A3B8"),
-		"accent":        Color("#818CF8"),
-		"accent_bright": Color("#A5B4FC"),
-		"accent_soft":   Color(0.5, 0.55, 0.97, 0.15),
-		"on_accent":     Color("#FFFFFF"),
-		"success":       Color("#34D399"),
-		"error":         Color("#F87171"),
-		"warning":       Color("#FBBF24"),
-		"success_soft":  Color(0.2, 0.82, 0.6, 0.15),
-		"error_soft":    Color(0.97, 0.44, 0.44, 0.15),
-		"warning_soft":  Color(0.98, 0.75, 0.14, 0.15),
-		"overlay":       Color(0, 0, 0, 0.65),
-		"bg_base":       Color("#0B1120"),
-		"wave_top":      Color("#3730A3"),
-		"wave_mid":      Color("#312E81"),
-		"wave_bottom":   Color("#1E1B4B"),
-	},
-	# ---------------------------------------------------------------
-	# LIGHT — Crisp Clean White & Playful Punchy Indigo
-	# ---------------------------------------------------------------
-	ThemeMode.LIGHT: {
-		"bg":            Color("#F8FAFC"),
-		"surface":       Color("#FFFFFF"),
-		"surface_alt":   Color("#F1F5F9"),
-		"border":        Color(0.0, 0.0, 0.0, 0.10),
-		"text":          Color("#0F172A"),
-		"text_dim":      Color("#64748B"),
-		"accent":        Color("#4F46E5"),
-		"accent_bright": Color("#4338CA"),
-		"accent_soft":   Color(0.31, 0.27, 0.90, 0.10),
-		"on_accent":     Color("#FFFFFF"),
-		"success":       Color("#10B981"),
-		"error":         Color("#EF4444"),
-		"warning":       Color("#F59E0B"),
-		"success_soft":  Color(0.06, 0.72, 0.5, 0.15),
-		"error_soft":    Color(0.93, 0.26, 0.26, 0.15),
-		"warning_soft":  Color(0.96, 0.62, 0.04, 0.15),
-		"overlay":       Color(0, 0, 0, 0.4),
-		"bg_base":       Color("#F1F5F9"),
-		"wave_top":      Color("#818CF8"),
-		"wave_mid":      Color("#A5B4FC"),
-		"wave_bottom":   Color("#E0E7FF"),
-	},
-}
-
-
 func theme_is_dark() -> bool:
-	return theme_mode == ThemeMode.DARK
-
+	return _theme.theme_is_dark()
 
 func get_theme_color(role: String) -> Color:
-	return theme_palette.get(role, Color.WHITE)
-
+	return _theme.get_theme_color(role)
 
 func on_theme_changed(callback: Callable) -> void:
-	theme_changed.connect(callback)
+	_theme.on_theme_changed(callback)
 
-
-# The app-wide base Theme (already applied to the tree root). Shared
-# components can assign this to themselves so all their children follow
-# the current Dark / Light palette automatically.
 func get_base_theme() -> Theme:
-	return _theme
-
+	return _theme.get_base_theme()
 
 func set_theme_mode(new_mode: int) -> void:
-	if new_mode != ThemeMode.DARK and new_mode != ThemeMode.LIGHT:
-		new_mode = ThemeMode.DARK
-	if new_mode == theme_mode and not theme_palette.is_empty():
-		return
-	theme_mode = new_mode
-	theme_palette = THEME_PALETTES[theme_mode]
-	_rebuild_theme()
-	_apply_theme_to_root()
-	_apply_theme_to_background()
-	save_settings()
-	theme_changed.emit(theme_mode)
-
-
-func _setup_theme() -> void:
-	_theme_font = load(THEME_FONT) as Font
-	if theme_mode != ThemeMode.DARK and theme_mode != ThemeMode.LIGHT:
-		theme_mode = ThemeMode.DARK
-	theme_palette = THEME_PALETTES[theme_mode]
-	_rebuild_theme()
-	_apply_theme_to_root()
-	_apply_theme_to_background()
-
-
-func _rebuild_theme() -> void:
-	var t := Theme.new()
-	t.default_font = _theme_font
-	t.default_font_size = 34
-
-	var bg: Color = theme_palette["bg"]
-	var surface: Color = theme_palette["surface"]
-	var alt: Color = theme_palette["surface_alt"]
-	var border: Color = theme_palette["border"]
-	var text: Color = theme_palette["text"]
-	var dim: Color = theme_palette["text_dim"]
-	var accent: Color = theme_palette["accent"]
-
-	t.set_color("font_color", "Label", text)
-	t.set_color("font_hover_color", "Label", text)
-	t.set_color("font_focus_color", "Label", text)
-	t.set_color("font_selected_color", "Label", text)
-	t.set_color("font_outline_color", "Label", Color(0, 0, 0, 0))
-	t.set_constant("outline_size", "Label", 0)
-
-	var btn_normal := StyleBoxFlat.new()
-	btn_normal.bg_color = alt
-	btn_normal.border_color = border
-	btn_normal.set_border_width_all(1)
-	btn_normal.set_corner_radius_all(16)
-	btn_normal.content_margin_left = 24
-	btn_normal.content_margin_right = 24
-	btn_normal.content_margin_top = 14
-	btn_normal.content_margin_bottom = 14
-	var btn_hover := btn_normal.duplicate() as StyleBoxFlat
-	btn_hover.bg_color = alt.lerp(accent, 0.18)
-	var btn_pressed := btn_normal.duplicate() as StyleBoxFlat
-	btn_pressed.bg_color = alt.lerp(accent, 0.3)
-	var btn_focus := btn_normal.duplicate() as StyleBoxFlat
-	btn_focus.border_color = accent
-	t.set_stylebox("normal", "Button", btn_normal)
-	t.set_stylebox("hover", "Button", btn_hover)
-	t.set_stylebox("pressed", "Button", btn_pressed)
-	t.set_stylebox("focus", "Button", btn_focus)
-	t.set_stylebox("disabled", "Button", btn_normal)
-	t.set_color("font_color", "Button", text)
-	t.set_color("font_hover_color", "Button", text)
-	t.set_color("font_pressed_color", "Button", text)
-	t.set_color("font_focus_color", "Button", text)
-	t.set_color("font_disabled_color", "Button", dim)
-
-	for ptype in ["Panel", "PanelContainer"]:
-		var p := StyleBoxFlat.new()
-		p.bg_color = surface
-		p.border_color = border
-		p.set_border_width_all(1)
-		p.set_corner_radius_all(20)
-		t.set_stylebox("panel", ptype, p)
-
-	var sc := StyleBoxFlat.new()
-	sc.bg_color = Color(0, 0, 0, 0)
-	t.set_stylebox("panel", "ScrollContainer", sc)
-
-	var grab := StyleBoxFlat.new()
-	grab.bg_color = accent
-	grab.set_corner_radius_all(8)
-	t.set_stylebox("grabber", "VScrollBar", grab)
-	t.set_stylebox("grabber", "HScrollBar", grab)
-	t.set_stylebox("grabber_highlight", "VScrollBar", grab)
-	t.set_stylebox("grabber_highlight", "HScrollBar", grab)
-	var track := StyleBoxFlat.new()
-	track.bg_color = Color(0, 0, 0, 0)
-	t.set_stylebox("track", "VScrollBar", track)
-	t.set_stylebox("track", "HScrollBar", track)
-
-	var le_normal := StyleBoxFlat.new()
-	le_normal.bg_color = bg
-	le_normal.border_color = border
-	le_normal.set_border_width_all(1)
-	le_normal.set_corner_radius_all(12)
-	le_normal.content_margin_left = 16
-	le_normal.content_margin_right = 16
-	var le_focus := le_normal.duplicate() as StyleBoxFlat
-	le_focus.border_color = accent
-	t.set_stylebox("normal", "LineEdit", le_normal)
-	t.set_stylebox("focus", "LineEdit", le_focus)
-	t.set_color("font_color", "LineEdit", text)
-	t.set_color("caret_color", "LineEdit", accent)
-	t.set_color("font_placeholder_color", "LineEdit", dim)
-
-	t.set_color("font_color", "OptionButton", text)
-	t.set_color("font_color", "CheckButton", text)
-	t.set_color("font_color", "CheckBox", text)
-	t.set_color("font_hover_color", "CheckButton", text)
-	t.set_color("font_hover_color", "CheckBox", text)
-	t.set_color("font_color", "TabContainer", text)
-	t.set_color("font_selected_color", "TabContainer", accent)
-	t.set_color("font_color", "ProgressBar", text)
-	t.set_color("font_color", "RichTextLabel", text)
-	t.set_color("default_color", "RichTextLabel", text)
-
-	var sep := StyleBoxLine.new()
-	sep.color = border
-	t.set_stylebox("separator", "HSeparator", sep)
-	t.set_stylebox("separator", "VSeparator", sep)
-
-	var tip := StyleBoxFlat.new()
-	tip.bg_color = alt
-	tip.border_color = border
-	tip.set_border_width_all(1)
-	tip.set_corner_radius_all(8)
-	t.set_stylebox("panel", "TooltipPanel", tip)
-	t.set_color("font_color", "TooltipLabel", text)
-
-	_theme = t
-
-
-func _apply_theme_to_root() -> void:
-	if is_inside_tree():
-		get_tree().root.theme = _theme
-
-
-func _apply_theme_to_background() -> void:
-	if not is_inside_tree():
-		return
-	call_deferred("_apply_theme_to_background_deferred")
-
-
-func _apply_theme_to_background_deferred() -> void:
-	var mb: Node = get_tree().root.get_node_or_null("MenuBackground")
-	if mb == null or not mb.has_method("apply_theme"):
-		return
-	mb.apply_theme(
-		theme_palette["bg_base"],
-		theme_palette["wave_top"],
-		theme_palette["wave_mid"],
-		theme_palette["wave_bottom"]
-	)
-
-
-# ══════════════════════════════════════════════════════════════
-# GENERIC SCENE THEMING
-# Walks any scene and restyles its Controls so Dark / Light stays
-# consistent across the whole app. Scenes that already implement
-# their own theme walk (settings, about_me, the grammar system)
-# are skipped to avoid double-styling.
-# ══════════════════════════════════════════════════════════════
-const SELF_THEMED_SCRIPTS := [
-	"settings.gd",
-	"about_me.gd",
-	"vocab_flashcards.gd",
-	"grammar_button.gd",
-	"grammar_hub.gd",
-	"grammar_lesson.gd",
-	"grammar_units.gd",
-	"main_menu.gd",
-	"word_review.gd",
-	"book_menu.gd",
-	"lesson_menu.gd",
-]
-
-# Labels that read better muted in both themes.
-const DIM_LABELS := [
-	"Subtitle", "Hint", "ContactHint", "VersionValue", "CreditLabel",
-	"SubName", "DevName", "VersionName",
-]
-
-
-func scene_handles_own_theme(root: Node) -> bool:
-	var s: Script = root.get_script()
-	if s == null:
-		return false
-	var p := String(s.resource_path).to_lower()
-	for script_name in SELF_THEMED_SCRIPTS:
-		if p.ends_with(script_name):
-			return true
-	return false
-
+	_theme.set_theme_mode(new_mode)
 
 func style_scene(root: Node) -> void:
-	if root == null:
-		return
-	if scene_handles_own_theme(root):
-		return
-	_style_walk(root)
-
-
-func _style_walk(node: Node) -> void:
-	# Independent overlay layers (side menu, transitions, animated
-	# background) own their theming or are decorative — skip them.
-	if node is CanvasLayer:
-		return
-
-	# PageView manages its own internal chrome (tabs, indicator, dots) via
-	# Global.on_theme_changed — the walker must not touch its children.
-	if node is PageView:
-		return
-
-	# GrammarHint is a fully self-themed widget (warm-yellow light-bulb
-	# bubble + flat bulb button). It styles every part of itself in
-	# _apply_theme, so the walker must not re-style its bubble as a card.
-	if node is GrammarHint:
-		return
-
-	# Unified header bars are themed as a whole (bar + its buttons/labels).
-	if node.name in HEADER_BAR_NAMES and node is Control:
-		style_header(node)
-		return
-
-	if node is ColorRect:
-		_style_background_rect(node)
-	elif node is PanelContainer or node is Panel:
-		if _is_header_bar_panel(node):
-			# BookMenu/LessonMenu: the bar panel is invisible — only the
-			# header buttons inside it should be visible.
-			_hide_header_bar_panel(node)
-		else:
-			_style_card(node)
-	elif node is Label:
-		_style_label(node)
-	elif node is Button:
-		_style_button(node)
-
-	for child in node.get_children():
-		_style_walk(child)
-
-
-func _style_background_rect(cr: ColorRect) -> void:
-	var n := cr.name
-	if n != "BackgroundColor" and n != "Bg" and not n.contains("Background"):
-		return
-	if theme_is_dark():
-		cr.color = Color(0.055, 0.07, 0.13, cr.color.a)
-	else:
-		cr.color = Color(0.955, 0.968, 0.98, cr.color.a)
-
-
-func _is_header_bar_panel(node: Node) -> bool:
-	for c in node.get_children():
-		if c.name in HEADER_BAR_NAMES:
-			return true
-	return false
-
-
-func _hide_header_bar_panel(node: Control) -> void:
-	# Transparent fill with the same breathing room as regular header bars,
-	# so the buttons inside sit at identical positions to every other scene.
-	var s := StyleBoxFlat.new()
-	s.bg_color = Color(0, 0, 0, 0)
-	s.border_color = Color(0, 0, 0, 0)
-	s.set_border_width_all(0)
-	s.content_margin_left = 30
-	s.content_margin_right = 30
-	s.content_margin_top = 16
-	s.content_margin_bottom = 12
-	node.add_theme_stylebox_override("panel", s)
-
-
-func _style_card(node: Node) -> void:
-	var dark := theme_is_dark()
-	var old: StyleBox = node.get_theme_stylebox("panel")
-	var style := StyleBoxFlat.new()
-	if old is StyleBoxFlat:
-		var of := old as StyleBoxFlat
-		style.content_margin_left = of.content_margin_left
-		style.content_margin_top = of.content_margin_top
-		style.content_margin_right = of.content_margin_right
-		style.content_margin_bottom = of.content_margin_bottom
-		style.set_corner_radius_all(of.corner_radius_top_left if of.corner_radius_top_left > 0 else 20)
-	else:
-		style.set_corner_radius_all(20)
-	if dark:
-		style.bg_color = get_theme_color("surface")
-		style.border_color = Color(1, 1, 1, 0.10)
-	else:
-		style.bg_color = Color(1, 1, 1, 1)
-		style.border_color = Color(0, 0, 0, 0.10)
-	style.set_border_width_all(1)
-	node.add_theme_stylebox_override("panel", style)
-
-
-func _style_label(label: Label) -> void:
-	var n := label.name
-	if n.ends_with("Title") or n.ends_with("Header"):
-		label.add_theme_color_override("font_color", get_theme_color("accent_bright"))
-	elif n in DIM_LABELS:
-		label.add_theme_color_override("font_color", get_theme_color("text_dim"))
-	else:
-		label.add_theme_color_override("font_color", get_theme_color("text"))
-
-
-func _style_button(btn: Button) -> void:
-	var colored := _button_has_colored_bg(btn)
-	var fc: Color = Color(1, 1, 1) if colored else get_theme_color("text")
-	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-		btn.add_theme_color_override(state, fc)
-
-
-func _button_has_colored_bg(btn: Button) -> bool:
-	var st: StyleBox = btn.get_theme_stylebox("normal")
-	if st is StyleBoxFlat:
-		var c: Color = (st as StyleBoxFlat).bg_color
-		var mx := maxf(maxf(c.r, c.g), c.b)
-		var mn := minf(minf(c.r, c.g), c.b)
-		# Saturated accents AND dark backgrounds both need light text.
-		return c.a > 0.4 and ((mx - mn) > 0.25 or c.get_luminance() < 0.45)
-	return false
-
-
-# ══════════════════════════════════════════════════════════════
-# UNIFIED HEADER BAR — one consistent look across every scene.
-# Same shapes, same labels, same colors in Dark and Light.
-# Only the look changes — button functions are untouched.
-# ══════════════════════════════════════════════════════════════
-const HEADER_BAR_NAMES := ["HeaderBar", "TopBar", "TopHeader", "TitleBar"]
-
+	if _theme != null:
+		_theme.style_scene(root)
 
 func style_header(header: Node) -> void:
-	if header == null or not (header is Control):
-		return
-	var dark := theme_is_dark()
-	var accent := get_theme_color("accent")
+	if _theme != null:
+		_theme.style_header(header)
 
-	# 1) Bar background — rounded-bottom "pill" bar, theme surface.
-	var bar := _header_bar_stylebox(dark, accent)
-	if header is PanelContainer or header is Panel:
-		header.add_theme_stylebox_override("panel", bar)
-	elif header is Control and not (header is Container):
-		# Plain-Control headers (Settings/AboutMe) get a background bar
-		# inserted behind their floating content. (Container headers such as
-		# BookMenu's TopBar are left as-is — a bg child would break their layout.)
-		var bg: Panel = header.get_node_or_null("__HeaderBarBg") as Panel
-		if bg == null:
-			bg = Panel.new()
-			bg.name = "__HeaderBarBg"
-			bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-			bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			header.add_child(bg)
-			header.move_child(bg, 0)
-		bg.add_theme_stylebox_override("panel", bar.duplicate())
-
-	# 2) Normalise layout rhythm across every header (consistent spacing).
-	#    Buttons are pinned to the LEFT (Back button always first) and title
-	#    labels are pushed to the RIGHT — a unified layout across all scenes.
-	if header is BoxContainer:
-		# Container headers (TopBar rows) pin their buttons to the same left
-		# position as every other scene; titles expand into the rest.
-		var bc := header as BoxContainer
-		bc.add_theme_constant_override("separation", 24)
-		bc.alignment = BoxContainer.ALIGNMENT_BEGIN
-		bc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		_reorder_header_children(bc)
-	for hb in header.find_children("*", "HBoxContainer", true, false):
-		(hb as HBoxContainer).add_theme_constant_override("separation", 24)
-		(hb as HBoxContainer).alignment = BoxContainer.ALIGNMENT_BEGIN
-		# Fill the whole bar so the title label can reach the far right edge
-		# (some scenes ship SHRINK_CENTER, which centres the whole cluster).
-		(hb as HBoxContainer).size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		_reorder_header_children(hb)
-	for hb in header.find_children("*", "VBoxContainer", true, false):
-		(hb as VBoxContainer).add_theme_constant_override("separation", 10)
-
-	# Header titles always expand and sit on the RIGHT (unified layout).
-	for hl in header.find_children("*", "Label", true, false):
-		if hl.name in ["HeaderTitle", "LessonTitle", "Title"]:
-			(hl as Label).size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			(hl as Label).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-
-	# 3) Style every button + label inside the header subtree.
-	var stack: Array = [header]
-	while not stack.is_empty():
-		var n: Node = stack.pop_back()
-		if n is Button:
-			_style_header_button(n)
-		elif n is Label:
-			_style_header_label(n)
-		for c in n.get_children():
-			stack.push_back(c)
-
-
-func _reorder_header_children(bc: BoxContainer) -> void:
-	# Unified header layout: every button pinned to the LEFT (Back button
-	# first), then any in-between controls, then title labels pushed to the
-	# RIGHT. Idempotent — safe to run on every scene change.
-	var buttons: Array[Node] = []
-	var others: Array[Node] = []
-	var labels: Array[Node] = []
-	for c in bc.get_children():
-		if c is Button:
-			buttons.append(c)
-		elif c is Label:
-			labels.append(c)
-		else:
-			others.append(c)
-	if buttons.is_empty() and labels.is_empty():
-		return
-	# The Back button is always the first button from the left.
-	var back_first: Array[Node] = []
-	var rest: Array[Node] = []
-	for b in buttons:
-		if _header_button_kind(b as Button) == "back":
-			back_first.append(b)
-		else:
-			rest.append(b)
-	buttons = back_first + rest
-	var ordered: Array[Node] = buttons + others + labels
-	var idx := 0
-	for c in ordered:
-		bc.move_child(c, idx)
-		idx += 1
-
-
-func _header_bar_stylebox(dark: bool, accent: Color) -> StyleBoxFlat:
-	# ── Glossy header bar: translucent glass, bright rim, violet-glow shadow ──
-	var bar := StyleBoxFlat.new()
-	bar.set_corner_radius_all(48)
-	bar.corner_radius_top_left = 10
-	bar.corner_radius_top_right = 10
-	if dark:
-		bar.bg_color = Color(0.06, 0.08, 0.16, 0.88)
-	else:
-		bar.bg_color = Color("#BFDBFE")
-	# Bright rim — thicker top/left catches the light.
-	bar.border_width_left = 2; bar.border_width_top = 2
-	bar.border_width_right = 1; bar.border_width_bottom = 3
-	var rim: Color = accent.lerp(Color.WHITE, 0.50)
-	rim.a = 0.70
-	bar.border_color = rim
-	# Strong accent glow underneath.
-	bar.shadow_color = Color(accent.r * 0.45, accent.g * 0.45, accent.b * 0.45, 0.60)
-	bar.shadow_size = 24
-	bar.shadow_offset = Vector2(0, 6)
-	bar.content_margin_left = 30
-	bar.content_margin_right = 30
-	bar.content_margin_top = 16
-	bar.content_margin_bottom = 12
-	return bar
-
-# Header buttons are flat icon buttons using the badge-style PNGs in
-# res://images/. Every header button now has a dedicated icon — the
-# translation toggle uses Translate.png instead of a text chip.
-const HEADER_ICONS := {
-	"back":        "res://images/Back.png",
-	"home":        "res://images/Main_Menu.png",
-	"audio":       "res://images/audio_play.png",
-	"leitner":     "res://images/Leitner.png",
-	"translation": "res://images/Translate.png",
-}
-const HEADER_BUTTON_SIZE := 168.0
-const HEADER_TRANSLATION_LABEL := "ترجمه"
-
-func _header_button_kind(btn: Button) -> String:
-	var n := String(btn.name).to_lower()
-	if n.contains("back"):
-		return "back"
-	if n.contains("home"):
-		return "home"
-	if n.contains("translation") or n.contains("toggle"):
-		return "translation"
-	if n.contains("leitner"):
-		return "leitner"
-	if n.contains("audio"):
-		return "audio"
-	return ""
-
-func _style_header_button(btn: Button) -> void:
-	var accent := get_theme_color("accent")
-	var kind := _header_button_kind(btn)
-
-	btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-
-	# All header buttons are flat icon buttons — soft hover/press disc.
-	btn.flat = true
-	btn.expand_icon = true
-	btn.custom_minimum_size = Vector2(HEADER_BUTTON_SIZE, HEADER_BUTTON_SIZE)
-	btn.add_theme_constant_override("icon_max_width", int(HEADER_BUTTON_SIZE))
-	btn.add_theme_constant_override("icon_max_height", int(HEADER_BUTTON_SIZE))
-	var clear := StyleBoxFlat.new()
-	clear.bg_color = Color(0, 0, 0, 0)
-	clear.set_border_width_all(0)
-	var hover := StyleBoxFlat.new()
-	hover.set_corner_radius_all(int(HEADER_BUTTON_SIZE / 2.0))
-	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.16)
-	var press := StyleBoxFlat.new()
-	press.set_corner_radius_all(int(HEADER_BUTTON_SIZE / 2.0))
-	press.bg_color = Color(accent.r, accent.g, accent.b, 0.26)
-	btn.add_theme_stylebox_override("normal", clear)
-	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_stylebox_override("pressed", press)
-	btn.add_theme_stylebox_override("focus", hover)
-	btn.icon = load(HEADER_ICONS[kind]) if HEADER_ICONS.has(kind) else null
-	btn.text = ""
-
-
-# Translation toggle is now an icon (Translate.png) — tint conveys on/off.
 func set_translation_toggle_state(btn: Button, active: bool) -> void:
-	if btn == null:
-		return
-	var accent := get_theme_color("accent")
-	if active:
-		btn.modulate = accent.lightened(0.35) if theme_is_dark() else accent
-	else:
-		btn.modulate = Color(1, 1, 1, 1)
+	if _theme != null:
+		_theme.set_translation_toggle_state(btn, active)
 
-func _style_header_label(label: Label) -> void:
-	var c: Color = get_theme_color("accent_bright") if theme_is_dark() else get_theme_color("accent")
-	if label.label_settings != null:
-		label.label_settings.font_color = c
-	label.add_theme_color_override("font_color", c)
-
+func _relay_theme_changed(mode: int) -> void:
+	theme_mode = mode
+	save_settings()
+	theme_changed.emit(mode)
 
 func _load_settings() -> void:
 	if not FileAccess.file_exists(SETTINGS_PATH):
@@ -830,7 +266,13 @@ func _ready() -> void:
 	call_deferred("_load_word_database")
 	_load_settings()
 	_init_tts() # You can keep or remove TTS init, keeping it for safety
-	_setup_theme()
+
+	# Decomposed theme system: a dedicated ThemeService node owns the palette,
+	# scene-styling walk and header engine; Global only forwards to it.
+	_theme = preload("res://autoload/ThemeService.gd").new()
+	add_child(_theme)
+	_theme.setup(theme_mode)
+	_theme.theme_changed.connect(_relay_theme_changed)
 
 	# Style every scene as it becomes current (covers transitions and the
 	# initial launch) so Dark / Light is consistent app-wide.
@@ -853,6 +295,7 @@ func _style_initial_scene() -> void:
 
 func set_last_scene(scene_path: String) -> void:
 	_last_scene = scene_path
+	_touch_progress_key("last_scene")
 	_save_progress()
 
 
@@ -892,6 +335,7 @@ func set_grammar_unlocked_units(book: int, lesson: int, unlocked: int) -> void:
 	var current: int = int(grammar_unlocked_units.get(key, 1))
 	var next_value: int = maxi(current, unlocked)
 	grammar_unlocked_units[key] = next_value
+	_touch_progress_key("grammar_unlocked_units")
 	_save_progress()
 
 
@@ -911,6 +355,7 @@ func add_grammar_xp(book: int, lesson: int, amount: int) -> int:
 	var key: String = _grammar_unlock_key(book, lesson)
 	var total: int = int(grammar_xp.get(key, 0)) + maxi(amount, 0)
 	grammar_xp[key] = total
+	_touch_progress_key("grammar_xp")
 	_save_progress()
 	return total
 
@@ -954,6 +399,7 @@ func mark_unit_completed(book: int, lesson: int, unit_index: int, unit_id: Strin
 			return
 		completed.append(unit_index)
 	grammar_completed_units[key] = completed
+	_touch_progress_key("grammar_completed_units")
 	_save_progress()
 
 
@@ -1016,6 +462,8 @@ func get_progress_snapshot() -> Dictionary:
 		"grammar_completed_units": grammar_completed_units.duplicate(true),
 		"saved_words": saved_words.duplicate(true),
 		"review_words": review_words.duplicate(true),
+		"schema_version": SCHEMA_VERSION,
+		"key_updated_at": _key_updated_at.duplicate(true),
 	}
 
 
@@ -1039,6 +487,8 @@ func apply_progress_snapshot(data: Dictionary) -> void:
 		saved_words = data["saved_words"]
 	if data.get("review_words") is Array:
 		review_words = data["review_words"]
+	if data.get("key_updated_at") is Dictionary:
+		_key_updated_at = data["key_updated_at"]
 	_save_progress()
 	_persist_saved_words()
 	_persist_review_words()
@@ -1106,10 +556,12 @@ func save_word(word_data: Dictionary) -> void:
 	saved_words.append(copy)
 	add_review_word(copy)
 
+	_touch_progress_key("saved_words")
 	_persist_saved_words()
 
 
 func remove_word(word: String, book: int, lesson: int) -> void:
+	_touch_progress_key("saved_words")
 	for i in range(saved_words.size()):
 		var entry = saved_words[i]
 		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
@@ -1143,6 +595,7 @@ func add_review_word(word_data: Dictionary) -> void:
 			return
 
 	review_words.append(word_data.duplicate(true))
+	_touch_progress_key("review_words")
 	_persist_review_words()
 	review_words_changed.emit()
 
@@ -1165,6 +618,8 @@ func get_review_words() -> Array:
 func clear_saved_words() -> void:
 	saved_words.clear()
 	review_words.clear()
+	_touch_progress_key("saved_words")
+	_touch_progress_key("review_words")
 	_persist_saved_words()
 	_persist_review_words()
 	review_words_changed.emit()
@@ -1182,6 +637,7 @@ func reset_all_progress() -> void:
 	saved_words.clear()
 	review_words.clear()
 	grammar_unlocked_units.clear()
+	_key_updated_at.clear()
 	grammar_xp.clear()
 	grammar_completed_units.clear()
 	_last_scene = ""
@@ -1477,6 +933,8 @@ func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
 func review_word(word: String, book: int, lesson: int, rating: String) -> void:
 	if not rating in ["again", "hard", "good", "easy"]:
 		return
+	_touch_progress_key("review_words")
+	_touch_progress_key("saved_words")
 	var result: Dictionary = {}
 	for entry in saved_words:
 		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:

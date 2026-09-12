@@ -654,3 +654,11 @@ static func make_header_icon_button(
 	button.text = ""
 	button.pressed.connect(callback)
 	return button
+
+
+# Puts a grammar header row on the same item grid as every other header in
+# the app — back/home pinned left, title centred on the bar, extras on the
+# right — so the grammar screens never drift from the rest of the app.
+static func unify_header_row(row: HBoxContainer) -> void:
+	ThemeService.layout_header_row(row)
+
