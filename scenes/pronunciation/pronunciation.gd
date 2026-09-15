@@ -1,37 +1,48 @@
 extends "res://autoload/BackButtonHandler.gd"
 # ============================================================
-# PRONUNCIATION SCENE — 2 swipeable pages via PageView
-#   Page 1 "Learn"    → Rule + Visual Stress/Intonation Cards + Audio
-#   Page 2 "Practice" → ExerciseEngine quizzes
+# PRONUNCIATION SCENE — powered by data/v_pronunciation.json
+# ------------------------------------------------------------
+# Structure of the data file (books -> lessons -> pages):
+#   books: [ { "book": "Vision N", "lessons": [ ... ] } ]
+#   lesson: { "lesson_number", "lesson_title", "pronunciation_topic",
+#             "pages": [ tip | exercise ] }
+#   tip:      { "page_type":"tip", "content_en", "content_fa" }
+#   exercise: { "page_type":"exercise", "exercise_letter":"A", ... }
 #
-# CHANGES:
-#   1) Stressed words are now bigger, bold, colored and underlined.
-#   2) "Slow" button removed. Play toggles to Stop while playing.
+# PAGING BEHAVIOUR:
+#   * Page 1 shows only the pretty Tip box + an extra Persian explanation.
+#   * Every exercise lives on its own page (A, B, ...).
+#   * Exercises that require the workbook (e.g. "Go to Part IV...")
+#     are skipped entirely.
+#
+# INTERACTIVE EXERCISES:
+#   Answerable exercises carry an "engine" object in the JSON; they are
+#   rendered with the shared ExerciseEngine (multiple-choice, etc.) with
+#   the options/answers authored in data/v_pronunciation.json. Exercises
+#   that only need listening/repeating stay as plain read-only cards.
+#
+# AUDIO:
+#   Each exercise (A, B, ...) maps to the audio file
+#   assets/audio/v{book}/l{lesson}/p{n}.mp3  (A=1, B=2, ...).
+#   The audio button (shown at the top of the exercise) is only rendered
+#   when that file actually exists; it opens the shared AudioPanel.
 # ============================================================
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
+const PRONUNCIATION_DATA_PATH := "res://data/v_pronunciation.json"
 
 # Global scale applied to every text size so fonts render larger.
-const FONT_SCALE := 1.25
+const FONT_SCALE := 1.15
 
 const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
 const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
 
-# ---------- Dark theme ----------
-const APP_BG := Color("#0b1229")
-const PANEL_BG := Color("#0f1b3d")
-const PANEL_BORDER := Color("#2d3a6a")
-const TEXT_LIGHT := Color("#F1F5F9")
-const TEXT_SOFT := Color("#CBD5E1")
-const TEXT_MUTED := Color("#94A3B8")
-const SUCCESS := Color("#34D399")
+# ---------- Accent / status colors ----------
 const ACCENT := Color("#0891B2")
-
-# ---------- Sentence typography ----------
-const SENTENCE_FONT_SIZE := 42
-# CHANGED: stressed words are rendered much bigger so they stand out.
-const STRESS_FONT_SIZE := 54
+const EXERCISE_ACCENT := Color("#0EA5E9")
+const TIP_BORDER := Color("#F59E0B")
+const TIP_TITLE := Color("#F59E0B")
 
 var font_regular: FontFile
 var font_bold: FontFile
@@ -42,63 +53,520 @@ var font_farsi: FontFile
 @onready var header_title: Label = $HeaderBar/HeaderContent/HeaderTitle
 @onready var page_view: PageView = $MarginContainer/MainLayout/PageView
 @onready var background: ColorRect = $Background
+@onready var audio_panel = $AudioPanel
 
 var _page_reveals: Dictionary = {}
 var _page_revealed: Dictionary = {}
 var _data: Dictionary = {}
 
-var _audio_player: AudioStreamPlayer
-# NEW: track which button is currently playing so Play <-> Stop can toggle.
-var _playing_btn: Button = null
-var _tts_active: bool = false
-var _tts_generation: int = 0
-
 func _ready() -> void:
 	font_regular = load(FONT_REGULAR_PATH)
 	font_bold = load(FONT_BOLD_PATH)
 	font_farsi = load(FONT_VAZIRMATN)
-	
+
 	if font_bold:
 		header_title.add_theme_font_override("font", font_bold)
-	# Keep header readable on the current theme.
 	header_title.add_theme_color_override("font_color", _text_color())
-	
+
 	back_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
 	page_view.page_changed.connect(_on_page_changed)
 	page_view.set_accent(ACCENT)
-	# Restyle live when the app theme toggles.
 	Global.on_theme_changed(_apply_theme)
-	# Dark background behind PageView content.
 	_add_page_view_background()
-	
-	_audio_player = AudioStreamPlayer.new()
-	# NEW: reset the button when audio finishes naturally.
-	_audio_player.finished.connect(_on_audio_finished)
-	add_child(_audio_player)
-	
-	# NEW: reset the button when fallback TTS finishes (if the platform exposes it).
-	if DisplayServer.has_signal("tts_ended"):
-		DisplayServer.connect("tts_ended", _on_tts_ended)
-	
+
+	if audio_panel != null:
+		audio_panel.audio_closed.connect(func(): _on_audio_closed())
+		# Swiping on the AudioPanel (slider/buttons) must never swipe pages.
+		page_view.add_swipe_blocker(audio_panel)
+
 	header_title.text = MenuStyle.persian_digits("درس %d\nتلفظ" % Global.current_lesson)
-	_data = Global.load_category(
-		"pronunciation",
-		Global.current_book,
-		Global.current_lesson
-	)
+	_data = _load_v_pronunciation()
 	if _data.is_empty():
 		return
-	
-	page_view.add_page("learn", "یادگیری", "👂", _build_learn_page())
-	page_view.add_page("practice", "تمرین", "✏️", _build_practice_page())
-	# Force dark backgrounds for PageView scroll areas.
+
+	_build_pages()
 	_apply_dark_scroll_background(page_view)
 	_play_reveal(0)
 	_apply_theme()
 
 # ============================================================
-# DARK THEME HELPERS
+# DATA LOADING (data/v_pronunciation.json)
+# ============================================================
+func _load_v_pronunciation() -> Dictionary:
+	var result := {}
+	if not FileAccess.file_exists(PRONUNCIATION_DATA_PATH):
+		push_warning("Pronunciation data not found: " + PRONUNCIATION_DATA_PATH)
+		return result
+
+	var file := FileAccess.open(PRONUNCIATION_DATA_PATH, FileAccess.READ)
+	if file == null:
+		push_warning("Could not open " + PRONUNCIATION_DATA_PATH)
+		return result
+	var text := file.get_as_text()
+	file.close()
+
+	var json := JSON.new()
+	if json.parse(text) != OK:
+		push_error("v_pronunciation.json parse error: " + json.get_error_message())
+		return result
+
+	var root: Dictionary = json.data
+	var lesson_entry := _find_lesson(root.get("books", []), Global.current_book, Global.current_lesson)
+	if lesson_entry.is_empty():
+		return result
+
+	result["lesson_title"] = str(lesson_entry.get("lesson_title", ""))
+	result["topic"] = str(lesson_entry.get("pronunciation_topic", ""))
+	result["tip"] = {}
+	result["exercises"] = []
+
+	for page in lesson_entry.get("pages", []):
+		match str(page.get("page_type", "")):
+			"tip":
+				result["tip"] = page
+			"exercise":
+				if _is_workbook_exercise(page):
+					continue
+				result["exercises"].append(page)
+
+	return result
+
+# Finds the requested lesson inside the nested books -> lessons structure.
+func _find_lesson(books: Array, book_number: int, lesson_number: int) -> Dictionary:
+	for book in books:
+		var bn := _book_number(book)
+		if bn != book_number:
+			continue
+		for lesson in book.get("lessons", []):
+			if int(lesson.get("lesson_number", 0)) == lesson_number:
+				return lesson
+	return {}
+
+# "Vision 1" -> 1, "Vision 2" -> 2, ...
+func _book_number(book: Dictionary) -> int:
+	var book_name := str(book.get("book", ""))
+	var m := RegEx.new()
+	m.compile("(\\d+)")
+	var match := m.search(book_name)
+	if match:
+		return int(match.get_string(1))
+	return -1
+
+# Exercises that point to the school workbook are skipped on purpose.
+func _is_workbook_exercise(page: Dictionary) -> bool:
+	var en := str(page.get("instruction_en", "")).to_lower()
+	var fa := str(page.get("instruction_fa", "")).to_lower()
+	if "workbook" in en or "part iv" in en or "part 4" in en:
+		return true
+	if "کتاب کار" in fa or "بخش چهارم" in fa:
+		return true
+	return false
+
+# ============================================================
+# PAGE BUILDING
+# ============================================================
+func _build_pages() -> void:
+	var exercises: Array = _data.get("exercises", [])
+	var tip: Dictionary = _data.get("tip", {})
+
+	# Page 0 = the tip box + extra Persian explanation (tip only).
+	if not tip.is_empty():
+		_add_page(_page_reveals.size(), _build_tip_page(tip))
+
+	# Page 1, 2, ... = one exercise per page (A, B, ...).
+	for i in range(exercises.size()):
+		_add_page(_page_reveals.size(), _build_exercise_page(exercises[i]))
+
+func _add_page(index: int, content: Control) -> void:
+	var title := _page_title(index)
+	page_view.add_page("pron_%d" % index, title, _page_icon(index), content)
+	_apply_dark_scroll_background(page_view)
+
+func _page_title(index: int) -> String:
+	if index == 0:
+		return "نکته"
+	var exercises: Array = _data.get("exercises", [])
+	if index - 1 < exercises.size():
+		return _exercise_letter(exercises[index - 1])
+	return "تمرین"
+
+func _page_icon(index: int) -> String:
+	if index == 0:
+		return "📖"
+	return "✏️"
+
+func _build_tip_page(tip: Dictionary) -> VBoxContainer:
+	var page := VBoxContainer.new()
+	page.add_theme_constant_override("separation", 20)
+	var index := _page_reveals.size()
+	_page_reveals[index] = []
+
+	var banner := _make_lesson_banner(str(_data.get("lesson_title", "")), str(_data.get("topic", "")))
+	page.add_child(banner)
+	_page_reveals[index].append(banner)
+
+	var tip_card := _make_tip_card(tip)
+	page.add_child(tip_card)
+	_page_reveals[index].append(tip_card)
+
+	var info_card := _make_tip_info_card(tip)
+	page.add_child(info_card)
+	_page_reveals[index].append(info_card)
+	return page
+
+func _build_exercise_page(exercise: Dictionary) -> VBoxContainer:
+	var page := VBoxContainer.new()
+	page.add_theme_constant_override("separation", 20)
+	var index := _page_reveals.size()
+	_page_reveals[index] = []
+	var ex_card := _make_exercise_card(exercise)
+	page.add_child(ex_card)
+	_page_reveals[index].append(ex_card)
+	return page
+
+# ============================================================
+# WIDGETS
+# ============================================================
+func _make_lesson_banner(lesson_title: String, topic: String) -> PanelContainer:
+	var banner := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = ACCENT
+	style.set_corner_radius_all(20)
+	style.set_content_margin_all(22)
+	banner.add_theme_stylebox_override("panel", style)
+
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 6)
+
+	var title := _make_label(lesson_title, 44, Color.WHITE, true)
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vb.add_child(title)
+
+	if topic != "":
+		var topic_l := _make_label(topic, 34, Color("E0F2FE"), false)
+		topic_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		vb.add_child(topic_l)
+
+	banner.add_child(vb)
+	return banner
+
+# A colourful, framed box for the pronunciation tip.
+func _make_tip_card(tip: Dictionary) -> PanelContainer:
+	var card := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = _tip_bg()
+	style.set_corner_radius_all(18)
+	style.border_width_left = 10
+	style.border_color = TIP_BORDER
+	style.set_content_margin_all(20)
+	card.add_theme_stylebox_override("panel", style)
+
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 10)
+
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 12)
+	var icon := Label.new()
+	icon.text = "💡"
+	icon.add_theme_font_size_override("font_size", int(58 * FONT_SCALE))
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	head.add_child(icon)
+	var title := _make_label("Tip  /  نکته", 42, TIP_TITLE, true, false)
+	title.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	head.add_child(title)
+	vb.add_child(head)
+
+	vb.add_child(_make_label(str(tip.get("content_en", "")), 37, _text_color(), false))
+
+	var fa := str(tip.get("content_fa", ""))
+	if fa != "":
+		vb.add_child(_make_fa_label(fa, 33, _text_soft_color()))
+
+	card.add_child(vb)
+	return card
+
+func _tip_bg() -> Color:
+	if Global.theme_is_dark():
+		return _dark_tint(TIP_BORDER)
+	return Color("FEF3C7")
+
+# Extra Persian explanation shown under the tip box to enrich the tip page.
+# Reads "more_tip_fa" from the lesson's tip page in the JSON; falls back to
+# a short generic explanation when a lesson has none.
+func _make_tip_info_card(tip: Dictionary) -> PanelContainer:
+	var card := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = _info_bg()
+	style.set_corner_radius_all(18)
+	style.border_width_left = 10
+	style.border_color = Color("#0EA5E9")
+	style.set_content_margin_all(20)
+	card.add_theme_stylebox_override("panel", style)
+
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 10)
+
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 12)
+	var icon := Label.new()
+	icon.text = "📌"
+	icon.add_theme_font_size_override("font_size", int(54 * FONT_SCALE))
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	head.add_child(icon)
+	var title := _make_label("توضیح بیشتر  /  More", 40, Color("#0369A1"), true, false)
+	title.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	head.add_child(title)
+	vb.add_child(head)
+
+	var more := str(tip.get("more_tip_fa", "")).strip_edges()
+	if more != "":
+		# Lesson-specific, richer explanation authored in the JSON.
+		vb.add_child(_make_fa_label(more, 32, _text_color()))
+	else:
+		var info := "آهنگ جمله (intonation) یعنی بالا و پایین رفتن صدای شما در هنگام صحبت. به پایان هر جمله دقت کنید: اگر جمله خبری باشد یا اطلاعات جدیدی بدهد، صدای شما معمولاً در پایان پایین می‌رود؛ اگر جمله سؤال بله/خیر یا بررسی اطلاعات باشد، صدای شما در پایان بالا می‌رود. برای یادگیری بهتر، هر جمله را چند بار بلند بخوانید و با گزینهٔ صدا مقایسه کنید تا این مهارت برایتان طبیعی شود."
+		vb.add_child(_make_fa_label(info, 32, _text_color()))
+		var hint := "💬 سعی کنید ابتدا به صدای ضبط‌شده گوش دهید، سپس همان جمله را با همان آهنگ تکرار کنید و صدای خودتان را ضبط و مقایسه کنید."
+		vb.add_child(_make_fa_label(hint, 30, _text_soft_color()))
+
+	card.add_child(vb)
+	return card
+
+func _info_bg() -> Color:
+	if Global.theme_is_dark():
+		return _dark_tint(Color("#38BDF8"))
+	return Color("E0F2FE")
+
+func _make_exercise_card(exercise: Dictionary) -> PanelContainer:
+	var card := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = Global.get_theme_color("surface")
+	style.set_corner_radius_all(16)
+	style.border_width_left = 5
+	style.border_color = EXERCISE_ACCENT
+	style.set_content_margin_all(20)
+	card.add_theme_stylebox_override("panel", style)
+
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 12)
+
+	var letter := _exercise_letter(exercise)
+
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 14)
+	head.add_child(_make_letter_badge(letter))
+	var ex_title := _make_label("Exercise  /  تمرین", 40, EXERCISE_ACCENT, true, false)
+	ex_title.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	head.add_child(ex_title)
+	vb.add_child(head)
+
+	# Audio button near the top of the exercise (only when an audio file exists).
+	var audio_path := _exercise_audio_path(letter)
+	if audio_path != "" and Content.has_asset(audio_path):
+		vb.add_child(_make_audio_btn(audio_path))
+
+	# Answerable exercises run inside the shared interactive ExerciseEngine.
+	var engine_data: Dictionary = exercise.get("engine", {})
+	if not engine_data.is_empty():
+		_build_engine_block(vb, exercise, engine_data)
+	else:
+		var instr_en := str(exercise.get("instruction_en", ""))
+		if instr_en != "":
+			vb.add_child(_make_label(instr_en, 35, _text_color(), false))
+		var instr_fa := str(exercise.get("instruction_fa", ""))
+		if instr_fa != "":
+			vb.add_child(_make_fa_label(instr_fa, 30, _text_soft_color()))
+
+		var note_text := str(exercise.get("note", ""))
+		if note_text != "" and note_text.to_lower() != "none":
+			vb.add_child(_make_note_label(note_text))
+
+		for item in exercise.get("items", []):
+			vb.add_child(_make_item_row(item))
+
+		var text_en := str(exercise.get("text_en", ""))
+		if text_en != "":
+			vb.add_child(_make_item_row({"en": text_en, "fa": str(exercise.get("text_fa", ""))}))
+
+		for line in exercise.get("dialogue", []):
+			vb.add_child(_make_dialogue_line(line))
+
+	card.add_child(vb)
+	return card
+
+# ============================================================
+# INTERACTIVE ENGINE BLOCK (answerable exercises)
+# ============================================================
+func _build_engine_block(target_vb: VBoxContainer, exercise: Dictionary, engine_data: Dictionary) -> void:
+	var merged := exercise.duplicate(true)
+	merged["type"] = str(engine_data.get("type", "multiple_choice"))
+	merged["items"] = engine_data.get("items", [])
+	if engine_data.has("options"):
+		merged["options"] = engine_data.get("options", [])
+	if engine_data.has("passage"):
+		merged["passage"] = engine_data.get("passage", "")
+	if engine_data.has("note"):
+		merged["note"] = engine_data.get("note", "")
+	# The engine reads "instruction" (en/fa) directly.
+	merged["instruction"] = {
+		"en": str(exercise.get("instruction_en", "")),
+		"fa": str(exercise.get("instruction_fa", ""))
+	}
+	# Our own header already shows the letter badge, so don't duplicate it.
+	merged["show_letter"] = false
+
+	var engine := ExerciseEngine.new()
+	target_vb.add_child(engine)
+	engine.build(merged)
+	_apply_dark_scroll_background(engine)
+
+func _make_letter_badge(letter: String) -> PanelContainer:
+	var badge := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = EXERCISE_ACCENT
+	style.set_corner_radius_all(30)
+	style.set_content_margin_all(10)
+	badge.add_theme_stylebox_override("panel", style)
+
+	var l := Label.new()
+	l.text = letter
+	l.add_theme_font_size_override("font_size", int(44 * FONT_SCALE))
+	l.add_theme_color_override("font_color", Color.WHITE)
+	if font_bold:
+		l.add_theme_font_override("font", font_bold)
+	badge.add_child(l)
+	return badge
+
+func _make_note_label(text: String) -> PanelContainer:
+	var note := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.0)
+	style.set_corner_radius_all(10)
+	style.border_width_bottom = 2
+	style.border_color = _dark_tint(ACCENT)
+	style.set_content_margin_all(10)
+	note.add_theme_stylebox_override("panel", style)
+	var l := _make_label(text, 27, _text_soft_color(), false)
+	l.add_theme_font_style_override("italic", true)
+	note.add_child(l)
+	return note
+
+func _make_item_row(item: Dictionary) -> PanelContainer:
+	var row := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = _item_bg()
+	style.set_corner_radius_all(12)
+	if not Global.theme_is_dark():
+		style.border_width_left = 4
+		style.border_color = EXERCISE_ACCENT
+	style.set_content_margin_all(14)
+	row.add_theme_stylebox_override("panel", style)
+
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 4)
+	var en := str(item.get("en", ""))
+	if en != "":
+		vb.add_child(_make_label(en, 35, _text_color(), false))
+	var fa := str(item.get("fa", ""))
+	if fa != "":
+		vb.add_child(_make_fa_label(fa, 29, _text_soft_color()))
+	row.add_child(vb)
+	return row
+
+func _item_bg() -> Color:
+	if Global.theme_is_dark():
+		return _dark_tint(Color("38BDF8"))
+	return Color("E0F2FE")
+
+func _make_dialogue_line(line: Dictionary) -> PanelContainer:
+	var row := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	if Global.theme_is_dark():
+		style.bg_color = _dark_tint(Color("A78BFA"))
+	else:
+		style.bg_color = Color("EDE9FE")
+	style.set_corner_radius_all(12)
+	style.set_content_margin_all(12)
+	row.add_theme_stylebox_override("panel", style)
+
+	var hb := HBoxContainer.new()
+	hb.add_theme_constant_override("separation", 12)
+	var badge := _make_letter_badge(str(line.get("speaker", "?")))
+	badge.modulate = Color("8B5CF6")
+	hb.add_child(badge)
+
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 4)
+	vb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var en := str(line.get("en", ""))
+	if en != "":
+		vb.add_child(_make_label(en, 33, _text_color(), false))
+	var fa := str(line.get("fa", ""))
+	if fa != "":
+		vb.add_child(_make_fa_label(fa, 28, _text_soft_color()))
+	hb.add_child(vb)
+
+	row.add_child(hb)
+	return row
+
+# ============================================================
+# AUDIO BUTTON -> shared AudioPanel
+# ============================================================
+# Maps the exercise letter to an index: A=1, B=2, C=3, ...
+func _letter_index(letter: String) -> int:
+	var code := letter.unicode_at(0)
+	if code >= 65 and code <= 90:   # 'A'..'Z'
+		return code - 65 + 1
+	return 1
+
+func _exercise_letter(exercise: Dictionary) -> String:
+	var letter := str(exercise.get("exercise_letter", ""))
+	if letter == "":
+		return "?"
+	return letter
+
+func _exercise_audio_path(letter: String) -> String:
+	if letter == "?":
+		return ""
+	var filename := "p%d.mp3" % _letter_index(letter)
+	return Global.get_audio_path(Global.current_book, Global.current_lesson, filename)
+
+func _make_audio_btn(audio_path: String) -> Button:
+	var btn := Button.new()
+	btn.text = "🔊  پخش صدا"
+	btn.custom_minimum_size = Vector2(300, 0)
+	btn.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	btn.add_theme_font_size_override("font_size", int(32 * FONT_SCALE))
+
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color("0EA5E9")
+	style.set_corner_radius_all(12)
+	style.set_content_margin_all(14)
+	btn.add_theme_stylebox_override("normal", style)
+	var hover := style.duplicate() as StyleBoxFlat
+	hover.bg_color = Color("38BDF8")
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", hover)
+	btn.add_theme_color_override("font_color", Color.WHITE)
+	if font_bold:
+		btn.add_theme_font_override("font", font_bold)
+
+	btn.pressed.connect(func():
+		_tap_scale(btn)
+		_open_audio(audio_path)
+	)
+	return btn
+
+func _open_audio(audio_path: String) -> void:
+	if audio_panel == null or not is_instance_valid(audio_panel):
+		return
+	audio_panel.load_and_play(audio_path)
+
+func _on_audio_closed() -> void:
+	pass
+
+# ============================================================
+# THEME / STYLE HELPERS
 # ============================================================
 func _add_page_view_background() -> void:
 	if page_view.has_meta("dark_bg"):
@@ -117,363 +585,43 @@ func _apply_dark_scroll_background(root: Control) -> void:
 			var style := StyleBoxFlat.new()
 			style.bg_color = Global.get_theme_color("bg_base")
 			child.add_theme_stylebox_override("panel", style)
-		if child is Control:
+		elif child is Control:
 			_apply_dark_scroll_background(child)
 
-func _dark_tint(color: Color, amount := 0.16) -> Color:
-	# Creates a panel color tinted by the given accent color (theme surface).
+func _dark_tint(color: Color, amount := 0.18) -> Color:
 	return Global.get_theme_color("surface").lerp(Color(color.r, color.g, color.b, 1.0), amount)
 
 func _text_color() -> Color:
-	# Pure white in dark theme, pure black in light theme — maximum contrast.
 	return Color.WHITE if Global.theme_is_dark() else Color.BLACK
+
+func _text_soft_color() -> Color:
+	if Global.theme_is_dark():
+		return Color("CBD5E1")
+	return Color(0.25, 0.28, 0.34)
 
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
 	header_title.add_theme_color_override("font_color", _text_color())
-	# Scene background (behind the header) — from the theme source.
 	if background != null:
 		background.color = Global.get_theme_color("bg_base")
-	# PageView background behind the content.
 	if page_view.has_meta("dark_bg"):
 		var bg: ColorRect = page_view.get_meta("dark_bg")
 		bg.color = Global.get_theme_color("bg_base")
 	_apply_dark_scroll_background(page_view)
-
-# ============================================================
-# PAGE 1 — LEARN
-# ============================================================
-func _build_learn_page() -> VBoxContainer:
-	var page := VBoxContainer.new()
-	page.add_theme_constant_override("separation", 22)
-	_page_reveals[0] = []
-	
-	# Topic banner.
-	var topic_en := str(_data.get("topic", {}).get("en", "Pronunciation"))
-	var topic_fa := str(_data.get("topic", {}).get("fa", "تلفظ"))
-	var banner := _make_topic_banner("🗣️", topic_en, topic_fa)
-	page.add_child(banner)
-	_page_reveals[0].append(banner)
-	
-	# Rule card.
-	var rule: Dictionary = _data.get("rule", {})
-	if not rule.is_empty():
-		var card := _make_text_card(
-			str(rule.get("en", "")),
-			str(rule.get("fa", "")),
-			_dark_tint(ACCENT),
-			ACCENT
-		)
-		page.add_child(card)
-		_page_reveals[0].append(card)
-	
-	# Pronunciation items.
-	for item in _data.get("items", []):
-		var p_card := _make_pronunciation_card(item)
-		page.add_child(p_card)
-		_page_reveals[0].append(p_card)
-	
-	return page
-
-func _make_pronunciation_card(item: Dictionary) -> PanelContainer:
-	var card := PanelContainer.new()
-	var style := StyleBoxFlat.new()
-	style.bg_color = Global.get_theme_color("surface")
-	style.set_corner_radius_all(16)
-	style.border_width_left = 5
-	style.border_color = ACCENT
-	style.set_content_margin_all(20)
-	card.add_theme_stylebox_override("panel", style)
-	
-	var vb := VBoxContainer.new()
-	vb.add_theme_constant_override("separation", 12)
-	
-	# ------------------------------------------------------------
-	# Sentence with stress highlighting and intonation arrow.
-	# ------------------------------------------------------------
-	var intonation := str(item.get("intonation", "falling"))
-	var arrow := "↘"
-	if intonation == "rising":
-		arrow = "↗"
-	elif intonation == "mixed":
-		arrow = "↗ ↘"
-	
-	var rtl := RichTextLabel.new()
-	rtl.bbcode_enabled = true
-	rtl.fit_content = true
-	rtl.scroll_active = false
-	rtl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	rtl.add_theme_font_size_override("normal_font_size", int(SENTENCE_FONT_SIZE * FONT_SCALE))
-	rtl.add_theme_color_override("default_color", _text_color())
-	if font_bold:
-		rtl.add_theme_font_override("normal_font", font_bold)
-		# CHANGED: make sure [b] tags resolve to the real bold font
-		# instead of falling back to a thin/small variant.
-		rtl.add_theme_font_override("bold_font", font_bold)
-	
-	var raw_text := str(item.get("text", ""))
-	var marked_text := raw_text
-	var stress_words: Array = item.get("stress", [])
-	for word in stress_words:
-		var regex := RegEx.new()
-		regex.compile("(?i)\\b(" + str(word) + ")\\b")
-		# CHANGED: bigger + bold + red + underlined so the stressed
-		# word (e.g. "going" in "Where are you going to go?") is
-		# impossible to miss.
-		var replacement := "[font_size=%d][color=#F87171][b][u]$1[/u][/b][/color][/font_size]" % int(STRESS_FONT_SIZE * FONT_SCALE)
-		marked_text = regex.sub(marked_text, replacement, true)
-	
-	rtl.text = marked_text + "  [color=#22D3EE][b]%s[/b][/color]" % arrow
-	vb.add_child(rtl)
-	
-	# Persian translation.
-	vb.add_child(_make_fa_label(str(item.get("fa", "")), 34, _text_color()))
-	
-	# CHANGED: single Play/Stop button (the "Slow" button was removed).
-	vb.add_child(_make_play_btn(str(item.get("audio", "")), raw_text))
-	
-	card.add_child(vb)
-	return card
-
-# ============================================================
-# AUDIO PLAYBACK — Play / Stop toggle
-# ============================================================
-func _make_play_btn(audio_path: String, fallback_text: String) -> Button:
-	var btn := Button.new()
-	btn.text = "▶  Play"
-	btn.custom_minimum_size = Vector2(230, 0)
-	btn.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	btn.add_theme_font_size_override("font_size", int(30 * FONT_SCALE))
-	
-	var text_color := Color.WHITE
-	if ACCENT.get_luminance() > 0.6:
-		text_color = Color("#0b1229")
-	btn.add_theme_color_override("font_color", text_color)
-	
-	var style := StyleBoxFlat.new()
-	style.bg_color = ACCENT
-	style.set_corner_radius_all(10)
-	style.set_content_margin_all(12)
-	btn.add_theme_stylebox_override("normal", style)
-	var hover := style.duplicate()
-	hover.bg_color = ACCENT.lightened(0.15)
-	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_stylebox_override("pressed", hover)
-	
-	if font_bold:
-		btn.add_theme_font_override("font", font_bold)
-	
-	btn.pressed.connect(_on_play_btn_pressed.bind(btn, audio_path, fallback_text))
-	return btn
-
-func _on_play_btn_pressed(btn: Button, audio_path: String, fallback_text: String) -> void:
-	# Pressing the currently-playing button stops playback.
-	if _playing_btn == btn:
-		_stop_all_audio()
-		return
-	
-	# Only one sound at a time: stop whatever else is playing.
-	_stop_all_audio()
-	
-	_playing_btn = btn
-	_apply_play_btn_state(btn, true)
-	
-	var stream: AudioStream = null
-	if audio_path != "" and Content.has_asset(audio_path):
-		stream = Content.load_audio(audio_path)
-	if stream != null:
-		_tts_active = false
-		_audio_player.stream = stream
-		_audio_player.pitch_scale = 1.0
-		_audio_player.play()
-	else:
-		# Fallback to TTS if the audio file is missing.
-		_tts_active = true
-		_tts_generation += 1
-		if Global.english_voice_id != "" and DisplayServer.has_method("tts_speak"):
-			DisplayServer.tts_speak(
-				fallback_text,
-				Global.english_voice_id,
-				100,              # volume (0-100) — was accidentally _tts_generation
-				1.0,              # pitch
-				1.0,              # rate
-				_tts_generation,  # utterance_id — lets _on_tts_ended ignore stale callbacks
-				true              # interrupt anything currently speaking
-			)
-			_watch_tts(_tts_generation)
-		else:
-			# No audio file and no TTS available: revert the button.
-			_stop_all_audio()
-	
-	# Press feedback.
-	btn.pivot_offset = btn.size / 2.0
-	var t := create_tween()
-	t.tween_property(btn, "scale", Vector2(0.94, 0.94), 0.06)
-	t.tween_property(btn, "scale", Vector2.ONE, 0.1)
-
-func _apply_play_btn_state(btn: Button, playing: bool) -> void:
-	if not is_instance_valid(btn):
-		return
-	# Toggle label: Play <-> Stop.
-	btn.text = "⏹  Stop" if playing else "▶  Play"
-	# Recolor while playing so the state is obvious.
-	var base_color: Color = Color("#DC2626") if playing else ACCENT
-	var style := StyleBoxFlat.new()
-	style.bg_color = base_color
-	style.set_corner_radius_all(10)
-	style.set_content_margin_all(12)
-	btn.add_theme_stylebox_override("normal", style)
-	var hover := style.duplicate()
-	hover.bg_color = base_color.lightened(0.15)
-	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_stylebox_override("pressed", hover)
-
-func _stop_all_audio() -> void:
-	_audio_player.stop()
-	if DisplayServer.has_method("tts_stop"):
-		DisplayServer.tts_stop()
-	_reset_play_button()
-
-func _reset_play_button() -> void:
-	_tts_active = false
-	if _playing_btn != null and is_instance_valid(_playing_btn):
-		_apply_play_btn_state(_playing_btn, false)
-	_playing_btn = null
-
-func _on_audio_finished() -> void:
-	# Audio file finished naturally → back to "Play".
-	_reset_play_button()
-
-func _on_tts_ended(utterance_id = null) -> void:
-	# Fallback TTS finished naturally → back to "Play".
-	if not _tts_active:
-		return
-	# Ignore stale utterance callbacks.
-	if utterance_id != null and int(utterance_id) != _tts_generation:
-		return
-	_reset_play_button()
-
-func _watch_tts(gen: int) -> void:
-	# Safety net for platforms without the tts_ended signal:
-	# poll until TTS stops speaking.
-	if DisplayServer.has_signal("tts_ended"):
-		return
-	if not DisplayServer.has_method("tts_is_speaking"):
-		return
-	# Give the engine a moment to actually start speaking.
-	await get_tree().create_timer(0.6).timeout
-	while is_inside_tree() and _tts_active and _tts_generation == gen and DisplayServer.tts_is_speaking():
-		await get_tree().create_timer(0.25).timeout
-	if is_inside_tree() and _tts_active and _tts_generation == gen:
-		_reset_play_button()
-
-# ============================================================
-# PAGE 2 — PRACTICE
-# ============================================================
-func _build_practice_page() -> VBoxContainer:
-	var page := VBoxContainer.new()
-	page.add_theme_constant_override("separation", 22)
-	_page_reveals[1] = []
-	
-	var banner := _make_topic_banner("✏️", "Practice", "تمرین")
-	page.add_child(banner)
-	_page_reveals[1].append(banner)
-	
-	var intro := _make_text_card(
-		"Test your ear! Can you identify the stress and intonation?",
-		"گوش خود را بسنجید! آیا می‌توانید استرس و آهنگ را شناسایی کنید؟",
-		_dark_tint(SUCCESS, 0.10),
-		SUCCESS
-	)
-	page.add_child(intro)
-	_page_reveals[1].append(intro)
-	
-	for exercise in _data.get("exercises", []):
-		var engine := ExerciseEngine.new()
-		page.add_child(engine)
-		engine.build(exercise)
-		_page_reveals[1].append(engine)
-	
-	return page
-
-# ============================================================
-# SHARED WIDGETS
-# ============================================================
-func _make_topic_banner(icon: String, en: String, fa: String) -> PanelContainer:
-	var banner := PanelContainer.new()
-	var style := StyleBoxFlat.new()
-	style.bg_color = ACCENT
-	style.set_corner_radius_all(20)
-	style.set_content_margin_all(26)
-	banner.add_theme_stylebox_override("panel", style)
-	
-	var vb := VBoxContainer.new()
-	vb.add_theme_constant_override("separation", 8)
-	
-	var ic := Label.new()
-	ic.text = icon
-	ic.add_theme_font_size_override("font_size", int(72 * FONT_SCALE))
-	ic.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vb.add_child(ic)
-	
-	# Choose readable text color based on accent brightness.
-	var text_color := Color.WHITE
-	if ACCENT.get_luminance() > 0.6:
-		text_color = Color("#0b1229")
-	var sub_color := Color(text_color.r, text_color.g, text_color.b, 0.85)
-	
-	# Banner title: one line, no wrapping.
-	var en_l := _make_label(en, 50, text_color, true)
-	en_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	vb.add_child(en_l)
-	var fa_l := _make_fa_label(fa, 36, sub_color)
-	fa_l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	vb.add_child(fa_l)
-	
-	banner.add_child(vb)
-	return banner
-
-func _make_text_card(en: String, fa: String, bg: Color, border: Color) -> PanelContainer:
-	var card := PanelContainer.new()
-	var style := StyleBoxFlat.new()
-	style.bg_color = bg
-	style.set_corner_radius_all(14)
-	style.border_width_left = 4
-	style.border_color = border
-	style.set_content_margin_all(18)
-	card.add_theme_stylebox_override("panel", style)
-	
-	var vb := VBoxContainer.new()
-	vb.add_theme_constant_override("separation", 6)
-	# Body text stays wrapped.
-	vb.add_child(_make_label(en, 36, _text_color(), false))
-	vb.add_child(_make_fa_label(fa, 31, _text_color()))
-	card.add_child(vb)
-	return card
 
 func _make_label(text: String, font_size: int, color: Color, bold: bool, do_wrap := true) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.custom_minimum_size.x = 0
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	# Disable wrapping for titles when requested.
 	if do_wrap:
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD
 	else:
 		l.autowrap_mode = TextServer.AUTOWRAP_OFF
 		l.clip_text = false
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
-	# Apply global scale, then slightly shrink very long one-line titles.
-	var base := int(float(font_size) * FONT_SCALE)
-	var final_size := base
-	if not do_wrap:
-		if text.length() > 30:
-			final_size = int(float(base) * 0.85)
-		if text.length() > 55:
-			final_size = int(float(base) * 0.72)
-	l.add_theme_font_size_override("font_size", final_size)
+	l.add_theme_font_size_override("font_size", int(float(font_size) * FONT_SCALE))
 	l.add_theme_color_override("font_color", color)
 	if bold and font_bold:
 		l.add_theme_font_override("font", font_bold)
@@ -492,15 +640,7 @@ func _make_fa_label(text: String, font_size: int, color: Color = Color.WHITE, do
 		l.autowrap_mode = TextServer.AUTOWRAP_OFF
 		l.clip_text = false
 		l.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
-	# Apply global scale, then slightly shrink very long one-line Persian titles.
-	var base := int(float(font_size) * FONT_SCALE)
-	var final_size := base
-	if not do_wrap:
-		if text.length() > 34:
-			final_size = int(float(base) * 0.85)
-		if text.length() > 60:
-			final_size = int(float(base) * 0.72)
-	l.add_theme_font_size_override("font_size", final_size)
+	l.add_theme_font_size_override("font_size", int(float(font_size) * FONT_SCALE))
 	l.add_theme_color_override("font_color", color)
 	l.text_direction = Control.TEXT_DIRECTION_RTL
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -509,7 +649,7 @@ func _make_fa_label(text: String, font_size: int, color: Color = Color.WHITE, do
 	return l
 
 # ============================================================
-# ENTRANCE ANIMATION
+# INTERACTION / NAVIGATION
 # ============================================================
 func _on_page_changed(index: int, _page_id: String) -> void:
 	_play_reveal(index)
@@ -530,19 +670,22 @@ func _play_reveal(index: int) -> void:
 			0.3
 		).set_delay(0.07 * i).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-# ============================================================
-# NAVIGATION
-# ============================================================
+func _tap_scale(control: Control) -> void:
+	control.pivot_offset = control.size / 2.0
+	var t := create_tween()
+	t.tween_property(control, "scale", Vector2(0.94, 0.94), 0.06)
+	t.tween_property(control, "scale", Vector2.ONE, 0.1)
+
 func _on_home_pressed() -> void:
-	_stop_all_audio()
+	if audio_panel != null and is_instance_valid(audio_panel):
+		audio_panel.stop_and_close()
+	_tap_scale(home_button)
 	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")
 
 func _on_back_button_pressed() -> void:
-	# CHANGED: stops AudioStreamPlayer + TTS and resets any Play button.
-	_stop_all_audio()
-	back_button.pivot_offset = back_button.size / 2.0
-	var t := create_tween()
-	t.tween_property(back_button, "scale", Vector2(0.96, 0.96), 0.08)
+	if audio_panel != null and is_instance_valid(audio_panel):
+		audio_panel.stop_and_close()
+	_tap_scale(back_button)
 	TransitionManager.change_scene(SCENE_LESSON_MENU)
 
 func _on_android_back_pressed() -> void:

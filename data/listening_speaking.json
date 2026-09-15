@@ -41,14 +41,14 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v1/l1/listening_1.mp3",
-			"transcript": {"en": "Alice is going to visit her grandmother this weekend. Alice will buy some flowers for her.", "fa": "آلیس قرار است این آخر هفته مادربزرگش را ببیند. آلیس برای او چند گل خواهد خرید."},
+			"transcript": {"en": "A: Where are you going to go in summer?\nB: I am going to go to Brazil.\nA: Really?! What will you do there?\nB: I will visit people and places.\nA: What's interesting about Brazil?\nB: Well, its nature and wild animals.", "fa": "الف: تابستان قرار است کجا بروی؟\nب: قرار است به برزیل بروم.\nالف: واقعاً؟! آنجا چه کار خواهی کرد؟\nب: از مردم و مکان‌ها دیدن خواهم کرد.\nالف: چه چیزی درباره برزیل جالب است؟\nب: خب، طبیعت و حیوانات وحشی‌اش."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v1_l1_lst_1a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "Alice is going to ___.", "fa": "آلیس قرار است ___."}, "answer": ["visit her grandmother", "visit her grandma"]},
-				 {"text": {"en": "Alice will ___.", "fa": "آلیس ___."}, "answer": ["buy some flowers"]}
+				 {"text": {"en": "He is going to ___.", "fa": "او قرار است ___."}, "answer": ["visit people and places"]},
+				 {"text": {"en": "He will go to ___.", "fa": "او به ___ خواهد رفت."}, "answer": ["Brazil"]}
 			   ]}
 			]
 		  },
@@ -56,14 +56,14 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v1/l1/listening_2.mp3",
-			"transcript": {"en": "Shahab is going to protect the forests. His family will take care of endangered animals.", "fa": "شهاب قرار است از جنگل‌ها محافظت کند. خانواده‌اش از حیوانات در خطر انقراض مراقبت خواهند کرد."},
+			"transcript": {"en": "A: Are you going to stay home this weekend, Shahab?\nB: No, we aren't. We'll go out.\nA: Where will you go?\nB: We'll visit our relatives in Varamin.\nA: Will you do anything else?\nB: I'm not sure yet.", "fa": "الف: شهاب، این آخر هفته قرار است خانه بمانی؟\nب: نه، نمی‌مانیم. بیرون خواهیم رفت.\nالف: کجا خواهید رفت؟\nب: به دیدن اقواممان در ورامین خواهیم رفت.\nالف: کار دیگری هم خواهید کرد؟\nب: هنوز مطمئن نیستم."},
 			"task": {"en": "Listen and tick what the speaker is going to do.", "fa": "گوش دهید و کاری را که گوینده قرار است انجام دهد علامت بزنید."},
 			"exercises": [
 			  {"exercise_id": "v1_l1_lst_2a", "type": "multiple_choice",
 			   "instruction": {"en": "What is Shahab going to do?", "fa": "شهاب قرار است چه کار کند؟"},
 			   "items": [
 				 {"question": {"en": "Shahab is going to ...", "fa": "شهاب قرار است ..."},
-				  "options": ["protect the forests", "hunt animals", "stay home"], "answer": 0}
+				  "options": ["visit their relatives in Varamin", "hunt animals", "stay home"], "answer": 0}
 			   ]}
 			]
 		  }
@@ -109,14 +109,14 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v1/l2/listening_1.mp3",
-			"transcript": {"en": "She bought a beautiful dress. It was very nice and long.", "fa": "او یک لباس زیبا خرید. خیلی خوب و بلند بود."},
+			"transcript": {"en": "A: I bought a dress for my mother's birthday.\nB: Good! What color was it?\nA: It was red. It was really beautiful.\nB: Was it expensive?\nA: No, it wasn't.\nB: Did she like it?\nA: Yeah. She got very happy when she saw it.", "fa": "الف: برای تولد مادرم یک لباس خریدم.\nب: خوب! چه رنگی بود؟\nالف: قرمز بود. واقعاً زیبا بود.\nب: گران بود؟\nالف: نه، نبود.\nب: او دوستش داشت؟\nالف: بله. وقتی آن را دید خیلی خوشحال شد."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v1_l2_lst_1a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "She bought ___.", "fa": "او ___ خرید."}, "answer": ["a beautiful dress"]},
-				 {"text": {"en": "It was ___.", "fa": "آن ___ بود."}, "answer": ["very nice and long"]}
+				 {"text": {"en": "She bought ___.", "fa": "او ___ خرید."}, "answer": ["a dress"]},
+				 {"text": {"en": "It was ___.", "fa": "آن ___ بود."}, "answer": ["red"]}
 			   ]}
 			]
 		  },
@@ -124,14 +124,14 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v1/l2/listening_2.mp3",
-			"transcript": {"en": "She likes cooking. Cooking is interesting and healthy.", "fa": "او آشپزی را دوست دارد. آشپزی جالب و سالم است."},
+			"transcript": {"en": "A: Do you cook?\nB: Yeah, sometimes. I like cooking healthy food.\nA: Is it difficult to cook?\nB: No. Actually, it's very easy.\nA: Who helps you when you cook?\nB: My mother and my younger sister.\nA: How interesting! Can you tell me how to cook?\nB: Yes, of course.", "fa": "الف: آشپزی می‌کنی؟\nب: بله، گاهی اوقات. دوست دارم غذای سالم بپزم.\nالف: آشپزی سخت است؟\nب: نه. در واقع، خیلی آسان است.\nالف: وقتی آشپزی می‌کنی چه کسی کمکت می‌کند؟\nب: مادرم و خواهر کوچکم.\nالف: چقدر جالب! می‌توانی به من بگویی چگونه آشپزی کنم؟\nب: بله، البته."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v1_l2_lst_2a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "She likes ___.", "fa": "او ___ را دوست دارد."}, "answer": ["cooking"]},
-				 {"text": {"en": "Cooking is ___.", "fa": "آشپزی ___ است."}, "answer": ["interesting and healthy"]}
+				 {"text": {"en": "She likes ___.", "fa": "او ___ را دوست دارد."}, "answer": ["cooking healthy food"]},
+				 {"text": {"en": "Who helps her? ___.", "fa": "چه کسی کمکش می‌کند؟ ___."}, "answer": ["her mother and her younger sister"]}
 			   ]}
 			]
 		  }
@@ -174,14 +174,14 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v1/l3/listening_1.mp3",
-			"transcript": {"en": "Leila was reading a book when her mother came home. The driver was talking to a passenger.", "fa": "لیلا داشت کتاب می‌خواند که مادرش به خانه آمد. راننده داشت با یک مسافر صحبت می‌کرد."},
+			"transcript": {"en": "A: Why were you absent last week?\nB: Sorry, Miss. I had an accident last Monday.\nA: I'm sorry to hear that. What happened?\nB: I was walking home in the afternoon. A motorcycle was driving very fast. The driver was talking with a cellphone. He hit me and hurt my head.\nA: Oh, God! What happened next? \nB: Um, I was in the hospital for two days. When I was resting in the hospital, the man came to visit me. He said he was sorry.\nA: Thank God you are OK now.", "fa": "الف: چرا هفته گذشته غایب بودی؟\nب: متأسفم خانم. دوشنبه گذشته تصادف کردم.\nالف: متأسفم که این را می‌شنوم. چه اتفاقی افتاد؟\nب: بعدازظهر داشتم به خانه می‌رفتم. یک موتورسیکلت خیلی سریع رانندگی می‌کرد. راننده داشت با تلفن همراه صحبت می‌کرد. به من زد و سرم را مجروح کرد.\nالف: اوه، خدای من! بعد چه اتفاقی افتاد؟\nب: اُم، دو روز در بیمارستان بودم. وقتی در بیمارستان استراحت می‌کردم، آن مرد به دیدنم آمد. گفت متأسف است.\nالف: خدا را شکر که الان خوبی."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v1_l3_lst_1a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "Leila was ___.", "fa": "لیلا داشت ___."}, "answer": ["reading a book"]},
-				 {"text": {"en": "The driver ___.", "fa": "راننده ___."}, "answer": ["was talking to a passenger"]}
+				 {"text": {"en": "She was ___ home in the afternoon.", "fa": "او بعدازظهر داشت ___ می‌رفت."}, "answer": ["walking"]},
+				 {"text": {"en": "The driver ___.", "fa": "راننده ___."}, "answer": ["was talking with a cellphone"]}
 			   ]}
 			]
 		  },
@@ -189,14 +189,14 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v1/l3/listening_2.mp3",
-			"transcript": {"en": "Amir was studying hard when his friend called. Amir was working long hours to solve the problem.", "fa": "امیر داشت سخت درس می‌خواند که دوستش زنگ زد. امیر ساعت‌های طولانی کار می‌کرد تا مسئله را حل کند."},
+			"transcript": {"en": "A: Where did you go yesterday?\nB: I went shopping with my family.\nA: Did you want to buy anything special?\nB: Yes. At first, I was looking for some clothes, but when I was walking at the bazaar, I saw a bookstore. I found many interesting books there.\nA: What did you buy?\nB: I was looking for Parvin Etesami's divan. When I was checking the books, I found it on the last shelf. I bought it and started reading it at once.", "fa": "الف: دیروز کجا رفتی؟\nب: با خانواده‌ام برای خرید رفتم.\nالف: می‌خواستی چیز خاصی بخری؟\nب: بله. اول دنبال چند لباس می‌گشتم، اما وقتی در بازار قدم می‌زدم، یک کتاب‌فروشی دیدم. کتاب‌های جالب زیادی آنجا پیدا کردم.\nالف: چه خریدی؟\nب: دنبال دیوان پروین اعتصامی می‌گشتم. وقتی کتاب‌ها را بررسی می‌کردم، آن را در آخرین قفسه پیدا کردم. خریدمش و فوراً شروع به خواندنش کردم."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v1_l3_lst_2a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "Amir ___.", "fa": "امیر ___."}, "answer": ["was studying hard"]},
-				 {"text": {"en": "Amir was ___.", "fa": "امیر داشت ___."}, "answer": ["working long hours"]}
+				 {"text": {"en": "He found ___.", "fa": "او ___ را پیدا کرد."}, "answer": ["Parvin Etesami's divan"]},
+				 {"text": {"en": "He found it on ___.", "fa": "او آن را در ___ پیدا کرد."}, "answer": ["the last shelf"]}
 			   ]}
 			]
 		  }
@@ -243,14 +243,14 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v1/l4/listening_1.mp3",
-			"transcript": {"en": "The man must go to the police to get a passport. His friend is coming to help him.", "fa": "مرد باید به پلیس برود تا پاسپورت بگیرد. دوستش دارد می‌آید تا به او کمک کند."},
+			"transcript": {"en": "A: Are you OK?\nB: No, I feel sick. I should visit a doctor.\nA: Can you go by yourself?\nB: I called my wife. She is on her way.\nA: Can I help you?\nB: Yes. Please help me go out.", "fa": "الف: حالت خوب است؟\nب: نه، حالم خوب نیست. باید به دکتر بروم.\nالف: می‌توانی خودت بروی؟\nب: به همسرم زنگ زدم. او در راه است.\nالف: می‌توانم کمکت کنم؟\nب: بله. لطفاً کمکم کن بیرون بروم."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v1_l4_lst_1a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "The man ___.", "fa": "مرد ___."}, "answer": ["must go to the police"]},
-				 {"text": {"en": "Who is coming? ___.", "fa": "چه کسی دارد می‌آید؟ ___."}, "answer": ["his friend"]}
+				 {"text": {"en": "He should ___.", "fa": "او باید ___."}, "answer": ["visit a doctor"]},
+				 {"text": {"en": "Who is coming? ___.", "fa": "چه کسی دارد می‌آید؟ ___."}, "answer": ["his wife"]}
 			   ]}
 			]
 		  },
@@ -258,14 +258,14 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v1/l4/listening_2.mp3",
-			"transcript": {"en": "The girl must be polite in a foreign country. She should not say bad things about the host's food.", "fa": "دختر باید در یک کشور خارجی مؤدب باشد. او نباید درباره غذای میزبان حرف بدی بزند."},
+			"transcript": {"en": "A: Umm, Miss. May I go out?\nB: What's the problem?\nA: I must take my medicine at 9.\nB: OK. You may go, but you should come back soon.\nA: Yes, ma'am. Thank you.", "fa": "الف: اُم، خانم. ممکن است بیرون بروم؟\nب: چه مشکلی هست؟\nالف: باید ساعت ۹ دارویم را بخورم.\nب: باشه. می‌توانی بروی، اما باید زود برگردی.\nالف: بله، خانم. متشکرم."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v1_l4_lst_2a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "The girl must ___.", "fa": "دختر باید ___."}, "answer": ["be polite"]},
-				 {"text": {"en": "What should she do? She should ___.", "fa": "او چه کار باید بکند؟ او باید ___."}, "answer": ["not say bad things"]}
+				 {"text": {"en": "She must take her medicine at ___.", "fa": "او باید دارویش را ساعت ___ بخورد."}, "answer": ["9", "nine"]},
+				 {"text": {"en": "She should ___.", "fa": "او باید ___."}, "answer": ["come back soon"]}
 			   ]}
 			]
 		  }
@@ -315,14 +315,14 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v2/l1/listening_1.mp3",
-			"transcript": {"en": "A ticket is 50,000 Tomans. She wants two tickets.", "fa": "یک بلیط ۵۰٬۰۰۰ تومان است. او دو بلیط می‌خواهد."},
+			"transcript": {"en": "A: How much is this English-to-Persian dictionary?\nB: It is 30000 Tomans.\nA: Oh, that's very expensive.\nB: But it is a very good dictionary. It has more than 15000 words.\nA: Do you have a smaller or cheaper one? Um... How much is that?\nB: That's a good one, too. It is 25000 Tomans. Do you want to take a look at it?\nA: Yes, please.", "fa": "الف: این فرهنگ لغت انگلیسی به فارسی چقدر است؟\nب: ۳۰٬۰۰۰ تومان است.\nالف: اوه، خیلی گران است.\nب: اما فرهنگ لغت خیلی خوبی است. بیش از ۱۵٬۰۰۰ کلمه دارد.\nالف: یکی کوچک‌تر یا ارزان‌تر دارید؟ اُم... آن یکی چقدر است؟\nب: آن هم خوب است. ۲۵٬۰۰۰ تومان است. می‌خواهید نگاهی به آن بیندازید؟\nالف: بله، لطفاً."},
 			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
 			"exercises": [
 			  {"exercise_id": "v2_l1_lst_1a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "How much is a ticket? ___ Tomans.", "fa": "یک بلیط چقدر است؟ ___ تومان."}, "answer": ["50000", "50,000", "fifty thousand"]},
-				 {"text": {"en": "How many tickets does she want? ___", "fa": "او چند بلیط می‌خواهد؟ ___"}, "answer": ["two", "2"]}
+				 {"text": {"en": "The first dictionary has more than ___ words.", "fa": "فرهنگ لغت اول بیش از ___ کلمه دارد."}, "answer": ["15000", "15,000", "fifteen thousand"]},
+				 {"text": {"en": "The second dictionary is ___ Tomans.", "fa": "فرهنگ لغت دوم ___ تومان است."}, "answer": ["25000", "25,000", "twenty-five thousand"]}
 			   ]}
 			]
 		  },
@@ -330,16 +330,16 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v2/l1/listening_2.mp3",
-			"transcript": {"en": "The boy wants a dictionary. The first dictionary has 50,000 words.", "fa": "پسر یک فرهنگ لغت می‌خواهد. فرهنگ لغت اول ۵۰٬۰۰۰ کلمه دارد."},
+			"transcript": {"en": "A: How much is the ticket?\nB: It is 4 dollars. How many tickets do you want?\nA: Fifteen tickets, please.\nB: Just a moment. Here are your tickets. 60 dollars, please.\nA: How much?\nB: 60 dollars.\nA: OK. can I pay with my credit card?\nB: Yes, sure.", "fa": "الف: بلیط چقدر است؟\nب: ۴ دلار است. چند بلیط می‌خواهید؟\nالف: پانزده بلیط، لطفاً.\nب: یک لحظه. بلیط‌هایتان اینجاست. ۶۰ دلار، لطفاً.\nالف: چقدر؟\nب: ۶۰ دلار.\nالف: باشه. می‌توانم با کارت اعتباری‌ام پرداخت کنم؟\nب: بله، حتماً."},
 			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
 			"exercises": [
 			  {"exercise_id": "v2_l1_lst_2a", "type": "multiple_choice",
 			   "instruction": {"en": "Listen and choose the correct answer.", "fa": "گوش دهید و پاسخ صحیح را انتخاب کنید."},
 			   "items": [
-				 {"question": {"en": "What does the boy want?", "fa": "پسر چه می‌خواهد؟"},
-				  "options": ["a dictionary", "a book", "a pen"], "answer": 0},
-				 {"question": {"en": "How many words does the first dictionary have?", "fa": "فرهنگ لغت اول چند کلمه دارد؟"},
-				  "options": ["50,000", "100,000", "10,000"], "answer": 0}
+				 {"question": {"en": "How much is one ticket?", "fa": "یک بلیط چقدر است؟"},
+				  "options": ["4 dollars", "15 dollars", "60 dollars"], "answer": 0},
+				 {"question": {"en": "How many tickets does the person want?", "fa": "آن شخص چند بلیط می‌خواهد؟"},
+				  "options": ["15", "4", "60"], "answer": 0}
 			   ]}
 			]
 		  }
@@ -382,14 +382,14 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v2/l2/listening_1.mp3",
-			"transcript": {"en": "Hamid is on a football team. He has quitted the team to study harder.", "fa": "حمید در یک تیم فوتبال است. او تیم را ترک کرده است تا سخت‌تر درس بخواند."},
+			"transcript": {"en": "A: Have you ever played on any of the school's sports teams?\nB: Yes, I have played volleyball for two years.\nA: Are you still on the team?\nB: No, I have left it.\nA: Why?\nB: I want to study more. Maybe I play volleyball in the university.", "fa": "الف: آیا تا به حال در هیچ‌کدام از تیم‌های ورزشی مدرسه بازی کرده‌ای؟\nب: بله، دو سال والیبال بازی کرده‌ام.\nالف: هنوز در تیمی؟\nب: نه، ترکش کرده‌ام.\nالف: چرا؟\nب: می‌خواهم بیشتر درس بخوانم. شاید در دانشگاه والیبال بازی کنم."},
 			"task": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			"exercises": [
 			  {"exercise_id": "v2_l2_lst_1a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "Hamid is on a ___ team.", "fa": "حمید در یک تیم ___ است."}, "answer": ["football"]},
-				 {"text": {"en": "He has quitted the team to ___.", "fa": "او تیم را ترک کرده تا ___."}, "answer": ["study harder"]}
+				 {"text": {"en": "He has played ___ for two years.", "fa": "او دو سال ___ بازی کرده‌است."}, "answer": ["volleyball"]},
+				 {"text": {"en": "He has left the team to ___.", "fa": "او تیم را ترک کرده تا ___."}, "answer": ["study more"]}
 			   ]}
 			]
 		  },
@@ -397,14 +397,16 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v2/l2/listening_2.mp3",
-			"transcript": {"en": "Farideh wants to watch Amir Kabir TV series. Farideh has tried to read poems of Hafez.", "fa": "فریده می‌خواهد سریال تلویزیونی امیرکبیر را تماشا کند. فریده سعی کرده اشعار حافظ را بخواند."},
+			"transcript": {"en": "A: I have put on weight recently. I don't know what to do.\nB: What have you done to lose weight so far?\nA: I have tried many different diets, but they didn't work.\nB: That's the point. Have you done daily workouts?\nA: No, I haven't. I don't have time for workouts.\nB: Let me show you some easy moves. First you need to...", "fa": "الف: اخیراً وزن اضافه کرده‌ام. نمی‌دانم چه کار کنم.\nب: تا حالا برای کاهش وزن چه کار کرده‌ای؟\nالف: رژیم‌های مختلف زیادی را امتحان کرده‌ام، اما جواب ندادند.\nب: مسئله همین است. آیا تمرینات روزانه انجام داده‌ای؟\nالف: نه، نداده‌ام. برای تمرینات وقت ندارم.\nب: بگذار چند حرکت آسان به تو نشان دهم. اول باید..."},
 			"task": {"en": "Listen and tick what Farideh wants to do / has tried.", "fa": "گوش دهید و آنچه فریده می‌خواهد انجام دهد / سعی کرده علامت بزنید."},
 			"exercises": [
 			  {"exercise_id": "v2_l2_lst_2a", "type": "multiple_choice",
 			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
 			   "items": [
-				 {"question": {"en": "Farideh wants to ___.", "fa": "فریده می‌خواهد ___."}, "options": ["watch Amir Kabir TV series", "play football", "travel to the South"], "answer": 0},
-				 {"question": {"en": "Farideh has tried ___.", "fa": "فریده سعی کرده ___."}, "options": ["read poems of Hafez", "make a paper boat", "climb Damavand"], "answer": 0}
+				 {"question": {"en": "What has she tried?", "fa": "او چه چیزی را امتحان کرده است؟"},
+				  "options": ["many different diets", "daily workouts", "playing football"], "answer": 0},
+				 {"question": {"en": "Has she done daily workouts?", "fa": "آیا او تمرینات روزانه انجام داده است؟"},
+				  "options": ["No, she hasn't.", "Yes, she has.", "We don't know."], "answer": 0}
 			   ]}
 			]
 		  }
@@ -450,14 +452,14 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v2/l3/listening_1.mp3",
-			"transcript": {"en": "They are going to open a new gallery. If all goes well, they will invite many artists.", "fa": "آن‌ها قرار است یک گالری جدید افتتاح کنند. اگر همه چیز خوب پیش برود، هنرمندان زیادی را دعوت خواهند کرد."},
+			"transcript": {"en": "A: We are planning to have an exhibition of Persian art in Paris.\nB: Wow! I'm amazed to hear that.\nA: It's really cool, but, not so simple. There are lots of things to do.\nB: When is it going to be?\nA: If all goes well, we will have the exhibition next spring.\nB: Good! If you need me, I'll be honored to help.\nA: Oh, yes. When we prepare our first plans, we will certainly call you.", "fa": "الف: ما قصد داریم یک نمایشگاه هنر ایرانی در پاریس برگزار کنیم.\nب: وای! از شنیدن این خبر شگفت‌زده شدم.\nالف: واقعاً عالی است، اما چندان ساده نیست. کارهای زیادی برای انجام دادن هست.\nب: چه زمانی خواهد بود؟\nالف: اگر همه چیز خوب پیش برود، بهار آینده نمایشگاه را برگزار خواهیم کرد.\nب: خوب! اگر به من نیاز داشتی، افتخار می‌کنم که کمک کنم.\nالف: آه، بله. وقتی برنامه‌های اولیه‌مان را آماده کردیم، قطعاً به تو زنگ خواهیم زد."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v2_l3_lst_1a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "They are going to ___.", "fa": "آن‌ها قرار دارند ___."}, "answer": ["open a new gallery"]},
-				 {"text": {"en": "If all goes well, ___.", "fa": "اگر همه چیز خوب پیش برود، ___."}, "answer": ["they will invite many artists"]}
+				 {"text": {"en": "They are planning to have an exhibition of Persian art in ___.", "fa": "آن‌ها قصد دارند نمایشگاهی از هنر ایرانی در ___ برگزار کنند."}, "answer": ["Paris"]},
+				 {"text": {"en": "If all goes well, they will have the exhibition next ___.", "fa": "اگر همه چیز خوب پیش برود، آن‌ها نمایشگاه را ___ آینده برگزار خواهند کرد."}, "answer": ["spring"]}
 			   ]}
 			]
 		  },
@@ -465,14 +467,14 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v2/l3/listening_2.mp3",
-			"transcript": {"en": "Mohammad is going to study Physics. Amir is going to take part in charity.", "fa": "محمد قرار است فیزیک بخواند. امیر قرار است در خیریه شرکت کند."},
+			"transcript": {"en": "A: Did you see the notice of science Olympiad?\nB: Yes, there will be an exam next summer.\nA: Are you going to participate in it?\nB: I'm studying hard now. If everything goes well, I will take part in it.\nA: Is it a difficult exam?\nB: No, but it needs a lot of hard work.\nA: Can I be a part of it, too?\nB: Yes, if you are interested in that, I will help you.\nA: Oh, yes. I would love that. Thank you very much.", "fa": "الف: اطلاعیه المپیاد علمی را دیدی؟\nب: بله، تابستان آینده یک امتحان خواهد بود.\nالف: می‌خواهی در آن شرکت کنی؟\nب: الان سخت درس می‌خوانم. اگر همه چیز خوب پیش برود، در آن شرکت خواهم کرد.\nالف: امتحان سختی است؟\nب: نه، اما تلاش زیادی می‌خواهد.\nالف: می‌توانم من هم بخشی از آن باشم؟\nب: بله، اگر به آن علاقه‌مند باشی، کمکت خواهم کرد.\nالف: آه، بله. خیلی دوست دارم. خیلی متشکرم."},
 			"task": {"en": "Listen and complete the sentences.", "fa": "گوش دهید و جملات را کامل کنید."},
 			"exercises": [
 			  {"exercise_id": "v2_l3_lst_2a", "type": "fill_blank",
 			   "instruction": {"en": "Listen and fill in the blanks.", "fa": "گوش دهید و جاهای خالی را پر کنید."},
 			   "items": [
-				 {"text": {"en": "Mohammad is going to ___.", "fa": "محمد قرار دارد ___."}, "answer": ["study physics"]},
-				 {"text": {"en": "Amir is going to ___.", "fa": "امیر قرار دارد ___."}, "answer": ["take part in charity"]}
+				 {"text": {"en": "There will be an exam next ___.", "fa": "تابستان آینده یک امتحان خواهد بود."}, "answer": ["summer"]},
+				 {"text": {"en": "If everything goes well, he will ___ in it.", "fa": "اگر همه چیز خوب پیش برود، او در آن ___ خواهد کرد."}, "answer": ["take part"]}
 			   ]}
 			]
 		  }
@@ -521,16 +523,16 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v3/l1/listening_1.mp3",
-			"transcript": {"en": "Amin is busy these days because he is preparing for his exams. Behzad thinks health is the most important thing.", "fa": "امین این روزها مشغول است چون دارد برای امتحاناتش آماده می‌شود. بهزاد فکر می‌کند سلامتی مهم‌ترین چیز است."},
+			"transcript": {"en": "Behzad: How is everything, Amin? You seem to be busy these days, don't you?\nAmin: I'm OK, Behzad. I'm working on a new project. I'm really tired.\nBehzad: But your health is really important, isn't it?\nAmin: I know. But what about work, money, responsibility? We need to consider them all, don't we?\nBehzad: Yes, but health is on top of everything.", "fa": "بهزاد: همه چیز چطور است، امین؟ به نظر می‌رسد این روزها مشغولی، نه؟\nامین: خوبم، بهزاد. روی یک پروژه جدید کار می‌کنم. واقعاً خسته‌ام.\nبهزاد: اما سلامتی‌ات واقعاً مهم است، نیست؟\nامین: می‌دانم. اما کار، پول، مسئولیت چطور؟ باید همه را در نظر بگیریم، نه؟\nبهزاد: بله، اما سلامتی بالاتر از همه چیز است."},
 			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
 			"exercises": [
 			  {"exercise_id": "v3_l1_lst_1a", "type": "multiple_choice",
 			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
 			   "items": [
-				 {"question": {"en": "Why is Amin busy these days?", "fa": "چرا امین این روزها مشغول است؟"},
-				  "options": ["He is preparing for exams", "He is traveling", "He is sick"], "answer": 0},
-				 {"question": {"en": "What does Behzad think about health?", "fa": "بهزاد درباره سلامتی چه فکر می‌کند؟"},
-				  "options": ["It is the most important thing", "It is not important", "He doesn't think about it"], "answer": 0}
+				 {"question": {"en": "What is Amin working on?", "fa": "امین روی چه چیزی کار می‌کند؟"},
+				  "options": ["a new project", "his exams", "a trip"], "answer": 0},
+				 {"question": {"en": "What does Behzad think is on top of everything?", "fa": "بهزاد فکر می‌کند چه چیزی بالاتر از همه چیز است؟"},
+				  "options": ["health", "work", "money"], "answer": 0}
 			   ]}
 			]
 		  },
@@ -538,16 +540,16 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v3/l1/listening_2.mp3",
-			"transcript": {"en": "They are going to Hamedan. Mina prefers chess because it is interesting.", "fa": "آن‌ها دارند به همدان می‌روند. مینا شطرنج را ترجیح می‌دهد چون جالب است."},
+			"transcript": {"en": "Roya: We are going to the gym on Friday. Will you come with us, Mina?\nMina: I don't think so.\nRoya: You don't like sports, do you?\nMina: Actually, I don't know. I think it depends on the type of sport.\nRoya: You prefer team sports, don't you?\nMina: Well, it seems to be OK. But honestly, I prefer less active sports like chess.", "fa": "رویا: جمعه به باشگاه می‌رویم. مینا، با ما می‌آیی؟\nمینا: فکر نمی‌کنم.\nرویا: ورزش را دوست نداری، داری؟\nمینا: راستش، نمی‌دانم. فکر می‌کنم بستگی به نوع ورزش دارد.\nرویا: ورزش‌های تیمی را ترجیح می‌دهی، نه؟\nمینا: خب، به نظر خوب می‌آید. اما راستش، ورزش‌های کم‌تحرک‌تر مثل شطرنج را ترجیح می‌دهم."},
 			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
 			"exercises": [
 			  {"exercise_id": "v3_l1_lst_2a", "type": "multiple_choice",
 			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
 			   "items": [
-				 {"question": {"en": "Where are they going?", "fa": "آن‌ها کجا می‌روند؟"},
-				  "options": ["Hamedan", "Tehran", "Isfahan"], "answer": 0},
-				 {"question": {"en": "Why does Mina prefer chess?", "fa": "چرا مینا شطرنج را ترجیح می‌دهد؟"},
-				  "options": ["Because it is interesting", "Because it is easy", "Because her friend plays"], "answer": 0}
+				 {"question": {"en": "Where are they going on Friday?", "fa": "آن‌ها جمعه کجا می‌روند؟"},
+				  "options": ["the gym", "the park", "the museum"], "answer": 0},
+				 {"question": {"en": "What sport does Mina prefer?", "fa": "مینا چه ورزشی را ترجیح می‌دهد؟"},
+				  "options": ["less active sports like chess", "team sports", "volleyball"], "answer": 0}
 			   ]}
 			]
 		  }
@@ -594,16 +596,16 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v3/l2/listening_1.mp3",
-			"transcript": {"en": "Mina lives in Tehran. Zoreh hasn't invited Mina yet because she is busy.", "fa": "مینا در تهران زندگی می‌کند. زهره هنوز مینا را دعوت نکرده چون مشغول است."},
+			"transcript": {"en": "Zohreh: This weekend is my birthday. I have invited everyone but Mina.\nMaryam: Why not? If I were you, I would certainly invite her. As far as I know, you were close friends at school.\nZohreh: Yes, but she has moved to another neighborhood. If I had her address, I would invite her.\nMaryam: What a pity! If I knew that sooner, I could help you.\nZohreh: How?\nMaryam: I could check it with my sister. She is her mother's friend.\nZohreh: Can you call her now?\nMaryam: Unfortunately, she is not available till next Wednesday. Sorry.", "fa": "زهره: این آخر هفته تولد من است. همه را دعوت کرده‌ام جز مینا.\nمریم: چرا نه؟ اگر جای تو بودم، حتماً او را دعوت می‌کردم. تا آنجا که می‌دانم، در مدرسه دوستان نزدیک بودید.\nزهره: بله، اما او به محله دیگری نقل مکان کرده است. اگر آدرسش را داشتم، دعوتش می‌کردم.\nمریم: چه حیف! اگر زودتر می‌دانستم، می‌توانستم کمکت کنم.\nزهره: چطور؟\nمریم: می‌توانستم از خواهرم بپرسم. او دوست مادرش است.\nزهره: می‌توانی الان به او زنگ بزنی؟\nمریم: متأسفانه، تا چهارشنبه آینده در دسترس نیست. ببخشید."},
 			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
 			"exercises": [
 			  {"exercise_id": "v3_l2_lst_1a", "type": "multiple_choice",
 			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
 			   "items": [
-				 {"question": {"en": "Where does Mina live?", "fa": "مینا کجا زندگی می‌کند؟"},
-				  "options": ["Tehran", "Shiraz", "Isfahan"], "answer": 0},
-				 {"question": {"en": "Why hasn't Zoreh invited Mina yet?", "fa": "چرا زهره هنوز مینا را دعوت نکرده؟"},
-				  "options": ["Because she is busy", "Because she forgot", "Because Mina is sick"], "answer": 0}
+				 {"question": {"en": "Why hasn't Zohreh invited Mina?", "fa": "چرا زهره مینا را دعوت نکرده است؟"},
+				  "options": ["She doesn't have her address.", "She forgot.", "Mina is sick."], "answer": 0},
+				 {"question": {"en": "Who is Maryam's sister?", "fa": "خواهر مریم کیست؟"},
+				  "options": ["Mina's mother's friend", "Zohreh's friend", "Mina's sister"], "answer": 0}
 			   ]}
 			]
 		  },
@@ -611,16 +613,16 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v3/l2/listening_2.mp3",
-			"transcript": {"en": "Bijan wanted to buy a new car. Bijan didn't tell Mehran about the problem because he was shy.", "fa": "بیژان می‌خواست یک ماشین جدید بخرد. بیژان درباره مشکل به مهران نگفت چون خجالتی بود."},
+			"transcript": {"en": "Mehran: Hi, Bijan. Are you OK?\nBijan: Hi, Mehran. I'm thinking about something.\nMehran: What's wrong?\nBijan: I've saved some money to buy a new mobile phone. But one of my friends is in trouble and needs some money. What would you do if you were in my shoes?\nMehran: What is his problem?\nBijan: I could tell you about it if it weren't a secret. But it's an emergency.\nMehran: OK. If I were you, I would give him the money. A friend in need is a friend indeed.", "fa": "مهران: سلام، بیژن. حالت خوب است؟\nبیژن: سلام، مهران. دارم به چیزی فکر می‌کنم.\nمهران: چه شده؟\nبیژن: مقداری پول پس‌انداز کرده‌ام تا یک گوشی موبایل جدید بخرم. اما یکی از دوستانم در مشکل است و به پول نیاز دارد. اگر جای من بودی چه می‌کردی؟\nمهران: مشکلش چیست؟\nبیژن: می‌توانستم درباره‌اش بگویم اگر راز نبود. اما اضطراری است.\nمهران: باشه. اگر جای تو بودم، پول را به او می‌دادم. دوست در نیاز، واقعاً دوست است."},
 			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
 			"exercises": [
 			  {"exercise_id": "v3_l2_lst_2a", "type": "multiple_choice",
 			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
 			   "items": [
-				 {"question": {"en": "What did Bijan want to buy?", "fa": "بیژان چه می‌خواست بخرد؟"},
-				  "options": ["a new car", "a new house", "a new book"], "answer": 0},
-				 {"question": {"en": "Why didn't Bijan tell Mehran about the problem?", "fa": "چرا بیژان درباره مشکل به مهران نگفت؟"},
-				  "options": ["Because he was shy", "Because he was angry", "Because he forgot"], "answer": 0}
+				 {"question": {"en": "What did Bijan save money for?", "fa": "بیژن برای چه پول پس‌انداز کرد؟"},
+				  "options": ["a new mobile phone", "a new car", "a new house"], "answer": 0},
+				 {"question": {"en": "What would Mehran do if he were in Bijan's shoes?", "fa": "اگر مهران جای بیژن بود چه می‌کرد؟"},
+				  "options": ["give him the money", "keep the money", "ask someone else"], "answer": 0}
 			   ]}
 			]
 		  }
@@ -665,16 +667,16 @@
 			"id": "conv1",
 			"title": {"en": "Conversation 1", "fa": "مکالمه ۱"},
 			"audio": "res://assets/audio/v3/l3/listening_1.mp3",
-			"transcript": {"en": "Rasool had tried the restaurant sauce before. Rasool went to the new restaurant with his friends.", "fa": "رسول قبلاً سس رستوران را امتحان کرده بود. رسول با دوستانش به رستوران جدید رفت."},
+			"transcript": {"en": "Amir: Why didn't you go to the new restaurant last night?\nRasoul: We didn't want to. We had already tried the food there the weekend before.\nAmir: Really? Did you like the food?\nRasoul: That was OK. We all ordered chicken with rice. I had never tasted their special sauce anywhere else.\nAmir: Was it pomegranate sauce?\nRasoul: No, it wasn't. I had already tasted pomegranate sauce at home.\nAmir: Was it expensive?\nRasoul: I think it was cheaper than the food we had tried in other restaurants.", "fa": "امیر: چرا دیشب به رستوران جدید نرفتی؟\nرسول: نمی‌خواستیم. آخر هفته قبلش قبلاً غذای آنجا را امتحان کرده بودیم.\nامیر: واقعاً؟ غذا را دوست داشتی؟\nرسول: بد نبود. همه مرغ با برنج سفارش دادیم. سس مخصوصشان را هیچ جای دیگری نچشیده بودم.\nامیر: سس انار بود؟\nرسول: نه، نبود. سس انار را قبلاً در خانه چشیده بودم.\nامیر: گران بود؟\nرسول: فکر می‌کنم ارزان‌تر از غذایی بود که در رستوران‌های دیگر امتحان کرده بودیم."},
 			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
 			"exercises": [
 			  {"exercise_id": "v3_l3_lst_1a", "type": "multiple_choice",
 			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
 			   "items": [
-				 {"question": {"en": "Had Rasool tried the restaurant sauce before?", "fa": "آیا رسول قبلاً سس رستوران را امتحان کرده بود؟"},
-				  "options": ["Yes, he had", "No, he hadn't", "We don't know"], "answer": 0},
-				 {"question": {"en": "Did Rasool go to the new restaurant alone?", "fa": "آیا رسول تنها به رستوران جدید رفت؟"},
-				  "options": ["No, he went with friends", "Yes, alone", "He didn't go"], "answer": 0}
+				 {"question": {"en": "Why didn't they go to the new restaurant?", "fa": "چرا آن‌ها به رستوران جدید نرفتند؟"},
+				  "options": ["They had already tried the food there.", "They didn't like the food.", "It was closed."], "answer": 0},
+				 {"question": {"en": "What did they order?", "fa": "آن‌ها چه سفارش دادند؟"},
+				  "options": ["chicken with rice", "pizza", "kebab"], "answer": 0}
 			   ]}
 			]
 		  },
@@ -682,16 +684,16 @@
 			"id": "conv2",
 			"title": {"en": "Conversation 2", "fa": "مکالمه ۲"},
 			"audio": "res://assets/audio/v3/l3/listening_2.mp3",
-			"transcript": {"en": "Samira and her friends had gone to the museum before the guests arrived. Samira's guests left her home at 10 pm.", "fa": "مینا و دوستانش قبل از رسیدن مهمان‌ها به موزه رفته بودند. مهمان‌های سمیرا ساعت ۱۰ شب خانه‌اش را ترک کردند."},
+			"transcript": {"en": "Shila: What did you do on Thursday?\nSamira: Oh! On Thursday, Yeganeh and Kiyana came over for dinner. We really missed you.\nShila: Thanks. But you wanted to go to the museum of Holy Defense, didn't you?\nSamira: Oh! Yes. Before we got home, we'd gone to the museum.\nShila: Was it the first time you went there?\nSamira: No, I had already been there once.\nShila: Did your friends stay till midnight?\nSamira: No. After we had had dinner, their mothers arrived and took them home.", "fa": "شیلا: پنجشنبه چه کار کردی؟\nسمیرا: آه! پنجشنبه، یگانه و کیانا برای شام آمدند. واقعاً دلمان برایت تنگ شده بود.\nشیلا: ممنون. اما می‌خواستید به موزه دفاع مقدس بروید، نه؟\nسمیرا: آه! بله. قبل از اینکه به خانه برسیم، به موزه رفته بودیم.\nشیلا: اولین بارت بود که آنجا می‌رفتی؟\nسمیرا: نه، قبلاً یک بار آنجا بوده‌ام.\nشیلا: دوستانت تا نیمه‌شب ماندند؟\nسمیرا: نه. بعد از اینکه شام خوردیم، مادرانشان آمدند و آن‌ها را به خانه بردند."},
 			"task": {"en": "Listen and answer the questions.", "fa": "گوش دهید و به سؤالات پاسخ دهید."},
 			"exercises": [
 			  {"exercise_id": "v3_l3_lst_2a", "type": "multiple_choice",
 			   "instruction": {"en": "Listen and choose.", "fa": "گوش دهید و انتخاب کنید."},
 			   "items": [
-				 {"question": {"en": "When had Samira and her friends gone to the museum?", "fa": "سمیرا و دوستانش چه زمانی به موزه رفته بودند؟"},
-				  "options": ["Before the guests arrived", "After the guests left", "Yesterday morning"], "answer": 0},
-				 {"question": {"en": "When did Samira's guests leave her home?", "fa": "مهمان‌های سمیرا چه زمانی خانه‌اش را ترک کردند؟"},
-				  "options": ["At 10 pm", "At 8 pm", "At midnight"], "answer": 0}
+				 {"question": {"en": "When had Samira gone to the museum?", "fa": "سمیرا چه زمانی به موزه رفته بود؟"},
+				  "options": ["before she got home", "after dinner", "at midnight"], "answer": 0},
+				 {"question": {"en": "Was it her first time at the museum?", "fa": "آیا اولین بارش در موزه بود؟"},
+				  "options": ["No, she had already been there once.", "Yes, it was her first time.", "We don't know."], "answer": 0}
 			   ]}
 			]
 		  }

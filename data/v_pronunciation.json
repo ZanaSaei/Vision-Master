@@ -1,0 +1,767 @@
+{
+  "books": [
+	{
+	  "book": "Vision 1",
+	  "note": "Vision 1 has an explicitly labeled 'Pronunciation' section in every lesson.",
+	  "lessons": [
+		{
+		  "lesson_number": 1,
+		  "lesson_title": "Saving Nature",
+		  "pronunciation_topic": "Falling Intonation",
+		  "book_pages": "32-33",
+		  "pages": [
+			{
+			  "page_type": "tip",
+			  "content_en": "When you ask for or give new information, use falling intonation.",
+			  "content_fa": "وقتی سؤال می‌پرسید یا اطلاعات جدیدی می‌دهید، از آهنگ نزولی (falling intonation) استفاده کنید.",
+			  "more_tip_fa": "آهنگ نزولی معمولاً در پایان جملات خبری، سؤالات Wh- (مثل what, where, when, who, why, how) و دستورات به کار می‌رود. در این حالت، صدای شما در هجای پایانی جمله به تدریج پایین می‌آید. برای تمرین، جمله را با صدای بلند بخوانید و روی آخرین کلمهٔ مهم، صدا را کمی پایین بیاورید. توجه کنید که آهنگ نزولی حس اطمینان، پایان و کامل بودن را منتقل می‌کند. اگر جمله‌ای خبری را با آهنگ صعودی بگویید، ممکن است شنونده فکر کند شما مطمئن نیستید یا در حال پرسیدن سؤال هستید."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "A",
+			  "instruction_en": "Listen to the following sentences. They have falling intonation.",
+			  "instruction_fa": "به جملات زیر گوش دهید. این جملات دارای آهنگ نزولی هستند.",
+			  "items": [
+				{
+				  "en": "Where are you going to go? I am going to go to Bam.",
+				  "fa": "کجا می‌خواهی بروی؟ من می‌خواهم به بم بروم."
+				},
+				{
+				  "en": "What does your brother do? He works in a zoo. He loves animals.",
+				  "fa": "برادرت چه کار می‌کند؟ او در باغ‌وحش کار می‌کند. او حیوانات را دوست دارد."
+				},
+				{
+				  "en": "Dr. James will buy a new laptop. His old laptop doesn't work.",
+				  "fa": "دکتر جیمز یک لپ‌تاپ جدید خواهد خرید. لپ‌تاپ قدیمی‌اش کار نمی‌کند."
+				},
+				{
+				  "en": "We will go on a school trip tomorrow. The students will visit a museum.",
+				  "fa": "فردا به یک سفر مدرسه‌ای می‌رویم. دانش‌آموزان از یک موزه بازدید خواهند کرد."
+				}
+			  ]
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "B",
+			  "instruction_en": "Listen and find where the sentences end. Do this by putting a period (.) and/or capitalizing words.",
+			  "instruction_fa": "گوش دهید و پایان جملات را پیدا کنید. این کار را با گذاشتن نقطه (.) و/یا با حروف بزرگ نوشتن کلمات انجام دهید.",
+			  "text_en": "My name is Jim I am a zookeeper there are many animals in our zoo we have big and small animals like birds and giraffes we have wild and farm animals I like wild animals we have two lions and a leopard here we don't have any sea animals now we will have some next year we are making new buildings for them I think the visitors are going to love them",
+			  "text_fa": "اسم من جیم است. من نگهبان باغ‌وحش هستم. در باغ‌وحش ما حیوانات زیادی وجود دارد. ما حیوانات بزرگ و کوچک مثل پرندگان و زرافه‌ها داریم. ما حیوانات وحشی و اهلی داریم. من حیوانات وحشی را دوست دارم. ما دو شیر و یک پلنگ اینجا داریم. ما در حال حاضر هیچ حیوان دریایی نداریم. سال آینده تعدادی خواهیم داشت. ما در حال ساختن ساختمان‌های جدیدی برای آن‌ها هستیم. فکر می‌کنم بازدیدکنندگان عاشق آن‌ها خواهند شد.",
+			  "engine": {
+				"type": "multiple_choice",
+				"passage": "My name is Jim I am a zookeeper there are many animals in our zoo we have big and small animals like birds and giraffes we have wild and farm animals I like wild animals we have two lions and a leopard here we don't have any sea animals now we will have some next year we are making new buildings for them I think the visitors are going to love them",
+				"items": [
+				  {
+					"question": "متن جیم شامل چند جمله است؟",
+					"options": [
+					  "شش",
+					  "هشت",
+					  "ده"
+					],
+					"answer": 1,
+					"explanation": "این متن از ۸ جمله جداگانه تشکیل شده است."
+				  },
+				  {
+					"question": "جمله اول صحیح کدام است؟",
+					"options": [
+					  "My name is Jim.",
+					  "My name is Jim I am a zookeeper.",
+					  "I am a zookeeper."
+					],
+					"answer": 0,
+					"explanation": "جمله اول بعد از Jim تمام می‌شود."
+				  },
+				  {
+					"question": "کدام جمله درست نوشته شده است؟",
+					"options": [
+					  "We have wild and farm animals.",
+					  "We have wild but farm animals.",
+					  "We have wild till farm animals."
+					],
+					"answer": 0,
+					"explanation": "در متن آمده است: «we have wild and farm animals»."
+				  },
+				  {
+					"question": "جیم بیشتر چه چیزی را دوست دارد؟",
+					"options": [
+					  "حیوانات وحشی",
+					  "حیوانات دریایی",
+					  "حیوانات اهلی"
+					],
+					"answer": 0,
+					"explanation": "جیم می‌گوید: «I like wild animals»."
+				  }
+				]
+			  }
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "C",
+			  "instruction_en": "Go to Part IV of your Workbook and do it.",
+			  "instruction_fa": "به بخش چهارم کتاب کار خود بروید و آن را انجام دهید."
+			}
+		  ]
+		},
+		{
+		  "lesson_number": 2,
+		  "lesson_title": "Wonders of Creation",
+		  "pronunciation_topic": "Rising Intonation",
+		  "book_pages": "60-61",
+		  "pages": [
+			{
+			  "page_type": "tip",
+			  "content_en": "When you check information, use rising intonation.",
+			  "content_fa": "وقتی اطلاعاتی را بررسی یا تأیید می‌کنید، از آهنگ صعودی (rising intonation) استفاده کنید.",
+			  "more_tip_fa": "آهنگ صعودی معمولاً در سؤالات بله/خیر (yes/no questions) و هنگام بررسی یا تأیید اطلاعات به کار می‌رود. در این حالت، صدای شما در هجای پایانی جمله به سمت بالا می‌رود. برای تمرین، جمله را با صدای بلند بگویید و روی آخرین کلمه، صدا را کمی بالا ببرید. توجه کنید که آهنگ صعودی حس پرسش، عدم اطمینان یا نیاز به تأیید را منتقل می‌کند. اگر جمله‌ای بله/خیر را با آهنگ نزولی بگویید، ممکن است شنونده فکر کند شما در حال بیان یک جمله خبری هستید، نه پرسیدن سؤال. همچنین در جملات خبری که با آهنگ صعودی گفته می‌شوند، معمولاً حس تعجب یا عدم اطمینان منتقل می‌شود."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "A",
+			  "instruction_en": "Listen to the following sentences. They have rising intonation.",
+			  "instruction_fa": "به جملات زیر گوش دهید. این جملات دارای آهنگ صعودی هستند.",
+			  "items": [
+				{
+				  "en": "Is this your new car?",
+				  "fa": "این ماشین جدید توست؟"
+				},
+				{
+				  "en": "Was the book interesting?",
+				  "fa": "کتاب جالب بود؟"
+				},
+				{
+				  "en": "Is this problem easier than that one?",
+				  "fa": "این مسئله از آن یکی راحت‌تر است؟"
+				},
+				{
+				  "en": "Are they the most expensive houses in this city?",
+				  "fa": "آیا آن‌ها گران‌ترین خانه‌های این شهر هستند؟"
+				}
+			  ]
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "B",
+			  "instruction_en": "Go to Part IV of your Workbook and do it.",
+			  "instruction_fa": "به بخش چهارم کتاب کار خود بروید و آن را انجام دهید."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "C",
+			  "instruction_en": "Listen to the conversation and draw downward or upward arrows to identify falling and rising intonations.",
+			  "instruction_fa": "به مکالمه گوش دهید و برای مشخص کردن آهنگ نزولی و صعودی، فلش‌های رو به پایین یا رو به بالا رسم کنید.",
+			  "dialogue": [
+				{
+				  "speaker": "A",
+				  "en": "I heard you travelled abroad this summer. Is it true?",
+				  "fa": "شنیدم این تابستان به خارج از کشور سفر کردی. درست است؟"
+				},
+				{
+				  "speaker": "B",
+				  "en": "Yes. I went to Japan. I was there for 2 weeks.",
+				  "fa": "بله. به ژاپن رفتم. دو هفته آنجا بودم."
+				},
+				{
+				  "speaker": "A",
+				  "en": "How was your trip?",
+				  "fa": "سفرت چطور بود؟"
+				},
+				{
+				  "speaker": "B",
+				  "en": "It was very interesting. The country was very clean and people were very polite.",
+				  "fa": "خیلی جالب بود. کشور خیلی تمیز بود و مردم خیلی مؤدب بودند."
+				},
+				{
+				  "speaker": "A",
+				  "en": "What about food?",
+				  "fa": "غذا چطور بود؟"
+				},
+				{
+				  "speaker": "B",
+				  "en": "I ate seafood. Japanese people make delicious food with fish.",
+				  "fa": "غذای دریایی خوردم. ژاپنی‌ها با ماهی غذاهای خوشمزه‌ای درست می‌کنند."
+				},
+				{
+				  "speaker": "A",
+				  "en": "Do you like to go there again?",
+				  "fa": "دوست داری دوباره به آنجا بروی؟"
+				},
+				{
+				  "speaker": "B",
+				  "en": "Yes, of course. But I like to stay there longer and visit different places.",
+				  "fa": "بله، البته. اما دوست دارم مدت بیشتری بمانم و جاهای مختلف را ببینم."
+				}
+			  ],
+			  "engine": {
+				"type": "multiple_choice",
+				"items": [
+				  {
+					"question": "«I heard you travelled abroad this summer. Is it true?» (گوینده A) با چه آهنگی تمام می‌شود؟",
+					"options": [
+					  "آهنگ صعودی",
+					  "آهنگ نزولی"
+					],
+					"answer": 0,
+					"explanation": "«Is it true?» یک سؤال بله/خیر است، پس آهنگ صعودی دارد."
+				  },
+				  {
+					"question": "«Yes. I went to Japan. I was there for 2 weeks.» (گوینده B) با چه آهنگی تمام می‌شود؟",
+					"options": [
+					  "آهنگ صعودی",
+					  "آهنگ نزولی"
+					],
+					"answer": 1,
+					"explanation": "این‌ها جمله‌های خبری هستند، پس آهنگ نزولی دارند."
+				  },
+				  {
+					"question": "«How was your trip?» (گوینده A) با چه آهنگی تمام می‌شود؟",
+					"options": [
+					  "آهنگ صعودی",
+					  "آهنگ نزولی"
+					],
+					"answer": 1,
+					"explanation": "سؤالات Wh- با آهنگ نزولی تمام می‌شوند."
+				  },
+				  {
+					"question": "«It was very interesting. The country was very clean and people were very polite.» (گوینده B) با چه آهنگی تمام می‌شود؟",
+					"options": [
+					  "آهنگ صعودی",
+					  "آهنگ نزولی"
+					],
+					"answer": 1,
+					"explanation": "این‌ها جمله‌های خبری هستند، پس آهنگ نزولی دارند."
+				  },
+				  {
+					"question": "«What about food?» (گوینده A) با چه آهنگی تمام می‌شود؟",
+					"options": [
+					  "آهنگ صعودی",
+					  "آهنگ نزولی"
+					],
+					"answer": 1,
+					"explanation": "این یک سؤال Wh- است، پس آهنگ نزولی دارد."
+				  },
+				  {
+					"question": "«I ate seafood. Japanese people make delicious food with fish.» (گوینده B) با چه آهنگی تمام می‌شود؟",
+					"options": [
+					  "آهنگ صعودی",
+					  "آهنگ نزولی"
+					],
+					"answer": 1,
+					"explanation": "این‌ها جمله‌های خبری هستند، پس آهنگ نزولی دارند."
+				  },
+				  {
+					"question": "«Do you like to go there again?» (گوینده A) با چه آهنگی تمام می‌شود؟",
+					"options": [
+					  "آهنگ صعودی",
+					  "آهنگ نزولی"
+					],
+					"answer": 0,
+					"explanation": "این یک سؤال بله/خیر است، پس آهنگ صعودی دارد."
+				  },
+				  {
+					"question": "«Yes, of course. But I like to stay there longer and visit different places.» (گوینده B) با چه آهنگی تمام می‌شود؟",
+					"options": [
+					  "آهنگ صعودی",
+					  "آهنگ نزولی"
+					],
+					"answer": 1,
+					"explanation": "این‌ها جمله‌های خبری هستند، پس آهنگ نزولی دارند."
+				  }
+				]
+			  }
+			}
+		  ]
+		},
+		{
+		  "lesson_number": 3,
+		  "lesson_title": "The Value of Knowledge",
+		  "pronunciation_topic": "Emphatic Stress",
+		  "book_pages": "89-90",
+		  "pages": [
+			{
+			  "page_type": "tip",
+			  "content_en": "When you want to put special emphasis on something, you say it more strongly.",
+			  "content_fa": "وقتی می‌خواهید روی چیزی تأکید خاصی داشته باشید، آن را با قدرت و تأکید بیشتری می‌گویید.",
+			  "more_tip_fa": "تأکید (emphatic stress) به معنای بلندتر، واضح‌تر و با کشش بیشتری گفتن یک کلمه است. در زبان انگلیسی، جایی که تأکید می‌گذارید، معنای جمله را تغییر می‌دهد. برای مثال، در جمله «Mina's dress is white»، اگر روی Mina's تأکید کنید، یعنی لباس مال میناست نه کس دیگر؛ اگر روی dress تأکید کنید، یعنی آن لباس است نه دامن؛ و اگر روی white تأکید کنید، یعنی رنگش سفید است نه رنگ دیگر. برای تمرین، یک جمله را با تأکید روی کلمات مختلف بگویید و به تفاوت معنایی آن دقت کنید. تأکید می‌تواند برای تصحیح اطلاعات نادرست، مقایسه، یا جلب توجه شنونده به نکته‌ای خاص استفاده شود."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "A",
+			  "instruction_en": "Listen to the following sentences. Notice how the speakers say some words with more emphasis.",
+			  "instruction_fa": "به جملات زیر گوش دهید. توجه کنید که گویندگان چگونه برخی کلمات را با تأکید بیشتری می‌گویند.",
+			  "items": [
+				{
+				  "en": "Were you doing the research? No, Ali was.",
+				  "fa": "تو داشتی تحقیق را انجام می‌دادی؟ نه، علی بود."
+				},
+				{
+				  "en": "Who broke the window? It wasn't me.",
+				  "fa": "چه کسی پنجره را شکست؟ من نبودم."
+				},
+				{
+				  "en": "Why were the students making so much noise? They weren't. The workers were making noises.",
+				  "fa": "چرا دانش‌آموزان این‌قدر سروصدا می‌کردند؟ آن‌ها نبودند. کارگرها سروصدا می‌کردند."
+				},
+				{
+				  "en": "Is it Jim's car over there? No, his car is white.",
+				  "fa": "آن ماشین جیم است؟ نه، ماشین او سفید است."
+				}
+			  ]
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "B",
+			  "instruction_en": "One word in each sentence is red. Say the sentence with emphatic stress on that word. Can you guess how the meanings of the sentences are different?",
+			  "instruction_fa": "در هر جمله یک کلمه به رنگ قرمز نوشته شده است. جمله را با تأکید روی همان کلمه بگویید. می‌توانید حدس بزنید معنای جملات چگونه با هم فرق می‌کند؟",
+			  "note": "In the original textbook, a different word in the same sentence is printed in red in each of the three lines to show where the stress falls.",
+			  "items": [
+				{
+				  "en": "Mina's dress is white. (stress on 'Mina's')",
+				  "fa": "لباس مینا سفید است. (تأکید روی «مینا»)"
+				},
+				{
+				  "en": "Mina's dress is white. (stress on 'dress')",
+				  "fa": "لباس مینا سفید است. (تأکید روی «لباس»)"
+				},
+				{
+				  "en": "Mina's dress is white. (stress on 'white')",
+				  "fa": "لباس مینا سفید است. (تأکید روی «سفید»)"
+				}
+			  ],
+			  "engine": {
+				"type": "multiple_choice",
+				"items": [
+				  {
+					"question": "«Mina's dress is white.» (تأکید روی Mina's) — گوینده روی چه چیزی تأکید می‌کند؟",
+					"options": [
+					  "اینکه لباس مال میناست، نه دختر دیگری",
+					  "اینکه لباس سفید است، نه رنگ دیگر",
+					  "اینکه آن یک لباس است، نه دامن"
+					],
+					"answer": 0,
+					"explanation": "تأکید روی Mina's نشان می‌دهد لباس متعلق به چه کسی است."
+				  },
+				  {
+					"question": "«Mina's dress is white.» (تأکید روی dress) — گوینده روی چه چیزی تأکید می‌کند؟",
+					"options": [
+					  "اینکه رنگ لباس سفید است",
+					  "اینکه آن یک لباس است، نه دامن یا بلوز",
+					  "اینکه لباس متعلق به میناست"
+					],
+					"answer": 1,
+					"explanation": "تأکید روی dress نوع پوشاک را مشخص می‌کند."
+				  },
+				  {
+					"question": "«Mina's dress is white.» (تأکید روی white) — گوینده روی چه چیزی تأکید می‌کند؟",
+					"options": [
+					  "اینکه لباس سفید است، نه قرمز یا مشکی",
+					  "اینکه لباس متعلق به میناست",
+					  "اینکه آن یک لباس است، نه دامن"
+					],
+					"answer": 0,
+					"explanation": "تأکید روی white رنگ را مشخص می‌کند."
+				  }
+				]
+			  }
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "C",
+			  "instruction_en": "Go to Part IV of your Workbook and do it.",
+			  "instruction_fa": "به بخش چهارم کتاب کار خود بروید و آن را انجام دهید."
+			}
+		  ]
+		},
+		{
+		  "lesson_number": 4,
+		  "lesson_title": "Traveling the World",
+		  "pronunciation_topic": "Contrastive Stress",
+		  "book_pages": "114",
+		  "pages": [
+			{
+			  "page_type": "tip",
+			  "content_en": "When you want to contrast two things, you say both of them with emphasis.",
+			  "content_fa": "وقتی می‌خواهید دو چیز را در تضاد با هم قرار دهید، هر دو را با تأکید می‌گویید.",
+			  "more_tip_fa": "تأکید تقابلی (contrastive stress) زمانی استفاده می‌شود که می‌خواهید دو گزینه یا دو ایده را با هم مقایسه کنید و نشان دهید کدام مهم‌تر است یا کدام درست است. در این حالت، هر دو کلمه‌ای که در تقابل هستند، با تأکید گفته می‌شوند. برای مثال، در جمله «Do you leave on Tuesday or Thursday?»، کلمات Tuesday و Thursday هر دو تأکید می‌گیرند. این نوع تأکید در سؤالات انتخابی، مقایسه‌ها و تصحیح اطلاعات نادرست بسیار رایج است. برای تمرین، جمله‌ای بسازید که دو گزینه متضاد دارد و هر دو را با تأکید بگویید. دقت کنید که تأکید روی کلمات غیرمهم می‌تواند معنای جمله را عوض کند یا شنونده را گیج کند."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "A",
+			  "instruction_en": "Listen to the following sentences. Notice how the speakers contrast the ideas.",
+			  "instruction_fa": "به جملات زیر گوش دهید. توجه کنید که گویندگان چگونه ایده‌ها را در تقابل با هم قرار می‌دهند.",
+			  "items": [
+				{
+				  "en": "Were you doing research or studying?",
+				  "fa": "داشتی تحقیق می‌کردی یا درس می‌خواندی؟"
+				},
+				{
+				  "en": "Who broke the window? Ali or Amir?",
+				  "fa": "چه کسی پنجره را شکست؟ علی یا امیر؟"
+				},
+				{
+				  "en": "Mom, should we help you or dad?",
+				  "fa": "مامان، باید به تو کمک کنیم یا به بابا؟"
+				},
+				{
+				  "en": "Was Jim's car white or blue?",
+				  "fa": "ماشین جیم سفید بود یا آبی؟"
+				}
+			  ]
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "B",
+			  "instruction_en": "Listen and underline two words that have contrastive stress.",
+			  "instruction_fa": "گوش دهید و زیر دو کلمه‌ای که تأکید تقابلی (contrastive stress) دارند خط بکشید.",
+			  "items": [
+				{
+				  "en": "Do you leave on Tuesday or Thursday?",
+				  "fa": "سه‌شنبه می‌روی یا پنج‌شنبه؟"
+				},
+				{
+				  "en": "Is the Taj Mahal in India or China?",
+				  "fa": "تاج‌محل در هند است یا چین؟"
+				},
+				{
+				  "en": "Should I read the booklet or the website?",
+				  "fa": "بروشور را بخوانم یا وب‌سایت را؟"
+				}
+			  ],
+			  "engine": {
+				"type": "multiple_choice",
+				"items": [
+				  {
+					"question": "«Do you leave on Tuesday or Thursday?» — کدام دو کلمه تأکید تقابلی دارند؟",
+					"options": [
+					  "leave و Tuesday",
+					  "Tuesday و Thursday",
+					  "on و or"
+					],
+					"answer": 1,
+					"explanation": "دو گزینه متضاد Tuesday و Thursday هستند."
+				  },
+				  {
+					"question": "«Is the Taj Mahal in India or China?» — کدام دو کلمه تأکید تقابلی دارند؟",
+					"options": [
+					  "Is و the",
+					  "Taj Mahal و in",
+					  "India و China"
+					],
+					"answer": 2,
+					"explanation": "دو مکان متضاد India و China هستند."
+				  },
+				  {
+					"question": "«Should I read the booklet or the website?» — کدام دو کلمه تأکید تقابلی دارند؟",
+					"options": [
+					  "booklet و website",
+					  "read و booklet",
+					  "the و or"
+					],
+					"answer": 0,
+					"explanation": "دو گزینه متضاد booklet و website هستند."
+				  }
+				]
+			  }
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "C",
+			  "instruction_en": "Go to Part IV of your Workbook and do it.",
+			  "instruction_fa": "به بخش چهارم کتاب کار خود بروید و آن را انجام دهید."
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "book": "Vision 2",
+	  "note": "Vision 2's lesson map does not label a 'Pronunciation' section (it was replaced by Vocabulary Development / Reading Strategy). However, each lesson still contains an embedded stress/intonation drill in the same slot pronunciation occupied in Vision 1 (between Grammar and Speaking Strategy). Confirmed at book pages 36, 71, and 101.",
+	  "lessons": [
+		{
+		  "lesson_number": 1,
+		  "lesson_title": "Understanding People",
+		  "pronunciation_topic": "Stress on 'Ten' Numbers vs. 'Teen' Numbers",
+		  "book_pages": "36",
+		  "pages": [
+			{
+			  "page_type": "tip",
+			  "content_en": "twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety",
+			  "content_fa": "بیست، سی، چهل، پنجاه، شصت، هفتاد، هشتاد، نود",
+			  "note": "The original book prints 'thrity' as a typo for 'thirty' in this word list.",
+			  "more_tip_fa": "اعداد ده‌تایی (ten numbers) مانند twenty, thirty, forty و غیره، تکیهٔ قوی روی بخش اول خود دارند: TWEN-ty, THIR-ty, FOR-ty. در مقابل، اعداد teen مانند thirteen, fourteen, fifteen و غیره، تکیهٔ قوی روی بخش teen دارند: thir-TEEN, four-TEEN, fif-TEEN. این تفاوت تکیه برای تشخیص این دو دسته اعداد در گفتار بسیار مهم است، زیرا ممکن است در غیر این صورت eighty و eighteen یا thirty و thirteen با هم اشتباه شوند. برای تمرین، هر دو دسته اعداد را با صدای بلند بگویید و به تفاوت تکیه دقت کنید. همچنین می‌توانید از جملاتی مثل «She is almost thirteen» و «Did you say eighty or eighteen?» استفاده کنید تا تفاوت را بهتر درک کنید."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "A",
+			  "instruction_en": "'Ten numbers' (ten, twenty, thirty, ...) have strong stress on their first part. Listen and repeat.",
+			  "instruction_fa": "«اعداد ده‌تایی» (ten, twenty, thirty, ...) روی بخش اول خود تکیهٔ قوی دارند. گوش دهید و تکرار کنید."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "B",
+			  "instruction_en": "'Teen numbers' have strong stress on 'teen'.",
+			  "instruction_fa": "«اعداد teen» (thirteen, fourteen, ...) روی بخش «teen» تکیهٔ قوی دارند.",
+			  "items": [
+				{
+				  "en": "She is almost thirteen.",
+				  "fa": "او تقریباً سیزده ساله است."
+				},
+				{
+				  "en": "Did you say eighty or eighteen?",
+				  "fa": "گفتی هشتاد یا هجده؟"
+				}
+			  ],
+			  "engine": {
+				"type": "multiple_choice",
+				"items": [
+				  {
+					"question": "«She is almost thirteen.» — تکیه در کلمه thirteen کجاست؟",
+					"options": [
+					  "روی بخش teen",
+					  "روی بخش thir",
+					  "روی هر دو بخش به‌طور یکسان"
+					],
+					"answer": 0,
+					"explanation": "اعداد teen تکیهٔ قوی روی بخش teen دارند."
+				  },
+				  {
+					"question": "«Did you say eighty or eighteen?» — کدام عدد تکیه روی teen دارد؟",
+					"options": [
+					  "eighty",
+					  "eighteen",
+					  "هر دو"
+					],
+					"answer": 1,
+					"explanation": "«Eighteen» یک عدد teen است، پس تکیه آن روی teen است."
+				  }
+				]
+			  }
+			}
+		  ]
+		},
+		{
+		  "lesson_number": 2,
+		  "lesson_title": "A Healthy Lifestyle",
+		  "pronunciation_topic": "Stress on All Words (Emergencies)",
+		  "book_pages": "71",
+		  "pages": [
+			{
+			  "page_type": "tip",
+			  "content_en": "In some situations, emergencies for example, all of the words are important. In that case, all words carry stress.",
+			  "content_fa": "در برخی موقعیت‌ها، برای مثال در شرایط اضطراری، همهٔ کلمات مهم هستند. در این حالت، همهٔ کلمات تکیه می‌گیرند.",
+			  "more_tip_fa": "در شرایط اضطراری، پیام باید سریع، واضح و بدون ابهام منتقل شود. به همین دلیل، همهٔ کلمات جمله با تکیهٔ تقریباً یکسان گفته می‌شوند تا هیچ بخشی از پیام نادیده گرفته نشود. جملاتی مثل «Get away!»، «Turn round!»، «Wake up!» و «Hurry up!» نمونه‌هایی از این حالت هستند. در این جملات، معمولاً کلمات کوتاه و فعل‌های امری به کار می‌روند و لحن صدا قوی و قاطع است. برای تمرین، این جملات را با صدای بلند و با تکیهٔ یکسان روی همهٔ کلمات بگویید. دقت کنید که در حالت عادی، برخی کلمات مانند حروف اضافه یا حروف تعریف تکیه نمی‌گیرند، اما در شرایط اضطراری همهٔ کلمات مهم تلقی می‌شوند."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "A",
+			  "instruction_en": "Listen to the following sentences. All of the words are important and thus they are all stressed.",
+			  "instruction_fa": "به جملات زیر گوش دهید. همهٔ کلمات مهم هستند و بنابراین همگی تکیه دارند.",
+			  "items": [
+				{
+				  "en": "Get away!",
+				  "fa": "دور شو!"
+				},
+				{
+				  "en": "Turn round!",
+				  "fa": "برگرد!"
+				},
+				{
+				  "en": "Wake up!",
+				  "fa": "بیدار شو!"
+				},
+				{
+				  "en": "Hurry up!",
+				  "fa": "عجله کن!"
+				},
+				{
+				  "en": "Take care!",
+				  "fa": "مراقب باش!"
+				}
+			  ]
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "B",
+			  "instruction_en": "Say the following sentences with appropriate stress patterns.",
+			  "instruction_fa": "جملات زیر را با الگوی تکیهٔ مناسب بگویید.",
+			  "items": [
+				{
+				  "en": "Watch out!",
+				  "fa": "مواظب باش!"
+				},
+				{
+				  "en": "Come back!",
+				  "fa": "برگرد!"
+				},
+				{
+				  "en": "Sit down!",
+				  "fa": "بنشین!"
+				},
+				{
+				  "en": "Go away!",
+				  "fa": "دور شو!"
+				},
+				{
+				  "en": "Take care!",
+				  "fa": "مراقب باش!"
+				}
+			  ]
+			}
+		  ]
+		},
+		{
+		  "lesson_number": 3,
+		  "lesson_title": "Art and Culture",
+		  "pronunciation_topic": "Rising and Falling Intonation in Conditional Sentences",
+		  "book_pages": "101",
+		  "pages": [
+			{
+			  "page_type": "tip",
+			  "content_en": "Both rising and falling intonations are used in conditional sentences.",
+			  "content_fa": "در جملات شرطی، هم از آهنگ صعودی و هم از آهنگ نزولی استفاده می‌شود.",
+			  "more_tip_fa": "در جملات شرطی، بخش شرط (if-clause) معمولاً با آهنگ صعودی و بخش نتیجه (main clause) با آهنگ نزولی گفته می‌شود. این الگو به شنونده کمک می‌کند تا بفهمد جمله هنوز کامل نشده و بخش نتیجه در راه است. اگر بخش شرط اول جمله بیاید، مانند «If I get the money, I will buy a new mobile phone»، آهنگ صعودی روی بخش if و آهنگ نزولی روی بخش نتیجه قرار می‌گیرد. اگر بخش نتیجه اول بیاید، مانند «We'll get to school late if the bus does not come on time»، باز هم بخش if آهنگ صعودی و بخش نتیجه آهنگ نزولی دارد. برای تمرین، جملات شرطی بسازید و با فلش‌های رو به بالا و رو به پایین، آهنگ هر بخش را مشخص کنید. دقت کنید که آهنگ صعودی در بخش شرط، حس «ادامه دارد» و آهنگ نزولی در بخش نتیجه، حس «پایان و قطعیت» را منتقل می‌کند."
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "A",
+			  "instruction_en": "Listen to the following sentences. A part of the sentence has a rising intonation, another part of it has a falling intonation.",
+			  "instruction_fa": "به جملات زیر گوش دهید. بخشی از جمله آهنگ صعودی دارد و بخش دیگر آن آهنگ نزولی دارد.",
+			  "items": [
+				{
+				  "en": "If I get the money, I will buy a new mobile phone.",
+				  "fa": "اگر پول را بگیرم، یک گوشی موبایل جدید می‌خرم."
+				},
+				{
+				  "en": "We'll get to school late if the bus does not come on time.",
+				  "fa": "اگر اتوبوس به‌موقع نیاید، دیر به مدرسه می‌رسیم."
+				},
+				{
+				  "en": "If the kids answer the questions, the teacher will give them a prize.",
+				  "fa": "اگر بچه‌ها به سؤالات جواب بدهند، معلم به آن‌ها جایزه می‌دهد."
+				},
+				{
+				  "en": "You'll get a good job if you work hard.",
+				  "fa": "اگر سخت کار کنی، شغل خوبی پیدا می‌کنی."
+				}
+			  ],
+			  "engine": {
+				"type": "multiple_choice",
+				"items": [
+				  {
+					"question": "«If I get the money, I will buy a new mobile phone.» — کدام بخش آهنگ صعودی دارد؟",
+					"options": [
+					  "بخش if (اول)",
+					  "بخش نتیجه (دوم)",
+					  "هیچ‌کدام — هر دو صاف هستند"
+					],
+					"answer": 0,
+					"explanation": "بخش if صعودی است و بخش نتیجه نزولی است."
+				  },
+				  {
+					"question": "«We will get to school late if the bus does not come on time.» — کدام بخش آهنگ صعودی دارد؟",
+					"options": [
+					  "بخش if",
+					  "بخش نتیجه",
+					  "هیچ‌کدام — هر دو صاف هستند"
+					],
+					"answer": 0,
+					"explanation": "بخش if آهنگ صعودی دارد."
+				  },
+				  {
+					"question": "«If the kids answer the questions, the teacher will give them a prize.» — کدام بخش آهنگ صعودی دارد؟",
+					"options": [
+					  "بخش if (اول)",
+					  "بخش نتیجه (دوم)",
+					  "هیچ‌کدام — هر دو صاف هستند"
+					],
+					"answer": 0,
+					"explanation": "بخش if صعودی است و بخش نتیجه نزولی است."
+				  },
+				  {
+					"question": "«You will get a good job if you work hard.» — کدام بخش آهنگ صعودی دارد؟",
+					"options": [
+					  "بخش if",
+					  "بخش نتیجه",
+					  "هیچ‌کدام — هر دو صاف هستند"
+					],
+					"answer": 0,
+					"explanation": "بخش if آهنگ صعودی دارد."
+				  }
+				]
+			  }
+			},
+			{
+			  "page_type": "exercise",
+			  "exercise_letter": "B",
+			  "instruction_en": "Listen to the sentences and draw upward or downward arrows for rising and falling intonations.",
+			  "instruction_fa": "به جملات گوش دهید و برای آهنگ صعودی و نزولی، فلش‌های رو به بالا یا رو به پایین رسم کنید.",
+			  "items": [
+				{
+				  "en": "If it snows, people will drive carefully.",
+				  "fa": "اگر برف ببارد، مردم با احتیاط رانندگی می‌کنند."
+				},
+				{
+				  "en": "If I earn enough money next year, I will buy a new car.",
+				  "fa": "اگر سال آینده پول کافی به دست بیاورم، یک ماشین جدید می‌خرم."
+				},
+				{
+				  "en": "She will pass the exam if I help her.",
+				  "fa": "اگر به او کمک کنم، او امتحان را قبول می‌شود."
+				},
+				{
+				  "en": "If you eat healthy food, you will live longer.",
+				  "fa": "اگر غذای سالم بخوری، بیشتر عمر می‌کنی."
+				}
+			  ],
+			  "engine": {
+				"type": "multiple_choice",
+				"items": [
+				  {
+					"question": "«If it snows, people will drive carefully.» — جمله اصلی (نتیجه) آهنگ ___ دارد.",
+					"options": [
+					  "صعودی",
+					  "نزولی"
+					],
+					"answer": 1,
+					"explanation": "بخش نتیجه نزولی است."
+				  },
+				  {
+					"question": "«If I earn enough money next year, I will buy a new car.» — جمله اصلی (نتیجه) آهنگ ___ دارد.",
+					"options": [
+					  "صعودی",
+					  "نزولی"
+					],
+					"answer": 1,
+					"explanation": "بخش نتیجه نزولی است."
+				  },
+				  {
+					"question": "«She will pass the exam if I help her.» — جمله اصلی (نتیجه) آهنگ ___ دارد.",
+					"options": [
+					  "صعودی",
+					  "نزولی"
+					],
+					"answer": 1,
+					"explanation": "بخش نتیجه نزولی است."
+				  },
+				  {
+					"question": "«If you eat healthy food, you will live longer.» — جمله اصلی (نتیجه) آهنگ ___ دارد.",
+					"options": [
+					  "صعودی",
+					  "نزولی"
+					],
+					"answer": 1,
+					"explanation": "بخش نتیجه نزولی است."
+				  }
+				]
+			  }
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "book": "Vision 3",
+	  "note": "No pronunciation/stress/intonation content exists anywhere in Vision 3 (Lessons 1-3). This slot was fully replaced by the Reading Strategy component. No pages omitted intentionally.",
+	  "lessons": []
+	}
+  ]
+}

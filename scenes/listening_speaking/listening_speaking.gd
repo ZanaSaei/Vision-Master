@@ -42,6 +42,11 @@ var _tts_fallback_tween: Tween
 # ---------- Extra listening state ----------
 var _listening_tts_active_id := ""
 
+# ---------- AudioPanel ----------
+const AUDIO_PANEL_SCENE_PATH := "res://scenes/shared/AudioPanel.tscn"
+var _audio_panel_instance: Node = null
+var _audio_panel_active_id := ""
+
 @onready var background: ColorRect = $Background
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var home_button: Button = $HeaderBar/HeaderContent/HomeButton
@@ -325,7 +330,7 @@ func _start_model() -> void:
 	_advance_turn()
 
 func _stop_tts() -> void:
-	# If a fallback listening TTS is active, reset its button/badge.
+	# If a fallback listening TTS is active, reset its UI.
 	_reset_listening_tts_ui()
 
 	_tts_done_cb = Callable()
@@ -664,7 +669,7 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	vb.add_theme_constant_override("separation", 16)
 
 	# ------------------------------------------------------------
-	# Title row + listened badge.
+	# Title row.
 	# ------------------------------------------------------------
 	var head := HBoxContainer.new()
 	head.add_theme_constant_override("separation", 12)
@@ -675,86 +680,63 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	head.add_child(title)
 
-	var badge := Label.new()
-	badge.text = "🔒 Not listened yet"
-	badge.autowrap_mode = TextServer.AUTOWRAP_OFF
-	badge.add_theme_font_size_override("font_size", 34)
-	badge.add_theme_color_override("font_color", _text_muted())
-
-	if font_bold:
-		badge.add_theme_font_override("font", font_bold)
-
-	head.add_child(badge)
 	vb.add_child(head)
 
 	# Task instruction.
 	vb.add_child(_make_label(_get_en(conv.get("task", "")), 42, _text_soft(), false))
 
 	# ------------------------------------------------------------
-	# Audio player + play button.
+	# AudioPanel reference (shared across all conversation cards).
 	# ------------------------------------------------------------
-	var player := AudioStreamPlayer.new()
-	add_child(player)
+	var audio_panel := _get_or_create_audio_panel()
 
-	var play_btn := _make_button("▶  پخش گفتگو", LISTEN_ACCENT)
+	var play_btn := _make_button("پخش گفتگو", LISTEN_ACCENT)
 	play_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-	# Store the button and badge so other cards can reset this one.
+	# ------------------------------------------------------------
+	# Transcript — English (left-aligned) + Farsi (right-aligned).
+	# ------------------------------------------------------------
+	var transcript_box := VBoxContainer.new()
+	transcript_box.add_theme_constant_override("separation", 14)
+	transcript_box.visible = false
+
+	var en_transcript := _make_label(_get_en(conv.get("transcript", "")), 40, _text_soft(), false)
+	en_transcript.text_direction = Control.TEXT_DIRECTION_LTR
+	en_transcript.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	transcript_box.add_child(en_transcript)
+
+	var fa_transcript_text := _get_fa(conv.get("transcript", ""))
+	if fa_transcript_text != "":
+		var fa_transcript := _make_fa_label(fa_transcript_text, 40, _text_soft())
+		transcript_box.add_child(fa_transcript)
+
+	var transcript_btn := _make_button("📜  نمایش متن", LISTEN_ACCENT)
+	transcript_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	# Store the button so other cards can reset this one.
 	_listening_players.append({
-		"player": player,
+		"audio_panel": audio_panel,
 		"id": conv_id,
 		"play_btn": play_btn,
-		"badge": badge,
+		"transcript_btn": transcript_btn,
 	})
 
-	# ------------------------------------------------------------
-	# Transcript — locked until first full listen.
-	# ------------------------------------------------------------
-	var transcript_label := Label.new()
-	transcript_label.text = _get_en(conv.get("transcript", ""))
-	transcript_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	transcript_label.add_theme_font_size_override("font_size", 40)
-	transcript_label.add_theme_color_override("font_color", _text_soft())
-	transcript_label.visible = false
-
-	if font_regular:
-		transcript_label.add_theme_font_override("font", font_regular)
-
-	var transcript_btn := _make_button("🔒  ابتدا گوش دهید تا متن باز شود", Color("#64748B"))
-	transcript_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	transcript_btn.disabled = true
-
 	transcript_btn.pressed.connect(func():
-		transcript_label.visible = not transcript_label.visible
+		transcript_box.visible = not transcript_box.visible
 
-		if transcript_label.visible:
+		if transcript_box.visible:
 			transcript_btn.text = "🙈  مخفی کردن متن"
 		else:
 			transcript_btn.text = "📜  نمایش متن"
 	)
 
 	play_btn.pressed.connect(func():
-		_play_listening(conv, player, play_btn, badge, transcript_btn)
+		_play_listening(conv, play_btn, transcript_btn)
 	)
 
 	vb.add_child(play_btn)
 	vb.add_child(transcript_btn)
-	vb.add_child(transcript_label)
-
-	player.finished.connect(func():
-		_listened[conv_id] = true
-		_listening_tts_active_id = ""
-
-		play_btn.text = "🔁  پخش دوباره"
-
-		badge.text = "✅ Listened"
-		badge.add_theme_color_override("font_color", SUCCESS)
-
-		transcript_btn.disabled = false
-		transcript_btn.text = "📜  نمایش متن"
-
-		_unlock_transcript_button(transcript_btn)
-	)
+	vb.add_child(transcript_box)
 
 	# ------------------------------------------------------------
 	# Comprehension questions.
@@ -767,33 +749,24 @@ func _build_conversation_card(conv: Dictionary) -> PanelContainer:
 	card.add_child(vb)
 	return card
 
-func _stop_all_listening_players(except: AudioStreamPlayer = null) -> void:
+func _stop_all_listening_players() -> void:
+	_audio_panel_active_id = ""
 	for entry in _listening_players:
-		var player := entry.get("player", null) as AudioStreamPlayer
+		var audio_panel := entry.get("audio_panel", null) as Node
 
-		if player == null or player == except:
+		if audio_panel == null:
 			continue
 
-		if player.playing:
-			player.stop()
+		if audio_panel.is_playing():
+			audio_panel.stop_and_close()
 			_set_listening_entry_stopped(entry)
 
 
 func _set_listening_entry_stopped(entry: Dictionary) -> void:
 	var btn := entry.get("play_btn", null) as Button
-	var badge := entry.get("badge", null) as Label
-	var entry_id := str(entry.get("id", ""))
 
 	if btn:
-		btn.text = "🔁  پخش دوباره"
-
-	if badge:
-		if _listened.get(entry_id, false):
-			badge.text = "✅ Listened"
-			badge.add_theme_color_override("font_color", SUCCESS)
-		else:
-			badge.text = "⏹ Stopped"
-			badge.add_theme_color_override("font_color", _text_muted())
+		btn.text = "پخش گفتگو"
 
 
 func _reset_listening_tts_ui() -> void:
@@ -809,7 +782,6 @@ func _reset_listening_tts_ui() -> void:
 func _on_listening_tts_finished(
 	conv_id: String,
 	play_btn: Button,
-	badge: Label,
 	transcript_btn: Button
 ) -> void:
 	if _listening_tts_active_id != conv_id:
@@ -818,15 +790,51 @@ func _on_listening_tts_finished(
 	_listening_tts_active_id = ""
 	_listened[conv_id] = true
 
-	play_btn.text = "🔁  پخش دوباره"
-
-	badge.text = "✅ Listened"
-	badge.add_theme_color_override("font_color", SUCCESS)
+	play_btn.text = "پخش گفتگو"
 
 	transcript_btn.disabled = false
 	transcript_btn.text = "📜  نمایش متن"
-
 	_unlock_transcript_button(transcript_btn)
+
+
+func _get_or_create_audio_panel() -> Node:
+	if _audio_panel_instance != null and is_instance_valid(_audio_panel_instance):
+		return _audio_panel_instance
+
+	if is_inside_tree() and ResourceLoader.exists(AUDIO_PANEL_SCENE_PATH):
+		var scene := load(AUDIO_PANEL_SCENE_PATH) as PackedScene
+		if scene != null:
+			_audio_panel_instance = scene.instantiate()
+			_audio_panel_instance.add_to_group("audio_panel")
+			add_child(_audio_panel_instance)
+			_audio_panel_instance.audio_finished.connect(_on_audio_panel_finished)
+			_audio_panel_instance.audio_closed.connect(_on_audio_panel_closed)
+			page_view.add_swipe_blocker(_audio_panel_instance)
+			return _audio_panel_instance
+	return null
+
+
+func _on_audio_panel_finished() -> void:
+	_audio_panel_active_id = ""
+	for entry in _listening_players:
+		var entry_id := str(entry.get("id", ""))
+		if _listened.get(entry_id, false):
+			continue
+		var play_btn := entry.get("play_btn", null) as Button
+		var transcript_btn := entry.get("transcript_btn", null) as Button
+		if play_btn:
+			play_btn.text = "پخش گفتگو"
+		if transcript_btn:
+			transcript_btn.disabled = false
+			transcript_btn.text = "📜  نمایش متن"
+			_unlock_transcript_button(transcript_btn)
+
+
+func _on_audio_panel_closed() -> void:
+	for entry in _listening_players:
+		var play_btn := entry.get("play_btn", null) as Button
+		if play_btn:
+			play_btn.text = "پخش گفتگو"
 
 
 func _unlock_transcript_button(btn: Button) -> void:
@@ -842,22 +850,45 @@ func _unlock_transcript_button(btn: Button) -> void:
 	btn.add_theme_stylebox_override("hover", unlock_hover)
 	btn.add_theme_stylebox_override("pressed", unlock_hover)
 
+
+# Builds the logical res:// path for a conversation's audio clip. The JSON may
+# store either a full path or a bare filename; either way it is resolved against
+# assets/audio/v{book}/l{lesson}/. Lessons may ship more than one clip, so the
+# conversation id (conv1, conv2, ...) is used as a sensible fallback filename.
+func _resolve_listening_audio_path(conv: Dictionary) -> String:
+	var audio_value := str(conv.get("audio", ""))
+	var fallback := "listening_1.mp3"
+	var conv_id := str(conv.get("id", ""))
+	if conv_id.begins_with("conv"):
+		var num := conv_id.substr(4).to_int()
+		if num > 0:
+			fallback = "listening_%d.mp3" % num
+	return Global.resolve_audio_path(
+		Global.current_book,
+		Global.current_lesson,
+		audio_value,
+		fallback
+	)
+
+
 func _play_listening(
 	conv: Dictionary,
-	player: AudioStreamPlayer,
 	play_btn: Button,
-	badge: Label,
 	transcript_btn: Button
 ) -> void:
 	var conv_id := str(conv.get("id", ""))
-	var path := str(conv.get("audio", ""))
+	var path := _resolve_listening_audio_path(conv)
+
+	# A clip is only usable when it was bundled in the APK or already
+	# downloaded — Content knows about both locations.
+	var has_audio := path != "" and Content.has_asset(path)
 
 	# True only if this same card is currently using fallback TTS.
-	var same_tts_active := (_listening_tts_active_id == conv_id and path == "")
+	var same_tts_active := (_listening_tts_active_id == conv_id and not has_audio)
 
 	# Stop model playback and other conversation audio.
 	_stop_model_reading()
-	_stop_all_listening_players(player)
+	_stop_all_listening_players()
 
 	# Stop any TTS except the one we are about to toggle as "Stop".
 	if not same_tts_active:
@@ -866,59 +897,45 @@ func _play_listening(
 	# ------------------------------------------------------------
 	# No real audio file: fallback to TTS reading the transcript.
 	# ------------------------------------------------------------
-	if path == "" or not ResourceLoader.exists(path):
+	if not has_audio:
 		if _listening_tts_active_id == conv_id:
 			# User hit Stop while fallback TTS was reading.
 			_stop_tts()
 
-			play_btn.text = "🔁  پخش دوباره"
-
-			if _listened.get(conv_id, false):
-				badge.text = "✅ Listened"
-				badge.add_theme_color_override("font_color", SUCCESS)
-			else:
-				badge.text = "⏹ Stopped"
-				badge.add_theme_color_override("font_color", _text_muted())
-
+			play_btn.text = "پخش گفتگو"
 			return
 
 		_listening_tts_active_id = conv_id
 
-		play_btn.text = "⏹  توقف گفتگو"
-		badge.text = "🎧 Playing..."
-		badge.add_theme_color_override("font_color", LISTEN_ACCENT)
+		play_btn.text = "در حال پخش..."
 
 		_speak(
 			_get_en(conv.get("transcript", "")),
-			Callable(_on_listening_tts_finished).bind(conv_id, play_btn, badge, transcript_btn)
+			Callable(_on_listening_tts_finished).bind(conv_id, play_btn, transcript_btn)
 		)
 		return
 
 	# ------------------------------------------------------------
-	# Real audio file.
+	# Real audio file — play through AudioPanel.
 	# ------------------------------------------------------------
-	if player.playing:
-		# User hit the button while audio was playing -> stop it.
-		player.stop()
-
-		play_btn.text = "🔁  پخش دوباره"
-
-		if _listened.get(conv_id, false):
-			badge.text = "✅ Listened"
-			badge.add_theme_color_override("font_color", SUCCESS)
-		else:
-			badge.text = "⏹ Stopped"
-			badge.add_theme_color_override("font_color", _text_muted())
-
+	var audio_panel := _get_or_create_audio_panel()
+	if audio_panel == null:
+		push_warning("AudioPanel could not be created for: " + conv_id)
 		return
 
-	# Start or restart the conversation audio.
-	player.stream = load(path)
-	player.play()
+	if audio_panel.is_playing():
+		# User hit the button while audio was playing -> stop it.
+		_audio_panel_active_id = ""
+		audio_panel.stop_and_close()
 
-	play_btn.text = "⏹  توقف گفتگو"
-	badge.text = "🎧 Playing..."
-	badge.add_theme_color_override("font_color", LISTEN_ACCENT)
+		play_btn.text = "پخش گفتگو"
+		return
+
+	# Start the conversation audio through AudioPanel.
+	_audio_panel_active_id = conv_id
+	audio_panel.load_and_play(path)
+
+	play_btn.text = "در حال پخش..."
 
 # ============================================================
 # SHARED WIDGETS
