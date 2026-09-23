@@ -131,11 +131,9 @@ static func bidi_fix(text: String) -> String:
 # SEMANTIC COLOR ACCESSORS  (theme-aware, all via Global)
 # ============================================================
 
-# Main app background behind everything — light blue in Light theme.
+# Main app background behind everything — the design system's page colour.
 static func background_color() -> Color:
-	if Global.theme_is_dark():
-		return Global.get_theme_color("bg")
-	return Color("#BFDBFE")
+	return Global.get_theme_color("bg")
 
 
 # Primary readable text.
@@ -590,25 +588,10 @@ static func style_card(
 	)
 
 
-# Professional raised header bar: a surface clearly different from the
-# background, with a soft drop shadow so it reads as floating above.
+# Professional raised header bar — the SAME bar every other scene uses, so the
+# grammar screens never drift from the rest of the app.
 static func header_style() -> StyleBoxFlat:
-	# Unified app header look: light blue background, rounded-bottom pill, accent underline.
-	var style := rounded_box(
-		Color("#BFDBFE"),
-		48,
-		Global.get_theme_color("accent"),
-		1
-	)
-	style.corner_radius_top_left = 10
-	style.corner_radius_top_right = 10
-	style.border_width_bottom = 3
-
-	style.shadow_color = Color(0.0, 0.0, 0.0, 0.35)
-	style.shadow_size = 12
-	style.shadow_offset = Vector2(0, 4)
-
-	return style
+	return DesignTokens.header_bar(Global.theme_is_dark())
 
 
 static func style_header_box(

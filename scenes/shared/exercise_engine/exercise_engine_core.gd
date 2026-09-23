@@ -72,8 +72,8 @@ const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
 const SAVE_PATH := "user://exercise_saves.json"
 
 const TYPE_META := {
-	"multiple_choice":          { "badge": "Multiple Choice",         "color": Color("#6366F1") },
-	"true_false":               { "badge": "True / False",            "color": Color("#8B5CF6") },
+	"multiple_choice":          { "badge": "Multiple Choice",         "color": DesignTokens.ACCENT },
+	"true_false":               { "badge": "True / False",            "color": DesignTokens.GOLD },
 	"matching":                 { "badge": "Matching",                "color": Color("#0EA5E9") },
 	"fill_blank":               { "badge": "Fill in the Blank",       "color": Color("#F97316") },
 	"cloze":                    { "badge": "Choose the Best Form",    "color": Color("#EC4899") },

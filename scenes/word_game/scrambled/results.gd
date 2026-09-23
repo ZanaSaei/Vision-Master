@@ -16,7 +16,7 @@ signal replay_requested()
 signal home_requested()
 
 const COLOR_SCORE := Color("#31C463")
-const COLOR_LEARNING := Color("#4D96FF")
+const COLOR_LEARNING := DesignTokens.ACCENT
 const COLOR_HINT := Color("#FFB703")
 const COLOR_RECORD := Color("#C77DFF")
 
@@ -215,13 +215,17 @@ func _target_score() -> int:
 
 
 ## -------------------------------------------------------------- the cards --
-## A plain card that the caller fills; returns the column inside it, and the
-## PanelContainer is reachable through the returned chain.
+## A plain card that the caller fills. Returns the column INSIDE the card; the
+## caller is responsible for parenting the returned PanelContainer (reachable
+## through `column.get_parent().get_parent()`).
+##
+## WHY the caller parents it: this used to add the panel to `_content` itself
+## AND hand it back, so `_fill_content` parented the same node a second time
+## and Godot raised "already has a parent" on every Results load.
 func _make_card(accent: Color) -> VBoxContainer:
 	var panel := PanelContainer.new()
 	panel.name = "Card"
 	panel.add_theme_stylebox_override("panel", MenuStyle.card_style(accent, 28, false, true))
-	_content.add_child(panel)
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 28)
 	margin.add_theme_constant_override("margin_right", 28)

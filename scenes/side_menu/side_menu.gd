@@ -120,42 +120,59 @@ func _on_theme_changed(_mode: int) -> void:
 	_apply_theme()
 
 
-# The side menu panel uses cream in Light theme and deep navy in Dark theme.
-const MENU_PANEL_BG_DARK  := Color(0.055, 0.065, 0.13, 1)
-const MENU_PANEL_BG_LIGHT := Color("#FFF7BA")
-const MENU_OVERLAY_DARK   := Color(0.02, 0.03, 0.07, 0.62)
-const MENU_OVERLAY_LIGHT  := Color(0, 0, 0, 0.3)
-const MENU_TEXT_DARK      := Color(1, 1, 1, 1)
-const MENU_TEXT_LIGHT     := Color("#1E1E1E")
-const MENU_DIM_TEXT_DARK  := Color(0.80, 0.84, 0.93, 1)
-const MENU_DIM_TEXT_LIGHT := Color("#444444")
-const MENU_CHIP_BG_DARK   := Color(1, 1, 1, 0.06)
-const MENU_CHIP_BG_LIGHT  := Color("#FFF7BA", 0.20)
-const MENU_CHIP_HOVER_DARK := Color(1, 1, 1, 0.12)
-const MENU_CHIP_HOVER_LIGHT := Color("#FFF7BA", 0.35)
-const MENU_CHIP_PRESSED_DARK := Color(1, 1, 1, 0.18)
-const MENU_CHIP_PRESSED_LIGHT := Color("#FFF7BA", 0.45)
-const MENU_CHIP_BORDER_DARK := Color(1, 1, 1, 0.10)
-const MENU_CHIP_BORDER_LIGHT := Color("#FFF7BA", 0.30)
+# The drawer palette comes straight from the design tokens, so it matches the
+# rest of the app: the soft-UI charcoal shell in Dark, warm paper in Light,
+# with the signature gold rim along the leading edge.
+func _panel_bg() -> Color:
+	return DesignTokens.color_of(Global.theme_is_dark(), "sidebar")
+
+
+func _panel_border() -> Color:
+	return DesignTokens.color_of(Global.theme_is_dark(), "gold_rim")
+
+
+func _overlay_color() -> Color:
+	return DesignTokens.color_of(Global.theme_is_dark(), "overlay")
+
+
+func _text_color() -> Color:
+	return DesignTokens.color_of(Global.theme_is_dark(), "text")
+
+
+func _dim_text_color() -> Color:
+	return DesignTokens.color_of(Global.theme_is_dark(), "text_dim")
+
+
+func _chip_bg() -> Color:
+	return DesignTokens.color_of(Global.theme_is_dark(), "surface_alt")
+
+
+func _chip_hover() -> Color:
+	return DesignTokens.color_of(Global.theme_is_dark(), "accent_soft")
+
+
+func _chip_border() -> Color:
+	return DesignTokens.color_of(Global.theme_is_dark(), "border")
 
 func _apply_theme() -> void:
 	var dark := Global.theme_is_dark()
-	var panel_bg := MENU_PANEL_BG_DARK if dark else MENU_PANEL_BG_LIGHT
-	var overlay_col := MENU_OVERLAY_DARK if dark else MENU_OVERLAY_LIGHT
-	var text_col := MENU_TEXT_DARK if dark else MENU_TEXT_LIGHT
-	var dim_text_col := MENU_DIM_TEXT_DARK if dark else MENU_DIM_TEXT_LIGHT
-	# Panel — cream in Light theme, deep navy in Dark theme.
-	var st := StyleBoxFlat.new()
-	st.set_corner_radius_all(26)
-	st.corner_radius_top_right = 0
-	st.corner_radius_bottom_right = 0
-	st.bg_color = panel_bg
-	st.set_border_width_all(0)
-	st.border_width_left = 1
-	st.border_color = Color(1, 1, 1, 0.10) if dark else Color("#FFF7BA", 0.20)
-	st.shadow_color = Color(0, 0, 0, 0.35) if dark else Color(0, 0, 0, 0.15)
-	st.shadow_size = 24
-	st.shadow_offset = Vector2(-6, 0)
+	var panel_bg := _panel_bg()
+	var overlay_col := _overlay_color()
+	var text_col := _text_color()
+	var dim_text_col := _dim_text_color()
+	# Panel — the drawer surface, with a gold hairline along its leading edge.
+	var st := DesignTokens.box(
+		panel_bg,
+		0,
+		_panel_border(),
+		DesignTokens.BORDER_SUBTLE,
+		Color(0, 0, 0, 0.40 if dark else 0.16),
+		DesignTokens.SHADOW_MEDIUM_SIZE,
+		Vector2(-6, 0)
+	)
+	st.corner_radius_top_left = DesignTokens.RADIUS_MD
+	st.corner_radius_bottom_left = DesignTokens.RADIUS_MD
+	st.border_width_left = DesignTokens.BORDER_STANDARD
 	_panel_stylebox = st
 	menu_panel.add_theme_stylebox_override("panel", st)
 
@@ -199,9 +216,51 @@ func _apply_theme() -> void:
 
 # ══════════════════════════════════════════════════════════════
 # MODERN BUTTON STYLING
+# Accent colours come from the palette now that the drawer no longer carries
+# its own violet identity — the app has ONE accent (the design system's blue).
 # ══════════════════════════════════════════════════════════════
-const ACCENT       := Color("#8B5CF6")
-const ACCENT_HOVER := Color("#A78BFA")
+
+
+func _apply_modern_style(btn: Button) -> void:
+	# Drawer rows are "chips": the raised surface with a hairline border, an
+	# accent wash on hover and a solid accent fill when pressed.
+	var dark := Global.theme_is_dark()
+	var t := Theme.new()
+
+	var normal := DesignTokens.box(_chip_bg(), DesignTokens.RADIUS_SM, _chip_border(), DesignTokens.BORDER_SUBTLE)
+	DesignTokens.pad(normal, DesignTokens.SPACE_SM, 12)
+
+	var hover := DesignTokens.box(
+		_chip_hover(),
+		DesignTokens.RADIUS_SM,
+		DesignTokens.color_of(dark, "accent_bright"),
+		DesignTokens.BORDER_SUBTLE
+	)
+	DesignTokens.pad(hover, DesignTokens.SPACE_SM, 12)
+
+	var pressed := DesignTokens.box(
+		DesignTokens.color_of(dark, "accent"),
+		DesignTokens.RADIUS_SM,
+		DesignTokens.color_of(dark, "accent_bright"),
+		DesignTokens.BORDER_SUBTLE
+	)
+	DesignTokens.pad(pressed, DesignTokens.SPACE_SM, 12)
+
+	t.set_stylebox("normal",   "Button", normal)
+	t.set_stylebox("hover",    "Button", hover)
+	t.set_stylebox("pressed",  "Button", pressed)
+	t.set_stylebox("focus",    "Button", DesignTokens.button_focus(dark))
+	t.set_stylebox("disabled", "Button", normal)
+
+	# --- Typography ---
+	t.set_color("font_color",         "Button", _text_color())
+	t.set_color("font_hover_color",   "Button", DesignTokens.color_of(dark, "accent_bright"))
+	t.set_color("font_pressed_color", "Button", DesignTokens.color_of(dark, "on_accent"))
+	t.set_color("font_focus_color",   "Button", _text_color())
+	t.set_font_size("font_size", "Button", DesignTokens.FONT_SMALL)
+	t.set_constant("h_separation", "Button", 10)
+
+	btn.theme = t
 
 
 func _setup_modern_buttons() -> void:
@@ -233,64 +292,6 @@ func _setup_modern_buttons() -> void:
 		_rebuild_button_content(btn, key)
 		_add_hover_animation(btn)
 
-
-
-func _apply_modern_style(btn: Button) -> void:
-	var t := Theme.new()
-
-	# --- Normal state ---
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color("#FFF7BA", 0.30)
-	normal.set_corner_radius_all(12)
-	normal.set_border_width_all(2)
-	normal.border_color = ACCENT
-	normal.content_margin_left = 16
-	normal.content_margin_right = 16
-	normal.content_margin_top = 10
-	normal.content_margin_bottom = 10
-
-	# --- Hover state ---
-	var hover := StyleBoxFlat.new()
-	hover.bg_color = Color("#FFF7BA", 0.45)
-	hover.set_corner_radius_all(12)
-	hover.set_border_width_all(2)
-	hover.border_color = ACCENT_HOVER
-	hover.content_margin_left = 16
-	hover.content_margin_right = 16
-	hover.content_margin_top = 10
-	hover.content_margin_bottom = 10
-	# Flat: accent border + visible fill on cream background.
-
-	# --- Pressed state ---
-	var pressed := StyleBoxFlat.new()
-	pressed.bg_color = Color("#FFF7BA", 0.55)
-	pressed.set_corner_radius_all(12)
-	pressed.set_border_width_all(2)
-	pressed.border_color = ACCENT_HOVER
-	pressed.content_margin_left = 16
-	pressed.content_margin_right = 16
-	pressed.content_margin_top = 10
-	pressed.content_margin_bottom = 10
-
-	# --- Focus state ---
-	var focus := hover.duplicate() as StyleBoxFlat
-
-	t.set_stylebox("normal",   "Button", normal)
-	t.set_stylebox("hover",    "Button", hover)
-	t.set_stylebox("pressed",  "Button", pressed)
-	t.set_stylebox("focus",    "Button", focus)
-	t.set_stylebox("disabled", "Button", normal)
-
-	# --- Typography ---
-	var btn_text_color := Color("#FFFFFF") if Global.theme_is_dark() else Color("#1E1E1E")
-	t.set_color("font_color",         "Button", btn_text_color)
-	t.set_color("font_hover_color",   "Button", btn_text_color)
-	t.set_color("font_pressed_color", "Button", btn_text_color)
-	t.set_color("font_focus_color",   "Button", btn_text_color)
-	t.set_font_size("font_size", "Button", 16)
-	t.set_constant("h_separation", "Button", 10)
-
-	btn.theme = t
 
 
 func _add_hover_animation(btn: Button) -> void:

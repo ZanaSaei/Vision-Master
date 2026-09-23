@@ -252,23 +252,26 @@ func _apply_hamburger_style() -> void:
 	if _hamburger == null:
 		return
 	var dark := MenuStyle.is_dark()
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color("#FFF7BA", 0.96) if not dark else Color(0.09, 0.10, 0.20, 0.96)
-	normal.set_corner_radius_all(48)
-	normal.set_border_width_all(1)
-	normal.border_color = MenuStyle.accent() if not dark else Color(1, 1, 1, 0.18)
-	# Flat: no drop shadow on the floating pill.
-	normal.shadow_size = 0
-	normal.shadow_offset = Vector2.ZERO
+	# The floating drawer pill: a raised surface carrying the design system's
+	# signature gold rim, so it reads as part of the same language as buttons.
+	var normal := DesignTokens.box(
+		MenuStyle.surface(),
+		DesignTokens.RADIUS_PILL,
+		MenuStyle.gold(),
+		DesignTokens.BORDER_STANDARD,
+		Color(0, 0, 0, 0.36 if dark else 0.12),
+		DesignTokens.SHADOW_SOFT_SIZE,
+		Vector2(0, 6)
+	)
 	var hover := normal.duplicate() as StyleBoxFlat
 	hover.border_color = MenuStyle.accent_bright()
 	var pressed := normal.duplicate() as StyleBoxFlat
-	pressed.bg_color = MenuStyle.accent_soft() if not dark else Color(1, 1, 1, 0.08)
+	pressed.bg_color = MenuStyle.accent()
 	_hamburger.add_theme_stylebox_override("normal", normal)
 	_hamburger.add_theme_stylebox_override("hover", hover)
 	_hamburger.add_theme_stylebox_override("pressed", pressed)
 	_hamburger.add_theme_stylebox_override("focus", hover)
-	var fc := MenuStyle.text() if not dark else Color(1, 1, 1)
+	var fc := MenuStyle.text()
 	for st in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
 		_hamburger.add_theme_color_override(st, fc)
 
@@ -277,14 +280,12 @@ func _apply_hamburger_style() -> void:
 # THEME AWARENESS
 ############################################################
 func _wordmark_color() -> Color:
-	# One brand violet, tuned per theme for perfect contrast:
-	# · Dark  → bright luminous lavender (#C4B5FD) that pops off the navy.
-	# · Light → deep rich violet (#5B21B6) that pops off the pale periwinkle.
-	# Same hue family in both — the wordmark is visible and beautiful no
-	# matter which theme the user has chosen.
+	# The wordmark wears the design system's warm gold — the same accent as
+	# the button rims — so the brand mark belongs to the palette instead of
+	# introducing a second hue. Tuned per theme for contrast.
 	if MenuStyle.is_dark():
-		return Color(0.769, 0.71, 0.992)
-	return Color(0.357, 0.129, 0.714)
+		return MenuStyle.gold_bright()
+	return MenuStyle.gold()
 
 
 func _on_theme_changed(_mode: int) -> void:
@@ -485,7 +486,7 @@ func _show_back_message() -> void:
 	add_child(message)
 
 	var bg := ColorRect.new()
-	bg.color = Color("#0F172A", 0.72)
+	bg.color = MenuStyle.c("overlay")
 	bg.anchor_left = 0.0
 	bg.anchor_top = 0.0
 	bg.anchor_right = 1.0

@@ -81,11 +81,43 @@ static func border() -> Color:
 	return c("border")
 
 
-## Card fill: cream (from Background.png) in Light, deep indigo-navy in Dark.
+## Card fill, read straight from the design tokens: the soft-UI charcoal
+## surface in Dark, warm paper in Light. Never hardcoded here, so a token
+## change lands on every menu at once.
 static func card_bg() -> Color:
-	if is_dark():
-		return Color(0.078, 0.088, 0.17)
-	return Color("#FFF7BA")
+	return DesignTokens.color_of(is_dark(), "surface")
+
+
+# ------------------------------------------------------- token shortcuts --
+# Thin, readable accessors over DesignTokens so a screen never has to reach
+# into the palette dictionary itself. Kept here (rather than on the tokens)
+# because they are theme-mode aware and MenuStyle owns "which mode are we in".
+static func ink() -> Color:
+	return DesignTokens.color_of(is_dark(), "ink")
+
+
+static func gold() -> Color:
+	return DesignTokens.color_of(is_dark(), "gold")
+
+
+static func gold_bright() -> Color:
+	return DesignTokens.color_of(is_dark(), "gold_bright")
+
+
+static func accent_deep() -> Color:
+	return DesignTokens.color_of(is_dark(), "accent_deep")
+
+
+static func sunken() -> Color:
+	return DesignTokens.color_of(is_dark(), "surface_sunken")
+
+
+static func paper() -> Color:
+	return Color("#EDE6D6") if is_dark() else Color("#FFFDF6")
+
+
+static func muted() -> Color:
+	return DesignTokens.color_of(is_dark(), "text_muted")
 
 
 ## Foreground colour that reads well on a saturated accent fill.
@@ -104,60 +136,44 @@ static func subtitle_color() -> Color:
 
 
 # ---------------------------------------------------------------- cards --
-## Soft, rounded, friendly card with a subtle accent-tinted border + shadow.
-## Pass `flat = true` for a completely shadowless (flat) surface.
-static func card_style(accent_col: Color, radius: int = 26, lifted: bool = false, flat: bool = false) -> StyleBoxFlat:
-	var s := StyleBoxFlat.new()
-	s.bg_color = card_bg()
+## Soft-UI card: rounded, hairline border, elevation carried by the shadow.
+## The border keeps the caller's accent so a card retains its colour identity,
+## while fill / radius / shadow / elevation come from the design tokens.
+## Pass `flat = true` for a shadowless surface.
+static func card_style(accent_col: Color, radius: int = DesignTokens.RADIUS_MD, lifted: bool = false, flat: bool = false) -> StyleBoxFlat:
+	var s := DesignTokens.card(is_dark(), lifted, flat)
 	s.set_corner_radius_all(radius)
-	s.set_border_width_all(1)
-	if is_dark():
-		s.border_color = Color(accent_col.r, accent_col.g, accent_col.b, 0.42)
-	else:
-		s.border_color = Color(accent_col.r, accent_col.g, accent_col.b, 0.30)
-	# Gentle shadow. In Light it stays very subtle so no grey box reads
-	# between the stacked cards; in Dark it gives the needed depth.
-	if flat:
-		# Flat design: no elevation, so no shadow at all.
-		s.shadow_size = 0
-		s.shadow_offset = Vector2.ZERO
-	else:
-		s.shadow_color = Color(0, 0, 0, 0.22 if is_dark() else 0.06)
-		s.shadow_size = 20 if lifted else 14
-		s.shadow_offset = Vector2(0, 8 if lifted else 5)
+	s.set_border_width_all(DesignTokens.BORDER_SUBTLE)
+	s.border_color = Color(accent_col.r, accent_col.g, accent_col.b, 0.42 if is_dark() else 0.30)
+	# Zero padding keeps the card's own MarginContainer in charge of insets,
+	# exactly as before this restyle, so no existing layout shifts.
+	DesignTokens.pad(s, 0, 0)
 	return s
 
 
-static func card_hover_style(accent_col: Color, radius: int = 26, flat: bool = false) -> StyleBoxFlat:
+static func card_hover_style(accent_col: Color, radius: int = DesignTokens.RADIUS_MD, flat: bool = false) -> StyleBoxFlat:
 	var s := card_style(accent_col, radius, true, flat)
 	if not flat:
-		s.shadow_size = 26
-	if is_dark():
-		s.bg_color = s.bg_color.lightened(0.05)
+		s.shadow_size = DesignTokens.SHADOW_DEEP_SIZE
+	# The lift has to read in BOTH themes, so Light gets a small lighten too
+	# instead of the old Dark-only bump that left Light cards static.
+	s.bg_color = s.bg_color.lightened(0.05 if is_dark() else 0.02)
 	return s
 
 
-static func card_pressed_style(accent_col: Color, radius: int = 26, flat: bool = false) -> StyleBoxFlat:
+static func card_pressed_style(accent_col: Color, radius: int = DesignTokens.RADIUS_MD, flat: bool = false) -> StyleBoxFlat:
 	var s := card_style(accent_col, radius, false, flat)
 	if not flat:
-		s.shadow_size = 6
-		s.shadow_offset = Vector2(0, 2)
-	if is_dark():
-		s.bg_color = s.bg_color.darkened(0.03)
+		# A tight shadow reads as the card sinking INTO the plate.
+		s.shadow_size = 8
+		s.shadow_offset = Vector2(0, 3)
+	s.bg_color = s.bg_color.darkened(0.04 if is_dark() else 0.05)
 	return s
 
 
 ## Rounded square chip behind the emoji/icon of a card.
-static func icon_chip(accent_col: Color, radius: int = 22) -> StyleBoxFlat:
-	var s := StyleBoxFlat.new()
-	if is_dark():
-		s.bg_color = Color(accent_col.r, accent_col.g, accent_col.b, 0.28)
-	else:
-		s.bg_color = Color(accent_col.r, accent_col.g, accent_col.b, 0.13)
-	s.set_corner_radius_all(radius)
-	s.set_border_width_all(1)
-	s.border_color = Color(accent_col.r, accent_col.g, accent_col.b, 0.38)
-	return s
+static func icon_chip(accent_col: Color, radius: int = DesignTokens.RADIUS_XS) -> StyleBoxFlat:
+	return DesignTokens.icon_chip(accent_col, radius, is_dark())
 
 
 ## Small rounded label pill (e.g. a count or status badge).
@@ -190,17 +206,7 @@ static func make_tip_card(message: String, emoji: String = "💡") -> PanelConta
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	panel.custom_minimum_size = Vector2(0, 108)
-	var style := StyleBoxFlat.new()
-	if is_dark():
-		style.bg_color = Color(0.078, 0.088, 0.17, 0.7)
-	else:
-		style.bg_color = Color("#FFF7BA", 0.6)
-	style.set_corner_radius_all(24)
-	style.set_border_width_all(1)
-	if is_dark():
-		style.border_color = Color(1, 1, 1, 0.08)
-	else:
-		style.border_color = Color(0, 0, 0, 0.08)
+	var style := DesignTokens.inset(is_dark(), DesignTokens.RADIUS_MD)
 	panel.add_theme_stylebox_override("panel", style)
 
 	var hb := HBoxContainer.new()
@@ -407,18 +413,12 @@ static func wire_microinteractions(btn: Button) -> void:
 # ---------------------------------------------------------------- bars --
 ## Rounded-bottom header bar (top of menu screens).
 ## Pass `flat = true` for a shadowless (flat) header.
-static func header_bar_style(radius_bottom: int = 44, flat: bool = false) -> StyleBoxFlat:
-	var s := StyleBoxFlat.new()
-	if is_dark():
-		s.bg_color = Color(0.078, 0.088, 0.17, 0.94)
-	else:
-		s.bg_color = Color("#BFDBFE")
-	s.corner_radius_bottom_left = radius_bottom
-	s.corner_radius_bottom_right = radius_bottom
-	if not flat:
-		s.shadow_color = Color(0, 0, 0, 0.12)
-		s.shadow_size = 20
-		s.shadow_offset = Vector2(0, 6)
+static func header_bar_style(radius_bottom: int = DesignTokens.RADIUS_LG, flat: bool = false) -> StyleBoxFlat:
+	var s := DesignTokens.header_bar(is_dark())
+	DesignTokens.round_bottom(s, radius_bottom)
+	if flat:
+		s.shadow_size = 0
+		s.shadow_offset = Vector2.ZERO
 	return s
 
 
@@ -452,3 +452,452 @@ static func make_back_button(icon_path: String, size: int = 96) -> Button:
 	b.add_theme_stylebox_override("pressed", pressed)
 	b.add_theme_stylebox_override("focus", focus)
 	return b
+
+
+# ══════════════════════════════════════════════════════════════
+#  COMPONENTS FROM THE REFERENCE SHEET
+#  Each one is a self-contained factory returning a ready-to-add Control, so a
+#  screen composes UI instead of restating styling. Children are named so the
+#  caller can reach in and adjust content afterwards.
+# ══════════════════════════════════════════════════════════════
+
+## Section heading: a shaded ruled label over an optional gold micro-caption —
+## the "Cards" / "RADIUS STEPS" pattern that groups the reference sheet.
+static func make_section_header(title: String, caption: String = "") -> VBoxContainer:
+	var col := VBoxContainer.new()
+	col.name = "SectionHeader"
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	col.add_theme_constant_override("separation", DesignTokens.SPACE_XS)
+
+	var head := Label.new()
+	head.name = "Title"
+	head.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	head.text = title
+	head.add_theme_font_override("font", vazir() if has_persian(title) else nunito())
+	head.add_theme_font_size_override("font_size", DesignTokens.FONT_LABEL)
+	head.add_theme_color_override("font_color", text())
+	head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col.add_child(head)
+
+	if caption != "":
+		var cap := Label.new()
+		cap.name = "Caption"
+		cap.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		cap.text = caption
+		cap.add_theme_font_override("font", vazir())
+		cap.add_theme_font_size_override("font_size", DesignTokens.FONT_TINY)
+		# Gold micro-caption is the reference's accent for a sub-label.
+		cap.add_theme_color_override("font_color", gold())
+		cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		col.add_child(cap)
+
+	return col
+
+
+## An action button in the new language.
+## `kind`: "primary" (blue), "secondary"/"default" (cream + gold rim),
+##         "ghost" (transparent, for in-card actions).
+static func make_button(btn_text: String, kind: String = "primary", min_height: int = 96) -> Button:
+	var btn := Button.new()
+	btn.name = kind.capitalize() + "Button"
+	btn.text = btn_text
+	btn.custom_minimum_size = Vector2(0, min_height)
+	btn.focus_mode = Control.FOCUS_ALL
+	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	btn.add_theme_font_override("font", vazir() if has_persian(btn_text) else nunito())
+	btn.add_theme_font_size_override("font_size", DesignTokens.FONT_LABEL)
+
+	var dark := is_dark()
+	if kind == "primary":
+		btn.add_theme_stylebox_override("normal", DesignTokens.button_primary(dark))
+		btn.add_theme_stylebox_override("hover", DesignTokens.button_primary_hover(dark))
+		btn.add_theme_stylebox_override("pressed", DesignTokens.button_pressed(dark))
+		btn.add_theme_stylebox_override("focus", DesignTokens.button_focus(dark))
+		btn.add_theme_color_override("font_color", DesignTokens.button_text_color("hover", dark))
+		btn.add_theme_color_override("font_hover_color", DesignTokens.button_text_color("hover", dark))
+	elif kind == "ghost":
+		var clear := StyleBoxFlat.new()
+		clear.bg_color = Color(0, 0, 0, 0)
+		var hover := DesignTokens.box(accent_soft(), DesignTokens.RADIUS_PILL)
+		btn.add_theme_stylebox_override("normal", clear)
+		btn.add_theme_stylebox_override("hover", hover)
+		btn.add_theme_stylebox_override("pressed", hover)
+		btn.add_theme_stylebox_override("focus", DesignTokens.button_focus(dark))
+		btn.add_theme_color_override("font_color", accent())
+		btn.add_theme_color_override("font_hover_color", accent_bright())
+	else:
+		btn.add_theme_stylebox_override("normal", DesignTokens.button_default(dark))
+		btn.add_theme_stylebox_override("hover", DesignTokens.button_hover(dark))
+		btn.add_theme_stylebox_override("pressed", DesignTokens.button_pressed(dark))
+		btn.add_theme_stylebox_override("focus", DesignTokens.button_focus(dark))
+		btn.add_theme_color_override("font_color", DesignTokens.button_text_color("default", dark))
+		btn.add_theme_color_override("font_hover_color", DesignTokens.button_text_color("hover", dark))
+
+	btn.add_theme_color_override("font_pressed_color", DesignTokens.button_text_color("pressed", dark))
+	wire_microinteractions(btn)
+	return btn
+
+
+## Floating notification toast: cream pill, circular tick badge, ink copy.
+## `tone` picks the badge colour: "success" | "error" | "warning" | "info".
+static func make_toast(message: String, tone: String = "success") -> PanelContainer:
+	var dark := is_dark()
+	var panel := PanelContainer.new()
+	panel.name = "Toast"
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.add_theme_stylebox_override("panel", DesignTokens.toast(dark))
+
+	var hb := HBoxContainer.new()
+	hb.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hb.add_theme_constant_override("separation", DesignTokens.SPACE_SM)
+	panel.add_child(hb)
+
+	var badge_tint: Color = {
+		"success": DesignTokens.color_of(dark, "success"),
+		"error": DesignTokens.color_of(dark, "error"),
+		"warning": DesignTokens.color_of(dark, "warning"),
+		"info": DesignTokens.color_of(dark, "accent"),
+	}.get(tone, DesignTokens.color_of(dark, "success"))
+
+	var badge := PanelContainer.new()
+	badge.name = "Badge"
+	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	badge.custom_minimum_size = Vector2(DesignTokens.ICON_MD, DesignTokens.ICON_MD)
+	badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var badge_style := DesignTokens.box(badge_tint, DesignTokens.RADIUS_PILL)
+	badge.add_theme_stylebox_override("panel", badge_style)
+	var tick := Label.new()
+	tick.name = "Glyph"
+	tick.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# A glyph in the badge means the toast needs no external icon asset.
+	tick.text = "✓" if tone == "success" else ("!" if tone != "info" else "i")
+	tick.add_theme_font_size_override("font_size", DesignTokens.FONT_SMALL)
+	tick.add_theme_color_override("font_color", Color.WHITE)
+	tick.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	tick.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	badge.add_child(tick)
+	hb.add_child(badge)
+
+	var msg := Label.new()
+	msg.name = "Message"
+	msg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	msg.text = message
+	msg.add_theme_font_override("font", vazir() if has_persian(message) else nunito())
+	msg.add_theme_font_size_override("font_size", DesignTokens.FONT_SMALL)
+	# Always ink: the toast body is cream in BOTH themes.
+	msg.add_theme_color_override("font_color", DesignTokens.color_of(true, "ink"))
+	msg.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	msg.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hb.add_child(msg)
+
+	return panel
+
+
+## The raised empty-state card: a rounded icon plate over a title and muted
+## copy, on the inset surface. Replaces the ad-hoc "nothing here" labels.
+static func make_empty_state(title: String, message: String, glyph: String = "≡") -> PanelContainer:
+	var panel := PanelContainer.new()
+	panel.name = "EmptyState"
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.add_theme_stylebox_override("panel", DesignTokens.empty_tile(is_dark()))
+
+	var col := VBoxContainer.new()
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.add_theme_constant_override("separation", DesignTokens.SPACE_SM)
+	panel.add_child(col)
+
+	var plate := PanelContainer.new()
+	plate.name = "IconPlate"
+	plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	plate.custom_minimum_size = Vector2(96, 96)
+	plate.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	plate.add_theme_stylebox_override("panel", DesignTokens.inset(is_dark(), DesignTokens.RADIUS_SM))
+	var gl := Label.new()
+	gl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	gl.text = glyph
+	gl.add_theme_font_size_override("font_size", DesignTokens.ICON_MD)
+	gl.add_theme_color_override("font_color", muted())
+	gl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	gl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	plate.add_child(gl)
+	col.add_child(plate)
+
+	var t := Label.new()
+	t.name = "Title"
+	t.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	t.text = title
+	t.add_theme_font_override("font", vazir() if has_persian(title) else nunito())
+	t.add_theme_font_size_override("font_size", DesignTokens.FONT_LABEL)
+	t.add_theme_color_override("font_color", text())
+	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	t.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	col.add_child(t)
+
+	var m := Label.new()
+	m.name = "Message"
+	m.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	m.text = message
+	m.add_theme_font_override("font", vazir() if has_persian(message) else nunito())
+	m.add_theme_font_size_override("font_size", DesignTokens.FONT_SMALL)
+	m.add_theme_color_override("font_color", muted())
+	m.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	m.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	col.add_child(m)
+
+	return panel
+
+
+## One table row with the reference's three states. Named "Label" so a caller
+## can retarget the copy.
+static func make_table_row(row_text: String, state: String = "default") -> PanelContainer:
+	var dark := is_dark()
+	var row := PanelContainer.new()
+	row.name = "TableRow"
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_theme_stylebox_override("panel", DesignTokens.table_row(state, dark))
+
+	var lbl := Label.new()
+	lbl.name = "Label"
+	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lbl.text = row_text
+	lbl.add_theme_font_override("font", vazir() if has_persian(row_text) else nunito())
+	lbl.add_theme_font_size_override("font_size", DesignTokens.FONT_SMALL)
+	lbl.add_theme_color_override("font_color", DesignTokens.table_row_text_color(state, dark))
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	row.add_child(lbl)
+	return row
+
+
+## The modal dialog: a blue header band over a cream body with a Cancel /
+## Confirm pair. Returns a Dictionary of the pieces so the caller can wire the
+## buttons and read the result:
+##   {"root": Control, "cancel": Button, "confirm": Button, "content": Control}
+## The returned root is a full-rect overlay — add it to a CanvasLayer and call
+## `root.queue_free()` when done.
+static func make_modal(
+	title: String,
+	content: String,
+	cancel_text: String = "Cancel",
+	confirm_text: String = "Content"
+) -> Dictionary:
+	var dark := is_dark()
+
+	var root := Control.new()
+	root.name = "Modal"
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	# Scrim so the dialog reads as floating above the page.
+	var scrim := ColorRect.new()
+	scrim.name = "Scrim"
+	scrim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	scrim.color = DesignTokens.color_of(dark, "overlay")
+	scrim.mouse_filter = Control.MOUSE_FILTER_STOP
+	root.add_child(scrim)
+
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(center)
+
+	var col := VBoxContainer.new()
+	col.name = "Dialog"
+	col.add_theme_constant_override("separation", 0)
+	col.custom_minimum_size = Vector2(720, 0)
+
+	# The whole dialog is ONE shadowed paper body with zero padding, so the
+	# header band can sit flush against the top edge with no seam.
+	var dialog := PanelContainer.new()
+	var body_style := DesignTokens.card_paper(dark)
+	DesignTokens.pad(body_style, 0, 0)
+	dialog.add_theme_stylebox_override("panel", body_style)
+	dialog.add_child(col)
+	center.add_child(dialog)
+
+	var head := PanelContainer.new()
+	head.name = "Header"
+	var head_style := DesignTokens.box(DesignTokens.color_of(dark, "accent"), 0)
+	head_style.corner_radius_top_left = DesignTokens.RADIUS_MD
+	head_style.corner_radius_top_right = DesignTokens.RADIUS_MD
+	DesignTokens.pad(head_style, DesignTokens.SPACE_MD, DesignTokens.SPACE_SM)
+	head.add_theme_stylebox_override("panel", head_style)
+	var head_lbl := Label.new()
+	head_lbl.name = "HeaderLabel"
+	head_lbl.text = title
+	head_lbl.add_theme_font_override("font", vazir() if has_persian(title) else nunito())
+	head_lbl.add_theme_font_size_override("font_size", DesignTokens.FONT_LABEL)
+	head_lbl.add_theme_color_override("font_color", DesignTokens.color_of(dark, "on_accent"))
+	head_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	head.add_child(head_lbl)
+	col.add_child(head)
+
+	var content_margin := MarginContainer.new()
+	content_margin.add_theme_constant_override("margin_left", DesignTokens.SPACE_LG)
+	content_margin.add_theme_constant_override("margin_right", DesignTokens.SPACE_LG)
+	content_margin.add_theme_constant_override("margin_top", DesignTokens.SPACE_LG)
+	content_margin.add_theme_constant_override("margin_bottom", DesignTokens.SPACE_LG)
+	col.add_child(content_margin)
+
+	var content_col := VBoxContainer.new()
+	content_col.name = "ContentColumn"
+	content_col.add_theme_constant_override("separation", DesignTokens.SPACE_LG)
+	content_margin.add_child(content_col)
+
+	var msg := Label.new()
+	msg.name = "ContentLabel"
+	msg.text = content
+	msg.add_theme_font_override("font", vazir() if has_persian(content) else nunito())
+	msg.add_theme_font_size_override("font_size", DesignTokens.FONT_BODY)
+	# Ink, because the modal body is always a light paper surface.
+	msg.add_theme_color_override("font_color", DesignTokens.modal_text_color(dark))
+	msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	msg.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content_col.add_child(msg)
+
+	var row := HBoxContainer.new()
+	row.name = "Actions"
+	row.add_theme_constant_override("separation", DesignTokens.SPACE_SM)
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	content_col.add_child(row)
+
+	# Cancel is the neutral cream button; Confirm is the blue primary — the
+	# exact pairing the reference modal shows.
+	var cancel := make_button(cancel_text, "secondary", 88)
+	cancel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(cancel)
+	var confirm := make_button(confirm_text, "primary", 88)
+	confirm.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(confirm)
+
+	return {"root": root, "cancel": cancel, "confirm": confirm, "content": content_margin}
+
+
+## A labelled toggle row using the reference's switch.
+static func make_toggle_row(label_text: String, is_on: bool) -> HBoxContainer:
+	var dark := is_dark()
+	var row := HBoxContainer.new()
+	row.name = "ToggleRow"
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_theme_constant_override("separation", DesignTokens.SPACE_SM)
+
+	var lbl := Label.new()
+	lbl.name = "Label"
+	lbl.text = label_text
+	lbl.add_theme_font_override("font", vazir() if has_persian(label_text) else nunito())
+	lbl.add_theme_font_size_override("font_size", DesignTokens.FONT_SMALL)
+	lbl.add_theme_color_override("font_color", text())
+	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	row.add_child(lbl)
+
+	var sw := CheckButton.new()
+	sw.name = "Switch"
+	sw.button_pressed = is_on
+	sw.custom_minimum_size = Vector2(120, 68)
+	sw.add_theme_stylebox_override("normal", DesignTokens.toggle_track(false, dark))
+	sw.add_theme_stylebox_override("hover", DesignTokens.toggle_track(false, dark))
+	sw.add_theme_stylebox_override("pressed", DesignTokens.toggle_track(true, dark))
+	sw.add_theme_stylebox_override("hover_pressed", DesignTokens.toggle_track(true, dark))
+	row.add_child(sw)
+
+	return row
+
+
+## A thick rounded progress indicator with the blue fill + gold remainder.
+static func make_progress(value: float, width: int = 0) -> ProgressBar:
+	var bar := ProgressBar.new()
+	bar.name = "ProgressIndicator"
+	bar.max_value = 1.0
+	bar.value = clampf(value, 0.0, 1.0)
+	bar.show_percentage = false
+	bar.custom_minimum_size = Vector2(width, 26)
+	bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL if width == 0 else Control.SIZE_SHRINK_CENTER
+	bar.add_theme_stylebox_override("background", DesignTokens.progress_track(is_dark()))
+	bar.add_theme_stylebox_override("fill", DesignTokens.progress_fill(is_dark()))
+	return bar
+
+
+# ══════════════════════════════════════════════════════════════
+#  JUICE — reusable Tween choreography.
+#  Kept here so every screen animates the same way instead of each one
+#  inventing its own durations and easings. All are fire-and-forget: they
+#  create their own tween and return it so callers may await or chain.
+# ══════════════════════════════════════════════════════════════
+
+## Scales a control up from nothing — the "pop in" for cards, tiles and popups.
+static func pop_in(node: Control, delay: float = 0.0) -> Tween:
+	if node.pivot_offset == Vector2.ZERO:
+		node.pivot_offset = node.size / 2.0
+	node.scale = Vector2(0.86, 0.86)
+	node.modulate.a = 0.0
+	var tw := node.create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(node, "scale", Vector2.ONE, 0.34).set_delay(delay) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(node, "modulate:a", 1.0, 0.22).set_delay(delay)
+	return tw
+
+
+## Horizontal shake for a wrong answer. Rotates nothing, so it is safe on any
+## layout container.
+static func shake(node: Control) -> Tween:
+	if node.pivot_offset == Vector2.ZERO:
+		node.pivot_offset = node.size / 2.0
+	var home := node.position
+	var tw := node.create_tween()
+	# Diminishing offsets: the classic "no" head-shake.
+	for offset in [14.0, -12.0, 9.0, -6.0, 3.0, 0.0]:
+		tw.tween_property(node, "position:x", home.x + offset, 0.055) \
+			.set_trans(Tween.TRANS_SINE)
+	return tw
+
+
+## A short scale bump for a correct answer / successful drop.
+static func pop(node: Control, strength: float = 1.12) -> Tween:
+	if node.pivot_offset == Vector2.ZERO:
+		node.pivot_offset = node.size / 2.0
+	var tw := node.create_tween()
+	tw.tween_property(node, "scale", Vector2(strength, strength), 0.12) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_property(node, "scale", Vector2.ONE, 0.26) \
+		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	return tw
+
+
+## Gentle infinite breathing loop, for "tap me" affordances.
+static func pulse_loop(node: Control, amount: float = 1.04) -> Tween:
+	if node.pivot_offset == Vector2.ZERO:
+		node.pivot_offset = node.size / 2.0
+	var tw := node.create_tween()
+	tw.set_loops()
+	tw.tween_property(node, "scale", Vector2(amount, amount), 0.9) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tw.tween_property(node, "scale", Vector2.ONE, 0.9) \
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	return tw
+
+
+## Cinematic entrance: slides in from the right while fading up. `delay` lets a
+## caller stagger a list into a cascade.
+static func slide_in(node: Control, delay: float = 0.0, distance: float = 90.0) -> Tween:
+	var home := node.position
+	node.position = Vector2(home.x + distance, home.y)
+	node.modulate.a = 0.0
+	var tw := node.create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(node, "position", home, 0.42).set_delay(delay) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_property(node, "modulate:a", 1.0, 0.30).set_delay(delay)
+	return tw
+
+
+## Staggered cascade over a list — the menu entrance used across the app.
+static func stagger_in(nodes: Array, step: float = 0.07, distance: float = 70.0) -> void:
+	for i in nodes.size():
+		var node := nodes[i] as Control
+		if node != null:
+			slide_in(node, float(i) * step, distance)

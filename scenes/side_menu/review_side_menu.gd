@@ -114,7 +114,7 @@ func _apply_theme() -> void:
 		_field.border_color = Color(0, 0, 0, 0.15)
 	_field.set_border_width_all(1)
 	var _field_focus: StyleBoxFlat = _field.duplicate() as StyleBoxFlat
-	_field_focus.border_color = Color("#8B5CF6")
+	_field_focus.border_color = DesignTokens.ACCENT
 	_field_focus.set_border_width_all(2)
 	search_input.add_theme_stylebox_override("normal", _field)
 	search_input.add_theme_stylebox_override("focus", _field_focus)
@@ -150,7 +150,7 @@ func _apply_theme() -> void:
 		normal.content_margin_bottom = 10
 		var hover := normal.duplicate() as StyleBoxFlat
 		hover.bg_color = btn_hover_bg
-		hover.border_color = Color("#8B5CF6")
+		hover.border_color = DesignTokens.ACCENT
 		hover.set_border_width_all(2)
 		var pressed := hover.duplicate() as StyleBoxFlat
 		var focus := hover.duplicate() as StyleBoxFlat

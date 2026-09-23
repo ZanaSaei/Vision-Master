@@ -92,7 +92,11 @@ func _ready() -> void:
 	_build_ui()
 
 	# Save current scene for back navigation from drill-down scenes.
-	Global.set_last_scene(get_tree().current_scene.scene_file_path)
+	# `current_scene` is only set when this screen is reached through a scene
+	# change, so fall back to this node's own path: the screen must also be
+	# instantiable in isolation (tooling, tests) without crashing on null.
+	var current := get_tree().current_scene
+	Global.set_last_scene(current.scene_file_path if current != null else scene_file_path)
 
 	Global.on_theme_changed(_on_theme_changed)
 	_apply_theme()

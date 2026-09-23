@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://boq31ykes3ty6"]
 
-[ext_resource type="Script" uid="uid://cg6kr0rrogh2q" path="res://scenes/grammar/components/RewardPopup.gd" id="1_161k4"]
+[ext_resource type="Script" uid="uid://b6ujbd68sbm5g" path="res://scenes/grammar/components/RewardPopup.gd" id="1_161k4"]
 
 [node name="RewardPopup" type="Control" unique_id=1000912049]
 layout_mode = 3

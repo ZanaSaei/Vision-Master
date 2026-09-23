@@ -14,41 +14,40 @@ extends RefCounted
 ##
 ##  Tiles draw themselves (see ScrambledTile), so nothing here is ever
 ##  applied to a Panel or a Label by the walk.
-## ============================================================
-
-## The letter-tile palette. Soft candy colours in the style of classic word
-## games: a flat face, a darker extruded bottom edge and a big white letter.
+## ==============================================## The letter-tile palette, retuned to the app's design language: the blue
+## action colour and the warm gold lead, supported by muted slate, moss, teal,
+## coral and cream. A flat face with a darker extruded edge and a big letter.
 const TILE_COLORS := [
-	Color("#A78BFA"),   # lavender
-	Color("#F472B6"),   # pink
-	Color("#60A5FA"),   # blue
-	Color("#34D399"),   # mint
-	Color("#FBBF24"),   # amber
-	Color("#FB7185"),   # coral
-	Color("#2DD4BF"),   # teal
-	Color("#F97316"),   # orange
+	Color("#4C8DF6"),   # design blue
+	Color("#D9B36C"),   # warm gold
+	Color("#6E8BB0"),   # slate blue
+	Color("#6FAE7C"),   # moss
+	Color("#5FB8C4"),   # teal
+	Color("#D97A6C"),   # coral
+	Color("#A98BB8"),   # mauve
+	Color("#E3D7BD"),   # cream
 ]
 
 ## The dark outline around every tile block, in both themes — part of the
 ## tile's identity, like its colours.
-const TILE_OUTLINE := Color("#4A3B63")
+const TILE_OUTLINE := Color("#2A2D33")
 
 ## A solved tile turns green, and the near-miss nudge is amber.
-const SOLVED_COLOR := Color("#31C463")
-const NUDGE_COLOR := Color("#FFB703")
+const SOLVED_COLOR := Color("#5FBF7F")
+const NUDGE_COLOR := Color("#E0B96B")
 
-## The meaning card wears a printed look — warm cream, green frame, dark ink —
-## in both themes, like a card dealt on top of the board.
-const CARD_BG := Color(0.984, 0.953, 0.898)
-const CARD_BORDER := Color(0.345, 0.780, 0.525)
-const CARD_INK := Color(0.208, 0.216, 0.290)
+## The meaning card wears a printed look — warm cream paper, gold frame, dark
+## ink — matching the design system's paper surface in both themes.
+const CARD_BG := Color(0.929, 0.902, 0.839)
+const CARD_BORDER := Color(0.851, 0.702, 0.424)
+const CARD_INK := Color(0.212, 0.200, 0.173)
 const CARD_INK_DIM := Color(0.373, 0.392, 0.463)
-const CARD_ACCENT := Color(0.180, 0.639, 0.404)
+const CARD_ACCENT := Color(0.298, 0.553, 0.965)
 
 
 static func tile_color(index: int) -> Color:
 	if TILE_COLORS.is_empty():
-		return Color("#4D96FF")
+		return DesignTokens.PALETTE_DARK["accent"]
 	return TILE_COLORS[absi(index) % TILE_COLORS.size()]
 
 
@@ -71,25 +70,25 @@ static func tile_letter(_body: Color) -> Color:
 ## backdrop keeps reading the same way.
 static func page_tint() -> Color:
 	if MenuStyle.is_dark():
-		return Color(0.055, 0.070, 0.130)
-	return Color(0.937, 0.965, 1.0)
+		return DesignTokens.color_of(true, "bg")
+	return DesignTokens.color_of(false, "bg")
 
 
 ## A soft plate behind a tile row: barely there in both themes.
 static func track_color() -> Color:
 	if MenuStyle.is_dark():
-		return Color(1, 1, 1, 0.05)
-	return Color(0.09, 0.13, 0.25, 0.05)
+		return Color(DesignTokens.PALETTE_DARK["surface_sunken"], 0.60)
+	return Color(DesignTokens.PALETTE_LIGHT["surface_sunken"], 0.70)
 
 
 ## The empty slot the carried tile would drop into.
 static func ghost_color(pulse: float) -> Color:
-	var base := Color("#4D96FF")
+	var base := DesignTokens.PALETTE_DARK["accent"]
 	return Color(base.r, base.g, base.b, 0.10 + 0.16 * pulse)
 
 
 static func ghost_border_color(pulse: float) -> Color:
-	var base := Color("#4D96FF")
+	var base := DesignTokens.PALETTE_DARK["accent"]
 	return Color(base.r, base.g, base.b, 0.55 + 0.40 * pulse)
 
 
@@ -114,10 +113,10 @@ static func hint_card_style() -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = CARD_BG
 	style.set_corner_radius_all(36)
-	style.set_border_width_all(5)
+	style.set_border_width_all(DesignTokens.BORDER_PROMINENT)
 	style.border_color = CARD_BORDER
-	style.shadow_color = Color(0, 0, 0, 0.22)
-	style.shadow_size = 22
+	style.shadow_color = Color(0, 0, 0, 0.45)
+	style.shadow_size = DesignTokens.SHADOW_DEEP_SIZE
 	style.shadow_offset = Vector2(0, 10)
 	style.content_margin_left = 34
 	style.content_margin_right = 34
@@ -130,17 +129,17 @@ static func hint_card_style() -> StyleBoxFlat:
 ## top band, then amber, orange and red as the bands fall away.
 static func timer_color(seconds: float) -> Color:
 	if seconds <= 10.0:
-		return Color("#31C463")
+		return DesignTokens.PALETTE_DARK["success"]
 	if seconds <= 30.0:
-		return Color("#8BC34A")
+		return DesignTokens.PALETTE_DARK["success"].darkened(0.12)
 	if seconds <= 50.0:
 		return NUDGE_COLOR
 	if seconds <= 60.0:
-		return Color("#FF9245")
-	return Color("#EF4444")
+		return DesignTokens.PALETTE_DARK["warning"].darkened(0.10)
+	return DesignTokens.PALETTE_DARK["error"]
 
 
 static func timer_track_color() -> Color:
 	if MenuStyle.is_dark():
-		return Color(1, 1, 1, 0.10)
-	return Color(0.09, 0.13, 0.25, 0.09)
+		return Color(DesignTokens.PALETTE_DARK["surface_sunken"], 0.80)
+	return Color(DesignTokens.PALETTE_LIGHT["surface_sunken"], 0.85)

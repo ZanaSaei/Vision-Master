@@ -6,16 +6,16 @@
 class_name ExerciseTheme
 
 # ---------- Theme ----------
-const C_PRIMARY := Color("#6366F1")   # Indigo — primary action, check buttons
-const C_SUCCESS := Color("#10B981")   # Emerald green
-const C_ERROR   := Color("#F87171")   # Soft red
-const C_TEXT    := Color("#F8FAFC")   # Near-white for dark surfaces
-const C_MUTED   := Color("#94A3B8")   # Slate muted
-const C_TINT    := Color("#0F172A")   # Deep slate (used as fallback bg)
-const C_WARNING := Color("#F59E0B")   # Amber
-const C_INFO    := Color("#38BDF8")   # Sky blue
-const C_PURPLE  := Color("#A78BFA")   # Violet (audio button)
-const C_ORANGE  := Color("#FB923C")   # Orange (sample answer button)
+const C_PRIMARY := Color("#4C8DF6")   # Design blue — primary action, check buttons
+const C_SUCCESS := Color("#5FBF7F")   # Design green
+const C_ERROR   := Color("#E06C75")   # Design red
+const C_TEXT    := Color("#E7E5E0")   # Design light type
+const C_MUTED   := Color("#A6A49D")   # Design muted
+const C_TINT    := Color("#24272D")   # Design page (fallback bg)
+const C_WARNING := Color("#E0B96B")   # Design amber
+const C_INFO    := Color("#7FB2FF")   # Design bright blue
+const C_PURPLE  := Color("#A98BB8")   # Mauve (audio button)
+const C_ORANGE  := Color("#D97A6C")   # Coral (sample answer button)
 
 # ---------- Theme-aware color helpers ----------
 # All UI chrome colors are resolved from the active Dark/Light palette

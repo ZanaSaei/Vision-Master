@@ -150,7 +150,7 @@ func _build_ui() -> void:
 	chip_row.custom_minimum_size = Vector2(0, 74)
 	chip_row.add_theme_constant_override("separation", 12)
 	_layout.add_child(chip_row)
-	_progress_label = _make_chip(Color("#4D96FF"), 30)
+	_progress_label = _make_chip(DesignTokens.ACCENT, 30)
 	chip_row.add_child(_progress_label)
 	_mode_label = _make_chip(Color("#C77DFF"), 28)
 	chip_row.add_child(_mode_label)
@@ -248,7 +248,7 @@ func _build_ui() -> void:
 	_reveal_button.custom_minimum_size = Vector2(200, 118)
 	_reveal_button.add_theme_font_override("font", MenuStyle.vazir())
 	_reveal_button.add_theme_font_size_override("font_size", 30)
-	_reveal_button.add_theme_stylebox_override("normal", _filled_button_style(Color("#818CF8"), false))
+	_reveal_button.add_theme_stylebox_override("normal", _filled_button_style(DesignTokens.ACCENT_BRIGHT, false))
 	_reveal_button.pressed.connect(_on_reveal_letter_pressed)
 	action.add_child(_reveal_button)
 	# ----------------------------------

@@ -780,7 +780,7 @@ func _build_reference_materials(strategy: Dictionary, th: Dictionary) -> void:
 			var card := _make_soft_card(soft, accent) #[cite: 2]
 			var vb := VBoxContainer.new() #[cite: 2]
 			vb.add_theme_constant_override("separation", 6) #[cite: 2]
-			var en := _make_label(kq["en"], 36, Color("#1E293B"), false) #[cite: 2]
+			var en := _make_label(kq["en"], 36, DesignTokens.INK, false) #[cite: 2]
 			var fa := _make_label(kq["fa"], 33, Color("#64748B"), false) #[cite: 2]
 			fa.text_direction = Control.TEXT_DIRECTION_RTL #[cite: 2]
 			fa.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT #[cite: 2]

@@ -19,7 +19,7 @@ const BOOK_ACCENTS := {
 	2: Color("#22C55E"),
 	3: Color("#EF4444"),
 }
-const FALLBACK_ACCENT := Color("#4D96FF")
+const FALLBACK_ACCENT := DesignTokens.ACCENT
 
 var _book := 1
 var _book_row: HBoxContainer = null

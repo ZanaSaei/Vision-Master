@@ -15,7 +15,7 @@ signal exit_requested()
 
 const COLOR_LEARNING := Color("#22C55E")
 const COLOR_COMPETITION := Color("#F59E0B")
-const COLOR_RECORD := Color("#4D96FF")
+const COLOR_RECORD := DesignTokens.ACCENT
 
 var _record_card: PanelContainer = null
 var _record_rows: VBoxContainer = null

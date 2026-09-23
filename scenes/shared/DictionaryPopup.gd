@@ -57,7 +57,7 @@ func _build_ui() -> void:
 	
 	title_label = Label.new()
 	title_label.add_theme_font_size_override("font_size", 75)
-	title_label.add_theme_color_override("font_color", Color("#0F172A"))
+	title_label.add_theme_color_override("font_color", DesignTokens.INK)
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if font_bold != null: title_label.add_theme_font_override("font", font_bold)
 	header_hbox.add_child(title_label)
@@ -67,9 +67,9 @@ func _build_ui() -> void:
 	audio_button.text = "🔊 Listen"
 	audio_button.add_theme_font_size_override("font_size", 38)
 	if font_bold != null: audio_button.add_theme_font_override("font", font_bold)
-	audio_button.add_theme_color_override("font_color", Color("#2563EB"))
-	audio_button.add_theme_color_override("font_pressed_color", Color("#1D4ED8"))
-	audio_button.add_theme_color_override("font_hover_color", Color("#2563EB")) # Match normal text color
+	audio_button.add_theme_color_override("font_color", DesignTokens.ACCENT)
+	audio_button.add_theme_color_override("font_pressed_color", DesignTokens.ACCENT_DEEP)
+	audio_button.add_theme_color_override("font_hover_color", DesignTokens.ACCENT) # Match normal text color
 	
 	var audio_style = StyleBoxFlat.new()
 	audio_style.bg_color = Color("#EFF6FF")

@@ -42,7 +42,7 @@ const DOT_ACTIVE_W    := 24
 const DOT_INACTIVE_W  := 14
 const DOT_HEIGHT      := 6
 const DOT_RADIUS      := 3
-const DOT_ACTIVE_COLOR    := Color("#8B5CF6")  # matches the flashcard's violet
+const DOT_ACTIVE_COLOR    := DesignTokens.ACCENT  # the app-wide accent blue
 const DOT_INACTIVE_COLOR  := Color(0.55, 0.60, 0.85, 0.45)
 
 # ---------- Scene paths ----------
@@ -100,7 +100,7 @@ const FLIP_DURATION := 0.18
 const BACK_ROW_ACCENTS := {
 	"WordRow":        Color("#10B981"),  # Emerald
 	"MeaningEnRow":   Color("#3B82F6"),  # Blue
-	"MeaningFaRow":   Color("#8B5CF6"),  # Violet
+	"MeaningFaRow":   DesignTokens.ACCENT,  # Violet
 	"ExampleRow":     Color("#F59E0B"),  # Amber
 	"SynonymsPanel":  Color("#14B8A6"),  # Teal
 	"AntonymsPanel":  Color("#EF4444"),  # Red
@@ -114,7 +114,7 @@ const BACK_ROW_PAD_BOOST := 6.0
 # Icon badges on the back face (solid accent chips with white text).
 const BACK_ICON_ACCENTS := {
 	"EnIcon":   Color("#3B82F6"),
-	"FaIcon":   Color("#8B5CF6"),
+	"FaIcon":   DesignTokens.ACCENT,
 	"ExIcon":   Color("#F59E0B"),
 	"SynIcon":  Color("#14B8A6"),
 	"AntoIcon": Color("#EF4444"),
@@ -124,7 +124,7 @@ const BACK_ICON_ACCENTS := {
 const BACK_LABEL_ACCENTS := {
 	"BackWordLabel":   Color("#10B981"),
 	"MeaningEnLabel":  Color("#3B82F6"),
-	"MeaningFaLabel":  Color("#8B5CF6"),
+	"MeaningFaLabel":  DesignTokens.ACCENT,
 	"ExampleLabel":    Color("#F59E0B"),
 	"SynonymsLabel":   Color("#14B8A6"),
 	"AntonymsLabel":   Color("#EF4444"),
@@ -266,7 +266,7 @@ func _theme_back_row(panel: PanelContainer) -> void:
 	st.set_border_width_all(1)
 	if dark:
 		# A deep slate pill to contrast against the vibrant dark gradient
-		st.bg_color = Color("#1E293B")
+		st.bg_color = DesignTokens.SURFACE_SUNKEN_DARK
 		st.bg_color.a = 0.95
 		st.border_color = Color(1, 1, 1, 0.15)
 	else:

@@ -20,57 +20,17 @@ var _theme_font: Font
 
 const THEME_FONT := "res://assets/fonts/Vazirmatn-Regular.ttf"
 # ---------------------------------------------------------------
-# DARK  — Modern Deep Slate & Vibrant Neon Indigo
+# The palette lives in DesignTokens — see DesignTokens.PALETTE_DARK/LIGHT.
+# Dark  = the soft-UI charcoal reference design.
+# Light = the same language inverted onto warm paper.
 # ---------------------------------------------------------------
-# LIGHT — Crisp Clean White & Playful Punchy Indigo
-# ---------------------------------------------------------------
+## The palette is owned by DesignTokens so there is exactly ONE place in the
+## app where a colour is defined. `theme_palette` below is the active copy.
+## DARK  — the reference design: soft-UI charcoal, cream paper, gold rim, blue.
+## LIGHT — the same language inverted onto warm paper.
 const THEME_PALETTES := {
-	ThemeMode.DARK: {
-		"bg":            Color("#0F172A"),
-		"surface":       Color("#1E293B"),
-		"surface_alt":   Color("#334155"),
-		"border":        Color(1, 1, 1, 0.12),
-		"text":          Color("#F8FAFC"),
-		"text_dim":      Color("#94A3B8"),
-		"accent":        Color("#818CF8"),
-		"accent_bright": Color("#A5B4FC"),
-		"accent_soft":   Color(0.5, 0.55, 0.97, 0.15),
-		"on_accent":     Color("#FFFFFF"),
-		"success":       Color("#34D399"),
-		"error":         Color("#F87171"),
-		"warning":       Color("#FBBF24"),
-		"success_soft":  Color(0.2, 0.82, 0.6, 0.15),
-		"error_soft":    Color(0.97, 0.44, 0.44, 0.15),
-		"warning_soft":  Color(0.98, 0.75, 0.14, 0.15),
-		"overlay":       Color(0, 0, 0, 0.65),
-		"bg_base":       Color("#0B1120"),
-		"wave_top":      Color("#3730A3"),
-		"wave_mid":      Color("#312E81"),
-		"wave_bottom":   Color("#1E1B4B"),
-	},
-	ThemeMode.LIGHT: {
-		"bg":            Color("#F8FAFC"),
-		"surface":       Color("#FFFFFF"),
-		"surface_alt":   Color("#F1F5F9"),
-		"border":        Color(0.0, 0.0, 0.0, 0.10),
-		"text":          Color("#0F172A"),
-		"text_dim":      Color("#64748B"),
-		"accent":        Color("#4F46E5"),
-		"accent_bright": Color("#4338CA"),
-		"accent_soft":   Color(0.31, 0.27, 0.90, 0.10),
-		"on_accent":     Color("#FFFFFF"),
-		"success":       Color("#10B981"),
-		"error":         Color("#EF4444"),
-		"warning":       Color("#F59E0B"),
-		"success_soft":  Color(0.06, 0.72, 0.5, 0.15),
-		"error_soft":    Color(0.93, 0.26, 0.26, 0.15),
-		"warning_soft":  Color(0.96, 0.62, 0.04, 0.15),
-		"overlay":       Color(0, 0, 0, 0.4),
-		"bg_base":       Color("#F1F5F9"),
-		"wave_top":      Color("#818CF8"),
-		"wave_mid":      Color("#A5B4FC"),
-		"wave_bottom":   Color("#E0E7FF"),
-	},
+	ThemeMode.DARK: DesignTokens.PALETTE_DARK,
+	ThemeMode.LIGHT: DesignTokens.PALETTE_LIGHT,
 }
 func theme_is_dark() -> bool:
 	return theme_mode == ThemeMode.DARK
@@ -114,111 +74,154 @@ func setup(initial_mode: int) -> void:
 
 
 func _rebuild_theme() -> void:
+	# Every control the app does NOT style itself inherits from here. The
+	# components come from DesignTokens so a change to the design system
+	# propagates to all 49 scenes without touching a single .tscn.
 	var t := Theme.new()
 	t.default_font = _theme_font
-	t.default_font_size = 34
+	t.default_font_size = DesignTokens.FONT_BODY
 
-	var bg: Color = theme_palette["bg"]
-	var surface: Color = theme_palette["surface"]
-	var alt: Color = theme_palette["surface_alt"]
-	var border: Color = theme_palette["border"]
+	var dark := theme_is_dark()
 	var text: Color = theme_palette["text"]
 	var dim: Color = theme_palette["text_dim"]
 	var accent: Color = theme_palette["accent"]
 
+	# ── Labels ──────────────────────────────────────────────────
+	# A Label exposes only font_color / font_shadow_color / font_outline_color
+	# — there is no hover, focus or selected colour on this type.
 	t.set_color("font_color", "Label", text)
-	t.set_color("font_hover_color", "Label", text)
-	t.set_color("font_focus_color", "Label", text)
-	t.set_color("font_selected_color", "Label", text)
+	t.set_color("font_shadow_color", "Label", Color(0, 0, 0, 0))
 	t.set_color("font_outline_color", "Label", Color(0, 0, 0, 0))
 	t.set_constant("outline_size", "Label", 0)
 
-	var btn_normal := StyleBoxFlat.new()
-	btn_normal.bg_color = alt
-	btn_normal.border_color = border
-	btn_normal.set_border_width_all(1)
-	btn_normal.set_corner_radius_all(16)
-	btn_normal.content_margin_left = 24
-	btn_normal.content_margin_right = 24
-	btn_normal.content_margin_top = 14
-	btn_normal.content_margin_bottom = 14
-	var btn_hover := btn_normal.duplicate() as StyleBoxFlat
-	btn_hover.bg_color = alt.lerp(accent, 0.18)
-	var btn_pressed := btn_normal.duplicate() as StyleBoxFlat
-	btn_pressed.bg_color = alt.lerp(accent, 0.3)
-	var btn_focus := btn_normal.duplicate() as StyleBoxFlat
-	btn_focus.border_color = accent
-	t.set_stylebox("normal", "Button", btn_normal)
-	t.set_stylebox("hover", "Button", btn_hover)
-	t.set_stylebox("pressed", "Button", btn_pressed)
-	t.set_stylebox("focus", "Button", btn_focus)
-	t.set_stylebox("disabled", "Button", btn_normal)
-	t.set_color("font_color", "Button", text)
-	t.set_color("font_hover_color", "Button", text)
-	t.set_color("font_pressed_color", "Button", text)
-	t.set_color("font_focus_color", "Button", text)
-	t.set_color("font_disabled_color", "Button", dim)
+	# ── Buttons: the reference sheet's five states ───────────────
+	t.set_stylebox("normal", "Button", DesignTokens.button_default(dark))
+	t.set_stylebox("hover", "Button", DesignTokens.button_hover(dark))
+	t.set_stylebox("pressed", "Button", DesignTokens.button_pressed(dark))
+	t.set_stylebox("disabled", "Button", DesignTokens.button_disabled(dark))
+	t.set_stylebox("focus", "Button", DesignTokens.button_focus(dark))
+	# A cream resting button needs dark ink; the blue states need white. The
+	# helper owns that mapping so it stays consistent with the styleboxes.
+	t.set_color("font_color", "Button", DesignTokens.button_text_color("default", dark))
+	t.set_color("font_hover_color", "Button", DesignTokens.button_text_color("hover", dark))
+	t.set_color("font_pressed_color", "Button", DesignTokens.button_text_color("pressed", dark))
+	t.set_color("font_focus_color", "Button", DesignTokens.button_text_color("default", dark))
+	t.set_color("font_disabled_color", "Button", DesignTokens.button_text_color("disabled", dark))
 
+	# ── Panels & cards ──────────────────────────────────────────
 	for ptype in ["Panel", "PanelContainer"]:
-		var p := StyleBoxFlat.new()
-		p.bg_color = surface
-		p.border_color = border
-		p.set_border_width_all(1)
-		p.set_corner_radius_all(20)
-		t.set_stylebox("panel", ptype, p)
+		t.set_stylebox("panel", ptype, DesignTokens.card(dark))
 
 	var sc := StyleBoxFlat.new()
 	sc.bg_color = Color(0, 0, 0, 0)
 	t.set_stylebox("panel", "ScrollContainer", sc)
 
-	var grab := StyleBoxFlat.new()
-	grab.bg_color = accent
-	grab.set_corner_radius_all(8)
-	t.set_stylebox("grabber", "VScrollBar", grab)
-	t.set_stylebox("grabber", "HScrollBar", grab)
-	t.set_stylebox("grabber_highlight", "VScrollBar", grab)
-	t.set_stylebox("grabber_highlight", "HScrollBar", grab)
-	var track := StyleBoxFlat.new()
-	track.bg_color = Color(0, 0, 0, 0)
-	t.set_stylebox("track", "VScrollBar", track)
-	t.set_stylebox("track", "HScrollBar", track)
+	# ── Scrollbars ──────────────────────────────────────────────
+	# Godot 4 scrollbars expose `scroll` for the trough and `grabber*` for the
+	# handle; there is no `track` item (that was Godot 3).
+	var grab := DesignTokens.scrollbar_grabber(dark)
+	var trough := DesignTokens.scrollbar_track()
+	for bar in ["VScrollBar", "HScrollBar"]:
+		t.set_stylebox("scroll", bar, trough)
+		t.set_stylebox("grabber", bar, grab)
+		t.set_stylebox("grabber_highlight", bar, grab)
+		t.set_stylebox("grabber_pressed", bar, grab)
 
-	var le_normal := StyleBoxFlat.new()
-	le_normal.bg_color = bg
-	le_normal.border_color = border
-	le_normal.set_border_width_all(1)
-	le_normal.set_corner_radius_all(12)
-	le_normal.content_margin_left = 16
-	le_normal.content_margin_right = 16
-	var le_focus := le_normal.duplicate() as StyleBoxFlat
-	le_focus.border_color = accent
+	# ── Text inputs: sunken body, always-visible soft focus ring ─
+	var le_normal := DesignTokens.inset(dark)
+	le_normal.content_margin_top = 12
+	le_normal.content_margin_bottom = 12
 	t.set_stylebox("normal", "LineEdit", le_normal)
-	t.set_stylebox("focus", "LineEdit", le_focus)
+	t.set_stylebox("focus", "LineEdit", DesignTokens.input_focus(dark))
 	t.set_color("font_color", "LineEdit", text)
 	t.set_color("caret_color", "LineEdit", accent)
 	t.set_color("font_placeholder_color", "LineEdit", dim)
+	t.set_color("selection_color", "LineEdit", theme_palette["accent_soft"])
 
-	t.set_color("font_color", "OptionButton", text)
-	t.set_color("font_color", "CheckButton", text)
-	t.set_color("font_color", "CheckBox", text)
-	t.set_color("font_hover_color", "CheckButton", text)
-	t.set_color("font_hover_color", "CheckBox", text)
-	t.set_color("font_color", "TabContainer", text)
-	t.set_color("font_selected_color", "TabContainer", accent)
+	t.set_stylebox("normal", "TextEdit", DesignTokens.inset(dark, DesignTokens.RADIUS_MD))
+	t.set_stylebox("focus", "TextEdit", DesignTokens.input_focus(dark))
+	t.set_color("font_color", "TextEdit", text)
+	t.set_color("caret_color", "TextEdit", accent)
+
+	# ── Progress: blue glowing fill over a gold-tinted remainder ─
+	t.set_stylebox("background", "ProgressBar", DesignTokens.progress_track(dark))
+	t.set_stylebox("fill", "ProgressBar", DesignTokens.progress_fill(dark))
 	t.set_color("font_color", "ProgressBar", text)
-	t.set_color("font_color", "RichTextLabel", text)
-	t.set_color("default_color", "RichTextLabel", text)
 
+	# ── Sliders: sunken track, accent fill, cream grabber ───────
+	# `slider` / `grabber_area*` are STYLEBOXES but `grabber*` are ICONS, so the
+	# knob is a generated disc texture rather than a stylebox (see DesignTokens).
+	var sl_track := DesignTokens.slider_track(dark)
+	var sl_fill := DesignTokens.slider_fill(dark)
+	var sl_knob := DesignTokens.slider_grabber_texture(dark)
+	for slider in ["HSlider", "VSlider"]:
+		t.set_stylebox("slider", slider, sl_track)
+		t.set_stylebox("grabber_area", slider, sl_fill)
+		t.set_stylebox("grabber_area_highlight", slider, sl_fill)
+		t.set_icon("grabber", slider, sl_knob)
+		t.set_icon("grabber_highlight", slider, sl_knob)
+		t.set_icon("grabber_disabled", slider, sl_knob)
+
+	# ── Toggles: accent + glow when on, flat grey when off ──────
+	for toggle in ["CheckButton", "CheckBox"]:
+		var off := DesignTokens.toggle_track(false, dark)
+		var on := DesignTokens.toggle_track(true, dark)
+		t.set_stylebox("normal", toggle, off)
+		t.set_stylebox("hover", toggle, off)
+		t.set_stylebox("pressed", toggle, on)
+		t.set_stylebox("hover_pressed", toggle, on)
+		t.set_stylebox("disabled", toggle, off)
+		t.set_color("font_color", toggle, text)
+		t.set_color("font_hover_color", toggle, theme_palette["accent_bright"])
+		t.set_color("font_pressed_color", toggle, text)
+		t.set_color("font_disabled_color", toggle, dim)
+
+	# ── OptionButton ────────────────────────────────────────────
+	t.set_color("font_color", "OptionButton", text)
+	t.set_color("font_hover_color", "OptionButton", text)
+	t.set_color("font_disabled_color", "OptionButton", dim)
+
+	# ── RichTextLabel: `default_color` is its type colour, and the type has
+	# no `font_color` item at all ──────────────────────────────────
+	t.set_color("default_color", "RichTextLabel", text)
+	t.set_color("font_selected_color", "RichTextLabel", theme_palette["on_accent"])
+	t.set_color("selection_color", "RichTextLabel", theme_palette["accent_soft"])
+
+	# ── TabContainer: no plain `font_color`; the four state colours it does
+	# define are named per state ─────────────────────────────────────
+	t.set_color("font_selected_color", "TabContainer", accent)
+	t.set_color("font_hovered_color", "TabContainer", theme_palette["accent_bright"])
+	t.set_color("font_unselected_color", "TabContainer", dim)
+	t.set_color("font_disabled_color", "TabContainer", theme_palette["text_muted"])
+	t.set_stylebox("panel", "TabContainer", DesignTokens.card(dark, true))
+
+	# ── Separators ──────────────────────────────────────────────
 	var sep := StyleBoxLine.new()
-	sep.color = border
+	sep.color = theme_palette["border_strong"]
 	t.set_stylebox("separator", "HSeparator", sep)
 	t.set_stylebox("separator", "VSeparator", sep)
 
-	var tip := StyleBoxFlat.new()
-	tip.bg_color = alt
-	tip.border_color = border
-	tip.set_border_width_all(1)
-	tip.set_corner_radius_all(8)
+	# ── Popups (OptionButton dropdowns, context menus) ──────────
+	var popup_panel := DesignTokens.card(dark, true)
+	popup_panel.set_corner_radius_all(DesignTokens.RADIUS_MD)
+	t.set_stylebox("panel", "PopupMenu", popup_panel)
+	t.set_stylebox("hover", "PopupMenu", DesignTokens.table_row("hover", dark))
+	t.set_stylebox("separator", "PopupMenu", sep)
+	t.set_color("font_color", "PopupMenu", text)
+	t.set_color("font_hover_color", "PopupMenu", theme_palette["on_accent"])
+	t.set_color("font_accelerator_color", "PopupMenu", dim)
+	t.set_color("font_separator_color", "PopupMenu", dim)
+
+	var popup_body := DesignTokens.card(dark, true)
+	t.set_stylebox("panel", "PopupPanel", popup_body)
+	# Window has no `panel` item — its frame is `embedded_border`. Dialogs take
+	# their panel from AcceptDialog, which ConfirmationDialog inherits.
+	t.set_stylebox("embedded_border", "Window", popup_body)
+	t.set_stylebox("panel", "AcceptDialog", popup_body)
+
+	# ── Tooltips ────────────────────────────────────────────────
+	var tip := DesignTokens.card(dark, true)
+	tip.set_corner_radius_all(DesignTokens.RADIUS_XS)
 	t.set_stylebox("panel", "TooltipPanel", tip)
 	t.set_color("font_color", "TooltipLabel", text)
 
@@ -330,10 +333,8 @@ func _style_background_rect(cr: ColorRect) -> void:
 	var n := cr.name
 	if n != "BackgroundColor" and n != "Bg" and not n.contains("Background"):
 		return
-	if theme_is_dark():
-		cr.color = Color(0.055, 0.07, 0.13, cr.color.a)
-	else:
-		cr.color = Color(0.955, 0.968, 0.98, cr.color.a)
+	# Keep the scene's own alpha so a translucent scrim stays translucent.
+	cr.color = Color(theme_palette["bg"], cr.color.a)
 
 
 func _is_header_bar_panel(node: Node) -> bool:
@@ -356,25 +357,19 @@ func _hide_header_bar_panel(node: Control) -> void:
 
 
 func _style_card(node: Node) -> void:
-	var dark := theme_is_dark()
+	# A scene-authored panel keeps its own padding and corner radius (only the
+	# radius is clamped up to the smallest design-system step) but takes its
+	# colors from the tokens, so every box in the app matches the shell.
 	var old: StyleBox = node.get_theme_stylebox("panel")
-	var style := StyleBoxFlat.new()
+	var style: StyleBoxFlat = DesignTokens.card(theme_is_dark())
 	if old is StyleBoxFlat:
 		var of := old as StyleBoxFlat
 		style.content_margin_left = of.content_margin_left
 		style.content_margin_top = of.content_margin_top
 		style.content_margin_right = of.content_margin_right
 		style.content_margin_bottom = of.content_margin_bottom
-		style.set_corner_radius_all(of.corner_radius_top_left if of.corner_radius_top_left > 0 else 20)
-	else:
-		style.set_corner_radius_all(20)
-	if dark:
-		style.bg_color = get_theme_color("surface")
-		style.border_color = Color(1, 1, 1, 0.10)
-	else:
-		style.bg_color = Color(1, 1, 1, 1)
-		style.border_color = Color(0, 0, 0, 0.10)
-	style.set_border_width_all(1)
+		if of.corner_radius_top_left > 0:
+			style.set_corner_radius_all(of.corner_radius_top_left)
 	node.add_theme_stylebox_override("panel", style)
 
 
@@ -389,10 +384,18 @@ func _style_label(label: Label) -> void:
 
 
 func _style_button(btn: Button) -> void:
-	var colored := _button_has_colored_bg(btn)
-	var fc: Color = Color(1, 1, 1) if colored else get_theme_color("text")
-	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-		btn.add_theme_color_override(state, fc)
+	# A button that brought its OWN coloured background needs its label forced
+	# to white, because the design system's state colours assume a cream or an
+	# accent fill.
+	#
+	# A button that uses the SHARED design must NOT be overridden: the theme
+	# already supplies ink-on-cream for the resting state and white-on-blue for
+	# hover/pressed. Forcing one colour here used to put near-white type on the
+	# cream pill in the Dark theme — unreadable — so the override is now applied
+	# only where a custom background actually demands it.
+	if _button_has_colored_bg(btn):
+		for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+			btn.add_theme_color_override(state, Color(1, 1, 1))
 
 
 func _button_has_colored_bg(btn: Button) -> bool:
@@ -716,23 +719,10 @@ static func _has_button(node: Node) -> bool:
 
 
 
-func _header_bar_stylebox(dark: bool, accent: Color) -> StyleBoxFlat:
-	var bar := StyleBoxFlat.new()
-	bar.set_corner_radius_all(48)
-	bar.corner_radius_top_left = 10
-	bar.corner_radius_top_right = 10
-	if dark:
-		bar.bg_color = Color(0.06, 0.08, 0.16, 0.88)
-	else:
-		bar.bg_color = Color("#BFDBFE")
-	bar.border_width_left = 2; bar.border_width_top = 2
-	bar.border_width_right = 1; bar.border_width_bottom = 3
-	var rim: Color = accent.lerp(Color.WHITE, 0.50)
-	rim.a = 0.70
-	bar.border_color = rim
-	bar.shadow_color = Color(accent.r * 0.45, accent.g * 0.45, accent.b * 0.45, 0.60)
-	bar.shadow_size = 24
-	bar.shadow_offset = Vector2(0, 6)
+func _header_bar_stylebox(dark: bool, _accent: Color) -> StyleBoxFlat:
+	# One bar look for the whole app: square top shoulders (it meets the screen
+	# edge), rounded bottom, a gold hairline underline and a soft drop shadow.
+	var bar := DesignTokens.header_bar(dark)
 	# Symmetric padding so the row sits exactly in the middle of the bar; the
 	# canonical values are shared with normalize_header_geometry().
 	bar.content_margin_left = HEADER_PAD_X

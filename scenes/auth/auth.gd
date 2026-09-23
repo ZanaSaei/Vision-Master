@@ -11,7 +11,7 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_SETTINGS  := "res://scenes/settings/Settings.tscn"
 
-const COLOR_ACCENT := Color("#8B5CF6")
+const COLOR_ACCENT := DesignTokens.ACCENT
 const COLOR_OK     := Color("#10B981")
 const COLOR_ERR    := Color("#EF4444")
 

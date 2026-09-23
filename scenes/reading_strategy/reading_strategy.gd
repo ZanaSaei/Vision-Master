@@ -233,7 +233,7 @@ func _build_steps(strategy: Dictionary, palette: Dictionary) -> void:
 		en.text = steps[i]["en"]
 		en.autowrap_mode = TextServer.AUTOWRAP_WORD
 		en.add_theme_font_size_override("font_size", 38)
-		en.add_theme_color_override("font_color", Color("#1E293B"))
+		en.add_theme_color_override("font_color", DesignTokens.INK)
 		if font_regular: en.add_theme_font_override("font", font_regular)
 		step_vbox.add_child(en)
 		
@@ -305,7 +305,7 @@ func _build_reference_materials(strategy: Dictionary, palette: Dictionary) -> vo
 			var card := _make_soft_card(soft, accent)
 			var vb := VBoxContainer.new()
 			vb.add_theme_constant_override("separation", 6)
-			var en := _make_label(kq["en"], 36, Color("#1E293B"), false)
+			var en := _make_label(kq["en"], 36, DesignTokens.INK, false)
 			var fa := _make_label(kq["fa"], 33, Color("#64748B"), false)
 			fa.text_direction = Control.TEXT_DIRECTION_RTL
 			fa.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -356,7 +356,7 @@ func _make_insight_card(text: String, accent: Color) -> PanelContainer:
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	label.add_theme_font_size_override("font_size", 36)
-	label.add_theme_color_override("font_color", Color("#1E293B"))
+	label.add_theme_color_override("font_color", DesignTokens.INK)
 	label.text_direction = Control.TEXT_DIRECTION_RTL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	if font_farsi: label.add_theme_font_override("font", font_farsi)
@@ -395,7 +395,7 @@ func _make_section_title(en: String, fa: String, accent: Color, rtl_primary := f
 	var title := Label.new()
 	title.text = fa if rtl_primary else en
 	title.add_theme_font_size_override("font_size", 42)
-	title.add_theme_color_override("font_color", Color("#1E293B"))
+	title.add_theme_color_override("font_color", DesignTokens.INK)
 	
 	if rtl_primary:
 		title.text_direction = Control.TEXT_DIRECTION_RTL
