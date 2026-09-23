@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/scrambled/tile.gd" id="1_script"]
+
+[node name="Tile" type="Control"]
+offset_right = 120.0
+offset_bottom = 120.0
+mouse_filter = 0
+script = ExtResource("1_script")

@@ -1,0 +1,1092 @@
+{
+  "books": [
+    {
+      "book": 1,
+      "grade_fa": "پایه دهم",
+      "lessons": [
+        {
+          "lesson": 1,
+          "title": "Lesson 1",
+          "title_fa": "نجات طبیعت",
+          "words": [
+            {
+              "meaning": "At serious risk of extinction.",
+              "meaning_fa": "در معرض خطر انقراض",
+              "word": "endangered"
+            },
+            {
+              "meaning": "Living; not dead.",
+              "meaning_fa": "زنده",
+              "word": "alive"
+            },
+            {
+              "meaning": "To become larger in number or amount.",
+              "meaning_fa": "افزایش یافتن",
+              "word": "increase"
+            },
+            {
+              "meaning": "To perceive sound with the ear.",
+              "meaning_fa": "شنیدن",
+              "word": "hear"
+            },
+            {
+              "meaning": "To keep someone or something safe from harm.",
+              "meaning_fa": "محافظت کردن",
+              "word": "protect"
+            },
+            {
+              "meaning": "A person.",
+              "meaning_fa": "انسان",
+              "word": "human"
+            },
+            {
+              "meaning": "In place of someone or something else.",
+              "meaning_fa": "به جای",
+              "word": "instead"
+            },
+            {
+              "meaning": "The time after the present moment.",
+              "meaning_fa": "آینده",
+              "word": "future"
+            },
+            {
+              "meaning": "The planet we live on.",
+              "meaning_fa": "زمین",
+              "word": "Earth"
+            },
+            {
+              "meaning": "A large wild cat with stripes.",
+              "meaning_fa": "ببر",
+              "word": "tiger"
+            },
+            {
+              "meaning": "a large area of land covered with trees and plants",
+              "meaning_fa": "جنگل",
+              "word": "forest"
+            },
+            {
+              "meaning": "A dense tropical forest.",
+              "meaning_fa": "جنگل انبوه",
+              "word": "jungle"
+            },
+            {
+              "meaning": "Notice or consideration.",
+              "meaning_fa": "توجه",
+              "word": "attention"
+            },
+            {
+              "meaning": "A large flat area of land.",
+              "meaning_fa": "دشت",
+              "word": "plain"
+            },
+            {
+              "meaning": "Hurt or harmed physically.",
+              "meaning_fa": "زخمی / آسیب دیده",
+              "word": "injured"
+            },
+            {
+              "meaning": "To cause physical or emotional pain.",
+              "meaning_fa": "آسیب رساندن",
+              "word": "hurt"
+            },
+            {
+              "meaning": "To assist someone.",
+              "meaning_fa": "کمک کردن",
+              "word": "help"
+            },
+            {
+              "meaning": "A very large mammal that lives in the ocean.",
+              "meaning_fa": "نهنگ",
+              "word": "whale"
+            },
+            {
+              "meaning": "A wild animal related to dogs.",
+              "meaning_fa": "گرگ",
+              "word": "wolf"
+            },
+            {
+              "meaning": "A black and white bear native to China.",
+              "meaning_fa": "پاندا",
+              "word": "panda"
+            },
+            {
+              "meaning": "A large wild cat with spots.",
+              "meaning_fa": "پلنگ",
+              "word": "leopard"
+            },
+            {
+              "meaning": "A very large plant-eating mammal with a trunk.",
+              "meaning_fa": "فیل",
+              "word": "elephant"
+            },
+            {
+              "meaning": "A farm animal with horns.",
+              "meaning_fa": "بز",
+              "word": "goat"
+            },
+            {
+              "meaning": "A small domestic animal.",
+              "meaning_fa": "گربه",
+              "word": "cat"
+            },
+            {
+              "meaning": "A water bird with a broad beak.",
+              "meaning_fa": "اردک",
+              "word": "duck"
+            }
+          ]
+        },
+        {
+          "lesson": 2,
+          "title": "Lesson 2",
+          "title_fa": "شگفتی‌های آفرینش",
+          "words": [
+            {
+              "meaning": "A large round object in space that moves around a star.",
+              "meaning_fa": "سیاره",
+              "word": "planet"
+            },
+            {
+              "meaning": "The star at the center of our solar system.",
+              "meaning_fa": "خورشید",
+              "word": "Sun"
+            },
+            {
+              "meaning": "The physical structure of a person or animal.",
+              "meaning_fa": "بدن",
+              "word": "body"
+            },
+            {
+              "meaning": "Very good; causing great pleasure.",
+              "meaning_fa": "شگفت‌انگیز",
+              "word": "wonderful"
+            },
+            {
+              "meaning": "A set of things working together as parts of a mechanism.",
+              "meaning_fa": "سیستم",
+              "word": "system"
+            },
+            {
+              "meaning": "A small insect that lives in organized groups.",
+              "meaning_fa": "مورچه",
+              "word": "ant"
+            },
+            {
+              "meaning": "Very surprising and impressive.",
+              "meaning_fa": "شگفت‌آور",
+              "word": "amazing"
+            },
+            {
+              "meaning": "A large animal with one or two humps, used in deserts.",
+              "meaning_fa": "شتر",
+              "word": "camel"
+            },
+            {
+              "meaning": "The clear liquid that falls as rain and is in rivers.",
+              "meaning_fa": "آب",
+              "word": "water"
+            },
+            {
+              "meaning": "A circular band or a round shape.",
+              "meaning_fa": "حلقه",
+              "word": "ring"
+            },
+            {
+              "meaning": "The organ that pumps blood around the body.",
+              "meaning_fa": "قلب",
+              "word": "heart"
+            },
+            {
+              "meaning": "The red liquid that flows in the veins.",
+              "meaning_fa": "خون",
+              "word": "blood"
+            },
+            {
+              "meaning": "A natural satellite that goes around a planet.",
+              "meaning_fa": "ماه",
+              "word": "moon"
+            },
+            {
+              "meaning": "A building equipped with a telescope for observing space.",
+              "meaning_fa": "رصدخانه",
+              "word": "observatory"
+            },
+            {
+              "meaning": "An optical instrument used to view distant objects in space.",
+              "meaning_fa": "تلسکوپ",
+              "word": "telescope"
+            },
+            {
+              "meaning": "An instrument used to view very small objects.",
+              "meaning_fa": "میکروسکوپ",
+              "word": "microscope"
+            },
+            {
+              "meaning": "A state of matter that is not solid or gas; a fluid.",
+              "meaning_fa": "مایع",
+              "word": "liquid"
+            },
+            {
+              "meaning": "A very small living organism that can cause disease.",
+              "meaning_fa": "میکروب",
+              "word": "microbe"
+            },
+            {
+              "meaning": "A small amount of liquid.",
+              "meaning_fa": "قطره",
+              "word": "drop"
+            },
+            {
+              "meaning": "A colored liquid used for painting.",
+              "meaning_fa": "رنگ (نقاشی)",
+              "word": "paint"
+            },
+            {
+              "meaning": "The number equal to 1,000.",
+              "meaning_fa": "هزار",
+              "word": "thousand"
+            },
+            {
+              "meaning": "Strong and well; good for the body.",
+              "meaning_fa": "سالم",
+              "word": "healthy"
+            },
+            {
+              "meaning": "To protect someone or something from danger.",
+              "meaning_fa": "دفاع کردن",
+              "word": "defend"
+            },
+            {
+              "meaning": "To move or hold something from one place to another.",
+              "meaning_fa": "حمل کردن",
+              "word": "carry"
+            },
+            {
+              "meaning": "To gather or bring things together.",
+              "meaning_fa": "جمع آوری کردن",
+              "word": "collect"
+            },
+            {
+              "meaning": "Something that is true and has really happened.",
+              "meaning_fa": "حقیقت",
+              "word": "fact"
+            },
+            {
+              "meaning": "Close to; not far away.",
+              "meaning_fa": "نزدیک",
+              "word": "near"
+            },
+            {
+              "meaning": "Covered with rocks; having a hard, uneven surface.",
+              "meaning_fa": "صخره‌ای",
+              "word": "rocky"
+            },
+            {
+              "meaning": "The curved path of an object around a planet or star.",
+              "meaning_fa": "مدار",
+              "word": "orbit"
+            },
+            {
+              "meaning": "Having great strength or influence.",
+              "meaning_fa": "قدرتمند",
+              "word": "powerful"
+            }
+          ]
+        },
+        {
+          "lesson": 3,
+          "title": "Lesson 3",
+          "title_fa": "ارزش دانش",
+          "words": [
+            {
+              "meaning": "The energy that makes things visible.",
+              "meaning_fa": "نور",
+              "word": "light"
+            },
+            {
+              "meaning": "To speak to someone.",
+              "meaning_fa": "صحبت کردن",
+              "word": "talk"
+            },
+            {
+              "meaning": "A device for taking photographs.",
+              "meaning_fa": "دوربین",
+              "word": "camera"
+            },
+            {
+              "meaning": "A photograph or painting.",
+              "meaning_fa": "عکس / نقاشی",
+              "word": "picture"
+            },
+            {
+              "meaning": "To go on a journey.",
+              "meaning_fa": "سفر کردن",
+              "word": "travel"
+            },
+            {
+              "meaning": "Belonging to the present time; new.",
+              "meaning_fa": "مدرن",
+              "word": "modern"
+            },
+            {
+              "meaning": "Relating to Iran or its people.",
+              "meaning_fa": "ایرانی",
+              "word": "Iranian"
+            },
+            {
+              "meaning": "Belonging to a past time; not new.",
+              "meaning_fa": "قدیمی",
+              "word": "old"
+            },
+            {
+              "meaning": "The science of treating and preventing disease.",
+              "meaning_fa": "پزشکی",
+              "word": "medicine"
+            },
+            {
+              "meaning": "Known by many people.",
+              "meaning_fa": "مشهور",
+              "word": "famous"
+            },
+            {
+              "meaning": "To make a structure or building.",
+              "meaning_fa": "ساختن",
+              "word": "build"
+            },
+            {
+              "meaning": "Requiring a lot of effort or strength; not easy.",
+              "meaning_fa": "سخت",
+              "word": "hard"
+            },
+            {
+              "meaning": "Full of energy and activity.",
+              "meaning_fa": "پر انرژی",
+              "word": "energetic"
+            },
+            {
+              "meaning": "A scientific test or trial to discover something.",
+              "meaning_fa": "آزمایش",
+              "word": "experiment"
+            },
+            {
+              "meaning": "Very quickly.",
+              "meaning_fa": "به سرعت",
+              "word": "rapidly"
+            },
+            {
+              "meaning": "Careful study to discover new facts.",
+              "meaning_fa": "تحقیق",
+              "word": "research"
+            },
+            {
+              "meaning": "A common viral infection causing fever and chills.",
+              "meaning_fa": "آنفولانزا",
+              "word": "flu"
+            },
+            {
+              "meaning": "Lacking physical or mental strength.",
+              "meaning_fa": "ضعیف",
+              "word": "weak"
+            },
+            {
+              "meaning": "The achievement of a goal or intention.",
+              "meaning_fa": "موفقیت",
+              "word": "success"
+            },
+            {
+              "meaning": "To create a new object or process for the first time.",
+              "meaning_fa": "اختراع کردن",
+              "word": "invent"
+            },
+            {
+              "meaning": "To find a solution to a problem or puzzle.",
+              "meaning_fa": "حل کردن",
+              "word": "solve"
+            },
+            {
+              "meaning": "To grow or change into a stronger or better form.",
+              "meaning_fa": "توسعه دادن",
+              "word": "develop"
+            },
+            {
+              "meaning": "A feeling of certainty in the truth of something.",
+              "meaning_fa": "باور",
+              "word": "belief"
+            },
+            {
+              "meaning": "To stop doing something.",
+              "meaning_fa": "ترک کردن",
+              "word": "quit"
+            }
+          ]
+        },
+        {
+          "lesson": 4,
+          "title": "Lesson 4",
+          "title_fa": "سفر به دور دنیا",
+          "words": [
+            {
+              "meaning": "A piece of paper that gives you the right to travel.",
+              "meaning_fa": "بلیط",
+              "word": "ticket"
+            },
+            {
+              "meaning": "The place where someone is going.",
+              "meaning_fa": "مقصد",
+              "word": "destination"
+            },
+            {
+              "meaning": "A place where aircraft take off and land.",
+              "meaning_fa": "فرودگاه",
+              "word": "airport"
+            },
+            {
+              "meaning": "A person who travels to a holy place.",
+              "meaning_fa": "زائر",
+              "word": "pilgrim"
+            },
+            {
+              "meaning": "A small, thin book containing information.",
+              "meaning_fa": "بروشور / کتابچه",
+              "word": "booklet"
+            },
+            {
+              "meaning": "A place where something exists or happened.",
+              "meaning_fa": "محل / سایت (تاریخی)",
+              "word": "site"
+            },
+            {
+              "meaning": "A period of time away from work or school.",
+              "meaning_fa": "تعطیلات",
+              "word": "vacation"
+            },
+            {
+              "meaning": "A dry, arid region with little rainfall.",
+              "meaning_fa": "بیابان",
+              "word": "desert"
+            },
+            {
+              "meaning": "A massive ancient stone structure with a triangular shape.",
+              "meaning_fa": "هرم",
+              "word": "pyramid"
+            },
+            {
+              "meaning": "A detailed scheme or intention for the future.",
+              "meaning_fa": "برنامه",
+              "word": "plan"
+            },
+            {
+              "meaning": "A person who manages business for someone else.",
+              "meaning_fa": "نماینده / کارگزار",
+              "word": "agent"
+            },
+            {
+              "meaning": "The act of choosing between two or more possibilities.",
+              "meaning_fa": "انتخاب",
+              "word": "choice"
+            },
+            {
+              "meaning": "Likely to happen or be true.",
+              "meaning_fa": "احتمالا",
+              "word": "probably"
+            },
+            {
+              "meaning": "Welcoming and generous to guests.",
+              "meaning_fa": "مهمان‌نواز",
+              "word": "hospitable"
+            },
+            {
+              "meaning": "An idea or plan put forward for consideration.",
+              "meaning_fa": "پیشنهاد",
+              "word": "suggestion"
+            }
+          ]
+        }
+      ],
+      "title": "Vision 1"
+    },
+    {
+      "book": 2,
+      "grade_fa": "پایه یازدهم",
+      "lessons": [
+        {
+          "lesson": 1,
+          "title": "Lesson 1",
+          "title_fa": "درک مردم",
+          "words": [
+            {
+              "meaning": "a particular area or part of a country",
+              "meaning_fa": "ناحیه / منطقه",
+              "word": "region"
+            },
+            {
+              "meaning": "to be real or present",
+              "meaning_fa": "وجود داشتن",
+              "word": "exist"
+            },
+            {
+              "meaning": "one of the large land masses of the earth",
+              "meaning_fa": "قاره",
+              "word": "continent"
+            },
+            {
+              "meaning": "belonging to a particular place by birth",
+              "meaning_fa": "بومی",
+              "word": "native"
+            },
+            {
+              "meaning": "the variety of things within a particular limit",
+              "meaning_fa": "محدوده / دامنه",
+              "word": "range"
+            },
+            {
+              "meaning": "one part in every hundred",
+              "meaning_fa": "درصد",
+              "word": "percent"
+            },
+            {
+              "meaning": "to form a picture in your mind",
+              "meaning_fa": "تصور کردن",
+              "word": "imagine"
+            },
+            {
+              "meaning": "a period of 100 years",
+              "meaning_fa": "قرن",
+              "word": "century"
+            },
+            {
+              "meaning": "a large group of people who live together",
+              "meaning_fa": "جامعه",
+              "word": "society"
+            },
+            {
+              "meaning": "the power or skill to do something",
+              "meaning_fa": "توانایی",
+              "word": "ability"
+            },
+            {
+              "meaning": "to be different from each other",
+              "meaning_fa": "متفاوت بودن",
+              "word": "vary"
+            },
+            {
+              "meaning": "without taking any notice of; in spite of",
+              "meaning_fa": "علی‌رغم",
+              "word": "despite"
+            },
+            {
+              "meaning": "to share or exchange information with others",
+              "meaning_fa": "ارتباط برقرار کردن",
+              "word": "communicate"
+            },
+            {
+              "meaning": "having great worth or importance",
+              "meaning_fa": "ارزشمند",
+              "word": "valuable"
+            },
+            {
+              "meaning": "a person who speaks a particular language",
+              "meaning_fa": "گوینده / سخن‌گو",
+              "word": "speaker"
+            },
+            {
+              "meaning": "at risk of disappearing or becoming extinct",
+              "meaning_fa": "در خطر انقراض",
+              "word": "endangered"
+            },
+            {
+              "meaning": "a method or way of doing something",
+              "meaning_fa": "وسیله / راه",
+              "word": "means"
+            },
+            {
+              "meaning": "to show admiration or regard for someone or something",
+              "meaning_fa": "احترام گذاشتن",
+              "word": "respect"
+            }
+          ]
+        },
+        {
+          "lesson": 2,
+          "title": "Lesson 2",
+          "title_fa": "سبک زندگی سالم",
+          "words": [
+            {
+              "meaning": "not very often; almost never",
+              "meaning_fa": "به ندرت",
+              "word": "rarely"
+            },
+            {
+              "meaning": "the movement or sound of the heart as it pumps blood",
+              "meaning_fa": "ضربان قلب",
+              "word": "heartbeat"
+            },
+            {
+              "meaning": "to find the size, amount, or degree of something",
+              "meaning_fa": "اندازه گرفتن",
+              "word": "measure"
+            },
+            {
+              "meaning": "an amount of food for one person",
+              "meaning_fa": "یک وعده غذا",
+              "word": "serving"
+            },
+            {
+              "meaning": "causing or likely to cause harm",
+              "meaning_fa": "مضر",
+              "word": "harmful"
+            },
+            {
+              "meaning": "a thing that you do often and regularly",
+              "meaning_fa": "عادت",
+              "word": "habit"
+            },
+            {
+              "meaning": "the state of being addicted to something",
+              "meaning_fa": "اعتیاد",
+              "word": "addiction"
+            },
+            {
+              "meaning": "relating to the body",
+              "meaning_fa": "جسمانی",
+              "word": "physical"
+            },
+            {
+              "meaning": "without worry or excitement",
+              "meaning_fa": "آرام",
+              "word": "calm"
+            },
+            {
+              "meaning": "with all parts existing in the correct amounts",
+              "meaning_fa": "متوازن",
+              "word": "balanced"
+            },
+            {
+              "meaning": "happening or starting a short time ago",
+              "meaning_fa": "اخیر",
+              "word": "recent"
+            },
+            {
+              "meaning": "relating to the emotions",
+              "meaning_fa": "عاطفی",
+              "word": "emotional"
+            },
+            {
+              "meaning": "to stop something from happening",
+              "meaning_fa": "پیشگیری کردن",
+              "word": "prevent"
+            },
+            {
+              "meaning": "the way in which two people feel and behave towards each other",
+              "meaning_fa": "رابطه",
+              "word": "relationship"
+            },
+            {
+              "meaning": "the way a person lives",
+              "meaning_fa": "سبک زندگی",
+              "word": "lifestyle"
+            },
+            {
+              "meaning": "a state of mental or emotional strain",
+              "meaning_fa": "استرس",
+              "word": "stress"
+            }
+          ]
+        },
+        {
+          "lesson": 3,
+          "title": "Lesson 3",
+          "title_fa": "هنر و فرهنگ",
+          "words": [
+            {
+              "meaning": "a reduction in the usual price",
+              "meaning_fa": "تخفیف",
+              "word": "discount"
+            },
+            {
+              "meaning": "a thing that is made or grown to be sold",
+              "meaning_fa": "محصول",
+              "word": "product"
+            },
+            {
+              "meaning": "to put things into a container or box",
+              "meaning_fa": "بسته‌بندی کردن",
+              "word": "pack"
+            },
+            {
+              "meaning": "an object made by hand, often using traditional methods",
+              "meaning_fa": "صنایع دستی",
+              "word": "handicraft"
+            },
+            {
+              "meaning": "decorative tiles used in architecture",
+              "meaning_fa": "کاشی‌کاری",
+              "word": "tilework"
+            },
+            {
+              "meaning": "objects made of clay that are fired to harden them",
+              "meaning_fa": "سفالگری",
+              "word": "pottery"
+            },
+            {
+              "meaning": "a thick floor covering made of woven material",
+              "meaning_fa": "فرش",
+              "word": "carpet"
+            },
+            {
+              "meaning": "the art of beautiful handwriting",
+              "meaning_fa": "خوشنویسی",
+              "word": "calligraphy"
+            },
+            {
+              "meaning": "the art of using paints to create pictures",
+              "meaning_fa": "نقاشی",
+              "word": "painting"
+            },
+            {
+              "meaning": "used to make something look more attractive",
+              "meaning_fa": "تزئینی",
+              "word": "decorative"
+            },
+            {
+              "meaning": "very large in size or area",
+              "meaning_fa": "وسیع",
+              "word": "vast"
+            },
+            {
+              "meaning": "a person who is skilled at making things by hand",
+              "meaning_fa": "صنعتگر",
+              "word": "craftsman"
+            },
+            {
+              "meaning": "to make cloth or a rug by crossing threads under and over each other",
+              "meaning_fa": "بافتن",
+              "word": "weave"
+            },
+            {
+              "meaning": "a hard, shiny material such as iron, gold, or silver",
+              "meaning_fa": "فلز",
+              "word": "metal"
+            },
+            {
+              "meaning": "being the only one of its kind",
+              "meaning_fa": "منحصربه‌فرد",
+              "word": "unique"
+            },
+            {
+              "meaning": "a range of different things or people",
+              "meaning_fa": "تنوع",
+              "word": "diversity"
+            },
+            {
+              "meaning": "traditional or usual things that people do in an area",
+              "meaning_fa": "رسم",
+              "word": "custom"
+            },
+            {
+              "meaning": "who or what a person or thing is",
+              "meaning_fa": "هویت",
+              "word": "identity"
+            },
+            {
+              "meaning": "to show a particular quality or feeling",
+              "meaning_fa": "بازتاب دادن",
+              "word": "reflect"
+            },
+            {
+              "meaning": "all people; humanity",
+              "meaning_fa": "بشر",
+              "word": "humankind"
+            },
+            {
+              "meaning": "to recognize the full worth of something",
+              "meaning_fa": "ارزش قائل شدن",
+              "word": "appreciate"
+            },
+            {
+              "meaning": "a thing kept as a reminder of a place or event",
+              "meaning_fa": "سوغاتی",
+              "word": "souvenir"
+            },
+            {
+              "meaning": "the system of making and selling goods in a country",
+              "meaning_fa": "اقتصاد",
+              "word": "economy"
+            },
+            {
+              "meaning": "the ability to form new ideas or pictures in the mind",
+              "meaning_fa": "تخیل",
+              "word": "imagination"
+            }
+          ]
+        }
+      ],
+      "title": "Vision 2"
+    },
+    {
+      "book": 3,
+      "grade_fa": "پایه دوازدهم",
+      "lessons": [
+        {
+          "lesson": 1,
+          "title": "Lesson 1",
+          "title_fa": "حس قدردانی",
+          "words": [
+            {
+              "meaning": "a medical doctor; a specialist in medicine",
+              "meaning_fa": "پزشک",
+              "word": "physician"
+            },
+            {
+              "meaning": "to think of someone or something in a particular way; consider",
+              "meaning_fa": "به حساب آوردن / انگاشتن",
+              "word": "regard"
+            },
+            {
+              "meaning": "working hard with great commitment and loyalty",
+              "meaning_fa": "متعهد / فداکار",
+              "word": "dedicated"
+            },
+            {
+              "meaning": "a long comfortable seat for two or more people",
+              "meaning_fa": "مبل",
+              "word": "sofa"
+            },
+            {
+              "meaning": "a grey bird often seen in cities",
+              "meaning_fa": "کبوتر",
+              "word": "pigeon"
+            },
+            {
+              "meaning": "to speak very loudly or angrily",
+              "meaning_fa": "فریاد زدن",
+              "word": "shout"
+            },
+            {
+              "meaning": "to hold someone closely in your arms",
+              "meaning_fa": "در آغوش گرفتن",
+              "word": "hug"
+            },
+            {
+              "meaning": "the flat area formed by the upper part of your legs when you sit down",
+              "meaning_fa": "زانو / دامان",
+              "word": "lap"
+            },
+            {
+              "meaning": "many times; again and again",
+              "meaning_fa": "مکرراً",
+              "word": "repeatedly"
+            },
+            {
+              "meaning": "to stop being angry with someone for a mistake",
+              "meaning_fa": "بخشیدن",
+              "word": "forgive"
+            },
+            {
+              "meaning": "in a quiet, peaceful, and controlled way",
+              "meaning_fa": "آرامانه",
+              "word": "calmly"
+            },
+            {
+              "meaning": "a book in which you record your daily thoughts or events",
+              "meaning_fa": "دفتر خاطرات",
+              "word": "diary"
+            },
+            {
+              "meaning": "the quality of being friendly, generous, and considerate",
+              "meaning_fa": "مهربانی",
+              "word": "kindness"
+            },
+            {
+              "meaning": "old; relating to older people",
+              "meaning_fa": "سالمند",
+              "word": "elderly"
+            },
+            {
+              "meaning": "history, traditions, and culture passed down from previous generations",
+              "meaning_fa": "میراث",
+              "word": "heritage"
+            }
+          ]
+        },
+        {
+          "lesson": 2,
+          "title": "Lesson 2",
+          "title_fa": "جستجو کن!",
+          "words": [
+            {
+              "meaning": "to suggest that someone should do or get something",
+              "meaning_fa": "توصیه کردن",
+              "word": "recommend"
+            },
+            {
+              "meaning": "to think or believe something is true",
+              "meaning_fa": "فکر کردن / گمان کردن",
+              "word": "suppose"
+            },
+            {
+              "meaning": "basic; at the beginning level",
+              "meaning_fa": "ابتدایی",
+              "word": "elementary"
+            },
+            {
+              "meaning": "at a level between beginner and advanced",
+              "meaning_fa": "میانه / متوسط",
+              "word": "intermediate"
+            },
+            {
+              "meaning": "at a high or complex level",
+              "meaning_fa": "پیشرفته",
+              "word": "advanced"
+            },
+            {
+              "meaning": "a software program for a computer or smartphone",
+              "meaning_fa": "نرم افزار کاربردی",
+              "word": "app"
+            },
+            {
+              "meaning": "to have something inside",
+              "meaning_fa": "شامل بودن / داشتن",
+              "word": "contain"
+            },
+            {
+              "meaning": "an item in a dictionary, list, or record",
+              "meaning_fa": "مدخل (در فرهنگ لغت)",
+              "word": "entry"
+            },
+            {
+              "meaning": "a sign, shape, or letter used to represent something",
+              "meaning_fa": "نماد",
+              "word": "symbol"
+            },
+            {
+              "meaning": "an arrangement of different things in a particular order",
+              "meaning_fa": "ترکیب",
+              "word": "combination"
+            },
+            {
+              "meaning": "the beginning part of a book that explains its purpose",
+              "meaning_fa": "مقدمه",
+              "word": "introduction"
+            },
+            {
+              "meaning": "in a successful way that achieves the desired result",
+              "meaning_fa": "به طور مؤثر",
+              "word": "effectively"
+            },
+            {
+              "meaning": "to put things in a neat or useful order",
+              "meaning_fa": "مرتب کردن",
+              "word": "arrange"
+            },
+            {
+              "meaning": "a shortened form of a word or phrase",
+              "meaning_fa": "اختصار",
+              "word": "abbreviation"
+            }
+          ]
+        },
+        {
+          "lesson": 3,
+          "title": "Lesson 3",
+          "title_fa": "انرژی تجدیدپذیر",
+          "words": [
+            {
+              "meaning": "to produce or create something, especially energy",
+              "meaning_fa": "تولید کردن",
+              "word": "generate"
+            },
+            {
+              "meaning": "completely different; facing the other way",
+              "meaning_fa": "مخالف / برعکس",
+              "word": "opposite"
+            },
+            {
+              "meaning": "to move in the air (wind)",
+              "meaning_fa": "وزیدن",
+              "word": "blow"
+            },
+            {
+              "meaning": "to make someone think of something again",
+              "meaning_fa": "یادآوری کردن",
+              "word": "remind"
+            },
+            {
+              "meaning": "able to be replaced naturally (energy source)",
+              "meaning_fa": "تجدیدپذیر",
+              "word": "renewable"
+            },
+            {
+              "meaning": "a supply of something useful, such as oil or water",
+              "meaning_fa": "منبع",
+              "word": "resource"
+            },
+            {
+              "meaning": "to make air, water, or land dirty and harmful",
+              "meaning_fa": "آلوده کردن",
+              "word": "pollute"
+            },
+            {
+              "meaning": "to use up a resource or energy",
+              "meaning_fa": "مصرف کردن",
+              "word": "consume"
+            },
+            {
+              "meaning": "a platform with a wall or railing attached to the outside of a building",
+              "meaning_fa": "بالکن",
+              "word": "balcony"
+            },
+            {
+              "meaning": "many different types of things or people",
+              "meaning_fa": "تنوع",
+              "word": "variety"
+            },
+            {
+              "meaning": "the regular rise and fall of the sea level",
+              "meaning_fa": "جزر و مد",
+              "word": "tide"
+            },
+            {
+              "meaning": "to take the place of something or to put something back",
+              "meaning_fa": "جایگزین کردن / بازگرداندن",
+              "word": "replace"
+            },
+            {
+              "meaning": "for all time; eternally",
+              "meaning_fa": "برای همیشه",
+              "word": "forever"
+            },
+            {
+              "meaning": "the amount of a product or service that people want",
+              "meaning_fa": "تقاضا",
+              "word": "demand"
+            },
+            {
+              "meaning": "to change in form, character, or function",
+              "meaning_fa": "تبدیل کردن",
+              "word": "convert"
+            },
+            {
+              "meaning": "to take in a substance gradually",
+              "meaning_fa": "جذب کردن",
+              "word": "absorb"
+            },
+            {
+              "meaning": "a machine that uses wind or water to produce power",
+              "meaning_fa": "توربین",
+              "word": "turbine"
+            },
+            {
+              "meaning": "the natural world around us",
+              "meaning_fa": "محیط زیست",
+              "word": "environment"
+            }
+          ]
+        }
+      ],
+      "title": "Vision 3"
+    }
+  ],
+  "comment": "Scrambled Words word bank — book > lesson > word list. Each entry: word (English, scrambled in game), meaning (English meaning shown as the hint), meaning_fa (Persian meaning, optional extra hint).",
+  "schema": 1
+}

@@ -265,6 +265,12 @@ const SELF_THEMED_SCRIPTS := [
 	"word_review.gd",
 	"book_menu.gd",
 	"lesson_menu.gd",
+	"spelling_game.gd",
+	"scrambled_words.gd",
+	"gameplay.gd",
+	"mode_select.gd",
+	"lesson_select.gd",
+	"results.gd",
 ]
 
 # Labels that read better muted in both themes.

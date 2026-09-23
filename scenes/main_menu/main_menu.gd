@@ -17,12 +17,14 @@ const SCENE_PURCHASE     := "res://scenes/purchase/Purchase.tscn"
 const SCENE_LEITNER      := "res://scenes/review/WordReview.tscn"
 const SCENE_ABOUT_ME     := "res://scenes/about_me/AboutMe.tscn"
 const SCENE_MAIN_MENU    := "res://scenes/main_menu/MainMenu.tscn"
+const SCENE_WORD_GAME    := "res://scenes/word_game/WordGame.tscn"
 
 # --- Per-book accent identities (friendly, modern) ---
 const COLOR_BOOK1 := Color("#3B82F6")   # Vision 1 — solid light blue
 const COLOR_BOOK2 := Color("#22C55E")   # Vision 2 — solid green
 const COLOR_BOOK3 := Color("#EF4444")   # Vision 3 — solid red
 const COLOR_EXAM  := Color("#7C3AED")   # Final exams — violet
+const COLOR_WORD_GAMES := Color("#F59E0B")   # بازی با کلمات — amber
 
 # --- Book metadata ---
 const BOOK_EMOJI := { 1: "📘", 2: "📗", 3: "📕" }
@@ -138,6 +140,9 @@ func _build_ui() -> void:
 
 	# 6. Exam card.
 	_add_card("امتحانات نهایی", "تمرین سوالات امتحان", "🎓", COLOR_EXAM, _on_exam_pressed)
+
+	# 7. Word games card.
+	_add_card("بازی با کلمات", "کلمه روز · معنی · املا · شنیداری", "🔤", COLOR_WORD_GAMES, _on_word_games_pressed)
 
 	# Bottom breathing room.
 	var spacer := Control.new()
@@ -392,6 +397,16 @@ func _on_exam_pressed() -> void:
 	if not is_inside_tree():
 		return
 	TransitionManager.slide_change_scene(SCENE_FINAL_EXAMS, TransitionManager.Slide.FORWARD)
+
+
+func _on_word_games_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
+	await get_tree().create_timer(0.10).timeout
+	if not is_inside_tree():
+		return
+	TransitionManager.slide_change_scene(SCENE_WORD_GAME, TransitionManager.Slide.FORWARD)
 
 
 func _on_side_menu_about_me_pressed() -> void:

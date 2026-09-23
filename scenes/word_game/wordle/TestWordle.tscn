@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/wordle/test_wordle_live.gd" id="1_script"]
+
+[node name="TestWordle" type="Node"]
+script = ExtResource("1_script")

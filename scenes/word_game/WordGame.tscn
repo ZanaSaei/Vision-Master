@@ -1,0 +1,139 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/word_game.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://images/Back.png" id="2_back"]
+[ext_resource type="StyleBox" path="res://scenes/shared/HeaderBar.tres" id="3_header"]
+[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+
+[sub_resource type="LabelSettings" id="TitleSettings"]
+font = ExtResource("4_font")
+font_size = 55
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="BtnWordOfDay"]
+bg_color = Color(0.9607843, 0.6196079, 0.04313726, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[sub_resource type="StyleBoxFlat" id="BtnMeaning"]
+bg_color = Color(0.2313726, 0.509804, 0.9647059, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[sub_resource type="StyleBoxFlat" id="BtnSpelling"]
+bg_color = Color(0.1333333, 0.772549, 0.3686275, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[sub_resource type="StyleBoxFlat" id="BtnListening"]
+bg_color = Color(0.4862745, 0.227451, 0.9294118, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[node name="WordGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9372549, 0.9647059, 1, 1)
+
+[node name="HeaderBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 0.0
+offset_bottom = 320.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("3_header")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent"]
+layout_mode = 2
+icon = ExtResource("2_back")
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent"]
+layout_mode = 2
+text = "بازی با کلمات"
+label_settings = SubResource("TitleSettings")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = 400.0
+offset_right = -80.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 44
+
+[node name="WordOfDayButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("BtnWordOfDay")
+theme_override_styles/hover = SubResource("BtnWordOfDay")
+theme_override_styles/pressed = SubResource("BtnWordOfDay")
+text = "کلمه روز"
+
+[node name="MeaningButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("BtnMeaning")
+theme_override_styles/hover = SubResource("BtnMeaning")
+theme_override_styles/pressed = SubResource("BtnMeaning")
+text = "بازی معنی"
+
+[node name="SpellingButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("BtnSpelling")
+theme_override_styles/hover = SubResource("BtnSpelling")
+theme_override_styles/pressed = SubResource("BtnSpelling")
+text = "بازی املا"
+
+[node name="ListeningButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("BtnListening")
+theme_override_styles/hover = SubResource("BtnListening")
+theme_override_styles/pressed = SubResource("BtnListening")
+text = "بازی شنیداری"
+
