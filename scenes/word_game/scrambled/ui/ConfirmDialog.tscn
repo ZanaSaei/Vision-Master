@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/scrambled/ui/confirm_dialog.gd" id="1_script"]
+
+[node name="ConfirmDialog" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Scrim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.07, 0.55)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Card" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(860, 540)
+layout_mode = 2
+theme_type_variation = &"ScrambledDialogCard"
+
+[node name="Margin" type="MarginContainer" parent="Center/Card"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 34
+
+[node name="Column" type="VBoxContainer" parent="Center/Card/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Title" type="Label" parent="Center/Card/Margin/Column"]
+layout_mode = 2
+theme_type_variation = &"ScrambledDialogTitle"
+horizontal_alignment = 1
+
+[node name="Body" type="Label" parent="Center/Card/Margin/Column"]
+layout_mode = 2
+theme_type_variation = &"ScrambledDialogBody"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="Choices" type="HBoxContainer" parent="Center/Card/Margin/Column"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Stay" type="Button" parent="Center/Card/Margin/Column/Choices"]
+custom_minimum_size = Vector2(320, 112)
+layout_mode = 2
+theme_type_variation = &"ScrambledSafeButton"
+text = "ادامه می‌دهم"
+
+[node name="Leave" type="Button" parent="Center/Card/Margin/Column/Choices"]
+custom_minimum_size = Vector2(320, 112)
+layout_mode = 2
+theme_type_variation = &"ScrambledDangerButton"
+text = "خارج می‌شوم"

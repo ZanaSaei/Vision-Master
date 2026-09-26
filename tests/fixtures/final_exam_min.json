@@ -1,0 +1,18 @@
+{
+	"id": "test_exam",
+	"title_fa": "آزمون آزمایشی",
+	"subtitle_fa": "تست نمره‌دهی از ۴۰",
+	"audio": "",
+	"blocks": [
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b1",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "1", "question": "1. one", "options": ["a", "b", "c", "d"], "answer": 0 },
+				{ "id": "2", "question": "2. two", "options": ["a", "b", "c", "d"], "answer": 1 }
+			]
+		}
+	]
+}

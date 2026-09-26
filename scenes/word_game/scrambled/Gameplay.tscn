@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://cnax2x5j47l7i"]
 
-[ext_resource type="Script" path="res://scenes/word_game/scrambled/gameplay.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dt3jqw5hhr1s6" path="res://scenes/word_game/scrambled/gameplay.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/word_game/scrambled/ui/GameplayChips.tscn" id="2_chips"]
+[ext_resource type="PackedScene" path="res://scenes/word_game/scrambled/ui/GameplayTimer.tscn" id="3_timer"]
+[ext_resource type="PackedScene" path="res://scenes/word_game/scrambled/ui/GameplayActions.tscn" id="4_actions"]
+[ext_resource type="PackedScene" path="res://scenes/word_game/scrambled/ui/HintCard.tscn" id="5_card"]
+[ext_resource type="PackedScene" path="res://scenes/word_game/scrambled/TileBoard.tscn" id="6_board"]
+[ext_resource type="PackedScene" path="res://scenes/word_game/scrambled/ui/ConfettiBurst.tscn" id="7_confetti"]
+[ext_resource type="PackedScene" path="res://scenes/word_game/scrambled/ui/PraiseOverlay.tscn" id="8_praise"]
+[ext_resource type="PackedScene" path="res://scenes/word_game/scrambled/ui/ConfirmDialog.tscn" id="9_confirm"]
 
-[node name="Gameplay" type="Control"]
+[node name="Gameplay" type="Control" unique_id=1610362425]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,3 +18,74 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=27788021]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Layout" type="VBoxContainer" parent="." unique_id=1424489526]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 24.0
+offset_right = -34.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Chips" parent="Layout" unique_id=1497487625 instance=ExtResource("2_chips")]
+layout_mode = 2
+
+[node name="Timer" parent="Layout" unique_id=830500973 instance=ExtResource("3_timer")]
+layout_mode = 2
+
+[node name="MessageBand" type="Control" parent="Layout" unique_id=1944429545]
+custom_minimum_size = Vector2(0, 320)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="InstructionInset" type="MarginContainer" parent="Layout/MessageBand" unique_id=102058061]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Instruction" type="Label" parent="Layout/MessageBand/InstructionInset" unique_id=1402502832]
+layout_mode = 2
+theme_type_variation = &"ScrambledInstruction"
+text = "حروف را با انگشت بکش و کلمه را بساز"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HintCard" parent="Layout/MessageBand" unique_id=1717676937 instance=ExtResource("5_card")]
+
+[node name="Board" parent="Layout" unique_id=631999061 instance=ExtResource("6_board")]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Actions" parent="Layout" unique_id=534735772 instance=ExtResource("4_actions")]
+layout_mode = 2
+
+[node name="Confetti" parent="Layout" unique_id=259647300 instance=ExtResource("7_confetti")]
+
+[node name="PraiseOverlay" parent="." unique_id=1225729544 instance=ExtResource("8_praise")]
+layout_mode = 1
+
+[node name="ConfirmDialog" parent="." unique_id=1021753946 instance=ExtResource("9_confirm")]
+layout_mode = 1

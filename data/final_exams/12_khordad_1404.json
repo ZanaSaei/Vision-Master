@@ -1,0 +1,352 @@
+{
+	"id": "12_khordad_1404",
+	"title_fa": "امتحان نهایی — دوازدهم · خرداد ۱۴۰۴",
+	"subtitle_fa": "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید. نمره از ۴۰ محاسبه می‌شود.",
+	"audio": "res://assets/final_test/دوازدهم/خرداد ۱۴۰۴/khordad404.mp3",
+	"blocks": [
+		{ "type": "h4", "text": "Listening — بخش شنیداری" },
+		{
+			"type": "true_false",
+			"exercise_id": "b1a",
+			"points": 1.5,
+			"audio": "res://assets/final_test/دوازدهم/خرداد ۱۴۰۴/khordad404.mp3",
+			"show_audio": true,
+			"instruction": "به گفتگوی بین مجید و آقای ایرانمهر گوش دهید. سپس درستی یا نادرستی جمله‌های ۱ تا ۳ را مشخص کنید.",
+			"items": [
+				{ "id": "1", "statement": "1. Majid knows how to use a dictionary.", "answer": false },
+				{ "id": "2", "statement": "2. An elementary dictionary is suitable for high school students.", "answer": true },
+				{ "id": "3", "statement": "3. Majid prefers online dictionaries to pocket dictionaries.", "answer": false }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b1b",
+			"points": 1,
+			"instruction": "برای سوال‌های ۴ و ۵ گزینهٔ صحیح را انتخاب نمایید.",
+			"items": [
+				{ "id": "4", "question": "4. Mr. Iranmehr suggests using ………… .", "options": ["a. a bilingual dictionary", "b. a free online dictionary", "c. an advanced level dictionary", "d. a dictionary designed for native students"], "answer": 1 },
+				{ "id": "5", "question": "5. Based on what you heard, ………… .", "options": ["a. pocket dictionaries are usually expensive", "b. foreign students need to use advanced dictionaries", "c. there are many factors to consider when buying a dictionary", "d. monolingual dictionaries give word information in two languages"], "answer": 2 }
+			]
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b2",
+			"points": 2.5,
+			"audio": "res://assets/final_test/دوازدهم/خرداد ۱۴۰۴/khordad404.mp3",
+			"show_audio": true,
+			"instruction": "به گفتگوی بین رسول و امیر گوش دهید. سپس درستی یا نادرستی جمله‌های داده‌شده را مشخص کنید.",
+			"items": [
+				{ "id": "6", "statement": "6. The two friends wanted to eat in the new restaurant.", "answer": false },
+				{ "id": "7", "statement": "7. Rasoul and his family ordered soup instead of rice.", "answer": false },
+				{ "id": "8", "statement": "8. The restaurant had a special kind of sauce.", "answer": true },
+				{ "id": "9", "statement": "9. Rasoul tried pomegranate sauce before.", "answer": true },
+				{ "id": "10", "statement": "10. The food in the new restaurant was not expensive.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b3",
+			"points": 2,
+			"audio": "res://assets/final_test/دوازدهم/خرداد ۱۴۰۴/khordad404.mp3",
+			"show_audio": true,
+			"instruction": "به گفتگوی بین سارا و دوستش گوش دهید، سپس گزینهٔ صحیح را انتخاب نمایید.",
+			"items": [
+				{ "id": "11", "question": "11. What is the topic of the dialogue?", "options": ["a. Being lost in the city", "b. Acts of kindness to strangers", "c. Ways to make friends"], "answer": 1 },
+				{ "id": "12", "question": "12. Why is kindness to strangers important?", "options": ["a. It helps people learn about a new culture.", "b. It makes the strangers feel depressed.", "c. It can make someone happy and feel less alone."], "answer": 2 },
+				{ "id": "13", "question": "13. A small act of kindness can ………… .", "options": ["a. create a positive chain", "b. make someone famous", "c. solve someone's problems completely"], "answer": 0 },
+				{ "id": "14", "question": "14. When doing a small act of kindness to people, we must ………… .", "options": ["a. know them personally", "b. think about their needs", "c. understand what they are experiencing"], "answer": 1 }
+			]
+		},
+		{ "type": "h4", "text": "Vocabulary — واژگان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b4",
+			"points": 2,
+			"instruction": "برای هر تصویر، یکی از جمله‌های داده‌شده را انتخاب نمایید. (یک جمله اضافی است.)",
+			"items": [
+				{
+					"id": "15",
+					"image": "res://assets/final_exams/12_khordad_1404/q15.png",
+					"question": "15. Which sentence matches this picture?",
+					"options": [
+						"a. Ali's cellphone consumes a lot of electricity.",
+						"b. Some of its apps don't work properly today.",
+						"c. Whenever he can't figure out the problem, he puts his cellphone away.",
+						"d. He has decided to replace it with a modern one.",
+						"e. Now he's sitting on the sofa and checking online shops."
+					],
+					"answer": 4
+				},
+				{
+					"id": "16",
+					"image": "res://assets/final_exams/12_khordad_1404/q16.png",
+					"question": "16. Which sentence matches this picture?",
+					"options": [
+						"a. Ali's cellphone consumes a lot of electricity.",
+						"b. Some of its apps don't work properly today.",
+						"c. Whenever he can't figure out the problem, he puts his cellphone away.",
+						"d. He has decided to replace it with a modern one.",
+						"e. Now he's sitting on the sofa and checking online shops."
+					],
+					"answer": 1
+				},
+				{
+					"id": "17",
+					"image": "res://assets/final_exams/12_khordad_1404/q17.png",
+					"question": "17. Which sentence matches this picture?",
+					"options": [
+						"a. Ali's cellphone consumes a lot of electricity.",
+						"b. Some of its apps don't work properly today.",
+						"c. Whenever he can't figure out the problem, he puts his cellphone away.",
+						"d. He has decided to replace it with a modern one.",
+						"e. Now he's sitting on the sofa and checking online shops."
+					],
+					"answer": 2
+				},
+				{
+					"id": "18",
+					"image": "res://assets/final_exams/12_khordad_1404/q18.png",
+					"question": "18. Which sentence matches this picture?",
+					"options": [
+						"a. Ali's cellphone consumes a lot of electricity.",
+						"b. Some of its apps don't work properly today.",
+						"c. Whenever he can't figure out the problem, he puts his cellphone away.",
+						"d. He has decided to replace it with a modern one.",
+						"e. Now he's sitting on the sofa and checking online shops."
+					],
+					"answer": 0
+				}
+			]
+		},
+		{
+			"type": "word_bank",
+			"exercise_id": "b5",
+			"points": 1.5,
+			"instruction": "با استفاده از کلمات داده‌شده، مکالمهٔ زیر را کامل کنید. (یک کلمه اضافی است.)",
+			"word_bank": ["forever", "founded", "recommended", "physician"],
+			"items": [
+				{ "id": "19", "text": "19. Did you know that Dr. Gharib ………… the first children's medical center in Tehran?", "answer": "founded" },
+				{ "id": "20", "text": "20. Sure, he was also a dedicated ………… .", "answer": "physician" },
+				{ "id": "21", "text": "21. Not surprisingly, people will remember him ………… .", "answer": "forever" }
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b6",
+			"points": 2,
+			"instruction": "برای هر کلمهٔ مشخص‌شده از ستون A، تعریف مناسبی از ستون B انتخاب کنید. (یک گزینه در ستون B اضافی است.)",
+			"options": [
+				"a. the amount of a product people want",
+				"b. a lack of success in doing something",
+				"c. a book in which you record what has happened every day",
+				"d. many different types of things or people",
+				"e. to suddenly decide to do something"
+			],
+			"items": [
+				{ "id": "22", "text": "22. While I was travelling, I kept a diary every day. (diary)", "answer": "c. a book in which you record what has happened every day" },
+				{ "id": "23", "text": "23. He jumped into using the dictionary without understanding the pronunciation guide. (jumped into)", "answer": "e. to suddenly decide to do something" },
+				{ "id": "24", "text": "24. The demand for solar energy is increasing. (demand)", "answer": "a. the amount of a product people want" },
+				{ "id": "25", "text": "25. You can order a variety of seafood in this restaurant. (variety)", "answer": "d. many different types of things or people" }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b7",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "26", "question": "26. Despite playing badly this time, the team ………… to win the league.", "options": ["a. deserved", "b. received", "c. created", "d. discovered"], "answer": 0 },
+				{ "id": "27", "question": "27. I needed more sunlight while painting. That's why I have ………… the balcony into a small office.", "options": ["a. applied", "b. converted", "c. transmitted", "d. suggested"], "answer": 1 },
+				{ "id": "28", "question": "28. B: Why don't you wear your warm jacket? It's spring and the weather is highly ………… .", "options": ["a. invisible", "b. comfortable", "c. valuable", "d. changeable"], "answer": 3 },
+				{ "id": "29", "question": "29. \"All people might experience ………… , but the first step to success is to accept it\", my father once said.", "options": ["a. radiation", "b. failure", "c. vibration", "d. heritage"], "answer": 1 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b8",
+			"points": 0.5,
+			"instruction": "جملهٔ ناقص زیر را با دانش زبانی خود کامل کنید. (اولین حرف کلمه داده شده است.)",
+			"items": [
+				{ "id": "30", "text": "30. After about an hour in the gym, your body starts to a______ protein. (starts with a, 6 letters)", "answer": ["absorb", "accept"] }
+			]
+		},
+		{ "type": "h4", "text": "Grammar — دستور زبان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b9",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "31", "question": "31. They know that you're right, but this idea will never help them, ………… ?", "options": ["a. won't it", "b. aren't you", "c. will it", "d. don't they"], "answer": 2 },
+				{ "id": "32", "question": "32. Divan-e-Hafez ………… into many countless languages since the 20th century.", "options": ["a. translates", "b. translated", "c. was translated", "d. has been translated"], "answer": 3 },
+				{ "id": "33", "question": "33. B: I ………… more money if I ………… you.", "options": ["a. saved / was", "b. saved / were", "c. would save / were", "d. saved / would be"], "answer": 2 },
+				{ "id": "34", "question": "34. Mina and her classmates bought some student books ………… their teacher suggested.", "options": ["a. which", "b. who", "c. whom", "d. what"], "answer": 0 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b10",
+			"points": 2,
+			"instruction": "شکل صحیح فعل‌های داخل پرانتز را در جاهای خالی بنویسید.",
+			"items": [
+				{ "id": "35", "text": "35. When I got home, my son ______ already fallen asleep. (to fall)", "answer": ["had"] },
+				{ "id": "36", "text": "36. What would you do if you ______ lost in a foreign country? (to get)", "answer": ["got"] },
+				{ "id": "37", "text": "37. In big cities, the traffic rules ______ by everyone. (must / obey)", "answer": ["must be obeyed"] },
+				{ "id": "38", "text": "38. Their father often ______ two pieces of pizza for lunch on the weekend, doesn't he? (to have)", "answer": ["has"] }
+			]
+		},
+		{
+			"type": "sentence_ordering",
+			"exercise_id": "b11",
+			"points": 2,
+			"instruction": "کلمه‌های در هم ریخته را به جملهٔ معنادار تبدیل کنید.",
+			"items": [
+				{
+					"id": "39",
+					"question": "39. (to landfill / by workers / should / taken / garbage / be / ?)",
+					"words": ["to landfill", "by workers", "should", "taken", "garbage", "be", "?"],
+					"answer": ["should", "garbage", "be", "taken", "to landfill", "by workers", "?"]
+				},
+				{
+					"id": "40",
+					"question": "40. (Vahid met / whom / the patient / before / talked / to the doctor / .)",
+					"words": ["Vahid met", "whom", "the patient", "before", "talked", "to the doctor", "."],
+					"answer": ["the patient", "talked", "to the doctor", "whom", "Vahid met", "before", "."]
+				}
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b12",
+			"points": 2,
+			"instruction": "مکالمه‌ها را کامل کنید.",
+			"items": [
+				{ "id": "41", "text": "41. Behzad: We ______ three days off.", "answer": ["have been given", "have got", "have gotten", "have had", "have taken", "got"] },
+				{ "id": "42", "text": "42. Behzad: If we were free for two weeks, ______ . (to travel)", "answer": ["we would travel", "we could travel", "we might travel"], "required_words": ["travel"] }
+			]
+		},
+		{ "type": "h4", "text": "Reading — درک مطلب" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b13",
+			"points": 1.5,
+			"instruction": "با توجه به مفهوم هر متن، گزینهٔ مناسب را انتخاب کنید.",
+			"items": [
+				{ "id": "43", "question": "43. (Asadi Tusi and Loghat-e-Fors) Which is correct?", "options": ["a. Loghat-e-Fors has no special arrangement of the words.", "b. Young poets use synonyms and explanations in Loghat-e-Fors.", "c. The poets after Asadi Tusi didn't know how to use his dictionary.", "d. Loghat-e-Fors only contains the words that young poets wrote first."], "answer": 1 },
+				{ "id": "44", "question": "44. When you get money quickly, like by winning it, it's easy to spend it or lose it quickly as well. In this case, people usually say, \"…………\".", "options": ["a. Easy come, easy go", "b. Two heads are better than one", "c. Money does not grow on trees", "d. Absence makes the heart grow fonder"], "answer": 0 },
+				{ "id": "45", "question": "45. (Oceans and lakes) Which is correct?", "options": ["a. Lakes surround lands.", "b. Oceans and lakes are totally different.", "c. Lakes have salt water.", "d. Oceans are large bodies of water around continents."], "answer": 3 }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Elderly people have to deal with the problems of aging, especially those related to health and income. Health-related issues commonly include normal losses of hearing, eyesight and memory. In addition, the elderly run a high risk of developing some serious illnesses such as kidney problem, stomach cancer, diabetes, and heart disease. While some people do not experience these issues until very old age, a lot of them learn to find a way to live with the limitations caused by health problems. Nowadays, elderly people receive better medical care during their lives as most governments have national health plans for them.\nIncome, as another important problem, has also influenced the way the elderly live. Most of these people are retired and do not work anymore. They usually earn about half the money that working people make. As a result, they may face various economic issues. This makes the situation even more difficult for those who do not have suitable houses, have no access to means of transportation and not receive social services. Something needs to be done to improve their condition so that they feel more hopeful about the future. They will find it difficult to keep their social relationships. Providing better medical care and meeting their money-related needs will help them live a happy life."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b14a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "46", "statement": "46. National health plans offer the elderly better medical care.", "answer": true },
+				{ "id": "47", "statement": "47. Keeping social relationships is hard in old age.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b14b",
+			"points": 1,
+			"instruction": "به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "48", "question": "48. What are the two main problems of getting old?", "options": ["a. experience and social services", "b. health and income", "c. cancer and sickness", "d. limitations and retirement"], "answer": 1 },
+				{ "id": "49", "question": "49. Many elderly people deal with health-related problems by ………… .", "options": ["a. being socially less active", "b. not working any more", "c. having several economic issues", "d. getting help from their government"], "answer": 3 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b14c",
+			"points": 1,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "50", "text": "50. What serious health-related problems do the elderly face?", "answer": ["kidney problem, stomach cancer, diabetes, and heart disease"], "required_words": ["cancer"] },
+				{ "id": "51", "text": "51. How much do retired people earn?", "answer": ["about half the money that working people make"], "required_words": ["half"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Electric cars will make gasoline cars less popular in the future. Electric cars use electricity that is stored in car batteries and do not use any types of fossil fuels. Hence, they are environmentally friendly. These cars have 12 or 24 batteries which might be similar to the batteries you can find in flashlights or in regular gasoline cars but are completely different from cellular batteries. To get these batteries ready to roll, you have to charge them just the way you charge the portable devices you carry around every day such as your cellphone, digital camera or laptop. You can recharge these batteries either at home or at gas stations. Car engineers are trying to use batteries that hold more energy and last longer. Until such batteries are available in the market, hybrid cars can be very helpful. Hybrid cars run partly on gasoline and partly on electricity. Many people believe hybrid cars can help reduce air pollution because they offer the benefits of gasoline engines and electric motors. Therefore, they can meet different goals such as better fuel economy or more power."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b15a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "52", "statement": "52. Electric cars have batteries which are like cellular batteries.", "answer": false },
+				{ "id": "53", "statement": "53. You need to recharge your electric car only at gas stations.", "answer": false }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b15b",
+			"points": 1.5,
+			"instruction": "به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "54", "question": "54. What does \"they\" in the third line refer to?", "options": ["a. electric cars", "b. batteries", "c. fossil fuels"], "answer": 0 },
+				{ "id": "55", "question": "55. The word \"portable\" in line 4 is similar in meaning to ………… .", "options": ["a. rechargeable", "b. suitable", "c. moveable"], "answer": 2 },
+				{ "id": "56", "question": "56. Electric cars are environmentally friendly because of ………… .", "options": ["a. using a lot of gasoline", "b. not polluting the air", "c. being available in the market"], "answer": 1 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b15c",
+			"points": 2,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "57", "text": "57. What types of fuels can hybrid cars use?", "answer": ["gasoline and electricity"], "required_words": ["gasoline"] },
+				{ "id": "58", "text": "58. What are car engineers trying to do?", "answer": ["use batteries that hold more energy and last longer"], "required_words": ["batteries"] }
+			]
+		},
+		{ "type": "h4", "text": "Writing — نوشتار" },
+		{
+			"type": "word_bank",
+			"exercise_id": "b16",
+			"points": 1.5,
+			"instruction": "جمله‌های ناقص زیر را با کلمه‌های ربط (and / or / but / so) کامل کنید. (یک کلمهٔ ربط اضافی است.)",
+			"word_bank": ["and", "or", "but", "so"],
+			"items": [
+				{ "id": "59", "text": "59. Whenever they find a sweet lying on the floor, they stick to the sweet ………… carry it to their home.", "answer": "and" },
+				{ "id": "60", "text": "60. They are usually wingless, ………… they develop wings when they reproduce.", "answer": "but" },
+				{ "id": "61", "text": "61. They live in groups or colonies, ………… they are social insects.", "answer": "so" }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b17",
+			"points": 1.5,
+			"instruction": "با توجه به تصویر و دانش زبانی، یک جملهٔ مرکب بنویسید.",
+			"items": [
+				{ "id": "62", "text": "62. In our town, people usually ride their bicycles, ………… to work.", "answer": ["or drive their cars", "or drive their car", "or use their cars", "so they don't drive to work", "so they don't drive their cars"] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b18",
+			"points": 2,
+			"instruction": "با توجه به پاراگراف داده‌شده، به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "63", "text": "63. The topic sentence of the paragraph is ………… .", "answer": ["saving electricity seems very essential these days"] },
+				{ "id": "64", "text": "64. The supporting sentences of the paragraph ………… .", "answer": ["explain the idea in the topic sentence", "give reasons"] },
+				{ "id": "65", "text": "65. Write a concluding sentence for the paragraph.", "answer": ["saving electricity is important to everyone"], "required_words": ["electric"] }
+			]
+		},
+		{
+			"type": "open_ended",
+			"exercise_id": "b19",
+			"points": 0,
+			"instruction": "یک پاراگراف با قالب صحیح با موضوع Pollution بنویسید. (topic + حداقل سه supporting + concluding)",
+			"items": [
+				{ "id": "66", "question": "66. Pollution …………  (A serious problem in the world · Air and water pollution · Causing diseases · Destroying nature)", "sample_answer": "Pollution is a serious problem in the world. Air and water pollution are causing diseases and destroying nature. It also harms animals and plants. In short, we must act to reduce pollution." }
+			]
+		}
+	]
+}

@@ -1,21 +1,18 @@
 extends "res://autoload/BackButtonHandler.gd"
 # ============================================================
 # WORD GAME HUB — بازی با کلمات
-# Entry hub for the four word-based game modes:
-#   کلمه روز / بازی معنی / بازی املا / بازی شنیداری
+# Entry hub for the three word-based game modes:
+#   کلمه روز / بازی معنی / بازی املا
 # ============================================================
 
 const SCENE_MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_WORD_OF_DAY := "res://scenes/word_game/WordOfDay.tscn"
-const SCENE_MEANING := "res://scenes/word_game/MeaningGame.tscn"
+const SCENE_MEANING := "res://scenes/word_game/MeaningQuiz.tscn"
 const SCENE_SPELLING := "res://scenes/word_game/SpellingGame.tscn"
-const SCENE_LISTENING := "res://scenes/word_game/ListeningGame.tscn"
-
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var word_of_day_button: Button = $Content/WordOfDayButton
 @onready var meaning_button: Button = $Content/MeaningButton
 @onready var spelling_button: Button = $Content/SpellingButton
-@onready var listening_button: Button = $Content/ListeningButton
 
 var _pulse_tween: Tween = null
 
@@ -25,7 +22,6 @@ func _ready() -> void:
 	word_of_day_button.pressed.connect(_on_word_of_day_pressed)
 	meaning_button.pressed.connect(_on_meaning_pressed)
 	spelling_button.pressed.connect(_on_spelling_pressed)
-	listening_button.pressed.connect(_on_listening_pressed)
 	_wire_button_animations()
 
 
@@ -35,7 +31,7 @@ func _ready() -> void:
 ## Hover-lift / press-squash micro-interactions (same design language as
 ## the main-menu cards) on every game-mode button.
 func _wire_button_animations() -> void:
-	for btn: Button in [word_of_day_button, meaning_button, spelling_button, listening_button]:
+	for btn: Button in [word_of_day_button, meaning_button, spelling_button]:
 		MenuStyle.wire_microinteractions(btn)
 	_play_entrance_animation()
 
@@ -43,7 +39,7 @@ func _wire_button_animations() -> void:
 ## Staggered entrance: each button fades in and rises from slightly below,
 ## then pops (TRANS_BACK) — mirrors the main menu's intro feel.
 func _play_entrance_animation() -> void:
-	var buttons: Array[Button] = [word_of_day_button, meaning_button, spelling_button, listening_button]
+	var buttons: Array[Button] = [word_of_day_button, meaning_button, spelling_button]
 	for btn in buttons:
 		btn.modulate.a = 0.0
 		btn.position.y += 40.0
@@ -113,8 +109,4 @@ func _on_meaning_pressed() -> void:
 
 func _on_spelling_pressed() -> void:
 	TransitionManager.change_scene(SCENE_SPELLING)
-
-
-func _on_listening_pressed() -> void:
-	TransitionManager.change_scene(SCENE_LISTENING)
 

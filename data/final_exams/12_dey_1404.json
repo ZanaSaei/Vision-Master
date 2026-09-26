@@ -1,0 +1,337 @@
+{
+	"id": "12_dey_1404",
+	"title_fa": "امتحان نهایی — دوازدهم · دی ۱۴۰۴",
+	"subtitle_fa": "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید. نمره از ۴۰ محاسبه می‌شود.",
+	"audio": "res://assets/final_test/دوازدهم/دی ۱۴۰۴/dey404.mp3",
+	"blocks": [
+		{ "type": "h4", "text": "Listening — بخش شنیداری" },
+		{
+			"type": "true_false",
+			"exercise_id": "b1",
+			"points": 2,
+			"audio": "res://assets/final_test/دوازدهم/دی ۱۴۰۴/dey404.mp3",
+			"show_audio": true,
+			"instruction": "به مکالمهٔ بین رویا و مینا گوش دهید و درستی یا نادرستی جمله‌های زیر را مشخص کنید.",
+			"items": [
+				{ "id": "1", "statement": "1. Roya and Mina are going to the gym on Wednesday.", "answer": false },
+				{ "id": "2", "statement": "2. Mina won't go to the gym with them.", "answer": true },
+				{ "id": "3", "statement": "3. Roya wants to know which sports Mina likes.", "answer": true },
+				{ "id": "4", "statement": "4. Mina does not prefer playing chess.", "answer": false }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b2",
+			"points": 3,
+			"audio": "res://assets/final_test/دوازدهم/دی ۱۴۰۴/dey404.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی گوش دهید. سپس گزینهٔ صحیح را انتخاب نمایید.",
+			"items": [
+				{ "id": "5", "question": "5. A dictionary does not give information about …………", "options": ["a. poems", "b. spellings", "c. pronunciations"], "answer": 0 },
+				{ "id": "6", "question": "6. To put words in sentences …………, learners can use a dictionary.", "options": ["a. essentially", "b. completely", "c. correctly"], "answer": 2 },
+				{ "id": "7", "question": "7. Based on what you heard, which type of dictionary is not mentioned?", "options": ["a. general dictionary", "b. pocket dictionary", "c. learner's dictionary"], "answer": 1 },
+				{ "id": "8", "question": "8. The first step in choosing the right dictionary is …………", "options": ["a. looking for definitions", "b. identifying your needs", "c. reading the introduction"], "answer": 1 }
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b3",
+			"points": 2,
+			"audio": "res://assets/final_test/دوازدهم/دی ۱۴۰۴/dey404.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی با دقت گوش دهید. سپس عبارات ستون A را با ستون B تطبیق دهید. (یک عبارت از ستون B اضافی است.)",
+			"options": [
+				"a. harms animals and plants.",
+				"b. keep rivers clean.",
+				"c. are main sources of energy.",
+				"d. we can decrease air pollution.",
+				"e. using it less in daily life."
+			],
+			"items": [
+				{ "id": "9", "text": "9. Saving energy is defined as …………", "answer": "e. using it less in daily life." },
+				{ "id": "10", "text": "10. Coal, oil and gas …………", "answer": "c. are main sources of energy." },
+				{ "id": "11", "text": "11. By using less energy …………", "answer": "d. we can decrease air pollution." },
+				{ "id": "12", "text": "12. Besides the earth, air pollution …………", "answer": "a. harms animals and plants." }
+			]
+		},
+		{ "type": "h4", "text": "Vocabulary — واژگان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b4",
+			"points": 2,
+			"instruction": "برای هر تصویر، یکی از جمله‌های داده‌شده را انتخاب کنید. (یک جمله اضافی است.)",
+			"items": [
+				{
+					"id": "13",
+					"image": "res://assets/final_exams/12_dey_1404/q13.png",
+					"question": "13. Which sentence matches this picture?",
+					"options": [
+						"a. We have to take care of elderly people.",
+						"b. Once you find an entry for a word, you can check its part of speech.",
+						"c. Water is a kind of renewable energy.",
+						"d. My little sister feeds the pigeons everyday.",
+						"e. The word \"nuclear\" is related to the central part of an atom."
+					],
+					"answer": 1
+				},
+				{
+					"id": "14",
+					"image": "res://assets/final_exams/12_dey_1404/q14.png",
+					"question": "14. Which sentence matches this picture?",
+					"options": [
+						"a. We have to take care of elderly people.",
+						"b. Once you find an entry for a word, you can check its part of speech.",
+						"c. Water is a kind of renewable energy.",
+						"d. My little sister feeds the pigeons everyday.",
+						"e. The word \"nuclear\" is related to the central part of an atom."
+					],
+					"answer": 4
+				},
+				{
+					"id": "15",
+					"image": "res://assets/final_exams/12_dey_1404/q15.png",
+					"question": "15. Which sentence matches this picture?",
+					"options": [
+						"a. We have to take care of elderly people.",
+						"b. Once you find an entry for a word, you can check its part of speech.",
+						"c. Water is a kind of renewable energy.",
+						"d. My little sister feeds the pigeons everyday.",
+						"e. The word \"nuclear\" is related to the central part of an atom."
+					],
+					"answer": 0
+				},
+				{
+					"id": "16",
+					"image": "res://assets/final_exams/12_dey_1404/q16.png",
+					"question": "16. Which sentence matches this picture?",
+					"options": [
+						"a. We have to take care of elderly people.",
+						"b. Once you find an entry for a word, you can check its part of speech.",
+						"c. Water is a kind of renewable energy.",
+						"d. My little sister feeds the pigeons everyday.",
+						"e. The word \"nuclear\" is related to the central part of an atom."
+					],
+					"answer": 2
+				}
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b5",
+			"points": 2,
+			"instruction": "برای هر کلمه از ستون A یک تعریف از ستون B انتخاب کنید. (یک تعریف در ستون B اضافی است.)",
+			"options": [
+				"a. in a quiet way",
+				"b. organize and put in order",
+				"c. to be grateful for",
+				"d. to be worthy",
+				"e. forgetting those who are no longer present"
+			],
+			"items": [
+				{ "id": "17", "text": "17. We need to care for our parents because they deserve it. (deserve)", "answer": "d. to be worthy" },
+				{ "id": "18", "text": "18. The list of students is arranged alphabetically. (arranged)", "answer": "b. organize and put in order" },
+				{ "id": "19", "text": "19. Out of sight, out of mind.", "answer": "e. forgetting those who are no longer present" },
+				{ "id": "20", "text": "20. Our English teacher always speaks slowly and calmly. (calmly)", "answer": "a. in a quiet way" }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b6",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "21", "question": "21. A: What does CD ………… ? B: Compact Disk, I think.", "options": ["a. ask for", "b. pay for", "c. use up", "d. stand for"], "answer": 3 },
+				{ "id": "22", "question": "22. B: Too many abbreviations in the text have made it ………… .", "options": ["a. incomprehensible", "b. comprehension", "c. incomprehensibly", "d. comprehend"], "answer": 0 },
+				{ "id": "23", "question": "23. B: It is the energy that comes from ………… and can be used to heat our homes.", "options": ["a. wind", "b. sunshine", "c. tide", "d. fossil fuels"], "answer": 1 },
+				{ "id": "24", "question": "24. B: He is OK. I have just taken his ………… .", "options": ["a. flu", "b. pain", "c. disease", "d. temperature"], "answer": 3 }
+			]
+		},
+		{
+			"type": "word_bank",
+			"exercise_id": "b7",
+			"points": 2,
+			"instruction": "با استفاده از کلمات داده‌شده، جمله‌ها را کامل کنید. (یک کلمه اضافی است.)",
+			"word_bank": ["demands", "suppose", "contains", "forever", "repeatedly"],
+			"items": [
+				{ "id": "25", "text": "25. I have told you ………… to fit some regular exercise into your daily plan.", "answer": "repeatedly" },
+				{ "id": "26", "text": "26. I ………… running is more suitable for me.", "answer": "suppose" },
+				{ "id": "27", "text": "27. It ………… a lot of calories to run fast.", "answer": "demands" },
+				{ "id": "28", "text": "28. I hope I can continue exercising to remain fit ………… .", "answer": "forever" }
+			]
+		},
+		{ "type": "h4", "text": "Grammar — دستور زبان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b8",
+			"points": 2.5,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "29", "question": "29. B: I think he is working on a new project, ………… ?", "options": ["a. does he", "b. doesn't he", "c. is he", "d. isn't he"], "answer": 3 },
+				{ "id": "30", "question": "30. B: No, I ………… lunch before I came here.", "options": ["a. have eaten", "b. was eaten", "c. had eaten", "d. would eat"], "answer": 2 },
+				{ "id": "31", "question": "31. B: Yes, it ………… by my grandfather many years ago.", "options": ["a. was founded", "b. had founded", "c. was found", "d. has founded"], "answer": 0 },
+				{ "id": "32", "question": "32. B: If I were you, I ………… an elementary one.", "options": ["a. will buy", "b. would buy", "c. bought", "d. was bought"], "answer": 1 },
+				{ "id": "33", "question": "33. A: My uncle ………… works in the bank is coming to dinner.", "options": ["a. which", "b. whom", "c. what", "d. who"], "answer": 3 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b9",
+			"points": 1.5,
+			"instruction": "شکل صحیح افعال داخل پرانتز را در جاهای خالی بنویسید.",
+			"items": [
+				{ "id": "34", "text": "34. Big cities are polluted in winter. Something ______ or many people will become sick. (should / do)", "answer": ["should be done"] },
+				{ "id": "35", "text": "35. I think my mother ______ to check her health condition soon, won't she? (to need)", "answer": ["will need"] }
+			]
+		},
+		{
+			"type": "sentence_ordering",
+			"exercise_id": "b10",
+			"points": 2,
+			"instruction": "با مرتب کردن عبارات داخل پرانتز، مکالمه‌های زیر را کامل کنید.",
+			"items": [
+				{
+					"id": "36",
+					"question": "36. Yes, this Persian dictionary ______ was written by him. (published / has been / which / many times)",
+					"words": ["published", "has been", "which", "many times"],
+					"answer": ["which", "has been", "published", "many times"]
+				},
+				{
+					"id": "37",
+					"question": "37. Sadly, when I arrived there, ______ . (she / already / left / had)",
+					"words": ["she", "already", "left", "had"],
+					"answer": ["she", "had", "already", "left"]
+				}
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b11",
+			"points": 2,
+			"instruction": "در هر یک از مکالمه‌های زیر شکل صحیح گرامری بخش مشخص‌شده را بنویسید.",
+			"items": [
+				{ "id": "38", "text": "38. If he got a better job, he ______ more money. (will earn)", "answer": ["would earn"] },
+				{ "id": "39", "text": "39. A new medicine has been ______ for cancer. (discover)", "answer": ["discovered"] },
+				{ "id": "40", "text": "40. If we ______ enough money, we could buy another car. (have)", "answer": ["had"] },
+				{ "id": "41", "text": "41. Persian is ______ in Iran, Tajikistan and Afghanistan. (speak)", "answer": ["spoken"] }
+			]
+		},
+		{ "type": "h4", "text": "Reading — درک مطلب" },
+		{
+			"type": "passage",
+			"passage": "Have you ever thought about the importance of listening to elders? In fact, children need to listen to them for several reasons. First, they are our first teachers who teach us how to love, how to care, how to forgive and how to accept. Second, elders have more knowledge and wisdom than their children. If children learn from their wisdom, their life quality will improve. Third, by facing many ups and downs in life, they have gained valuable experience that is worth respecting and learning from.\nAnother important point we can learn from the elders is about our heritage and culture. This helps us to be proud of our past. Knowing about our traditional beliefs and culture brings us a sense of belonging, identity of our past and the responsibility to protect them for our future generations. To add more, our parents have learned, created or have been brought up with a set of moral values and principles which have made them successful in life. Gaining knowledge of these factors can create a set of guidelines that are important for their children's life. In conclusion, the experience that elders have gained through years is a valuable treasure for next generation."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b12a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "42", "statement": "42. Valuable experience is gained through facing ups and downs in life.", "answer": true },
+				{ "id": "43", "statement": "43. Elders have no information about our heritage and culture.", "answer": false }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b12b",
+			"points": 2,
+			"instruction": "جمله را کامل کنید و به سوال پاسخ دهید.",
+			"items": [
+				{ "id": "44", "text": "44. By learning from elders' wisdom, children will improve ………… .", "answer": ["their life quality", "the quality of their life"] },
+				{ "id": "45", "text": "45. What does learning about our traditional beliefs and culture bring us?", "answer": ["a sense of belonging, identity of our past and the responsibility to protect them for our future generations"], "required_words": ["belonging"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Expanding vocabulary is necessary for communication and understanding. But what are some useful ways to achieve that? First, reading is a fantastic way to improve our vocabulary. This is possible by reading books, newspapers and checking the meaning of unfamiliar words in a dictionary. In this way, learners can understand the text better and remember the new words for future use. The second important technique to improve vocabulary is watching English movies. By doing this, learners can practice both listening and speaking skills. Third, they can write down unknown words they face for the first time in their notebook and look them up later. Lastly, to make learning vocabulary more effective, learners can use labeling as a strategy to name objects around their house. By writing the names of objects on small pieces of paper and sticking the notes to things such as a desk, window or fridge, learners can see words around them again and again. These are just some important ways to improve learners' vocabulary."
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b13",
+			"points": 3,
+			"instruction": "متن بالا را بخوانید، سپس جدول را کامل کنید (Scan the text).",
+			"items": [
+				{ "id": "46", "text": "46. A synonym for the word \"expand\":", "answer": ["improve"] },
+				{ "id": "47", "text": "47. How many ways there are to learn more vocabulary:", "answer": ["4", "four"] },
+				{ "id": "48", "text": "48. A phrase similar in meaning to \"many times\":", "answer": ["again and again"] },
+				{ "id": "49", "text": "49. What \"them\" in line 7 refers to:", "answer": ["unknown words", "words"] },
+				{ "id": "50", "text": "50. The technique that listening and speaking skills are practiced by:", "answer": ["watching English movies", "English movies"] },
+				{ "id": "51", "text": "51. The name of the technique by which learners stick notes to objects:", "answer": ["labeling", "labelling"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Sending emails, watching online videos and downloading music may seem harmless, but our online habits have a surprising impact on the environment. The impact of our online activities on the internet is called \"Internet Pollution\".\nRecently, the Internet has become a large part of our lives. According to some estimates, more than five billion people were online in 2022 — that's more than 60 percent of world's population. This number continues to grow rapidly as more people go online every year. This means that a large amount of data is stored in computers everyday which requires connecting more and more devices to the Internet. This leads to processing a huge amount of data and powering a large number of devices which can cause serious challenges for the environment.\nHowever, there are some ways to protect the environment against the Internet Pollution. Since people are not aware of the amount of energy they waste by their online habits, teaching them how to use the Internet wisely is helpful. Also, developing technologies that help reduce energy consumption of our devices is another way. This can be done by using clean energy sources. Google, for example, uses solar panels and wind farms to power its data centers."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b14a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "52", "statement": "52. The Internet has always been a large part of our lives.", "answer": false },
+				{ "id": "53", "statement": "53. Google data centers use clean energy sources.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b14b",
+			"points": 1,
+			"instruction": "به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "54", "question": "54. The passage is mainly about ………… .", "options": ["a. developing technologies", "b. Internet Pollution", "c. sending emails", "d. clean energy"], "answer": 1 },
+				{ "id": "55", "question": "55. The word \"grow\" in paragraph 2 is closest in meaning to ………… .", "options": ["a. increase", "b. create", "c. decrease", "d. replace"], "answer": 0 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b14c",
+			"points": 2,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "56", "text": "56. What can cause serious problems to the environment?", "answer": ["processing a huge amount of data and powering a large number of devices"], "required_words": ["data"] },
+				{ "id": "57", "text": "57. What are the two ways to protect environment against Internet Pollution?", "answer": ["teaching people how to use the Internet wisely and developing technologies that help reduce energy consumption"], "required_words": ["internet"] }
+			]
+		},
+		{ "type": "h4", "text": "Writing — نوشتار" },
+		{
+			"type": "word_bank",
+			"exercise_id": "b15",
+			"points": 1.5,
+			"instruction": "متن ناقص زیر را با کلمات ربط (but / or / and / so) کامل کنید. (یک کلمهٔ ربط اضافی است.)",
+			"word_bank": ["but", "or", "and", "so"],
+			"items": [
+				{ "id": "58", "text": "58. Last Monday morning, the streets of the town were covered by snow, ………… the weather wasn't very cold.", "answer": "but" },
+				{ "id": "59", "text": "59. Some of the students were waiting for the school bus at the bus stop ………… they were talking about the snow.", "answer": "and" },
+				{ "id": "60", "text": "60. After a while, they got a message that all the schools were closed, ………… they left the bus stop and went back home.", "answer": "so" }
+			]
+		},
+		{
+			"type": "open_ended",
+			"exercise_id": "b16",
+			"points": 0,
+			"instruction": "برای پاراگراف زیر یک جملهٔ موضوعی (topic sentence) و یک جملهٔ نتیجه‌گیری (concluding sentence) بنویسید.",
+			"items": [
+				{ "id": "61", "question": "61. Topic sentence: Hafez …………", "sample_answer": "Hafez is a famous Persian poet." },
+				{ "id": "62", "question": "62. Concluding sentence: Therefore, …………", "sample_answer": "Hafez is one of the best poets of all time." }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b17",
+			"points": 0.5,
+			"instruction": "در پاراگراف زیر، یک جملهٔ پشتیبان که با جملهٔ موضوعی هم‌خوانی ندارد را پیدا کرده و بنویسید.",
+			"items": [
+				{ "id": "63", "text": "63. (Topic: The nature and wildlife of Iran are unique.) The mismatching sentence is:", "answer": ["One of my friends is a tourist from China."], "required_words": ["tourist"] }
+			]
+		},
+		{
+			"type": "open_ended",
+			"exercise_id": "b18",
+			"points": 0,
+			"instruction": "با استفاده از تمام عبارات داده‌شده، یک پاراگراف با موضوع Persian Gulf بنویسید. (topic + supporting + concluding)",
+			"items": [
+				{ "id": "64", "question": "64. Persian Gulf …………  (be considered the most important sea in Asia · be surrounded by Iran and some Arab countries · large sea in the south of Iran · rich in natural resources)", "sample_answer": "The Persian Gulf is a large sea in the south of Iran. It is considered the most important sea in Asia and is surrounded by Iran and some Arab countries. It is also rich in natural resources. In short, the Persian Gulf is very important for our country." }
+			]
+		}
+	]
+}

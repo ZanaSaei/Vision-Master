@@ -1,0 +1,347 @@
+{
+	"id": "12_shahrivar_1404",
+	"title_fa": "امتحان نهایی — دوازدهم · شهریور ۱۴۰۴",
+	"subtitle_fa": "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید. نمره از ۴۰ محاسبه می‌شود.",
+	"audio": "res://assets/final_test/دوازدهم/شهریور ۱۴۰۴/shahrivar404.mp3",
+	"blocks": [
+		{ "type": "h4", "text": "Listening — بخش شنیداری" },
+		{
+			"type": "true_false",
+			"exercise_id": "b1",
+			"points": 2,
+			"audio": "res://assets/final_test/دوازدهم/شهریور ۱۴۰۴/shahrivar404.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی با دقت گوش دهید، سپس جمله‌های صحیح را با True و جمله‌های غلط را با False مشخص نمایید.",
+			"items": [
+				{ "id": "1", "statement": "1. The picnic was great.", "answer": true },
+				{ "id": "2", "statement": "2. They played volleyball, but they didn't have a barbecue.", "answer": false },
+				{ "id": "3", "statement": "3. They played volleyball, then they took some photographs.", "answer": false },
+				{ "id": "4", "statement": "4. After eating lunch, they flew their kites.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b2",
+			"points": 2,
+			"audio": "res://assets/final_test/دوازدهم/شهریور ۱۴۰۴/shahrivar404.mp3",
+			"show_audio": true,
+			"instruction": "به مکالمهٔ زیر با دقت گوش دهید و سپس گزینهٔ صحیح را انتخاب نمایید.",
+			"items": [
+				{ "id": "5", "question": "5. How long has Sara been in the medical center?", "options": ["a. one year", "b. one month", "c. one week"], "answer": 2 },
+				{ "id": "6", "question": "6. Dr. Gharib was born in Tehran in …………", "options": ["a. 2008", "b. 1288", "c. 2018"], "answer": 1 },
+				{ "id": "7", "question": "7. What did Dr. Gharib do in 1347?", "options": ["a. received his diploma", "b. went abroad", "c. founded the center"], "answer": 2 },
+				{ "id": "8", "question": "8. He was a/an ………… man who spared no pains to cure sick children.", "options": ["a. generous", "b. religious", "c. quiet"], "answer": 0 }
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b3",
+			"points": 3,
+			"audio": "res://assets/final_test/دوازدهم/شهریور ۱۴۰۴/shahrivar404.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی با دقت گوش دهید، سپس عبارات ستون A را با ستون B تطبیق دهید. (یک عبارت در ستون B اضافی است.)",
+			"options": [
+				"a. use them in sentences and conversations.",
+				"b. take a few minutes each day.",
+				"c. fun and effective.",
+				"d. only remove the notes.",
+				"e. are objects around your house."
+			],
+			"items": [
+				{ "id": "9", "text": "9. You can make learning new vocabulary …………", "answer": "c. fun and effective." },
+				{ "id": "10", "text": "10. Refrigerators, desks or windows …………", "answer": "e. are objects around your house." },
+				{ "id": "11", "text": "11. To remember words and their meanings …………", "answer": "a. use them in sentences and conversations." },
+				{ "id": "12", "text": "12. To review your flashcards and test yourself …………", "answer": "b. take a few minutes each day." }
+			]
+		},
+		{ "type": "h4", "text": "Vocabulary — واژگان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b4",
+			"points": 2,
+			"instruction": "با توجه به تصاویر، مشخص کنید هر جمله مربوط به کدام تصویر است. (یک جمله اضافی است.)",
+			"items": [
+				{
+					"id": "13",
+					"image": "res://assets/final_exams/12_shahrivar_1404/q13.png",
+					"question": "13. Which sentence matches this picture?",
+					"options": [
+						"a. The new light bulbs consume less electricity.",
+						"b. Try to avoid foods that contain a lot of fat.",
+						"c. Birds of a feather flock together.",
+						"d. Around 4,000 new words are added to the English dictionary every year.",
+						"e. My little sister sits on my mother's lap all the time."
+					],
+					"answer": 1
+				},
+				{
+					"id": "14",
+					"image": "res://assets/final_exams/12_shahrivar_1404/q14.png",
+					"question": "14. Which sentence matches this picture?",
+					"options": [
+						"a. The new light bulbs consume less electricity.",
+						"b. Try to avoid foods that contain a lot of fat.",
+						"c. Birds of a feather flock together.",
+						"d. Around 4,000 new words are added to the English dictionary every year.",
+						"e. My little sister sits on my mother's lap all the time."
+					],
+					"answer": 4
+				},
+				{
+					"id": "15",
+					"image": "res://assets/final_exams/12_shahrivar_1404/q15.png",
+					"question": "15. Which sentence matches this picture?",
+					"options": [
+						"a. The new light bulbs consume less electricity.",
+						"b. Try to avoid foods that contain a lot of fat.",
+						"c. Birds of a feather flock together.",
+						"d. Around 4,000 new words are added to the English dictionary every year.",
+						"e. My little sister sits on my mother's lap all the time."
+					],
+					"answer": 0
+				},
+				{
+					"id": "16",
+					"image": "res://assets/final_exams/12_shahrivar_1404/q16.png",
+					"question": "16. Which sentence matches this picture?",
+					"options": [
+						"a. The new light bulbs consume less electricity.",
+						"b. Try to avoid foods that contain a lot of fat.",
+						"c. Birds of a feather flock together.",
+						"d. Around 4,000 new words are added to the English dictionary every year.",
+						"e. My little sister sits on my mother's lap all the time."
+					],
+					"answer": 2
+				}
+			]
+		},
+		{
+			"type": "word_bank",
+			"exercise_id": "b5",
+			"points": 2,
+			"instruction": "با استفاده از کلمات داده‌شده، جمله‌ها را کامل کنید. (یک کلمه اضافی است.)",
+			"word_bank": ["replaced", "use up", "shares", "stands for", "tide"],
+			"items": [
+				{ "id": "17", "text": "17. Parvin likes her toys very much. She never ………… them with her friends.", "answer": "shares" },
+				{ "id": "18", "text": "18. It's a fact that some people don't know what IT ………… .", "answer": "stands for" },
+				{ "id": "19", "text": "19. He carefully ………… the China plate on the shelf.", "answer": "replaced" },
+				{ "id": "20", "text": "20. Don't ………… all the sugar. We need some for breakfast.", "answer": "use up" }
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b6",
+			"points": 2,
+			"instruction": "برای هر کلمه از ستون A یک تعریف از ستون B پیدا کنید. (یک تعریف در ستون B اضافی است.)",
+			"options": [
+				"a. the amount of a product or service that people want",
+				"b. all the people of about the same age",
+				"c. many different types of things or people",
+				"d. to stop being angry with someone",
+				"e. to suddenly decide to do something"
+			],
+			"items": [
+				{ "id": "21", "text": "21. I did not read the introduction and jumped into the next part. (jumped into)", "answer": "e. to suddenly decide to do something" },
+				{ "id": "22", "text": "22. I forgave her for breaking the vase. (forgave)", "answer": "d. to stop being angry with someone" },
+				{ "id": "23", "text": "23. The new generation have grown up with the internet. (generation)", "answer": "b. all the people of about the same age" },
+				{ "id": "24", "text": "24. Demand for organic food is increasing. (demand)", "answer": "a. the amount of a product or service that people want" }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b7",
+			"points": 2,
+			"instruction": "با انتخاب گزینهٔ مناسب، جمله‌های زیر را کامل کنید.",
+			"items": [
+				{ "id": "25", "question": "25. B: I ………… a monolingual dictionary is more suitable for you.", "options": ["a. arrange", "b. suppose", "c. compile", "d. look up"], "answer": 1 },
+				{ "id": "26", "question": "26. B: She always keeps to herself and isn't ………… .", "options": ["a. communicative", "b. communicate", "c. communication", "d. communicatively"], "answer": 0 },
+				{ "id": "27", "question": "27. B: He ………… into tears.", "options": ["a. dedicated", "b. kept", "c. shouted", "d. burst"], "answer": 3 },
+				{ "id": "28", "question": "28. A: Can trees lower the cooling ………… of your home? B: Sure!", "options": ["a. turbines", "b. outlet", "c. costs", "d. waste"], "answer": 2 }
+			]
+		},
+		{ "type": "h4", "text": "Grammar — دستور زبان" },
+		{
+			"type": "fill_blank",
+			"exercise_id": "b8",
+			"points": 2,
+			"instruction": "با شکل صحیح فعل داخل پرانتز، جاهای خالی را کامل کنید.",
+			"items": [
+				{ "id": "29", "text": "29. Penicillin ______ quite accidently when Fleming was working on bacteria. (to discover)", "answer": ["was discovered"] },
+				{ "id": "30", "text": "30. Her father ______ that expensive car, will he? (to buy)", "answer": ["won't buy", "will not buy", "wont buy"] },
+				{ "id": "31", "text": "31. If they had enough time in summer, they ______ to Mazandaran. (to travel)", "answer": ["would travel", "could travel", "might travel"] },
+				{ "id": "32", "text": "32. When I ______ the book to her, she had already bought it. (to send)", "answer": ["sent"] }
+			]
+		},
+		{
+			"type": "sentence_ordering",
+			"exercise_id": "b9",
+			"points": 2,
+			"instruction": "با مرتب کردن کلمات داده‌شده، مکالمه‌های کوتاه زیر را کامل کنید.",
+			"items": [
+				{
+					"id": "33",
+					"question": "33. B: Yes, but we ______ . (the results / informed / weren't / about)",
+					"words": ["the results", "informed", "weren't", "about"],
+					"answer": ["weren't", "informed", "about", "the results"]
+				},
+				{
+					"id": "34",
+					"question": "34. B: The mechanic ______ was the driver. (very / who / skillful / was)",
+					"words": ["very", "who", "skillful", "was"],
+					"answer": ["who", "was", "very", "skillful"]
+				}
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b10",
+			"points": 2.5,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "35", "question": "35. Zahra never forgets to feed the chickens, ………… ?", "options": ["a. does Zahra", "b. doesn't Zahra", "c. does she", "d. doesn't she"], "answer": 2 },
+				{ "id": "36", "question": "36. I searched everywhere but I couldn't find the keys ………… my daughter needed.", "options": ["a. which", "b. who", "c. whom", "d. what"], "answer": 0 },
+				{ "id": "37", "question": "37. They ………… healthier if they didn't eat junk food.", "options": ["a. will be", "b. were", "c. would be", "d. are"], "answer": 2 },
+				{ "id": "38", "question": "38. The shopkeeper gave me some money back because I ………… too much.", "options": ["a. paid", "b. had paid", "c. was paid", "d. would pay"], "answer": 1 },
+				{ "id": "39", "question": "39. Don't swim in this river as it ………… with aluminum.", "options": ["a. pollute", "b. has polluted", "c. polluted", "d. has been polluted"], "answer": 3 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b11",
+			"points": 1.5,
+			"instruction": "در هر یک از مکالمه‌های کوتاه زیر، شکل صحیح گرامری افعال مشخص‌شده را بنویسید.",
+			"items": [
+				{ "id": "40", "text": "40. No, we can't. The bill must ______ before leaving the restaurant. (pay)", "answer": ["be paid"] },
+				{ "id": "41", "text": "41. All the trees and plants were brown because it ______ in spring. (rain)", "answer": ["hadn't rained", "had not rained"] },
+				{ "id": "42", "text": "42. No. Some dangerous gases may ______ when garbage is burned. (produce)", "answer": ["be produced"] }
+			]
+		},
+		{ "type": "h4", "text": "Reading — درک مطلب" },
+		{
+			"type": "passage",
+			"passage": "Small acts of kindness such as giving someone a gift, giving your seat on public transportation to someone who needs it, giving a smile to a stranger, or offering someone to carry something for them can make a big difference in your life. They do not take much time, but they do require thoughtfulness and effort. A simple kind phrase like \"you look great today!\", a heartfelt thank you or, a friendly word can make someone's day. It can make them smile and feel good. This is the \"power of kindness\". Such small acts of kindness are the basis of many successful relationships."
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b12",
+			"points": 2,
+			"instruction": "متن کوتاه بالا را بخوانید، سپس جدول را کامل کنید (Skim/scan).",
+			"items": [
+				{ "id": "43", "text": "43. The title of the passage:", "answer": ["kindness", "(small act of) kindness", "small acts of kindness", "the power of kindness"] },
+				{ "id": "44", "text": "44. One example for an act of kindness:", "answer": ["giving someone a gift", "giving your seat on public transportation to someone who needs it", "giving a smile to a stranger", "offering someone to carry something for them"] },
+				{ "id": "45", "text": "45. A simple phrase that can make someone's day:", "answer": ["you look great today", "you look great today!"] },
+				{ "id": "46", "text": "46. What the word \"it\" in line 2 refers to:", "answer": ["seat", "your seat"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Water is the most essential element in our life. We cannot think of life without water. We need it to drink, wash our bodies and clothes, cook our food and grow crops, vegetables and fruits. Water is also essential for animals, birds, insects, etc. We need huge resources of it to produce electricity on a large and commercial scale. Nearly 70 percent of our body is water. No living being can exist for long without water, the most valuable liquid. We use oceans, seas, rivers and lakes as waterways to carry goods, passengers, etc. Lack of water causes a lot of problems for us, so saving it is necessary. For example, using a dishwasher saves much more water than hand washing. In short, water is very important to our life and our planet."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b13a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "47", "statement": "47. No other element is as important as water in our life.", "answer": true },
+				{ "id": "48", "statement": "48. Less than half of our body is water.", "answer": false }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b13b",
+			"points": 1,
+			"instruction": "به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "49", "question": "49. The word \"exist\" in line 4 can be replaced by the word ………… .", "options": ["a. live", "b. carry", "c. generate", "d. value"], "answer": 0 },
+				{ "id": "50", "question": "50. According to the passage, which one is wrong? Water is ………… .", "options": ["a. used for several purposes.", "b. the most valuable liquid.", "c. saved if a dishwasher is used.", "d. necessary for animals not insects."], "answer": 3 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b13c",
+			"points": 2,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "51", "text": "51. Why do we need large resources of water?", "answer": ["to produce electricity on a large and commercial scale"], "required_words": ["electricity"] },
+				{ "id": "52", "text": "52. Which waterways do we use to carry passengers?", "answer": ["oceans, seas, rivers and lakes"], "required_words": ["rivers"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "One of the most essential issues which nations must consider these days is providing energy for their people. In the past, energy was produced from fossil fuels such as oil, coal, and natural gas. Although such fuels have been main resources for years, they are harmful to the environment. They have caused serious problems including air or water pollution, global warming and health problems. Also, they take millions of years to form, so they are nonrenewable — cannot be replaced easily.\nTo reduce bad effects of nonrenewable energy, scientists are trying to replace it with other energy resources which are friendly to the environment. Such energy sources are called clean energy as they reduce the environmental risks and don't cause serious problems for humans. They are made from resources that can be replaced like wind, water, sunshine, tides and plants. As a vast country that is rich in sun radiation during most time of the year, Iran can generate enough energy by setting solar panels in desert areas like Yazd, south of Semnan or Kashan. In short, it seems that replacing fossil fuels with solar energy is the main solution to the various problems caused by burning fossil fuels."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b14a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "53", "statement": "53. Natural gas is a type of clean energy.", "answer": false },
+				{ "id": "54", "statement": "54. It takes a long time for fossil fuels to form.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b14b",
+			"points": 1,
+			"instruction": "به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "55", "question": "55. Which is not mentioned as a serious problem caused by fossil fuels, according to the passage?", "options": ["a. lack of rain", "b. global warming", "c. water pollution", "d. health problems"], "answer": 0 },
+				{ "id": "56", "question": "56. The word \"it\" in the first line of paragraph 2 refers to ………… .", "options": ["a. effects", "b. scientists", "c. nonrenewable energy", "d. environment"], "answer": 2 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b14c",
+			"points": 2,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "57", "text": "57. Why are some energy sources called clean energy?", "answer": ["as they reduce the environmental risks and don't cause serious problems for humans"], "required_words": ["human"] },
+				{ "id": "58", "text": "58. What is the main solution to problems caused by burning fossil fuels?", "answer": ["replacing fossil fuels with solar energy"], "required_words": ["solar"] }
+			]
+		},
+		{ "type": "h4", "text": "Writing — نوشتار" },
+		{
+			"type": "word_bank",
+			"exercise_id": "b15",
+			"points": 1.5,
+			"instruction": "متن ناقص زیر را با کلمات ربط (but / and / or / so) کامل کنید. (یک کلمهٔ ربط اضافی است.)",
+			"word_bank": ["but", "and", "or", "so"],
+			"items": [
+				{ "id": "59", "text": "59. They are red and black in color, ………… they have two eyes and six legs.", "answer": "and" },
+				{ "id": "60", "text": "60. Ants are social insects, ………… they live in groups or colonies.", "answer": "so" },
+				{ "id": "61", "text": "61. They are usually wingless, ………… they develop wings when they reproduce.", "answer": "but" }
+			]
+		},
+		{
+			"type": "open_ended",
+			"exercise_id": "b16",
+			"points": 0,
+			"instruction": "برای پاراگراف زیر یک جملهٔ موضوعی (topic sentence) و یک جملهٔ نتیجه‌گیری (concluding sentence) بنویسید.",
+			"items": [
+				{ "id": "62", "question": "62. Topic sentence: Language learning …………", "sample_answer": "Language is very useful for communication." },
+				{ "id": "63", "question": "63. Concluding sentence: So, …………", "sample_answer": "learning a foreign language is helpful and necessary." }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b17",
+			"points": 1,
+			"instruction": "در پاراگراف زیر دو جملهٔ پشتیبان که با جملهٔ موضوعی هم‌خوانی ندارند را مشخص کنید.",
+			"items": [
+				{ "id": "64", "text": "64. (Topic: Learning to take good notes is very important.) Mismatching sentence #1:", "answer": ["My brother always keeps a notebook in his bag."], "required_words": ["brother"] },
+				{ "id": "65", "text": "65. Mismatching sentence #2:", "answer": ["Some notes are written in English."], "required_words": ["english"] }
+			]
+		},
+		{
+			"type": "open_ended",
+			"exercise_id": "b18",
+			"points": 0,
+			"instruction": "با استفاده از تمام عبارات داده‌شده، یک پاراگراف با موضوع Electric cars بنویسید. (topic + supporting + concluding)",
+			"items": [
+				{ "id": "66", "question": "66. The electric cars …………  (use renewable energy · don't pollute the air · can be charged easily · make less noise)", "sample_answer": "Electric cars are a useful invention. They use renewable energy, they don't pollute the air, they can be charged easily and they make less noise. In short, electric cars are friendly to our environment." }
+			]
+		}
+	]
+}

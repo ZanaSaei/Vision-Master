@@ -31,13 +31,6 @@ corner_radius_top_right = 28
 corner_radius_bottom_right = 28
 corner_radius_bottom_left = 28
 
-[sub_resource type="StyleBoxFlat" id="BtnListening"]
-bg_color = Color(0.4862745, 0.227451, 0.9294118, 1)
-corner_radius_top_left = 28
-corner_radius_top_right = 28
-corner_radius_bottom_right = 28
-corner_radius_bottom_left = 28
-
 [node name="WordGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -126,14 +119,4 @@ theme_override_styles/hover = SubResource("BtnSpelling")
 theme_override_styles/pressed = SubResource("BtnSpelling")
 text = "بازی املا"
 
-[node name="ListeningButton" type="Button" parent="Content"]
-custom_minimum_size = Vector2(0, 240)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 64
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("BtnListening")
-theme_override_styles/hover = SubResource("BtnListening")
-theme_override_styles/pressed = SubResource("BtnListening")
-text = "بازی شنیداری"
 

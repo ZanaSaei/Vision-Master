@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/scrambled/ui/gameplay_chips.gd" id="1_script"]
+
+[node name="GameplayChips" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 74)
+theme_override_constants/separation = 12
+script = ExtResource("1_script")
+
+[node name="Progress" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"ScrambledChipProgress"
+
+[node name="Mode" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"ScrambledChipMode"
+
+[node name="Spacer" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Worth" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"ScrambledChipWorth"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"ScrambledChipScore"

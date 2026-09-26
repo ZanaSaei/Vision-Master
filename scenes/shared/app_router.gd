@@ -26,6 +26,8 @@ const ROUTES := {
 	"settings":       "res://scenes/settings/Settings.tscn",
 	"account":        "res://scenes/auth/Auth.tscn",
 	"final_exams":    "res://scenes/exam/FinalExams.tscn",
+	"final_exam_list": "res://scenes/exam/FinalExamList.tscn",
+	"final_exam":     "res://scenes/exam/FinalExam.tscn",
 	"purchase":       "res://scenes/purchase/Purchase.tscn",
 	"about_me":       "res://scenes/about_me/AboutMe.tscn",
 	"conversation":   "res://scenes/conversation/Conversation.tscn",

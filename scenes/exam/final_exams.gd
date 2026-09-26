@@ -1,147 +1,167 @@
+class_name FinalExams
 extends "res://autoload/BackButtonHandler.gd"
+## ============================================================
+##  FINAL EXAMS — امتحانات نهایی (year picker)
+##
+##  Entry screen reached from the main menu's "امتحانات نهایی"
+##  card. It shows one card per grade (یازدهم / دوازدهم) read
+##  from res://data/final_exams/manifest.json. Picking a grade
+##  pushes the exam list for that year.
+## ============================================================
 
-# ============================================================
-#  FINAL EXAMS — placeholder screen.
-#  The real exam flow isn't implemented yet; this screen exists
-#  so navigating here shows a friendly, themed message with a
-#  WORKING back button instead of a blank, unescapable page.
-# ============================================================
+const SCENE_MAIN_MENU: String = "res://scenes/main_menu/MainMenu.tscn"
+const BACK_ICON: String = "res://images/Back.png"
+const HOME_ICON: String = "res://images/Main_Menu.png"
+const CARD_ACCENTS: Array[Color] = [Color("#2563EB"), Color("#D97706")]
 
-const SCENE_MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
-const BACK_ICON       := "res://images/Back.png"
+var _navigating: bool = false
 
 
 func _ready() -> void:
+	super._ready()
+	MenuBackground.enter_background()
 	_build_ui()
-	_apply_theme()
-	Global.on_theme_changed(_on_theme_changed)
 
 
 func _build_ui() -> void:
-	# Page background.
-	var bg := ColorRect.new()
-	bg.name = "Bg"
-	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(bg)
+	var root_margin: MarginContainer = MarginContainer.new()
+	root_margin.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root_margin.mouse_filter = Control.MOUSE_FILTER_STOP
+	root_margin.add_theme_constant_override("margin_left", GrammarTheme.SAFE_MARGIN)
+	root_margin.add_theme_constant_override("margin_top", GrammarTheme.SAFE_MARGIN)
+	root_margin.add_theme_constant_override("margin_right", GrammarTheme.SAFE_MARGIN)
+	root_margin.add_theme_constant_override("margin_bottom", GrammarTheme.SAFE_MARGIN)
+	add_child(root_margin)
 
-	# Header bar with a working back button.
-	var header := PanelContainer.new()
-	header.name = "HeaderBar"
-	header.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	header.offset_bottom = 220.0
-	header.mouse_filter = Control.MOUSE_FILTER_PASS
-	add_child(header)
+	var main: VBoxContainer = VBoxContainer.new()
+	main.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	main.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	main.add_theme_constant_override("separation", 24)
+	root_margin.add_child(main)
 
-	var h_margin := MarginContainer.new()
-	h_margin.add_theme_constant_override("margin_left", 36)
-	h_margin.add_theme_constant_override("margin_right", 36)
-	h_margin.add_theme_constant_override("margin_top", 60)
-	h_margin.add_theme_constant_override("margin_bottom", 24)
-	header.add_child(h_margin)
+	_build_header(main)
 
-	var h_row := HBoxContainer.new()
-	h_row.add_theme_constant_override("separation", 20)
-	h_margin.add_child(h_row)
+	var content_box: PanelContainer = PanelContainer.new()
+	GrammarTheme.style_card(content_box)
+	content_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	main.add_child(content_box)
 
-	var back := MenuStyle.make_back_button(BACK_ICON, 132)
-	back.pressed.connect(_on_back_pressed)
-	MenuStyle.wire_microinteractions(back)
-	h_row.add_child(back)
+	var content_margin: MarginContainer = MarginContainer.new()
+	content_margin.add_theme_constant_override("margin_left", GrammarTheme.CONTENT_MARGIN)
+	content_margin.add_theme_constant_override("margin_top", GrammarTheme.CONTENT_MARGIN)
+	content_margin.add_theme_constant_override("margin_right", GrammarTheme.CONTENT_MARGIN)
+	content_margin.add_theme_constant_override("margin_bottom", GrammarTheme.CONTENT_MARGIN)
+	content_box.add_child(content_margin)
 
-	var title := Label.new()
-	title.name = "HeaderTitle"
-	title.text = "آزمون‌های نهایی"
-	title.add_theme_font_override("font", MenuStyle.vazir())
-	title.add_theme_font_size_override("font_size", 44)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	h_row.add_child(title)
+	var scroll: ScrollContainer = ScrollContainer.new()
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	content_margin.add_child(scroll)
 
-	# Centered "coming soon" content.
-	var center := VBoxContainer.new()
-	center.set_anchors_preset(Control.PRESET_FULL_RECT)
-	center.alignment = BoxContainer.ALIGNMENT_CENTER
-	center.add_theme_constant_override("separation", 28)
-	center.mouse_filter = Control.MOUSE_FILTER_PASS
-	add_child(center)
+	var content: VBoxContainer = VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", 26)
+	scroll.add_child(content)
 
-	var icon := Label.new()
-	icon.text = "📝"
-	icon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	icon.add_theme_font_size_override("font_size", 120)
-	center.add_child(icon)
+	var subtitle: Label = Label.new()
+	GrammarTheme.set_bidi_text(subtitle, "پایهٔ خود را انتخاب کنید")
+	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var body_font: Font = GrammarTheme.get_fa_regular()
+	if body_font != null:
+		subtitle.add_theme_font_override("font", body_font)
+	subtitle.add_theme_font_size_override("font_size", 32)
+	subtitle.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
+	content.add_child(subtitle)
 
-	var msg := Label.new()
-	msg.name = "MessageLabel"
-	msg.text = "آزمون‌های نهایی به‌زودی اضافه می‌شوند."
-	msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	msg.autowrap_mode = TextServer.AUTOWRAP_WORD
-	msg.add_theme_font_override("font", MenuStyle.vazir())
-	msg.add_theme_font_size_override("font_size", 40)
-	center.add_child(msg)
-
-	var sub := Label.new()
-	sub.name = "SubLabel"
-	sub.text = "فعلاً با دکمه برگشت به منوی اصلی برگردید."
-	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	sub.autowrap_mode = TextServer.AUTOWRAP_WORD
-	sub.add_theme_font_override("font", MenuStyle.vazir())
-	sub.add_theme_font_size_override("font_size", 30)
-	center.add_child(sub)
-
-	var spacer := Control.new()
-	spacer.custom_minimum_size = Vector2(0, 20)
-	center.add_child(spacer)
-
-	var home_btn := Button.new()
-	home_btn.name = "HomeButton"
-	home_btn.text = "بازگشت به منوی اصلی"
-	home_btn.add_theme_font_override("font", MenuStyle.vazir())
-	home_btn.add_theme_font_size_override("font_size", 34)
-	home_btn.custom_minimum_size = Vector2(420, 96)
-	home_btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	home_btn.pressed.connect(_on_back_pressed)
-	MenuStyle.wire_microinteractions(home_btn)
-	center.add_child(home_btn)
-
-
-func _apply_theme() -> void:
-	if not is_inside_tree():
+	var years: Array = ExamData.years()
+	if years.is_empty():
+		var empty: Label = Label.new()
+		empty.text = "هنوز آزمونی اضافه نشده است."
+		empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty.add_theme_font_size_override("font_size", 32)
+		content.add_child(empty)
 		return
-	var bg: ColorRect = get_node_or_null("Bg")
-	if bg:
-		bg.color = Global.get_theme_color("bg")
-	var header: PanelContainer = get_node_or_null("HeaderBar")
-	if header:
-		header.add_theme_stylebox_override("panel", MenuStyle.header_bar_style(44, true))
-	var msg: Label = get_node_or_null("MessageLabel")
-	if msg:
-		msg.add_theme_color_override("font_color", Global.get_theme_color("text"))
-	var sub: Label = get_node_or_null("SubLabel")
-	if sub:
-		sub.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
-	var title: Label = get_node_or_null("HeaderTitle")
-	if title:
-		title.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
-	var home_btn: Button = get_node_or_null("HomeButton")
-	if home_btn:
-		var style := StyleBoxFlat.new()
-		style.set_corner_radius_all(26)
-		style.bg_color = Global.get_theme_color("accent")
-		style.set_content_margin_all(20)
-		home_btn.add_theme_stylebox_override("normal", style)
-		home_btn.add_theme_stylebox_override("hover", style)
-		home_btn.add_theme_stylebox_override("pressed", style)
-		home_btn.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
+
+	for i in years.size():
+		var year: Dictionary = years[i]
+		var accent: Color = CARD_ACCENTS[i % CARD_ACCENTS.size()]
+		var exam_count: int = year.get("exams", []).size()
+		var card: Button = MenuStyle.make_card(
+			str(year.get("title_fa", "")),
+			"%s · %d آزمون" % [str(year.get("subtitle_fa", "")), exam_count],
+			str(year.get("emoji", "🎓")),
+			accent,
+			190
+		)
+		var year_id: String = str(year.get("id", ""))
+		card.pressed.connect(func() -> void: _open_year(year_id))
+		MenuStyle.wire_microinteractions(card)
+		content.add_child(card)
+
+	var spacer: Control = Control.new()
+	spacer.custom_minimum_size = Vector2(0, 24)
+	content.add_child(spacer)
 
 
-func _on_theme_changed(_mode: int) -> void:
-	_apply_theme()
+func _build_header(main: VBoxContainer) -> void:
+	var header_box: PanelContainer = PanelContainer.new()
+	GrammarTheme.style_header_box(header_box)
+	main.add_child(header_box)
+
+	var header_margin: MarginContainer = MarginContainer.new()
+	header_margin.add_theme_constant_override("margin_left", 18)
+	header_margin.add_theme_constant_override("margin_top", 14)
+	header_margin.add_theme_constant_override("margin_right", 18)
+	header_margin.add_theme_constant_override("margin_bottom", 14)
+	header_box.add_child(header_margin)
+
+	var header_row: HBoxContainer = HBoxContainer.new()
+	header_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header_row.add_theme_constant_override("separation", 16)
+	header_margin.add_child(header_row)
+
+	var back_button: Button = GrammarTheme.make_header_icon_button(BACK_ICON, Callable(self, "_on_back_pressed"))
+	header_row.add_child(back_button)
+
+	var home_button: Button = GrammarTheme.make_header_icon_button(HOME_ICON, Callable(self, "_on_main_menu_pressed"))
+	header_row.add_child(home_button)
+
+	var title_label: Label = Label.new()
+	GrammarTheme.set_bidi_text(title_label, "امتحانات نهایی")
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var title_font: Font = GrammarTheme.get_fa_bold()
+	if title_font != null:
+		title_label.add_theme_font_override("font", title_font)
+	title_label.add_theme_font_size_override("font_size", 42)
+	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
+	header_row.add_child(title_label)
+
+	GrammarTheme.unify_header_row(header_row)
+
+
+func _open_year(year_id: String) -> void:
+	if _navigating:
+		return
+	_navigating = true
+	Sfx.click()
+	AppRouter.push("final_exam_list", {"year": year_id})
 
 
 func _on_back_pressed() -> void:
-	Sfx.click()
+	if _navigating:
+		return
+	_navigating = true
+	TransitionManager.slide_change_scene(SCENE_MAIN_MENU, TransitionManager.Slide.BACK)
+
+
+func _on_main_menu_pressed() -> void:
+	if _navigating:
+		return
+	_navigating = true
 	TransitionManager.change_scene(SCENE_MAIN_MENU)
 
 

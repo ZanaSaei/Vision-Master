@@ -1,0 +1,357 @@
+{
+	"id": "11_khordad_1405",
+	"title_fa": "امتحان نهایی — یازدهم · خرداد ۱۴۰۵",
+	"subtitle_fa": "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید. نمره از ۴۰ محاسبه می‌شود.",
+	"audio": "res://assets/final_test/یازدهم/خرداد ۱۴۰۵/khordad405.mp3",
+	"blocks": [
+		{ "type": "h4", "text": "Listening — بخش شنیداری" },
+		{
+			"type": "true_false",
+			"exercise_id": "b1",
+			"points": 2,
+			"audio": "res://assets/final_test/یازدهم/خرداد ۱۴۰۵/khordad405.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی گوش دهید، سپس جمله‌های صحیح را True و جمله‌های نادرست را False مشخص کنید.",
+			"items": [
+				{ "id": "1", "statement": "1. He hasn't played the game \"Travel to Mars\".", "answer": false },
+				{ "id": "2", "statement": "2. He wants to play the game again.", "answer": false },
+				{ "id": "3", "statement": "3. He has attended a Spanish class since last Monday.", "answer": true },
+				{ "id": "4", "statement": "4. He hasn't thought about playing the game in his free time.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b2",
+			"points": 3,
+			"audio": "res://assets/final_test/یازدهم/خرداد ۱۴۰۵/khordad405.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی گوش دهید، سپس گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "5", "question": "5. He saw the notice of ………… Olympiad.", "options": ["a. Physics", "b. Science", "c. Mathematics"], "answer": 1 },
+				{ "id": "6", "question": "6. The exam will be next ……… .", "options": ["a. spring", "b. fall", "c. summer"], "answer": 2 },
+				{ "id": "7", "question": "7. He is going to ………… in Olympiad.", "options": ["a. participate", "b. prepare", "c. produce"], "answer": 0 },
+				{ "id": "8", "question": "8. The Olympiad needs a lot of hard work but it is not a(n) ……………… exam.", "options": ["a. important", "b. essential", "c. difficult"], "answer": 2 }
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b3",
+			"points": 2,
+			"audio": "res://assets/final_test/یازدهم/خرداد ۱۴۰۵/khordad405.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی گوش دهید، سپس برای هر جملهٔ ناقص در ستون A گزینهٔ مناسب از ستون B را انتخاب کنید. (یک گزینه در ستون B اضافی است.)",
+			"options": [
+				"a. it connects Persian learners with native Persian teachers",
+				"b. to share personal information online",
+				"c. to learn and practice the Persian language",
+				"d. you can find lessons, and videos",
+				"e. incorrect information"
+			],
+			"items": [
+				{ "id": "9", "text": "9. The Internet has made it easier for people …………", "answer": "c. to learn and practice the Persian language" },
+				{ "id": "10", "text": "10. There are websites and online courses where …………", "answer": "d. you can find lessons, and videos" },
+				{ "id": "11", "text": "11. One amazing thing about the Internet is that …………", "answer": "a. it connects Persian learners with native Persian teachers" },
+				{ "id": "12", "text": "12. Some websites might have …………", "answer": "e. incorrect information" }
+			]
+		},
+		{ "type": "h4", "text": "Vocabulary — واژگان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b4",
+			"points": 2,
+			"instruction": "با توجه به هر تصویر، گزینهٔ مناسب را انتخاب کنید و در پاسخ‌نامه بنویسید. (یک جمله اضافی است.)",
+			"items": [
+				{
+					"id": "13",
+					"image": "res://assets/final_exams/11_khordad_1405/q13.png",
+					"question": "13. Which sentence matches this picture?",
+					"options": [
+						"a. Calligraphy has a special place in the history of Iran.",
+						"b. We decided to buy a decorative wall clock from that workshop.",
+						"c. He always uses beautiful colors in weaving the carpets.",
+						"d. My sister measures herself every month.",
+						"e. Did you know only 40 percent of the population live in this area?"
+					],
+					"answer": 3
+				},
+				{
+					"id": "14",
+					"image": "res://assets/final_exams/11_khordad_1405/q14.png",
+					"question": "14. Which sentence matches this picture?",
+					"options": [
+						"a. Calligraphy has a special place in the history of Iran.",
+						"b. We decided to buy a decorative wall clock from that workshop.",
+						"c. He always uses beautiful colors in weaving the carpets.",
+						"d. My sister measures herself every month.",
+						"e. Did you know only 40 percent of the population live in this area?"
+					],
+					"answer": 4
+				},
+				{
+					"id": "15",
+					"image": "res://assets/final_exams/11_khordad_1405/q15.png",
+					"question": "15. Which sentence matches this picture?",
+					"options": [
+						"a. Calligraphy has a special place in the history of Iran.",
+						"b. We decided to buy a decorative wall clock from that workshop.",
+						"c. He always uses beautiful colors in weaving the carpets.",
+						"d. My sister measures herself every month.",
+						"e. Did you know only 40 percent of the population live in this area?"
+					],
+					"answer": 0
+				},
+				{
+					"id": "16",
+					"image": "res://assets/final_exams/11_khordad_1405/q16.png",
+					"question": "16. Which sentence matches this picture?",
+					"options": [
+						"a. Calligraphy has a special place in the history of Iran.",
+						"b. We decided to buy a decorative wall clock from that workshop.",
+						"c. He always uses beautiful colors in weaving the carpets.",
+						"d. My sister measures herself every month.",
+						"e. Did you know only 40 percent of the population live in this area?"
+					],
+					"answer": 1
+				}
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b5",
+			"points": 2,
+			"instruction": "برای هر کلمهٔ مشخص‌شده در ستون A، تعریف مناسبی از ستون B انتخاب کنید. (یک تعریف در ستون B اضافی است.)",
+			"options": [
+				"a. without worry",
+				"b. to be different from each other",
+				"c. traditional or usual things",
+				"d. the way in which people feel and behave towards each other",
+				"e. with all parts existing in the correct amounts"
+			],
+			"items": [
+				{ "id": "17", "text": "17. If you have a balanced diet, you are getting all the vitamins you need. (balanced)", "answer": "e. with all parts existing in the correct amounts" },
+				{ "id": "18", "text": "18. Test grades vary from school to school. (vary)", "answer": "b. to be different from each other" },
+				{ "id": "19", "text": "19. What customs do you have for the New Year in your city? (customs)", "answer": "c. traditional or usual things" },
+				{ "id": "20", "text": "20. Luckily, his relationship is good with his father. (relationship)", "answer": "d. the way in which people feel and behave towards each other" }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b6",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "21", "question": "21. Taxi drivers must drive carefully to ………… accidents.", "options": ["a. agree", "b. prefer", "c. prevent", "d. range"], "answer": 2 },
+				{ "id": "22", "question": "22. They usually give you a(n) ………… if you take more metal works.", "options": ["a. discount", "b. economy", "c. weight", "d. region"], "answer": 0 },
+				{ "id": "23", "question": "23. A: What do you think about this movie? B: I think it reflects the moral and cultural ………… of our country.", "options": ["a. income", "b. century", "c. continent", "d. diversity"], "answer": 3 },
+				{ "id": "24", "question": "24. Student: How do children learn new things? Teacher: They should ………… them to learn better.", "options": ["a. protect", "b. experience", "c. happen", "d. spend"], "answer": 1 }
+			]
+		},
+		{
+			"type": "word_bank",
+			"exercise_id": "b7",
+			"points": 2,
+			"instruction": "با استفاده از کلمات داده‌شده، مکالمهٔ زیر را کامل کنید. (یک کلمه اضافی است.)",
+			"word_bank": ["emotional", "rarely", "hang out", "absolutely", "depend on"],
+			"items": [
+				{ "id": "25", "text": "25. Well, I believe an effective way to live longer is having ………… health.", "answer": "emotional" },
+				{ "id": "26", "text": "26. Besides this, they should ………… with their relatives and friends as much as possible.", "answer": "hang out" },
+				{ "id": "27", "text": "27. I know. These types of habits ………… their lifestyle.", "answer": "depend on" },
+				{ "id": "28", "text": "28. Yeah, it ………… helps them live in a calm manner.", "answer": "absolutely" }
+			]
+		},
+		{ "type": "h4", "text": "Grammar — دستور زبان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b8",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "29", "question": "29. A: Do you know these workers? B: Yes, they are really skillful. They …….. in this factory for 20 years.", "options": ["a. have worked", "b. has worked", "c. worked", "d. will work"], "answer": 0 },
+				{ "id": "30", "question": "30. A: Hi Samira! How …….. information do you have about endangered languages? B: Well, an endangered language is a language that has very ……… speakers.", "options": ["a. many / few", "b. much / little", "c. many / little", "d. much / few"], "answer": 3 },
+				{ "id": "31", "question": "31. A: Your flight is at 6 a.m. Is it OK for you? B: No problem, I usually get …….. very early in the morning.", "options": ["a. in", "b. for", "c. after", "d. up"], "answer": 3 },
+				{ "id": "32", "question": "32. A: It's getting dark. We're late. B: You're right. If we …….., we will miss the bus.", "options": ["a. won't hurry", "b. don't hurry", "c. doesn't hurry", "d. didn't hurry"], "answer": 1 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b9",
+			"points": 1.5,
+			"instruction": "با توجه به تصویر، جاهای خالی را با کلمات مناسب کامل کنید.",
+			"items": [
+				{ "id": "33a", "text": "33. B: She put a (a) ______ of bread on the table. (a whole unit of bread)", "answer": ["loaf"] },
+				{ "id": "33b", "text": "33. B: She put two (b) ______ of coffee on the table.", "answer": ["cups"] },
+				{ "id": "33c", "text": "33. B: And a piece of (c) ______ .", "answer": ["cake"] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b10",
+			"points": 1.5,
+			"instruction": "شکل صحیح افعال داخل پرانتز را در جاهای خالی بنویسید.",
+			"items": [
+				{ "id": "34", "text": "34. A: Have you ever ______ (to be) to Shiraz? B: Yes, many times.", "answer": ["been"] },
+				{ "id": "35", "text": "35. B: To tell the truth, I'm so ______ (to excite) that we are going to Shiraz this Norooz again.", "answer": ["excited"] },
+				{ "id": "36", "text": "36. A: Nice, if everything goes well, we ______ (to meet) you there.", "answer": ["will meet", "can meet", "may meet"] }
+			]
+		},
+		{
+			"type": "sentence_ordering",
+			"exercise_id": "b11",
+			"points": 2,
+			"instruction": "با مرتب کردن کلمات داخل پرانتز، جمله‌های ناقص را کامل کنید.",
+			"items": [
+				{
+					"id": "37",
+					"question": "37. If people use public transportation, …….. . (clean / the air / be / will)",
+					"words": ["clean", "the air", "be", "will"],
+					"answer": ["the air", "will", "be", "clean"]
+				},
+				{
+					"id": "38",
+					"question": "38. Mina …….. in the library. (the story / got / by / amused)",
+					"words": ["the story", "got", "by", "amused"],
+					"answer": ["got", "amused", "by", "the story"]
+				}
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b12",
+			"points": 1,
+			"instruction": "با توجه به تصویر داده‌شده، جای خالی را کامل کنید.",
+			"items": [
+				{ "id": "39", "text": "39. Reza: Daddy! Can we go fishing this afternoon? Daddy: Maybe tomorrow. I ______ the flat tires yet. (to change)", "answer": ["haven't changed", "have not changed"] }
+			]
+		},
+		{ "type": "h4", "text": "Reading — درک مطلب" },
+		{
+			"type": "passage",
+			"passage": "Mr. Saberian is a translator who works for IRIB. He knows four languages: Persian, English, French, and Russian. He learned English at school when he was 13 years old. He began learning French in a language institute when he was 15. Then, he learned Russian when he was a university student in Moscow. Interestingly, he speaks all of these languages fluently, but he uses English more. To learn a foreign language, he says that interest and hard work are really more important than age."
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b13",
+			"points": 2,
+			"instruction": "متن بالا را بخوانید و جدول را کامل کنید (Scan the passage).",
+			"items": [
+				{ "id": "40", "text": "40. Where does Mr. Saberian work?", "answer": ["irib"] },
+				{ "id": "41", "text": "41. How many languages does he know?", "answer": ["four", "4"] },
+				{ "id": "42", "text": "42. When did he learn French?", "answer": ["when he was 15", "when he was 15 years old", "15"] },
+				{ "id": "43", "text": "43. Which language does he use more?", "answer": ["english"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Technology has had both positive and negative effects on people's lives. It has enabled us to have easy access to information, become more creative, travel easier, and have a more comfortable life. Technology has also helped the researchers and scientists of our time. New technologies have helped doctors to understand how diseases develop. Technology, as some people may think, is not a bad thing at all. The way we use technology, is important. For example, using new technologies has changed people's lifestyle in a harmful way in this century.\nSome technologies are dangerous to our health and can harm our body. Using mobile phones or surfing the Internet for long hours can increase people's blood pressure, cause sleep problems, and depression. Playing video games for long hours makes people nervous and harm their heart and nervous system. Listening to music by headsets can be harmful to one's hearing and even brain. So, we should be careful in choosing the right technology. We should also limit the time of working with technologies."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b14a",
+			"points": 1.5,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "44", "statement": "44. Technology hasn't helped us to become more creative.", "answer": false },
+				{ "id": "45", "statement": "45. Technology never causes depression.", "answer": false },
+				{ "id": "46", "statement": "46. Listening to music by headsets can harm brain.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b14b",
+			"points": 0.5,
+			"instruction": "به سوال زیر پاسخ دهید.",
+			"items": [
+				{ "id": "47", "question": "47. What is the antonym for the word \"increase\"?", "options": ["a. improve", "b. press", "c. decrease", "d. practice"], "answer": 2 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b14c",
+			"points": 2,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "48", "text": "48. How have new technologies helped doctors?", "answer": ["new technologies have helped doctors to understand how diseases develop"], "required_words": ["diseases"] },
+				{ "id": "49", "text": "49. What makes people nervous?", "answer": ["playing video games for long hours"], "required_words": ["video games"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Art is something that people create with imagination and skill. Art has different forms including paintings, drawings, photos, or even things made by hand. Artists make art for some reasons such as enjoying it, or selling their artworks to make money. They can sell it to those who collect art in places like art stores, galleries, or online. But, it's not always easy to make money from art. Artists have to find people who are interested in their works. Nowadays, artists let others know about their art by showing it in galleries or using the Internet, which takes a lot of work. Also, the value of art can be different to various people. Some might like a piece of art and have it for themselves, but others might not. Artists can find their own style and make special things to get people's attention. To make money, artists can do many things such as teaching in art classes, or selling artistic items. They can also work with companies to make particular art projects. In conclusion, art can be an acceptable way to earn money, but it cannot be easy. Artists have to connect with the buyers, and let people know about their art. In this way, they can create good feelings in the society and bring people together."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b15a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "50", "statement": "50. Art has the same value to various people.", "answer": false },
+				{ "id": "51", "statement": "51. Earning money from art is not always easy.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b15b",
+			"points": 1,
+			"instruction": "به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "52", "question": "52. Where can artists sell their products, based on the text?", "options": ["a. exhibitions", "b. parks", "c. galleries", "d. museums"], "answer": 2 },
+				{ "id": "53", "question": "53. What does the underlined \"they\" refer to?", "options": ["a. items", "b. classes", "c. people", "d. artists"], "answer": 3 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b15c",
+			"points": 2,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "54", "text": "54. Name four different forms of art according to the text.", "answer": ["paintings, drawings, photos, things made by hands"], "required_words": ["paintings"] },
+				{ "id": "55", "text": "55. How can artists get people's attention?", "answer": ["artists can find their own style and make special things to get people's attention"], "required_words": ["style"] }
+			]
+		},
+		{ "type": "h4", "text": "Writing — نوشتار" },
+		{
+			"type": "table_fill",
+			"exercise_id": "b16",
+			"points": 2,
+			"instruction": "کلمات مشخص‌شدهٔ متن زیر را بر اساس نقش دستوری‌شان در جدول بنویسید.\nMost museums contain products from the past. Tourists usually go to these places to learn about the history of different nations.\nOptions: Subject · Verb · Object · Adverb of frequency",
+			"columns": ["Word", "Its grammatical role"],
+			"rows": [
+				{ "cells": [ { "text": "a. products" }, { "editable": true, "answer": ["object"] } ] },
+				{ "cells": [ { "text": "b. usually" }, { "editable": true, "answer": ["adverb of frequency"] } ] },
+				{ "cells": [ { "text": "c. contain" }, { "editable": true, "answer": ["verb"] } ] },
+				{ "cells": [ { "text": "d. tourists" }, { "editable": true, "answer": ["subject"] } ] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b17",
+			"points": 2,
+			"instruction": "شکل صحیح افعال داخل پرانتز را در جاهای خالی بنویسید.",
+			"items": [
+				{ "id": "57", "text": "57. A: My son! Can you imagine ______ (to study) in Tehran University?", "answer": ["studying"] },
+				{ "id": "58", "text": "58. B: Why not. I promise ______ (to work) hard enough to go there.", "answer": ["to work"] },
+				{ "id": "59", "text": "59. A: Good. Remember that it is quite possible by ______ (to spend) a lot of time to study.", "answer": ["spending"] },
+				{ "id": "60", "text": "60. B: I see. I will become happy ______ (to make) you be proud of me.", "answer": ["to make"] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b18",
+			"points": 2,
+			"instruction": "با توجه به تصاویر و کلمات داده‌شده، مکالمه‌های زیر را کامل کنید.",
+			"items": [
+				{ "id": "61", "text": "61. A: Why does he visit the doctor every six months? B: He ______ his general health every six months. (to check)", "answer": ["visits the doctor to check"], "required_words": ["check"] },
+				{ "id": "62", "text": "62. A: What is Navid tired of? B: He is ______ the dirty dishes. (to wash)", "answer": ["tired of washing"], "required_words": ["washing"] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b19",
+			"points": 1,
+			"instruction": "با استفاده از کلمات داده‌شده داخل پرانتز، جملهٔ ناقص را کامل کنید.",
+			"items": [
+				{ "id": "63", "text": "63. A: What did the teacher tell Amir? B: He ______ too much noise. (not / to make)", "answer": ["told Amir not to make", "told him not to make"], "required_words": ["not to make"] }
+			]
+		}
+	]
+}

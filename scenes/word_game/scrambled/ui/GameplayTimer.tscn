@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/scrambled/ui/gameplay_timer.gd" id="1_script"]
+
+[node name="GameplayTimer" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+theme_override_constants/separation = 14
+script = ExtResource("1_script")
+
+[node name="Bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_type_variation = &"ScrambledTimerBar"
+max_value = 100.0
+show_percentage = false
+
+[node name="Time" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 2
+vertical_alignment = 1

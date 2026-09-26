@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/scrambled/ui/gameplay_actions.gd" id="1_script"]
+
+[node name="GameplayActions" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 146)
+alignment = 1
+script = ExtResource("1_script")
+
+[node name="Hint" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(430, 118)
+layout_mode = 2
+theme_type_variation = &"ScrambledCandyButton"
+text = "💡  راهنما"
+
+[node name="Reveal" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 118)
+layout_mode = 2
+theme_type_variation = &"ScrambledRevealButton"
+text = "🔍 یک حرف"

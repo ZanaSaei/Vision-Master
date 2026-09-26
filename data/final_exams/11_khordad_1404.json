@@ -1,0 +1,362 @@
+{
+	"id": "11_khordad_1404",
+	"title_fa": "امتحان نهایی — یازدهم · خرداد ۱۴۰۴",
+	"subtitle_fa": "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید. نمره از ۴۰ محاسبه می‌شود.",
+	"audio": "res://assets/final_test/یازدهم/خرداد ۱۴۰۴/khorada404.mp3",
+	"blocks": [
+		{ "type": "h4", "text": "Listening — بخش شنیداری" },
+		{
+			"type": "true_false",
+			"exercise_id": "b1",
+			"points": 2,
+			"audio": "res://assets/final_test/یازدهم/خرداد ۱۴۰۴/khorada404.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی گوش دهید، سپس جمله‌های درست را True و جمله‌های نادرست را False مشخص کنید.",
+			"items": [
+				{ "id": "1", "statement": "1. The school has more than one sports team.", "answer": true },
+				{ "id": "2", "statement": "2. He has played for the school's volleyball team for three years.", "answer": false },
+				{ "id": "3", "statement": "3. He won't play on the school's team anymore.", "answer": true },
+				{ "id": "4", "statement": "4. He might play volleyball in the university.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b2",
+			"points": 3,
+			"audio": "res://assets/final_test/یازدهم/خرداد ۱۴۰۴/khorada404.mp3",
+			"show_audio": true,
+			"instruction": "به مکالمهٔ بین رضا و توریست گوش دهید، سپس گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "5", "question": "5. They don't sell …….. in the store.", "options": ["a. pottery", "b. metal work", "c. tilework"], "answer": 1 },
+				{ "id": "6", "question": "6. The tourist likes to buy a(n) …….., but it seems expensive.", "options": ["a. Persian carpet", "b. Isfahan Termeh", "c. Qashqai Gabbeh"], "answer": 0 },
+				{ "id": "7", "question": "7. How much discount will the tourist get?", "options": ["a. 85 percent", "b. 30 percent", "c. 20 percent"], "answer": 2 },
+				{ "id": "8", "question": "8. Which one is correct based on what you've just listened to?", "options": ["a. Reza works in the store all the time.", "b. Everyone in Reza's family helps their business.", "c. For more information, the tourist can check their website."], "answer": 1 }
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b3",
+			"points": 2,
+			"audio": "res://assets/final_test/یازدهم/خرداد ۱۴۰۴/khorada404.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی با دقت گوش دهید. سپس برای هر جملهٔ ناقص در ستون A گزینهٔ مناسب از ستون B را انتخاب کنید. (یک گزینه در ستون B اضافی است.)",
+			"options": [
+				"a. can be a problem in a new country.",
+				"b. are games, quizzes, and flashcards.",
+				"c. you don't speak their language.",
+				"d. it can be hard to talk to people.",
+				"e. help you learn a language easily."
+			],
+			"items": [
+				{ "id": "9", "text": "9. When you travel to a new country, …………", "answer": "d. it can be hard to talk to people." },
+				{ "id": "10", "text": "10. Asking for directions …………", "answer": "a. can be a problem in a new country." },
+				{ "id": "11", "text": "11. Available language apps …………", "answer": "e. help you learn a language easily." },
+				{ "id": "12", "text": "12. Different ways to learn a new language …………", "answer": "b. are games, quizzes, and flashcards." }
+			]
+		},
+		{ "type": "h4", "text": "Vocabulary — واژگان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b4",
+			"points": 2,
+			"instruction": "با توجه به هر تصویر، گزینهٔ مناسب را انتخاب کنید و در پاسخ‌نامه بنویسید. (یک جمله اضافی است.)",
+			"items": [
+				{
+					"id": "13",
+					"image": "res://assets/final_exams/11_khordad_1404/q13.png",
+					"question": "13. Which sentence matches this picture?",
+					"options": [
+						"a. Police use traffic signs to control speed limits and road conditions.",
+						"b. He is doing wildlife photography for a nature magazine.",
+						"c. A baby's heartbeat is nearly twice as fast as an adult's.",
+						"d. Doctors say it is too early to measure the effectiveness of the drug.",
+						"e. For a while, he imagined that he was a rich man living in a big house."
+					],
+					"answer": 2
+				},
+				{
+					"id": "14",
+					"image": "res://assets/final_exams/11_khordad_1404/q14.png",
+					"question": "14. Which sentence matches this picture?",
+					"options": [
+						"a. Police use traffic signs to control speed limits and road conditions.",
+						"b. He is doing wildlife photography for a nature magazine.",
+						"c. A baby's heartbeat is nearly twice as fast as an adult's.",
+						"d. Doctors say it is too early to measure the effectiveness of the drug.",
+						"e. For a while, he imagined that he was a rich man living in a big house."
+					],
+					"answer": 0
+				},
+				{
+					"id": "15",
+					"image": "res://assets/final_exams/11_khordad_1404/q15.png",
+					"question": "15. Which sentence matches this picture?",
+					"options": [
+						"a. Police use traffic signs to control speed limits and road conditions.",
+						"b. He is doing wildlife photography for a nature magazine.",
+						"c. A baby's heartbeat is nearly twice as fast as an adult's.",
+						"d. Doctors say it is too early to measure the effectiveness of the drug.",
+						"e. For a while, he imagined that he was a rich man living in a big house."
+					],
+					"answer": 4
+				},
+				{
+					"id": "16",
+					"image": "res://assets/final_exams/11_khordad_1404/q16.png",
+					"question": "16. Which sentence matches this picture?",
+					"options": [
+						"a. Police use traffic signs to control speed limits and road conditions.",
+						"b. He is doing wildlife photography for a nature magazine.",
+						"c. A baby's heartbeat is nearly twice as fast as an adult's.",
+						"d. Doctors say it is too early to measure the effectiveness of the drug.",
+						"e. For a while, he imagined that he was a rich man living in a big house."
+					],
+					"answer": 1
+				}
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b5",
+			"points": 2,
+			"instruction": "برای هر کلمهٔ مشخص‌شده در ستون A، تعریف مناسبی از ستون B انتخاب کنید. (یک تعریف در ستون B اضافی است.)",
+			"options": [
+				"a. people who spend a lot of time watching TV",
+				"b. to be different from each other",
+				"c. who or what a person is",
+				"d. to form a thing, or number",
+				"e. without worry"
+			],
+			"items": [
+				{ "id": "17", "text": "17. Iran makes up nearly 1.1% of the world's population. (makes up)", "answer": "d. to form a thing, or number" },
+				{ "id": "18", "text": "18. A lot of kids today are overweight and lazy. They are known as couch potatoes. (couch potatoes)", "answer": "a. people who spend a lot of time watching TV" },
+				{ "id": "19", "text": "19. I tried to stay calm and just listen to him. (calm)", "answer": "e. without worry" },
+				{ "id": "20", "text": "20. We don't know the identity of the man in the picture. (identity)", "answer": "c. who or what a person is" }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b6",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "21", "question": "21. Some people eat too much when they are …….. .", "options": ["a. balanced", "b. depressed", "c. fluent", "d. special"], "answer": 1 },
+				{ "id": "22", "question": "22. It is a(n) …….. in Iran to take your shoes off when you go to the holy places.", "options": ["a. strategy", "b. emotion", "c. custom", "d. addiction"], "answer": 2 },
+				{ "id": "23", "question": "23. Son: Mom! I'm in a hurry. Would you please help me? Mom: Why do you always …….. at the last minute?", "options": ["a. gain", "b. create", "c. shut", "d. pack"], "answer": 3 },
+				{ "id": "24", "question": "24. Tourist: What is your favorite food? Zahra: Rice and fish. Rice is the most …….. food in Iran.", "options": ["a. popular", "b. sociable", "c. harmful", "d. physical"], "answer": 0 }
+			]
+		},
+		{
+			"type": "word_bank",
+			"exercise_id": "b7",
+			"points": 2,
+			"instruction": "با استفاده از کلمات داده‌شده، مکالمهٔ زیر را کامل کنید. (یک کلمه اضافی است.)",
+			"word_bank": ["vary", "weave", "unique", "appreciate", "prevent"],
+			"items": [
+				{ "id": "25", "text": "25. Every culture has something …….. .", "answer": "unique" },
+				{ "id": "26", "text": "26. In my city, people …….. beautiful rugs by hand.", "answer": "weave" },
+				{ "id": "27", "text": "27. Languages …….. greatly from region to region.", "answer": "vary" },
+				{ "id": "28", "text": "28. Yeah, and I …….. all these differences.", "answer": "appreciate" }
+			]
+		},
+		{ "type": "h4", "text": "Grammar — دستور زبان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b8",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "29", "question": "29. A: Do you often see Ali in the Spanish class? B: No. In fact, I …….. him for the last two weeks.", "options": ["a. haven't seen", "b. don't see", "c. didn't see", "d. won't see"], "answer": 0 },
+				{ "id": "30", "question": "30. A: Do you know …….. languages exist in the world? B: Yes, I have …….. information about it.", "options": ["a. how much / a lot of", "b. how many / some", "c. how much / many", "d. how many / a few"], "answer": 1 },
+				{ "id": "31", "question": "31. A: How much do …….. cinema tickets cost? B: I am not sure. Why don't you check it online?", "options": ["a. fifty nine", "b. two hundreds", "c. twenty and four", "d. two hundred"], "answer": 3 },
+				{ "id": "32", "question": "32. A: Let's play a computer game this afternoon. B: It depends. If it doesn't rain, I …….. my grandparents.", "options": ["a. visit", "b. have visited", "c. will visit", "d. visited"], "answer": 2 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b9",
+			"points": 1.5,
+			"instruction": "با توجه به تصاویر، جاهای خالی را با کلمات مناسب کامل کنید.",
+			"items": [
+				{ "id": "33a", "text": "33. B: I need two ______ of bread. (a word meaning a whole unit of bread)", "answer": ["loaves", "loaf"] },
+				{ "id": "33b", "image": "res://assets/final_exams/11_khordad_1404/q33_bread.png", "text": "33. I need two loaves of ______ .", "answer": ["bread"] },
+				{ "id": "33c", "image": "res://assets/final_exams/11_khordad_1404/q33_bottles.png", "text": "33. I need three ______ of milk.", "answer": ["bottles"] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b10",
+			"points": 1.5,
+			"instruction": "شکل صحیح افعال داخل پرانتز را در جاهای خالی بنویسید.",
+			"items": [
+				{ "id": "34", "text": "34. Many students ______ (decrease) their sleeping time recently, because they surf the net most of the time.", "answer": ["have decreased"] },
+				{ "id": "35", "text": "35. If they ______ (not / give up) this bad habit, they will become sick in the near future.", "answer": ["don't give up", "do not give up"] },
+				{ "id": "36", "text": "36. If they don't give up this bad habit, they ______ (become) sick in the near future.", "answer": ["will become", "may become", "can become"] }
+			]
+		},
+		{
+			"type": "sentence_ordering",
+			"exercise_id": "b11",
+			"points": 2,
+			"instruction": "جمله‌های ناقص زیر را با استفاده از کلمات به‌هم‌ریخته داخل پرانتز کامل کنید.",
+			"items": [
+				{
+					"id": "37",
+					"question": "37. He often ______ . (gets / his weight / depressed / about)",
+					"words": ["gets", "his weight", "depressed", "about"],
+					"answer": ["gets", "depressed", "about", "his weight"]
+				},
+				{
+					"id": "38",
+					"question": "38. When I grow up, I ______ . (like him / will / an artist / become)",
+					"words": ["like him", "will", "an artist", "become"],
+					"answer": ["will", "become", "an artist", "like him"]
+				}
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b12",
+			"points": 1,
+			"instruction": "با توجه به تصویر/مکالمه، جای خالی را کامل کنید.",
+			"items": [
+				{ "id": "39", "text": "39. Sima: Dad! Is my shirt ready to wear? Dad: Just a minute. I ______ it yet. (to press)", "answer": ["haven't pressed", "have not pressed"] }
+			]
+		},
+		{ "type": "h4", "text": "Reading — درک مطلب" },
+		{
+			"type": "passage",
+			"passage": "Culture is a system of shared beliefs that are common in a society. Some cultural elements include food, music, clothing, holidays, values, behaviors, and artifacts. Learning to respect other cultures is important for having new experience and learning about the world. One of the first things to learn about other cultures is to simply accept that there are many different cultures other than our own culture. One of the most important ways to learn to become respectful of other cultures is to spend some time reflecting on our own. Then it is important to understand something about other cultures.\nFor those who want to learn about other cultures, but do not know where to start, a great place to start is reading about the cultures that interest them. In today's world, if we all are able to know about other cultures, and respect them, life would be easier for most of us."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b13a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "40", "statement": "40. Culture is only a combination of food, clothing, and holidays.", "answer": false },
+				{ "id": "41", "statement": "41. Respecting other cultures often makes our lives easier.", "answer": true }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b13b",
+			"points": 1,
+			"instruction": "بر اساس متن، جاهای خالی را با کلمات مناسب کامل کنید.",
+			"items": [
+				{ "id": "42", "text": "42. Spending some time reflecting on our own ______ is one of the most important ways to learn to become respectful of other cultures.", "answer": ["culture"] },
+				{ "id": "43", "text": "43. A system of shared beliefs that are ______ in a society is called culture.", "answer": ["common"] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b13c",
+			"points": 1,
+			"instruction": "به سوال زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "44", "text": "44. How can one learn about other cultures?", "answer": ["(by) reading about the cultures that interest them"], "required_words": ["reading"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Language is a powerful tool that humans use to communicate with each other. Verbal and non-verbal communication has become the key to success of people in their daily life. Verbal communication, using words instead of gestures, is the necessary tool for communication. Non-verbal communication has diverse forms such as body language, gestures, facial expressions, sign language, etc. All languages have spoken forms, but some of them don't have written forms. Surprisingly, there are about 7000 languages in the world. Of these languages, more than 2000 languages are in Africa, 1000 in Americas, more than 2250 in Asia, about 230 in Europe and more than 1300 in Oceania. About 548 languages have fewer than 99 speakers, making nearly 8 percent of the world's languages. We call them \"endangered languages\". As the speakers of such languages grow old and die, their languages will die, too."
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b14",
+			"points": 3,
+			"instruction": "متن بالا را بخوانید و جدول را با اطلاعات خواسته‌شده کامل کنید (Scan the passage).",
+			"items": [
+				{ "id": "45", "text": "45. The percent of endangered languages:", "answer": ["8", "eight"] },
+				{ "id": "46", "text": "46. The continent with the largest number of languages:", "answer": ["asia"] },
+				{ "id": "47", "text": "47. The reference of the underlined \"their\" in the last line:", "answer": ["speakers", "the speakers"] },
+				{ "id": "48", "text": "48. The number of languages with fewer than 99 speakers:", "answer": ["548"] },
+				{ "id": "49", "text": "49. An example of non-verbal communication:", "answer": ["body language", "gestures", "facial expressions", "sign language"], "required_words": [] },
+				{ "id": "50", "text": "50. Two forms of language:", "answer": ["spoken and written"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Artificial Intelligence, or AI, is the ability of a computer or a robot to do activities that usually need human intelligence. These tasks and activities include understanding languages, recognizing pictures, solving problems, and learning from experience. AI is used in many parts of our lives today, like virtual assistance, self-driving cars, and suggestion systems on websites. AI helps doctors cure diseases and suggests good medicines in healthcare. AI is also changing education in many ways. Many schools and universities use AI tools to help students learn better. These tools can check how well students are doing, show what they need to work on, and give lessons that meet their needs. AI can give quick feedback on homework and tests, helping students learn faster. Teachers can also use AI to save time on grading and making lesson plans.\nAI has many good uses; however, some people worry about its bad effects. They think AI might take away jobs. Others are also worried that AI might make mistakes. Despite these worries, many specialists believe that if AI is used carefully and with good rules, it can help society a lot. So, people, companies, and governments need to work together to use AI in a good and fair way."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b15a",
+			"points": 1.5,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "51", "statement": "51. AI can understand languages and recognize pictures.", "answer": true },
+				{ "id": "52", "statement": "52. AI is mostly used in computers and has no use in cars.", "answer": false },
+				{ "id": "53", "statement": "53. AI tools can help teachers to grade and make lesson plans.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b15b",
+			"points": 0.5,
+			"instruction": "به سوال زیر پاسخ دهید.",
+			"items": [
+				{ "id": "54", "question": "54. What does the underlined \"these\" in paragraph one refer to?", "options": ["a. schools", "b. tools", "c. universities", "d. students"], "answer": 1 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b15c",
+			"points": 2,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "55", "text": "55. What is Artificial Intelligence?", "answer": ["the ability of a computer or a robot to do activities that usually need human intelligence"], "required_words": ["intelligence"] },
+				{ "id": "56", "text": "56. Why do some people worry about AI?", "answer": ["because they think AI might take away jobs, and might make mistakes"], "required_words": ["jobs"] }
+			]
+		},
+		{ "type": "h4", "text": "Writing — نوشتار" },
+		{
+			"type": "table_fill",
+			"exercise_id": "b16",
+			"points": 1.5,
+			"instruction": "کلمات مشخص‌شدهٔ متن زیر را بر اساس نقش دستوری‌شان در جدول بنویسید.\n(Technology) has influenced the lives of people (rapidly) (in this century). It (has helped) (researchers) (everywhere) to find anti-cancer medicines.\nOptions: Subject · Verb · Object · Adverb of manner · Adverb of time · Adverb of place",
+			"columns": ["Word", "Its grammatical role"],
+			"rows": [
+				{ "cells": [ { "text": "a. technology" }, { "editable": true, "answer": ["subject"] } ] },
+				{ "cells": [ { "text": "b. in this century" }, { "editable": true, "answer": ["adverb of time"] } ] },
+				{ "cells": [ { "text": "c. has helped" }, { "editable": true, "answer": ["verb"] } ] },
+				{ "cells": [ { "text": "d. rapidly" }, { "editable": true, "answer": ["adverb of manner"] } ] },
+				{ "cells": [ { "text": "e. researchers" }, { "editable": true, "answer": ["object"] } ] },
+				{ "cells": [ { "text": "f. everywhere" }, { "editable": true, "answer": ["adverb of place"] } ] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b17",
+			"points": 2,
+			"instruction": "شکل صحیح افعال داخل پرانتز را در جاهای خالی بنویسید.",
+			"items": [
+				{ "id": "58", "text": "58. I know that ______ (do) daily exercise is useful for everyone.", "answer": ["doing"] },
+				{ "id": "59", "text": "59. That's why I usually go ______ (jog) every other day.", "answer": ["jogging"] },
+				{ "id": "60", "text": "60. I have also decided ______ (not smoke) anymore.", "answer": ["not to smoke"] },
+				{ "id": "61", "text": "61. Besides, I am thinking about ______ (live) in a small village.", "answer": ["living"] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b18",
+			"points": 2,
+			"instruction": "با توجه به تصاویر داده‌شده، جمله‌ها را کامل کنید.",
+			"items": [
+				{ "id": "62", "text": "62. A: What does the doctor expect his patient to do? B: He ______ his blood pressure regularly. (control)", "answer": ["expects him to control"], "required_words": ["control"] },
+				{ "id": "63", "text": "63. A: What is the boy good at? B: He ______ . (cycle)", "answer": ["is good at cycling"], "required_words": ["cycling"] }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b19",
+			"points": 1.5,
+			"instruction": "شکل صحیح کلمات مشخص‌شدهٔ جمله‌های زیر را که دارای اشتباه نگارشی است، بنویسید.",
+			"items": [
+				{ "id": "64", "text": "64. Can you finish (clean) the room soon?", "answer": ["cleaning"] },
+				{ "id": "65", "text": "65. The tourist was fortunate (receive) a nice collection of Iranian handicrafts.", "answer": ["to receive"] },
+				{ "id": "66", "text": "66. Without (use) notes, our teacher can speak about addiction for two hours.", "answer": ["using"] }
+			]
+		}
+	]
+}

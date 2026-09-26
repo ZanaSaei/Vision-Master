@@ -55,6 +55,8 @@ static func start_learning(p_book: int, p_lesson: int) -> bool:
 
 ## Deals today's five words in competition mode.
 static func start_competition() -> bool:
+	if ScrambledScoreManager.today_played():
+		return false
 	var words := ScrambledDailyPicker.pick()
 	var first: Dictionary = {}
 	if not words.is_empty() and words[0] is Dictionary:

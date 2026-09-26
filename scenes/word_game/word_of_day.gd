@@ -21,6 +21,8 @@ const SCENE_WORD_GAME := "res://scenes/word_game/WordGame.tscn"
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)
 	help_button.pressed.connect(_on_help_button_pressed)
+	back_button.mouse_filter = Control.MOUSE_FILTER_STOP
+	help_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	# The app-wide theme walk styles a scene when it is *entered*, not on a
 	# live toggle; re-walking from here keeps the header and the page surface
 	# in step when the theme is switched while the puzzle is open. (The game

@@ -86,6 +86,7 @@ grow_vertical = 2
 
 [node name="EndScroll" type="ScrollContainer" parent="EndPanel" unique_id=1909030105]
 layout_mode = 2
+horizontal_scroll_mode = 0
 
 [node name="EndBox" type="VBoxContainer" parent="EndPanel/EndScroll" unique_id=427566572]
 layout_mode = 2
@@ -116,8 +117,9 @@ theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
 [node name="SourceLabel" type="Label" parent="EndPanel/EndScroll/EndBox" unique_id=1692366186]
-custom_minimum_size = Vector2(880, 0)
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -130,46 +132,52 @@ theme_override_font_sizes/font_size = 36
 text = "تلفظ کلمه"
 
 [node name="MeaningFaLabel" type="Label" parent="EndPanel/EndScroll/EndBox" unique_id=452176970]
-custom_minimum_size = Vector2(880, 0)
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "معنی: —"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="MeaningEnLabel" type="Label" parent="EndPanel/EndScroll/EndBox" unique_id=951029185]
-custom_minimum_size = Vector2(880, 0)
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 34
 text = "Meaning: —"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="ExampleLabel" type="Label" parent="EndPanel/EndScroll/EndBox" unique_id=1377505201]
-custom_minimum_size = Vector2(880, 0)
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Example: —"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="SynonymsLabel" type="Label" parent="EndPanel/EndScroll/EndBox" unique_id=2146719063]
-custom_minimum_size = Vector2(880, 0)
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="AntonymsLabel" type="Label" parent="EndPanel/EndScroll/EndBox" unique_id=1903125019]
-custom_minimum_size = Vector2(880, 0)
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="StatsLabel" type="Label" parent="EndPanel/EndScroll/EndBox" unique_id=1952761282]
-custom_minimum_size = Vector2(880, 0)
+custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -205,6 +213,7 @@ grow_vertical = 2
 
 [node name="HelpBox" type="VBoxContainer" parent="HelpPanel" unique_id=816628261]
 layout_mode = 2
+layout_direction = 1
 theme_override_constants/separation = 14
 
 [node name="HelpTitle" type="Label" parent="HelpPanel/HelpBox" unique_id=704969052]
@@ -215,7 +224,16 @@ horizontal_alignment = 1
 
 [node name="LegendGreen" type="HBoxContainer" parent="HelpPanel/HelpBox" unique_id=834158840]
 layout_mode = 2
+layout_direction = 1
 theme_override_constants/separation = 16
+
+[node name="Text" type="Label" parent="HelpPanel/HelpBox/LegendGreen" unique_id=1233142143]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "حرف درست، در جای درست"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Swatch" type="ColorRect" parent="HelpPanel/HelpBox/LegendGreen" unique_id=1280821143]
 custom_minimum_size = Vector2(44, 44)
@@ -223,15 +241,18 @@ layout_mode = 2
 size_flags_vertical = 4
 color = Color(0.41568628, 0.6666667, 0.39215687, 1)
 
-[node name="Text" type="Label" parent="HelpPanel/HelpBox/LegendGreen" unique_id=1233142143]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "حرف درست، در جای درست"
-vertical_alignment = 1
-
 [node name="LegendYellow" type="HBoxContainer" parent="HelpPanel/HelpBox" unique_id=1480690087]
 layout_mode = 2
+layout_direction = 1
 theme_override_constants/separation = 16
+
+[node name="Text" type="Label" parent="HelpPanel/HelpBox/LegendYellow" unique_id=1848850660]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "حرف درست، در جای دیگر"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Swatch" type="ColorRect" parent="HelpPanel/HelpBox/LegendYellow" unique_id=385590670]
 custom_minimum_size = Vector2(44, 44)
@@ -239,15 +260,18 @@ layout_mode = 2
 size_flags_vertical = 4
 color = Color(0.7882353, 0.7058824, 0.34509805, 1)
 
-[node name="Text" type="Label" parent="HelpPanel/HelpBox/LegendYellow" unique_id=1848850660]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "حرف درست، در جای دیگر"
-vertical_alignment = 1
-
 [node name="LegendGray" type="HBoxContainer" parent="HelpPanel/HelpBox" unique_id=1870040129]
 layout_mode = 2
+layout_direction = 1
 theme_override_constants/separation = 16
+
+[node name="Text" type="Label" parent="HelpPanel/HelpBox/LegendGray" unique_id=1605866552]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "این حرف در کلمه نیست"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Swatch" type="ColorRect" parent="HelpPanel/HelpBox/LegendGray" unique_id=966028378]
 custom_minimum_size = Vector2(44, 44)
@@ -255,18 +279,18 @@ layout_mode = 2
 size_flags_vertical = 4
 color = Color(0.47058824, 0.4862745, 0.49411765, 1)
 
-[node name="Text" type="Label" parent="HelpPanel/HelpBox/LegendGray" unique_id=1605866552]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "این حرف در کلمه نیست"
-vertical_alignment = 1
-
 [node name="HelpBody" type="Label" parent="HelpPanel/HelpBox" unique_id=948329125]
 custom_minimum_size = Vector2(880, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
-text = "هر روز یک کلمه‌ی پنهان وجود دارد و حداکثر ۶ تلاش داری تا آن را پیدا کنی. هر حدس باید یک کلمه‌ی واقعی از فهرست واژگان بازی باشد؛ حدس‌های نامعتبر یک تلاش را حساب نمی‌شوند. کلمه‌ی پنهان هر روز ساعت ۱۲ شب به وقت جهانی (UTC) عوض می‌شود."
+text = "هر روز یک کلمه‌ی پنهان وجود دارد و حداکثر ۶ تلاش داری تا آن را پیدا کنی. هر ترکیب حروفی به اندازه‌ی کلمه‌ی پنهان، حتی اگر واژه‌ی واقعی نباشد، پذیرفته می‌شود. رنگ‌ها نشان می‌دهند حروف حدس در کجای کلمه‌ی پنهان قرار دارند. کلمه‌ی پنهان هر روز ساعت ۱۲ شب به وقت جهانی (UTC) عوض می‌شود."
+horizontal_alignment = 2
 autowrap_mode = 2
+
+[node name="HelpSpacer" type="Control" parent="HelpPanel/HelpBox" unique_id=258408314]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="HelpCloseButton" type="Button" parent="HelpPanel/HelpBox" unique_id=956906631]
 custom_minimum_size = Vector2(0, 90)

@@ -256,9 +256,7 @@ func _make_summary_card() -> PanelContainer:
 	column.add_child(_make_card_title("خلاصه", accent))
 	var counts := ScrambledGameManager.score_band_counts()
 	if competition:
-		column.add_child(_make_stat_row("کلمه‌های درست",
-			"%s از %s" % [digits(ScrambledGameManager.correct_count()),
-				digits(ScrambledDailyPicker.WORDS_PER_DAY)], accent))
+		column.add_child(_make_progress_stat("پیشرفت امروز", ScrambledGameManager.correct_count(), ScrambledDailyPicker.WORDS_PER_DAY, accent))
 		column.add_child(_make_stat_row("بهترین امتیاز",
 			digits(ScrambledScoreManager.best_score()), COLOR_RECORD))
 		column.add_child(_make_stat_row("روزهای مسابقه",
@@ -281,6 +279,45 @@ func _make_summary_card() -> PanelContainer:
 	column.add_child(_make_stat_row("میانگین هر کلمه",
 		_format_seconds(ScrambledGameManager.average_seconds()), COLOR_RECORD))
 	return column.get_parent().get_parent() as PanelContainer
+
+
+## A compact visual progress chart for the daily set.
+func _make_progress_stat(label_text: String, value: int, maximum: int, accent: Color) -> VBoxContainer:
+	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	box.add_theme_constant_override("separation", 10)
+	var heading := HBoxContainer.new()
+	var caption := Label.new()
+	caption.text = label_text
+	caption.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	caption.add_theme_font_override("font", MenuStyle.vazir())
+	caption.add_theme_font_size_override("font_size", 28)
+	caption.add_theme_color_override("font_color", MenuStyle.subtitle_color())
+	heading.add_child(caption)
+	var amount := Label.new()
+	amount.text = "%s / %s" % [digits(value), digits(maximum)]
+	amount.add_theme_font_override("font", MenuStyle.vazir())
+	amount.add_theme_font_size_override("font_size", 28)
+	amount.add_theme_color_override("font_color", accent)
+	heading.add_child(amount)
+	box.add_child(heading)
+	var bar := ProgressBar.new()
+	bar.name = "StatisticsProgress"
+	bar.custom_minimum_size = Vector2(0, 18)
+	bar.min_value = 0.0
+	bar.max_value = float(maximum)
+	bar.value = clampi(value, 0, maximum)
+	bar.show_percentage = false
+	var track := StyleBoxFlat.new()
+	track.bg_color = ScrambledTheme.track_color()
+	track.set_corner_radius_all(12)
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = accent
+	fill.set_corner_radius_all(12)
+	bar.add_theme_stylebox_override("background", track)
+	bar.add_theme_stylebox_override("fill", fill)
+	box.add_child(bar)
+	return box
 
 
 ## Word by word: what was spelled, how long it took and what it was worth.
@@ -316,9 +353,14 @@ func _make_action_row() -> HBoxContainer:
 	again.add_theme_stylebox_override("normal", _filled_style(accent, false))
 	again.add_theme_stylebox_override("hover", _filled_style(accent, true))
 	again.add_theme_stylebox_override("pressed", _filled_style(accent, true))
-	again.pressed.connect(func() -> void:
-		Sfx.click()
-		replay_requested.emit())
+	if ScrambledGameManager.is_competition() and ScrambledScoreManager.today_played():
+		again.text = "چالش امروز انجام شد"
+		again.disabled = true
+		again.modulate = Color(0.68, 0.70, 0.74, 0.72)
+	else:
+		again.pressed.connect(func() -> void:
+			Sfx.click()
+			replay_requested.emit())
 	MenuStyle.wire_microinteractions(again)
 	row.add_child(again)
 
@@ -349,9 +391,26 @@ func _filled_style(accent: Color, hover: bool) -> StyleBoxFlat:
 	return style
 
 
-func _make_stat_row(label_text: String, value_text: String, accent: Color) -> HBoxContainer:
+func _stat_row_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = ScrambledTheme.track_color()
+	style.set_corner_radius_all(18)
+	return style
+
+
+func _make_stat_row(label_text: String, value_text: String, _accent: Color) -> PanelContainer:
+	var panel := PanelContainer.new()
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.add_theme_stylebox_override("panel", _stat_row_style())
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 14)
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 16)
+	margin.add_theme_constant_override("margin_right", 16)
+	margin.add_theme_constant_override("margin_top", 10)
+	margin.add_theme_constant_override("margin_bottom", 10)
+	margin.add_child(row)
+	panel.add_child(margin)
 	var name_label := Label.new()
 	name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	name_label.text = label_text
@@ -362,10 +421,16 @@ func _make_stat_row(label_text: String, value_text: String, accent: Color) -> HB
 	name_label.add_theme_font_size_override("font_size", 30)
 	name_label.add_theme_color_override("font_color", MenuStyle.subtitle_color())
 	row.add_child(name_label)
-	var value_label: Label = MenuStyle.pill_label(value_text, accent, 28)
-	value_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var value_label := Label.new()
+	value_label.text = value_text
+	value_label.custom_minimum_size = Vector2(112, 54)
+	value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	value_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	value_label.add_theme_font_override("font", MenuStyle.vazir())
+	value_label.add_theme_font_size_override("font_size", 28)
+	value_label.add_theme_color_override("font_color", MenuStyle.text())
 	row.add_child(value_label)
-	return row
+	return panel
 
 
 ## "۰:۱۲" — the same mm:ss shape the gameplay timer uses.
@@ -378,9 +443,34 @@ func digits(value: int) -> String:
 	return MenuStyle.persian_digits(str(value))
 
 
-func _make_word_row(entry: Dictionary, word_index: int) -> HBoxContainer:
+func _make_word_badge(text: String, _accent: Color) -> Label:
+	var badge := Label.new()
+	badge.text = text
+	badge.custom_minimum_size = Vector2(104, 54)
+	badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	badge.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	badge.add_theme_font_override("font", MenuStyle.vazir())
+	badge.add_theme_font_size_override("font_size", 29)
+	badge.add_theme_color_override("font_color", MenuStyle.text())
+	var style := StyleBoxFlat.new()
+	style.bg_color = ScrambledTheme.track_color()
+	style.set_corner_radius_all(16)
+	badge.add_theme_stylebox_override("normal", style)
+	return badge
+
+
+func _make_word_row(entry: Dictionary, word_index: int) -> PanelContainer:
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", _stat_row_style())
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 12)
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 14)
+	margin.add_theme_constant_override("margin_right", 14)
+	margin.add_theme_constant_override("margin_top", 10)
+	margin.add_theme_constant_override("margin_bottom", 10)
+	margin.add_child(row)
+	panel.add_child(margin)
 	var word := Label.new()
 	word.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	word.text = "%s. %s" % [MenuStyle.persian_digits(str(word_index)), str(entry.get("word", ""))]
@@ -390,17 +480,13 @@ func _make_word_row(entry: Dictionary, word_index: int) -> HBoxContainer:
 	word.add_theme_font_size_override("font_size", 38)
 	word.add_theme_color_override("font_color", MenuStyle.text())
 	row.add_child(word)
+	var metadata := HBoxContainer.new()
+	metadata.add_theme_constant_override("separation", 8)
+	metadata.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	if bool(entry.get("hint_used", false)):
-		var hint: Label = MenuStyle.pill_label("با راهنما", COLOR_HINT, 26)
-		hint.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		row.add_child(hint)
-	var time: Label = MenuStyle.pill_label(_format_seconds(float(entry.get("seconds", 0.0))),
-		COLOR_RECORD, 26)
-	time.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	row.add_child(time)
+		metadata.add_child(_make_word_badge("راهنما", COLOR_HINT))
+	metadata.add_child(_make_word_badge(_format_seconds(float(entry.get("seconds", 0.0))), COLOR_RECORD))
 	if ScrambledGameManager.is_competition():
-		var points: Label = MenuStyle.pill_label("%s+" % digits(int(entry.get("points", 0))),
-			COLOR_SCORE, 26)
-		points.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		row.add_child(points)
-	return row
+		metadata.add_child(_make_word_badge("%s+" % digits(int(entry.get("points", 0))), COLOR_SCORE))
+	row.add_child(metadata)
+	return panel

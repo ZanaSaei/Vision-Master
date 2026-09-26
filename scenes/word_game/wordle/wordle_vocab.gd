@@ -17,12 +17,13 @@ extends RefCounted
 
 const DICTIONARY_PATH := "res://data/v_dictionary.json"
 
-## Minimum playable word length (answers are 5+ letters).
+## Supported Wordle answer/guess lengths.
 const MIN_WORD_LENGTH := 5
+const MAX_WORD_LENGTH := 7
 
 ## English-only alphabet guard: rejects spaces, hyphens, apostrophes,
 ## slashes, digits, accented letters, multi-word expressions, etc.
-const _WORD_PATTERN := "^[a-z]{%d,}$" % MIN_WORD_LENGTH
+const _WORD_PATTERN := "^[a-z]{%d,%d}$" % [MIN_WORD_LENGTH, MAX_WORD_LENGTH]
 
 ## Cached processed data (built lazily on first access).
 static var _word_set: Dictionary = {}

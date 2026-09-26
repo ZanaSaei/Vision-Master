@@ -62,14 +62,11 @@ func get_current_row() -> String:
 	return current_row
 
 
-## True when `word` is the right length AND in the game dictionary.
-## The answer itself is always valid even if it only entered the pool
-## via a synonym/antonym (it is by construction in the pool anyway).
+## True when `word` has the same number of letters as the answer.
+## Guesses need not be dictionary words, so learners can try any letter
+## combination and still receive positional feedback.
 func is_valid_guess(word: String) -> bool:
-	var u := word.to_upper()
-	if u.length() != answer.length():
-		return false
-	return WordleVocab.is_valid_word(u)
+	return word.length() == answer.length()
 
 
 ## Appends a letter to the current row (if room and still playing).

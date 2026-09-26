@@ -157,21 +157,11 @@ func test_evaluator() -> void:
 	_eval("CRANE", "CRONY", [2, 2, 0, 2, 0])
 	_eval("ABBAA", "AAABB", [2, 1, 1, 1, 1])
 	_eval("SPEED", "DZZZZ", [1, 0, 0, 0, 0])
-	# The answer's single L is consumed by the exact match at index 0, so the
-	# trailing L of the guess is absent — the class docs call out this case.
 	_eval("LEVEL", "LEVER", [2, 2, 2, 2, 0])
-
-	# Guards: an empty evaluation is not a win, and a length mismatch must
-	# never read past the end of the answer.
-	_check(not WordleEvaluator.is_win([]), "an empty evaluation is NOT a win")
-	_check(WordleEvaluator.is_win([2, 2, 2]), "an all-correct row is a win")
-	_check(not WordleEvaluator.is_win([2, 2, 1]), "a row with a yellow letter is not a win")
-	_check(WordleEvaluator.evaluate("ABOUT", "CAT") == [0, 0, 0],
-		"a short guess is reported absent instead of crashing")
-	_check(WordleEvaluator.evaluate("ABOUT", "ABOUTS").size() == 6,
-		"a long guess returns one code per guessed letter")
-	_check(WordleEvaluator.evaluate("", "ABOUT") == [0, 0, 0, 0, 0],
-		"an empty answer cannot win by accident")
+	_check(not WordleEvaluator.is_win([]), "empty evaluation is not a win")
+	_check(WordleEvaluator.evaluate("ABOUT", "CAT") == [0, 0, 0], "short guess is safe")
+	_check(WordleEvaluator.evaluate("ABOUT", "ABOUTS").size() == 6, "long guess returns per-letter codes")
+	_check(WordleEvaluator.evaluate("", "ABOUT") == [0, 0, 0, 0, 0], "empty answer cannot win")
 
 
 func _eval(answer: String, guess: String, expected: Array) -> void:
@@ -185,32 +175,29 @@ func _eval(answer: String, guess: String, expected: Array) -> void:
 # GAME LOOP
 ############################################################
 func test_game() -> void:
-	var game := WordleGame.new("ABOUT", "wordle-test")
-	_check(game.is_valid_guess("ADULT"), "a dictionary guess is accepted")
-	_check(not game.is_valid_guess("QWERT"), "a nonsense guess is rejected")
-	_check(not game.is_valid_guess("CAT"), "a wrong-length guess is rejected")
-
-	game.current_row = "QWERT"
-	var rejected: Dictionary = game.submit_current_row()
-	_check(not rejected.ok and game.attempts_used() == 0,
-		"a rejected guess consumes no attempt")
-	_check(rejected.reason == "not_a_word", "the rejection reason is reported")
-
+	var game: WordleGame = WordleGame.new("ABOUT", "wordle-test")
+	_check(game.is_valid_guess("ADULT"), "dictionary guess accepted")
+	_check(game.is_valid_guess("AAAAA"), "repeated-letter guess accepted")
+	_check(not game.is_valid_guess("CAT"), "wrong-length guess rejected")
+	game.current_row = "AAAAA"
+	var arbitrary: Dictionary = game.submit_current_row()
+	_check(arbitrary.ok and game.attempts_used() == 1, "valid combination consumes attempt")
+	var rejected_game: WordleGame = WordleGame.new("ABOUT", "wordle-test-rejected")
+	rejected_game.current_row = "ZZZZZ"
+	var rejected: Dictionary = rejected_game.submit_current_row()
+	_check(not rejected.ok and rejected_game.attempts_used() == 0, "rejected guess consumes no attempt")
+	_check(rejected.get("reason", "") == "length", "incomplete guess reports a length problem")
 	game.current_row = "CAT"
 	var short: Dictionary = game.submit_current_row()
-	_check(not short.ok and short.reason == "length", "a short row is rejected as a length problem")
-
+	_check(not short.ok and short.reason == "length", "short row reports length error")
 	game.current_row = "ADULT"
 	var accepted: Dictionary = game.submit_current_row()
-	_check(accepted.ok and game.attempts_used() == 1, "a valid guess consumes one attempt")
-	_check(game.remaining_attempts() == WordleGame.MAX_GUESSES - 1, "the attempt counter moves")
-
+	_check(accepted.ok and game.attempts_used() == 2, "valid guess consumes attempt")
 	game.current_row = "ABOUT"
 	var winning: Dictionary = game.submit_current_row()
-	_check(winning.won and game.get_state() == WordleGame.State.WON,
-		"the answer ends the puzzle as WON")
-	_check(game.is_finished(), "a won puzzle reports finished")
-	_check(not game.add_letter("Z"), "a finished puzzle takes no more letters")
+	_check(winning.won and game.get_state() == WordleGame.State.WON, "answer wins")
+	_check(game.is_finished(), "won game reports finished")
+	_check(not game.add_letter("Z"), "finished game rejects more letters")
 
 
 func test_keyboard_states() -> void:

@@ -180,6 +180,13 @@ static func icon_chip(accent_col: Color, radius: int = DesignTokens.RADIUS_XS) -
 static func pill_label(label_text: String, accent_col: Color, font_size: int = 34) -> Label:
 	var lbl := Label.new()
 	lbl.text = label_text
+	style_pill(lbl, accent_col, font_size)
+	return lbl
+
+
+## Dresses an EXISTING label as a pill, so a component scene can declare its
+## chips as nodes and still wear the one badge shape the app uses everywhere.
+static func style_pill(lbl: Label, accent_col: Color, font_size: int = 34) -> void:
 	lbl.add_theme_font_override("font", vazir())
 	lbl.add_theme_font_size_override("font_size", font_size)
 	# The pill chip is translucent, so pick a text colour with real contrast.
@@ -189,7 +196,6 @@ static func pill_label(label_text: String, accent_col: Color, font_size: int = 3
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	lbl.custom_minimum_size = Vector2(0, 60)
-	return lbl
 
 
 ## Text colour for translucent pill/chip backgrounds (theme-aware):

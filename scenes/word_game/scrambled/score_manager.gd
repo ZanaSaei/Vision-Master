@@ -1,37 +1,14 @@
 class_name ScrambledScoreManager
 extends RefCounted
-## ============================================================
-##  SCORE MANAGER — the daily competition score and the practice record.
-##
-##  One small JSON file in user:// holds two records:
-##    * `daily`    — one entry per played day, keeping the BEST attempt of
-##                   that day, plus the overall best and how many days have
-##                   been played,
-##    * `practice` — per lesson: sessions, words spelled and hints used, so
-##                   learning mode keeps a light record of what was practised.
-##
-##  Every read is guarded: a missing or corrupt file starts a fresh record
-##  instead of breaking a screen. Writing rewrites the whole file, which is
-##  cheap at this size and keeps the format obvious to read by hand.
-##
-##  SCORE TABLE (competition, per word) — solved within:
-##      10s → 100  ·  30s → 60  ·  50s → 40  ·  60s → 30  ·  slower → 20
-##  A word solved after the meaning was revealed loses HINT_PENALTY points
-##  (never below MIN_WORD_POINTS), which keeps a daily run between
-##  MIN_DAILY_SCORE (5 × 10 = 50) and MAX_DAILY_SCORE (5 × 100 = 500).
-## ============================================================
 
 const SAVE_PATH := "user://scrambled_words.json"
 const SCHEMA := 1
-
 const WORDS_PER_DAY := ScrambledDailyPicker.WORDS_PER_DAY
 const MAX_WORD_POINTS := 100
 const MIN_WORD_POINTS := 10
 const HINT_PENALTY := 10
 const MAX_DAILY_SCORE := MAX_WORD_POINTS * WORDS_PER_DAY
 const MIN_DAILY_SCORE := MIN_WORD_POINTS * WORDS_PER_DAY
-
-## The time table: the first row whose seconds cover the solve time wins.
 const SCORE_TABLE := [
 	{"seconds": 10.0, "points": 100},
 	{"seconds": 30.0, "points": 60},
@@ -39,8 +16,6 @@ const SCORE_TABLE := [
 	{"seconds": 60.0, "points": 30},
 ]
 const SLOWEST_POINTS := 20
-
-## Qualitative rating of a daily total, best band first.
 const RATINGS := [
 	{"min_score": 450, "label": "شگفت‌انگیز!", "emoji": ""},
 	{"min_score": 350, "label": "خیلی خوب", "emoji": "🌟"},
@@ -48,71 +23,53 @@ const RATINGS := [
 	{"min_score": 150, "label": "قابل قبول", "emoji": "🙂"},
 	{"min_score": 0, "label": "دوباره تلاش کن", "emoji": ""},
 ]
-
 static var _data: Dictionary = {}
 static var _loaded := false
 
-
-## --------------------------------------------------------------- scoring --
 static func base_points_for(seconds: float) -> int:
 	for row in SCORE_TABLE:
 		if seconds <= float(row["seconds"]):
 			return int(row["points"])
 	return SLOWEST_POINTS
 
-
-## Points for one solved word: the time table minus the hint penalty.
 static func points_for(seconds: float, hint_used: bool) -> int:
 	var points := base_points_for(seconds)
 	if hint_used:
-		points -= HINT_PENALTY
+		points = int(floor(float(points) / 2.0))
 	return maxi(MIN_WORD_POINTS, points)
 
-
-## The rating band of a daily total: {label, emoji}.
 static func rating_for(score: int) -> Dictionary:
 	for band in RATINGS:
 		if score >= int(band["min_score"]):
 			return band
 	return RATINGS[RATINGS.size() - 1]
 
-
-## ----------------------------------------------------------- daily record --
 static func today_key() -> String:
 	return ScrambledDailyPicker.date_key()
-
 
 static func today_score() -> int:
 	_ensure_loaded()
 	return int(_today_entry().get("score", 0))
 
-
 static func today_attempts() -> int:
 	_ensure_loaded()
 	return int(_today_entry().get("attempts", 0))
 
-
 static func today_played() -> bool:
 	return today_attempts() > 0
-
 
 static func best_score() -> int:
 	_ensure_loaded()
 	return int(_data.get("best_daily", 0))
 
-
 static func best_score_date() -> String:
 	_ensure_loaded()
 	return str(_data.get("best_daily_date", ""))
 
-
-## How many different days have been played.
 static func played_days() -> int:
 	_ensure_loaded()
 	return (_data.get("daily", {}) as Dictionary).size()
 
-
-## How many attempts (replays included) have been played in total.
 static func total_attempts() -> int:
 	_ensure_loaded()
 	var total := 0
@@ -121,11 +78,7 @@ static func total_attempts() -> int:
 			total += int((entry as Dictionary).get("attempts", 0))
 	return total
 
-
-## Records one finished competition run. Returns true when it took the day's
-## best — the results card says so, and replays can never lower a record.
-static func save_daily_attempt(score: int, words_played: int, hints_used: int,
-		seconds: float) -> bool:
+static func save_daily_attempt(score: int, words_played: int, hints_used: int, seconds: float) -> bool:
 	_ensure_loaded()
 	var key := today_key()
 	var daily: Dictionary = _data["daily"]
@@ -140,15 +93,12 @@ static func save_daily_attempt(score: int, words_played: int, hints_used: int,
 	daily[key] = entry
 	_data["daily"] = daily
 	_data["played_days"] = daily.size()
-
 	if score > int(_data.get("best_daily", 0)):
 		_data["best_daily"] = score
 		_data["best_daily_date"] = key
 	_save()
 	return improved
 
-
-## The most recently played days, newest first: [{date, score, attempts}].
 static func daily_history(limit: int = 7) -> Array:
 	_ensure_loaded()
 	var keys: Array = (_data.get("daily", {}) as Dictionary).keys()
@@ -159,41 +109,25 @@ static func daily_history(limit: int = 7) -> Array:
 			break
 		var key := str(keys[i])
 		var entry: Dictionary = (_data["daily"] as Dictionary).get(key, {})
-		out.append({
-			"date": key,
-			"score": int(entry.get("score", 0)),
-			"attempts": int(entry.get("attempts", 0)),
-		})
+		out.append({"date": key, "score": int(entry.get("score", 0)), "attempts": int(entry.get("attempts", 0))})
 	return out
 
-
-## -------------------------------------------------------- practice record --
-## The key of one lesson's practice record ("1_2" = Vision 1, lesson 2).
 static func practice_key(book: int, lesson: int) -> String:
 	return "%d_%d" % [book, lesson]
 
-
-## Records one spelled word of a learning session, as it happens: leaving a
-## long lesson halfway never throws away the words already practised.
-static func record_practice_word(book: int, lesson: int, hint_used: bool,
-		seconds: float) -> void:
+static func record_practice_word(book: int, lesson: int, hint_used: bool, seconds: float) -> void:
 	_ensure_loaded()
 	var key := practice_key(book, lesson)
 	var practice: Dictionary = _data["practice"]
 	var entry: Dictionary = practice.get(key, {}) if practice.get(key) is Dictionary else {}
 	entry["plays"] = int(entry.get("plays", 0)) + 1
 	entry["words"] = int(entry.get("words", 0)) + 1
-	if hint_used:
-		entry["hints"] = int(entry.get("hints", 0)) + 1
-	else:
-		entry["hints"] = int(entry.get("hints", 0))
+	entry["hints"] = int(entry.get("hints", 0)) + (1 if hint_used else 0)
 	entry["seconds"] = snappedf(float(entry.get("seconds", 0.0)) + maxf(0.0, seconds), 0.1)
 	practice[key] = entry
 	_data["practice"] = practice
 	_save()
 
-
-## {plays, words, hints, seconds} of one lesson, all zero when never played.
 static func practice_stats(book: int, lesson: int) -> Dictionary:
 	_ensure_loaded()
 	var entry = (_data.get("practice", {}) as Dictionary).get(practice_key(book, lesson), {})
@@ -205,8 +139,6 @@ static func practice_stats(book: int, lesson: int) -> Dictionary:
 		out["seconds"] = float(entry.get("seconds", 0.0))
 	return out
 
-
-## How many words have been spelled in learning mode, across every lesson.
 static func total_practice_words() -> int:
 	_ensure_loaded()
 	var total := 0
@@ -215,8 +147,6 @@ static func total_practice_words() -> int:
 			total += int((entry as Dictionary).get("words", 0))
 	return total
 
-
-## Totals across every practised lesson: {lessons, words, hints, seconds}.
 static func practice_summary() -> Dictionary:
 	_ensure_loaded()
 	var out := {"lessons": 0, "words": 0, "hints": 0, "seconds": 0.0}
@@ -229,35 +159,22 @@ static func practice_summary() -> Dictionary:
 		out["seconds"] = float(out["seconds"]) + float((entry as Dictionary).get("seconds", 0.0))
 	return out
 
-
-## ------------------------------------------------------------- internals --
 static func reset_cache() -> void:
 	_data = {}
 	_loaded = false
-
 
 static func _today_entry() -> Dictionary:
 	var entry = (_data.get("daily", {}) as Dictionary).get(today_key(), {})
 	return entry if entry is Dictionary else {}
 
-
 static func _default_data() -> Dictionary:
-	return {
-		"schema": SCHEMA,
-		"best_daily": 0,
-		"best_daily_date": "",
-		"played_days": 0,
-		"daily": {},
-		"practice": {},
-	}
-
+	return {"schema": SCHEMA, "best_daily": 0, "best_daily_date": "", "played_days": 0, "daily": {}, "practice": {}}
 
 static func _ensure_loaded() -> void:
 	if _loaded:
 		return
 	_loaded = true
 	_data = _default_data()
-
 	if not FileAccess.file_exists(SAVE_PATH):
 		return
 	var text := FileAccess.get_file_as_string(SAVE_PATH)
@@ -267,7 +184,6 @@ static func _ensure_loaded() -> void:
 	if json.parse(text) != OK or not (json.data is Dictionary):
 		push_warning("ScrambledScoreManager: ignoring an unreadable %s" % SAVE_PATH)
 		return
-
 	var stored: Dictionary = json.data
 	_data["schema"] = int(stored.get("schema", SCHEMA))
 	_data["best_daily"] = maxi(0, int(stored.get("best_daily", 0)))
@@ -279,7 +195,6 @@ static func _ensure_loaded() -> void:
 	if practice is Dictionary:
 		_data["practice"] = practice
 	_data["played_days"] = (_data["daily"] as Dictionary).size()
-
 
 static func _save() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)

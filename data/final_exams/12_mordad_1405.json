@@ -1,0 +1,347 @@
+{
+	"id": "12_mordad_1405",
+	"title_fa": "امتحان نهایی — دوازدهم · مرداد ۱۴۰۵",
+	"subtitle_fa": "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید. نمره از ۴۰ محاسبه می‌شود.",
+	"audio": "res://assets/final_test/دوازدهم/مرداد ۱۴۰۵/mordad405.mp3",
+	"blocks": [
+		{ "type": "h4", "text": "Listening — بخش شنیداری" },
+		{
+			"type": "true_false",
+			"exercise_id": "b1",
+			"points": 2,
+			"audio": "res://assets/final_test/دوازدهم/مرداد ۱۴۰۵/mordad405.mp3",
+			"show_audio": true,
+			"instruction": "به مکالمهٔ بین علی و بابک گوش دهید و درستی یا نادرستی جمله‌های زیر را مشخص کنید.",
+			"items": [
+				{ "id": "1", "statement": "1. The rain is not heavy right now.", "answer": false },
+				{ "id": "2", "statement": "2. Ali likes to go to the park because he is bored.", "answer": true },
+				{ "id": "3", "statement": "3. Babak suggests playing a physical game.", "answer": false },
+				{ "id": "4", "statement": "4. Sina isn't home to play with them.", "answer": true }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b2",
+			"points": 2,
+			"audio": "res://assets/final_test/دوازدهم/مرداد ۱۴۰۵/mordad405.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی گوش دهید و گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "5", "question": "5. When did he leave work last night?", "options": ["a. early", "b. late", "c. on time"], "answer": 1 },
+				{ "id": "6", "question": "6. At about 9 p.m. last night, most people were …………", "options": ["a. at home", "b. at work", "c. in the street"], "answer": 0 },
+				{ "id": "7", "question": "7. The man had never experienced such a ………… street.", "options": ["a. busy", "b. noisy", "c. quiet"], "answer": 2 },
+				{ "id": "8", "question": "8. What did the driver offer to the man?", "options": ["a. driving him home", "b. giving him some money", "c. going to his office"], "answer": 0 }
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b3",
+			"points": 3,
+			"audio": "res://assets/final_test/دوازدهم/مرداد ۱۴۰۵/mordad405.mp3",
+			"show_audio": true,
+			"instruction": "به فایل صوتی گوش دهید. سپس عبارات ستون A را با ستون B تطبیق دهید. (یک عبارت از ستون B اضافی است.)",
+			"options": [
+				"a. guide and help us to learn and grow.",
+				"b. work hard to keep us safe.",
+				"c. dedicate their time and energy to us.",
+				"d. are with us during good and bad times.",
+				"e. are kind, generous and ready to help."
+			],
+			"items": [
+				{ "id": "9", "text": "9. Our parents …………", "answer": "c. dedicate their time and energy to us." },
+				{ "id": "10", "text": "10. Our teachers …………", "answer": "a. guide and help us to learn and grow." },
+				{ "id": "11", "text": "11. Our friends …………", "answer": "d. are with us during good and bad times." },
+				{ "id": "12", "text": "12. Police officers …………", "answer": "b. work hard to keep us safe." }
+			]
+		},
+		{ "type": "h4", "text": "Vocabulary — واژگان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b4",
+			"points": 2,
+			"instruction": "برای هر تصویر، یکی از جمله‌های داده‌شده را انتخاب کنید. (یک جمله اضافی است.)",
+			"items": [
+				{
+					"id": "13",
+					"image": "res://assets/final_exams/12_mordad_1405/q13.png",
+					"question": "13. Which sentence matches this picture?",
+					"options": [
+						"a. A monolingual dictionary gives word information in one language.",
+						"b. Hydropower is produced as a result of falling or running water.",
+						"c. A wind turbine can produce enough electricity to power many homes.",
+						"d. Special helps can be provided for people with disabilities.",
+						"e. PC is an abbreviation for personal computer."
+					],
+					"answer": 3
+				},
+				{
+					"id": "14",
+					"image": "res://assets/final_exams/12_mordad_1405/q14.png",
+					"question": "14. Which sentence matches this picture?",
+					"options": [
+						"a. A monolingual dictionary gives word information in one language.",
+						"b. Hydropower is produced as a result of falling or running water.",
+						"c. A wind turbine can produce enough electricity to power many homes.",
+						"d. Special helps can be provided for people with disabilities.",
+						"e. PC is an abbreviation for personal computer."
+					],
+					"answer": 4
+				},
+				{
+					"id": "15",
+					"image": "res://assets/final_exams/12_mordad_1405/q15.png",
+					"question": "15. Which sentence matches this picture?",
+					"options": [
+						"a. A monolingual dictionary gives word information in one language.",
+						"b. Hydropower is produced as a result of falling or running water.",
+						"c. A wind turbine can produce enough electricity to power many homes.",
+						"d. Special helps can be provided for people with disabilities.",
+						"e. PC is an abbreviation for personal computer."
+					],
+					"answer": 0
+				},
+				{
+					"id": "16",
+					"image": "res://assets/final_exams/12_mordad_1405/q16.png",
+					"question": "16. Which sentence matches this picture?",
+					"options": [
+						"a. A monolingual dictionary gives word information in one language.",
+						"b. Hydropower is produced as a result of falling or running water.",
+						"c. A wind turbine can produce enough electricity to power many homes.",
+						"d. Special helps can be provided for people with disabilities.",
+						"e. PC is an abbreviation for personal computer."
+					],
+					"answer": 1
+				}
+			]
+		},
+		{
+			"type": "matching",
+			"exercise_id": "b5",
+			"points": 2,
+			"instruction": "برای هر کلمه یا عبارت مشخص‌شده از ستون A، یک تعریف از ستون B انتخاب کنید. (یک تعریف اضافی است.)",
+			"options": [
+				"a. to tell somebody that something is good",
+				"b. to stop being angry with someone",
+				"c. doing is harder and more meaningful than saying",
+				"d. all the people of about the same age within a society",
+				"e. many times"
+			],
+			"items": [
+				{ "id": "17", "text": "17. Actions speak louder than words …………", "answer": "c. doing is harder and more meaningful than saying" },
+				{ "id": "18", "text": "18. Doctors recommend that we should avoid unhealthy foods. (recommend)", "answer": "a. to tell somebody that something is good" },
+				{ "id": "19", "text": "19. We must save fossil fuels for future generations. (generations)", "answer": "d. all the people of about the same age within a society" },
+				{ "id": "20", "text": "20. His parents have told him to repeatedly study for his exams. (repeatedly)", "answer": "e. many times" }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b6",
+			"points": 2,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "21", "question": "21. Amir: Yes, of course. He ………… the first high school in Iran.", "options": ["a. founded", "b. compiled", "c. produced", "d. defined"], "answer": 0 },
+				{ "id": "22", "question": "22. Teacher: Its list of entries has been ………… according to the final letters of the words.", "options": ["a. expanded", "b. contained", "c. circled", "d. arranged"], "answer": 3 },
+				{ "id": "23", "question": "23. Arash: Nothing. He is not very ………… and always keeps to himself.", "options": ["a. unexpected", "b. communicative", "c. unchangeable", "d. valuable"], "answer": 1 },
+				{ "id": "24", "question": "24. Rosa: Yes. In fact, she ………… me of my older sister.", "options": ["a. absorbs", "b. organizes", "c. reminds", "d. includes"], "answer": 2 }
+			]
+		},
+		{
+			"type": "word_bank",
+			"exercise_id": "b7",
+			"points": 2,
+			"instruction": "با استفاده از کلمات داده‌شده جمله‌ها را کامل کنید. (یک کلمه اضافی است.)",
+			"word_bank": ["deserve", "consume", "wisdom", "respect", "achieve"],
+			"items": [
+				{ "id": "25", "text": "25. You must try hard to ………… what you want.", "answer": "achieve" },
+				{ "id": "26", "text": "26. Our elders have done a lot for us and ………… to be cared for.", "answer": "deserve" },
+				{ "id": "27", "text": "27. New dishwashers ………… much less water than hand washing.", "answer": "consume" },
+				{ "id": "28", "text": "28. Students should show their ………… to the teacher by not making noise.", "answer": "respect" }
+			]
+		},
+		{ "type": "h4", "text": "Grammar — دستور زبان" },
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b8",
+			"points": 2.5,
+			"instruction": "گزینهٔ صحیح را انتخاب کنید.",
+			"items": [
+				{ "id": "29", "question": "29. Ali: I think trees can lower the cooling costs of homes, ………… ?", "options": ["a. can't they", "b. can they", "c. do I", "d. don't I"], "answer": 0 },
+				{ "id": "30", "question": "30. Mina: No. When I arrived, they ………… home.", "options": ["a. have gone", "b. would go", "c. are going", "d. had gone"], "answer": 3 },
+				{ "id": "31", "question": "31. Sam: Which language ………… in Australia?", "options": ["a. speaks", "b. is spoken", "c. was speaking", "d. are spoken"], "answer": 1 },
+				{ "id": "32", "question": "32. Kiana: I ………… you if I knew how to do it.", "options": ["a. will help", "b. would help", "c. had helped", "d. have helped"], "answer": 1 },
+				{ "id": "33", "question": "33. Reza: Yes. I met my best friend ………… I hadn't seen for long.", "options": ["a. whose", "b. which", "c. what", "d. whom"], "answer": 3 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b9",
+			"points": 1.5,
+			"instruction": "شکل صحیح افعال داخل پرانتز را در جای خالی قرار دهید.",
+			"items": [
+				{ "id": "34a", "text": "34. I don't have a smart phone. If I ______ (have) one,", "answer": ["had"] },
+				{ "id": "34b", "text": "34. ... I ______ (use) an online dictionary.", "answer": ["would use", "I would use", "'d use"] },
+				{ "id": "35", "text": "35. Kinetic energy in the wind ______ (can / convert) into mechanical power by wind turbines.", "answer": ["can be converted"] }
+			]
+		},
+		{
+			"type": "sentence_ordering",
+			"exercise_id": "b10",
+			"points": 2,
+			"instruction": "با مرتب کردن کلمات داخل پرانتز، مکالمه‌های زیر را کامل کنید.",
+			"items": [
+				{
+					"id": "36",
+					"question": "36. I bought ______ . (suggested / which / the book / the teacher)",
+					"words": ["the book", "which", "the teacher", "suggested"],
+					"answer": ["the book", "which", "the teacher", "suggested"]
+				},
+				{
+					"id": "37",
+					"question": "37. Before we went to the library, she ______ . (bought / already / it / had)",
+					"words": ["bought", "already", "it", "had"],
+					"answer": ["had", "already", "bought", "it"]
+				}
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b11",
+			"points": 2,
+			"instruction": "شکل صحیح گرامری بخش مشخص‌شده را بنویسید.",
+			"items": [
+				{ "id": "38", "text": "38. Bahram: No. It ______ yet. (hasn't / fix)", "answer": ["hasn't been fixed", "has not been fixed"] },
+				{ "id": "39", "text": "39. Ali: Your father ______ you solve this problem, can't he? (help)", "answer": ["can help", "helps"] },
+				{ "id": "40", "text": "40. Sina: Something ______ about the problem. (should / do)", "answer": ["should be done"] },
+				{ "id": "41", "text": "41. Parham: Yes. If I were you, I ______ it to the police. (will)", "answer": ["would report", "would"] }
+			]
+		},
+		{ "type": "h4", "text": "Reading — درک مطلب" },
+		{
+			"type": "passage",
+			"passage": "Nowadays, waste production is increasing. Developing technology has caused the appearance of various goods compared to the past. This has made people produce much more waste than they did before. New advances in technology have turned people into big consumers. Many people believe that this is a big challenge that has changed their lifestyles. However, we might not know that the things nobody needs can be used to produce electricity, heat or fuel. Changing waste to energy can be considered as one of the most helpful ways to save the resources of the earth. Because garbage can be changed directly into a liquid fuel, it can be used in cars, trucks, buses and airplanes. To do that, garbage should be collected and taken to a landfill by workers. People may be paid for voluntary garbage delivery as well. It is important to know that not all types of waste can be used to produce fuel. Some materials may give off gases in the process. Therefore, people should be informed of this danger and warned about the possible harms."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b12a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "42", "statement": "42. In the past, people produced less garbage compared to the present time.", "answer": true },
+				{ "id": "43", "statement": "43. The things nobody needs are only useful for producing heat.", "answer": false }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b12b",
+			"points": 1,
+			"instruction": "به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "44", "question": "44. The pronoun \"their\" in line 4 refers to …………", "options": ["a. advances", "b. workers", "c. people", "d. things"], "answer": 2 },
+				{ "id": "45", "question": "45. Which option is NOT a part of the process of changing waste into energy?", "options": ["a. collecting garbage", "b. taking garbage to landfills", "c. delivering garbage voluntarily", "d. changing liquid fuel into waste"], "answer": 3 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b12c",
+			"points": 1,
+			"instruction": "46. به سوال زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "46", "text": "46. Why should garbage be taken to the landfill by workers?", "answer": ["to be changed into liquid fuel", "to produce liquid fuel", "to change waste into liquid fuel"], "required_words": ["landfill"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "Dictionaries which explain what words mean give a clear definition of them. A good dictionary also gives more information about words. For instance, it explains how they are pronounced. Usually the International Phonetic Alphabet (IPA) is used for this purpose.\nThere are also dictionaries which translate words into other languages. These are bilingual dictionaries. When using a dictionary to find out how to say something in another language, one has to be careful to choose the right meaning.\nA word like 'right' has different meanings in English, for example, 'correct' and 'the opposite of left'. A word like 'present' may be used as an adjective, meaning 'not absent', as a noun, meaning 'gift' or as a verb, meaning 'give'. Words with different meanings exist in other languages, too. A good dictionary lists all the meanings of words to help people find the meaning that they look for. A complete dictionary also tells you about the origin of words. For example, the words 'pajamas', 'bazaar' and 'paradise' entered English from Persian."
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b13",
+			"points": 3,
+			"instruction": "متن بالا را بخوانید و جدول را کامل کنید (Scan the text).",
+			"items": [
+				{ "id": "47", "text": "47. The pronoun 'them' in line 1 refers to …", "answer": ["words"] },
+				{ "id": "48", "text": "48. A word in paragraph 1 which is similar in meaning to 'goal' is …", "answer": ["purpose"] },
+				{ "id": "49", "text": "49. Dictionaries which give you translations of words are …", "answer": ["bilingual", "bilingual dictionaries"] },
+				{ "id": "50", "text": "50. The number of meanings of the word 'right' mentioned in the text is …", "answer": ["2", "two"] },
+				{ "id": "51", "text": "51. In the sentence: \"Ali was present in the class yesterday.\" 'present' means …", "answer": ["not absent"] },
+				{ "id": "52", "text": "52. The word 'paradise' is originally from …", "answer": ["Persian", "Persia"] }
+			]
+		},
+		{
+			"type": "passage",
+			"passage": "We need to appreciate the presence of dedicated groups of people in our lives including teachers, pilots, nurses, doctors, etc. They help others even in the most dangerous situations. One example is Hassan Omidzadeh, a dedicated teacher who worked in a primary school in a small village in the north of Iran. One day the school caught fire and his 30 students were stuck in the fire. He risked his own life to save the kids. He was severely burnt and struggled with the burn injuries for many years. He passed away 15 years after the accident.\nAnother example is Abbas Babaei. He is known as one of the greatest war heroes of Iran. He was an Air Force pilot. During the Iran-Iraq war, he took part in several successful missions to defend our country. Babaei was martyred when he was returning from one of his missions on the day of Ghorban Feast. One more example is Rizali Khajavi (Dehghan-e Fadakar). He is known as a national hero, and his story is taught in Iranian schools. In a cold winter, he took off his coat, tied it to a stick and set it on fire while running towards an express train shouting \"danger\" to draw the train driver's attention to the landslide. The driver managed to stop the train, and a tragic accident was prevented."
+		},
+		{
+			"type": "true_false",
+			"exercise_id": "b14a",
+			"points": 1,
+			"instruction": "متن بالا را بخوانید و درستی یا نادرستی جمله‌ها را مشخص کنید.",
+			"items": [
+				{ "id": "53", "statement": "53. The story of Rizali Khajavi is taught in the schools of our country.", "answer": true },
+				{ "id": "54", "statement": "54. Hassan Omidzadeh is still working in an elementary school.", "answer": false }
+			]
+		},
+		{
+			"type": "multiple_choice",
+			"exercise_id": "b14b",
+			"points": 1,
+			"instruction": "به سوال‌های زیر پاسخ دهید.",
+			"items": [
+				{ "id": "55", "question": "55. According to the passage, which is true about Hassan Omidzadeh?", "options": ["a. His students were not in danger.", "b. He was not injured in the accident.", "c. His students saved his life.", "d. He did something unusual for his students."], "answer": 3 },
+				{ "id": "56", "question": "56. Why did Rizali set his coat on fire?", "options": ["a. The weather was cold.", "b. The train was in danger.", "c. He knew the driver.", "d. He was a national hero."], "answer": 1 }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b14c",
+			"points": 2,
+			"instruction": "به سوال‌های زیر بر اساس متن پاسخ دهید.",
+			"items": [
+				{ "id": "57", "text": "57. Why should we appreciate the presence of dedicated people in our lives?", "answer": ["because they help others even in the most dangerous situations"], "required_words": ["help"] },
+				{ "id": "58", "text": "58. What happened to Babaei on the day of Ghorban Feast?", "answer": ["he was martyred"], "required_words": ["martyred"] }
+			]
+		},
+		{ "type": "h4", "text": "Writing — نوشتار" },
+		{
+			"type": "word_bank",
+			"exercise_id": "b15",
+			"points": 1.5,
+			"instruction": "متن ناقص را با کلمات ربط (but / or / so) کامل کنید. (یک کلمهٔ ربط اضافی است.)",
+			"word_bank": ["but", "or", "so"],
+			"items": [
+				{ "id": "59", "text": "59. Amir wanted to buy a dictionary, ………… he didn't know which dictionary was suitable for him.", "answer": "but" },
+				{ "id": "60", "text": "60. He couldn't find much useful information after using AI, ………… he decided to talk to his English teacher.", "answer": "so" },
+				{ "id": "61", "text": "61. He should buy an intermediate learner's dictionary, ………… borrow one from his friend.", "answer": "or" }
+			]
+		},
+		{
+			"type": "open_ended",
+			"exercise_id": "b16",
+			"points": 0,
+			"instruction": "برای پاراگراف زیر یک جملهٔ موضوعی (topic sentence) و یک جملهٔ نتیجه‌گیری (concluding sentence) بنویسید.",
+			"items": [
+				{ "id": "62", "question": "62. Topic sentence: Learning vocabulary …………", "sample_answer": "Learning vocabulary is possible in several ways." },
+				{ "id": "63", "question": "63. Concluding sentence: Thus, …………", "sample_answer": "You can improve your vocabulary by using these ways." }
+			]
+		},
+		{
+			"type": "fill_blank",
+			"exercise_id": "b17",
+			"points": 0.5,
+			"instruction": "در پاراگراف زیر، یک جملهٔ پشتیبان (supporting sentence) که با جملهٔ موضوعی هم‌خوانی ندارد را پیدا کرده و بنویسید.",
+			"items": [
+				{ "id": "64", "text": "64. (Topic: Air is the most essential element in our life.) The mismatching sentence is:", "answer": ["animals also need water to keep themselves alive"], "required_words": ["water"] }
+			]
+		},
+		{
+			"type": "open_ended",
+			"exercise_id": "b18",
+			"points": 0,
+			"instruction": "با استفاده از عبارات داده‌شده، یک پاراگراف با موضوع Electricity بنویسید. (topic sentence + سه جملهٔ پشتیبان + concluding sentence)",
+			"items": [
+				{ "id": "65", "question": "65. Electricity …………  (powering homes for daily activities · providing energy for factories · helping the police control traffic · supplying hospitals with energy)", "sample_answer": "Electricity is an important part of our daily life. It is used for powering homes for daily activities, providing energy for factories, helping the police control traffic and supplying hospitals with energy. In short, electricity is essential for a modern and comfortable life." }
+			]
+		}
+	]
+}

@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/scrambled/ui/hint_card.gd" id="1_script"]
+
+[node name="HintCard" type="PanelContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ScrambledHintCard"
+script = ExtResource("1_script")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Caption" type="Label" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"ScrambledHintCaption"
+text = "معنی این کلمه چیست؟"
+
+[node name="Meaning" type="Label" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"ScrambledHintMeaning"
+autowrap_mode = 2
+
+[node name="Persian" type="Label" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"ScrambledHintPersian"
+autowrap_mode = 2
+
+[node name="Worth" type="Label" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"ScrambledHintWorth"

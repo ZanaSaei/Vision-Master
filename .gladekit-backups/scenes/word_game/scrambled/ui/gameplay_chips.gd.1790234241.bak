@@ -1,0 +1,74 @@
+class_name ScrambledGameplayChips
+extends HBoxContainer
+## ============================================================
+##  GAMEPLAY CHIPS — where the run stands, in four pills.
+##
+##  Which word of the day is in play, which mode is being played, what the
+##  current word is still worth, and the points banked so far. It is a
+##  component scene of its own (per the project's UI rules) because it is the
+##  one part of the screen the board never has to know about: the screen hands
+##  it the numbers and it decides the words.
+##
+##  A practice lesson keeps its score chips hidden — a lesson awards nothing,
+##  so an «امتیاز» pill there would be a promise the game does not keep.
+## ============================================================
+
+## The accent each chip keeps, so a number reads as the same thing from word to
+## word. Progress borrows the app accent; the rest are the game's own colours.
+const MODE_ACCENT := Color("#C77DFF")
+const WORTH_ACCENT := Color("#FFB703")
+const SCORE_ACCENT := Color("#31C463")
+const FONT_SIZE_PROGRESS := 30
+const FONT_SIZE_MODE := 28
+const FONT_SIZE_WORTH := 28
+const FONT_SIZE_SCORE := 30
+
+@onready var _progress: Label = $Progress
+@onready var _mode: Label = $Mode
+@onready var _worth: Label = $Worth
+@onready var _score: Label = $Score
+
+
+func _ready() -> void:
+	apply_theme()
+
+
+## "کلمه ۳ از ۵" — a practice lesson reads the very same line, which is why the
+## wording is not decided here.
+func set_progress(position: int, total: int) -> void:
+	_progress.text = "کلمه %s از %s" % [
+		MenuStyle.persian_digits(str(position)),
+		MenuStyle.persian_digits(str(total)),
+	]
+
+
+func set_mode(text: String) -> void:
+	_mode.text = text
+
+
+func set_points(points: int) -> void:
+	_score.text = "امتیاز: %s" % MenuStyle.persian_digits(str(points))
+
+
+## `hinted` changes the caption rather than the number: the same word is worth
+## less once its meaning has been read, and saying so is the point.
+func set_worth(worth: int, hinted: bool) -> void:
+	_worth.text = "%s %s" % [
+		"با راهنما:" if hinted else "ارزش:",
+		MenuStyle.persian_digits(str(worth)),
+	]
+
+
+## The two score chips belong to the day's competition only.
+func set_competition(on: bool) -> void:
+	_score.visible = on
+	_worth.visible = on
+
+
+## Re-reads the palette and repaints. Called on a live theme toggle: a chip's
+## accent never changes, only the pill's tint and its text colour.
+func apply_theme() -> void:
+	MenuStyle.style_pill(_progress, DesignTokens.ACCENT, FONT_SIZE_PROGRESS)
+	MenuStyle.style_pill(_mode, MODE_ACCENT, FONT_SIZE_MODE)
+	MenuStyle.style_pill(_worth, WORTH_ACCENT, FONT_SIZE_WORTH)
+	MenuStyle.style_pill(_score, SCORE_ACCENT, FONT_SIZE_SCORE)

@@ -31,7 +31,13 @@ func _ready() -> void:
 	test_learning_session()
 	test_competition_session()
 
+	await test_board_first_word_layout()
+	await test_gameplay_first_word_visible()
+	await test_gameplay_layout()
+	await test_gameplay_theme_variations()
 	await test_board_drag()
+	await test_tile_drag_payload()
+	await test_board_drag_cancel()
 
 	_restore_user_file()
 
@@ -193,8 +199,9 @@ func test_score_table() -> void:
 	_check(ScrambledScoreManager.points_for(60.0, false) == 30, "exactly 60s is still 30")
 	_check(ScrambledScoreManager.points_for(120.0, false) == 20, "a slow solve is worth 20")
 
-	_check(ScrambledScoreManager.points_for(5.0, true) == 90, "a hint costs 10 points")
-	_check(ScrambledScoreManager.points_for(120.0, true) == 10, "a hinted slow solve is worth 10")
+	_check(ScrambledScoreManager.points_for(5.0, true) == 50, "a hint halves the top score")
+	_check(ScrambledScoreManager.points_for(20.0, true) == 30, "a hint halves the middle score")
+	_check(ScrambledScoreManager.points_for(120.0, true) == 10, "a hinted slow solve is floored at 10")
 	_check(ScrambledScoreManager.points_for(120.0, true) == ScrambledScoreManager.MIN_WORD_POINTS,
 		"the penalty never drops a word below the floor")
 
@@ -219,17 +226,17 @@ func test_daily_record() -> void:
 	_check(ScrambledScoreManager.today_score() == 320, "the day keeps its score")
 	_check(ScrambledScoreManager.today_attempts() == 1, "the attempt is counted")
 	_check(ScrambledScoreManager.played_days() == 1, "the day is counted once")
-
+	_check(ScrambledGameManager.start_competition() == false, "a second daily challenge start is rejected")
 	_check(not ScrambledScoreManager.save_daily_attempt(120, 5, 3, 90.0),
-		"a worse replay does not replace the best")
-	_check(ScrambledScoreManager.today_score() == 320, "the best score survives a worse replay")
-	_check(ScrambledScoreManager.today_attempts() == 2, "replays are counted")
+		"duplicate result record does not improve the daily best")
+	_check(ScrambledScoreManager.today_score() == 320, "the best score remains unchanged")
+	_check(ScrambledScoreManager.today_attempts() == 2, "direct record calls still count attempts")
 
-	_check(ScrambledScoreManager.save_daily_attempt(460, 5, 0, 33.0), "a better replay takes the best")
+	_check(ScrambledScoreManager.save_daily_attempt(460, 5, 0, 33.0), "a higher direct record improves the best")
 	_check(ScrambledScoreManager.today_score() == 460, "the day's best is updated")
 	_check(ScrambledScoreManager.best_score() == 460, "the overall best follows")
 	_check(ScrambledScoreManager.best_score_date() == ScrambledDailyPicker.date_key(), "the best date is today")
-	_check(ScrambledScoreManager.total_attempts() == 3, "every attempt is counted")
+	_check(ScrambledScoreManager.total_attempts() == 3, "all record entries are counted")
 	_check(ScrambledScoreManager.daily_history().size() == 1, "the history holds the played day")
 
 	ScrambledScoreManager.reset_cache()
@@ -369,13 +376,18 @@ func test_competition_session() -> void:
 # BOARD (the drag-and-drop itself)
 ############################################################
 ## The pure modules above never touch the screen, so the drag pipeline is
-## exercised here against a real board: grab, drag past two slots, drop, and
-## solve a three-letter word by two moves.
+## exercised here against a real board, driven from the board's side of the
+## seam the native drag uses: the pickup is reported, the finger is followed,
+## and the drop is delivered. The tile's own half of the protocol (the payload
+## and the carried preview) is covered by test_tile_drag_payload.
 func test_board_drag() -> void:
 	var board_scene: PackedScene = load("res://scenes/word_game/scrambled/TileBoard.tscn")
-	var board := board_scene.instantiate()
-	add_child(board)
+	var board := board_scene.instantiate() as ScrambledTileBoard
+	# The board's scene ships stretched, so a size set on it would be re-imposed
+	# by the next layout pass: pin it to a fixed rect first.
+	board.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	board.size = Vector2(1000, 420)
+	add_child(board)
 	await get_tree().process_frame
 	await get_tree().process_frame
 
@@ -396,16 +408,16 @@ func test_board_drag() -> void:
 	var second_tile: ScrambledTile = board.get_child(1)
 	_check(first_tile.letter != "", "tiles carry letters")
 
-	# Drag the first tile two slots to the right and drop it there.
-	var start: Vector2 = first_tile.position + first_tile.size * 0.5
-	board._on_tile_grabbed(first_tile, board.get_global_transform() * start)
-	_check(first_tile.state == ScrambledTile.State.HELD, "a grabbed tile is held")
-	_check(board.is_busy(), "the board knows a tile is carried")
+	# Drag the first letter two slots to the right and drop it there, played
+	# through the tile's own protocol exactly as the Viewport plays it.
+	var drop_x := first_tile.position.x + first_tile.size.x * 0.5 + 700.0
+	var payload: Variant = _begin_drag(first_tile)
+	_check(first_tile.state == ScrambledTile.State.DRAGGING, "a picked-up letter is dragged")
+	_check(board.is_busy(), "the board knows a letter is carried")
 
-	board._on_tile_dragged(first_tile,
-		board.get_global_transform() * (Vector2(start.x + 700.0, start.y)))
+	_hover_drag(first_tile, payload, _board_point(board, drop_x, first_tile.position.y))
 	_check(board._preview_index == 2, "dragging right opens the third slot")
-	board._on_tile_released(first_tile)
+	_end_drag(first_tile, payload, _board_point(board, drop_x, first_tile.position.y))
 	await get_tree().create_timer(0.5).timeout
 	_check(settled.size() >= 1 and not bool(settled[settled.size() - 1]),
 		"the drop settled without solving")
@@ -413,23 +425,12 @@ func test_board_drag() -> void:
 		"the carried tile landed in the slot it was dropped in")
 
 	# Two more moves finish the word. The tile references are captured before
-	# each grab: grabbing calls move_to_front(), which reorders the children,
-	# so a fresh get_child(0) would name a different tile.
-	var dragged: ScrambledTile = board.get_child(0)
-	board._on_tile_grabbed(dragged,
-		board.get_global_transform() * (dragged.position + Vector2(50, 50)))
-	board._on_tile_dragged(dragged,
-		board.get_global_transform() * (Vector2(dragged.position.x + 700.0, dragged.position.y)))
-	board._on_tile_released(dragged)
-	await get_tree().create_timer(0.5).timeout
-
-	dragged = board.get_child(0)
-	board._on_tile_grabbed(dragged,
-		board.get_global_transform() * (dragged.position + Vector2(50, 50)))
-	board._on_tile_dragged(dragged,
-		board.get_global_transform() * (Vector2(dragged.position.x + 700.0, dragged.position.y)))
-	board._on_tile_released(dragged)
-	await get_tree().create_timer(0.5).timeout
+	# each pickup: starting a drag calls move_to_front(), which reorders the
+	# children, so a fresh get_child(0) would name a different tile.
+	for _move in 2:
+		var dragged: ScrambledTile = board.get_child(0)
+		_play_drag(board, dragged, dragged.position.x + dragged.size.x * 0.5 + 700.0)
+		await get_tree().create_timer(0.5).timeout
 	_check(bool(settled[settled.size() - 1]) == board.is_solved(),
 		"the settle signal agrees with the board")
 	_check(board.is_solved(), "the arranged board is solved (%s)" % board.current_text())
@@ -523,6 +524,165 @@ func test_gameplay_first_word_visible() -> void:
 	ScrambledGameManager.abandon()
 
 
+## The screen is laid out by containers, so every band has to land in its place
+## in the column: nothing may overlap the band below it, the board must get the
+## room the others leave, and the overlays must float over the lot. This is the
+## guarantee splitting the screen into component scenes is for.
+func test_gameplay_layout() -> void:
+	ScrambledScoreManager.reset_cache()
+	ScrambledGameManager.reset()
+	_check(ScrambledGameManager.start_learning(1, 2), "a lesson starts for the layout check")
+	var screen_scene: PackedScene = load("res://scenes/word_game/scrambled/Gameplay.tscn")
+	var screen: Control = screen_scene.instantiate()
+	add_child(screen)
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	var band: Control = screen.get_node("Layout/MessageBand")
+	var column: Array = [
+		["the chips sit at the top of the column", screen._chips],
+		["the clock sits under the chips", screen._timer],
+		["the message band sits under the clock", band],
+		["the board takes the room the rest leave", screen._board],
+		["the action row closes the column", screen._actions],
+	]
+	var previous_bottom := 0.0
+	for entry in column:
+		var control: Control = entry[1]
+		_check(control.size.y > 0.0, "%s (height %.0f)" % [entry[0], control.size.y])
+		_check(control.position.y >= previous_bottom - 0.5,
+			"%s: does not overlap what is above it (top %.0f after %.0f)"
+			% [entry[0], control.position.y, previous_bottom])
+		previous_bottom = control.position.y + control.size.y
+	_check(previous_bottom <= screen.size.y + 1.0,
+		"the column fits the screen (bottom %.0f of %.0f)" % [previous_bottom, screen.size.y])
+	_check(screen._board.size.y >= 400.0,
+		"the board clears its own minimum (%.0f)" % screen._board.size.y)
+	_check(screen._hint_card.size.y > 0.0,
+		"the meaning card is laid out inside the band (%.0f)" % screen._hint_card.size.y)
+
+	# The feedback layers float above the column, so they must span the screen
+	# rather than be pushed around by it.
+	_check(is_equal_approx(screen._praise.size.x, screen.size.x)
+		and is_equal_approx(screen._praise.size.y, screen.size.y),
+		"the praise overlay covers the screen")
+	_check(is_equal_approx(screen._confirm.size.x, screen.size.x)
+		and is_equal_approx(screen._confirm.size.y, screen.size.y),
+		"the quit question covers the screen")
+	_check(not screen._confirm.is_open(), "the quit question stays shut until it is asked")
+
+	screen.queue_free()
+	ScrambledGameManager.abandon()
+
+
+## The screen's looks come from a Theme now, so the THEME is what this test
+## checks: each component is asked for a value only its variation could supply.
+## A variation that stopped resolving would quietly fall back to the plain app
+## look, and this is where that gets caught instead of by eye.
+func test_gameplay_theme_variations() -> void:
+	ScrambledScoreManager.reset_cache()
+	ScrambledGameManager.reset()
+	_check(ScrambledGameManager.start_learning(1, 2), "a lesson starts for the theme check")
+	var screen_scene: PackedScene = load("res://scenes/word_game/scrambled/Gameplay.tscn")
+	var screen: Control = screen_scene.instantiate()
+	add_child(screen)
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	_check(screen.theme != null, "the screen puts a theme in place")
+	_check(screen.theme.default_font != null
+		and screen.theme.default_font.resource_path == MenuStyle.FONT_VAZIR,
+		"the game's theme carries the app's type face")
+	_check(screen.theme.get_color("font_color", "Label") == MenuStyle.text(),
+		"a plain label on this screen takes the app's text colour")
+
+	# The chips: a pill's shape and its own accent can only come from the
+	# variation, so a resolved rounded stylebox proves the wiring end to end.
+	var progress := screen._chips.get_node("Progress") as Label
+	var mode := screen._chips.get_node("Mode") as Label
+	_check(progress.theme_type_variation == ScrambledTheme.V_CHIP_PROGRESS,
+		"the progress chip names its variation")
+	_check(progress.get_theme_stylebox("normal") is StyleBoxFlat,
+		"the progress chip takes its pill shape from the theme")
+	_check(progress.get_theme_font_size("font_size") > 0,
+		"the progress chip takes its size from the theme (%.0f)"
+			% progress.get_theme_font_size("font_size"))
+	_check(mode.get_theme_color("font_color") != progress.get_theme_color("font_color"),
+		"each chip keeps its own accent")
+
+	# The clock: shape from the theme, colour from the clock itself.
+	var bar := screen._timer.get_node("Bar") as ProgressBar
+	_check(bar.theme_type_variation == ScrambledTheme.V_TIMER_BAR,
+		"the clock bar names its variation")
+	var fill := bar.get_theme_stylebox("fill")
+	_check(fill is StyleBoxFlat and (fill as StyleBoxFlat).corner_radius_top_left > 0,
+		"the clock's fill is a rounded block from the theme")
+
+	# The buttons: the game's own candy look rather than the app's button.
+	var hint := screen._actions.get_node("Hint") as Button
+	_check(hint.theme_type_variation == ScrambledTheme.V_CANDY_BUTTON,
+		"the hint button names the game's candy variation")
+	_check(hint.get_theme_stylebox("normal") is StyleBoxFlat,
+		"the hint button is painted by the theme")
+
+	# The two answers: one variation each, so the pair reads as one choice.
+	var stay := screen._confirm.get_node("Center/Card/Margin/Column/Choices/Stay") as Button
+	_check(stay.theme_type_variation == ScrambledTheme.V_SAFE_BUTTON,
+		"the dialog's safe answer names its variation")
+	_check(stay.get_theme_stylebox("normal") is StyleBoxFlat,
+		"the dialog's safe answer is painted by the theme")
+	_check(stay.get_theme_font_size("font_size") == ScrambledTheme.DIALOG_BUTTON_FONT_SIZE,
+		"the dialog's answers share one size (%.0f)" % stay.get_theme_font_size("font_size"))
+
+	# The how-to line and the meaning card.
+	_check(screen._instruction.get_theme_font_size("font_size") > 0,
+		"the how-to line takes its size from the theme")
+	_check(screen._hint_card.get_theme_stylebox("panel") is StyleBoxFlat,
+		"the meaning card's paper comes from the theme")
+
+	screen.queue_free()
+	ScrambledGameManager.abandon()
+
+
+## The payload and the carried preview are the only contract between a drag and
+## a drop target, so the tile's half of the protocol is checked on its own —
+## including the payload shapes that must be refused.
+func test_tile_drag_payload() -> void:
+	var board: ScrambledTileBoard = await _make_board("sun", 4242)
+
+	var tile: ScrambledTile = board.get_child(0)
+	# A locked letter (the beat between two words) must not start a drag at all.
+	tile.set_locked(true)
+	_check(tile._get_drag_data(Vector2.ZERO) == null, "a locked letter refuses to be dragged")
+	tile.set_locked(false)
+
+	var payload: Variant = tile._get_drag_data(Vector2.ZERO)
+	# The carried copy belongs to the engine, so it is only handed over during a
+	# real drag: asking outside one has to stay silent rather than trip the
+	# engine's guard.
+	_check(tile.get_viewport().gui_get_drag_data() == null,
+		"no preview is handed to a drag that is not running")
+	_check(typeof(payload) == TYPE_DICTIONARY, "a draggable letter hands over a payload")
+	_check(ScrambledTile.payload_tile(payload) == tile, "the payload names its own letter")
+	_check(tile.state == ScrambledTile.State.DRAGGING, "the letter knows it is being dragged")
+	_check(ScrambledTile.payload_tile({"kind": "some_other_screen"}) == null,
+		"a payload from another screen is refused")
+	_check(ScrambledTile.payload_tile("not a payload") == null,
+		"a payload that is not a dictionary is refused")
+
+	# The engine ends every drag with this notification. Nothing took this
+	# letter, so the board must be told and the carried ghost must fade back;
+	# the row then settles and hands the letters back, ready to be picked up.
+	tile._notification(Control.NOTIFICATION_DRAG_END)
+	_check(not board.is_busy(), "the board stops carrying the letter")
+	await get_tree().create_timer(0.5).timeout
+	_check(tile.state == ScrambledTile.State.IDLE, "the letter is playable again once the row settles")
+	_check(is_equal_approx(tile.modulate.a, 1.0),
+		"the carried ghost fades back to solid (alpha %.2f)" % tile.modulate.a)
+
+	board.queue_free()
+
+
 ############################################################
 # HELPERS
 ############################################################
@@ -533,7 +693,89 @@ func _word_list(entries: Array) -> Array:
 	return out
 
 
+## A drag that ends anywhere but over the row must put the letter back exactly
+## where it came from: a slipped finger can never scramble the word for free,
+## and a letter can never be lost off the row.
+func test_board_drag_cancel() -> void:
+	var board: ScrambledTileBoard = await _make_board("sun", 20250924)
+	var before := board.current_text()
+	var carried: ScrambledTile = board.get_child(0)
+
+	# The finger travels two slots right — the slot really does open — and then
+	# lifts somewhere the row does not accept.
+	var payload: Variant = _begin_drag(carried)
+	_hover_drag(carried, payload,
+		_board_point(board, carried.position.x + 700.0, carried.position.y))
+	_check(board._preview_index == 2, "the cancellation case really did open a slot")
+	carried._notification(Control.NOTIFICATION_DRAG_END)
+	await get_tree().create_timer(0.5).timeout
+
+	_check(not board.is_busy(), "nothing is carried after a cancelled drag")
+	_check(board.current_text() == before,
+		"a cancelled drag leaves the word alone (%s)" % board.current_text())
+	_check(is_equal_approx(carried.modulate.a, 1.0), "the cancelled letter is solid again")
+
+	board.queue_free()
+
+
 func _check(condition: bool, label: String) -> void:
 	if not condition:
 		_failures += 1
 	print(("PASS  " if condition else "FAIL  ") + label)
+
+
+## A real, laid-out board with one word dealt — the fixture the drag tests
+## need. The board guesses its geometry when it is built before it has been
+## laid out, so the fixture waits for the real size twice, exactly as the live
+## screen does on the frame it appears.
+func _make_board(word: String, seed_value: int) -> ScrambledTileBoard:
+	var controller := ScrambledWordController.new()
+	controller.setup({"word": word}, seed_value)
+	var board_scene: PackedScene = load("res://scenes/word_game/scrambled/TileBoard.tscn")
+	var board := board_scene.instantiate() as ScrambledTileBoard
+	# The board's scene ships stretched, so a size set on it would be re-imposed
+	# by the next layout pass: pin it to a fixed rect first.
+	board.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	board.size = Vector2(1000, 420)
+	add_child(board)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	board.build(controller, false)
+	await get_tree().process_frame
+	return board
+
+
+## Plays one whole gesture exactly as the Viewport plays it: the tile is asked
+## for its payload (which is when it builds the preview the player carries),
+## the finger is followed, and the letter is let go at `drop_x`.
+func _play_drag(board: ScrambledTileBoard, tile: ScrambledTile, drop_x: float) -> void:
+	var payload: Variant = _begin_drag(tile)
+	_hover_drag(tile, payload, _board_point(board, drop_x, tile.position.y))
+	_end_drag(tile, payload, _board_point(board, drop_x, tile.position.y))
+
+
+## The Viewport's drag start: the tile hands over its payload, and its own
+## drag_started signal is what tells the board to open a slot.
+func _begin_drag(tile: ScrambledTile) -> Variant:
+	return tile._get_drag_data(Vector2.ZERO)
+
+
+## The Viewport asking whatever is under the finger whether it would take the
+## letter — the letter is hovered over the row, so the row itself answers.
+func _hover_drag(tile: ScrambledTile, payload: Variant, canvas_point: Vector2) -> bool:
+	var local := tile.get_global_transform().affine_inverse() * canvas_point
+	return tile._can_drop_data(local, payload)
+
+
+## The finger lifting over the row: the drop is delivered and the engine's
+## end-of-drag notification follows, exactly as in a live drag.
+func _end_drag(tile: ScrambledTile, payload: Variant, canvas_point: Vector2) -> void:
+	var local := tile.get_global_transform().affine_inverse() * canvas_point
+	tile._drop_data(local, payload)
+	tile._notification(Control.NOTIFICATION_DRAG_END)
+
+
+## A finger position over the row, in the shared canvas space the drag protocol
+## speaks (the board reaches its own space through _to_board).
+func _board_point(board: ScrambledTileBoard, x: float, y: float) -> Vector2:
+	return board.get_global_transform() * Vector2(x, y)

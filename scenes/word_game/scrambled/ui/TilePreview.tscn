@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dml1wljx08ufb"]
+
+[ext_resource type="Script" uid="uid://bytp4ucmspiyu" path="res://scenes/word_game/scrambled/ui/tile_preview.gd" id="1_root"]
+[ext_resource type="Script" uid="uid://c5jdey60lcjhu" path="res://scenes/word_game/scrambled/ui/tile_preview_visual.gd" id="2_visual"]
+
+[node name="TilePreview" type="Control" unique_id=506294193]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_root")
+
+[node name="Visual" type="Control" parent="." unique_id=927410633]
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("2_visual")

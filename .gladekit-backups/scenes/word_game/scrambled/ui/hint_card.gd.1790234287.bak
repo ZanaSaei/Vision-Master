@@ -1,0 +1,92 @@
+class_name ScrambledHintCard
+extends PanelContainer
+## ============================================================
+##  HINT CARD — the meaning of the word, dealt like a printed card.
+##
+##  The English meaning is the hint (that is what a spelling game may give
+##  away); the Persian meaning sits underneath as a second hand, and in the
+##  day's competition a line says what the word is now worth.
+##
+##  The card owns its own entrance animation: it is the one moment on this
+##  screen that should feel like something being dealt, and the tweens belong
+##  with the thing they animate (per the project's UI rules) rather than in the
+##  screen that happens to show it.
+## ============================================================
+
+const CAPTION := "معنی این کلمه چیست؟"
+const FONT_SIZE_CAPTION := 32
+const FONT_SIZE_MEANING := 40
+const FONT_SIZE_PERSIAN := 32
+const FONT_SIZE_WORTH := 28
+## The entrance: a card lands slightly small and opens out, TRANS_BACK.
+const ENTER_FROM := 0.86
+const ENTER_TIME := 0.34
+const ENTER_FADE_TIME := 0.22
+
+@onready var _caption: Label = $Column/Caption
+@onready var _meaning: Label = $Column/Meaning
+@onready var _persian: Label = $Column/Persian
+@onready var _worth: Label = $Column/Worth
+
+
+func _ready() -> void:
+	_caption.text = CAPTION
+	visible = false
+	_style_labels()
+	apply_theme()
+	resized.connect(func() -> void: pivot_offset = size * 0.5)
+
+
+func is_shown() -> bool:
+	return visible
+
+
+## Deals the card in: the meaning first, the Persian one under it, and — in the
+## competition — a line about what reading it costs.
+func show_hint(meaning: String, meaning_fa: String, worth_text: String) -> void:
+	_meaning.text = meaning if not meaning.is_empty() else "—"
+	_persian.text = meaning_fa
+	_persian.visible = not meaning_fa.is_empty()
+	_worth.text = worth_text
+	_worth.visible = not worth_text.is_empty()
+
+	pivot_offset = size * 0.5
+	scale = Vector2(ENTER_FROM, ENTER_FROM)
+	modulate.a = 0.0
+	visible = true
+	var tw := create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(self, "scale", Vector2.ONE, ENTER_TIME) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(self, "modulate:a", 1.0, ENTER_FADE_TIME) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+
+## Takes the card away with no animation: used when a new word is dealt, where
+## the board is already moving and a second animation would fight it.
+func hide_hint() -> void:
+	visible = false
+	scale = Vector2.ONE
+	modulate.a = 1.0
+
+
+## Repaints. The card's colours are fixed on purpose (it is printed paper, read
+## the same in both themes), so only the panel's frame is re-read — but a theme
+## toggle still has to be acknowledged so a future themed part is not missed.
+func apply_theme() -> void:
+	add_theme_stylebox_override("panel", ScrambledTheme.hint_card_style())
+
+
+func _style_labels() -> void:
+	_caption.add_theme_font_override("font", MenuStyle.vazir())
+	_caption.add_theme_font_size_override("font_size", FONT_SIZE_CAPTION)
+	_caption.add_theme_color_override("font_color", ScrambledTheme.CARD_ACCENT)
+	_meaning.add_theme_font_override("font", MenuStyle.jakarta_bold())
+	_meaning.add_theme_font_size_override("font_size", FONT_SIZE_MEANING)
+	_meaning.add_theme_color_override("font_color", ScrambledTheme.CARD_INK)
+	_persian.add_theme_font_override("font", MenuStyle.vazir())
+	_persian.add_theme_font_size_override("font_size", FONT_SIZE_PERSIAN)
+	_persian.add_theme_color_override("font_color", ScrambledTheme.CARD_INK_DIM)
+	_worth.add_theme_font_override("font", MenuStyle.vazir())
+	_worth.add_theme_font_size_override("font_size", FONT_SIZE_WORTH)
+	_worth.add_theme_color_override("font_color", ScrambledTheme.CARD_ACCENT)

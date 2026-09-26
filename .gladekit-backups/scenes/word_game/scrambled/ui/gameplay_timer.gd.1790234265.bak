@@ -1,0 +1,62 @@
+class_name ScrambledGameplayTimer
+extends HBoxContainer
+## ============================================================
+##  GAMEPLAY TIMER — the word's clock, as a bar and a readout.
+##
+##  The bar fills towards a limit the SCREEN chooses, because the two modes
+##  count towards different things: a lesson counts towards its hint, the day's
+##  competition towards the slowest score band. The colour arrives the same way
+##  — the bar only draws what it is told.
+##
+##  It is a component scene of its own (per the project's UI rules) so that the
+##  clock's look, its fill/track styleboxes and its Persian readout live in one
+##  place instead of being assembled by the screen every time.
+## ============================================================
+
+## Corner radius of the bar, in pixels. The bar is a filled pill.
+const BAR_RADIUS := 12
+
+@onready var _bar: ProgressBar = $Bar
+@onready var _time: Label = $Time
+
+## Rebuilt styles, kept so a theme toggle can recolour the track without
+## touching the fill's colour (which belongs to the clock, not the theme).
+var _fill := StyleBoxFlat.new()
+var _track := StyleBoxFlat.new()
+## Last colour handed to the fill, so an unchanged colour is not rewritten on
+## every frame of the timer.
+var _last_color := Color(0, 0, 0, 0)
+
+
+func _ready() -> void:
+	_fill.set_corner_radius_all(BAR_RADIUS)
+	_track.set_corner_radius_all(BAR_RADIUS)
+	_bar.add_theme_stylebox_override("background", _track)
+	_bar.add_theme_stylebox_override("fill", _fill)
+	_time.add_theme_font_override("font", MenuStyle.vazir())
+	apply_theme()
+
+
+## Fills towards `limit` and paints the fill `color`. Called every frame, so it
+## writes nothing that has not changed.
+func set_elapsed(elapsed: float, limit: float, color: Color) -> void:
+	_bar.value = clampf(elapsed / maxf(limit, 1.0) * 100.0, 0.0, 100.0)
+	_time.text = format_clock(elapsed)
+	if color != _last_color:
+		_last_color = color
+		_fill.bg_color = color
+
+
+func apply_theme() -> void:
+	_track.bg_color = ScrambledTheme.timer_track_color()
+	_time.add_theme_color_override("font_color", MenuStyle.text())
+
+
+## «۱:۰۵» — Persian digits, minutes:seconds. Public because the results screen
+## reads a session's average time with the same shape.
+static func format_clock(seconds: float) -> String:
+	var total := int(floor(seconds))
+	return "%s:%s" % [
+		MenuStyle.persian_digits(str(int(floor(float(total) / 60.0)))),
+		MenuStyle.persian_digits("%02d" % (total % 60)),
+	]

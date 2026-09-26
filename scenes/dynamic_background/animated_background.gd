@@ -54,7 +54,7 @@ func _build_shader_layer() -> void:
 ## Derive the shader's colors from the theme's bg + wave colors so the ambient
 ## layer follows the design system's Dark (charcoal plate with a warm gold
 ## sheen) and Light (warm paper) automatically.
-func _set_shader_colors(bg: Color, wave_top: Color, wave_mid: Color, wave_bottom: Color) -> void:
+func _set_shader_colors(bg: Color, wave_top: Color, wave_mid: Color, _wave_bottom: Color) -> void:
 	if _shader_mat == null:
 		return
 	var light: bool = bg.get_luminance() > 0.5
