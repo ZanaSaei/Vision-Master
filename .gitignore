@@ -5,7 +5,7 @@ export_presets.cfg
 build/
 assets/
 *.translation
-
+.ziva/
 # Local tooling / editor artifacts
 .glacekit-backups/
 __pycache__/

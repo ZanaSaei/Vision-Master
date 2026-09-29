@@ -1,1155 +1,844 @@
-# AGENTS.md — General Rules for All Godot 4.7.x Projects (Mr.Saei)
+# AGENTS.md — Ziva Godot 4.7 Agent Constitution
 
-These are standing rules for the AI agent across every game and app built in Godot 4.7.x by Mr.Saei.
+## 0. Mission
 
-They are intentionally project-agnostic. Project-specific requirements may override these rules when explicitly documented by the project.
+You are an autonomous Godot 4.7.x development agent working inside the Godot Editor.
 
-The agent must prefer **simple, maintainable, testable, data-driven, scene-based Godot architecture** over unnecessary abstraction or cleverness.
+Your job is not merely to write code. You must:
+- inspect the existing project,
+- understand scenes, nodes, scripts, resources, settings, signals, and dependencies,
+- make the smallest correct architectural change,
+- use Godot's editor structures directly when appropriate,
+- run and observe the result,
+- inspect Output/Debugger/errors,
+- playtest interactive behavior when relevant,
+- fix failures before declaring the task complete.
 
-**Godot version target: 4.7.x.**
-Do not introduce APIs, properties, classes, project settings, or patterns that require Godot 4.8+ unless explicitly requested.
-
----
-
-# 1. Core Agent Principles
-
-## 1.1 Inspect Before Changing
-
-* Before creating a new system, inspect the existing project architecture, relevant scenes, scripts, Resources, Autoloads, UI, and project settings.
-* Reuse existing systems before creating replacements.
-* Never create duplicate managers, databases, utility systems, singleton equivalents, or UI frameworks without first determining that the existing system cannot reasonably be reused.
-* Before modifying a shared system, identify its known consumers and dependencies.
-* Preserve existing behavior unless the requested change explicitly requires changing it.
-* Prefer targeted modifications over rewriting entire files.
-* Do not delete, replace, or reorganize unrelated user work.
-* Never assume a file's purpose from its filename alone. Inspect its contents and usage first.
-* Do not invent APIs, methods, signals, properties, node paths, project settings, or plugin interfaces.
-* When uncertain about an engine API or behavior, verify it against the project and Godot 4.7.x documentation before implementing it.
-
-## 1.2 Simplicity First
-
-* Prefer the simplest architecture that correctly solves the problem.
-* Do not introduce abstractions merely because they are theoretically reusable.
-* Do not create interfaces, managers, state machines, event buses, dependency injection, factories, service locators, or other architectural patterns unless they solve an actual problem in the current project.
-* Avoid premature optimization.
-* Avoid premature generalization.
-* Start with a small working implementation and generalize only after the design has proven useful.
-* Prefer explicit, readable code over highly abstract or clever code.
-
-## 1.3 Single Responsibility
-
-* Every major system should have one clear responsibility.
-* Each important piece of state should have one clear owner.
-* Avoid "Manager" scripts that accumulate unrelated responsibilities.
-* Avoid giant scripts containing unrelated gameplay, UI, networking, persistence, audio, and configuration logic.
-* If a script keeps growing into unrelated responsibilities, split it by actual domain responsibility rather than arbitrary file size.
-
-## 1.4 Dependency Direction
-
-Prefer dependencies that flow in a deliberate direction:
-
-```text
-Data
-  ↓
-Core / Domain Logic
-  ↓
-Feature / Gameplay Systems
-  ↓
-Scene Controllers
-  ↓
-UI / Presentation
-```
-
-Avoid:
-
-```text
-Everything → Everything
-```
-
-* Avoid circular dependencies between systems.
-* Lower-level reusable systems should not depend directly on unrelated high-level UI.
-* Core gameplay/business logic should not directly manipulate unrelated UI controls.
-* UI should request actions or react to state rather than becoming the source of truth for application/game logic.
-* Use signals, explicit methods, Resources, or well-defined interfaces at system boundaries.
+Prefer a correct, tested, simple Godot solution over a clever or code-heavy solution.
 
 ---
 
-# 2. GDScript Code Conventions
+# 1. ABSOLUTE PRIORITIES
 
-## 2.1 Static Typing
+When rules conflict, follow this order:
 
-* Prefer static typing throughout project code.
-* Every function parameter must have an explicit type.
-* Every function must have an explicit return type, including `-> void`.
-* Every member/local variable should have an explicit type or use `:=` when the type is unambiguous.
-* Prefer typed collections such as `Array[String]`, `Array[Enemy]`, and typed dictionaries where practical.
-* Dynamic `Variant` values are allowed at deliberate dynamic boundaries such as JSON parsing, heterogeneous data, or APIs that require them.
-* Do not use dynamic typing merely for convenience when the type is already known.
-* Avoid `Variant` propagation through large parts of the architecture.
+1. Preserve required existing behavior unless the user explicitly asks to change it.
+2. Correctness and verification.
+3. Follow the user's explicit request and visual/reference requirements.
+4. Scene Tree + Inspector + Resources before runtime code.
+5. Clear ownership and single responsibility.
+6. Reuse existing systems before creating new ones.
+7. Simplicity and readability.
+8. Performance where it matters.
+9. Future-proofing only when justified.
+
+Never optimize for fewer files or fewer nodes if that makes the Godot project harder to edit, inspect, test, or maintain.
+
+---
+
+# 2. ZIVA OPERATING RULES
+
+Ziva has access to live Godot project context. Use that capability.
+
+Before changing anything:
+- inspect the relevant scene(s),
+- inspect the relevant scripts/resources,
+- inspect existing signals and references,
+- inspect project settings when relevant,
+- inspect Output/Debugger when the task involves an existing bug,
+- inspect the running game when behavior or UI is involved.
+
+Do not guess a node path, signal, property, resource, API, or existing architecture when the project can be inspected.
+
+After making changes:
+1. save the changed resources/scenes,
+2. run the smallest relevant test,
+3. inspect errors/output,
+4. run the relevant scene or project,
+5. playtest interactive behavior when applicable,
+6. fix discovered issues,
+7. repeat until verified.
+
+Do not say "done", "should work", or "looks correct" without appropriate verification.
+
+If a task cannot be fully verified, state exactly what was and was not verified.
+
+---
+
+# 3. SCENE TREE FIRST PROTOCOL
+
+Before writing runtime code for a feature, ask:
+
+1. Can this be represented by an existing Node?
+2. Can it be solved by adding/configuring a child Node?
+3. Can an Inspector property solve it?
+4. Can a Theme, StyleBox, Resource, Animation, or other editor-authored asset solve it?
+5. Can an existing signal solve the communication?
+6. Can an existing scene be reused or instanced?
+7. Only then: does custom script logic need to exist?
+
+When creating a UI or gameplay structure, build the Scene Tree first whenever practical.
+
+Do not create a static Scene Tree in `_ready()` or another runtime function when the same structure belongs naturally in a `.tscn`.
+
+Bad:
+- creating dozens of Labels/Buttons/Containers in code,
+- assigning their entire hierarchy at runtime,
+- hardcoding layout that belongs in the scene.
+
+Preferred:
+- create the nodes in the scene,
+- configure their properties through the Inspector,
+- connect stable relationships through signals,
+- use scripts for behavior and dynamic state.
+
+Runtime creation is appropriate when the objects are genuinely dynamic, data-driven, repeated, or created/destroyed during play.
+
+---
+
+# 4. EXISTING PROJECT BEFORE NEW ARCHITECTURE
+
+Before introducing a new system:
+- search for an existing implementation,
+- inspect nearby scenes/scripts/resources,
+- identify the current owner of the responsibility,
+- determine whether the feature belongs to an existing system.
+
+Reuse before duplicate.
+
+Do not create:
+- a second manager for an existing manager,
+- a second save system,
+- duplicate UI components,
+- duplicate Resources,
+- parallel signals for an existing event,
+- a new Autoload without proving it is required.
+
+Do not rewrite working architecture merely because another design is theoretically cleaner.
+
+---
+
+# 5. UI AUTHORITY RULE
+
+## 5.1 Complete visual reference or complete style request
+
+If the user provides:
+- a complete visual design in text,
+- a screenshot,
+- an image/reference,
+- or a clearly defined visual style,
+
+treat that as a high-authority design specification.
+
+You may change whatever is necessary to faithfully implement it, including:
+- Scene Tree structure,
+- node types,
+- containers,
+- anchors,
+- layout,
+- spacing,
+- typography,
+- Theme resources,
+- StyleBoxes,
+- colors,
+- borders,
+- shadows,
+- icons,
+- textures,
+- animations,
+- control sizes,
+- hierarchy,
+- supporting scripts.
+
+Do not preserve an old UI structure merely because it already exists if that structure prevents the requested design.
+
+However, preserve unrelated gameplay/data systems unless the visual redesign genuinely requires changes.
+
+## 5.2 Local/small UI request
+
+If the user asks for a small, local change:
+- change only the requested area,
+- preserve unrelated layout and styling,
+- do not redesign the screen,
+- do not replace the Theme globally unless requested,
+- do not restructure the Scene Tree unnecessarily.
 
 Examples:
+- "move this button" → move that button.
+- "make this label larger" → change that label.
+- "change the panel color" → change that panel/style.
 
-```gdscript
-var health: int = 100
-var speed: float = 250.0
-var player_name: String = "Player"
-var enemies: Array[Enemy] = []
-var score := calculate_score()
-```
+## 5.3 Visual verification
 
-## 2.2 Indentation and Formatting
+For visual work:
+- run the relevant scene,
+- inspect the actual result,
+- use screenshots/visual inspection when available,
+- compare against the supplied reference,
+- correct obvious spacing, alignment, scaling, clipping, readability, and hierarchy problems.
 
-* GDScript indentation MUST use TAB characters.
-* Never use spaces for indentation in GDScript.
-* Never convert an existing tab-indented GDScript file to spaces.
-* Maintain consistent indentation throughout the project.
-* Use UTF-8 text encoding.
-* Prefer double quotes for strings.
-* Keep lines at or below approximately 100 characters where reasonably practical.
-* Use trailing commas in multiline arrays, dictionaries, function calls, and similar constructs where appropriate.
-
-## 2.3 Script Layout
-
-Use this general order:
-
-```text
-@tool / @icon / @static_unload
-class_name
-extends
-documentation comment
-
-signals
-enums
-constants
-static variables
-
-@export variables
-regular variables
-@onready variables
-
-_init()
-_enter_tree()
-_ready()
-
-engine callbacks
-_process()
-_physics_process()
-_input()
-_unhandled_input()
-...
-
-public methods
-
-private methods beginning with _
-    
-inner classes
-```
-
-Do not treat this order as permission to create unnecessary sections. Omit sections that are not used.
-
-## 2.4 Naming
-
-* Classes and node types: `PascalCase`
-* Functions: `snake_case`
-* Variables: `snake_case`
-* Files and folders: `snake_case`
-* Constants: `ALL_CAPS`
-* Private members/functions: `_leading_underscore`
-* Signals: descriptive `snake_case` phrases
-* Boolean variables should generally read naturally, for example:
-
-  * `is_alive`
-  * `has_target`
-  * `can_attack`
-  * `is_loading`
-
-Do not abbreviate names unless the abbreviation is universally clear in the project.
+Do not consider a UI finished solely because the scene file looks logically correct.
 
 ---
 
-# 3. Node and Scene Architecture
+# 6. INSPECTOR-FIRST DESIGN
 
-## 3.1 Scene-First Design
-
-* Prefer representing persistent scene structure in `.tscn` files rather than generating the same static structure entirely through code.
-* Prefer creating and configuring Nodes, Control layouts, Themes, Resources, animations, and signal connections in scene/resource files when they are static or designer-controlled.
-* Use runtime code to create nodes when the content is genuinely dynamic, data-driven, procedurally generated, or dependent on runtime state.
-* Do not construct a large static UI entirely through script when it could reasonably be represented as a reusable scene.
-* Keep scene composition visible and understandable in the Godot Scene dock.
-* A developer should be able to understand a scene's major structure without reading its entire script.
-* Prefer reusable sub-scenes over procedural duplication.
-
-## 3.2 Scenes vs. Scripts
-
-* Give something its own scene when it needs a meaningful node subtree, visual representation, lifecycle, or reusable composition.
-* Use a plain script for pure logic that does not require a node tree.
-* Use `class_name` for reusable domain types when appropriate.
-* Do not create scenes merely because a script exists.
-* Do not create scripts merely because a scene exists.
-
-## 3.3 Composition Over Inheritance
-
-* Prefer composition over deep inheritance hierarchies.
-* Prefer reusable sub-scenes and components over large inheritance chains.
-* Keep inheritance shallow.
-* Avoid deep hierarchies that make behavior difficult to trace.
-* A reusable component should solve a clearly defined responsibility.
-
-## 3.4 Node Hierarchies
-
-* Keep scene trees as shallow as practical.
-* Avoid unnecessary wrapper nodes.
-* Do not create ten layers of Containers, Panels, or generic Node wrappers when fewer nodes can express the same structure.
-* Use meaningful node names.
-* Avoid nodes that exist only because an AI agent habitually creates them.
-
----
-
-# 4. Node References and Scene Communication
-
-## 4.1 Node References
-
-* Do not repeatedly search for nodes during per-frame callbacks.
-* Never use `get_node()`, `find_child()`, or equivalent tree searches inside `_process()` or `_physics_process()` merely to retrieve a stable reference.
-* Cache stable references during initialization.
-* Prefer Scene Unique Names for stable scene-local references:
-
-```gdscript
-@onready var score_label: Label = %ScoreLabel
-```
-
-* Use explicit references or dependency injection when a dependency is external to the scene.
-* Avoid fragile long node paths when a reusable reference or unique name is more appropriate.
-
-## 4.2 Parent/Child Communication
-
-Follow:
-
-**"Signal up, call down."**
-
-* A child may emit signals describing events or state changes.
-* A parent/controller may call methods or set properties on child components.
-* Children should not reach upward into parent internals merely to control the parent.
-* Avoid children calling `$../../../../GameManager`-style paths.
-* Avoid hardcoded knowledge of unrelated scene hierarchies.
-* Use signals when a component needs to announce something without knowing who will consume it.
-* Use direct method calls when the relationship is explicit and stable.
-
-## 4.3 Signals vs. Polling
-
-* Prefer signals and event-driven communication for discrete events and state changes.
-* Use polling when the value genuinely needs continuous sampling, such as:
-
-  * movement
-  * aiming
-  * physics
-  * animation state
-  * continuous input
-  * timers or elapsed-time logic
-* Do not replace legitimate per-frame logic with signals merely because "signals are better."
-* Connect signals explicitly and keep signal ownership understandable.
-* Prefer Godot 4's first-class `Signal` and `Callable` patterns over fragile string-based callback references.
-
----
-
-# 5. Autoload and Global State Rules
-
-* Use Autoloads only for genuinely global, shared state or services.
-* Typical candidates include:
-
-  * global application/game state
-  * a small event/signal bus when truly necessary
-  * persistent settings/configuration
-  * carefully scoped global services
-* Do not create one Autoload per feature.
-* Do not use Autoloads merely to avoid passing a reference.
-* If something belongs to one scene, feature, or gameplay object, keep it local.
-* Keep global state minimal.
-* Document any significant new Autoload before changing it.
-* Do not allow global state to become the default communication mechanism between every system.
-
----
-
-# 6. Resources and Data Architecture
-
-## 6.1 Use Resources for Data
-
-Prefer custom `Resource` classes for reusable, serializable, Inspector-editable, data-only objects such as:
-
-* items
-* characters
-* weapons
-* dialogue entries
-* levels
-* configuration
-* abilities
-* quests
-* educational content
-* statistics
-* game settings
-
-Example:
-
-```gdscript
-class_name ItemData
-extends Resource
-
-@export var item_name: String
-@export var price: int
-@export var description: String
-```
-
-## 6.2 Resource Sharing
-
-* Treat loaded `.tres` / `.res` resources as potentially shared.
-* Do not mutate a shared Resource at runtime unless shared mutation is intentional.
-* Keep static configuration data separate from mutable runtime state when practical.
-* When state must be instance-specific, use an appropriate local resource, duplicate strategy, or a separate runtime object.
-* Do not accidentally turn static `.tres` data into mutable global state.
-
-## 6.3 Data vs. Behavior
-
-Separate:
-
-```text
-Configuration / Content Data
-        ↓
-Domain Logic
-        ↓
-Runtime State
-        ↓
-Presentation
-```
-
-Do not place large amounts of gameplay behavior inside Resources simply because Resources are convenient for storing data.
-
----
-
-# 7. Magic Values and Configuration
-
-* Do not scatter magic strings or magic numbers throughout the code.
-* Use constants for repeated values.
-* Use enums for finite sets of states/types.
-* Use Resources for designer-editable configuration.
-* Use project settings only when a value genuinely belongs at project/configuration level.
-* Avoid hardcoded node paths, filenames, URLs, identifiers, and repeated JSON keys.
-* Centralize important schema identifiers and keys.
-
----
-
-# 8. Initialization and Lifecycle
-
-* Do not put substantial gameplay logic directly into `_ready()` merely because it is convenient.
-* Use `_ready()` primarily for initialization, reference wiring, signal connections, and startup preparation.
-* Put meaningful gameplay/application transitions into named methods such as:
-
-  * `start_game()`
-  * `initialize_level()`
-  * `begin_round()`
-  * `reset_state()`
-* Understand the difference between:
-
-  * `_init()`
-  * `_enter_tree()`
-  * `_ready()`
-  * `_exit_tree()`
-* Disconnect or clean up resources/connections when the lifecycle requires it.
-* Never assume a node will remain valid after an asynchronous operation.
-
----
-
-# 9. Input Architecture
-
-* Prefer InputMap actions over hardcoded physical keys/buttons.
-* Use semantic actions such as:
-
-```text
-move_left
-move_right
-jump
-confirm
-cancel
-attack
-interact
-```
-
-rather than embedding device-specific inputs throughout gameplay code.
-
-* Keep input interpretation separate from core gameplay logic when practical.
-* Support keyboard, controller, touch, and other input methods through the same gameplay actions where the target platform requires it.
-* Do not hardcode mouse/keyboard assumptions into systems intended for mobile/controller use.
-* Interactive UI must have appropriate keyboard/controller focus behavior when relevant.
-* Touch controls should not require rewriting the core gameplay system.
-
----
-
-# 10. UI/UX Architecture
-
-## 10.1 Layout
-
-* Use anchors and Containers rather than manually positioning UI.
-* Use `VBoxContainer`, `HBoxContainer`, `GridContainer`, `MarginContainer`, etc. where appropriate.
-* Never rely on setting a child's `position` or `size` inside a `Container`.
-* Control size through:
-
-  * `custom_minimum_size`
-  * size flags
-  * anchors
-  * container properties
-* Explicitly configure size flags for elements that must expand.
-* Use anchors for responsive screen relationships.
-
-## 10.2 Responsive Design
-
-* Design for multiple resolutions and aspect ratios from the beginning.
-* Establish the project's base resolution and stretch configuration early.
-* Do not build every screen around a single hardcoded window size.
-* Test UI at multiple aspect ratios.
-* Consider portrait and landscape requirements explicitly when relevant.
-* Do not make resolution-specific hacks unless the project truly needs them.
-
-## 10.3 CanvasLayer
-
-* Use `CanvasLayer` for screen-space overlays/HUDs that should remain independent of world/camera transforms.
-* For full-screen UI applications and menu-heavy apps, prefer a `Control`-based root unless a CanvasLayer is actually needed.
-* Deliberately distinguish:
-
-  * world-space UI
-  * camera-space UI
-  * screen-space UI
-
-## 10.4 Theme
-
-* Establish a shared base Theme for the project.
-* Reuse Theme resources instead of creating accidental per-node styling.
-* Centralize fonts, typography, colors, StyleBoxes, and common control styles.
-* Use deliberate local overrides only when they represent a real design distinction.
-* Avoid duplicating visually identical styles across many nodes.
-* Do not hardcode visual constants into dozens of unrelated scripts.
-
-## 10.5 UI Consistency
-
-* Reuse established button, dialog, list, card, popup, and navigation patterns.
-* Consistency should be intentional.
-* Do not introduce a unique interaction pattern for every screen.
-* Every interaction should provide appropriate feedback.
-* Important information must not rely on color alone.
-* Maintain readable contrast.
-* Interactive controls should have appropriate target sizes for the platform.
-* Do not make animation mandatory for understanding critical information.
-* When appropriate, provide reduced-motion or disable-animation behavior.
-
----
-
-# 11. Game and Product Design Principles
-
-These principles apply to both games and interactive applications.
-
-## 11.1 Core Experience First
-
-* Prototype the core loop before polishing secondary systems.
-* For a game:
-
-```text
-Action → Feedback → Reward → Progression → Action
-```
-
-* For an app:
-
-```text
-Open → Primary Task → Result → Next Useful Action
-```
-
-* A working gray-box vertical slice is more valuable than a polished shell without a functioning core experience.
-
-## 11.2 First 30 Seconds
-
-* The main experience should become understandable quickly.
-* Avoid unnecessary tutorials, explanations, and onboarding steps.
-* If a feature requires a long explanation before becoming understandable, reconsider the design.
-
-## 11.3 Feedback
-
-Every important interaction should provide appropriate feedback.
-
-Depending on the context, this may include:
-
-* visual state change
-* animation
-* sound
-* haptic feedback
-* particles
-* confirmation
-* loading state
-* progress indication
-* error state
-
-Do not add "juice" everywhere merely for decoration. Feedback should improve clarity and responsiveness.
-
-## 11.4 Meaningful Choices
-
-* Important features and choices should have a clear purpose.
-* Avoid adding complexity, options, mechanics, or settings that do not meaningfully improve the experience.
-* In game systems, meaningful choices should generally produce meaningful differences in outcome, strategy, or resource usage.
-* Do not add artificial complexity simply to make a system feel deep.
-
-## 11.5 Respect User Time
-
-* Remove filler steps.
-* Avoid unnecessary clicks, confirmations, menus, grinding, and repeated work.
-* Do not make users/player perform work merely because the implementation is technically convenient.
-
----
-
-# 12. Feature Development Workflow
-
-Every significant feature should follow this general progression:
-
-```text
-Understand
-   ↓
-Inspect Existing Architecture
-   ↓
-Define Smallest Vertical Slice
-   ↓
-Implement
-   ↓
-Verify
-   ↓
-Refine
-   ↓
-Generalize Only When Needed
-```
-
-## 12.1 Vertical Slice First
-
-* Build the smallest complete version of the feature.
-* Include the real interaction flow, state changes, and feedback.
-* Do not build a large generalized framework before the first working slice exists.
-* Once the vertical slice works, identify what should actually be generalized.
-
-## 12.2 Shared State Changes
-
-Before modifying:
-
-* Autoloads
-* save-data schemas
-* network protocols
-* major Resources
-* core game/application state
-
-the agent should first understand the impact on existing systems.
-
-For significant shared architecture changes, describe the intended ownership and data flow in plain language before implementation.
-
----
-
-# 13. Performance Rules
-
-## 13.1 Measure First
-
-* Profile before making significant optimization changes.
-* Use Godot's profiler and performance monitors to identify the real bottleneck.
-* Do not optimize based only on assumptions.
-* Distinguish:
-
-  * CPU bottlenecks
-  * GPU bottlenecks
-  * memory pressure
-  * rendering/draw-call problems
-  * script overhead
-  * loading/IO problems
-
-## 13.2 Frame Budget
-
-* Establish a target frame rate appropriate to the target platform.
-* 60 FPS is a useful default target where practical.
-* Lower targets may be appropriate for some mobile or specialized applications.
-* Treat the actual frame-time budget as the engineering constraint.
-
-Approximate budgets:
-
-```text
-60 FPS → 16.6 ms/frame
-30 FPS → 33.3 ms/frame
-```
-
-## 13.3 Per-Frame Work
-
-Avoid expensive unnecessary work in:
-
-```text
-_process()
-_physics_process()
-_input()
-_unhandled_input()
-```
-
-Examples:
-
-* repeated scene-tree searches
-* repeated group-wide searches
-* unnecessary allocations
-* repeated parsing
-* repeated filesystem operations
-* excessive logging
-* expensive calculations that can be cached
-* naive `O(n²)` operations when a better approach is practical
-
-## 13.4 Object Pooling
-
-* Consider pooling for high-frequency, short-lived objects when profiling or expected runtime churn justifies it.
-* Do not introduce object pooling automatically.
-* Prefer simple `instantiate()` / `queue_free()` implementations until profiling or scale demonstrates a need.
-
-## 13.5 Visibility and Culling
-
-* Reduce processing/rendering of objects that are irrelevant to the current view or gameplay range when this provides a meaningful benefit.
-* Use an appropriate technique for the problem, such as:
-
-  * visibility notifiers
-  * distance checks
-  * disabled processing
-  * LOD
-  * batching
-  * spatial partitioning
-* Do not add culling infrastructure to small/simple scenes without a real reason.
-
-## 13.6 Rendering
-
-* Reduce unnecessary draw calls where relevant.
-* Prefer efficient Godot systems such as:
-
-  * TileMap/TileMapLayer
-  * MultiMesh
-  * batching-friendly materials/textures
-* Avoid excessive unique materials and unnecessary texture duplication.
-* Profile before redesigning rendering architecture.
-
-## 13.7 Threads
-
-* Use `WorkerThreadPool` or other threading tools for expensive work that should not block the main thread.
-* Do not move work to threads merely because "threads are faster."
-* Keep thread work focused on data and computation.
-* Do not access SceneTree/Node state from worker threads unless the specific API is documented as thread-safe.
-* Return/synchronize results to the main thread before modifying normal scene state.
-
-## 13.8 Memory
-
-Monitor for:
-
-* increasing Object Count
-* increasing Video RAM
-* growing memory across scene transitions
-* resources/nodes that should have been freed but remain alive
-
-When memory usage increases unexpectedly, investigate:
-
-* references
-* signal connections
-* retained Resources
-* Autoload state
-* orphaned nodes
-* caches
-* static variables
-
----
-
-# 14. Asynchronous Code
-
-* Use `await` when asynchronous behavior makes the design clearer.
-* Do not introduce asynchronous code unnecessarily.
-* After an `await`, assume relevant state may have changed.
-* Verify that nodes and objects are still valid before using them after a long asynchronous operation.
-* Verify that the operation is still relevant to the current scene/state.
-* Avoid orphaned asynchronous operations after a scene exits.
-* Design cancellation/lifecycle handling for long-running operations.
-* Never assume execution resumes immediately after `await`.
-
----
-
-# 15. Save Data and Persistence
-
-* Treat save files as external/untrusted input.
-* Validate loaded save data before applying it.
-* Every persistent save format must have a version number.
-* Never assume old save data has the newest schema.
-* Implement migrations when persistent data structures change.
-* Keep serialization/deserialization separate from presentation logic.
-* Failed saves must not silently replace a previously valid save with corrupted data.
-* Use atomic or otherwise safe save strategies where appropriate.
-* Do not store transient runtime state unless it actually needs persistence.
-* Do not store sensitive credentials in ordinary save files.
-
-Example:
-
-```text
-SaveData
-├── version
-├── player_progress
-├── settings
-└── unlocks
-```
-
----
-
-# 16. Networking and Backend Rules
-
-For online features:
-
-* Assume all client data can be modified by a malicious client.
-* Never trust the client for:
-
-  * purchases
-  * leaderboard scores
-  * rewards
-  * account ownership
-  * premium entitlements
-  * competitive results
-  * authoritative progression
-* The server should validate important game/application rules.
-* Keep secrets and privileged credentials on the server.
-* Use HTTPS/TLS for network communication.
-* Handle:
-
-  * timeouts
-  * retries
-  * invalid responses
-  * offline state
-  * server errors
-  * authentication expiration
-* Never make online-only assumptions when the product is supposed to support offline operation.
-* Clearly separate offline/local state from authoritative server state.
-
----
-
-# 17. Security Rules
-
-* Never hardcode API keys, tokens, passwords, private certificates, or server credentials into exported project code/resources.
-* Assume everything shipped in the client can eventually be extracted.
-* PCK/script encryption increases extraction difficulty but must not be treated as a secure secret-storage mechanism.
-* Anything important that depends on a secret or trusted authority belongs behind a backend/proxy.
-* The client must never contain secrets that need to remain secret from players/users.
-* Local-only developer keys may be stored on-device for personal tooling, but:
-
-  * keep them out of version control
-  * use `.gitignore`
-  * do not include them in public templates
-  * do not package them into production exports
-* Validate and sanitize external input from:
-
-  * network responses
-  * save files
-  * user-editable files
-  * JSON
-  * configuration
-  * URLs
-* Use HTTPS/TLS for all network communication.
-* Never commit secrets to Git.
-* If a secret is committed, treat it as compromised and rotate/revoke it.
-
----
-
-# 18. Error Handling and Debugging
-
-* Never silently ignore important failures.
-* Check return values from:
-
-  * file operations
-  * network operations
-  * serialization
-  * resource loading
-  * authentication
-  * backend APIs
-* Use meaningful error messages that identify the system and context.
-* Use `push_error()` for developer-visible runtime errors where appropriate.
-* Use `assert()` for development-time programmer invariants.
-* Never rely on `assert()` for production validation because assertions may not execute in release builds.
-* Do not place essential side effects inside assertions.
-* Avoid leaving temporary debugging prints in release code.
-* Prefer structured/debug logging that can be filtered or disabled.
-
----
-
-# 19. Project Organization
-
-Prefer organization by feature/domain rather than one massive folder per file type.
-
-Example:
-
-```text
-project/
-├── scenes/
-│   ├── main/
-│   ├── player/
-│   ├── ui/
-│   └── features/
-│
-├── scripts/
-│   ├── core/
-│   ├── gameplay/
-│   ├── systems/
-│   └── ui/
-│
-├── resources/
-│   ├── characters/
-│   ├── items/
-│   ├── levels/
-│   └── config/
-│
-├── assets/
-├── addons/
-└── docs/
-```
-
-Guidelines:
-
-* Keep closely related assets near the scene/system that owns them when practical.
-* Do not create giant catch-all folders.
-* Do not put every script in one `scripts/` folder if the project is large enough that domain organization would help.
-* Do not put every texture/sound/model in a single flat directory for a large project.
-* Use `snake_case` for files and folders.
-* Keep third-party plugins/assets clearly separated from first-party project code.
-
----
-
-# 20. Version Control
-
-* Never overwrite unrelated user changes.
-* Never silently delete files that may contain user work.
-* Keep changes logically grouped.
-* Avoid massive unrelated formatting changes.
-* Do not commit secrets.
-* Do not commit Godot cache data such as `.godot/` unless a specific workflow requires otherwise.
-* Preserve required project/import metadata.
-* Before large refactors, identify affected scenes/scripts/resources.
-* Prefer small, understandable commits where version control is used.
-
----
-
-# 21. Testing and Verification
-
-A feature is **not complete merely because the code has been written**.
-
-After every meaningful implementation:
-
-1. Check for GDScript parser errors.
-2. Check for static type errors.
-3. Check the Godot debugger for runtime errors.
-4. Run the affected scene/system.
-5. Test the primary user interaction.
-6. Verify signals are connected correctly.
-7. Verify node references and Resources exist.
-8. Verify expected state transitions.
-9. Verify no obvious regression was introduced.
-10. Test on the intended target platform when platform-specific behavior changed.
-
-For significant changes:
-
-* perform a focused regression test on related functionality
-* test edge cases
-* test invalid input where relevant
-* test scene reload/exit behavior
-* test save/load behavior when persistence is involved
-* test offline/network failure behavior when networking is involved
-
-Do not claim a feature works without actually verifying it.
-
----
-
-# 22. Debugging Method
-
-When something fails:
-
-```text
-Reproduce
-   ↓
-Observe Actual Error
-   ↓
-Identify Root Cause
-   ↓
-Make Smallest Correct Fix
-   ↓
-Retest
-   ↓
-Check for Regression
-```
-
-* Do not randomly rewrite code until the error disappears.
-* Prefer fixing root causes over adding patches.
-* Do not suppress errors merely to make the debugger quiet.
-* Preserve useful diagnostics until the issue is understood.
-* When a bug crosses system boundaries, trace the data/state flow between systems.
-
----
-
-# 23. Dependency and API Discipline
-
-* Prefer Godot-native functionality when it solves the problem adequately.
-* Do not add a plugin or third-party dependency for a trivial problem Godot already solves well.
-* Before adding a dependency, determine:
-
-  * why it is needed
-  * where it will be used
-  * whether it is maintained
-  * whether it adds significant architectural complexity
-* Keep third-party integrations behind clear boundaries where practical.
-* Do not let external services leak throughout the entire codebase.
-* When APIs may vary by Godot version, verify compatibility with Godot 4.7.x.
-
----
-
-# 24. Data-Driven Design
-
-* Prefer data-driven systems when the same logic operates over many pieces of content.
-* Separate content from code where practical.
-* Use Resources, JSON, configuration files, or other appropriate data formats according to the project's needs.
-* Do not put large content tables directly inside scripts unless there is a clear reason.
-* Avoid hardcoding content that designers/users need to edit frequently.
-* Do not over-generalize small amounts of data into a complicated content framework.
-
----
-
-# 25. UI, Gameplay, and State Separation
-
-For non-trivial systems, prefer:
-
-```text
-Input
-  ↓
-State / Domain Logic
-  ↓
-Feature System
-  ↓
-Presentation
-```
-
-Examples:
-
-* A button should request an action, not directly modify every part of the application.
-* A gameplay system should update state, not search the UI tree to change five labels.
-* A UI view should observe relevant state and display it.
-* A score calculation should not depend on the visual position of a Label.
-* A database/network service should not know which Button triggered it.
-
-Keep the **source of truth** in the system that owns the data.
-
----
-
-# 26. State Machines
-
-* Use a state machine when the system genuinely contains distinct mutually exclusive states and transitions.
-* Do not create a state machine merely because a tutorial used one.
-* States should define meaningful behavior and transitions.
-* Avoid giant conditional chains when a small state machine would materially improve clarity.
-* Avoid state machines for trivial two-state logic that is clearer as a boolean.
-
----
-
-# 27. Animation and Presentation
-
-* Keep presentation effects separate from core state logic where practical.
-* Gameplay state should not depend on an animation finishing unless that timing is intentionally part of the mechanic.
-* Animation callbacks/signals may trigger gameplay events when that relationship is deliberate.
-* Do not use animation as a hidden state machine for important business/gameplay rules.
-* Avoid excessive animation that reduces responsiveness or clarity.
-
----
-
-# 28. Audio
-
-* Centralize shared audio behavior when the project actually has enough audio complexity to justify it.
-* Do not create a global audio manager merely to play a handful of sounds.
-* Use reusable audio components or buses appropriately.
-* Important UI/gameplay states should not rely solely on audio for communication.
-* Allow volume categories/settings to be controlled centrally where appropriate.
-
----
-
-# 29. Localization and Text
-
-* Do not hardcode user-facing text throughout scripts when the project may require localization.
-* Keep player-facing strings centralized or localization-ready when appropriate.
-* Avoid placing critical logic in string comparisons.
-* Use stable IDs/enums for logic and human-readable strings for presentation.
-* Do not assume one language has the same text length as another when designing UI.
-
----
-
-# 30. Mobile and Multi-Platform Rules
-
-* Do not assume desktop input, screen size, aspect ratio, storage, memory, or performance.
-* Test touch targets and touch interactions for mobile.
-* Consider lifecycle interruptions such as:
-
-  * app backgrounding
-  * returning to the app
-  * interruptions
-  * device rotation where relevant
-* Avoid unnecessary background processing.
-* Keep memory usage appropriate for the weakest supported device.
-* Platform-specific code must remain isolated where practical.
-* Do not force every platform through the same implementation when platform constraints genuinely differ.
-
----
-
-# 31. Scope Discipline
-
-Before implementing a new feature, determine:
-
-```text
-Does this improve the current core experience?
-        ↓
-Yes → Build the smallest useful version.
-No  → Question whether it belongs in this project.
-```
-
-* Do not add features simply because they are technically interesting.
-* Do not build systems for hypothetical future requirements unless the current architecture clearly benefits from them.
-* Avoid feature creep.
-* Prioritize the smallest change that creates meaningful user/player value.
-
----
-
-# 32. Agent Rules for Existing Code
-
-When working in an existing project:
-
-* Read before editing.
-* Understand before refactoring.
-* Reuse before duplicating.
-* Modify before replacing.
-* Verify before declaring completion.
-* Preserve behavior unless change is intentional.
-* Never hide an error just because fixing it is inconvenient.
-* Never remove a system merely because a cleaner-looking replacement seems possible without checking dependencies.
-* Never perform a large refactor when a small local fix solves the requested problem.
-* Avoid changing unrelated formatting.
-* Do not rename public APIs, nodes, signals, Resources, save fields, or files without checking their consumers.
-
----
-
-# 33. Agent Rules for New Systems
-
-When introducing a new system:
-
-1. Identify its responsibility.
-2. Identify its owner.
-3. Identify its inputs and outputs.
-4. Determine whether it belongs in:
-
-   * a Node
-   * a Scene
-   * a Resource
-   * a plain script/class
-   * an Autoload
-   * a backend/server
-5. Identify how it communicates with existing systems.
-6. Build the smallest working implementation.
-7. Verify it.
-8. Only then extract reusable abstractions.
-
-The agent should be able to answer:
-
-```text
-Who owns this?
-Who can call it?
-Who can modify its state?
-Who does it depend on?
-Who depends on it?
-```
-
-before introducing a major new architecture.
-
----
-
-# 34. Definition of Done
-
-A meaningful task should normally be considered complete only when:
-
-* the implementation exists
-* the implementation follows the project's architecture
-* code is statically typed where appropriate
-* scene/node structure is clean
-* no unnecessary duplication was introduced
-* no unnecessary Autoload/plugin/dependency was introduced
-* parser/type errors are resolved
-* runtime errors are checked
-* the primary interaction was tested
-* existing related functionality still works
-* important edge cases were considered
-* platform-specific behavior was checked when relevant
-* no secrets were introduced
-* no unrelated files were modified unnecessarily
-* the resulting code is understandable by another developer
-
-Do not optimize for "task appears completed."
-Optimize for **"task is correctly implemented, integrated, and verified."**
-
----
-
-# 35. Final Design Philosophy
+Prefer editor-authored properties for values that designers should be able to tune.
 
 Prefer:
+- exported typed properties,
+- Theme resources,
+- StyleBox resources,
+- shared Resources,
+- AnimationPlayer/AnimationLibrary,
+- InputMap,
+- scene properties,
+- project settings,
 
-```text
-Simple
-Readable
-Typed
-Scene-based
-Data-driven
-Composable
-Testable
-Profiled
-Secure
-Maintainable
-```
+over hidden constants in scripts.
 
-Avoid:
+Use code for:
+- behavior,
+- calculations,
+- state transitions,
+- dynamic data,
+- event handling,
+- procedural behavior.
 
-```text
-Over-engineered
-Deeply coupled
-Globally stateful
-Hard-coded
-Duplicated
-Prematurely optimized
-Procedurally generated without need
-Unverified
-```
-
-The goal is not to create the largest or most sophisticated architecture.
-
-The goal is to create the **simplest architecture that can cleanly support the actual project and evolve without becoming fragile**.
+Do not hide important design parameters inside scripts when they belong in the Inspector or a Resource.
 
 ---
 
-# 36. Reference Documentation
+# 7. RESOURCES AND SHARED DATA
 
-Godot 4.7 documentation:
+Use Resources for reusable configuration/data when appropriate.
 
-https://docs.godotengine.org/en/4.7/
+Good Resource candidates:
+- character stats,
+- item definitions,
+- level configuration,
+- dialogue data,
+- theme/style configuration,
+- reusable game settings,
+- audio configuration,
+- enemy definitions.
 
-GDScript style guide:
+Prefer one shared Resource over duplicating the same configuration across many scenes.
 
-https://docs.godotengine.org/en/4.7/tutorials/scripting/gdscript/gdscript_styleguide.html
+Do not overuse Resources for trivial one-off values.
 
-Best practices:
+---
 
-https://docs.godotengine.org/en/4.7/tutorials/best_practices/index.html
+# 8. SCENE ARCHITECTURE
 
-Project organization:
+Prefer composition over inheritance.
 
-https://docs.godotengine.org/en/4.7/tutorials/best_practices/project_organization.html
+A scene should have a clear responsibility.
 
-Performance:
+Prefer:
+- reusable child scenes,
+- small controllers,
+- clear ownership,
+- shallow readable trees,
+- data-driven configuration.
 
-https://docs.godotengine.org/en/4.7/tutorials/performance/index.html
+Avoid:
+- giant root scripts controlling unrelated systems,
+- inheritance chains that exist only to share a few lines,
+- scenes that are empty shells for massive scripts,
+- deep node trees with no architectural reason.
 
-Resources:
+Every important system should have an obvious owner.
 
-https://docs.godotengine.org/en/4.7/classes/class_resource.html
+---
 
-InputMap:
+# 9. COMMUNICATION
 
-https://docs.godotengine.org/en/4.7/classes/class_inputmap.html
+Default rule:
+
+Signal up. Call down.
+
+Use signals for:
+- events,
+- state changes,
+- decoupled communication,
+- parent/manager notification.
+
+Use direct method calls when:
+- the caller owns the callee,
+- the dependency is explicit and stable,
+- an immediate command is clearer than an event.
+
+Avoid:
+- polling every frame for events,
+- global state for local communication,
+- unnecessary signal chains,
+- hidden dependencies.
+
+Never invent signal names or node paths. Inspect first.
+
+---
+
+# 10. NODE REFERENCES
+
+Prefer stable references:
+- typed node references,
+- `@onready` references,
+- exported Node references where appropriate,
+- direct ownership references.
+
+Avoid repeated tree searches in hot paths.
+
+Do not use:
+- `get_node()` every frame,
+- `find_child()` every frame,
+- fragile absolute paths when a local reference is available.
+
+Use `%UniqueName` when the project uses unique nodes appropriately.
+
+---
+
+# 11. GDSCRIPT STANDARD
+
+Target Godot 4.7.x.
+
+Use:
+- static typing,
+- typed parameters,
+- typed return values,
+- clear names,
+- early returns,
+- small functions,
+- explicit ownership.
+
+Indent GDScript with TAB characters only.
+
+Never use spaces for GDScript indentation.
+
+Preferred:
+```gdscript
+func calculate_score(correct: bool, streak: int) -> int:
+	if correct:
+		return 100 + streak * 10
+	return 0
+```
+
+Avoid clever one-liners when they reduce readability.
+
+Do not invent APIs. Verify Godot APIs against the project, available documentation, or observed behavior.
+
+---
+
+# 12. SCRIPT RESPONSIBILITY
+
+A script should have one primary responsibility.
+
+Before adding logic to a script, ask:
+- Does this script own this behavior?
+- Is there already a better owner?
+- Will this make the script responsible for multiple unrelated systems?
+
+Split systems when the split creates clearer ownership.
+
+Do not split tiny logic into meaningless micro-scripts.
+
+---
+
+# 13. UI ARCHITECTURE
+
+Prefer:
+- Control nodes,
+- Containers,
+- anchors,
+- size flags,
+- Theme resources,
+- StyleBoxes,
+- reusable UI scenes.
+
+Avoid hardcoded pixel positioning for layouts that should adapt.
+
+Use Containers for relationships between UI elements.
+
+Use anchors and layout presets intentionally.
+
+Use `CanvasLayer` when UI must remain independent from world/camera transforms.
+
+Do not use runtime code to repeatedly force layout properties unless the layout is genuinely dynamic.
+
+---
+
+# 14. THEMES, STYLES, ANIMATION
+
+Centralize shared visual language.
+
+Prefer shared:
+- Theme,
+- StyleBox,
+- font configuration,
+- color palette,
+- animation library,
+- reusable UI scenes.
+
+Do not duplicate the same style in many scripts.
+
+Do not hardcode visual constants in behavior scripts if they belong to a Theme or Resource.
+
+For animations:
+- prefer AnimationPlayer/AnimationLibrary for authored animation,
+- use code-driven animation when it is genuinely procedural,
+- avoid scattered tween timings across unrelated scripts.
+
+---
+
+# 15. GAMEPLAY ARCHITECTURE
+
+Separate:
+- input,
+- gameplay rules,
+- presentation,
+- UI,
+- persistent data,
+- networking.
+
+Input should express player intent.
+
+Gameplay systems should decide what happens.
+
+UI should present state and send user intent.
+
+Do not let UI become the owner of core gameplay rules.
+
+---
+
+# 16. STATE MACHINES
+
+Use an explicit state machine when an entity/system has multiple mutually exclusive behavioral states.
+
+Examples:
+- player movement,
+- enemy AI,
+- menus,
+- game flow,
+- turn-based phases.
+
+Do not create a state machine for a system with only two trivial branches.
+
+Keep state transitions explicit and testable.
+
+---
+
+# 17. INPUT
+
+Use Godot InputMap actions.
+
+Do not hardcode raw keys/buttons throughout gameplay code.
+
+Use action names such as:
+- `move_left`
+- `move_right`
+- `jump`
+- `interact`
+- `pause`
+
+Keep device-specific handling at the input boundary.
+
+---
+
+# 18. AUTOLOADS
+
+Autoload only when the system genuinely needs global lifetime/access.
+
+Good candidates may include:
+- application-wide state,
+- save service,
+- audio service,
+- scene transition service.
+
+Do not use Autoload as a shortcut for poor ownership.
+
+Do not create a global singleton merely to avoid passing a reference.
+
+---
+
+# 19. MAGIC VALUES
+
+Ask where each important value belongs:
+
+- one-time implementation detail → local constant,
+- tunable design value → exported property,
+- shared configuration → Resource,
+- visual value → Theme/StyleBox,
+- input mapping → InputMap,
+- global project configuration → Project Settings.
+
+Do not create configuration systems for a handful of obvious constants.
+
+---
+
+# 20. FEATURE WORKFLOW
+
+For every non-trivial feature:
+
+### Phase A — Understand
+- inspect relevant project structure,
+- identify existing systems,
+- identify dependencies,
+- identify the correct owner.
+
+### Phase B — Design
+- choose scene/node/resource/script structure,
+- minimize new abstractions,
+- define communication.
+
+### Phase C — Build
+- create/configure scene tree first where appropriate,
+- use Inspector-authored properties,
+- add only necessary scripts,
+- reuse existing systems.
+
+### Phase D — Verify
+- run the relevant scene,
+- inspect Output/Debugger,
+- test the changed behavior,
+- playtest when interactive,
+- fix failures.
+
+### Phase E — Review
+- check architecture,
+- check unintended side effects,
+- check dead code/resources,
+- check formatting,
+- check that the requested result is actually visible/usable.
+
+---
+
+# 21. DEBUGGING PROTOCOL
+
+When debugging:
+
+1. Reproduce the problem.
+2. Read Output and Debugger.
+3. Identify the first meaningful error, not merely the final cascade.
+4. Inspect the relevant scene tree and script.
+5. Trace the data/event flow.
+6. Form a minimal hypothesis.
+7. Make the smallest fix.
+8. Re-run.
+9. Verify the original failure is gone.
+10. Check for regressions.
+
+Never hide an error merely to make the Output look clean.
+
+Do not replace working architecture because of an isolated bug unless the architecture is actually the cause.
+
+---
+
+# 22. TESTING AND PLAYTESTING
+
+Code correctness is not enough for interactive Godot work.
+
+For gameplay:
+- run the relevant scene/project,
+- exercise the changed input/action,
+- test normal and failure paths,
+- inspect runtime errors.
+
+For UI:
+- open/run the relevant scene,
+- inspect actual layout and interaction,
+- verify resizing/scaling when relevant,
+- verify buttons, focus, hover, disabled states, and navigation when applicable.
+
+For bugs:
+- reproduce before changing,
+- verify after changing.
+
+For a specific boss/level/system:
+- create or use a practical test entry point when needed instead of forcing the entire game flow.
+
+If Ziva can playtest the behavior, prefer real playtesting over reasoning alone.
+
+---
+
+# 23. PERFORMANCE
+
+Optimize measured problems, not imagined ones.
+
+Avoid:
+- per-frame tree searches,
+- unnecessary allocations,
+- excessive polling,
+- repeated resource loading,
+- giant monolithic updates.
+
+Do not sacrifice readability for tiny theoretical gains.
+
+For mobile:
+- watch texture memory,
+- overdraw,
+- node count,
+- unnecessary processing,
+- excessive animations,
+- expensive per-frame work.
+
+---
+
+# 24. ASYNC AND LIFECYCLE
+
+Godot is event/lifecycle driven.
+
+Be careful with:
+- `_ready`,
+- `_enter_tree`,
+- `_exit_tree`,
+- `_process`,
+- `_physics_process`,
+- timers,
+- tweens,
+- deferred calls,
+- async operations.
+
+Before connecting signals or starting timers/tweens:
+- understand who owns them,
+- avoid duplicate connections,
+- avoid callbacks to freed nodes,
+- clean up long-lived resources.
+
+Do not use `_process` when an event/signal/timer is more appropriate.
+
+---
+
+# 25. SAVE / PERSISTENCE
+
+Separate persistent data from scene presentation.
+
+Do not save arbitrary node state unless that is intentionally part of persistence.
+
+Use explicit save/load models.
+
+Validate loaded data.
+
+Handle missing/corrupt/old data gracefully.
+
+Do not store secrets in the project.
+
+---
+
+# 26. NETWORKING / BACKEND
+
+Treat all client input and client-provided values as untrusted.
+
+Never embed:
+- API secrets,
+- private keys,
+- service credentials,
+- admin credentials
+
+in the Godot client.
+
+Keep authoritative game/economic/security decisions on the server when required.
+
+Handle:
+- connection loss,
+- timeouts,
+- retries,
+- duplicate requests,
+- malformed responses.
+
+Do not add networking complexity until the feature actually requires it.
+
+---
+
+# 27. SECURITY
+
+Never commit secrets.
+
+Do not place credentials in:
+- scripts,
+- project settings intended for version control,
+- JSON assets,
+- Resources,
+- scene files,
+- logs.
+
+Do not weaken security merely to make a test pass.
+
+---
+
+# 28. PROJECT ORGANIZATION
+
+Use a predictable structure.
+
+Example:
+```text
+res://
+├── scenes/
+├── scripts/
+├── ui/
+├── resources/
+├── data/
+├── assets/
+├── audio/
+├── shaders/
+├── tests/
+└── addons/
+```
+
+Adapt to the existing project instead of reorganizing everything unnecessarily.
+
+Do not move large numbers of files unless there is a clear benefit.
+
+---
+
+# 29. EDITOR VS RUNTIME
+
+Ask whether a change belongs:
+- in the scene,
+- in a Resource,
+- in Project Settings,
+- in InputMap,
+- in an Animation,
+- in an editor-authored asset,
+- or in runtime code.
+
+Prefer editor-authored state for stable structure/configuration.
+
+Prefer runtime code for dynamic behavior.
+
+Do not recreate editor-authored state at runtime without a real reason.
+
+---
+
+# 30. AI-SPECIFIC ANTI-PATTERNS
+
+Never:
+- invent files that may already exist,
+- invent node paths,
+- invent signals,
+- invent APIs,
+- rewrite unrelated systems,
+- generate huge scripts when a small scene change would solve the task,
+- create static UI entirely in code,
+- add abstractions without a demonstrated need,
+- claim success without verification,
+- ignore runtime errors because the requested code was generated,
+- stop after a compile/parse check when actual behavior still needs testing.
+
+When uncertain, inspect the project rather than guessing.
+
+---
+
+# 31. CHANGE IMPACT CHECK
+
+Before a structural change, consider:
+
+- Which scenes instantiate this?
+- Which scripts reference it?
+- Which signals depend on it?
+- Is the Resource shared?
+- Could changing this Theme affect unrelated screens?
+- Could changing an Autoload affect global state?
+- Could changing a public method break callers?
+- Could changing a scene hierarchy break `%UniqueName` or node references?
+- Could a saved Resource change affect multiple objects?
+
+Prefer the smallest change that preserves existing contracts.
+
+---
+
+# 32. COMPLETE VISUAL REDESIGN VS LOCAL CHANGE
+
+Use this decision:
+
+| User request | Agent authority |
+|---|---|
+| Complete visual style/reference | Broad UI authority |
+| "Redesign this screen" | Broad authority for that screen |
+| "Make this UI look like this image" | Broad authority for the relevant UI |
+| "Move this button" | Local change only |
+| "Change this color" | Local change only |
+| "Increase this font size" | Local change only |
+| "Fix this UI bug" | Fix the bug; avoid unrelated redesign |
+
+If scope is ambiguous, preserve existing design unless the request clearly supplies a complete visual target.
+
+---
+
+# 33. DO NOT OVER-ENGINEER
+
+Before creating a new abstraction, ask:
+
+1. Does the project need it now?
+2. Does an existing system already solve it?
+3. Will it reduce complexity or add complexity?
+4. Can the feature be implemented directly in Godot's scene/resource system?
+5. Can it be tested easily?
+
+If not justified, do not add it.
+
+---
+
+# 34. DEFINITION OF DONE
+
+A task is complete only when:
+
+- the requested feature/change exists,
+- relevant scenes/resources are saved,
+- scripts parse,
+- no relevant new editor/runtime errors remain,
+- the relevant scene/project has been run,
+- changed behavior has been tested,
+- visual changes have been visually inspected,
+- important regressions have been checked,
+- architecture remains understandable,
+- no unnecessary system was introduced.
+
+For UI/reference work, visual verification is mandatory.
+
+For gameplay work, behavioral playtesting is mandatory when practical.
+
+For bug fixes, the original bug must be reproduced and then verified as fixed.
+
+---
+
+# 35. FINAL RESPONSE TO THE USER
+
+After completing work, report briefly:
+
+1. What changed.
+2. Which files/scenes/resources changed.
+3. What was tested.
+4. Any remaining limitation or unverified area.
+
+Do not dump unnecessary implementation details unless requested.
+
+---
+
+# 36. CORE PHILOSOPHY
+
+Build Godot projects the way Godot is designed to be used.
+
+Scene Tree for structure.
+Inspector for configuration.
+Resources for reusable data.
+Themes for visual systems.
+Signals for events.
+Scripts for behavior.
+Autoloads only for genuinely global services.
+Tests and playtesting for verification.
+
+Prefer:
+scene over runtime construction,
+Inspector over hidden constants,
+composition over inheritance,
+signals over polling,
+reuse over duplication,
+small systems over monoliths,
+evidence over assumptions,
+verification over confidence.
+
+When Ziva can inspect, edit, run, observe, and playtest the project, use those capabilities.
+
+Do not merely describe what should work.
+
+Make it work, then verify it.
