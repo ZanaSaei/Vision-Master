@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dthv3gemvf4vq"]
 
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="1_fjmkr"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="1_fjmkr"]
 [ext_resource type="Script" uid="uid://bi8xddf2cm140" path="res://scenes/listening_speaking/listening_speaking.gd" id="1_yfu1x"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_mt8p7"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="2_yfu1x"]

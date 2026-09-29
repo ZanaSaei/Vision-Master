@@ -74,7 +74,7 @@ func _build_ui() -> void:
 	h_row.add_theme_constant_override("separation", 20)
 	h_margin.add_child(h_row)
 
-	var back := MenuStyle.make_back_button("res://images/Back.png", 132)
+	var back := MenuStyle.make_back_button("res://assets/images/ui/Back.png", 132)
 	# Name it "BackButton": Global.style_header maps header buttons to their
 	# icon by node name, and an unnamed button would have its icon cleared.
 	back.name = "BackButton"

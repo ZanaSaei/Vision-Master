@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UiMotionProfile" format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/ui_motion_profile.gd" id="1_hfmus"]
+
+[resource]
+script = ExtResource("1_hfmus")
+duration = 0.5
+transition = 2
+settle_transition = 2
+from_scale = 1.04
+peak_scale = 1.0
+from_alpha = 1.0
+distance = 0.0
+shake_offsets = PackedFloat32Array(14, -12, 9, -6, 3, 0)

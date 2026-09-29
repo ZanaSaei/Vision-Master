@@ -21,8 +21,8 @@ extends "res://autoload/BackButtonHandler.gd"
 ##  only, so they never affect the auto-score.
 ## ============================================================
 
-const BACK_ICON: String = "res://images/Back.png"
-const HOME_ICON: String = "res://images/Main_Menu.png"
+const BACK_ICON: String = "res://assets/images/ui/Back.png"
+const HOME_ICON: String = "res://assets/images/ui/Main_Menu.png"
 const SCORE_MAX: float = 40.0
 
 var _navigating: bool = false

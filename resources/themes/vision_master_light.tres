@@ -1,0 +1,171 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="StyleBox" path="res://resources/styleboxes/card_lifted_light.tres" id="1_vduxx"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/button_disabled_light.tres" id="2_mmd2d"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/button_focus_light.tres" id="3_ufo87"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/button_default_light.tres" id="4_v31qs"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/button_pressed_light.tres" id="5_hsjly"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/toggle_off_light.tres" id="6_h3png"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/toggle_on_light.tres" id="7_4n3jr"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/scrollbar_grabber_light.tres" id="8_oem7f"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/scrollbar_track.tres" id="9_jju2c"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/separator_light.tres" id="10_7qvp1"]
+[ext_resource type="Texture2D" path="res://resources/textures/slider_grabber_light.tres" id="11_vs18e"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/slider_fill_light.tres" id="12_lld5u"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/slider_track_light.tres" id="13_mmfxm"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/input_focus_light.tres" id="14_xmklp"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/card_light.tres" id="15_vddr2"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/table_row_hover_light.tres" id="16_wxfh0"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/progress_track_light.tres" id="17_ymwhc"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/progress_fill_light.tres" id="18_hicls"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/panel_transparent.tres" id="19_h63hx"]
+[ext_resource type="StyleBox" path="res://resources/styleboxes/pill_accent_light.tres" id="20_a1rst"]
+[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="21_2wkg4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2q7v"]
+content_margin_left = 36.0
+content_margin_top = 12.0
+content_margin_right = 36.0
+content_margin_bottom = 12.0
+bg_color = Color(0.92156863, 0.8980392, 0.84705883, 1)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.07)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyxw8"]
+content_margin_left = 36.0
+content_margin_top = 36.0
+content_margin_right = 36.0
+content_margin_bottom = 36.0
+bg_color = Color(0.98039216, 0.96862745, 0.9411765, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.235, 0.196, 0.118, 0.14)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 22
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgbed"]
+content_margin_left = 36.0
+content_margin_top = 16.0
+content_margin_right = 36.0
+content_margin_bottom = 16.0
+bg_color = Color(0.92156863, 0.8980392, 0.84705883, 1)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.07)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[resource]
+default_font = ExtResource("21_2wkg4")
+default_font_size = 34
+AcceptDialog/styles/panel = ExtResource("1_vduxx")
+Button/colors/font_color = Color(0.21176471, 0.2, 0.17254902, 1)
+Button/colors/font_disabled_color = Color(0.5686275, 0.54901963, 0.50980395, 1)
+Button/colors/font_focus_color = Color(0.21176471, 0.2, 0.17254902, 1)
+Button/colors/font_hover_color = Color(0.21176471, 0.2, 0.17254902, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/disabled = ExtResource("2_mmd2d")
+Button/styles/focus = ExtResource("3_ufo87")
+Button/styles/hover = ExtResource("4_v31qs")
+Button/styles/normal = ExtResource("4_v31qs")
+Button/styles/pressed = ExtResource("5_hsjly")
+CheckBox/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+CheckBox/colors/font_disabled_color = Color(0.43137255, 0.41568628, 0.38039216, 1)
+CheckBox/colors/font_hover_color = Color(0.29803923, 0.5529412, 0.9647059, 1)
+CheckBox/colors/font_pressed_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+CheckBox/styles/disabled = ExtResource("6_h3png")
+CheckBox/styles/hover = ExtResource("6_h3png")
+CheckBox/styles/hover_pressed = ExtResource("7_4n3jr")
+CheckBox/styles/normal = ExtResource("6_h3png")
+CheckBox/styles/pressed = ExtResource("7_4n3jr")
+CheckButton/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+CheckButton/colors/font_disabled_color = Color(0.43137255, 0.41568628, 0.38039216, 1)
+CheckButton/colors/font_hover_color = Color(0.29803923, 0.5529412, 0.9647059, 1)
+CheckButton/colors/font_pressed_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+CheckButton/styles/disabled = ExtResource("6_h3png")
+CheckButton/styles/hover = ExtResource("6_h3png")
+CheckButton/styles/hover_pressed = ExtResource("7_4n3jr")
+CheckButton/styles/normal = ExtResource("6_h3png")
+CheckButton/styles/pressed = ExtResource("7_4n3jr")
+HScrollBar/styles/grabber = ExtResource("8_oem7f")
+HScrollBar/styles/grabber_highlight = ExtResource("8_oem7f")
+HScrollBar/styles/grabber_pressed = ExtResource("8_oem7f")
+HScrollBar/styles/scroll = ExtResource("9_jju2c")
+HSeparator/styles/separator = ExtResource("10_7qvp1")
+HSlider/icons/grabber = ExtResource("11_vs18e")
+HSlider/icons/grabber_disabled = ExtResource("11_vs18e")
+HSlider/icons/grabber_highlight = ExtResource("11_vs18e")
+HSlider/styles/grabber_area = ExtResource("12_lld5u")
+HSlider/styles/grabber_area_highlight = ExtResource("12_lld5u")
+HSlider/styles/slider = ExtResource("13_mmfxm")
+Label/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 0)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/outline_size = 0
+LineEdit/colors/caret_color = Color(0.18431373, 0.43529412, 0.84705883, 1)
+LineEdit/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+LineEdit/colors/font_placeholder_color = Color(0.43137255, 0.41568628, 0.38039216, 1)
+LineEdit/colors/selection_color = Color(0.184, 0.435, 0.847, 0.12)
+LineEdit/styles/focus = ExtResource("14_xmklp")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_i2q7v")
+OptionButton/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+OptionButton/colors/font_disabled_color = Color(0.43137255, 0.41568628, 0.38039216, 1)
+OptionButton/colors/font_hover_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+Panel/styles/panel = ExtResource("15_vddr2")
+PanelContainer/styles/panel = ExtResource("15_vddr2")
+PopupMenu/colors/font_accelerator_color = Color(0.43137255, 0.41568628, 0.38039216, 1)
+PopupMenu/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+PopupMenu/colors/font_hover_color = Color(1, 1, 1, 1)
+PopupMenu/colors/font_separator_color = Color(0.43137255, 0.41568628, 0.38039216, 1)
+PopupMenu/styles/hover = ExtResource("16_wxfh0")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_vyxw8")
+PopupMenu/styles/separator = ExtResource("10_7qvp1")
+PopupPanel/styles/panel = ExtResource("1_vduxx")
+ProgressBar/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+ProgressBar/styles/background = ExtResource("17_ymwhc")
+ProgressBar/styles/fill = ExtResource("18_hicls")
+RichTextLabel/colors/default_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+RichTextLabel/colors/font_selected_color = Color(1, 1, 1, 1)
+RichTextLabel/colors/selection_color = Color(0.184, 0.435, 0.847, 0.12)
+ScrollContainer/styles/panel = ExtResource("19_h63hx")
+TabContainer/colors/font_disabled_color = Color(0.5686275, 0.54901963, 0.50980395, 1)
+TabContainer/colors/font_hovered_color = Color(0.29803923, 0.5529412, 0.9647059, 1)
+TabContainer/colors/font_selected_color = Color(0.18431373, 0.43529412, 0.84705883, 1)
+TabContainer/colors/font_unselected_color = Color(0.43137255, 0.41568628, 0.38039216, 1)
+TabContainer/styles/panel = ExtResource("1_vduxx")
+TextEdit/colors/caret_color = Color(0.18431373, 0.43529412, 0.84705883, 1)
+TextEdit/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+TextEdit/styles/focus = ExtResource("14_xmklp")
+TextEdit/styles/normal = SubResource("StyleBoxFlat_lgbed")
+TooltipLabel/colors/font_color = Color(0.18431373, 0.17254902, 0.14901961, 1)
+TooltipPanel/styles/panel = ExtResource("20_a1rst")
+VScrollBar/styles/grabber = ExtResource("8_oem7f")
+VScrollBar/styles/grabber_highlight = ExtResource("8_oem7f")
+VScrollBar/styles/grabber_pressed = ExtResource("8_oem7f")
+VScrollBar/styles/scroll = ExtResource("9_jju2c")
+VSeparator/styles/separator = ExtResource("10_7qvp1")
+VSlider/icons/grabber = ExtResource("11_vs18e")
+VSlider/icons/grabber_disabled = ExtResource("11_vs18e")
+VSlider/icons/grabber_highlight = ExtResource("11_vs18e")
+VSlider/styles/grabber_area = ExtResource("12_lld5u")
+VSlider/styles/grabber_area_highlight = ExtResource("12_lld5u")
+VSlider/styles/slider = ExtResource("13_mmfxm")
+Window/styles/embedded_border = ExtResource("1_vduxx")

@@ -4,7 +4,7 @@ extends RefCounted
 ##  SCRAMBLED THEME — the visual language of «بازی املا».
 ##
 ##  The game screens are skipped by the app-wide theme walk (they are listed
-##  in ThemeService.SELF_THEMED_SCRIPTS) because a game board must not lose
+##  in ThemeSceneStyler.SELF_THEMED_SCRIPTS) because a game board must not lose
 ##  its colours to a restyle pass. Everything theme-dependent therefore comes
 ##  from here: the page tint, the card surfaces and the text roles read the
 ##  palette through MenuStyle, while the game parts — the letter tiles, their

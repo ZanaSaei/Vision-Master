@@ -9,7 +9,7 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_MAIN_MENU   := "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
-const BACK_ICON         := "res://images/Back.png"
+const BACK_ICON         := "res://assets/images/ui/Back.png"
 
 # Persian + English lesson titles per book.
 const LESSON_DATA := {

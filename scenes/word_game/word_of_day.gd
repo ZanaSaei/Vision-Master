@@ -10,21 +10,39 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_WORD_GAME := "res://scenes/word_game/WordGame.tscn"
 
+# ── Header action buttons — Inspector-tunable styling ──
+@export_group("Header actions")
+@export var help_label: String = "راهنما"
+@export var help_tint: Color = Color("#DCEBFF")
+@export var help_accent: Color = Color("#2563EB")
+@export var card_label: String = "کارت واژه"
+@export var card_tint: Color = Color("#DDF7E8")
+@export var card_accent: Color = Color("#16834A")
+@export var action_button_min_size: Vector2 = Vector2(150, 102)
+@export var action_button_font_size: int = 28
+@export var action_button_radius: int = 24
+
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var help_button: Button = $HeaderBar/HeaderContent/HelpButton
 @onready var card_button: Button = $HeaderBar/HeaderContent/CardButton
 ## The instanced game content. Typed as Node on purpose: its small public API
-## (show_help / close_panels) is reached through call(), so this shell does
-## not need to know the game's script class.
+## (show_help / show_card / close_panels) is reached through call(), so this
+## shell does not need to know the game's script class.
 @onready var game_content: Node = $Game
 
 
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)
 	help_button.pressed.connect(_on_help_button_pressed)
+	card_button.pressed.connect(_on_card_button_pressed)
 	back_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	help_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	_style_header_actions.call_deferred()
+
+	# The game content owns the "is the card available" state; the header owns
+	# the button, so the content reports upward and the host reflects it.
+	if game_content.has_signal("card_available_changed"):
+		game_content.card_available_changed.connect(_on_card_available_changed)
 
 	# The app-wide theme walk styles a scene when it is *entered*, not on a
 	# live toggle; re-walking from here keeps the header and the page surface
@@ -37,16 +55,16 @@ func _ready() -> void:
 func _style_header_actions() -> void:
 	if not is_inside_tree():
 		return
-	_style_action_button(help_button, "راهنما", Color("#DCEBFF"), Color("#2563EB"))
-	_style_action_button(card_button, "کارت واژه", Color("#DDF7E8"), Color("#16834A"))
+	_style_action_button(help_button, help_label, help_tint, help_accent)
+	_style_action_button(card_button, card_label, card_tint, card_accent)
 
 
 func _style_action_button(button: Button, label_text: String, tint: Color, accent: Color) -> void:
 	button.text = label_text
 	button.tooltip_text = label_text
-	button.custom_minimum_size = Vector2(150, 102)
+	button.custom_minimum_size = action_button_min_size
 	button.add_theme_font_override("font", MenuStyle.vazir())
-	button.add_theme_font_size_override("font_size", 28)
+	button.add_theme_font_size_override("font_size", action_button_font_size)
 	button.add_theme_color_override("font_color", accent)
 	button.add_theme_color_override("font_hover_color", accent)
 	button.add_theme_color_override("font_pressed_color", accent.darkened(0.15))
@@ -57,11 +75,7 @@ func _style_action_button(button: Button, label_text: String, tint: Color, accen
 
 
 func _action_button_style(fill: Color, outline: Color, border_width: int) -> StyleBoxFlat:
-	var style: StyleBoxFlat = StyleBoxFlat.new()
-	style.bg_color = fill
-	style.border_color = outline
-	style.set_border_width_all(border_width)
-	style.set_corner_radius_all(24)
+	var style := DesignTokens.box(fill, action_button_radius, outline, border_width)
 	style.content_margin_left = 16.0
 	style.content_margin_right = 16.0
 	style.content_margin_top = 10.0
@@ -75,6 +89,15 @@ func _action_button_style(fill: Color, outline: Color, border_width: int) -> Sty
 func _on_help_button_pressed() -> void:
 	if game_content != null and game_content.has_method("show_help"):
 		game_content.call("show_help")
+
+
+func _on_card_button_pressed() -> void:
+	if game_content != null and game_content.has_method("show_card"):
+		game_content.call("show_card")
+
+
+func _on_card_available_changed(available: bool) -> void:
+	card_button.visible = available
 
 
 func _on_theme_changed() -> void:

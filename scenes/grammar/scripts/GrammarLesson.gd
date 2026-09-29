@@ -240,7 +240,7 @@ func _build_top_bar(main: VBoxContainer) -> void:
 	top_bar.custom_minimum_size = Vector2(0, 64)
 	main.add_child(top_bar)
 
-	var back_button: Button = GrammarTheme.make_header_icon_button("res://images/Back.png", Callable(self, "_on_back_pressed"))
+	var back_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Back.png", Callable(self, "_on_back_pressed"))
 	top_bar.add_child(back_button)
 
 	title_label = Label.new()

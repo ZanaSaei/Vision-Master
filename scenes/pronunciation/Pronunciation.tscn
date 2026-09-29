@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://chnhgo7f6vvb0"]
 
 [ext_resource type="Script" uid="uid://dqfglxa84pov2" path="res://scenes/pronunciation/pronunciation.gd" id="1_4tnhm"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_15k17"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_15k17"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_25c5q"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_bsisb"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_25c5q"]

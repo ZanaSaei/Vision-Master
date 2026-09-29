@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UiMotionProfile" format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/ui_motion_profile.gd" id="1_ci6hs"]
+
+[resource]
+script = ExtResource("1_ci6hs")
+duration = 0.9
+transition = 1
+easing = 2
+settle_duration = 0.9
+settle_transition = 1
+settle_easing = 2
+from_scale = 1.0
+peak_scale = 1.04
+from_alpha = 1.0
+distance = 0.0
+shake_offsets = PackedFloat32Array(14, -12, 9, -6, 3, 0)
+loops_forever = true

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c2pfea6jx7nr6"]
 
 [ext_resource type="Script" uid="uid://c1ngji6rki4jt" path="res://scenes/workbook/workbook.gd" id="1_gxl1f"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_b4itg"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_b4itg"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_y31tq"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_5arbi"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_ar1ge"]

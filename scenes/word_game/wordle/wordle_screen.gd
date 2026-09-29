@@ -31,24 +31,26 @@ const KEY_ERASE := "BACK"
 ## rendered as empty boxes.
 const KEY_SUBMIT_LABEL := "تأیید"
 const KEY_ERASE_LABEL := "پاک"
-const KEY_MIN_SIZE := Vector2(88, 104)
-const KEY_FONT_SIZE := 46
-const KEY_ACTION_FONT_SIZE := 34
-const KEY_GAP := 8
-const KEY_CORNER_RADIUS := 14
+@export_group("Keyboard")
+@export var key_min_size: Vector2 = Vector2(88, 104)
+@export var key_font_size: int = 46
+@export var key_action_font_size: int = 34
+@export var key_gap: int = 8
+@export var key_corner_radius: int = 14
 
+@export_group("Board")
 ## Board geometry. The tile size is measured from the box the scene layout
 ## actually gives the board, so a 5- and a 10-letter answer both fit.
-const TILE_GAP := 12.0
-const TILE_MAX_SIZE := 150.0
-const TILE_MIN_SIZE := 44.0
+@export var tile_gap: float = 12.0
+@export var tile_max_size: float = 150.0
+@export var tile_min_size: float = 44.0
 
-## Reveal pacing.
-const REVEAL_STEP := 0.16
+@export_group("Pacing")
+@export var reveal_step: float = 0.16
 ## Beat between the last flip and the vocabulary card, so the player gets to
 ## look at the row that just finished.
-const END_PANEL_DELAY := 1.15
-const MESSAGE_FLASH_TIME := 2.6
+@export var end_panel_delay: float = 1.15
+@export var message_flash_time: float = 2.6
 
 const MESSAGE_NOT_A_WORD := "این کلمه در فهرست واژگان بازی نیست"
 const MESSAGE_TOO_SHORT := "تعداد حروف کافی نیست"
@@ -56,25 +58,32 @@ const MESSAGE_WIN := "آفرین! درست بود"
 const MESSAGE_LOSE := "پایان بازی — کلمه‌ی درست:"
 const MESSAGE_LOAD_ERROR := "خطا در بارگذاری واژگان بازی"
 
+@export_group("Vocabulary card")
 ## The end-of-game card wears its own look — a warm cream paper card with a
 ## thick green frame and centred dark ink — instead of the plain themed panel.
 ## Colours are fixed on purpose (not from the palette) so the card reads the
-## same in both themes, like a printed card.
-const CARD_BG := Color(0.984, 0.953, 0.898)          # warm cream
-const CARD_BORDER := Color(0.345, 0.780, 0.525)      # felt-tip green
-const CARD_INK := Color(0.208, 0.216, 0.290)         # dark blue-grey text
-const CARD_INK_DIM := Color(0.373, 0.392, 0.463)     # muted captions
-const CARD_ACCENT := Color(0.180, 0.639, 0.404)      # green emphasis
-const CARD_RADIUS := 44.0
-const CARD_BORDER_WIDTH := 6
+## same in both themes, like a printed card. They are exported so the card can
+## be restyled from the Inspector without touching this script.
+@export var card_bg: Color = Color(0.984, 0.953, 0.898)          # warm cream
+@export var card_border: Color = Color(0.345, 0.780, 0.525)      # felt-tip green
+@export var card_ink: Color = Color(0.208, 0.216, 0.290)         # dark blue-grey text
+@export var card_ink_dim: Color = Color(0.373, 0.392, 0.463)     # muted captions
+@export var card_accent: Color = Color(0.180, 0.639, 0.404)      # green emphasis
+@export var card_radius: float = 44.0
+@export var card_border_width: int = 6
 
 ## Which palette role a message line is painted with, so it stays legible in
 ## both themes.
 enum MessageKind { INFO, ERROR, SUCCESS }
 
+## Raised whenever the host's «کارت واژه» header button should be offered or
+## hidden. The header belongs to the HOST scene (WordOfDay.tscn), so this
+## content scene reports its own state upward instead of reaching into a
+## sibling node's internals — see AGENTS "signal up, call down".
+signal card_available_changed(available: bool)
+
 @onready var board_container: VBoxContainer = $GameArea/BoardContainer
 @onready var status_label: Label = $GameArea/StatusRow/StatusLabel
-@onready var card_button: Button = get_node("../HeaderBar/HeaderContent/CardButton") as Button
 @onready var message_label: Label = $GameArea/MessageLabel
 @onready var keyboard_container: VBoxContainer = $Keyboard
 @onready var end_panel: PanelContainer = $EndPanel
@@ -120,8 +129,6 @@ func _ready() -> void:
 	end_audio_button.visible = false
 	end_close_button.pressed.connect(close_panels)
 	help_close_button.pressed.connect(close_panels)
-	card_button.pressed.connect(_on_card_button_pressed)
-	card_button.visible = false
 	end_audio_button.pressed.connect(_on_audio_button_pressed)
 
 	# The app-wide theme walk runs on scene load, not on a live toggle, so
@@ -161,7 +168,7 @@ func _build_board() -> void:
 		var row := HBoxContainer.new()
 		row.name = "Row%d" % row_index
 		row.alignment = BoxContainer.ALIGNMENT_CENTER
-		row.add_theme_constant_override("separation", int(TILE_GAP))
+		row.add_theme_constant_override("separation", int(tile_gap))
 		var tiles: Array = []
 		for column in columns:
 			var tile: WordleTile = TILE_SCENE.instantiate()
@@ -172,7 +179,7 @@ func _build_board() -> void:
 		board_container.add_child(row)
 		_row_nodes.append(row)
 		_rows.append(tiles)
-	board_container.add_theme_constant_override("separation", int(TILE_GAP))
+	board_container.add_theme_constant_override("separation", int(tile_gap))
 	_board_ready = true
 
 
@@ -186,10 +193,10 @@ func _measure_cell(box: Vector2) -> float:
 		box = Vector2(get_viewport_rect().size.x - 80.0, 800.0)
 	var columns := maxi(game.answer.length(), 1)
 	var rows := WordleGame.MAX_GUESSES
-	var by_width := (box.x - TILE_GAP * float(columns - 1)) / float(columns)
-	var by_height := (box.y - TILE_GAP * float(rows - 1)) / float(rows)
-	return clampf(floorf(minf(minf(by_width, by_height), TILE_MAX_SIZE)),
-		TILE_MIN_SIZE, TILE_MAX_SIZE)
+	var by_width := (box.x - tile_gap * float(columns - 1)) / float(columns)
+	var by_height := (box.y - tile_gap * float(rows - 1)) / float(rows)
+	return clampf(floorf(minf(minf(by_width, by_height), tile_max_size)),
+		tile_min_size, tile_max_size)
 
 
 ## Keeps the board proportional when the window or the orientation changes.
@@ -237,7 +244,7 @@ func _build_keyboard() -> void:
 	for row_letters in KEY_ROWS:
 		var row := HBoxContainer.new()
 		row.alignment = BoxContainer.ALIGNMENT_CENTER
-		row.add_theme_constant_override("separation", KEY_GAP)
+		row.add_theme_constant_override("separation", key_gap)
 		for key in row_letters:
 			var button := _make_key_button(key)
 			row.add_child(button)
@@ -250,15 +257,15 @@ func _build_keyboard() -> void:
 func _make_key_button(key: String) -> Button:
 	var button := Button.new()
 	button.name = "Key%s" % key
-	button.custom_minimum_size = KEY_MIN_SIZE
+	button.custom_minimum_size = key_min_size
 	button.pressed.connect(_on_key_pressed.bind(key))
 	if key == KEY_SUBMIT or key == KEY_ERASE:
 		button.text = KEY_SUBMIT_LABEL if key == KEY_SUBMIT else KEY_ERASE_LABEL
-		button.add_theme_font_size_override("font_size", KEY_ACTION_FONT_SIZE)
+		button.add_theme_font_size_override("font_size", key_action_font_size)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	else:
 		button.text = key
-		button.add_theme_font_size_override("font_size", KEY_FONT_SIZE)
+		button.add_theme_font_size_override("font_size", key_font_size)
 	MenuStyle.wire_microinteractions(button)
 	return button
 
@@ -285,7 +292,7 @@ func _apply_keyboard_colors() -> void:
 ## instead of a Wordle colour.
 func _key_style(score: int) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.set_corner_radius_all(KEY_CORNER_RADIUS)
+	style.set_corner_radius_all(key_corner_radius)
 	style.bg_color = _key_color(score)
 	if score < 0:
 		style.set_border_width_all(1)
@@ -367,10 +374,10 @@ func _reveal_row(result: Dictionary) -> void:
 	var row_index := game.attempts_used() - 1
 	var tiles := _row_tiles(row_index)
 	for i in tiles.size():
-		tiles[i].reveal(int(result.evaluation[i]), REVEAL_STEP * float(i))
+		tiles[i].reveal(int(result.evaluation[i]), reveal_step * float(i))
 
 	# Wait for the last flip of the row to land.
-	var wait := REVEAL_STEP * float(tiles.size()) + WordleTile.FLIP_HALF_TIME * 2.0 + 0.08
+	var wait := reveal_step * float(tiles.size()) + WordleTile.FLIP_HALF_TIME * 2.0 + 0.08
 	await get_tree().create_timer(wait).timeout
 	if not is_inside_tree():
 		return
@@ -398,7 +405,7 @@ func _reveal_row(result: Dictionary) -> void:
 	WordleStats.record_result(won, game.attempts_used(), game.puzzle_id)
 
 	# Let the player look at the finished row before the card covers it.
-	await get_tree().create_timer(END_PANEL_DELAY).timeout
+	await get_tree().create_timer(end_panel_delay).timeout
 	if not is_inside_tree():
 		return
 	_show_end_panel(game.get_state() == WordleGame.State.WON)
@@ -427,7 +434,7 @@ func _set_message(text: String, kind: int) -> void:
 
 
 ## Shows a message that clears itself after `seconds`.
-func _flash_message(text: String, kind: int, seconds: float = MESSAGE_FLASH_TIME) -> void:
+func _flash_message(text: String, kind: int, seconds: float = message_flash_time) -> void:
 	_set_message(text, kind)
 	var token := _message_token
 	await get_tree().create_timer(seconds).timeout
@@ -446,18 +453,19 @@ func _refresh_status() -> void:
 			WordleDaily.format_until_next_word(),
 		])
 	status_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
-	_update_card_button()
+	_notify_card_available()
 
 
 ## The vocabulary card can be dismissed, so a finished board offers a way
-## back to it — otherwise the day's word would be lost for good.
-func _update_card_button() -> void:
-	if card_button == null:
-		return
-	card_button.visible = game != null and game.is_finished() and not end_panel.visible
+## back to it — otherwise the day's word would be lost for good. The host owns
+## the header button, so this screen only reports whether it should be shown.
+func _notify_card_available() -> void:
+	card_available_changed.emit(game != null and game.is_finished() and not end_panel.visible)
 
 
-func _on_card_button_pressed() -> void:
+## Re-opens the end-of-game vocabulary card. Called by the host (WordOfDay)
+## when its header button is pressed — the same public API as show_help().
+func show_card() -> void:
 	Sfx.click()
 	if game != null and game.is_finished():
 		_show_end_panel(game.get_state() == WordleGame.State.WON)
@@ -535,7 +543,7 @@ func _show_end_panel(won: bool, instant: bool = false) -> void:
 
 	end_panel.visible = true
 	end_scroll.scroll_vertical = 0
-	_update_card_button()
+	_notify_card_available()
 	if instant:
 		end_panel.modulate.a = 1.0
 	else:
@@ -610,7 +618,7 @@ func close_panels() -> bool:
 		closed = true
 	if end_panel.visible:
 		end_panel.visible = false
-		_update_card_button()
+		_notify_card_available()
 		closed = true
 	return closed
 
@@ -674,10 +682,10 @@ func _apply_card_style() -> void:
 	if not is_inside_tree():
 		return
 	var style := StyleBoxFlat.new()
-	style.bg_color = CARD_BG
-	style.set_corner_radius_all(int(CARD_RADIUS))
-	style.set_border_width_all(CARD_BORDER_WIDTH)
-	style.border_color = CARD_BORDER
+	style.bg_color = card_bg
+	style.set_corner_radius_all(int(card_radius))
+	style.set_border_width_all(card_border_width)
+	style.border_color = card_border
 	style.content_margin_left = 44.0
 	style.content_margin_right = 44.0
 	style.content_margin_top = 40.0
@@ -688,12 +696,12 @@ func _apply_card_style() -> void:
 	# unreadable on cream, so every card label is overridden here.
 	for label in [end_headline, end_word, end_meaning_fa, end_meaning_en,
 			end_synonyms, end_antonyms]:
-		label.add_theme_color_override("font_color", CARD_INK)
+		label.add_theme_color_override("font_color", card_ink)
 	for label in [end_phonetics, end_source, end_example, end_stats, end_next_word]:
-		label.add_theme_color_override("font_color", CARD_INK_DIM)
-	end_word.add_theme_color_override("font_color", CARD_ACCENT)
-	end_card_number.add_theme_color_override("font_color", CARD_INK)
+		label.add_theme_color_override("font_color", card_ink_dim)
+	end_word.add_theme_color_override("font_color", card_accent)
+	end_card_number.add_theme_color_override("font_color", card_ink)
 	if game != null and game.is_finished():
 		end_headline.add_theme_color_override("font_color",
-			CARD_ACCENT if game.get_state() == WordleGame.State.WON
+			card_accent if game.get_state() == WordleGame.State.WON
 				else Color(0.851, 0.502, 0.239))

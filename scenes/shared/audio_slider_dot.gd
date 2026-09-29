@@ -1,7 +1,7 @@
 class_name AudioSliderDot
 extends Control
 
-const GRABBER_TEXTURE: Texture2D = preload("res://images/audio_grabber.png")
+const GRABBER_TEXTURE: Texture2D = preload("res://assets/images/ui/audio_grabber.png")
 const SHOW_DURATION: float = 0.18
 const HIDE_DURATION: float = 0.16
 

@@ -49,6 +49,11 @@ static func exams_for_year(year_id: String) -> Array:
 
 ## Reads a JSON file into a Dictionary; logs and returns {} on error.
 static func _read_json(path: String) -> Dictionary:
+	# An empty path is "no exam selected" (the scene opened directly or a stale
+	# deep link) — a benign, expected state, so it degrades to {} without the
+	# noisy error a genuinely missing file deserves.
+	if path.is_empty():
+		return {}
 	if not FileAccess.file_exists(path):
 		push_error("ExamData: file not found: " + path)
 		return {}

@@ -269,7 +269,7 @@ func _ready() -> void:
 
 	# Decomposed theme system: a dedicated ThemeService node owns the palette,
 	# scene-styling walk and header engine; Global only forwards to it.
-	_theme = preload("res://autoload/ThemeService.gd").new()
+	_theme = preload("res://autoload/theme/theme_service.gd").new()
 	add_child(_theme)
 	_theme.setup(theme_mode)
 	_theme.theme_changed.connect(_relay_theme_changed)

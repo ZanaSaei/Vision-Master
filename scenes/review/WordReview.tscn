@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bp02fo3um6w2u" path="res://scenes/review/word_review.gd" id="1_chjlt"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_hx4ce"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://images/Back.png" id="2_o6c0r"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_o6c0r"]
 [ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_gfdwm"]
 [ext_resource type="FontFile" uid="uid://drnivg6cxlyr2" path="res://assets/fonts/PlusJakartaSans-Italic.ttf" id="5_3kfk6"]
 [ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="6_y8wcc"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="7_y8wcc"]
-[ext_resource type="StyleBox" uid="uid://cra0kyhull2d5" path="res://buttons_styles/show_answer.tres" id="8_hx4ce"]
+[ext_resource type="StyleBox" uid="uid://cra0kyhull2d5" path="res://resources/styleboxes/show_answer.tres" id="8_hx4ce"]
 [ext_resource type="PackedScene" uid="uid://c4kduxd61oyll" path="res://scenes/side_menu/ReviewSideMenu.tscn" id="8_y8wcc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gfdwm"]

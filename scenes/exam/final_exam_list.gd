@@ -9,8 +9,8 @@ extends "res://autoload/BackButtonHandler.gd"
 ##  pushes the exam runner with the exam's JSON path.
 ## ============================================================
 
-const BACK_ICON: String = "res://images/Back.png"
-const HOME_ICON: String = "res://images/Main_Menu.png"
+const BACK_ICON: String = "res://assets/images/ui/Back.png"
+const HOME_ICON: String = "res://assets/images/ui/Main_Menu.png"
 const CARD_ACCENT: Color = Color("#D97706")
 
 var _navigating: bool = false

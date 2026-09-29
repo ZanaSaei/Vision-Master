@@ -18,7 +18,7 @@ const SCENE_PRONUNCIATION      := "res://scenes/pronunciation/Pronunciation.tscn
 const SCENE_WRITING            := "res://scenes/writing/Writing.tscn"
 const SCENE_WHAT_YOU_LEARNED   := "res://scenes/what_you_learned/WhatYouLearned.tscn"
 const SCENE_WORKBOOK           := "res://scenes/workbook/Workbook.tscn"
-const BACK_ICON                := "res://images/Back.png"
+const BACK_ICON                := "res://assets/images/ui/Back.png"
 
 const PERSIAN_DIGITS := ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۱۰"]
 

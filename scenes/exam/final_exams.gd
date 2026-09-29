@@ -10,8 +10,8 @@ extends "res://autoload/BackButtonHandler.gd"
 ## ============================================================
 
 const SCENE_MAIN_MENU: String = "res://scenes/main_menu/MainMenu.tscn"
-const BACK_ICON: String = "res://images/Back.png"
-const HOME_ICON: String = "res://images/Main_Menu.png"
+const BACK_ICON: String = "res://assets/images/ui/Back.png"
+const HOME_ICON: String = "res://assets/images/ui/Main_Menu.png"
 const CARD_ACCENTS: Array[Color] = [Color("#2563EB"), Color("#D97706")]
 
 var _navigating: bool = false

@@ -9,6 +9,6 @@ extends Control
 # must NOT extend BackButtonHandler (that would handle the Android back twice).
 #
 # The script stays the scene root on purpose: it is listed in
-# ThemeService.SELF_THEMED_SCRIPTS, so the app-wide theme walk skips the whole
+# ThemeSceneStyler.SELF_THEMED_SCRIPTS, so the app-wide theme walk skips the whole
 # subtree and the game keeps its own candy-coloured styling.
 # ============================================================

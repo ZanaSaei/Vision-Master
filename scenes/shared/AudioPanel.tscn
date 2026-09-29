@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d077on3j3i6pd"]
 
 [ext_resource type="Script" uid="uid://cuyy7b8mylefo" path="res://scenes/shared/audio_panel.gd" id="1_f8ndu"]
-[ext_resource type="Texture2D" uid="uid://dtkko2fhjaucm" path="res://images/Backward.png" id="2_bwd"]
-[ext_resource type="Texture2D" uid="uid://bgas441s5yqhc" path="res://images/Close.png" id="2_close"]
-[ext_resource type="Texture2D" uid="uid://b4g5s6mn47q2j" path="res://images/Forward.png" id="2_fwd"]
-[ext_resource type="Texture2D" uid="uid://cflx0rr1btx23" path="res://images/Play.png" id="2_play"]
+[ext_resource type="Texture2D" uid="uid://dtkko2fhjaucm" path="res://assets/images/ui/Backward.png" id="2_bwd"]
+[ext_resource type="Texture2D" uid="uid://bgas441s5yqhc" path="res://assets/images/ui/Close.png" id="2_close"]
+[ext_resource type="Texture2D" uid="uid://b4g5s6mn47q2j" path="res://assets/images/ui/Forward.png" id="2_fwd"]
+[ext_resource type="Texture2D" uid="uid://cflx0rr1btx23" path="res://assets/images/ui/Play.png" id="2_play"]
 
 [node name="AudioPanel" type="PanelContainer" unique_id=418187207]
 visible = false

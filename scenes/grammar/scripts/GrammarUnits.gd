@@ -62,10 +62,10 @@ func _build_ui() -> void:
 	header_row.add_theme_constant_override("separation", 16)
 	header_margin.add_child(header_row)
 
-	var back_button: Button = GrammarTheme.make_header_icon_button("res://images/Back.png", Callable(self, "_on_previous_pressed"))
+	var back_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Back.png", Callable(self, "_on_previous_pressed"))
 	header_row.add_child(back_button)
 
-	var menu_button: Button = GrammarTheme.make_header_icon_button("res://images/Main_Menu.png", Callable(self, "_on_main_menu_pressed"))
+	var menu_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Main_Menu.png", Callable(self, "_on_main_menu_pressed"))
 	header_row.add_child(menu_button)
 
 	var title_label: Label = Label.new()

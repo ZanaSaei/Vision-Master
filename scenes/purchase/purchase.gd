@@ -8,7 +8,7 @@ extends "res://autoload/BackButtonHandler.gd"
 # ============================================================
 
 const SCENE_MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
-const BACK_ICON       := "res://images/Back.png"
+const BACK_ICON       := "res://assets/images/ui/Back.png"
 
 
 func _ready() -> void:

@@ -29,9 +29,9 @@ const COLOR_WORD_GAMES := Color("#F59E0B")   # بازی با کلمات — ambe
 # --- Book metadata ---
 const BOOK_EMOJI := { 1: "📘", 2: "📗", 3: "📕" }
 const BOOK_COVER := {
-	1: "res://images/Vision 1.jpg",
-	2: "res://images/Vision 2.jpg",
-	3: "res://images/Vision 3.jpg",
+	1: "res://assets/images/ui/Vision 1.jpg",
+	2: "res://assets/images/ui/Vision 2.jpg",
+	3: "res://assets/images/ui/Vision 3.jpg",
 }
 # Cover cards are taller than the default so the portrait cover chip (108x150)
 # sits inside with clean, balanced margins and is never cropped or distorted.

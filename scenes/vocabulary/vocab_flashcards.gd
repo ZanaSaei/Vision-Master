@@ -88,11 +88,11 @@ const SCENE_FLASHCARDS     := "res://scenes/vocabulary/VocabFlashcards.tscn"
 @onready var home_button: Button               = $HeaderBar/HeaderContent/HomeButton
 @onready var leitner_button: Button            = $HeaderBar/HeaderContent/LeitnerButton
 
-@onready var save_inactive = preload("res://images/save_button.png")
-@onready var save_active = preload("res://images/saved_button.png")
+@onready var save_inactive = preload("res://assets/images/ui/save_button.png")
+@onready var save_active = preload("res://assets/images/ui/saved_button.png")
 # SAVED mode shows a Remove glyph instead of the heart: on that screen the
 # button means "take this card out of my saved list", not "bookmark it".
-@onready var save_remove = preload("res://images/Remove.png")
+@onready var save_remove = preload("res://assets/images/ui/Remove.png")
 
 
 @onready var bg_rect: ColorRect = $TextureRect
@@ -101,37 +101,46 @@ const SCENE_FLASHCARDS     := "res://scenes/vocabulary/VocabFlashcards.tscn"
 
 const FLIP_DURATION := 0.18
 
-# ---------- Clover method-card palette ----------
-# From the reference: orange / deep teal / sky blue / coral / plum headers
-# on white cards. One accent per card, rotating by index, so a lesson reads
-# as a dealt deck instead of one flat color.
-const CLOVER_ACCENTS := [
-	Color("#E8A33D"),  # warm orange (Clover cover card)
-	Color("#0F5E5A"),  # deep teal (Respect our users)
-	Color("#45A9C6"),  # sky blue (Be direct)
-	Color("#E05A4E"),  # coral red (bottom-row prompt)
-	Color("#5FB49C"),  # sage green (bottom-row prompt)
-	Color("#5B6ABF"),  # indigo (bottom-row prompt)
-]
+# ---------- Book accent palette ----------
+# One solid cover color per Vision book, so a lesson reads as one deck:
+# Vision 1 = dark blue, Vision 2 = dark green, Vision 3 = dark orange.
+# Saved cards carry their original book id, so they keep their book color.
+const BOOK_ACCENT_VISION_1 := Color("#1E3A5F")
+const BOOK_ACCENT_VISION_2 := Color("#0F5E5A")
+const BOOK_ACCENT_VISION_3 := Color("#B4530A")
+const BOOK_ACCENTS := {
+	1: BOOK_ACCENT_VISION_1,
+	2: BOOK_ACCENT_VISION_2,
+	3: BOOK_ACCENT_VISION_3,
+}
+
+
+func _card_book() -> int:
+	if not word_list.is_empty() and current_index >= 0 and current_index < word_list.size():
+		var entry: Dictionary = word_list[current_index]
+		if entry.has("book"):
+			return int(entry.get("book", current_book))
+	return current_book
 
 
 func _current_accent() -> Color:
-	if CLOVER_ACCENTS.is_empty():
-		return DesignTokens.ACCENT
-	if word_list.is_empty():
-		return CLOVER_ACCENTS[0]
-	return CLOVER_ACCENTS[posmod(current_index, CLOVER_ACCENTS.size())]
+	var book := _card_book()
+	if BOOK_ACCENTS.has(book):
+		return BOOK_ACCENTS[book]
+	if not word_list.is_empty() and current_book != 0 and BOOK_ACCENTS.has(current_book):
+		return BOOK_ACCENTS[current_book]
+	return BOOK_ACCENT_VISION_2
 
 
 # Row panels on the back face: the WordRow is the solid accent header band,
 # the rest are white checklist rows. Kept so _theme_walk still routes here.
 const BACK_ROW_ACCENTS := {
-	"WordRow":        Color("#E8A33D"),
-	"MeaningEnRow":   Color("#E8A33D"),
-	"MeaningFaRow":   Color("#E8A33D"),
-	"ExampleRow":     Color("#E8A33D"),
-	"SynonymsPanel":  Color("#E8A33D"),
-	"AntonymsPanel":  Color("#E8A33D"),
+	"WordRow":        Color("#0F5E5A"),
+	"MeaningEnRow":   Color("#0F5E5A"),
+	"MeaningFaRow":   Color("#0F5E5A"),
+	"ExampleRow":     Color("#0F5E5A"),
+	"SynonymsPanel":  Color("#0F5E5A"),
+	"AntonymsPanel":  Color("#0F5E5A"),
 }
 
 # How much extra padding to add around every back-card label pill. This makes
@@ -444,8 +453,8 @@ func _style_bottom_controls() -> void:
 	controls.add_theme_constant_override("separation", 68)
 
 	# Optimize the arrow icons so their edges render smoothly.
-	prev_button.icon = _optimize_icon(load("res://images/prev.png"))
-	next_button.icon = _optimize_icon(load("res://images/next.png"))
+	prev_button.icon = _optimize_icon(load("res://assets/images/ui/prev.png"))
+	next_button.icon = _optimize_icon(load("res://assets/images/ui/next.png"))
 
 	_style_nav_button(prev_button, _current_accent())
 	_style_nav_button(next_button, _current_accent())

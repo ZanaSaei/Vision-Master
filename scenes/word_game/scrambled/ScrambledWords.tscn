@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/scrambled/scrambled_words.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://images/Back.png" id="2_back"]
+[ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
 [ext_resource type="StyleBox" path="res://scenes/shared/HeaderBar.tres" id="3_header"]
 [ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 
