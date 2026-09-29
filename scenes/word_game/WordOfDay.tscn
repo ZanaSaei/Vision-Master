@@ -53,11 +53,19 @@ text = "کلمه روز"
 label_settings = SubResource("TitleSettings")
 
 [node name="HelpButton" type="Button" parent="HeaderBar/HeaderContent"]
-custom_minimum_size = Vector2(96, 96)
+custom_minimum_size = Vector2(150, 102)
 layout_mode = 2
 text = "؟"
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 52
+
+[node name="CardButton" type="Button" parent="HeaderBar/HeaderContent"]
+visible = false
+custom_minimum_size = Vector2(150, 102)
+layout_mode = 2
+text = "کارت واژه"
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 28
 
 [node name="Game" parent="." instance=ExtResource("5_game")]
 mouse_filter = 2

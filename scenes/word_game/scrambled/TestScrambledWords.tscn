@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://cexl7snl1n2tp"]
 
-[ext_resource type="Script" path="res://scenes/word_game/scrambled/test_scrambled_words.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://pahkky3sgo11" path="res://scenes/word_game/scrambled/test_scrambled_words.gd" id="1_script"]
 
-[node name="TestScrambledWords" type="Node"]
+[node name="TestScrambledWords" type="Node" unique_id=616855675]
 script = ExtResource("1_script")

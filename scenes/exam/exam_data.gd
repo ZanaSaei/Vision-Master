@@ -39,11 +39,11 @@ static func year_by_id(year_id: String) -> Dictionary:
 	return {}
 
 
-## Returns the exams of a year, sorted chronologically by date_key.
+## Returns the exams of a year, sorted newest-to-oldest by date_key.
 static func exams_for_year(year_id: String) -> Array:
 	var exams: Array = year_by_id(year_id).get("exams", []).duplicate()
 	exams.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		return int(a.get("date_key", 0)) < int(b.get("date_key", 0)))
+		return int(a.get("date_key", 0)) > int(b.get("date_key", 0)))
 	return exams
 
 

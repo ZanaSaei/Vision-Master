@@ -173,7 +173,11 @@ static func card_pressed_style(accent_col: Color, radius: int = DesignTokens.RAD
 
 ## Rounded square chip behind the emoji/icon of a card.
 static func icon_chip(accent_col: Color, radius: int = DesignTokens.RADIUS_XS) -> StyleBoxFlat:
-	return DesignTokens.icon_chip(accent_col, radius, is_dark())
+	var style: StyleBoxFlat = DesignTokens.icon_chip(accent_col, radius, is_dark())
+	# Use a strong accent rim so the emoji chip reads as a distinct framed badge.
+	style.set_border_width_all(4)
+	style.border_color = accent_col.lightened(0.18 if is_dark() else 0.04)
+	return style
 
 
 ## Small rounded label pill (e.g. a count or status badge).
@@ -281,12 +285,22 @@ static func make_card(
 	btn.custom_minimum_size = Vector2(0, min_height)
 	btn.text = ""
 	btn.focus_mode = Control.FOCUS_ALL
-	btn.clip_contents = true
+	# Keep the stylebox shadow within the control bounds; scale-based hover
+	# effects otherwise get clipped at both horizontal edges.
+	btn.clip_contents = false
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	btn.add_theme_stylebox_override("normal", card_style(accent_col, 26, false, flat))
-	btn.add_theme_stylebox_override("hover", card_hover_style(accent_col, 26, flat))
-	btn.add_theme_stylebox_override("pressed", card_pressed_style(accent_col, 26, flat))
-	btn.add_theme_stylebox_override("focus", card_hover_style(accent_col, 26, flat))
+	btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	var normal_style: StyleBoxFlat = card_style(accent_col, 26, false, flat)
+	var hover_style: StyleBoxFlat = card_hover_style(accent_col, 26, flat)
+	var pressed_style: StyleBoxFlat = card_pressed_style(accent_col, 26, flat)
+	var focus_style: StyleBoxFlat = card_hover_style(accent_col, 26, flat)
+	for style: StyleBoxFlat in [normal_style, hover_style, pressed_style, focus_style]:
+		style.set_border_width_all(3)
+		style.border_color = Color(accent_col.r, accent_col.g, accent_col.b, 0.95)
+	btn.add_theme_stylebox_override("normal", normal_style)
+	btn.add_theme_stylebox_override("hover", hover_style)
+	btn.add_theme_stylebox_override("pressed", pressed_style)
+	btn.add_theme_stylebox_override("focus", focus_style)
 
 	var margin := MarginContainer.new()
 	margin.name = "Margin"
@@ -315,7 +329,7 @@ static func make_card(
 	chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	# Cover chips are portrait to match the 230x320 book-cover ratio (~0.72) so
 	# the full cover is visible with no crop or stretch; emoji chips stay square.
-	chip.custom_minimum_size = Vector2(108, 150) if image_path != "" else Vector2(108, 108)
+	chip.custom_minimum_size = Vector2(124, 150) if image_path != "" else Vector2(132, 132)
 	chip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	chip.clip_contents = true
 	chip.add_theme_stylebox_override("panel", icon_chip(accent_col))
@@ -337,7 +351,7 @@ static func make_card(
 		var emoji_lbl := Label.new()
 		emoji_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		emoji_lbl.text = emoji
-		emoji_lbl.add_theme_font_size_override("font_size", 50)
+		emoji_lbl.add_theme_font_size_override("font_size", 58)
 		emoji_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		emoji_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		chip.add_child(emoji_lbl)
@@ -400,7 +414,9 @@ static func wire_microinteractions(btn: Button) -> void:
 		btn.pivot_offset = btn.size / 2.0)
 	btn.mouse_entered.connect(func() -> void:
 		var tw := btn.create_tween()
-		tw.tween_property(btn, "scale", Vector2(1.015, 1.015), 0.16) \
+		# Keep the hover card inside its layout slot: scaling clips the outer
+		# edges against the parent ScrollContainer and hides the outline.
+		tw.tween_property(btn, "scale", Vector2.ONE, 0.16) \
 			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT))
 	btn.mouse_exited.connect(func() -> void:
 		var tw := btn.create_tween()
@@ -408,7 +424,7 @@ static func wire_microinteractions(btn: Button) -> void:
 			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT))
 	btn.button_down.connect(func() -> void:
 		var tw := btn.create_tween()
-		tw.tween_property(btn, "scale", Vector2(0.965, 0.965), 0.07) \
+		tw.tween_property(btn, "scale", Vector2.ONE, 0.07) \
 			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN))
 	btn.button_up.connect(func() -> void:
 		var tw := btn.create_tween()

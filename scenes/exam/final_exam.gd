@@ -32,6 +32,10 @@ var _points_by_id: Dictionary = {}       # exercise_id -> points weight
 var _results: Dictionary = {}            # exercise_id -> {correct, total}
 var _check_btn: Button = null
 var _score_overlay: Control = null
+var _audio_panel: PanelContainer = null
+var _audio_button: Button = null
+var _audio_path: String = ""
+var _page_view: PageView = null
 
 
 func _ready() -> void:
@@ -59,35 +63,25 @@ func _build_ui() -> void:
 
 	_build_header(main)
 
-	var content_box: PanelContainer = PanelContainer.new()
-	GrammarTheme.style_card(content_box)
-	content_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	main.add_child(content_box)
+	var page_host: Control = Control.new()
+	page_host.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	page_host.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	main.add_child(page_host)
 
-	var content_margin: MarginContainer = MarginContainer.new()
-	content_margin.add_theme_constant_override("margin_left", GrammarTheme.CONTENT_MARGIN)
-	content_margin.add_theme_constant_override("margin_top", GrammarTheme.CONTENT_MARGIN)
-	content_margin.add_theme_constant_override("margin_right", GrammarTheme.CONTENT_MARGIN)
-	content_margin.add_theme_constant_override("margin_bottom", GrammarTheme.CONTENT_MARGIN)
-	content_box.add_child(content_margin)
-
-	var scroll: ScrollContainer = ScrollContainer.new()
-	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	content_margin.add_child(scroll)
-
-	var content: VBoxContainer = VBoxContainer.new()
-	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	content.add_theme_constant_override("separation", GrammarTheme.SPACING_LG)
-	scroll.add_child(content)
+	_page_view = PageView.new()
+	_page_view.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_page_view.tab_font_size = 26
+	_page_view.tab_font_min = 18
+	page_host.add_child(_page_view)
 
 	var blocks: Array = _exam.get("blocks", [])
 	if blocks.is_empty():
-		_show_empty_message(content)
+		var empty_page: VBoxContainer = VBoxContainer.new()
+		_show_empty_message(empty_page)
+		_page_view.add_page("empty", "آزمون", "📄", empty_page)
 		return
 
-	_build_exam_content(content, blocks)
+	_build_exam_pages(blocks)
 
 
 func _build_header(main: VBoxContainer) -> void:
@@ -130,51 +124,112 @@ func _build_header(main: VBoxContainer) -> void:
 	GrammarTheme.unify_header_row(header_row)
 
 
-func _build_exam_content(content: VBoxContainer, blocks: Array) -> void:
-	var subtitle: Label = Label.new()
-	GrammarTheme.set_bidi_text(subtitle, str(_exam.get("subtitle_fa", "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید.")))
-	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var body_font: Font = GrammarTheme.get_fa_regular()
-	if body_font != null:
-		subtitle.add_theme_font_override("font", body_font)
-	subtitle.add_theme_font_size_override("font_size", 28)
-	subtitle.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
-	content.add_child(subtitle)
-
-	for block in blocks:
-		var type: String = str(block.get("type", ""))
-		if type == "h4":
-			_add_section_header(content, block)
-			continue
-
-		var engine: ExerciseEngine = ExerciseEngine.new()
-		engine.hide_footer_buttons = true
-		content.add_child(engine)
-		engine.build(block)
-
-		var points: float = float(block.get("points", 0))
-		if points > 0.0:
-			var ex_id: String = str(block.get("exercise_id", ""))
-			if ex_id != "":
-				_points_by_id[ex_id] = points
-				engine.exercise_checked.connect(_on_exercise_checked)
-				_engines.append(engine)
-
-	var spacer: Control = Control.new()
-	spacer.custom_minimum_size = Vector2(0, 40)
-	content.add_child(spacer)
-
-	if _engines.is_empty():
+func _build_audio_button(content: VBoxContainer) -> void:
+	if _audio_path.is_empty():
 		return
-	_check_btn = Button.new()
-	_check_btn.text = "بررسی پاسخ‌ها"
-	_check_btn.custom_minimum_size = Vector2(0, 112)
-	_check_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	GrammarTheme.style_primary_button(_check_btn)
-	_check_btn.add_theme_font_size_override("font_size", 46)
-	_check_btn.pressed.connect(_on_check_pressed)
-	content.add_child(_check_btn)
+	_audio_button = Button.new()
+	_audio_button.text = "▶  Play Audio"
+	_audio_button.custom_minimum_size = Vector2(0, 96)
+	_audio_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	GrammarTheme.style_primary_button(_audio_button)
+	_audio_button.add_theme_font_size_override("font_size", 38)
+	_audio_button.pressed.connect(_on_audio_pressed)
+	content.add_child(_audio_button)
+
+	var packed_audio: PackedScene = load("res://scenes/shared/AudioPanel.tscn") as PackedScene
+	if packed_audio == null:
+		push_error("FinalExam: AudioPanel scene could not be loaded")
+		_audio_button.disabled = true
+		return
+	_audio_panel = packed_audio.instantiate() as PanelContainer
+	if _audio_panel == null:
+		_audio_button.disabled = true
+		return
+	add_child(_audio_panel)
+	_page_view.add_swipe_blocker(_audio_panel)
+	_audio_panel.audio_closed.connect(_on_audio_closed)
+	_audio_panel.audio_finished.connect(_on_audio_closed)
+
+
+func _on_audio_pressed() -> void:
+	if _audio_panel == null or _audio_path.is_empty():
+		return
+	_audio_panel.load_and_play(_audio_path)
+	_audio_button.text = "⏸  Pause Audio"
+
+
+func _on_audio_closed() -> void:
+	if _audio_button != null and is_instance_valid(_audio_button):
+		_audio_button.text = "▶  Play Audio"
+
+
+func _build_exam_pages(blocks: Array) -> void:
+	var sections: Array[Dictionary] = []
+	var current: Dictionary = {"title": "آزمون", "blocks": []}
+	for block_value in blocks:
+		var block: Dictionary = block_value as Dictionary
+		if str(block.get("type", "")) == "h4":
+			if not (current["blocks"] as Array).is_empty():
+				sections.append(current)
+			current = {"title": str(block.get("text", "بخش")), "blocks": []}
+		else:
+			(current["blocks"] as Array).append(block)
+	if not (current["blocks"] as Array).is_empty():
+		sections.append(current)
+
+	for index in sections.size():
+		var section: Dictionary = sections[index]
+		var content: VBoxContainer = VBoxContainer.new()
+		content.add_theme_constant_override("separation", GrammarTheme.SPACING_LG)
+		var section_title: String = _english_section_title(str(section["title"]))
+		if section_title == "Listening":
+			_audio_path = _find_section_audio(section["blocks"] as Array)
+			_build_audio_button(content)
+		for block_value in section["blocks"] as Array:
+			var block: Dictionary = block_value as Dictionary
+			var engine: ExerciseEngine = ExerciseEngine.new()
+			engine.hide_footer_buttons = true
+			engine.audio_allow_any_type = false
+			content.add_child(engine)
+			var engine_block: Dictionary = block.duplicate(true)
+			engine_block["show_audio"] = false
+			engine.build(engine_block)
+			var points: float = float(block.get("points", 0))
+			if points > 0.0:
+				var ex_id: String = str(block.get("exercise_id", ""))
+				if not ex_id.is_empty():
+					_points_by_id[ex_id] = points
+					engine.exercise_checked.connect(_on_exercise_checked)
+					_engines.append(engine)
+		if index == sections.size() - 1 and not _engines.is_empty():
+			var spacer: Control = Control.new()
+			spacer.custom_minimum_size = Vector2(0, 40)
+			content.add_child(spacer)
+			_check_btn = Button.new()
+			_check_btn.text = "بررسی پاسخ‌ها"
+			_check_btn.custom_minimum_size = Vector2(0, 112)
+			_check_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			GrammarTheme.style_primary_button(_check_btn)
+			_check_btn.add_theme_font_size_override("font_size", 46)
+			_check_btn.pressed.connect(_on_check_pressed)
+			content.add_child(_check_btn)
+		_page_view.add_page("section_%d" % index, section_title, "", content)
+
+
+func _english_section_title(source: String) -> String:
+	var text: String = source.split("—", true, 1)[0].strip_edges()
+	if text.is_empty():
+		return "Section"
+	return text
+
+
+func _find_section_audio(blocks: Array) -> String:
+	for block_value in blocks:
+		var block: Dictionary = block_value as Dictionary
+		var path: String = str(block.get("audio", ""))
+		if not path.is_empty():
+			return path
+	return ""
 
 
 func _add_section_header(content: VBoxContainer, block: Dictionary) -> void:

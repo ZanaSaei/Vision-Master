@@ -183,10 +183,12 @@ func test_game() -> void:
 	var arbitrary: Dictionary = game.submit_current_row()
 	_check(arbitrary.ok and game.attempts_used() == 1, "valid combination consumes attempt")
 	var rejected_game: WordleGame = WordleGame.new("ABOUT", "wordle-test-rejected")
-	rejected_game.current_row = "ZZZZZ"
+	rejected_game.current_row = "ZZZ"
 	var rejected: Dictionary = rejected_game.submit_current_row()
-	_check(not rejected.ok and rejected_game.attempts_used() == 0, "rejected guess consumes no attempt")
-	_check(rejected.get("reason", "") == "length", "incomplete guess reports a length problem")
+	_check(not rejected.ok and rejected_game.attempts_used() == 0,
+		"a short guess consumes no attempt")
+	_check(rejected.get("reason", "") == "length",
+		"a short guess reports a length problem")
 	game.current_row = "CAT"
 	var short: Dictionary = game.submit_current_row()
 	_check(not short.ok and short.reason == "length", "short row reports length error")

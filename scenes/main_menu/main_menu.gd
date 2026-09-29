@@ -194,15 +194,6 @@ func _build_hero() -> VBoxContainer:
 	hero.add_theme_constant_override("separation", 8)
 	hero.custom_minimum_size = Vector2(0, 330)
 
-	var greeting := Label.new()
-	greeting.name = "GreetingLabel"
-	greeting.text = "سلام! 👋"
-	greeting.add_theme_font_override("font", MenuStyle.vazir())
-	greeting.add_theme_font_size_override("font_size", 58)
-	greeting.add_theme_color_override("font_color", MenuStyle.accent_bright())
-	greeting.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hero.add_child(greeting)
-
 	var title := Label.new()
 	title.name = "AppTitle"
 	title.text = "Vision Master"
@@ -230,10 +221,32 @@ func _build_hero() -> VBoxContainer:
 
 
 func _make_continue_card() -> Button:
-	var card: Button = MenuStyle.make_card("ادامه بده", "به آخرین بخش برگرد", "🚀", MenuStyle.accent(), 148, "", true)
+	var destination: String = _continue_destination_label(Global.get_last_scene())
+	var card: Button = MenuStyle.make_card(
+		"ادامه یادگیری",
+		destination,
+		"▶",
+		MenuStyle.accent(),
+		148,
+		"",
+		true
+	)
 	card.name = "ContinueButton"
+	card.tooltip_text = "بازگشت به آخرین بخشی که باز کرده‌اید"
 	card.pressed.connect(_on_continue_pressed)
+	MenuStyle.wire_microinteractions(card)
 	return card
+
+
+func _continue_destination_label(scene_path: String) -> String:
+	var scene_names: Dictionary = {
+		"res://scenes/lesson_menu/LessonMenu.tscn": "بازگشت به فهرست درس‌ها",
+		"res://scenes/grammar/GrammarHub.tscn": "بازگشت به دستور زبان",
+		"res://scenes/grammar/GrammarUnits.tscn": "ادامه تمرین دستور زبان",
+		"res://scenes/grammar/GrammarLesson.tscn": "ادامه درس دستور زبان",
+		"res://scenes/book_menu/BookMenu.tscn": "بازگشت به انتخاب کتاب",
+	}
+	return str(scene_names.get(scene_path, "بازگشت به آخرین بخش بازشده"))
 
 
 func _add_card(title: String, subtitle: String, emoji: String, accent: Color, on_pressed: Callable, image_path: String = "", min_height: int = 158) -> void:
@@ -369,10 +382,24 @@ func _play_intro_animation() -> void:
 func _on_continue_pressed() -> void:
 	if _navigating:
 		return
-	var last := Global.get_last_scene()
-	if last == "":
+	var last: String = Global.get_last_scene()
+	if last.is_empty() or not ResourceLoader.exists(last):
+		Global.set_last_scene("")
+		var invalid_button: Button = _main_col.get_node_or_null("ContinueButton") as Button
+		if invalid_button != null:
+			invalid_button.disabled = true
+			invalid_button.tooltip_text = "مسیری برای ادامه پیدا نشد؛ یکی از کتاب‌ها را انتخاب کنید."
+			var subtitle: Label = invalid_button.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
+			if subtitle != null:
+				subtitle.text = "مسیری پیدا نشد؛ یک کتاب را انتخاب کنید"
 		return
 	_navigating = true
+	var continue_button: Button = _main_col.get_node_or_null("ContinueButton") as Button
+	if continue_button != null:
+		continue_button.disabled = true
+		var subtitle: Label = continue_button.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
+		if subtitle != null:
+			subtitle.text = "در حال باز کردن بخش شما…"
 	await get_tree().create_timer(0.10).timeout
 	if not is_inside_tree():
 		return

@@ -43,6 +43,10 @@ func _on_back_pressed() -> void:
 	if _mode == "question" and not _is_learning:
 		_confirm_dialog.popup_centered(Vector2i(760, 360))
 		return
+	if _mode == "question" and _is_learning:
+		_timer.stop()
+		_show_modes()
+		return
 	if _mode == "question" or _mode == "result":
 		_timer.stop()
 		_show_modes()
@@ -77,14 +81,14 @@ func _confirm_leave_competition() -> void:
 
 
 func _consume_daily_attempt() -> void:
-	_daily_available = false
 	if not _attempt_recorded:
 		_save_daily_status()
 		_attempt_recorded = true
+	_daily_available = false
 
 
 func _load_daily_status() -> void:
-	var today: String = Time.get_date_string_from_system()
+	var today: String = MeaningQuizDaily.date_key()
 	var stats_config: ConfigFile = ConfigFile.new()
 	if stats_config.load("user://meaning_quiz.cfg") == OK:
 		_daily_stats = stats_config.get_value("stats", "data", {})
@@ -94,14 +98,21 @@ func _load_daily_status() -> void:
 		_daily_available = previous_date != today
 		if _daily_available:
 			_daily_stats["today_score"] = 0
+			_attempt_recorded = false
+		else:
+			_attempt_recorded = true
+	else:
+		_daily_available = true
+		_attempt_recorded = false
 
 
 func _save_daily_status() -> void:
 	var config: ConfigFile = ConfigFile.new()
-	config.set_value("daily", "date", Time.get_date_string_from_system())
-	_daily_stats["last_date"] = Time.get_date_string_from_system()
+	config.set_value("daily", "date", MeaningQuizDaily.date_key())
+	_daily_stats["last_date"] = MeaningQuizDaily.date_key()
 	_daily_stats["plays"] = int(_daily_stats.get("plays", 0)) + 1
 	_daily_stats["best_score"] = maxi(int(_daily_stats.get("best_score", 0)), _score)
+	_daily_stats["today_score"] = _score
 	_daily_stats["last_score"] = _score
 	config.set_value("stats", "data", _daily_stats)
 	var error: Error = config.save("user://meaning_quiz.cfg")
@@ -123,7 +134,9 @@ func _show_modes() -> void:
 	var competition: Button = _make_button("مسابقه روزانه\n۱۰ پرسش · ۳۰ ثانیه برای هر پرسش")
 	competition.disabled = not _daily_available
 	if not _daily_available:
-		competition.text = "مسابقه امروز انجام شده است"
+		competition.text = "مسابقه امروز انجام شده است\nمسابقه بعدی: %s" % MeaningQuizDaily.time_left_text()
+	else:
+		competition.text += "\nبه‌روزرسانی روزانه تا %s دیگر" % MeaningQuizDaily.time_left_text()
 	competition.pressed.connect(_start_competition)
 	content.add_child(competition)
 	_animate_in(competition, 2)
@@ -168,7 +181,7 @@ func _card_style(fill: Color, border: Color) -> StyleBoxFlat:
 func _start_competition() -> void:
 	if not _daily_available:
 		return
-	var day_key: String = Time.get_date_string_from_system()
+	var day_key: String = MeaningQuizDaily.date_key()
 	_questions = MeaningQuizDaily.questions_for_date(day_key)
 	if _questions.size() < DAILY_QUESTION_COUNT:
 		_show_message("واژه‌های کافی برای ساخت پرسش‌های معتبر وجود ندارد.")

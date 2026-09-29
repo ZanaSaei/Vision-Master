@@ -96,14 +96,15 @@ func _rebuild_theme() -> void:
 
 	# ── Buttons: the reference sheet's five states ───────────────
 	t.set_stylebox("normal", "Button", DesignTokens.button_default(dark))
-	t.set_stylebox("hover", "Button", DesignTokens.button_hover(dark))
+	# Mobile UI has no hover-only appearance; pressed remains distinct for taps.
+	t.set_stylebox("hover", "Button", DesignTokens.button_default(dark))
 	t.set_stylebox("pressed", "Button", DesignTokens.button_pressed(dark))
 	t.set_stylebox("disabled", "Button", DesignTokens.button_disabled(dark))
 	t.set_stylebox("focus", "Button", DesignTokens.button_focus(dark))
 	# A cream resting button needs dark ink; the blue states need white. The
 	# helper owns that mapping so it stays consistent with the styleboxes.
 	t.set_color("font_color", "Button", DesignTokens.button_text_color("default", dark))
-	t.set_color("font_hover_color", "Button", DesignTokens.button_text_color("hover", dark))
+	t.set_color("font_hover_color", "Button", DesignTokens.button_text_color("default", dark))
 	t.set_color("font_pressed_color", "Button", DesignTokens.button_text_color("pressed", dark))
 	t.set_color("font_focus_color", "Button", DesignTokens.button_text_color("default", dark))
 	t.set_color("font_disabled_color", "Button", DesignTokens.button_text_color("disabled", dark))

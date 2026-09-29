@@ -13,7 +13,7 @@ extends "res://autoload/BackButtonHandler.gd"
 #    - Loads all words from Global.get_saved_words()
 #    - Header: back arrow + audio button (dynamically loads lesson audio)
 #    - Bottom nav: 📖 home | 🗑 Remove Word | 📝 Quiz
-#    - Heart: static filled indicator (word is saved)
+#    - Save button: Remove.png glyph — removes the card from the saved list
 # ============================================================
 
 enum Mode { LESSON, SAVED }
@@ -42,8 +42,12 @@ const DOT_ACTIVE_W    := 24
 const DOT_INACTIVE_W  := 14
 const DOT_HEIGHT      := 6
 const DOT_RADIUS      := 3
-const DOT_ACTIVE_COLOR    := DesignTokens.ACCENT  # the app-wide accent blue
-const DOT_INACTIVE_COLOR  := Color(0.55, 0.60, 0.85, 0.45)
+# Past this many words the dot strip scales down instead of rendering one dot
+# per card, which would overflow the header on a large saved list.
+const MAX_PROGRESS_DOTS := 50
+var _num_dots: int = 0
+const DOT_ACTIVE_COLOR    := DesignTokens.GOLD  # editorial gold marker
+const DOT_INACTIVE_COLOR  := Color(0.45, 0.42, 0.36, 0.35)
 
 # ---------- Scene paths ----------
 const SCENE_MAIN_MENU      := "res://scenes/main_menu/MainMenu.tscn"
@@ -86,6 +90,9 @@ const SCENE_FLASHCARDS     := "res://scenes/vocabulary/VocabFlashcards.tscn"
 
 @onready var save_inactive = preload("res://images/save_button.png")
 @onready var save_active = preload("res://images/saved_button.png")
+# SAVED mode shows a Remove glyph instead of the heart: on that screen the
+# button means "take this card out of my saved list", not "bookmark it".
+@onready var save_remove = preload("res://images/Remove.png")
 
 
 @onready var bg_rect: ColorRect = $TextureRect
@@ -94,16 +101,37 @@ const SCENE_FLASHCARDS     := "res://scenes/vocabulary/VocabFlashcards.tscn"
 
 const FLIP_DURATION := 0.18
 
-# ---------- Back-card palette (colorful rows, kept in both themes) ----------
-# Row panels on the back face: each field keeps its own accent so the card
-# reads as a set of colorful info pills instead of flat grey boxes.
+# ---------- Clover method-card palette ----------
+# From the reference: orange / deep teal / sky blue / coral / plum headers
+# on white cards. One accent per card, rotating by index, so a lesson reads
+# as a dealt deck instead of one flat color.
+const CLOVER_ACCENTS := [
+	Color("#E8A33D"),  # warm orange (Clover cover card)
+	Color("#0F5E5A"),  # deep teal (Respect our users)
+	Color("#45A9C6"),  # sky blue (Be direct)
+	Color("#E05A4E"),  # coral red (bottom-row prompt)
+	Color("#5FB49C"),  # sage green (bottom-row prompt)
+	Color("#5B6ABF"),  # indigo (bottom-row prompt)
+]
+
+
+func _current_accent() -> Color:
+	if CLOVER_ACCENTS.is_empty():
+		return DesignTokens.ACCENT
+	if word_list.is_empty():
+		return CLOVER_ACCENTS[0]
+	return CLOVER_ACCENTS[posmod(current_index, CLOVER_ACCENTS.size())]
+
+
+# Row panels on the back face: the WordRow is the solid accent header band,
+# the rest are white checklist rows. Kept so _theme_walk still routes here.
 const BACK_ROW_ACCENTS := {
-	"WordRow":        Color("#10B981"),  # Emerald
-	"MeaningEnRow":   Color("#3B82F6"),  # Blue
-	"MeaningFaRow":   DesignTokens.ACCENT,  # Violet
-	"ExampleRow":     Color("#F59E0B"),  # Amber
-	"SynonymsPanel":  Color("#14B8A6"),  # Teal
-	"AntonymsPanel":  Color("#EF4444"),  # Red
+	"WordRow":        Color("#E8A33D"),
+	"MeaningEnRow":   Color("#E8A33D"),
+	"MeaningFaRow":   Color("#E8A33D"),
+	"ExampleRow":     Color("#E8A33D"),
+	"SynonymsPanel":  Color("#E8A33D"),
+	"AntonymsPanel":  Color("#E8A33D"),
 }
 
 # How much extra padding to add around every back-card label pill. This makes
@@ -111,27 +139,27 @@ const BACK_ROW_ACCENTS := {
 # untouched (the request: bigger labels, same-sized text).
 const BACK_ROW_PAD_BOOST := 6.0
 
-# Icon badges on the back face (solid accent chips with white text).
+# Icon badges on the back face (small ink chips with gold text).
 const BACK_ICON_ACCENTS := {
-	"EnIcon":   Color("#3B82F6"),
-	"FaIcon":   DesignTokens.ACCENT,
-	"ExIcon":   Color("#F59E0B"),
-	"SynIcon":  Color("#14B8A6"),
-	"AntoIcon": Color("#EF4444"),
+	"EnIcon":   DesignTokens.INK,
+	"FaIcon":   DesignTokens.INK,
+	"ExIcon":   DesignTokens.INK,
+	"SynIcon":  DesignTokens.INK,
+	"AntoIcon": DesignTokens.INK,
 }
 
-# Owned content labels on the back face (text color follows their row).
+# Owned content labels on the back face (warm ink, not rainbow text).
 const BACK_LABEL_ACCENTS := {
-	"BackWordLabel":   Color("#10B981"),
-	"MeaningEnLabel":  Color("#3B82F6"),
-	"MeaningFaLabel":  DesignTokens.ACCENT,
-	"ExampleLabel":    Color("#F59E0B"),
-	"SynonymsLabel":   Color("#14B8A6"),
-	"AntonymsLabel":   Color("#EF4444"),
+	"BackWordLabel":   DesignTokens.INK,
+	"MeaningEnLabel":  DesignTokens.INK,
+	"MeaningFaLabel":  DesignTokens.INK,
+	"ExampleLabel":    DesignTokens.INK,
+	"SynonymsLabel":   DesignTokens.INK,
+	"AntonymsLabel":   DesignTokens.INK,
 }
 
-# ---------- Solid lively flashcard color ----------
-const FLASH_SOLID_COLOR := Color("#3B82F6")  # Bright Blue - lively and educational
+# ---------- Warm paper flashcard ----------
+const FLASH_SOLID_COLOR := DesignTokens.PAPER  # Cream paper - calm editorial card
 
 
 func _ready() -> void:
@@ -210,26 +238,39 @@ func _theme_walk(node: Node) -> void:
 
 
 func _theme_card(node: PanelContainer) -> void:
+	_style_card_face(node, is_flipped)
+
+
+func _style_card_face(node: PanelContainer, show_back: bool) -> void:
 	var dark := Global.theme_is_dark()
-	# The flashcard itself gets a solid lively color + border/shadow frame.
+	# Clover method card, face-aware like the reference:
+	# FRONT = solid accent cover (orange Ideation card), BACK = white body
+	# with a thick accent top band (Clover Design checklist card).
 	if node == card_panel:
+		var accent := _current_accent()
 		var frame := StyleBoxFlat.new()
-		frame.set_corner_radius_all(50)
-		frame.set_border_width_all(1)
-		frame.bg_color = FLASH_SOLID_COLOR
-		frame.border_color = Color(0, 0, 0, 0.12) if not dark else Color(1, 1, 1, 0.16)
-		frame.shadow_color = Color(0.25, 0.15, 0.55, 0.22 if dark else 0.18)
-		frame.shadow_size = 20
+		frame.set_corner_radius_all(DesignTokens.RADIUS_LG)
+		if show_back:
+			frame.bg_color = Color("#FFFFFF") if not dark else Color("#2A2D33")
+			frame.border_width_top = 28
+			frame.border_width_left = 2
+			frame.border_width_right = 2
+			frame.border_width_bottom = 2
+		else:
+			frame.bg_color = accent
+			frame.set_border_width_all(0)
+		frame.border_color = accent
+		frame.shadow_color = Color(accent.r, accent.g, accent.b, 0.30 if not dark else 0.45)
+		frame.shadow_size = 22
 		frame.shadow_offset = Vector2(0, 10)
 		node.add_theme_stylebox_override("panel", frame)
 		return
-	# Progress dots bar sits in a soft pill so it belongs to the card.
+	# Progress dots bar sits in a quiet editorial strip above the paper.
 	if node.name == "ProgressBackground":
 		var pst := StyleBoxFlat.new()
-		pst.set_corner_radius_all(30)
-		pst.set_border_width_all(1)
-		pst.border_color = Color(0.45, 0.42, 0.8, 0.18) if not dark else Color(1, 1, 1, 0.08)
-		pst.bg_color = Color(1, 1, 1, 0.65) if not dark else Color(0.12, 0.11, 0.26, 0.5)
+		pst.set_corner_radius_all(DesignTokens.RADIUS_PILL)
+		pst.set_border_width_all(0)
+		pst.bg_color = Color(0, 0, 0, 0)
 		node.add_theme_stylebox_override("panel", pst)
 		return
 	# Any other themed panel falls back to a clean surface card.
@@ -259,22 +300,20 @@ func _optimize_icon(tex: Texture2D, max_edge: int = 256) -> Texture2D:
 
 
 func _theme_back_row(panel: PanelContainer) -> void:
-	# A clean content "pill" on the colorful gradient card.
+	# Clover checklist rows: white, borderless, slim accent left marker.
 	var dark := Global.theme_is_dark()
+	var accent := _current_accent()
 	var st := StyleBoxFlat.new()
-	st.set_corner_radius_all(18)
-	st.set_border_width_all(1)
-	if dark:
-		# A deep slate pill to contrast against the vibrant dark gradient
-		st.bg_color = DesignTokens.SURFACE_SUNKEN_DARK
-		st.bg_color.a = 0.95
-		st.border_color = Color(1, 1, 1, 0.15)
-	else:
-		st.bg_color = Color(1, 1, 1, 0.95)
-		st.border_color = Color(0, 0, 0, 0.08)
-	st.shadow_color = Color(0, 0, 0, 0.2 if dark else 0.08)
-	st.shadow_size = 8
-	st.shadow_offset = Vector2(0, 4)
+	st.set_corner_radius_all(14)
+	st.bg_color = Color("#FFFFFF") if not dark else Color("#2A2D33")
+	st.border_width_left = 8
+	st.border_width_top = 0
+	st.border_width_right = 0
+	st.border_width_bottom = 0
+	st.border_color = accent
+	st.shadow_color = Color(0, 0, 0, 0)
+	st.shadow_size = 0
+	st.shadow_offset = Vector2.ZERO
 
 	# Make the label boxes a little bigger (more padding) while leaving the text
 	# size untouched. The base (scene) margins are cached once, so re-theming
@@ -307,20 +346,20 @@ func _theme_back_row(panel: PanelContainer) -> void:
 
 
 func _theme_back_icon(icon: Label) -> void:
-	# A solid accent chip (white text) that never washes out in either
-	# theme — replaces the old pale badge with a flat colored tile.
-	var accent: Color = BACK_ICON_ACCENTS.get(icon.name, Global.get_theme_color("accent"))
+	# Clover marker chip: soft accent tint with solid accent text.
+	var accent := _current_accent()
+	var dark := Global.theme_is_dark()
 	var st := StyleBoxFlat.new()
-	st.set_corner_radius_all(14)
-	st.bg_color = accent
-	st.content_margin_left = 10
-	st.content_margin_right = 10
-	st.content_margin_top = 4
-	st.content_margin_bottom = 4
+	st.set_corner_radius_all(10)
+	st.bg_color = Color(accent.r, accent.g, accent.b, 0.22 if not dark else 0.30)
+	st.content_margin_left = 12
+	st.content_margin_right = 12
+	st.content_margin_top = 6
+	st.content_margin_bottom = 6
 	icon.add_theme_stylebox_override("normal", st)
-	icon.add_theme_color_override("font_color", Color(1, 1, 1))
+	icon.add_theme_color_override("font_color", accent)
 	if icon.label_settings != null:
-		icon.label_settings.font_color = Color(1, 1, 1)
+		icon.label_settings.font_color = accent
 		icon.label_settings.outline_size = 0
 
 
@@ -329,15 +368,17 @@ func _theme_label(label: Label) -> void:
 	var fill: Color
 	var dark := Global.theme_is_dark()
 	
-	if n == "WordLabel":
-		# The FRONT word sits directly on the colorful gradient — white so it
-		# pops, with a soft shadow for contrast on the bright card.
-		fill = Color(1, 1, 1)
+	if n == "BackWordLabel":
+		# Sits on the solid accent header band — always white.
+		fill = Color("#FFFFFF")
+	elif n == "WordLabel":
+		# FRONT sits on the SOLID accent cover — always white like Ideation.
+		fill = Color("#FFFFFF")
 	elif BACK_LABEL_ACCENTS.has(n):
-		fill = BACK_LABEL_ACCENTS[n]
-		if dark:
-			# Lighten and desaturate slightly for better contrast on dark pill
-			fill = fill.lerp(Color(1, 1, 1), 0.2)
+		fill = Color("#2B2B2B") if not dark else Color("#E8E6E1")
+		if n in ["MeaningEnLabel", "MeaningFaLabel"]:
+			# Checklist prompt titles carry the card accent like the reference.
+			fill = _current_accent()
 	elif n.ends_with("Title"):
 		fill = Global.get_theme_color("accent_bright")
 	elif n in ["PhoneticsLabel"]:
@@ -358,9 +399,9 @@ func _theme_label(label: Label) -> void:
 	label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0))
 	label.add_theme_constant_override("shadow_offset_x", 0)
 	label.add_theme_constant_override("shadow_offset_y", 0)
-	# Front word on the colorful gradient benefits from a soft drop shadow.
+	# White on solid accent needs a soft shadow for the Ideation-cover read.
 	if n == "WordLabel":
-		label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.25))
+		label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.28))
 		label.add_theme_constant_override("shadow_offset_x", 0)
 		label.add_theme_constant_override("shadow_offset_y", 4)
 
@@ -387,7 +428,7 @@ func _button_has_colored_bg(btn: Button) -> bool:
 #  BOTTOM CONTROLS — redesigned prev / save / next bar (theme-aware)
 # ----------------------------------------------------------------
 func _style_bottom_controls() -> void:
-	var accent: Color = Global.get_theme_color("accent")
+	# Nav washes follow the current card accent (Clover deck feel).
 
 	# The control dock itself is invisible — the flat icon buttons float.
 	var panel: PanelContainer = $MarginContainer/MainLayout/PanelContainer
@@ -406,13 +447,13 @@ func _style_bottom_controls() -> void:
 	prev_button.icon = _optimize_icon(load("res://images/prev.png"))
 	next_button.icon = _optimize_icon(load("res://images/next.png"))
 
-	_style_nav_button(prev_button, accent)
-	_style_nav_button(next_button, accent)
-	_style_save_button(save_button, accent)
+	_style_nav_button(prev_button, _current_accent())
+	_style_nav_button(next_button, _current_accent())
+	_style_save_button(save_button, _current_accent())
 
 
-func _style_nav_button(btn: Button, accent: Color) -> void:
-	# Flat icon button — no persistent panel. A soft circular highlight only
+func _style_nav_button(btn: Button, gold: Color) -> void:
+	# Flat icon button — no persistent panel. A warm gold wash only
 	# appears on hover/press for affordance, keeping the icons clean.
 	btn.flat = true
 	btn.expand_icon = true
@@ -427,18 +468,18 @@ func _style_nav_button(btn: Button, accent: Color) -> void:
 	clear.set_border_width_all(0)
 	var hover := StyleBoxFlat.new()
 	hover.set_corner_radius_all(80)
-	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.14)
+	hover.bg_color = Color(gold.r, gold.g, gold.b, 0.16)
 	var pressed := StyleBoxFlat.new()
 	pressed.set_corner_radius_all(80)
-	pressed.bg_color = Color(accent.r, accent.g, accent.b, 0.24)
+	pressed.bg_color = Color(gold.r, gold.g, gold.b, 0.28)
 	btn.add_theme_stylebox_override("normal", clear)
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", pressed)
 	btn.add_theme_stylebox_override("focus", hover)
 
 
-func _style_save_button(btn: Button, accent: Color) -> void:
-	# Flat heart/remove toggle — no persistent panel, soft highlight on hover/press.
+func _style_save_button(btn: Button, gold: Color) -> void:
+	# Flat heart/remove toggle — warm gold wash on hover/press.
 	btn.flat = true
 	btn.expand_icon = true
 	btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -452,10 +493,10 @@ func _style_save_button(btn: Button, accent: Color) -> void:
 	clear.set_border_width_all(0)
 	var hover := StyleBoxFlat.new()
 	hover.set_corner_radius_all(100)
-	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.14)
+	hover.bg_color = Color(gold.r, gold.g, gold.b, 0.16)
 	var pressed := StyleBoxFlat.new()
 	pressed.set_corner_radius_all(100)
-	pressed.bg_color = Color(accent.r, accent.g, accent.b, 0.24)
+	pressed.bg_color = Color(gold.r, gold.g, gold.b, 0.28)
 	btn.add_theme_stylebox_override("normal", clear)
 	btn.add_theme_stylebox_override("hover", hover)
 	btn.add_theme_stylebox_override("pressed", pressed)
@@ -501,12 +542,14 @@ func _enter_saved_mode() -> void:
 		lesson_title.add_theme_font_override("font", FONT_FARSI)
 
 	leitner_button.visible = true
-	save_button.icon = _optimize_icon(load("res://images/Remove.png"))
-	save_button.modulate = Color(1, 1, 1, 1)
+	# Keep the heart meaningful in this mode: it is a save toggle, so show the
+	# saved/unset state rather than a permanent trash icon.
 	save_button.disabled = false
 
-	var saved_copy = Global.get_saved_words().duplicate()
-	setup(saved_copy, 0, 0, "", Mode.SAVED)
+	# get_saved_words() already returns a deep copy, so the scene can safely
+	# remove entries from it (as _on_remove_pressed does) without touching the
+	# Global's live list. The extra duplicate() here was a no-op copy.
+	setup(Global.get_saved_words(), 0, 0, "", Mode.SAVED)
 
 
 # ----------------------------------------------------------------
@@ -527,42 +570,59 @@ func setup(words: Array, book: int, lesson: int, _audio_filename: String, screen
 # ----------------------------------------------------------------
 #  PROGRESS DOTS
 # ----------------------------------------------------------------
+func _dot_colors() -> Array:
+	var accent := _current_accent()
+	return [accent, Color(accent.r, accent.g, accent.b, 0.25)]
 func _build_progress_dots() -> void:
 	for child in progress_dots.get_children():
 		child.queue_free()
 
 	var total: int = word_list.size()
-	var num_dots: int = min(total, 50)
+	_num_dots = mini(maxi(total, 0), MAX_PROGRESS_DOTS)
 
-	for i in num_dots:
+	for i in _num_dots:
 		var dot := Panel.new()
 		var style := StyleBoxFlat.new()
-		style.corner_radius_top_left     = DOT_RADIUS
-		style.corner_radius_top_right    = DOT_RADIUS
-		style.corner_radius_bottom_left  = DOT_RADIUS
-		style.corner_radius_bottom_right = DOT_RADIUS
-		style.bg_color = DOT_ACTIVE_COLOR if i == current_index else DOT_INACTIVE_COLOR
+		style.set_corner_radius_all(DOT_RADIUS)
+		var cols := _dot_colors()
+		style.bg_color = cols[0] if i == _active_dot() else cols[1]
 		dot.add_theme_stylebox_override("panel", style)
 		dot.custom_minimum_size = Vector2(
-			DOT_ACTIVE_W if i == current_index else DOT_INACTIVE_W,
+			DOT_ACTIVE_W if i == _active_dot() else DOT_INACTIVE_W,
 			DOT_HEIGHT
 		)
 		progress_dots.add_child(dot)
 
 
+## Which dot represents the current card. With more words than dots the strip
+## is scaled down, so the index has to be mapped into the visible window —
+## otherwise the active dot simply never lights up on a large saved list.
+func _active_dot() -> int:
+	if _num_dots <= 0 or word_list.is_empty():
+		return -1
+	if _num_dots >= word_list.size():
+		return clampi(current_index, 0, _num_dots - 1)
+	return clampi(int(float(current_index) * _num_dots / word_list.size()), 0, _num_dots - 1)
+
+
 func _update_progress_dots() -> void:
+	# The list can shrink while SAVED (a word is removed), leaving a stale dot
+	# strip behind. Rebuild it so the dots keep matching the word count.
+	if progress_dots.get_child_count() != _num_dots:
+		_build_progress_dots()
+		return
+	var active := _active_dot()
 	var dots := progress_dots.get_children()
 	for i in dots.size():
 		var dot: Panel = dots[i]
+		var is_active := i == active
 		var style := StyleBoxFlat.new()
-		style.corner_radius_top_left     = DOT_RADIUS
-		style.corner_radius_top_right    = DOT_RADIUS
-		style.corner_radius_bottom_left  = DOT_RADIUS
-		style.corner_radius_bottom_right = DOT_RADIUS
-		style.bg_color = DOT_ACTIVE_COLOR if i == current_index else DOT_INACTIVE_COLOR
+		style.set_corner_radius_all(DOT_RADIUS)
+		var cols := _dot_colors()
+		style.bg_color = cols[0] if is_active else cols[1]
 		dot.add_theme_stylebox_override("panel", style)
 		dot.custom_minimum_size = Vector2(
-			DOT_ACTIVE_W if i == current_index else DOT_INACTIVE_W,
+			DOT_ACTIVE_W if is_active else DOT_INACTIVE_W,
 			DOT_HEIGHT
 		)
 
@@ -604,12 +664,17 @@ func _update_card(animate: bool = false) -> void:
 
 	is_flipped = false
 
+	_refresh_card_style()
+
 	if animate:
 		_play_flip(false)
 	else:
 		_show_face(false)
 
 	_update_progress_dots()
+	# Keep the heart in sync with the card now on screen, otherwise it shows
+	# the previous word's saved state after every swipe/tap navigation.
+	_refresh_save_button(entry)
 
 	if mode == Mode.LESSON:
 		_refresh_save_button(entry)
@@ -659,16 +724,34 @@ func _handle_empty_list() -> void:
 
 
 func _refresh_save_button(entry: Dictionary) -> void:
-	if mode != Mode.LESSON:
+	if word_list.is_empty():
 		return
-	var saved := Global.is_word_saved(entry.get("word", ""), current_book, current_lesson)
-	save_button.icon     = _optimize_icon(save_active if saved else save_inactive)
+	# In SAVED mode the entry carries its own book/lesson, so the lookup has
+	# to use those instead of current_book/current_lesson (which are 0 here).
+	var book: int   = int(entry.get("book", current_book)) if mode == Mode.SAVED else current_book
+	var lesson: int = int(entry.get("lesson", current_lesson)) if mode == Mode.SAVED else current_lesson
+	var saved := Global.is_word_saved(str(entry.get("word", "")), book, lesson)
+	# SAVED mode is a removal screen: every card shown is already saved, so
+	# the button carries the Remove glyph instead of the heart. LESSON mode
+	# keeps the heart as the save/unsave toggle.
+	if mode == Mode.SAVED:
+		save_button.icon = _optimize_icon(save_remove)
+	else:
+		save_button.icon = _optimize_icon(save_active if saved else save_inactive)
+	save_button.modulate = Color(1, 1, 1, 1)
 	save_button.disabled = false
+
+
+func _refresh_card_style() -> void:
+	_style_card_face(card_panel, is_flipped)
+	_theme_walk(card_panel)
+	_update_progress_dots()
 
 
 func _show_face(show_back: bool) -> void:
 	front_face.visible = not show_back
-	back_face.visible  = show_back
+	back_face.visible = show_back
+	_style_card_face(card_panel, show_back)
 
 
 # ----------------------------------------------------------------
@@ -819,21 +902,51 @@ func _on_next_pressed() -> void:
 #  SAVE / REMOVE (heart button)
 # ----------------------------------------------------------------
 func _on_save_pressed() -> void:
-	# In SAVED mode the centre button removes the current word.
-	if mode == Mode.SAVED:
-		_on_remove_pressed()
+	# The heart is a save toggle in BOTH modes. In SAVED mode it used to be
+	# hard-wired to _on_remove_pressed(), so tapping the heart there could
+	# never save anything — it only ever deleted the word, which is what
+	# "nothing happens when I press the heart" looked like.
+	if word_list.is_empty():
 		return
-	if mode != Mode.LESSON or word_list.is_empty():
-		return
+
 	var entry: Dictionary = word_list[current_index]
-	if Global.is_word_saved(entry.get("word", ""), current_book, current_lesson):
-		Global.remove_word(entry.get("word", ""), current_book, current_lesson)
+	var word: String = str(entry.get("word", ""))
+
+	# In SAVED mode the cards come from saved_words, so a card's identity lives
+	# on the entry itself; in LESSON mode it comes from the current lesson.
+	var book: int   = int(entry.get("book", 0))     if mode == Mode.SAVED else current_book
+	var lesson: int = int(entry.get("lesson", 0))   if mode == Mode.SAVED else current_lesson
+	if mode != Mode.LESSON and mode != Mode.SAVED:
+		return
+
+	if Global.is_word_saved(word, book, lesson):
+		# Unheart only removes the flashcard bookmark. The Leitner entry remains.
+		Global.remove_word(word, book, lesson)
+		if mode == Mode.SAVED:
+			_refresh_from_global()
+			return
 	else:
-		var data := entry.duplicate()
-		data["book"]   = current_book
-		data["lesson"] = current_lesson
+		# Not saved yet → the heart saves it. Enrichment inside save_word()
+		# fills in the meaning/example so the review card is never blank.
+		var data: Dictionary = entry.duplicate(true)
+		data["book"]   = book
+		data["lesson"] = lesson
 		Global.save_word(data)
+		if mode == Mode.SAVED:
+			_refresh_from_global()
+			return
+
 	_refresh_save_button(entry)
+
+
+## Re-reads the saved list from Global after the heart toggled a word, so the
+## cards on screen always match what is actually stored.
+func _refresh_from_global() -> void:
+	word_list = Global.get_saved_words()
+	if current_index >= word_list.size():
+		current_index = maxi(0, word_list.size() - 1)
+	_build_progress_dots()
+	_update_card(false)
 
 
 func _on_remove_pressed() -> void:
@@ -843,8 +956,13 @@ func _on_remove_pressed() -> void:
 	var entry: Dictionary = word_list[current_index]
 	Global.remove_word(entry.get("word", ""), entry.get("book", 0), entry.get("lesson", 0))
 	word_list.remove_at(current_index)
+	# Removing the last remaining card leaves index 0 with an empty list;
+	# _update_card() routes that to the "no saved words" screen.
 	if current_index > 0 and current_index >= word_list.size():
 		current_index = word_list.size() - 1
+	# The list just shrank, so the dot strip must be rebuilt (a stale strip
+	# left one extra dot behind after every removal).
+	_build_progress_dots()
 	_update_card(false)
 
 

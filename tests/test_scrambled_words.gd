@@ -348,7 +348,29 @@ func test_competition_session() -> void:
 	_check(ScrambledWordController.letters_to_text(ScrambledGameManager.controller.letters) == letters_before,
 		"the daily scramble is identical on a replay")
 
-	# Quitting halfway keeps the points already earned.
+	# A daily competition is limited to one attempt. Complete that attempt
+	# before checking the score and attempt record.
+	ScrambledGameManager.mark_hint_used()
+	var guard := 0
+	while ScrambledGameManager.state != ScrambledGameManager.State.FINISHED and guard < 50:
+		ScrambledGameManager.solve_current_word()
+		ScrambledGameManager.advance()
+		guard += 1
+	_check(ScrambledGameManager.state == ScrambledGameManager.State.FINISHED,
+		"the daily run finishes")
+	_check(ScrambledGameManager.correct_count() == ScrambledDailyPicker.WORDS_PER_DAY,
+		"all five words were spelled (%d)" % ScrambledGameManager.correct_count())
+	_check(ScrambledScoreManager.today_attempts() == 1,
+		"the completed run is counted as one attempt")
+	_check(ScrambledScoreManager.today_score() == ScrambledGameManager.total_score(),
+		"the completed run owns the day's best (%d)" % ScrambledScoreManager.today_score())
+
+	# Test abandoning in an isolated fresh record: it consumes its one daily
+	# attempt and preserves the points earned before quitting.
+	_remove_save()
+	ScrambledScoreManager.reset_cache()
+	ScrambledGameManager.reset()
+	_check(ScrambledGameManager.start_competition(), "a fresh record allows a daily run")
 	ScrambledGameManager.mark_hint_used()
 	ScrambledGameManager.solve_current_word()
 	ScrambledGameManager.abandon()
@@ -356,20 +378,13 @@ func test_competition_session() -> void:
 	_check(ScrambledScoreManager.today_score() > 0, "the partial score is kept")
 	_check(ScrambledScoreManager.today_attempts() == 1, "abandoning counts as one attempt")
 
-	# A fully played run replaces the day's best.
-	_check(ScrambledGameManager.start_competition(), "a second run starts")
-	ScrambledGameManager.mark_hint_used()
-	var guard := 0
-	while ScrambledGameManager.state != ScrambledGameManager.State.FINISHED and guard < 50:
-		ScrambledGameManager.solve_current_word()
-		ScrambledGameManager.advance()
-		guard += 1
-	_check(ScrambledGameManager.state == ScrambledGameManager.State.FINISHED, "the daily run finishes")
-	_check(ScrambledGameManager.correct_count() == ScrambledDailyPicker.WORDS_PER_DAY,
-		"all five words were spelled (%d)" % ScrambledGameManager.correct_count())
-	_check(ScrambledScoreManager.today_attempts() == 2, "the replay is counted as a second attempt")
-	_check(ScrambledScoreManager.today_score() == ScrambledGameManager.total_score(),
-		"the fully played run owns the day's best (%d)" % ScrambledScoreManager.today_score())
+	_remove_save()
+	ScrambledScoreManager.reset_cache()
+	ScrambledGameManager.reset()
+	_check(ScrambledGameManager.start_competition(), "a fresh daily run can start before any words are solved")
+	ScrambledGameManager.abandon()
+	_check(ScrambledScoreManager.today_played(), "leaving before a solved word still locks the daily run")
+	_check(ScrambledScoreManager.today_score() == 0, "an immediate exit records the current zero score")
 
 
 ############################################################

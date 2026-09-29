@@ -107,6 +107,7 @@ func _make_label(text: String, font_size: int, color: Color, bold: bool) -> Labe
 	var fa_dominant := _is_fa_dominant(text)
 	l.text = GrammarTheme.bidi_fix(text)
 	l.text_direction = Control.TEXT_DIRECTION_RTL if fa_dominant else Control.TEXT_DIRECTION_LTR
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if fa_dominant else HORIZONTAL_ALIGNMENT_LEFT
 	if fa_dominant and _font_farsi:
 		l.add_theme_font_override("font", _font_farsi)
 	elif bold and _font_bold:

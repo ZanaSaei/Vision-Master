@@ -36,6 +36,12 @@ const ENTER_SCALE      := 1.04    # new screen arrives slightly big, settles to 
 var _slide_busy := false
 # Same guard for the fade transition (change_scene).
 var _fade_busy := false
+# Scene change requested while a fade is already running: parked here and
+# started as soon as the in-flight change settles, instead of being dropped.
+var _pending_scene: String = ""
+# Destination of the in-flight fade, so a repeat request for it (double-tap)
+# can be recognised and ignored.
+var _active_scene: String = ""
 
 
 func _ready() -> void:
@@ -61,25 +67,66 @@ func _ready() -> void:
 ############################################################
 func change_scene(scene_path: String) -> void:
 	# Guard: a second tap while a fade is running would start an
-	# overlapping fade and double-swap the scene. Ignore it.
+	# overlapping fade and double-swap the scene. Park the request
+	# instead of dropping it: a screen may legitimately navigate from
+	# inside its own _ready() while the fade that delivered it is still
+	# running (Saved Words checks the word list and routes straight on
+	# to the flashcards). Dropping that call used to strand the user on
+	# a pass-through screen. A repeat of the in-flight target is just a
+	# double-tap and is ignored.
 	if _fade_busy:
+		if scene_path != _active_scene and scene_path != _pending_scene:
+			_pending_scene = scene_path
 		return
+
 	_fade_busy = true
-	# 1. Fade to black over the current scene.
-	await _fade_out()
-	# 2. Swap the scene while nothing is visible.
-	get_tree().change_scene_to_file(scene_path)
-	# 3. Give the new scene two frames to finish layout before revealing.
-	await get_tree().process_frame
-	await get_tree().process_frame
-	# 4. Fade back in.
-	await _fade_in()
+	var target := scene_path
+	# True once the overlay is fully opaque. A chained swap runs while the
+	# screen is still black, so its fade-out must not reset the overlay to
+	# transparent first — that would flash the outgoing screen for a frame.
+	var black := false
+
+	while true:
+		_active_scene = target
+		await _fade_out(black)
+		# 2. Swap the scene while nothing is visible.
+		get_tree().change_scene_to_file(target)
+		# 3. Give the new scene two frames to finish layout before revealing.
+		await get_tree().process_frame
+		await get_tree().process_frame
+		black = true
+
+		# The new screen may already have queued its own navigation (the
+		# Saved Words pass-through above). Chain straight into it while the
+		# screen is still black instead of revealing a screen nobody wants.
+		if _pending_scene != "" and _pending_scene != target:
+			target = _pending_scene
+			_pending_scene = ""
+			continue
+
+		_pending_scene = ""
+		# 4. Fade back in.
+		await _fade_in()
+		black = false
+		# A request that arrived during the fade-in still needs a cycle of
+		# its own; anything else (including a repeat of this target) is done.
+		if _pending_scene == "" or _pending_scene == target:
+			_pending_scene = ""
+			break
+		target = _pending_scene
+		_pending_scene = ""
+
+	_active_scene = ""
 	_fade_busy = false
 
 
-func _fade_out() -> void:
+## Fades the overlay to opaque. `already_black` is set when a chained swap
+## starts while the overlay is already opaque: the overlay stays black and
+## only the transparent reset is skipped, so the outgoing screen never flashes.
+func _fade_out(already_black: bool = false) -> void:
 	color_rect.visible = true
-	color_rect.color = Color(0, 0, 0, 0)   # start fully transparent
+	if not already_black:
+		color_rect.color = Color(0, 0, 0, 0)   # start fully transparent
 	var tween := create_tween()
 	tween.tween_property(color_rect, "color:a", 1.0, fade_duration)
 	await tween.finished

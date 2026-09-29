@@ -46,8 +46,10 @@ func _build_ui() -> void:
 	column.add_child(_make_mode_card(
 		"LearningCard", "یادگیری", "تمرین با آرامش", "بدون زمان‌سنج و بدون امتیاز", "📚",
 		COLOR_LEARNING, false))
+	var competition_description: String = "۵ کلمه · امتیاز تا ۵۰۰ · یک‌بار در روز"
+	competition_description += "\nبه‌روزرسانی روزانه تا %s دیگر" % ScrambledDailyPicker.time_left_text()
 	column.add_child(_make_mode_card(
-		"CompetitionCard", "مسابقه روزانه", "چالش زمان‌دار", "۵ کلمه · امتیاز تا ۵۰۰ · یک‌بار در روز", "🏆",
+		"CompetitionCard", "مسابقه روزانه", "چالش زمان‌دار", competition_description, "🏆",
 		COLOR_COMPETITION, ScrambledScoreManager.today_played()))
 	_record_card = PanelContainer.new()
 	_record_card.name = "RecordCard"
@@ -106,13 +108,6 @@ func _make_mode_card(node_name: String, title_text: String, tag_text: String,
 	layout.alignment = BoxContainer.ALIGNMENT_CENTER
 	margin.add_child(layout)
 
-	var copy := VBoxContainer.new()
-	copy.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	copy.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	copy.add_theme_constant_override("separation", 5)
-	copy.alignment = BoxContainer.ALIGNMENT_CENTER
-	layout.add_child(copy)
-
 	var icon_panel := PanelContainer.new()
 	icon_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	icon_panel.custom_minimum_size = Vector2(140, 140)
@@ -126,16 +121,27 @@ func _make_mode_card(node_name: String, title_text: String, tag_text: String,
 	icon.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	icon.add_theme_font_size_override("font_size", 68)
 	icon_panel.add_child(icon)
+
+	var copy := VBoxContainer.new()
+	copy.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	copy.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	copy.add_theme_constant_override("separation", 5)
+	copy.alignment = BoxContainer.ALIGNMENT_CENTER
+	layout.add_child(copy)
 	if not locked:
 		var tag := Label.new()
 		tag.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		tag.text = tag_text
+		tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		tag.text_direction = Control.TEXT_DIRECTION_RTL
 		tag.add_theme_font_size_override("font_size", 22)
 		tag.add_theme_color_override("font_color", accent.darkened(0.08))
 		copy.add_child(tag)
 	var title := Label.new()
 	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	title.text = title_text
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	title.text_direction = Control.TEXT_DIRECTION_RTL
 	title.add_theme_font_override("font", MenuStyle.vazir())
 	title.add_theme_font_size_override("font_size", 42)
 	title.add_theme_color_override("font_color", MenuStyle.text())
@@ -143,6 +149,8 @@ func _make_mode_card(node_name: String, title_text: String, tag_text: String,
 	var description := Label.new()
 	description.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	description.text = description_text
+	description.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	description.text_direction = Control.TEXT_DIRECTION_RTL
 	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	description.add_theme_font_override("font", MenuStyle.vazir())
 	description.add_theme_font_size_override("font_size", 26)
@@ -257,6 +265,7 @@ func _refresh_record() -> void:
 	var headline := Label.new()
 	headline.name = "RecordHeadline"
 	headline.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	headline.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	headline.add_theme_font_override("font", MenuStyle.vazir())
 	headline.add_theme_font_size_override("font_size", 38)
 	if played:
@@ -273,7 +282,7 @@ func _refresh_record() -> void:
 	_record_rows.add_child(_make_stat_row("روزهای مسابقه", digits(ScrambledScoreManager.played_days())))
 	_record_rows.add_child(_make_stat_row("کلمه‌های تمرین‌شده", digits(int(practice["words"]))))
 	_record_rows.add_child(_make_stat_row("درس‌های تمرینشده", digits(int(practice["lessons"]))))
-	_record_rows.add_child(_make_stat_row("مسابقهی بعدی", ScrambledDailyPicker.time_left_text()))
+	_record_rows.add_child(_make_stat_row("مسابقه‌ی بعدی", ScrambledDailyPicker.time_left_text()))
 func _make_stat_row(label_text: String, value_text: String) -> HBoxContainer:
 	var row := HBoxContainer.new()
 	row.custom_minimum_size = Vector2(0, 60)

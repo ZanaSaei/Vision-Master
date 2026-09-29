@@ -292,27 +292,53 @@ func _add_instruction() -> void:
 	var text_val := _get_en_text(text_raw)
 	if text_val == "":
 		return
-	var show_letter := bool(_exercise.get("show_letter", true))
-	var final_text := text_val
+	var show_letter: bool = bool(_exercise.get("show_letter", true))
+	var letter_code: String = ""
 	if show_letter:
-		var letter_code := char(65 + (_compute_letter_index() % 26))
-		final_text = letter_code + ". " + text_val
+		letter_code = char(65 + (_compute_letter_index() % 26))
 
-	var instruction := Label.new()
+	var fa_text: String = _get_fa_text(text_raw)
+	var fa_dominant: bool = _is_fa_dominant(text_val if fa_text.is_empty() else fa_text)
+	var instruction_row: HBoxContainer = HBoxContainer.new()
+	instruction_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	instruction_row.add_theme_constant_override("separation", 12)
+
+	var instruction: Label = Label.new()
 	instruction.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	instruction.text = GrammarTheme.bidi_fix(final_text)
+	instruction.text = GrammarTheme.bidi_fix(text_val)
 	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD
+	instruction.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	instruction.add_theme_font_size_override("font_size", 44)
 	instruction.add_theme_color_override("font_color", _c_text())
-	instruction.set_meta("text_fa", _get_fa_text(text_raw))
-	var fa_dominant := _is_fa_dominant(final_text)
+	instruction.set_meta("text_fa", fa_text)
 	instruction.text_direction = Control.TEXT_DIRECTION_RTL if fa_dominant else Control.TEXT_DIRECTION_LTR
+	instruction.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT if fa_dominant else HORIZONTAL_ALIGNMENT_LEFT
 	if fa_dominant and _font_farsi:
 		instruction.add_theme_font_override("font", _font_farsi)
 	elif _font_bold:
 		instruction.add_theme_font_override("font", _font_bold)
-	_active_vbox.add_child(instruction)
-	_add_fa_label(_get_fa_text(text_raw), 34)
+	instruction_row.add_child(instruction)
+
+	if not letter_code.is_empty():
+		var letter_badge: Label = Label.new()
+		letter_badge.text = letter_code
+		letter_badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		letter_badge.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		letter_badge.custom_minimum_size = Vector2(64, 64)
+		letter_badge.add_theme_font_size_override("font_size", 32)
+		letter_badge.add_theme_color_override("font_color", Color.WHITE)
+		var badge_style: StyleBoxFlat = StyleBoxFlat.new()
+		badge_style.bg_color = Color(0.10, 0.14, 0.22, 1.0)
+		badge_style.set_corner_radius_all(16)
+		badge_style.set_content_margin_all(8)
+		letter_badge.add_theme_stylebox_override("normal", badge_style)
+		letter_badge.add_theme_stylebox_override("focus", badge_style)
+		letter_badge.add_theme_stylebox_override("hover", badge_style)
+		letter_badge.add_theme_stylebox_override("pressed", badge_style)
+		instruction_row.add_child(letter_badge)
+
+	_active_vbox.add_child(instruction_row)
+	_add_fa_label(fa_text, 34)
 
 	var sep := HSeparator.new()
 	sep.mouse_filter = Control.MOUSE_FILTER_IGNORE

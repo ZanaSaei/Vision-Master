@@ -82,7 +82,14 @@ func _build_ui() -> void:
 		var card: Button = MenuStyle.make_card(title, "تاریخ آزمون · " + date_fa, "📄", CARD_ACCENT, 168)
 		card.pressed.connect(func() -> void: _open_exam(exam_json, title))
 		MenuStyle.wire_microinteractions(card)
-		content.add_child(card)
+		var card_inset: MarginContainer = MarginContainer.new()
+		card_inset.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		card_inset.add_theme_constant_override("margin_left", 14)
+		card_inset.add_theme_constant_override("margin_right", 14)
+		card_inset.add_theme_constant_override("margin_top", 4)
+		card_inset.add_theme_constant_override("margin_bottom", 4)
+		card_inset.add_child(card)
+		content.add_child(card_inset)
 
 	var spacer: Control = Control.new()
 	spacer.custom_minimum_size = Vector2(0, 24)

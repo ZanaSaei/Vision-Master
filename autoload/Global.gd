@@ -497,35 +497,76 @@ func apply_progress_snapshot(data: Dictionary) -> void:
 
 
 func _load_saved_words() -> void:
-	if not FileAccess.file_exists(SAVED_WORDS_PATH):
-		saved_words = []
-		return
-
-	var file := FileAccess.open(SAVED_WORDS_PATH, FileAccess.READ)
-	var text := file.get_as_text()
-	file.close()
-
-	var json := JSON.new()
-	if json.parse(text) == OK and json.data is Array:
-		saved_words = json.data
-	else:
-		saved_words = []
+	saved_words = _load_word_list_file(SAVED_WORDS_PATH)
 
 func _load_review_words() -> void:
-	if not FileAccess.file_exists(REVIEW_WORDS_PATH):
-		review_words = []
-		return
+	review_words = _load_word_list_file(REVIEW_WORDS_PATH)
 
-	var file := FileAccess.open(REVIEW_WORDS_PATH, FileAccess.READ)
+
+## Reads a saved word list from disk, normalising and de-duplicating it.
+## A missing, unreadable, unparseable or non-array file yields an empty list
+## rather than an error — json.data is null on a parse failure, so the type
+## has to be checked before it is handed on.
+func _load_word_list_file(path: String) -> Array:
+	if not FileAccess.file_exists(path):
+		return []
+
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		push_warning("Could not read %s (error %d)." % [path, FileAccess.get_open_error()])
+		return []
 	var text := file.get_as_text()
 	file.close()
 
 	var json := JSON.new()
+	# These two are warnings rather than errors on purpose: the loader recovers
+	# by starting from an empty list, and the list is rebuilt as the student
+	# saves words again. A hard error here would only ever be noise.
+	if json.parse(text) != OK:
+		push_warning("Could not parse %s: %s — starting from an empty list."
+			% [path, json.get_error_message()])
+		return []
+	if not (json.data is Array):
+		push_warning("Unexpected contents in %s: expected an array — starting from an empty list." % path)
+		return []
 
-	if json.parse(text) == OK and json.data is Array:
-		review_words = json.data
-	else:
-		review_words = []
+	# Normalise + de-duplicate on read. A hand-edited or half-synced file can
+	# hold duplicate entries, entries missing book/lesson, or non-dictionary
+	# junk; all of those used to break identity lookups later on.
+	return _sanitize_word_list(json.data)
+
+
+## Turns a raw parsed JSON array into a clean, de-duplicated word list:
+## drops non-dictionary entries, guarantees word/book/lesson are present and
+## correctly typed, and seeds the SRS fields. Keeps the on-disk format valid
+## even if it was hand-edited or produced by an older build.
+func _sanitize_word_list(raw: Array) -> Array:
+	var clean: Array = []
+	var seen: Dictionary = {}
+	for item in raw:
+		if not (item is Dictionary):
+			continue
+		var word: String = str(item.get("word", ""))
+		if word == "":
+			continue
+		var book: int   = _as_int(item.get("book", 0), 0)
+		var lesson: int = _as_int(item.get("lesson", 0), 0)
+		# Case-insensitive identity: the same word saved from two lessons, or
+		# with different capitalisation, must not become two review cards.
+		var key := "%s|%d|%d" % [word.to_lower(), book, lesson]
+		if seen.has(key):
+			continue
+		seen[key] = true
+		var entry: Dictionary = item.duplicate(true)
+		entry["word"]   = word
+		entry["book"]   = book
+		entry["lesson"] = lesson
+		# Backfill content for entries stored before enrichment existed (or by
+		# an older build), so an already-saved blank card heals on next launch.
+		_enrich_word_entry(entry)
+		_ensure_srs_fields(entry)
+		clean.append(entry)
+	return clean
 
 func _persist_saved_words() -> void:
 	_write_json_file(SAVED_WORDS_PATH, saved_words)
@@ -537,49 +578,98 @@ func _persist_review_words() -> void:
 
 func is_word_saved(word: String, book: int, lesson: int) -> bool:
 	for entry in saved_words:
-		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
+		if _is_same_word(entry, word, book, lesson):
 			return true
 	return false
 
 
 func save_word(word_data: Dictionary) -> void:
-
-	if is_word_saved(
-		word_data.get("word"),
-		word_data.get("book"),
-		word_data.get("lesson")
-	):
+	var word: String = str(word_data.get("word", ""))
+	if word == "":
 		return
+	var book: int   = _as_int(word_data.get("book", 0), 0)
+	var lesson: int = _as_int(word_data.get("lesson", 0), 0)
 
-	var copy = word_data.duplicate(true)
+	if is_word_saved(word, book, lesson):
+		# Keep the two destinations independent: if the review card was removed
+		# from Word Review, saving again should restore it without duplicating the
+		# flashcard entry.
+		for saved_entry in saved_words:
+			if _is_same_word(saved_entry, word, book, lesson):
+				add_review_word(saved_entry)
+				return
+
+	var copy: Dictionary = word_data.duplicate(true)
+	# Normalise the identity fields so later lookups compare like with like.
+	copy["word"]   = word
+	copy["book"]   = book
+	copy["lesson"] = lesson
+	# Fill in any content the caller did not supply from the unified
+	# dictionary. Some save paths (e.g. a bare {word, book, lesson}) carry no
+	# meaning/example/phonetics at all, which produced a review card whose
+	# whole back face was blank. Enriching here means the card is complete
+	# regardless of which screen saved it.
+	_enrich_word_entry(copy)
+	_ensure_srs_fields(copy)
 
 	saved_words.append(copy)
-	add_review_word(copy)
-
 	_touch_progress_key("saved_words")
 	_persist_saved_words()
+	# add_review_word() persists + emits review_words_changed itself.
+	add_review_word(copy)
 
 
 func remove_word(word: String, book: int, lesson: int) -> void:
+	# Flashcard unsave/removal affects only the saved flashcard collection.
+	# Leitner cards are managed independently from Word Review's side menu.
+	var removed_saved: bool = _remove_from_array(saved_words, word, book, lesson)
+	if not removed_saved:
+		return
 	_touch_progress_key("saved_words")
-	for i in range(saved_words.size()):
-		var entry = saved_words[i]
-		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
-			saved_words.remove_at(i)
-			break
 	_persist_saved_words()
-	# Keep the review queue in sync so it never holds orphaned words.
-	_remove_from_array(review_words, word, book, lesson)
-	_persist_review_words()
-	review_words_changed.emit()
 
 
-func _remove_from_array(arr: Array, word: String, book: int, lesson: int) -> void:
-	for i in range(arr.size()):
-		var entry: Variant = arr[i]
-		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
+## Removes the first matching entry. Returns true when something was actually
+## removed, so callers can skip persisting on a no-op.
+## Fills in missing content fields on a saved word entry from the unified
+## dictionary. Only blanks are filled — data the caller already provided
+## (e.g. the lesson's own example sentence) always wins. This keeps a card's
+## back face populated even when it was saved from a screen that only knew the
+## word, book and lesson.
+func _enrich_word_entry(entry: Dictionary) -> void:
+	var word: String = str(entry.get("word", ""))
+	if word == "":
+		return
+	const CONTENT_FIELDS := [
+		"meaning_en", "meaning_fa", "example", "phonetics",
+		"word_type", "audio", "synonyms", "antonyms",
+	]
+	# Nothing to do if the entry already carries its content.
+	var has_content := false
+	for field in CONTENT_FIELDS:
+		if not str(entry.get(field, "")).is_empty():
+			has_content = true
+			break
+	if has_content:
+		return
+
+	var definition := get_word_definition(word)
+	if definition.is_empty():
+		return
+	for field in CONTENT_FIELDS:
+		if entry.has(field):
+			continue
+		var value: Variant = definition.get(field)
+		if value != null and not str(value).is_empty():
+			entry[field] = value
+
+
+func _remove_from_array(arr: Array, word: String, book: int, lesson: int) -> bool:
+	for i in range(arr.size() - 1, -1, -1):
+		if _is_same_word(arr[i], word, book, lesson):
 			arr.remove_at(i)
-			return
+			return true
+	return false
 
 
 func get_saved_words() -> Array:
@@ -587,25 +677,35 @@ func get_saved_words() -> Array:
 
 
 func add_review_word(word_data: Dictionary) -> void:
+	var word: String = str(word_data.get("word", ""))
+	if word == "":
+		return
+	var book: int   = _as_int(word_data.get("book", 0), 0)
+	var lesson: int = _as_int(word_data.get("lesson", 0), 0)
 
 	for entry in review_words:
-		if entry.get("word") == word_data.get("word") \
-		and entry.get("book") == word_data.get("book") \
-		and entry.get("lesson") == word_data.get("lesson"):
+		if _is_same_word(entry, word, book, lesson):
 			return
 
-	review_words.append(word_data.duplicate(true))
+	var copy: Dictionary = word_data.duplicate(true)
+	# Seed the SRS fields on insert. Without this a new card reached the disk
+	# with no srs_due at all, and only got the "-1 = new" default as a side
+	# effect of get_due_words() mutating the entry in memory.
+	_ensure_srs_fields(copy)
+	_enrich_word_entry(copy)
+	review_words.append(copy)
 	_touch_progress_key("review_words")
 	_persist_review_words()
 	review_words_changed.emit()
 
-func remove_review_word(word:String, book:int, lesson:int) -> void:
-	# A word removed from the review list is also removed from saved words —
-	# the two stay in sync so neither array keeps orphans.
-	_remove_from_array(review_words, word, book, lesson)
-	_remove_from_array(saved_words, word, book, lesson)
+func remove_review_word(word: String, book: int, lesson: int) -> void:
+	# Word Review's side menu owns removal from the Leitner queue. Keep the
+	# flashcard saved list untouched so the word can remain bookmarked.
+	var removed_review: bool = _remove_from_array(review_words, word, book, lesson)
+	if not removed_review:
+		return
+	_touch_progress_key("review_words")
 	_persist_review_words()
-	_persist_saved_words()
 	review_words_changed.emit()
 
 
@@ -628,6 +728,10 @@ func clear_saved_words() -> void:
 func clear_review_words() -> void:
 	review_words.clear()
 	saved_words.clear()
+	# Same reason as clear_saved_words(): a clear on one device has to win the
+	# last-writer-wins merge on the other, so both keys must be stamped.
+	_touch_progress_key("saved_words")
+	_touch_progress_key("review_words")
 	_persist_review_words()
 	_persist_saved_words()
 	review_words_changed.emit()
@@ -820,6 +924,11 @@ func button_bounce(button: Control, shrink_to: float = 0.92, duration: float = 0
 # ============================================================
 
 const SRS_NEW_CARDS_PER_SESSION := 20
+# Ceiling on how far a single interval can grow, so a card rated "easy"
+# repeatedly can never drift years into the future.
+const SRS_MAX_INTERVAL := 365.0
+const SRS_MIN_EASE := 1.3
+const SRS_MAX_EASE := 3.0
 
 
 func _today_day_number() -> int:
@@ -829,15 +938,28 @@ func _today_day_number() -> int:
 	return int(Time.get_unix_time_from_datetime_dict(local) / 86400.0)
 
 
+func _as_float(value: Variant, fallback: float) -> float:
+	# Saved JSON can hand back a string, null or bool for a numeric field
+	# (hand-edited files, older schema). Coerce defensively so a bad value
+	# degrades to the default instead of crashing or poisoning the maths.
+	if value is float or value is int:
+		return float(value)
+	return fallback
+
+
+func _as_int(value: Variant, fallback: int) -> int:
+	if value is float or value is int:
+		return int(value)
+	return fallback
+
+
 func _ensure_srs_fields(entry: Dictionary) -> void:
-	if not entry.has("srs_interval"):
-		entry["srs_interval"] = 0.0
-	if not entry.has("srs_ease"):
-		entry["srs_ease"] = 2.5
-	if not entry.has("srs_reps"):
-		entry["srs_reps"] = 0
-	if not entry.has("srs_due"):
-		entry["srs_due"] = -1   # -1 means "new, never studied"
+	# Fills in any missing field AND normalises out-of-range/garbage values, so
+	# the scheduler can assume these four keys are always sane numbers.
+	entry["srs_interval"] = maxf(0.0, _as_float(entry.get("srs_interval"), 0.0))
+	entry["srs_ease"] = clampf(_as_float(entry.get("srs_ease"), 2.5), SRS_MIN_EASE, SRS_MAX_EASE)
+	entry["srs_reps"] = maxi(0, _as_int(entry.get("srs_reps"), 0))
+	entry["srs_due"] = _as_int(entry.get("srs_due"), -1)  # -1 = "new, never studied"
 
 
 func get_due_words() -> Array:
@@ -846,20 +968,33 @@ func get_due_words() -> Array:
 	var new_cards: Array = []
 
 	for entry in review_words:
+		# A corrupt save must not take the whole review screen down.
+		if not (entry is Dictionary):
+			continue
 		_ensure_srs_fields(entry)
 		if entry["srs_due"] == -1:
 			new_cards.append(entry)            # never studied yet
 		elif entry["srs_due"] <= today:
 			reviews.append(entry)              # due for review
 
-	# Due reviews always come first; new cards follow, capped per session.
+	# Most overdue first, so the words closest to being forgotten are studied
+	# early in the session instead of being left to the end.
+	reviews.sort_custom(func(a, b): return int(a["srs_due"]) < int(b["srs_due"]))
+
+	# Deep copies: the caller mutates what it receives (interval previews,
+	# re-queueing), so it must never write through into Global's live SRS
+	# state. Returning live references let a UI read corrupt the schedule.
 	var due: Array = []
-	due.append_array(reviews)
+	for entry in reviews:
+		due.append(entry.duplicate(true))
+
+	# New cards follow the reviews, capped per session so a large library does
+	# not dump hundreds of unseen words in one sitting.
 	var shown_new := 0
 	for entry in new_cards:
 		if shown_new >= SRS_NEW_CARDS_PER_SESSION:
 			break
-		due.append(entry)
+		due.append(entry.duplicate(true))
 		shown_new += 1
 
 	return due
@@ -882,9 +1017,9 @@ func load_category(category: String, book: int, lesson: int) -> Dictionary:
 	return data.get("books", {}).get(str(book), {}).get(str(lesson), {})
 
 func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
-	var ease_factor: float = entry.get("srs_ease", 2.5)
-	var interval: float = entry.get("srs_interval", 0.0)
-	var reps: int        = entry.get("srs_reps", 0)
+	var ease_factor: float = clampf(_as_float(entry.get("srs_ease"), 2.5), SRS_MIN_EASE, SRS_MAX_EASE)
+	var interval: float = maxf(0.0, _as_float(entry.get("srs_interval"), 0.0))
+	var reps: int = maxi(0, _as_int(entry.get("srs_reps"), 0))
 	var today := _today_day_number()
 
 	var new_ease := ease_factor
@@ -893,12 +1028,21 @@ func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
 
 	match rating:
 		"again":
+			# A lapse drops the card back to the start of the learning steps.
+			# It stays due TODAY, so the review scene re-queues it later in the
+			# same session instead of the student waiting a full day.
 			new_reps = 0
-			new_ease = max(1.3, ease_factor - 0.2)
+			new_ease = maxf(SRS_MIN_EASE, ease_factor - 0.2)
 			new_interval = 0.0
 		"hard":
-			new_ease = max(1.3, ease_factor - 0.15)
-			new_interval = max(1.0, (interval if interval > 0 else 1.0) * 1.2)
+			new_ease = maxf(SRS_MIN_EASE, ease_factor - 0.15)
+			# A new card must never get a LONGER wait than "good". Previously
+			# "hard" produced 1.2 days here, which ceil() turned into 2 days —
+			# rating a card "hard" pushed it further away than rating it "good".
+			# On a new card "hard" now means "barely knew it", so the card comes
+			# back TODAY, strictly before "good" (+1 day) and "easy".
+			new_interval = (interval * 1.2) if interval > 0.0 else 0.0
+			new_interval = maxf(1.0, new_interval) if interval > 0.0 else 0.0
 			new_reps = reps + 1
 		"good":
 			if reps == 0:
@@ -910,17 +1054,29 @@ func _compute_srs_result(entry: Dictionary, rating: String) -> Dictionary:
 			new_reps = reps + 1
 		"easy":
 			if reps == 0:
-				new_interval = 2.0
+				new_interval = 3.0
 			else:
 				new_interval = interval * ease_factor * 1.3
-			new_ease = ease_factor + 0.15
+			new_ease = minf(SRS_MAX_EASE, ease_factor + 0.15)
 			new_reps = reps + 1
+
+	# An interval can never grow without bound.
+	new_interval = clampf(new_interval, 0.0, SRS_MAX_INTERVAL)
 
 	var new_due: int
 	if rating == "again":
 		new_due = today
+	elif new_interval < 1.0:
+		# A sub-day interval means "still today" — this is what makes "hard" on
+		# a brand new card come back before "good". Forcing a 1-day minimum
+		# here (as the old maxi(1, ...) did) is what made both buttons read
+		# "۱ روز" and told the student the two choices were identical.
+		new_due = today
 	else:
-		new_due = today + int(ceil(new_interval))
+		# round(), not ceil(): the label on the rating button is derived from
+		# the same interval via _format_interval(), so the promise the UI makes
+		# to the student ("۱ روز") is exactly the one kept here.
+		new_due = today + int(round(new_interval))
 
 	return {
 		"ease": new_ease,
@@ -935,53 +1091,71 @@ func review_word(word: String, book: int, lesson: int, rating: String) -> void:
 		return
 	_touch_progress_key("review_words")
 	_touch_progress_key("saved_words")
-	var result: Dictionary = {}
-	for entry in saved_words:
-		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
-			_ensure_srs_fields(entry)
-			result = _compute_srs_result(entry, rating)
-			entry["srs_ease"]     = result["ease"]
-			entry["srs_interval"] = result["interval"]
-			entry["srs_reps"]     = result["reps"]
-			entry["srs_due"]      = result["due"]
-			break
+
+	# The schedule is mirrored in BOTH lists, so update whichever ones actually
+	# hold this word. Looking only at saved_words meant a word that lived only
+	# in review_words (possible after a partial sync merge, or if the two files
+	# ever disagreed) was silently never rescheduled: its SRS result came back
+	# empty, review_word() bailed out, and the card stayed due forever.
+	_apply_srs_result(saved_words, word, book, lesson, rating)
+	_apply_srs_result(review_words, word, book, lesson, rating)
+
 	_persist_saved_words()
-	if result.is_empty():
-		return
-	# Keep the review queue (the source of get_due_words) in sync so the SRS
-	# schedule actually controls when the word comes back. NOTE: we do NOT
-	# emit review_words_changed here — the WordReview scene manages its own
-	# in-session queue and would re-enter _populate_list() and skip cards.
-	_sync_srs_to_review_words(word, book, lesson, result)
 	_persist_review_words()
 
 
-func _sync_srs_to_review_words(word: String, book: int, lesson: int, result: Dictionary) -> void:
-	for entry in review_words:
-		if entry.get("word") == word and entry.get("book") == book and entry.get("lesson") == lesson:
-			entry["srs_ease"]     = result["ease"]
-			entry["srs_interval"] = result["interval"]
-			entry["srs_reps"]     = result["reps"]
-			entry["srs_due"]      = result["due"]
-			return
+## Runs one grading step against every matching entry in `arr` and returns the
+## computed result (empty when the word is not present in that list).
+func _apply_srs_result(arr: Array, word: String, book: int, lesson: int, rating: String) -> Dictionary:
+	var result: Dictionary = {}
+	for entry in arr:
+		if not _is_same_word(entry, word, book, lesson):
+			continue
+		_ensure_srs_fields(entry)
+		result = _compute_srs_result(entry, rating)
+		entry["srs_ease"]     = result["ease"]
+		entry["srs_interval"] = result["interval"]
+		entry["srs_reps"]     = result["reps"]
+		entry["srs_due"]      = result["due"]
+		break
+	return result
+
+
+## Identity test for a saved word: same word text, book and lesson. Tolerates
+## non-Dictionary entries (corrupt save) and numeric fields that arrived from
+## JSON as a different numeric type.
+func _is_same_word(entry: Variant, word: String, book: int, lesson: int) -> bool:
+	if not (entry is Dictionary):
+		return false
+	return str(entry.get("word", "")) == word \
+		and _as_int(entry.get("book", 0), 0) == book \
+		and _as_int(entry.get("lesson", 0), 0) == lesson
 
 
 func preview_intervals(entry: Dictionary) -> Dictionary:
-	_ensure_srs_fields(entry)
+	# Preview on a copy. _ensure_srs_fields() writes defaults into the dict it
+	# is given, and this is called on every "Show answer" tap — mutating the
+	# caller's entry here leaked scheduler state into whatever held it.
+	var probe: Dictionary = entry.duplicate(true)
+	_ensure_srs_fields(probe)
 	var result := {}
 	for rating in ["again", "hard", "good", "easy"]:
-		var r := _compute_srs_result(entry, rating)
+		var r := _compute_srs_result(probe, rating)
 		result[rating] = _format_interval(r["interval"], rating)
 	return result
 
 
 func _format_interval(interval: float, rating: String) -> String:
 	if rating == "again":
-		return "چند دقیقه دیگر"
-	var days := int(round(interval))
-	if days < 1:
+		# "again" is rescheduled for later in the SAME session, not in minutes.
+		return "همین حالا"
+	# Anything under a full day comes back today — the label has to say so,
+	# otherwise "hard" (today) and "good" (tomorrow) both read "۱ روز" and the
+	# student cannot tell the two choices apart.
+	if interval < 1.0:
 		return "امروز"
-	elif days == 1:
+	var days := int(round(interval))
+	if days == 1:
 		return "۱ روز"
 	else:
 		return "%d روز" % days

@@ -250,10 +250,10 @@ static func finish() -> void:
 static func abandon() -> void:
 	if state == State.FINISHED:
 		return
-	if mode == Mode.COMPETITION and not _results.is_empty():
+	if mode == Mode.COMPETITION:
 		state = State.FINISHED
 		last_run_new_best = ScrambledScoreManager.save_daily_attempt(
-			total_score(), _results.size(), _hints_used, session_seconds())
+			total_score(), words_attempted(), _hints_used, session_seconds())
 		_play_counts[_lesson_key()] = int(_play_counts.get(_lesson_key(), 0)) + 1
 		return
 	state = State.IDLE

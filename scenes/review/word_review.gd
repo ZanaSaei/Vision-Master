@@ -44,6 +44,12 @@ const SCENE_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
 var review_queue: Array       = []
 var current_entry: Dictionary = {}
 
+# How many times a single card may be pushed back into the queue within one
+# session. Without a cap, repeatedly answering "again" re-appended the card
+# forever and the session could never end.
+const MAX_SESSION_REQUEUES := 3
+var _session_requeues: Dictionary = {}
+
 
 func _ready() -> void:
 	Global.review_words_changed.connect(_on_review_words_changed)
@@ -77,34 +83,52 @@ func _on_word_selected_from_menu(word_data: Dictionary) -> void:
 	"""Navigate to a specific word in the review queue"""
 	# Find the word in the queue
 	for i in range(review_queue.size()):
-		var entry = review_queue[i]
-		if entry.get("word") == word_data.get("word") and \
-		   entry.get("book") == word_data.get("book") and \
-		   entry.get("lesson") == word_data.get("lesson"):
+		if _is_same_entry(review_queue[i], word_data):
 			# Reorder queue to put this word first
 			var temp = review_queue[i]
 			review_queue.remove_at(i)
 			review_queue.insert(0, temp)
 			_load_next_card()
 			return
-	
-	# If word not found in queue, reload queue and try again
+
+	# Not in the current queue (it may be scheduled for a future day, or the
+	# queue was capped at SRS_NEW_CARDS_PER_SESSION). Refresh from Global and
+	# try once more — the old code found the entry but never moved it to the
+	# front, so it silently displayed the first card instead of the chosen one.
 	review_queue = Global.get_due_words()
-	for entry in review_queue:
-		if entry.get("word") == word_data.get("word") and \
-		   entry.get("book") == word_data.get("book") and \
-		   entry.get("lesson") == word_data.get("lesson"):
+	for i in range(review_queue.size()):
+		if _is_same_entry(review_queue[i], word_data):
+			var temp = review_queue[i]
+			review_queue.remove_at(i)
+			review_queue.insert(0, temp)
 			_load_next_card()
 			return
+	_update_due_counter()
+
+
+func _is_same_entry(a: Dictionary, b: Dictionary) -> bool:
+	return str(a.get("word", "")) == str(b.get("word", "")) \
+		and int(a.get("book", 0)) == int(b.get("book", 0)) \
+		and int(a.get("lesson", 0)) == int(b.get("lesson", 0))
 
 func _on_review_words_changed():
-	# This will be called every time a word is added or removed
-	_populate_word_list()   # re‑reads Global.review_words and updates UI
+	# This will be called every time a word is added or removed.
+	# Rebuild the queue, but keep studying the card that is currently on
+	# screen: re-deriving the queue and jumping to position 0 used to yank the
+	# student onto an unrelated card the moment they added or removed a word.
+	var keep_key := _entry_key(current_entry) if not current_entry.is_empty() else ""
+	review_queue = Global.get_due_words()
+	if keep_key != "":
+		for i in range(review_queue.size()):
+			if _entry_key(review_queue[i]) == keep_key:
+				var entry = review_queue[i]
+				review_queue.remove_at(i)
+				review_queue.insert(0, entry)
+				break
+	_load_next_card()
 
 func _populate_word_list() -> void:
-	review_queue = Global.get_due_words()
-	_load_next_card()
-	_update_due_counter()
+	_on_review_words_changed()
 
 
 func _on_review_menu_closed() -> void:
@@ -395,6 +419,10 @@ func _update_rating_previews() -> void:
 
 
 func _on_rate_pressed(rating: String) -> void:
+	if current_entry.is_empty():
+		return
+	var key := _entry_key(current_entry)
+
 	Global.review_word(
 		current_entry.get("word", ""),
 		current_entry.get("book", 0),
@@ -403,16 +431,33 @@ func _on_rate_pressed(rating: String) -> void:
 	)
 
 	review_queue.pop_front()
+	_session_requeues.erase(key)
 
-	# "Again" words come back later in the SAME session, not tomorrow
-	if rating == "again":
-		review_queue.append(current_entry)
+	# "Again" words come back later in the SAME session, not tomorrow — but
+	# only up to a limit, so a word the student keeps forgetting can never
+	# trap them in an endless loop.
+	if rating == "again" and int(_session_requeues.get(key, 0)) < MAX_SESSION_REQUEUES:
+		_session_requeues[key] = int(_session_requeues.get(key, 0)) + 1
+		# Re-queue a copy: the entry in Global has just been rescheduled, and
+		# the badge shown on the next visit must reflect the new state.
+		review_queue.append(current_entry.duplicate(true))
 
 	_load_next_card()
 
 
+## Stable per-card key, used to count how often a card was re-queued.
+func _entry_key(entry: Dictionary) -> String:
+	return "%s|%d|%d" % [
+		entry.get("word", ""),
+		int(entry.get("book", 0)),
+		int(entry.get("lesson", 0))
+	]
+
+
 func _update_due_counter() -> void:
-	due_counter.text = "%d کلمه باقی مانده" % review_queue.size()
+	var remaining := review_queue.size()
+	due_counter.text = "%s کلمه باقی مانده" % MenuStyle.persian_digits(str(remaining)) \
+		if remaining > 0 else "تمام شد ✅"
 
 
 # ----------------------------------------------------------------

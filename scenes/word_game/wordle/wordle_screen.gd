@@ -74,7 +74,7 @@ enum MessageKind { INFO, ERROR, SUCCESS }
 
 @onready var board_container: VBoxContainer = $GameArea/BoardContainer
 @onready var status_label: Label = $GameArea/StatusRow/StatusLabel
-@onready var card_button: Button = $GameArea/StatusRow/CardButton
+@onready var card_button: Button = get_node("../HeaderBar/HeaderContent/CardButton") as Button
 @onready var message_label: Label = $GameArea/MessageLabel
 @onready var keyboard_container: VBoxContainer = $Keyboard
 @onready var end_panel: PanelContainer = $EndPanel
@@ -114,18 +114,14 @@ var _end_audio_filename := ""
 
 
 func _ready() -> void:
-	# Both overlays belong to this scene; the host's header button only
-	# triggers the how-to card through show_help().
+	# The host header buttons trigger these overlays.
 	end_panel.visible = false
 	help_panel.visible = false
 	end_audio_button.visible = false
-	card_button.visible = false
-	# The theme walk runs after the scene is entered and would paint the card
-	# plain; re-applying the card look one frame later wins that race.
-	_apply_card_style.call_deferred()
 	end_close_button.pressed.connect(close_panels)
 	help_close_button.pressed.connect(close_panels)
 	card_button.pressed.connect(_on_card_button_pressed)
+	card_button.visible = false
 	end_audio_button.pressed.connect(_on_audio_button_pressed)
 
 	# The app-wide theme walk runs on scene load, not on a live toggle, so
@@ -445,7 +441,10 @@ func _refresh_status() -> void:
 	if game == null:
 		return
 	status_label.text = MenuStyle.persian_digits(
-		"تلاش‌ها: %d از %d" % [game.attempts_used(), WordleGame.MAX_GUESSES])
+		"تلاش‌ها: %d از %d\nکلمه‌ی بعدی در %s" % [
+			game.attempts_used(), WordleGame.MAX_GUESSES,
+			WordleDaily.format_until_next_word(),
+		])
 	status_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 	_update_card_button()
 
@@ -453,6 +452,8 @@ func _refresh_status() -> void:
 ## The vocabulary card can be dismissed, so a finished board offers a way
 ## back to it — otherwise the day's word would be lost for good.
 func _update_card_button() -> void:
+	if card_button == null:
+		return
 	card_button.visible = game != null and game.is_finished() and not end_panel.visible
 
 
@@ -481,8 +482,6 @@ func _restore_saved_progress() -> void:
 	_apply_keyboard_colors()
 
 	if game.is_finished():
-		# A restored finished day shows its card at once: the player has
-		# already watched the board, so there is nothing to delay for.
 		if game.get_state() == WordleGame.State.WON:
 			_set_message(MESSAGE_WIN, MessageKind.SUCCESS)
 		else:
