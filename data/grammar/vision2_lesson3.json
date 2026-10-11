@@ -15,9 +15,9 @@
 					{
 						"id": "u1_p1",
 						"type": "learn",
-						"title_fa": "If + حال ساده، ... will + فعل ساده",
+						"title_fa": "ساختار If + حال ساده، ... will + base verb",
 						"title_en": "",
-						"explanation": "برای بیان یک شرط واقعی و نتیجه‌ی احتمالی آن در آینده، از If + فعل حال ساده در جمله‌ی شرط و will + فعل ساده در جمله‌ی نتیجه استفاده می‌کنیم.",
+						"explanation": "برای بیان یک شرط واقعی و نتیجه‌ی احتمالی آن در آینده، از If + فعل حال ساده در جمله‌ی شرط و will + base verb در جمله‌ی نتیجه استفاده می‌کنیم.",
 						"cards": [
 							{
 								"en": "If you study hard, you will pass the exams.",
@@ -42,7 +42,7 @@
 								"answers": [
 									"will"
 								],
-								"hint_fa": "در جمله‌ی نتیجه از will استفاده می‌کنیم.",
+								"hint_fa": "جمله‌ی نتیجه در شرطی نوع اول با کدام فعل کمکی ساخته می‌شود؟",
 								"explanation_fa": "در جمله‌ی نتیجه از will استفاده می‌کنیم."
 							}
 						]
@@ -52,10 +52,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: If Reza goes to Rey, he ___ visit the bazaar.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: If Reza goes to Rey, he ___ visit the bazaar.",
+								"question": "If Reza goes to Rey, he ___ visit the bazaar.",
 								"options": [
 									"will",
 									"would",
@@ -63,7 +63,7 @@
 									"was"
 								],
 								"correct": 0,
-								"hint_fa": "جمله‌ی نتیجه با will ساخته می‌شود.",
+								"hint_fa": "به فرمول شرطی نوع اول فکر کن: در جمله‌ی نتیجه چه کلمه‌ای می‌آید؟",
 								"explanation_fa": "جمله‌ی نتیجه با will ساخته می‌شود."
 							}
 						]
@@ -73,11 +73,11 @@
 						"type": "learn",
 						"title_fa": "فعل بعد از if همیشه به شکل حال ساده است",
 						"title_en": "",
-						"explanation": "در جمله‌ی شرط (بعد از if)، فعل به شکل حال ساده می‌آید، نه آینده.",
+						"explanation": "در جمله‌ی شرط یعنی بعد از if، فعل به شکل حال ساده می‌آید، نه آینده.",
 						"cards": [
 							{
 								"en": "If my friends come, I will become happy.",
-								"fa": "اگر دوستانم بیایند (نه will come)، خوشحال می‌شوم."
+								"fa": "اگر دوستانم بیایند، خوشحال می‌شوم."
 							}
 						],
 						"highlight_word": "come"
@@ -90,9 +90,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «If my friends will come, I will become happy» درست است.",
+								"statement": "این جمله درست است: If my friends will come, I will become happy.",
 								"answer": false,
-								"hint_fa": "بعد از if از حال ساده استفاده می‌شود، نه will.",
+								"hint_fa": "بعد از if از چه زمانی استفاده می‌کنیم؟",
 								"explanation_fa": "بعد از if از حال ساده استفاده می‌شود، نه will."
 							}
 						]
@@ -109,7 +109,7 @@
 								"answers": [
 									"answers"
 								],
-								"hint_fa": "بعد از if فعل حال ساده می‌آید و با فاعل سوم‌شخص s می‌گیرد: answers.",
+								"hint_fa": "بعد از if فعل حال ساده می‌آید؛ با فاعل سوم‌شخص مفرد به فعل چه اضافه می‌شود؟",
 								"explanation_fa": "بعد از if فعل حال ساده می‌آید و با فاعل سوم‌شخص s می‌گیرد: answers."
 							}
 						]
@@ -119,17 +119,17 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: I'll phone you if I ___ time.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: I'll phone you if I ___ time.",
+								"question": "I'll phone you if I ___ time.",
 								"options": [
 									"have",
 									"will have",
 									"had"
 								],
 								"correct": 0,
-								"hint_fa": "بعد از if فعل حال ساده می‌آید: have.",
+								"hint_fa": "بعد از if کدام زمان به کار می‌رود؟",
 								"explanation_fa": "بعد از if فعل حال ساده می‌آید: have."
 							}
 						]
@@ -146,7 +146,7 @@
 								"answers": [
 									"jump"
 								],
-								"hint_fa": "بعد از if فعل حال ساده می‌آید: jump.",
+								"hint_fa": "بعد از if کدام زمان به کار می‌رود؟",
 								"explanation_fa": "بعد از if فعل حال ساده می‌آید: jump."
 							}
 						]
@@ -159,9 +159,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "در شرطی نوع اول، فعل بعد از «if» همیشه زمان حال ساده است.",
+								"statement": "در شرطی نوع اول، فعل بعد از if همیشه زمان حال ساده است.",
 								"answer": true,
-								"hint_fa": "درسته! این قانون اصلی شرطی نوع اول است.",
+								"hint_fa": "به قانون اصلی شرطی نوع اول فکر کن.",
 								"explanation_fa": "درسته! این قانون اصلی شرطی نوع اول است."
 							}
 						]
@@ -176,7 +176,7 @@
 							{
 								"statement": "در جمله‌ی شرطی نوع اول، فعل بعد از if همیشه به شکل حال ساده است.",
 								"answer": true,
-								"hint_fa": "درسته! هرگز بعد از if از will استفاده نمی‌کنیم.",
+								"hint_fa": "آیا بعد از if از will استفاده می‌کنیم؟",
 								"explanation_fa": "درسته! هرگز بعد از if از will استفاده نمی‌کنیم."
 							}
 						]
@@ -189,9 +189,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "در جمله‌ی نتیجه (بخش اصلی جمله)، از will + فعل ساده استفاده می‌کنیم.",
+								"statement": "در جمله‌ی نتیجه یعنی بخش اصلی جمله، از will + base verb استفاده می‌کنیم.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: you will pass the exams.",
+								"hint_fa": "جمله‌ی نتیجه با چه ساختاری ساخته می‌شود؟",
 								"explanation_fa": "درسته! مثل: you will pass the exams."
 							}
 						]
@@ -204,7 +204,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"If it rains, I will stay home.",
 									"If it will rain, I will stay home.",
@@ -212,7 +212,7 @@
 									"If it rain, I will stay home."
 								],
 								"correct": 0,
-								"hint_fa": "بعد از if حال ساده و در جمله‌ی نتیجه will می‌آید.",
+								"hint_fa": "به زمان فعل بعد از if و در جمله‌ی نتیجه دقت کن.",
 								"explanation_fa": "بعد از if حال ساده و در جمله‌ی نتیجه will می‌آید."
 							}
 						]
@@ -252,9 +252,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "وقتی جمله‌ی نتیجه اول بیاید، ویرگول لازم است؛ مثل «I'll phone you if I have time».",
+								"statement": "وقتی جمله‌ی نتیجه اول بیاید، ویرگول لازم است؛ مثل: I'll phone you if I have time.",
 								"answer": false,
-								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، آیا کاما لازم است؟",
 								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
 							}
 						]
@@ -271,7 +271,7 @@
 								"answers": [
 									"answers"
 								],
-								"hint_fa": "بعد از if فعل حال ساده می‌آید: answers.",
+								"hint_fa": "بعد از if فعل حال ساده می‌آید؛ به فاعل سوم‌شخص دقت کن.",
 								"explanation_fa": "بعد از if فعل حال ساده می‌آید: answers."
 							}
 						]
@@ -285,11 +285,11 @@
 						"cards": [
 							{
 								"en": "If you study hard, you will pass the exams.",
-								"fa": "(با کاما)"
+								"fa": "با کاما"
 							},
 							{
 								"en": "You will pass the exams if you study hard.",
-								"fa": "(بدون کاما)"
+								"fa": "بدون کاما"
 							}
 						],
 						"highlight_word": "comma"
@@ -302,9 +302,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «If you study hard you will pass the exams» بعد از «hard» به ویرگول نیاز دارد.",
+								"statement": "جمله‌ی If you study hard you will pass the exams بعد از hard به ویرگول نیاز دارد.",
 								"answer": true,
-								"hint_fa": "چون جمله با if شروع شده، بعد از قسمت شرط کاما لازم است.",
+								"hint_fa": "وقتی جمله با if شروع می‌شود، بعد از قسمت شرط چه علامتی می‌آید؟",
 								"explanation_fa": "چون جمله با if شروع شده، بعد از قسمت شرط کاما لازم است."
 							}
 						]
@@ -317,13 +317,13 @@
 						"instruction_fa": "کدام جمله نیازی به کاما ندارد؟",
 						"questions": [
 							{
-								"question": "کدام جمله نیازی به کاما ندارد؟",
+								"question": "",
 								"options": [
 									"If it rains, we will stay home.",
 									"We will stay home if it rains."
 								],
 								"correct": 1,
-								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+								"hint_fa": "به ترتیب دو بخش جمله دقت کن.",
 								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
 							}
 						]
@@ -336,9 +336,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "در جمله‌ی «You will hurt yourself, if you jump into the river» استفاده از ویرگول درست است.",
+								"statement": "در جمله‌ی You will hurt yourself, if you jump into the river استفاده از ویرگول درست است.",
 								"answer": false,
-								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+								"hint_fa": "کدام بخش جمله اول آمده است؟",
 								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
 							}
 						]
@@ -355,7 +355,7 @@
 								"answers": [
 									"come"
 								],
-								"hint_fa": "بعد از if فعل حال ساده می‌آید: come.",
+								"hint_fa": "بعد از if کدام زمان به کار می‌رود؟",
 								"explanation_fa": "بعد از if فعل حال ساده می‌آید: come."
 							}
 						]
@@ -368,9 +368,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "هر دو ترتیب (اول جمله‌ی شرط یا اول جمله‌ی نتیجه) معنای یکسانی دارند.",
+								"statement": "هر دو ترتیب یعنی اول جمله‌ی شرط یا اول جمله‌ی نتیجه معنای یکسانی دارند.",
 								"answer": true,
-								"hint_fa": "درسته! فقط ترتیب و کاما فرق می‌کند، نه معنا.",
+								"hint_fa": "آیا جابه‌جا کردن دو بخش جمله معنا را عوض می‌کند؟",
 								"explanation_fa": "درسته! فقط ترتیب و کاما فرق می‌کند، نه معنا."
 							}
 						]
@@ -385,7 +385,7 @@
 							{
 								"statement": "جمله‌ی شرطی می‌تواند با if شروع شود یا با جمله‌ی نتیجه.",
 								"answer": true,
-								"hint_fa": "درسته! هر دو ترتیب درست است.",
+								"hint_fa": "آیا هر دو ترتیب امکان‌پذیر است؟",
 								"explanation_fa": "درسته! هر دو ترتیب درست است."
 							}
 						]
@@ -400,7 +400,7 @@
 							{
 								"statement": "وقتی جمله با if شروع می‌شود، بعد از آن کاما لازم است.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: If you study hard, you will pass.",
+								"hint_fa": "به جای کاما در جمله‌های شرطی فکر کن.",
 								"explanation_fa": "درسته! مثل: If you study hard, you will pass."
 							}
 						]
@@ -413,7 +413,7 @@
 						"instruction_fa": "کدام جمله از نظر نگارشی درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله از نظر نگارشی درست است؟",
+								"question": "",
 								"options": [
 									"You will pass the exams, if you study hard.",
 									"You will pass the exams if you study hard.",
@@ -421,7 +421,7 @@
 									"If, you study hard, you will pass the exams."
 								],
 								"correct": 1,
-								"hint_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست.",
+								"hint_fa": "به جای کاما در دو حالت مختلف جمله‌ی شرطی دقت کن.",
 								"explanation_fa": "وقتی جمله‌ی نتیجه اول بیاید، کاما لازم نیست."
 							}
 						]
@@ -461,7 +461,7 @@
 						"instruction_fa": "کدام کلمه یک احساس را نشان می‌دهد؟",
 						"questions": [
 							{
-								"question": "کدام کلمه یک احساس را نشان می‌دهد؟",
+								"question": "",
 								"options": [
 									"bore",
 									"bored",
@@ -469,7 +469,7 @@
 									"to bore"
 								],
 								"correct": 1,
-								"hint_fa": "bored شکل صفتی احساس خسته‌بودن است.",
+								"hint_fa": "کدام شکل، حالت یک شخص را توصیف می‌کند؟",
 								"explanation_fa": "bored شکل صفتی احساس خسته‌بودن است."
 							}
 						]
@@ -486,7 +486,7 @@
 								"answers": [
 									"confused"
 								],
-								"hint_fa": "confused شکل صفتی احساس گیج‌بودن است.",
+								"hint_fa": "برای توصیف احساس گیج‌بودن از کدام شکل صفتی استفاده می‌کنیم؟",
 								"explanation_fa": "confused شکل صفتی احساس گیج‌بودن است."
 							}
 						]
@@ -514,10 +514,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: He often gets ___ about his weight.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: He often gets ___ about his weight.",
+								"question": "He often gets ___ about his weight.",
 								"options": [
 									"depress",
 									"depressed",
@@ -525,7 +525,7 @@
 									"to depress"
 								],
 								"correct": 1,
-								"hint_fa": "get + صفت احساسی: gets depressed.",
+								"hint_fa": "بعد از get کدام شکل، حالت یک شخص را توصیف می‌کند؟",
 								"explanation_fa": "get + صفت احساسی: gets depressed."
 							}
 						]
@@ -538,9 +538,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«surprised» می‌تواند احساس یک شخص را توصیف کند.",
+								"statement": "کلمه‌ی surprised می‌تواند احساس یک شخص را توصیف کند.",
 								"answer": true,
-								"hint_fa": "درسته! surprised یعنی احساس تعجب.",
+								"hint_fa": "surprised چه نوع احساسی را نشان می‌دهد؟",
 								"explanation_fa": "درسته! surprised یعنی احساس تعجب."
 							}
 						]
@@ -550,10 +550,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (frighten): I was ___ to death.",
+						"instruction_fa": "جای خالی را کامل کن (frighten)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (frighten): I was ___ to death.",
+								"question": "I was ___ to death.",
 								"options": [
 									"frighten",
 									"frightened",
@@ -561,7 +561,7 @@
 									"to frighten"
 								],
 								"correct": 1,
-								"hint_fa": "frightened شکل صفتی احساس ترس است.",
+								"hint_fa": "برای توصیف احساس ترس یک شخص از کدام شکل استفاده می‌کنیم؟",
 								"explanation_fa": "frightened شکل صفتی احساس ترس است."
 							}
 						]
@@ -578,7 +578,7 @@
 								"answers": [
 									"surprised"
 								],
-								"hint_fa": "surprised شکل صفتی احساس تعجب است.",
+								"hint_fa": "برای توصیف احساس تعجب از کدام شکل صفتی استفاده می‌کنیم؟",
 								"explanation_fa": "surprised شکل صفتی احساس تعجب است."
 							}
 						]
@@ -591,9 +591,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «I'm tired of watching television» یک احساس را نشان می‌دهد.",
+								"statement": "جمله‌ی I'm tired of watching television یک احساس را نشان می‌دهد.",
 								"answer": true,
-								"hint_fa": "درسته! tired احساس خستگی را نشان می‌دهد.",
+								"hint_fa": "tired چه نوع احساسی را نشان می‌دهد؟",
 								"explanation_fa": "درسته! tired احساس خستگی را نشان می‌دهد."
 							}
 						]
@@ -608,7 +608,7 @@
 							{
 								"statement": "بسیاری از صفت‌های احساسی از قسمت سوم فعل ساخته می‌شوند.",
 								"answer": true,
-								"hint_fa": "درسته! مثل bored، excited، confused.",
+								"hint_fa": "به مثال‌هایی مثل bored، excited، confused فکر کن.",
 								"explanation_fa": "درسته! مثل bored، excited، confused."
 							}
 						]
@@ -623,7 +623,7 @@
 							{
 								"statement": "این صفت‌ها معمولاً بعد از افعال be یا get می‌آیند.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: I am bored. یا He gets depressed.",
+								"hint_fa": "این صفت‌ها بعد از چه افعالی می‌آیند؟",
 								"explanation_fa": "درسته! مثل: I am bored. یا He gets depressed."
 							}
 						]
@@ -636,7 +636,7 @@
 						"instruction_fa": "کدام گزینه یک صفت احساسی درست است؟",
 						"questions": [
 							{
-								"question": "کدام گزینه یک صفت احساسی درست است؟",
+								"question": "",
 								"options": [
 									"excite",
 									"excited",
@@ -644,7 +644,7 @@
 									"to excite"
 								],
 								"correct": 1,
-								"hint_fa": "excited شکل صفتی احساس هیجان‌زدگی است.",
+								"hint_fa": "کدام شکل، حالت یک شخص را توصیف می‌کند؟",
 								"explanation_fa": "excited شکل صفتی احساس هیجان‌زدگی است."
 							}
 						]
@@ -714,7 +714,7 @@
 								"answers": [
 									"in"
 								],
-								"hint_fa": "interested همیشه با in می‌آید.",
+								"hint_fa": "interested با کدام حرف اضافه می‌آید؟",
 								"explanation_fa": "interested همیشه با in می‌آید."
 							}
 						]
@@ -722,9 +722,9 @@
 					{
 						"id": "u4_p4",
 						"type": "learn",
-						"title_fa": "چند حرف اضافه‌ی دیگر: about, to, that",
+						"title_fa": "چند حرف اضافه‌ی دیگر: about، to، that",
 						"title_en": "",
-						"explanation": "برخی صفت‌های احساسی با about، to یا حرف ربط that می‌آیند: depressed about، frightened to (death)، excited that.",
+						"explanation": "برخی صفت‌های احساسی با about، to یا حرف ربط that می‌آیند: depressed about، frightened to death، excited that.",
 						"cards": [
 							{
 								"en": "He often gets depressed about his weight.",
@@ -749,7 +749,7 @@
 								"answers": [
 									"about"
 								],
-								"hint_fa": "depressed معمولاً با about می‌آید.",
+								"hint_fa": "depressed با کدام حرف اضافه می‌آید؟",
 								"explanation_fa": "depressed معمولاً با about می‌آید."
 							}
 						]
@@ -759,10 +759,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: I'm so excited ___ we're going to Yazd.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: I'm so excited ___ we're going to Yazd.",
+								"question": "I'm so excited ___ we're going to Yazd.",
 								"options": [
 									"in",
 									"of",
@@ -770,7 +770,7 @@
 									"at"
 								],
 								"correct": 2,
-								"hint_fa": "excited می‌تواند با حرف ربط that بیاید.",
+								"hint_fa": "وقتی بعد از excited یک جمله‌ی کامل می‌آید، از چه کلمه‌ای استفاده می‌کنیم؟",
 								"explanation_fa": "excited می‌تواند با حرف ربط that بیاید."
 							}
 						]
@@ -787,7 +787,7 @@
 								"answers": [
 									"with"
 								],
-								"hint_fa": "bored معمولاً با with می‌آید.",
+								"hint_fa": "bored با کدام حرف اضافه می‌آید؟",
 								"explanation_fa": "bored معمولاً با with می‌آید."
 							}
 						]
@@ -797,10 +797,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: They were greatly surprised ___ the news.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: They were greatly surprised ___ the news.",
+								"question": "They were greatly surprised ___ the news.",
 								"options": [
 									"in",
 									"of",
@@ -808,7 +808,7 @@
 									"that"
 								],
 								"correct": 2,
-								"hint_fa": "surprised معمولاً با at می‌آید.",
+								"hint_fa": "surprised با کدام حرف اضافه می‌آید؟",
 								"explanation_fa": "surprised معمولاً با at می‌آید."
 							}
 						]
@@ -821,9 +821,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«interested» معمولاً با «in» ادامه پیدا می‌کند.",
+								"statement": "کلمه‌ی interested معمولاً با in ادامه پیدا می‌کند.",
 								"answer": true,
-								"hint_fa": "درسته! interested in است.",
+								"hint_fa": "interested با کدام حرف اضافه می‌آید؟",
 								"explanation_fa": "درسته! interested in است."
 							}
 						]
@@ -838,7 +838,7 @@
 							{
 								"statement": "هر صفت احساسی حرف اضافه‌ی خاص خودش را دارد.",
 								"answer": true,
-								"hint_fa": "درسته! باید حرف اضافه‌ی هر صفت را جداگانه یاد بگیریم.",
+								"hint_fa": "آیا همه‌ی صفت‌های احساسی با یک حرف اضافه می‌آیند؟",
 								"explanation_fa": "درسته! باید حرف اضافه‌ی هر صفت را جداگانه یاد بگیریم."
 							}
 						]
@@ -848,10 +848,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "حرف اضافه‌ی مناسب بعد از 'interested' کدام است؟",
+						"instruction_fa": "حرف اضافه‌ی مناسب بعد از interested کدام است؟",
 						"questions": [
 							{
-								"question": "حرف اضافه‌ی مناسب بعد از 'interested' کدام است؟",
+								"question": "",
 								"options": [
 									"at",
 									"in",
@@ -859,8 +859,8 @@
 									"with"
 								],
 								"correct": 1,
-								"hint_fa": "interested in",
-								"explanation_fa": "interested in"
+								"hint_fa": "به ترکیب ثابت interested با حرف اضافه فکر کن.",
+								"explanation_fa": "interested in."
 							}
 						]
 					},
@@ -869,10 +869,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "حرف اضافه‌ی مناسب بعد از 'tired' کدام است؟",
+						"instruction_fa": "حرف اضافه‌ی مناسب بعد از tired کدام است؟",
 						"questions": [
 							{
-								"question": "حرف اضافه‌ی مناسب بعد از 'tired' کدام است؟",
+								"question": "",
 								"options": [
 									"of",
 									"at",
@@ -880,8 +880,8 @@
 									"about"
 								],
 								"correct": 0,
-								"hint_fa": "tired of",
-								"explanation_fa": "tired of"
+								"hint_fa": "به ترکیب ثابت tired با حرف اضافه فکر کن.",
+								"explanation_fa": "tired of."
 							}
 						]
 					}
@@ -899,7 +899,7 @@
 						"type": "learn",
 						"title_fa": "مصدر با to چیست؟",
 						"title_en": "",
-						"explanation": "مصدر با to شکل 'to + فعل ساده' است، مثل to study. می‌تواند به‌عنوان مفعول بعد از برخی افعال بیاید.",
+						"explanation": "مصدر با to شکل to + base verb است، مثل to study. می‌تواند به‌عنوان مفعول بعد از برخی افعال بیاید.",
 						"cards": [
 							{
 								"en": "I like to watch this movie.",
@@ -917,10 +917,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (watch): I like ___ this movie.",
+						"instruction_fa": "جای خالی را کامل کن (watch)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (watch): I like ___ this movie.",
+								"question": "I like ___ this movie.",
 								"options": [
 									"watch",
 									"watching",
@@ -928,7 +928,7 @@
 									"watched"
 								],
 								"correct": 2,
-								"hint_fa": "بعد از like می‌توان از مصدر با to استفاده کرد: to watch.",
+								"hint_fa": "بعد از like می‌توان از چه ساختاری استفاده کرد؟",
 								"explanation_fa": "بعد از like می‌توان از مصدر با to استفاده کرد: to watch."
 							}
 						]
@@ -945,7 +945,7 @@
 								"answers": [
 									"to buy"
 								],
-								"hint_fa": "بعد از want از مصدر با to استفاده می‌کنیم: to buy.",
+								"hint_fa": "بعد از want کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از want از مصدر با to استفاده می‌کنیم: to buy."
 							}
 						]
@@ -969,10 +969,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (learn): I have decided ___ Spanish.",
+						"instruction_fa": "جای خالی را کامل کن (learn)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (learn): I have decided ___ Spanish.",
+								"question": "I have decided ___ Spanish.",
 								"options": [
 									"learn",
 									"learning",
@@ -980,7 +980,7 @@
 									"learned"
 								],
 								"correct": 2,
-								"hint_fa": "بعد از decide از مصدر با to استفاده می‌کنیم: to learn.",
+								"hint_fa": "بعد از decide کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از decide از مصدر با to استفاده می‌کنیم: to learn."
 							}
 						]
@@ -997,7 +997,7 @@
 								"answers": [
 									"to turn off"
 								],
-								"hint_fa": "بعد از remember از مصدر با to استفاده می‌کنیم.",
+								"hint_fa": "بعد از remember کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از remember از مصدر با to استفاده می‌کنیم."
 							}
 						]
@@ -1007,10 +1007,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (do): I have decided ___ my homework first.",
+						"instruction_fa": "جای خالی را کامل کن (do)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (do): I have decided ___ my homework first.",
+								"question": "I have decided ___ my homework first.",
 								"options": [
 									"do",
 									"doing",
@@ -1018,7 +1018,7 @@
 									"did"
 								],
 								"correct": 2,
-								"hint_fa": "بعد از decide مصدر با to می‌آید.",
+								"hint_fa": "بعد از decide کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از decide مصدر با to می‌آید."
 							}
 						]
@@ -1035,7 +1035,7 @@
 								"answers": [
 									"to study"
 								],
-								"hint_fa": "بعد از promise از مصدر با to استفاده می‌کنیم.",
+								"hint_fa": "بعد از promise کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از promise از مصدر با to استفاده می‌کنیم."
 							}
 						]
@@ -1048,10 +1048,10 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «I ran fast to catch the bus» از مصدر استفاده می‌کند.",
+								"statement": "جمله‌ی I ran fast to catch the bus از مصدر استفاده می‌کند.",
 								"answer": true,
-								"hint_fa": "درسته! 'to catch' مصدر با to است.",
-								"explanation_fa": "درسته! 'to catch' مصدر با to است."
+								"hint_fa": "کدام بخش جمله مصدر با to است؟",
+								"explanation_fa": "درسته! to catch مصدر با to است."
 							}
 						]
 					},
@@ -1063,9 +1063,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "مصدر با to شکل 'to + فعل ساده' است و می‌تواند مفعول جمله باشد.",
+								"statement": "مصدر با to شکل to + base verb است و می‌تواند مفعول جمله باشد.",
 								"answer": true,
-								"hint_fa": "درسته! مثل to watch، to buy.",
+								"hint_fa": "مصدر با to از چه اجزایی ساخته می‌شود؟",
 								"explanation_fa": "درسته! مثل to watch، to buy."
 							}
 						]
@@ -1080,8 +1080,8 @@
 							{
 								"statement": "بعد از افعالی مثل decide، want، promise معمولاً از مصدر با to استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! این افعال معمولاً با to + فعل ساده می‌آیند.",
-								"explanation_fa": "درسته! این افعال معمولاً با to + فعل ساده می‌آیند."
+								"hint_fa": "این افعال با چه ساختاری همراه هستند؟",
+								"explanation_fa": "درسته! این افعال معمولاً با to + base verb می‌آیند."
 							}
 						]
 					},
@@ -1093,7 +1093,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"She wanted buy a gift.",
 									"She wanted buying a gift.",
@@ -1101,7 +1101,7 @@
 									"She wanted bought a gift."
 								],
 								"correct": 2,
-								"hint_fa": "بعد از want از مصدر با to استفاده می‌کنیم.",
+								"hint_fa": "بعد از want کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از want از مصدر با to استفاده می‌کنیم."
 							}
 						]
@@ -1118,7 +1118,7 @@
 					{
 						"id": "u6_p1",
 						"type": "learn",
-						"title_fa": "not + to + فعل",
+						"title_fa": "ساختار not + to + فعل",
 						"title_en": "",
 						"explanation": "برای منفی کردن مصدر با to، کلمه‌ی not را قبل از to می‌آوریم.",
 						"cards": [
@@ -1145,7 +1145,7 @@
 								"answers": [
 									"not to"
 								],
-								"hint_fa": "ترتیب درست: not + to + فعل.",
+								"hint_fa": "برای منفی کردن مصدر، ترتیب کلمات چگونه است؟",
 								"explanation_fa": "ترتیب درست: not + to + فعل."
 							}
 						]
@@ -1155,10 +1155,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (not forget): My dad tries ___ the phone numbers.",
+						"instruction_fa": "جای خالی را کامل کن (not forget)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (not forget): My dad tries ___ the phone numbers.",
+								"question": "My dad tries ___ the phone numbers.",
 								"options": [
 									"not to forget",
 									"to not forget",
@@ -1166,7 +1166,7 @@
 									"not forgetting"
 								],
 								"correct": 0,
-								"hint_fa": "ترتیب درست: not + to + فعل.",
+								"hint_fa": "ترتیب not و to در مصدر منفی چگونه است؟",
 								"explanation_fa": "ترتیب درست: not + to + فعل."
 							}
 						]
@@ -1180,7 +1180,7 @@
 						"cards": [
 							{
 								"en": "I told the children not to make so much noise.",
-								"fa": "(نه: to not make)"
+								"fa": "نه to not make"
 							}
 						],
 						"highlight_word": "not to"
@@ -1193,9 +1193,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "ترتیب «to not make noise» درست است.",
+								"statement": "ترتیب to not make noise درست است.",
 								"answer": false,
-								"hint_fa": "ترتیب درست: not to make، نه to not make.",
+								"hint_fa": "not قبل از to می‌آید یا بعد از آن؟",
 								"explanation_fa": "ترتیب درست: not to make، نه to not make."
 							}
 						]
@@ -1212,7 +1212,7 @@
 								"answers": [
 									"not to"
 								],
-								"hint_fa": "ترتیب درست: not + to + فعل.",
+								"hint_fa": "ترتیب not و to در مصدر منفی چگونه است؟",
 								"explanation_fa": "ترتیب درست: not + to + فعل."
 							}
 						]
@@ -1222,17 +1222,17 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (not be): She asked me ___ late.",
+						"instruction_fa": "جای خالی را کامل کن (not be)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (not be): She asked me ___ late.",
+								"question": "She asked me ___ late.",
 								"options": [
 									"not to be",
 									"to not be",
 									"be not to"
 								],
 								"correct": 0,
-								"hint_fa": "ترتیب درست: not to be.",
+								"hint_fa": "ترتیب not و to در مصدر منفی چگونه است؟",
 								"explanation_fa": "ترتیب درست: not to be."
 							}
 						]
@@ -1249,7 +1249,7 @@
 								"answers": [
 									"not to"
 								],
-								"hint_fa": "ترتیب درست: not + to + فعل.",
+								"hint_fa": "ترتیب not و to در مصدر منفی چگونه است؟",
 								"explanation_fa": "ترتیب درست: not + to + فعل."
 							}
 						]
@@ -1262,9 +1262,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "در مصدر منفی، «not to» همیشه قبل از شکل ساده‌ی فعل می‌آید.",
+								"statement": "در مصدر منفی، not to همیشه قبل از شکل ساده‌ی فعل می‌آید.",
 								"answer": true,
-								"hint_fa": "درسته! ترتیب همیشه not to + فعل است.",
+								"hint_fa": "ترتیب not to و فعل چگونه است؟",
 								"explanation_fa": "درسته! ترتیب همیشه not to + فعل است."
 							}
 						]
@@ -1279,7 +1279,7 @@
 							{
 								"statement": "برای منفی کردن مصدر با to، not را قبل از to می‌آوریم.",
 								"answer": true,
-								"hint_fa": "درسته! مثل not to make.",
+								"hint_fa": "not کجای مصدر منفی قرار می‌گیرد؟",
 								"explanation_fa": "درسته! مثل not to make."
 							}
 						]
@@ -1292,9 +1292,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "می‌توان گفت 'to not go' به‌جای 'not to go'.",
+								"statement": "می‌توان گفت to not go به‌جای not to go.",
 								"answer": false,
-								"hint_fa": "ترتیب درست همیشه not to است، نه to not.",
+								"hint_fa": "ترتیب درست not و to چگونه است؟",
 								"explanation_fa": "ترتیب درست همیشه not to است، نه to not."
 							}
 						]
@@ -1307,7 +1307,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"I told him to not worry.",
 									"I told him not to worry.",
@@ -1315,7 +1315,7 @@
 									"I told him not worry to."
 								],
 								"correct": 1,
-								"hint_fa": "ترتیب درست: not to worry.",
+								"hint_fa": "ترتیب not و to در مصدر منفی چگونه است؟",
 								"explanation_fa": "ترتیب درست: not to worry."
 							}
 						]
@@ -1352,10 +1352,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (see): She became happy ___ her classmate.",
+						"instruction_fa": "جای خالی را کامل کن (see)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (see): She became happy ___ her classmate.",
+								"question": "She became happy ___ her classmate.",
 								"options": [
 									"see",
 									"seeing",
@@ -1363,7 +1363,7 @@
 									"saw"
 								],
 								"correct": 2,
-								"hint_fa": "بعد از happy از مصدر با to استفاده می‌کنیم: to see.",
+								"hint_fa": "بعد از صفت happy کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از happy از مصدر با to استفاده می‌کنیم: to see."
 							}
 						]
@@ -1380,7 +1380,7 @@
 								"answers": [
 									"to leave"
 								],
-								"hint_fa": "بعد از sad از مصدر با to استفاده می‌کنیم.",
+								"hint_fa": "بعد از صفت sad کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از sad از مصدر با to استفاده می‌کنیم."
 							}
 						]
@@ -1408,10 +1408,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (have): We are lucky ___ such a good teacher.",
+						"instruction_fa": "جای خالی را کامل کن (have)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (have): We are lucky ___ such a good teacher.",
+								"question": "We are lucky ___ such a good teacher.",
 								"options": [
 									"have",
 									"having",
@@ -1419,7 +1419,7 @@
 									"had"
 								],
 								"correct": 2,
-								"hint_fa": "بعد از lucky از مصدر با to استفاده می‌کنیم.",
+								"hint_fa": "بعد از صفت lucky کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از lucky از مصدر با to استفاده می‌کنیم."
 							}
 						]
@@ -1432,10 +1432,10 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «I was amazed to hear the news» بعد از صفت از مصدر استفاده می‌کند.",
+								"statement": "جمله‌ی I was amazed to hear the news بعد از صفت از مصدر استفاده می‌کند.",
 								"answer": true,
-								"hint_fa": "درسته! 'to hear' مصدر با to بعد از صفت amazed است.",
-								"explanation_fa": "درسته! 'to hear' مصدر با to بعد از صفت amazed است."
+								"hint_fa": "بعد از صفت amazed چه ساختاری می‌آید؟",
+								"explanation_fa": "درسته! to hear مصدر با to بعد از صفت amazed است."
 							}
 						]
 					},
@@ -1444,10 +1444,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (bother): I'm sorry ___ you.",
+						"instruction_fa": "جای خالی را کامل کن (bother)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (bother): I'm sorry ___ you.",
+								"question": "I'm sorry ___ you.",
 								"options": [
 									"bother",
 									"bothering",
@@ -1455,7 +1455,7 @@
 									"bothered"
 								],
 								"correct": 2,
-								"hint_fa": "بعد از sorry از مصدر با to استفاده می‌کنیم.",
+								"hint_fa": "بعد از صفت sorry کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از sorry از مصدر با to استفاده می‌کنیم."
 							}
 						]
@@ -1472,7 +1472,7 @@
 								"answers": [
 									"to see"
 								],
-								"hint_fa": "بعد از shocked از مصدر با to استفاده می‌کنیم.",
+								"hint_fa": "بعد از صفت shocked کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از shocked از مصدر با to استفاده می‌کنیم."
 							}
 						]
@@ -1485,9 +1485,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "صفت‌هایی مثل «happy»، «sad» و «glad» می‌توانند با مصدر ادامه پیدا کنند.",
+								"statement": "صفت‌هایی مثل happy، sad و glad می‌توانند با مصدر ادامه پیدا کنند.",
 								"answer": true,
-								"hint_fa": "درسته! مثل happy to see، sad to leave.",
+								"hint_fa": "این صفت‌ها با چه ساختاری همراه می‌شوند؟",
 								"explanation_fa": "درسته! مثل happy to see، sad to leave."
 							}
 						]
@@ -1502,7 +1502,7 @@
 							{
 								"statement": "بعد از صفت‌هایی مثل happy، sad، glad، surprised از مصدر با to استفاده می‌کنیم.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: happy to see.",
+								"hint_fa": "این صفت‌ها با چه ساختاری همراه می‌شوند؟",
 								"explanation_fa": "درسته! مثل: happy to see."
 							}
 						]
@@ -1515,7 +1515,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"She was happy see her friend.",
 									"She was happy seeing her friend.",
@@ -1523,7 +1523,7 @@
 									"She was happy saw her friend."
 								],
 								"correct": 2,
-								"hint_fa": "بعد از happy از مصدر با to استفاده می‌کنیم.",
+								"hint_fa": "بعد از صفت happy کدام ساختار می‌آید؟",
 								"explanation_fa": "بعد از happy از مصدر با to استفاده می‌کنیم."
 							}
 						]
@@ -1536,9 +1536,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "صفت 'lucky' هم می‌تواند با مصدر با to بیاید.",
+								"statement": "صفت lucky هم می‌تواند با مصدر با to بیاید.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: lucky to have.",
+								"hint_fa": "lucky با چه ساختاری همراه می‌شود؟",
 								"explanation_fa": "درسته! مثل: lucky to have."
 							}
 						]

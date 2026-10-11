@@ -1,35 +1,75 @@
-[gd_scene format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/word_game.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
 [ext_resource type="StyleBox" path="res://scenes/shared/HeaderBar.tres" id="3_header"]
 [ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="Shader" path="res://scenes/shared/GradientCard.gdshader" id="5_shader"]
+[ext_resource type="Script" path="res://ui/widgets/GradientCardRect.gd" id="6_cardrect"]
 
 [sub_resource type="LabelSettings" id="TitleSettings"]
 font = ExtResource("4_font")
 font_size = 55
 font_color = Color(1, 1, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="BtnWordOfDay"]
-bg_color = Color(0.9607843, 0.6196079, 0.04313726, 1)
-corner_radius_top_left = 28
-corner_radius_top_right = 28
-corner_radius_bottom_right = 28
-corner_radius_bottom_left = 28
+[sub_resource type="LabelSettings" id="ModeLabelSettings"]
+font = ExtResource("4_font")
+font_size = 58
+font_color = Color(1, 1, 1, 1)
+outline_size = 4
+outline_color = Color(0.08, 0.12, 0.2, 0.85)
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="BtnMeaning"]
-bg_color = Color(0.2313726, 0.509804, 0.9647059, 1)
-corner_radius_top_left = 28
-corner_radius_top_right = 28
-corner_radius_bottom_right = 28
-corner_radius_bottom_left = 28
+[sub_resource type="ShaderMaterial" id="MatAmber"]
+render_priority = 0
+shader = ExtResource("5_shader")
+shader_parameter/color_top = Color(1, 0.8, 0.2, 1)
+shader_parameter/color_bottom = Color(0.97, 0.57, 0.11, 1)
+shader_parameter/rect_size = Vector2(976, 296)
+shader_parameter/corner_radius = 64.0
+shader_parameter/inset = 28.0
+shader_parameter/shadow_blur = 22.0
+shader_parameter/shadow_offset = 10.0
+shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
 
-[sub_resource type="StyleBoxFlat" id="BtnSpelling"]
-bg_color = Color(0.1333333, 0.772549, 0.3686275, 1)
-corner_radius_top_left = 28
-corner_radius_top_right = 28
-corner_radius_bottom_right = 28
-corner_radius_bottom_left = 28
+[sub_resource type="ShaderMaterial" id="MatBlue"]
+render_priority = 0
+shader = ExtResource("5_shader")
+shader_parameter/color_top = Color(0.3, 0.56, 0.97, 1)
+shader_parameter/color_bottom = Color(0.09, 0.4, 0.95, 1)
+shader_parameter/rect_size = Vector2(976, 296)
+shader_parameter/corner_radius = 64.0
+shader_parameter/inset = 28.0
+shader_parameter/shadow_blur = 22.0
+shader_parameter/shadow_offset = 10.0
+shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
+
+[sub_resource type="ShaderMaterial" id="MatGreen"]
+render_priority = 0
+shader = ExtResource("5_shader")
+shader_parameter/color_top = Color(0.31, 0.83, 0.5, 1)
+shader_parameter/color_bottom = Color(0.09, 0.74, 0.38, 1)
+shader_parameter/rect_size = Vector2(976, 296)
+shader_parameter/corner_radius = 64.0
+shader_parameter/inset = 28.0
+shader_parameter/shadow_blur = 22.0
+shader_parameter/shadow_offset = 10.0
+shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
+
+[sub_resource type="StyleBoxFlat" id="IconChip"]
+bg_color = Color(1, 1, 1, 0.18)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="ArrowBadge"]
+bg_color = Color(0, 0, 0, 0.14)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
 
 [node name="WordGame" type="Control"]
 layout_mode = 3
@@ -38,6 +78,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
 script = ExtResource("1_script")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -89,34 +130,219 @@ theme_override_constants/separation = 44
 [node name="WordOfDayButton" type="Button" parent="Content"]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
+flat = true
+focus_mode = 0
+
+[node name="Gradient" type="ColorRect" parent="Content/WordOfDayButton"]
+material = SubResource("MatAmber")
+script = ExtResource("6_cardrect")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Content/WordOfDayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="Content/WordOfDayButton/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Content/WordOfDayButton/Margin/Row"]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("IconChip")
+
+[node name="Emoji" type="Label" parent="Content/WordOfDayButton/Margin/Row/IconChip"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 92
+text = "📅"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Content/WordOfDayButton/Margin/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 64
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("BtnWordOfDay")
-theme_override_styles/hover = SubResource("BtnWordOfDay")
-theme_override_styles/pressed = SubResource("BtnWordOfDay")
+label_settings = SubResource("ModeLabelSettings")
 text = "کلمه روز"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowBadge" type="PanelContainer" parent="Content/WordOfDayButton/Margin/Row"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("ArrowBadge")
+
+[node name="Chevron" type="Label" parent="Content/WordOfDayButton/Margin/Row/ArrowBadge"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "❯"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MeaningButton" type="Button" parent="Content"]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
+flat = true
+focus_mode = 0
+
+[node name="Gradient" type="ColorRect" parent="Content/MeaningButton"]
+material = SubResource("MatBlue")
+script = ExtResource("6_cardrect")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Content/MeaningButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="Content/MeaningButton/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Content/MeaningButton/Margin/Row"]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("IconChip")
+
+[node name="Emoji" type="Label" parent="Content/MeaningButton/Margin/Row/IconChip"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 92
+text = "📋"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Content/MeaningButton/Margin/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 64
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("BtnMeaning")
-theme_override_styles/hover = SubResource("BtnMeaning")
-theme_override_styles/pressed = SubResource("BtnMeaning")
+label_settings = SubResource("ModeLabelSettings")
 text = "بازی معنی"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowBadge" type="PanelContainer" parent="Content/MeaningButton/Margin/Row"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("ArrowBadge")
+
+[node name="Chevron" type="Label" parent="Content/MeaningButton/Margin/Row/ArrowBadge"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "❯"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SpellingButton" type="Button" parent="Content"]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 64
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("BtnSpelling")
-theme_override_styles/hover = SubResource("BtnSpelling")
-theme_override_styles/pressed = SubResource("BtnSpelling")
-text = "بازی املا"
+flat = true
+focus_mode = 0
 
+[node name="Gradient" type="ColorRect" parent="Content/SpellingButton"]
+material = SubResource("MatGreen")
+script = ExtResource("6_cardrect")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Content/SpellingButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="Content/SpellingButton/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Content/SpellingButton/Margin/Row"]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("IconChip")
+
+[node name="Emoji" type="Label" parent="Content/SpellingButton/Margin/Row/IconChip"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 92
+text = "🔤"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Content/SpellingButton/Margin/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_font")
+label_settings = SubResource("ModeLabelSettings")
+text = "بازی املا"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowBadge" type="PanelContainer" parent="Content/SpellingButton/Margin/Row"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("ArrowBadge")
+
+[node name="Chevron" type="Label" parent="Content/SpellingButton/Margin/Row/ArrowBadge"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "❯"
+horizontal_alignment = 1
+vertical_alignment = 1
 

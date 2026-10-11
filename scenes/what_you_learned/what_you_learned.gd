@@ -48,7 +48,9 @@ const AUDIO_PANEL_SCENE_PATH := "res://scenes/shared/AudioPanel.tscn"
 
 var _audio_panel: Node = null
 var _listen_audio_btn: Button = null
-var _listen_audio_path := ""
+var _listen_audio_path: String = ""
+var _audio_request_pending: bool = false
+var _audio_play_requested: bool = false
 
 var _transcript_label: PanelContainer
 var _transcript_btn: Button
@@ -90,6 +92,19 @@ func _ready() -> void:
 	page_view.add_page("listen", "گوش دادن", "🎧", _build_listen_page())
 	page_view.add_page("read", "خواندن", "📖", _build_read_page())
 	page_view.add_page("speak", "صحبت کردن", "🗣️", _build_speak_page())
+
+	# Load/download media for every lesson, matching the other lesson screens.
+	# The panel itself is created lazily on Play Audio, not during UI construction.
+	if not Content.lesson_ready.is_connected(_on_content_lesson_ready):
+		Content.lesson_ready.connect(_on_content_lesson_ready)
+	if not Content.manifest_ready.is_connected(_on_content_manifest_ready):
+		Content.manifest_ready.connect(_on_content_manifest_ready)
+	if not Content.is_lesson_ready(Global.current_book, Global.current_lesson):
+		_listen_audio_btn.disabled = false
+		_update_listen_audio_availability()
+		Content.ensure_lesson(Global.current_book, Global.current_lesson)
+	else:
+		_update_listen_audio_availability()
 
 	# Force backgrounds for PageView scroll areas.
 	_apply_dark_scroll_background(page_view)
@@ -181,13 +196,7 @@ func _build_listen_page() -> VBoxContainer:
 	play_btn.pressed.connect(_on_listen_audio_pressed)
 	audio_box.add_child(play_btn)
 	
-	# Sync the button label when the panel closes or the track ends.
-	var panel := _get_or_create_audio_panel()
-	if panel != null:
-		if not panel.audio_closed.is_connected(_on_listen_audio_closed):
-			panel.audio_closed.connect(_on_listen_audio_closed)
-		if not panel.audio_finished.is_connected(_on_listen_audio_closed):
-			panel.audio_finished.connect(_on_listen_audio_closed)
+	# AudioPanel is instantiated lazily when the play button is pressed.
 
 	_transcript_btn = _make_button("📜 Show Transcript", Color("#64748B"))
 	_transcript_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -487,54 +496,76 @@ func _on_android_back_pressed() -> void:
 # AUDIO PANEL HELPERS
 # ============================================================
 func _get_or_create_audio_panel() -> Node:
-	# Reuse our existing instance.
 	if _audio_panel != null and is_instance_valid(_audio_panel):
 		return _audio_panel
-	
-	# Reuse a panel already created by an ExerciseEngine.
-	var found := get_tree().get_first_node_in_group("audio_panel")
-	if found != null:
-		_audio_panel = found
-		return _audio_panel
-	
-	# Otherwise instantiate AudioPanel.tscn.
+
+	# Do not accidentally adopt an unrelated panel owned by another screen.
 	if not ResourceLoader.exists(AUDIO_PANEL_SCENE_PATH):
 		push_warning("WhatYouLearned: AudioPanel scene not found: " + AUDIO_PANEL_SCENE_PATH)
 		return null
-	
-	var scene := load(AUDIO_PANEL_SCENE_PATH) as PackedScene
+
+	var scene: PackedScene = load(AUDIO_PANEL_SCENE_PATH) as PackedScene
 	if scene == null:
 		return null
-	
+
 	var panel: Node = scene.instantiate()
-	# Add it to the root so it is never clipped and always on top.
 	get_tree().root.add_child(panel)
 	if panel is Control:
-		panel.set_anchors_preset(Control.PRESET_FULL_RECT)
-	# Start hidden. load_and_play() will show it.
-	panel.hide()
-	# Share it with the ExerciseEngine instances.
+		(panel as Control).set_anchors_preset(Control.PRESET_FULL_RECT)
 	panel.add_to_group("audio_panel")
 	_audio_panel = panel
-	return _audio_panel
+	page_view.add_swipe_blocker(panel as Control)
+	panel.audio_closed.connect(_on_listen_audio_closed)
+	panel.audio_finished.connect(_on_listen_audio_closed)
+	return panel
+
+
+func _update_listen_audio_availability() -> void:
+	if _listen_audio_btn == null or not is_instance_valid(_listen_audio_btn):
+		return
+	if _listen_audio_path != "" and Content.has_asset(_listen_audio_path):
+		_listen_audio_btn.disabled = false
+		_set_listen_button_idle()
+	else:
+		_listen_audio_btn.disabled = false
+		_listen_audio_btn.text = "▶  Play Audio"
+
+
+func _on_content_manifest_ready() -> void:
+	if not is_inside_tree():
+		return
+	Content.ensure_lesson(Global.current_book, Global.current_lesson)
+
+
+func _on_content_lesson_ready(book: int, lesson: int) -> void:
+	if book != Global.current_book or lesson != Global.current_lesson:
+		return
+	_audio_request_pending = false
+	_update_listen_audio_availability()
+	if _audio_play_requested and Content.has_asset(_listen_audio_path):
+		_audio_play_requested = false
+		_on_listen_audio_pressed()
 
 
 func _on_listen_audio_pressed() -> void:
-	# No available audio for this lesson -> show "No Audio" and stop.
-	if _listen_audio_path == "" or not Content.has_asset(_listen_audio_path):
+	if _listen_audio_path == "":
 		_set_listen_button_no_audio()
 		return
-	
-	var panel := _get_or_create_audio_panel()
+	if not Content.has_asset(_listen_audio_path):
+		_audio_play_requested = true
+		_audio_request_pending = true
+		_listen_audio_btn.text = "⏳ Downloading Audio..."
+		_listen_audio_btn.disabled = true
+		Content.ensure_lesson(Global.current_book, Global.current_lesson)
+		return
+
+	var panel: Node = _get_or_create_audio_panel()
 	if panel == null:
 		return
-	
 	if panel.is_playing():
-		# Audio is playing -> stop it and close the panel.
 		panel.stop_and_close()
 		_set_listen_button_idle()
 	else:
-		# Open the panel and start playback.
 		panel.load_and_play(_listen_audio_path)
 		_set_listen_button_playing()
 
@@ -558,6 +589,7 @@ func _set_listen_button_idle() -> void:
 
 func _on_listen_audio_closed() -> void:
 	# The panel was closed OR the track finished -> reset the button.
+	_audio_play_requested = false
 	_set_listen_button_idle()
 
 

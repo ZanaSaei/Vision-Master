@@ -142,7 +142,7 @@ func _build_ui() -> void:
 	_add_card("امتحانات نهایی", "تمرین سوالات امتحان", "🎓", COLOR_EXAM, _on_exam_pressed)
 
 	# 7. Word games card.
-	_add_card("بازی با کلمات", "کلمه روز · معنی · املا · شنیداری", "🔤", COLOR_WORD_GAMES, _on_word_games_pressed)
+	_add_card("بازی با کلمات", "کلمه روز · معنی · املا", "🔤", COLOR_WORD_GAMES, _on_word_games_pressed)
 
 	# Bottom breathing room.
 	var spacer := Control.new()

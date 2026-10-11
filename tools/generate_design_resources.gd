@@ -213,9 +213,8 @@ func _build_theme(dark: bool) -> void:
 	t.set_color("font_focus_color", "Button", _dt.button_text_color("default", dark))
 	t.set_color("font_disabled_color", "Button", _dt.button_text_color("disabled", dark))
 
-	# ── Panels ──────────────────────────────────────────────────
-	for ptype in ["Panel", "PanelContainer"]:
-		t.set_stylebox("panel", ptype, _sb("card", dark))
+	# Panel and PanelContainer deliberately have no global style here. Panels
+	# are authored individually in their scenes; ScrollContainer remains clear.
 	t.set_stylebox("panel", "ScrollContainer", load(STYLEBOX_DIR + "panel_transparent.tres"))
 
 	# ── Scrollbars ──────────────────────────────────────────────

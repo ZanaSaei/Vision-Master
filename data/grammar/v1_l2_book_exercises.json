@@ -1,114 +1,429 @@
 {
-	"book_exercises": {
-		"title_fa": "تمرینات کتاب",
-		"title_en": "Book Exercises",
-		"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
-		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
-		"sections": [
-			{
-				"type": "multiple_choice",
-				"exercise_id": "book_ex1",
-				"instruction": {
-					"en": "Circle the correct answer.",
-					"fa": "گزینهٔ درست را دور بزنید."
-				},
-				"items": [
-					{
-						"question": {
-							"en": "His new car is ___ than my car.",
-							"fa": "ماشین جدید او از ماشین من ___ است."
-						},
-						"options": [
-							{ "en": "faster", "fa": "سریع‌تر" },
-							{ "en": "the fastest", "fa": "سریع‌ترین" }
-						],
-						"answer": 0,
-						"explanation": {
-							"en": "Use 'faster' when comparing two things.",
-							"fa": "برای مقایسهٔ دو چیز از «faster» استفاده می‌کنیم."
-						}
-					},
-					{
-						"question": {
-							"en": "Russia is ___ country of the world.",
-							"fa": "روسیه ___ کشور جهان است."
-						},
-						"options": [
-							{ "en": "bigger", "fa": "بزرگ‌تر" },
-							{ "en": "the biggest", "fa": "بزرگ‌ترین" }
-						],
-						"answer": 1,
-						"explanation": {
-							"en": "Use 'the biggest' for comparing more than two things.",
-							"fa": "برای مقایسهٔ بیش از دو چیز از «the biggest» استفاده می‌کنیم."
-						}
-					}
-				]
+  "book_exercises": {
+	"title_fa": "تمرینات کتاب",
+	"title_en": "Book Exercises",
+	"subtitle_fa": "تمرین‌های این بخش را کامل کنید. هر تمرین دکمهٔ «بررسی پاسخ» خودش را دارد.",
+	"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
+	"sections": [
+	  {
+		"type": "multiple_choice",
+		"exercise_id": "book_ex1",
+		"instruction": {
+		  "en": "Circle the correct answer.",
+		  "fa": "گزینهٔ درست را دور بزنید."
+		},
+		"items": [
+		  {
+			"question": {
+			  "en": "His new car is ___ than my car.",
+			  "fa": "ماشین جدید او از ماشین من ___ است."
 			},
-			{
-				"type": "true_false",
-				"exercise_id": "book_ex2",
-				"instruction": {
-					"en": "True or False?",
-					"fa": "درست یا نادرست؟"
-				},
-				"items": [
-					{
-						"statement": {
-							"en": "Learning about endangered animals is not important.",
-							"fa": "یادگیری دربارهٔ حیوانات در خطر انقراض مهم نیست."
-						},
-						"answer": false,
-						"correction": {
-							"en": "Learning about endangered animals is important.",
-							"fa": "یادگیری دربارهٔ حیوانات در خطر انقراض مهم است."
-						}
-					},
-					{
-						"statement": {
-							"en": "You can do voluntary work in wildlife parks.",
-							"fa": "شما می‌توانید در پارک‌های حیات وحش کار داوطلبانه انجام دهید."
-						},
-						"answer": true,
-						"correction": {
-							"en": "You can do voluntary work in wildlife parks.",
-							"fa": "شما می‌توانید در پارک‌های حیات وحش کار داوطلبانه انجام دهید."
-						}
-					}
-				]
-			},
-			{
-				"type": "fill_blank",
-				"exercise_id": "book_ex3",
-				"instruction": {
-					"en": "Type the missing word.",
-					"fa": "کلمهٔ جاافتاده را بنویسید."
-				},
-				"items": [
-					{
-						"text": {
-							"en": "The whale is ___ (heavy) sea animal.",
-							"fa": "نهنگ ___ حیوان دریایی است."
-						},
-						"answer": ["the heaviest", "heaviest"],
-						"explanation": {
-							"en": "Superlative: the heaviest.",
-							"fa": "صفت عالی: the heaviest."
-						}
-					},
-					{
-						"text": {
-							"en": "She ___ (work) in a hospital every week.",
-							"fa": "او هر هفته در بیمارستان ___."
-						},
-						"answer": ["works"],
-						"explanation": {
-							"en": "Simple present with 'she': works.",
-							"fa": "حال ساده با «she»: works."
-						}
-					}
-				]
+			"options": [
+			  {
+				"en": "faster",
+				"fa": "سریع‌تر"
+			  },
+			  {
+				"en": "the fastest",
+				"fa": "سریع‌ترین"
+			  }
+			],
+			"answer": 0,
+			"explanation": {
+			  "en": "Use 'faster' when comparing two things.",
+			  "fa": "برای مقایسهٔ دو چیز از «faster» استفاده می‌کنیم."
 			}
+		  },
+		  {
+			"question": {
+			  "en": "Russia is ___ country of the world.",
+			  "fa": "روسیه ___ کشور جهان است."
+			},
+			"options": [
+			  {
+				"en": "bigger",
+				"fa": "بزرگ‌تر"
+			  },
+			  {
+				"en": "the biggest",
+				"fa": "بزرگ‌ترین"
+			  }
+			],
+			"answer": 1,
+			"explanation": {
+			  "en": "Use 'the biggest' for comparing more than two things.",
+			  "fa": "برای مقایسهٔ بیش از دو چیز از «the biggest» استفاده می‌کنیم."
+			}
+		  }
 		]
-	}
+	  },
+	  {
+		"type": "true_false",
+		"exercise_id": "book_ex2",
+		"instruction": {
+		  "en": "True or False?",
+		  "fa": "درست یا نادرست؟"
+		},
+		"items": [
+		  {
+			"statement": {
+			  "en": "Learning about endangered animals is not important.",
+			  "fa": "یادگیری دربارهٔ حیوانات در خطر انقراض مهم نیست."
+			},
+			"answer": false,
+			"correction": {
+			  "en": "Learning about endangered animals is important.",
+			  "fa": "یادگیری دربارهٔ حیوانات در خطر انقراض مهم است."
+			}
+		  },
+		  {
+			"statement": {
+			  "en": "You can do voluntary work in wildlife parks.",
+			  "fa": "شما می‌توانید در پارک‌های حیات وحش کار داوطلبانه انجام دهید."
+			},
+			"answer": true,
+			"correction": {
+			  "en": "You can do voluntary work in wildlife parks.",
+			  "fa": "شما می‌توانید در پارک‌های حیات وحش کار داوطلبانه انجام دهید."
+			}
+		  }
+		]
+	  },
+	  {
+		"type": "fill_blank",
+		"exercise_id": "book_ex3",
+		"instruction": {
+		  "en": "Type the missing word.",
+		  "fa": "کلمهٔ جاافتاده را بنویسید."
+		},
+		"items": [
+		  {
+			"text": {
+			  "en": "The whale is ___ (heavy) sea animal.",
+			  "fa": "نهنگ ___ حیوان دریایی است."
+			},
+			"answer": [
+			  "the heaviest",
+              "heaviest"
+			],
+			"explanation": {
+			  "en": "Superlative: the heaviest.",
+			  "fa": "صفت عالی: the heaviest."
+			}
+		  },
+		  {
+			"text": {
+			  "en": "She ___ (work) in a hospital every week.",
+			  "fa": "او هر هفته در بیمارستان ___."
+			},
+			"answer": [
+              "works"
+			],
+			"explanation": {
+			  "en": "Simple present with 'she': works.",
+			  "fa": "حال ساده با «she»: works."
+			}
+		  }
+		]
+	  },
+	  {
+		"type": "multiple_choice",
+		"exercise_id": "workbook_v1_l2_a_best_sentence",
+		"instruction": {
+		  "en": "Choose the best sentence in each pair.",
+		  "fa": "از هر جفت، بهترین جمله را انتخاب کنید."
+		},
+		"items": [
+		  {
+			"question": "Choose the sentence that correctly uses an adjective.",
+			"options": [
+			  "This is a modern car.",
+              "This is an old car."
+			],
+			"answer": 0
+		  },
+		  {
+			"question": "Choose the sentence that correctly expresses the given comparison.",
+			"options": [
+			  "Our house is the smallest of all.",
+              "Our house is as small as their houses."
+			],
+			"answer": 0
+		  },
+		  {
+			"question": "Choose the sentence that correctly expresses the given comparison.",
+			"options": [
+			  "David is taller than his father.",
+              "David is as tall as his father."
+			],
+			"answer": 0
+		  },
+		  {
+			"question": "Choose the sentence that correctly expresses the given comparison.",
+			"options": [
+			  "The blue pencil is longer than the yellow pencil.",
+              "The yellow pencil is as short as the blue pencil."
+			],
+			"answer": 0
+		  }
+		]
+	  },
+	  {
+		"type": "writing",
+		"exercise_id": "workbook_v1_l2_b_make_sentences",
+		"instruction": {
+		  "en": "Make sentences about people, things, or places you know using these adjectives.",
+		  "fa": "با این صفت‌ها دربارهٔ افراد، اشیا یا مکان‌هایی که می‌شناسی جمله بساز."
+		},
+		"items": [
+		  {
+			"id": "v1l2_b_brave",
+			"question": "brave",
+			"sample_answer": "My sister is brave."
+		  },
+		  {
+			"id": "v1l2_b_kind",
+			"question": "kind",
+			"sample_answer": "Our teacher is kind."
+		  },
+		  {
+			"id": "v1l2_b_large",
+			"question": "large",
+			"sample_answer": "The library is large."
+		  },
+		  {
+			"id": "v1l2_b_fast",
+			"question": "fast",
+			"sample_answer": "That train is fast."
+		  }
+		]
+	  },
+	  {
+		"type": "table_fill",
+		"exercise_id": "workbook_v1_l2_c_comparative_superlative_forms",
+		"instruction": {
+		  "en": "Write the comparative and superlative forms of each adjective.",
+		  "fa": "شکل تفضیلی و عالی هر صفت را بنویسید."
+		},
+		"columns": [
+		  "Adjective",
+		  "Comparative",
+          "Superlative"
+		],
+		"rows": [
+		  {
+			"cells": [
+			  {
+				"text": "angry",
+				"editable": false
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+                  "angrier"
+				]
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+				  "the angriest",
+                  "angriest"
+				]
+			  }
+			]
+		  },
+		  {
+			"cells": [
+			  {
+				"text": "strong",
+				"editable": false
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+                  "stronger"
+				]
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+				  "the strongest",
+                  "strongest"
+				]
+			  }
+			]
+		  },
+		  {
+			"cells": [
+			  {
+				"text": "hot",
+				"editable": false
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+                  "hotter"
+				]
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+				  "the hottest",
+                  "hottest"
+				]
+			  }
+			]
+		  },
+		  {
+			"cells": [
+			  {
+				"text": "far",
+				"editable": false
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+				  "farther",
+                  "further"
+				]
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+				  "the farthest",
+				  "the furthest",
+				  "farthest",
+                  "furthest"
+				]
+			  }
+			]
+		  },
+		  {
+			"cells": [
+			  {
+				"text": "neat",
+				"editable": false
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+                  "neater"
+				]
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+				  "the neatest",
+                  "neatest"
+				]
+			  }
+			]
+		  },
+		  {
+			"cells": [
+			  {
+				"text": "ugly",
+				"editable": false
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+                  "uglier"
+				]
+			  },
+			  {
+				"text": "",
+				"editable": true,
+				"answer": [
+				  "the ugliest",
+                  "ugliest"
+				]
+			  }
+			]
+		  }
+		]
+	  },
+	  {
+		"type": "word_bank",
+		"exercise_id": "workbook_v1_l2_d_comparative_superlative",
+		"instruction": {
+		  "en": "Complete each sentence with the comparative or superlative form of the word in the box.",
+		  "fa": "جمله‌ها را با شکل تفضیلی یا عالی کلمهٔ مناسب کامل کنید."
+		},
+		"word_bank": [
+		  "deep",
+		  "good",
+		  "dangerous",
+		  "expensive",
+          "small"
+		],
+		"items": [
+		  {
+			"text": "Pluto is ______ than the moon of Earth.",
+			"answer": "smaller"
+		  },
+		  {
+			"text": "Are you sure this is the ______ way of doing it?",
+			"answer": "best"
+		  },
+		  {
+			"text": "Lions are ______ animals in the world.",
+			"answer": "the most dangerous"
+		  },
+		  {
+			"text": "This lake is ______ one in the world.",
+			"answer": "the deepest"
+		  },
+		  {
+			"text": "A plane ticket is ______ than a train ticket.",
+			"answer": "more expensive"
+		  }
+		]
+	  },
+	  {
+		"type": "word_bank",
+		"exercise_id": "workbook_v1_l2_e_adjective_choice",
+		"instruction": {
+		  "en": "Complete each sentence with the correct adjective. One adjective is extra.",
+		  "fa": "جمله‌ها را با صفت مناسب کامل کنید. یک صفت اضافه است."
+		},
+		"word_bank": [
+		  "funny",
+		  "careful",
+		  "tall",
+		  "golden",
+          "cloudy"
+		],
+		"items": [
+		  {
+			"text": "It's not ______. Don't laugh please!",
+			"answer": "funny"
+		  },
+		  {
+			"text": "She looked at the ______ sky above the sea.",
+			"answer": "cloudy"
+		  },
+		  {
+			"text": "Be ______! Look both ways when you cross the street.",
+			"answer": "careful"
+		  },
+		  {
+			"text": "Mary lost her ______ watch in the park.",
+			"answer": "golden"
+		  }
+		]
+	  }
+	]
+  }
 }

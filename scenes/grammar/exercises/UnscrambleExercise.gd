@@ -643,16 +643,8 @@ func _check_answer() -> void:
 	if _blanks_mode:
 		correct = _check_blanks_answer(item)
 	else:
-		var expected := str(
-			item.get(
-				"answer",
-				""
-			)
-		).to_lower().strip_edges()
-
-		var actual := " ".join(
-			selected_words
-		).to_lower().strip_edges()
+		var expected := _normalize_unscramble(str(item.get("answer", "")))
+		var actual := _normalize_unscramble(" ".join(selected_words))
 
 		correct = (actual == expected)
 
@@ -721,3 +713,14 @@ func get_current_hint() -> String:
 	if hint.is_empty():
 		hint = "کلمات را طوری مرتب کن که یک جملهٔ درست و معنادار بسازی."
 	return hint
+
+
+# Normalizes an assembled unscramble sentence so grading matches the neat
+# stored answers: lowercase, collapse spaces, strip spaces before . ? , ، ؟.
+func _normalize_unscramble(s: String) -> String:
+	var out := s.strip_edges().to_lower()
+	while out.contains("  "):
+		out = out.replace("  ", " ")
+	for punct in [" .", " ?", " ,", " ،", " ؟", " !", " :", " ;"]:
+		out = out.replace(punct, punct.strip_edges())
+	return out.strip_edges()

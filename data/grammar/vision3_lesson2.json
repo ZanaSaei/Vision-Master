@@ -69,9 +69,9 @@
 								"answers": [
 									"who"
 								],
-								"hint_fa": "برای اشخاص وقتی فاعل جمله‌ی وصفی هستند از who استفاده می‌کنیم.",
+								"hint_fa": "برای اشخاصی که فاعل جمله‌ی وصفی هستند از کدام ضمیر استفاده می‌کنیم؟",
 								"explanation_fa": "آفرین! who درست است.",
-								"wrong_explanation_fa": "برای اشخاص (فاعل جمله‌ی وصفی) از who استفاده می‌کنیم."
+								"wrong_explanation_fa": "برای اشخاص در نقش فاعل جمله‌ی وصفی از who استفاده می‌کنیم."
 							}
 						]
 					},
@@ -86,9 +86,9 @@
 								"answers": [
 									"who"
 								],
-								"hint_fa": "برای اشخاص از who استفاده می‌کنیم.",
+								"hint_fa": "برای اشخاص از کدام ضمیر وصفی استفاده می‌کنیم؟",
 								"explanation_fa": "آفرین! who درست است.",
-								"wrong_explanation_fa": "برای اشخاص (فاعل جمله‌ی وصفی) از who استفاده می‌کنیم."
+								"wrong_explanation_fa": "برای اشخاص در نقش فاعل جمله‌ی وصفی از who استفاده می‌کنیم."
 							}
 						]
 					},
@@ -96,10 +96,10 @@
 						"id": "unit1_mc_1",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "کدام کلمه جمله‌ی وصفی درباره‌ی یک شخص در نقش فاعل را شروع می‌کند؟",
 						"questions": [
 							{
-								"question": "کدام کلمه جمله‌ی وصفی درباره‌ی یک شخص در نقش فاعل را شروع می‌کند؟",
+								"question": "",
 								"options": [
 									"which",
 									"who",
@@ -120,10 +120,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«who» در جملات وصفی برای افراد استفاده می‌شود.",
+								"statement": "who در جملات وصفی برای افراد استفاده می‌شود.",
 								"fa": "کلمه‌ی who می‌تواند برای اشخاص در جمله‌ی وصفی استفاده شود.",
 								"answer": true,
-								"hint_fa": "who مخصوص اشخاص است.",
+								"hint_fa": "who مخصوص اشخاص است یا اشیا؟",
 								"explanation_fa": "درست است! who برای معرفی اشخاص به کار می‌رود."
 							}
 						]
@@ -135,10 +135,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«who» می‌تواند برای توصیف شیءای مثل کتاب یا ماشین استفاده شود.",
-								"fa": "who می‌تواند برای توصیف یک شیء مثل کتاب یا ماشین استفاده شود.",
+								"statement": "who می‌تواند برای توصیف شیءای مثل کتاب یا ماشین استفاده شود.",
+								"fa": "کلمه‌ی who می‌تواند برای توصیف یک شیء مثل کتاب یا ماشین استفاده شود.",
 								"answer": false,
-								"hint_fa": "who فقط برای اشخاص است، نه اشیا.",
+								"hint_fa": "who فقط برای اشخاص است یا اشیا هم شامل می‌شود؟",
 								"explanation_fa": "غلط است! who فقط برای اشخاص به کار می‌رود؛ برای اشیا از which استفاده می‌شود."
 							}
 						]
@@ -162,8 +162,8 @@
 									"10",
 									"."
 								],
-								"answer": "The man who plays golf lives at No. 10 .",
-								"hint_fa": "اسم (The man) + who + فعل (plays golf) در ابتدا می‌آید، سپس فعل اصلی جمله."
+								"answer": "The man who plays golf lives at No. 10.",
+								"hint_fa": "ترتیب درست: اسم The man، سپس who و بعد فعل plays golf در ابتدا می‌آید، سپس فعل اصلی جمله."
 							}
 						]
 					},
@@ -182,7 +182,7 @@
 									"what"
 								],
 								"correct": 1.0,
-								"hint_fa": "The doctor یک شخص است و فاعل جمله‌ی وصفی است.",
+								"hint_fa": "به شخص بودن The doctor و نقش آن در جمله‌ی وصفی دقت کن.",
 								"explanation_fa": "آفرین! who درست است.",
 								"wrong_explanation_fa": "برای اشخاص در نقش فاعل جمله‌ی وصفی از who استفاده می‌کنیم."
 							}
@@ -219,7 +219,7 @@
 						"id": "unit2_matching_who_whom",
 						"type": "matching",
 						"title_fa": "اتصال جمله وصفی به نقش آن",
-						"instruction_fa": "هر جمله‌ی وصفی را به نقش who در آن (فاعل یا مفعول) وصل کن.",
+						"instruction_fa": "هر جمله‌ی وصفی را به نقش who در آن یعنی فاعل یا مفعول وصل کن.",
 						"items": [
 							{
 								"left": "The man who plays golf",
@@ -251,9 +251,9 @@
 									"whom",
 									"who"
 								],
-								"hint_fa": "'the man' مفعول جمله‌ی وصفی است ('I called him')، پس whom مناسب‌تر است (who هم در محاوره پذیرفته می‌شود).",
+								"hint_fa": "واژه‌ی the man مفعول جمله‌ی وصفی است، چون فعل called روی او انجام شده. پس whom مناسب‌تر است؛ who هم در محاوره پذیرفته می‌شود.",
 								"explanation_fa": "آفرین! پاسخ درست است.",
-								"wrong_explanation_fa": "چون 'the man' مفعول جمله‌ی وصفی است، whom (یا who در محاوره) درست است."
+								"wrong_explanation_fa": "چون the man مفعول جمله‌ی وصفی است، whom یا who در محاوره درست است."
 							}
 						]
 					},
@@ -264,10 +264,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«whom» برای اشاره به مفعولِ جمله‌ی وصفی، رسمی‌تر از «who» است.",
-								"fa": "whom نسبت به who رسمی‌تر است وقتی به مفعول جمله‌ی وصفی اشاره می‌کند.",
+								"statement": "whom برای اشاره به مفعول جمله‌ی وصفی، رسمی‌تر از who است.",
+								"fa": "کلمه‌ی whom نسبت به who رسمی‌تر است وقتی به مفعول جمله‌ی وصفی اشاره می‌کند.",
 								"answer": true,
-								"hint_fa": "whom در نوشتار رسمی به‌جای who برای مفعول استفاده می‌شود.",
+								"hint_fa": "در نوشتار رسمی، whom جای who برای مفعول استفاده می‌شود.",
 								"explanation_fa": "درست است! whom شکل رسمی‌تر who برای مفعول است."
 							}
 						]
@@ -276,10 +276,10 @@
 						"id": "unit2_mc_1",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "نقش the woman را در جمله‌ی وصفی مشخص کن.",
 						"questions": [
 							{
-								"question": "در جمله‌ی «The woman who(m) you met yesterday is coming to dinner»، نقش «the woman» در جمله‌ی وصفی چیست؟",
+								"question": "The woman who(m) you met yesterday is coming to dinner.",
 								"options": [
 									"فاعل جمله وصفی",
 									"مفعول جمله وصفی",
@@ -287,9 +287,9 @@
 									"هیچ‌کدام"
 								],
 								"correct": 1.0,
-								"hint_fa": "جمله‌ی وصفی 'you met her' است؛ 'her' مفعول است.",
-								"explanation_fa": "آفرین! 'the woman' مفعول جمله‌ی وصفی است.",
-								"wrong_explanation_fa": "در جمله‌ی 'you met her'، the woman همان 'her' است و مفعول محسوب می‌شود."
+								"hint_fa": "جمله‌ی وصفی you met her است؛ her مفعول است.",
+								"explanation_fa": "آفرین! the woman مفعول جمله‌ی وصفی است.",
+								"wrong_explanation_fa": "در جمله‌ی you met her، the woman همان her است و مفعول محسوب می‌شود."
 							}
 						]
 					},
@@ -313,8 +313,8 @@
 									"dinner",
 									"."
 								],
-								"answer": "The woman who you met yesterday is coming to dinner .",
-								"hint_fa": "اسم (The woman) + who + فاعل و فعل جمله‌ی وصفی (you met yesterday) در ابتدا می‌آید."
+								"answer": "The woman who you met yesterday is coming to dinner.",
+								"hint_fa": "ترتیب درست: اسم The woman، سپس who و بعد فاعل و فعل جمله‌ی وصفی you met yesterday در ابتدا می‌آید."
 							}
 						]
 					},
@@ -322,10 +322,10 @@
 						"id": "unit2_mc_review",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "کدام جمله از who به‌درستی در نقش فاعل استفاده کرده؟",
 						"questions": [
 							{
-								"question": "کدام جمله از who به‌درستی در نقش فاعل استفاده کرده؟",
+								"question": "",
 								"options": [
 									"The man who plays golf lives at No. 10.",
 									"The man who I called is my teacher.",
@@ -334,7 +334,7 @@
 								],
 								"correct": 0.0,
 								"hint_fa": "در کدام جمله who خودش فاعل فعل بعدی است؟",
-								"explanation_fa": "آفرین! در این جمله who فاعل 'plays' است.",
+								"explanation_fa": "آفرین! در این جمله who فاعل فعل plays است.",
 								"wrong_explanation_fa": "وقتی who مستقیم قبل از فعل بیاید، فاعل جمله‌ی وصفی است."
 							}
 						]
@@ -346,10 +346,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "در انگلیسی محاوره‌ای روزمره، معمولاً به‌جای «whom» از «who» استفاده می‌شود.",
+								"statement": "در انگلیسی محاوره‌ای روزمره، معمولاً به‌جای whom از who استفاده می‌شود.",
 								"fa": "در انگلیسی محاوره‌ای روزمره، اغلب who به‌جای whom استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "whom بیشتر در نوشتار رسمی به کار می‌رود.",
+								"hint_fa": "کدام شکل بیشتر در نوشتار رسمی به کار می‌رود؟",
 								"explanation_fa": "درست است! در محاوره، who جای whom را هم می‌گیرد."
 							}
 						]
@@ -416,7 +416,7 @@
 								"answers": [
 									"which"
 								],
-								"hint_fa": "cat یک حیوان است، پس از which استفاده می‌کنیم.",
+								"hint_fa": "واژه‌ی cat یک حیوان است؛ برای حیوانات از کدام ضمیر استفاده می‌کنیم؟",
 								"explanation_fa": "آفرین! which درست است.",
 								"wrong_explanation_fa": "برای اشیا و حیوانات از which استفاده می‌کنیم."
 							}
@@ -433,7 +433,7 @@
 								"answers": [
 									"which"
 								],
-								"hint_fa": "keys یک شیء است، پس از which استفاده می‌کنیم.",
+								"hint_fa": "واژه‌ی keys یک شیء است؛ برای اشیا از کدام ضمیر استفاده می‌کنیم؟",
 								"explanation_fa": "آفرین! which درست است.",
 								"wrong_explanation_fa": "برای اشیا از which استفاده می‌کنیم."
 							}
@@ -446,10 +446,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«which» می‌تواند برای افراد استفاده شود.",
-								"fa": "which می‌تواند برای اشخاص استفاده شود.",
+								"statement": "which می‌تواند برای افراد استفاده شود.",
+								"fa": "کلمه‌ی which می‌تواند برای اشخاص استفاده شود.",
 								"answer": false,
-								"hint_fa": "which فقط برای اشیا و حیوانات است، نه اشخاص.",
+								"hint_fa": "which فقط برای اشیا و حیوانات است یا اشخاص هم شامل می‌شود؟",
 								"explanation_fa": "غلط است! برای اشخاص از who استفاده می‌کنیم، نه which."
 							}
 						]
@@ -458,10 +458,10 @@
 						"id": "unit3_mc_1",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "ضمیر وصفی درست را انتخاب کن.",
 						"questions": [
 							{
-								"question": "ضمیر وصفی درست را انتخاب کن: «This is the book ___ I bought yesterday.»",
+								"question": "This is the book ___ I bought yesterday.",
 								"options": [
 									"who",
 									"whom",
@@ -469,7 +469,7 @@
 									"whose"
 								],
 								"correct": 2.0,
-								"hint_fa": "book یک شیء است.",
+								"hint_fa": "واژه‌ی book یک شیء است.",
 								"explanation_fa": "آفرین! which درست است.",
 								"wrong_explanation_fa": "برای اشیا از which استفاده می‌کنیم."
 							}
@@ -494,8 +494,8 @@
 									"milk",
 									"."
 								],
-								"answer": "The cat which lives near us was drinking milk .",
-								"hint_fa": "اسم (The cat) + which + فعل (lives near us) در ابتدا می‌آید، سپس فعل اصلی جمله."
+								"answer": "The cat which lives near us was drinking milk.",
+								"hint_fa": "ترتیب درست: اسم The cat، سپس which و بعد فعل lives near us در ابتدا می‌آید، سپس فعل اصلی جمله."
 							}
 						]
 					},
@@ -503,10 +503,10 @@
 						"id": "unit3_mc_review",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "کدام ضمیر وصفی برای این جمله مناسب است؟",
 						"questions": [
 							{
-								"question": "کدام ضمیر وصفی برای 'the dog ___ barks at night' مناسب است؟",
+								"question": "The dog ___ barks at night.",
 								"options": [
 									"who",
 									"whom",
@@ -514,7 +514,7 @@
 									"whose"
 								],
 								"correct": 2.0,
-								"hint_fa": "dog یک حیوان است.",
+								"hint_fa": "واژه‌ی dog یک حیوان است.",
 								"explanation_fa": "آفرین! which درست است.",
 								"wrong_explanation_fa": "برای حیوانات از which استفاده می‌کنیم."
 							}
@@ -534,7 +534,7 @@
 						"type": "learn",
 						"title_fa": "that جایگزین who و which",
 						"title_en": "That as a Universal Relative Pronoun",
-						"explanation": "کلمه‌ی that می‌تواند به‌جای who (برای اشخاص) یا which (برای اشیا و حیوانات) به کار رود؛ این حالت رایج‌تر و کمی محاوره‌ای‌تر است.",
+						"explanation": "کلمه‌ی that می‌تواند به‌جای who برای اشخاص یا which برای اشیا و حیوانات به کار رود؛ این حالت رایج‌تر و کمی محاوره‌ای‌تر است.",
 						"structure": "اسم (شخص/شیء/حیوان) + that + فعل",
 						"cards": [
 							{
@@ -596,8 +596,8 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«that» در جملات وصفی هم برای افراد و هم برای اشیا استفاده می‌شود.",
-								"fa": "that می‌تواند هم برای اشخاص و هم برای اشیا در جمله‌ی وصفی استفاده شود.",
+								"statement": "that در جملات وصفی هم برای افراد و هم برای اشیا استفاده می‌شود.",
+								"fa": "کلمه‌ی that می‌تواند هم برای اشخاص و هم برای اشیا در جمله‌ی وصفی استفاده شود.",
 								"answer": true,
 								"hint_fa": "that جایگزین هر دوی who و which می‌شود.",
 								"explanation_fa": "درست است! that یک ضمیر وصفی عمومی است."
@@ -608,10 +608,10 @@
 						"id": "unit4_mc_1",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "کدام کلمه می‌تواند هم جایگزین who و هم which در جمله‌ی وصفی باشد؟",
 						"questions": [
 							{
-								"question": "کدام کلمه می‌تواند هم جایگزین «who» و هم «which» در جمله‌ی وصفی باشد؟",
+								"question": "",
 								"options": [
 									"whom",
 									"whose",
@@ -619,7 +619,7 @@
 									"what"
 								],
 								"correct": 2.0,
-								"hint_fa": "این کلمه هم برای اشخاص و هم برای اشیا/حیوانات به کار می‌رود.",
+								"hint_fa": "این کلمه هم برای اشخاص و هم برای اشیا و حیوانات به کار می‌رود.",
 								"explanation_fa": "آفرین! that درست است.",
 								"wrong_explanation_fa": "that می‌تواند جایگزین who یا which شود."
 							}
@@ -644,8 +644,8 @@
 									"10",
 									"."
 								],
-								"answer": "The man that plays golf lives at No. 10 .",
-								"hint_fa": "اسم (The man) + that + فعل (plays golf) در ابتدا می‌آید، سپس فعل اصلی جمله."
+								"answer": "The man that plays golf lives at No. 10.",
+								"hint_fa": "ترتیب درست: اسم The man، سپس that و بعد فعل plays golf در ابتدا می‌آید، سپس فعل اصلی جمله."
 							}
 						]
 					},
@@ -653,10 +653,10 @@
 						"id": "unit4_mc_review",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "کدام جمله از نظر گرامری درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله از نظر گرامری درست است؟",
+								"question": "",
 								"options": [
 									"The book that I bought is interesting.",
 									"The book whom I bought is interesting.",
@@ -664,7 +664,7 @@
 									"The book whose I bought is interesting."
 								],
 								"correct": 0.0,
-								"hint_fa": "book یک شیء است؛ کدام ضمیر برای اشیا مناسب است؟",
+								"hint_fa": "واژه‌ی book یک شیء است؛ کدام ضمیر برای اشیا مناسب است؟",
 								"explanation_fa": "آفرین! that برای اشیا درست است.",
 								"wrong_explanation_fa": "برای اشیا از that یا which استفاده می‌کنیم، نه who یا whom."
 							}
@@ -682,10 +682,10 @@
 					{
 						"id": "unit5_learn1",
 						"type": "learn",
-						"title_fa": "If + گذشته ساده، ... would + فعل ساده",
+						"title_fa": "ساختار If + گذشته ساده، ... would + base verb",
 						"title_en": "If + Past Simple, ... Would + Base Verb",
-						"explanation": "برای بیان موقعیت‌های فرضی یا غیرواقعی در زمان حال، از If + فعل گذشته‌ی ساده در جمله‌ی شرط و would + فعل ساده در جمله‌ی نتیجه استفاده می‌کنیم. این شرایط معمولاً واقعیت ندارند یا بعید هستند.",
-						"structure": "If + فاعل + فعل گذشته ساده، فاعل + would + فعل ساده",
+						"explanation": "برای بیان موقعیت‌های فرضی یا غیرواقعی در زمان حال، از If + فعل گذشته‌ی ساده در جمله‌ی شرط و would + base verb در جمله‌ی نتیجه استفاده می‌کنیم. این شرایط معمولاً واقعیت ندارند یا بعید هستند.",
+						"structure": "If + فاعل + فعل گذشته ساده، فاعل + would + شکل ساده فعل",
 						"cards": [
 							{
 								"en": "They would be healthier if they lived in a village.",
@@ -707,7 +707,7 @@
 								"statement": "شرطی نوع دوم برای صحبت درباره‌ی واقعیت‌های واقعی و فعلی استفاده می‌شود.",
 								"fa": "شرطی نوع دوم برای صحبت درباره‌ی حقایق واقعی و فعلی استفاده می‌شود.",
 								"answer": false,
-								"hint_fa": "شرطی نوع دوم برای موقعیت‌های فرضی و غیرواقعی به کار می‌رود.",
+								"hint_fa": "شرطی نوع دوم برای موقعیت‌های فرضی به کار می‌رود یا واقعی؟",
 								"explanation_fa": "غلط است! شرطی نوع دوم برای موقعیت‌های فرضی یا خلاف واقع است."
 							}
 						]
@@ -723,7 +723,7 @@
 								"answers": [
 									"would"
 								],
-								"hint_fa": "جمله‌ی نتیجه در شرطی نوع دوم با would می‌آید.",
+								"hint_fa": "جمله‌ی نتیجه در شرطی نوع دوم با کدام فعل کمکی می‌آید؟",
 								"explanation_fa": "آفرین! would درست است.",
 								"wrong_explanation_fa": "در جمله‌ی نتیجه‌ی شرطی نوع دوم از would استفاده می‌کنیم."
 							}
@@ -740,7 +740,7 @@
 								"answers": [
 									"got"
 								],
-								"hint_fa": "بعد از if در شرطی نوع دوم، فعل گذشته‌ی ساده می‌آید.",
+								"hint_fa": "بعد از if در شرطی نوع دوم، فعل در چه زمانی می‌آید؟",
 								"explanation_fa": "آفرین! got درست است.",
 								"wrong_explanation_fa": "بعد از if در شرطی نوع دوم از گذشته‌ی ساده استفاده می‌کنیم."
 							}
@@ -761,7 +761,7 @@
 									"do"
 								],
 								"correct": 1.0,
-								"hint_fa": "این یک جمله‌ی شرطی نوع دوم است.",
+								"hint_fa": "این یک جمله‌ی شرطی نوع دوم است؛ در جمله‌ی نتیجه چه فعلی می‌آید؟",
 								"explanation_fa": "آفرین! would درست است.",
 								"wrong_explanation_fa": "در جمله‌ی نتیجه‌ی شرطی نوع دوم از would استفاده می‌کنیم."
 							}
@@ -775,14 +775,14 @@
 						"items": [
 							{
 								"words": [
-									"فعل ساده",
+									"شکل ساده فعل",
 									"would",
 									"If",
 									"فعل گذشته ساده",
 									"فاعل"
 								],
-								"answer": "If فاعل فعل گذشته ساده فاعل would فعل ساده",
-								"hint_fa": "ساختار درست: If + فاعل + فعل گذشته ساده، فاعل + would + فعل ساده"
+								"answer": "If فاعل فعل گذشته ساده فاعل would شکل ساده فعل",
+								"hint_fa": "ساختار درست: If + فاعل + فعل گذشته ساده، سپس فاعل + would + شکل ساده فعل"
 							}
 						]
 					},
@@ -806,8 +806,8 @@
 									"would",
 									"."
 								],
-								"answer": "They would be healthier if they lived in a village .",
-								"hint_fa": "جمله‌ی نتیجه (They would be healthier) می‌تواند قبل از if بیاید."
+								"answer": "They would be healthier if they lived in a village.",
+								"hint_fa": "جمله‌ی نتیجه یعنی They would be healthier می‌تواند قبل از if بیاید."
 							}
 						]
 					},
@@ -818,10 +818,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "جمله‌ی «If I have more time, I would learn French» از نظر گرامری درست است.",
-								"fa": "جمله‌ی 'If I have more time, I would learn French' از نظر گرامری درست است.",
+								"statement": "این جمله از نظر گرامری درست است: If I have more time, I would learn French.",
+								"fa": "این جمله از نظر گرامری درست است: If I have more time, I would learn French.",
 								"answer": false,
-								"hint_fa": "بعد از if در شرطی نوع دوم باید گذشته‌ی ساده بیاید، نه حال ساده.",
+								"hint_fa": "بعد از if در شرطی نوع دوم باید گذشته‌ی ساده بیاید یا حال ساده؟",
 								"explanation_fa": "غلط است! درست: If I had more time, I would learn French."
 							}
 						]
@@ -830,10 +830,10 @@
 						"id": "unit5_mc_review",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "جمله‌ی درستِ شرطی نوع دوم را انتخاب کن.",
 						"questions": [
 							{
-								"question": "جمله‌ی درستِ شرطی نوع دوم را انتخاب کن.",
+								"question": "",
 								"options": [
 									"If it gets warmer, they will travel to the north.",
 									"If it got warmer, they would travel to the north.",
@@ -843,7 +843,7 @@
 								"correct": 1.0,
 								"hint_fa": "بعد از if گذشته‌ی ساده و در جمله‌ی نتیجه would می‌آید.",
 								"explanation_fa": "آفرین! این جمله ساختار شرطی نوع دوم را درست رعایت کرده.",
-								"wrong_explanation_fa": "شرطی نوع دوم: If + گذشته ساده، would + فعل ساده."
+								"wrong_explanation_fa": "شرطی نوع دوم: If + گذشته ساده، would + شکل ساده فعل."
 							}
 						]
 					}
@@ -861,8 +861,8 @@
 						"type": "learn",
 						"title_fa": "استفاده از were به‌جای was",
 						"title_en": "Using 'were' instead of 'was'",
-						"explanation": "در جمله‌ی شرطی نوع دوم، برای فعل be در جمله‌ی شرط، به‌جای was از were برای همه‌ی فاعل‌ها (حتی I, he, she, it) استفاده می‌کنیم؛ این نکته‌ای است که شرطی نوع دوم را از گذشته‌ی ساده‌ی معمولی متمایز می‌کند.",
-						"structure": "If + فاعل + were + ...، فاعل + would + فعل ساده",
+						"explanation": "در جمله‌ی شرطی نوع دوم، برای فعل be در جمله‌ی شرط، به‌جای was از were برای همه‌ی فاعل‌ها حتی I، he، she، it استفاده می‌کنیم؛ این نکته‌ای است که شرطی نوع دوم را از گذشته‌ی ساده‌ی معمولی متمایز می‌کند.",
+						"structure": "If + فاعل + were + ...، فاعل + would + شکل ساده فعل",
 						"cards": [
 							{
 								"en": "If I were you, I would buy a house.",
@@ -885,7 +885,7 @@
 								"answers": [
 									"were"
 								],
-								"hint_fa": "در شرطی نوع دوم، با تمام فاعل‌ها از were استفاده می‌کنیم، نه was.",
+								"hint_fa": "در شرطی نوع دوم با تمام فاعل‌ها از کدام شکل فعل be استفاده می‌کنیم؟",
 								"explanation_fa": "آفرین! were درست است.",
 								"wrong_explanation_fa": "در شرطی نوع دوم همیشه از were استفاده می‌کنیم، حتی با I."
 							}
@@ -898,21 +898,21 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«If I was you» شکل استاندارد در شرطی نوع دوم است.",
-								"fa": "'If I was you' شکل استاندارد در شرطی نوع دوم است.",
+								"statement": "شکل استاندارد در شرطی نوع دوم، If I was you است.",
+								"fa": "شکل استاندارد در شرطی نوع دوم، If I was you است.",
 								"answer": false,
-								"hint_fa": "شکل استاندارد were است، نه was، حتی با فاعل I.",
-								"explanation_fa": "غلط است! شکل درست و استاندارد 'If I were you' است."
+								"hint_fa": "شکل استاندارد were است یا was، حتی با فاعل I؟",
+								"explanation_fa": "غلط است! شکل درست و استاندارد If I were you است."
 							}
 						]
 					},
 					{
 						"id": "unit6_learn2",
 						"type": "learn",
-						"title_fa": "could به‌جای would (توانایی فرضی)",
+						"title_fa": "could به‌جای would برای توانایی فرضی",
 						"title_en": "Could instead of Would",
 						"explanation": "در جمله‌ی نتیجه‌ی شرطی نوع دوم، می‌توان به‌جای would از could استفاده کرد تا یک توانایی فرضی را نشان دهیم.",
-						"structure": "If + فاعل + فعل گذشته ساده، فاعل + could + فعل ساده",
+						"structure": "If + فاعل + فعل گذشته ساده، فاعل + could + شکل ساده فعل",
 						"cards": [
 							{
 								"en": "John could fix the car if he were home.",
@@ -935,7 +935,7 @@
 								"answers": [
 									"could"
 								],
-								"hint_fa": "این جمله یک توانایی فرضی را نشان می‌دهد، پس could مناسب‌تر است.",
+								"hint_fa": "این جمله یک توانایی فرضی را نشان می‌دهد؛ کدام فعل کمکی مناسب‌تر است؟",
 								"explanation_fa": "آفرین! could درست است.",
 								"wrong_explanation_fa": "برای بیان توانایی فرضی در شرطی نوع دوم از could استفاده می‌کنیم."
 							}
@@ -982,7 +982,7 @@
 									"."
 								],
 								"answer": "John could fix the car if he were home .",
-								"hint_fa": "جمله‌ی نتیجه (John could fix the car) قبل از if می‌آید."
+								"hint_fa": "جمله‌ی نتیجه یعنی John could fix the car قبل از if می‌آید."
 							}
 						]
 					},
@@ -990,10 +990,10 @@
 						"id": "unit6_mc_review",
 						"type": "multiple_choice",
 						"title_fa": "انتخاب گزینه",
-						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
+						"instruction_fa": "کدام جمله از نظر گرامری درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله از نظر گرامری درست است؟",
+								"question": "",
 								"options": [
 									"If I was you, I would buy a house.",
 									"If I were you, I would buy a house.",
@@ -1001,9 +1001,9 @@
 									"If I were you, I will buy a house."
 								],
 								"correct": 1.0,
-								"hint_fa": "در شرطی نوع دوم از were با تمام فاعل‌ها استفاده می‌کنیم و در نتیجه would می‌آید.",
+								"hint_fa": "در شرطی نوع دوم از were با تمام فاعل‌ها استفاده می‌کنیم و در جمله‌ی نتیجه would می‌آید.",
 								"explanation_fa": "آفرین! این جمله ساختار شرطی نوع دوم را درست رعایت کرده.",
-								"wrong_explanation_fa": "شرطی نوع دوم: If + فاعل + were، فاعل + would + فعل ساده."
+								"wrong_explanation_fa": "شرطی نوع دوم: If + فاعل + were، فاعل + would + شکل ساده فعل."
 							}
 						]
 					}

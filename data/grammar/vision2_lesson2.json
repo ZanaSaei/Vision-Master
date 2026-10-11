@@ -15,9 +15,9 @@
 					{
 						"id": "u1_p1",
 						"type": "learn",
-						"title_fa": "have/has + قسمت سوم فعل",
+						"title_fa": "ساختار have/has + قسمت سوم فعل",
 						"title_en": "",
-						"explanation": "برای ساخت حال کامل، از have (با I/you/we/they) یا has (با he/she/it) به همراه قسمت سوم فعل (past participle) استفاده می‌کنیم.",
+						"explanation": "برای ساخت حال کامل، از have با I/you/we/they یا has با he/she/it به همراه قسمت سوم فعل past participle استفاده می‌کنیم.",
 						"cards": [
 							{
 								"en": "Amir has written a letter.",
@@ -42,8 +42,8 @@
 								"answers": [
 									"has"
 								],
-								"hint_fa": "فاعل مفرد 'Amir' با has می‌آید.",
-								"explanation_fa": "فاعل مفرد 'Amir' با has می‌آید."
+								"hint_fa": "به فاعل جمله دقت کن: Amir مفرد است یا جمع؟",
+								"explanation_fa": "فاعل مفرد Amir با has می‌آید."
 							}
 						]
 					},
@@ -52,10 +52,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: I ___ watched that movie.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: I ___ watched that movie.",
+								"question": "I ___ watched that movie.",
 								"options": [
 									"have",
 									"has",
@@ -63,8 +63,8 @@
 									"was"
 								],
 								"correct": 0,
-								"hint_fa": "فاعل 'I' با have می‌آید.",
-								"explanation_fa": "فاعل 'I' با have می‌آید."
+								"hint_fa": "به فاعل جمله دقت کن: I با have می‌آید یا has؟",
+								"explanation_fa": "فاعل I با have می‌آید."
 							}
 						]
 					},
@@ -73,7 +73,7 @@
 						"type": "learn",
 						"title_fa": "has برای سوم‌شخص مفرد، have برای بقیه",
 						"title_en": "",
-						"explanation": "با he, she, it (و اسم‌های مفرد) از has و با I, you, we, they (و اسم‌های جمع) از have استفاده می‌کنیم.",
+						"explanation": "با he, she, it و اسم‌های مفرد از has و با I, you, we, they و اسم‌های جمع از have استفاده می‌کنیم.",
 						"cards": [
 							{
 								"en": "Behrooz has started a business.",
@@ -110,7 +110,7 @@
 								"right": "have"
 							}
 						],
-						"hint_fa": "he/she/it → has  |  I/you/we/they → have"
+						"hint_fa": "به جدول have/has دقت کن: فاعل‌های سوم‌شخص مفرد has و بقیه have می‌گیرند."
 					},
 					{
 						"id": "u1_p6",
@@ -120,10 +120,10 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «They has finished their homework» درست است.",
+								"statement": "این جمله درست است: They has finished their homework.",
 								"answer": false,
-								"hint_fa": "فاعل جمع 'They' باید با have بیاید: They have finished.",
-								"explanation_fa": "فاعل جمع 'They' باید با have بیاید: They have finished."
+								"hint_fa": "به فاعل They دقت کن: مفرد است یا جمع؟",
+								"explanation_fa": "فاعل جمع They باید با have بیاید: They have finished."
 							}
 						]
 					},
@@ -132,17 +132,17 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: My mother ___ made a cake.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: My mother ___ made a cake.",
+								"question": "My mother ___ made a cake.",
 								"options": [
 									"has",
 									"have"
 								],
 								"correct": 0,
-								"hint_fa": "فاعل مفرد 'My mother' با has می‌آید.",
-								"explanation_fa": "فاعل مفرد 'My mother' با has می‌آید."
+								"hint_fa": "به فاعل My mother دقت کن: مفرد است یا جمع؟",
+								"explanation_fa": "فاعل مفرد My mother با has می‌آید."
 							}
 						]
 					},
@@ -158,8 +158,8 @@
 								"answers": [
 									"have"
 								],
-								"hint_fa": "فاعل جمع 'The students' با have می‌آید.",
-								"explanation_fa": "فاعل جمع 'The students' با have می‌آید."
+								"hint_fa": "به فاعل The students دقت کن: مفرد است یا جمع؟",
+								"explanation_fa": "فاعل جمع The students با have می‌آید."
 							}
 						]
 					},
@@ -171,9 +171,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«has» با «she» استفاده می‌شود.",
+								"statement": "کلمه‌ی has با she استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! she سوم‌شخص مفرد است.",
+								"hint_fa": "she سوم‌شخص مفرد است؛ have یا has؟",
 								"explanation_fa": "درسته! she سوم‌شخص مفرد است."
 							}
 						]
@@ -188,7 +188,7 @@
 							{
 								"statement": "برای ساخت حال کامل از have/has + قسمت سوم فعل استفاده می‌کنیم.",
 								"answer": true,
-								"hint_fa": "درسته! این ساختار اصلی حال کامل است.",
+								"hint_fa": "به فرمول اصلی حال کامل فکر کن.",
 								"explanation_fa": "درسته! این ساختار اصلی حال کامل است."
 							}
 						]
@@ -201,10 +201,10 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "has فقط با فاعل‌های جمع به کار می‌رود.",
+								"statement": "کلمه‌ی has فقط با فاعل‌های جمع به کار می‌رود.",
 								"answer": false,
-								"hint_fa": "has با فاعل‌های مفرد سوم‌شخص (he/she/it) به کار می‌رود.",
-								"explanation_fa": "has با فاعل‌های مفرد سوم‌شخص (he/she/it) به کار می‌رود."
+								"hint_fa": "has با چه فاعل‌هایی به کار می‌رود؟",
+								"explanation_fa": "کلمه‌ی has با فاعل‌های مفرد سوم‌شخص مثل he/she/it به کار می‌رود."
 							}
 						]
 					},
@@ -213,16 +213,16 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "کدام شکل درست است؟ 'She ___ traveled to Paris.'",
+						"instruction_fa": "کدام شکل درست است؟",
 						"questions": [
 							{
-								"question": "کدام شکل درست است؟ 'She ___ traveled to Paris.'",
+								"question": "She ___ traveled to Paris.",
 								"options": [
 									"has",
 									"have"
 								],
 								"correct": 0,
-								"hint_fa": "she سوم‌شخص مفرد است: has.",
+								"hint_fa": "به فاعل She دقت کن: مفرد است یا جمع؟",
 								"explanation_fa": "she سوم‌شخص مفرد است: has."
 							}
 						]
@@ -239,7 +239,7 @@
 					{
 						"id": "u2_p1",
 						"type": "learn",
-						"title_fa": "has not (hasn't) و have not (haven't) + قسمت سوم فعل",
+						"title_fa": "ساختار has not و have not + قسمت سوم فعل",
 						"title_en": "",
 						"explanation": "برای منفی کردن حال کامل، not را بعد از has/have می‌آوریم؛ می‌توان از شکل کوتاه hasn't یا haven't هم استفاده کرد.",
 						"cards": [
@@ -266,8 +266,8 @@
 								"answers": [
 									"hasn't"
 								],
-								"hint_fa": "فاعل مفرد 'My mother' با hasn't منفی می‌شود.",
-								"explanation_fa": "فاعل مفرد 'My mother' با hasn't منفی می‌شود."
+								"hint_fa": "برای منفی کردن، به has یک not اضافه کن.",
+								"explanation_fa": "فاعل مفرد My mother با hasn't منفی می‌شود."
 							}
 						]
 					},
@@ -276,10 +276,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: The students ___ finished their homework.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: The students ___ finished their homework.",
+								"question": "The students ___ finished their homework.",
 								"options": [
 									"hasn't",
 									"haven't",
@@ -287,17 +287,17 @@
 									"don't"
 								],
 								"correct": 1,
-								"hint_fa": "فاعل جمع 'The students' با haven't منفی می‌شود.",
-								"explanation_fa": "فاعل جمع 'The students' با haven't منفی می‌شود."
+								"hint_fa": "به فاعل The students دقت کن: مفرد است یا جمع؟",
+								"explanation_fa": "فاعل جمع The students با haven't منفی می‌شود."
 							}
 						]
 					},
 					{
 						"id": "u2_p4",
 						"type": "learn",
-						"title_fa": "yet در جملات منفی حال کامل",
+						"title_fa": "کاربرد yet در جملات منفی حال کامل",
 						"title_en": "",
-						"explanation": "کلمه‌ی yet در جملات منفی حال کامل به معنای 'هنوز' استفاده می‌شود و معمولاً در انتهای جمله می‌آید.",
+						"explanation": "کلمه‌ی yet در جملات منفی حال کامل به معنای هنوز استفاده می‌شود و معمولاً در انتهای جمله می‌آید.",
 						"cards": [
 							{
 								"en": "He hasn't got a job yet.",
@@ -314,9 +314,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«yet» معمولاً در انتهای جمله‌ی منفی ماضی نقلی می‌آید.",
+								"statement": "کلمه‌ی yet معمولاً در انتهای جمله‌ی منفی ماضی نقلی می‌آید.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: He hasn't got a job yet.",
+								"hint_fa": "yet معمولاً در کدام نوع جمله به کار می‌رود؟",
 								"explanation_fa": "درسته! مثل: He hasn't got a job yet."
 							}
 						]
@@ -333,8 +333,8 @@
 								"answers": [
 									"yet"
 								],
-								"hint_fa": "yet در انتهای جمله‌ی منفی به معنای 'هنوز' می‌آید.",
-								"explanation_fa": "yet در انتهای جمله‌ی منفی به معنای 'هنوز' می‌آید."
+								"hint_fa": "کدام کلمه در انتهای جمله‌ی منفی به معنای هنوز است؟",
+								"explanation_fa": "yet در انتهای جمله‌ی منفی به معنای هنوز می‌آید."
 							}
 						]
 					},
@@ -343,17 +343,17 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: She ___ traveled to Madrid yet.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: She ___ traveled to Madrid yet.",
+								"question": "She ___ traveled to Madrid yet.",
 								"options": [
 									"hasn't",
 									"haven't"
 								],
 								"correct": 0,
-								"hint_fa": "فاعل مفرد 'She' با hasn't منفی می‌شود.",
-								"explanation_fa": "فاعل مفرد 'She' با hasn't منفی می‌شود."
+								"hint_fa": "به فاعل She دقت کن: مفرد است یا جمع؟",
+								"explanation_fa": "فاعل مفرد She با hasn't منفی می‌شود."
 							}
 						]
 					},
@@ -369,8 +369,8 @@
 								"answers": [
 									"haven't"
 								],
-								"hint_fa": "فاعل جمع 'They' با haven't منفی می‌شود.",
-								"explanation_fa": "فاعل جمع 'They' با haven't منفی می‌شود."
+								"hint_fa": "به فاعل They دقت کن: مفرد است یا جمع؟",
+								"explanation_fa": "فاعل جمع They با haven't منفی می‌شود."
 							}
 						]
 					},
@@ -382,10 +382,10 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«haven't» شکل کوتاه‌شده‌ی «have not» است.",
+								"statement": "کلمه‌ی haven't شکل کوتاه‌شده‌ی have not است.",
 								"answer": true,
-								"hint_fa": "درسته! haven't = have not",
-								"explanation_fa": "درسته! haven't = have not"
+								"hint_fa": "haven't مخفف چه ترکیبی است؟",
+								"explanation_fa": "درسته! haven't = have not."
 							}
 						]
 					},
@@ -399,7 +399,7 @@
 							{
 								"statement": "برای منفی کردن حال کامل، not را بعد از has/have می‌آوریم.",
 								"answer": true,
-								"hint_fa": "درسته! مثل hasn't/haven't + قسمت سوم فعل.",
+								"hint_fa": "not در جمله‌ی حال کامل کجا قرار می‌گیرد؟",
 								"explanation_fa": "درسته! مثل hasn't/haven't + قسمت سوم فعل."
 							}
 						]
@@ -414,7 +414,7 @@
 							{
 								"statement": "کلمه‌ی yet در جملات مثبت حال کامل به کار می‌رود، نه منفی.",
 								"answer": false,
-								"hint_fa": "yet معمولاً در جملات منفی و سؤالی به کار می‌رود.",
+								"hint_fa": "yet معمولاً در کدام نوع جمله‌ها به کار می‌رود؟",
 								"explanation_fa": "yet معمولاً در جملات منفی و سؤالی به کار می‌رود."
 							}
 						]
@@ -427,7 +427,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"She hasn't finish her work.",
 									"She hasn't finished her work.",
@@ -435,8 +435,8 @@
 									"She not has finished her work."
 								],
 								"correct": 1,
-								"hint_fa": "فاعل مفرد 'She' با hasn't + قسمت سوم فعل می‌آید.",
-								"explanation_fa": "فاعل مفرد 'She' با hasn't + قسمت سوم فعل می‌آید."
+								"hint_fa": "به فرمول hasn't + قسمت سوم فعل دقت کن.",
+								"explanation_fa": "فاعل مفرد She با hasn't + قسمت سوم فعل می‌آید."
 							}
 						]
 					}
@@ -452,7 +452,7 @@
 					{
 						"id": "u3_p1",
 						"type": "learn",
-						"title_fa": "Has/Have + فاعل + قسمت سوم فعل؟",
+						"title_fa": "ساختار سؤالی: Has/Have + فاعل + قسمت سوم فعل؟",
 						"title_en": "",
 						"explanation": "برای ساخت سؤال در حال کامل، has یا have را به ابتدای جمله می‌آوریم.",
 						"cards": [
@@ -479,8 +479,8 @@
 								"answers": [
 									"Have"
 								],
-								"hint_fa": "فاعل 'you' با Have سؤالی می‌شود.",
-								"explanation_fa": "فاعل 'you' با Have سؤالی می‌شود."
+								"hint_fa": "برای سؤال، has/have را به ابتدای جمله بیاور.",
+								"explanation_fa": "فاعل you با Have سؤالی می‌شود."
 							}
 						]
 					},
@@ -489,10 +489,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: ___ Mr. Ahmadi produced that movie?",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: ___ Mr. Ahmadi produced that movie?",
+								"question": "___ Mr. Ahmadi produced that movie?",
 								"options": [
 									"Has",
 									"Have",
@@ -500,17 +500,17 @@
 									"Do"
 								],
 								"correct": 0,
-								"hint_fa": "فاعل مفرد 'Mr. Ahmadi' با Has سؤالی می‌شود.",
-								"explanation_fa": "فاعل مفرد 'Mr. Ahmadi' با Has سؤالی می‌شود."
+								"hint_fa": "به فاعل Mr. Ahmadi دقت کن: مفرد است یا جمع؟",
+								"explanation_fa": "فاعل مفرد Mr. Ahmadi با Has سؤالی می‌شود."
 							}
 						]
 					},
 					{
 						"id": "u3_p4",
 						"type": "learn",
-						"title_fa": "ever در سؤالات حال کامل",
+						"title_fa": "کاربرد ever در سؤالات حال کامل",
 						"title_en": "",
-						"explanation": "کلمه‌ی ever (تا حالا) معمولاً در سؤالات حال کامل بعد از فاعل می‌آید تا بپرسیم آیا تجربه‌ای در طول زندگی داشته‌ایم یا نه.",
+						"explanation": "کلمه‌ی ever به معنی تا حالا معمولاً در سؤالات حال کامل بعد از فاعل می‌آید تا بپرسیم آیا تجربه‌ای در طول زندگی داشته‌ایم یا نه.",
 						"cards": [
 							{
 								"en": "Have they ever traveled to Madrid?",
@@ -531,7 +531,7 @@
 								"answers": [
 									"ever"
 								],
-								"hint_fa": "برای پرسیدن تجربه از ever استفاده می‌کنیم.",
+								"hint_fa": "برای پرسیدن تجربه کدام کلمه به کار می‌رود؟",
 								"explanation_fa": "برای پرسیدن تجربه از ever استفاده می‌کنیم."
 							}
 						]
@@ -544,9 +544,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«ever» در سوالات ماضی نقلی معمولاً بلافاصله بعد از فاعل می‌آید.",
+								"statement": "کلمه‌ی ever در سوالات ماضی نقلی معمولاً بلافاصله بعد از فاعل می‌آید.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: Have they ever traveled...?",
+								"hint_fa": "ever بعد از کدام بخش جمله می‌آید؟",
 								"explanation_fa": "درسته! مثل: Have they ever traveled...?"
 							}
 						]
@@ -556,17 +556,17 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: ___ she finished her homework?",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: ___ she finished her homework?",
+								"question": "___ she finished her homework?",
 								"options": [
 									"Has",
 									"Have"
 								],
 								"correct": 0,
-								"hint_fa": "فاعل مفرد 'she' با Has سؤالی می‌شود.",
-								"explanation_fa": "فاعل مفرد 'she' با Has سؤالی می‌شود."
+								"hint_fa": "به فاعل she دقت کن: مفرد است یا جمع؟",
+								"explanation_fa": "فاعل مفرد she با Has سؤالی می‌شود."
 							}
 						]
 					},
@@ -582,8 +582,8 @@
 								"answers": [
 									"Have"
 								],
-								"hint_fa": "فاعل 'you' با Have سؤالی می‌شود.",
-								"explanation_fa": "فاعل 'you' با Have سؤالی می‌شود."
+								"hint_fa": "به فاعل you دقت کن.",
+								"explanation_fa": "فاعل you با Have سؤالی می‌شود."
 							}
 						]
 					},
@@ -595,10 +595,10 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «Has Mr. Ahmadi produce that movie?» از نظر گرامری درست است.",
+								"statement": "این جمله از نظر گرامری درست است: Has Mr. Ahmadi produce that movie?",
 								"answer": false,
-								"hint_fa": "درست باید بگوییم: Has Mr. Ahmadi produced that movie? (قسمت سوم فعل)",
-								"explanation_fa": "درست باید بگوییم: Has Mr. Ahmadi produced that movie? (قسمت سوم فعل)"
+								"hint_fa": "بعد از has کدام شکل فعل می‌آید؟",
+								"explanation_fa": "درست باید بگوییم: Has Mr. Ahmadi produced that movie? با قسمت سوم فعل."
 							}
 						]
 					},
@@ -612,7 +612,7 @@
 							{
 								"statement": "برای ساخت سؤال در حال کامل، has یا have را ابتدای جمله می‌آوریم.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: Have you been to Paris?",
+								"hint_fa": "برای سؤال، has/have کجای جمله می‌آید؟",
 								"explanation_fa": "درسته! مثل: Have you been to Paris?"
 							}
 						]
@@ -627,7 +627,7 @@
 							{
 								"statement": "کلمه‌ی ever برای پرسیدن یک تجربه‌ی خاص در طول زندگی به کار می‌رود.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: Have you ever traveled abroad?",
+								"hint_fa": "ever برای پرسیدن چه چیزی به کار می‌رود؟",
 								"explanation_fa": "درسته! مثل: Have you ever traveled abroad?"
 							}
 						]
@@ -640,7 +640,7 @@
 						"instruction_fa": "کدام سؤال درست است؟",
 						"questions": [
 							{
-								"question": "کدام سؤال درست است؟",
+								"question": "",
 								"options": [
 									"Have she visited London?",
 									"Has she visited London?",
@@ -648,8 +648,8 @@
 									"Has she visit London?"
 								],
 								"correct": 1,
-								"hint_fa": "فاعل مفرد 'she' با Has + قسمت سوم فعل می‌آید.",
-								"explanation_fa": "فاعل مفرد 'she' با Has + قسمت سوم فعل می‌آید."
+								"hint_fa": "به فاعل she و قسمت سوم فعل دقت کن.",
+								"explanation_fa": "فاعل مفرد she با Has + قسمت سوم فعل می‌آید."
 							}
 						]
 					}
@@ -665,7 +665,7 @@
 					{
 						"id": "u4_p1",
 						"type": "learn",
-						"title_fa": "since (نقطه‌ی شروع) و for (مدت‌زمان)",
+						"title_fa": "کاربرد since برای نقطه‌ی شروع و for برای مدت‌زمان",
 						"title_en": "",
 						"explanation": "since برای بیان نقطه‌ی شروع یک عمل (از یک زمان مشخص) و for برای بیان مدت‌زمان با حال کامل استفاده می‌شود.",
 						"cards": [
@@ -685,16 +685,16 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: I've lived here ___ 2015.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: I've lived here ___ 2015.",
+								"question": "I've lived here ___ 2015.",
 								"options": [
 									"since",
 									"for"
 								],
 								"correct": 0,
-								"hint_fa": "2015 یک نقطه‌ی زمانی مشخص است: since.",
+								"hint_fa": "2015 یک نقطه‌ی زمانی مشخص است یا یک مدت‌زمان؟",
 								"explanation_fa": "2015 یک نقطه‌ی زمانی مشخص است: since."
 							}
 						]
@@ -711,7 +711,7 @@
 								"answers": [
 									"for"
 								],
-								"hint_fa": "20 years یک مدت‌زمان است: for.",
+								"hint_fa": "20 years یک مدت‌زمان است یا یک نقطه‌ی زمانی؟",
 								"explanation_fa": "20 years یک مدت‌زمان است: for."
 							}
 						]
@@ -719,9 +719,9 @@
 					{
 						"id": "u4_p4",
 						"type": "learn",
-						"title_fa": "yet (منفی/سؤالی) و ever (سؤالی) در حال کامل",
+						"title_fa": "کاربرد yet در منفی/سؤالی و ever در سؤالی",
 						"title_en": "",
-						"explanation": "yet در جملات منفی و سؤالی به معنای 'هنوز' و ever در سؤالات به معنای 'تا حالا' استفاده می‌شود.",
+						"explanation": "yet در جملات منفی و سؤالی به معنای هنوز و ever در سؤالات به معنای تا حالا استفاده می‌شود.",
 						"cards": [
 							{
 								"en": "He hasn't got a job yet.",
@@ -742,9 +742,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«yet» معمولاً در جملات مثبت استفاده می‌شود.",
+								"statement": "کلمه‌ی yet معمولاً در جملات مثبت استفاده می‌شود.",
 								"answer": false,
-								"hint_fa": "yet معمولاً در جملات منفی و سؤالی به کار می‌رود.",
+								"hint_fa": "yet در کدام نوع جمله‌ها به کار می‌رود؟",
 								"explanation_fa": "yet معمولاً در جملات منفی و سؤالی به کار می‌رود."
 							}
 						]
@@ -761,7 +761,7 @@
 								"answers": [
 									"ever"
 								],
-								"hint_fa": "برای پرسیدن تجربه از ever استفاده می‌کنیم.",
+								"hint_fa": "برای پرسیدن تجربه کدام کلمه به کار می‌رود؟",
 								"explanation_fa": "برای پرسیدن تجربه از ever استفاده می‌کنیم."
 							}
 						]
@@ -771,16 +771,16 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: She has worked here ___ five years.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: She has worked here ___ five years.",
+								"question": "She has worked here ___ five years.",
 								"options": [
 									"since",
 									"for"
 								],
 								"correct": 1,
-								"hint_fa": "five years یک مدت‌زمان است: for.",
+								"hint_fa": "five years یک مدت‌زمان است یا یک نقطه‌ی زمانی؟",
 								"explanation_fa": "five years یک مدت‌زمان است: for."
 							}
 						]
@@ -797,7 +797,7 @@
 								"answers": [
 									"since"
 								],
-								"hint_fa": "این جمله نقطه‌ی شروع را نشان می‌دهد: since.",
+								"hint_fa": "این جمله نقطه‌ی شروع را نشان می‌دهد یا مدت‌زمان؟",
 								"explanation_fa": "این جمله نقطه‌ی شروع را نشان می‌دهد: since."
 							}
 						]
@@ -810,9 +810,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«ever» بیشتر در سوالات ماضی نقلی استفاده می‌شود.",
+								"statement": "کلمه‌ی ever بیشتر در سوالات ماضی نقلی استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: Have you ever...?",
+								"hint_fa": "ever بیشتر در کدام نوع جمله می‌آید؟",
 								"explanation_fa": "درسته! مثل: Have you ever...?"
 							}
 						]
@@ -827,7 +827,7 @@
 							{
 								"statement": "since برای بیان نقطه‌ی شروع یک عمل و for برای بیان مدت‌زمان به کار می‌رود.",
 								"answer": true,
-								"hint_fa": "درسته! since 2008 در مقابل for 20 years.",
+								"hint_fa": "به تفاوت since و for فکر کن.",
 								"explanation_fa": "درسته! since 2008 در مقابل for 20 years."
 							}
 						]
@@ -840,9 +840,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "yet معمولاً در جملات مثبت حال کامل به کار می‌رود.",
+								"statement": "کلمه‌ی yet معمولاً در جملات مثبت حال کامل به کار می‌رود.",
 								"answer": false,
-								"hint_fa": "yet در جملات منفی و سؤالی به کار می‌رود.",
+								"hint_fa": "yet در کدام نوع جمله‌ها به کار می‌رود؟",
 								"explanation_fa": "yet در جملات منفی و سؤالی به کار می‌رود."
 							}
 						]
@@ -852,16 +852,16 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "کدام گزینه درست است؟ 'I have lived here ___ ten years.'",
+						"instruction_fa": "کدام گزینه درست است؟",
 						"questions": [
 							{
-								"question": "کدام گزینه درست است؟ 'I have lived here ___ ten years.'",
+								"question": "I have lived here ___ ten years.",
 								"options": [
 									"since",
 									"for"
 								],
 								"correct": 1,
-								"hint_fa": "ten years یک مدت‌زمان است: for.",
+								"hint_fa": "ten years یک مدت‌زمان است.",
 								"explanation_fa": "ten years یک مدت‌زمان است: for."
 							}
 						]
@@ -870,7 +870,7 @@
 				"activity_count": 12,
 				"id": "v2_l2_u4",
 				"title_en": "",
-				"title_fa": "کاربرد با since / for / yet / ever",
+				"title_fa": "کاربرد since، for، yet و ever",
 				"type": "group"
 			},
 			{
@@ -880,7 +880,7 @@
 						"type": "learn",
 						"title_fa": "فعل دوکلمه‌ای چیست؟",
 						"title_en": "",
-						"explanation": "فعل دوکلمه‌ای (Phrasal Verb) از یک فعل و یک کلمه‌ی کوچک (مثل up، off، back) تشکیل شده و معنایی متفاوت از معنای تک‌تک کلمات دارد.",
+						"explanation": "فعل دوکلمه‌ای Phrasal Verb از یک فعل و یک کلمه‌ی کوچک مثل up، off، back تشکیل شده و معنایی متفاوت از معنای تک‌تک کلمات دارد.",
 						"cards": [
 							{
 								"en": "Turn off the washing machine.",
@@ -898,10 +898,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "'Turn off the light' یعنی چه؟",
+						"instruction_fa": "معنی عبارت turn off چیست؟",
 						"questions": [
 							{
-								"question": "'Turn off the light' یعنی چه؟",
+								"question": "",
 								"options": [
 									"روشن کردن",
 									"خاموش کردن",
@@ -909,7 +909,7 @@
 									"باز کردن"
 								],
 								"correct": 1,
-								"hint_fa": "turn off یعنی خاموش کردن.",
+								"hint_fa": "به معنای turn off فکر کن.",
 								"explanation_fa": "turn off یعنی خاموش کردن."
 							}
 						]
@@ -926,7 +926,7 @@
 								"answers": [
 									"Hurry"
 								],
-								"hint_fa": "hurry up یعنی عجله کردن.",
+								"hint_fa": "hurry up یعنی چه؟",
 								"explanation_fa": "hurry up یعنی عجله کردن."
 							}
 						]
@@ -934,9 +934,9 @@
 					{
 						"id": "u5_p4",
 						"type": "learn",
-						"title_fa": "چند فعل دوکلمه‌ی رایج",
+						"title_fa": "چند فعل دوکلمه‌ای رایج",
 						"title_en": "",
-						"explanation": "برخی فعل‌های دوکلمه‌ای رایج: call back (دوباره تماس گرفتن)، check in (ثبت‌نام هتل/فرودگاه)، look after (مراقبت کردن)، wake up (بیدار شدن).",
+						"explanation": "برخی فعل‌های دوکلمه‌ای رایج: call back به معنی دوباره تماس گرفتن، check in به معنی ثبت‌نام هتل یا فرودگاه، look after به معنی مراقبت کردن، wake up به معنی بیدار شدن.",
 						"cards": [
 							{
 								"en": "I'll call back later.",
@@ -954,10 +954,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "'look after' یعنی چه؟",
+						"instruction_fa": "معنی عبارت look after چیست؟",
 						"questions": [
 							{
-								"question": "'look after' یعنی چه؟",
+								"question": "",
 								"options": [
 									"نگاه کردن به",
 									"مراقبت کردن از",
@@ -965,7 +965,7 @@
 									"فراموش کردن"
 								],
 								"correct": 1,
-								"hint_fa": "look after یعنی مراقبت کردن از کسی یا چیزی.",
+								"hint_fa": "look after به معنای مراقبت کردن از کسی یا چیزی است.",
 								"explanation_fa": "look after یعنی مراقبت کردن از کسی یا چیزی."
 							}
 						]
@@ -978,7 +978,7 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«wake up» یعنی «به خواب رفتن».",
+								"statement": "wake up یعنی به خواب رفتن.",
 								"answer": false,
 								"hint_fa": "wake up یعنی بیدار شدن، نه به خواب رفتن.",
 								"explanation_fa": "wake up یعنی بیدار شدن، نه به خواب رفتن."
@@ -990,10 +990,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "'check in' در هتل یعنی چه؟",
+						"instruction_fa": "معنی عبارت check in در هتل چیست؟",
 						"questions": [
 							{
-								"question": "'check in' در هتل یعنی چه؟",
+								"question": "",
 								"options": [
 									"ثبت‌نام کردن",
 									"بیرون رفتن",
@@ -1001,7 +1001,7 @@
 									"مراقبت کردن"
 								],
 								"correct": 0,
-								"hint_fa": "check in یعنی ورود و ثبت‌نام در هتل.",
+								"hint_fa": "check in به معنای ثبت‌نام کردن در هتل است.",
 								"explanation_fa": "check in یعنی ورود و ثبت‌نام در هتل."
 							}
 						]
@@ -1018,7 +1018,7 @@
 								"answers": [
 									"wakes"
 								],
-								"hint_fa": "wake up یعنی بیدار شدن.",
+								"hint_fa": "wake up یعنی چه؟",
 								"explanation_fa": "wake up یعنی بیدار شدن."
 							}
 						]
@@ -1031,9 +1031,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«call back» یعنی بعداً دوباره با کسی تماس بگیریم.",
+								"statement": "call back یعنی بعداً دوباره با کسی تماس بگیریم.",
 								"answer": true,
-								"hint_fa": "درسته! call back یعنی دوباره تماس گرفتن.",
+								"hint_fa": "call back یعنی دوباره تماس گرفتن.",
 								"explanation_fa": "درسته! call back یعنی دوباره تماس گرفتن."
 							}
 						]
@@ -1048,7 +1048,7 @@
 							{
 								"statement": "فعل دوکلمه‌ای از یک فعل و یک کلمه‌ی کوچک تشکیل شده و معنایی متفاوت از معنای تک‌تک کلمات دارد.",
 								"answer": true,
-								"hint_fa": "درسته! مثل turn off که یعنی خاموش کردن.",
+								"hint_fa": "فعل دوکلمه‌ای از چه اجزایی ساخته می‌شود؟",
 								"explanation_fa": "درسته! مثل turn off که یعنی خاموش کردن."
 							}
 						]
@@ -1058,10 +1058,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "معنی 'turn off' چیست؟",
+						"instruction_fa": "معنی turn off چیست؟",
 						"questions": [
 							{
-								"question": "معنی 'turn off' چیست؟",
+								"question": "",
 								"options": [
 									"روشن کردن",
 									"خاموش کردن",
@@ -1079,10 +1079,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "معنی 'look after' چیست؟",
+						"instruction_fa": "معنی look after چیست؟",
 						"questions": [
 							{
-								"question": "معنی 'look after' چیست؟",
+								"question": "",
 								"options": [
 									"نگاه کردن به",
 									"مراقبت کردن از",
@@ -1099,7 +1099,7 @@
 				"activity_count": 12,
 				"id": "v2_l2_u5",
 				"title_en": "",
-				"title_fa": "افعال دوکلمه‌ای (Phrasal Verbs)",
+				"title_fa": "افعال دوکلمه‌ای Phrasal Verbs",
 				"type": "group"
 			},
 			{
@@ -1127,10 +1127,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "در جمله‌ی 'Swimming is useful for everyone'، کلمه‌ی 'Swimming' چه نقشی دارد؟",
+						"instruction_fa": "در جمله‌ی Swimming is useful for everyone، کلمه‌ی Swimming چه نقشی دارد؟",
 						"questions": [
 							{
-								"question": "در جمله‌ی 'Swimming is useful for everyone'، کلمه‌ی 'Swimming' چه نقشی دارد؟",
+								"question": "",
 								"options": [
 									"فعل اصلی جمله",
 									"فاعل جمله (جرأند)",
@@ -1138,8 +1138,8 @@
 									"قید"
 								],
 								"correct": 1,
-								"hint_fa": "'Swimming' اینجا مثل یک اسم عمل می‌کند و فاعل جمله است.",
-								"explanation_fa": "'Swimming' اینجا مثل یک اسم عمل می‌کند و فاعل جمله است."
+								"hint_fa": "Swimming اینجا مثل یک اسم عمل می‌کند.",
+								"explanation_fa": "Swimming اینجا مثل یک اسم عمل می‌کند و فاعل جمله است."
 							}
 						]
 					},
@@ -1155,8 +1155,8 @@
 								"answers": [
 									"Reading"
 								],
-								"hint_fa": "برای فاعل بودن، فعل + ing (جرأند) می‌آید: Reading.",
-								"explanation_fa": "برای فاعل بودن، فعل + ing (جرأند) می‌آید: Reading."
+								"hint_fa": "برای اینکه فعل به‌عنوان فاعل جمله به کار برود، چه شکلی می‌گیرد؟",
+								"explanation_fa": "برای فاعل بودن، فعل + ing یعنی جرأند می‌آید: Reading."
 							}
 						]
 					},
@@ -1183,16 +1183,16 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: Walking ___ me happy.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: Walking ___ me happy.",
+								"question": "Walking ___ me happy.",
 								"options": [
 									"make",
 									"makes"
 								],
 								"correct": 1,
-								"hint_fa": "یک جرأند تکی مثل فاعل مفرد است: makes.",
+								"hint_fa": "یک جرأند تکی فعل مفرد می‌گیرد.",
 								"explanation_fa": "یک جرأند تکی مثل فاعل مفرد است: makes."
 							}
 						]
@@ -1205,9 +1205,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «Cycling and jogging is my favorite sports» درست است.",
+								"statement": "این جمله درست است: Cycling and jogging is my favorite sports.",
 								"answer": false,
-								"hint_fa": "دو جرأند با هم فاعل جمع می‌گیرند: Cycling and jogging are...",
+								"hint_fa": "دو جرأند با هم فاعل جمع می‌گیرند.",
 								"explanation_fa": "دو جرأند با هم فاعل جمع می‌گیرند: Cycling and jogging are..."
 							}
 						]
@@ -1217,16 +1217,16 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: Reading ___ us learn English.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: Reading ___ us learn English.",
+								"question": "Reading ___ us learn English.",
 								"options": [
 									"help",
 									"helps"
 								],
 								"correct": 1,
-								"hint_fa": "جرأند تکی فعل مفرد می‌گیرد: helps.",
+								"hint_fa": "جرأند تکی فعل مفرد می‌گیرد.",
 								"explanation_fa": "جرأند تکی فعل مفرد می‌گیرد: helps."
 							}
 						]
@@ -1243,7 +1243,7 @@
 								"answers": [
 									"was"
 								],
-								"hint_fa": "جرأند تکی فعل مفرد می‌گیرد: was.",
+								"hint_fa": "جرأند تکی فعل مفرد می‌گیرد.",
 								"explanation_fa": "جرأند تکی فعل مفرد می‌گیرد: was."
 							}
 						]
@@ -1256,9 +1256,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "فاعل gerund مفرد، فعل مفرد می‌گیرد.",
+								"statement": "فاعل جرأند مفرد، فعل مفرد می‌گیرد.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: Swimming is...",
+								"hint_fa": "به مثال Swimming is... فکر کن.",
 								"explanation_fa": "درسته! مثل: Swimming is..."
 							}
 						]
@@ -1273,7 +1273,7 @@
 							{
 								"statement": "جرأند از فعل + ing ساخته می‌شود و مثل یک اسم عمل می‌کند.",
 								"answer": true,
-								"hint_fa": "درسته! مثل Swimming، Reading.",
+								"hint_fa": "جرأند از چه ساخته می‌شود؟",
 								"explanation_fa": "درسته! مثل Swimming، Reading."
 							}
 						]
@@ -1288,7 +1288,7 @@
 							{
 								"statement": "وقتی یک جرأند فاعل جمله باشد، فعل جمله باید جمع بیاید.",
 								"answer": false,
-								"hint_fa": "یک جرأند تکی فعل مفرد می‌گیرد، نه جمع.",
+								"hint_fa": "یک جرأند تکی فعل مفرد می‌گیرد یا جمع؟",
 								"explanation_fa": "یک جرأند تکی فعل مفرد می‌گیرد، نه جمع."
 							}
 						]
@@ -1301,7 +1301,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"Swimming are good exercise.",
 									"Swimming is good exercise.",
@@ -1309,7 +1309,7 @@
 									"Swimming has good exercise."
 								],
 								"correct": 1,
-								"hint_fa": "جرأند تکی فعل مفرد می‌گیرد: Swimming is...",
+								"hint_fa": "جرأند تکی فعل مفرد می‌گیرد.",
 								"explanation_fa": "جرأند تکی فعل مفرد می‌گیرد: Swimming is..."
 							}
 						]
@@ -1328,7 +1328,7 @@
 						"type": "learn",
 						"title_fa": "بعد از برخی افعال، جرأند می‌آید",
 						"title_en": "",
-						"explanation": "بعد از افعالی مثل enjoy، finish، give up، quit، love، از جرأند (فعل+ing) استفاده می‌کنیم، نه مصدر با to.",
+						"explanation": "بعد از افعالی مثل enjoy، finish، give up، quit، love از جرأند یعنی فعل+ing استفاده می‌کنیم، نه مصدر با to.",
 						"cards": [
 							{
 								"en": "I enjoy swimming.",
@@ -1346,10 +1346,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (swim): I enjoy ___.",
+						"instruction_fa": "جای خالی را کامل کن (swim)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (swim): I enjoy ___.",
+								"question": "I enjoy ___.",
 								"options": [
 									"swim",
 									"to swim",
@@ -1357,7 +1357,7 @@
 									"swam"
 								],
 								"correct": 2,
-								"hint_fa": "بعد از enjoy از جرأند استفاده می‌کنیم: swimming.",
+								"hint_fa": "بعد از enjoy کدام شکل فعل می‌آید؟",
 								"explanation_fa": "بعد از enjoy از جرأند استفاده می‌کنیم: swimming."
 							}
 						]
@@ -1374,7 +1374,7 @@
 								"answers": [
 									"smoking"
 								],
-								"hint_fa": "بعد از quit از جرأند استفاده می‌کنیم: smoking.",
+								"hint_fa": "بعد از quit کدام شکل فعل می‌آید؟",
 								"explanation_fa": "بعد از quit از جرأند استفاده می‌کنیم: smoking."
 							}
 						]
@@ -1382,9 +1382,9 @@
 					{
 						"id": "u7_p4",
 						"type": "learn",
-						"title_fa": "go + جرأند و حرف اضافه + جرأند",
+						"title_fa": "کاربرد go + جرأند و حرف اضافه + جرأند",
 						"title_en": "",
-						"explanation": "برای فعالیت‌های تفریحی از go + جرأند استفاده می‌کنیم (go fishing, go skiing) و بعد از حروف اضافه (at, in, about, for, without...) هم همیشه جرأند می‌آید، نه مصدر.",
+						"explanation": "برای فعالیت‌های تفریحی از go + جرأند استفاده می‌کنیم مثل go fishing و go skiing، و بعد از حروف اضافه مثل at، in، about، for، without هم همیشه جرأند می‌آید، نه مصدر.",
 						"cards": [
 							{
 								"en": "Let's go shopping.",
@@ -1402,10 +1402,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (ski): Let's go ___ this weekend.",
+						"instruction_fa": "جای خالی را کامل کن (ski)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (ski): Let's go ___ this weekend.",
+								"question": "Let's go ___ this weekend.",
 								"options": [
 									"ski",
 									"to ski",
@@ -1413,7 +1413,7 @@
 									"skied"
 								],
 								"correct": 2,
-								"hint_fa": "برای فعالیت‌های تفریحی: go + جرأند.",
+								"hint_fa": "برای فعالیت‌های تفریحی از go + جرأند استفاده می‌کنیم.",
 								"explanation_fa": "برای فعالیت‌های تفریحی: go + جرأند."
 							}
 						]
@@ -1430,8 +1430,8 @@
 								"answers": [
 									"playing"
 								],
-								"hint_fa": "بعد از حرف اضافه‌ی 'in' از جرأند استفاده می‌کنیم.",
-								"explanation_fa": "بعد از حرف اضافه‌ی 'in' از جرأند استفاده می‌کنیم."
+								"hint_fa": "بعد از حرف اضافه‌ی in کدام شکل فعل می‌آید؟",
+								"explanation_fa": "بعد از حرف اضافه‌ی in از جرأند استفاده می‌کنیم."
 							}
 						]
 					},
@@ -1440,10 +1440,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (bike): We went ___ yesterday.",
+						"instruction_fa": "جای خالی را کامل کن (bike)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (bike): We went ___ yesterday.",
+								"question": "We went ___ yesterday.",
 								"options": [
 									"bike",
 									"to bike",
@@ -1468,8 +1468,8 @@
 								"answers": [
 									"washing"
 								],
-								"hint_fa": "بعد از حرف اضافه‌ی 'of' از جرأند استفاده می‌کنیم.",
-								"explanation_fa": "بعد از حرف اضافه‌ی 'of' از جرأند استفاده می‌کنیم."
+								"hint_fa": "بعد از حرف اضافه‌ی of کدام شکل فعل می‌آید؟",
+								"explanation_fa": "بعد از حرف اضافه‌ی of از جرأند استفاده می‌کنیم."
 							}
 						]
 					},
@@ -1481,9 +1481,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "بعد از حروف اضافه‌ای مثل «about» یا «for»، از gerund استفاده می‌کنیم.",
+								"statement": "بعد از حروف اضافه‌ای مثل about یا for، از gerund استفاده می‌کنیم.",
 								"answer": true,
-								"hint_fa": "درسته! بعد از حروف اضافه همیشه جرأند می‌آید.",
+								"hint_fa": "بعد از حروف اضافه کدام شکل فعل می‌آید؟",
 								"explanation_fa": "درسته! بعد از حروف اضافه همیشه جرأند می‌آید."
 							}
 						]
@@ -1498,7 +1498,7 @@
 							{
 								"statement": "بعد از افعالی مثل enjoy، finish، quit، love از جرأند استفاده می‌کنیم.",
 								"answer": true,
-								"hint_fa": "درسته! مثل enjoy swimming.",
+								"hint_fa": "بعد از enjoy، finish، quit و love کدام شکل فعل می‌آید؟",
 								"explanation_fa": "درسته! مثل enjoy swimming."
 							}
 						]
@@ -1513,8 +1513,8 @@
 							{
 								"statement": "برای فعالیت‌های تفریحی مثل ماهیگیری یا اسکی از go + مصدر با to استفاده می‌کنیم.",
 								"answer": false,
-								"hint_fa": "درست: go + جرأند (go fishing, go skiing)، نه to.",
-								"explanation_fa": "درست: go + جرأند (go fishing, go skiing)، نه to."
+								"hint_fa": "go با جرأند می‌آید یا با مصدر با to؟",
+								"explanation_fa": "درست: go + جرأند مثل go fishing و go skiing، نه to."
 							}
 						]
 					},
@@ -1526,7 +1526,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"She is good at speak French.",
 									"She is good at speaking French.",
@@ -1534,8 +1534,8 @@
 									"She is good at spoke French."
 								],
 								"correct": 1,
-								"hint_fa": "بعد از حرف اضافه‌ی 'at' از جرأند استفاده می‌کنیم.",
-								"explanation_fa": "بعد از حرف اضافه‌ی 'at' از جرأند استفاده می‌کنیم."
+								"hint_fa": "بعد از حرف اضافه‌ی at کدام شکل فعل می‌آید؟",
+								"explanation_fa": "بعد از حرف اضافه‌ی at از جرأند استفاده می‌کنیم."
 							}
 						]
 					}

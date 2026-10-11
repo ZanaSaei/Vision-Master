@@ -48,6 +48,13 @@ const DIM_LABELS := [
 	"SubName", "DevName", "VersionName",
 ]
 
+## Labels that paint their OWN background colour and therefore decide their own
+## font colour (e.g. the exercise engine's single-letter badge: white type on a
+## dark square). The walk must leave these alone, otherwise it would force the
+## theme's text colour on top and the glyph would vanish into the square.
+## Opt in with `add_to_group(ThemeSceneStyler.KEEP_FONT_COLOR_GROUP)`.
+const KEEP_FONT_COLOR_GROUP := "keep_font_color"
+
 var _dark: bool = true
 var _palette: Dictionary = {}
 ## The header engine, so a header bar met during the walk is handed to the one
@@ -94,6 +101,10 @@ func style_scene(root: Node) -> void:
 
 
 func _style_walk(node: Node) -> void:
+	# BottomNavigation owns a bespoke visual design. Leave its complete subtree
+	# alone so app-wide card styling cannot overwrite its scene-authored styles.
+	if node.name == "BottomNavigation":
+		return
 	if node is CanvasLayer:
 		return
 	if node is PageView:
@@ -107,11 +118,10 @@ func _style_walk(node: Node) -> void:
 
 	if node is ColorRect:
 		_style_background_rect(node)
+	# Panel appearance is scene-authored. Do not apply shared card styles here;
+	# each scene can now configure its own Panel/PanelContainer in its scene file.
 	elif node is PanelContainer or node is Panel:
-		if _is_header_bar_panel(node):
-			_hide_header_bar_panel(node)
-		else:
-			_style_card(node)
+		pass
 	elif node is Label:
 		_style_label(node)
 	elif node is Button:
@@ -168,6 +178,10 @@ func _style_card(node: Node) -> void:
 
 
 func _style_label(label: Label) -> void:
+	# A label that wears its own coloured background (see KEEP_FONT_COLOR_GROUP)
+	# keeps the font colour its creator chose.
+	if label.is_in_group(KEEP_FONT_COLOR_GROUP):
+		return
 	var n := label.name
 	if n.ends_with("Title") or n.ends_with("Header"):
 		label.add_theme_color_override("font_color", _color("accent_bright"))

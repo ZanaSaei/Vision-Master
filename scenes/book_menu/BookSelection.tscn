@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cc5bggnhxrx5e"]
+
+[ext_resource type="PackedScene" uid="uid://nxsbernnf8ky" path="res://scenes/bottom_navigation/NavigationBar.tscn" id="1_gx7h6"]
+[ext_resource type="Script" uid="uid://ck675wn5jnu7w" path="res://scenes/book_menu/book_selection.gd" id="1_kdstj"]
+
+[node name="BookSelection" type="Control" unique_id=1108866151]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kdstj")
+
+[node name="BackgroundA" type="TextureRect" parent="." unique_id=1166541466]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackgroundB" type="TextureRect" parent="." unique_id=2090699330]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackgroundTint" type="ColorRect" parent="." unique_id=753047116]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1254902, 0.16470589, 0.26666668, 0.5882353)
+
+[node name="CardStack" type="Control" parent="." unique_id=1425483430]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="NavigationBar" parent="." unique_id=1620981374 instance=ExtResource("1_gx7h6")]
+layout_mode = 1

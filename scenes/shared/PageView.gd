@@ -77,6 +77,8 @@ var _scroll_tween: Tween
 
 # ---------- Swipe blockers ----------
 var _swipe_blockers: Array[Control] = []
+var _audio_panel_clearance: float = 0.0
+var _audio_panel_open: bool = false
 
 
 func _ready() -> void:
@@ -322,7 +324,10 @@ func add_page(id: String, title: String, icon: String, content: Control) -> void
 		"scroll": scroll,
 		"slot": slot,
 		"content": content,
+		"margin": margin,
 	})
+	if _audio_panel_open:
+		_apply_audio_panel_clearance()
 
 	# ------------------------------------------------------------
 	# Tab button.
@@ -947,6 +952,60 @@ func _stop_scroll_tween() -> void:
 func add_swipe_blocker(control: Control) -> void:
 	if control and not _swipe_blockers.has(control):
 		_swipe_blockers.append(control)
+		if control.has_signal("visibility_changed_state"):
+			var callback: Callable = _on_audio_panel_visibility_changed.bind(control)
+			if not control.visibility_changed_state.is_connected(callback):
+				control.visibility_changed_state.connect(callback)
+			if control.visible:
+				_on_audio_panel_visibility_changed(true, control)
+
+
+func _on_audio_panel_visibility_changed(is_open: bool, panel: Control) -> void:
+	if not is_instance_valid(panel):
+		return
+	_audio_panel_open = is_open
+	_audio_panel_clearance = panel.size.y if is_open else 0.0
+	if _audio_panel_open:
+		var panel_top: float = panel.get_global_rect().position.y
+		var covered_height: float = maxf(0.0, get_global_rect().end.y - panel_top)
+		_audio_panel_clearance = covered_height
+	_apply_audio_panel_clearance()
+
+
+func _apply_audio_panel_clearance() -> void:
+	for page_data: Dictionary in _pages:
+		var scroll: ScrollContainer = page_data.get("scroll") as ScrollContainer
+		var margin: MarginContainer = page_data.get("margin") as MarginContainer
+		if not is_instance_valid(scroll) or not is_instance_valid(margin):
+			continue
+		var bottom_padding: int = 60 + int(ceil(_audio_panel_clearance))
+		margin.add_theme_constant_override("margin_bottom", bottom_padding)
+		margin.reset_size()
+		margin.queue_sort()
+		scroll.queue_sort()
+		if _audio_panel_open:
+			if not page_data.has("audio_saved_scroll"):
+				page_data["audio_saved_scroll"] = scroll.scroll_vertical
+			call_deferred("_apply_audio_scroll_after_layout", page_data)
+		else:
+			if page_data.has("audio_saved_scroll"):
+				scroll.set_deferred("scroll_vertical", int(page_data["audio_saved_scroll"]))
+				page_data.erase("audio_saved_scroll")
+			margin.add_theme_constant_override("margin_bottom", 60)
+
+
+func _apply_audio_scroll_after_layout(page_data: Dictionary) -> void:
+	if not _audio_panel_open:
+		return
+	var scroll: ScrollContainer = page_data.get("scroll") as ScrollContainer
+	var margin: MarginContainer = page_data.get("margin") as MarginContainer
+	if not is_instance_valid(scroll) or not is_instance_valid(margin):
+		return
+	var max_scroll: float = maxf(0.0, margin.get_combined_minimum_size().y - scroll.size.y)
+	var required_scroll: int = int(ceil(_audio_panel_clearance))
+	var applied_scroll: float = minf(max_scroll, float(required_scroll))
+	var target_scroll: float = maxf(float(page_data.get("audio_saved_scroll", 0)), applied_scroll)
+	scroll.scroll_vertical = int(ceil(target_scroll))
 
 
 func _is_touch_blocked(global_pos: Vector2) -> bool:

@@ -35,9 +35,9 @@ var font_bold: FontFile
 var font_farsi: FontFile
 
 # ---------- Extra speaking state ----------
-var _model_btn: Button
-var _is_model_playing := false
 var _tts_fallback_tween: Tween
+var _user_response_tween: Tween
+const USER_RESPONSE_PAUSE := 4.0
 
 # ---------- Extra listening state ----------
 var _listening_tts_active_id := ""
@@ -277,11 +277,6 @@ func _build_partner_controls(page: VBoxContainer) -> void:
 	box.add_theme_constant_override("separation", 14)
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-	# Model button now toggles between Play and Stop.
-	_model_btn = _make_button("▶  شنیدن مدل", Color("#64748B"))
-	_model_btn.pressed.connect(_on_model_button_pressed)
-	box.add_child(_model_btn)
-
 	_action_btn = _make_button("🤝  تمرین با برنامه", SPEAK_ACCENT)
 	_action_btn.pressed.connect(_on_action_pressed)
 	box.add_child(_action_btn)
@@ -299,37 +294,12 @@ func _build_partner_controls(page: VBoxContainer) -> void:
 
 	page.add_child(_status_label)
 
-func _on_model_button_pressed() -> void:
-	if _is_model_playing:
-		_stop_model_reading()
-	else:
-		_start_model()
-
-
-func _start_model() -> void:
-	if _turns.is_empty():
-		return
-
-	# Stop listening players and any active TTS before starting the model.
-	_stop_all_listening_players()
-	_stop_tts()
-
-	_partner_mode = false
-	_current_turn = -1
-	_is_model_playing = true
-
-	if _model_btn:
-		_model_btn.text = "⏹  توقف صدا"
-
-	if _action_btn:
-		_action_btn.disabled = false
-		_action_btn.text = "🤝  تمرین با برنامه"
-
-	_set_status("🔊 در حال پخش گفتگوی مدل. برای توقف، روی «توقف صدا» بزنید.")
-
-	_advance_turn()
-
 func _stop_tts() -> void:
+	# Cancel an unfinished speaking pause whenever playback is stopped or replaced.
+	if is_instance_valid(_user_response_tween):
+		_user_response_tween.kill()
+		_user_response_tween = null
+
 	# If a fallback listening TTS is active, reset its UI.
 	_reset_listening_tts_ui()
 
@@ -342,26 +312,6 @@ func _stop_tts() -> void:
 
 	if DisplayServer.has_method("tts_stop"):
 		DisplayServer.tts_stop()
-
-func _stop_model_reading() -> void:
-	if not _is_model_playing:
-		return
-
-	_is_model_playing = false
-
-	_stop_tts()
-	_unhighlight_all()
-
-	_current_turn = -1
-
-	if _model_btn:
-		_model_btn.text = "▶  شنیدن مدل"
-
-	if _action_btn:
-		_action_btn.disabled = false
-		_action_btn.text = "🤝  تمرین با برنامه"
-
-	_set_status("⏹ صدای مدل متوقف شد. برای پخش دوباره، روی «شنیدن مدل» بزنید.")
 
 func _build_turn_cards(page: VBoxContainer) -> void:
 	_turn_cards.clear()
@@ -419,12 +369,13 @@ func _build_turn_cards(page: VBoxContainer) -> void:
 
 func _on_action_pressed() -> void:
 	if _current_turn >= 0:
-		# Mid-conversation: this is the "Next" button.
+		# User may skip the remaining response pause with the button.
+		if is_instance_valid(_user_response_tween):
+			_user_response_tween.kill()
+			_user_response_tween = null
 		_advance_turn()
 	else:
 		_start_partner()
-
-
 
 
 func _advance_turn() -> void:
@@ -446,19 +397,24 @@ func _advance_turn() -> void:
 
 		if _action_btn:
 			_action_btn.disabled = true
+			_action_btn.text = "🤝  تمرین با برنامه"
 
 		_speak(str(turn.get("text", "")), _advance_turn)
 	else:
-		# User's turn in partner mode.
-		_set_status("🎤 نوبت شماست! بگویید: «" + str(turn.get("text", "")) + "» — سپس روی «بعدی» بزنید.")
+		# User's turn: leave time to repeat the line, then continue automatically.
+		_set_status("🎤 نوبت شماست! بگویید: «" + str(turn.get("text", "")) + "» — خط بعدی پس از چند ثانیه پخش می‌شود.")
 
 		if _action_btn:
 			_action_btn.disabled = false
 			_action_btn.text = "➡  بعدی"
 
-func _start_partner() -> void:
-	_is_model_playing = false
+		if is_instance_valid(_user_response_tween):
+			_user_response_tween.kill()
+		_user_response_tween = create_tween()
+		_user_response_tween.tween_interval(USER_RESPONSE_PAUSE)
+		_user_response_tween.tween_callback(_advance_turn)
 
+func _start_partner() -> void:
 	_stop_all_listening_players()
 	_stop_tts()
 	_unhighlight_all()
@@ -466,24 +422,21 @@ func _start_partner() -> void:
 	_partner_mode = true
 	_current_turn = -1
 
-	if _model_btn:
-		_model_btn.text = "▶  شنیدن مدل"
-
 	_advance_turn()
 
 func _on_page_changed(_index: int, page_id: String) -> void:
 	# Re-tint the dark background to match the skill being practiced.
 	_apply_ambient(SPEAK_ACCENT if page_id == "speaking" else LISTEN_ACCENT)
 
-	# Stop speaking-page playback and reset its button.
-	_is_model_playing = false
+	# Stop speaking-page playback.
 	_stop_tts()
 	_unhighlight_all()
 
 	_current_turn = -1
 
-	if _model_btn:
-		_model_btn.text = "▶  شنیدن مدل"
+	if is_instance_valid(_user_response_tween):
+		_user_response_tween.kill()
+		_user_response_tween = null
 
 	if _action_btn:
 		_action_btn.disabled = false
@@ -497,23 +450,15 @@ func _finish_conversation() -> void:
 	_unhighlight_all()
 
 	_current_turn = -1
-	_is_model_playing = false
-
-	if _model_btn:
-		_model_btn.text = "▶  شنیدن مدل"
+	if is_instance_valid(_user_response_tween):
+		_user_response_tween.kill()
+	_user_response_tween = null
 
 	if _action_btn:
 		_action_btn.disabled = false
+		_action_btn.text = "🤝  تمرین با برنامه"
 
-		if _partner_mode:
-			_action_btn.text = "🤝  تمرین دوباره"
-		else:
-			_action_btn.text = "🤝  تمرین با برنامه"
-
-	if _partner_mode:
-		_set_status("🎉 آفرین! یک گفتگوی واقعی انگلیسی انجام دادید. به صفحه «شنیدن» بروید ←")
-	else:
-		_set_status("این گفتگوی مدل بود. حالا روی «تمرین با برنامه» بزنید و یک نقش را بگیرید!")
+	_set_status("🎉 آفرین! گفتگو به پایان رسید.")
 
 func _highlight(index: int) -> void:
 	if index < 0 or index >= _turn_cards.size():
@@ -886,8 +831,7 @@ func _play_listening(
 	# True only if this same card is currently using fallback TTS.
 	var same_tts_active := (_listening_tts_active_id == conv_id and not has_audio)
 
-	# Stop model playback and other conversation audio.
-	_stop_model_reading()
+	# Stop any active conversation TTS and other conversation audio.
 	_stop_all_listening_players()
 
 	# Stop any TTS except the one we are about to toggle as "Stop".
@@ -1154,14 +1098,11 @@ func _make_fa_label(text: String, font_size: int, color: Color = Color.WHITE, do
 # NAVIGATION
 # ============================================================
 func _on_home_pressed() -> void:
-	_is_model_playing = false
 	_stop_tts()
 	_stop_all_listening_players()
 	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")
 
 func _on_back_button_pressed() -> void:
-	_is_model_playing = false
-
 	_stop_tts()
 	_stop_all_listening_players()
 

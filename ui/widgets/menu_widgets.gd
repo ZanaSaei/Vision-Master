@@ -216,7 +216,7 @@ static func make_card(
 	var pressed_style: StyleBoxFlat = MenuTheme.card_pressed_style(accent_col, 26, flat)
 	var focus_style: StyleBoxFlat = MenuTheme.card_hover_style(accent_col, 26, flat)
 	for style: StyleBoxFlat in [normal_style, hover_style, pressed_style, focus_style]:
-		style.set_border_width_all(3)
+		style.set_border_width_all(DesignTokens.BORDER_SUBTLE)
 		style.border_color = Color(accent_col.r, accent_col.g, accent_col.b, 0.95)
 	btn.add_theme_stylebox_override("normal", normal_style)
 	btn.add_theme_stylebox_override("hover", hover_style)

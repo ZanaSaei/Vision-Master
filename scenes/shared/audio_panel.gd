@@ -3,6 +3,7 @@ extends PanelContainer
 signal playback_updated(current_time: float)
 signal audio_closed
 signal audio_finished
+signal visibility_changed_state(is_open: bool)
 
 const SEEK_STEP: float = 10.0 #
 const TAP_PRESS_SCALE: Vector2 = Vector2(0.85, 0.85)
@@ -179,6 +180,7 @@ func load_and_play(audio_path: String) -> void:
 		return
 
 	show()
+	call_deferred("_notify_visibility_changed", true)
 	_reset_button_scales()
 	audio_player.stream = stream
 	audio_player.play()
@@ -221,12 +223,17 @@ func _on_forward_pressed() -> void:
 		audio_player.seek(min(max_len, audio_player.get_playback_position() + SEEK_STEP)) #[cite: 2, 3]
 		audio_slider.value = audio_player.get_playback_position()
 
+func _notify_visibility_changed(is_open: bool) -> void:
+	visibility_changed_state.emit(is_open)
+
+
 func _on_close_audio_pressed() -> void:
 	audio_player.stop() #[cite: 2, 3]
 	audio_player.stream_paused = false #[cite: 2, 3]
 	audio_slider.value = 0.0 #[cite: 2, 3]
 	_reset_button_scales()
 	hide()
+	_notify_visibility_changed(false)
 	audio_closed.emit()
 
 func _on_audio_finished() -> void:

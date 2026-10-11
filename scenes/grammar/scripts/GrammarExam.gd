@@ -26,6 +26,9 @@ var _correct_total: int = 0       # accumulated correct answers
 var _items_total: int = 0         # accumulated question count
 var _check_btn: Button = null
 var _score_overlay: Control = null
+var _manual_writing_total: int = 0
+var _writing_score_input: SpinBox = null
+var _page_view: PageView = null
 
 
 func _ready() -> void:
@@ -101,33 +104,23 @@ func _build_ui() -> void:
 
 	_build_header(main, data)
 
-	var content_box: PanelContainer = PanelContainer.new()
-	GrammarTheme.style_card(content_box)
-	content_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	main.add_child(content_box)
+	var page_host: Control = Control.new()
+	page_host.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	page_host.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	main.add_child(page_host)
 
-	var content_margin: MarginContainer = MarginContainer.new()
-	content_margin.add_theme_constant_override("margin_left", GrammarTheme.CONTENT_MARGIN)
-	content_margin.add_theme_constant_override("margin_top", GrammarTheme.CONTENT_MARGIN)
-	content_margin.add_theme_constant_override("margin_right", GrammarTheme.CONTENT_MARGIN)
-	content_margin.add_theme_constant_override("margin_bottom", GrammarTheme.CONTENT_MARGIN)
-	content_box.add_child(content_margin)
-
-	var scroll: ScrollContainer = ScrollContainer.new()
-	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	content_margin.add_child(scroll)
-
-	var content: VBoxContainer = VBoxContainer.new()
-	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	content.add_theme_constant_override("separation", GrammarTheme.SPACING_LG)
-	scroll.add_child(content)
+	_page_view = PageView.new()
+	_page_view.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_page_view.tab_font_size = 28
+	_page_view.tab_font_min = 20
+	page_host.add_child(_page_view)
 
 	if blocks.is_empty():
-		_show_empty_message(content)
+		var empty_page: VBoxContainer = VBoxContainer.new()
+		_show_empty_message(empty_page)
+		_page_view.add_page("empty", "آزمون", "📄", empty_page)
 	else:
-		_build_exam_content(content, data, blocks)
+		_build_exam_pages(data, blocks)
 
 
 # ============================================================
@@ -173,9 +166,73 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 # ============================================================
 # CONTENT
 # ============================================================
-func _build_exam_content(content: VBoxContainer, data: Dictionary, blocks: Array) -> void:
+func _build_exam_pages(data: Dictionary, blocks: Array) -> void:
+	var section_pages: Array[Dictionary] = []
+	var current: Dictionary = {"title": "آزمون", "blocks": []}
+
+	for block_value in blocks:
+		if not block_value is Dictionary:
+			continue
+		var block: Dictionary = block_value
+		if str(block.get("type", "")) == "h4":
+			if not (current["blocks"] as Array).is_empty():
+				section_pages.append(current)
+			current = {"title": str(block.get("text", "بخش")), "blocks": []}
+		else:
+			(current["blocks"] as Array).append(block)
+
+	if not (current["blocks"] as Array).is_empty():
+		section_pages.append(current)
+
+	var next_letter_index: int = 0
+	for index in section_pages.size():
+		var section: Dictionary = section_pages[index]
+		var content: VBoxContainer = VBoxContainer.new()
+		content.add_theme_constant_override("separation", GrammarTheme.SPACING_LG)
+		next_letter_index = _build_exam_content(
+			content,
+			data,
+			section["blocks"] as Array,
+			index == 0,
+			index == section_pages.size() - 1,
+			next_letter_index
+		)
+		_page_view.add_page("section_%d" % index, _page_title(str(section["title"])), "", content)
+
+
+func _page_title(source: String) -> String:
+	var title: String = source.strip_edges()
+	var separator_index: int = title.find("—")
+	if separator_index >= 0:
+		title = title.substr(0, separator_index).strip_edges()
+	if title.is_empty():
+		return "آزمون"
+	return title
+
+
+func _build_exam_content(
+	content: VBoxContainer,
+	data: Dictionary,
+	blocks: Array,
+	show_exam_instruction: bool,
+	is_last_page: bool,
+	letter_index: int
+) -> int:
+	if show_exam_instruction:
+		var instruction: Label = Label.new()
+		instruction.text = "لطفاً به همهٔ سؤال‌ها پاسخ دهید. برای مشاهدهٔ نمره و بازخورد، در صفحهٔ آخر روی دکمهٔ «بررسی پاسخ‌ها» بزنید."
+		instruction.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		instruction.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		instruction.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		instruction.add_theme_font_size_override("font_size", 28)
+		instruction.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
+		var instruction_font: Font = GrammarTheme.get_fa_regular()
+		if instruction_font != null:
+			instruction.add_theme_font_override("font", instruction_font)
+		content.add_child(instruction)
+
 	var subtitle: Label = Label.new()
-	GrammarTheme.set_bidi_text(subtitle, str(data.get("subtitle_fa", "به همهٔ سوالات پاسخ دهید، سپس دکمهٔ «بررسی پاسخ‌ها» را بزنید.")))
+	GrammarTheme.set_bidi_text(subtitle, str(data.get("subtitle_fa", "")))
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var body_font: Font = GrammarTheme.get_fa_regular()
@@ -183,34 +240,39 @@ func _build_exam_content(content: VBoxContainer, data: Dictionary, blocks: Array
 		subtitle.add_theme_font_override("font", body_font)
 	subtitle.add_theme_font_size_override("font_size", 28)
 	subtitle.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
-	content.add_child(subtitle)
+	if not str(data.get("subtitle_fa", "")).is_empty():
+		content.add_child(subtitle)
 
-	# One ExerciseEngine per content block (skipping "h4" heading markers).
-	# Per-item check buttons are hidden; the single global button below
-	# grades all auto-gradable exercises at once.
-	for block in blocks:
-		var type := str(block.get("type", ""))
-		if type == "h4":
-			_add_section_header(content, block)
+	for block_value in blocks:
+		if not block_value is Dictionary:
 			continue
+		var block: Dictionary = block_value
+		var type: String = str(block.get("type", ""))
+		var exercise_block: Dictionary = block.duplicate(true)
+		if bool(exercise_block.get("show_letter", true)) and _has_instruction_text(block):
+			exercise_block["letter_index"] = letter_index
+			letter_index += 1
+
 		var engine: ExerciseEngine = ExerciseEngine.new()
 		engine.hide_footer_buttons = true
+		engine.size_flags_horizontal = Control.SIZE_EXPAND_FILL | Control.SIZE_SHRINK_BEGIN
+		engine.custom_minimum_size.x = 0
 		content.add_child(engine)
-		engine.build(block)
-		engine.exercise_checked.connect(_on_exercise_checked)
-		# Open-ended / writing / reading blocks cannot be auto-graded, so they
-		# are rendered for practice but excluded from the /100 score.
-		if not type in ["open_ended", "pronunciation", "writing", "passage", "reading"]:
+		engine.build(exercise_block)
+		var points_per_item: int = int(block.get("points_per_item", 1))
+		engine.exercise_checked.connect(_on_exercise_checked.bind(points_per_item))
+		if type in ["open_ended", "pronunciation", "writing"]:
+			_manual_writing_total += int(block.get("score_points", 0))
+		elif not type in ["passage", "reading"]:
 			_engines.append(engine)
 
-	# Spacer so the content never sits under the button row.
+	if not is_last_page or _engines.is_empty():
+		return letter_index
+
 	var spacer: Control = Control.new()
 	spacer.custom_minimum_size = Vector2(0, 40)
 	content.add_child(spacer)
 
-	# Global Check button (only shown when there is something auto-gradable).
-	if _engines.is_empty():
-		return
 	_check_btn = Button.new()
 	_check_btn.text = "بررسی پاسخ‌ها"
 	_check_btn.custom_minimum_size = Vector2(0, 112)
@@ -220,8 +282,55 @@ func _build_exam_content(content: VBoxContainer, data: Dictionary, blocks: Array
 	_check_btn.pressed.connect(_on_check_pressed)
 	content.add_child(_check_btn)
 
+	if _manual_writing_total <= 0:
+		return letter_index
+	var grading_note: Label = Label.new()
+	grading_note.text = "Writing score (self-assessment / teacher) — 0–%d" % _manual_writing_total
+	grading_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	grading_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	grading_note.custom_minimum_size = Vector2(0, 64)
+	grading_note.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grading_note.add_theme_font_size_override("font_size", 24)
+	grading_note.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
+	content.add_child(grading_note)
+
+	_writing_score_input = SpinBox.new()
+	_writing_score_input.min_value = 0
+	_writing_score_input.max_value = _manual_writing_total
+	_writing_score_input.step = 1
+	_writing_score_input.value = 0
+	_writing_score_input.custom_minimum_size = Vector2(240, 72)
+	_writing_score_input.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_writing_score_input.add_theme_font_size_override("font_size", 24)
+	content.add_child(_writing_score_input)
+
+	var score_hint: Label = Label.new()
+	score_hint.text = "Enter a manual score here. It is not included in the automatic result."
+	score_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	score_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	score_hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	score_hint.add_theme_font_size_override("font_size", 21)
+	score_hint.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
+	content.add_child(score_hint)
+
+	var score_notice: Label = Label.new()
+	score_notice.text = "Manual score is not included in the automatic result."
+	score_notice.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	score_notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	score_notice.add_theme_font_size_override("font_size", 21)
+	score_notice.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
+	content.add_child(score_notice)
+	return letter_index
+
 
 # Renders a bold section divider (the JSON "h4" blocks, e.g. "Part 1 — ...").
+func _has_instruction_text(block: Dictionary) -> bool:
+	var instruction: Variant = block.get("instruction", "")
+	if instruction is Dictionary:
+		return not str(instruction.get("en", instruction.get("fa", ""))).is_empty()
+	return not str(instruction).is_empty()
+
+
 func _add_section_header(content: VBoxContainer, block: Dictionary) -> void:
 	var header: Label = Label.new()
 	GrammarTheme.set_bidi_text(header, str(block.get("text", "")))
@@ -254,9 +363,9 @@ func _show_empty_message(content: VBoxContainer) -> void:
 # ============================================================
 # GRADING
 # ============================================================
-func _on_exercise_checked(_id: String, correct: int, total: int) -> void:
-	_correct_total += correct
-	_items_total += total
+func _on_exercise_checked(_id: String, correct: int, total: int, points_per_item: int = 1) -> void:
+	_correct_total += correct * points_per_item
+	_items_total += total * points_per_item
 
 
 func _on_check_pressed() -> void:
@@ -272,8 +381,10 @@ func _on_check_pressed() -> void:
 	_check_btn.text = "پاسخ‌ها بررسی شد ✓"
 
 	var score: int = 0
-	if _items_total > 0:
-		score = int(round(float(_correct_total) / float(_items_total) * 100.0))
+	var maximum_score: int = _items_total
+	var earned_score: int = _correct_total
+	if maximum_score > 0:
+		score = int(round(float(earned_score) / float(maximum_score) * 100.0))
 	_show_score_popup(score)
 
 

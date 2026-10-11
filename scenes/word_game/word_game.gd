@@ -13,11 +13,14 @@ const SCENE_SPELLING := "res://scenes/word_game/SpellingGame.tscn"
 @onready var word_of_day_button: Button = $Content/WordOfDayButton
 @onready var meaning_button: Button = $Content/MeaningButton
 @onready var spelling_button: Button = $Content/SpellingButton
-
-var _pulse_tween: Tween = null
-
+@onready var word_of_day_label: Label = $Content/WordOfDayButton/Margin/Row/Title
+@onready var meaning_label: Label = $Content/MeaningButton/Margin/Row/Title
+@onready var spelling_label: Label = $Content/SpellingButton/Margin/Row/Title
 
 func _ready() -> void:
+	for label: Label in [word_of_day_label, meaning_label, spelling_label]:
+		label.self_modulate = Color.WHITE
+		label.modulate = Color.WHITE
 	back_button.pressed.connect(_on_back_button_pressed)
 	word_of_day_button.pressed.connect(_on_word_of_day_pressed)
 	meaning_button.pressed.connect(_on_meaning_pressed)
@@ -32,8 +35,42 @@ func _ready() -> void:
 ## the main-menu cards) on every game-mode button.
 func _wire_button_animations() -> void:
 	for btn: Button in [word_of_day_button, meaning_button, spelling_button]:
-		MenuStyle.wire_microinteractions(btn)
+		btn.pivot_offset = btn.size / 2.0
+		btn.resized.connect(_update_mode_button_pivot.bind(btn))
+		btn.mouse_entered.connect(_on_mode_button_hovered.bind(btn))
+		btn.mouse_exited.connect(_on_mode_button_exited.bind(btn))
+		btn.button_down.connect(_animate_mode_button.bind(btn, Vector2(0.97, 0.97)))
+		btn.button_up.connect(_on_mode_button_up.bind(btn))
 	_play_entrance_animation()
+
+
+func _update_mode_button_pivot(btn: Button) -> void:
+	btn.pivot_offset = btn.size / 2.0
+
+
+func _on_mode_button_hovered(btn: Button) -> void:
+	if not btn.button_pressed:
+		_animate_mode_button(btn, Vector2(1.03, 1.03))
+
+
+func _on_mode_button_exited(btn: Button) -> void:
+	if not btn.button_pressed:
+		_animate_mode_button(btn, Vector2.ONE)
+
+
+func _on_mode_button_up(btn: Button) -> void:
+	var target_scale: Vector2 = Vector2(1.03, 1.03) if btn.is_hovered() else Vector2.ONE
+	_animate_mode_button(btn, target_scale)
+
+
+func _animate_mode_button(btn: Button, target_scale: Vector2) -> void:
+	if btn.has_meta("word_game_scale_tween"):
+		var old_tween: Tween = btn.get_meta("word_game_scale_tween") as Tween
+		if old_tween != null and old_tween.is_valid():
+			old_tween.kill()
+	var tween: Tween = btn.create_tween()
+	btn.set_meta("word_game_scale_tween", tween)
+	tween.tween_property(btn, "scale", target_scale, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
 ## Staggered entrance: each button fades in and rises from slightly below,
@@ -57,38 +94,8 @@ func _play_entrance_animation() -> void:
 		tw.parallel().tween_property(btn, "position:y", btn.position.y - 40.0, 0.32) \
 			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
-	# Once the stagger finishes, start the idle pulse on the featured button.
-	await get_tree().create_timer(0.08 * buttons.size() + 0.4).timeout
-	if not is_inside_tree():
-		return
-	_start_ambient_pulse()
-
-
-## Gentle looping "breathe" pulse on the کلمه روز button so it reads as the
-## featured mode of the hub (mirrors the main menu's ambient title pulse).
-## Paused while the pointer is over the button so it never fights the
-## hover/press micro-interactions, which also tween `scale`.
-func _start_ambient_pulse() -> void:
-	_pulse_tween = create_tween().set_loops()
-	_pulse_tween.tween_property(word_of_day_button, "scale", Vector2(1.015, 1.015), 1.6) \
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	_pulse_tween.tween_property(word_of_day_button, "scale", Vector2.ONE, 1.6) \
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-	# Hover/press squash the button — give them exclusive control of scale.
-	word_of_day_button.mouse_entered.connect(_pause_ambient_pulse)
-	word_of_day_button.mouse_exited.connect(_resume_ambient_pulse)
-
-
-func _pause_ambient_pulse() -> void:
-	if _pulse_tween != null and _pulse_tween.is_valid():
-		_pulse_tween.pause()
-
-
-func _resume_ambient_pulse() -> void:
-	if _pulse_tween != null and _pulse_tween.is_valid():
-		word_of_day_button.scale = Vector2.ONE
-		_pulse_tween.play()
+	# Idle scale pulse intentionally disabled; entrance and hover/press
+	# micro-interactions remain active.
 
 
 func _on_back_button_pressed() -> void:

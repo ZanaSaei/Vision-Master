@@ -299,7 +299,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.95, 0.98, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 34
-text = "Vision Master یک اپلیکیشن آموزش زبان انگلیسی برای دبیرستان است؛ شامل واژگان، دستور زبان، مکالمه، خواندن و تمرین‌های تعاملی برای کتاب‌های Vision 1 تا 3."
+text = "برنامه Vision Master یک اپلیکیشن آموزش زبان انگلیسی برای دبیرستان است؛ شامل واژگان، دستور زبان، مکالمه، خواندن و تمرین‌های تعاملی برای کتاب‌های ویژن ۱، ۲ و ۳."
 horizontal_alignment = 2
 autowrap_mode = 3
 
@@ -331,7 +331,7 @@ theme_override_styles/normal = SubResource("btn_style")
 theme_override_styles/pressed = SubResource("btn_pressed")
 theme_override_styles/hover = SubResource("btn_hover")
 theme_override_styles/focus = SubResource("btn_style")
-text = "✉️   mrsaei@example.com"
+text = "✉️   mrsaei.dev@gmail.com"
 
 [node name="InstagramRow" type="Button" parent="Scroll/Margin/Layout/ContactCard/VBox" unique_id=1982736451]
 custom_minimum_size = Vector2(0, 90)
@@ -344,7 +344,7 @@ theme_override_styles/normal = SubResource("btn_style")
 theme_override_styles/pressed = SubResource("btn_pressed")
 theme_override_styles/hover = SubResource("btn_hover")
 theme_override_styles/focus = SubResource("btn_style")
-text = "📸   @mrsaei"
+text = "📸   @mrsaei_dev"
 
 [node name="Sep" type="HSeparator" parent="Scroll/Margin/Layout/ContactCard/VBox" unique_id=1845794110]
 layout_mode = 2

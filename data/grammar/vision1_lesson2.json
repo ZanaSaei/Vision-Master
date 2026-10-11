@@ -37,7 +37,7 @@
 							{
 								"correct": 1,
 								"explanation_fa": "صفت ویژگی اسم را نشان می‌دهد. اینجا 'blue' رنگ 'sky' را توصیف می‌کند.",
-								"hint_fa": "صفت ویژگی اسم را نشان می‌دهد. اینجا 'blue' رنگ 'sky' را توصیف می‌کند.",
+								"hint_fa": "یادت باشه صفت ویژگی اسم را نشان می‌دهد. اینجا اسم sky هست. ببین چی این کلمه رو توصیف می کنه.",
 								"options": [
 									"Look",
 									"blue",
@@ -57,8 +57,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "'interesting' ویژگی 'movie' را توصیف می‌کند، پس صفت است.",
-								"hint_fa": "'interesting' ویژگی 'movie' را توصیف می‌کند، پس صفت است.",
+								"explanation_fa": "کلمه 'interesting' ویژگی 'movie' را توصیف می‌کند، پس صفت است.",
+								"hint_fa": "دقت کن چه کلمه ای ویژگی 'movie' را توصیف می‌کند.",
 								"options": [
 									"watched",
 									"interesting",
@@ -83,7 +83,7 @@
 								"fa": "او خیلی خوشحال بود."
 							}
 						],
-						"explanation": "صفت می‌تواند بعد از افعال is، am، are، was، were هم بیاید. در این حالت صفت به فاعل جمله برمی‌گردد.",
+						"explanation": "صفت می‌تواند بعد از افعال is، am، are، was، were هم بیاید. در این حالت صفت به subject (فاعل) جمله برمی‌گردد.",
 						"highlight_word": "amazing",
 						"id": "u1_p4",
 						"title_en": "",
@@ -96,8 +96,8 @@
 						"questions": [
 							{
 								"correct": 3,
-								"explanation_fa": "'happy' بعد از فعل was آمده و حال فاعل (She) را توصیف می‌کند.",
-								"hint_fa": "'happy' بعد از فعل was آمده و حال فاعل (She) را توصیف می‌کند.",
+								"explanation_fa": "کلمه 'happy' بعد از فعل was آمده و حال subject (She) را توصیف می‌کند.",
+								"hint_fa": "دقت کن چه کلمه ای حال She را توصیف می کند و بعد از فعل to be آمده است.",
 								"options": [
 									"She",
 									"was",
@@ -117,8 +117,8 @@
 						"items": [
 							{
 								"answer": false,
-								"explanation_fa": "'tall' ویژگی 'man' را توصیف می‌کند، پس صفت است نه اسم.",
-								"hint_fa": "'tall' ویژگی 'man' را توصیف می‌کند، پس صفت است نه اسم.",
+								"explanation_fa": "کلمه 'tall' ویژگی 'man' را توصیف می‌کند، پس صفت است نه اسم.",
+								"hint_fa": "اینجا tall کلمه ی man را توصیف کرده است.",
 								"statement": "در جمله‌ی «Robert's father is a very tall man»، کلمه‌ی «tall» اسم است."
 							}
 						],
@@ -132,8 +132,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "'interesting' ویژگی 'animals' را توصیف می‌کند.",
-								"hint_fa": "'interesting' ویژگی 'animals' را توصیف می‌کند.",
+								"explanation_fa": "کلمه 'interesting' ویژگی 'animals' را توصیف می‌کند.",
+								"hint_fa": "کلمه 'interesting' ویژگی 'animals' را توصیف می‌کند.",
 								"options": [
 									"Many",
 									"interesting",
@@ -153,8 +153,8 @@
 						"questions": [
 							{
 								"correct": 3,
-								"explanation_fa": "'powerful' ویژگی 'computers' را توصیف می‌کند.",
-								"hint_fa": "'powerful' ویژگی 'computers' را توصیف می‌کند.",
+								"explanation_fa": "کلمه 'powerful' ویژگی 'computers' را توصیف می‌کند.",
+								"hint_fa": "چه کلمه ای ویژگی 'computers' را توصیف می‌کند؟",
 								"options": [
 									"He",
 									"works",
@@ -175,9 +175,9 @@
 							{
 								"correct": 1,
 								"explanation_fa": "صفت همیشه ویژگی یک اسم را نشان می‌دهد.",
-								"hint_fa": "صفت همیشه ویژگی یک اسم را نشان می‌دهد.",
+								"hint_fa": "همیشه یادت باشه، صفت ویژگی یک اسم را نشان می‌دهد.",
 								"options": [
-									"فاعل جمله است",
+									"فاعل یا subject جمله است",
 									"ویژگی 'people' را توصیف می‌کند",
 									"فعل جمله است",
 									"قید جمله است"
@@ -211,7 +211,7 @@
 							{
 								"answer": false,
 								"explanation_fa": "صفت می‌تواند بعد از افعالی مانند is، am، are، was، were هم بیاید؛ مثل 'She was happy'.",
-								"hint_fa": "صفت می‌تواند بعد از افعالی مانند is، am، are، was، were هم بیاید؛ مثل 'She was happy'.",
+								"hint_fa": "یادت باشه که صفت فقط قبل از اسم نمی آید.",
 								"statement": "صفت فقط قبل از اسم می‌آید و هرگز بعد از فعل be نمی‌آید."
 							}
 						],
@@ -225,8 +225,8 @@
 						"questions": [
 							{
 								"correct": 3,
-								"explanation_fa": "'old' ویژگی 'tree' را توصیف می‌کند.",
-								"hint_fa": "'old' ویژگی 'tree' را توصیف می‌کند.",
+								"explanation_fa": "کلمه 'old' ویژگی 'tree' را توصیف می‌کند.",
+								"hint_fa": "چه کلمه ای ویژگی 'tree' را توصیف می‌کند؟",
 								"options": [
 									"This",
 									"is",
@@ -290,8 +290,8 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "as...as برای نشان دادن برابری استفاده می‌شود، نه برتری.",
-								"hint_fa": "as...as برای نشان دادن برابری استفاده می‌شود، نه برتری.",
+								"explanation_fa": "ساختار as...as برای نشان دادن برابری استفاده می‌شود، نه برتری.",
+								"hint_fa": "ساختار as...as برای برتری استفاده نمی شود.",
 								"options": [
 									"سارا مهربان‌تر است",
 									"ندا مهربان‌تر است",
@@ -330,8 +330,8 @@
 							{
 								"answer": false,
 								"explanation_fa": "در as...as از شکل ساده‌ی صفت (tall) استفاده می‌شود، نه comparative (taller).",
-								"hint_fa": "در as...as از شکل ساده‌ی صفت (tall) استفاده می‌شود، نه comparative (taller).",
-								"statement": "«as taller as» ساختار درستی در انگلیسی است."
+								"hint_fa": "در as...as از شکل ساده‌ی صفت استفاده می‌شود.",
+								"statement": "عبارت «as taller as» ساختار درستی در انگلیسی است."
 							}
 						],
 						"title_en": "",
@@ -399,8 +399,8 @@
 						"items": [
 							{
 								"answer": true,
-								"explanation_fa": "as...as یعنی برابری کامل در آن ویژگی.",
-								"hint_fa": "as...as یعنی برابری کامل در آن ویژگی.",
+								"explanation_fa": "استفاده از as...as یعنی برابری کامل در آن ویژگی.",
+								"hint_fa": "وقتی که برابر باشند باید از as...as استفاده کرد.",
 								"statement": "جمله‌ی «His grandfather is as old as my grandfather» یعنی این دو پدربزرگ هم‌سن هستند."
 							}
 						],
@@ -414,8 +414,8 @@
 						"items": [
 							{
 								"answer": false,
-								"explanation_fa": "as...as برای نشان دادن برابری استفاده می‌شود، نه برتری.",
-								"hint_fa": "as...as برای نشان دادن برابری استفاده می‌شود، نه برتری.",
+								"explanation_fa": "استفاده از as...as یعنی برابری کامل در آن ویژگی.",
+								"hint_fa": "وقتی که برابر باشند باید از as...as استفاده کرد.",
 								"statement": "ساختار as...as برای نشان دادن برتری یک چیز نسبت به چیز دیگر استفاده می‌شود."
 							}
 						],
@@ -429,8 +429,8 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "as dangerous as یعنی هر دو در یک سطح از خطرناک بودن قرار دارند.",
-								"hint_fa": "as dangerous as یعنی هر دو در یک سطح از خطرناک بودن قرار دارند.",
+								"explanation_fa": "ساختار as dangerous as یعنی هر دو در یک سطح از خطرناک بودن قرار دارند.",
+								"hint_fa": "از ساختار as...as برای چی استفاده می کنی؟ برابری!",
 								"options": [
 									"شیرها خطرناک‌ترند",
 									"ببرها خطرناک‌ترند",
@@ -485,7 +485,7 @@
 						"highlight_word": "taller",
 						"id": "u3_p1",
 						"title_en": "",
-						"title_fa": "صفت کوتاه + er + than",
+						"title_fa": "adjective (صفت کوتاه) + er + than",
 						"type": "learn"
 					},
 					{
@@ -518,8 +518,8 @@
 								"answers": [
 									"longer"
 								],
-								"explanation_fa": "long یک صفت کوتاه است، پس er می‌گیرد: longer.",
-								"hint_fa": "long یک صفت کوتاه است، پس er می‌گیرد: longer.",
+								"explanation_fa": "صفت long یک صفت کوتاه است، پس er می‌گیرد: longer.",
+								"hint_fa": "چون صفت کوتاهه فقط er اضافه کن.",
 								"text": "Karoon is ___ than Atrak."
 							}
 						],
@@ -547,8 +547,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "big یک صفت کوتاه است، پس comparative آن bigger است.",
-								"hint_fa": "big یک صفت کوتاه است، پس comparative آن bigger است.",
+								"explanation_fa": "صفت big یک صفت کوتاه است، پس comparative آن bigger است.",
+								"hint_fa": "چون صفت کوتاهه فقط er اضافه کن.",
 								"options": [
 									"big",
 									"bigger",
@@ -570,7 +570,7 @@
 								"answer": true,
 								"explanation_fa": "ساختار comparative + than برای مقایسه‌ی دو چیز استفاده می‌شود.",
 								"hint_fa": "ساختار comparative + than برای مقایسه‌ی دو چیز استفاده می‌شود.",
-								"statement": "«older than» برای مقایسه‌ی دو چیز استفاده می‌شود."
+								"statement": "عبارت «older than» برای مقایسه‌ی دو چیز استفاده می‌شود."
 							}
 						],
 						"title_en": "",
@@ -605,8 +605,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "tall یک صفت کوتاه است: taller.",
-								"hint_fa": "tall یک صفت کوتاه است: taller.",
+								"explanation_fa": "صفت tall یک صفت کوتاه است: taller.",
+								"hint_fa": "صفت کوتاه = er",
 								"options": [
 									"tall",
 									"taller",
@@ -628,8 +628,8 @@
 								"answers": [
 									"deeper"
 								],
-								"explanation_fa": "deep یک صفت کوتاه است: deeper.",
-								"hint_fa": "deep یک صفت کوتاه است: deeper.",
+								"explanation_fa": "کلمه deep یک صفت کوتاه است: deeper.",
+								"hint_fa": "صفت کوتاه = er",
 								"text": "This lake is ___ than that one."
 							}
 						],
@@ -644,7 +644,7 @@
 							{
 								"answer": true,
 								"explanation_fa": "درسته! این قانون اصلی comparative برای صفت‌های کوتاه است.",
-								"hint_fa": "درسته! این قانون اصلی comparative برای صفت‌های کوتاه است.",
+								"hint_fa": "قانون اصلی: adjective + er + than",
 								"statement": "برای مقایسه‌ی دو چیز با صفت‌های کوتاه، به آخر صفت er اضافه می‌کنیم و بعد از آن than می‌آوریم."
 							}
 						],
@@ -681,8 +681,8 @@
 								"answers": [
 									"smaller"
 								],
-								"explanation_fa": "small یک صفت کوتاه است: smaller.",
-								"hint_fa": "small یک صفت کوتاه است: smaller.",
+								"explanation_fa": "کلمه small یک صفت کوتاه است: smaller.",
+								"hint_fa": "کلمه small یک صفت کوتاه است.",
 								"text": "Mars is ___ than Jupiter."
 							}
 						],
@@ -710,7 +710,7 @@
 								"fa": "امید کوچک‌ترین دانش‌آموز کلاس ماست."
 							}
 						],
-						"explanation": "وقتی می‌خواهیم بگوییم یک چیز بین سه چیز یا بیشتر، بیشترین آن ویژگی را دارد، از the + صفت + est استفاده می‌کنیم.",
+						"explanation": "وقتی می‌خواهیم بگوییم یک چیز بین سه چیز یا بیشتر، بیشترین آن ویژگی را دارد، از est + صفت + the استفاده می‌کنیم.",
 						"highlight_word": "the tallest",
 						"id": "u4_p1",
 						"title_en": "",
@@ -723,8 +723,8 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "برای صفت عالی صفت کوتاه، از the + صفت + est استفاده می‌شود.",
-								"hint_fa": "برای صفت عالی صفت کوتاه، از the + صفت + est استفاده می‌شود.",
+								"explanation_fa": "برای صفت عالی صفت کوتاه، از est + صفت + the استفاده می‌شود.",
+								"hint_fa": "برای صفت عالی صفت کوتاه، از est + صفت + the استفاده می‌شود.",
 								"options": [
 									"tall",
 									"taller",
@@ -786,8 +786,8 @@
 								"answers": [
 									"biggest"
 								],
-								"explanation_fa": "برای صفت عالی صفت کوتاه big: the biggest.",
-								"hint_fa": "برای صفت عالی صفت کوتاه big: the biggest.",
+								"explanation_fa": "برای صفت عالی صفت کوتاه big: شکل the biggest درست است.",
+								"hint_fa": "برای صفت عالی صفت کوتاه از est استفاده می کنیم.",
 								"text": "Asia is the ___ continent of the world."
 							}
 						],
@@ -803,7 +803,7 @@
 								"answer": false,
 								"explanation_fa": "صفت عالی (superlative) برای مقایسه‌ی سه چیز یا بیشتر استفاده می‌شود، نه فقط دو تا.",
 								"hint_fa": "صفت عالی (superlative) برای مقایسه‌ی سه چیز یا بیشتر استفاده می‌شود، نه فقط دو تا.",
-								"statement": "«the tallest» وقتی استفاده می‌شود که فقط دو چیز را مقایسه می‌کنیم."
+								"statement": "عبارت «the tallest» وقتی استفاده می‌شود که فقط دو چیز را مقایسه می‌کنیم."
 							}
 						],
 						"title_en": "",
@@ -816,8 +816,8 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "برای صفت عالی صفت کوتاه long: the longest.",
-								"hint_fa": "برای صفت عالی صفت کوتاه long: the longest.",
+								"explanation_fa": "برای صفت عالی صفت کوتاه long: شکل the longest درست است.",
+								"hint_fa": "برای صفت عالی صفت کوتاه از est استفاده می کنیم.",
 								"options": [
 									"long",
 									"longer",
@@ -837,8 +837,8 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "برای صفت عالی صفت کوتاه large: the largest.",
-								"hint_fa": "برای صفت عالی صفت کوتاه large: the largest.",
+								"explanation_fa": "برای صفت عالی صفت کوتاه large: شکل the largest درست است.",
+								"hint_fa": "برای صفت عالی صفت کوتاه از est استفاده می کنیم.",
 								"options": [
 									"large",
 									"larger",
@@ -853,7 +853,7 @@
 						"type": "multiple_choice"
 					},
 					{
-						"hint_fa": "همه‌ی این‌ها صفت‌های کوتاه هستند: the + صفت + est.",
+						"hint_fa": "همه‌ی این‌ها صفت‌های کوتاه هستند: est + صفت + the.",
 						"id": "u4_p9",
 						"instruction_fa": "صفت را به شکل عالی آن وصل کن",
 						"items": [
@@ -881,7 +881,7 @@
 							{
 								"answer": true,
 								"explanation_fa": "درسته! صفت عالی وقتی به‌کار می‌رود که بیش از دو مورد مقایسه می‌شوند.",
-								"hint_fa": "درسته! صفت عالی وقتی به‌کار می‌رود که بیش از دو مورد مقایسه می‌شوند.",
+								"hint_fa": "صفت عالی وقتی به‌کار می‌رود که بیش از دو مورد مقایسه می‌شوند.",
 								"statement": "برای مقایسه‌ی یک چیز با دو یا چند چیز دیگر (بیشتر از دو مورد)، از صفت عالی (superlative) استفاده می‌کنیم."
 							}
 						],
@@ -896,7 +896,7 @@
 							{
 								"correct": 1,
 								"explanation_fa": "قبل از صفت عالی همیشه the می‌آید: the tallest.",
-								"hint_fa": "قبل از صفت عالی همیشه the می‌آید: the tallest.",
+								"hint_fa": "قبل از صفت عالی همیشه the می‌آید.",
 								"options": [
 									"Damavand is tallest mountain of Iran.",
 									"Damavand is the tallest mountain of Iran.",
@@ -919,7 +919,7 @@
 									"biggest"
 								],
 								"explanation_fa": "the + صفت کوتاه + est → the biggest",
-								"hint_fa": "the + صفت کوتاه + est → the biggest",
+								"hint_fa": "the + صفت کوتاه + est",
 								"text": "Asia is the ___ continent of the world."
 							}
 						],
@@ -987,7 +987,7 @@
 							{
 								"correct": 1,
 								"explanation_fa": "حرف t در hot دوبل می‌شود: hotter.",
-								"hint_fa": "حرف t در hot دوبل می‌شود: hotter.",
+								"hint_fa": "حرف t در hot دوبل می‌شود.",
 								"options": [
 									"hoter",
 									"hotter",
@@ -1051,8 +1051,8 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "y در happy به i تبدیل می‌شود: the happiest.",
-								"hint_fa": "y در happy به i تبدیل می‌شود: the happiest.",
+								"explanation_fa": "حرف y در happy به i تبدیل می‌شود: the happiest.",
+								"hint_fa": "حرف y در happy به چه حرفی تغییر می کند ؟",
 								"options": [
 									"the happyest",
 									"the happier",
@@ -1093,8 +1093,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "y در easy به i تبدیل می‌شود: the easiest.",
-								"hint_fa": "y در easy به i تبدیل می‌شود: the easiest.",
+								"explanation_fa": "حرف y در easy به i تبدیل می‌شود: the easiest.",
+								"hint_fa": "حرف y در easy به چه حرفی تغییر می کند ؟",
 								"options": [
 									"the easyest",
 									"the easiest",
@@ -1141,7 +1141,7 @@
 							{
 								"answer": true,
 								"explanation_fa": "درسته! hot → hotter",
-								"hint_fa": "درسته! hot → hotter",
+								"hint_fa": "اگر صفت کوتاه به یک حرف صامت ختم شود و قبل از آن یک مصوت کوتاه باشد، حرف آخر را دوبل می‌کنیم.",
 								"statement": "در صفت‌هایی مثل hot که به یک حرف صامت ختم می‌شوند، حرف آخر قبل از اضافه کردن er دوبل می‌شود."
 							}
 						],
@@ -1170,8 +1170,8 @@
 						"questions": [
 							{
 								"correct": 0,
-								"explanation_fa": "y در happy به i تبدیل می‌شود: the happiest.",
-								"hint_fa": "y در happy به i تبدیل می‌شود: the happiest.",
+								"explanation_fa": "حرف y در happy به i تبدیل می‌شود: the happiest.",
+								"hint_fa": "حرف y در happy به i تبدیل می‌شود.",
 								"options": [
 									"the happiest",
 									"the happyest",
@@ -1209,7 +1209,7 @@
 						"highlight_word": "more expensive",
 						"id": "u6_p1",
 						"title_en": "",
-						"title_fa": "صفت‌های بلند: more + صفت + than",
+						"title_fa": "صفت‌های بلند: than + صفت + more",
 						"type": "learn"
 					},
 					{
@@ -1220,8 +1220,8 @@
 								"answers": [
 									"more than"
 								],
-								"explanation_fa": "expensive یک صفت بلند است، پس از more...than استفاده می‌کنیم.",
-								"hint_fa": "expensive یک صفت بلند است، پس از more...than استفاده می‌کنیم.",
+								"explanation_fa": "صفت expensive یک صفت بلند است، پس از more...than استفاده می‌کنیم.",
+								"hint_fa": "زمانی که صفت بلند باشد از more...than استفاده می‌کنیم.",
 								"text": "This laptop is ___ expensive ___ that one."
 							}
 						],
@@ -1235,8 +1235,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "beautiful یک صفت بلند است: more beautiful.",
-								"hint_fa": "beautiful یک صفت بلند است: more beautiful.",
+								"explanation_fa": "صفت beautiful یک صفت بلند است: more beautiful.",
+								"hint_fa": "صفت beautiful یک صفت بلند است.",
 								"options": [
 									"beautifuler",
 									"more beautiful",
@@ -1265,7 +1265,7 @@
 						"highlight_word": "the most difficult",
 						"id": "u6_p4",
 						"title_en": "",
-						"title_fa": "صفت‌های بلند: the most + صفت",
+						"title_fa": "صفت‌های بلند: صفت + the most",
 						"type": "learn"
 					},
 					{
@@ -1306,8 +1306,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "interesting صفت بلند است: more interesting.",
-								"hint_fa": "interesting صفت بلند است: more interesting.",
+								"explanation_fa": "کلمه interesting یک صفت بلند است: more interesting.",
+								"hint_fa": "کلمه interesting یک صفت بلند است.",
 								"options": [
 									"This book is interestinger than that one.",
 									"This book is more interesting than that one.",
@@ -1329,8 +1329,8 @@
 								"answers": [
 									"more"
 								],
-								"explanation_fa": "dangerous یک صفت بلند است: more dangerous.",
-								"hint_fa": "dangerous یک صفت بلند است: more dangerous.",
+								"explanation_fa": "کلمه dangerous یک صفت بلند است: more dangerous.",
+								"hint_fa": "کلمه dangerous یک صفت بلند است.",
 								"text": "Sharks are ___ dangerous than whales."
 							}
 						],
@@ -1344,15 +1344,15 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "dangerous یک صفت بلند است: the most dangerous.",
-								"hint_fa": "dangerous یک صفت بلند است: the most dangerous.",
+								"explanation_fa": "کلمه interesting یک صفت بلند است: the most interesting.",
+								"hint_fa": "کلمه interesting یک صفت بلند است.",
 								"options": [
-									"dangerousest",
-									"more dangerous",
-									"the most dangerous",
-									"the dangerousest"
+									"interestingest",
+									"more interesting",
+									"the most interesting",
+									"the interestingest"
 								],
-								"question": "شکل عالی صفت 'dangerous' کدام است؟"
+								"question": "شکل عالی صفت 'interesting' کدام است؟"
 							}
 						],
 						"title_en": "",
@@ -1366,7 +1366,7 @@
 							{
 								"answer": true,
 								"explanation_fa": "درسته! صفت‌های بلند با more/most مقایسه می‌شوند.",
-								"hint_fa": "درسته! صفت‌های بلند با more/most مقایسه می‌شوند.",
+								"hint_fa": "صفت‌های بلند با more/most مقایسه می‌شوند.",
 								"statement": "برای صفت‌های بلند (دو هجا یا بیشتر) مثل beautiful یا expensive، به‌جای اضافه کردن er از more استفاده می‌کنیم."
 							}
 						],
@@ -1380,7 +1380,7 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "the most + صفت بلند",
+								"explanation_fa": "آفرین: صفت بلند + the most",
 								"hint_fa": "the most + صفت بلند",
 								"options": [
 									"dangerousest",
@@ -1403,8 +1403,8 @@
 								"answers": [
 									"more"
 								],
-								"explanation_fa": "beautiful صفت بلند است: more beautiful.",
-								"hint_fa": "beautiful صفت بلند است: more beautiful.",
+								"explanation_fa": "کلمه beautiful صفت بلند است و چون than در جمله هست: more beautiful.",
+								"hint_fa": "کلمه beautiful یک صفت بلند است و اینجا کلمه than داریم.",
 								"text": "Persian zebras are ___ beautiful than African zebras."
 							}
 						],
@@ -1424,20 +1424,16 @@
 					{
 						"cards": [
 							{
-								"en": "good → better",
-								"fa": "good ← better"
+								"en": "good → better"
 							},
 							{
-								"en": "bad → worse",
-								"fa": "bad ← worse"
+								"en": "bad → worse"
 							},
 							{
-								"en": "far → farther",
-								"fa": "far ← farther"
+								"en": "far → farther"
 							},
 							{
-								"en": "many/much → more",
-								"fa": "many/much ← more"
+								"en": "many/much → more"
 							}
 						],
 						"explanation": "صفت‌های good، bad، far و many/much از قانون معمول er یا more پیروی نمی‌کنند و شکل تفضیلی‌شان باید حفظ شود.",
@@ -1479,8 +1475,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "good یک صفت بی‌قاعده است: better.",
-								"hint_fa": "good یک صفت بی‌قاعده است: better.",
+								"explanation_fa": "کلمه good یک صفت بی‌قاعده است: better.",
+								"hint_fa": "کلمه good یک صفت بی‌قاعده است.",
 								"options": [
 									"gooder",
 									"better",
@@ -1497,20 +1493,16 @@
 					{
 						"cards": [
 							{
-								"en": "good → the best",
-								"fa": "good ← the best"
+								"en": "good → the best"
 							},
 							{
-								"en": "bad → the worst",
-								"fa": "bad ← the worst"
+								"en": "bad → the worst"
 							},
 							{
-								"en": "far → the farthest",
-								"fa": "far ← the farthest"
+								"en": "far → the farthest"
 							},
 							{
-								"en": "many/much → the most",
-								"fa": "many/much ← the most"
+								"en": "many/much → the most"
 							}
 						],
 						"explanation": "شکل عالی (superlative) این چهار صفت هم بی‌قاعده است.",
@@ -1552,9 +1544,9 @@
 						"items": [
 							{
 								"answer": false,
-								"explanation_fa": "good بی‌قاعده است؛ شکل درست آن better و the best است.",
-								"hint_fa": "good بی‌قاعده است؛ شکل درست آن better و the best است.",
-								"statement": "«gooder» یک کلمه‌ی درست در انگلیسی است."
+								"explanation_fa": "کلمه good بی‌قاعده است؛ شکل درست آن better و the best است.",
+								"hint_fa": "کلمه good بی‌قاعده است.",
+								"statement": "کلمه «gooder» یک کلمه‌ی درست در انگلیسی است."
 							}
 						],
 						"title_en": "",
@@ -1567,8 +1559,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "bad یک صفت بی‌قاعده است: worse.",
-								"hint_fa": "bad یک صفت بی‌قاعده است: worse.",
+								"explanation_fa": "کلمه bad یک صفت بی‌قاعده است: worse.",
+								"hint_fa": "کلمه bad یک صفت بی‌قاعده است.",
 								"options": [
 									"badder",
 									"worse",
@@ -1588,8 +1580,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "far یک صفت بی‌قاعده است: the farthest.",
-								"hint_fa": "far یک صفت بی‌قاعده است: the farthest.",
+								"explanation_fa": "کلمه far یک صفت بی‌قاعده است: the farthest.",
+								"hint_fa": "کلمه far یک صفت بی‌قاعده است.",
 								"options": [
 									"farer",
 									"the farthest",
@@ -1636,7 +1628,7 @@
 							{
 								"answer": true,
 								"explanation_fa": "درسته! این چهار صفت بی‌قاعده هستند.",
-								"hint_fa": "درسته! این چهار صفت بی‌قاعده هستند.",
+								"hint_fa": "این چهار صفت بی‌قاعده هستند.",
 								"statement": "صفت‌های good، bad، far و many/much از قانون معمول er یا more پیروی نمی‌کنند و باید حفظ شوند."
 							}
 						],
@@ -1651,7 +1643,7 @@
 							{
 								"correct": 1,
 								"explanation_fa": "bad ← worse (بی‌قاعده)",
-								"hint_fa": "bad ← worse (بی‌قاعده)",
+								"hint_fa": "کلمه bad بی قاعده است.",
 								"options": [
 									"badder",
 									"worse",
@@ -1673,8 +1665,8 @@
 								"answers": [
 									"best"
 								],
-								"explanation_fa": "good در حالت عالی: the best.",
-								"hint_fa": "good در حالت عالی: the best.",
+								"explanation_fa": "کلمه good در حالت عالی: the best.",
+								"hint_fa": "کلمه good بی قاعده است.",
 								"text": "This is the ___ book I have ever read."
 							}
 						],
@@ -1705,8 +1697,8 @@
 						"questions": [
 							{
 								"correct": 3,
-								"explanation_fa": "'powerful' ویژگی 'computers' را نشان می‌دهد.",
-								"hint_fa": "'powerful' ویژگی 'computers' را نشان می‌دهد.",
+								"explanation_fa": "کلمه 'powerful' ویژگی 'computers' را نشان می‌دهد.",
+								"hint_fa": "چه کلمه ای ویژگی 'computers' را نشان می‌دهد؟",
 								"options": [
 									"He",
 									"works",
@@ -1769,8 +1761,8 @@
 						"questions": [
 							{
 								"correct": 2,
-								"explanation_fa": "صفت عالی صفت کوتاه: the + صفت + est",
-								"hint_fa": "صفت عالی صفت کوتاه: the + صفت + est",
+								"explanation_fa": "صفت عالی صفت کوتاه: est + صفت + the",
+								"hint_fa": "صفت عالی صفت کوتاه: est + صفت + the",
 								"options": [
 									"tall",
 									"taller",
@@ -1792,8 +1784,8 @@
 								"answers": [
 									"more than"
 								],
-								"explanation_fa": "صفت بلند expensive: more...than",
-								"hint_fa": "صفت بلند expensive: more...than",
+								"explanation_fa": "کلمه expensive یک صفت بلند است پس از more استفاده می کنیم.",
+								"hint_fa": "برای صفت تفضیلی صفات بلند باید از چه کلمه ای استفاده کنیم؟",
 								"text": "This laptop is ___ expensive ___ that one."
 							}
 						],
@@ -1807,8 +1799,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "bad یک صفت بی‌قاعده است: the worst.",
-								"hint_fa": "bad یک صفت بی‌قاعده است: the worst.",
+								"explanation_fa": "کلمه bad یک صفت بی‌قاعده است: the worst.",
+								"hint_fa": "کلمه bad یک صفت بی‌قاعده است.",
 								"options": [
 									"the baddest",
 									"the worst",
@@ -1858,8 +1850,8 @@
 						"questions": [
 							{
 								"correct": 1,
-								"explanation_fa": "صفت عالی صفت بلند: the most + صفت",
-								"hint_fa": "صفت عالی صفت بلند: the most + صفت",
+								"explanation_fa": "صفت عالی صفت بلند: صفت + the most",
+								"hint_fa": "صفت عالی صفت بلند با the most درست می شود.",
 								"options": [
 									"This is more interesting book of all.",
 									"This is the most interesting book of all.",

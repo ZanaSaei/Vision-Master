@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://b2tiexu8jgth0"]
+
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="1_4reby"]
+
+[resource]
+font = ExtResource("1_4reby")
+font_size = 15
+font_color = Color(0, 0, 0, 1)

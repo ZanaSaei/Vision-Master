@@ -111,7 +111,7 @@ func _build_ui() -> void:
 	lesson_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	if title_font != null:
 		lesson_title.add_theme_font_override("font", title_font)
-	lesson_title.add_theme_font_size_override("font_size", 30)
+	lesson_title.add_theme_font_size_override("font_size", 34)
 	lesson_title.add_theme_color_override("font_color", GrammarTheme.text_color())
 	content.add_child(lesson_title)
 
@@ -124,7 +124,7 @@ func _build_ui() -> void:
 		xp_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		if body_font != null:
 			xp_label.add_theme_font_override("font", body_font)
-		xp_label.add_theme_font_size_override("font_size", 26)
+		xp_label.add_theme_font_size_override("font_size", 30)
 		xp_label.add_theme_color_override("font_color", GrammarTheme.xp_color())
 		content.add_child(xp_label)
 
@@ -134,7 +134,7 @@ func _build_ui() -> void:
 		hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		if body_font != null:
 			hint.add_theme_font_override("font", body_font)
-		hint.add_theme_font_size_override("font_size", 24)
+		hint.add_theme_font_size_override("font_size", 28)
 		hint.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
 		content.add_child(hint)
 
@@ -177,12 +177,23 @@ func _build_ui() -> void:
 		scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		content.add_child(scroll)
 
+		# ScrollContainer clips content at its viewport edges. Inset the grid
+		# so a unit's hover/press scale and StyleBox shadow stay inside that
+		# clipping rectangle, including the outermost columns.
+		var grid_margin: MarginContainer = MarginContainer.new()
+		grid_margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid_margin.add_theme_constant_override("margin_left", 72)
+		grid_margin.add_theme_constant_override("margin_right", 72)
+		grid_margin.add_theme_constant_override("margin_top", 48)
+		grid_margin.add_theme_constant_override("margin_bottom", 48)
+		scroll.add_child(grid_margin)
+
 		var grid: GridContainer = GridContainer.new()
 		grid.columns = 2
 		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		grid.add_theme_constant_override("h_separation", 18)
 		grid.add_theme_constant_override("v_separation", 18)
-		scroll.add_child(grid)
+		grid_margin.add_child(grid)
 
 		for i in range(units.size()):
 			var unit: Dictionary = units[i]

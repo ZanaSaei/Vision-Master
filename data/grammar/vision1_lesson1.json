@@ -22,7 +22,7 @@
 						"title_fa": "آینده ساده با Will",
 						"title_en": "Simple Future with Will",
 						"explanation": "برای صحبت درباره‌ی کارهایی که در آینده اتفاق می‌افتند از will استفاده می‌کنیم.",
-						"structure": "فعل ساده + will + فاعل",
+						"structure": "subject + will + base verb",
 						"cards": [
 							{
 								"en": "I will help you.",
@@ -39,8 +39,8 @@
 						"type": "learn",
 						"title_fa": "ساختار جمله مثبت",
 						"title_en": "Affirmative Sentences",
-						"explanation": "در جملات مثبت، ساختار به صورت فاعل + will + شکل ساده فعل است.",
-						"structure": "فعل ساده + will + فاعل",
+						"explanation": "در جملات مثبت، ساختار به صورت subject یا فاعل بعد will و بعد از آن base verb یا همان فعل ساده است:",
+						"structure": "subject + will + base verb",
 						"cards": [
 							{
 								"en": "She will read a book.",
@@ -55,17 +55,17 @@
 					{
 						"id": "unit1_unscramble_affirmative",
 						"type": "unscramble",
-						"title_fa": "مرتب‌کردن جمله مثبت",
+						"title_fa": "مرتب‌ کردن جمله مثبت",
 						"instruction_fa": "کلمات را مرتب کن تا ساختار جمله مثبت را کامل کنی. \nاز چپ به راست",
 						"items": [
 							{
 								"words": [
-									"فاعل",
-									"فعل ساده",
+									"subject (فاعل)",
+									"base verb (فعل ساده)",
 									"will"
 								],
-								"answer": "فاعل will فعل ساده",
-								"hint_fa": "ساختار درست از چپ به راست:\nفعل ساده + will + فاعل"
+								"answer": "subject (فاعل) will base verb (فعل ساده)",
+								"hint_fa": "ساختار درست از چپ به راست:\nsubject + will + base verb"
 							}
 						]
 					},
@@ -84,9 +84,9 @@
 									"do"
 								],
 								"correct": 0.0,
-								"hint_fa": "برای آینده بعد از فاعل از will استفاده می‌کنیم.",
+								"hint_fa": "برای آینده بعد از subject (فاعل) از will استفاده می‌کنیم.",
 								"explanation_fa": "آفرین! will درست است.",
-								"wrong_explanation_fa": "بعد از فاعل برای آینده از will استفاده می‌کنیم."
+								"wrong_explanation_fa": "بعد از subject (فاعل) برای آینده از will استفاده می‌کنیم."
 							}
 						]
 					},
@@ -171,7 +171,7 @@
 						"title_fa": "ساختار جمله منفی",
 						"title_en": "Negative Sentences",
 						"explanation": "برای ساختن جمله منفی، کلمه‌ی not را بعد از will می‌آوریم.",
-						"structure": "فعل ساده + will + not + فاعل",
+						"structure": "subject + will + not + base verb",
 						"cards": [
 							{
 								"en": "I will not go there.",
@@ -193,11 +193,11 @@
 								"words": [
 									"will",
 									"not",
-									"فعل ساده",
-									"فاعل"
+									"base verb",
+									"subject"
 								],
-								"answer": "فاعل will not فعل ساده",
-								"hint_fa": "ساختار درست از چپ به راست: \nفعل ساده + will + not + فاعل"
+								"answer": "subject will not base verb",
+								"hint_fa": "ساختار درست از چپ به راست: \nsubject + will + not + base verb"
 							}
 						]
 					},
@@ -207,7 +207,7 @@
 						"title_fa": "شکل مخفف will not",
 						"title_en": "Won't",
 						"explanation": "شکل مخفف will not به صورت won't است که در زبان محاوره‌ای بسیار استفاده می‌شود.",
-						"structure": "فعل ساده + won't + فاعل",
+						"structure": "subject + won't + base verb",
 						"cards": [
 							{
 								"en": "I won't forget you.",
@@ -287,13 +287,13 @@
 						"items": [
 							{
 								"words": [
-									"فعل ساده",
+									"base verb",
 									"Will",
-									"فاعل",
+									"subject",
 									"?"
 								],
-								"answer": "Will فاعل فعل ساده ?",
-								"hint_fa": "ساختار درست از چپ به راست: ?فعل ساده + فاعل + Will"
+								"answer": "Will subject base verb?",
+								"hint_fa": "ساختار درست از چپ به راست: ? + Will + subject + base verb"
 							}
 						]
 					},
@@ -311,8 +311,8 @@
 									"tonight",
 									"?"
 								],
-								"answer": "Will she study tonight ?",
-								"hint_fa": "در جمله سوالی will اول می‌آید، سپس فاعل و بعد فعل."
+								"answer": "Will she study tonight?",
+								"hint_fa": "در جمله سوالی will اول می‌آید، سپس subject و بعد فعل."
 							}
 						]
 					},
@@ -374,7 +374,7 @@
 								],
 								"correct": 0.0,
 								"hint_fa": "در جمله سوالی will اول می‌آید.",
-								"explanation_fa": "آفرین! Will درست است و در اینجا Are اشتباهه چون فعل ساده است.",
+								"explanation_fa": "آفرین! Will درست است و در اینجا بقیه گزینه ها اشتباهند چون base verb یا شکل ساده فعل داریم",
 								"wrong_explanation_fa": "در سوالات آینده will اول می‌آید."
 							}
 						]
@@ -393,8 +393,8 @@
 						"type": "learn",
 						"title_fa": "سوالات Wh با Will",
 						"title_en": "Wh-Questions with Will",
-						"explanation": "در سوالات wh، کلمه‌ی سوالی در اول جمله می‌آید و سپس will + فاعل + شکل ساده فعل.",
-						"structure": "Wh-word + will + subject + base verb + rest?",
+						"explanation": "در سوالات wh، کلمه‌ی سوالی در اول جمله می‌آید و پس از آن will و سپس فاعل یا subject و بعد از آن base verb یا شکل ساده فعل و بقیه جمله می آید.",
+						"structure": "Wh-word + will + subject + base verb + بقیه جمله?",
 						"cards": [
 							{
 								"en": "What will you eat?",
@@ -413,11 +413,11 @@
 						"instruction_fa": "ساختار زیر را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "ساختار سوال: Wh + فاعل + will + فعل ساده",
-								"fa": "ساختار سوال wh به صورت Wh + فاعل + will + شکل ساده فعل است.",
-								"answer": false,
-								"hint_fa": "در سوال wh باید will بعد از کلمه wh و قبل از فاعل می‌آید.",
-								"explanation_fa": "غلط است. ساختار درست از سمت چپ: \n فعل ساده + فاعل + will + کلمه Wh"
+								"statement": "ساختار سوال: Wh + will + subject + base verb",
+								"fa": "ساختار سوال wh به صورت Wh + will + subject + شکل ساده فعل است.",
+								"answer": true,
+								"hint_fa": "در سوال wh باید will بعد از کلمه wh و قبل از subject می‌آید.",
+								"explanation_fa": "آفرین، درست است. ساختار درست از سمت چپ: \n کلمه Wh + will + subject + base verb"
 							}
 						]
 					},
@@ -430,13 +430,13 @@
 							{
 								"words": [
 									"Wh",
-									"فاعل",
+									"subject",
 									"will",
 									"شکل ساده فعل",
 									"?"
 								],
-								"answer": "Wh will فاعل شکل ساده فعل ?",
-								"hint_fa": "ساختار درست از سمت چپ: \n فعل ساده + فاعل + will + کلمه Wh"
+								"answer": "Wh will subject شکل ساده فعل ?",
+								"hint_fa": "ساختار درست از سمت چپ: \n کلمه Wh + will + subject + base verb"
 							}
 						]
 					},
@@ -492,7 +492,7 @@
 						"title_fa": "نحوه ساخت سوال با Wh",
 						"title_en": "Making Wh-Questions",
 						"explanation": "برای ساختن سوال wh، جمله را به سوال تبدیل می‌کنیم و کلمه wh را اول می‌آوریم.",
-						"structure": "Wh + will + subject + base verb + rest?",
+						"structure": "Wh + will + subject + base verb + بقیه جمله?",
 						"cards": [
 							{
 								"en": "He will visit Bukan next summer. → Where will he visit next summer?",
@@ -515,8 +515,8 @@
 									"Bukan",
 									"?"
 								],
-								"answer": "When will he visit Bukan ?",
-								"hint_fa": "کلمه wh اول می‌آید، سپس will، بعد فاعل و فعل."
+								"answer": "When will he visit Bukan?",
+								"hint_fa": "کلمه wh اول می‌آید، سپس will، بعد subject و فعل."
 							}
 						]
 					},
@@ -525,7 +525,7 @@
 						"type": "learn",
 						"title_fa": "نکته مهم درباره Who",
 						"title_en": "Who Questions",
-						"explanation": "در سوالات who، ممکن است فاعل حذف شود و ساختار به صورت Who + will + base verb باشد.",
+						"explanation": "در سوالات who، ممکن است subject یا فاعل حذف شود و ساختار به صورت Who + will + base verb باشد.",
 						"structure": "Who + will + base verb + بقیه جمله?",
 						"cards": [
 							{
@@ -553,7 +553,7 @@
 									"When"
 								],
 								"correct": 2.0,
-								"hint_fa": "سوال درباره‌ی شخص است و فاعل در سوال وجود ندارد.",
+								"hint_fa": "سوال درباره‌ی شخص است و subject یا فاعل در سوال وجود ندارد.",
 								"explanation_fa": "آفرین! Who درست است.",
 								"wrong_explanation_fa": "برای پرسیدن درباره‌ی شخص از Who استفاده می‌کنیم."
 							}
@@ -574,7 +574,7 @@
 						"title_fa": "Be Going To",
 						"title_en": "Be Going To",
 						"explanation": "از be going to برای صحبت درباره‌ی کارهایی که قصد انجام آن‌ها را داریم یا بر اساس شواهد قرار است اتفاق بیفتند استفاده می‌کنیم.",
-						"structure": "Subject + be + going to + base verb",
+						"structure": "Subject(فاعل) + be(فعل to be) + going to + base verb(شکل ساده فعل)",
 						"cards": [
 							{
 								"en": "I am going to study.",
@@ -591,7 +591,7 @@
 						"type": "learn",
 						"title_fa": "ساختار جمله مثبت",
 						"title_en": "Affirmative Sentences",
-						"explanation": "ساختار جمله مثبت با be going to به صورت فاعل + فعل be + going to + شکل ساده فعل است.",
+						"explanation": "ساختار جمله مثبت با be going to به صورت زیر است:",
 						"structure": "Subject + be + going to + base verb",
 						"cards": [
 							{
@@ -621,7 +621,7 @@
 									"."
 								],
 								"answer": "She is going to study tonight .",
-								"hint_fa": "ساختار درست از چپ به راست: \nفعل ساده + be + going to + فاعل"
+								"hint_fa": "ساختار درست از چپ به راست: \nsubject + be + going to + base verb"
 							}
 						]
 					},
@@ -663,9 +663,9 @@
 					{
 						"id": "unit3_learn3_be_verb",
 						"type": "learn",
-						"title_fa": "فعل Be با فاعل‌ها",
+						"title_fa": "فعل Be با subject‌ها",
 						"title_en": "Be Verbs with Subjects",
-						"explanation": "فعل be باید با فاعل مطابقت داشته باشد: I → am, He/She/It → is, We/You/They → are",
+						"explanation": "فعل be باید با subject مطابقت داشته باشد: I → am, He/She/It → is, We/You/They → are",
 						"structure": "I am, He/She/It is, We/You/They are",
 						"cards": [
 							{
@@ -818,7 +818,7 @@
 									"."
 								],
 								"answer": "She is not going to come .",
-								"hint_fa": "ساختار درست از چپ به راست: \nفعل ساده + be + not + going to + فاعل"
+								"hint_fa": "ساختار درست از چپ به راست: \nsubject + be + not + going to + base verb"
 							}
 						]
 					},
@@ -919,7 +919,7 @@
 									"she"
 								],
 								"answer": "Is she going to study ?",
-								"hint_fa": "ساختار درست از چپ به راست: \nفعل ساده + going to + فاعل + فعل Be"
+								"hint_fa": "ساختار درست از چپ به راست: \nفعل Be + subject + going to + base verb"
 							}
 						]
 					},
@@ -939,7 +939,7 @@
 									"?"
 								],
 								"answer": "Are you going to eat ?",
-								"hint_fa": "فعل be اول می‌آید، سپس فاعل و going to و فعل."
+								"hint_fa": "فعل be اول می‌آید، سپس subject و going to و فعل."
 							}
 						]
 					},
@@ -1149,16 +1149,20 @@
 						"instruction_fa": "هر جمله را با ساختار درست آن جفت کن.",
 						"items": [
 							{
-								"left": "I promise I'll come.",
+								"left": "من قول می دهم بیایم.",
 								"right": "will"
 							},
 							{
-								"left": "I'm going to travel next week.",
+								"left": "قراره هفته بعد سفر برم.",
 								"right": "be going to"
 							},
 							{
-								"left": "I think it'll be cold.",
+								"left": "فکر کنم هوا سرد بشه.",
 								"right": "will"
+							},
+							{
+								"left": "جمعه قراره به دیدن پدربزرگ و مادربزرگم بروم.",
+								"right": "be going to"
 							}
 						]
 					}
@@ -1265,8 +1269,8 @@
 						"type": "learn",
 						"title_fa": "مرور Will و Be Going To",
 						"title_en": "Review: Will and Be Going To",
-						"explanation": "هر دو برای آینده استفاده می‌شوند اما: will برای پیش‌بینی‌های بدون شواهد، تصمیمات لحظه‌ای و قول‌ها؛ be going to برای برنامه‌ها، قصدها و پیش‌بینی‌های بر اساس شواهد.",
-						"structure": "will: Subject + will + base verb\nbe going to: Subject + be + going to + base verb",
+						"explanation": "هر دو برای آینده استفاده می‌شوند اما: will برای پیش‌بینی‌های بدون شواهد، تصمیمات لحظه‌ای و قول‌ها؛ \nbe going to برای برنامه‌ها، قصدها و پیش‌بینی‌های بر اساس شواهد.",
+						"structure": "will: Subject(فاعل) + will + base verb(فعل ساده)\nbe going to: Subject(فاعل) + be + going to + base verb(فعل ساده)",
 						"cards": [
 							{
 								"en": "I will help you. (Promise)",
@@ -1331,7 +1335,8 @@
 									"."
 								],
 								"answer": "She is going to travel next week .",
-								"hint_fa": "ساختار درست: فاعل + فعل be + going to + فعل + قید زمان."
+								"hint_fa": "ساختار درست:\n
+								Subject(فاعل) + be + going to + base verb(ساده فعل) + زمان قید "
 							}
 						]
 					},

@@ -6,107 +6,53 @@
 		"subtitle_en": "Complete the exercises below. Each exercise has its own Check Answer button.",
 		"sections": [
 			{
-				"type": "multiple_choice",
-				"exercise_id": "book_ex1",
-				"instruction": {
-					"en": "Circle the correct answer.",
-					"fa": "گزینهٔ درست را دور بزنید."
-				},
+				"type": "fill_blank",
+				"exercise_id": "workbook_v1_l1_a_will_forms",
+				"instruction": {"en": "Complete the table using will: affirmative, negative, and question forms.", "fa": "با استفاده از will جدول را کامل کن: مثبت، منفی و پرسشی."},
 				"items": [
-					{
-						"question": {
-							"en": "His new car is ___ than my car.",
-							"fa": "ماشین جدید او از ماشین من ___ است."
-						},
-						"options": [
-							{ "en": "faster", "fa": "سریع‌تر" },
-							{ "en": "the fastest", "fa": "سریع‌ترین" }
-						],
-						"answer": 0,
-						"explanation": {
-							"en": "Use 'faster' when comparing two things.",
-							"fa": "برای مقایسهٔ دو چیز از «faster» استفاده می‌کنیم."
-						}
-					},
-					{
-						"question": {
-							"en": "Russia is ___ country of the world.",
-							"fa": "روسیه ___ کشور جهان است."
-						},
-						"options": [
-							{ "en": "bigger", "fa": "بزرگ‌تر" },
-							{ "en": "the biggest", "fa": "بزرگ‌ترین" }
-						],
-						"answer": 1,
-						"explanation": {
-							"en": "Use 'the biggest' for comparing more than two things.",
-							"fa": "برای مقایسهٔ بیش از دو چیز از «the biggest» استفاده می‌کنیم."
-						}
-					}
+					{"text": "I ___ (save / not save) nature.", "answer": ["will save", "will not save", "won't save"]},
+					{"text": "She ___ (go / not go) to the mountain?", "answer": ["Will she go", "Will she not go", "Won't she go"]},
+					{"text": "They ___ (destroy / not destroy) the jungle.", "answer": ["will destroy", "will not destroy", "won't destroy"]},
+					{"text": "___ he ___ (have) an exam on Friday?", "answer": ["Will he have"]},
+					{"text": "We ___ (protect / not protect) endangered animals.", "answer": ["will protect", "will not protect", "won't protect"]}
 				]
 			},
 			{
-				"type": "true_false",
-				"exercise_id": "book_ex2",
-				"instruction": {
-					"en": "True or False?",
-					"fa": "درست یا نادرست؟"
-				},
+				"type": "writing",
+				"exercise_id": "workbook_v1_l1_b_future_writing",
+				"instruction": {"en": "Write future-tense sentences using these beginnings. Then ask a friend questions about the future with When, Where, and Who.", "fa": "با استفاده از این شروع‌ها جمله بساز: On Friday morning, I ... / Next week, my brother ... / Tomorrow afternoon, ... سپس با یک دوست، با کلمات When / Where / Who دربارهٔ آینده سؤال بپرس."},
 				"items": [
-					{
-						"statement": {
-							"en": "Learning about endangered animals is not important.",
-							"fa": "یادگیری دربارهٔ حیوانات در خطر انقراض مهم نیست."
-						},
-						"answer": false,
-						"correction": {
-							"en": "Learning about endangered animals is important.",
-							"fa": "یادگیری دربارهٔ حیوانات در خطر انقراض مهم است."
-						}
-					},
-					{
-						"statement": {
-							"en": "You can do voluntary work in wildlife parks.",
-							"fa": "شما می‌توانید در پارک‌های حیات وحش کار داوطلبانه انجام دهید."
-						},
-						"answer": true,
-						"correction": {
-							"en": "You can do voluntary work in wildlife parks.",
-							"fa": "شما می‌توانید در پارک‌های حیات وحش کار داوطلبانه انجام دهید."
-						}
-					}
+					{"id": "v1l1_friday_morning", "question": "On Friday morning, I ...", "sample_answer": "On Friday morning, I will visit my grandparents."},
+					{"id": "v1l1_next_week_brother", "question": "Next week, my brother ...", "sample_answer": "Next week, my brother will study for his exam."},
+					{"id": "v1l1_tomorrow_afternoon", "question": "Tomorrow afternoon, ...", "sample_answer": "Tomorrow afternoon, I will meet my friend."},
+					{"id": "v1l1_future_questions", "question": "Write three questions to ask a friend about the future: one with When, one with Where, and one with Who."}
 				]
 			},
 			{
 				"type": "fill_blank",
-				"exercise_id": "book_ex3",
-				"instruction": {
-					"en": "Type the missing word.",
-					"fa": "کلمهٔ جاافتاده را بنویسید."
-				},
+				"exercise_id": "workbook_v1_l1_c_be_going_to",
+				"instruction": {"en": "Complete each sentence with the correct form of be going to.", "fa": "جمله‌ها را با شکل درست going to کامل کن."},
 				"items": [
-					{
-						"text": {
-							"en": "The whale is ___ (heavy) sea animal.",
-							"fa": "نهنگ ___ حیوان دریایی است."
-						},
-						"answer": ["the heaviest", "heaviest"],
-						"explanation": {
-							"en": "Superlative: the heaviest.",
-							"fa": "صفت عالی: the heaviest."
-						}
-					},
-					{
-						"text": {
-							"en": "She ___ (work) in a hospital every week.",
-							"fa": "او هر هفته در بیمارستان ___."
-						},
-						"answer": ["works"],
-						"explanation": {
-							"en": "Simple present with 'she': works.",
-							"fa": "حال ساده با «she»: works."
-						}
-					}
+					{"text": "Look at the clouds! It (rain) ______.", "answer": ["is going to rain"]},
+					{"text": "We (not / destroy) ______ nature.", "answer": ["are not going to destroy", "aren't going to destroy"]},
+					{"text": "______ you ______ (visit) the museum this weekend?", "answer": ["Are you going to visit"]},
+					{"text": "Alice (read) ______ some poems tonight.", "answer": ["is going to read"]},
+					{"text": "Reza (not / watch) ______ TV. The program is boring.", "answer": ["is not going to watch", "isn't going to watch"]}
+				]
+			},
+			{
+				"type": "cloze",
+				"exercise_id": "workbook_v1_l1_d_alfredo_cloze",
+				"passage_title": "Alfredo's trip",
+				"instruction": {"en": "Choose the best verb form to complete the passage.", "fa": "بهترین فعل را برای کامل کردن متن انتخاب کن."},
+				"passage": {"en": "Alfredo is an Italian tourist. He (1) ______ in Rome. He (2) ______ to travel and see different places of the world. He (3) ______ photos especially of animals. Next month, he and his wife (4) ______ to Iran. They (5) ______ to Tooran Plain to see animals. After two weeks, they (6) ______ some beautiful cities in Iran.", "fa": "آلفردو یک گردشگر ایتالیایی است. او در رم (1) ______. او (2) ______ به سفر و دیدن مکان‌های مختلف جهان. او مخصوصاً از حیوانات عکس (3) ______. ماه آینده او و همسرش به ایران (4) ______. آن‌ها برای دیدن حیوانات به دشت توران (5) ______. پس از دو هفته، آن‌ها از چند شهر زیبای ایران (6) ______."},
+				"blanks": [
+					{"options": ["lives", "will live"], "answer": 0},
+					{"options": ["likes", "will like"], "answer": 0},
+					{"options": ["takes", "will take"], "answer": 0},
+					{"options": ["travel", "will travel"], "answer": 1},
+					{"options": ["go", "will go"], "answer": 1},
+					{"options": ["visit", "will visit"], "answer": 1}
 				]
 			}
 		]

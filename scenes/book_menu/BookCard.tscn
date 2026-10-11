@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://c57yyafyfu6rk"]
+
+[ext_resource type="Script" uid="uid://di330p5p0p4m6" path="res://book_card.gd" id="1_168sl"]
+
+[node name="BookCard" type="Control" unique_id=332278860]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_168sl")
+
+[node name="Cover" type="TextureRect" parent="." unique_id=2084064077]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="." unique_id=438824932]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="BookTitle" type="Label" parent="." unique_id=1855387787]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="BookNumber" type="Label" parent="." unique_id=204124797]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+horizontal_alignment = 1
+
+[node name="SwipeHint" type="Label" parent="." unique_id=1459348316]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+horizontal_alignment = 1
+
+[node name="BookTab" type="Panel" parent="." unique_id=1310085040]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="TabLabel" type="Label" parent="BookTab" unique_id=1250081510]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 26.0
+horizontal_alignment = 1
+vertical_alignment = 1

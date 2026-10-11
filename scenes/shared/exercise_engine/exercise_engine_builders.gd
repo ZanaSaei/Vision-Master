@@ -184,6 +184,7 @@ func _create_master_panel() -> void:
 	var panel := PanelContainer.new()
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.custom_minimum_size.x = 0
 
 	var style := StyleBoxFlat.new()
 	style.bg_color = _c_surface()
@@ -269,6 +270,8 @@ func _add_common_passage() -> void:
 # manual reset required anywhere else in the app.
 # ------------------------------------------------------------
 func _compute_letter_index() -> int:
+	if _exercise.has("letter_index"):
+		return int(_exercise["letter_index"])
 	var parent := get_parent()
 	if parent == null:
 		return 0
@@ -298,7 +301,9 @@ func _add_instruction() -> void:
 		letter_code = char(65 + (_compute_letter_index() % 26))
 
 	var fa_text: String = _get_fa_text(text_raw)
-	var fa_dominant: bool = _is_fa_dominant(text_val if fa_text.is_empty() else fa_text)
+	# Layout follows the displayed instruction language. Farsi translation is
+	# rendered separately below, so it must not flip an English instruction RTL.
+	var fa_dominant: bool = _is_fa_dominant(text_val)
 	var instruction_row: HBoxContainer = HBoxContainer.new()
 	instruction_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	instruction_row.add_theme_constant_override("separation", 12)
@@ -317,7 +322,6 @@ func _add_instruction() -> void:
 		instruction.add_theme_font_override("font", _font_farsi)
 	elif _font_bold:
 		instruction.add_theme_font_override("font", _font_bold)
-	instruction_row.add_child(instruction)
 
 	if not letter_code.is_empty():
 		var letter_badge: Label = Label.new()
@@ -335,7 +339,18 @@ func _add_instruction() -> void:
 		letter_badge.add_theme_stylebox_override("focus", badge_style)
 		letter_badge.add_theme_stylebox_override("hover", badge_style)
 		letter_badge.add_theme_stylebox_override("pressed", badge_style)
-		instruction_row.add_child(letter_badge)
+		# The badge paints white type on its own dark square, so keep the
+		# app-wide theme walk from repainting the letter in the theme text
+		# colour (which made it vanish into the square).
+		letter_badge.add_to_group(ThemeSceneStyler.KEEP_FONT_COLOR_GROUP)
+		if fa_dominant:
+			instruction_row.add_child(instruction)
+			instruction_row.add_child(letter_badge)
+		else:
+			instruction_row.add_child(letter_badge)
+			instruction_row.add_child(instruction)
+	else:
+		instruction_row.add_child(instruction)
 
 	_active_vbox.add_child(instruction_row)
 	_add_fa_label(fa_text, 34)
@@ -1867,10 +1882,13 @@ func _build_table_fill() -> void:
 			if cell.get("editable", false):
 				var le := _make_line_edit("...")
 				cell_box.add_child(le)
+				var answer: Variant = cell.get("answer", [])
+				if answer is String:
+					answer = [answer]
 				_items.append({
 					"type": "fill_blank",
 					"get": func(): return le.text,
-					"answer": cell.get("answer", []),
+					"answer": answer,
 					"feedback": _make_feedback(cell_box),
 					"explanation_en": "",
 					"explanation_fa": "",

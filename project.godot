@@ -35,11 +35,12 @@ Sfx="*res://autoload/Sfx.gd"
 API="*res://autoload/ApiClient.gd"
 Content="*res://autoload/ContentManager.gd"
 Sync="*res://autoload/SyncManager.gd"
+BookSession="*uid://b0agwlo8dg8g1"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=1920
+window/size/viewport_width=720
+window/size/viewport_height=1280
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1

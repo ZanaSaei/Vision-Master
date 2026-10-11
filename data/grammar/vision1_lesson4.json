@@ -17,7 +17,7 @@
 						"type": "learn",
 						"title_fa": "can برای بیان توانایی",
 						"title_en": "",
-						"explanation": "از can قبل از فعل ساده استفاده می‌کنیم تا بگوییم کسی توانایی انجام کاری را دارد.",
+						"explanation": "از can قبل از base verb استفاده می‌کنیم تا بگوییم کسی توانایی انجام کاری را دارد.",
 						"cards": [
 							{
 								"en": "The translator can speak four languages.",
@@ -35,10 +35,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: The translator ___ speak four languages.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: The translator ___ speak four languages.",
+								"question": "The translator ___ speak four languages.",
 								"options": [
 									"can",
 									"may",
@@ -46,7 +46,7 @@
 									"should"
 								],
 								"correct": 0,
-								"hint_fa": "برای بیان توانایی از can استفاده می‌کنیم.",
+								"hint_fa": "به معنی جمله دقت کن: صحبت کردن به چهار زبان یک توانایی است.",
 								"explanation_fa": "برای بیان توانایی از can استفاده می‌کنیم."
 							}
 						]
@@ -63,8 +63,8 @@
 								"answers": [
 									"can"
 								],
-								"hint_fa": "can برای بیان امکان/توانایی انجام کاری به کار می‌رود.",
-								"explanation_fa": "can برای بیان امکان/توانایی انجام کاری به کار می‌رود."
+								"hint_fa": "پیدا کردن شمع در آن طرف یک امکان است؛ کدام مدال برای امکان به‌کار می‌رود؟",
+								"explanation_fa": "can برای بیان امکان یا توانایی انجام کاری به کار می‌رود."
 							}
 						]
 					},
@@ -91,10 +91,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: The tourists ___ stay in Iran for two more days.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: The tourists ___ stay in Iran for two more days.",
+								"question": "The tourists ___ stay in Iran for two more days.",
 								"options": [
 									"can",
 									"may",
@@ -102,7 +102,7 @@
 									"should"
 								],
 								"correct": 1,
-								"hint_fa": "این جمله یک احتمال را بیان می‌کند، پس may درست است.",
+								"hint_fa": "به کلمه‌ی «ممکن است» در ترجمه‌ی جمله دقت کن.",
 								"explanation_fa": "این جمله یک احتمال را بیان می‌کند، پس may درست است."
 							}
 						]
@@ -115,9 +115,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«May I sit down?» برای درخواست اجازه استفاده می‌شود.",
+								"statement": "جمله‌ی May I sit down? برای درخواست اجازه استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! may برای گرفتن اجازه به کار می‌رود.",
+								"hint_fa": "به کاربرد may در جمله‌های پرسشی فکر کن.",
 								"explanation_fa": "درسته! may برای گرفتن اجازه به کار می‌رود."
 							}
 						]
@@ -127,10 +127,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (گرفتن اجازه): ___ I use your pencil?",
+						"instruction_fa": "جای خالی را کامل کن (گرفتن اجازه)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (گرفتن اجازه): ___ I use your pencil?",
+								"question": "___ I use your pencil?",
 								"options": [
 									"Can",
 									"May",
@@ -138,7 +138,7 @@
 									"Should"
 								],
 								"correct": 1,
-								"hint_fa": "برای گرفتن اجازه از may استفاده می‌کنیم.",
+								"hint_fa": "کدام مدال مخصوص گرفتن اجازه است؟",
 								"explanation_fa": "برای گرفتن اجازه از may استفاده می‌کنیم."
 							}
 						]
@@ -155,7 +155,7 @@
 								"answers": [
 									"Can"
 								],
-								"hint_fa": "برای پرسیدن توانایی از can استفاده می‌کنیم.",
+								"hint_fa": "شنا کردن یک توانایی است؛ کدام مدال برای پرسیدن توانایی است؟",
 								"explanation_fa": "برای پرسیدن توانایی از can استفاده می‌کنیم."
 							}
 						]
@@ -168,9 +168,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«can» برای صحبت درباره‌ی توانایی استفاده می‌شود.",
+								"statement": "کلمه‌ی can برای صحبت درباره‌ی توانایی استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! can برای بیان توانایی است.",
+								"hint_fa": "به کاربرد اصلی can فکر کن.",
 								"explanation_fa": "درسته! can برای بیان توانایی است."
 							}
 						]
@@ -185,7 +185,7 @@
 							{
 								"statement": "از can برای بیان توانایی انجام کاری استفاده می‌کنیم.",
 								"answer": true,
-								"hint_fa": "درسته! can برای توانایی است.",
+								"hint_fa": "به معنی can در جمله‌های مثبت فکر کن.",
 								"explanation_fa": "درسته! can برای توانایی است."
 							}
 						]
@@ -200,7 +200,7 @@
 							{
 								"statement": "از may فقط برای بیان توانایی استفاده می‌شود.",
 								"answer": false,
-								"hint_fa": "may برای اجازه یا احتمال به‌کار می‌رود، نه توانایی.",
+								"hint_fa": "may فقط برای اجازه و احتمال است؛ آیا توانایی هم شامل می‌شود؟",
 								"explanation_fa": "may برای اجازه یا احتمال به‌کار می‌رود، نه توانایی."
 							}
 						]
@@ -213,7 +213,7 @@
 						"instruction_fa": "کدام جمله برای گرفتن اجازه مناسب است؟",
 						"questions": [
 							{
-								"question": "کدام جمله برای گرفتن اجازه مناسب است؟",
+								"question": "",
 								"options": [
 									"Can I speak four languages?",
 									"May I use your pencil?",
@@ -221,8 +221,8 @@
 									"Should I use your pencil?"
 								],
 								"correct": 1,
-								"hint_fa": "May I...? ساختار رایج برای گرفتن اجازه است.",
-								"explanation_fa": "May I...? ساختار رایج برای گرفتن اجازه است."
+								"hint_fa": "کدام گزینه با ساختار درخواست اجازه مطابقت دارد؟",
+								"explanation_fa": "ساختار May I...? رایج‌ترین شکل برای گرفتن اجازه است."
 							}
 						]
 					}
@@ -240,7 +240,7 @@
 						"type": "learn",
 						"title_fa": "must برای الزام و ضرورت",
 						"title_en": "",
-						"explanation": "از must قبل از فعل ساده استفاده می‌کنیم تا بگوییم انجام کاری الزامی یا ضروری است.",
+						"explanation": "از must قبل از base verb استفاده می‌کنیم تا بگوییم انجام کاری الزامی یا ضروری است.",
 						"cards": [
 							{
 								"en": "You must drive carefully.",
@@ -258,10 +258,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: You ___ drive carefully.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: You ___ drive carefully.",
+								"question": "You ___ drive carefully.",
 								"options": [
 									"can",
 									"may",
@@ -269,7 +269,7 @@
 									"should"
 								],
 								"correct": 2,
-								"hint_fa": "این جمله یک الزام قوی است: must.",
+								"hint_fa": "رانندگی با احتیاط یک الزام قوی است.",
 								"explanation_fa": "این جمله یک الزام قوی است: must."
 							}
 						]
@@ -286,7 +286,7 @@
 								"answers": [
 									"must"
 								],
-								"hint_fa": "برای بیان ضرورت از must استفاده می‌کنیم.",
+								"hint_fa": "گرفتن پاسپورت برای همه یک ضرورت است.",
 								"explanation_fa": "برای بیان ضرورت از must استفاده می‌کنیم."
 							}
 						]
@@ -296,7 +296,7 @@
 						"type": "learn",
 						"title_fa": "should برای توصیه و پیشنهاد",
 						"title_en": "",
-						"explanation": "از should قبل از فعل ساده استفاده می‌کنیم تا توصیه یا پیشنهاد بدهیم؛ این الزام قوی مثل must نیست.",
+						"explanation": "از should قبل از base verb استفاده می‌کنیم تا توصیه یا پیشنهاد بدهیم؛ این الزام قوی مثل must نیست.",
 						"cards": [
 							{
 								"en": "Everyone should respect other people's culture.",
@@ -314,10 +314,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: Everyone ___ respect other people's culture.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: Everyone ___ respect other people's culture.",
+								"question": "Everyone ___ respect other people's culture.",
 								"options": [
 									"can",
 									"may",
@@ -325,7 +325,7 @@
 									"should"
 								],
 								"correct": 3,
-								"hint_fa": "این جمله یک توصیه است: should.",
+								"hint_fa": "احترام گذاشتن به فرهنگ دیگران یک توصیه است، نه الزام قوی.",
 								"explanation_fa": "این جمله یک توصیه است: should."
 							}
 						]
@@ -338,9 +338,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«should» الزام قوی‌تری از «must» نشان می‌دهد.",
+								"statement": "کلمه‌ی should الزام قوی‌تری از must نشان می‌دهد.",
 								"answer": false,
-								"hint_fa": "must الزام قوی‌تری نسبت به should نشان می‌دهد.",
+								"hint_fa": "کدام مدال قوی‌تر است: must یا should؟",
 								"explanation_fa": "must الزام قوی‌تری نسبت به should نشان می‌دهد."
 							}
 						]
@@ -350,10 +350,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: You ___ be careful in a foreign country.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: You ___ be careful in a foreign country.",
+								"question": "You ___ be careful in a foreign country.",
 								"options": [
 									"can",
 									"may",
@@ -361,7 +361,7 @@
 									"should"
 								],
 								"correct": 3,
-								"hint_fa": "این جمله یک توصیه است: should.",
+								"hint_fa": "مراقب بودن یک توصیه است، نه الزام قوی.",
 								"explanation_fa": "این جمله یک توصیه است: should."
 							}
 						]
@@ -378,7 +378,7 @@
 								"answers": [
 									"must"
 								],
-								"hint_fa": "برای الزام قوی از must استفاده می‌کنیم.",
+								"hint_fa": "گرفتن پاسپورت برای مسافران یک الزام است.",
 								"explanation_fa": "برای الزام قوی از must استفاده می‌کنیم."
 							}
 						]
@@ -391,9 +391,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«must» الزام قوی‌تری از «should» نشان می‌دهد.",
+								"statement": "کلمه‌ی must الزام قوی‌تری از should نشان می‌دهد.",
 								"answer": true,
-								"hint_fa": "درسته! must الزام قوی‌تری از should دارد.",
+								"hint_fa": "شدت الزام را در must و should مقایسه کن.",
 								"explanation_fa": "درسته! must الزام قوی‌تری از should دارد."
 							}
 						]
@@ -408,7 +408,7 @@
 							{
 								"statement": "must برای بیان یک الزام یا ضرورت قوی استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! must یعنی انجام کاری الزامی است.",
+								"hint_fa": "به معنی اصلی must فکر کن.",
 								"explanation_fa": "درسته! must یعنی انجام کاری الزامی است."
 							}
 						]
@@ -423,7 +423,7 @@
 							{
 								"statement": "should برای بیان یک توصیه یا پیشنهاد استفاده می‌شود، نه یک الزام قوی.",
 								"answer": true,
-								"hint_fa": "درسته! should ملایم‌تر از must است.",
+								"hint_fa": "به تفاوت شدت should و must فکر کن.",
 								"explanation_fa": "درسته! should ملایم‌تر از must است."
 							}
 						]
@@ -436,7 +436,7 @@
 						"instruction_fa": "کدام جمله یک توصیه است، نه یک الزام قوی؟",
 						"questions": [
 							{
-								"question": "کدام جمله یک توصیه است، نه یک الزام قوی؟",
+								"question": "",
 								"options": [
 									"You must get a passport.",
 									"You should respect other cultures.",
@@ -444,7 +444,7 @@
 									"Must we finish the book?"
 								],
 								"correct": 1,
-								"hint_fa": "should یک پیشنهاد ملایم است.",
+								"hint_fa": "کدام گزینه لحن ملایم‌تری دارد؟",
 								"explanation_fa": "should یک پیشنهاد ملایم است."
 							}
 						]
@@ -488,7 +488,7 @@
 								"answers": [
 									"cannot"
 								],
-								"hint_fa": "برای بیان ناتوانی از cannot/can't استفاده می‌کنیم.",
+								"hint_fa": "شنا نتوانستن یک ناتوانی است.",
 								"explanation_fa": "برای بیان ناتوانی از cannot/can't استفاده می‌کنیم."
 							}
 						]
@@ -498,10 +498,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: She ___ speak Japanese.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: She ___ speak Japanese.",
+								"question": "She ___ speak Japanese.",
 								"options": [
 									"can",
 									"cannot",
@@ -509,7 +509,7 @@
 									"should"
 								],
 								"correct": 1,
-								"hint_fa": "این جمله منفی است و ناتوانی نشان می‌دهد: cannot.",
+								"hint_fa": "جمله منفی است و صحبت نکردن به ژاپنی یک ناتوانی است.",
 								"explanation_fa": "این جمله منفی است و ناتوانی نشان می‌دهد: cannot."
 							}
 						]
@@ -537,10 +537,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (ممنوعیت): Children ___ eat fast food.",
+						"instruction_fa": "جای خالی را کامل کن (ممنوعیت)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (ممنوعیت): Children ___ eat fast food.",
+								"question": "Children ___ eat fast food.",
 								"options": [
 									"can't",
 									"must not",
@@ -548,7 +548,7 @@
 									"shouldn't"
 								],
 								"correct": 1,
-								"hint_fa": "must not برای بیان ممنوعیت به‌کار می‌رود.",
+								"hint_fa": "خوردن فست‌فود توسط بچه‌ها یک ممنوعیت است.",
 								"explanation_fa": "must not برای بیان ممنوعیت به‌کار می‌رود."
 							}
 						]
@@ -561,9 +561,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«must not» یعنی انجام کاری ممنوع است.",
+								"statement": "عبارت must not یعنی انجام کاری ممنوع است.",
 								"answer": true,
-								"hint_fa": "درسته! must not یعنی ممنوع بودن یک کار.",
+								"hint_fa": "به معنی must not فکر کن.",
 								"explanation_fa": "درسته! must not یعنی ممنوع بودن یک کار."
 							}
 						]
@@ -573,10 +573,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: Please help me. I ___ swim.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: Please help me. I ___ swim.",
+								"question": "Please help me. I ___ swim.",
 								"options": [
 									"can't",
 									"mustn't",
@@ -584,7 +584,7 @@
 									"shouldn't"
 								],
 								"correct": 0,
-								"hint_fa": "این جمله ناتوانی نشان می‌دهد: can't.",
+								"hint_fa": "درخواست کمک نشان می‌دهد که گوینده ناتوان است.",
 								"explanation_fa": "این جمله ناتوانی نشان می‌دهد: can't."
 							}
 						]
@@ -601,7 +601,7 @@
 								"answers": [
 									"shouldn't"
 								],
-								"hint_fa": "این جمله عدم توصیه است: shouldn't.",
+								"hint_fa": "بی‌احتیاط بودن در سفر یک توصیه‌ی منفی است.",
 								"explanation_fa": "این جمله عدم توصیه است: shouldn't."
 							}
 						]
@@ -614,9 +614,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«may not» برای گفتن اینکه کاری مجاز نیست استفاده می‌شود.",
+								"statement": "عبارت may not برای گفتن اینکه کاری مجاز نیست استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! may not یعنی اجازه نداریم.",
+								"hint_fa": "به معنی may not فکر کن.",
 								"explanation_fa": "درسته! may not یعنی اجازه نداریم."
 							}
 						]
@@ -631,7 +631,7 @@
 							{
 								"statement": "cannot/can't برای بیان ناتوانی در انجام کاری استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! این منفی can است.",
+								"hint_fa": "cannot شکل منفی کدام مدال است؟",
 								"explanation_fa": "درسته! این منفی can است."
 							}
 						]
@@ -646,7 +646,7 @@
 							{
 								"statement": "must not به معنای ممنوعیت انجام یک کار است.",
 								"answer": true,
-								"hint_fa": "درسته! must not یعنی انجام آن کار ممنوع است.",
+								"hint_fa": "به تفاوت must not و shouldn't فکر کن.",
 								"explanation_fa": "درسته! must not یعنی انجام آن کار ممنوع است."
 							}
 						]
@@ -656,10 +656,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "کدام جمله معنای 'ممنوع بودن' را می‌رساند؟",
+						"instruction_fa": "کدام جمله معنای ممنوع بودن را می‌رساند؟",
 						"questions": [
 							{
-								"question": "کدام جمله معنای 'ممنوع بودن' را می‌رساند؟",
+								"question": "",
 								"options": [
 									"Children can't eat fast food.",
 									"Children must not eat fast food.",
@@ -667,7 +667,7 @@
 									"Children should eat fast food."
 								],
 								"correct": 1,
-								"hint_fa": "must not برای ممنوعیت به‌کار می‌رود.",
+								"hint_fa": "کدام گزینه بیانگر ممنوعیت است؟",
 								"explanation_fa": "must not برای ممنوعیت به‌کار می‌رود."
 							}
 						]
@@ -684,7 +684,7 @@
 					{
 						"id": "u4_p1",
 						"type": "learn",
-						"title_fa": "Can/May/Must/Should + فاعل + فعل؟",
+						"title_fa": "Can/May/Must/Should + subject + فعل؟",
 						"title_en": "",
 						"explanation": "برای ساختن سؤال با مدال‌ها، مدال را به ابتدای جمله می‌آوریم.",
 						"cards": [
@@ -711,8 +711,8 @@
 								"answers": [
 									"Can"
 								],
-								"hint_fa": "این سؤال درباره‌ی توانایی/امکان است: Can.",
-								"explanation_fa": "این سؤال درباره‌ی توانایی/امکان است: Can."
+								"hint_fa": "خرید بلیت آنلاین یک توانایی است.",
+								"explanation_fa": "این سؤال درباره‌ی توانایی یا امکان است: Can."
 							}
 						]
 					},
@@ -721,10 +721,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (گرفتن اجازه): ___ I use your pencil?",
+						"instruction_fa": "جای خالی را کامل کن (گرفتن اجازه)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (گرفتن اجازه): ___ I use your pencil?",
+								"question": "___ I use your pencil?",
 								"options": [
 									"Can",
 									"May",
@@ -732,7 +732,7 @@
 									"Should"
 								],
 								"correct": 1,
-								"hint_fa": "این سؤال برای گرفتن اجازه است: May.",
+								"hint_fa": "کدام مدال برای درخواست مؤدبانه‌ی اجازه به‌کار می‌رود؟",
 								"explanation_fa": "این سؤال برای گرفتن اجازه است: May."
 							}
 						]
@@ -760,10 +760,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: ___ we finish our English book before Khordad?",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: ___ we finish our English book before Khordad?",
+								"question": "___ we finish our English book before Khordad?",
 								"options": [
 									"Can",
 									"May",
@@ -771,7 +771,7 @@
 									"Should"
 								],
 								"correct": 2,
-								"hint_fa": "این سؤال درباره‌ی الزام است: Must.",
+								"hint_fa": "تمام کردن کتاب قبل از خرداد یک الزام است.",
 								"explanation_fa": "این سؤال درباره‌ی الزام است: Must."
 							}
 						]
@@ -784,9 +784,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «Should your friend help you?» درباره‌ی توانایی سوال می‌کند.",
+								"statement": "جمله‌ی Should your friend help you? درباره‌ی توانایی سوال می‌کند.",
 								"answer": false,
-								"hint_fa": "این سؤال درباره‌ی توصیه است، نه توانایی.",
+								"hint_fa": "should درباره‌ی چه چیزی می‌پرسد؟",
 								"explanation_fa": "این سؤال درباره‌ی توصیه است، نه توانایی."
 							}
 						]
@@ -803,7 +803,7 @@
 								"answers": [
 									"Can"
 								],
-								"hint_fa": "این سؤال درباره‌ی توانایی است: Can.",
+								"hint_fa": "شنا کردن یک توانایی است.",
 								"explanation_fa": "این سؤال درباره‌ی توانایی است: Can."
 							}
 						]
@@ -813,10 +813,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (اجازه): ___ I sit down?",
+						"instruction_fa": "جای خالی را کامل کن (اجازه)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (اجازه): ___ I sit down?",
+								"question": "___ I sit down?",
 								"options": [
 									"Can",
 									"May",
@@ -824,7 +824,7 @@
 									"Should"
 								],
 								"correct": 1,
-								"hint_fa": "این سؤال برای گرفتن اجازه است: May.",
+								"hint_fa": "نشستن یک درخواست اجازه است.",
 								"explanation_fa": "این سؤال برای گرفتن اجازه است: May."
 							}
 						]
@@ -837,9 +837,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "جمله‌ی «Must we drive fast?» درباره‌ی الزام سوال می‌کند.",
+								"statement": "جمله‌ی Must we drive fast? درباره‌ی الزام سوال می‌کند.",
 								"answer": true,
-								"hint_fa": "درسته! Must درباره‌ی الزام می‌پرسد.",
+								"hint_fa": "کلمه‌ی Must به معنای باید است؛ چه نوع سؤالی می‌سازد؟",
 								"explanation_fa": "درسته! Must درباره‌ی الزام می‌پرسد."
 							}
 						]
@@ -854,7 +854,7 @@
 							{
 								"statement": "برای ساختن سؤال با مدال‌ها، مدال را به ابتدای جمله می‌آوریم.",
 								"answer": true,
-								"hint_fa": "درسته! مثل: Can you...? May I...?",
+								"hint_fa": "در سؤال با مدال، جای مدال کجاست؟",
 								"explanation_fa": "درسته! مثل: Can you...? May I...?"
 							}
 						]
@@ -867,7 +867,7 @@
 						"instruction_fa": "کدام سؤال برای گرفتن اجازه مناسب‌تر است؟",
 						"questions": [
 							{
-								"question": "کدام سؤال برای گرفتن اجازه مناسب‌تر است؟",
+								"question": "",
 								"options": [
 									"Can I leave the class?",
 									"May I leave the class?",
@@ -875,8 +875,8 @@
 									"Should I leave the class?"
 								],
 								"correct": 1,
-								"hint_fa": "May I...? ساختار رایج برای گرفتن اجازه است.",
-								"explanation_fa": "May I...? ساختار رایج برای گرفتن اجازه است."
+								"hint_fa": "کدام گزینه مؤدبانه‌تر و مناسب‌تر برای درخواست اجازه است؟",
+								"explanation_fa": "ساختار May I...? رایج‌ترین شکل برای گرفتن اجازه است."
 							}
 						]
 					},
@@ -892,7 +892,7 @@
 								"answers": [
 									"Can"
 								],
-								"hint_fa": "این سؤال درباره‌ی توانایی است: Can.",
+								"hint_fa": "صحبت کردن به فرانسه یک توانایی است.",
 								"explanation_fa": "این سؤال درباره‌ی توانایی است: Can."
 							}
 						]
@@ -933,10 +933,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: I wake up ___ 7 o'clock.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: I wake up ___ 7 o'clock.",
+								"question": "I wake up ___ 7 o'clock.",
 								"options": [
 									"in",
 									"at",
@@ -944,7 +944,7 @@
 									"next to"
 								],
 								"correct": 1,
-								"hint_fa": "برای ساعت دقیق از at استفاده می‌کنیم.",
+								"hint_fa": "برای ساعت‌های دقیق کدام حرف اضافه به‌کار می‌رود؟",
 								"explanation_fa": "برای ساعت دقیق از at استفاده می‌کنیم."
 							}
 						]
@@ -961,8 +961,8 @@
 								"answers": [
 									"at"
 								],
-								"hint_fa": "'at night' یک اصطلاح ثابت است.",
-								"explanation_fa": "'at night' یک اصطلاح ثابت است."
+								"hint_fa": "به ترکیب night با حرف اضافه‌ی مناسب فکر کن.",
+								"explanation_fa": "ترکیب at night یک اصطلاح ثابت است."
 							}
 						]
 					},
@@ -993,10 +993,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: School starts ___ September.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: School starts ___ September.",
+								"question": "School starts ___ September.",
 								"options": [
 									"in",
 									"at",
@@ -1004,7 +1004,7 @@
 									"next to"
 								],
 								"correct": 0,
-								"hint_fa": "برای ماه‌ها از in استفاده می‌کنیم.",
+								"hint_fa": "September یک ماه است؛ کدام حرف اضافه برای ماه به‌کار می‌رود؟",
 								"explanation_fa": "برای ماه‌ها از in استفاده می‌کنیم."
 							}
 						]
@@ -1017,9 +1017,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«on Friday» درست است.",
+								"statement": "عبارت on Friday درست است.",
 								"answer": true,
-								"hint_fa": "درسته! برای روزهای هفته از on استفاده می‌کنیم.",
+								"hint_fa": "Friday یک روز هفته است؛ کدام حرف اضافه؟",
 								"explanation_fa": "درسته! برای روزهای هفته از on استفاده می‌کنیم."
 							}
 						]
@@ -1029,10 +1029,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: We have a party ___ Wednesday.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: We have a party ___ Wednesday.",
+								"question": "We have a party ___ Wednesday.",
 								"options": [
 									"in",
 									"at",
@@ -1040,7 +1040,7 @@
 									"next to"
 								],
 								"correct": 2,
-								"hint_fa": "برای روزهای هفته از on استفاده می‌کنیم.",
+								"hint_fa": "Wednesday یک روز هفته است.",
 								"explanation_fa": "برای روزهای هفته از on استفاده می‌کنیم."
 							}
 						]
@@ -1057,7 +1057,7 @@
 								"answers": [
 									"in"
 								],
-								"hint_fa": "برای بخش‌های روز از in استفاده می‌کنیم.",
+								"hint_fa": "the evening یک بخش از روز است.",
 								"explanation_fa": "برای بخش‌های روز از in استفاده می‌کنیم."
 							}
 						]
@@ -1070,9 +1070,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«at» با روزهای هفته مثل جمعه (Friday) استفاده می‌شود.",
+								"statement": "کلمه‌ی at با روزهای هفته مثل Friday استفاده می‌شود.",
 								"answer": false,
-								"hint_fa": "برای روزهای هفته از on استفاده می‌شود، نه at.",
+								"hint_fa": "کدام حرف اضافه برای روزهای هفته به‌کار می‌رود؟",
 								"explanation_fa": "برای روزهای هفته از on استفاده می‌شود، نه at."
 							}
 						]
@@ -1087,8 +1087,8 @@
 							{
 								"statement": "برای ساعت دقیق مثل 8 o'clock از at استفاده می‌کنیم.",
 								"answer": true,
-								"hint_fa": "درسته! at 8 o'clock",
-								"explanation_fa": "درسته! at 8 o'clock"
+								"hint_fa": "به مثال ساعت دقیق فکر کن.",
+								"explanation_fa": "درسته! at 8 o'clock."
 							}
 						]
 					},
@@ -1102,7 +1102,7 @@
 							{
 								"statement": "برای روزهای هفته مثل Friday از in استفاده می‌کنیم.",
 								"answer": false,
-								"hint_fa": "برای روزهای هفته از on استفاده می‌کنیم، نه in.",
+								"hint_fa": "Friday یک روز هفته است.",
 								"explanation_fa": "برای روزهای هفته از on استفاده می‌کنیم، نه in."
 							}
 						]
@@ -1115,7 +1115,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"I go to school in Friday.",
 									"I go to school on Friday.",
@@ -1123,7 +1123,7 @@
 									"I go to school for Friday."
 								],
 								"correct": 1,
-								"hint_fa": "برای روزهای هفته از on استفاده می‌کنیم.",
+								"hint_fa": "به Friday در جمله دقت کن.",
 								"explanation_fa": "برای روزهای هفته از on استفاده می‌کنیم."
 							}
 						]
@@ -1168,10 +1168,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن: My friend lives ___ Italy.",
+						"instruction_fa": "جای خالی را کامل کن",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن: My friend lives ___ Italy.",
+								"question": "My friend lives ___ Italy.",
 								"options": [
 									"in",
 									"on",
@@ -1179,7 +1179,7 @@
 									"in front of"
 								],
 								"correct": 0,
-								"hint_fa": "برای داخل یک کشور از in استفاده می‌کنیم.",
+								"hint_fa": "Italy یک کشور است.",
 								"explanation_fa": "برای داخل یک کشور از in استفاده می‌کنیم."
 							}
 						]
@@ -1196,7 +1196,7 @@
 								"answers": [
 									"on"
 								],
-								"hint_fa": "برای روی یک سطح از on استفاده می‌کنیم.",
+								"hint_fa": "کلیدها روی میز هستند، نه داخل آن.",
 								"explanation_fa": "برای روی یک سطح از on استفاده می‌کنیم."
 							}
 						]
@@ -1224,10 +1224,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (کنار): The pharmacy is ___ the hospital.",
+						"instruction_fa": "جای خالی را کامل کن (کنار)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (کنار): The pharmacy is ___ the hospital.",
+								"question": "The pharmacy is ___ the hospital.",
 								"options": [
 									"in",
 									"on",
@@ -1235,7 +1235,7 @@
 									"in front of"
 								],
 								"correct": 2,
-								"hint_fa": "برای گفتن کنار یک چیز از next to استفاده می‌کنیم.",
+								"hint_fa": "داروخانه در کنار بیمارستان است.",
 								"explanation_fa": "برای گفتن کنار یک چیز از next to استفاده می‌کنیم."
 							}
 						]
@@ -1248,9 +1248,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«in front of» یعنی «کنار».",
+								"statement": "عبارت in front of به معنای کنار است.",
 								"answer": false,
-								"hint_fa": "in front of یعنی روبروی، نه کنار.",
+								"hint_fa": "معنای دقیق in front of چیست؟",
 								"explanation_fa": "in front of یعنی روبروی، نه کنار."
 							}
 						]
@@ -1260,10 +1260,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "جای خالی را کامل کن (کنار): Our school is ___ the post office.",
+						"instruction_fa": "جای خالی را کامل کن (کنار)",
 						"questions": [
 							{
-								"question": "جای خالی را کامل کن (کنار): Our school is ___ the post office.",
+								"question": "Our school is ___ the post office.",
 								"options": [
 									"in",
 									"on",
@@ -1271,7 +1271,7 @@
 									"in front of"
 								],
 								"correct": 2,
-								"hint_fa": "برای گفتن کنار یک چیز از next to استفاده می‌کنیم.",
+								"hint_fa": "مدرسه در کنار پست است.",
 								"explanation_fa": "برای گفتن کنار یک چیز از next to استفاده می‌کنیم."
 							}
 						]
@@ -1288,7 +1288,7 @@
 								"answers": [
 									"in front of"
 								],
-								"hint_fa": "برای روبروی چیزی از in front of استفاده می‌کنیم.",
+								"hint_fa": "ایستگاه اتوبوس روبروی ایستگاه قطار است.",
 								"explanation_fa": "برای روبروی چیزی از in front of استفاده می‌کنیم."
 							}
 						]
@@ -1301,10 +1301,10 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«on the table» یعنی شیء داخل میز است.",
+								"statement": "عبارت on the table یعنی شیء داخل میز است.",
 								"answer": false,
-								"hint_fa": "'on the table' یعنی روی میز، نه داخل آن.",
-								"explanation_fa": "'on the table' یعنی روی میز، نه داخل آن."
+								"hint_fa": "به معنای on دقت کن: روی سطح یا داخل؟",
+								"explanation_fa": "عبارت on the table یعنی روی میز، نه داخل آن."
 							}
 						]
 					},
@@ -1318,7 +1318,7 @@
 							{
 								"statement": "برای گفتن اینکه چیزی داخل یک شهر یا کشور است از in استفاده می‌کنیم.",
 								"answer": true,
-								"hint_fa": "درسته! مثل in Tehran، in Italy.",
+								"hint_fa": "به کاربرد in برای شهر و کشور فکر کن.",
 								"explanation_fa": "درسته! مثل in Tehran، in Italy."
 							}
 						]
@@ -1331,9 +1331,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "next to به معنای 'روبروی' است.",
+								"statement": "کلمه‌ی next to به معنای روبروی است.",
 								"answer": false,
-								"hint_fa": "next to یعنی کنار؛ روبروی می‌شود in front of.",
+								"hint_fa": "معنای next to چیست؟",
 								"explanation_fa": "next to یعنی کنار؛ روبروی می‌شود in front of."
 							}
 						]
@@ -1346,7 +1346,7 @@
 						"instruction_fa": "کدام جمله درست است؟ (کتاب روی میز است)",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟ (کتاب روی میز است)",
+								"question": "",
 								"options": [
 									"The book is next to the table.",
 									"The book is on the table.",
@@ -1354,7 +1354,7 @@
 									"The book is at the table."
 								],
 								"correct": 1,
-								"hint_fa": "برای روی یک سطح از on استفاده می‌کنیم.",
+								"hint_fa": "کتاب روی میز قرار دارد، نه داخل یا کنار آن.",
 								"explanation_fa": "برای روی یک سطح از on استفاده می‌کنیم."
 							}
 						]
@@ -1377,15 +1377,15 @@
 						"cards": [
 							{
 								"en": "quick → quickly",
-								"fa": "quick ← quickly (سریع)"
+								"fa": "سریع"
 							},
 							{
 								"en": "careful → carefully",
-								"fa": "careful ← carefully (با دقت)"
+								"fa": "با دقت"
 							},
 							{
 								"en": "polite → politely",
-								"fa": "polite ← politely (مؤدبانه)"
+								"fa": "مؤدبانه"
 							}
 						],
 						"highlight_word": "quickly"
@@ -1395,10 +1395,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "قید صفت 'quick' کدام است؟",
+						"instruction_fa": "قید صفت quick کدام است؟",
 						"questions": [
 							{
-								"question": "قید صفت 'quick' کدام است؟",
+								"question": "",
 								"options": [
 									"quick",
 									"quickly",
@@ -1406,7 +1406,7 @@
 									"quickely"
 								],
 								"correct": 1,
-								"hint_fa": "برای ساخت قید، ly به آخر صفت اضافه می‌شود: quickly.",
+								"hint_fa": "به صفت quick چه پسوندی اضافه می‌شود؟",
 								"explanation_fa": "برای ساخت قید، ly به آخر صفت اضافه می‌شود: quickly."
 							}
 						]
@@ -1423,8 +1423,8 @@
 								"answers": [
 									"carefully"
 								],
-								"hint_fa": "careful + ly = carefully",
-								"explanation_fa": "careful + ly = carefully"
+								"hint_fa": "به careful پسوند ly اضافه کن.",
+								"explanation_fa": "careful + ly = carefully."
 							}
 						]
 					},
@@ -1437,15 +1437,15 @@
 						"cards": [
 							{
 								"en": "easy → easily",
-								"fa": "easy ← easily (به‌راحتی)"
+								"fa": "به‌راحتی"
 							},
 							{
 								"en": "possible → possibly",
-								"fa": "possible ← possibly (احتمالاً)"
+								"fa": "احتمالاً"
 							},
 							{
 								"en": "good → well",
-								"fa": "good ← well (خوب)"
+								"fa": "خوب"
 							}
 						],
 						"highlight_word": "well"
@@ -1455,10 +1455,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "قید صفت 'easy' کدام است؟",
+						"instruction_fa": "قید صفت easy کدام است؟",
 						"questions": [
 							{
-								"question": "قید صفت 'easy' کدام است؟",
+								"question": "",
 								"options": [
 									"easyly",
 									"easily",
@@ -1466,7 +1466,7 @@
 									"easilly"
 								],
 								"correct": 1,
-								"hint_fa": "y در easy به i تبدیل و ly اضافه می‌شود: easily.",
+								"hint_fa": "به صفت‌های ختم به y دقت کن: y به i تبدیل می‌شود.",
 								"explanation_fa": "y در easy به i تبدیل و ly اضافه می‌شود: easily."
 							}
 						]
@@ -1479,9 +1479,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "قیدِ کلمه‌ی «good»، «goodly» است.",
+								"statement": "قیدِ کلمه‌ی good، goodly است.",
 								"answer": false,
-								"hint_fa": "good یک قید بی‌قاعده دارد: well.",
+								"hint_fa": "آیا برای قید good فقط ly اضافه می‌شود؟",
 								"explanation_fa": "good یک قید بی‌قاعده دارد: well."
 							}
 						]
@@ -1491,10 +1491,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "قید صفت 'possible' کدام است؟",
+						"instruction_fa": "قید صفت possible کدام است؟",
 						"questions": [
 							{
-								"question": "قید صفت 'possible' کدام است؟",
+								"question": "",
 								"options": [
 									"possibleley",
 									"possibly",
@@ -1502,7 +1502,7 @@
 									"possibley"
 								],
 								"correct": 1,
-								"hint_fa": "ble در possible به bly تبدیل می‌شود: possibly.",
+								"hint_fa": "صفت‌های ختم به ble چه تغییری می‌کنند؟",
 								"explanation_fa": "ble در possible به bly تبدیل می‌شود: possibly."
 							}
 						]
@@ -1519,7 +1519,7 @@
 								"answers": [
 									"well"
 								],
-								"hint_fa": "قید good به شکل بی‌قاعده well است.",
+								"hint_fa": "به قید بی‌قاعده‌ی good فکر کن.",
 								"explanation_fa": "قید good به شکل بی‌قاعده well است."
 							}
 						]
@@ -1532,9 +1532,9 @@
 						"instruction_fa": "درست یا غلط",
 						"items": [
 							{
-								"statement": "«fast» برای صفت و قید به یک شکل استفاده می‌شود.",
+								"statement": "کلمه‌ی fast برای صفت و قید به یک شکل استفاده می‌شود.",
 								"answer": true,
-								"hint_fa": "درسته! fast هم صفت هم قید است (بدون تغییر).",
+								"hint_fa": "آیا fast در حالت قید تغییر می‌کند؟",
 								"explanation_fa": "درسته! fast هم صفت هم قید است (بدون تغییر)."
 							}
 						]
@@ -1549,7 +1549,7 @@
 							{
 								"statement": "بیشتر قیدهای حالت با اضافه کردن ly به آخر صفت ساخته می‌شوند.",
 								"answer": true,
-								"hint_fa": "درسته! این قانون اصلی ساخت قید حالت است.",
+								"hint_fa": "به قانون ساخت قید از صفت فکر کن.",
 								"explanation_fa": "درسته! این قانون اصلی ساخت قید حالت است."
 							}
 						]
@@ -1564,7 +1564,7 @@
 							{
 								"statement": "قید کلمه‌ی good به شکل goodly است.",
 								"answer": false,
-								"hint_fa": "قید good بی‌قاعده است و well می‌شود، نه goodly.",
+								"hint_fa": "به قید بی‌قاعده‌ی good فکر کن.",
 								"explanation_fa": "قید good بی‌قاعده است و well می‌شود، نه goodly."
 							}
 						]
@@ -1574,10 +1574,10 @@
 						"type": "multiple_choice",
 						"title_fa": "",
 						"title_en": "",
-						"instruction_fa": "قید صحیح کلمه‌ی 'good' کدام است؟",
+						"instruction_fa": "قید صحیح کلمه‌ی good کدام است؟",
 						"questions": [
 							{
-								"question": "قید صحیح کلمه‌ی 'good' کدام است؟",
+								"question": "",
 								"options": [
 									"goodly",
 									"well",
@@ -1585,8 +1585,8 @@
 									"goodily"
 								],
 								"correct": 1,
-								"hint_fa": "good یک قید بی‌قاعده دارد: well.",
-								"explanation_fa": "good یک قید بی‌قاعده دارد: well."
+								"hint_fa": "به قید بی‌قاعده‌ی good فکر کن.",
+								"explanation_fa": "کلمه good یک قید بی‌قاعده دارد: well."
 							}
 						]
 					}

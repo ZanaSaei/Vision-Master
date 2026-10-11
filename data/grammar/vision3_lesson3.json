@@ -21,7 +21,7 @@
 						"type": "learn",
 						"title_fa": "مدال + be + قسمت سوم فعل",
 						"title_en": "Modal + Be + Past Participle",
-						"explanation": "وقتی جمله‌ای هم مدال (should, must, may, can, ...) دارد و هم مجهول است، بعد از مدال از be و بعد از آن قسمت سوم فعل می‌آید.",
+						"explanation": "وقتی جمله‌ای هم مدال مثل should، must، may، can دارد و هم مجهول است، بعد از مدال از be و بعد از آن قسمت سوم فعل می‌آید.",
 						"structure": "فاعل + مدال + be + قسمت سوم فعل",
 						"cards": [
 							{
@@ -87,7 +87,7 @@
 								"answers": [
 									"be"
 								],
-								"hint_fa": "بعد از مدال (should) و قبل از قسمت سوم فعل، be می‌آید.",
+								"hint_fa": "بین مدال should و قسمت سوم فعل called چه کلمه‌ای قرار می‌گیرد؟",
 								"explanation_fa": "آفرین! be درست است.",
 								"wrong_explanation_fa": "ساختار مجهول با مدال: مدال + be + قسمت سوم فعل."
 							}
@@ -104,7 +104,7 @@
 								"answers": [
 									"be"
 								],
-								"hint_fa": "بعد از مدال (must) و قبل از قسمت سوم فعل، be می‌آید.",
+								"hint_fa": "بین مدال must و قسمت سوم فعل obeyed چه کلمه‌ای قرار می‌گیرد؟",
 								"explanation_fa": "آفرین! be درست است.",
 								"wrong_explanation_fa": "ساختار مجهول با مدال: مدال + be + قسمت سوم فعل."
 							}
@@ -117,7 +117,7 @@
 						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
 						"questions": [
 							{
-								"question": "Active: 'The cook may make a fish salad.' Passive: 'A fish salad may ___ made.'",
+								"question": "معلوم: The cook may make a fish salad. مجهول: A fish salad may ___ made.",
 								"options": [
 									"be",
 									"is",
@@ -125,7 +125,7 @@
 									"being"
 								],
 								"correct": 0.0,
-								"hint_fa": "بعد از مدال (may) در مجهول، be می‌آید.",
+								"hint_fa": "بعد از مدال may در مجهول، چه کلمه‌ای می‌آید؟",
 								"explanation_fa": "آفرین! be درست است.",
 								"wrong_explanation_fa": "ساختار مجهول با مدال: مدال + be + قسمت سوم فعل."
 							}
@@ -138,11 +138,11 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "در حالت مجهول با فعل‌های کمکی، ساختار به صورت: فعل کمکی + be + قسمت سوم فعل است.",
+								"statement": "در حالت مجهول با فعل‌های کمکی، ساختار به صورت فعل کمکی + be + قسمت سوم فعل است.",
 								"fa": "در مجهول با مدال، ساختار به‌صورت مدال + be + قسمت سوم فعل است.",
 								"answer": true,
-								"hint_fa": "این ساختار اصلی مجهول با مدال است.",
-								"explanation_fa": "درست است! مثل: should be called، must be obeyed."
+								"hint_fa": "به فرمول مجهول با مدال فکر کن.",
+								"explanation_fa": "درست است! مثل: should be called و must be obeyed."
 							}
 						]
 					},
@@ -153,10 +153,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "جمله‌ی «The traffic rules must obeyed» از نظر گرامری درست است.",
-								"fa": "جمله‌ی 'The traffic rules must obeyed' از نظر گرامری درست است.",
+								"statement": "جمله‌ی The traffic rules must obeyed از نظر گرامری درست است.",
+								"fa": "جمله‌ی The traffic rules must obeyed از نظر گرامری درست است.",
 								"answer": false,
-								"hint_fa": "بین must و obeyed باید be بیاید.",
+								"hint_fa": "آیا بین must و obeyed کلمه‌ای لازم است؟",
 								"explanation_fa": "غلط است! درست: The traffic rules must be obeyed."
 							}
 						]
@@ -176,8 +176,8 @@
 									"called",
 									"."
 								],
-								"answer": "The parents should be called .",
-								"hint_fa": "فاعل (The parents) + مدال (should) + be + قسمت سوم فعل (called) در ادامه می‌آید."
+								"answer": "The parents should be called.",
+								"hint_fa": "ترتیب درست: فاعل The parents، سپس مدال should، بعد be و در انتها قسمت سوم فعل called می‌آید."
 							}
 						]
 					},
@@ -196,7 +196,7 @@
 									"Wind can be change into electricity."
 								],
 								"correct": 1.0,
-								"hint_fa": "کدام جمله مدال + be + قسمت سوم فعل دارد؟",
+								"hint_fa": "کدام جمله ساختار مدال + be + قسمت سوم فعل دارد؟",
 								"explanation_fa": "آفرین! این جمله ساختار درستی دارد.",
 								"wrong_explanation_fa": "ساختار درست: مدال + be + قسمت سوم فعل."
 							}
@@ -214,7 +214,7 @@
 					{
 						"id": "unit2_learn1",
 						"type": "learn",
-						"title_fa": "should be + قسمت سوم فعل (توصیه)",
+						"title_fa": "should be + قسمت سوم فعل برای توصیه",
 						"title_en": "Should be + Past Participle",
 						"explanation": "از should be + قسمت سوم فعل برای بیان یک توصیه در حالت مجهول استفاده می‌کنیم.",
 						"structure": "فاعل + should be + قسمت سوم فعل",
@@ -228,7 +228,7 @@
 					{
 						"id": "unit2_learn2",
 						"type": "learn",
-						"title_fa": "must be + قسمت سوم فعل (الزام)",
+						"title_fa": "must be + قسمت سوم فعل برای الزام",
 						"title_en": "Must be + Past Participle",
 						"explanation": "از must be + قسمت سوم فعل برای بیان یک الزام قوی در حالت مجهول استفاده می‌کنیم.",
 						"structure": "فاعل + must be + قسمت سوم فعل",
@@ -243,7 +243,7 @@
 						"id": "unit2_matching_should_must",
 						"type": "matching",
 						"title_fa": "اتصال جمله به مفهوم آن",
-						"instruction_fa": "هر جمله را به مفهوم درست آن (توصیه یا الزام) وصل کن.",
+						"instruction_fa": "هر جمله را به مفهوم درست آن یعنی توصیه یا الزام وصل کن.",
 						"items": [
 							{
 								"left": "Something should be done about global warming.",
@@ -274,7 +274,7 @@
 								"answers": [
 									"should"
 								],
-								"hint_fa": "این جمله یک توصیه است.",
+								"hint_fa": "این جمله یک توصیه است؛ کدام مدال برای توصیه به کار می‌رود؟",
 								"explanation_fa": "آفرین! should درست است.",
 								"wrong_explanation_fa": "برای بیان توصیه از should استفاده می‌کنیم."
 							}
@@ -291,7 +291,7 @@
 								"answers": [
 									"must"
 								],
-								"hint_fa": "این جمله یک الزام قوی است.",
+								"hint_fa": "این جمله یک الزام قوی است؛ کدام مدال برای الزام قوی به کار می‌رود؟",
 								"explanation_fa": "آفرین! must درست است.",
 								"wrong_explanation_fa": "برای بیان الزام قوی از must استفاده می‌کنیم."
 							}
@@ -304,10 +304,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«should» الزام قوی‌تری از «must» نشان می‌دهد.",
+								"statement": "should الزام قوی‌تری از must نشان می‌دهد.",
 								"fa": "should الزام قوی‌تری نسبت به must نشان می‌دهد.",
 								"answer": false,
-								"hint_fa": "must الزام قوی‌تری نسبت به should دارد.",
+								"hint_fa": "شدت الزام را در must و should مقایسه کن.",
 								"explanation_fa": "غلط است! must الزام قوی‌تری نسبت به should نشان می‌دهد."
 							}
 						]
@@ -331,8 +331,8 @@
 									"restaurant",
 									"."
 								],
-								"answer": "The bill must be paid before leaving the restaurant .",
-								"hint_fa": "فاعل (The bill) + must + be + قسمت سوم فعل (paid) در ادامه می‌آید."
+								"answer": "The bill must be paid before leaving the restaurant.",
+								"hint_fa": "ترتیب درست: فاعل The bill، سپس must، بعد be و قسمت سوم فعل paid در ادامه می‌آید."
 							}
 						]
 					},
@@ -351,7 +351,7 @@
 									"Wind can be changed into electricity."
 								],
 								"correct": 1.0,
-								"hint_fa": "کدام مدال الزام قوی‌تری نشان می‌دهد؟",
+								"hint_fa": "کدام مدال الزام قوی‌تری نسبت به بقیه نشان می‌دهد؟",
 								"explanation_fa": "آفرین! must الزام قوی است.",
 								"wrong_explanation_fa": "must الزام قوی‌تری نسبت به should، may یا can نشان می‌دهد."
 							}
@@ -369,7 +369,7 @@
 					{
 						"id": "unit3_learn1",
 						"type": "learn",
-						"title_fa": "may be + قسمت سوم فعل (احتمال)",
+						"title_fa": "may be + قسمت سوم فعل برای احتمال",
 						"title_en": "May be + Past Participle",
 						"explanation": "از may be + قسمت سوم فعل برای بیان یک احتمال در حالت مجهول استفاده می‌کنیم.",
 						"structure": "فاعل + may be + قسمت سوم فعل",
@@ -383,7 +383,7 @@
 					{
 						"id": "unit3_learn2",
 						"type": "learn",
-						"title_fa": "can be + قسمت سوم فعل (امکان/توانایی)",
+						"title_fa": "can be + قسمت سوم فعل برای امکان یا توانایی",
 						"title_en": "Can be + Past Participle",
 						"explanation": "از can be + قسمت سوم فعل برای بیان یک امکان یا توانایی در حالت مجهول استفاده می‌کنیم.",
 						"structure": "فاعل + can be + قسمت سوم فعل",
@@ -398,7 +398,7 @@
 						"id": "unit3_matching_may_can",
 						"type": "matching",
 						"title_fa": "اتصال جمله به مفهوم آن",
-						"instruction_fa": "هر جمله را به مفهوم درست آن (احتمال یا امکان) وصل کن.",
+						"instruction_fa": "هر جمله را به مفهوم درست آن یعنی احتمال یا امکان وصل کن.",
 						"items": [
 							{
 								"left": "Some gases may be produced.",
@@ -406,7 +406,7 @@
 							},
 							{
 								"left": "Wind can be changed into electricity.",
-								"right": "امکان/توانایی"
+								"right": "امکان یا توانایی"
 							},
 							{
 								"left": "The plan may be changed.",
@@ -414,7 +414,7 @@
 							},
 							{
 								"left": "Water can be turned into ice.",
-								"right": "امکان/توانایی"
+								"right": "امکان یا توانایی"
 							}
 						]
 					},
@@ -429,7 +429,7 @@
 								"answers": [
 									"may"
 								],
-								"hint_fa": "این جمله یک احتمال را نشان می‌دهد.",
+								"hint_fa": "این جمله یک احتمال را نشان می‌دهد؛ کدام مدال برای احتمال به کار می‌رود؟",
 								"explanation_fa": "آفرین! may درست است.",
 								"wrong_explanation_fa": "برای بیان احتمال از may استفاده می‌کنیم."
 							}
@@ -446,7 +446,7 @@
 								"answers": [
 									"can"
 								],
-								"hint_fa": "این جمله یک امکان یا توانایی را نشان می‌دهد.",
+								"hint_fa": "این جمله یک امکان یا توانایی را نشان می‌دهد؛ کدام مدال مناسب است؟",
 								"explanation_fa": "آفرین! can درست است.",
 								"wrong_explanation_fa": "برای بیان امکان یا توانایی از can استفاده می‌کنیم."
 							}
@@ -459,10 +459,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«may» برای نشان دادن قطعیت استفاده می‌شود، نه احتمال.",
+								"statement": "may برای نشان دادن قطعیت استفاده می‌شود، نه احتمال.",
 								"fa": "may برای نشان دادن قطعیت استفاده می‌شود، نه احتمال.",
 								"answer": false,
-								"hint_fa": "may برای احتمال به کار می‌رود، نه قطعیت.",
+								"hint_fa": "may مفهوم احتمال را می‌رساند یا قطعیت؟",
 								"explanation_fa": "غلط است! may برای بیان احتمال به کار می‌رود."
 							}
 						]
@@ -483,8 +483,8 @@
 									"electricity",
 									"."
 								],
-								"answer": "Wind can be changed into electricity .",
-								"hint_fa": "فاعل (Wind) + can + be + قسمت سوم فعل (changed) در ادامه می‌آید."
+								"answer": "Wind can be changed into electricity.",
+								"hint_fa": "ترتیب درست: فاعل Wind، سپس can، بعد be و قسمت سوم فعل changed در ادامه می‌آید."
 							}
 						]
 					},
@@ -503,7 +503,7 @@
 									"The parents should be called."
 								],
 								"correct": 1.0,
-								"hint_fa": "کدام مدال احتمال را نشان می‌دهد؟",
+								"hint_fa": "کدام مدال مفهوم احتمال را می‌رساند؟",
 								"explanation_fa": "آفرین! may برای بیان احتمال به کار می‌رود.",
 								"wrong_explanation_fa": "must الزام، should توصیه، can توانایی و may احتمال را نشان می‌دهد."
 							}
@@ -521,9 +521,9 @@
 					{
 						"id": "unit4_learn1",
 						"type": "learn",
-						"title_fa": "had + قسمت سوم فعل",
+						"title_fa": "ساختار had + قسمت سوم فعل",
 						"title_en": "Had + Past Participle",
-						"explanation": "از ماضی بعید (Past Perfect) برای عملی استفاده می‌کنیم که قبل از یک عمل دیگر در گذشته اتفاق افتاده است.",
+						"explanation": "از ماضی بعید Past Perfect برای عملی استفاده می‌کنیم که قبل از یک عمل دیگر در گذشته اتفاق افتاده است.",
 						"structure": "فاعل + had + قسمت سوم فعل",
 						"cards": [
 							{
@@ -565,7 +565,7 @@
 								"answers": [
 									"had"
 								],
-								"hint_fa": "برای ماضی بعید مثبت از had استفاده می‌کنیم.",
+								"hint_fa": "برای ساخت ماضی بعید مثبت از کدام فعل کمکی استفاده می‌کنیم؟",
 								"explanation_fa": "آفرین! had درست است.",
 								"wrong_explanation_fa": "ساختار ماضی بعید: had + قسمت سوم فعل."
 							}
@@ -582,7 +582,7 @@
 								"answers": [
 									"hadn't"
 								],
-								"hint_fa": "برای منفی کردن ماضی بعید از hadn't استفاده می‌کنیم.",
+								"hint_fa": "برای منفی کردن ماضی بعید از کدام شکل کوتاه‌شده استفاده می‌کنیم؟",
 								"explanation_fa": "آفرین! hadn't درست است.",
 								"wrong_explanation_fa": "منفی ماضی بعید: hadn't + قسمت سوم فعل."
 							}
@@ -603,7 +603,7 @@
 									"Do"
 								],
 								"correct": 1.0,
-								"hint_fa": "برای سؤالی کردن ماضی بعید، Had به ابتدای جمله می‌آید.",
+								"hint_fa": "برای سؤالی کردن ماضی بعید، کدام فعل کمکی به ابتدای جمله می‌آید؟",
 								"explanation_fa": "آفرین! Had درست است.",
 								"wrong_explanation_fa": "سؤالی ماضی بعید: Had + فاعل + قسمت سوم فعل؟"
 							}
@@ -619,7 +619,7 @@
 								"statement": "ماضی بعید برای عملی استفاده می‌شود که قبل از عمل دیگری در گذشته اتفاق افتاده است.",
 								"fa": "ماضی بعید برای عملی استفاده می‌شود که قبل از یک عمل دیگر در گذشته اتفاق افتاده است.",
 								"answer": true,
-								"hint_fa": "این تعریف اصلی ماضی بعید است.",
+								"hint_fa": "به تعریف اصلی ماضی بعید فکر کن.",
 								"explanation_fa": "درست است! ماضی بعید همیشه یک عمل قبل از عمل دیگری در گذشته را نشان می‌دهد."
 							}
 						]
@@ -631,10 +631,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«She has never seen a bear before» شکل درست ماضی بعید است.",
-								"fa": "جمله‌ی 'She has never seen a bear before' شکل درست ماضی بعید است.",
+								"statement": "جمله‌ی She has never seen a bear before شکل درست ماضی بعید است.",
+								"fa": "جمله‌ی She has never seen a bear before شکل درست ماضی بعید است.",
 								"answer": false,
-								"hint_fa": "ماضی بعید از had استفاده می‌کند، نه has (که حال کامل است).",
+								"hint_fa": "ماضی بعید از has استفاده می‌کند یا از had؟",
 								"explanation_fa": "غلط است! شکل درست ماضی بعید: She had never seen a bear before."
 							}
 						]
@@ -658,8 +658,8 @@
 									"China",
 									"."
 								],
-								"answer": "Joe had studied Chinese before he moved to China .",
-								"hint_fa": "فاعل (Joe) + had + قسمت سوم فعل (studied) در ابتدا می‌آید."
+								"answer": "Joe had studied Chinese before he moved to China.",
+								"hint_fa": "ترتیب درست: فاعل Joe، سپس had و قسمت سوم فعل studied در ابتدا می‌آید."
 							}
 						]
 					},
@@ -678,8 +678,8 @@
 									"She sees a bear."
 								],
 								"correct": 2.0,
-								"hint_fa": "ماضی بعید با had + قسمت سوم فعل ساخته می‌شود.",
-								"explanation_fa": "آفرین! 'She had seen a bear' ماضی بعید است.",
+								"hint_fa": "ماضی بعید با کدام ساختار ساخته می‌شود؟",
+								"explanation_fa": "آفرین! She had seen a bear ماضی بعید است.",
 								"wrong_explanation_fa": "ماضی بعید: had + قسمت سوم فعل."
 							}
 						]
@@ -696,9 +696,9 @@
 					{
 						"id": "unit5_learn1",
 						"type": "learn",
-						"title_fa": "Before + گذشته ساده، ماضی بعید",
+						"title_fa": "ساختار Before + گذشته ساده، ماضی بعید",
 						"title_en": "Before + Simple Past, Past Perfect",
-						"explanation": "وقتی از before استفاده می‌کنیم، عملی که زودتر اتفاق افتاده با ماضی بعید و عملی که دیرتر اتفاق افتاده (بعد از before) با گذشته‌ی ساده بیان می‌شود.",
+						"explanation": "وقتی از before استفاده می‌کنیم، عملی که زودتر اتفاق افتاده با ماضی بعید و عملی که دیرتر اتفاق افتاده یعنی بعد از before با گذشته‌ی ساده بیان می‌شود.",
 						"structure": "فاعل + had + قسمت سوم فعل (کار اول) + before + فاعل + گذشته ساده (کار دوم)",
 						"cards": [
 							{
@@ -710,9 +710,9 @@
 					{
 						"id": "unit5_learn2",
 						"type": "learn",
-						"title_fa": "After + ماضی بعید، گذشته ساده",
+						"title_fa": "ساختار After + ماضی بعید، گذشته ساده",
 						"title_en": "After + Past Perfect, Simple Past",
-						"explanation": "وقتی از after استفاده می‌کنیم، عملی که زودتر اتفاق افتاده (بعد از after) با ماضی بعید و عملی که دیرتر اتفاق افتاده با گذشته‌ی ساده بیان می‌شود.",
+						"explanation": "وقتی از after استفاده می‌کنیم، عملی که زودتر اتفاق افتاده یعنی بعد از after با ماضی بعید و عملی که دیرتر اتفاق افتاده با گذشته‌ی ساده بیان می‌شود.",
 						"structure": "After + فاعل + had + قسمت سوم فعل (کار اول)، فاعل + گذشته ساده (کار دوم)",
 						"cards": [
 							{
@@ -756,9 +756,9 @@
 								"answers": [
 									"had"
 								],
-								"hint_fa": "عملی که زودتر اتفاق افتاده با ماضی بعید (had + قسمت سوم فعل) بیان می‌شود.",
+								"hint_fa": "عملی که زودتر اتفاق افتاده با کدام ساختار بیان می‌شود؟",
 								"explanation_fa": "آفرین! had درست است.",
-								"wrong_explanation_fa": "کار اول (که زودتر اتفاق افتاده) با had + قسمت سوم فعل بیان می‌شود."
+								"wrong_explanation_fa": "کار اول یعنی کاری که زودتر اتفاق افتاده با had + قسمت سوم فعل بیان می‌شود."
 							}
 						]
 					},
@@ -773,9 +773,9 @@
 								"answers": [
 									"flew"
 								],
-								"hint_fa": "کار دوم (که دیرتر اتفاق افتاده) با گذشته‌ی ساده بیان می‌شود.",
+								"hint_fa": "کار دومی که بعد از کار اول اتفاق افتاده با چه زمانی بیان می‌شود؟",
 								"explanation_fa": "آفرین! flew درست است.",
-								"wrong_explanation_fa": "کار دوم (بعد از ماضی بعید با after) با گذشته‌ی ساده می‌آید."
+								"wrong_explanation_fa": "کار دوم یعنی کاری که بعد از ماضی بعید با after اتفاق افتاده با گذشته‌ی ساده می‌آید."
 							}
 						]
 					},
@@ -786,7 +786,7 @@
 						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"Before he moved to China, Joe studied Chinese.",
 									"Before he moved to China, Joe had studied Chinese.",
@@ -794,9 +794,9 @@
 									"Before he had moved to China, Joe had studied Chinese."
 								],
 								"correct": 1.0,
-								"hint_fa": "کاری که زودتر اتفاق افتاده (مطالعه کردن) باید ماضی بعید باشد.",
+								"hint_fa": "کاری که زودتر اتفاق افتاده یعنی مطالعه کردن باید در زمان ماضی بعید باشد.",
 								"explanation_fa": "آفرین! این جمله ترتیب زمانی درستی دارد.",
-								"wrong_explanation_fa": "کار اول (زودتر) ماضی بعید و کار دوم (دیرتر، بعد از before) گذشته‌ی ساده است."
+								"wrong_explanation_fa": "کار اول یعنی زودتر، ماضی بعید و کار دوم یعنی دیرتر و بعد از before، گذشته‌ی ساده است."
 							}
 						]
 					},
@@ -807,10 +807,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "بعد از «before»، معمولاً عملی که زودتر اتفاق افتاده در ماضی بعید می‌آید.",
+								"statement": "قبل از قسمتی که با before می‌آید، فعلی که زودتر اتفاق افتاده معمولاً ماضی بعید است.",
 								"fa": "قبل از قسمتی که با before می‌آید، فعلی که زودتر اتفاق افتاده معمولاً ماضی بعید است.",
 								"answer": true,
-								"hint_fa": "before کار اول را با ماضی بعید نشان می‌دهد.",
+								"hint_fa": "before کدام کار را با ماضی بعید نشان می‌دهد؟",
 								"explanation_fa": "درست است! مثل: we had taken photographs before we played volleyball."
 							}
 						]
@@ -834,8 +834,8 @@
 									"kites",
 									"."
 								],
-								"answer": "After we had eaten lunch, we flew our kites .",
-								"hint_fa": "After + فاعل + had + قسمت سوم فعل (کار اول)، فاعل + گذشته ساده (کار دوم)."
+								"answer": "After we had eaten lunch, we flew our kites.",
+								"hint_fa": "ترتیب درست: After + فاعل + had + قسمت سوم فعل برای کار اول، سپس فاعل + گذشته ساده برای کار دوم."
 							}
 						]
 					},
@@ -854,7 +854,7 @@
 									"Before I had left, I had locked the door."
 								],
 								"correct": 0.0,
-								"hint_fa": "کار اول (قفل کردن در) باید ماضی بعید و کار دوم (رفتن) گذشته‌ی ساده باشد.",
+								"hint_fa": "کار اول یعنی قفل کردن در باید ماضی بعید و کار دوم یعنی رفتن گذشته‌ی ساده باشد.",
 								"explanation_fa": "آفرین! این جمله ترتیب زمانی درستی دارد.",
 								"wrong_explanation_fa": "کار زودتر انجام‌شده ماضی بعید و کار دیرتر گذشته‌ی ساده می‌شود."
 							}
@@ -872,9 +872,9 @@
 					{
 						"id": "unit6_learn1",
 						"type": "learn",
-						"title_fa": "already در جمله‌های ماضی بعید",
+						"title_fa": "کاربرد already در جمله‌های ماضی بعید",
 						"title_en": "Already in Past Perfect Sentences",
-						"explanation": "از already (قبلاً) در جمله‌های ماضی بعید استفاده می‌کنیم تا تأکید کنیم عملی پیش از زمان دیگری در گذشته، از قبل کامل شده بود.",
+						"explanation": "از already به معنی قبلاً در جمله‌های ماضی بعید استفاده می‌کنیم تا تأکید کنیم عملی پیش از زمان دیگری در گذشته، از قبل کامل شده بود.",
 						"structure": "فاعل + had already + قسمت سوم فعل",
 						"cards": [
 							{
@@ -908,7 +908,7 @@
 								"answers": [
 									"already"
 								],
-								"hint_fa": "این جمله تأکید می‌کند که کاری از قبل انجام شده بود.",
+								"hint_fa": "کدام کلمه تأکید می‌کند که کاری از قبل انجام شده بود؟",
 								"explanation_fa": "آفرین! already درست است.",
 								"wrong_explanation_fa": "already برای تأکید بر انجام‌شدن پیشین یک کار در ماضی بعید به کار می‌رود."
 							}
@@ -925,7 +925,7 @@
 								"answers": [
 									"When"
 								],
-								"hint_fa": "این کلمه یک لحظه‌ی مشخص در گذشته را نشان می‌دهد.",
+								"hint_fa": "کدام کلمه یک لحظه‌ی مشخص در گذشته را نشان می‌دهد؟",
 								"explanation_fa": "آفرین! When درست است.",
 								"wrong_explanation_fa": "برای نشان دادن یک لحظه‌ی مشخص در گذشته از when استفاده می‌کنیم."
 							}
@@ -938,7 +938,7 @@
 						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
 						"questions": [
 							{
-								"question": "کدام جمله درست است؟",
+								"question": "",
 								"options": [
 									"When I arrived, my grandparents already went home.",
 									"When I arrived, my grandparents had already gone home.",
@@ -946,9 +946,9 @@
 									"When I arrived, my grandparents have already gone home."
 								],
 								"correct": 1.0,
-								"hint_fa": "لحظه‌ی مرجع (arrived) گذشته‌ی ساده و کار قبلی (gone home) ماضی بعید است.",
+								"hint_fa": "لحظه‌ی مرجع یعنی arrived گذشته‌ی ساده و کار قبلی یعنی gone home ماضی بعید است.",
 								"explanation_fa": "آفرین! این جمله ترتیب زمانی درستی دارد.",
-								"wrong_explanation_fa": "with when، لحظه‌ی مرجع گذشته‌ی ساده و کار انجام‌شده‌ی قبلی ماضی بعید است."
+								"wrong_explanation_fa": "با when، لحظه‌ی مرجع گذشته‌ی ساده و کار انجام‌شده‌ی قبلی ماضی بعید است."
 							}
 						]
 					},
@@ -959,10 +959,10 @@
 						"instruction_fa": "جمله را بخوان و درست یا غلط بودن آن را مشخص کن.",
 						"items": [
 							{
-								"statement": "«already» تأکید می‌کند که کاری قبل از نقطه‌ای در گذشته اتفاق افتاده بود.",
+								"statement": "already تأکید می‌کند که کاری قبل از نقطه‌ای در گذشته اتفاق افتاده بود.",
 								"fa": "already تأکید می‌کند که کاری پیش از نقطه‌ی دیگری در گذشته، از قبل اتفاق افتاده بود.",
 								"answer": true,
-								"hint_fa": "already معمولاً همراه ماضی بعید برای این منظور می‌آید.",
+								"hint_fa": "already معمولاً همراه کدام زمان برای این منظور می‌آید؟",
 								"explanation_fa": "درست است! مثل: had already gone home."
 							}
 						]
@@ -989,8 +989,8 @@
 									"her",
 									","
 								],
-								"answer": "When I sent the book to her , she had already bought it",
-								"hint_fa": "لحظه‌ی مرجع (When I sent the book) اول و ماضی بعید (had already bought) بعد از کاما می‌آید."
+								"answer": "When I sent the book to her, she had already bought it .",
+								"hint_fa": "لحظه‌ی مرجع یعنی When I sent the book اول و ماضی بعید یعنی had already bought بعد از کاما می‌آید."
 							}
 						]
 					},
@@ -1009,9 +1009,9 @@
 									"When she called, I have already left."
 								],
 								"correct": 1.0,
-								"hint_fa": "لحظه‌ی مرجع (called) گذشته‌ی ساده و کار قبلی (left) ماضی بعید است.",
+								"hint_fa": "لحظه‌ی مرجع یعنی called گذشته‌ی ساده و کار قبلی یعنی left ماضی بعید است.",
 								"explanation_fa": "آفرین! این جمله ترتیب زمانی درستی دارد.",
-								"wrong_explanation_fa": "with when، لحظه‌ی مرجع گذشته‌ی ساده و کار انجام‌شده‌ی قبلی ماضی بعید است."
+								"wrong_explanation_fa": "با when، لحظه‌ی مرجع گذشته‌ی ساده و کار انجام‌شده‌ی قبلی ماضی بعید است."
 							}
 						]
 					}

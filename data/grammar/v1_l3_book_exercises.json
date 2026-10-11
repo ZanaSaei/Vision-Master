@@ -99,12 +99,12 @@
 					{
 						"text": {
 							"en": "At 4 o'clock yesterday, I ___ (study) for my exam.",
-							"fa": "دیگر ساعت ۴ دیروز، من ___ برای امتحانم."
+							"fa": "دیروز ساعت ۴، من ___ برای امتحانم درس می‌خواندم."
 						},
 						"answer": ["was studying"],
 						"explanation": {
 							"en": "Past progressive: was + verb-ing.",
-							"fa": "گذشتهٔ استمراری: was + فعل ingدار."
+							"fa": "گذشتهٔ استمراری: was + فعل + ing."
 						}
 					}
 				]

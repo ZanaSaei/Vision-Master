@@ -214,8 +214,8 @@ static func icon_chip(accent_col: Color, radius: int = DesignTokens.RADIUS_XS) -
 	# resource's alpha/saturation relationship between fill and border.
 	var alpha := 0.26 if is_dark() else 0.14
 	style.bg_color = Color(accent_col.r, accent_col.g, accent_col.b, alpha)
-	# Use a strong accent rim so the emoji chip reads as a distinct framed badge.
-	style.set_border_width_all(4)
+	# Keep the icon chip rim subtle, matching the slimmer menu-card outline.
+	style.set_border_width_all(DesignTokens.BORDER_SUBTLE)
 	style.border_color = accent_col.lightened(0.18 if is_dark() else 0.04)
 	return style
 

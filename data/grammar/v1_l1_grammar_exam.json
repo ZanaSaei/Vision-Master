@@ -4,328 +4,348 @@
 			"accent": "#2563EB",
 			"exam_exercises": [
 				{
-					"text": "Part 1 — Multiple Choice (۲۰ نمره)",
-					"type": "h4"
+					"type": "h4",
+					"text": "Part 1 — Multiple Choice (۲۰ نمره — هر سؤال ۲ نمره)"
 				},
 				{
+					"type": "multiple_choice",
+					"points_per_item": 2,
 					"instruction": "Choose the best answer.",
 					"items": [
 						{
-							"answer": 0.0,
+							"question": "Humans ______ destroy the natural homes of animals if we don't act now.",
 							"options": [
 								"will",
 								"are",
 								"do",
 								"did"
 							],
-							"question": "Humans ______ destroy the natural homes of animals if we don't act now."
+							"answer": 0
 						},
 						{
-							"answer": 1.0,
+							"question": "Look! The cheetah ______ run into the forest.",
 							"options": [
 								"will",
 								"is going to",
 								"does",
 								"can"
 							],
-							"question": "Look! The cheetah ______ run into the forest."
+							"answer": 1
 						},
 						{
-							"answer": 0.0,
+							"question": "We ______ (not/hurt) the injured animal.",
 							"options": [
 								"won't hurt",
 								"not will hurt",
 								"don't will hurt",
 								"isn't hurt"
 							],
-							"question": "We ______ (not/hurt) the injured animal."
+							"answer": 0
 						},
 						{
-							"answer": 0.0,
+							"question": "______ you ______ protect the environment?",
 							"options": [
 								"Will / protect",
 								"Do / protect",
 								"Are / protect",
 								"Did / protect"
 							],
-							"question": "______ you ______ protect the environment?"
+							"answer": 0
 						},
 						{
-							"answer": 0.0,
+							"question": "Next year, there ______ be a few more Iranian cheetahs.",
 							"options": [
 								"will",
 								"is",
 								"are",
 								"do"
 							],
-							"question": "Next year, there ______ be a few more Iranian cheetahs."
+							"answer": 0
 						},
 						{
-							"answer": 0.0,
+							"question": "Maryam is visiting the museum. She ______ going to learn about wildlife.",
 							"options": [
 								"is",
 								"will",
 								"do",
 								"are"
 							],
-							"question": "Maryam is visiting the museum. She ______ going to learn about wildlife."
+							"answer": 0
 						},
 						{
-							"answer": 0.0,
+							"question": "If people take care of them, cheetahs ______ live longer.",
 							"options": [
 								"will",
 								"going to",
 								"are",
 								"do"
 							],
-							"question": "If people take care of them, cheetahs ______ live longer."
+							"answer": 0
 						},
 						{
-							"answer": 2.0,
+							"question": "The number of endangered animals ______ increase in the future.",
 							"options": [
 								"is going to",
 								"will",
 								"both a and b",
 								"none"
 							],
-							"question": "The number of endangered animals ______ increase in the future."
+							"answer": 2
 						},
 						{
-							"answer": 1.0,
+							"question": "Families ______ pay more attention to nature these days.",
 							"options": [
 								"is going to",
 								"are going to",
 								"will to",
 								"going to"
 							],
-							"question": "Families ______ pay more attention to nature these days."
+							"answer": 1
 						},
 						{
-							"answer": 0.0,
+							"question": "We ______ have clean air in the future if we work hard.",
 							"options": [
 								"will",
 								"is going",
 								"are will",
 								"going to"
 							],
-							"question": "We ______ have clean air in the future if we work hard."
+							"answer": 0
 						}
-					],
-					"type": "multiple_choice"
+					]
 				},
 				{
-					"text": "Part 2 — Fill in the Blanks (۱۵ نمره)",
-					"type": "h4"
+					"type": "h4",
+					"text": "Part 2 — Fill in the Blanks with will or won't (۱۵ نمره — هر جای خالی ۳ نمره)"
 				},
 				{
-					"instruction": "Fill in the blanks with will or won't and the given words (protect, increase, hurt, save, live).",
+					"type": "fill_blank",
+					"points_per_item": 3,
+					"instruction": "Use words from the lesson: protect, increase, hurt, save, live. Fill in each blank with will or won't and the correct verb form.",
 					"items": [
 						{
-							"answer": "will increase",
-							"text": "If humans take care of nature, wild animals ______ (increase) in number."
+							"text": "If humans take care of nature, wild animals ______ (increase) in number.",
+							"answer": [
+								"will increase"
+							]
 						},
 						{
-							"answer": "won't live",
-							"text": "If people cut down trees, endangered animals ______ (not/live) safely."
+							"text": "If people cut down trees, endangered animals ______ (not/live) safely.",
+							"answer": [
+								"won't live",
+								"will not live"
+							]
 						},
 						{
-							"answer": "will protect",
-							"text": "We ______ (protect) the Iranian cheetah for future generations."
+							"text": "We ______ (protect) the Iranian cheetah for future generations.",
+							"answer": [
+								"will protect"
+							]
 						},
 						{
-							"answer": "won't hurt",
-							"text": "Hunters ______ (not/hurt) animals anymore."
+							"text": "Hunters ______ (not/hurt) animals anymore.",
+							"answer": [
+								"won't hurt",
+								"will not hurt"
+							]
 						},
 						{
-							"answer": "will increase",
-							"text": "The number of cheetahs ______ (increase) if we help them."
+							"text": "The number of cheetahs ______ (increase) if we help them.",
+							"answer": [
+								"will increase"
+							]
 						}
-					],
-					"type": "fill_blank"
+					]
 				},
 				{
-					"text": "Part 3 — will or be going to (۱۵ نمره)",
-					"type": "h4"
+					"type": "h4",
+					"text": "Part 3 — Choose will or be going to (۱۵ نمره — هر سؤال ۳ نمره)"
 				},
 				{
-					"instruction": "Write the correct form of will or be going to based on the situation.",
+					"type": "multiple_choice",
+					"points_per_item": 3,
+					"instruction": "Choose the correct form based on the situation.",
 					"items": [
 						{
-							"answer": "is going to rain",
-							"text": "Look at those dark clouds! It ______ (rain)."
+							"question": "Look at those dark clouds! It ______ (rain).",
+							"options": [
+								"is going to rain",
+								"will rain"
+							],
+							"answer": 0
 						},
 						{
-							"answer": "are going to visit",
-							"text": "We have already planned our trip. We ______ (visit) Golestan Forest next month."
+							"question": "We have already planned our trip. We ______ (visit) Golestan Forest next month.",
+							"options": [
+								"are going to visit",
+								"will visit"
+							],
+							"answer": 0
 						},
 						{
-							"answer": "will answer",
-							"text": "The phone is ringing! I ______ (answer) it."
+							"question": "The phone is ringing! I ______ (answer) it.",
+							"options": [
+								"will answer",
+								"am going to answer"
+							],
+							"answer": 0
 						},
 						{
-							"answer": "is not going to watch",
-							"text": "Reza has decided already. He ______ (not/watch) TV tonight."
+							"question": "Reza has decided already. He ______ (not/watch) TV tonight.",
+							"options": [
+								"is not going to watch",
+								"will not watch"
+							],
+							"answer": 0
 						},
 						{
-							"answer": "will save",
-							"text": "I think people ______ (save) more animals in the future."
+							"question": "I think people ______ (save) more animals in the future.",
+							"options": [
+								"will save",
+								"are going to save"
+							],
+							"answer": 0
 						}
-					],
-					"type": "fill_blank"
+					]
 				},
 				{
-					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره)",
-					"type": "h4"
+					"type": "h4",
+					"text": "Part 4 — Rewrite the Sentences (۱۵ نمره — هر جمله ۵ نمره)"
 				},
 				{
-					"instruction": "Rewrite the sentence as instructed.",
+					"type": "transformation",
+					"points_per_item": 5,
+					"instruction": "Rewrite each sentence as instructed.",
 					"items": [
 						{
-							"answer": "The children will not (won't) play in the yard.",
 							"task": "Rewrite in the negative form:",
-							"text": "The children will play in the yard."
+							"text": "The children will play in the yard.",
+							"answer": [
+								"The children will not play in the yard.",
+								"The children won't play in the yard."
+							]
 						},
 						{
-							"answer": "Are they going to protect endangered animals?",
 							"task": "Rewrite as a question:",
-							"text": "They are going to protect endangered animals."
+							"text": "They are going to protect endangered animals.",
+							"answer": [
+								"Are they going to protect endangered animals?"
+							]
 						},
 						{
-							"answer": "Who will teach people to take care of animals?",
 							"task": "Rewrite using \"Who\" as a Wh-question:",
-							"text": "Mr. Razavi will teach people to take care of animals."
+							"text": "Mr. Razavi will teach people to take care of animals.",
+							"answer": [
+								"Who will teach people to take care of animals?"
+							]
 						}
-					],
-					"type": "transformation"
+					]
 				},
 				{
-					"text": "Part 5 — Reading (۱۵ نمره)",
-					"type": "h4"
+					"type": "h4",
+					"text": "Part 5 — Reading and Choosing the Best Verb Form (۱۵ نمره — هر جای خالی ۳ نمره)"
 				},
 				{
-					"instruction": "Read the passage and choose the best verb form.",
+					"type": "multiple_choice",
+					"points_per_item": 3,
+					"instruction": "Read the paragraph and choose the best verb form.",
+					"passage": "Sara is an Iranian student. She likes/will like animals very much. Next month, she and her family travel/will travel to Tooran Plain. They hope/hopes to see the Iranian cheetah there. If they are lucky, they see/will see a few cheetahs. Sara is going to/will take many photos of the wildlife there.",
 					"items": [
 						{
-							"answer": 0.0,
+							"question": "She ______ animals very much.",
 							"options": [
 								"likes",
 								"will like"
 							],
-							"question": "Choose the best form:"
+							"answer": 0
 						},
 						{
-							"answer": 1.0,
+							"question": "Next month, she and her family ______ to Tooran Plain.",
 							"options": [
 								"travel",
 								"will travel"
 							],
-							"question": "Choose the best form:"
+							"answer": 1
 						},
 						{
-							"answer": 0.0,
+							"question": "They ______ to see the Iranian cheetah there.",
 							"options": [
 								"hope",
 								"hopes"
 							],
-							"question": "Choose the best form:"
+							"answer": 0
 						},
 						{
-							"answer": 1.0,
+							"question": "If they are lucky, they ______ a few cheetahs.",
 							"options": [
 								"see",
 								"will see"
 							],
-							"question": "Choose the best form:"
+							"answer": 1
 						},
 						{
-							"answer": 0.0,
+							"question": "Sara ______ many photos of the wildlife there.",
 							"options": [
 								"is going to",
-								"will take"
+								"will"
 							],
-							"question": "Choose the best form:"
+							"answer": 0
 						}
-					],
-					"passage": "Sara is an Iranian student. She _____ animals very much. Next month, she and her family _____ to Tooran Plain. They hope to see the Iranian cheetah there. If they are lucky, they _____ a few cheetahs. Sara _____ many photos of the wildlife there.",
-					"type": "multiple_choice"
+					]
 				},
 				{
-					"text": "Part 6 — Matching (۱۰ نمره)",
-					"type": "h4"
+					"type": "h4",
+					"text": "Part 6 — Matching (۱۰ نمره — هر مورد ۲ نمره)"
 				},
 				{
+					"type": "matching",
+					"points_per_item": 2,
 					"instruction": "Match column A with column B to make correct sentences.",
+					"options": [
+						"will you visit next summer?",
+						"animals will not die out.",
+						"It's going to rain.",
+						"are going to save the forest.",
+						"will increase in the future."
+					],
 					"items": [
 						{
-							"answer": "animals will not die out.",
-							"options": [
-								"will you visit next summer?",
-								"animals will not die out.",
-								"It's going to rain.",
-								"are going to save the forest.",
-								"will increase in the future."
-							],
-							"text": "If people protect nature,"
+							"text": "If people protect nature,",
+							"answer": "animals will not die out."
 						},
 						{
-							"answer": "It's going to rain.",
-							"options": [
-								"will you visit next summer?",
-								"animals will not die out.",
-								"It's going to rain.",
-								"are going to save the forest.",
-								"will increase in the future."
-							],
-							"text": "Look at the sky!"
+							"text": "Look at the sky!",
+							"answer": "It's going to rain."
 						},
 						{
-							"answer": "will you visit next summer?",
-							"options": [
-								"will you visit next summer?",
-								"animals will not die out.",
-								"It's going to rain.",
-								"are going to save the forest.",
-								"will increase in the future."
-							],
-							"text": "Where"
+							"text": "Where",
+							"answer": "will you visit next summer?"
 						},
 						{
-							"answer": "are going to save the forest.",
-							"options": [
-								"will you visit next summer?",
-								"animals will not die out.",
-								"It's going to rain.",
-								"are going to save the forest.",
-								"will increase in the future."
-							],
-							"text": "We"
+							"text": "We",
+							"answer": "are going to save the forest."
 						},
 						{
-							"answer": "will increase in the future.",
-							"options": [
-								"will you visit next summer?",
-								"animals will not die out.",
-								"It's going to rain.",
-								"are going to save the forest.",
-								"will increase in the future."
-							],
-							"text": "The number of tigers"
+							"text": "The number of tigers",
+							"answer": "will increase in the future."
 						}
-					],
-					"type": "matching"
+					]
 				},
 				{
-					"text": "Part 7 — Short Writing (۱۰ نمره)",
-					"type": "h4"
+					"type": "h4",
+					"text": "Part 7 — Short Writing (۱۰ نمره — خودارزیابی یا با راهنمایی معلم)"
 				},
 				{
-					"instruction": "Write in 3-4 complete sentences. Use at least one sentence with \"will\" and one sentence with \"be going to\".",
+					"type": "writing",
+					"score_points": 10,
+					"instruction": "In 3-4 complete sentences, write about your plans for next weekend and one prediction about the future of nature in Iran. Use at least one sentence with \"will\" and one sentence with \"be going to\".",
 					"items": [
 						{
-							"text": "Write about your plans for next weekend and one prediction about the future of nature in Iran."
+							"id": "v1l1_grammar_exam_short_writing",
+							"text": "Write your 3-4 sentences below.",
+							"sample_answer": "Next weekend, I am going to visit my grandparents. We are going to spend time together. I will help them in the garden. I think people will protect nature in Iran."
 						}
-					],
-					"type": "open_ended"
+					]
 				}
 			]
 		}
