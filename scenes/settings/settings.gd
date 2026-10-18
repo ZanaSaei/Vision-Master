@@ -8,10 +8,8 @@ extends "res://autoload/BackButtonHandler.gd"
 ##  Settings persist to user://settings.json via Global.
 ## ============================================================
 
-const SCENE_MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 
 # --- Node references (match Settings.tscn) ---
-@onready var back_button: Button    = $Header/Margin/HBox/BackButton
 @onready var bg: ColorRect          = $Bg
 @onready var sound_toggle: Button    = $Scroll/Margin/Layout/SoundCard/VBox/SoundRow/SoundToggle
 @onready var tts_toggle: Button      = $Scroll/Margin/Layout/SoundCard/VBox/TtsRow/TtsToggle
@@ -43,7 +41,6 @@ func _ready() -> void:
 	sub_value.text = _subscription_text()
 
 	# Wiring.
-	back_button.pressed.connect(_on_back_pressed)
 	sound_toggle.pressed.connect(_on_sound_toggled)
 	tts_toggle.pressed.connect(_on_tts_toggled)
 	theme_toggle.pressed.connect(_on_theme_toggled)
@@ -106,9 +103,6 @@ func _apply_theme() -> void:
 	_set_toggle(tts_toggle, Global.tts_enabled)
 	_set_toggle(theme_toggle, dark)
 
-	# Back button font follows the palette (light theme needs dark text).
-	back_button.add_theme_color_override("font_color", Global.get_theme_color("text"))
-
 	# Danger (reset) button: solid red + white text reads clearly in both themes.
 	var danger := StyleBoxFlat.new()
 	danger.set_corner_radius_all(18)
@@ -164,16 +158,15 @@ func _apply_theme() -> void:
 	_confirm_title.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
 	_confirm_message.add_theme_color_override("font_color", Global.get_theme_color("text"))
 
-	# Unified header styling last, so it wins over the generic walk.
-	if has_node("Header"):
-		Global.style_header($Header)
-
 	_style_extra_buttons()
 
 
 func _theme_walk(node: Node) -> void:
 	var node_name: String = node.name
 	if node == _modal_root:
+		return
+	# The bottom NavigationBar owns its own bespoke styling — leave it alone.
+	if node_name == "NavigationBar":
 		return
 	if node is ColorRect and node_name == "Bg":
 		bg.color = Color(Global.get_theme_color("bg"), 0.9)
@@ -197,7 +190,7 @@ func _theme_walk(node: Node) -> void:
 	elif node is Label:
 		_theme_label(node)
 
-	elif node is Button and node != back_button and node != sound_toggle and node != tts_toggle and node != theme_toggle and node != reset_button:
+	elif node is Button and node != sound_toggle and node != tts_toggle and node != theme_toggle and node != reset_button:
 		var btn := node as Button
 		btn.add_theme_color_override("font_color", Global.get_theme_color("text"))
 
@@ -738,10 +731,6 @@ func _on_download_finished(success: bool) -> void:
 # ══════════════════════════════════════════════════════════════
 #  NAVIGATION
 # ══════════════════════════════════════════════════════════════
-func _on_back_pressed() -> void:
-	Sfx.click()
-	TransitionManager.change_scene(SCENE_MAIN_MENU)
-
-
 func _on_android_back_pressed() -> void:
-	_on_back_pressed()
+	Sfx.click()
+	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")

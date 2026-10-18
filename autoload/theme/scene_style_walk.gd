@@ -103,7 +103,7 @@ func style_scene(root: Node) -> void:
 func _style_walk(node: Node) -> void:
 	# BottomNavigation owns a bespoke visual design. Leave its complete subtree
 	# alone so app-wide card styling cannot overwrite its scene-authored styles.
-	if node.name == "BottomNavigation":
+	if node.name == "NavigationBar" or node.name == "BottomNavigation" or node is VisionNavigationBar:
 		return
 	if node is CanvasLayer:
 		return
@@ -202,8 +202,13 @@ func _style_button(btn: Button) -> void:
 	# cream pill in the Dark theme — unreadable — so the override is applied
 	# only where a custom background actually demands it.
 	if _button_has_colored_bg(btn):
-		for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-			btn.add_theme_color_override(state, Color(1, 1, 1))
+		if btn.name == "LearningButton" or btn.name == "DailyButton":
+			var requested_text_color: Color = Color("#090a74")
+			for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+				btn.add_theme_color_override(state, requested_text_color)
+		else:
+			for state in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
+				btn.add_theme_color_override(state, Color(1, 1, 1))
 
 
 func _button_has_colored_bg(btn: Button) -> bool:

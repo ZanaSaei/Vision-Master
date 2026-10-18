@@ -3,7 +3,7 @@ const MODE_SELECT_SCENE := preload("res://scenes/word_game/scrambled/ModeSelect.
 const LESSON_SELECT_SCENE := preload("res://scenes/word_game/scrambled/LessonSelect.tscn")
 const GAMEPLAY_SCENE := preload("res://scenes/word_game/scrambled/Gameplay.tscn")
 const RESULTS_SCENE := preload("res://scenes/word_game/scrambled/Results.tscn")
-const SCENE_WORD_GAME := "res://scenes/word_game/WordGame.tscn"
+const SCENE_WORD_GAME := "res://scenes/word_game/WordGameHub.tscn"
 const DEFAULT_TITLE := "بازی املا"
 @onready var _header: PanelContainer = $HeaderBar
 @onready var _back_button: Button = $HeaderBar/HeaderContent/BackButton
@@ -40,14 +40,6 @@ func _start_learning(book: int, lesson: int) -> void:
 		push_warning("ScrambledWords: lesson %d/%d has no playable words" % [book, lesson])
 		return
 	_swap_to(GAMEPLAY_SCENE)
-func _start_competition() -> void:
-	if ScrambledScoreManager.today_played():
-		_show_mode_select()
-		return
-	if not ScrambledGameManager.start_competition():
-		push_warning("ScrambledWords: the daily words could not be loaded")
-		return
-	_swap_to(GAMEPLAY_SCENE)
 func _swap_to(scene: PackedScene) -> void:
 	var next := scene.instantiate() as Control
 	next.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -70,8 +62,6 @@ func _swap_to(scene: PackedScene) -> void:
 func _wire_screen(screen: Control) -> void:
 	if screen.has_signal("learning_requested"):
 		screen.connect("learning_requested", _show_lesson_select)
-	if screen.has_signal("competition_requested"):
-		screen.connect("competition_requested", _start_competition)
 	if screen.has_signal("exit_requested"):
 		screen.connect("exit_requested", _leave_game)
 	if screen.has_signal("lesson_chosen"):

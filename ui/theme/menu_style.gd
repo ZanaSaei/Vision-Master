@@ -175,8 +175,14 @@ static func make_section_header(title: String, caption: String = "") -> VBoxCont
 static func make_button(btn_text: String, kind: String = "primary", min_height: int = 96) -> Button:
 	return WidgetModule.make_button(btn_text, kind, min_height)
 
+static func style_button(btn: Button, kind: String = "primary") -> void:
+	WidgetModule.style_button(btn, kind)
+
 static func make_back_button(icon_path: String, size: int = 96) -> Button:
 	return WidgetModule.make_back_button(icon_path, size)
+
+static func style_back_button(button: Button) -> void:
+	WidgetModule.style_back_button(button)
 
 static func make_tip_card(message: String, emoji: String = "💡") -> PanelContainer:
 	return WidgetModule.make_tip_card(message, emoji)

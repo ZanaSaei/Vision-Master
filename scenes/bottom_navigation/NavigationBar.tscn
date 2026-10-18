@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://ceu3plb3lmsb6" path="res://assets/images/ui/nav_bar/exam.svg" id="5_ncpsy"]
 [ext_resource type="Texture2D" uid="uid://bf8uvb4lmsub8" path="res://assets/images/ui/nav_bar/flashcard.svg" id="6_vmnu6"]
 [ext_resource type="Texture2D" uid="uid://c14ijjpf8uol0" path="res://assets/images/ui/nav_bar/menu.svg" id="7_54eih"]
+[ext_resource type="Texture2D" uid="uid://bdgw4pw08nj7v" path="res://assets/images/ui/nav_bar/profile.svg" id="8_profile"]
+[ext_resource type="Texture2D" uid="uid://du4dcek2s3jpg" path="res://assets/images/ui/nav_bar/buy.svg" id="9_buy"]
+[ext_resource type="Texture2D" uid="uid://c5iovoa4u5wuo" path="res://assets/images/ui/nav_bar/settings.svg" id="10_settings"]
+[ext_resource type="Texture2D" uid="uid://dpve1l4wsttkm" path="res://assets/images/ui/nav_bar/about me.svg" id="11_aboutme"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_54rmf"]
 shader = ExtResource("1_54rmf")
@@ -25,13 +29,13 @@ corner_radius_bottom_right = 27
 corner_radius_bottom_left = 27
 
 [node name="NavigationBar" type="Control" unique_id=1620981374]
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -120.0
+offset_top = -144.0
 offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -44,8 +48,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -29.0
-offset_right = 30.0
+offset_left = 0.0
+offset_right = 0.0
 offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -278,3 +282,132 @@ offset_right = 13.0
 offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MenuPanel" type="Panel" parent="." unique_id=1928374651]
+custom_minimum_size = Vector2(66, 224)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -102.0
+offset_top = -342.0
+offset_right = -36.0
+offset_bottom = -118.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(33, 224)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ku3dv")
+
+[node name="MenuItems" type="VBoxContainer" parent="MenuPanel" unique_id=1928374652]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Profile" type="Control" parent="MenuPanel/MenuItems" unique_id=1928374653]
+custom_minimum_size = Vector2(54, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="MenuPanel/MenuItems/Profile" unique_id=1928374654]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_profile")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Buy" type="Control" parent="MenuPanel/MenuItems" unique_id=1928374655]
+custom_minimum_size = Vector2(54, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="MenuPanel/MenuItems/Buy" unique_id=1928374656]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_buy")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Settings" type="Control" parent="MenuPanel/MenuItems" unique_id=1928374657]
+custom_minimum_size = Vector2(54, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="MenuPanel/MenuItems/Settings" unique_id=1928374658]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_settings")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AboutMe" type="Control" parent="MenuPanel/MenuItems" unique_id=1928374659]
+custom_minimum_size = Vector2(54, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="MenuPanel/MenuItems/AboutMe" unique_id=1928374660]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_aboutme")
+expand_mode = 2
+stretch_mode = 5

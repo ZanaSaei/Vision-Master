@@ -2,11 +2,12 @@
   "name": "vision-master-server",
   "version": "1.0.0",
   "private": true,
-  "description": "Backend for Vision Master: phone OTP auth (Kavenegar), progress sync, and content delivery.",
+  "description": "Backend for Vision Master: OTP auth, progress sync, content delivery, and daily word-game challenges.",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
     "migrate": "node src/migrate.js",
+    "test": "node --test test/",
     "manifest": "node scripts/make_manifest.js"
   },
   "engines": {

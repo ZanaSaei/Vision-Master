@@ -1,0 +1,234 @@
+[gd_scene format=3 uid="uid://cmkppwambp8rq"]
+
+[ext_resource type="Script" uid="uid://ooowd4rdod73" path="res://scenes/vocabulary/flashcard_hub.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="Shader" uid="uid://dje0dgpfw45e5" path="res://scenes/shared/GradientCard.gdshader" id="5_shader"]
+[ext_resource type="Script" uid="uid://dqlylk0w3c2p8" path="res://ui/widgets/GradientCardRect.gd" id="6_cardrect"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
+font = ExtResource("4_font")
+font_size = 70
+font_color = Color(0.039215688, 0.039215688, 0.4509804, 1)
+
+[sub_resource type="ShaderMaterial" id="MatBlue"]
+shader = ExtResource("5_shader")
+shader_parameter/color_top = Color(0.3, 0.56, 0.97, 1)
+shader_parameter/color_bottom = Color(0.09, 0.4, 0.95, 1)
+shader_parameter/rect_size = Vector2(976, 296)
+shader_parameter/corner_radius = 64.0
+shader_parameter/inset = 28.0
+shader_parameter/shadow_blur = 22.0
+shader_parameter/shadow_offset = 10.0
+shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
+
+[sub_resource type="StyleBoxFlat" id="IconChip"]
+bg_color = Color(1, 1, 1, 0.18)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="LabelSettings" id="ModeLabelSettings"]
+font = ExtResource("4_font")
+font_size = 58
+outline_size = 4
+outline_color = Color(0.08, 0.12, 0.2, 0.85)
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="ArrowBadge"]
+bg_color = Color(0, 0, 0, 0.14)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="ShaderMaterial" id="MatGreen"]
+shader = ExtResource("5_shader")
+shader_parameter/color_top = Color(0.31, 0.83, 0.5, 1)
+shader_parameter/color_bottom = Color(0.09, 0.74, 0.38, 1)
+shader_parameter/rect_size = Vector2(976, 296)
+shader_parameter/corner_radius = 64.0
+shader_parameter/inset = 28.0
+shader_parameter/shadow_blur = 22.0
+shader_parameter/shadow_offset = 10.0
+shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
+
+[node name="FlashcardHub" type="Control" unique_id=833777148]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Label" type="Label" parent="." unique_id=976215890]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 72.0
+grow_horizontal = 2
+text = "منوی کارت ها"
+label_settings = SubResource("LabelSettings_7ujfs")
+horizontal_alignment = 1
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=201766586]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = 198.0
+offset_right = -80.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 56
+
+[node name="FlashcardButton" type="Button" parent="Content" unique_id=1916511259]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="Gradient" type="ColorRect" parent="Content/FlashcardButton" unique_id=1875290091]
+material = SubResource("MatBlue")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_cardrect")
+
+[node name="Margin" type="MarginContainer" parent="Content/FlashcardButton" unique_id=1504284525]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="Content/FlashcardButton/Margin" unique_id=1205949483]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Content/FlashcardButton/Margin/Row" unique_id=1126750895]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("IconChip")
+
+[node name="Emoji" type="Label" parent="Content/FlashcardButton/Margin/Row/IconChip" unique_id=746306104]
+layout_mode = 2
+theme_override_font_sizes/font_size = 92
+text = "📚"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Content/FlashcardButton/Margin/Row" unique_id=358017873]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_font")
+text = "فلش کارت"
+label_settings = SubResource("ModeLabelSettings")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowBadge" type="PanelContainer" parent="Content/FlashcardButton/Margin/Row" unique_id=1483827124]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("ArrowBadge")
+
+[node name="Chevron" type="Label" parent="Content/FlashcardButton/Margin/Row/ArrowBadge" unique_id=9395951]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "❯"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeitnerButton" type="Button" parent="Content" unique_id=247769420]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="Gradient" type="ColorRect" parent="Content/LeitnerButton" unique_id=1713114937]
+material = SubResource("MatGreen")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_cardrect")
+
+[node name="Margin" type="MarginContainer" parent="Content/LeitnerButton" unique_id=360794148]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="Content/LeitnerButton/Margin" unique_id=1025428295]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Content/LeitnerButton/Margin/Row" unique_id=320694558]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("IconChip")
+
+[node name="Emoji" type="Label" parent="Content/LeitnerButton/Margin/Row/IconChip" unique_id=289019242]
+layout_mode = 2
+theme_override_font_sizes/font_size = 92
+text = "🧠"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Content/LeitnerButton/Margin/Row" unique_id=1366357268]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_font")
+text = "لایتنر"
+label_settings = SubResource("ModeLabelSettings")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowBadge" type="PanelContainer" parent="Content/LeitnerButton/Margin/Row" unique_id=1589585883]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("ArrowBadge")
+
+[node name="Chevron" type="Label" parent="Content/LeitnerButton/Margin/Row/ArrowBadge" unique_id=909926620]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "❯"
+horizontal_alignment = 1
+vertical_alignment = 1

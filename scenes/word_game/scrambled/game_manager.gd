@@ -53,11 +53,12 @@ static func start_learning(p_book: int, p_lesson: int) -> bool:
 	return _start(Mode.LEARNING, ScrambledData.words_ordered(p_book, p_lesson), p_book, p_lesson)
 
 
-## Deals today's five words in competition mode.
+## Retained for scoring/state tests and backward compatibility. The legacy
+## mode selector no longer exposes this daily competition entry point.
 static func start_competition() -> bool:
 	if ScrambledScoreManager.today_played():
 		return false
-	var words := ScrambledDailyPicker.pick()
+	var words: Array = ScrambledDailyPicker.pick()
 	var first: Dictionary = {}
 	if not words.is_empty() and words[0] is Dictionary:
 		first = words[0]

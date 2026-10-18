@@ -5,6 +5,7 @@ const express = require('express');
 const authRoutes = require('./routes/auth');
 const progressRoutes = require('./routes/progress');
 const contentRoutes = require('./routes/content');
+const challengeRoutes = require('./routes/challenges');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.get('/health', (_req, res) => res.json({ ok: true, service: 'vision-master' 
 app.use('/auth', authRoutes);
 app.use('/', progressRoutes);
 app.use('/', contentRoutes);
+app.use('/', challengeRoutes);
 
 // Central error handler — never leak stack traces to clients.
 // eslint-disable-next-line no-unused-vars

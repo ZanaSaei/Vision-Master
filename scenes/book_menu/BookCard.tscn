@@ -1,57 +1,129 @@
 [gd_scene format=3 uid="uid://c57yyafyfu6rk"]
 
-[ext_resource type="Script" uid="uid://di330p5p0p4m6" path="res://book_card.gd" id="1_168sl"]
+[ext_resource type="Script" uid="uid://di330p5p0p4m6" path="res://scenes/book_menu/book_card.gd" id="1_168sl"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_3rmt2"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_mk5ey"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ujfs"]
+corner_radius_top_left = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
+font = ExtResource("2_3rmt2")
+font_size = 42
+
+[sub_resource type="LabelSettings" id="LabelSettings_3umrm"]
+font = ExtResource("2_3rmt2")
+font_size = 72
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ccj0"]
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ccj0"]
+font = ExtResource("3_mk5ey")
+font_size = 24
 
 [node name="BookCard" type="Control" unique_id=332278860]
+custom_minimum_size = Vector2(520, 800)
 layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -400.0
+offset_right = 260.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_168sl")
+
+[node name="CardOverlay" type="ColorRect" parent="." unique_id=438824932]
+custom_minimum_size = Vector2(460, 800)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.02745098, 0.3647059, 0.19607843)
+
+[node name="Content" type="Control" parent="." unique_id=1686696288]
+custom_minimum_size = Vector2(460, 800)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ContentPanel" type="PanelContainer" parent="Content" unique_id=193494318]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_168sl")
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ujfs")
 
-[node name="Cover" type="TextureRect" parent="." unique_id=2084064077]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CardBackground" type="TextureRect" parent="Content/ContentPanel" unique_id=2084064077]
+custom_minimum_size = Vector2(460, 800)
+layout_mode = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Shade" type="ColorRect" parent="." unique_id=438824932]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="Content/ContentPanel" unique_id=1206441854]
+layout_mode = 2
 mouse_filter = 2
+theme_override_constants/margin_top = 33
 
-[node name="BookTitle" type="Label" parent="." unique_id=1855387787]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
+[node name="BookNumber" type="Label" parent="Content/ContentPanel/MarginContainer" unique_id=1855387787]
+custom_minimum_size = Vector2(396, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 180)
+text = "کتاب اول"
+label_settings = SubResource("LabelSettings_7ujfs")
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="BookNumber" type="Label" parent="." unique_id=204124797]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
+[node name="BookTitle" type="Label" parent="Content/ContentPanel/MarginContainer" unique_id=204124797]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -30)
+text = "ویژن ۱"
+label_settings = SubResource("LabelSettings_3umrm")
 horizontal_alignment = 1
 
-[node name="SwipeHint" type="Label" parent="." unique_id=1459348316]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
-horizontal_alignment = 1
-
-[node name="BookTab" type="Panel" parent="." unique_id=1310085040]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="DecorativeShape" type="TextureRect" parent="Content/ContentPanel/MarginContainer" unique_id=1336714756]
+custom_minimum_size = Vector2(396, 300)
+layout_mode = 2
 mouse_filter = 2
+stretch_mode = 6
+
+[node name="BookTab" type="PanelContainer" parent="." unique_id=1776694306]
+custom_minimum_size = Vector2(60, 800)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ccj0")
 
 [node name="TabLabel" type="Label" parent="BookTab" unique_id=1250081510]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 26.0
+layout_mode = 2
+size_flags_vertical = 1
+offset_transform_enabled = true
+offset_transform_rotation = 1.5707964
+text = "Vision 1"
+label_settings = SubResource("LabelSettings_5ccj0")
 horizontal_alignment = 1
 vertical_alignment = 1

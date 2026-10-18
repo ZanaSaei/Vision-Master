@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://7q88x2dcuq8h"]
+
+[ext_resource type="Script" uid="uid://cjulurn60vnt7" path="res://scenes/word_game/WordGameLearning.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+
+[node name="WordGameLearning" type="Control" unique_id=128433250]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1348262237]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=2082834716]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 42
+theme_override_constants/margin_top = 72
+theme_override_constants/margin_right = 42
+theme_override_constants/margin_bottom = 240
+
+[node name="MainColumn" type="VBoxContainer" parent="MainMargin" unique_id=66471743]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="BackButton" type="Button" parent="MainMargin/MainColumn" unique_id=94474130]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+icon = ExtResource("2_back")
+expand_icon = true
+
+[node name="Title" type="Label" parent="MainMargin/MainColumn" unique_id=890998581]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 54
+text = "یادگیری"
+horizontal_alignment = 1
+
+[node name="Intro" type="Label" parent="MainMargin/MainColumn" unique_id=909339573]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 28
+text = "تمرین آزاد؛ بدون امتیاز رقابتی و بدون محدودیت روزانه"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="MainMargin/MainColumn" unique_id=877017246]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+
+[node name="WordefButton" type="Button" parent="MainMargin/MainColumn" unique_id=1295671944]
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "بازی Wordef
+یادگیری معنی، مترادف و متضاد"
+
+[node name="UnscrambleButton" type="Button" parent="MainMargin/MainColumn" unique_id=1914319980]
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "بازی Unscramble
+تمرین نوشتن و مرتب‌کردن واژه‌ها"

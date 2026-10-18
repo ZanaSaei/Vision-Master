@@ -1,21 +1,17 @@
-extends Control
+extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
 #  SAVED WORDS
 #  If words exist → switches to VocabFlashcards in SAVED mode.
-#  If empty → shows a friendly empty state with a back button.
+#  If empty → shows a friendly empty state; navigation remains available below.
 # ============================================================
 
-const SCENE_MAIN_MENU  := "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_FLASHCARDS := "res://scenes/vocabulary/VocabFlashcards.tscn"
 
 @onready var empty_state: VBoxContainer = $EmptyState
-@onready var back_button: Button        = $EmptyState/BackButton
 
 
 func _ready() -> void:
-	back_button.pressed.connect(_on_back_button_pressed)
-
 	# The empty state is only for the genuinely-empty case, so hide it up
 	# front. This screen is a pass-through whenever words exist and must
 	# never flash "Empty" while it is routing on to the flashcards.
@@ -33,8 +29,8 @@ func _ready() -> void:
 	TransitionManager.change_scene(SCENE_FLASHCARDS)
 
 
-func _on_back_button_pressed() -> void:
-	TransitionManager.change_scene(SCENE_MAIN_MENU)
-
 func _on_android_back_pressed() -> void:
-	_on_back_button_pressed()
+	# Return to the screen that opened the saved-word flow (the flashcard hub),
+	# falling back to the main menu when none was recorded.
+	var back_route: String = str(AppRouter.get_arg("saved_back_route", "res://scenes/vocabulary/FlashcardHub.tscn"))
+	TransitionManager.change_scene(back_route)

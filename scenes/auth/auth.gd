@@ -8,22 +8,21 @@ extends "res://autoload/BackButtonHandler.gd"
 #  the whole screen re-themes with the app's Dark / Light palette.
 # ============================================================
 
-const SCENE_MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_SETTINGS  := "res://scenes/settings/Settings.tscn"
 
 const COLOR_ACCENT := DesignTokens.ACCENT
 const COLOR_OK     := Color("#10B981")
 const COLOR_ERR    := Color("#EF4444")
 
-var _phone_edit: LineEdit
-var _code_edit: LineEdit
-var _status_label: Label
-var _send_button: Button
-var _verify_button: Button
-var _resend_button: Button
-var _change_button: Button
-var _phone_step: VBoxContainer
-var _code_step: VBoxContainer
+@onready var _phone_edit: LineEdit = $CenterContainer/AuthCard/CardMargin/VBoxContainer/PhoneStep/PhoneEdit
+@onready var _code_edit: LineEdit = $CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep/CodeEdit
+@onready var _status_label: Label = $CenterContainer/AuthCard/CardMargin/VBoxContainer/StatusLabel
+@onready var _send_button: Button = $CenterContainer/AuthCard/CardMargin/VBoxContainer/PhoneStep/SendButton
+@onready var _verify_button: Button = $CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep/VerifyButton
+@onready var _resend_button: Button = $CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep/ResendButton
+@onready var _change_button: Button = $CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep/ChangeButton
+@onready var _phone_step: VBoxContainer = $CenterContainer/AuthCard/CardMargin/VBoxContainer/PhoneStep
+@onready var _code_step: VBoxContainer = $CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep
 
 var _phone: String = ""
 var _resend_cooldown: float = 0.0
@@ -50,191 +49,58 @@ func _process(delta: float) -> void:
 #  UI
 # ══════════════════════════════════════════════════════════════
 func _build_ui() -> void:
-	var bg := ColorRect.new()
-	bg.name = "Bg"
-	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(bg)
-
-	# ---- Header bar ----
-	var header := PanelContainer.new()
-	header.name = "HeaderBar"
-	header.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	header.offset_bottom = ThemeService.HEADER_BAR_HEIGHT
-	header.mouse_filter = Control.MOUSE_FILTER_PASS
-	add_child(header)
-
-	var h_margin := MarginContainer.new()
-	h_margin.add_theme_constant_override("margin_left", 36)
-	h_margin.add_theme_constant_override("margin_right", 36)
-	h_margin.add_theme_constant_override("margin_top", 60)
-	h_margin.add_theme_constant_override("margin_bottom", 24)
-	header.add_child(h_margin)
-
-	var h_row := HBoxContainer.new()
-	h_row.add_theme_constant_override("separation", 20)
-	h_margin.add_child(h_row)
-
-	var back := MenuStyle.make_back_button("res://assets/images/ui/Back.png", 132)
-	# Name it "BackButton": Global.style_header maps header buttons to their
-	# icon by node name, and an unnamed button would have its icon cleared.
-	back.name = "BackButton"
-	back.pressed.connect(_on_back_pressed)
-	MenuStyle.wire_microinteractions(back)
-	h_row.add_child(back)
-
-	var title := Label.new()
-	title.name = "HeaderTitle"
-	title.text = "حساب کاربری"
-	title.add_theme_font_override("font", MenuStyle.vazir())
-	title.add_theme_font_size_override("font_size", 46)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	h_row.add_child(title)
-
-	# ---- Centered card ----
-	var center := CenterContainer.new()
-	center.set_anchors_preset(Control.PRESET_FULL_RECT)
-	center.offset_top = ThemeService.HEADER_BAR_HEIGHT
-	add_child(center)
-
-	var card := PanelContainer.new()
-	card.name = "AuthCard"
-	card.custom_minimum_size = Vector2(880, 0)
-	center.add_child(card)
-
-	var card_margin := MarginContainer.new()
-	for side in ["left", "right"]:
-		card_margin.add_theme_constant_override("margin_" + side, 48)
-	for side in ["top", "bottom"]:
-		card_margin.add_theme_constant_override("margin_" + side, 56)
-	card.add_child(card_margin)
-
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 30)
-	card_margin.add_child(col)
-
-	var heading := Label.new()
-	heading.name = "CardHeading"
-	heading.text = "ورود با شماره موبایل"
-	heading.add_theme_font_override("font", MenuStyle.vazir())
-	heading.add_theme_font_size_override("font_size", 42)
-	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	col.add_child(heading)
-
-	_phone_step = _build_phone_step()
-	col.add_child(_phone_step)
-
-	_code_step = _build_code_step()
-	_code_step.visible = false
-	col.add_child(_code_step)
-
-	_status_label = Label.new()
-	_status_label.name = "StatusLabel"
-	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_status_label.add_theme_font_override("font", MenuStyle.vazir())
-	_status_label.add_theme_font_size_override("font_size", 30)
-	col.add_child(_status_label)
-
-
-func _build_phone_step() -> VBoxContainer:
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 24)
-
-	var hint := _make_hint("شماره موبایل خود را وارد کنید. یک کد تأیید برایتان پیامک می‌شود.")
-
-	_phone_edit = LineEdit.new()
-	_phone_edit.name = "PhoneEdit"
 	_phone_edit.placeholder_text = "۰۹۱۲۳۴۵۶۷۸۹"
-	_phone_edit.max_length = 13
-	_phone_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_phone_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_PHONE
+	_phone_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_phone_edit.add_theme_font_override("font", MenuStyle.vazir())
 	_phone_edit.add_theme_font_size_override("font_size", 40)
-	_phone_edit.custom_minimum_size = Vector2(0, 96)
-
-	_send_button = _make_primary_button("ارسال کد")
-	_send_button.pressed.connect(_on_send_pressed)
-
-	box.add_child(hint)
-	box.add_child(_phone_edit)
-	box.add_child(_send_button)
-	return box
-
-
-func _build_code_step() -> VBoxContainer:
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 24)
-
-	var hint := _make_hint("کد ارسال‌شده را وارد کنید.")
-
-	_code_edit = LineEdit.new()
-	_code_edit.name = "CodeEdit"
-	_code_edit.placeholder_text = "کد ۵ رقمی"
-	_code_edit.max_length = 6
-	_code_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_code_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
+	_code_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_code_edit.add_theme_font_override("font", MenuStyle.vazir())
 	_code_edit.add_theme_font_size_override("font_size", 46)
-	_code_edit.custom_minimum_size = Vector2(0, 96)
-
-	_verify_button = _make_primary_button("تأیید و ورود")
+	_send_button.pressed.connect(_on_send_pressed)
 	_verify_button.pressed.connect(_on_verify_pressed)
-
-	_resend_button = _make_secondary_button("ارسال دوباره کد")
 	_resend_button.pressed.connect(_on_resend_pressed)
-
-	_change_button = _make_secondary_button("تغییر شماره")
 	_change_button.pressed.connect(_on_change_number_pressed)
-
-	box.add_child(hint)
-	box.add_child(_code_edit)
-	box.add_child(_verify_button)
-	box.add_child(_resend_button)
-	box.add_child(_change_button)
-	return box
-
-
-func _make_hint(text: String) -> Label:
-	var lbl := Label.new()
-	lbl.text = text
-	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lbl.add_theme_font_override("font", MenuStyle.vazir())
-	lbl.add_theme_font_size_override("font_size", 28)
-	return lbl
-
-
-func _make_primary_button(text: String) -> Button:
-	var btn := Button.new()
-	btn.text = text
-	btn.custom_minimum_size = Vector2(0, 100)
-	btn.add_theme_font_override("font", MenuStyle.vazir())
-	btn.add_theme_font_size_override("font_size", 36)
-	btn.add_theme_color_override("font_color", Color.WHITE)
-	btn.add_theme_color_override("font_hover_color", Color.WHITE)
-	btn.add_theme_color_override("font_pressed_color", Color.WHITE)
-	var style := StyleBoxFlat.new()
-	style.set_corner_radius_all(20)
-	style.bg_color = COLOR_ACCENT
-	style.set_content_margin_all(18)
-	btn.add_theme_stylebox_override("normal", style)
-	btn.add_theme_stylebox_override("hover", style)
-	btn.add_theme_stylebox_override("pressed", style)
-	btn.add_theme_stylebox_override("focus", style)
-	MenuStyle.wire_microinteractions(btn)
-	return btn
+	_resend_button.visible = false
+	_status_label.add_theme_font_override("font", MenuStyle.vazir())
+	_status_label.add_theme_font_size_override("font_size", 30)
+	var phone_hint: Label = _phone_step.get_node("PhoneHint") as Label
+	phone_hint.add_theme_font_override("font", MenuStyle.vazir())
+	phone_hint.add_theme_font_size_override("font_size", 28)
+	var code_hint: Label = _code_step.get_node("CodeHint") as Label
+	code_hint.add_theme_font_override("font", MenuStyle.vazir())
+	code_hint.add_theme_font_size_override("font_size", 28)
+	_apply_button_layout(_send_button, 36, true)
+	_apply_button_layout(_verify_button, 36, true)
+	_apply_button_layout(_resend_button, 32, false)
+	_apply_button_layout(_change_button, 32, false)
+	var side_menu: Node = get_node_or_null("SideMenu")
+	if side_menu != null and side_menu.has_method("set_hamburger_button"):
+		var hamburger: Button = get_node_or_null("HamburgerButton") as Button
+		if hamburger != null:
+			side_menu.set_hamburger_button(hamburger)
+			hamburger.pressed.connect(side_menu.toggle)
+			MenuStyle.style_button(hamburger, "secondary")
+			MenuStyle.wire_microinteractions(hamburger)
 
 
-func _make_secondary_button(text: String) -> Button:
-	var btn := Button.new()
-	btn.text = text
-	btn.custom_minimum_size = Vector2(0, 88)
-	btn.add_theme_font_override("font", MenuStyle.vazir())
-	btn.add_theme_font_size_override("font_size", 32)
-	MenuStyle.wire_microinteractions(btn)
-	return btn
+func _apply_button_layout(button: Button, font_size: int, primary: bool) -> void:
+	button.add_theme_font_override("font", MenuStyle.vazir())
+	button.add_theme_font_size_override("font_size", font_size)
+	if primary:
+		button.add_theme_color_override("font_color", Color.WHITE)
+		button.add_theme_color_override("font_hover_color", Color.WHITE)
+		button.add_theme_color_override("font_pressed_color", Color.WHITE)
+		var style := StyleBoxFlat.new()
+		style.set_corner_radius_all(20)
+		style.bg_color = COLOR_ACCENT
+		style.set_content_margin_all(18)
+		button.add_theme_stylebox_override("normal", style)
+		button.add_theme_stylebox_override("hover", style)
+		button.add_theme_stylebox_override("pressed", style)
+		button.add_theme_stylebox_override("focus", style)
+	MenuStyle.wire_microinteractions(button)
 
 
 # ══════════════════════════════════════════════════════════════
@@ -247,11 +113,10 @@ func _on_theme_changed(_mode: int) -> void:
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	var bg: ColorRect = get_node_or_null("Bg")
-	if bg != null:
-		bg.color = Global.get_theme_color("bg")
+	var bg: ColorRect = $Background
+	bg.color = Global.get_theme_color("bg")
 
-	var card: PanelContainer = get_node_or_null("CenterContainer/AuthCard")
+	var card: PanelContainer = $CenterContainer/AuthCard
 	if card != null:
 		var style := StyleBoxFlat.new()
 		style.set_corner_radius_all(28)
@@ -264,15 +129,13 @@ func _apply_theme() -> void:
 		style.set_border_width_all(1)
 		card.add_theme_stylebox_override("panel", style)
 
-	var heading: Label = get_node_or_null("CenterContainer/AuthCard/MarginContainer/VBoxContainer/CardHeading")
+	var heading: Label = $CenterContainer/AuthCard/CardMargin/VBoxContainer/CardHeading
 	if heading != null:
 		heading.add_theme_color_override("font_color", Global.get_theme_color("accent_bright"))
 
 	if _status_label != null:
 		_status_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 
-	if has_node("HeaderBar"):
-		Global.style_header($HeaderBar)
 
 
 func _set_status(message: String, color: Color) -> void:
@@ -389,10 +252,6 @@ func _error_message(error: String, retry_after: int) -> String:
 # ══════════════════════════════════════════════════════════════
 #  NAVIGATION
 # ══════════════════════════════════════════════════════════════
-func _on_back_pressed() -> void:
-	Sfx.click()
-	TransitionManager.change_scene(SCENE_MAIN_MENU)
-
-
 func _on_android_back_pressed() -> void:
-	_on_back_pressed()
+	Sfx.click()
+	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")

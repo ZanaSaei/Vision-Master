@@ -4,7 +4,7 @@ extends "res://autoload/BackButtonHandler.gd"
 # Quiz mode selection and two quiz modes.
 # ============================================================
 
-const SCENE_WORD_GAME := "res://scenes/word_game/WordGame.tscn"
+const SCENE_WORD_GAME := "res://scenes/word_game/WordGameHub.tscn"
 const SCENE_MEANING_QUIZ := "res://scenes/word_game/MeaningQuiz.tscn"
 
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton

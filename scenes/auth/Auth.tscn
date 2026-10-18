@@ -10,3 +10,106 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_auth")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+offset_bottom = -176.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AuthCard" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(880, 0)
+layout_mode = 2
+
+[node name="CardMargin" type="MarginContainer" parent="CenterContainer/AuthCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 56
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 56
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AuthCard/CardMargin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="CardHeading" type="Label" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "ورود با شماره موبایل"
+horizontal_alignment = 1
+
+[node name="PhoneStep" type="VBoxContainer" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="PhoneHint" type="Label" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer/PhoneStep"]
+layout_mode = 2
+autowrap_mode = 1
+text = "شماره موبایل خود را وارد کنید. یک کد تأیید برایتان پیامک می‌شود."
+horizontal_alignment = 1
+
+[node name="PhoneEdit" type="LineEdit" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer/PhoneStep"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+placeholder_text = "۰۹۱۲۳۴۵۶۷۸۹"
+alignment = 1
+max_length = 13
+virtual_keyboard_type = 3
+
+[node name="SendButton" type="Button" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer/PhoneStep"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "ارسال کد"
+
+[node name="CodeStep" type="VBoxContainer" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CodeHint" type="Label" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep"]
+layout_mode = 2
+autowrap_mode = 1
+text = "کد ارسال‌شده را وارد کنید."
+horizontal_alignment = 1
+
+[node name="CodeEdit" type="LineEdit" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+placeholder_text = "کد ۵ رقمی"
+alignment = 1
+max_length = 6
+virtual_keyboard_type = 2
+
+[node name="VerifyButton" type="Button" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "تأیید و ورود"
+
+[node name="ResendButton" type="Button" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+text = "ارسال دوباره کد"
+
+[node name="ChangeButton" type="Button" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer/CodeStep"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+text = "تغییر شماره"
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/AuthCard/CardMargin/VBoxContainer"]
+layout_mode = 2
+autowrap_mode = 1
+text = ""
+horizontal_alignment = 1

@@ -1013,7 +1013,10 @@ func _on_leitner_pressed() -> void:
 func _on_back_button_pressed() -> void:
 	AppRouter.set_args({"mode": "lesson"})
 	if mode == Mode.SAVED:
-		TransitionManager.change_scene(SCENE_MAIN_MENU)
+		# Return to whichever screen opened the saved flashcards (the flashcard
+		# hub), falling back to the main menu when none was recorded.
+		var back_route: String = str(AppRouter.get_arg("saved_back_route", SCENE_MAIN_MENU))
+		TransitionManager.change_scene(back_route)
 	else:
 		TransitionManager.change_scene(SCENE_LESSON_MENU)
 

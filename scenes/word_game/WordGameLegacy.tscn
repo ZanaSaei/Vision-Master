@@ -1,0 +1,318 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/word_game.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="Shader" uid="uid://dje0dgpfw45e5" path="res://scenes/shared/GradientCard.gdshader" id="5_shader"]
+[ext_resource type="Script" uid="uid://dqlylk0w3c2p8" path="res://ui/widgets/GradientCardRect.gd" id="6_cardrect"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
+font = ExtResource("4_font")
+font_size = 70
+font_color = Color(0.039609082, 0.039360993, 0.45209223, 1)
+
+[sub_resource type="ShaderMaterial" id="MatAmber"]
+shader = ExtResource("5_shader")
+shader_parameter/color_top = Color(1, 0.8, 0.2, 1)
+shader_parameter/color_bottom = Color(0.97, 0.57, 0.11, 1)
+shader_parameter/rect_size = Vector2(976, 296)
+shader_parameter/corner_radius = 64.0
+shader_parameter/inset = 28.0
+shader_parameter/shadow_blur = 22.0
+shader_parameter/shadow_offset = 10.0
+shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
+
+[sub_resource type="StyleBoxFlat" id="IconChip"]
+bg_color = Color(1, 1, 1, 0.18)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="LabelSettings" id="ModeLabelSettings"]
+font = ExtResource("4_font")
+font_size = 58
+outline_size = 4
+outline_color = Color(0.08, 0.12, 0.2, 0.85)
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="ArrowBadge"]
+bg_color = Color(0, 0, 0, 0.14)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="ShaderMaterial" id="MatBlue"]
+shader = ExtResource("5_shader")
+shader_parameter/color_top = Color(0.3, 0.56, 0.97, 1)
+shader_parameter/color_bottom = Color(0.09, 0.4, 0.95, 1)
+shader_parameter/rect_size = Vector2(976, 296)
+shader_parameter/corner_radius = 64.0
+shader_parameter/inset = 28.0
+shader_parameter/shadow_blur = 22.0
+shader_parameter/shadow_offset = 10.0
+shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
+
+[sub_resource type="ShaderMaterial" id="MatGreen"]
+shader = ExtResource("5_shader")
+shader_parameter/color_top = Color(0.31, 0.83, 0.5, 1)
+shader_parameter/color_bottom = Color(0.09, 0.74, 0.38, 1)
+shader_parameter/rect_size = Vector2(976, 296)
+shader_parameter/corner_radius = 64.0
+shader_parameter/inset = 28.0
+shader_parameter/shadow_blur = 22.0
+shader_parameter/shadow_offset = 10.0
+shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
+
+[node name="WordGame" type="Control" unique_id=877802505]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Label" type="Label" parent="." unique_id=1641233276]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -156.5
+offset_right = 156.5
+offset_bottom = 109.0
+grow_horizontal = 2
+text = "بازی کلمات"
+label_settings = SubResource("LabelSettings_7ujfs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=104712140]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = 200.0
+offset_right = -80.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 44
+
+[node name="WordOfDayButton" type="Button" parent="Content" unique_id=2143147544]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="Gradient" type="ColorRect" parent="Content/WordOfDayButton" unique_id=95386134]
+material = SubResource("MatAmber")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_cardrect")
+
+[node name="Margin" type="MarginContainer" parent="Content/WordOfDayButton" unique_id=1418802273]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="Content/WordOfDayButton/Margin" unique_id=1969564363]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Content/WordOfDayButton/Margin/Row" unique_id=963643466]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("IconChip")
+
+[node name="Emoji" type="Label" parent="Content/WordOfDayButton/Margin/Row/IconChip" unique_id=482275033]
+layout_mode = 2
+theme_override_font_sizes/font_size = 92
+text = "📅"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Content/WordOfDayButton/Margin/Row" unique_id=1148977264]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_font")
+text = "Wordle"
+label_settings = SubResource("ModeLabelSettings")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowBadge" type="PanelContainer" parent="Content/WordOfDayButton/Margin/Row" unique_id=1218594699]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("ArrowBadge")
+
+[node name="Chevron" type="Label" parent="Content/WordOfDayButton/Margin/Row/ArrowBadge" unique_id=1541365824]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "❯"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeaningButton" type="Button" parent="Content" unique_id=722936691]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="Gradient" type="ColorRect" parent="Content/MeaningButton" unique_id=425391361]
+material = SubResource("MatBlue")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_cardrect")
+
+[node name="Margin" type="MarginContainer" parent="Content/MeaningButton" unique_id=143222325]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="Content/MeaningButton/Margin" unique_id=1590624302]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Content/MeaningButton/Margin/Row" unique_id=1055054480]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("IconChip")
+
+[node name="Emoji" type="Label" parent="Content/MeaningButton/Margin/Row/IconChip" unique_id=1093910975]
+layout_mode = 2
+theme_override_font_sizes/font_size = 92
+text = "📋"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Content/MeaningButton/Margin/Row" unique_id=1114770201]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_font")
+text = "WordDef"
+label_settings = SubResource("ModeLabelSettings")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowBadge" type="PanelContainer" parent="Content/MeaningButton/Margin/Row" unique_id=1349253110]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("ArrowBadge")
+
+[node name="Chevron" type="Label" parent="Content/MeaningButton/Margin/Row/ArrowBadge" unique_id=1104401969]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "❯"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpellingButton" type="Button" parent="Content" unique_id=163568141]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="Gradient" type="ColorRect" parent="Content/SpellingButton" unique_id=1433804595]
+material = SubResource("MatGreen")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_cardrect")
+
+[node name="Margin" type="MarginContainer" parent="Content/SpellingButton" unique_id=98976739]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="Content/SpellingButton/Margin" unique_id=1059906738]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Content/SpellingButton/Margin/Row" unique_id=1750383868]
+custom_minimum_size = Vector2(196, 196)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("IconChip")
+
+[node name="Emoji" type="Label" parent="Content/SpellingButton/Margin/Row/IconChip" unique_id=759572764]
+layout_mode = 2
+theme_override_font_sizes/font_size = 92
+text = "🔤"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Content/SpellingButton/Margin/Row" unique_id=1346337704]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_font")
+text = "Unscramble"
+label_settings = SubResource("ModeLabelSettings")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowBadge" type="PanelContainer" parent="Content/SpellingButton/Margin/Row" unique_id=2027748487]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("ArrowBadge")
+
+[node name="Chevron" type="Label" parent="Content/SpellingButton/Margin/Row/ArrowBadge" unique_id=1843960706]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "❯"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://csjykfgswhgaf"]
 
 [ext_resource type="Script" uid="uid://dp1p468gjieln" path="res://scenes/main_menu/main_menu.gd" id="1_main"]
-[ext_resource type="PackedScene" uid="uid://b2onop4jk0ebo" path="res://scenes/side_menu/SideMenu.tscn" id="2_side"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="FontFile" uid="uid://ctqw8326nrhnu" path="res://assets/fonts/JosefinSans-Bold.ttf" id="4_josefin"]
 
 [node name="MainMenu" type="Control" unique_id=117377103]
 layout_mode = 3
@@ -12,4 +13,81 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_main")
 
-[node name="SideMenu" parent="." unique_id=2005345806 instance=ExtResource("2_side")]
+[node name="RootScroll" type="ScrollContainer" parent="." unique_id=738591028]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="OuterMargin" type="MarginContainer" parent="RootScroll" unique_id=811715590]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 72
+
+[node name="MainColumn" type="VBoxContainer" parent="RootScroll/OuterMargin" unique_id=594146135]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 26
+
+[node name="TopSpacer" type="Control" parent="RootScroll/OuterMargin/MainColumn" unique_id=1956615397]
+custom_minimum_size = Vector2(0, 104)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeroVBox" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=366222435]
+custom_minimum_size = Vector2(0, 330)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="AppTitle" type="Label" parent="RootScroll/OuterMargin/MainColumn/HeroVBox" unique_id=2035207034]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.7, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0.36, 0.16, 0.9, 0.2)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 8
+theme_override_fonts/font = ExtResource("4_josefin")
+theme_override_font_sizes/font_size = 108
+text = "Vision Master"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AppSubtitle" type="Label" parent="RootScroll/OuterMargin/MainColumn/HeroVBox" unique_id=685242542]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 38
+text = "یادگیری زبان انگلیسی مدرسه · متوسطه دوم"
+horizontal_alignment = 1
+
+[node name="ContinueSlot" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=1694471527]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="SectionLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn" unique_id=1989207574]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 40
+text = "کتابهای درسی 📚"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DynamicCards" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=615023849]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 26
+
+[node name="BottomSpacer" type="Control" parent="RootScroll/OuterMargin/MainColumn" unique_id=801807862]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+mouse_filter = 2

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://qvx0q2vcn6ni"]
+[gd_scene load_steps=3 format=3 uid="uid://qvx0q2vcn6ni"]
 
 [ext_resource type="Script" path="res://scenes/purchase/purchase.gd" id="1_pu"]
+[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_vazir"]
 
 [node name="Purchase" type="Control"]
 layout_mode = 3
@@ -10,4 +11,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pu")
+
+[node name="Bg" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CenterBox" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+offset_bottom = -176.0
+alignment = 1
+theme_override_constants/separation = 28
+
+[node name="Icon" type="Label" parent="CenterBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "💎"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="CenterBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 40
+text = "اشتراک ویژه به‌زودی فعال می‌شود."
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="CenterBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 30
+text = "همه بخش‌های آموزشی فعلاً رایگان هستند."
+autowrap_mode = 2
+horizontal_alignment = 1
 

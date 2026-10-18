@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://bkfllarndb2kx"]
+
+[ext_resource type="Script" uid="uid://f2ugyjkxregm" path="res://scenes/word_game/WordGameHub.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+
+[node name="WordGameHub" type="Control" unique_id=757437532]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1533568564]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Scroll" type="ScrollContainer" parent="." unique_id=1863716374]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MainMargin" type="MarginContainer" parent="Scroll" unique_id=1852628925]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 52
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 240
+
+[node name="MainColumn" type="VBoxContainer" parent="Scroll/MainMargin" unique_id=1276624173]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=1585946414]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 54
+text = "بازی با کلمات"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=308971966]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 30
+text = "روش بازی را انتخاب کنید"
+horizontal_alignment = 1
+
+[node name="ModeButtons" type="HBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=1602772560]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
+
+[node name="LearningButton" type="Button" parent="Scroll/MainMargin/MainColumn/ModeButtons" unique_id=1823623472]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.037244946, 0.03783645, 0.45377022, 1)
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 34
+text = "یادگیری
+تمرین بدون رقابت"
+
+[node name="DailyButton" type="Button" parent="Scroll/MainMargin/MainColumn/ModeButtons" unique_id=1455998737]
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.03529412, 0.039215688, 0.45490196, 1)
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 34
+text = "چالش روزانه
+برای امتیاز رسمی"
+
+[node name="LeaderboardTitle" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=1792258045]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 40
+text = "جدول رتبه‌بندی"
+horizontal_alignment = 1
+
+[node name="Tabs" type="HBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=744202285]
+layout_mode = 2
+layout_direction = 2
+theme_override_constants/separation = 16
+
+[node name="DailyBoardButton" type="Button" parent="Scroll/MainMargin/MainColumn/Tabs" unique_id=73248624]
+custom_minimum_size = Vector2(0, 82)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 30
+text = "امروز"
+
+[node name="LifetimeButton" type="Button" parent="Scroll/MainMargin/MainColumn/Tabs" unique_id=160102682]
+custom_minimum_size = Vector2(0, 82)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 30
+text = "کل عمر"
+
+[node name="Status" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=1313806602]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Entries" type="VBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=1993428948]
+layout_mode = 2
+theme_override_constants/separation = 12

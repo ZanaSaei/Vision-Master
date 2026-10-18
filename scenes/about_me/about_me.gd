@@ -2,15 +2,13 @@ extends "res://autoload/BackButtonHandler.gd"
 ## ============================================================
 ##  ABOUT ME — a polished developer/author page.
 ##  Shown via the side-menu «درباره من» entry (fade transition).
-##  Back returns to the main menu.
+##  Uses the persistent bottom navigation for scene changes.
 ## ============================================================
 
-const SCENE_MAIN_MENU := "res://scenes/main_menu/MainMenu.tscn"
 const DEV_EMAIL := "mrsaei@example.com"   # TODO: replace with your real contact
 const DEV_INSTAGRAM := "@mrsaei"           # TODO: replace with your real handle
 
 # --- Node references (match AboutMe.tscn) ---
-@onready var back_button: Button = $Header/Margin/HBox/BackButton
 @onready var bg: ColorRect = $Bg
 @onready var email_button: Button = $Scroll/Margin/Layout/ContactCard/VBox/EmailRow
 @onready var instagram_button: Button = $Scroll/Margin/Layout/ContactCard/VBox/InstagramRow
@@ -19,7 +17,6 @@ const DEV_INSTAGRAM := "@mrsaei"           # TODO: replace with your real handle
 
 func _ready() -> void:
 	version_value.text = "نسخه " + _app_version()
-	back_button.pressed.connect(_on_back_pressed)
 	email_button.pressed.connect(_on_email_pressed)
 	instagram_button.pressed.connect(_on_instagram_pressed)
 	Global.on_theme_changed(_on_theme_changed)
@@ -35,14 +32,12 @@ func _on_theme_changed(_mode: int) -> void:
 # ══════════════════════════════════════════════════════════════
 func _apply_theme() -> void:
 	bg.color = Color(Global.get_theme_color("bg"), 0.9)
-	back_button.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	_theme_walk(self)
-	# Unified header styling last, so it wins over the generic walk.
-	if has_node("Header"):
-		Global.style_header($Header)
-
 
 func _theme_walk(node: Node) -> void:
+	# The bottom NavigationBar owns its own bespoke styling — leave it alone.
+	if node.name == "NavigationBar":
+		return
 	if node is ColorRect and node.name == "Bg":
 		bg.color = Color(Global.get_theme_color("bg"), 0.9)
 	elif node is PanelContainer and node.name != "Avatar":
@@ -62,7 +57,7 @@ func _theme_walk(node: Node) -> void:
 		node.add_theme_stylebox_override("panel", style)
 	elif node is Label:
 		_theme_label(node)
-	elif node is Button and node != back_button:
+	elif node is Button:
 		node.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	for child in node.get_children():
 		_theme_walk(child)
@@ -142,10 +137,6 @@ func _show_toast(text: String) -> void:
 # ══════════════════════════════════════════════════════════════
 #  NAVIGATION
 # ══════════════════════════════════════════════════════════════
-func _on_back_pressed() -> void:
-	Sfx.click()
-	TransitionManager.change_scene(SCENE_MAIN_MENU)
-
-
 func _on_android_back_pressed() -> void:
-	_on_back_pressed()
+	Sfx.click()
+	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")

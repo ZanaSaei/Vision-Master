@@ -4,7 +4,7 @@ extends "res://autoload/BackButtonHandler.gd"
 # Placeholder scene; gameplay will be added later.
 # ============================================================
 
-const SCENE_WORD_GAME := "res://scenes/word_game/WordGame.tscn"
+const SCENE_WORD_GAME := "res://scenes/word_game/WordGameHub.tscn"
 
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 

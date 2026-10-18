@@ -7,7 +7,7 @@ extends "res://autoload/BackButtonHandler.gd"
 # The animated background lives in the MenuBackground autoload.
 ############################################################
 
-const SCENE_BOOK_MENU          := "res://scenes/book_menu/BookMenu.tscn"
+const SCENE_BOOK_MENU          := "res://scenes/book_menu/BookSelection.tscn"
 const SCENE_VOCAB              := "res://scenes/vocabulary/VocabFlashcards.tscn"
 const SCENE_CONVERSATION       := "res://scenes/conversation/Conversation.tscn"
 const SCENE_READING            := "res://scenes/reading/Reading.tscn"
@@ -18,7 +18,6 @@ const SCENE_PRONUNCIATION      := "res://scenes/pronunciation/Pronunciation.tscn
 const SCENE_WRITING            := "res://scenes/writing/Writing.tscn"
 const SCENE_WHAT_YOU_LEARNED   := "res://scenes/what_you_learned/WhatYouLearned.tscn"
 const SCENE_WORKBOOK           := "res://scenes/workbook/Workbook.tscn"
-const BACK_ICON                := "res://assets/images/ui/Back.png"
 
 const PERSIAN_DIGITS := ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۱۰"]
 
@@ -76,7 +75,6 @@ var _scroll: ScrollContainer = null
 var _col: VBoxContainer = null
 var _title_label: Label = null
 var _subtitle_badge: Label = null
-var _back_button: Button = null
 var _card_buttons: Array[Button] = []
 var _card_accents: Array[Color] = []
 
@@ -116,7 +114,7 @@ func _get_lesson_title() -> String:
 
 
 func _build_ui() -> void:
-	# ---- Scrollable content (behind the fixed header) ----
+	# ---- Scrollable content ----
 	_scroll = ScrollContainer.new()
 	_scroll.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_scroll.offset_top = 0.0
@@ -124,75 +122,14 @@ func _build_ui() -> void:
 	_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
 	add_child(_scroll)
 
-	# ---- Header bar (fixed on top, renders OVER the scroll) ----
-	var header := PanelContainer.new()
-	header.name = "HeaderBar"
-	header.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	header.offset_bottom = 260.0
-	header.mouse_filter = Control.MOUSE_FILTER_PASS
-	add_child(header)
-
-	var h_margin := MarginContainer.new()
-	h_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	h_margin.add_theme_constant_override("margin_left", 36)
-	h_margin.add_theme_constant_override("margin_right", 36)
-	h_margin.add_theme_constant_override("margin_top", 60)
-	h_margin.add_theme_constant_override("margin_bottom", 24)
-	header.add_child(h_margin)
-
-	var h_row := HBoxContainer.new()
-	h_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	h_row.add_theme_constant_override("separation", 20)
-	h_margin.add_child(h_row)
-
-	# Back button sits on the LEFT; the title column is centred between it
-	# and a right-hand spacer that mirrors the button's width.
-	_back_button = MenuStyle.make_back_button(BACK_ICON, 132)
-	_back_button.pressed.connect(_on_back_button_pressed)
-	MenuStyle.wire_microinteractions(_back_button)
-	h_row.add_child(_back_button)
-
-	var title_col := VBoxContainer.new()
-	title_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	title_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title_col.add_theme_constant_override("separation", 4)
-	title_col.alignment = BoxContainer.ALIGNMENT_CENTER
-
-	_title_label = Label.new()
-	_title_label.text = MenuStyle.persian_digits("درس %d" % _lesson)
-	_title_label.add_theme_font_override("font", MenuStyle.vazir())
-	_title_label.add_theme_font_size_override("font_size", 70)
-	_title_label.add_theme_color_override("font_color", MenuStyle.accent())
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-	var lesson_title := _get_lesson_title()
-	_subtitle_badge = MenuStyle.pill_label(
-		MenuStyle.persian_digits(lesson_title if lesson_title != "" else "ویژن %d" % _book),
-		MenuStyle.accent(), 28
-	)
-	_subtitle_badge.custom_minimum_size = Vector2(0, 56)
-	_subtitle_badge.add_theme_stylebox_override("normal", MenuStyle.icon_chip(MenuStyle.accent(), 26))
-	_subtitle_badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title_col.add_child(_title_label)
-	title_col.add_child(_subtitle_badge)
-
-	h_row.add_child(title_col)
-
-	# A right-hand spacer mirrors the back button's width so the title
-	# column stays perfectly centred in the header.
-	var right_pad := Control.new()
-	right_pad.custom_minimum_size = Vector2(132, 1)
-	h_row.add_child(right_pad)
-
-	# ---- Scrollable content (starts below the fixed header) ----
 	var outer := MarginContainer.new()
 	outer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	outer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	outer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	outer.add_theme_constant_override("margin_left", 40)
 	outer.add_theme_constant_override("margin_right", 40)
-	outer.add_theme_constant_override("margin_top", int(ThemeService.HEADER_BAR_HEIGHT))
-	outer.add_theme_constant_override("margin_bottom", 72)
+	outer.add_theme_constant_override("margin_top", 48)
+	outer.add_theme_constant_override("margin_bottom", 170)
 	_scroll.add_child(outer)
 
 	_col = VBoxContainer.new()
@@ -252,12 +189,6 @@ func _apply_theme() -> void:
 	if _subtitle_badge:
 		_subtitle_badge.add_theme_stylebox_override("normal", MenuStyle.icon_chip(book_accent, 26))
 		_subtitle_badge.add_theme_color_override("font_color", MenuStyle.pill_text(book_accent))
-	# Unified header geometry (bar height, padding, item order/positions).
-	var header: PanelContainer = get_node_or_null("HeaderBar") as PanelContainer
-	if header:
-		Global.style_header(header)
-		# Flat menu-screen background on top of it.
-		header.add_theme_stylebox_override("panel", MenuStyle.header_bar_style(44, true))
 	for i in _card_buttons.size():
 		var btn: Button = _card_buttons[i]
 		var accent: Color = _card_accents[i]
@@ -315,7 +246,7 @@ func _on_section_pressed(scene_key: String) -> void:
 		TransitionManager.change_scene(path)
 
 
-func _on_back_button_pressed() -> void:
+func _on_android_back_pressed() -> void:
 	if _navigating:
 		return
 	_navigating = true
@@ -323,7 +254,3 @@ func _on_back_button_pressed() -> void:
 	if not is_inside_tree():
 		return
 	TransitionManager.slide_change_scene(SCENE_BOOK_MENU, TransitionManager.Slide.BACK)
-
-
-func _on_android_back_pressed() -> void:
-	_on_back_button_pressed()

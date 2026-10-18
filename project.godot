@@ -15,7 +15,7 @@ run/main_scene="uid://csjykfgswhgaf"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Mobile")
-run/max_fps="60"
+run/max_fps=60.0
 boot_splash/bg_color=Color(0.003921569, 0.047058824, 0.16862746, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="uid://ds0litfms2cyf"
@@ -36,11 +36,14 @@ API="*res://autoload/ApiClient.gd"
 Content="*res://autoload/ContentManager.gd"
 Sync="*res://autoload/SyncManager.gd"
 BookSession="*uid://b0agwlo8dg8g1"
+BottomNavigation="*res://autoload/BottomNavigation.gd"
+SafeAreaInset="*res://autoload/SafeAreaInset.gd"
+DailyChallengeState="*res://autoload/DailyChallengeState.gd"
 
 [display]
 
-window/size/viewport_width=720
-window/size/viewport_height=1280
+window/size/viewport_width=1080.0
+window/size/viewport_height=1920.0
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1

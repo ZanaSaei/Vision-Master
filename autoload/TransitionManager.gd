@@ -1,24 +1,20 @@
 extends CanvasLayer
 ############################################################
 # TRANSITION MANAGER
-# Two transition styles:
-#   change_scene()       -> fade to black. Still used by the
-#                           side-menu destinations (Saved Words,
-#                           Settings, Purchase) and any scene
-#                           outside the menu flow.
-#   slide_change_scene() -> horizontal push used by the menu
-#                           flow (Main <-> Book <-> Lesson and
-#                           their drill-downs). Content exits
-#                           LEFT when going deeper, RIGHT when
-#                           going back. The shared background
-#                           (MenuBackground autoload) is never
-#                           touched by either transition.
+#   change_scene()       -> fade transition for existing callers.
+#   slide_change_scene() -> longer push for hierarchical drill-down/back.
+#   tab_change_scene()   -> quick horizontal push between peer tab scenes.
+#                          Tab changes do not fade or scale the screens.
+# The shared background (MenuBackground autoload) is never touched by slides.
 ############################################################
 
 # Direction of a slide transition.
 # FORWARD = going deeper (main -> book -> lesson -> section)
 # BACK    = going up one level
 enum Slide { FORWARD, BACK }
+
+signal tab_transition_started
+signal tab_transition_finished(success: bool)
 
 # --- Fade settings (unchanged) ---
 var transition_color := Color.BLACK
@@ -31,6 +27,9 @@ const SLIDE_ENTER_TIME := 0.50    # how fast the new screen settles in
 const SLIDE_MARGIN     := 240.0   # extra travel so glows/shadows fully clear
 const EXIT_SCALE       := 0.94    # old screen shrinks a touch as it leaves
 const ENTER_SCALE      := 1.04    # new screen arrives slightly big, settles to 1
+const TAB_SLIDE_TIME   := 0.18    # brief, direct movement for peer tabs
+
+var _tab_change_busy: bool = false
 
 # Guards against double-taps starting a second slide mid-transition.
 var _slide_busy := false
@@ -45,13 +44,15 @@ var _active_scene: String = ""
 
 
 func _ready() -> void:
-	# Build the fade overlay in code so no scene editing is required.
+	# Fade overlay sits above the persistent bottom navigation bar (layer 1)
+	# so a full-screen fade still covers the bar.
+	layer = 100
+
+	# Build the transition overlay in code so no scene editing is required.
 	color_rect = ColorRect.new()
 	color_rect.color = transition_color
 	color_rect.visible = false
-	# Block touches while the screen is black.
 	color_rect.mouse_filter = Control.MOUSE_FILTER_STOP
-	# Anchor to all four edges so it always fills the viewport.
 	color_rect.anchor_left = 0.0
 	color_rect.anchor_top = 0.0
 	color_rect.anchor_right = 1.0
@@ -59,6 +60,39 @@ func _ready() -> void:
 	color_rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	color_rect.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	add_child(color_rect)
+
+	# Lock taps across the scene swap without retaining scene-local references.
+	tab_transition_started.connect(_lock_navigation_bars)
+	tab_transition_finished.connect(_unlock_navigation_bars)
+
+
+func _unlock_navigation_bars(_success: bool) -> void:
+	_set_navigation_bars_busy(false)
+
+
+func _lock_navigation_bars() -> void:
+	_set_navigation_bars_busy(true)
+
+
+func _set_navigation_bars_busy(busy: bool) -> void:
+	var scene_tree: SceneTree = get_tree()
+	var navigation_bars: Array[Node] = scene_tree.get_nodes_in_group("bottom_navigation")
+	for navigation_node: Node in navigation_bars:
+		if navigation_node is VisionNavigationBar:
+			var navigation_bar: VisionNavigationBar = navigation_node as VisionNavigationBar
+			navigation_bar.set_navigation_busy(busy)
+
+
+func _find_navigation_bar(root: Node) -> VisionNavigationBar:
+	if root == null:
+		return null
+	if root is VisionNavigationBar:
+		return root as VisionNavigationBar
+	for child: Node in root.get_children():
+		var navigation_bar: VisionNavigationBar = _find_navigation_bar(child)
+		if navigation_bar != null:
+			return navigation_bar
+	return null
 
 
 ############################################################
@@ -137,6 +171,118 @@ func _fade_in() -> void:
 	tween.tween_property(color_rect, "color:a", 0.0, fade_duration)
 	await tween.finished
 	color_rect.visible = false             # hide so it never eats touches
+
+
+############################################################
+# TAB PUSH — quick horizontal transition between bottom tabs.
+# FORWARD moves the old screen LEFT; BACK moves it RIGHT.
+# Unlike the hierarchical slide, this is a direct push with no scaling.
+############################################################
+func tab_change_scene(scene_path: String, direction: Slide) -> void:
+	if scene_path.is_empty() or _tab_change_busy or _fade_busy or _slide_busy:
+		return
+	var target_resource: Resource = load(scene_path)
+	if target_resource == null or not (target_resource is PackedScene):
+		push_error("tab_change_scene: can't load '%s'." % scene_path)
+		return
+	_tab_change_busy = true
+	tab_transition_started.emit()
+	_lock_navigation_bars()
+	var scene_tree: SceneTree = get_tree()
+	var travel: float = maxf(get_viewport().get_visible_rect().size.x, 1.0)
+	var exit_offset: float = -travel if direction == Slide.FORWARD else travel
+	var old_scene: Node = scene_tree.current_scene
+	var old_nodes: Array = _slidable_nodes(old_scene)
+
+	# Only scene content participates; the shared background and the persistent
+	# bottom navigation (its own canvas layer) remain perfectly stationary.
+	if not old_nodes.is_empty():
+		var outgoing_tween: Tween = _create_tab_slide_tween(
+			old_nodes, exit_offset, false
+		)
+		await outgoing_tween.finished
+
+	var error_code: int = scene_tree.change_scene_to_file(scene_path)
+	if error_code != OK:
+		push_error(
+			"tab_change_scene: can't load '%s' (%s)."
+			% [scene_path, error_string(error_code)]
+		)
+		if not old_nodes.is_empty():
+			var restore_tween: Tween = _create_tab_slide_tween(
+				old_nodes, -exit_offset, true
+			)
+			await restore_tween.finished
+		_finish_tab_transition(false)
+		return
+
+	# Change scenes through a deferred call. Once the native swap emits
+	# scene_changed, park the incoming content before the next rendered frame.
+	await scene_tree.scene_changed
+	var incoming_scene: Node = scene_tree.current_scene
+	if incoming_scene == null:
+		push_error("tab_change_scene: the new current scene is unavailable.")
+		_finish_tab_transition(false)
+		return
+
+	var incoming_nodes: Array = _slidable_nodes(incoming_scene)
+	for incoming_node: Node in incoming_nodes:
+		_shift_tab_node_x(incoming_node, -exit_offset)
+
+	if not incoming_nodes.is_empty():
+		var incoming_tween: Tween = _create_tab_slide_tween(
+			incoming_nodes, exit_offset, true
+		)
+		await incoming_tween.finished
+
+	_finish_tab_transition(true)
+
+
+func _create_tab_slide_tween(
+	nodes: Array,
+	horizontal_offset: float,
+	entering: bool
+) -> Tween:
+	var movement_tween: Tween = create_tween()
+	movement_tween.set_trans(Tween.TRANS_CUBIC)
+	movement_tween.set_ease(Tween.EASE_OUT if entering else Tween.EASE_IN)
+	for node: Node in nodes:
+		if not is_instance_valid(node):
+			continue
+		if node is Control:
+			var control_node: Control = node as Control
+			var target_left: float = control_node.offset_left + horizontal_offset
+			var target_right: float = control_node.offset_right + horizontal_offset
+			movement_tween.parallel().tween_property(
+				control_node, "offset_left", target_left, TAB_SLIDE_TIME
+			)
+			movement_tween.parallel().tween_property(
+				control_node, "offset_right", target_right, TAB_SLIDE_TIME
+			)
+		elif node is Node2D:
+			var node_2d: Node2D = node as Node2D
+			movement_tween.parallel().tween_property(
+				node_2d, "position:x", node_2d.position.x + horizontal_offset, TAB_SLIDE_TIME
+			)
+	return movement_tween
+
+
+func _shift_tab_node_x(node: Node, offset_x: float) -> void:
+	if node is Control:
+		var control_node: Control = node as Control
+		control_node.offset_left += offset_x
+		control_node.offset_right += offset_x
+	elif node is Node2D:
+		var node_2d: Node2D = node as Node2D
+		node_2d.position.x += offset_x
+
+
+func _finish_tab_transition(success: bool) -> void:
+	_tab_change_busy = false
+	if color_rect != null:
+		color_rect.visible = false
+	# Unlocks the persistent bottom navigation (see _unlock_navigation_bars).
+	tab_transition_finished.emit(success)
 
 
 ############################################################
@@ -244,6 +390,9 @@ func slide_change_scene(scene_path: String, direction: Slide) -> void:
 ## its content. This is what makes lesson -> section read as one
 ## continuous push instead of a background pop at the swap moment.
 ## CanvasLayers are skipped: they are independent overlays.
+## The bottom navigation bar is persistent chrome: it must stay
+## perfectly still while the scene content pushes past it, so it is
+## skipped too (its selection is carried across the swap explicitly).
 func _slidable_nodes(root: Node) -> Array:
 	var out: Array = []
 	if root == null:
@@ -251,6 +400,9 @@ func _slidable_nodes(root: Node) -> Array:
 	for child in root.get_children():
 		# Overlays/HUDs on their own canvas stay put.
 		if child is CanvasLayer:
+			continue
+		# The bottom navigation bar never moves during a transition.
+		if child is VisionNavigationBar:
 			continue
 		# Only nodes with a position property can be tweened this way.
 		if child is Control or child is Node2D:

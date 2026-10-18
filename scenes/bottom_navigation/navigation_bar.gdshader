@@ -5,6 +5,7 @@ uniform vec4 bar_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform vec2 cutout_center = vec2(180.0, 0.0);
 
 uniform float cutout_radius = 36.0;
+uniform float top_corner_radius = 24.0;
 
 uniform vec2 bar_size = vec2(360.0, 72.0);
 
@@ -19,12 +20,41 @@ void fragment()
 		cutout_center
 	);
 
+	float corner_mask = 1.0;
+	if (pixel_position.x < top_corner_radius && pixel_position.y < top_corner_radius)
+	{
+		float distance_to_corner = distance(
+			pixel_position,
+			vec2(top_corner_radius, top_corner_radius)
+		);
+		corner_mask = 1.0 - smoothstep(
+			top_corner_radius - 1.0,
+			top_corner_radius + 1.0,
+			distance_to_corner
+		);
+	}
+	else if (
+		pixel_position.x > bar_size.x - top_corner_radius
+		&& pixel_position.y < top_corner_radius
+	)
+	{
+		float distance_to_corner = distance(
+			pixel_position,
+			vec2(bar_size.x - top_corner_radius, top_corner_radius)
+		);
+		corner_mask = 1.0 - smoothstep(
+			top_corner_radius - 1.0,
+			top_corner_radius + 1.0,
+			distance_to_corner
+		);
+	}
+
 	if (distance_to_selector < cutout_radius)
 	{
 		COLOR = vec4(0.0);
 	}
 	else
 	{
-		COLOR = bar_color;
+		COLOR = vec4(bar_color.rgb, bar_color.a * corner_mask);
 	}
 }

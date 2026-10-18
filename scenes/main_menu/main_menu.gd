@@ -8,7 +8,7 @@ extends "res://autoload/BackButtonHandler.gd"
 ############################################################
 
 # --- Scene paths ---
-const SCENE_BOOK_MENU    := "res://scenes/book_menu/BookMenu.tscn"
+const SCENE_BOOK_MENU    := "res://scenes/book_menu/BookSelection.tscn"
 const SCENE_SAVED_WORDS  := "res://scenes/saved_words/SavedWords.tscn"
 const SCENE_SETTINGS     := "res://scenes/settings/Settings.tscn"
 const SCENE_ACCOUNT      := "res://scenes/auth/Auth.tscn"
@@ -17,7 +17,7 @@ const SCENE_PURCHASE     := "res://scenes/purchase/Purchase.tscn"
 const SCENE_LEITNER      := "res://scenes/review/WordReview.tscn"
 const SCENE_ABOUT_ME     := "res://scenes/about_me/AboutMe.tscn"
 const SCENE_MAIN_MENU    := "res://scenes/main_menu/MainMenu.tscn"
-const SCENE_WORD_GAME    := "res://scenes/word_game/WordGame.tscn"
+const SCENE_WORD_GAME    := "res://scenes/word_game/WordGameHub.tscn"
 
 # --- Per-book accent identities (friendly, modern) ---
 const COLOR_BOOK1 := Color("#3B82F6")   # Vision 1 — solid light blue
@@ -46,12 +46,12 @@ const BOOK_SUBTITLE := {
 var _navigating: bool = false
 var _card_buttons: Array[Button] = []
 var _card_accents: Array[Color] = []
-var _hamburger: Button = null
-var _side_menu: Node = null
 var _back_message_nodes: Array[Node] = []   # active exit-confirmation overlays
 
-@onready var _root_scroll: ScrollContainer = null
-@onready var _main_col: VBoxContainer = null
+@onready var _main_col: VBoxContainer = $RootScroll/OuterMargin/MainColumn
+@onready var _continue_slot: VBoxContainer = $RootScroll/OuterMargin/MainColumn/ContinueSlot
+@onready var _dynamic_cards: VBoxContainer = $RootScroll/OuterMargin/MainColumn/DynamicCards
+@onready var _app_title: Label = $RootScroll/OuterMargin/MainColumn/HeroVBox/AppTitle
 
 
 ############################################################
@@ -59,17 +59,6 @@ var _back_message_nodes: Array[Node] = []   # active exit-confirmation overlays
 ############################################################
 func _ready() -> void:
 	_build_ui()
-
-	# Side menu wiring (instance lives in the scene).
-	_side_menu = $SideMenu
-	_side_menu.set_hamburger_button(_hamburger)
-	_hamburger.pressed.connect(_side_menu.toggle)
-	_side_menu.saved_words_pressed.connect(_on_side_menu_saved_words_pressed)
-	_side_menu.settings_pressed.connect(_on_side_menu_settings_pressed)
-	_side_menu.account_pressed.connect(_on_side_menu_account_pressed)
-	_side_menu.purchase_pressed.connect(_on_side_menu_purchase_pressed)
-	_side_menu.leitner_pressed.connect(_on_side_menu_leitner_pressed)
-	_side_menu.about_me_pressed.connect(_on_side_menu_about_me_pressed)
 
 	Global.on_theme_changed(_on_theme_changed)
 
@@ -85,139 +74,13 @@ func _ready() -> void:
 # UI BUILD
 ############################################################
 func _build_ui() -> void:
-	_root_scroll = ScrollContainer.new()
-	_root_scroll.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_root_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	_root_scroll.mouse_filter = Control.MOUSE_FILTER_PASS
-	_root_scroll.add_theme_constant_override("margin_left", 40)
-	_root_scroll.add_theme_constant_override("margin_right", 40)
-	add_child(_root_scroll)
-
-	var outer := MarginContainer.new()
-	outer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	outer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	outer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	outer.add_theme_constant_override("margin_left", 40)
-	outer.add_theme_constant_override("margin_right", 40)
-	outer.add_theme_constant_override("margin_top", 150)
-	outer.add_theme_constant_override("margin_bottom", 72)
-	_root_scroll.add_child(outer)
-
-	_main_col = VBoxContainer.new()
-	_main_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_main_col.add_theme_constant_override("separation", 26)
-	_main_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	outer.add_child(_main_col)
-
-	# 1. Top row: logo mark + spacer (hamburger floats above, like the old design,
-	# so it can slide with the drawer when the side menu opens).
-	_main_col.add_child(_build_top_row())
-	_build_hamburger()
-
-	# 2. Hero greeting.
-	_main_col.add_child(_build_hero())
-
-	# 3. Continue card (only when there is somewhere to continue to).
 	if Global.has_last_scene():
-		_main_col.add_child(_make_continue_card())
-
-	# 4. Section label.
-	var section_lbl := Label.new()
-	section_lbl.name = "SectionLabel"
-	section_lbl.text = "کتابهای درسی 📚"
-	section_lbl.add_theme_font_override("font", MenuStyle.vazir())
-	section_lbl.add_theme_font_size_override("font_size", 40)
-	section_lbl.add_theme_color_override("font_color", MenuStyle.text_dim())
-	section_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	section_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	section_lbl.custom_minimum_size = Vector2(0, 80)
-	_main_col.add_child(section_lbl)
-
-	# 5. Book cards — cover images on the left (taller cards for portrait covers).
+		_continue_slot.add_child(_make_continue_card())
 	_add_card("Vision 1", BOOK_SUBTITLE[1], BOOK_EMOJI[1], COLOR_BOOK1, _on_book_pressed.bind(1), BOOK_COVER[1], BOOK_CARD_HEIGHT)
 	_add_card("Vision 2", BOOK_SUBTITLE[2], BOOK_EMOJI[2], COLOR_BOOK2, _on_book_pressed.bind(2), BOOK_COVER[2], BOOK_CARD_HEIGHT)
 	_add_card("Vision 3", BOOK_SUBTITLE[3], BOOK_EMOJI[3], COLOR_BOOK3, _on_book_pressed.bind(3), BOOK_COVER[3], BOOK_CARD_HEIGHT)
-
-	# 6. Exam card.
 	_add_card("امتحانات نهایی", "تمرین سوالات امتحان", "🎓", COLOR_EXAM, _on_exam_pressed)
-
-	# 7. Word games card.
 	_add_card("بازی با کلمات", "کلمه روز · معنی · املا", "🔤", COLOR_WORD_GAMES, _on_word_games_pressed)
-
-	# Bottom breathing room.
-	var spacer := Control.new()
-	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	spacer.custom_minimum_size = Vector2(0, 64)
-	_main_col.add_child(spacer)
-
-
-func _build_top_row() -> HBoxContainer:
-	var row := HBoxContainer.new()
-	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	row.add_theme_constant_override("separation", 16)
-	row.custom_minimum_size = Vector2(0, 104)
-
-	# The logo mark ("V") was removed — it was purely decorative and not
-	# needed. The top row is now just an empty breathing spacer so the
-	# hamburger keeps its floating top-right position.
-	var spacer := Control.new()
-	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(spacer)
-
-	return row
-
-
-## Floating hamburger button pinned to the top-right corner (NOT inside a
-## container), so the side menu can slide it left alongside the drawer — the
-## original pre-modernization behaviour.
-func _build_hamburger() -> void:
-	_hamburger = Button.new()
-	_hamburger.text = "☰ منو"
-	_hamburger.add_theme_font_override("font", MenuStyle.vazir())
-	_hamburger.add_theme_font_size_override("font_size", 40)
-	_hamburger.custom_minimum_size = Vector2(190, 96)
-	_hamburger.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	_hamburger.offset_left = -230
-	_hamburger.offset_top = 150
-	_hamburger.offset_right = -40
-	_hamburger.offset_bottom = 246
-	add_child(_hamburger)
-	_apply_hamburger_style()
-	MenuStyle.wire_microinteractions(_hamburger)
-
-
-func _build_hero() -> VBoxContainer:
-	var hero := VBoxContainer.new()
-	hero.name = "HeroVBox"
-	hero.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hero.add_theme_constant_override("separation", 8)
-	hero.custom_minimum_size = Vector2(0, 330)
-
-	var title := Label.new()
-	title.name = "AppTitle"
-	title.text = "Vision Master"
-	title.add_theme_font_override("font", MenuStyle.josefin())
-	title.add_theme_font_size_override("font_size", 108)
-	title.add_theme_color_override("font_color", _wordmark_color())
-	# Violet-tinted glow so the wordmark lifts off either background.
-	title.add_theme_color_override("font_shadow_color", Color(0.36, 0.16, 0.9, 0.20))
-	title.add_theme_constant_override("shadow_offset_x", 0)
-	title.add_theme_constant_override("shadow_offset_y", 8)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	hero.add_child(title)
-
-	var subtitle := Label.new()
-	subtitle.name = "AppSubtitle"
-	subtitle.text = "یادگیری زبان انگلیسی مدرسه · متوسطه دوم"
-	subtitle.add_theme_font_override("font", MenuStyle.vazir())
-	subtitle.add_theme_font_size_override("font_size", 38)
-	subtitle.add_theme_color_override("font_color", MenuStyle.subtitle_color())
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hero.add_child(subtitle)
-
-	return hero
 
 
 func _make_continue_card() -> Button:
@@ -244,6 +107,7 @@ func _continue_destination_label(scene_path: String) -> String:
 		"res://scenes/grammar/GrammarHub.tscn": "بازگشت به دستور زبان",
 		"res://scenes/grammar/GrammarUnits.tscn": "ادامه تمرین دستور زبان",
 		"res://scenes/grammar/GrammarLesson.tscn": "ادامه درس دستور زبان",
+		"res://scenes/book_menu/BookSelection.tscn": "بازگشت به انتخاب کتاب",
 		"res://scenes/book_menu/BookMenu.tscn": "بازگشت به انتخاب کتاب",
 	}
 	return str(scene_names.get(scene_path, "بازگشت به آخرین بخش بازشده"))
@@ -253,41 +117,9 @@ func _add_card(title: String, subtitle: String, emoji: String, accent: Color, on
 	var card: Button = MenuStyle.make_card(title, subtitle, emoji, accent, min_height, image_path, true)
 	card.pressed.connect(on_pressed)
 	MenuStyle.wire_microinteractions(card)
-	_main_col.add_child(card)
+	_dynamic_cards.add_child(card)
 	_card_buttons.append(card)
 	_card_accents.append(accent)
-
-
-############################################################
-# HAMBURGER PILL
-############################################################
-func _apply_hamburger_style() -> void:
-	if _hamburger == null:
-		return
-	var dark := MenuStyle.is_dark()
-	# The floating drawer pill: a raised surface carrying the design system's
-	# signature gold rim, so it reads as part of the same language as buttons.
-	var normal := DesignTokens.box(
-		MenuStyle.surface(),
-		DesignTokens.RADIUS_PILL,
-		MenuStyle.gold(),
-		DesignTokens.BORDER_STANDARD,
-		Color(0, 0, 0, 0.36 if dark else 0.12),
-		DesignTokens.SHADOW_SOFT_SIZE,
-		Vector2(0, 6)
-	)
-	var hover := normal.duplicate() as StyleBoxFlat
-	hover.border_color = MenuStyle.accent_bright()
-	var pressed := normal.duplicate() as StyleBoxFlat
-	pressed.bg_color = MenuStyle.accent()
-	_hamburger.add_theme_stylebox_override("normal", normal)
-	_hamburger.add_theme_stylebox_override("hover", hover)
-	_hamburger.add_theme_stylebox_override("pressed", pressed)
-	_hamburger.add_theme_stylebox_override("focus", hover)
-	var fc := MenuStyle.text()
-	for st in ["font_color", "font_hover_color", "font_pressed_color", "font_focus_color"]:
-		_hamburger.add_theme_color_override(st, fc)
-
 
 ############################################################
 # THEME AWARENESS
@@ -309,13 +141,7 @@ func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
 	# Restyle theme-dependent labels.
-	var greeting: Label = _main_col.get_node_or_null("HeroVBox/GreetingLabel") as Label
-	if greeting:
-		greeting.add_theme_color_override("font_color", MenuStyle.accent_bright())
-	var title: Label = _main_col.get_node_or_null("HeroVBox/AppTitle") as Label
-	if title:
-		title.add_theme_color_override("font_color", _wordmark_color())
-	_apply_hamburger_style()
+	_app_title.add_theme_color_override("font_color", _wordmark_color())
 	# Rebuild card styleboxes (flat — MainMenu buttons have no elevation).
 	for i in _card_buttons.size():
 		var btn: Button = _card_buttons[i]
@@ -337,13 +163,10 @@ func _apply_theme() -> void:
 # AMBIENT LIFE + INTRO
 ############################################################
 func _start_ambient() -> void:
-	var title: Label = _main_col.get_node_or_null("HeroVBox/AppTitle") as Label
-	if title == null:
-		return
 	var tw := create_tween().set_loops()
-	tw.tween_property(title, "scale", Vector2(1.03, 1.03), 3.0) \
+	tw.tween_property(_app_title, "scale", Vector2(1.03, 1.03), 3.0) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tw.tween_property(title, "scale", Vector2.ONE, 3.0) \
+	tw.tween_property(_app_title, "scale", Vector2.ONE, 3.0) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
@@ -352,7 +175,6 @@ func _play_intro_animation() -> void:
 	for child in _main_col.get_children():
 		if child is Control and not child.is_queued_for_deletion():
 			targets.append(child)
-
 	for t in targets:
 		t.modulate.a = 0.0
 		t.position += Vector2(0, 30)
@@ -385,7 +207,7 @@ func _on_continue_pressed() -> void:
 	var last: String = Global.get_last_scene()
 	if last.is_empty() or not ResourceLoader.exists(last):
 		Global.set_last_scene("")
-		var invalid_button: Button = _main_col.get_node_or_null("ContinueButton") as Button
+		var invalid_button: Button = _continue_slot.get_node_or_null("ContinueButton") as Button
 		if invalid_button != null:
 			invalid_button.disabled = true
 			invalid_button.tooltip_text = "مسیری برای ادامه پیدا نشد؛ یکی از کتاب‌ها را انتخاب کنید."
@@ -394,7 +216,7 @@ func _on_continue_pressed() -> void:
 				subtitle.text = "مسیری پیدا نشد؛ یک کتاب را انتخاب کنید"
 		return
 	_navigating = true
-	var continue_button: Button = _main_col.get_node_or_null("ContinueButton") as Button
+	var continue_button: Button = _continue_slot.get_node_or_null("ContinueButton") as Button
 	if continue_button != null:
 		continue_button.disabled = true
 		var subtitle: Label = continue_button.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label

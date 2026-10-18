@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/ScorePanel.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="ScorePanelStyle"]
+bg_color = Color(0.17, 0.19, 0.23, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+content_margin_left = 26.0
+content_margin_top = 18.0
+content_margin_right = 26.0
+content_margin_bottom = 18.0
+
+[node name="ScorePanel" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 130)
+theme_override_styles/panel = SubResource("ScorePanelStyle")
+script = ExtResource("1_script")
+
+[node name="Padding" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Rows" type="VBoxContainer" parent="Padding"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="GameScore" type="Label" parent="Padding/Rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 30
+text = "امتیاز این بازی: ۰"
+horizontal_alignment = 1
+
+[node name="LifetimeScore" type="Label" parent="Padding/Rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 26
+text = "امتیاز کل: ۰"
+horizontal_alignment = 1

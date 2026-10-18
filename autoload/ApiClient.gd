@@ -199,6 +199,93 @@ func push_progress(data: Dictionary, callback: Callable = Callable()) -> void:
 
 
 # ------------------------------------------------------------
+# DAILY WORD CHALLENGES + LEADERBOARDS
+# ------------------------------------------------------------
+
+## All official challenge APIs are authenticated and server-authoritative.
+## callbacks receive (ok: bool, data: Dictionary); failures carry {error: ...}.
+func fetch_challenge_date(callback: Callable) -> void:
+	_authed_get("/challenge/date", func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func fetch_challenge_calendar(callback: Callable) -> void:
+	_authed_get("/challenge/calendar", func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func fetch_challenge_summary(date: String, callback: Callable) -> void:
+	_authed_get("/challenge/summary?date=" + date.uri_encode(), func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func fetch_challenge_attempt(attempt_id: String, callback: Callable) -> void:
+	_authed_get("/challenge/attempts/%s" % attempt_id.uri_encode(), func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func start_challenge_attempt(date: String, game_type: String, idempotency_key: String, callback: Callable, practice: bool = false) -> void:
+	_authed_post("/challenge/attempts", {
+		"date": date,
+		"gameType": game_type,
+		"idempotencyKey": idempotency_key,
+		"practice": practice,
+	}, func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func submit_wordle_guess(attempt_id: String, guess: String, callback: Callable) -> void:
+	_authed_post("/challenge/attempts/%s/wordle-guess" % attempt_id.uri_encode(), {"guess": guess}, func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func abandon_challenge_attempt(attempt_id: String, callback: Callable) -> void:
+	_authed_post("/challenge/attempts/%s/abandon" % attempt_id.uri_encode(), {}, func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func next_wordef_question(attempt_id: String, callback: Callable) -> void:
+	_authed_post("/challenge/attempts/%s/wordef-next" % attempt_id.uri_encode(), {}, func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func answer_wordef_question(attempt_id: String, index: int, option: String, callback: Callable) -> void:
+	_authed_post("/challenge/attempts/%s/wordef-answer" % attempt_id.uri_encode(), {
+		"index": index,
+		"option": option,
+	}, func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func reveal_unscramble_clue(attempt_id: String, index: int, callback: Callable) -> void:
+	_authed_post("/challenge/attempts/%s/clue" % attempt_id.uri_encode(), {"index": index}, func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func solve_unscramble_word(attempt_id: String, index: int, word: String, callback: Callable) -> void:
+	_authed_post("/challenge/attempts/%s/unscramble-solve" % attempt_id.uri_encode(), {
+		"index": index,
+		"word": word,
+	}, func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func settle_challenge_attempt(attempt_id: String, callback: Callable) -> void:
+	_authed_post("/challenge/attempts/%s/submit" % attempt_id.uri_encode(), {}, func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func fetch_daily_leaderboard(limit: int, offset: int, callback: Callable) -> void:
+	_authed_get("/challenge/leaderboard/daily?limit=%d&offset=%d" % [limit, offset], func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+func fetch_lifetime_leaderboard(limit: int, offset: int, callback: Callable) -> void:
+	_authed_get("/challenge/leaderboard/lifetime?limit=%d&offset=%d" % [limit, offset], func(result: int, code: int, body: Dictionary) -> void:
+		callback.call(_ok(result, code), body))
+
+
+# ------------------------------------------------------------
 # LOW-LEVEL HTTP
 # ------------------------------------------------------------
 
@@ -225,6 +312,11 @@ func _authed_get(path: String, callback: Callable) -> void:
 func _authed_put(path: String, body: Dictionary, callback: Callable) -> void:
 	_with_token(func(header: PackedStringArray) -> void:
 		_request(HTTPClient.METHOD_PUT, path, body, header, true, callback))
+
+
+func _authed_post(path: String, body: Dictionary, callback: Callable) -> void:
+	_with_token(func(header: PackedStringArray) -> void:
+		_request(HTTPClient.METHOD_POST, path, body, header, true, callback))
 
 
 func _with_token(run: Callable) -> void:

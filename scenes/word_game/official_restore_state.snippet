@@ -1,0 +1,45 @@
+func _restore_attempt_state() -> void:
+	var state: Dictionary = DailyChallengeState.current_attempt_state
+	match _game_type:
+		"wordle":
+			var guesses: Array = state.get("guesses", [])
+			_wordle_guesses = guesses.size()
+			var input: LineEdit = _body.get_node_or_null("WordleInput") as LineEdit
+			var history: Label = _body.get_node_or_null("WordleFeedback") as Label
+			if history != null:
+				for raw: Variant in guesses:
+					if not raw is Dictionary:
+						continue
+					var entry: Dictionary = raw
+					var symbols: String = ""
+					for cell: Variant in entry.get("feedback", []):
+						symbols += "🟩" if int(cell) == 2 else ("🟨" if int(cell) == 1 else "⬛")
+					history.text += ("\n" if history.text != "" else "") + "%s  %s" % [str(entry.get("guess", "")).to_upper(), symbols]
+					if entry.get("feedback", []).size() == _wordle_length and entry.get("feedback", []).all(func(cell: Variant) -> bool: return int(cell) == 2):
+						_finished = true
+				if _wordle_guesses >= 6:
+					_finished = true
+			if _finished:
+				input.editable = false
+		"wordef":
+			var answers: Array = state.get("answers", [])
+			if answers.size() >= 10:
+				_finish_attempt("همهٔ پرسش‌ها قبلاً پاسخ داده شده‌اند.")
+		"unscramble":
+			var solved: Array = state.get("solved", [])
+			for raw: Variant in solved:
+				if not raw is Dictionary:
+					continue
+				var entry: Dictionary = raw
+				var index: int = int(entry.get("index", -1))
+				if index < 0 or index >= _solved_words.size():
+					continue
+				_solved_words[index] = true
+				var panel: PanelContainer = _body.get_node_or_null("Word%d" % index) as PanelContainer
+				if panel != null:
+					panel.modulate = Color(0.72, 1.0, 0.75, 1.0)
+					var input: LineEdit = panel.find_child("Answer", true, false) as LineEdit
+					if input != null:
+						input.editable = false
+			if _solved_words.all(func(solved_word: bool) -> bool: return solved_word):
+				_finish_attempt("هر پنج واژه پیش‌تر حل شده است.")

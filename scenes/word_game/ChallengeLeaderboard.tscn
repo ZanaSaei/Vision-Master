@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+
+[ext_resource type="Script" path="res://scenes/word_game/ChallengeLeaderboard.gd" id="1_script"]
+
+[node name="ChallengeLeaderboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 1
+
+[node name="MainMargin" type="MarginContainer" parent="Scroll"]
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 38
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 38
+theme_override_constants/margin_bottom = 240
+
+[node name="MainColumn" type="VBoxContainer" parent="Scroll/MainMargin"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="Scroll/MainMargin/MainColumn"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="Scroll/MainMargin/MainColumn/Header"]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+icon = ExtResource("2_back")
+expand_icon = true
+text = ""
+
+[node name="Title" type="Label" parent="Scroll/MainMargin/MainColumn/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 42
+text = "رتبه‌بندی جهانی"
+horizontal_alignment = 1
+
+[node name="Tabs" type="HBoxContainer" parent="Scroll/MainMargin/MainColumn"]
+layout_mode = 2
+layout_direction = 2
+
+[node name="DailyButton" type="Button" parent="Scroll/MainMargin/MainColumn/Tabs"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "امروز"
+
+[node name="LifetimeButton" type="Button" parent="Scroll/MainMargin/MainColumn/Tabs"]
+custom_minimum_size = Vector2(0, 88)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "کل عمر"
+
+[node name="Status" type="Label" parent="Scroll/MainMargin/MainColumn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vazir")
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
+horizontal_alignment = 1
+
+[node name="Entries" type="VBoxContainer" parent="Scroll/MainMargin/MainColumn"]
+layout_mode = 2
+theme_override_constants/separation = 12

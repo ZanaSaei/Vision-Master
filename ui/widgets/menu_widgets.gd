@@ -97,7 +97,14 @@ static func make_button(btn_text: String, kind: String = "primary", min_height: 
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	btn.add_theme_font_override("font", MenuTheme.family_for(btn_text))
 	btn.add_theme_font_size_override("font_size", DesignTokens.FONT_LABEL)
+	style_button(btn, kind)
+	return btn
 
+
+## Applies the shared, theme-aware button appearance and interaction behavior to
+## an existing scene-authored Button. Text, layout and sizing remain owned by
+## the scene/Inspector; this method only provides the shared design-system skin.
+static func style_button(btn: Button, kind: String = "primary") -> void:
 	var dark := MenuTheme.is_dark()
 	if kind == "primary":
 		btn.add_theme_stylebox_override("normal", MenuTheme.stylebox("button_primary"))
@@ -124,7 +131,6 @@ static func make_button(btn_text: String, kind: String = "primary", min_height: 
 
 	btn.add_theme_color_override("font_pressed_color", DesignTokens.button_text_color("pressed", dark))
 	UiMotion.wire_microinteractions(btn)
-	return btn
 
 
 ## Clean back button: transparent normally, soft accent pill on hover/press.
@@ -135,11 +141,16 @@ static func make_back_button(icon_path: String, size: int = 96) -> Button:
 	b.expand_icon = true
 	b.custom_minimum_size = Vector2(size, size)
 	b.text = ""
-	b.add_theme_stylebox_override("normal", MenuTheme.stylebox_plain("nav_button_normal"))
-	b.add_theme_stylebox_override("hover", MenuTheme.stylebox("nav_button_hover"))
-	b.add_theme_stylebox_override("pressed", MenuTheme.stylebox("nav_button_pressed"))
-	b.add_theme_stylebox_override("focus", MenuTheme.stylebox("nav_button_focus"))
+	style_back_button(b)
 	return b
+
+
+## Applies the standard theme-aware back-button styles to an authored Button.
+static func style_back_button(button: Button) -> void:
+	button.add_theme_stylebox_override("normal", MenuTheme.stylebox_plain("nav_button_normal"))
+	button.add_theme_stylebox_override("hover", MenuTheme.stylebox("nav_button_hover"))
+	button.add_theme_stylebox_override("pressed", MenuTheme.stylebox("nav_button_pressed"))
+	button.add_theme_stylebox_override("focus", MenuTheme.stylebox("nav_button_focus"))
 
 
 # ══════════════════════════════════════════════════════════════
