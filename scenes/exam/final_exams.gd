@@ -22,7 +22,6 @@ var _navigating: bool = false
 
 func _ready() -> void:
 	super._ready()
-	MenuBackground.enter_background()
 	_build_ui()
 
 

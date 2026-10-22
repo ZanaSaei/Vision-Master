@@ -40,7 +40,6 @@ var _page_view: PageView = null
 
 func _ready() -> void:
 	super._ready()
-	MenuBackground.enter_background()
 	_exam = ExamData.load_exam(str(AppRouter.get_arg("exam_json", "")))
 	_build_ui()
 

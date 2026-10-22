@@ -4,7 +4,7 @@ extends "res://autoload/BackButtonHandler.gd"
 # BOOK MENU — modern, friendly lesson picker.
 # Reads Global.current_book to build lesson cards.
 # Navigation uses the SLIDE transition (book -> lesson spine).
-# The animated background lives in the MenuBackground autoload.
+# The app uses a persistent theme-aware solid background.
 ############################################################
 
 const SCENE_MAIN_MENU   := "res://scenes/main_menu/MainMenu.tscn"

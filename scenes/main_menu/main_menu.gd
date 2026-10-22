@@ -1,68 +1,47 @@
 extends "res://autoload/BackButtonHandler.gd"
 
 ############################################################
-# MAIN MENU — modern, friendly, animated (Godot 4.7)
-# Rebuilt with the shared MenuStyle design language:
-# greeting hero, rounded book cards, exam card, side menu.
-# The animated backdrop lives in the MenuBackground autoload.
+# MAIN MENU — Continue + Leaderboards (Godot 4.7)
+# One big scene-tree Continue button + two leaderboard panels
+# (daily / lifetime) switched by two horizontal tab buttons.
 ############################################################
 
-# --- Scene paths ---
-const SCENE_BOOK_MENU    := "res://scenes/book_menu/BookSelection.tscn"
-const SCENE_SAVED_WORDS  := "res://scenes/saved_words/SavedWords.tscn"
-const SCENE_SETTINGS     := "res://scenes/settings/Settings.tscn"
-const SCENE_ACCOUNT      := "res://scenes/auth/Auth.tscn"
-const SCENE_FINAL_EXAMS  := "res://scenes/exam/FinalExams.tscn"
-const SCENE_PURCHASE     := "res://scenes/purchase/Purchase.tscn"
-const SCENE_LEITNER      := "res://scenes/review/WordReview.tscn"
-const SCENE_ABOUT_ME     := "res://scenes/about_me/AboutMe.tscn"
-const SCENE_MAIN_MENU    := "res://scenes/main_menu/MainMenu.tscn"
-const SCENE_WORD_GAME    := "res://scenes/word_game/WordGameHub.tscn"
+const COLOR_CONTINUE := Color("#3B82F6")
 
-# --- Per-book accent identities (friendly, modern) ---
-const COLOR_BOOK1 := Color("#3B82F6")   # Vision 1 — solid light blue
-const COLOR_BOOK2 := Color("#22C55E")   # Vision 2 — solid green
-const COLOR_BOOK3 := Color("#EF4444")   # Vision 3 — solid red
-const COLOR_EXAM  := Color("#7C3AED")   # Final exams — violet
-const COLOR_WORD_GAMES := Color("#F59E0B")   # بازی با کلمات — amber
-
-# --- Book metadata ---
-const BOOK_EMOJI := { 1: "📘", 2: "📗", 3: "📕" }
-const BOOK_COVER := {
-	1: "res://assets/images/ui/Vision 1.jpg",
-	2: "res://assets/images/ui/Vision 2.jpg",
-	3: "res://assets/images/ui/Vision 3.jpg",
-}
-# Cover cards are taller than the default so the portrait cover chip (108x150)
-# sits inside with clean, balanced margins and is never cropped or distorted.
-const BOOK_CARD_HEIGHT := 176
-const BOOK_SUBTITLE := {
-	1: "پایه دهم · ۴ درس",
-	2: "پایه یازدهم · ۳ درس",
-	3: "پایه دوازدهم · ۳ درس",
-}
-
-# --- Built UI state ---
 var _navigating: bool = false
-var _card_buttons: Array[Button] = []
-var _card_accents: Array[Color] = []
-var _back_message_nodes: Array[Node] = []   # active exit-confirmation overlays
+var _back_message_nodes: Array[Node] = []
+var _daily_selected: bool = true
+var _daily_request_id: int = 0
+var _lifetime_request_id: int = 0
 
 @onready var _main_col: VBoxContainer = $RootScroll/OuterMargin/MainColumn
-@onready var _continue_slot: VBoxContainer = $RootScroll/OuterMargin/MainColumn/ContinueSlot
-@onready var _dynamic_cards: VBoxContainer = $RootScroll/OuterMargin/MainColumn/DynamicCards
-@onready var _app_title: Label = $RootScroll/OuterMargin/MainColumn/HeroVBox/AppTitle
+@onready var _continue_button: Button = $RootScroll/OuterMargin/MainColumn/ContinueSlot/ContinueButton
+@onready var _continue_sub: Label = $RootScroll/OuterMargin/MainColumn/ContinueSlot/ContinueButton/Margin/Row/TextColumn/SubLabel
+@onready var _continue_title: Label = $RootScroll/OuterMargin/MainColumn/ContinueSlot/ContinueButton/Margin/Row/TextColumn/TitleLabel
+@onready var _brand_mark: TextureRect = $RootScroll/OuterMargin/MainColumn/HeroVBox/BrandMark
+@onready var _daily_tab: Button = $RootScroll/OuterMargin/MainColumn/BoardTabs/DailyBoardButton
+@onready var _lifetime_tab: Button = $RootScroll/OuterMargin/MainColumn/BoardTabs/LifetimeBoardButton
+@onready var _daily_panel: PanelContainer = $RootScroll/OuterMargin/MainColumn/LeaderboardPanelSlot/DailyPanel
+@onready var _lifetime_panel: PanelContainer = $RootScroll/OuterMargin/MainColumn/LeaderboardPanelSlot/LifetimePanel
+@onready var _daily_status: Label = $RootScroll/OuterMargin/MainColumn/LeaderboardPanelSlot/DailyPanel/DailyMargin/DailyVBox/DailyStatus
+@onready var _daily_entries: VBoxContainer = $RootScroll/OuterMargin/MainColumn/LeaderboardPanelSlot/DailyPanel/DailyMargin/DailyVBox/DailyEntries
+@onready var _lifetime_status: Label = $RootScroll/OuterMargin/MainColumn/LeaderboardPanelSlot/LifetimePanel/LifetimeMargin/LifetimeVBox/LifetimeStatus
+@onready var _lifetime_entries: VBoxContainer = $RootScroll/OuterMargin/MainColumn/LeaderboardPanelSlot/LifetimePanel/LifetimeMargin/LifetimeVBox/LifetimeEntries
 
 
 ############################################################
 # READY
 ############################################################
 func _ready() -> void:
-	_build_ui()
-
+	super._ready()
+	_setup_continue_button()
+	_daily_tab.pressed.connect(_on_daily_tab_pressed)
+	_lifetime_tab.pressed.connect(_on_lifetime_tab_pressed)
 	Global.on_theme_changed(_on_theme_changed)
-
-	# Entrance — cinematic stagger on first visit, instant otherwise.
+	_apply_panels_visibility()
+	_update_tab_selection()
+	_load_daily_board()
+	_load_lifetime_board()
 	if not Global.intro_animation_played:
 		Global.intro_animation_played = true
 		_play_intro_animation()
@@ -71,34 +50,26 @@ func _ready() -> void:
 
 
 ############################################################
-# UI BUILD
+# CONTINUE BUTTON (scene-tree node, wired here)
 ############################################################
-func _build_ui() -> void:
-	if Global.has_last_scene():
-		_continue_slot.add_child(_make_continue_card())
-	_add_card("Vision 1", BOOK_SUBTITLE[1], BOOK_EMOJI[1], COLOR_BOOK1, _on_book_pressed.bind(1), BOOK_COVER[1], BOOK_CARD_HEIGHT)
-	_add_card("Vision 2", BOOK_SUBTITLE[2], BOOK_EMOJI[2], COLOR_BOOK2, _on_book_pressed.bind(2), BOOK_COVER[2], BOOK_CARD_HEIGHT)
-	_add_card("Vision 3", BOOK_SUBTITLE[3], BOOK_EMOJI[3], COLOR_BOOK3, _on_book_pressed.bind(3), BOOK_COVER[3], BOOK_CARD_HEIGHT)
-	_add_card("امتحانات نهایی", "تمرین سوالات امتحان", "🎓", COLOR_EXAM, _on_exam_pressed)
-	_add_card("بازی با کلمات", "کلمه روز · معنی · املا", "🔤", COLOR_WORD_GAMES, _on_word_games_pressed)
+
+func _setup_continue_button() -> void:
+	if _continue_button.pressed.is_connected(_on_continue_pressed):
+		_continue_button.pressed.disconnect(_on_continue_pressed)
+	_continue_button.pressed.connect(_on_continue_pressed)
+	_refresh_continue_state()
 
 
-func _make_continue_card() -> Button:
-	var destination: String = _continue_destination_label(Global.get_last_scene())
-	var card: Button = MenuStyle.make_card(
-		"ادامه یادگیری",
-		destination,
-		"▶",
-		MenuStyle.accent(),
-		148,
-		"",
-		true
-	)
-	card.name = "ContinueButton"
-	card.tooltip_text = "بازگشت به آخرین بخشی که باز کرده‌اید"
-	card.pressed.connect(_on_continue_pressed)
-	MenuStyle.wire_microinteractions(card)
-	return card
+func _refresh_continue_state() -> void:
+	var last: String = Global.get_last_scene()
+	if last.is_empty() or not ResourceLoader.exists(last):
+		_continue_button.disabled = true
+		_continue_sub.text = "هنوز چیزی را شروع نکرده‌ای؛ یک بازی روزانه انجام بده تا اینجا ادامه‌اش بدهی! 🌱"
+		_continue_button.tooltip_text = "اول یک بخش را باز کن تا ادامه‌اش اینجا باشد"
+	else:
+		_continue_button.disabled = false
+		_continue_sub.text = _continue_destination_label(last)
+		_continue_button.tooltip_text = "بازگشت به آخرین بخشی که باز کرده‌اید"
 
 
 func _continue_destination_label(scene_path: String) -> String:
@@ -108,31 +79,163 @@ func _continue_destination_label(scene_path: String) -> String:
 		"res://scenes/grammar/GrammarUnits.tscn": "ادامه تمرین دستور زبان",
 		"res://scenes/grammar/GrammarLesson.tscn": "ادامه درس دستور زبان",
 		"res://scenes/book_menu/BookSelection.tscn": "بازگشت به انتخاب کتاب",
-		"res://scenes/book_menu/BookMenu.tscn": "بازگشت به انتخاب کتاب",
+		"res://scenes/word_game/WordGameHub.tscn": "ادامه بازی با کلمات",
+		"res://scenes/word_game/DailyWordGame.tscn": "ادامه چالش روزانه",
 	}
 	return str(scene_names.get(scene_path, "بازگشت به آخرین بخش بازشده"))
 
 
-func _add_card(title: String, subtitle: String, emoji: String, accent: Color, on_pressed: Callable, image_path: String = "", min_height: int = 158) -> void:
-	var card: Button = MenuStyle.make_card(title, subtitle, emoji, accent, min_height, image_path, true)
-	card.pressed.connect(on_pressed)
-	MenuStyle.wire_microinteractions(card)
-	_dynamic_cards.add_child(card)
-	_card_buttons.append(card)
-	_card_accents.append(accent)
+func _on_continue_pressed() -> void:
+	if _navigating:
+		return
+	var last: String = Global.get_last_scene()
+	if last.is_empty() or not ResourceLoader.exists(last):
+		Global.set_last_scene("")
+		_continue_sub.text = "مسیری پیدا نشد؛ اول یک بازی روزانه انجام بده! 🎮"
+		_refresh_continue_state()
+		return
+	_navigating = true
+	_continue_button.disabled = true
+	_continue_sub.text = "در حال باز کردن بخش شما…"
+	await get_tree().create_timer(0.10).timeout
+	if not is_inside_tree():
+		return
+	TransitionManager.slide_change_scene(last, TransitionManager.Slide.FORWARD)
+
 
 ############################################################
-# THEME AWARENESS
+# LEADERBOARD TABS — switch panels (like WordGameHub)
 ############################################################
-func _wordmark_color() -> Color:
-	# The wordmark wears the design system's warm gold — the same accent as
-	# the button rims — so the brand mark belongs to the palette instead of
-	# introducing a second hue. Tuned per theme for contrast.
-	if MenuStyle.is_dark():
-		return MenuStyle.gold_bright()
-	return MenuStyle.gold()
+func _on_daily_tab_pressed() -> void:
+	_daily_selected = true
+	_apply_panels_visibility()
+	_update_tab_selection()
 
 
+func _on_lifetime_tab_pressed() -> void:
+	_daily_selected = false
+	_apply_panels_visibility()
+	_update_tab_selection()
+
+
+func _apply_panels_visibility() -> void:
+	_daily_panel.visible = _daily_selected
+	_lifetime_panel.visible = not _daily_selected
+
+
+func _update_tab_selection() -> void:
+	_daily_tab.button_pressed = _daily_selected
+	_lifetime_tab.button_pressed = not _daily_selected
+
+
+############################################################
+# LEADERBOARD LOAD — daily + lifetime panels
+############################################################
+func _load_daily_board() -> void:
+	_daily_request_id += 1
+	for child: Node in _daily_entries.get_children():
+		_daily_entries.remove_child(child)
+		child.queue_free()
+	if not API.is_configured() or not API.is_logged_in():
+		_daily_status.text = "برای دیدن رتبه‌بندی امروز اینترنت و ورود لازم است.\nوصل شو و برگرد! 🌐"
+		return
+	var request_id: int = _daily_request_id
+	_daily_status.text = "در حال دریافت رتبه‌بندی امروز از سرور…"
+	API.fetch_daily_leaderboard(50, 0, func(ok: bool, data: Dictionary) -> void: _on_daily_loaded(request_id, ok, data))
+
+
+func _load_lifetime_board() -> void:
+	_lifetime_request_id += 1
+	for child: Node in _lifetime_entries.get_children():
+		_lifetime_entries.remove_child(child)
+		child.queue_free()
+	if not API.is_configured() or not API.is_logged_in():
+		_lifetime_status.text = "برای دیدن رتبه‌بندی کل اینترنت و ورود لازم است.\nوصل شو و برگرد! 🌐"
+		return
+	var request_id: int = _lifetime_request_id
+	_lifetime_status.text = "در حال دریافت رتبه‌بندی کل از سرور…"
+	API.fetch_lifetime_leaderboard(50, 0, func(ok: bool, data: Dictionary) -> void: _on_lifetime_loaded(request_id, ok, data))
+
+
+func _on_daily_loaded(request_id: int, ok: bool, data: Dictionary) -> void:
+	if request_id != _daily_request_id:
+		return
+	if not ok:
+		_daily_status.text = "اینترنت وصل نیست! اتصالت را بررسی کن و دوباره تلاش کن. 📡"
+		return
+	var period: String = "امروز"
+	if str(data.get("date", "")) != "":
+		period = "امروز · %s" % MenuStyle.persian_digits(str(data.get("date", "")))
+	var self_row: Variant = data.get("self", null)
+	if self_row is Dictionary:
+		var self_data: Dictionary = self_row
+		_daily_status.text = "%s\nرتبهٔ شما: %s · امتیاز: %s" % [period, MenuStyle.persian_digits(str(self_data.get("rank", "—"))), MenuStyle.persian_digits(str(self_data.get("score", 0)))]
+	else:
+		_daily_status.text = "%s\nامروز هنوز بازی نکرده‌ای! همین حالا چالش روزانه را بازی کن و اسمت را به جدول اضافه کن! 🔥🎮" % period
+	_fill_entries(_daily_entries, data, true)
+
+
+func _on_lifetime_loaded(request_id: int, ok: bool, data: Dictionary) -> void:
+	if request_id != _lifetime_request_id:
+		return
+	if not ok:
+		_lifetime_status.text = "اینترنت وصل نیست! اتصالت را بررسی کن و دوباره تلاش کن. 📡"
+		return
+	var self_row: Variant = data.get("self", null)
+	if self_row is Dictionary:
+		var self_data: Dictionary = self_row
+		_lifetime_status.text = "مجموع امتیازهای ثبت‌شده\nرتبهٔ شما: %s · امتیاز: %s" % [MenuStyle.persian_digits(str(self_data.get("rank", "—"))), MenuStyle.persian_digits(str(self_data.get("score", 0)))]
+	else:
+		_lifetime_status.text = "هنوز هیچ بازی ثبت نکرده‌ای! از امروز شروع کن و کم‌کم به بالای جدول برس! 🚀📚"
+	_fill_entries(_lifetime_entries, data, false)
+
+
+func _fill_entries(box: VBoxContainer, data: Dictionary, is_daily: bool) -> void:
+	var rows: Array = data.get("entries", [])
+	if rows.is_empty():
+		var empty := Label.new()
+		empty.text = "هنوز کسی امروز امتیاز نگرفته؛ اولین نفر باش! 🏆" if is_daily else "هنوز کسی امتیازی ثبت نکرده؛ اولین نفر باش! 🏆"
+		empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		empty.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		empty.add_theme_font_override("font", MenuStyle.vazir())
+		empty.add_theme_font_size_override("font_size", 26)
+		empty.add_theme_color_override("font_color", MenuStyle.text_dim())
+		box.add_child(empty)
+		return
+	for raw: Variant in rows:
+		if not raw is Dictionary:
+			continue
+		var entry: Dictionary = raw
+		var highlighted: bool = bool(entry.get("isSelf", false))
+		var panel := PanelContainer.new()
+		panel.add_theme_stylebox_override("panel", MenuStyle.card_style(MenuStyle.accent() if highlighted else MenuStyle.border(), 18, highlighted, false))
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 12)
+		panel.add_child(row)
+		row.add_child(_make_cell("#%s" % MenuStyle.persian_digits(str(entry.get("rank", "—"))), 24))
+		row.add_child(_make_cell(str(entry.get("name", "بازیکن")), 23))
+		var score := _make_cell(MenuStyle.persian_digits(str(entry.get("score", 0))), 25)
+		score.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(score)
+		box.add_child(panel)
+
+
+func _make_cell(value: String, font_size: int) -> Label:
+	var label := Label.new()
+	label.text = value
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.add_theme_font_override("font", MenuStyle.vazir())
+	label.add_theme_font_size_override("font_size", font_size)
+	label.add_theme_color_override("font_color", MenuStyle.text())
+	return label
+
+
+############################################################
+# THEME + ANIMATION
+############################################################
 func _on_theme_changed(_mode: int) -> void:
 	_apply_theme()
 
@@ -140,34 +243,13 @@ func _on_theme_changed(_mode: int) -> void:
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	# Restyle theme-dependent labels.
-	_app_title.add_theme_color_override("font_color", _wordmark_color())
-	# Rebuild card styleboxes (flat — MainMenu buttons have no elevation).
-	for i in _card_buttons.size():
-		var btn: Button = _card_buttons[i]
-		var accent := _card_accents[i]
-		btn.add_theme_stylebox_override("normal", MenuStyle.card_style(accent, 26, false, true))
-		btn.add_theme_stylebox_override("hover", MenuStyle.card_hover_style(accent, 26, true))
-		btn.add_theme_stylebox_override("pressed", MenuStyle.card_pressed_style(accent, 26, true))
-		btn.add_theme_stylebox_override("focus", MenuStyle.card_hover_style(accent, 26, true))
-		# Title / subtitle / chevron colours.
-		var tl: Label = btn.get_node_or_null("Margin/Row/TextColumn/TitleLabel") as Label
-		if tl:
-			tl.add_theme_color_override("font_color", MenuStyle.text())
-		var sl: Label = btn.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
-		if sl:
-			sl.add_theme_color_override("font_color", MenuStyle.subtitle_color())
+	_refresh_continue_state()
 
 
-############################################################
-# AMBIENT LIFE + INTRO
-############################################################
 func _start_ambient() -> void:
-	var tw := create_tween().set_loops()
-	tw.tween_property(_app_title, "scale", Vector2(1.03, 1.03), 3.0) \
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tw.tween_property(_app_title, "scale", Vector2.ONE, 3.0) \
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	var tw: Tween = create_tween().set_loops()
+	tw.tween_property(_brand_mark, "scale", Vector2(1.03, 1.03), 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tw.tween_property(_brand_mark, "scale", Vector2.ONE, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 func _play_intro_animation() -> void:
@@ -178,129 +260,19 @@ func _play_intro_animation() -> void:
 	for t in targets:
 		t.modulate.a = 0.0
 		t.position += Vector2(0, 30)
-
 	await get_tree().process_frame
 	if not is_inside_tree():
 		return
-
 	for i in targets.size():
 		var t: Control = targets[i]
 		var tw := create_tween()
 		tw.tween_interval(0.06 * i)
-		tw.tween_property(t, "modulate:a", 1.0, 0.30) \
-			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.parallel().tween_property(t, "position:y", t.position.y - 30.0, 0.30) \
-			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
+		tw.tween_property(t, "modulate:a", 1.0, 0.30).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tw.parallel().tween_property(t, "position:y", t.position.y - 30.0, 0.30).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(0.06 * targets.size() + 0.4).timeout
 	if not is_inside_tree():
 		return
 	_start_ambient()
-
-
-############################################################
-# NAVIGATION
-############################################################
-func _on_continue_pressed() -> void:
-	if _navigating:
-		return
-	var last: String = Global.get_last_scene()
-	if last.is_empty() or not ResourceLoader.exists(last):
-		Global.set_last_scene("")
-		var invalid_button: Button = _continue_slot.get_node_or_null("ContinueButton") as Button
-		if invalid_button != null:
-			invalid_button.disabled = true
-			invalid_button.tooltip_text = "مسیری برای ادامه پیدا نشد؛ یکی از کتاب‌ها را انتخاب کنید."
-			var subtitle: Label = invalid_button.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
-			if subtitle != null:
-				subtitle.text = "مسیری پیدا نشد؛ یک کتاب را انتخاب کنید"
-		return
-	_navigating = true
-	var continue_button: Button = _continue_slot.get_node_or_null("ContinueButton") as Button
-	if continue_button != null:
-		continue_button.disabled = true
-		var subtitle: Label = continue_button.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
-		if subtitle != null:
-			subtitle.text = "در حال باز کردن بخش شما…"
-	await get_tree().create_timer(0.10).timeout
-	if not is_inside_tree():
-		return
-	TransitionManager.slide_change_scene(last, TransitionManager.Slide.FORWARD)
-
-
-func _on_book_pressed(book_number: int) -> void:
-	if _navigating:
-		return
-	_navigating = true
-	Global.current_book = book_number
-	await get_tree().create_timer(0.10).timeout
-	if not is_inside_tree():
-		return
-	TransitionManager.slide_change_scene(SCENE_BOOK_MENU, TransitionManager.Slide.FORWARD)
-
-
-func _on_exam_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	await get_tree().create_timer(0.10).timeout
-	if not is_inside_tree():
-		return
-	TransitionManager.slide_change_scene(SCENE_FINAL_EXAMS, TransitionManager.Slide.FORWARD)
-
-
-func _on_word_games_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	await get_tree().create_timer(0.10).timeout
-	if not is_inside_tree():
-		return
-	TransitionManager.slide_change_scene(SCENE_WORD_GAME, TransitionManager.Slide.FORWARD)
-
-
-func _on_side_menu_about_me_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	TransitionManager.change_scene(SCENE_ABOUT_ME)
-
-
-func _on_side_menu_account_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	TransitionManager.change_scene(SCENE_ACCOUNT)
-
-
-func _on_side_menu_saved_words_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	AppRouter.set_args({"mode": "saved"})
-	TransitionManager.change_scene(SCENE_SAVED_WORDS)
-
-
-func _on_side_menu_leitner_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	AppRouter.set_args({"return_route": SCENE_MAIN_MENU})
-	TransitionManager.change_scene(SCENE_LEITNER)
-
-
-func _on_side_menu_settings_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	TransitionManager.change_scene(SCENE_SETTINGS)
-
-
-func _on_side_menu_purchase_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	TransitionManager.change_scene(SCENE_PURCHASE)
 
 
 ############################################################
@@ -316,8 +288,6 @@ func _on_android_back_pressed() -> void:
 
 
 func _show_back_message() -> void:
-	# Only one exit message at a time — pressing back again while it shows
-	# either quits (double-press) or is ignored, never stacks overlays.
 	if not _back_message_nodes.is_empty():
 		return
 	var message := Label.new()
@@ -333,7 +303,6 @@ func _show_back_message() -> void:
 	message.anchor_bottom = 1.0
 	message.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(message)
-
 	var bg := ColorRect.new()
 	bg.color = MenuStyle.c("overlay")
 	bg.anchor_left = 0.0
@@ -343,20 +312,16 @@ func _show_back_message() -> void:
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bg)
 	move_child(bg, 0)
-
 	_back_message_nodes = [bg, message]
-
 	await get_tree().create_timer(1.5).timeout
 	if not is_inside_tree():
 		return
-
 	var tw := create_tween()
 	tw.parallel().tween_property(bg, "modulate:a", 0.0, 0.3)
 	tw.parallel().tween_property(message, "modulate:a", 0.0, 0.3)
 	await tw.finished
 	if not is_inside_tree():
 		return
-
 	bg.queue_free()
 	message.queue_free()
 	_back_message_nodes.clear()

@@ -5,6 +5,7 @@ extends "res://autoload/BackButtonHandler.gd"
 ##    • صدا و گفتار  (sound effects + English TTS)
 ##    • داده‌ها      (clear saved words / review words / reset all)
 ##    • درباره برنامه (app version, subscription, developer)
+##  The app uses the Light appearance exclusively.
 ##  Settings persist to user://settings.json via Global.
 ## ============================================================
 
@@ -13,7 +14,6 @@ extends "res://autoload/BackButtonHandler.gd"
 @onready var bg: ColorRect          = $Bg
 @onready var sound_toggle: Button    = $Scroll/Margin/Layout/SoundCard/VBox/SoundRow/SoundToggle
 @onready var tts_toggle: Button      = $Scroll/Margin/Layout/SoundCard/VBox/TtsRow/TtsToggle
-@onready var theme_toggle: Button    = $Scroll/Margin/Layout/ThemeCard/VBox/ThemeRow/ThemeToggle
 @onready var clear_saved_button: Button = $Scroll/Margin/Layout/DataCard/VBox/ClearSavedButton
 @onready var clear_review_button: Button = $Scroll/Margin/Layout/DataCard/VBox/ClearReviewButton
 @onready var reset_button: Button        = $Scroll/Margin/Layout/DataCard/VBox/ResetButton
@@ -34,7 +34,6 @@ func _ready() -> void:
 	# Initialise the toggles from the persisted settings.
 	_set_toggle(sound_toggle, Global.sound_enabled)
 	_set_toggle(tts_toggle, Global.tts_enabled)
-	_set_toggle(theme_toggle, Global.theme_is_dark())
 
 	# About section values.
 	version_value.text = _app_version()
@@ -43,7 +42,6 @@ func _ready() -> void:
 	# Wiring.
 	sound_toggle.pressed.connect(_on_sound_toggled)
 	tts_toggle.pressed.connect(_on_tts_toggled)
-	theme_toggle.pressed.connect(_on_theme_toggled)
 	clear_saved_button.pressed.connect(_on_clear_saved_pressed)
 	clear_review_button.pressed.connect(_on_clear_review_pressed)
 	reset_button.pressed.connect(_on_reset_pressed)
@@ -79,21 +77,12 @@ func _set_toggle(btn: Button, on: bool) -> void:
 	btn.add_theme_stylebox_override("pressed", style)
 
 
-func _on_theme_toggled() -> void:
-	var dark := not Global.theme_is_dark()
-	Global.set_theme_mode(Global.ThemeMode.DARK if dark else Global.ThemeMode.LIGHT)
-	_set_toggle(theme_toggle, dark)
-	_apply_theme()
-	Sfx.click()
-
-
 # ══════════════════════════════════════════════════════════════
-#  THEME AWARENESS — restyle this screen for Dark / Light
+#  THEME AWARENESS — restyle this screen with the fixed Light palette
 # ══════════════════════════════════════════════════════════════
 func _apply_theme() -> void:
-	var dark := Global.theme_is_dark()
-	# Background overlay over the animated backdrop.
-	bg.color = Color(0.012, 0.018, 0.055, 0.88) if dark else Color(0.955, 0.968, 0.98, 0.90)
+	# Keep the settings page on the same flat background as the rest of the app.
+	bg.color = Global.get_theme_color("bg_base")
 
 	# Cards + text walk the whole scene.
 	_theme_walk(self)
@@ -101,26 +90,10 @@ func _apply_theme() -> void:
 	# Rebuild the custom toggles with the current palette.
 	_set_toggle(sound_toggle, Global.sound_enabled)
 	_set_toggle(tts_toggle, Global.tts_enabled)
-	_set_toggle(theme_toggle, dark)
 
-	# Danger (reset) button: solid red + white text reads clearly in both themes.
-	var danger := StyleBoxFlat.new()
-	danger.set_corner_radius_all(18)
-	danger.content_margin_left = 26.0
-	danger.content_margin_top = 20.0
-	danger.content_margin_right = 26.0
-	danger.content_margin_bottom = 20.0
-	danger.set_border_width_all(1)
-	danger.border_color = Global.get_theme_color("error")
-	if Global.theme_is_dark():
-		danger.bg_color = Color(Global.get_theme_color("error"), 0.30)
-	else:
-		danger.bg_color = Global.get_theme_color("error")
-	reset_button.add_theme_stylebox_override("normal", danger)
-	reset_button.add_theme_stylebox_override("hover", danger)
-	reset_button.add_theme_stylebox_override("pressed", danger)
-	reset_button.add_theme_stylebox_override("focus", danger)
-	reset_button.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
+	# Danger (reset) button: shared UI/Styles/danger treatment reads clearly
+	# in both themes. Reused resource — edit the .tres to restyle.
+	UiTheme.style_button(reset_button, "danger")
 
 	# The two "clear" buttons: the scene's default white-on-white styles only
 	# read on dark cards, so in Light theme they get a visible outline + fill.
@@ -132,12 +105,8 @@ func _apply_theme() -> void:
 	clear_style.content_margin_right = 26.0
 	clear_style.content_margin_bottom = 20.0
 	clear_style.set_border_width_all(2)
-	if dark:
-		clear_style.bg_color = Color(1, 1, 1, 0.09)
-		clear_style.border_color = Color(1, 1, 1, 0.14)
-	else:
-		clear_style.bg_color = Color(0.97, 0.965, 1.0)
-		clear_style.border_color = Global.get_theme_color("accent")
+	clear_style.bg_color = Color(1, 1, 1, 0.85)
+	clear_style.border_color = Global.get_theme_color("accent")
 	clear_saved_button.add_theme_stylebox_override("normal", clear_style)
 	clear_saved_button.add_theme_stylebox_override("hover", clear_style)
 	clear_saved_button.add_theme_stylebox_override("pressed", clear_style)
@@ -146,7 +115,7 @@ func _apply_theme() -> void:
 	clear_review_button.add_theme_stylebox_override("hover", clear_style)
 	clear_review_button.add_theme_stylebox_override("pressed", clear_style)
 	clear_review_button.add_theme_stylebox_override("focus", clear_style)
-	var clear_fc: Color = Color(1, 1, 1) if dark else Global.get_theme_color("accent")
+	var clear_fc: Color = Global.get_theme_color("accent")
 	clear_saved_button.add_theme_color_override("font_color", clear_fc)
 	clear_review_button.add_theme_color_override("font_color", clear_fc)
 
@@ -169,7 +138,7 @@ func _theme_walk(node: Node) -> void:
 	if node_name == "NavigationBar":
 		return
 	if node is ColorRect and node_name == "Bg":
-		bg.color = Color(Global.get_theme_color("bg"), 0.9)
+		bg.color = Global.get_theme_color("bg_base")
 
 	elif node is PanelContainer:
 		var style := StyleBoxFlat.new()
@@ -178,19 +147,15 @@ func _theme_walk(node: Node) -> void:
 		style.content_margin_top = 38.0
 		style.content_margin_right = 44.0
 		style.content_margin_bottom = 38.0
-		if Global.theme_is_dark():
-			style.bg_color = Color(1, 1, 1, 0.06)
-			style.border_color = Color(1, 1, 1, 0.10)
-		else:
-			style.bg_color = Color(1, 1, 1, 0.85)
-			style.border_color = Color(0, 0, 0, 0.10)
+		style.bg_color = Color(1, 1, 1, 0.85)
+		style.border_color = Color(0, 0, 0, 0.10)
 		style.set_border_width_all(1)
 		node.add_theme_stylebox_override("panel", style)
 
 	elif node is Label:
 		_theme_label(node)
 
-	elif node is Button and node != sound_toggle and node != tts_toggle and node != theme_toggle and node != reset_button:
+	elif node is Button and node != sound_toggle and node != tts_toggle and node != reset_button:
 		var btn := node as Button
 		btn.add_theme_color_override("font_color", Global.get_theme_color("text"))
 

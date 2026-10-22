@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://b4q4amyvxdy0n"]
-
-[ext_resource type="Script" uid="uid://d22bixm2l6wlg" path="res://scenes/dynamic_background/animated_background.gd" id="2_ooirt"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0weyf"]
-
-[node name="AnimatedBackground" type="Node2D" unique_id=1120716659]
-material = SubResource("ShaderMaterial_0weyf")
-script = ExtResource("2_ooirt")

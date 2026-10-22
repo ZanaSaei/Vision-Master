@@ -186,18 +186,15 @@ func _emit_dirty() -> void:
 const SETTINGS_PATH := "user://settings.json"
 var sound_enabled: bool = true   # UI sound effects (Sfx autoload)
 var tts_enabled: bool = true     # English text-to-speech pronunciation
-var theme_mode: int = 0          # 0 = Dark, 1 = Light
-
 
 var _theme: Node = null
 
 # ---------- THEME SYSTEM (delegated to ThemeService, owned by Global) ----------
 signal theme_changed(mode: int)
 
-enum ThemeMode { DARK, LIGHT }
 
 func theme_is_dark() -> bool:
-	return _theme.theme_is_dark()
+	return false
 
 func get_theme_color(role: String) -> Color:
 	return _theme.get_theme_color(role)
@@ -208,8 +205,9 @@ func on_theme_changed(callback: Callable) -> void:
 func get_base_theme() -> Theme:
 	return _theme.get_base_theme()
 
-func set_theme_mode(new_mode: int) -> void:
-	_theme.set_theme_mode(new_mode)
+func set_theme_mode(_new_mode: int) -> void:
+	# Compatibility shim; the app uses the Light appearance exclusively.
+	_theme.set_theme_mode(1)
 
 func style_scene(root: Node) -> void:
 	if _theme != null:
@@ -223,10 +221,8 @@ func set_translation_toggle_state(btn: Button, active: bool) -> void:
 	if _theme != null:
 		_theme.set_translation_toggle_state(btn, active)
 
-func _relay_theme_changed(mode: int) -> void:
-	theme_mode = mode
-	save_settings()
-	theme_changed.emit(mode)
+func _relay_theme_changed(_mode: int) -> void:
+	theme_changed.emit(1)
 
 func _load_settings() -> void:
 	if not FileAccess.file_exists(SETTINGS_PATH):
@@ -240,14 +236,12 @@ func _load_settings() -> void:
 	var data: Dictionary = json.data
 	sound_enabled = bool(data.get("sound_enabled", true))
 	tts_enabled = bool(data.get("tts_enabled", true))
-	theme_mode = int(data.get("theme_mode", 0))
 
 
 func save_settings() -> void:
 	var data: Dictionary = {
 		"sound_enabled": sound_enabled,
 		"tts_enabled": tts_enabled,
-		"theme_mode": theme_mode,
 	}
 	var file := FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
 	if file == null:
@@ -271,11 +265,10 @@ func _ready() -> void:
 	# scene-styling walk and header engine; Global only forwards to it.
 	_theme = preload("res://autoload/theme/theme_service.gd").new()
 	add_child(_theme)
-	_theme.setup(theme_mode)
+	_theme.setup()
 	_theme.theme_changed.connect(_relay_theme_changed)
 
-	# Style every scene as it becomes current (covers transitions and the
-	# initial launch) so Dark / Light is consistent app-wide.
+	# Style every scene as it becomes current so the Light appearance is consistent app-wide.
 	get_tree().scene_changed.connect(_on_scene_changed)
 	call_deferred("_style_initial_scene")
 

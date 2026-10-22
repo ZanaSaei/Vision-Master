@@ -50,7 +50,7 @@ const ICONS := {
 	"translation": "res://assets/images/ui/Translate.png",
 }
 
-var _dark: bool = true
+var _dark: bool = false
 var _palette: Dictionary = {}
 
 
@@ -66,7 +66,7 @@ func _color(role: String) -> Color:
 
 
 func _sb(file_base: String) -> StyleBox:
-	var suffix := "dark" if _dark else "light"
+	var suffix := "light"
 	return load(STYLEBOX_DIR + "%s_%s.tres" % [file_base, suffix])
 
 

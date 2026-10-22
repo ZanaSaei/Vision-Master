@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://btv25lfeojoe4"]
+
+[ext_resource type="FontFile" uid="uid://b3xpilak1a81t" path="res://assets/fonts/Vazirmatn-Light.ttf" id="1_bnik8"]
+
+[resource]
+font = ExtResource("1_bnik8")
+font_size = 25
+font_color = Color(0, 0, 0.5686275, 1)

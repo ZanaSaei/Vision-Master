@@ -7,7 +7,7 @@ extends SceneTree
 ##  shareable between scenes:
 ##
 ##    res://resources/styleboxes/*.tres   one file per component state
-##    res://resources/themes/*.tres       the two app Themes (Dark / Light)
+##    res://resources/themes/*.tres       the single Light app Theme
 ##    res://resources/textures/*.tres     generated slider grabber discs
 ##    res://resources/motion/*.tres       UI motion profiles
 ##    res://resources/typography/*.tres   the type scale
@@ -110,8 +110,8 @@ func _write_styleboxes() -> void:
 
 	for base in pairs:
 		var factory: Callable = pairs[base]
-		for dark in [true, false]:
-			var suffix := "dark" if dark else "light"
+		for dark in [false]:
+			var suffix := "light"
 			var sb: StyleBox = factory.call(dark)
 			_save_sb("%s_%s" % [base, suffix], sb)
 
@@ -123,8 +123,8 @@ func _write_styleboxes() -> void:
 
 	# Nav / icon-button states. Dark lifts with white, Light with the accent, so
 	# a transparent icon button still reads as interactive on either backdrop.
-	for dark in [true, false]:
-		var suffix := "dark" if dark else "light"
+	for dark in [false]:
+		var suffix := "light"
 		var accent: Color = _dt.color_of(dark, "accent")
 		var tint: Color = Color(1, 1, 1, 0.10) if dark else Color(accent.r, accent.g, accent.b, 0.12)
 		var hover: StyleBoxFlat = _dt.box(tint, _dt.RADIUS_PILL)
@@ -139,8 +139,8 @@ func _write_styleboxes() -> void:
 		focus.set_border_width_all(1)
 		_save_sb("nav_button_focus_%s" % suffix, focus)
 
-	for dark in [true, false]:
-		var suffix := "dark" if dark else "light"
+	for dark in [false]:
+		var suffix := "light"
 		var sep := StyleBoxLine.new()
 		sep.color = _dt.color_of(dark, "border_strong")
 		sep.thickness = 1
@@ -161,8 +161,8 @@ func _save_sb(file_base: String, sb: StyleBox) -> void:
 # ══════════════════════════════════════════════════════════════
 
 func _write_textures() -> void:
-	for dark in [true, false]:
-		var suffix := "dark" if dark else "light"
+	for dark in [false]:
+		var suffix := "light"
 		var tex: Texture2D = _dt.slider_grabber_texture(dark)
 		if tex != null:
 			ResourceSaver.save(tex, TEXTURE_DIR + "slider_grabber_%s.tres" % suffix)
@@ -175,12 +175,11 @@ func _write_textures() -> void:
 # ══════════════════════════════════════════════════════════════
 
 func _write_themes() -> void:
-	for dark in [true, false]:
-		_build_theme(dark)
+	_build_theme(false)
 
 
-func _sb(name: String, dark: bool) -> StyleBox:
-	var suffix := "dark" if dark else "light"
+func _sb(name: String, _dark: bool) -> StyleBox:
+	var suffix := "light"
 	return load(STYLEBOX_DIR + "%s_%s.tres" % [name, suffix])
 
 
@@ -254,7 +253,7 @@ func _build_theme(dark: bool) -> void:
 	# knob is a generated disc texture rather than a stylebox.
 	var sl_track := _sb("slider_track", dark)
 	var sl_fill := _sb("slider_fill", dark)
-	var suffix := "dark" if dark else "light"
+	var suffix := "light"
 	var sl_knob: Texture2D = load(TEXTURE_DIR + "slider_grabber_%s.tres" % suffix)
 	for slider in ["HSlider", "VSlider"]:
 		t.set_stylebox("slider", slider, sl_track)
@@ -323,8 +322,7 @@ func _build_theme(dark: bool) -> void:
 	t.set_stylebox("panel", "TooltipPanel", _sb("pill_accent", dark))
 	t.set_color("font_color", "TooltipLabel", text)
 
-	var theme_name := "vision_master_dark" if dark else "vision_master_light"
-	var err := ResourceSaver.save(t, THEME_DIR + theme_name + ".tres")
+	var err := ResourceSaver.save(t, THEME_DIR + "vision_master_light.tres")
 	if err != OK:
 		push_error("theme save failed (%d)" % err)
 

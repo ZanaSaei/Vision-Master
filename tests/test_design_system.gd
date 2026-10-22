@@ -50,9 +50,9 @@ func _ready() -> void:
 ############################################################
 func test_palettes_complete() -> void:
 	_check(DesignTokens.missing_roles().is_empty(),
-		"both palettes define every role (missing: %s)" % str(DesignTokens.missing_roles()))
-	_check(DesignTokens.PALETTE_DARK.size() == DesignTokens.PALETTE_LIGHT.size(),
-		"both palettes define the same number of roles (%d)" % DesignTokens.PALETTE_DARK.size())
+		"the Light palette defines every role (missing: %s)" % str(DesignTokens.missing_roles()))
+	_check(DesignTokens.PALETTE_LIGHT.size() == DesignTokens.PALETTE_ROLES.size(),
+		"the Light palette defines all %d semantic roles" % DesignTokens.PALETTE_ROLES.size())
 
 
 func test_token_scales() -> void:
@@ -80,7 +80,7 @@ func test_token_scales() -> void:
 # 2. COMPONENT FACTORIES
 ############################################################
 func test_button_states() -> void:
-	for dark in [true, false]:
+	for dark in [false]:
 		var which := "dark" if dark else "light"
 		var resting := DesignTokens.button_default(dark)
 		var hover := DesignTokens.button_hover(dark)
@@ -121,7 +121,7 @@ func test_button_states() -> void:
 
 
 func test_cards_and_insets() -> void:
-	for dark in [true, false]:
+	for dark in [false]:
 		var which := "dark" if dark else "light"
 		var card := DesignTokens.card(dark)
 		_check(card.bg_color.a >= 0.999, "%s: card fill is opaque" % which)
@@ -148,7 +148,7 @@ func test_cards_and_insets() -> void:
 
 
 func test_table_rows() -> void:
-	for dark in [true, false]:
+	for dark in [false]:
 		var which := "dark" if dark else "light"
 		var plain := DesignTokens.table_row("default", dark)
 		var hover := DesignTokens.table_row("hover", dark)
@@ -168,7 +168,7 @@ func test_table_rows() -> void:
 
 
 func test_modal_composition() -> void:
-	for dark in [true, false]:
+	for dark in [false]:
 		var which := "dark" if dark else "light"
 		var parts := DesignTokens.modal(dark)
 		var head := parts["header"] as StyleBoxFlat
@@ -190,7 +190,7 @@ func test_modal_composition() -> void:
 
 
 func test_toggle_and_progress() -> void:
-	for dark in [true, false]:
+	for dark in [false]:
 		var which := "dark" if dark else "light"
 		var on := DesignTokens.toggle_track(true, dark)
 		var off := DesignTokens.toggle_track(false, dark)
@@ -212,7 +212,7 @@ func test_toggle_and_progress() -> void:
 
 
 func test_header_bar() -> void:
-	for dark in [true, false]:
+	for dark in [false]:
 		var which := "dark" if dark else "light"
 		var bar := DesignTokens.header_bar(dark)
 		_check(bar.corner_radius_bottom_left > bar.corner_radius_top_left,

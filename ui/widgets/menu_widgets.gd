@@ -389,7 +389,7 @@ static func make_toast(message: String, tone: String = "success") -> PanelContai
 	msg.add_theme_font_override("font", MenuTheme.family_for(message))
 	msg.add_theme_font_size_override("font_size", DesignTokens.FONT_SMALL)
 	# Always ink: the toast body is cream in BOTH themes.
-	msg.add_theme_color_override("font_color", DesignTokens.color_of(true, "ink"))
+	msg.add_theme_color_override("font_color", DesignTokens.color_of(false, "ink"))
 	msg.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	msg.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hb.add_child(msg)

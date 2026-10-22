@@ -3,8 +3,10 @@ class_name WordGameHub
 
 const LEARNING_SCENE: String = "res://scenes/word_game/WordGameLearning.tscn"
 const DAILY_SCENE: String = "res://scenes/word_game/DailyWordGame.tscn"
+const BUTTON_PRESSED_SCALE: float = 0.94
+const BUTTON_PRESS_DURATION: float = 0.12
+const BUTTON_RELEASE_DURATION: float = 0.20
 
-@onready var _background: ColorRect = $Background
 @onready var _learning_button: Button = $Scroll/MainMargin/MainColumn/ModeButtons/LearningButton
 @onready var _daily_button: Button = $Scroll/MainMargin/MainColumn/ModeButtons/DailyButton
 @onready var _daily_board_button: Button = $Scroll/MainMargin/MainColumn/Tabs/DailyBoardButton
@@ -14,44 +16,41 @@ const DAILY_SCENE: String = "res://scenes/word_game/DailyWordGame.tscn"
 
 var _daily_selected: bool = true
 var _board_request_id: int = 0
+var _button_tweens: Dictionary = {}
 
 func _ready() -> void:
-	_background.color = MenuStyle.c("bg")
-	_style_mode_button(_learning_button, Color("#8EC5FF"))
-	_style_mode_button(_daily_button, Color("#FFD166"))
-	MenuStyle.style_button(_daily_board_button, "primary")
-	MenuStyle.style_button(_lifetime_button, "secondary")
+	for button: Button in [_learning_button, _daily_button, _daily_board_button, _lifetime_button]:
+		button.pivot_offset = button.size / 2.0
+		button.resized.connect(_on_button_resized.bind(button))
+		button.button_down.connect(_on_button_down.bind(button))
+		button.button_up.connect(_on_button_up.bind(button))
+
 	_learning_button.pressed.connect(_on_learning_pressed)
 	_daily_button.pressed.connect(_on_daily_pressed)
 	_daily_board_button.pressed.connect(_on_daily_board_pressed)
 	_lifetime_button.pressed.connect(_on_lifetime_board_pressed)
 	_load_board()
 
-func _style_mode_button(button: Button, accent_color: Color) -> void:
-	var normal: StyleBoxFlat = MenuStyle.card_style(accent_color, 10, false, true)
-	var hover: StyleBoxFlat = MenuStyle.card_hover_style(accent_color, 10, true)
-	var pressed: StyleBoxFlat = MenuStyle.card_pressed_style(accent_color, 10, true)
-	normal.set_border_width_all(6)
-	hover.set_border_width_all(6)
-	pressed.set_border_width_all(6)
-	normal.bg_color = accent_color
-	hover.bg_color = accent_color.lightened(0.05)
-	pressed.bg_color = accent_color.darkened(0.05)
-	normal.border_color = Color.BLACK
-	hover.border_color = Color.BLACK
-	pressed.border_color = Color.BLACK
-	button.add_theme_stylebox_override("normal", normal)
-	button.add_theme_stylebox_override("hover", hover)
-	button.add_theme_stylebox_override("pressed", pressed)
-	button.add_theme_stylebox_override("focus", hover)
-	button.add_theme_font_override("font", MenuStyle.vazir())
-	var button_text_color: Color = Color("#090a74")
-	button.add_theme_color_override("font_color", button_text_color)
-	button.add_theme_color_override("font_hover_color", button_text_color)
-	button.add_theme_color_override("font_pressed_color", button_text_color)
-	button.add_theme_color_override("font_focus_color", button_text_color)
-	button.add_theme_font_size_override("font_size", 34)
-	MenuStyle.wire_microinteractions(button)
+func _on_button_resized(button: Button) -> void:
+	button.pivot_offset = button.size / 2.0
+
+func _on_button_down(button: Button) -> void:
+	_animate_button_scale(button, BUTTON_PRESSED_SCALE, BUTTON_PRESS_DURATION, Tween.EASE_OUT)
+
+func _on_button_up(button: Button) -> void:
+	_animate_button_scale(button, 1.0, BUTTON_RELEASE_DURATION, Tween.EASE_OUT)
+
+func _animate_button_scale(button: Button, target_scale: float, duration: float, easing: Tween.EaseType) -> void:
+	var button_id: int = button.get_instance_id()
+	var previous_tween: Tween = _button_tweens.get(button_id) as Tween
+	if previous_tween != null and previous_tween.is_running():
+		previous_tween.kill()
+
+	var tween: Tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(easing)
+	tween.tween_property(button, "scale", Vector2(target_scale, target_scale), duration)
+	_button_tweens[button_id] = tween
 
 func _on_learning_pressed() -> void:
 	TransitionManager.change_scene(LEARNING_SCENE)
@@ -67,13 +66,20 @@ func _on_lifetime_board_pressed() -> void:
 	_daily_selected = false
 	_load_board()
 
+func _update_tab_selection() -> void:
+	# Selection state only — visuals are Inspector-owned.
+	# In WordGameHub.tscn set toggle_mode = true on both tab buttons and
+	# style button_pressed differently from normal to show selection.
+	_daily_board_button.button_pressed = _daily_selected
+	_lifetime_button.button_pressed = not _daily_selected
+
+
 func _load_board() -> void:
 	_board_request_id += 1
 	for child: Node in _entries.get_children():
 		_entries.remove_child(child)
 		child.queue_free()
-	MenuStyle.style_button(_daily_board_button, "primary" if _daily_selected else "secondary")
-	MenuStyle.style_button(_lifetime_button, "secondary" if _daily_selected else "primary")
+	_update_tab_selection()
 	if not API.is_configured() or not API.is_logged_in():
 		_status.text = "برای مشاهدهٔ رتبه‌بندی جهانی، ورود و اتصال اینترنت لازم است."
 		return
@@ -90,43 +96,38 @@ func _on_board_loaded(request_id: int, was_daily: bool, ok: bool, data: Dictiona
 	if not ok:
 		_status.text = "رتبه‌بندی از سرور دریافت نشد؛ لطفاً اتصال را بررسی کنید."
 		return
-	var period: String = "امروز · %s" % MenuStyle.persian_digits(str(data.get("date", ""))) if _daily_selected else "مجموع امتیازهای ثبت‌شده"
+	var period: String = "امروز · %s" % str(data.get("date", "")) if _daily_selected else "مجموع امتیازهای ثبت‌شده"
 	var self_row: Variant = data.get("self", null)
 	if self_row is Dictionary:
 		var self_data: Dictionary = self_row
-		_status.text = "%s\nرتبهٔ شما: %s · امتیاز: %s" % [period, MenuStyle.persian_digits(str(self_data.get("rank", "—"))), MenuStyle.persian_digits(str(self_data.get("score", 0)))]
+		_status.text = "%s\nرتبهٔ شما: %s · امتیاز: %s" % [period, str(self_data.get("rank", "—")), str(self_data.get("score", 0))]
 	else:
 		_status.text = "%s\nهنوز امتیازی در این بازه ندارید." % period
 	var rows: Array = data.get("entries", [])
 	if rows.is_empty():
-		_entries.add_child(_make_label("هنوز بازیکنی در این بازه امتیاز ثبت نکرده است.", 26))
+		_entries.add_child(_make_label("هنوز بازیکنی در این بازه امتیاز ثبت نکرده است."))
 		return
 	for raw: Variant in rows:
 		if not raw is Dictionary:
 			continue
 		var entry: Dictionary = raw
-		var highlighted: bool = bool(entry.get("isSelf", false))
 		var panel: PanelContainer = PanelContainer.new()
-		panel.add_theme_stylebox_override("panel", MenuStyle.card_style(MenuStyle.accent() if highlighted else MenuStyle.border(), 18, highlighted, false))
+		panel.name = "SelfRow" if bool(entry.get("isSelf", false)) else "Row"
 		var row: HBoxContainer = HBoxContainer.new()
-		row.add_theme_constant_override("separation", 12)
 		panel.add_child(row)
-		row.add_child(_make_label("#%s" % MenuStyle.persian_digits(str(entry.get("rank", "—"))), 24))
-		row.add_child(_make_label(str(entry.get("name", "بازیکن")), 23))
-		var score: Label = _make_label(MenuStyle.persian_digits(str(entry.get("score", 0))), 25)
+		row.add_child(_make_label("#%s" % str(entry.get("rank", "—"))))
+		row.add_child(_make_label(str(entry.get("name", "بازیکن"))))
+		var score: Label = _make_label(str(entry.get("score", 0)))
 		score.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(score)
 		_entries.add_child(panel)
 
-func _make_label(value: String, font_size: int) -> Label:
+func _make_label(value: String) -> Label:
 	var label: Label = Label.new()
 	label.text = value
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.add_theme_font_override("font", MenuStyle.vazir())
-	label.add_theme_font_size_override("font_size", font_size)
-	label.add_theme_color_override("font_color", MenuStyle.text())
 	return label
 
 func _on_android_back_pressed() -> void:

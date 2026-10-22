@@ -13,6 +13,12 @@ extends RefCounted
 ##  from res://resources/styleboxes/, so the look is editable in the Inspector.
 ## ============================================================
 
+##  INSPECTOR-FIRST MODE (default ON): when true, the walk does NOT repaint
+##  scene-authored controls. Your Inspector styles win; the base Theme on the
+##  tree root still provides defaults + light/dark switching. Set to false
+##  only if you want the old auto-repaint behavior back.
+const INSPECTOR_FIRST := true
+
 const STYLEBOX_DIR := "res://resources/styleboxes/"
 
 ## Explicit preload rather than the global class name: this collaborator and the
@@ -40,6 +46,7 @@ const SELF_THEMED_SCRIPTS := [
 	"mode_select.gd",
 	"lesson_select.gd",
 	"results.gd",
+	"wordgamehub.gd",
 ]
 
 ## Labels that read better muted in both themes.
@@ -55,7 +62,7 @@ const DIM_LABELS := [
 ## Opt in with `add_to_group(ThemeSceneStyler.KEEP_FONT_COLOR_GROUP)`.
 const KEEP_FONT_COLOR_GROUP := "keep_font_color"
 
-var _dark: bool = true
+var _dark: bool = false
 var _palette: Dictionary = {}
 ## The header engine, so a header bar met during the walk is handed to the one
 ## component that knows how to lay it out.
@@ -73,7 +80,7 @@ func _color(role: String) -> Color:
 
 
 func _sb(file_base: String) -> StyleBox:
-	var suffix := "dark" if _dark else "light"
+	var suffix := "light"
 	return load(STYLEBOX_DIR + "%s_%s.tres" % [file_base, suffix])
 
 
@@ -94,6 +101,8 @@ func scene_handles_own_theme(root: Node) -> bool:
 
 func style_scene(root: Node) -> void:
 	if root == null:
+		return
+	if INSPECTOR_FIRST:
 		return
 	if scene_handles_own_theme(root):
 		return
@@ -136,7 +145,7 @@ func _style_background_rect(cr: ColorRect) -> void:
 	if n != "BackgroundColor" and n != "Bg" and not n.contains("Background"):
 		return
 	# Keep the scene's own alpha so a translucent scrim stays translucent.
-	cr.color = Color(_color("bg"), cr.color.a)
+	cr.color = Color(_color("bg_base"), cr.color.a)
 
 
 ## A PanelContainer that merely WRAPS a header bar (some scenes nest one) must

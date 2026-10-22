@@ -4,7 +4,7 @@ extends "res://autoload/BackButtonHandler.gd"
 # LESSON MENU — modern, friendly section picker.
 # Shows the section cards for Global.current_book + current_lesson.
 # Navigation: GRAMMAR slides forward; other sections fade.
-# The animated background lives in the MenuBackground autoload.
+# The app uses a persistent theme-aware solid background.
 ############################################################
 
 const SCENE_BOOK_MENU          := "res://scenes/book_menu/BookSelection.tscn"

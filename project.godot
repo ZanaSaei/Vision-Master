@@ -16,7 +16,7 @@ config/auto_accept_quit=false
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Mobile")
 run/max_fps=60.0
-boot_splash/bg_color=Color(0.003921569, 0.047058824, 0.16862746, 1)
+boot_splash/bg_color=Color(0.9372549, 0.92156863, 0.88235295, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="uid://ds0litfms2cyf"
 boot_splash/minimum_display_time=1000
@@ -30,7 +30,6 @@ general/text_to_speech=true
 
 Global="*uid://b3q8f06t1vj73"
 TransitionManager="*uid://b3bmr0hvx2x7n"
-MenuBackground="*uid://xuhqxtyibmvw"
 Sfx="*res://autoload/Sfx.gd"
 API="*res://autoload/ApiClient.gd"
 Content="*res://autoload/ContentManager.gd"
@@ -39,6 +38,7 @@ BookSession="*uid://b0agwlo8dg8g1"
 BottomNavigation="*res://autoload/BottomNavigation.gd"
 SafeAreaInset="*res://autoload/SafeAreaInset.gd"
 DailyChallengeState="*res://autoload/DailyChallengeState.gd"
+SolidBackground="*res://autoload/SolidBackground.gd"
 
 [display]
 
@@ -52,10 +52,6 @@ window/handheld/orientation=1
 
 naming/scene_name_casing=1
 naming/script_name_casing=2
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/com.gladekit.mcp-bridge/plugin.cfg")
 
 [gui]
 

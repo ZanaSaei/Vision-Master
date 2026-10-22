@@ -58,11 +58,11 @@ static func josefin() -> Font:
 
 # ---------------------------------------------------------------- state --
 static func is_dark() -> bool:
-	return Global.theme_is_dark()
+	return false
 
 
 static func mode_suffix() -> String:
-	return "dark" if is_dark() else "light"
+	return "light"
 
 
 ## Loads a mode-specific shared stylebox.
@@ -139,7 +139,7 @@ static func card_bg() -> Color:
 
 
 static func paper() -> Color:
-	return Color("#EDE6D6") if is_dark() else Color("#FFFDF6")
+	return Color("#FFFDF6")
 
 
 ## Foreground colour that reads well on a saturated accent fill.

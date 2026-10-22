@@ -31,7 +31,7 @@ func _on_theme_changed(_mode: int) -> void:
 #  THEME AWARENESS — restyle this page for Dark / Light
 # ══════════════════════════════════════════════════════════════
 func _apply_theme() -> void:
-	bg.color = Color(Global.get_theme_color("bg"), 0.9)
+	bg.color = Global.get_theme_color("bg_base")
 	_theme_walk(self)
 
 func _theme_walk(node: Node) -> void:
@@ -39,7 +39,7 @@ func _theme_walk(node: Node) -> void:
 	if node.name == "NavigationBar":
 		return
 	if node is ColorRect and node.name == "Bg":
-		bg.color = Color(Global.get_theme_color("bg"), 0.9)
+		bg.color = Global.get_theme_color("bg_base")
 	elif node is PanelContainer and node.name != "Avatar":
 		var style := StyleBoxFlat.new()
 		style.set_corner_radius_all(26)

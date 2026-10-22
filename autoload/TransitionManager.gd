@@ -5,7 +5,7 @@ extends CanvasLayer
 #   slide_change_scene() -> longer push for hierarchical drill-down/back.
 #   tab_change_scene()   -> quick horizontal push between peer tab scenes.
 #                          Tab changes do not fade or scale the screens.
-# The shared background (MenuBackground autoload) is never touched by slides.
+# The persistent solid fill is a separate low canvas layer and never slides.
 ############################################################
 
 # Direction of a slide transition.
@@ -383,12 +383,8 @@ func slide_change_scene(scene_path: String, direction: Slide) -> void:
 
 
 ## Returns every root child that should participate in the slide.
-## NOTE: scene-local AnimatedBackground nodes DO slide now — the
-## shared menu background lives in the MenuBackground autoload
-## (a CanvasLayer, never a scene child), so any AnimatedBackground
-## still inside a scene belongs to that scene and must travel with
-## its content. This is what makes lesson -> section read as one
-## continuous push instead of a background pop at the swap moment.
+## Root-level scene content slides as a unit. Persistent overlays and the
+## solid app background live on separate canvas layers and remain stationary.
 ## CanvasLayers are skipped: they are independent overlays.
 ## The bottom navigation bar is persistent chrome: it must stay
 ## perfectly still while the scene content pushes past it, so it is

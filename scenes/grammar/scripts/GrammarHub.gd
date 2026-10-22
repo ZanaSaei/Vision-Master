@@ -13,9 +13,6 @@ var _navigating: bool = false
 
 func _ready() -> void:
 	super._ready()
-	# Use the shared animated background (MenuBackground autoload) exactly
-	# like the book menu and lesson menu do.
-	MenuBackground.enter_background()
 	_build_ui()
 
 

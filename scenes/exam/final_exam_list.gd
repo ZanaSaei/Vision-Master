@@ -20,7 +20,6 @@ var _year_id: String = ""
 
 func _ready() -> void:
 	super._ready()
-	MenuBackground.enter_background()
 	_year_id = str(AppRouter.get_arg("year", "12"))
 	_build_ui()
 

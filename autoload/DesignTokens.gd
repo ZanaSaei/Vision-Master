@@ -13,7 +13,7 @@ extends RefCounted
 ##  the app is code-generated UI — screens build their trees in GDScript and
 ##  read their colours from the theme. Keeping the whole visual language in one
 ##  place means a restyle is a change here, not a sweep through 49 scenes, and
-##  it keeps Dark / Light in lockstep by construction.
+##  it keeps the single supported appearance consistent by construction.
 ##
 ##  Consumers: ThemeService (palette + base Theme), MenuStyle (menu components),
 ##  ScrambledTheme / ExerciseTheme / GrammarTheme (gameplay modules).
@@ -28,9 +28,7 @@ extends RefCounted
 
 # ══════════════════════════════════════════════════════════════
 #  PALETTE
-#  Dark is the reference design: a soft-UI charcoal shell, cream paper
-#  surfaces, a warm gold rim and a vivid blue action colour. Light is the
-#  same language inverted onto warm paper so the theme toggle stays coherent.
+#  The warm-paper Light palette is the sole supported appearance.
 # ══════════════════════════════════════════════════════════════
 
 # ---------------------------------------------------------------- accents --
@@ -38,77 +36,29 @@ extends RefCounted
 # them in a `const` initialiser: indexing a const Dictionary is not a constant
 # expression in GDScript, but referencing a const Color is. The palette below
 # is built from these, so there is still exactly one place each colour lives.
-const ACCENT              := Color("#4C8DF6")
-const ACCENT_BRIGHT       := Color("#7FB2FF")
-const ACCENT_DEEP         := Color("#2E5FAE")
-const GOLD                := Color("#D9B36C")
-const GOLD_BRIGHT         := Color("#F0DFA6")
+const ACCENT              := Color("#2F6FD8")
+const ACCENT_BRIGHT       := Color("#4C8DF6")
+const ACCENT_DEEP         := Color("#22539F")
+const GOLD                := Color("#A87C24")
+const GOLD_BRIGHT         := Color("#C9A24A")
 const INK                 := Color("#36332C")
-const PAPER               := Color("#EDE6D6")
-const SURFACE_SUNKEN_DARK := Color("#2A2D33")
-const SUCCESS             := Color("#5FBF7F")
-const ERROR               := Color("#E06C75")
-const WARNING             := Color("#E0B96B")
+const PAPER               := Color("#FFFDF6")
+const SUCCESS             := Color("#2E8B57")
+const ERROR               := Color("#C0392B")
+const WARNING             := Color("#B8860B")
 
-## Roles every palette must define. `ThemeService.get_theme_color()` falls back
-## to white for an unknown role, so a missing key degrades to "invisible" —
-## this list is the contract both palettes are validated against below.
+## Roles the app palette must define. `ThemeService.get_theme_color()` falls back
+## to white for an unknown role, so a missing key degrades to "invisible".
 const PALETTE_ROLES := [
 	"bg_base", "bg", "surface", "surface_alt", "surface_sunken", "sidebar",
 	"border", "border_strong", "text", "text_dim", "text_muted", "ink",
 	"accent", "accent_bright", "accent_deep", "accent_soft", "on_accent",
 	"gold", "gold_bright", "gold_soft", "gold_rim",
 	"success", "error", "warning", "success_soft", "error_soft", "warning_soft",
-	"overlay", "wave_top", "wave_mid", "wave_bottom",
+	"overlay",
 ]
 
-const PALETTE_DARK := {
-	# ── Shell: the charcoal plate the whole design sits on ──
-	"bg_base":        Color("#1E2126"),   # outermost / behind everything
-	"bg":             Color("#24272D"),   # page background
-	"surface":        Color("#31353C"),   # card face
-	"surface_alt":    Color("#3A3E46"),   # raised card / secondary surface
-	"surface_sunken": SURFACE_SUNKEN_DARK,  # inset field, empty tile, table row
-	"sidebar":        Color("#2B2F36"),   # tokens sidebar panel
-
-	# ── Hairlines ──
-	"border":         Color(1, 1, 1, 0.10),
-	"border_strong":  Color(1, 1, 1, 0.16),
-
-	# ── Type ──
-	"text":           Color("#E7E5E0"),
-	"text_dim":       Color("#A6A49D"),
-	"text_muted":     Color("#83817B"),
-	"ink":            INK,                # dark type meant for cream surfaces
-
-	# ── Blue action colour (hover/pressed buttons, focus rings, toggles) ──
-	"accent":         ACCENT,
-	"accent_bright":  ACCENT_BRIGHT,
-	"accent_deep":    ACCENT_DEEP,
-	"accent_soft":    Color(0.298, 0.553, 0.965, 0.16),
-	"on_accent":      Color("#FFFFFF"),
-
-	# ── Warm gold: the signature rim, the "default" button, selected rows ──
-	"gold":           GOLD,
-	"gold_bright":    GOLD_BRIGHT,
-	"gold_soft":      Color(0.851, 0.702, 0.424, 0.18),
-	"gold_rim":       Color(0.851, 0.702, 0.424, 0.55),
-
-	# ── Feedback ──
-	"success":        SUCCESS,
-	"error":          ERROR,
-	"warning":        WARNING,
-	"success_soft":   Color(0.373, 0.749, 0.498, 0.18),
-	"error_soft":     Color(0.878, 0.424, 0.459, 0.18),
-	"warning_soft":   Color(0.878, 0.725, 0.420, 0.18),
-
-	# ── Scrim + ambient backdrop ──
-	"overlay":        Color(0, 0, 0, 0.62),
-	"wave_top":       Color("#3A4A63"),
-	"wave_mid":       Color("#C0A063"),
-	"wave_bottom":    Color("#2A3140"),
-}
-
+# The sole supported palette for the app.
 const PALETTE_LIGHT := {
 	"bg_base":        Color("#EFEBE1"),
 	"bg":             Color("#F5F2EA"),
@@ -145,10 +95,8 @@ const PALETTE_LIGHT := {
 	"warning_soft":   Color(0.722, 0.525, 0.043, 0.14),
 
 	"overlay":        Color(0, 0, 0, 0.38),
-	"wave_top":       Color("#DCE6F5"),
-	"wave_mid":       Color("#E4D4A8"),
-	"wave_bottom":    Color("#F0EDE4"),
 }
+
 
 
 # ══════════════════════════════════════════════════════════════
@@ -208,11 +156,10 @@ const FONT_HERO   := 62
 #  PALETTE ACCESS
 # ══════════════════════════════════════════════════════════════
 
-## Returns the palette dictionary for a theme mode without needing the autoload.
-## MenuStyle and the module themes fall back to this during early boot, before
-## Global has finished wiring ThemeService.
-static func palette(dark: bool) -> Dictionary:
-	return PALETTE_DARK if dark else PALETTE_LIGHT
+## Returns the sole supported palette. The argument remains for compatibility
+## with existing style factories; its value no longer selects another palette.
+static func palette(_dark: bool = false) -> Dictionary:
+	return PALETTE_LIGHT
 
 
 ## Convenience: one role straight out of a palette.
@@ -307,16 +254,16 @@ static func round_bottom(s: StyleBoxFlat, radius: int) -> StyleBoxFlat:
 ## sheet's "Default" state — the neutral / secondary action.
 ## The fill is OPAQUE on purpose: `gold_soft` carries an alpha, and lerping
 ## from it would leave the button translucent, letting the page show through.
-static func button_default(dark: bool = true) -> StyleBoxFlat:
-	var fill: Color = Color("#E3D7BD") if dark else Color("#EFE7D2")
-	var rim: Color = PALETTE_DARK["gold_rim"] if dark else PALETTE_LIGHT["gold_rim"]
-	var gold: Color = PALETTE_DARK["gold"] if dark else PALETTE_LIGHT["gold"]
+static func button_default(_dark: bool = false) -> StyleBoxFlat:
+	var fill: Color = Color("#EFE7D2")
+	var rim: Color = PALETTE_LIGHT["gold_rim"]
+	var gold: Color = PALETTE_LIGHT["gold"]
 	var s := box(
 		fill,
 		RADIUS_PILL,
 		rim,
 		BORDER_STANDARD,
-		glow(gold, 0.42 if dark else 0.24, SHADOW_SOFT_SIZE),
+		glow(gold, 0.24, SHADOW_SOFT_SIZE),
 		SHADOW_SOFT_SIZE,
 		Vector2.ZERO
 	)
@@ -325,7 +272,7 @@ static func button_default(dark: bool = true) -> StyleBoxFlat:
 
 ## The PRIMARY action — the modal's "Content" button and every "Continue" /
 ## "Check" / "Next" in the app. Flat accent blue with a bright rim + blue glow.
-static func button_primary(dark: bool = true) -> StyleBoxFlat:
+static func button_primary(dark: bool = false) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(
 		p["accent"],
@@ -341,7 +288,7 @@ static func button_primary(dark: bool = true) -> StyleBoxFlat:
 
 ## Primary hover: a shade brighter so it still reacts after being the resting
 ## style of a call-to-action.
-static func button_primary_hover(dark: bool = true) -> StyleBoxFlat:
+static func button_primary_hover(dark: bool = false) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(
 		p["accent_bright"],
@@ -356,7 +303,7 @@ static func button_primary_hover(dark: bool = true) -> StyleBoxFlat:
 
 
 ## Hover: the blue state. Fill lifts toward accent_bright.
-static func button_hover(dark: bool = true) -> StyleBoxFlat:
+static func button_hover(dark: bool = false) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(
 		p["accent"],
@@ -371,7 +318,7 @@ static func button_hover(dark: bool = true) -> StyleBoxFlat:
 
 
 ## Pressed: deeper blue and a tighter shadow so the button sinks.
-static func button_pressed(dark: bool = true) -> StyleBoxFlat:
+static func button_pressed(dark: bool = false) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(
 		p["accent_deep"],
@@ -386,15 +333,15 @@ static func button_pressed(dark: bool = true) -> StyleBoxFlat:
 
 
 ## Disabled: contrast drops and the shadow is removed entirely.
-static func button_disabled(dark: bool = true) -> StyleBoxFlat:
-	var fill := Color("#4A4E54") if dark else Color("#D8D3C7")
+static func button_disabled(dark: bool = false) -> StyleBoxFlat:
+	var fill := Color("#D8D3C7")
 	var s := box(fill, RADIUS_PILL, Color(0, 0, 0, 0), 0)
 	return pad(s, SPACE_MD, SPACE_SM)
 
 
 ## Focus ring: a transparent body carrying only the blue outline, so it can be
 ## layered over any state without hiding it.
-static func button_focus(dark: bool = true) -> StyleBoxFlat:
+static func button_focus(dark: bool = false) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(Color(0, 0, 0, 0), RADIUS_PILL, p["accent_bright"], BORDER_PROMINENT)
 	return pad(s, SPACE_MD, SPACE_SM)
@@ -402,7 +349,7 @@ static func button_focus(dark: bool = true) -> StyleBoxFlat:
 
 ## Text colour for a button in a given state. The cream default needs dark ink;
 ## the blue hover/pressed states need white.
-static func button_text_color(state: String, dark: bool = true) -> Color:
+static func button_text_color(state: String, dark: bool = false) -> Color:
 	var p := palette(dark)
 	match state:
 		"default":
@@ -421,12 +368,12 @@ static func button_text_color(state: String, dark: bool = true) -> Color:
 # ══════════════════════════════════════════════════════════════
 
 ## The standard raised card: surface fill, hairline border, medium elevation.
-static func card(dark: bool = true, lifted: bool = false, flat: bool = false) -> StyleBoxFlat:
-	var p := palette(dark)
+static func card(_dark: bool = false, lifted: bool = false, flat: bool = false) -> StyleBoxFlat:
+	var p := PALETTE_LIGHT
 	var fill: Color = p["surface_alt"] if lifted else p["surface"]
 	var s := box(fill, RADIUS_MD, p["border"], BORDER_SUBTLE)
 	if not flat:
-		s.shadow_color = Color(0, 0, 0, 0.32 if dark else 0.10)
+		s.shadow_color = Color(0, 0, 0, 0.10)
 		s.shadow_size = SHADOW_MEDIUM_SIZE if lifted else SHADOW_SOFT_SIZE
 		s.shadow_offset = Vector2(0, 10 if lifted else 6)
 	return pad(s, SPACE_MD, SPACE_MD)
@@ -434,14 +381,14 @@ static func card(dark: bool = true, lifted: bool = false, flat: bool = false) ->
 
 ## The warm paper card — the cream tile in the reference, with a gold rim.
 ## Use for anything meant to feel "dealt on top of" the app.
-static func card_paper(dark: bool = true) -> StyleBoxFlat:
-	var fill: Color = Color("#EDE6D6") if dark else Color("#FFFDF6")
+static func card_paper(_dark: bool = false) -> StyleBoxFlat:
+	var fill: Color = Color("#FFFDF6")
 	var s := box(
 		fill,
 		RADIUS_MD,
-		PALETTE_DARK["gold_rim"] if dark else PALETTE_LIGHT["gold_rim"],
+		PALETTE_LIGHT["gold_rim"],
 		BORDER_SUBTLE,
-		Color(0, 0, 0, 0.35 if dark else 0.12),
+		Color(0, 0, 0, 0.12),
 		SHADOW_MEDIUM_SIZE,
 		Vector2(0, 10)
 	)
@@ -449,10 +396,10 @@ static func card_paper(dark: bool = true) -> StyleBoxFlat:
 
 
 ## The blue-tinted card (the reference's first card) — an accent-identified tile.
-static func card_accent(dark: bool = true) -> StyleBoxFlat:
-	var fill: Color = Color("#3C5570") if dark else Color("#DCE8F8")
-	var s := box(fill, RADIUS_MD, palette(dark)["accent_soft"], BORDER_SUBTLE)
-	s.shadow_color = Color(0, 0, 0, 0.34 if dark else 0.10)
+static func card_accent(_dark: bool = false) -> StyleBoxFlat:
+	var fill: Color = Color("#DCE8F8")
+	var s := box(fill, RADIUS_MD, PALETTE_LIGHT["accent_soft"], BORDER_SUBTLE)
+	s.shadow_color = Color(0, 0, 0, 0.10)
 	s.shadow_size = SHADOW_MEDIUM_SIZE
 	s.shadow_offset = Vector2(0, 10)
 	return pad(s, SPACE_MD, SPACE_MD)
@@ -461,16 +408,16 @@ static func card_accent(dark: bool = true) -> StyleBoxFlat:
 ## Inset / sunken surface: inputs, empty-state tiles, unselected table rows.
 ## A StyleBoxFlat cannot draw a true inner shadow, so the "pressed into the
 ## plate" read comes from a fill darker than its parent plus a light top edge.
-static func inset(dark: bool = true, radius: int = RADIUS_SM) -> StyleBoxFlat:
+static func inset(dark: bool = false, radius: int = RADIUS_SM) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(p["surface_sunken"], radius, p["border"], BORDER_SUBTLE)
 	s.border_width_top = BORDER_STANDARD
-	s.border_color = Color(1, 1, 1, 0.06) if dark else Color(0, 0, 0, 0.07)
+	s.border_color = Color(0, 0, 0, 0.07)
 	return pad(s, SPACE_MD, SPACE_SM)
 
 
 ## Focused input: the inset body plus the reference's always-visible soft ring.
-static func input_focus(dark: bool = true) -> StyleBoxFlat:
+static func input_focus(dark: bool = false) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(
 		p["surface_sunken"],
@@ -489,8 +436,8 @@ static func input_focus(dark: bool = true) -> StyleBoxFlat:
 # ══════════════════════════════════════════════════════════════
 
 ## Rounded square behind a card's icon / emoji, tinted by its identity colour.
-static func icon_chip(accent_col: Color, radius: int = RADIUS_XS, dark: bool = true) -> StyleBoxFlat:
-	var a := 0.26 if dark else 0.14
+static func icon_chip(accent_col: Color, radius: int = RADIUS_XS, _dark: bool = false) -> StyleBoxFlat:
+	var a := 0.14
 	var s := box(
 		Color(accent_col.r, accent_col.g, accent_col.b, a),
 		radius,
@@ -501,8 +448,8 @@ static func icon_chip(accent_col: Color, radius: int = RADIUS_XS, dark: bool = t
 
 
 ## Fully rounded status pill (counts, levels, tags).
-static func pill(accent_col: Color, dark: bool = true) -> StyleBoxFlat:
-	var a := 0.22 if dark else 0.12
+static func pill(accent_col: Color, _dark: bool = false) -> StyleBoxFlat:
+	var a := 0.12
 	var s := box(
 		Color(accent_col.r, accent_col.g, accent_col.b, a),
 		RADIUS_PILL,
@@ -516,10 +463,10 @@ static func pill(accent_col: Color, dark: bool = true) -> StyleBoxFlat:
 #  TABLES (the reference's three row states)
 # ══════════════════════════════════════════════════════════════
 
-static func table_row(state: String, dark: bool = true) -> StyleBoxFlat:
+static func table_row(state: String, _dark: bool = false) -> StyleBoxFlat:
 	match state:
 		"hover":
-			var p := palette(dark)
+			var p := PALETTE_LIGHT
 			var s := box(
 				p["accent"],
 				RADIUS_SM,
@@ -531,10 +478,10 @@ static func table_row(state: String, dark: bool = true) -> StyleBoxFlat:
 			)
 			return pad(s, SPACE_MD, SPACE_SM)
 		"selected":
-			var q := palette(dark)
+			var q := PALETTE_LIGHT
 			# Opaque gold-cream: lerping from `gold_soft` would inherit its
 			# alpha and the row would blend into whatever sits behind it.
-			var sel_fill: Color = Color("#4A4231") if dark else Color("#F2E7C9")
+			var sel_fill: Color = Color("#F2E7C9")
 			var g := box(
 				sel_fill,
 				RADIUS_SM,
@@ -546,16 +493,16 @@ static func table_row(state: String, dark: bool = true) -> StyleBoxFlat:
 			)
 			return pad(g, SPACE_MD, SPACE_SM)
 		_:
-			return inset(dark, RADIUS_SM)
+			return inset(false, RADIUS_SM)
 
 
 ## Type colour that stays legible on each row state.
-static func table_row_text_color(state: String, dark: bool = true) -> Color:
-	var p := palette(dark)
+static func table_row_text_color(state: String, _dark: bool = false) -> Color:
+	var p := PALETTE_LIGHT
 	if state == "hover":
 		return p["on_accent"]
 	if state == "selected":
-		return p["gold_bright"] if dark else p["gold"]
+		return p["gold"]
 	return p["text"]
 
 
@@ -565,19 +512,19 @@ static func table_row_text_color(state: String, dark: bool = true) -> Color:
 #  `body` on the content panel without this module knowing the tree shape.
 # ══════════════════════════════════════════════════════════════
 
-static func modal(dark: bool = true) -> Dictionary:
-	var p := palette(dark)
+static func modal(_dark: bool = false) -> Dictionary:
+	var p := PALETTE_LIGHT
 	var header := box(p["accent"], RADIUS_LG, p["accent_bright"], BORDER_SUBTLE)
 	round_top(header, RADIUS_LG)
 	pad(header, SPACE_MD, SPACE_SM)
 
 	# A single deep shadow belongs to the BODY: the header sits flush on top of
 	# it, so giving both an elevation would double the darkening at the seam.
-	var body_fill: Color = Color("#EFE9DA") if dark else Color("#FFFDF6")
+	var body_fill: Color = Color("#FFFDF6")
 	var body := box(body_fill, RADIUS_LG, p["border"], BORDER_SUBTLE)
 	round_bottom(body, RADIUS_LG)
 	pad(body, SPACE_LG, SPACE_LG)
-	body.shadow_color = Color(0, 0, 0, 0.50 if dark else 0.18)
+	body.shadow_color = Color(0, 0, 0, 0.18)
 	body.shadow_size = SHADOW_DEEP_SIZE
 	body.shadow_offset = Vector2(0, 16)
 
@@ -585,22 +532,22 @@ static func modal(dark: bool = true) -> Dictionary:
 
 
 ## Type colours for the modal, since its body is always a light surface.
-static func modal_text_color(dark: bool = true) -> Color:
-	return Color("#3A3730") if dark else Color("#2F2C26")
+static func modal_text_color(_dark: bool = false) -> Color:
+	return Color("#2F2C26")
 
 
 # ══════════════════════════════════════════════════════════════
 #  TOAST — cream notification with a success tick, floating on a soft shadow.
 # ══════════════════════════════════════════════════════════════
 
-static func toast(dark: bool = true) -> StyleBoxFlat:
-	var fill: Color = Color("#EDE6D6") if dark else Color("#FFFDF6")
+static func toast(_dark: bool = false) -> StyleBoxFlat:
+	var fill: Color = Color("#FFFDF6")
 	var s := box(
 		fill,
 		RADIUS_MD,
-		PALETTE_DARK["gold_rim"] if dark else PALETTE_LIGHT["gold_rim"],
+		PALETTE_LIGHT["gold_rim"],
 		BORDER_SUBTLE,
-		Color(0, 0, 0, 0.38 if dark else 0.14),
+		Color(0, 0, 0, 0.14),
 		SHADOW_MEDIUM_SIZE,
 		Vector2(0, 10)
 	)
@@ -608,8 +555,8 @@ static func toast(dark: bool = true) -> StyleBoxFlat:
 
 
 ## The circular tick badge inside a toast.
-static func toast_badge(dark: bool = true) -> StyleBoxFlat:
-	return box(PALETTE_DARK["success"] if dark else PALETTE_LIGHT["success"], RADIUS_PILL)
+static func toast_badge(_dark: bool = false) -> StyleBoxFlat:
+	return box(PALETTE_LIGHT["success"], RADIUS_PILL)
 
 
 # ══════════════════════════════════════════════════════════════
@@ -617,8 +564,8 @@ static func toast_badge(dark: bool = true) -> StyleBoxFlat:
 # ══════════════════════════════════════════════════════════════
 
 ## Toggle track: accent + glow when on, flat grey when off.
-static func toggle_track(on: bool, dark: bool = true) -> StyleBoxFlat:
-	var p := palette(dark)
+static func toggle_track(on: bool, _dark: bool = false) -> StyleBoxFlat:
+	var p := PALETTE_LIGHT
 	if on:
 		var s := box(
 			p["accent"],
@@ -630,12 +577,12 @@ static func toggle_track(on: bool, dark: bool = true) -> StyleBoxFlat:
 			Vector2.ZERO
 		)
 		return s
-	return box(Color("#4A4E54") if dark else Color("#CFC9BC"), RADIUS_PILL)
+	return box(Color("#CFC9BC"), RADIUS_PILL)
 
 
 ## Toggle knob: a cream disc that carries its own small shadow.
-static func toggle_knob(dark: bool = true) -> StyleBoxFlat:
-	var fill: Color = Color("#EDE6D6") if dark else Color("#FFFFFF")
+static func toggle_knob(_dark: bool = false) -> StyleBoxFlat:
+	var fill: Color = Color("#FFFFFF")
 	var s := box(
 		fill,
 		RADIUS_PILL,
@@ -650,11 +597,11 @@ static func toggle_knob(dark: bool = true) -> StyleBoxFlat:
 
 ## Slider: a sunken track, an accent fill up to the current value, and a cream
 ## grabber matching the reference's discs.
-static func slider_track(dark: bool = true) -> StyleBoxFlat:
+static func slider_track(dark: bool = false) -> StyleBoxFlat:
 	return box(palette(dark)["surface_sunken"], RADIUS_PILL)
 
 
-static func slider_fill(dark: bool = true) -> StyleBoxFlat:
+static func slider_fill(dark: bool = false) -> StyleBoxFlat:
 	return box(palette(dark)["accent"], RADIUS_PILL)
 
 
@@ -662,8 +609,8 @@ static func slider_fill(dark: bool = true) -> StyleBoxFlat:
 ## Slider theme type exposes `slider` / `grabber_area` as styleboxes and
 ## `grabber` as a texture. So the reference's cream knob is drawn procedurally
 ## as a radial-gradient disc instead of shipping an image asset.
-static func slider_grabber_texture(dark: bool = true) -> Texture2D:
-	var fill: Color = Color("#EDE6D6") if dark else Color("#FFFFFF")
+static func slider_grabber_texture(_dark: bool = false) -> Texture2D:
+	var fill: Color = Color("#FFFFFF")
 	var grad := Gradient.new()
 	# Hold the fill out to 0.86 of the radius, then fall to fully transparent,
 	# which gives a crisp disc rather than a fuzzy blob.
@@ -682,7 +629,7 @@ static func slider_grabber_texture(dark: bool = true) -> Texture2D:
 
 ## Progress bar: blue fill with the reference's glowing rounded cap, over a
 ## gold-tinted remainder track.
-static func progress_fill(dark: bool = true) -> StyleBoxFlat:
+static func progress_fill(dark: bool = false) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(
 		p["accent"],
@@ -696,10 +643,10 @@ static func progress_fill(dark: bool = true) -> StyleBoxFlat:
 	return s
 
 
-static func progress_track(dark: bool = true) -> StyleBoxFlat:
+static func progress_track(_dark: bool = false) -> StyleBoxFlat:
 	# Opaque so the un-filled remainder reads as a real gold-tinted track
 	# rather than the page showing through a translucent tint.
-	var fill: Color = Color("#4A4231") if dark else Color("#E9DFC0")
+	var fill: Color = Color("#E9DFC0")
 	return box(fill, RADIUS_PILL)
 
 
@@ -707,7 +654,7 @@ static func progress_track(dark: bool = true) -> StyleBoxFlat:
 #  EMPTY STATE — the inset tile with a rounded icon and centred muted copy.
 # ══════════════════════════════════════════════════════════════
 
-static func empty_tile(dark: bool = true) -> StyleBoxFlat:
+static func empty_tile(dark: bool = false) -> StyleBoxFlat:
 	var p := palette(dark)
 	var s := box(p["surface_sunken"], RADIUS_MD, p["border"], BORDER_SUBTLE)
 	s.content_margin_left = SPACE_LG
@@ -722,20 +669,20 @@ static func empty_tile(dark: bool = true) -> StyleBoxFlat:
 # ══════════════════════════════════════════════════════════════
 
 ## Page header: rounded bottom shoulders, a gold underline and a soft drop.
-static func header_bar(dark: bool = true) -> StyleBoxFlat:
-	var p := palette(dark)
-	var fill: Color = Color("#2E323A", 0.96) if dark else Color("#FFFDF6", 0.97)
+static func header_bar(_dark: bool = false) -> StyleBoxFlat:
+	var p := PALETTE_LIGHT
+	var fill: Color = Color("#FFFDF6", 0.97)
 	var s := box(fill, RADIUS_XL, p["border"], 0)
 	round_bottom(s, RADIUS_LG)
 	s.border_width_bottom = BORDER_PROMINENT
 	s.border_color = p["gold_rim"]
-	s.shadow_color = Color(0, 0, 0, 0.42 if dark else 0.14)
+	s.shadow_color = Color(0, 0, 0, 0.14)
 	s.shadow_size = SHADOW_MEDIUM_SIZE
 	s.shadow_offset = Vector2(0, 8)
 	return s
 
 
-static func scrollbar_grabber(dark: bool = true) -> StyleBoxFlat:
+static func scrollbar_grabber(dark: bool = false) -> StyleBoxFlat:
 	return box(palette(dark)["accent"], RADIUS_PILL)
 
 
@@ -747,14 +694,10 @@ static func scrollbar_track() -> StyleBoxFlat:
 #  VALIDATION — used by tests to guarantee the two palettes stay in lockstep.
 # ══════════════════════════════════════════════════════════════
 
-## Every role both palettes must define. Returns the missing role names, so a
-## half-finished palette fails loudly in a test instead of silently rendering
-## white-on-white in production.
+## Returns any missing roles from the sole supported Light palette.
 static func missing_roles() -> Array:
 	var missing: Array = []
 	for role in PALETTE_ROLES:
-		if not PALETTE_DARK.has(role):
-			missing.append("dark:" + role)
 		if not PALETTE_LIGHT.has(role):
 			missing.append("light:" + role)
 	return missing

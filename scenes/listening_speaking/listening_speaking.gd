@@ -128,9 +128,7 @@ func _apply_theme() -> void:
 	header_title.add_theme_color_override("font_color", _text_color())
 
 	if _ambient_bg != null:
-		_ambient_bg.color = _app_bg().lerp(
-			Color(SPEAK_ACCENT.r, SPEAK_ACCENT.g, SPEAK_ACCENT.b, 1.0), 0.06
-		)
+		_ambient_bg.color = _app_bg()
 
 	_apply_dark_scroll_background(page_view)
 	_retheme_turn_cards()
@@ -180,8 +178,8 @@ func _apply_ambient(accent: Color) -> void:
 	if _ambient_bg == null:
 		return
 
-	# Very subtle accent tint over the app background.
-	_ambient_bg.color = _app_bg().lerp(Color(accent.r, accent.g, accent.b, 1.0), 0.06)
+	# Skill identity is shown by page content, not by tinting the app background.
+	_ambient_bg.color = _app_bg()
 
 
 func _dark_tint(color: Color, amount := 0.16) -> Color:

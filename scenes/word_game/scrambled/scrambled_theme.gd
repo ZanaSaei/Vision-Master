@@ -47,7 +47,7 @@ const CARD_ACCENT := Color(0.298, 0.553, 0.965)
 
 static func tile_color(index: int) -> Color:
 	if TILE_COLORS.is_empty():
-		return DesignTokens.PALETTE_DARK["accent"]
+		return DesignTokens.PALETTE_LIGHT["accent"]
 	return TILE_COLORS[absi(index) % TILE_COLORS.size()]
 
 
@@ -69,26 +69,22 @@ static func tile_letter(_body: Color) -> Color:
 ## The page behind the game. Matches the app's other screens so the animated
 ## backdrop keeps reading the same way.
 static func page_tint() -> Color:
-	if MenuStyle.is_dark():
-		return DesignTokens.color_of(true, "bg")
 	return DesignTokens.color_of(false, "bg")
 
 
 ## A soft plate behind a tile row: barely there in both themes.
 static func track_color() -> Color:
-	if MenuStyle.is_dark():
-		return Color(DesignTokens.PALETTE_DARK["surface_sunken"], 0.60)
 	return Color(DesignTokens.PALETTE_LIGHT["surface_sunken"], 0.70)
 
 
 ## The empty slot the carried tile would drop into.
 static func ghost_color(pulse: float) -> Color:
-	var base := DesignTokens.PALETTE_DARK["accent"]
+	var base := DesignTokens.PALETTE_LIGHT["accent"]
 	return Color(base.r, base.g, base.b, 0.10 + 0.16 * pulse)
 
 
 static func ghost_border_color(pulse: float) -> Color:
-	var base := DesignTokens.PALETTE_DARK["accent"]
+	var base := DesignTokens.PALETTE_LIGHT["accent"]
 	return Color(base.r, base.g, base.b, 0.55 + 0.40 * pulse)
 
 
@@ -145,19 +141,17 @@ static func hint_card_style() -> StyleBoxFlat:
 ## top band, then amber, orange and red as the bands fall away.
 static func timer_color(seconds: float) -> Color:
 	if seconds <= 10.0:
-		return DesignTokens.PALETTE_DARK["success"]
+		return DesignTokens.PALETTE_LIGHT["success"]
 	if seconds <= 30.0:
-		return DesignTokens.PALETTE_DARK["success"].darkened(0.12)
+		return DesignTokens.PALETTE_LIGHT["success"].darkened(0.12)
 	if seconds <= 50.0:
 		return NUDGE_COLOR
 	if seconds <= 60.0:
-		return DesignTokens.PALETTE_DARK["warning"].darkened(0.10)
-	return DesignTokens.PALETTE_DARK["error"]
+		return DesignTokens.PALETTE_LIGHT["warning"].darkened(0.10)
+	return DesignTokens.PALETTE_LIGHT["error"]
 
 
 static func timer_track_color() -> Color:
-	if MenuStyle.is_dark():
-		return Color(DesignTokens.PALETTE_DARK["surface_sunken"], 0.80)
 	return Color(DesignTokens.PALETTE_LIGHT["surface_sunken"], 0.85)
 
 

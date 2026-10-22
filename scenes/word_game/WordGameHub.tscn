@@ -1,7 +1,15 @@
 [gd_scene format=3 uid="uid://bkfllarndb2kx"]
 
 [ext_resource type="Script" uid="uid://f2ugyjkxregm" path="res://scenes/word_game/WordGameHub.gd" id="1_script"]
+[ext_resource type="LabelSettings" uid="uid://dv2tiiw6sx567" path="res://ui/fonts/Fa_Button_Title_Blue.tres" id="3_1yjrf"]
+[ext_resource type="StyleBox" uid="uid://boy06ynkqak3q" path="res://ui/Styles/buttons/Blue_Normal.tres" id="3_ttcs7"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="LabelSettings" uid="uid://btv25lfeojoe4" path="res://ui/fonts/Fa_Button_Info_Blue.tres" id="4_ocyyk"]
+[ext_resource type="StyleBox" uid="uid://cx6iskaugv7ey" path="res://ui/Styles/buttons/Blue_Hovered.tres" id="4_wtlp0"]
+[ext_resource type="StyleBox" uid="uid://cp4wknax5vhvc" path="res://ui/Styles/buttons/Yellow_Normal.tres" id="5_dr7k0"]
+[ext_resource type="StyleBox" uid="uid://c8m6mqu5l84iy" path="res://ui/Styles/buttons/Yellow_Hovered.tres" id="6_ttcs7"]
+[ext_resource type="StyleBox" uid="uid://cpdnjfuv3ffxb" path="res://ui/Styles/buttons/Tab_Normal_Notactivated.tres" id="7_p7c5t"]
+[ext_resource type="LabelSettings" uid="uid://d0avuqvpr5rxl" path="res://ui/fonts/Fa_Button_NormalTitle_Blue.tres" id="8_wtlp0"]
 
 [node name="WordGameHub" type="Control" unique_id=757437532]
 layout_mode = 3
@@ -11,12 +19,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
-
-[node name="Background" type="ColorRect" parent="." unique_id=1533568564]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
 
 [node name="Scroll" type="ScrollContainer" parent="." unique_id=1863716374]
 layout_mode = 0
@@ -43,13 +45,15 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vazir")
 theme_override_font_sizes/font_size = 54
 text = "بازی با کلمات"
+label_settings = ExtResource("3_1yjrf")
 horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=308971966]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vazir")
 theme_override_font_sizes/font_size = 30
-text = "روش بازی را انتخاب کنید"
+text = "روش بازی را انتخاب کنید:"
+label_settings = ExtResource("8_wtlp0")
 horizontal_alignment = 1
 
 [node name="ModeButtons" type="HBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=1602772560]
@@ -64,8 +68,33 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.037244946, 0.03783645, 0.45377022, 1)
 theme_override_fonts/font = ExtResource("3_vazir")
 theme_override_font_sizes/font_size = 34
-text = "یادگیری
-تمرین بدون رقابت"
+theme_override_styles/normal = ExtResource("3_ttcs7")
+theme_override_styles/pressed = ExtResource("3_ttcs7")
+theme_override_styles/hover = ExtResource("4_wtlp0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/MainMargin/MainColumn/ModeButtons/LearningButton" unique_id=1317248847]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Scroll/MainMargin/MainColumn/ModeButtons/LearningButton/VBoxContainer" unique_id=1934354619]
+layout_mode = 2
+text = "یادگیری"
+label_settings = ExtResource("3_1yjrf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="info" type="Label" parent="Scroll/MainMargin/MainColumn/ModeButtons/LearningButton/VBoxContainer" unique_id=1638369851]
+layout_mode = 2
+text = "تمرین بدون رقابت"
+label_settings = ExtResource("4_ocyyk")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DailyButton" type="Button" parent="Scroll/MainMargin/MainColumn/ModeButtons" unique_id=1455998737]
 custom_minimum_size = Vector2(0, 190)
@@ -74,14 +103,40 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.03529412, 0.039215688, 0.45490196, 1)
 theme_override_fonts/font = ExtResource("3_vazir")
 theme_override_font_sizes/font_size = 34
-text = "چالش روزانه
-برای امتیاز رسمی"
+theme_override_styles/normal = ExtResource("5_dr7k0")
+theme_override_styles/pressed = ExtResource("5_dr7k0")
+theme_override_styles/hover = ExtResource("6_ttcs7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/MainMargin/MainColumn/ModeButtons/DailyButton" unique_id=567321539]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Scroll/MainMargin/MainColumn/ModeButtons/DailyButton/VBoxContainer" unique_id=560495540]
+layout_mode = 2
+text = "چالش روزانه"
+label_settings = ExtResource("3_1yjrf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="info" type="Label" parent="Scroll/MainMargin/MainColumn/ModeButtons/DailyButton/VBoxContainer" unique_id=2085366600]
+layout_mode = 2
+text = "برای امتیاز رسمی"
+label_settings = ExtResource("4_ocyyk")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LeaderboardTitle" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=1792258045]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vazir")
 theme_override_font_sizes/font_size = 40
-text = "جدول رتبه‌بندی"
+text = "جدول رتبه‌بندی ⬇️"
+label_settings = ExtResource("3_1yjrf")
 horizontal_alignment = 1
 
 [node name="Tabs" type="HBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=744202285]
@@ -95,7 +150,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vazir")
 theme_override_font_sizes/font_size = 30
-text = "امروز"
+theme_override_styles/normal = ExtResource("7_p7c5t")
+toggle_mode = true
+
+[node name="Label" type="Label" parent="Scroll/MainMargin/MainColumn/Tabs/DailyBoardButton" unique_id=1208301017]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.5
+offset_top = -24.0
+offset_right = 65.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "امتیاز امروز"
+label_settings = ExtResource("8_wtlp0")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LifetimeButton" type="Button" parent="Scroll/MainMargin/MainColumn/Tabs" unique_id=160102682]
 custom_minimum_size = Vector2(0, 82)
@@ -103,7 +177,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_vazir")
 theme_override_font_sizes/font_size = 30
-text = "کل عمر"
+theme_override_styles/normal = ExtResource("7_p7c5t")
+toggle_mode = true
+
+[node name="NormalTitle" type="Label" parent="Scroll/MainMargin/MainColumn/Tabs/LifetimeButton" unique_id=2023035834]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "امتیاز کل"
+label_settings = ExtResource("8_wtlp0")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Status" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=1313806602]
 custom_minimum_size = Vector2(700, 0)

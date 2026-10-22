@@ -22,7 +22,7 @@ func _ready() -> void:
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	_background.color = Global.get_theme_color("bg")
+	_background.color = Global.get_theme_color("bg_base")
 	_message_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	_subtitle_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
 

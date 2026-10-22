@@ -35,7 +35,6 @@ const DEFAULT_THEME := {"accent": Color("#2563EB"), "soft": Color("#EFF6FF"), "i
 @onready var content_layout: VBoxContainer = $MarginContainer/MainLayout/ScrollContainer/ContentLayout
 
 var _reveal_cards: Array = []   # collected for staggered entrance
-var _ambient_accent := Color("#2563EB")  # last applied ambient accent
 
 
 func _ready() -> void:
@@ -60,7 +59,6 @@ func _ready() -> void:
 	var strategy: Dictionary = data["strategy"]
 	var palette: Dictionary = STRATEGY_THEMES.get(strategy["name"]["en"], DEFAULT_THEME)
 	
-	_apply_ambient_background(palette["accent"])
 	_build_banner(strategy, palette)
 	_build_steps(strategy, palette)
 	_build_reference_materials(strategy, palette)
@@ -72,46 +70,13 @@ func _ready() -> void:
 
 
 # ============================================================
-# AMBIENT BACKGROUND — tinted by the strategy's accent
+# THEME
 # ============================================================
-func _apply_ambient_background(accent: Color) -> void:
-	_ambient_accent = accent
-	_apply_ambient_material()
-
-
-func _apply_ambient_material() -> void:
-	# Dark mode keeps today's light gradient; light mode uses the palette.
-	var top: Color
-	var bottom: Color
-	if Global.theme_is_dark():
-		top = Color(0.97, 0.98, 1.0)
-		bottom = Color(0.92, 0.94, 0.98)
-	else:
-		top = Global.get_theme_color("bg")
-		bottom = Global.get_theme_color("bg_base")
-	var shader := Shader.new()
-	shader.code = """
-shader_type canvas_item;
-uniform vec4 top : source_color = vec4(%f, %f, %f, 1.0);
-uniform vec4 bottom : source_color = vec4(%f, %f, %f, 1.0);
-uniform vec4 accent : source_color = vec4(0.0, 0.5, 0.6, 1.0);
-void fragment() {
-	vec4 grad = mix(top, bottom, UV.y);
-	float d = distance(UV, vec2(0.5, -0.1));
-	float glow = clamp(1.0 - d * 1.4, 0.0, 1.0);
-	COLOR = mix(grad, accent, glow * 0.10);
-}
-""" % [top.r, top.g, top.b, bottom.r, bottom.g, bottom.b]
-	var mat := ShaderMaterial.new()
-	mat.shader = shader
-	mat.set_shader_parameter("accent", _ambient_accent)
-	background.material = mat
-
-
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	_apply_ambient_material()
+	background.color = Global.get_theme_color("bg_base")
+	background.material = null
 
 
 # ============================================================

@@ -114,7 +114,7 @@ func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
 	var bg: ColorRect = $Background
-	bg.color = Global.get_theme_color("bg")
+	bg.color = Global.get_theme_color("bg_base")
 
 	var card: PanelContainer = $CenterContainer/AuthCard
 	if card != null:
