@@ -166,6 +166,28 @@ func _make_option_button(text: String, group: ButtonGroup) -> Button:
 	return _make_select_button(text, group, C_PRIMARY)
 
 
+# Maps the accent a select button was asked to use to the matching Theme type
+# variation. The appearance itself lives in the Theme resource (generated into
+# vision_master_light.tres by tools/generate_design_resources.gd); this only
+# chooses which predefined variation to apply, so a restyle is a Theme edit.
+func _choice_variation_for(accent: Color) -> StringName:
+	if _color_matches(accent, _c_success()):
+		return &"ChoiceButtonSuccess"
+	if _color_matches(accent, _c_error()):
+		return &"ChoiceButtonError"
+	if _color_matches(accent, _c_warning()):
+		return &"ChoiceButtonWarning"
+	if _color_matches(accent, C_INFO):
+		return &"ChoiceButtonInfo"
+	if _color_matches(accent, C_PURPLE):
+		return &"ChoiceButtonPurple"
+	return &"ChoiceButton"
+
+
+func _color_matches(a: Color, b: Color) -> bool:
+	return is_equal_approx(a.r, b.r) and is_equal_approx(a.g, b.g) and is_equal_approx(a.b, b.b)
+
+
 func _make_select_button(text: String, group: ButtonGroup, accent: Color) -> Button:
 	var b := Button.new()
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -181,40 +203,8 @@ func _make_select_button(text: String, group: ButtonGroup, accent: Color) -> But
 	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	# Big, finger-friendly tap target for every answer option.
 	b.custom_minimum_size = Vector2(0, 96)
-	b.add_theme_font_size_override("font_size", 40)
-	b.add_theme_color_override("font_color", _c_text())
-	b.add_theme_color_override("font_hover_color", accent)
-	b.add_theme_color_override("font_pressed_color", Color.WHITE)
-
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = _c_surface()
-	normal.set_corner_radius_all(16)
-	normal.set_border_width_all(2)
-	normal.border_color = _c_border()
-	normal.set_content_margin_all(16)
-	normal.shadow_color = Color(0, 0, 0, 0.10)
-	normal.shadow_size = 4
-	normal.shadow_offset = Vector2(0, 2)
-	b.add_theme_stylebox_override("normal", normal)
-
-	var hover: StyleBoxFlat = normal.duplicate()
-	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.12)
-	hover.border_color = accent
-	hover.border_width_left = 3
-	hover.border_width_right = 3
-	hover.border_width_top = 3
-	hover.border_width_bottom = 3
-	b.add_theme_stylebox_override("hover", hover)
-
-	var pressed: StyleBoxFlat = normal.duplicate()
-	pressed.bg_color = Color(accent.r, accent.g, accent.b, 1.0)
-	pressed.border_color = accent
-	pressed.set_border_width_all(3)
-	pressed.shadow_size = 8
-	b.add_theme_stylebox_override("pressed", pressed)
-
-	if _font_regular:
-		b.add_theme_font_override("font", _font_regular)
+	# All styling comes from the Theme type variation chosen by the accent.
+	b.theme_type_variation = _choice_variation_for(accent)
 
 	_register_scroll_control(b)
 	return b
@@ -229,10 +219,8 @@ func _make_image_option_button(opt: Variant, group: ButtonGroup) -> Button:
 	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	b.text = _get_option_text(opt)
 	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	b.add_theme_font_size_override("font_size", 34)
-	b.add_theme_color_override("font_color", _c_text())
-	b.add_theme_color_override("font_hover_color", C_PRIMARY)
-	b.add_theme_color_override("font_pressed_color", Color.WHITE)
+	# Same shape as a ChoiceButton, tighter margins/font — Theme supplied.
+	b.theme_type_variation = &"ImageChoiceButton"
 
 	if opt is Dictionary:
 		var path := str(opt.get("image", opt.get("path", "")))
@@ -242,33 +230,6 @@ func _make_image_option_button(opt: Variant, group: ButtonGroup) -> Button:
 				b.icon = tex
 				b.expand_icon = true
 				b.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = _c_surface()
-	normal.set_corner_radius_all(16)
-	normal.set_border_width_all(2)
-	normal.border_color = _c_border()
-	normal.set_content_margin_all(14)
-	normal.shadow_color = Color(0, 0, 0, 0.10)
-	normal.shadow_size = 4
-	normal.shadow_offset = Vector2(0, 2)
-	b.add_theme_stylebox_override("normal", normal)
-
-	var hover: StyleBoxFlat = normal.duplicate()
-	hover.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.12)
-	hover.border_color = C_PRIMARY
-	hover.set_border_width_all(3)
-	b.add_theme_stylebox_override("hover", hover)
-
-	var pressed: StyleBoxFlat = normal.duplicate()
-	pressed.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 1.0)
-	pressed.border_color = C_PRIMARY
-	pressed.set_border_width_all(3)
-	pressed.shadow_size = 8
-	b.add_theme_stylebox_override("pressed", pressed)
-
-	if _font_regular:
-		b.add_theme_font_override("font", _font_regular)
 
 	_register_scroll_control(b)
 	return b
@@ -291,36 +252,9 @@ func _make_line_edit(placeholder: String) -> LineEdit:
 	var le := LineEdit.new()
 	le.mouse_filter = Control.MOUSE_FILTER_PASS
 	le.placeholder_text = placeholder
-	le.add_theme_font_size_override("font_size", 40)
-	le.add_theme_color_override("font_color", _c_text())
-	le.add_theme_color_override("font_placeholder_color", _c_text_dim())
 	le.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	if _font_regular:
-		le.add_theme_font_override("font", _font_regular)
-
-	var le_style := StyleBoxFlat.new()
-	le_style.bg_color = _c_surface()
-	le_style.set_corner_radius_all(16)
-	le_style.set_border_width_all(2)
-	le_style.border_color = _c_border()
-	le_style.set_content_margin_all(18)
-	le_style.shadow_color = Color(0, 0, 0, 0.08)
-	le_style.shadow_size = 4
-	le_style.shadow_offset = Vector2(0, 2)
-	le.add_theme_stylebox_override("normal", le_style)
-
-	var le_hover: StyleBoxFlat = le_style.duplicate()
-	le_hover.border_color = C_PRIMARY.lightened(0.2)
-	le.add_theme_stylebox_override("hover", le_hover)
-
-	var le_focus: StyleBoxFlat = le_style.duplicate()
-	le_focus.border_color = C_PRIMARY
-	le_focus.shadow_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.20)
-	le_focus.shadow_size = 8
-	le.add_theme_stylebox_override("focus", le_focus)
-
-	le.add_theme_color_override("caret_color", C_PRIMARY)
-	le.add_theme_color_override("selection_color", Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.35))
+	# Colours, font and border states come from the Theme variation.
+	le.theme_type_variation = &"AnswerLineEdit"
 	_register_scroll_control(le)
 	return le
 
@@ -329,35 +263,8 @@ func _make_chart_input(placeholder: String) -> LineEdit:
 	var le := LineEdit.new()
 	le.mouse_filter = Control.MOUSE_FILTER_PASS
 	le.placeholder_text = placeholder
-	le.add_theme_font_size_override("font_size", 38)
-	le.add_theme_color_override("font_color", _c_text())
-	le.add_theme_color_override("font_placeholder_color", _c_text_dim())
-	le.add_theme_color_override("caret_color", C_PRIMARY)
-	le.add_theme_color_override(
-		"selection_color",
-		Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.35)
-	)
-	le.add_theme_color_override("font_selected_color", Color.WHITE)
 	le.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	if _font_regular:
-		le.add_theme_font_override("font", _font_regular)
-
-	var le_style := StyleBoxFlat.new()
-	le_style.bg_color = _c_surface()
-	le_style.set_corner_radius_all(12)
-	le_style.set_border_width_all(2)
-	le_style.border_color = _c_border()
-	le_style.set_content_margin_all(12)
-	le_style.shadow_color = Color(0, 0, 0, 0.08)
-	le_style.shadow_size = 3
-	le.add_theme_stylebox_override("normal", le_style)
-
-	var le_focus: StyleBoxFlat = le_style.duplicate()
-	le_focus.border_color = C_PRIMARY
-	le_focus.shadow_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.20)
-	le_focus.shadow_size = 7
-	le.add_theme_stylebox_override("focus", le_focus)
-
+	le.theme_type_variation = &"ChartInput"
 	_register_scroll_control(le)
 	return le
 
@@ -368,37 +275,9 @@ func _make_chip_button(text: String, filled := false) -> Button:
 	# Bidi-safe display for mixed Farsi/English chips.
 	b.text = GrammarTheme.bidi_fix(text)
 	b.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(text) else Control.TEXT_DIRECTION_LTR
-	b.add_theme_font_size_override("font_size", 38)
-	b.add_theme_color_override("font_color", Color.WHITE if filled else _c_text())
-	b.add_theme_color_override("font_hover_color", Color.WHITE)
 	# Keep chips comfortably tappable.
 	b.custom_minimum_size = Vector2(0, 76)
-	if _font_regular:
-		b.add_theme_font_override("font", _font_regular)
-
-	var style := StyleBoxFlat.new()
-	style.bg_color = C_PRIMARY if filled else _c_surface()
-	style.set_corner_radius_all(40)
-	style.set_border_width_all(2)
-	style.border_color = C_PRIMARY
-	style.set_content_margin_all(14)
-	style.shadow_color = Color(0, 0, 0, 0.15)
-	style.shadow_size = 5
-	style.shadow_offset = Vector2(0, 2)
-	b.add_theme_stylebox_override("normal", style)
-
-	var hover: StyleBoxFlat = style.duplicate()
-	hover.bg_color = C_PRIMARY if filled else Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.15)
-	hover.shadow_size = 8
-	b.add_theme_stylebox_override("hover", hover)
-	b.add_theme_stylebox_override("pressed", hover)
-
-	var disabled: StyleBoxFlat = style.duplicate()
-	disabled.bg_color = _c_surface_alt()
-	disabled.border_color = _c_border()
-	b.add_theme_stylebox_override("disabled", disabled)
-	b.add_theme_color_override("font_disabled_color", _c_text_dim())
-
+	b.theme_type_variation = &"ChipButtonFilled" if filled else &"ChipButton"
 	_register_scroll_control(b)
 	return b
 
@@ -412,34 +291,11 @@ func _make_word_toggle(word: String, compact := false) -> Button:
 	b.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(word) else Control.TEXT_DIRECTION_LTR
 	b.toggle_mode = true
 	if compact:
-		b.add_theme_font_size_override("font_size", 34)
 		# Even dense grid tiles stay at/above the minimum tap size.
 		b.custom_minimum_size = Vector2(48, 56)
 	else:
-		b.add_theme_font_size_override("font_size", 40)
 		b.custom_minimum_size = Vector2(0, 76)
-	b.add_theme_color_override("font_color", _c_text())
-	b.add_theme_color_override("font_pressed_color", Color.WHITE)
-	b.add_theme_color_override("font_hover_color", C_PRIMARY)
-	if _font_regular:
-		b.add_theme_font_override("font", _font_regular)
-
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(0, 0, 0, 0)
-	normal.set_corner_radius_all(8)
-	normal.set_content_margin_all(3 if compact else 8)
-	b.add_theme_stylebox_override("normal", normal)
-	b.add_theme_stylebox_override("hover", normal.duplicate())
-
-	var pressed := StyleBoxFlat.new()
-	pressed.bg_color = C_WARNING
-	pressed.set_corner_radius_all(8)
-	pressed.set_content_margin_all(3 if compact else 8)
-	pressed.shadow_color = Color(C_WARNING.r, C_WARNING.g, C_WARNING.b, 0.35)
-	pressed.shadow_size = 6
-	pressed.shadow_offset = Vector2(0, 2)
-	b.add_theme_stylebox_override("pressed", pressed)
-
+	b.theme_type_variation = &"WordToggleCompact" if compact else &"WordToggle"
 	_register_scroll_control(b)
 	return b
 
@@ -448,10 +304,8 @@ func _make_feedback(parent: Node) -> Label:
 	var fb := Label.new()
 	fb.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	fb.autowrap_mode = TextServer.AUTOWRAP_WORD
-	fb.add_theme_font_size_override("font_size", 36)
+	fb.theme_type_variation = &"FeedbackLabel"
 	fb.visible = false
-	if _font_bold:
-		fb.add_theme_font_override("font", _font_bold)
 	parent.add_child(fb)
 	return fb
 

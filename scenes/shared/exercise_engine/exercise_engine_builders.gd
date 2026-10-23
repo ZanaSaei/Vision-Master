@@ -1146,7 +1146,7 @@ func _make_order_card(pos: int, idx: int, item_texts: Array, list_vbox: VBoxCont
 	var card := PanelContainer.new()
 	card.mouse_filter = Control.MOUSE_FILTER_PASS
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	card.add_theme_stylebox_override("panel", _make_order_card_style())
+	card.theme_type_variation = &"OrderCard"
 	_register_scroll_control(card)
 
 	var row := HBoxContainer.new()
@@ -1162,7 +1162,7 @@ func _make_order_card(pos: int, idx: int, item_texts: Array, list_vbox: VBoxCont
 	chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	chip.custom_minimum_size = Vector2(56, 56)
 	chip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	chip.add_theme_stylebox_override("panel", _make_order_chip_style())
+	chip.theme_type_variation = &"OrderChip"
 	var chip_lbl := _make_label(str(pos + 1), 32, C_PRIMARY, true)
 	chip_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	chip_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -1213,36 +1213,23 @@ func _flash_order_row(list_vbox: VBoxContainer, pos: int) -> void:
 	tw.tween_property(card, "modulate", Color.WHITE, 0.4)
 
 
-# ---------- ordering card / chip / arrow / handle styling ----------
-func _make_order_card_style(dragging := false) -> StyleBoxFlat:
+# ---------- ordering card / arrow / handle styling ----------
+# The resting card look lives in the Theme's OrderCard variation. This builds
+# only the transient "lifted while being dragged" state, which genuinely depends
+# on a runtime gesture and so cannot be a static variation.
+func _make_order_drag_style() -> StyleBoxFlat:
 	var st := StyleBoxFlat.new()
 	st.bg_color = _c_surface_alt()
 	st.set_corner_radius_all(18)
 	st.set_border_width_all(2)
-	var border := _c_border()
-	st.border_color = C_PRIMARY if dragging else Color(border.r, border.g, border.b, 0.45)
+	st.border_color = C_PRIMARY
 	st.content_margin_left = 18
 	st.content_margin_right = 14
 	st.content_margin_top = 12
 	st.content_margin_bottom = 12
-	if dragging:
-		st.shadow_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.35)
-		st.shadow_size = 14
-		st.shadow_offset = Vector2(0, 6)
-	else:
-		st.shadow_color = Color(0, 0, 0, 0.12)
-		st.shadow_size = 6
-		st.shadow_offset = Vector2(0, 3)
-	return st
-
-
-func _make_order_chip_style() -> StyleBoxFlat:
-	var st := StyleBoxFlat.new()
-	st.bg_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.16)
-	st.set_corner_radius_all(16)
-	st.set_border_width_all(2)
-	st.border_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.55)
-	st.set_content_margin_all(4)
+	st.shadow_color = Color(C_PRIMARY.r, C_PRIMARY.g, C_PRIMARY.b, 0.35)
+	st.shadow_size = 14
+	st.shadow_offset = Vector2(0, 6)
 	return st
 
 
@@ -1251,41 +1238,8 @@ func _make_order_arrow_button(glyph: String) -> Button:
 	b.mouse_filter = Control.MOUSE_FILTER_PASS
 	b.text = glyph
 	b.custom_minimum_size = Vector2(88, 88)
-	b.add_theme_font_size_override("font_size", 44)
-	b.add_theme_color_override("font_color", _c_text_dim())
-	b.add_theme_color_override("font_hover_color", C_PRIMARY)
-	b.add_theme_color_override("font_pressed_color", C_PRIMARY)
-	b.add_theme_color_override("font_focus_color", _c_text_dim())
-	b.add_theme_color_override("font_hover_pressed_color", C_PRIMARY)
-	if _font_bold:
-		b.add_theme_font_override("font", _font_bold)
-
-	var accent := C_PRIMARY
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(accent.r, accent.g, accent.b, 0.05)
-	normal.set_corner_radius_all(18)
-	normal.set_border_width_all(2)
-	normal.border_color = Color(_c_border().r, _c_border().g, _c_border().b, 0.5)
-	normal.set_content_margin_all(8)
-	b.add_theme_stylebox_override("normal", normal)
-
-	var hover := StyleBoxFlat.new()
-	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.12)
-	hover.set_corner_radius_all(18)
-	hover.set_border_width_all(2)
-	hover.border_color = accent
-	hover.set_content_margin_all(8)
-	b.add_theme_stylebox_override("hover", hover)
-
-	var pressed := StyleBoxFlat.new()
-	pressed.bg_color = Color(accent.r, accent.g, accent.b, 0.24)
-	pressed.set_corner_radius_all(18)
-	pressed.set_border_width_all(2)
-	pressed.border_color = accent
-	pressed.set_content_margin_all(8)
-	b.add_theme_stylebox_override("pressed", pressed)
-
-	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	# States + font come from the Theme's OrderArrow variation.
+	b.theme_type_variation = &"OrderArrow"
 	_register_scroll_control(b)
 	return b
 
@@ -1302,7 +1256,7 @@ func _make_order_handle(list_vbox: VBoxContainer, current_order: Array, item_tex
 	handle.mouse_filter = Control.MOUSE_FILTER_STOP
 	handle.custom_minimum_size = Vector2(56, 56)
 	handle.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	handle.add_theme_stylebox_override("panel", _make_order_handle_style())
+	handle.theme_type_variation = &"OrderHandle"
 	handle.add_child(_make_order_grip_bars())
 	handle.gui_input.connect(_on_order_handle_input.bind(handle, list_vbox, current_order, item_texts, pos, idx))
 	# PageView must never turn a handle press into a page scroll/swipe. Handles
@@ -1311,17 +1265,6 @@ func _make_order_handle(list_vbox: VBoxContainer, current_order: Array, item_tex
 	# relying on registration order). Rebuilt handles re-join the group.
 	handle.add_to_group("order_drag_handles")
 	return handle
-
-
-func _make_order_handle_style() -> StyleBoxFlat:
-	var st := StyleBoxFlat.new()
-	var accent := C_PRIMARY
-	st.bg_color = Color(accent.r, accent.g, accent.b, 0.05)
-	st.set_corner_radius_all(16)
-	st.set_border_width_all(2)
-	var border := _c_border()
-	st.border_color = Color(border.r, border.g, border.b, 0.5)
-	return st
 
 
 # The "≡" grip: three short horizontal bars, drawn as ColorRects so the
@@ -1412,7 +1355,7 @@ func _begin_order_drag() -> void:
 	if _order_drag_card == null or not is_instance_valid(_order_drag_card):
 		return
 	_order_drag_card.z_index = 50
-	_order_drag_card.add_theme_stylebox_override("panel", _make_order_card_style(true))
+	_order_drag_card.add_theme_stylebox_override("panel", _make_order_drag_style())
 	_order_drag_card.modulate = Color.WHITE
 	_order_drag_card.scale = Vector2(1.03, 1.03)
 	if _order_drag_list != null and is_instance_valid(_order_drag_list):

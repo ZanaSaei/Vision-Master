@@ -23,6 +23,7 @@ extends SceneTree
 ## ============================================================
 
 const DT_PATH := "res://autoload/DesignTokens.gd"
+const EXERCISE_THEME_PATH := "res://scenes/shared/exercise_engine/exercise_theme.gd"
 const MOTION_SCRIPT := "res://scripts/resources/ui_motion_profile.gd"
 const TYPE_SCALE_SCRIPT := "res://scripts/resources/type_scale.gd"
 
@@ -41,10 +42,12 @@ const FONT_REGULAR := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 static var _variant_specs: Array = []
 
 var _dt: GDScript
+var _et: GDScript
 
 
 func _init() -> void:
 	_dt = load(DT_PATH)
+	_et = load(EXERCISE_THEME_PATH)
 	for dir in [STYLEBOX_DIR, THEME_DIR, TEXTURE_DIR, MOTION_DIR, TYPOGRAPHY_DIR]:
 		DirAccess.make_dir_recursive_absolute(dir)
 
@@ -322,9 +325,212 @@ func _build_theme(dark: bool) -> void:
 	t.set_stylebox("panel", "TooltipPanel", _sb("pill_accent", dark))
 	t.set_color("font_color", "TooltipLabel", text)
 
+	# ── Exercise-engine widgets ─────────────────────────────────
+	# The shared ExerciseEngine builds its answer widgets in code and styles
+	# them with Theme TYPE VARIATIONS defined here, so their look lives in the
+	# Theme resource (editable in the Inspector) instead of scattered inline
+	# StyleBoxFlat construction. Values mirror the previous inline styles.
+	_write_exercise_variations(t)
+
 	var err := ResourceSaver.save(t, THEME_DIR + "vision_master_light.tres")
 	if err != OK:
 		push_error("theme save failed (%d)" % err)
+
+
+# ══════════════════════════════════════════════════════════════
+#  EXERCISE WIDGET TYPE VARIATIONS
+#  Registered on the Light theme so every ExerciseEngine control that sets
+#  `theme_type_variation` resolves them through the app-wide theme.
+# ══════════════════════════════════════════════════════════════
+
+func _pal(role: String) -> Color:
+	return _dt.PALETTE_LIGHT.get(role, Color.WHITE)
+
+
+## A select/action-style pill button: surface body with an accent hover/press.
+func _ex_choice_button(t: Theme, name: String, accent: Color, font_size: int, margin: int = 16) -> void:
+	var border: Color = _pal("border")
+	var text: Color = _pal("text")
+	t.set_type_variation(name, "Button")
+
+	var normal: StyleBoxFlat = _dt.box(_pal("surface"), 16, border, 2)
+	normal.set_content_margin_all(margin)
+	normal.shadow_color = Color(0, 0, 0, 0.10)
+	normal.shadow_size = 4
+	normal.shadow_offset = Vector2(0, 2)
+
+	var hover := normal.duplicate() as StyleBoxFlat
+	hover.bg_color = Color(accent.r, accent.g, accent.b, 0.12)
+	hover.border_color = accent
+	hover.set_border_width_all(3)
+
+	var pressed := normal.duplicate() as StyleBoxFlat
+	pressed.bg_color = Color(accent.r, accent.g, accent.b, 1.0)
+	pressed.border_color = accent
+	pressed.set_border_width_all(3)
+	pressed.shadow_size = 8
+
+	t.set_stylebox("normal", name, normal)
+	t.set_stylebox("hover", name, hover)
+	t.set_stylebox("pressed", name, pressed)
+	t.set_font("font", name, load(FONT_REGULAR) as Font)
+	t.set_font_size("font_size", name, font_size)
+	t.set_color("font_color", name, text)
+	t.set_color("font_hover_color", name, accent)
+	t.set_color("font_pressed_color", name, Color.WHITE)
+
+
+func _write_exercise_variations(t: Theme) -> void:
+	const EX_FONT_REGULAR := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
+	const EX_FONT_BOLD := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+	var accent: Color = _et.C_PRIMARY
+	var surface: Color = _pal("surface")
+	var surface_alt: Color = _pal("surface_alt")
+	var border: Color = _pal("border")
+	var text: Color = _pal("text")
+	var text_dim: Color = _pal("text_dim")
+
+	# ── Choice buttons (selectable answers). One per accent in use. ──
+	_ex_choice_button(t, "ChoiceButton", accent, 40)
+	_ex_choice_button(t, "ChoiceButtonSuccess", _pal("success"), 40)
+	_ex_choice_button(t, "ChoiceButtonError", _pal("error"), 40)
+	_ex_choice_button(t, "ChoiceButtonWarning", _pal("warning"), 40)
+	_ex_choice_button(t, "ChoiceButtonInfo", _et.C_INFO, 40)
+	_ex_choice_button(t, "ChoiceButtonPurple", _et.C_PURPLE, 40)
+	# Image option buttons are the same shape with a tighter margin + font.
+	_ex_choice_button(t, "ImageChoiceButton", accent, 34, 14)
+
+	# ── Chip buttons (word bank / built sentence chips). ──
+	for filled in [false, true]:
+		var chip_name := "ChipButtonFilled" if filled else "ChipButton"
+		t.set_type_variation(chip_name, "Button")
+		var style: StyleBoxFlat = _dt.box(accent if filled else surface, 40, accent, 2)
+		style.set_content_margin_all(14)
+		style.shadow_color = Color(0, 0, 0, 0.15)
+		style.shadow_size = 5
+		style.shadow_offset = Vector2(0, 2)
+		var chip_hover := style.duplicate() as StyleBoxFlat
+		chip_hover.bg_color = accent if filled else Color(accent.r, accent.g, accent.b, 0.15)
+		chip_hover.shadow_size = 8
+		var chip_disabled := style.duplicate() as StyleBoxFlat
+		chip_disabled.bg_color = surface_alt
+		chip_disabled.border_color = border
+		t.set_stylebox("normal", chip_name, style)
+		t.set_stylebox("hover", chip_name, chip_hover)
+		t.set_stylebox("pressed", chip_name, chip_hover)
+		t.set_stylebox("disabled", chip_name, chip_disabled)
+		t.set_font("font", chip_name, load(EX_FONT_REGULAR) as Font)
+		t.set_font_size("font_size", chip_name, 38)
+		t.set_color("font_color", chip_name, Color.WHITE if filled else text)
+		t.set_color("font_hover_color", chip_name, Color.WHITE)
+		t.set_color("font_disabled_color", chip_name, text_dim)
+
+	# ── Word toggles (word search / text highlight). ──
+	for compact in [false, true]:
+		var wt_name := "WordToggleCompact" if compact else "WordToggle"
+		var margin := 3 if compact else 8
+		t.set_type_variation(wt_name, "Button")
+		var wt_normal: StyleBoxFlat = _dt.box(Color(0, 0, 0, 0), 8)
+		wt_normal.set_content_margin_all(margin)
+		var wt_pressed: StyleBoxFlat = _dt.box(_et.C_WARNING, 8)
+		wt_pressed.set_content_margin_all(margin)
+		wt_pressed.shadow_color = Color(_et.C_WARNING.r, _et.C_WARNING.g, _et.C_WARNING.b, 0.35)
+		wt_pressed.shadow_size = 6
+		wt_pressed.shadow_offset = Vector2(0, 2)
+		t.set_stylebox("normal", wt_name, wt_normal)
+		t.set_stylebox("hover", wt_name, wt_normal.duplicate())
+		t.set_stylebox("pressed", wt_name, wt_pressed)
+		t.set_font("font", wt_name, load(EX_FONT_REGULAR) as Font)
+		t.set_font_size("font_size", wt_name, 34 if compact else 40)
+		t.set_color("font_color", wt_name, text)
+		t.set_color("font_pressed_color", wt_name, Color.WHITE)
+		t.set_color("font_hover_color", wt_name, accent)
+
+	# ── Answer text inputs. ──
+	t.set_type_variation("AnswerLineEdit", "LineEdit")
+	var ale: StyleBoxFlat = _dt.box(surface, 16, border, 2)
+	ale.set_content_margin_all(18)
+	ale.shadow_color = Color(0, 0, 0, 0.08)
+	ale.shadow_size = 4
+	ale.shadow_offset = Vector2(0, 2)
+	var ale_hover := ale.duplicate() as StyleBoxFlat
+	ale_hover.border_color = accent.lightened(0.2)
+	var ale_focus := ale.duplicate() as StyleBoxFlat
+	ale_focus.border_color = accent
+	ale_focus.shadow_color = Color(accent.r, accent.g, accent.b, 0.20)
+	ale_focus.shadow_size = 8
+	t.set_stylebox("normal", "AnswerLineEdit", ale)
+	t.set_stylebox("hover", "AnswerLineEdit", ale_hover)
+	t.set_stylebox("focus", "AnswerLineEdit", ale_focus)
+	t.set_font("font", "AnswerLineEdit", load(EX_FONT_REGULAR) as Font)
+	t.set_font_size("font_size", "AnswerLineEdit", 40)
+	t.set_color("font_color", "AnswerLineEdit", text)
+	t.set_color("font_placeholder_color", "AnswerLineEdit", text_dim)
+	t.set_color("caret_color", "AnswerLineEdit", accent)
+	t.set_color("selection_color", "AnswerLineEdit", Color(accent.r, accent.g, accent.b, 0.35))
+
+	t.set_type_variation("ChartInput", "LineEdit")
+	var ci: StyleBoxFlat = _dt.box(surface, 12, border, 2)
+	ci.set_content_margin_all(12)
+	ci.shadow_color = Color(0, 0, 0, 0.08)
+	ci.shadow_size = 3
+	var ci_focus := ci.duplicate() as StyleBoxFlat
+	ci_focus.border_color = accent
+	ci_focus.shadow_color = Color(accent.r, accent.g, accent.b, 0.20)
+	ci_focus.shadow_size = 7
+	t.set_stylebox("normal", "ChartInput", ci)
+	t.set_stylebox("focus", "ChartInput", ci_focus)
+	t.set_font("font", "ChartInput", load(EX_FONT_REGULAR) as Font)
+	t.set_font_size("font_size", "ChartInput", 38)
+	t.set_color("font_color", "ChartInput", text)
+	t.set_color("font_placeholder_color", "ChartInput", text_dim)
+	t.set_color("caret_color", "ChartInput", accent)
+	t.set_color("selection_color", "ChartInput", Color(accent.r, accent.g, accent.b, 0.35))
+	t.set_color("font_selected_color", "ChartInput", Color.WHITE)
+
+	# ── Feedback label (font only; colour is set at grade time). ──
+	t.set_type_variation("FeedbackLabel", "Label")
+	t.set_font("font", "FeedbackLabel", load(EX_FONT_BOLD) as Font)
+	t.set_font_size("font_size", "FeedbackLabel", 36)
+
+	# ── Ordering card + chip + handle + arrow. ──
+	t.set_type_variation("OrderCard", "PanelContainer")
+	var card: StyleBoxFlat = _dt.box(surface_alt, 18, Color(border.r, border.g, border.b, 0.45), 2)
+	card.content_margin_left = 18
+	card.content_margin_right = 14
+	card.content_margin_top = 12
+	card.content_margin_bottom = 12
+	card.shadow_color = Color(0, 0, 0, 0.12)
+	card.shadow_size = 6
+	card.shadow_offset = Vector2(0, 3)
+	t.set_stylebox("panel", "OrderCard", card)
+
+	t.set_type_variation("OrderChip", "PanelContainer")
+	var chip: StyleBoxFlat = _dt.box(Color(accent.r, accent.g, accent.b, 0.16), 16, Color(accent.r, accent.g, accent.b, 0.55), 2)
+	chip.set_content_margin_all(4)
+	t.set_stylebox("panel", "OrderChip", chip)
+
+	t.set_type_variation("OrderHandle", "PanelContainer")
+	t.set_stylebox("panel", "OrderHandle", _dt.box(Color(accent.r, accent.g, accent.b, 0.05), 16, Color(border.r, border.g, border.b, 0.5), 2))
+
+	t.set_type_variation("OrderArrow", "Button")
+	var oa_normal: StyleBoxFlat = _dt.box(Color(accent.r, accent.g, accent.b, 0.05), 18, Color(border.r, border.g, border.b, 0.5), 2)
+	oa_normal.set_content_margin_all(8)
+	var oa_hover: StyleBoxFlat = _dt.box(Color(accent.r, accent.g, accent.b, 0.12), 18, accent, 2)
+	oa_hover.set_content_margin_all(8)
+	var oa_pressed: StyleBoxFlat = _dt.box(Color(accent.r, accent.g, accent.b, 0.24), 18, accent, 2)
+	oa_pressed.set_content_margin_all(8)
+	t.set_stylebox("normal", "OrderArrow", oa_normal)
+	t.set_stylebox("hover", "OrderArrow", oa_hover)
+	t.set_stylebox("pressed", "OrderArrow", oa_pressed)
+	t.set_stylebox("focus", "OrderArrow", StyleBoxEmpty.new())
+	t.set_font("font", "OrderArrow", load(EX_FONT_BOLD) as Font)
+	t.set_font_size("font_size", "OrderArrow", 44)
+	t.set_color("font_color", "OrderArrow", text_dim)
+	t.set_color("font_hover_color", "OrderArrow", accent)
+	t.set_color("font_pressed_color", "OrderArrow", accent)
+	t.set_color("font_focus_color", "OrderArrow", text_dim)
+	t.set_color("font_hover_pressed_color", "OrderArrow", accent)
 
 
 # ══════════════════════════════════════════════════════════════
