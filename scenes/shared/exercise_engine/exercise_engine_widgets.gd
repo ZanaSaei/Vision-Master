@@ -9,6 +9,14 @@ class_name ExerciseEngineWidgets
 extends "res://scenes/shared/exercise_engine/exercise_engine_core.gd"
 const DropdownScript := preload("res://scenes/shared/exercise_engine/Dropdown.gd")
 
+# Reusable widget scenes (static styling lives in the Theme; see the widgets/
+# folder scripts). The factories below instantiate these instead of building
+# the controls from scratch, keeping their signatures unchanged.
+const CHOICE_BUTTON_SCENE := preload("res://scenes/shared/exercise_engine/widgets/ChoiceButton.tscn")
+const CHIP_BUTTON_SCENE := preload("res://scenes/shared/exercise_engine/widgets/ChipButton.tscn")
+const ANSWER_LINE_EDIT_SCENE := preload("res://scenes/shared/exercise_engine/widgets/AnswerLineEdit.tscn")
+const FEEDBACK_LABEL_SCENE := preload("res://scenes/shared/exercise_engine/widgets/FeedbackLabel.tscn")
+
 # ---------- text / string helpers ----------
 func _get_en_text(val: Variant) -> String:
 	if val is Dictionary:
@@ -189,23 +197,12 @@ func _color_matches(a: Color, b: Color) -> bool:
 
 
 func _make_select_button(text: String, group: ButtonGroup, accent: Color) -> Button:
-	var b := Button.new()
-	b.mouse_filter = Control.MOUSE_FILTER_PASS
+	var b: Button = CHOICE_BUTTON_SCENE.instantiate()
 	# Mixed Farsi/English option text needs bidi isolates and a matching
 	# base direction, otherwise Latin fragments inside a Farsi line (or
-	# Farsi words inside an English line) visually scramble.
-	b.text = "   " + GrammarTheme.bidi_fix(text)
-	b.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(text) else Control.TEXT_DIRECTION_LTR
-	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	b.toggle_mode = true
-	b.button_group = group
-	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	# Big, finger-friendly tap target for every answer option.
-	b.custom_minimum_size = Vector2(0, 96)
-	# All styling comes from the Theme type variation chosen by the accent.
-	b.theme_type_variation = _choice_variation_for(accent)
-
+	# Farsi words inside an English line) visually scramble. The engine's
+	# own _is_fa_dominant() rule is passed through unchanged.
+	b.call("setup", GrammarTheme.bidi_fix(text), _is_fa_dominant(text), group, _choice_variation_for(accent))
 	_register_scroll_control(b)
 	return b
 
@@ -249,12 +246,8 @@ func _make_option_dropdown(options: Array, placeholder := "") -> DropdownScript:
 
 
 func _make_line_edit(placeholder: String) -> LineEdit:
-	var le := LineEdit.new()
-	le.mouse_filter = Control.MOUSE_FILTER_PASS
+	var le: LineEdit = ANSWER_LINE_EDIT_SCENE.instantiate()
 	le.placeholder_text = placeholder
-	le.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	# Colours, font and border states come from the Theme variation.
-	le.theme_type_variation = &"AnswerLineEdit"
 	_register_scroll_control(le)
 	return le
 
@@ -270,14 +263,9 @@ func _make_chart_input(placeholder: String) -> LineEdit:
 
 
 func _make_chip_button(text: String, filled := false) -> Button:
-	var b := Button.new()
-	b.mouse_filter = Control.MOUSE_FILTER_PASS
+	var b: Button = CHIP_BUTTON_SCENE.instantiate()
 	# Bidi-safe display for mixed Farsi/English chips.
-	b.text = GrammarTheme.bidi_fix(text)
-	b.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(text) else Control.TEXT_DIRECTION_LTR
-	# Keep chips comfortably tappable.
-	b.custom_minimum_size = Vector2(0, 76)
-	b.theme_type_variation = &"ChipButtonFilled" if filled else &"ChipButton"
+	b.call("setup", GrammarTheme.bidi_fix(text), _is_fa_dominant(text), filled)
 	_register_scroll_control(b)
 	return b
 
@@ -301,11 +289,7 @@ func _make_word_toggle(word: String, compact := false) -> Button:
 
 
 func _make_feedback(parent: Node) -> Label:
-	var fb := Label.new()
-	fb.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	fb.autowrap_mode = TextServer.AUTOWRAP_WORD
-	fb.theme_type_variation = &"FeedbackLabel"
-	fb.visible = false
+	var fb: Label = FEEDBACK_LABEL_SCENE.instantiate()
 	parent.add_child(fb)
 	return fb
 

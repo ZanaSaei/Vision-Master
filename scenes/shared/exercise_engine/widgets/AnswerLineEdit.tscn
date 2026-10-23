@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[node name="AnswerLineEdit" type="LineEdit"]
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_type_variation = &"AnswerLineEdit"
