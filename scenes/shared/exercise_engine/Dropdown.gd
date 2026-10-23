@@ -29,6 +29,13 @@ func set_font(f: Font) -> void:
 func add_item(label: String) -> void:
 	_options.append(label)
 
+# Restores the placeholder selection (index 0) and refreshes the face text.
+# Used by the exercise engine's in-place "Try Again" reset.
+func reset() -> void:
+	selected = 0
+	if is_inside_tree():
+		_refresh_face()
+
 func get_item_text(index: int) -> String:
 	if index <= 0 or index > _options.size():
 		return "— " + placeholder + " —"

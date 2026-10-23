@@ -576,6 +576,7 @@ func _build_multiple_choice() -> void:
 					if option_btns[idx].button_pressed:
 						return idx
 				return -1,
+			"reset": func(): _clear_select_buttons(option_btns),
 			"answer": answer,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
@@ -614,6 +615,7 @@ func _build_true_false() -> void:
 				if f_btn.button_pressed:
 					return false
 				return null,
+			"reset": func(): _clear_select_buttons([t_btn, f_btn]),
 			"answer": ans,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(corr_raw),
@@ -655,6 +657,7 @@ func _build_matching() -> void:
 				if ob.selected > 0:
 					return ob.get_item_text(ob.selected)
 				return "",
+			"reset": func(): ob.reset(),
 			"answer": answer,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": "",
@@ -687,6 +690,7 @@ func _build_fill_blank() -> void:
 		_items.append({
 			"type": "fill_blank",
 			"get": func(): return le.text,
+			"reset": func(): le.text = "",
 			"answer": item.get("answer", []),
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -1094,6 +1098,14 @@ func _build_ordering() -> void:
 	_items.append({
 		"type": "ordering",
 		"get": func(): return current_order.duplicate(),
+		# Restore the original display order (0,1,2,…) and rebuild only the
+		# ordering card list, leaving the surrounding exercise state untouched.
+		"reset": func():
+			current_order.clear()
+			for i in raw_items.size():
+				current_order.append(i)
+			_clear_order_drag_state()
+			_rebuild_ordering_list(list_vbox, current_order, item_texts),
 		"answer": answer_order.duplicate(),
 		"feedback": fb,
 		"answer_display": _join_string_array(ordered_texts, " → "),
@@ -1554,6 +1566,7 @@ func _build_categorize() -> void:
 				if ob.selected > 0:
 					return ob.get_item_text(ob.selected)
 				return "",
+			"reset": func(): ob.reset(),
 			"answer": answer,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": "",
@@ -1704,6 +1717,7 @@ func _build_word_bank() -> void:
 				if ob.selected > 0:
 					return ob.get_item_text(ob.selected)
 				return "",
+			"reset": func(): ob.reset(),
 			"answer": answer,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": "",
@@ -1779,6 +1793,14 @@ func _build_sentence_ordering() -> void:
 				for idx in order:
 					chosen.append(word_texts[idx])
 				return _join_words(chosen),
+			# Return every word chip to the bank and empty the built row.
+			"reset": func():
+				order.clear()
+				for b in word_btns:
+					if is_instance_valid(b):
+						b.disabled = false
+						b.modulate.a = 1.0
+				_rebuild_order_row(order, word_btns, built_row, word_texts),
 			"answer": _join_words(answer_words),
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": "",
@@ -1845,6 +1867,7 @@ func _build_letter_scramble() -> void:
 		_items.append({
 			"type": "letter_scramble",
 			"get": func(): return le.text,
+			"reset": func(): le.text = "",
 			"answer": item.get("answer", ""),
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": "",
@@ -1888,6 +1911,7 @@ func _build_table_fill() -> void:
 				_items.append({
 					"type": "fill_blank",
 					"get": func(): return le.text,
+					"reset": func(): le.text = "",
 					"answer": answer,
 					"feedback": _make_feedback(cell_box),
 					"explanation_en": "",
@@ -1968,6 +1992,7 @@ func _build_table_fill_advanced() -> void:
 						_items.append({
 							"type": "fill_blank",
 							"get": func(): return le.text,
+							"reset": func(): le.text = "",
 							"answer": cell.get("answer", []),
 							"feedback": _make_feedback(cell_box),
 							"explanation_en": _get_en_text(cell.get("explanation", "")),
@@ -1994,6 +2019,7 @@ func _build_table_fill_advanced() -> void:
 								if ob.selected > 0:
 									return ob.get_item_text(ob.selected)
 								return "",
+							"reset": func(): ob.reset(),
 							"answer": ans,
 							"feedback": _make_feedback(cell_box),
 							"explanation_en": _get_en_text(cell.get("explanation", "")),
@@ -2024,6 +2050,7 @@ func _build_table_fill_advanced() -> void:
 								if b_no.button_pressed:
 									return false
 								return null,
+							"reset": func(): _clear_select_buttons([b_yes, b_no]),
 							"answer": ans_tf,
 							"feedback": _make_feedback(cell_box),
 							"explanation_en": _get_en_text(cell.get("explanation", "")),
@@ -2041,6 +2068,7 @@ func _build_table_fill_advanced() -> void:
 						_items.append({
 							"type": "checkbox",
 							"get": func(): return cb.button_pressed,
+							"reset": func(): cb.button_pressed = false,
 							"answer": bool(cell.get("answer", false)),
 							"feedback": _make_feedback(cell_box),
 							"explanation_en": _get_en_text(cell.get("explanation", "")),
@@ -2089,6 +2117,7 @@ func _build_table_fill_advanced() -> void:
 						_items.append({
 							"type": "textarea",
 							"get": func(): return te.text,
+							"reset": func(): te.text = "",
 							"answer": cell.get("answer", []),
 							"placeholder": str(cell.get("placeholder", "")),
 							"feedback": _make_feedback(cell_box),
@@ -2140,6 +2169,7 @@ func _build_text_highlight() -> void:
 		_items.append({
 			"type": "text_highlight",
 			"get": func(): return wb.button_pressed,
+			"reset": func(): wb.button_pressed = false,
 			"answer": is_target,
 			"feedback": fb,
 			"explanation_en": "",
@@ -2229,6 +2259,10 @@ func _build_text_highlight_multi() -> void:
 		_items.append({
 			"type": "text_highlight_multi",
 			"get": func(): return str(selected_cat[idx]),
+			# Clear this token's label and repaint it in the neutral style.
+			"reset": func():
+				selected_cat[idx] = ""
+				_update_multi_word_style(buttons[idx], "", categories),
 			"answer": str(answer_map.get(idx, "")),
 			"feedback": fb,
 			"explanation_en": "",
@@ -2342,6 +2376,7 @@ func _build_transformation() -> void:
 		_items.append({
 			"type": "transformation",
 			"get": func(): return le.text,
+			"reset": func(): le.text = "",
 			"answer": item.get("answer", []),
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -2389,6 +2424,7 @@ func _build_error_correction() -> void:
 		_items.append({
 			"type": "error_correction",
 			"get": func(): return le.text,
+			"reset": func(): le.text = "",
 			"answer": item.get("answer", ""),
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -2435,6 +2471,7 @@ func _build_word_building() -> void:
 				if ob.selected > 0:
 					return ob.get_item_text(ob.selected)
 				return "",
+			"reset": func(): ob.reset(),
 			"answer": answer,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": "",
@@ -2900,6 +2937,7 @@ func _build_chart_fill() -> void:
 				_items.append({
 					"type": "chart_fill",
 					"get": func(): return le.text,
+					"reset": func(): le.text = "",
 					"answer": cell.get("answer", []),
 					"feedback": _make_feedback(cell_box),
 					"explanation_en": _get_en_text(cell.get("explanation", {})),
@@ -2963,6 +3001,7 @@ func _build_odd_one_out() -> void:
 					if option_btns[i].button_pressed:
 						return i
 				return -1,
+			"reset": func(): _clear_select_buttons(option_btns),
 			"answer": answer,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
@@ -3031,6 +3070,7 @@ func _build_grammar_choice() -> void:
 					if option_btns[i].button_pressed:
 						return i
 				return -1,
+			"reset": func(): _clear_select_buttons(option_btns),
 			"answer": answer,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
@@ -3060,6 +3100,7 @@ func _build_passive_transformation() -> void:
 		_items.append({
 			"type": "passive_transformation",
 			"get": func(): return le.text,
+			"reset": func(): le.text = "",
 			"answer": item.get("answer", []),
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -3129,6 +3170,7 @@ func _build_grammar_identification() -> void:
 					if option_btns[i].button_pressed:
 						return i
 				return -1,
+			"reset": func(): _clear_select_buttons(option_btns),
 			"answer": answer,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
@@ -3155,6 +3197,7 @@ func _build_question_formation() -> void:
 		_items.append({
 			"type": "question_formation",
 			"get": func(): return le.text,
+			"reset": func(): le.text = "",
 			"answer": item.get("answer", []),
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -3251,6 +3294,7 @@ func _build_token_label() -> void:
 					if ob.selected > 0 and ob.selected - 1 < ids.size():
 						return ids[ob.selected - 1]
 					return "",
+				"reset": func(): ob.selected = 0,
 				"answer": ans,
 				"answer_display": ans_display,
 				"feedback": fb,
@@ -3297,6 +3341,7 @@ func _build_image_choice() -> void:
 				if option_btns[i].button_pressed:
 					return i
 			return -1,
+		"reset": func(): _clear_select_buttons(option_btns),
 		"answer": answer,
 		"answer_display": answer_display,
 		"feedback": fb,
@@ -3345,6 +3390,7 @@ func _build_image_match() -> void:
 					if option_btns[i].button_pressed:
 						return i
 				return -1,
+			"reset": func(): _clear_select_buttons(option_btns),
 			"answer": answer,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
@@ -3427,6 +3473,9 @@ func _build_image_hotspot() -> void:
 	_items.append({
 		"type": "image_hotspot",
 		"get": func(): return overlay.selected.duplicate(),
+		"reset": func():
+			overlay.selected.clear()
+			overlay.queue_redraw(),
 		"answer": answer_ids,
 		"feedback": fb,
 		"answer_display": _join_string_array(answer_ids, ", "),

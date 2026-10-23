@@ -251,14 +251,81 @@ func _format_answer(answer: Variant) -> String:
 	return str(answer)
 
 
+# Resets the ALREADY-BUILT exercise in place for another attempt.
+#
+# This used to call build(_exercise, false), which deleted and recreated every
+# node in the exercise. That caused visible flicker, reset the workbook page's
+# scroll position and re-ran the whole build cost on every "Try Again".
+#
+# Instead we now walk the records collected during build() and reset each
+# control to the state it had right after construction:
+#   * every per-item feedback label is cleared and hidden,
+#   * every item's own "reset" callback (registered by its _build_* method)
+#     restores its answers / selections / dropdowns / inputs,
+#   * cloze and word-search, which grade through their own visuals rather than
+#     per-item feedback, are handled explicitly,
+#   * the score banner and Check button are restored to their initial look.
+# The UI tree, node references, scroll position and behaviour are untouched.
 func _reset_for_retry() -> void:
 	_is_graded = false
+
 	if _score_banner:
 		_score_banner.visible = false
+
+	# A note that is hidden at build time (graded exercises) is revealed after
+	# grading; put it back to its initial visibility.
+	if _note_label:
+		_note_label.visible = _is_open_ended or _is_non_interactive
+
+	# Reset each item's own controls/answers and clear its feedback label.
+	for item in _items:
+		var fb: Variant = item.get("feedback", null)
+		if fb is Label and is_instance_valid(fb):
+			(fb as Label).text = ""
+			(fb as Label).visible = false
+		var reset: Variant = item.get("reset", null)
+		if reset is Callable and (reset as Callable).is_valid():
+			(reset as Callable).call()
+
+	# Inline cloze recolors its blank slots instead of using per-item labels.
+	if str(_exercise.get("type", "")) == "cloze":
+		_reset_cloze_for_retry()
+
+	# Word search freezes and recolors its word buttons on grading.
+	if str(_exercise.get("type", "")) in ["word_search", "word_find"]:
+		_reset_word_search_for_retry()
+
 	if _check_btn:
 		_check_btn.text = _t("check_answer")
 		_apply_fa_meta(_check_btn, "check_answer")
-	build(_exercise, false)
+
+
+# Clears every inline cloze blank and re-renders the passage so the numbered
+# placeholders reappear. The passage control itself is NOT rebuilt.
+func _reset_cloze_for_retry() -> void:
+	_cloze_graded_all = false
+	_cloze_active = -1
+	for i in _cloze_choices.size():
+		_cloze_choices[i] = ""
+		if i < _cloze_graded.size():
+			_cloze_graded[i] = false
+	if _cloze_popup != null:
+		_cloze_popup.hide()
+	_refresh_cloze_bbcode()
+
+
+# Word search disables and recolors its word buttons during grading; put them
+# back to their neutral, tappable idle state.
+func _reset_word_search_for_retry() -> void:
+	for item in _items:
+		if str(item.get("type", "")) != "word_search_word":
+			continue
+		var btn: Button = item.get("word_button", null)
+		if btn == null or not is_instance_valid(btn):
+			continue
+		btn.disabled = false
+		btn.button_pressed = false
+		_style_word_search_word_button(btn, "idle")
 
 
 func _on_reveal_sample() -> void:

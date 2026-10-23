@@ -95,6 +95,14 @@ func _join_string_array(arr: Array, sep: String) -> String:
 	return out
 
 # ---------- widget factories + audio ----------
+# Clears the pressed state of a group of toggle/select buttons. Used by the
+# in-place retry reset (a ButtonGroup is left with nothing selected, which is
+# the same state the buttons start in before the learner answers).
+func _clear_select_buttons(btns: Array) -> void:
+	for b in btns:
+		if b is BaseButton and is_instance_valid(b):
+			(b as BaseButton).button_pressed = false
+
 func _make_label(text: String, font_size: int, color: Color, bold: bool) -> Label:
 	font_size += 4
 	var l := Label.new()
