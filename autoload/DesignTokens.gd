@@ -333,7 +333,7 @@ static func button_pressed(dark: bool = false) -> StyleBoxFlat:
 
 
 ## Disabled: contrast drops and the shadow is removed entirely.
-static func button_disabled(dark: bool = false) -> StyleBoxFlat:
+static func button_disabled(_dark: bool = false) -> StyleBoxFlat:
 	var fill := Color("#D8D3C7")
 	var s := box(fill, RADIUS_PILL, Color(0, 0, 0, 0), 0)
 	return pad(s, SPACE_MD, SPACE_SM)

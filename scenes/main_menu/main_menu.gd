@@ -17,7 +17,6 @@ var _lifetime_request_id: int = 0
 @onready var _main_col: VBoxContainer = $RootScroll/OuterMargin/MainColumn
 @onready var _continue_button: Button = $RootScroll/OuterMargin/MainColumn/ContinueSlot/ContinueButton
 @onready var _continue_sub: Label = $RootScroll/OuterMargin/MainColumn/ContinueSlot/ContinueButton/Margin/Row/TextColumn/SubLabel
-@onready var _continue_title: Label = $RootScroll/OuterMargin/MainColumn/ContinueSlot/ContinueButton/Margin/Row/TextColumn/TitleLabel
 @onready var _brand_mark: TextureRect = $RootScroll/OuterMargin/MainColumn/HeroVBox/BrandMark
 @onready var _daily_tab: Button = $RootScroll/OuterMargin/MainColumn/BoardTabs/DailyBoardButton
 @onready var _lifetime_tab: Button = $RootScroll/OuterMargin/MainColumn/BoardTabs/LifetimeBoardButton
