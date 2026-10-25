@@ -96,6 +96,39 @@ func _find_navigation_bar(root: Node) -> VisionNavigationBar:
 
 
 ############################################################
+# THREADED SCENE PRELOADING
+#   change_scene_to_file() loads AND instantiates the whole scene on the
+#   main thread — on mobile this is a visible frame hitch on navigation.
+#   Instead the destination PackedScene is requested on a worker thread
+#   while the exit animation is still covering the screen, and the swap
+#   is then a cheap change_scene_to_packed(). Falls back to the
+#   synchronous path if threading is unavailable or the load fails.
+############################################################
+
+## Kick off a background load of `scene_path`. No-op when cached or empty.
+func _begin_preload(scene_path: String) -> void:
+	if scene_path == "" or ResourceLoader.has_cached(scene_path):
+		return
+	ResourceLoader.load_threaded_request(scene_path, "PackedScene", true)
+
+
+## Await the threaded load started by _begin_preload (or fall back to a
+## synchronous load). Returns null when the scene can't be loaded.
+func _threaded_get(scene_path: String) -> PackedScene:
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		return null
+	if ResourceLoader.has_cached(scene_path):
+		return load(scene_path) as PackedScene
+	var state := ResourceLoader.load_threaded_get_status(scene_path)
+	while state == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		await get_tree().process_frame
+		state = ResourceLoader.load_threaded_get_status(scene_path)
+	if state == ResourceLoader.THREAD_LOAD_LOADED:
+		return ResourceLoader.load_threaded_get(scene_path) as PackedScene
+	return null
+
+
+############################################################
 # FADE — classic transition, unchanged.
 # Side-menu buttons keep using this, per your requirement.
 ############################################################
@@ -122,9 +155,16 @@ func change_scene(scene_path: String) -> void:
 
 	while true:
 		_active_scene = target
+		# Load the destination on a worker thread while the fade-out
+		# animation covers it, so the swap below never stalls a frame.
+		_begin_preload(target)
 		await _fade_out(black)
 		# 2. Swap the scene while nothing is visible.
-		get_tree().change_scene_to_file(target)
+		var packed: PackedScene = await _threaded_get(target)
+		if packed != null:
+			get_tree().change_scene_to_packed(packed)
+		else:
+			get_tree().change_scene_to_file(target)
 		# 3. Give the new scene two frames to finish layout before revealing.
 		await get_tree().process_frame
 		await get_tree().process_frame
@@ -181,13 +221,16 @@ func _fade_in() -> void:
 func tab_change_scene(scene_path: String, direction: Slide) -> void:
 	if scene_path.is_empty() or _tab_change_busy or _fade_busy or _slide_busy:
 		return
-	var target_resource: Resource = load(scene_path)
-	if target_resource == null or not (target_resource is PackedScene):
+	if not ResourceLoader.exists(scene_path):
 		push_error("tab_change_scene: can't load '%s'." % scene_path)
 		return
 	_tab_change_busy = true
 	tab_transition_started.emit()
 	_lock_navigation_bars()
+	# Kick the destination load off on a worker thread immediately, so the
+	# outgoing slide animation runs during the load instead of the tap
+	# frame stalling on a synchronous load.
+	_begin_preload(scene_path)
 	var scene_tree: SceneTree = get_tree()
 	var travel: float = maxf(get_viewport().get_visible_rect().size.x, 1.0)
 	var exit_offset: float = -travel if direction == Slide.FORWARD else travel
@@ -202,7 +245,14 @@ func tab_change_scene(scene_path: String, direction: Slide) -> void:
 		)
 		await outgoing_tween.finished
 
-	var error_code: int = scene_tree.change_scene_to_file(scene_path)
+	# The worker-thread load started above has had the whole exit animation
+	# to finish; pick it up (or fall back to the synchronous path).
+	var packed: PackedScene = await _threaded_get(scene_path)
+	var error_code: int = OK
+	if packed != null:
+		error_code = scene_tree.change_scene_to_packed(packed)
+	else:
+		error_code = scene_tree.change_scene_to_file(scene_path)
 	if error_code != OK:
 		push_error(
 			"tab_change_scene: can't load '%s' (%s)."
@@ -295,11 +345,43 @@ func _finish_tab_transition(success: bool) -> void:
 # layout is then allowed to settle while it is invisible, and
 # only then does it slide home.
 ############################################################
+############################################################
+# INSTANT — threaded but transition-free scene swap.
+# Legacy call sites used change_scene_to_file() directly, which loads AND
+# instantiates the scene synchronously on the tap frame (a visible hitch).
+# change_scene_now() starts the load on a worker thread immediately and
+# swaps as soon as the packed scene is ready, with no visual transition —
+# identical behaviour minus the stall. Returns false only when the scene
+# could not be loaded at all.
+############################################################
+func change_scene_now(scene_path: String) -> bool:
+	if not ResourceLoader.exists(scene_path):
+		push_error("change_scene_now: scene not found — " + scene_path)
+		return false
+	_begin_preload(scene_path)
+	var packed: PackedScene = await _threaded_get(scene_path)
+	if packed != null:
+		get_tree().change_scene_to_packed(packed)
+		return true
+	# Worker path failed (rare): fall back to the direct call so the tap
+	# still goes somewhere instead of dead-ending the user.
+	var err := get_tree().change_scene_to_file(scene_path)
+	if err != OK:
+		push_error("change_scene_now: couldn't open '%s' (%s)."
+			% [scene_path, error_string(err)])
+		return false
+	return true
+
+
 func slide_change_scene(scene_path: String, direction: Slide) -> void:
 	# Ignore any tap that arrives while a slide is already running.
 	if _slide_busy:
 		return
 	_slide_busy = true
+	# Start loading the destination on a worker thread right away: the whole
+	# Phase-1 exit animation then runs concurrently with the load instead of
+	# the load stalling the Phase-2 swap.
+	_begin_preload(scene_path)
 
 	# Total horizontal distance: full screen width + margin for shadows.
 	var travel := get_viewport().get_visible_rect().size.x + SLIDE_MARGIN
@@ -330,7 +412,12 @@ func slide_change_scene(scene_path: String, direction: Slide) -> void:
 		await tw_out.finished
 
 	# --- Phase 2: swap scenes while the old content is off-screen. ---
-	var err := get_tree().change_scene_to_file(scene_path)
+	var packed: PackedScene = await _threaded_get(scene_path)
+	var err := OK
+	if packed != null:
+		get_tree().change_scene_to_packed(packed)
+	else:
+		err = get_tree().change_scene_to_file(scene_path)
 	if err != OK:
 		# Scene failed to load — slide the old screen back home and bail.
 		push_error("slide_change_scene: can't load " + scene_path)

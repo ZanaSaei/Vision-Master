@@ -298,6 +298,10 @@ func _ready() -> void:
 			_shared_font_farsi = farsi
 	_font_farsi = _shared_font_farsi
 
+	# _process is only needed while a press is being tracked for the
+	# hold-to-cancel behaviour; it is toggled on press and off on release.
+	set_process(false)
+
 	add_theme_constant_override("separation", 18)
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -580,6 +584,7 @@ func _on_scroll_child_gui_input(event: InputEvent, source: Control) -> void:
 		_hold_blocked = false
 		_press_pos = press_pos
 		_press_time_msec = Time.get_ticks_msec()
+		set_process(true)
 
 		if _is_editable_control(source):
 			if source.has_focus():
@@ -607,6 +612,7 @@ func _on_scroll_child_gui_input(event: InputEvent, source: Control) -> void:
 		_drag_active = false
 		_hold_blocked = false
 		_drag_source = null
+		set_process(false)
 
 func _viewport_width() -> float:
 	var vp := get_viewport()

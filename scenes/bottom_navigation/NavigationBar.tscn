@@ -19,6 +19,7 @@ shader = ExtResource("1_54rmf")
 shader_parameter/bar_color = Color(1, 1, 1, 1)
 shader_parameter/cutout_center = Vector2(180, 0)
 shader_parameter/cutout_radius = 44.0
+shader_parameter/top_corner_radius = 24.0
 shader_parameter/bar_size = Vector2(360, 72)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ku3dv"]
@@ -48,8 +49,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0
-offset_right = 0.0
 offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -63,7 +62,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 5
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 
 [node name="Items" type="HBoxContainer" parent="MarginContainer" unique_id=432825537]
@@ -72,7 +71,7 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Home" type="Control" parent="MarginContainer/Items" unique_id=839815064]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -81,26 +80,25 @@ custom_minimum_size = Vector2(35, 35)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 39.0
+offset_bottom = 60.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("1_sflyj")
-expand_mode = 2
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/Items/Home" unique_id=192614851]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 43.0
-offset_bottom = 67.0
+offset_top = 64.0
+offset_bottom = 90.0
 grow_horizontal = 2
 text = "خانه"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Books" type="Control" parent="MarginContainer/Items" unique_id=1959694762]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -109,26 +107,26 @@ custom_minimum_size = Vector2(35, 35)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 39.0
+offset_bottom = 60.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("3_vog3g")
 expand_mode = 2
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/Items/Books" unique_id=83053727]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 43.0
-offset_bottom = 67.0
+offset_top = 64.0
+offset_bottom = 90.0
 grow_horizontal = 2
 text = "کتاب"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Games" type="Control" parent="MarginContainer/Items" unique_id=423623266]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -137,26 +135,26 @@ custom_minimum_size = Vector2(35, 35)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 39.0
+offset_bottom = 60.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("4_wocfp")
 expand_mode = 2
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/Items/Games" unique_id=748897416]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 43.0
-offset_bottom = 67.0
+offset_top = 64.0
+offset_bottom = 90.0
 grow_horizontal = 2
 text = "بازی"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Exam" type="Control" parent="MarginContainer/Items" unique_id=1707272213]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -165,26 +163,26 @@ custom_minimum_size = Vector2(35, 35)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 39.0
+offset_bottom = 60.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("5_ncpsy")
 expand_mode = 2
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/Items/Exam" unique_id=1356003114]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 43.0
-offset_bottom = 67.0
+offset_top = 64.0
+offset_bottom = 90.0
 grow_horizontal = 2
 text = "امتحان نهایی"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Flashcards" type="Control" parent="MarginContainer/Items" unique_id=1039648138]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -193,26 +191,26 @@ custom_minimum_size = Vector2(35, 35)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 39.0
+offset_bottom = 60.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("6_vmnu6")
 expand_mode = 2
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/Items/Flashcards" unique_id=1740857421]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 43.0
-offset_bottom = 67.0
+offset_top = 64.0
+offset_bottom = 90.0
 grow_horizontal = 2
 text = "فلش کارت"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Menu" type="Control" parent="MarginContainer/Items" unique_id=1336864719]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -221,19 +219,19 @@ custom_minimum_size = Vector2(35, 35)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 39.0
+offset_bottom = 60.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("7_54eih")
 expand_mode = 2
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/Items/Menu" unique_id=1049984574]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 43.0
-offset_bottom = 67.0
+offset_top = 64.0
+offset_bottom = 90.0
 grow_horizontal = 2
 text = "منو"
 label_settings = ExtResource("2_54rmf")

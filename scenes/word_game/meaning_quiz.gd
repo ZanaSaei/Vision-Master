@@ -37,7 +37,7 @@ func _on_back_pressed() -> void:
 	if _mode == "book_select":
 		_show_modes()
 		return
-	get_tree().change_scene_to_file(HUB_SCENE)
+	TransitionManager.change_scene_now(HUB_SCENE)
 
 
 func _on_android_back_pressed() -> void:

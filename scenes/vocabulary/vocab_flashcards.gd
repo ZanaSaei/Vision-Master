@@ -528,7 +528,7 @@ func _enter_lesson_mode() -> void:
 	
 	if lesson_data.is_empty():
 		push_error("Failed to load lesson %d from book %d" % [lesson, book])
-		get_tree().change_scene_to_file(SCENE_LESSON_MENU)
+		TransitionManager.change_scene_now(SCENE_LESSON_MENU)
 		return
 	
 	var vocab_section: Dictionary = lesson_data.get("vocabulary", {})
@@ -727,9 +727,9 @@ func _update_antonyms(entry: Dictionary) -> void:
 
 func _handle_empty_list() -> void:
 	if mode == Mode.SAVED:
-		get_tree().change_scene_to_file(SCENE_NO_SAVED_WORDS)
+		TransitionManager.change_scene_now(SCENE_NO_SAVED_WORDS)
 	else:
-		get_tree().change_scene_to_file(SCENE_MAIN_MENU)
+		TransitionManager.change_scene_now(SCENE_MAIN_MENU)
 
 
 func _refresh_save_button(entry: Dictionary) -> void:

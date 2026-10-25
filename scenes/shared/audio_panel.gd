@@ -41,6 +41,9 @@ func _ready() -> void:
 	_apply_theme()
 	_apply_slider_theme()
 	_setup_animated_dot()
+	# Only tick while audio is actually playing (re-enabled by
+	# load_and_play / the play-pause resume branches).
+	set_process(false)
 
 
 func _apply_theme() -> void:
@@ -156,8 +159,13 @@ func _reset_button_scales() -> void:
 		button.scale = Vector2.ONE
 
 func _process(_delta: float) -> void:
-	# Broadcast the current time for syncing text[cite: 2, 3]
-	if (audio_player.playing or audio_player.stream_paused) and not is_dragging_slider:
+	# Nothing to broadcast while stopped: stop ticking until a playback site
+	# re-enables us (load_and_play / play-pause resume).
+	if not (audio_player.playing or audio_player.stream_paused):
+		set_process(false)
+		return
+	# Broadcast the current time for syncing text
+	if not is_dragging_slider:
 		var current_time = audio_player.get_playback_position()
 		audio_slider.value = current_time
 		playback_updated.emit(current_time)
@@ -183,6 +191,7 @@ func load_and_play(audio_path: String) -> void:
 	call_deferred("_notify_visibility_changed", true)
 	_reset_button_scales()
 	audio_player.stream = stream
+	set_process(true)
 	audio_player.play()
 	audio_player.stream_paused = false
 	audio_slider.max_value = stream.get_length()
@@ -203,13 +212,15 @@ func _on_play_pause_pressed() -> void:
 	
 	if audio_player.stream_paused:
 		audio_player.stream_paused = false
-		if not audio_player.playing: 
+		set_process(true)
+		if not audio_player.playing:
 			audio_player.play(audio_slider.value)
 	elif audio_player.playing:
 		audio_player.stream_paused = true
 	else:
 		# Stream finished (or was stopped): hit play again to replay from the start.
 		audio_slider.value = 0.0
+		set_process(true)
 		audio_player.play()
 
 func _on_rewind_pressed() -> void:

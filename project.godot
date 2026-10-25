@@ -16,6 +16,7 @@ config/auto_accept_quit=false
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.7", "Mobile")
 run/max_fps=60.0
+run/low_processor_mode=true
 boot_splash/bg_color=Color(0.9372549, 0.92156863, 0.88235295, 1)
 boot_splash/stretch_mode=0
 boot_splash/image="uid://ds0litfms2cyf"

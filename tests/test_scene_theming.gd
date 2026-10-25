@@ -13,10 +13,13 @@ extends Node
 ##
 ##  EXIT-TIME NOTE: this sweep deliberately boots all 47 screens, which
 ##  populates process-lifetime caches — most visibly MenuStyle._font_cache, a
-##  `static var` holding every font the app loads. Godot therefore reports "1
-##  resource still in use at exit" after a sweep run. That is the cache being
-##  held correctly, not a leak from this test: every scene instance is freed
-##  here, and the same note appears when the real app is launched and closed.
+##  `static var` holding every font the app loads. Godot therefore reports
+##  resources "still in use at exit" after a sweep run (1 normally, 2 with
+##  application/run/low_processor_mode enabled, which parks one more canvas
+##  resource until the harness force-quits). Both counts are teardown
+##  accounting in a dying process, not leaks from this test: every scene
+##  instance is freed here, and a plain app launch + quit (verified with
+##  --verbose --quit-after) exits with ZERO such reports either way.
 ## ============================================================
 
 const SCENE_ROOT := "res://scenes"

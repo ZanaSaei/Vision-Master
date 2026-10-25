@@ -29,6 +29,16 @@ const MANIFEST_PATH := "user://content/manifest.json"
 var _manifest: Dictionary = {}
 var _index: Dictionary = {}
 
+# resolve() results cached by logical path so hot paths (per-word audio /
+# image lookups in lesson lists) don't stat the filesystem every call.
+# Cleared whenever a file lands on or leaves disk (_store_file,
+# clear_downloads, validate_downloads).
+var _resolve_cache: Dictionary = {}
+# Manifest entries indexed by "book|lesson", rebuilt whenever the manifest
+# changes, so _files_for_lesson() is a Dictionary lookup instead of a linear
+# scan over the whole manifest.
+var _lesson_files: Dictionary = {}
+
 var _queue: Array = []
 var _active: bool = false
 var _failed: Array = []
@@ -73,14 +83,19 @@ func _ready() -> void:
 ## Returns a loadable path for a logical `res://assets/...` path, preferring
 ## the bundled copy, then the downloaded copy, else "" when missing.
 func resolve(logical_path: String) -> String:
+	if _resolve_cache.has(logical_path):
+		return _resolve_cache[logical_path]
+	var resolved := ""
 	if FileAccess.file_exists(logical_path):
-		return logical_path
-	var rel := _rel(logical_path)
-	if rel != "":
-		var local := _local_for(rel)
-		if FileAccess.file_exists(local):
-			return local
-	return ""
+		resolved = logical_path
+	else:
+		var rel := _rel(logical_path)
+		if rel != "":
+			var local := _local_for(rel)
+			if FileAccess.file_exists(local):
+				resolved = local
+	_resolve_cache[logical_path] = resolved
+	return resolved
 
 
 func has_asset(logical_path: String) -> bool:
@@ -157,6 +172,7 @@ func _on_manifest_completed(result: int, code: int, _headers: PackedStringArray,
 		push_error("Content: manifest is not a JSON object.")
 		return
 	_manifest = parsed
+	_rebuild_lesson_index()
 	var file := FileAccess.open(MANIFEST_PATH, FileAccess.WRITE)
 	if file != null:
 		file.store_string(text)
@@ -360,6 +376,7 @@ func total_downloaded_bytes() -> int:
 
 func clear_downloads() -> void:
 	_index.clear()
+	_resolve_cache.clear()
 	_save_index()
 	_remove_dir_recursive(ProjectSettings.globalize_path(LOCAL_DIR))
 
@@ -390,6 +407,7 @@ func _store_file(entry: Dictionary, bytes: PackedByteArray) -> bool:
 	file.store_buffer(bytes)
 	file.close()
 	_index[rel] = {"sha256": expected, "size": bytes.size()}
+	_resolve_cache.clear()
 	_save_index()
 	return true
 
@@ -439,6 +457,7 @@ func validate_downloads() -> int:
 			push_warning("Content: %s is corrupt on disk; re-queuing." % rel)
 			bad_rels.append(entry)
 			_index.erase(rel)
+			_resolve_cache.clear()
 	if not bad_rels.is_empty():
 		_save_index()
 		_reset_if_idle()
@@ -470,6 +489,7 @@ func _load_cached_manifest() -> void:
 	file.close()
 	if parsed is Dictionary:
 		_manifest = parsed
+		_rebuild_lesson_index()
 
 
 func _remove_dir_recursive(abs_path: String) -> void:
@@ -495,12 +515,23 @@ func _remove_dir_recursive(abs_path: String) -> void:
 # HELPERS
 # ------------------------------------------------------------
 
-func _files_for_lesson(book: int, lesson: int) -> Array:
-	var out: Array = []
+## Rebuilds the "book|lesson" -> entries index. Call whenever `_manifest` changes.
+func _rebuild_lesson_index() -> void:
+	_lesson_files.clear()
 	for entry in _manifest.get("files", []):
-		if int(entry.get("book", -1)) == book and int(entry.get("lesson", -1)) == lesson:
-			out.append(entry)
-	return out
+		if not (entry is Dictionary):
+			continue
+		var key := "%d|%d" % [int(entry.get("book", -1)), int(entry.get("lesson", -1))]
+		if not _lesson_files.has(key):
+			_lesson_files[key] = []
+		(_lesson_files[key] as Array).append(entry)
+
+
+func _files_for_lesson(book: int, lesson: int) -> Array:
+	var key := "%d|%d" % [book, lesson]
+	if _lesson_files.has(key):
+		return _lesson_files[key]
+	return []
 
 
 func _entry_present(entry: Dictionary) -> bool:

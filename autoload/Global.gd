@@ -22,6 +22,8 @@ var _category_cache: Dictionary = {}
 var _json_cache: Dictionary = {}
 var _lesson_index_cache: Dictionary = {}
 var _word_db_loaded := false
+# Worker thread parsing v_dictionary.json after boot; null when idle/adopted.
+var _word_db_thread: Thread = null
 
 const DICTIONARY_PATH := "res://data/v_dictionary.json"
 
@@ -255,9 +257,10 @@ func _ready() -> void:
 	_load_saved_words()
 	_load_review_words()
 	_load_progress()
-	# The 1 MB dictionary parse is deferred off the boot critical path (and
-	# lazily loaded on first lookup) so startup doesn't freeze on it.
-	call_deferred("_load_word_database")
+	# The 1 MB dictionary parse runs on a worker thread (started here) so
+	# neither boot nor the frames after it ever stall on the parse; the
+	# first definition lookup adopts the result as soon as it is ready.
+	_start_word_database_load()
 	_load_settings()
 	_init_tts() # You can keep or remove TTS init, keeping it for safety
 
@@ -283,6 +286,13 @@ func _on_scene_changed() -> void:
 
 func _style_initial_scene() -> void:
 	style_scene(get_tree().current_scene)
+
+func _exit_tree() -> void:
+	# Join the dictionary worker on shutdown so a started Thread is always
+	# reaped — freeing one mid-run can crash the process at exit.
+	if _word_db_thread != null:
+		_word_db_thread.wait_to_finish()
+	_word_db_thread = null
 
 # ---------- LAST SCENE ----------
 
@@ -746,30 +756,35 @@ func reset_all_progress() -> void:
 
 # ---------- ENHANCED WORD DATABASE ----------
 
-func _load_word_database(force := false) -> void:
-	"""Load every word from the single unified dictionary file into the database"""
-	if _word_db_loaded and not force:
-		return
-	word_database.clear()
-	verb_forms.clear()
+## Parses v_dictionary.json and builds the word + verb-form databases.
+## Pure: reads only and writes no member state, so it is safe to run on a
+## worker Thread. Returns {"words": Dictionary, "verbs": Dictionary}, or an
+## empty Dictionary on any load or parse failure.
+func _parse_word_database() -> Dictionary:
 
 	if not FileAccess.file_exists(DICTIONARY_PATH):
 		push_error("Dictionary file not found: " + DICTIONARY_PATH)
-		return
+		return {}
 
 	var file := FileAccess.open(DICTIONARY_PATH, FileAccess.READ)
+	if file == null:
+		push_error("Could not open %s (error %d)." % [DICTIONARY_PATH, FileAccess.get_open_error()])
+		return {}
 	var text := file.get_as_text()
 	file.close()
 
 	var json := JSON.new()
 	if json.parse(text) != OK:
 		push_error("Failed to parse v_dictionary.json — %s" % json.get_error_message())
-		return
+		return {}
 
 	var data = json.data
 	if not data is Array:
 		push_error("Invalid v_dictionary.json format: expected a flat array of word objects")
-		return
+		return {}
+
+	var db: Dictionary = {}
+	var verbs: Dictionary = {}
 
 	for word_obj in data:
 		var word: String = word_obj.get("word", "")
@@ -777,7 +792,7 @@ func _load_word_database(force := false) -> void:
 			continue
 
 		var key := word.to_lower()
-		if word_database.has(key):
+		if db.has(key):
 			continue  # keep the first occurrence if a word appears twice
 
 		var word_data := {
@@ -794,18 +809,76 @@ func _load_word_database(force := false) -> void:
 	"audio": word_obj.get("audio", ""),
 	"phonetics": word_obj.get("phonetics", "")
 }
-		word_database[key] = word_data
+		db[key] = word_data
 
 		if word_data["word_type"] == "verb":
 			var forms = word_data["verb_forms"]
 			var base_word: String = word_data["word"]
-			if forms.has("past"): verb_forms[forms["past"].to_lower()] = base_word
-			if forms.has("past_participle"): verb_forms[forms["past_participle"].to_lower()] = base_word
-			if forms.has("present_participle"): verb_forms[forms["present_participle"].to_lower()] = base_word
-			if forms.has("third_person"): verb_forms[forms["third_person"].to_lower()] = base_word
+			if forms.has("past"): verbs[forms["past"].to_lower()] = base_word
+			if forms.has("past_participle"): verbs[forms["past_participle"].to_lower()] = base_word
+			if forms.has("present_participle"): verbs[forms["present_participle"].to_lower()] = base_word
+			if forms.has("third_person"): verbs[forms["third_person"].to_lower()] = base_word
 
-	print("Word database loaded: %d words" % word_database.size())
+	print("Word database loaded: %d words" % db.size())
+	return { "words": db, "verbs": verbs }
+
+
+## Installs a result produced by _parse_word_database(). Returns false (and
+## leaves the previous database in place) when the parse had failed.
+func _apply_word_database(result: Dictionary) -> bool:
+	if not result.has("words"):
+		return false
+	word_database = result["words"]
+	verb_forms = result["verbs"]
 	_word_db_loaded = true
+	return true
+
+
+## Kicks the 1 MB dictionary parse off onto a worker thread right after boot,
+## so no frame on the main thread ever stalls on it.
+func _start_word_database_load() -> void:
+	if _word_db_loaded or _word_db_thread != null:
+		return
+	_word_db_thread = Thread.new()
+	if _word_db_thread.start(_word_db_thread_main) != OK:
+		# Threads unavailable (exotic platforms): keep the lazy sync path.
+		_word_db_thread = null
+
+
+## Worker entry point: parses, then hands the result to the main thread via
+## a deferred call. The returned Dictionary is also retrievable through
+## Thread.wait_to_finish() if a lookup needs it before that call runs.
+func _word_db_thread_main() -> Dictionary:
+	var result := _parse_word_database()
+	_finish_word_database.call_deferred()
+	return result
+
+
+## Adopts the background parse result. Runs on the main thread — either from
+## the deferred call above or eagerly from a first definition lookup, which
+## then only blocks for the (usually tiny) remainder of the parse.
+func _finish_word_database() -> void:
+	if _word_db_thread == null:
+		return  # already adopted eagerly by an earlier call
+	var result: Dictionary = _word_db_thread.wait_to_finish()
+	_word_db_thread = null
+	_apply_word_database(result)
+
+
+## Synchronous load, kept for reload_word_database() (Settings) and the lazy
+## fallback for a definition requested before boot started the worker.
+## Adopts an in-flight background parse instead of parsing the file twice.
+func _load_word_database(force := false) -> void:
+	"""Load every word from the single unified dictionary file into the database"""
+	if _word_db_loaded and not force:
+		return
+	if _word_db_thread != null:
+		_finish_word_database()
+		if _word_db_loaded:
+			# The worker just delivered a parse of the very same file, so a
+			# reload requested this early has nothing new to read.
+			return
+	_apply_word_database(_parse_word_database())
 
 
 func get_word_definition(word: String) -> Dictionary:

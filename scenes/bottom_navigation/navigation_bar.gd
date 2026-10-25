@@ -7,9 +7,9 @@ signal menu_item_selected(menu_index: int)
 
 const ITEM_COUNT: int = 6
 const MENU_ITEM_COUNT: int = 4
-const SELECTOR_SIZE: float = 84.0
-const ACTIVE_ICON_SIZE: float = 44.0
-const NORMAL_ICON_SIZE: float = 54.0
+const SELECTOR_SIZE: float = 90.0
+const ACTIVE_ICON_SIZE: float = 55.0
+const NORMAL_ICON_SIZE: float = 40.0
 const CUTOUT_RADIUS: float = 50.0
 const NORMAL_ICON_TOUCH_RADIUS: float = 38.0
 const ICON_CLEAR_FADE_DURATION: float = 0.72
@@ -727,12 +727,12 @@ func _configure_items() -> void:
 		normal_icon.position = Vector2.ZERO
 
 		label.add_theme_color_override("font_color", label_color)
-		label.add_theme_font_size_override("font_size", 22)
+		label.add_theme_font_size_override("font_size", 26)
 		if label.label_settings != null:
 			label.label_settings.font_color = label_color
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		label.set_anchors_preset(Control.PRESET_TOP_LEFT)
-		label.size = Vector2(item.size.x, 30.0)
+		label.size = Vector2(item.size.x, 36.0)
 		label.position = Vector2(0.0, 0.0)
 		label.offset_left = 0.0
 		label.offset_right = item.size.x
@@ -875,13 +875,14 @@ func _navigate_to_scene(
 	# Side-menu destinations are layered screens rather than peer tabs. Route
 	# those directly; only primary tabs use a quick horizontal push.
 	if _target_primary_index(target_scene) >= ITEM_SCENES.size() - 1:
-		var error_code: int = get_tree().change_scene_to_file(target_scene)
-		if error_code != OK:
+		# Layered screens swap with no transition; the load now runs on a
+		# worker thread (change_scene_now) so the tap frame doesn't hitch on
+		# a synchronous load. apply_scene_path() unlocks the bar once the
+		# destination is active, same as before — only a hard load failure
+		# re-opens it here.
+		var opened: bool = await TransitionManager.change_scene_now(target_scene)
+		if not opened:
 			_is_navigating = false
-			push_error(
-				"NavigationBar: couldn't open '%s' (%s)."
-				% [target_scene, error_string(error_code)]
-			)
 		return
 
 	if TransitionManager._tab_change_busy or TransitionManager._fade_busy or TransitionManager._slide_busy:
