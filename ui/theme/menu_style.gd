@@ -198,6 +198,11 @@ static func make_card(
 ) -> Button:
 	return WidgetModule.make_card(title, subtitle, emoji, accent_col, min_height, image_path, flat)
 
+## Dresses an existing menu card as a glossy one (raised face + shine coating).
+## Safe to call again on a theme change: the coating is reused, not stacked.
+static func style_gloss_card(card: Button, accent_col: Color, radius: int = 26) -> void:
+	WidgetModule.style_gloss_card(card, accent_col, radius)
+
 static func make_toast(message: String, tone: String = "success") -> PanelContainer:
 	return WidgetModule.make_toast(message, tone)
 

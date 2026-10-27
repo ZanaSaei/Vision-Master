@@ -3,6 +3,8 @@ extends "res://autoload/BackButtonHandler.gd"
 ############################################################
 # LESSON MENU — modern, friendly section picker.
 # Shows the section cards for Global.current_book + current_lesson.
+# The section cards are GLOSSY buttons: a raised, lightly tinted face wearing
+# a rounded sheen (GlossSheen) that brightens on hover and flattens on press.
 # Navigation: GRAMMAR slides forward; other sections fade.
 # A fixed header bar — the main menu's, at the same size — carries the
 # screen's top label and sits over the scrolling cards.
@@ -85,6 +87,11 @@ const HEADER_LABEL_HEIGHT := 70
 const HEADER_LABEL_SIZE := 40
 const HEADER_GAP := 48
 const HEADER_TEXT := "یک بخش را انتخاب کنید 👇"
+
+# Section cards are GLOSSY buttons: one rounded corner radius drives both the
+# card's styleboxes and the sheen overlay's mask, so the shine stops exactly at
+# the rounded face instead of spilling into the corners.
+const CARD_RADIUS := 26
 
 var _navigating: bool = false
 var _book: int = 1
@@ -222,9 +229,11 @@ func _build_ui() -> void:
 		var scene_key: String = sec[3]
 		var accent: Color = SECTION_ACCENT_COLORS[i % SECTION_ACCENT_COLORS.size()]
 
-		var card: Button = MenuStyle.make_card(label_en, label_fa, emoji, accent, 150, "", true)
+		var card: Button = MenuStyle.make_card(label_en, label_fa, emoji, accent, 150)
 		card.pressed.connect(_on_section_pressed.bind(scene_key))
 		MenuStyle.wire_microinteractions(card)
+		# Glossy face + shine coating, both tinted with the section's accent.
+		MenuStyle.style_gloss_card(card, accent, CARD_RADIUS)
 		_col.add_child(card)
 		_card_buttons.append(card)
 		_card_accents.append(accent)
@@ -316,10 +325,9 @@ func _apply_theme() -> void:
 	for i in _card_buttons.size():
 		var btn: Button = _card_buttons[i]
 		var accent: Color = _card_accents[i]
-		btn.add_theme_stylebox_override("normal", MenuStyle.card_style(accent, 26, false, true))
-		btn.add_theme_stylebox_override("hover", MenuStyle.card_hover_style(accent, 26, true))
-		btn.add_theme_stylebox_override("pressed", MenuStyle.card_pressed_style(accent, 26, true))
-		btn.add_theme_stylebox_override("focus", MenuStyle.card_hover_style(accent, 26, true))
+		# Glossy cards: the same call that built them restyles them, so a theme
+		# change re-tints the face and the sheen instead of dropping the gloss.
+		MenuStyle.style_gloss_card(btn, accent, CARD_RADIUS)
 		var tl: Label = btn.get_node_or_null("Margin/Row/TextColumn/TitleLabel") as Label
 		if tl:
 			tl.add_theme_color_override("font_color", MenuStyle.text())

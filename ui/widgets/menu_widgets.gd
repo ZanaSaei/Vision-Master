@@ -20,6 +20,10 @@ extends RefCounted
 
 const ROUNDED_COVER_SHADER := preload("res://scenes/shared/rounded_cover.gdshader")
 
+## Explicit preload rather than the global class name, so this module resolves
+## the gloss coating regardless of when the editor's class cache is refreshed.
+const GlossSheenScript := preload("res://ui/widgets/gloss_sheen.gd")
+
 
 # ══════════════════════════════════════════════════════════════
 #  TEXT COMPONENTS
@@ -334,6 +338,33 @@ static func make_card(
 	hb.add_child(chev)
 
 	return btn
+
+
+## Dresses an EXISTING menu card as a glossy one: an elevated face carrying a
+## whisper of the section colour, under the sheen overlay that makes it shine
+## (GlossSheen). The card keeps every behaviour it already had — press, focus,
+## icon chip, labels — and only its surface changes.
+##
+## Safe to call again, which is what a theme change does: the overlay is reused
+## and re-tinted rather than stacked.
+static func style_gloss_card(card: Button, accent_col: Color, radius: int = 26) -> void:
+	var body := MenuTheme.gloss_body(accent_col)
+	var normal := MenuTheme.card_style(accent_col, radius)
+	var hover := MenuTheme.card_hover_style(accent_col, radius)
+	var pressed := MenuTheme.card_pressed_style(accent_col, radius)
+	# The face owns the colour now, so the border only rims the glass.
+	var rim := Color(accent_col.r, accent_col.g, accent_col.b, 0.45)
+	for style: StyleBoxFlat in [normal, hover, pressed]:
+		style.set_border_width_all(DesignTokens.BORDER_SUBTLE)
+		style.border_color = rim
+	normal.bg_color = body
+	hover.bg_color = body.lightened(0.04)
+	pressed.bg_color = body.darkened(0.05)
+	card.add_theme_stylebox_override("normal", normal)
+	card.add_theme_stylebox_override("hover", hover)
+	card.add_theme_stylebox_override("pressed", pressed)
+	card.add_theme_stylebox_override("focus", hover)
+	GlossSheenScript.attach(card, accent_col, radius)
 
 
 # ══════════════════════════════════════════════════════════════

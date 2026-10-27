@@ -186,6 +186,14 @@ static func card_style(accent_col: Color, radius: int = DesignTokens.RADIUS_MD, 
 	return s
 
 
+## The light body a GLOSSY card is painted with: white carrying a whisper of the
+## section's accent, so the sheen overlay has a colour to refract instead of
+## shining on a dead-white face. Kept pale on purpose — the card's text stays
+## the theme's dark ink on top of it.
+static func gloss_body(accent_col: Color) -> Color:
+	return Color(1, 1, 1).lerp(accent_col, 0.09)
+
+
 static func card_hover_style(accent_col: Color, radius: int = DesignTokens.RADIUS_MD, flat: bool = false) -> StyleBoxFlat:
 	var s := card_style(accent_col, radius, true, flat)
 	if not flat:
