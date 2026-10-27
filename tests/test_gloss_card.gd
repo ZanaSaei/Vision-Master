@@ -99,6 +99,14 @@ func test_face_is_a_light_glass_wash_rimmed_with_the_accent() -> void:
 	var body: Color = MenuTheme.gloss_body(ACCENT)
 	_check(normal.bg_color == body, "the face is the glossy body for the accent")
 	_check(
+		body.a < 0.999,
+		"the face is a little transparent, so the page reads through it (a=%.2f)" % body.a
+	)
+	_check(
+		body.a >= 0.8,
+		"the glass stays opaque enough for the dark ink over it (a=%.2f)" % body.a
+	)
+	_check(
 		body.get_luminance() > 0.85,
 		"the face stays light enough for the theme's dark ink (%.2f)" % body.get_luminance()
 	)
@@ -132,6 +140,10 @@ func test_face_is_a_light_glass_wash_rimmed_with_the_accent() -> void:
 	_check(
 		pressed.bg_color.get_luminance() < normal.bg_color.get_luminance(),
 		"press sinks the face"
+	)
+	_check(
+		is_equal_approx(hover.bg_color.a, body.a) and is_equal_approx(pressed.bg_color.a, body.a),
+		"every state keeps the same glass, so it never firms up or clears"
 	)
 	_check(
 		card.get_theme_stylebox("focus") == hover,
@@ -300,7 +312,16 @@ func test_the_shine_paints_a_top_highlight_over_a_shaded_bottom() -> void:
 	_print_luminance_map(img)
 
 	_check(corner.a < 0.5, "the shine keeps the rounded corner cut (a=%.2f)" % corner.a)
-	_check(middle.a > 0.99, "the face itself is opaque (a=%.2f)" % middle.a)
+	# The glass is see-through: with nothing behind it, the face pixel keeps the
+	# leftover transparency instead of reading as a solid slab.
+	_check(
+		middle.a < 0.99,
+		"the face is a little transparent, so the page behind it shows (a=%.2f)" % middle.a
+	)
+	_check(
+		middle.a > 0.7,
+		"the glass stays solid enough to carry the ink over the artwork (a=%.2f)" % middle.a
+	)
 	_check(
 		top.get_luminance() > middle.get_luminance(),
 		"the top of the card is brighter than its middle (%.3f > %.3f)"

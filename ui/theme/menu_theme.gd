@@ -18,6 +18,12 @@ extends RefCounted
 
 const STYLEBOX_DIR := "res://resources/styleboxes/"
 
+## How much of the page shows through a GLOSSY card's face. Open enough that the
+## card reads as a pane of glass over the artwork behind it, closed enough that
+## the theme's dark ink keeps its contrast on top of it. One value for every
+## state, so the glass never firms up or turns see-through as the card is used.
+const GLOSS_FACE_ALPHA := 0.88
+
 const FONT_VAZIR        := "res://assets/fonts/Vazirmatn-Regular.ttf"
 const FONT_JAKARTA      := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_JAKARTA_BOLD := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
@@ -189,9 +195,12 @@ static func card_style(accent_col: Color, radius: int = DesignTokens.RADIUS_MD, 
 ## The light body a GLOSSY card is painted with: white carrying a whisper of the
 ## section's accent, so the sheen overlay has a colour to refract instead of
 ## shining on a dead-white face. Kept pale on purpose — the card's text stays
-## the theme's dark ink on top of it.
+## the theme's dark ink on top of it — and kept slightly see-through, so the
+## page behind the card reads through the glass.
 static func gloss_body(accent_col: Color) -> Color:
-	return Color(1, 1, 1).lerp(accent_col, 0.09)
+	var body := Color(1, 1, 1).lerp(accent_col, 0.09)
+	body.a = GLOSS_FACE_ALPHA
+	return body
 
 
 static func card_hover_style(accent_col: Color, radius: int = DesignTokens.RADIUS_MD, flat: bool = false) -> StyleBoxFlat:
