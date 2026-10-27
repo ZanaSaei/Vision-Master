@@ -71,6 +71,7 @@ func set_theme_mode(_new_mode: int) -> void:
 
 func setup() -> void:
 	_activate_theme()
+	_watch_header_bars()
 
 
 ## Loads the sole Light Theme, pushes its context into the styling collaborators,
@@ -108,6 +109,47 @@ func style_scene(root: Node) -> void:
 
 func style_header(header: Node) -> void:
 	_header_styler.style_header(header)
+
+
+## Re-applies the header engine to every bar under `root`. The watcher below
+## covers the normal scene flow; this is the explicit pass for a tree that was
+## already standing when the theme came up.
+func style_headers(root: Node) -> void:
+	if root == null or not is_instance_valid(root):
+		return
+	if HeaderStyler.is_header_bar(root):
+		_header_styler.style_header(root)
+	for child in root.get_children():
+		style_headers(child)
+
+
+# ══════════════════════════════════════════════════════════════
+#  HEADER WATCHER
+#
+#  Every screen carries the same bar, so the engine must reach a bar nobody
+#  remembered to style. A bar is announced (node_added) before its items exist
+#  and before its screen's _ready() has filled the title in, so the pass is
+#  deferred: only then is the whole bar there to be measured.
+# ══════════════════════════════════════════════════════════════
+
+func _watch_header_bars() -> void:
+	var tree := get_tree()
+	if tree == null:
+		return
+	if not tree.node_added.is_connected(_on_node_added):
+		tree.node_added.connect(_on_node_added)
+
+
+func _on_node_added(node: Node) -> void:
+	if HeaderStyler.is_header_bar(node):
+		_style_header_later.call_deferred(weakref(node))
+
+
+func _style_header_later(ref: WeakRef) -> void:
+	var node: Node = ref.get_ref() as Node
+	if node == null or not node.is_inside_tree():
+		return
+	_header_styler.style_header(node)
 
 
 func set_translation_toggle_state(btn: Button, active: bool) -> void:

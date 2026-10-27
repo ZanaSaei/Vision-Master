@@ -149,3 +149,40 @@ Example: custom EventCard with image + gradient + icon + labels + animation.
   them visuals via the project Theme: assign Panel styles for those
   names, or add a tiny scene-local theme. Do NOT add code styling back.
 - Exercise Engine files (res://scenes/shared/exercise_engine/*) untouched.
+
+## 11. The header bar — one bar on every screen
+
+Every screen in the app wears the same header, built and enforced by
+`res://autoload/theme/header_bar_styler.gd`:
+
+| Piece | Value | Where it lives |
+|---|---|---|
+| Surface (white, 35 px bottom shoulders) | `scenes/shared/HeaderBar.tres` | edited in the Inspector |
+| Bar height | 200 px (`BAR_HEIGHT`) | `HeaderBarStyler` |
+| Side padding | 60 px (`PAD_X`) | `HeaderBarStyler` |
+| Item slot | 96 x 96 square (`BUTTON_SIZE`) | `HeaderBarStyler` |
+| Icon inside a button | up to 72 px (`ICON_SIZE`) | `HeaderBarStyler` |
+| Title | 40 px, accent colour, centred, Vazir/Jakarta by script | `HeaderBarStyler` |
+
+Order, always, whatever order a scene authored:
+`[back][home]  title  [translation][audio][leitner]`.
+
+- Items are icon-only: `Back.png`, `Main_Menu.png`, `Translate.png`,
+  `audio_play.png`, `Leitner.png` from `res://assets/images/ui/`, each with a
+  Persian tooltip. A button is recognised by its node NAME (contains "back",
+  "home"/"menu", "translation"/"toggle", "audio", "leitner").
+- The buttons never scale or slide: the engine marks them as already wired for
+  `UiMotion`, so the hover lift skips them. They keep one size and one slot.
+- You do not have to call anything. `ThemeService` watches the tree and styles
+  every node named `HeaderBar` / `TopBar` / `TopHeader` / `TitleBar` after its
+  screen has been built (deferred one frame), so a new screen inherits the bar
+  by naming its panel `HeaderBar`. `Global.style_header(node)` still works and
+  is idempotent.
+- A bar with NO buttons (the main menu and the lesson menu hero bars) is left
+  alone apart from its body: those screens own their own composition.
+- To add a new header button, add the node to the scene with a name that
+  `_button_kind()` recognises, plus an icon entry in `HeaderBarStyler.ICONS`.
+- Screens position their content just under the bar (217–280 px in the shipped
+  scenes); the regression suite `tests/test_header_unified.gd` fails if a
+  scene's bar stops being 200 px or its content slips back into the old
+  dead band.

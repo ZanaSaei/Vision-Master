@@ -8,7 +8,13 @@ extends RefCounted
 ##  given a Control in the scene that is a header bar, style it and lay its
 ##  items out in the app-wide order
 ##
-##      [back][home][leading]   title (centred)   [translation][audio][leitner]
+##      [back][home]      title (centred)      [translation][audio][leitner]
+##
+##  Every screen wears the bar the main menu and the lesson menu wear: a 200 px
+##  tall white surface with 35 px bottom shoulders, 60 px side padding and one
+##  line of type in the middle. Every item is a SQUARE ICON BUTTON of the same
+##  size, in the same slot on every screen, and it never scales or slides — the
+##  back arrow sits in exactly the same place everywhere.
 ##
 ##  It is a pure function of its context: it never reaches for an autoload, so
 ##  it can be exercised in isolation. Call `set_context()` whenever the theme
@@ -20,11 +26,20 @@ extends RefCounted
 
 const STYLEBOX_DIR := "res://resources/styleboxes/"
 
+## The one surface every bar paints — the same resource the scene headers
+## reference in their .tscn, so the editor preview and the runtime look cannot
+## drift apart.
+const BAR_STYLEBOX_PATH := "res://scenes/shared/HeaderBar.tres"
+
 const HEADER_BAR_NAMES := ["HeaderBar", "TopBar", "TopHeader", "TitleBar"]
-## Height of the bar itself, in pixels (all scenes author 320 in their .tscn).
-const BAR_HEIGHT := 320.0
+## Height of the bar itself, in pixels — the main menu's header, which every
+## screen in the app now follows.
+const BAR_HEIGHT := 200.0
+## Radius of the bar's bottom shoulders. Mirrors HeaderBar.tres; asserted by
+## the regression test so the resource cannot silently lose it.
+const BAR_RADIUS := 35
 ## Distance from the bar's left/right edge to the first item.
-const PAD_X := 30.0
+const PAD_X := 60.0
 ## Distance from the bar's top/bottom edge to the row (kept symmetric so the
 ## items are exactly centred vertically).
 const PAD_Y := 24.0
@@ -37,8 +52,34 @@ const FLEX_NAME := "HeaderFlex"
 
 ## Square size every header item is pinned to, so the row reads identically in
 ## every scene no matter which buttons that scene happens to show.
-const BUTTON_SIZE := 168.0
-const TRANSLATION_LABEL := "ترجمه"
+const BUTTON_SIZE := 96.0
+## Longest side the icon inside a header button may draw at. The source art is
+## a 200 px canvas whose glyph fills ~65 % of it, so 72 px draws a ~50 px icon
+## inside the 96 px button.
+const ICON_SIZE := 72
+## One type ramp for every header title, in pixels.
+const TITLE_FONT_SIZE := 40
+
+## What each icon means, so an icon-only bar stays discoverable (hover / long
+## press tooltip). Only the recognised roles get one.
+const TOOLTIPS := {
+	"back":        "بازگشت",
+	"home":        "منوی اصلی",
+	"audio":       "پخش صدا",
+	"leitner":     "جعبه لایتنر",
+	"translation": "نمایش ترجمه",
+}
+
+## Canonical slot order. A button is placed by its role, not by where the scene
+## happened to author it, so "audio" is always the second item from the right
+## edge — even in a screen that used to put it on the left.
+const LEADING_ORDER := ["back", "home"]
+const TRAILING_ORDER := ["translation", "audio", "leitner"]
+
+## Meta key UiMotion.wire_microinteractions() checks before it wires a hover /
+## press scale. Header buttons set it so an item can never grow, shrink or
+## drift out of its slot — it stays put, at its one size.
+const MOTION_WIRED_META := "ui_motion_wired"
 
 ## Canonical icons per recognised header button. Keys are produced by
 ## `_button_kind()` from the button's own name.
@@ -75,42 +116,74 @@ func _sb_plain(file_base: String) -> StyleBox:
 	return load(STYLEBOX_DIR + "%s.tres" % file_base)
 
 
+## True when `node` is a bar the app paints as a header. Scenes name their bar
+## HeaderBar (a few older ones say TopBar / TitleBar); the watcher in
+## ThemeService only ever hands us nodes that answer true.
+static func is_header_bar(node: Node) -> bool:
+	if node == null or not (node is Control):
+		return false
+	return String((node as Node).name) in HEADER_BAR_NAMES
+
+
 # ══════════════════════════════════════════════════════════════
 #  ENTRY POINT
 # ══════════════════════════════════════════════════════════════
 
 func style_header(header: Node) -> void:
-	if header == null:
+	if not is_header_bar(header) or not (header as Node).is_inside_tree():
+		return
+
+	var row: BoxContainer = find_row(header)
+	var inner: MarginContainer = inner_margin(header, row)
+
+	if not _has_header_buttons(header):
+		# A title-only hero bar (the main menu and the lesson menu). It already
+		# wears the canonical surface and its scene owns the composition — the
+		# menus stack a spacer above the label — so only the bar body is pinned.
+		# Rebuilding this row would stack the clusters vertically in that VBox.
+		if header is PanelContainer or header is Panel:
+			header.add_theme_stylebox_override("panel", _bar_stylebox(inner == null))
+		normalize_geometry(header, null)
 		return
 
 	# Style the items first: the layout below measures them, so every button
 	# must already carry its final (uniform) size when the row is rebuilt.
-	var stack: Array = [header]
-	while not stack.is_empty():
-		var n: Node = stack.pop_back()
-		if n is Button:
-			_style_button(n)
-		elif n is Label:
-			_style_label(n)
-		for c in n.get_children():
-			stack.push_back(c)
+	for item: Node in _items(header):
+		if item is BaseButton:
+			_style_button(item as Button)
+		elif item is Label:
+			_style_label(item as Label)
 
-	var row := find_row(header)
-	var inner := inner_margin(header, row)
+	# Then the bar itself: one surface, one height, whatever the scene authored.
 	if header is PanelContainer or header is Panel:
-		var bar := _bar_stylebox()
-		if inner != null:
-			# A MarginContainer owns the padding in this header, so the bar
-			# itself must not add any — otherwise the two would stack up, and
-			# a scene that later swaps the stylebox would shift its items.
-			bar.content_margin_left = 0.0
-			bar.content_margin_right = 0.0
-			bar.content_margin_top = 0.0
-			bar.content_margin_bottom = 0.0
-		header.add_theme_stylebox_override("panel", bar)
+		header.add_theme_stylebox_override("panel", _bar_stylebox(inner == null))
 
 	normalize_geometry(header, inner)
 	layout_row(row)
+
+
+## True when the bar carries at least one button, i.e. it is a toolbar rather
+## than a title-only hero bar.
+func _has_header_buttons(header: Node) -> bool:
+	for item: Node in _items(header):
+		if item is BaseButton:
+			return true
+	return false
+
+
+## Every Button / Label on the bar. Scenes nest them in a row, a margin box or
+## a spacer, so the search is a plain subtree walk.
+func _items(header: Node) -> Array[Node]:
+	var out: Array[Node] = []
+	var stack: Array[Node] = [header]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		if node != header and (node is Button or node is Label):
+			out.append(node)
+			continue
+		for child: Node in node.get_children():
+			stack.push_back(child)
+	return out
 
 
 # ══════════════════════════════════════════════════════════════
@@ -226,7 +299,8 @@ static func layout_row(row: BoxContainer) -> void:
 		left.append(b)
 	for l in leading:
 		left.append(l)
-	leading = left
+	leading = _sorted_by_role(left, LEADING_ORDER)
+	trailing = _sorted_by_role(trailing, TRAILING_ORDER)
 
 	if title == null:
 		# Nothing to centre: pack the leading items left, the rest right.
@@ -258,6 +332,26 @@ static func layout_row(row: BoxContainer) -> void:
 	row.move_child(trail_wrap, 2)
 
 
+## Stable sort by a role table. An unknown role sorts after every known one, so
+## two unrecognised buttons keep the order their scene authored.
+static func _sorted_by_role(items: Array[Node], order: Array) -> Array[Node]:
+	var out: Array[Node] = []
+	for item: Node in items:
+		var slot := _slot_of(item, order)
+		var at := out.size()
+		for i: int in range(out.size()):
+			if slot < _slot_of(out[i], order):
+				at = i
+				break
+		out.insert(at, item)
+	return out
+
+
+static func _slot_of(node: Node, order: Array) -> int:
+	var slot := order.find(_button_kind(node))
+	return slot if slot >= 0 else order.size()
+
+
 static func _make_side(items: Array[Node], wrap_name: String, align: BoxContainer.AlignmentMode, side: float) -> HBoxContainer:
 	var side_wrap := HBoxContainer.new()
 	side_wrap.name = wrap_name
@@ -282,6 +376,7 @@ static func _center_title(title: Node) -> void:
 	if title is Label:
 		var direct := title as Label
 		direct.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		direct.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		direct.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		direct.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		return
@@ -294,6 +389,7 @@ static func _center_title(title: Node) -> void:
 	if nested == null:
 		return
 	nested.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	nested.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	nested.size_flags_horizontal = Control.SIZE_FILL
 	if not (el is Container):
 		# A plain Control (title + spacer) has no minimum size of its own, so
@@ -375,16 +471,20 @@ static func _has_button(node: Node) -> bool:
 #  ITEM STYLING
 # ══════════════════════════════════════════════════════════════
 
-## One bar look for the whole app: square top shoulders (it meets the screen
-## edge), rounded bottom, a gold hairline underline and a soft drop shadow.
-func _bar_stylebox() -> StyleBoxFlat:
-	var bar := _sb("header_bar").duplicate() as StyleBoxFlat
-	# Symmetric padding so the row sits exactly in the middle of the bar; the
-	# canonical values are shared with normalize_geometry().
-	bar.content_margin_left = PAD_X
-	bar.content_margin_right = PAD_X
-	bar.content_margin_top = PAD_Y
-	bar.content_margin_bottom = PAD_Y
+## One bar look for the whole app: white, square top shoulders (it meets the
+## screen edge), rounded bottom. `owns_padding` is false when a MarginContainer
+## already supplies the 60 px side padding — the two must never stack up.
+func _bar_stylebox(owns_padding: bool) -> StyleBoxFlat:
+	var bar := (load(BAR_STYLEBOX_PATH) as StyleBoxFlat).duplicate() as StyleBoxFlat
+	bar.set_border_width_all(0)
+	bar.corner_radius_top_left = 0
+	bar.corner_radius_top_right = 0
+	bar.corner_radius_bottom_left = BAR_RADIUS
+	bar.corner_radius_bottom_right = BAR_RADIUS
+	bar.content_margin_left = PAD_X if owns_padding else 0.0
+	bar.content_margin_right = PAD_X if owns_padding else 0.0
+	bar.content_margin_top = PAD_Y if owns_padding else 0.0
+	bar.content_margin_bottom = PAD_Y if owns_padding else 0.0
 	return bar
 
 
@@ -404,24 +504,30 @@ static func _button_kind(btn: Node) -> String:
 	return ""
 
 
+## Turns any header button into the app's square icon button: no text, one
+## size, one slot. An unknown button keeps whatever icon its scene gave it.
 func _style_button(btn: Button) -> void:
 	var kind := _button_kind(btn)
-	btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	btn.text = ""
 	btn.flat = true
 	btn.expand_icon = true
+	btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	btn.custom_minimum_size = Vector2(BUTTON_SIZE, BUTTON_SIZE)
-	btn.add_theme_constant_override("icon_max_width", int(BUTTON_SIZE))
-	btn.add_theme_constant_override("icon_max_height", int(BUTTON_SIZE))
+	btn.add_theme_constant_override("icon_max_width", ICON_SIZE)
+	btn.add_theme_constant_override("icon_max_height", ICON_SIZE)
 	btn.add_theme_stylebox_override("normal", _sb_plain("nav_button_normal"))
 	btn.add_theme_stylebox_override("hover", _sb("nav_button_hover"))
 	btn.add_theme_stylebox_override("pressed", _sb("nav_button_pressed"))
 	btn.add_theme_stylebox_override("focus", _sb("nav_button_focus"))
-	# Only the recognised header buttons get the app icons; an unknown button
-	# keeps whatever icon/text its scene gave it.
+	# Still and one size: no hover lift, no press squash, no drift.
+	btn.scale = Vector2.ONE
+	btn.set_meta(MOTION_WIRED_META, true)
 	if ICONS.has(kind):
 		btn.icon = load(ICONS[kind])
-		btn.text = ""
+	if TOOLTIPS.has(kind):
+		btn.tooltip_text = TOOLTIPS[kind]
 
 
 ## Paints the translation toggle so its on/off state is obvious at a glance.
@@ -436,7 +542,46 @@ func set_translation_toggle_state(btn: Button, active: bool) -> void:
 
 
 func _style_label(label: Label) -> void:
-	var c: Color = _color("accent_bright") if _dark else _color("accent")
-	if label.label_settings != null:
-		label.label_settings.font_color = c
-	label.add_theme_color_override("font_color", c)
+	_apply_title_style(label, _color("accent"))
+
+
+## Re-applies the canonical header title look to a label. Screens call this from
+## their `_apply_theme()` so a live re-theme cannot repaint the bar's title with
+## a page colour.
+static func style_title(label: Label) -> void:
+	if label == null:
+		return
+	_apply_title_style(label, DesignTokens.ACCENT)
+
+
+## One type ramp for the words on the bar: Vazir for Persian, Jakarta for
+## Latin, 40 px, in the accent colour, centred on the bar.
+static func _apply_title_style(label: Label, accent: Color) -> void:
+	label.label_settings = null
+	var font := _title_font(label.text)
+	if font != null:
+		label.add_theme_font_override("font", font)
+	label.add_theme_font_size_override("font_size", TITLE_FONT_SIZE)
+	label.add_theme_color_override("font_color", accent)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+
+
+## Fonts the bar title can be set in. Loaded straight from res:// rather than
+## through MenuStyle, so the engine keeps no autoload in its dependency graph.
+const FONT_VAZIR := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_LATIN := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+
+
+static func _title_font(text: String) -> Font:
+	return load(FONT_VAZIR if _has_persian(text) else FONT_LATIN) as Font
+
+
+static func _has_persian(text: String) -> bool:
+	for i: int in text.length():
+		var code := text.unicode_at(i)
+		if code >= 0x0600 and code <= 0x06FF:
+			return true
+	return false

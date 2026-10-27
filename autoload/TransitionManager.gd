@@ -29,6 +29,12 @@ const EXIT_SCALE       := 0.94    # old screen shrinks a touch as it leaves
 const ENTER_SCALE      := 1.04    # new screen arrives slightly big, settles to 1
 const TAB_SLIDE_TIME   := 0.18    # brief, direct movement for peer tabs
 
+# --- Background bridge ---
+# Canvas layer of the still that can hold a background across a scene swap.
+# Above the persistent solid fill (-100) and below every scene background
+# (-1 or the default canvas layer), so real scene artwork always covers it.
+const BG_BRIDGE_LAYER := -50
+
 var _tab_change_busy: bool = false
 
 # Guards against double-taps starting a second slide mid-transition.
@@ -41,6 +47,10 @@ var _pending_scene: String = ""
 # Destination of the in-flight fade, so a repeat request for it (double-tap)
 # can be recognised and ignored.
 var _active_scene: String = ""
+
+# Full-screen still used to hold a background across a scene swap.
+var _bg_layer: CanvasLayer = null
+var _bg_bridge: TextureRect = null
 
 
 func _ready() -> void:
@@ -64,6 +74,25 @@ func _ready() -> void:
 	# Lock taps across the scene swap without retaining scene-local references.
 	tab_transition_started.connect(_lock_navigation_bars)
 	tab_transition_finished.connect(_unlock_navigation_bars)
+
+	# Full-screen still that survives scene swaps (see hold_background).
+	# It lives on its own low layer so it is drawn behind every scene and is
+	# never moved by a slide.
+	_bg_layer = CanvasLayer.new()
+	_bg_layer.name = "BackgroundBridge"
+	_bg_layer.layer = BG_BRIDGE_LAYER
+	add_child(_bg_layer)
+
+	_bg_bridge = TextureRect.new()
+	_bg_bridge.name = "Still"
+	_bg_bridge.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_bg_bridge.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_bg_bridge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_bg_bridge.visible = false
+	_bg_layer.add_child(_bg_bridge)
+	# Anchored once the layer is in the tree: a CanvasLayer child anchors to
+	# the viewport, which is only known then.
+	_bg_bridge.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 
 func _unlock_navigation_bars(_success: bool) -> void:
@@ -126,6 +155,87 @@ func _threaded_get(scene_path: String) -> PackedScene:
 	if state == ResourceLoader.THREAD_LOAD_LOADED:
 		return ResourceLoader.load_threaded_get(scene_path) as PackedScene
 	return null
+
+
+############################################################
+# BACKGROUND BRIDGE — hold a still across a scene swap.
+#
+# change_scene_to_packed()/change_scene_to_file() first free the running
+# scene and set current_scene to null; the incoming scene is only built
+# afterwards (a code-built screen like the lesson menu can take >100 ms).
+# Any frame the engine draws in that window shows nothing but the flat
+# theme fill behind the persistent bars — on screen a beige "splash"
+# between two full-screen artworks.
+#
+# The bridge paints the outgoing artwork on its own low canvas layer, so
+# that window is a continuation of the old screen instead. It is released
+# once the incoming scene paints its own background on top of it.
+############################################################
+
+## Paint `texture` full-screen underneath the scenes and keep it there until
+## release_background(). Call it immediately before a swap that nothing else
+## covers (a fade covers the swap with black, a slide does not).
+func hold_background(texture: Texture2D) -> void:
+	if not is_instance_valid(_bg_bridge) or texture == null:
+		return
+	_bg_bridge.texture = texture
+	_bg_bridge.modulate.a = 1.0
+	_bg_bridge.visible = true
+
+
+## Drop the held still once the incoming scene has drawn its own background.
+## Waits two frames because the swap itself is deferred: the first frame after
+## a change_scene_to_*() call can still run before the tree is replaced.
+func release_background() -> void:
+	if not is_instance_valid(_bg_bridge) or not _bg_bridge.visible:
+		return
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if is_instance_valid(_bg_bridge):
+		_bg_bridge.visible = false
+
+
+## Hand the screen over to an already-loaded scene while `background` stays
+## on screen the whole time.
+##
+## Used when the incoming screen opens on the outgoing screen's artwork: the
+## book menu leaves on its blurred cover and the lesson menu opens on that
+## same still and sharpens it. Because both sides of the swap show the same
+## picture, the swap and the hand-over are invisible — only the content
+## changes, and the unblur reads as one movement instead of a flash.
+func handover_scene(packed: PackedScene, background: Texture2D) -> void:
+	if packed == null:
+		push_error("handover_scene: no scene to change to.")
+		return
+	hold_background(background)
+	get_tree().change_scene_to_packed(packed)
+	release_background()
+
+
+## Best-effort lookup of the full-screen background texture a live scene is
+## showing, so slide/tab swaps can keep that artwork on the bridge. Matches the
+## house naming convention (BackgroundA, BgLayer, ...) and requires the node to
+## cover the viewport, so card artwork and thumbnails are ignored.
+func _scene_background(scene: Node) -> Texture2D:
+	if scene == null:
+		return null
+	var screen: Vector2 = get_viewport().get_visible_rect().size
+	var best_texture: Texture2D = null
+	var best_alpha := 0.0
+	for node: Node in scene.find_children("*", "TextureRect", true, false):
+		var rect := node as TextureRect
+		if rect == null or rect.texture == null or not rect.is_visible_in_tree():
+			continue
+		if rect.modulate.a <= best_alpha:
+			continue
+		var lower_name := rect.name.to_lower()
+		if not (lower_name.contains("background") or lower_name.contains("bg")):
+			continue
+		if rect.size.x < screen.x * 0.9 or rect.size.y < screen.y * 0.9:
+			continue
+		best_texture = rect.texture
+		best_alpha = rect.modulate.a
+	return best_texture
 
 
 ############################################################
@@ -247,6 +357,10 @@ func tab_change_scene(scene_path: String, direction: Slide) -> void:
 
 	# The worker-thread load started above has had the whole exit animation
 	# to finish; pick it up (or fall back to the synchronous path).
+	# Hold the outgoing artwork across the swap: backgrounds do not slide, so
+	# it is still the backdrop, and the swap's empty frame would show the
+	# flat fill instead of it.
+	hold_background(_scene_background(old_scene))
 	var packed: PackedScene = await _threaded_get(scene_path)
 	var error_code: int = OK
 	if packed != null:
@@ -254,6 +368,7 @@ func tab_change_scene(scene_path: String, direction: Slide) -> void:
 	else:
 		error_code = scene_tree.change_scene_to_file(scene_path)
 	if error_code != OK:
+		release_background()
 		push_error(
 			"tab_change_scene: can't load '%s' (%s)."
 			% [scene_path, error_string(error_code)]
@@ -265,6 +380,10 @@ func tab_change_scene(scene_path: String, direction: Slide) -> void:
 			await restore_tween.finished
 		_finish_tab_transition(false)
 		return
+
+	# The incoming screen is in the tree now; drop the still once it has drawn
+	# its own background on top of it.
+	release_background()
 
 	# Change scenes through a deferred call. Once the native swap emits
 	# scene_changed, park the incoming content before the next rendered frame.
@@ -412,6 +531,10 @@ func slide_change_scene(scene_path: String, direction: Slide) -> void:
 		await tw_out.finished
 
 	# --- Phase 2: swap scenes while the old content is off-screen. ---
+	# The backgrounds never slide, so the outgoing artwork is still the whole
+	# backdrop. Hold it on the bridge across the swap: the frame(s) in which
+	# the tree has no current scene would otherwise show the flat fill.
+	hold_background(_scene_background(get_tree().current_scene))
 	var packed: PackedScene = await _threaded_get(scene_path)
 	var err := OK
 	if packed != null:
@@ -419,6 +542,7 @@ func slide_change_scene(scene_path: String, direction: Slide) -> void:
 	else:
 		err = get_tree().change_scene_to_file(scene_path)
 	if err != OK:
+		release_background()
 		# Scene failed to load — slide the old screen back home and bail.
 		push_error("slide_change_scene: can't load " + scene_path)
 		var tw_back := create_tween()
@@ -431,6 +555,10 @@ func slide_change_scene(scene_path: String, direction: Slide) -> void:
 		await tw_back.finished
 		_slide_busy = false
 		return
+
+	# The incoming screen is in the tree now; drop the still once it has drawn
+	# its own background on top of it.
+	release_background()
 
 	# --- Phase 3: park the new content off-screen IMMEDIATELY. ---
 	# No await before this! change_scene_to_file() returns in the same
@@ -486,6 +614,11 @@ func _slidable_nodes(root: Node) -> Array:
 			continue
 		# The bottom navigation bar never moves during a transition.
 		if child is VisionNavigationBar:
+			continue
+		# Background images stay fixed so the screen never shows a blank
+		# clear color while swapping scenes (avoids the flash between
+		# blur and unblur backgrounds).
+		if child.name.contains("Background"):
 			continue
 		# Only nodes with a position property can be tweened this way.
 		if child is Control or child is Node2D:

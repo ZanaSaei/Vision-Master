@@ -219,6 +219,10 @@ func style_header(header: Node) -> void:
 	if _theme != null:
 		_theme.style_header(header)
 
+func style_headers(root: Node) -> void:
+	if _theme != null:
+		_theme.style_headers(root)
+
 func set_translation_toggle_state(btn: Button, active: bool) -> void:
 	if _theme != null:
 		_theme.set_translation_toggle_state(btn, active)
@@ -282,10 +286,12 @@ func _ready() -> void:
 
 func _on_scene_changed() -> void:
 	style_scene(get_tree().current_scene)
+	style_headers(get_tree().current_scene)
 
 
 func _style_initial_scene() -> void:
 	style_scene(get_tree().current_scene)
+	style_headers(get_tree().current_scene)
 
 func _exit_tree() -> void:
 	# Join the dictionary worker on shutdown so a started Thread is always

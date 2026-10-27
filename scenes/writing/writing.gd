@@ -67,8 +67,8 @@ func _ready() -> void:
 	if font_bold:
 		header_title.add_theme_font_override("font", font_bold)
 
-	# Keep header readable (theme-aware).
-	header_title.add_theme_color_override("font_color", _text_color())
+	# The bar owns its title's type ramp; see HeaderBarStyler.
+	HeaderBarStyler.style_title(header_title)
 
 	back_button.pressed.connect(_on_back_button_pressed)
 	home_button.pressed.connect(_on_home_pressed)
@@ -139,7 +139,7 @@ func _apply_theme() -> void:
 	if background != null:
 		background.color = _navy_bg()
 
-	header_title.add_theme_color_override("font_color", _text_color())
+	HeaderBarStyler.style_title(header_title)
 	_apply_dark_scroll_background(page_view)
 
 

@@ -36,12 +36,6 @@ const BOOK_BLURRED_BACKGROUNDS: Array[Texture2D] = [
 	preload("res://assets/images/ui/book_scene/Vision3_blur.png")
 ]
 
-const BOOK_CLEAR_BACKGROUNDS: Array[Texture2D] = [
-	preload("res://assets/images/ui/book_scene/Vision1.png"),
-	preload("res://assets/images/ui/book_scene/Vision2.png"),
-	preload("res://assets/images/ui/book_scene/Vision3.png")
-]
-
 
 # ============================================================
 # ANIMATION SETTINGS
@@ -627,27 +621,16 @@ func _on_card_pressed(card: BookCard) -> void:
 			duration
 		)
 
-	background_b.texture = BOOK_CLEAR_BACKGROUNDS[card.book_id]
-	background_b.modulate.a = 0.0
-
-	# The clear background replaces the blurred one; fade the blurred layer
-	# away at the same time to avoid a sudden brightness/contrast shift.
-	tween.tween_property(
-		background_b,
-		"modulate:a",
-		1.0,
-		0.48
-	)
-	tween.tween_property(
-		background_a,
-		"modulate:a",
-		0.0,
-		0.48
-	)
-
 	await tween.finished
 
 	if not is_inside_tree():
 		return
 
-	get_tree().change_scene_to_packed(BOOK_CONTENTS_SCENE)
+	# Hand the screen over while the blurred cover stays exactly where it is.
+	# The unblur belongs to the lesson menu: it opens on this same still and
+	# sharpens it while its own content fades in. Doing the unblur here as well
+	# would go blur -> sharp -> (rebuild) -> sharp-with-no-content, which is the
+	# "splash of an empty screen" this replaces.
+	TransitionManager.handover_scene(
+		BOOK_CONTENTS_SCENE, BOOK_BLURRED_BACKGROUNDS[card.book_id]
+	)
