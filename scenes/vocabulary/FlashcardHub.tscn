@@ -1,22 +1,14 @@
 [gd_scene format=3 uid="uid://cmkppwambp8rq"]
 
 [ext_resource type="Script" uid="uid://ooowd4rdod73" path="res://scenes/vocabulary/flashcard_hub.gd" id="1_script"]
+[ext_resource type="StyleBox" uid="uid://boy06ynkqak3q" path="res://ui/Styles/buttons/Blue_Normal.tres" id="2_1131u"]
+[ext_resource type="StyleBox" uid="uid://cx6iskaugv7ey" path="res://ui/Styles/buttons/Blue_Hovered.tres" id="3_13px0"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
-[ext_resource type="Shader" uid="uid://dje0dgpfw45e5" path="res://scenes/shared/GradientCard.gdshader" id="5_shader"]
-[ext_resource type="Script" uid="uid://dqlylk0w3c2p8" path="res://ui/widgets/GradientCardRect.gd" id="6_cardrect"]
+[ext_resource type="LabelSettings" uid="uid://dv2tiiw6sx567" path="res://ui/fonts/Fa_Button_Title_Blue.tres" id="5_13px0"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="7_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="8_header_style"]
-
-[sub_resource type="ShaderMaterial" id="MatBlue"]
-shader = ExtResource("5_shader")
-shader_parameter/color_top = Color(0.3, 0.56, 0.97, 1)
-shader_parameter/color_bottom = Color(0.09, 0.4, 0.95, 1)
-shader_parameter/rect_size = Vector2(976, 296)
-shader_parameter/corner_radius = 64.0
-shader_parameter/inset = 28.0
-shader_parameter/shadow_blur = 22.0
-shader_parameter/shadow_offset = 10.0
-shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
+[ext_resource type="StyleBox" uid="uid://cp4wknax5vhvc" path="res://ui/Styles/buttons/Yellow_Normal.tres" id="9_yellow_normal"]
+[ext_resource type="StyleBox" uid="uid://c8m6mqu5l84iy" path="res://ui/Styles/buttons/Yellow_Hovered.tres" id="10_yellow_hovered"]
 
 [sub_resource type="StyleBoxFlat" id="IconChip"]
 bg_color = Color(1, 1, 1, 0.18)
@@ -25,31 +17,12 @@ corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 
-[sub_resource type="LabelSettings" id="ModeLabelSettings"]
-font = ExtResource("4_font")
-font_size = 58
-outline_size = 4
-outline_color = Color(0.08, 0.12, 0.2, 0.85)
-shadow_color = Color(0, 0, 0, 0.35)
-shadow_offset = Vector2(0, 2)
-
 [sub_resource type="StyleBoxFlat" id="ArrowBadge"]
 bg_color = Color(0, 0, 0, 0.14)
 corner_radius_top_left = 60
 corner_radius_top_right = 60
 corner_radius_bottom_right = 60
 corner_radius_bottom_left = 60
-
-[sub_resource type="ShaderMaterial" id="MatGreen"]
-shader = ExtResource("5_shader")
-shader_parameter/color_top = Color(0.31, 0.83, 0.5, 1)
-shader_parameter/color_bottom = Color(0.09, 0.74, 0.38, 1)
-shader_parameter/rect_size = Vector2(976, 296)
-shader_parameter/corner_radius = 64.0
-shader_parameter/inset = 28.0
-shader_parameter/shadow_blur = 22.0
-shader_parameter/shadow_offset = 10.0
-shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
 font = ExtResource("4_font")
@@ -81,22 +54,9 @@ theme_override_constants/separation = 56
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 focus_mode = 0
-flat = true
-
-[node name="Gradient" type="ColorRect" parent="Content/FlashcardButton" unique_id=1875290091]
-material = SubResource("MatBlue")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -28.0
-offset_top = -28.0
-offset_right = 28.0
-offset_bottom = 28.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("6_cardrect")
+theme_override_styles/normal = ExtResource("2_1131u")
+theme_override_styles/pressed = ExtResource("2_1131u")
+theme_override_styles/hover = ExtResource("3_13px0")
 
 [node name="Margin" type="MarginContainer" parent="Content/FlashcardButton" unique_id=1504284525]
 layout_mode = 1
@@ -132,7 +92,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_font")
 text = "فلش کارت"
-label_settings = SubResource("ModeLabelSettings")
+label_settings = ExtResource("5_13px0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -153,22 +113,9 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 focus_mode = 0
-flat = true
-
-[node name="Gradient" type="ColorRect" parent="Content/LeitnerButton" unique_id=1713114937]
-material = SubResource("MatGreen")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -28.0
-offset_top = -28.0
-offset_right = 28.0
-offset_bottom = 28.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("6_cardrect")
+theme_override_styles/normal = ExtResource("9_yellow_normal")
+theme_override_styles/pressed = ExtResource("9_yellow_normal")
+theme_override_styles/hover = ExtResource("10_yellow_hovered")
 
 [node name="Margin" type="MarginContainer" parent="Content/LeitnerButton" unique_id=360794148]
 layout_mode = 1
@@ -204,7 +151,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_font")
 text = "لایتنر"
-label_settings = SubResource("ModeLabelSettings")
+label_settings = ExtResource("5_13px0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
