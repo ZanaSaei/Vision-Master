@@ -21,8 +21,6 @@ extends "res://autoload/BackButtonHandler.gd"
 ##  only, so they never affect the auto-score.
 ## ============================================================
 
-const BACK_ICON: String = "res://assets/images/ui/Back.png"
-const HOME_ICON: String = "res://assets/images/ui/Main_Menu.png"
 const SCORE_MAX: float = 40.0
 
 var _navigating: bool = false
@@ -49,18 +47,22 @@ func _build_ui() -> void:
 	root_margin.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root_margin.mouse_filter = Control.MOUSE_FILTER_STOP
 	root_margin.add_theme_constant_override("margin_left", GrammarTheme.SAFE_MARGIN)
-	root_margin.add_theme_constant_override("margin_top", GrammarTheme.SAFE_MARGIN)
+	# The app-wide header bar is authored in FinalExam.tscn and floats above the
+	# page, so the content starts below it instead of underneath it.
+	root_margin.add_theme_constant_override("margin_top", HeaderBarStyler.BAR_HEIGHT + GrammarTheme.SAFE_MARGIN)
 	root_margin.add_theme_constant_override("margin_right", GrammarTheme.SAFE_MARGIN)
 	root_margin.add_theme_constant_override("margin_bottom", GrammarTheme.SAFE_MARGIN)
 	add_child(root_margin)
+
+	# Lift the authored bar back above the page: root_margin stops mouse input
+	# across the whole screen, which would otherwise swallow the bar's taps.
+	wire_header_bar(str(_exam.get("title_fa", AppRouter.get_arg("title_fa", "امتحان نهایی"))))
 
 	var main: VBoxContainer = VBoxContainer.new()
 	main.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	main.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	main.add_theme_constant_override("separation", 24)
 	root_margin.add_child(main)
-
-	_build_header(main)
 
 	var page_host: Control = Control.new()
 	page_host.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -81,46 +83,6 @@ func _build_ui() -> void:
 		return
 
 	_build_exam_pages(blocks)
-
-
-func _build_header(main: VBoxContainer) -> void:
-	var header_box: PanelContainer = PanelContainer.new()
-	GrammarTheme.style_header_box(header_box)
-	main.add_child(header_box)
-
-	var header_margin: MarginContainer = MarginContainer.new()
-	header_margin.add_theme_constant_override("margin_left", 18)
-	header_margin.add_theme_constant_override("margin_top", 14)
-	header_margin.add_theme_constant_override("margin_right", 18)
-	header_margin.add_theme_constant_override("margin_bottom", 14)
-	header_box.add_child(header_margin)
-
-	var header_row: HBoxContainer = HBoxContainer.new()
-	header_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	header_row.add_theme_constant_override("separation", 16)
-	header_margin.add_child(header_row)
-
-	var back_button: Button = GrammarTheme.make_header_icon_button(BACK_ICON, Callable(self, "_on_back_pressed"))
-	header_row.add_child(back_button)
-
-	var home_button: Button = GrammarTheme.make_header_icon_button(HOME_ICON, Callable(self, "_on_main_menu_pressed"))
-	header_row.add_child(home_button)
-
-	var title_label: Label = Label.new()
-	var title: String = str(_exam.get("title_fa", AppRouter.get_arg("title_fa", "امتحان نهایی")))
-	GrammarTheme.set_bidi_text(title_label, title)
-	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	var title_font: Font = GrammarTheme.get_fa_bold()
-	if title_font != null:
-		title_label.add_theme_font_override("font", title_font)
-	title_label.add_theme_font_size_override("font_size", 34)
-	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
-	header_row.add_child(title_label)
-
-	GrammarTheme.unify_header_row(header_row)
 
 
 func _build_audio_button(content: VBoxContainer) -> void:
@@ -386,13 +348,6 @@ func _on_back_pressed() -> void:
 		return
 	_navigating = true
 	AppRouter.back("final_exam_list", {"year": _year_id()})
-
-
-func _on_main_menu_pressed() -> void:
-	if _navigating:
-		return
-	_navigating = true
-	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")
 
 
 func _year_id() -> String:

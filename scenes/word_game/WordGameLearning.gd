@@ -6,7 +6,7 @@ const SCRAMBLED_SCENE: String = "res://scenes/word_game/scrambled/ScrambledWords
 const HUB_SCENE: String = "res://scenes/word_game/WordGameHub.tscn"
 
 @onready var _background: ColorRect = $Background
-@onready var _back_button: Button = $MainMargin/MainColumn/BackButton
+@onready var _back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var _wordef_button: Button = $MainMargin/MainColumn/WordefButton
 @onready var _unscramble_button: Button = $MainMargin/MainColumn/UnscrambleButton
 

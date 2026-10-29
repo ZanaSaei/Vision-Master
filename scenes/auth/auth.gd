@@ -30,6 +30,7 @@ var _busy: bool = false
 
 
 func _ready() -> void:
+	wire_header_bar()
 	_build_ui()
 	_apply_theme()
 	Global.on_theme_changed(_on_theme_changed)

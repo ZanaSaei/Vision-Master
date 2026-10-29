@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://cjulurn60vnt7" path="res://scenes/word_game/WordGameLearning.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_back"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
+
+[sub_resource type="LabelSettings" id="HeaderTitleSettings"]
+font = ExtResource("3_vazir")
+font_size = 45
 
 [node name="WordGameLearning" type="Control" unique_id=128433250]
 layout_mode = 3
@@ -24,26 +29,13 @@ layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_constants/margin_left = 42
-theme_override_constants/margin_top = 72
+theme_override_constants/margin_top = 236
 theme_override_constants/margin_right = 42
 theme_override_constants/margin_bottom = 240
 
 [node name="MainColumn" type="VBoxContainer" parent="MainMargin" unique_id=66471743]
 layout_mode = 2
 theme_override_constants/separation = 28
-
-[node name="BackButton" type="Button" parent="MainMargin/MainColumn" unique_id=94474130]
-custom_minimum_size = Vector2(96, 96)
-layout_mode = 2
-icon = ExtResource("2_back")
-expand_icon = true
-
-[node name="Title" type="Label" parent="MainMargin/MainColumn" unique_id=890998581]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vazir")
-theme_override_font_sizes/font_size = 54
-text = "یادگیری"
-horizontal_alignment = 1
 
 [node name="Intro" type="Label" parent="MainMargin/MainColumn" unique_id=909339573]
 layout_mode = 2
@@ -70,3 +62,37 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "بازی Unscramble
 تمرین نوشتن و مرتب‌کردن واژه‌ها"
+
+[node name="HeaderBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 0.0
+offset_bottom = 200.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("4_header_style")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 45
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent"]
+layout_mode = 2
+icon = ExtResource("2_back")
+flat = true
+icon_alignment = 1
+
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent"]
+layout_mode = 2
+text = "یادگیری"
+label_settings = SubResource("HeaderTitleSettings")

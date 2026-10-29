@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bk10p2d4d2sci" path="res://scenes/settings/settings.gd" id="1_settings"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
+
+[sub_resource type="LabelSettings" id="HeaderTitleSettings"]
+font = ExtResource("2_font")
+font_size = 45
 
 [sub_resource type="StyleBoxFlat" id="btn_pressed"]
 content_margin_left = 26.0
@@ -125,7 +131,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 24.0
+offset_top = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -133,7 +139,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 12
+theme_override_constants/margin_top = 36
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 180
 
@@ -330,3 +336,37 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 32
 text = "نسخه رایگان"
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=1204458812]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 0.0
+offset_bottom = 200.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("4_header_style")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1904458813]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 45
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1604458814]
+layout_mode = 2
+icon = ExtResource("3_back")
+flat = true
+icon_alignment = 1
+
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1304458815]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=1704458816]
+layout_mode = 2
+text = "تنظیمات"
+label_settings = SubResource("HeaderTitleSettings")
+

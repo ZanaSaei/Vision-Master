@@ -10,6 +10,12 @@
 [ext_resource type="StyleBox" uid="uid://c8m6mqu5l84iy" path="res://ui/Styles/buttons/Yellow_Hovered.tres" id="6_ttcs7"]
 [ext_resource type="StyleBox" uid="uid://cpdnjfuv3ffxb" path="res://ui/Styles/buttons/Tab_Normal_Notactivated.tres" id="7_p7c5t"]
 [ext_resource type="LabelSettings" uid="uid://d0avuqvpr5rxl" path="res://ui/fonts/Fa_Button_NormalTitle_Blue.tres" id="8_wtlp0"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="9_header_style"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="9_back_icon"]
+
+[sub_resource type="LabelSettings" id="HeaderTitleSettings"]
+font = ExtResource("3_vazir")
+font_size = 45
 
 [node name="WordGameHub" type="Control" unique_id=757437532]
 layout_mode = 3
@@ -31,7 +37,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 36
-theme_override_constants/margin_top = 52
+theme_override_constants/margin_top = 236
 theme_override_constants/margin_right = 36
 theme_override_constants/margin_bottom = 240
 
@@ -39,14 +45,6 @@ theme_override_constants/margin_bottom = 240
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
-
-[node name="Title" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=1585946414]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vazir")
-theme_override_font_sizes/font_size = 54
-text = "بازی با کلمات"
-label_settings = ExtResource("3_1yjrf")
-horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=308971966]
 layout_mode = 2
@@ -210,3 +208,37 @@ autowrap_mode = 3
 [node name="Entries" type="VBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=1993428948]
 layout_mode = 2
 theme_override_constants/separation = 12
+
+[node name="HeaderBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 0.0
+offset_bottom = 200.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9_header_style")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 45
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent"]
+layout_mode = 2
+icon = ExtResource("9_back_icon")
+flat = true
+icon_alignment = 1
+
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent"]
+layout_mode = 2
+text = "بازی با کلمات"
+label_settings = SubResource("HeaderTitleSettings")

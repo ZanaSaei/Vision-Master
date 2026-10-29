@@ -16,6 +16,7 @@ const DEV_INSTAGRAM := "@mrsaei"           # TODO: replace with your real handle
 
 
 func _ready() -> void:
+	wire_header_bar()
 	version_value.text = "نسخه " + _app_version()
 	email_button.pressed.connect(_on_email_pressed)
 	instagram_button.pressed.connect(_on_instagram_pressed)
@@ -37,6 +38,10 @@ func _apply_theme() -> void:
 func _theme_walk(node: Node) -> void:
 	# The bottom NavigationBar owns its own bespoke styling — leave it alone.
 	if node.name == "NavigationBar":
+		return
+	# The app-wide header bar paints its own surface and type ramp; the card
+	# style below must never repaint it.
+	if node.name == "HeaderBar":
 		return
 	if node is ColorRect and node.name == "Bg":
 		bg.color = Global.get_theme_color("bg_base")

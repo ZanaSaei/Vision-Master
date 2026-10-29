@@ -31,6 +31,7 @@ var _pending_action: Callable = Callable()
 
 
 func _ready() -> void:
+	wire_header_bar()
 	# Initialise the toggles from the persisted settings.
 	_set_toggle(sound_toggle, Global.sound_enabled)
 	_set_toggle(tts_toggle, Global.tts_enabled)
@@ -136,6 +137,10 @@ func _theme_walk(node: Node) -> void:
 		return
 	# The bottom NavigationBar owns its own bespoke styling — leave it alone.
 	if node_name == "NavigationBar":
+		return
+	# The app-wide header bar paints its own surface and type ramp; the card
+	# style below must never repaint it.
+	if node_name == "HeaderBar":
 		return
 	if node is ColorRect and node_name == "Bg":
 		bg.color = Global.get_theme_color("bg_base")

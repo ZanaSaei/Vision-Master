@@ -21,7 +21,17 @@ var _year_id: String = ""
 func _ready() -> void:
 	super._ready()
 	_year_id = str(AppRouter.get_arg("year", "12"))
+	wire_header_bar(_header_title())
 	_build_ui()
+
+
+## The bar reads "امتحانات نهایی · <پایه>" so the chosen grade stays visible.
+func _header_title() -> String:
+	var year: Dictionary = ExamData.year_by_id(_year_id)
+	var year_title: String = str(year.get("title_fa", "")).strip_edges()
+	if year_title.is_empty():
+		return "امتحانات نهایی"
+	return "امتحانات نهایی · " + year_title
 
 
 func _build_ui() -> void:

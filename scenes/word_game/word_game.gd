@@ -8,6 +8,7 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_WORD_OF_DAY := "res://scenes/word_game/WordOfDay.tscn"
 const SCENE_MEANING := "res://scenes/word_game/MeaningQuiz.tscn"
 const SCENE_SPELLING := "res://scenes/word_game/SpellingGame.tscn"
+@onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var word_of_day_button: Button = $Content/WordOfDayButton
 @onready var meaning_button: Button = $Content/MeaningButton
 @onready var spelling_button: Button = $Content/SpellingButton
@@ -22,6 +23,8 @@ func _ready() -> void:
 	word_of_day_button.pressed.connect(_on_word_of_day_pressed)
 	meaning_button.pressed.connect(_on_meaning_pressed)
 	spelling_button.pressed.connect(_on_spelling_pressed)
+	if back_button != null:
+		back_button.pressed.connect(_on_android_back_pressed)
 	_wire_button_animations()
 
 

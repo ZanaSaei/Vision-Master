@@ -43,30 +43,13 @@ func _build_ui() -> void:
 	margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	margin.add_theme_constant_override("margin_left", 32)
 	margin.add_theme_constant_override("margin_right", 32)
-	margin.add_theme_constant_override("margin_top", 48)
+	margin.add_theme_constant_override("margin_top", 240)
 	margin.add_theme_constant_override("margin_bottom", 250)
 	scroll_page.add_child(margin)
 
 	_root = VBoxContainer.new()
 	_root.add_theme_constant_override("separation", 18)
 	margin.add_child(_root)
-
-	var top: HBoxContainer = HBoxContainer.new()
-	_root.add_child(top)
-	var back: Button = MenuStyle.make_back_button("res://assets/images/ui/Back.png", 90)
-	back.pressed.connect(_go_back)
-	top.add_child(back)
-	var title: Label = Label.new()
-	title.text = "چالش روزانه"
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_override("font", MenuStyle.vazir())
-	title.add_theme_font_size_override("font_size", 42)
-	title.add_theme_color_override("font_color", MenuStyle.text())
-	top.add_child(title)
-	var spacer: Control = Control.new()
-	spacer.custom_minimum_size.x = 90
-	top.add_child(spacer)
 
 	_month_title = _make_label("در حال دریافت تقویم…", 30, true)
 	_root.add_child(_month_title)
@@ -112,6 +95,19 @@ func _build_ui() -> void:
 	MenuStyle.wire_microinteractions(_game_buttons["wordle"])
 	MenuStyle.wire_microinteractions(_game_buttons["wordef"])
 	MenuStyle.wire_microinteractions(_game_buttons["unscramble"])
+	_wire_header()
+
+## The screen wears the app-wide header bar authored in DailyWordGame.tscn, the
+## same bar the lesson screens carry. The bar is moved to the end of the child
+## list so the scrolling page glides underneath it instead of over it.
+func _wire_header() -> void:
+	var header: Control = get_node_or_null("HeaderBar") as Control
+	if header == null:
+		return
+	move_child(header, get_child_count() - 1)
+	var back: Button = header.get_node_or_null("HeaderContent/BackButton") as Button
+	if back != null:
+		back.pressed.connect(_go_back)
 
 func _load_calendar() -> void:
 	if not API.is_configured() or not API.is_logged_in():

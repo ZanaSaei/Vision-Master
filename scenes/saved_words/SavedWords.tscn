@@ -3,6 +3,12 @@
 [ext_resource type="Script" uid="uid://bohbhtc8jn1ln" path="res://scenes/saved_words/saved_words.gd" id="1_cfgum"]
 [ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="2_bltao"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_6xmsu"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="4_back"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="5_header_style"]
+
+[sub_resource type="LabelSettings" id="HeaderTitleSettings"]
+font = ExtResource("3_6xmsu")
+font_size = 45
 
 [sub_resource type="LabelSettings" id="LabelSettings_h65dr"]
 font = ExtResource("2_bltao")
@@ -37,6 +43,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 200.0
 offset_bottom = -140.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -59,4 +66,38 @@ text = "هیچ کلمه ای ذخیره نشده."
 label_settings = SubResource("LabelSettings_d1u5f")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HeaderBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 0.0
+offset_bottom = 200.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("5_header_style")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 45
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent"]
+layout_mode = 2
+icon = ExtResource("4_back")
+flat = true
+icon_alignment = 1
+
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent"]
+layout_mode = 2
+text = "کلمات ذخیره‌شده"
+label_settings = SubResource("HeaderTitleSettings")
 

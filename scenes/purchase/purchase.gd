@@ -11,6 +11,7 @@ extends "res://autoload/BackButtonHandler.gd"
 @onready var _background: ColorRect = $Bg
 
 func _ready() -> void:
+	wire_header_bar()
 	_apply_theme()
 	Global.on_theme_changed(_on_theme_changed)
 	_refresh_status()

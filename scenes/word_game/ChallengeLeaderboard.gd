@@ -2,7 +2,7 @@ extends "res://autoload/BackButtonHandler.gd"
 class_name ChallengeLeaderboard
 
 @onready var _background: ColorRect = $Background
-@onready var _back_button: Button = $Scroll/MainMargin/MainColumn/Header/BackButton
+@onready var _back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var _daily_button: Button = $Scroll/MainMargin/MainColumn/Tabs/DailyButton
 @onready var _lifetime_button: Button = $Scroll/MainMargin/MainColumn/Tabs/LifetimeButton
 @onready var _status: Label = $Scroll/MainMargin/MainColumn/Status

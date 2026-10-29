@@ -3,10 +3,12 @@ class_name WordGameHub
 
 const LEARNING_SCENE: String = "res://scenes/word_game/WordGameLearning.tscn"
 const DAILY_SCENE: String = "res://scenes/word_game/DailyWordGame.tscn"
+const MAIN_MENU_SCENE: String = "res://scenes/main_menu/MainMenu.tscn"
 const BUTTON_PRESSED_SCALE: float = 0.94
 const BUTTON_PRESS_DURATION: float = 0.12
 const BUTTON_RELEASE_DURATION: float = 0.20
 
+@onready var _back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var _learning_button: Button = $Scroll/MainMargin/MainColumn/ModeButtons/LearningButton
 @onready var _daily_button: Button = $Scroll/MainMargin/MainColumn/ModeButtons/DailyButton
 @onready var _daily_board_button: Button = $Scroll/MainMargin/MainColumn/Tabs/DailyBoardButton
@@ -19,6 +21,7 @@ var _board_request_id: int = 0
 var _button_tweens: Dictionary = {}
 
 func _ready() -> void:
+	_back_button.pressed.connect(_on_back_pressed)
 	for button: Button in [_learning_button, _daily_button, _daily_board_button, _lifetime_button]:
 		button.pivot_offset = button.size / 2.0
 		button.resized.connect(_on_button_resized.bind(button))
@@ -130,5 +133,8 @@ func _make_label(value: String) -> Label:
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return label
 
+func _on_back_pressed() -> void:
+	TransitionManager.change_scene(MAIN_MENU_SCENE)
+
 func _on_android_back_pressed() -> void:
-	TransitionManager.change_scene("res://scenes/main_menu/MainMenu.tscn")
+	_on_back_pressed()

@@ -12,6 +12,8 @@ const SCENE_FLASHCARDS := "res://scenes/vocabulary/VocabFlashcards.tscn"
 
 
 func _ready() -> void:
+	wire_header_bar()
+
 	# The empty state is only for the genuinely-empty case, so hide it up
 	# front. This screen is a pass-through whenever words exist and must
 	# never flash "Empty" while it is routing on to the flashcards.

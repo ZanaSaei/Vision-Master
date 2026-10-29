@@ -22,6 +22,7 @@ var _navigating: bool = false
 
 func _ready() -> void:
 	super._ready()
+	wire_header_bar()
 	_build_ui()
 
 

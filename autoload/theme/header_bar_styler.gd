@@ -52,11 +52,11 @@ const FLEX_NAME := "HeaderFlex"
 
 ## Square size every header item is pinned to, so the row reads identically in
 ## every scene no matter which buttons that scene happens to show.
-const BUTTON_SIZE := 96.0
+const BUTTON_SIZE := 144.0
 ## Longest side the icon inside a header button may draw at. The source art is
 ## a 200 px canvas whose glyph fills ~65 % of it, so 72 px draws a ~50 px icon
 ## inside the 96 px button.
-const ICON_SIZE := 72
+const ICON_SIZE := 112
 ## One type ramp for every header title, in pixels.
 const TITLE_FONT_SIZE := 40
 
@@ -64,7 +64,6 @@ const TITLE_FONT_SIZE := 40
 ## press tooltip). Only the recognised roles get one.
 const TOOLTIPS := {
 	"back":        "بازگشت",
-	"home":        "منوی اصلی",
 	"audio":       "پخش صدا",
 	"leitner":     "جعبه لایتنر",
 	"translation": "نمایش ترجمه",
@@ -73,7 +72,7 @@ const TOOLTIPS := {
 ## Canonical slot order. A button is placed by its role, not by where the scene
 ## happened to author it, so "audio" is always the second item from the right
 ## edge — even in a screen that used to put it on the left.
-const LEADING_ORDER := ["back", "home"]
+const LEADING_ORDER := ["back"]
 const TRAILING_ORDER := ["translation", "audio", "leitner"]
 
 ## Meta key UiMotion.wire_microinteractions() checks before it wires a hover /
@@ -85,7 +84,6 @@ const MOTION_WIRED_META := "ui_motion_wired"
 ## `_button_kind()` from the button's own name.
 const ICONS := {
 	"back":        "res://assets/images/ui/Back.png",
-	"home":        "res://assets/images/ui/Main_Menu.png",
 	"audio":       "res://assets/images/ui/audio_play.png",
 	"leitner":     "res://assets/images/ui/Leitner.png",
 	"translation": "res://assets/images/ui/Translate.png",
@@ -524,6 +522,10 @@ func _style_button(btn: Button) -> void:
 	# Still and one size: no hover lift, no press squash, no drift.
 	btn.scale = Vector2.ONE
 	btn.set_meta(MOTION_WIRED_META, true)
+	if kind == "home":
+		# Remove the home button from all header bars
+		btn.visible = false
+		return
 	if ICONS.has(kind):
 		btn.icon = load(ICONS[kind])
 	if TOOLTIPS.has(kind):

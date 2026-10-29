@@ -4,11 +4,8 @@
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 [ext_resource type="Shader" uid="uid://dje0dgpfw45e5" path="res://scenes/shared/GradientCard.gdshader" id="5_shader"]
 [ext_resource type="Script" uid="uid://dqlylk0w3c2p8" path="res://ui/widgets/GradientCardRect.gd" id="6_cardrect"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
-font = ExtResource("4_font")
-font_size = 70
-font_color = Color(0.039215688, 0.039215688, 0.4509804, 1)
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="7_back"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="8_header_style"]
 
 [sub_resource type="ShaderMaterial" id="MatBlue"]
 shader = ExtResource("5_shader")
@@ -54,6 +51,10 @@ shader_parameter/shadow_blur = 22.0
 shader_parameter/shadow_offset = 10.0
 shader_parameter/shadow_color = Color(0.1, 0.1, 0.1, 0.32)
 
+[sub_resource type="LabelSettings" id="HeaderTitleSettings"]
+font = ExtResource("4_font")
+font_size = 45
+
 [node name="FlashcardHub" type="Control" unique_id=833777148]
 layout_mode = 3
 anchors_preset = 15
@@ -63,26 +64,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Label" type="Label" parent="." unique_id=976215890]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 72.0
-grow_horizontal = 2
-text = "منوی کارت ها"
-label_settings = SubResource("LabelSettings_7ujfs")
-horizontal_alignment = 1
-
 [node name="Content" type="VBoxContainer" parent="." unique_id=201766586]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 80.0
-offset_top = 198.0
+offset_top = 310.0
 offset_right = -80.0
 offset_bottom = -26.0
 grow_horizontal = 2
@@ -232,3 +220,36 @@ theme_override_font_sizes/font_size = 56
 text = "❯"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=143353489]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 200.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("8_header_style")
+
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=18271439]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 45
+
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=86629660]
+layout_mode = 2
+icon = ExtResource("7_back")
+flat = true
+icon_alignment = 1
+
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=967943798]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "🏠"
+flat = true
+
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=241793701]
+layout_mode = 2
+text = "فلش کارت"
+label_settings = SubResource("HeaderTitleSettings")

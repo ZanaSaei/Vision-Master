@@ -22,6 +22,7 @@ var _navigating: bool = false
 
 
 func _ready() -> void:
+	wire_header_bar()
 	for label: Label in [flashcard_label, leitner_label]:
 		label.self_modulate = Color.WHITE
 		label.modulate = Color.WHITE

@@ -28,6 +28,7 @@ func _ready() -> void:
 	_game_type = DailyChallengeState.selected_game
 	_attempt_id = DailyChallengeState.current_attempt_id
 	_public = DailyChallengeState.current_public_content.duplicate(true)
+	_wire_header()
 	if _attempt_id.is_empty() or not GAME_NAMES.has(_game_type):
 		_show_fatal("اطلاعات تلاش رسمی پیدا نشد.")
 		return
@@ -70,20 +71,12 @@ func _build_shell() -> void:
 	margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	margin.add_theme_constant_override("margin_left", 36)
 	margin.add_theme_constant_override("margin_right", 36)
-	margin.add_theme_constant_override("margin_top", 54)
+	margin.add_theme_constant_override("margin_top", 250)
 	margin.add_theme_constant_override("margin_bottom", 240)
 	scroll.add_child(margin)
 	_root = VBoxContainer.new()
 	_root.add_theme_constant_override("separation", 18)
 	margin.add_child(_root)
-	var top: HBoxContainer = HBoxContainer.new()
-	_root.add_child(top)
-	var back: Button = MenuStyle.make_back_button("res://assets/images/ui/Back.png", 88)
-	back.pressed.connect(_confirm_exit)
-	top.add_child(back)
-	var title: Label = _label("چالش رسمی · %s" % str(GAME_NAMES.get(_game_type, "")), 38, true)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	top.add_child(title)
 	var timer_label: Label = _label("", 28, true)
 	timer_label.name = "TimerLabel"
 	_root.add_child(timer_label)
@@ -96,6 +89,27 @@ func _build_shell() -> void:
 	_status = _label("بارگذاری بازی…", 24, false)
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_root.add_child(_status)
+	_raise_header()
+
+## The screen wears the app-wide header bar authored in
+## OfficialChallengeGame.tscn — the same bar the lesson screens carry — so the
+## back arrow plus the centered title replace the old in-page title row.
+func _wire_header() -> void:
+	var header: Control = get_node_or_null("HeaderBar") as Control
+	if header == null:
+		return
+	var title: Label = header.get_node_or_null("HeaderContent/HeaderTitle") as Label
+	if title != null:
+		title.text = "چالش رسمی · %s" % str(GAME_NAMES.get(_game_type, ""))
+	var back: Button = header.get_node_or_null("HeaderContent/BackButton") as Button
+	if back != null:
+		back.pressed.connect(_confirm_exit)
+
+## Puts the bar on top of the tree so the built page scrolls underneath it.
+func _raise_header() -> void:
+	var header: Control = get_node_or_null("HeaderBar") as Control
+	if header != null:
+		move_child(header, get_child_count() - 1)
 
 func _restore_wordle_state() -> void:
 	var state: Dictionary = DailyChallengeState.current_attempt_state
