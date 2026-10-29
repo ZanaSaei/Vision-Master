@@ -171,6 +171,9 @@ func _build_exam_pages(blocks: Array) -> void:
 			_check_btn.custom_minimum_size = Vector2(0, 112)
 			_check_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			GrammarTheme.style_primary_button(_check_btn)
+			_check_btn.add_theme_stylebox_override("normal", load("res://ui/Styles/buttons/Yellow_Normal.tres"))
+			_check_btn.add_theme_stylebox_override("pressed", load("res://ui/Styles/buttons/Yellow_Normal.tres"))
+			_check_btn.add_theme_stylebox_override("hover", load("res://ui/Styles/buttons/Yellow_Hovered.tres"))
 			_check_btn.add_theme_font_size_override("font_size", 46)
 			_check_btn.pressed.connect(_on_check_pressed)
 			content.add_child(_check_btn)
@@ -328,6 +331,9 @@ func _show_score_popup(score: float) -> void:
 	close_btn.text = "بستن"
 	close_btn.custom_minimum_size = Vector2(0, GrammarTheme.BUTTON_HEIGHT)
 	close_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	close_btn.add_theme_stylebox_override("normal", load("res://ui/Styles/buttons/Yellow_Normal.tres"))
+	close_btn.add_theme_stylebox_override("pressed", load("res://ui/Styles/buttons/Yellow_Normal.tres"))
+	close_btn.add_theme_stylebox_override("hover", load("res://ui/Styles/buttons/Yellow_Hovered.tres"))
 	GrammarTheme.style_primary_button(close_btn)
 	close_btn.pressed.connect(func() -> void:
 		if _score_overlay != null and is_instance_valid(_score_overlay):

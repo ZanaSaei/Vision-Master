@@ -3,10 +3,8 @@ extends "res://autoload/BackButtonHandler.gd"
 ## ============================================================
 ##  FINAL EXAMS — امتحانات نهایی (year picker)
 ##
-##  Entry screen reached from the main menu's "امتحانات نهایی"
-##  card. It shows one card per grade (یازدهم / دوازدهم) read
-##  from res://data/final_exams/manifest.json. Picking a grade
-##  pushes the exam list for that year.
+##  Entry screen reached from the main menu's card. It shows one card per grade read
+##  from res://data/final_exams/manifest.json. Picking a grade pushes the exam list for that year.
 ## ============================================================
 
 const SCENE_MAIN_MENU: String = "res://scenes/main_menu/MainMenu.tscn"
@@ -14,10 +12,9 @@ const CARD_ACCENTS: Array[Color] = [Color("#2563EB"), Color("#D97706")]
 
 var _navigating: bool = false
 
-@onready var _content_box: PanelContainer = $RootMargin/MainColumn/ContentBox
-@onready var _subtitle: Label = $RootMargin/MainColumn/ContentBox/ContentMargin/ContentScroll/Content/Subtitle
-@onready var _dynamic_content: VBoxContainer = $RootMargin/MainColumn/ContentBox/ContentMargin/ContentScroll/Content/DynamicContent
-@onready var _empty_message: Label = $RootMargin/MainColumn/ContentBox/ContentMargin/ContentScroll/Content/EmptyMessage
+@onready var _subtitle: Label = $RootMargin/MainColumn/ContentMargin/ContentScroll/Content/Subtitle
+@onready var _dynamic_content: VBoxContainer = $RootMargin/MainColumn/ContentMargin/ContentScroll/Content/DynamicContent
+@onready var _empty_message: Label = $RootMargin/MainColumn/ContentMargin/ContentScroll/Content/EmptyMessage
 
 
 func _ready() -> void:
@@ -27,8 +24,11 @@ func _ready() -> void:
 
 
 func _build_ui() -> void:
-	GrammarTheme.style_card(_content_box)
-	GrammarTheme.set_bidi_text(_subtitle, "پایهٔ خود را انتخاب کنید")
+	GrammarTheme.set_bidi_text(_subtitle, "پایه خود را انتخاب کنید")
+	var _yellow_normal: StyleBoxFlat = load("res://ui/Styles/buttons/Yellow_Normal.tres")
+	var _yellow_hovered: StyleBoxFlat = load("res://ui/Styles/buttons/Yellow_Hovered.tres")
+	var _blue_normal: StyleBoxFlat = load("res://ui/Styles/buttons/Blue_Normal.tres")
+	var _blue_hovered: StyleBoxFlat = load("res://ui/Styles/buttons/Blue_Hovered.tres")
 	_subtitle.add_theme_font_size_override("font_size", 32)
 	_subtitle.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
 
@@ -44,11 +44,25 @@ func _build_ui() -> void:
 		var card: Button = MenuStyle.make_card(
 			str(year.get("title_fa", "")),
 			"%s · %d آزمون" % [str(year.get("subtitle_fa", "")), exam_count],
-			str(year.get("emoji", "🎓")),
+			"🎓",
 			accent,
 			190
 		)
 		var year_id: String = str(year.get("id", ""))
+		if year_id == "11" or year_id == "12":
+			card.add_theme_stylebox_override("normal", _blue_normal)
+			card.add_theme_stylebox_override("pressed", _blue_normal)
+			card.add_theme_stylebox_override("hover", _blue_hovered)
+			var title_lbl: Label = card.get_node_or_null("Margin/Row/TextColumn/TitleLabel") as Label
+			if title_lbl != null:
+				title_lbl.label_settings = load("res://ui/fonts/Fa_Button_Title_Blue.tres")
+			var sub_lbl: Label = card.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
+			if sub_lbl != null:
+				sub_lbl.label_settings = load("res://ui/fonts/Fa_Button_Info_Blue.tres")
+		else:
+			card.add_theme_stylebox_override("normal", _yellow_normal)
+			card.add_theme_stylebox_override("pressed", _yellow_normal)
+			card.add_theme_stylebox_override("hover", _yellow_hovered)
 		card.pressed.connect(func() -> void: _open_year(year_id))
 		MenuStyle.wire_microinteractions(card)
 		var card_inset: MarginContainer = MarginContainer.new()
