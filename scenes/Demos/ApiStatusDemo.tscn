@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource path="res://autoload/ApiClient.gd" type="GDScript" id=1]
+[ext_resource path="res://autoload/Global.gd" type="GDScript" id=2]
+
+[node name="ApiStatusDemo" type="Node2D" parent=""]
+anchor_right=1
+anchor_bottom=1
+position=Vector2(0, 0)
+size=Vector2(1080, 1920)
+
+[connection signal="logged_in" from="/root/API" to="ApiStatusDemo" method="on_logged_in"]
+[connection signal="logged_out" from="/root/API" to="ApiStatusDemo" method="on_logged_out"]
+[connection signal="token_refreshed" from="/root/API" to="ApiStatusDemo" method="on_token_refreshed"]
+
+@Node("_api")
+@Node("_status_label")
+@Node("_configured_label")
+@Node("_login_button")
+@Node("_logout_button")
+@Node("_refresh_label")
+@Node("_base_url_label")
+
+#### API Status Demo - demonstrates server-dependent features
+### Shows whether the API is configured and logged in, and responds to auth signals
+
+@tool
+@api
+@class_name ApiStatusDemo
+####
+var _api: ApiClient = null
+var _is_configured: bool = false
+var _is_logged_in: bool = false
+
+func _ready() -> void:
+	_api = /root/API
+	_is_configured = _api.is_configured()
+	_is_logged_in = _api.is_logged_in()
+	_update_labels()
+	
+	# Connect to signals
+	_api.logged_in.connect(_on_logged_in)
+	_api.logged_out.connect(_on_logged_out)
+	_api.token_refreshed.connect(_on_token_refreshed)
+	
+	# Initial status
+	print("[ApiStatusDemo] Ready - configured: %s, logged_in: %s" % [_is_configured, _is_logged_in])
+
+func _on_logged_in(user: Dictionary) -> void:
+	_is_logged_in = true
+	_update_labels()
+	print("[ApiStatusDemo] Logged in: %s" % user)
+
+func _on_logged_out() -> void:
+	_is_logged_in = false
+	_update_labels()
+	print("[ApiStatusDemo] Logged out")
+
+func _on_token_refreshed(success: bool) -> void:
+	_update_labels()
+	print("[ApiStatusDemo] Token refreshed: %s" % success)
+
+func _update_labels() -> void:
+	var config_text: String = _is_configured and "Configured" or "Not Configured"
+	var login_text: String = _is_logged_in and "Logged In" or "Not Logged In"
+	$._configured_label.text = "API Configured: %s" % config_text
+	$._login_button.visible = not _is_logged_in
+	$._logout_button.visible = _is_logged_in
+	$._status_label.text = "Status: %s %s" % [config_text, login_text]
+	$._refresh_label.visible = _is_logged_in and not _is_configured
+
+# UI buttons
+func _on_logout_pressed() -> void:
+	_api.logout()
+
+func _on_refresh_pressed() -> void:
+	_api.refresh_tokens()

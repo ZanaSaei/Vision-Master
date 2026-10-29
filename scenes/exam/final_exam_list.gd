@@ -50,20 +50,26 @@ func _build_ui() -> void:
 		var date_fa: String = str(exam.get("date_fa", ""))
 		var exam_json: String = str(exam.get("json", ""))
 		var card: Button = MenuStyle.make_card(title, "تاریخ آزمون · " + date_fa, "📄", CARD_ACCENT, 168)
-		if _year_id == "11" or _year_id == "12":
+		if _year_id == "11":
 			card.add_theme_stylebox_override("normal", _blue_normal)
 			card.add_theme_stylebox_override("pressed", _blue_normal)
 			card.add_theme_stylebox_override("hover", _blue_hovered)
+		elif _year_id == "12":
+			card.add_theme_stylebox_override("normal", _yellow_normal)
+			card.add_theme_stylebox_override("pressed", _yellow_normal)
+			card.add_theme_stylebox_override("hover", _yellow_hovered)
+		else:
+			card.add_theme_stylebox_override("normal", _yellow_normal)
+			card.add_theme_stylebox_override("pressed", _yellow_normal)
+			card.add_theme_stylebox_override("hover", _yellow_hovered)
+
+		if _year_id == "11" or _year_id == "12":
 			var title_lbl: Label = card.get_node_or_null("Margin/Row/TextColumn/TitleLabel") as Label
 			if title_lbl != null:
 				title_lbl.label_settings = title_blue_settings
 			var sub_lbl: Label = card.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
 			if sub_lbl != null:
 				sub_lbl.label_settings = info_blue_settings
-		else:
-			card.add_theme_stylebox_override("normal", _yellow_normal)
-			card.add_theme_stylebox_override("pressed", _yellow_normal)
-			card.add_theme_stylebox_override("hover", _yellow_hovered)
 		card.pressed.connect(func() -> void: _open_exam(exam_json, title))
 		MenuStyle.wire_microinteractions(card)
 		var card_inset: MarginContainer = MarginContainer.new()

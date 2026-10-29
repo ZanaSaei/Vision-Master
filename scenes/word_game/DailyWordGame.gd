@@ -159,6 +159,7 @@ func _build_day_cards(days: Array) -> void:
 		button.add_theme_stylebox_override("normal", _day_style(date_key == _selected_date, button.disabled))
 		button.add_theme_stylebox_override("disabled", _day_style(date_key == _selected_date, true))
 		button.add_theme_stylebox_override("pressed", _day_style(true, false))
+		button.add_theme_stylebox_override("hover", _day_style(date_key == _selected_date, button.disabled))
 		button.add_theme_font_override("font", MenuStyle.vazir())
 		button.add_theme_font_size_override("font_size", 1)
 		var box: VBoxContainer = VBoxContainer.new()
@@ -267,11 +268,15 @@ func _on_summary_loaded(ok: bool, data: Dictionary) -> void:
 		button.set_meta("existing_attempt", in_progress and not completed)
 		button.set_meta("counted", bool(game.get("counted", false)))
 		if completed:
-			button.text = "%s  ·  انجام‌شده" % GAME_TITLES[game_type]
+			# Game already played/completed
+			button.text = "%s\nانجام شده" % GAME_TITLES[game_type]
+			button.disabled = true
 		elif in_progress:
-			button.text = "%s  ·  ادامه بازی" % GAME_TITLES[game_type]
+			# Game in progress - still playable
+			button.text = "%s\nادامه بازی" % GAME_TITLES[game_type]
 		else:
-			button.text = "%s  ·  شروع بازی" % GAME_TITLES[game_type]
+			# Game not started - playable
+			button.text = "%s\nبازی را شروع کن" % GAME_TITLES[game_type]
 		button.disabled = _is_future_selected() or not _date_is_today()
 
 func _date_is_today() -> bool:

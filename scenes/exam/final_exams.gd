@@ -49,20 +49,26 @@ func _build_ui() -> void:
 			190
 		)
 		var year_id: String = str(year.get("id", ""))
-		if year_id == "11" or year_id == "12":
+		if year_id == "11":
 			card.add_theme_stylebox_override("normal", _blue_normal)
 			card.add_theme_stylebox_override("pressed", _blue_normal)
 			card.add_theme_stylebox_override("hover", _blue_hovered)
+		elif year_id == "12":
+			card.add_theme_stylebox_override("normal", _yellow_normal)
+			card.add_theme_stylebox_override("pressed", _yellow_normal)
+			card.add_theme_stylebox_override("hover", _yellow_hovered)
+		else:
+			card.add_theme_stylebox_override("normal", _yellow_normal)
+			card.add_theme_stylebox_override("pressed", _yellow_normal)
+			card.add_theme_stylebox_override("hover", _yellow_hovered)
+
+		if year_id == "11" or year_id == "12":
 			var title_lbl: Label = card.get_node_or_null("Margin/Row/TextColumn/TitleLabel") as Label
 			if title_lbl != null:
 				title_lbl.label_settings = load("res://ui/fonts/Fa_Button_Title_Blue.tres")
 			var sub_lbl: Label = card.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
 			if sub_lbl != null:
 				sub_lbl.label_settings = load("res://ui/fonts/Fa_Button_Info_Blue.tres")
-		else:
-			card.add_theme_stylebox_override("normal", _yellow_normal)
-			card.add_theme_stylebox_override("pressed", _yellow_normal)
-			card.add_theme_stylebox_override("hover", _yellow_hovered)
 		card.pressed.connect(func() -> void: _open_year(year_id))
 		MenuStyle.wire_microinteractions(card)
 		var card_inset: MarginContainer = MarginContainer.new()
