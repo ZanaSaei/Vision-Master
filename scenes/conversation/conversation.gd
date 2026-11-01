@@ -52,6 +52,10 @@ var exercises_container: VBoxContainer
 var intro_translation_label: Label = null
 var _page_bg_style: StyleBoxFlat
 
+# Collapsing image state
+const HERO_MAX_HEIGHT := 800.0
+var _hero_collapse_progress: float = 0.0
+
 # ---------- State Variables ----------
 const SEEK_STEP: float = 10.0
 var is_dragging_slider: bool = false
@@ -148,7 +152,8 @@ func _build_conversation_page() -> void:
 	conversation_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	conversation_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	conversation_image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	conversation_image.custom_minimum_size = Vector2(0, 800)
+	conversation_image.custom_minimum_size = Vector2(0, HERO_MAX_HEIGHT)
+	conversation_image.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	page.add_child(conversation_image)
 
 	# Intro Label
@@ -203,9 +208,29 @@ func _input(event: InputEvent) -> void:
 		if event.pressed:
 			_touch_start_pos = event.position
 			_is_drag_scrolling = false
-		elif event is InputEventScreenDrag or (event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
+		else:
 			if _touch_start_pos.distance_to(event.position) > 15.0:
 				_is_drag_scrolling = true
+	elif event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_update_hero_collapse(-60.0)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_update_hero_collapse(60.0)
+	elif event is InputEventScreenDrag or (event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
+		if _touch_start_pos.distance_to(event.position) > 15.0:
+			_is_drag_scrolling = true
+			_update_hero_collapse(event.relative.y)
+
+func _update_hero_collapse(scroll_delta: float) -> void:
+	if not is_instance_valid(conversation_image) or not conversation_image.visible:
+		return
+	
+	var delta_progress := -scroll_delta / HERO_MAX_HEIGHT
+	_hero_collapse_progress = clampf(_hero_collapse_progress + delta_progress, 0.0, 1.0)
+	
+	var current_h := lerpf(HERO_MAX_HEIGHT, 0.0, _hero_collapse_progress)
+	conversation_image.custom_minimum_size.y = current_h
+	conversation_image.modulate.a = 1.0 - (_hero_collapse_progress * 0.85)
 
 func _load_fonts() -> void:
 	font_regular = load(FONT_JAKARTA_REGULAR_PATH)
@@ -280,11 +305,14 @@ func _highlight_text_color() -> String:
 func _build_conversation(book: int, lesson: int, data: Dictionary) -> void:
 	all_sentences_sync.clear()
 	_sync_index = 0
+	_hero_collapse_progress = 0.0
 	var image_path := "res://assets/images/%s" % data.get("image", "")
 	var lesson_texture: Texture2D = Content.load_image(image_path)
 	if lesson_texture != null:
 		conversation_image.texture = lesson_texture
 		conversation_image.visible = true
+		conversation_image.custom_minimum_size = Vector2(0, HERO_MAX_HEIGHT)
+		conversation_image.modulate.a = 1.0
 	else:
 		conversation_image.visible = false
 		conversation_image.custom_minimum_size = Vector2(0, 0) # Hidden until downloaded

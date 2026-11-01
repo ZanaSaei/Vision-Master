@@ -99,9 +99,15 @@ func _build_ui() -> void:
 	main.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	main.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	main.add_theme_constant_override("separation", 24)
+	main.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	root_margin.add_child(main)
 
 	_build_header(main, data)
+
+	var content_box := PanelContainer.new()
+	GrammarTheme.style_card(content_box)
+	content_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	main.add_child(content_box)
 
 	var page_host: Control = Control.new()
 	page_host.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -127,7 +133,7 @@ func _build_ui() -> void:
 # ============================================================
 func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 	var header_box: PanelContainer = PanelContainer.new()
-	GrammarTheme.style_header_box(header_box)
+	header_box.add_theme_stylebox_override("panel", GrammarTheme.rounded_box(Color.WHITE, 35, Color.TRANSPARENT, 0))
 	main.add_child(header_box)
 
 	var header_margin: MarginContainer = MarginContainer.new()

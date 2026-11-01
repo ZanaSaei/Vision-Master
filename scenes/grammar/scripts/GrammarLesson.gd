@@ -136,10 +136,7 @@ func _load_lesson() -> void:
 # ============================================================
 
 func _build_ui() -> void:
-	var background := ColorRect.new()
-	background.color = GrammarTheme.background_color()
-	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(background)
+	
 
 	var safe_area := MarginContainer.new()
 	safe_area.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -151,18 +148,17 @@ func _build_ui() -> void:
 	add_child(safe_area)
 
 	var main := VBoxContainer.new()
+	main.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	main.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	main.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	main.add_theme_constant_override("separation", GrammarTheme.SPACING_MD)
 	safe_area.add_child(main)
-
-	# Invisible breathing room above the header bar.
-	var top_gap := Control.new()
-	top_gap.custom_minimum_size = Vector2(0, 50)
-	main.add_child(top_gap)
 
 	# ---- Header box: raised bar (distinct color + shadow) with the
 	#      back/title/XP top bar and the progress row inside it.
 	var header_box := PanelContainer.new()
-	GrammarTheme.style_header_box(header_box)
+	header_box.add_theme_stylebox_override("panel", GrammarTheme.rounded_box(Color.WHITE, 35, Color.TRANSPARENT, 0))
+	header_box.add_theme_font_size_override("font_size", 42)
 	main.add_child(header_box)
 
 	var header_margin := MarginContainer.new()

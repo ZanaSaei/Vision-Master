@@ -30,11 +30,11 @@ func _build_ui() -> void:
 	main.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	main.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	main.add_theme_constant_override("separation", 24)
-	main.alignment = BoxContainer.ALIGNMENT_CENTER
+	main.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	root_margin.add_child(main)
 
 	var header_box: PanelContainer = PanelContainer.new()
-	GrammarTheme.style_header_box(header_box)
+	header_box.add_theme_stylebox_override("panel", GrammarTheme.rounded_box(Color.WHITE, 35, Color.TRANSPARENT, 0))
 	main.add_child(header_box)
 
 	var header_margin: MarginContainer = MarginContainer.new()
@@ -71,7 +71,7 @@ func _build_ui() -> void:
 	GrammarTheme.unify_header_row(header_row)
 
 	var content_box: PanelContainer = PanelContainer.new()
-	GrammarTheme.style_card(content_box)
+	content_box.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 	main.add_child(content_box)
 
 	var content_margin: MarginContainer = MarginContainer.new()
