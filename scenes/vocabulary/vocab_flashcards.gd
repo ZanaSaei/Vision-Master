@@ -316,9 +316,9 @@ func _theme_back_row(panel: PanelContainer) -> void:
 	st.set_corner_radius_all(14)
 	st.bg_color = Color("#FFFFFF") if not dark else Color("#2A2D33")
 	st.border_width_left = 8
-	st.border_width_top = 0
-	st.border_width_right = 0
-	st.border_width_bottom = 0
+	st.border_width_top = 2
+	st.border_width_right = 2
+	st.border_width_bottom = 2
 	st.border_color = accent
 	st.shadow_color = Color(0, 0, 0, 0)
 	st.shadow_size = 0

@@ -29,6 +29,9 @@ func _ready() -> void:
 	flashcard_button.pressed.connect(_on_flashcard_pressed)
 	leitner_button.pressed.connect(_on_leitner_pressed)
 	_wire_button_animations()
+	# Remove initial entrance animation - buttons appear instantly at full opacity
+	flashcard_button.modulate = Color.WHITE
+	leitner_button.modulate = Color.WHITE
 
 
 ############################################################
