@@ -59,10 +59,16 @@ func _build_ui() -> void:
 	header_row.add_theme_constant_override("separation", 16)
 	header_margin.add_child(header_row)
 
-	var back_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Back.png", Callable(self, "_on_previous_pressed"))
+	var back_button: Button = GrammarTheme.make_header_icon_button(
+		"res://assets/images/ui/Back.png",
+		Callable(self, "_on_previous_pressed")
+	)
 	header_row.add_child(back_button)
 
-	var menu_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Main_Menu.png", Callable(self, "_on_main_menu_pressed"))
+	var menu_button: Button = GrammarTheme.make_header_icon_button(
+		"res://assets/images/ui/Main_Menu.png",
+		Callable(self, "_on_main_menu_pressed")
+	)
 	header_row.add_child(menu_button)
 
 	var title_label: Label = Label.new()
@@ -77,7 +83,6 @@ func _build_ui() -> void:
 	title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	header_row.add_child(title_label)
 
-	# Same item grid as every other header in the app.
 	GrammarTheme.unify_header_row(header_row)
 
 	var content_box: PanelContainer = PanelContainer.new()
@@ -108,32 +113,14 @@ func _build_ui() -> void:
 	lesson_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	if title_font != null:
 		lesson_title.add_theme_font_override("font", title_font)
-	lesson_title.add_theme_font_size_override("font_size", 34)
+	lesson_title.add_theme_font_size_override("font_size", 36)
 	lesson_title.add_theme_color_override("font_color", GrammarTheme.text_color())
 	content.add_child(lesson_title)
 
 	var body_font: Font = GrammarTheme.get_fa_regular()
 
 	if not units.is_empty():
-		var xp_label: Label = Label.new()
-		xp_label.text = "⭐ %d XP" % Global.get_grammar_xp(Global.current_book, Global.current_lesson)
-		xp_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		xp_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		if body_font != null:
-			xp_label.add_theme_font_override("font", body_font)
-		xp_label.add_theme_font_size_override("font_size", 30)
-		xp_label.add_theme_color_override("font_color", GrammarTheme.xp_color())
-		content.add_child(xp_label)
-
-		var hint: Label = Label.new()
-		hint.text = "فقط بخش‌های بازشده قابل انتخاب هستند."
-		hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		if body_font != null:
-			hint.add_theme_font_override("font", body_font)
-		hint.add_theme_font_size_override("font_size", 28)
-		hint.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
-		content.add_child(hint)
+		_build_mastery_banner(content)
 
 	if units.is_empty():
 		var empty_box: VBoxContainer = VBoxContainer.new()
@@ -172,24 +159,22 @@ func _build_ui() -> void:
 		var scroll: ScrollContainer = ScrollContainer.new()
 		scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 		content.add_child(scroll)
 
-		# ScrollContainer clips content at its viewport edges. Inset the grid
-		# so a unit's hover/press scale and StyleBox shadow stay inside that
-		# clipping rectangle, including the outermost columns.
 		var grid_margin: MarginContainer = MarginContainer.new()
 		grid_margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		grid_margin.add_theme_constant_override("margin_left", 72)
-		grid_margin.add_theme_constant_override("margin_right", 72)
-		grid_margin.add_theme_constant_override("margin_top", 48)
-		grid_margin.add_theme_constant_override("margin_bottom", 48)
+		grid_margin.add_theme_constant_override("margin_left", 36)
+		grid_margin.add_theme_constant_override("margin_right", 36)
+		grid_margin.add_theme_constant_override("margin_top", 24)
+		grid_margin.add_theme_constant_override("margin_bottom", 36)
 		scroll.add_child(grid_margin)
 
 		var grid: GridContainer = GridContainer.new()
 		grid.columns = 2
 		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		grid.add_theme_constant_override("h_separation", 18)
-		grid.add_theme_constant_override("v_separation", 18)
+		grid.add_theme_constant_override("h_separation", 20)
+		grid.add_theme_constant_override("v_separation", 20)
 		grid_margin.add_child(grid)
 
 		for i in range(units.size()):
@@ -197,35 +182,87 @@ func _build_ui() -> void:
 			var button: GrammarButton = _make_unit_button(i, unit)
 			grid.add_child(button)
 			_unit_buttons.append(button)
+			GrammarAnimation.appear(button, i * 0.05)
 
 
-func _make_header_button(text: String, callback: Callable) -> Button:
-	var button: Button = Button.new()
-	button.text = text
-	button.custom_minimum_size = Vector2(140.0, 64.0)
-	button.focus_mode = Control.FOCUS_ALL
-	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	GrammarTheme.style_secondary_button(button)
-	var font: Font = GrammarTheme.get_fa_bold()
-	if font != null:
-		button.add_theme_font_override("font", font)
-	button.add_theme_font_size_override("font_size", 24)
-	button.pressed.connect(callback)
-	return button
+func _build_mastery_banner(parent: VBoxContainer) -> void:
+	var mastery := GrammarData.get_mastery_status(Global.current_book, Global.current_lesson)
+	var rank_color: Color = mastery["rank_color"]
+
+	var banner := PanelContainer.new()
+	var style := GrammarTheme.info_card_style()
+	style.border_color = Color(rank_color.r, rank_color.g, rank_color.b, 0.55)
+	style.set_border_width_all(2)
+	banner.add_theme_stylebox_override("panel", style)
+	parent.add_child(banner)
+
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 24)
+	margin.add_theme_constant_override("margin_right", 24)
+	margin.add_theme_constant_override("margin_top", 16)
+	margin.add_theme_constant_override("margin_bottom", 16)
+	banner.add_child(margin)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 10)
+	margin.add_child(vbox)
+
+	var top_row := HBoxContainer.new()
+	top_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	vbox.add_child(top_row)
+
+	var xp_badge := Label.new()
+	xp_badge.text = "⭐ %d / %d XP" % [mastery["current_xp"], mastery["base_max_xp"]]
+	xp_badge.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	xp_badge.add_theme_font_size_override("font_size", 28)
+	xp_badge.add_theme_color_override("font_color", GrammarTheme.xp_color())
+	top_row.add_child(xp_badge)
+
+	var rank_lbl := Label.new()
+	GrammarTheme.set_bidi_text(rank_lbl, "%s سطح: %s (%d/%d بخش)" % [
+		mastery["rank_icon"],
+		mastery["rank_title_fa"],
+		mastery["completed_units"],
+		mastery["total_units"]
+	])
+	rank_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rank_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	rank_lbl.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	rank_lbl.add_theme_font_size_override("font_size", 28)
+	rank_lbl.add_theme_color_override("font_color", rank_color)
+	top_row.add_child(rank_lbl)
+
+	var bar := ProgressBar.new()
+	bar.show_percentage = false
+	bar.custom_minimum_size = Vector2(0, 16)
+	bar.add_theme_stylebox_override("background", GrammarTheme.rounded_box(GrammarTheme.disabled_color(), 8))
+	bar.add_theme_stylebox_override("fill", GrammarTheme.rounded_box(rank_color, 8))
+	bar.value = mastery["progress_ratio"] * 100.0
+	vbox.add_child(bar)
+
+	var sub_lbl := Label.new()
+	if mastery["xp_to_next"] > 0:
+		GrammarTheme.set_bidi_text(sub_lbl, "🎯 %d XP دیگر تا ارتقا به سطح بعدی! (پاسخ بدون اشتباه = +۵ XP پاداش)" % mastery["xp_to_next"])
+	else:
+		GrammarTheme.set_bidi_text(sub_lbl, "🏆 تبریک! شما به بالاترین سطح تسلط در این درس رسیده‌اید!")
+	sub_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sub_lbl.add_theme_font_override("font", GrammarTheme.get_fa_regular())
+	sub_lbl.add_theme_font_size_override("font_size", 23)
+	sub_lbl.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
+	vbox.add_child(sub_lbl)
 
 
 func _make_unit_button(index: int, unit: Dictionary) -> GrammarButton:
 	var unlocked: bool = index < unlocked_units
-	# Check completion against the stable unit id (falling back to the index
-	# for legacy data) instead of assuming sequential completion, so a lesson
-	# whose units were reordered/edited never shows the wrong badges.
 	var completed: bool = Global.is_unit_completed(
 		Global.current_book, Global.current_lesson, index, str(unit.get("id", ""))
 	)
+	var xp_per_unit: int = int(lesson_data.get("xp_per_unit", 10))
+
 	var button: GrammarButton = GrammarButton.new()
 	button.no_clip = true
 	button.variant = GrammarButton.ButtonVariant.SECONDARY
-	button.custom_minimum_size = Vector2(0.0, 180.0)
+	button.custom_minimum_size = Vector2(0.0, 195.0)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -237,32 +274,40 @@ func _make_unit_button(index: int, unit: Dictionary) -> GrammarButton:
 	button.add_theme_color_override("font_focus_color", GrammarTheme.text_color())
 	button.add_theme_color_override("font_disabled_color", GrammarTheme.locked_text_color())
 
-	var status: String = "🔒"
+	var status_tag: String = "🔒 قفل"
 	if completed:
-		status = "✅"
+		status_tag = "✅ کامل شد"
 	elif unlocked:
-		status = "▶"
+		status_tag = "⭐ +%d XP" % xp_per_unit
 
 	var label: String = GrammarData.unit_title(unit)
 	GrammarTheme.set_bidi_text(
 		button,
-		"%s %s\nبخش %d\n%s" % [status, GrammarData.unit_icon(unit), index + 1, label]
+		"%s  |  %s\nبخش %d\n%s" % [GrammarData.unit_icon(unit), status_tag, index + 1, label]
 	)
 
 	if unlocked:
 		button.pressed.connect(_on_unit_pressed.bind(index))
 
-	# Apply the per-status styleboxes on the `ready` signal so they are not
-	# clobbered by GrammarButton._apply_theme() (which runs during _ready).
-	button.ready.connect(func() -> void: _apply_unit_styles(button, unlocked))
-
+	button.ready.connect(func() -> void: _apply_unit_styles(button, unlocked, completed))
 	return button
 
 
-func _apply_unit_styles(button: GrammarButton, unlocked: bool) -> void:
-	if unlocked:
-		# Unlocked units POP: thick solid accent border + opaque violet fill
-		# + strong glow so they clearly read as active in dark theme.
+func _apply_unit_styles(button: GrammarButton, unlocked: bool, completed: bool) -> void:
+	if completed:
+		# Completed units shine with a rich emerald/gold mastery border
+		var fill := GrammarTheme.success_soft_color()
+		var border := GrammarTheme.success_color()
+		var normal := _unit_style(fill, border, 1.0, 1.0, 3)
+		normal.shadow_color = Color(border.r, border.g, border.b, 0.32)
+		normal.shadow_size = 14
+		normal.shadow_offset = Vector2(0, 5)
+		button.add_theme_stylebox_override("normal", normal)
+		button.add_theme_stylebox_override("hover", _unit_style(fill.lightened(0.08), border, 1.0, 1.0, 3))
+		button.add_theme_stylebox_override("pressed", _unit_style(fill.darkened(0.06), border, 1.0, 1.0, 3))
+		button.add_theme_stylebox_override("focus", _unit_style(fill.lightened(0.08), border, 1.0, 1.0, 3))
+	elif unlocked:
+		# Active unlocked unit pops with accent glow
 		var normal := _unit_style(GrammarTheme.primary_light_color(), GrammarTheme.primary_color(), 1.0, 1.0, 3)
 		normal.shadow_color = Color(0.42, 0.47, 1.0, 0.45)
 		normal.shadow_size = 18
@@ -272,8 +317,6 @@ func _apply_unit_styles(button: GrammarButton, unlocked: bool) -> void:
 		button.add_theme_stylebox_override("pressed", _unit_style(GrammarTheme.primary_light_color().darkened(0.06), GrammarTheme.primary_color(), 1.0, 1.0, 3))
 		button.add_theme_stylebox_override("focus", _unit_style(GrammarTheme.primary_light_color().lightened(0.11), GrammarTheme.primary_dark_color(), 1.0, 1.0, 3))
 	else:
-		# Locked units stay clearly dim/faded: dark gray fill, faint border,
-		# no glow, and reduced opacity so they never read as active.
 		button.disabled = true
 		var locked_fill: Color = GrammarTheme.disabled_color().darkened(0.15)
 		button.add_theme_stylebox_override("normal", _unit_style(locked_fill, GrammarTheme.locked_text_color(), 0.55, 0.18))
@@ -283,7 +326,12 @@ func _apply_unit_styles(button: GrammarButton, unlocked: bool) -> void:
 
 
 func _unit_style(color: Color, border_color: Color, alpha: float, border_alpha: float, border_width: int = 2) -> StyleBoxFlat:
-	var style: StyleBoxFlat = GrammarTheme.rounded_box(Color(color.r, color.g, color.b, alpha), 26, Color(border_color.r, border_color.g, border_color.b, border_alpha), border_width)
+	var style: StyleBoxFlat = GrammarTheme.rounded_box(
+		Color(color.r, color.g, color.b, alpha),
+		26,
+		Color(border_color.r, border_color.g, border_color.b, border_alpha),
+		border_width
+	)
 	style.shadow_color = Color(0.0, 0.0, 0.0, 0.24)
 	style.shadow_size = 12
 	style.shadow_offset = Vector2(0.0, 5.0)

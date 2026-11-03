@@ -1,31 +1,21 @@
 class_name FeedbackPopup
 extends Control
 
-
 signal continue_pressed
 signal skip_pressed
-
 
 var title_label: Label
 var explanation_label: Label
 var continue_button: GrammarButton
 var skip_button: GrammarButton
-
 var is_correct := false
-
 var _card: PanelContainer
 
 
 func _ready() -> void:
-
 	_build_ui()
-
 	_apply_theme()
-
-	Global.on_theme_changed(
-		_on_theme_changed
-	)
-
+	Global.on_theme_changed(_on_theme_changed)
 	hide()
 
 
@@ -35,323 +25,142 @@ func _exit_tree() -> void:
 
 
 func _build_ui() -> void:
-
-	set_anchors_and_offsets_preset(
-		Control.PRESET_FULL_RECT
-	)
-
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
-	# Dim the screen behind the feedback card.
 	var dim := ColorRect.new()
-
-	dim.color = Color(
-		0.04,
-		0.05,
-		0.08,
-		0.62
-	)
-
-	dim.set_anchors_and_offsets_preset(
-		Control.PRESET_FULL_RECT
-	)
-
+	dim.color = Color(0.04, 0.05, 0.08, 0.62)
+	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(dim)
 
-	# Center the card on the whole screen.
 	var center := CenterContainer.new()
-
-	center.set_anchors_and_offsets_preset(
-		Control.PRESET_FULL_RECT
-	)
-
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(center)
 
 	_card = PanelContainer.new()
-
-	# Wide enough that the explanation text fits at least ~7 words per
-	# line (minus the card's inner margins) instead of wrapping into a
-	# tall, narrow strip.
-	_card.custom_minimum_size = Vector2(
-		900,
-		0
-	)
-
-	GrammarTheme.style_card(
-		_card
-	)
-
-	center.add_child(
-		_card
-	)
+	_card.custom_minimum_size = Vector2(900, 0)
+	GrammarTheme.style_card(_card)
+	center.add_child(_card)
 
 	var margin := MarginContainer.new()
-
-	margin.add_theme_constant_override(
-		"margin_left",
-		26
-	)
-
-	margin.add_theme_constant_override(
-		"margin_right",
-		26
-	)
-
-	margin.add_theme_constant_override(
-		"margin_top",
-		22
-	)
-
-	margin.add_theme_constant_override(
-		"margin_bottom",
-		22
-	)
-
-	_card.add_child(
-		margin
-	)
+	margin.add_theme_constant_override("margin_left", 28)
+	margin.add_theme_constant_override("margin_right", 28)
+	margin.add_theme_constant_override("margin_top", 24)
+	margin.add_theme_constant_override("margin_bottom", 24)
+	_card.add_child(margin)
 
 	var layout := VBoxContainer.new()
-
-	layout.add_theme_constant_override(
-		"separation",
-		14
-	)
-
-	margin.add_child(
-		layout
-	)
+	layout.add_theme_constant_override("separation", 14)
+	margin.add_child(layout)
 
 	title_label = Label.new()
-
-	title_label.horizontal_alignment = (
-		HORIZONTAL_ALIGNMENT_CENTER
-	)
-
-	title_label.add_theme_font_size_override(
-		"font_size",
-		32
-	)
-
-	title_label.add_theme_font_override(
-		"font",
-		GrammarTheme.get_fa_bold()
-	)
-
-	layout.add_child(
-		title_label
-	)
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title_label.add_theme_font_size_override("font_size", 36)
+	title_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	layout.add_child(title_label)
 
 	explanation_label = Label.new()
-
-	explanation_label.horizontal_alignment = (
-		HORIZONTAL_ALIGNMENT_CENTER
-	)
-
-	explanation_label.autowrap_mode = (
-		TextServer.AUTOWRAP_WORD_SMART
-	)
-
-	explanation_label.add_theme_font_size_override(
-		"font_size",
-		GrammarTheme.BODY_SIZE
-	)
-
-	explanation_label.add_theme_color_override(
-		"font_color",
-		GrammarTheme.text_secondary_color()
-	)
-
-	layout.add_child(
-		explanation_label
-	)
+	explanation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	explanation_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	explanation_label.add_theme_font_size_override("font_size", GrammarTheme.BODY_SIZE)
+	explanation_label.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
+	layout.add_child(explanation_label)
 
 	var spacer := Control.new()
-
-	spacer.custom_minimum_size = Vector2(
-		0,
-		6
-	)
-
-	layout.add_child(
-		spacer
-	)
+	spacer.custom_minimum_size = Vector2(0, 6)
+	layout.add_child(spacer)
 
 	var button_row := HBoxContainer.new()
-
-	button_row.add_theme_constant_override(
-		"separation",
-		14
-	)
-
-	layout.add_child(
-		button_row
-	)
+	button_row.add_theme_constant_override("separation", 14)
+	layout.add_child(button_row)
 
 	continue_button = GrammarButton.new()
-
-	continue_button.variant = (
-		GrammarButton.ButtonVariant.PRIMARY
-	)
-
+	continue_button.variant = GrammarButton.ButtonVariant.PRIMARY
 	continue_button.text = "ادامه"
-
 	continue_button.min_height = 112
-
 	continue_button.font_size = 46
+	continue_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	continue_button.pressed.connect(_on_continue_pressed)
+	button_row.add_child(continue_button)
 
-	continue_button.size_flags_horizontal = (
-		Control.SIZE_EXPAND_FILL
-	)
-
-	continue_button.pressed.connect(
-		_on_continue_pressed
-	)
-
-	button_row.add_child(
-		continue_button
-	)
-
-	# A "skip" escape hatch shown only after the learner has gotten the
-	# question wrong twice; lets them move on to the next question.
 	skip_button = GrammarButton.new()
-
-	skip_button.variant = (
-		GrammarButton.ButtonVariant.SECONDARY
-	)
-
-	skip_button.text = "پرش به سوال بعدی ⏭"
-
-	skip_button.size_flags_horizontal = (
-		Control.SIZE_EXPAND_FILL
-	)
-
+	skip_button.variant = GrammarButton.ButtonVariant.SECONDARY
+	skip_button.text = "پرش به سوال بعدی"
+	skip_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	skip_button.visible = false
-
-	skip_button.pressed.connect(
-		_on_skip_pressed
-	)
-
-	button_row.add_child(
-		skip_button
-	)
+	skip_button.pressed.connect(_on_skip_pressed)
+	button_row.add_child(skip_button)
 
 
-func show_correct(
-	explanation: String
-) -> void:
-
+func show_correct(explanation: String) -> void:
 	is_correct = true
-
 	skip_button.visible = false
+	title_label.text = "🌟 عالی بود!"
+	title_label.add_theme_color_override("font_color", GrammarTheme.success_color())
+	var style := GrammarTheme.card_style()
+	style.border_color = GrammarTheme.success_color()
+	style.set_border_width_all(3)
+	_card.add_theme_stylebox_override("panel", style)
 
-	title_label.text = "🎉 عالی بود!"
-
-	title_label.add_theme_color_override(
-		"font_color",
-		GrammarTheme.success_color()
-	)
-
-	GrammarTheme.set_bidi_text(
-		explanation_label,
-		explanation
-	)
-
+	GrammarTheme.set_bidi_text(explanation_label, explanation)
 	continue_button.text = "ادامه"
-
 	Sfx.correct()
-
 	_show_popup()
 
 
-func show_wrong(
-	_explanation: String
-) -> void:
-
+func show_wrong(_explanation: String) -> void:
 	is_correct = false
-
 	skip_button.visible = false
-
-	# On a wrong answer we never reveal the correct answer — we just
-	# encourage the learner to try again (the hint bulb offers help).
-	title_label.text = "🌱 نزدیک بود!"
-
-	title_label.add_theme_color_override(
-		"font_color",
-		GrammarTheme.warning_color()
-	)
+	title_label.text = "💡 نزدیک بود!"
+	title_label.add_theme_color_override("font_color", GrammarTheme.warning_color())
+	var style := GrammarTheme.card_style()
+	style.border_color = GrammarTheme.warning_color()
+	style.set_border_width_all(3)
+	_card.add_theme_stylebox_override("panel", style)
 
 	GrammarTheme.set_bidi_text(
 		explanation_label,
-		"اشکالی نداره! دوباره امتحان کن.\nمی‌تونی از چراغ راهنما 💡 کمک بگیری."
+		"اشکالی نداره، دوباره امتحان کن!\nمی‌تونی از چراغ راهنما کمک بگیری."
 	)
-
 	continue_button.text = "دوباره امتحان کن"
-
 	Sfx.wrong()
-
 	_show_popup()
 
 
 func _apply_theme() -> void:
-
 	if _card != null:
 		GrammarTheme.style_card(_card)
-
 	if explanation_label != null:
-		explanation_label.add_theme_color_override(
-			"font_color",
-			GrammarTheme.text_secondary_color()
-		)
+		explanation_label.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
 
 
 func _on_theme_changed(_mode: int) -> void:
-
 	if not is_inside_tree():
 		return
-
 	_apply_theme()
 
 
 func _show_popup() -> void:
-
 	show()
-
-	GrammarAnimation.pop(
-		_card
-	)
+	GrammarAnimation.pop(_card)
 
 
 func hide_popup() -> void:
-
-	GrammarAnimation.disappear(
-		_card
-	)
-
-	await get_tree().create_timer(
-		0.18
-	).timeout
-
+	GrammarAnimation.disappear(_card)
+	await get_tree().create_timer(0.18).timeout
 	hide()
 
 
-# Reveals the skip button (called after the learner has been wrong
-# twice). The continue button stays as the primary "try again" action.
 func show_skip_button() -> void:
-
 	if skip_button != null:
 		skip_button.visible = true
 
 
 func _on_continue_pressed() -> void:
-
 	continue_pressed.emit()
-
 	hide()
 
 
 func _on_skip_pressed() -> void:
-
 	skip_pressed.emit()
-
 	hide()

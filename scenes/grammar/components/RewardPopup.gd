@@ -1,25 +1,25 @@
 class_name RewardPopup
 extends Control
 
-
 signal next_requested
 signal back_requested
 
-
+var emoji_label: Label
 var title_label: Label
 var reward_label: Label
+var bonus_label: Label
+var rank_badge_panel: PanelContainer
+var rank_label: Label
+var mastery_bar: ProgressBar
 var next_button: GrammarButton
 var back_button: GrammarButton
-
 var _card: PanelContainer
 
 
 func _ready() -> void:
 	_build_ui()
 	_apply_theme()
-	Global.on_theme_changed(
-		_on_theme_changed
-	)
+	Global.on_theme_changed(_on_theme_changed)
 	hide()
 
 
@@ -32,9 +32,8 @@ func _build_ui() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
-	# Dim the screen behind the reward card.
 	var dim := ColorRect.new()
-	dim.color = Color(0.04, 0.05, 0.08, 0.62)
+	dim.color = Color(0.04, 0.05, 0.08, 0.72)
 	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(dim)
 
@@ -43,42 +42,79 @@ func _build_ui() -> void:
 	add_child(center)
 
 	_card = PanelContainer.new()
-	_card.custom_minimum_size = Vector2(720, 0)
+	_card.custom_minimum_size = Vector2(780, 0)
 	GrammarTheme.style_card(_card)
 	center.add_child(_card)
 
 	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 24)
-	margin.add_theme_constant_override("margin_right", 24)
-	margin.add_theme_constant_override("margin_top", 24)
-	margin.add_theme_constant_override("margin_bottom", 24)
+	margin.add_theme_constant_override("margin_left", 32)
+	margin.add_theme_constant_override("margin_right", 32)
+	margin.add_theme_constant_override("margin_top", 30)
+	margin.add_theme_constant_override("margin_bottom", 30)
 	_card.add_child(margin)
 
 	var layout := VBoxContainer.new()
 	layout.alignment = BoxContainer.ALIGNMENT_CENTER
-	layout.add_theme_constant_override("separation", 12)
+	layout.add_theme_constant_override("separation", 16)
 	margin.add_child(layout)
 
-	var emoji := Label.new()
-	emoji.text = "🏆"
-	emoji.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	emoji.add_theme_font_size_override("font_size", 54)
-	layout.add_child(emoji)
+	emoji_label = Label.new()
+	emoji_label.text = "🎉"
+	emoji_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	emoji_label.add_theme_font_size_override("font_size", 76)
+	layout.add_child(emoji_label)
 
 	title_label = Label.new()
 	title_label.text = "بخش کامل شد!"
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
-	title_label.add_theme_font_size_override("font_size", 30)
+	title_label.add_theme_font_size_override("font_size", 38)
 	layout.add_child(title_label)
 
 	reward_label = Label.new()
 	reward_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	reward_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	reward_label.add_theme_color_override("font_color", GrammarTheme.xp_color())
-	reward_label.add_theme_font_size_override("font_size", 28)
+	reward_label.add_theme_font_size_override("font_size", 46)
 	layout.add_child(reward_label)
 
-	# Spacer before the buttons.
+	bonus_label = Label.new()
+	bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	bonus_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	bonus_label.add_theme_color_override("font_color", GrammarTheme.success_color())
+	bonus_label.add_theme_font_size_override("font_size", 28)
+	bonus_label.visible = false
+	layout.add_child(bonus_label)
+
+	# Rank & XP Progress Mini-Card inside Reward Popup
+	rank_badge_panel = PanelContainer.new()
+	rank_badge_panel.add_theme_stylebox_override("panel", GrammarTheme.info_card_style())
+	layout.add_child(rank_badge_panel)
+
+	var rank_margin := MarginContainer.new()
+	rank_margin.add_theme_constant_override("margin_left", 20)
+	rank_margin.add_theme_constant_override("margin_right", 20)
+	rank_margin.add_theme_constant_override("margin_top", 14)
+	rank_margin.add_theme_constant_override("margin_bottom", 14)
+	rank_badge_panel.add_child(rank_margin)
+
+	var rank_vbox := VBoxContainer.new()
+	rank_vbox.add_theme_constant_override("separation", 10)
+	rank_margin.add_child(rank_vbox)
+
+	rank_label = Label.new()
+	rank_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	rank_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	rank_label.add_theme_font_size_override("font_size", 28)
+	rank_vbox.add_child(rank_label)
+
+	mastery_bar = ProgressBar.new()
+	mastery_bar.show_percentage = false
+	mastery_bar.custom_minimum_size = Vector2(0, 16)
+	mastery_bar.add_theme_stylebox_override("background", GrammarTheme.rounded_box(GrammarTheme.disabled_color(), 8))
+	mastery_bar.add_theme_stylebox_override("fill", GrammarTheme.rounded_box(GrammarTheme.xp_color(), 8))
+	rank_vbox.add_child(mastery_bar)
+
 	var spacer := Control.new()
 	spacer.custom_minimum_size = Vector2(0, 8)
 	layout.add_child(spacer)
@@ -102,11 +138,12 @@ func _build_ui() -> void:
 func _apply_theme() -> void:
 	if _card != null:
 		GrammarTheme.style_card(_card)
+	if title_label != null:
+		title_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	if reward_label != null:
-		reward_label.add_theme_color_override(
-			"font_color",
-			GrammarTheme.xp_color()
-		)
+		reward_label.add_theme_color_override("font_color", GrammarTheme.xp_color())
+	if rank_badge_panel != null:
+		rank_badge_panel.add_theme_stylebox_override("panel", GrammarTheme.info_card_style())
 
 
 func _on_theme_changed(_mode: int) -> void:
@@ -115,17 +152,51 @@ func _on_theme_changed(_mode: int) -> void:
 	_apply_theme()
 
 
-func show_reward(title: String, awarded_xp: int, next_text: String = "ادامه", show_back: bool = false) -> void:
+func show_reward(title: String, awarded_xp: int, next_text: String = "ادامه", show_back: bool = false, bonus_xp: int = 0) -> void:
 	GrammarTheme.set_bidi_text(title_label, title)
-	reward_label.text = "⭐ +%d XP" % awarded_xp
 	GrammarTheme.set_bidi_text(next_button, next_text)
 	back_button.visible = show_back
-	# Only play the reward jingle when XP was actually earned (a replay of an
-	# already-completed بخش grants +0 XP, so no fanfare).
-	if awarded_xp > 0:
-		Sfx.reward()
+
+	if bonus_xp > 0:
+		bonus_label.visible = true
+		GrammarTheme.set_bidi_text(bonus_label, "🔥 +%d XP پاداش پاسخ بدون اشتباه!" % bonus_xp)
+	else:
+		bonus_label.visible = false
+
+	# Update Mastery Bar & Rank inside Popup
+	var mastery := GrammarData.get_mastery_status(Global.current_book, Global.current_lesson)
+	var rank_str := "%s سطح تسلط: %s  (⭐ %d / %d XP)" % [
+		mastery["rank_icon"],
+		mastery["rank_title_fa"],
+		mastery["current_xp"],
+		mastery["base_max_xp"]
+	]
+	GrammarTheme.set_bidi_text(rank_label, rank_str)
+	rank_label.add_theme_color_override("font_color", mastery["rank_color"])
+	mastery_bar.add_theme_stylebox_override("fill", GrammarTheme.rounded_box(mastery["rank_color"], 8))
+	mastery_bar.value = 0.0
+
 	show()
-	GrammarAnimation.pop(get_child(1).get_child(0))
+	GrammarAnimation.pop(_card)
+	GrammarAnimation.spawn_confetti(self, 80 if awarded_xp > 0 else 35)
+
+	# Animate the XP counter and mastery bar
+	var t := create_tween()
+	t.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property(mastery_bar, "value", mastery["progress_ratio"] * 100.0, 0.75)
+
+	if awarded_xp > 0:
+		emoji_label.text = "🏆" if mastery["progress_ratio"] >= 1.0 else "🎉"
+		Sfx.reward()
+		t.parallel().tween_method(
+			func(val: int) -> void: reward_label.text = "⭐ +%d XP" % val,
+			0,
+			awarded_xp,
+			0.65
+		)
+	else:
+		emoji_label.text = "✅"
+		GrammarTheme.set_bidi_text(reward_label, "⭐ مرور مجدد (امتیاز قبلاً دریافت شده)")
 
 
 func _on_next() -> void:

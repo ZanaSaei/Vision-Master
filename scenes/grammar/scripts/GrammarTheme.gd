@@ -644,4 +644,3 @@ static func make_header_icon_button(
 # right — so the grammar screens never drift from the rest of the app.
 static func unify_header_row(row: HBoxContainer) -> void:
 	ThemeService.layout_header_row(row)
-

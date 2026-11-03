@@ -1,48 +1,7 @@
 class_name GrammarData
 extends RefCounted
 # ============================================================
-#  GRAMMAR DATA — static loader for grammar micro-lessons
-# ------------------------------------------------------------
-#  A lesson is a single JSON file at:
-#      res://data/grammar/vision{book}_lesson{lesson}.json
-#  To add a new lesson for another book/lesson, simply create that
-#  file following the schema below — the rest of the system reads
-#  it with no code changes.
-#
-#  SCHEMA (root = { "lesson": { ... } }):
-#    lesson:
-#      id, book, lesson_number, title_en, title_fa, icon, theme_color
-#      xp_per_correct (int, default 10)
-#      units: [ ... ]
-#
-#    A unit is a Dictionary with "type" and unit-specific fields:
-#      { "type": "learn",
-#        "title_fa", "title_en", "explanation",
-#        "cards": [ { "en": "...", "fa": "..." } ] }     # structure patterns
-#        # optional legacy: "structure": "..." and "examples": [ {en,fa} ]
-#
-#      { "type": "multiple_choice",
-#        "instruction_fa",
-#        "questions": [ { "question", "options": [ ... ],
-#                        "correct": <index>, "explanation_fa",
-#                        "wrong_explanation_fa" } ] }
-#
-#      { "type": "fill_blank",
-#        "instruction_fa",
-#        "items": [ { "text", "answers": [ ...accepted strings ],
-#                    "explanation_fa", "wrong_explanation_fa" } ] }
-#
-#      { "type": "true_false",
-#        "instruction_fa",
-#        "items": [ { "statement", "answer": <bool>, "explanation_fa" } ] }
-#
-#      { "type": "matching",
-#        "instruction_fa",
-#        "items": [ { "left": "...", "right": "..." } ] }
-#
-#      { "type": "unscramble",
-#        "instruction_fa",
-#        "items": [ { "words": [ ... ], "answer": "correct sentence" } ] }
+# GRAMMAR DATA — static loader & XP mastery calculator
 # ============================================================
 
 const DIR := "res://data/grammar/"
@@ -57,26 +16,19 @@ static func load_lesson(book: int, lesson: int) -> Dictionary:
 	if not FileAccess.file_exists(path):
 		push_error("Grammar JSON not found: " + path)
 		return {}
-
 	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
 	var text: String = file.get_as_text()
 	file.close()
-
 	var json: JSON = JSON.new()
 	var err: Error = json.parse(text)
 	if err != OK:
 		push_error("Grammar JSON parse error at %s: %s" % [path, json.get_error_message()])
 		return {}
-
 	var data: Variant = json.data
 	if not data is Dictionary:
 		push_error("Grammar JSON root must be a Dictionary: " + path)
 		return {}
-
 	var lesson_dict: Dictionary = (data as Dictionary).get("lesson", {})
-	# Validate units up front so a malformed file can never silently award
-	# XP / progress for an empty group (see GrammarLesson._show_current_activity):
-	# drop group units that carry no activities and warn loudly instead.
 	var units: Array = lesson_dict.get("units", [])
 	var valid: Array = []
 	for unit in units:
@@ -95,21 +47,21 @@ static func load_lesson(book: int, lesson: int) -> Dictionary:
 static func unit_icon(unit: Dictionary) -> String:
 	match str(unit.get("type", "")):
 		"group":
-			return "🗂️"
-		"learn":
 			return "📚"
+		"learn":
+			return "💡"
 		"multiple_choice":
-			return "🟣"
+			return "🎯"
 		"fill_blank":
-			return "📝"
+			return "✍️"
 		"true_false":
 			return "✅"
 		"matching":
 			return "🔗"
 		"unscramble":
-			return "🔀"
+			return "🧩"
 		_:
-			return "📦"
+			return "⭐"
 
 
 static func unit_title(unit: Dictionary) -> String:
@@ -123,3 +75,77 @@ static func unit_title(unit: Dictionary) -> String:
 
 static func unit_label(unit: Dictionary) -> String:
 	return "%s\n%s" % [unit_icon(unit), unit_title(unit)]
+
+
+# ============================================================
+# XP & MASTERY PROGRESSION SYSTEM
+# ============================================================
+# Returns a dictionary with:
+# - current_xp: int
+# - max_xp: int (base XP from all units + flawless/exam potential)
+# - completed_units: int
+# - total_units: int
+# - progress_ratio: float (0.0 to 1.0)
+# - rank_title_fa: String
+# - rank_icon: String
+# - rank_color: Color
+# - next_rank_xp: int (XP needed to reach next rank, 0 if maxed)
+static func get_mastery_status(book: int, lesson: int) -> Dictionary:
+	var lesson_dict := load_lesson(book, lesson)
+	var units: Array = lesson_dict.get("units", [])
+	var xp_per_unit: int = int(lesson_dict.get("xp_per_unit", 10))
+	var total_units: int = units.size()
+	var completed_count: int = 0
+
+	for i in range(total_units):
+		var u: Dictionary = units[i]
+		if Global.is_unit_completed(book, lesson, i, str(u.get("id", ""))):
+			completed_count += 1
+
+	var current_xp: int = Global.get_grammar_xp(book, lesson)
+	# Base max XP is total_units * xp_per_unit (minimum 50 so empty/small lessons still scale nicely)
+	var base_max_xp: int = maxi(total_units * xp_per_unit, 50)
+	# If the student earned flawless bonuses or exam XP beyond base_max_xp, expand ceiling gracefully
+	var max_xp: int = maxi(base_max_xp, current_xp)
+	var ratio: float = clampf(float(current_xp) / float(base_max_xp), 0.0, 1.0)
+
+	var rank_title := "مبتدی"
+	var rank_icon := "🌱"
+	var rank_color := Color("#94A3B8")
+	var next_threshold := int(ceil(base_max_xp * 0.25))
+
+	if ratio >= 1.0:
+		rank_title = "استاد گرامر"
+		rank_icon = "🏆"
+		rank_color = Color("#F59E0B") # Gold
+		next_threshold = 0
+	elif ratio >= 0.75:
+		rank_title = "حرفه‌ای"
+		rank_icon = "👑"
+		rank_color = Color("#A855F7") # Purple
+		next_threshold = base_max_xp
+	elif ratio >= 0.50:
+		rank_title = "مسلط"
+		rank_icon = "⚡"
+		rank_color = Color("#06B6D4") # Cyan
+		next_threshold = int(ceil(base_max_xp * 0.75))
+	elif ratio >= 0.25 or current_xp > 0:
+		rank_title = "یادگیرنده"
+		rank_icon = "📘"
+		rank_color = Color("#10B981") # Emerald
+		next_threshold = int(ceil(base_max_xp * 0.50))
+
+	var xp_to_next: int = maxi(0, next_threshold - current_xp)
+
+	return {
+		"current_xp": current_xp,
+		"max_xp": max_xp,
+		"base_max_xp": base_max_xp,
+		"completed_units": completed_count,
+		"total_units": total_units,
+		"progress_ratio": ratio,
+		"rank_title_fa": rank_title,
+		"rank_icon": rank_icon,
+		"rank_color": rank_color,
+		"xp_to_next": xp_to_next
+	}
