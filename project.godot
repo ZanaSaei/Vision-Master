@@ -18,7 +18,7 @@ config/features=PackedStringArray("4.7", "Mobile")
 run/max_fps=60.0
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.9372549, 0.92156863, 0.88235295, 1)
-boot_splash/stretch_mode=0
+boot_splash/stretch_mode=1
 boot_splash/image="uid://ds0litfms2cyf"
 boot_splash/minimum_display_time=1000
 config/use_safe_save=false
@@ -53,6 +53,7 @@ window/handheld/orientation=1
 
 naming/scene_name_casing=1
 naming/script_name_casing=2
+export/convert_text_resources_to_binary=false
 
 [gui]
 
@@ -65,7 +66,8 @@ theme/custom_font="res://assets/fonts/Vazirmatn-Regular.ttf"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 
 [vision_master]
