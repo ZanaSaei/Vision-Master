@@ -1,14 +1,14 @@
 [gd_resource type="Theme" format=3]
 
 [ext_resource type="StyleBox" path="res://resources/styleboxes/card_lifted_light.tres" id="1_mmd2d"]
-[ext_resource type="FontFile" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="2_ufo87"]
+[ext_resource type="FontFile" path="res://ui/fonts/PlusJakartaSans-Regular.ttf" id="2_ufo87"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/button_disabled_light.tres" id="3_v31qs"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/button_focus_light.tres" id="4_hsjly"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/button_default_light.tres" id="5_h3png"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/button_pressed_light.tres" id="6_4n3jr"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/toggle_off_light.tres" id="7_oem7f"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/toggle_on_light.tres" id="8_jju2c"]
-[ext_resource type="FontFile" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="9_7qvp1"]
+[ext_resource type="FontFile" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="9_7qvp1"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/scrollbar_grabber_light.tres" id="10_vs18e"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/scrollbar_track.tres" id="11_lld5u"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/separator_light.tres" id="12_mmfxm"]
@@ -21,7 +21,7 @@
 [ext_resource type="StyleBox" path="res://resources/styleboxes/progress_fill_light.tres" id="19_a1rst"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/panel_transparent.tres" id="20_2wkg4"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/pill_accent_light.tres" id="21_i2q7v"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="22_vyxw8"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="22_vyxw8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgbed"]
 content_margin_left = 18.0

@@ -65,9 +65,9 @@ static func _c_warning() -> Color:
 const CLOZE_OPT_FONT := 42            # matches the cloze passage text size
 const MIN_FONT := 28                   # nothing rendered smaller than this
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 const SAVE_PATH := "user://exercise_saves.json"
 

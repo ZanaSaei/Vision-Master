@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/ScorePanel.gd" id="1_script"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
 
 [sub_resource type="StyleBoxFlat" id="ScorePanelStyle"]
 bg_color = Color(0.17, 0.19, 0.23, 1)

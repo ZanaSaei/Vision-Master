@@ -18,8 +18,8 @@ extends Node
 
 const Transitions := preload("res://autoload/TransitionManager.gd")
 
-const BLURRED_COVER := "res://assets/images/ui/book_scene/Vision1_blur.png"
-const CLEAR_COVER := "res://assets/images/ui/book_scene/Vision1.png"
+const BLURRED_COVER := "res://ui/images/book_scene/Vision1_blur.png"
+const CLEAR_COVER := "res://ui/images/book_scene/Vision1.png"
 
 
 func test_hold_paints_the_outgoing_still_beneath_every_scene() -> void:

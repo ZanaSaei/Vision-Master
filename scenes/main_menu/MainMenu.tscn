@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://csjykfgswhgaf"]
 
 [ext_resource type="Script" uid="uid://dp1p468gjieln" path="res://scenes/main_menu/main_menu.gd" id="1_main"]
-[ext_resource type="Texture2D" uid="uid://go7l15igegw4" path="res://assets/images/brand/Logo_Transparent.webp" id="3_qq55g"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="Texture2D" uid="uid://go7l15igegw4" path="res://ui/brand/Logo_Transparent.webp" id="3_qq55g"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
 [ext_resource type="StyleBox" uid="uid://cp4wknax5vhvc" path="res://ui/Styles/buttons/Yellow_Normal.tres" id="5_arvcj"]
 [ext_resource type="LabelSettings" uid="uid://dv2tiiw6sx567" path="res://ui/fonts/Fa_Button_Title_Blue.tres" id="5_oitky"]
 [ext_resource type="LabelSettings" uid="uid://btv25lfeojoe4" path="res://ui/fonts/Fa_Button_Info_Blue.tres" id="5_pkvjm"]

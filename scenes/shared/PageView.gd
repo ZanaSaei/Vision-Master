@@ -17,7 +17,7 @@ signal page_changed(index: int, page_id: String)
 # Colors are read from Global.get_theme_color(...) at build/rebuild time so
 # the component follows the app-wide light/dark theme. No hardcoded fallback
 # palette is kept here.
-const FONT_BOLD_PATH := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_BOLD_PATH := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
 
 var _accent: Color = Color("#22D3EE")
 var font_bold: FontFile

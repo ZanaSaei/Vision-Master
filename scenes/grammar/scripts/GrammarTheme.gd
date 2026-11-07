@@ -261,18 +261,18 @@ const CONTENT_MARGIN := 50
 # ============================================================
 
 const FONT_FA_REGULAR_PATH := \
-	"res://assets/fonts/Vazirmatn-Regular.ttf"
+	"res://ui/fonts/Vazirmatn-Regular.ttf"
 
 const FONT_FA_BOLD_PATH := \
-	"res://assets/fonts/Vazirmatn-Regular.ttf"
+	"res://ui/fonts/Vazirmatn-Regular.ttf"
 	
 
 const FONT_EN_REGULAR_PATH := \
-	"res://assets/fonts/Nunito-Regular.ttf"
+	"res://ui/fonts/Nunito-Regular.ttf"
 	
 
 const FONT_EN_BOLD_PATH := \
-	"res://assets/fonts/Nunito-Bold.ttf"
+	"res://ui/fonts/Nunito-Bold.ttf"
 	
 
 static func get_fa_regular() -> Font:

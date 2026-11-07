@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ba6b0wamf0nb7"]
 
 [ext_resource type="Script" uid="uid://bk10p2d4d2sci" path="res://scenes/settings/settings.gd" id="1_settings"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://7q88x2dcuq8h"]
 
 [ext_resource type="Script" uid="uid://cjulurn60vnt7" path="res://scenes/word_game/WordGameLearning.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_back"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_back"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]

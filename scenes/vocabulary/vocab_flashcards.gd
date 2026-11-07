@@ -88,16 +88,16 @@ const SCENE_FLASHCARDS     := "res://scenes/vocabulary/VocabFlashcards.tscn"
 @onready var home_button: Button               = $HeaderBar/HeaderContent/HomeButton
 @onready var leitner_button: Button            = $HeaderBar/HeaderContent/LeitnerButton
 
-@onready var save_inactive = preload("res://assets/images/ui/save_button.png")
-@onready var save_active = preload("res://assets/images/ui/saved_button.png")
+@onready var save_inactive = preload("res://ui/images/save_button.png")
+@onready var save_active = preload("res://ui/images/saved_button.png")
 # SAVED mode shows a Remove glyph instead of the heart: on that screen the
 # button means "take this card out of my saved list", not "bookmark it".
-@onready var save_remove = preload("res://assets/images/ui/Remove.png")
+@onready var save_remove = preload("res://ui/images/Remove.png")
 
 
 @onready var bg_rect: ColorRect = $TextureRect
 
-@onready var FONT_FARSI : FontFile = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
+@onready var FONT_FARSI : FontFile = preload("res://ui/fonts/Vazirmatn-Regular.ttf")
 
 const FLIP_DURATION := 0.18
 
@@ -453,8 +453,8 @@ func _style_bottom_controls() -> void:
 	controls.add_theme_constant_override("separation", 68)
 
 	# Optimize the arrow icons so their edges render smoothly.
-	prev_button.icon = _optimize_icon(load("res://assets/images/ui/prev.png"))
-	next_button.icon = _optimize_icon(load("res://assets/images/ui/next.png"))
+	prev_button.icon = _optimize_icon(load("res://ui/images/prev.png"))
+	next_button.icon = _optimize_icon(load("res://ui/images/next.png"))
 
 	_style_nav_button(prev_button, _current_accent())
 	_style_nav_button(next_button, _current_accent())

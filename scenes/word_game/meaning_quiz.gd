@@ -3,7 +3,7 @@ extends "res://autoload/BackButtonHandler.gd"
 const HUB_SCENE := "res://scenes/word_game/WordGameHub.tscn"
 const OPTIONS_COUNT := 4
 const DATA_PATH := "res://data/extracted_words.json"
-const FONT: FontFile = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
+const FONT: FontFile = preload("res://ui/fonts/Vazirmatn-Regular.ttf")
 
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var title_label: Label = $HeaderBar/HeaderContent/HeaderTitle

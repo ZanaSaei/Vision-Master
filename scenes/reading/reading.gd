@@ -15,10 +15,10 @@ const HIGHLIGHT_COLOR    := Color("#fbbf24")
 const BACKGROUND_OPACITY := 0.08
 
 # ---------- Font configuration ----------
-const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_JAKARTA_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_JAKARTA_ITALIC_PATH  := "res://assets/fonts/PlusJakartaSans-Italic.ttf"
-const FONT_VAZIRMATN            := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_JAKARTA_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_JAKARTA_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_JAKARTA_ITALIC_PATH  := "res://ui/fonts/PlusJakartaSans-Italic.ttf"
+const FONT_VAZIRMATN            := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 var font_regular: FontFile
 var font_bold: FontFile

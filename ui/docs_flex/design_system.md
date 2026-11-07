@@ -29,7 +29,7 @@
 - Regenerator: res://tools/generate_design_resources.gd — run ONLY when
   a DesignTokens VALUE changes. It overwrites generated .tres files.
 
-Fonts: res://assets/fonts/ (Vazirmatn for Persian/RTL, PlusJakartaSans,
+Fonts: res://ui/fonts/ (Vazirmatn for Persian/RTL, PlusJakartaSans,
 Nunito, Josefin). Base: 1080x1920 portrait, stretch canvas_items/expand.
 
 ## 2. How light / dark themes work
@@ -168,7 +168,7 @@ Order, always, whatever order a scene authored:
 `[back][home]  title  [translation][audio][leitner]`.
 
 - Items are icon-only: `Back.png`, `Main_Menu.png`, `Translate.png`,
-  `audio_play.png`, `Leitner.png` from `res://assets/images/ui/`, each with a
+  `audio_play.png`, `Leitner.png` from `res://ui/images/`, each with a
   Persian tooltip. A button is recognised by its node NAME (contains "back",
   "home"/"menu", "translation"/"toggle", "audio", "leitner").
 - The buttons never scale or slide: the engine marks them as already wired for

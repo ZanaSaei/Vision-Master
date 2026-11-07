@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://f2ugyjkxregm" path="res://scenes/word_game/WordGameHub.gd" id="1_script"]
 [ext_resource type="LabelSettings" uid="uid://dv2tiiw6sx567" path="res://ui/fonts/Fa_Button_Title_Blue.tres" id="3_1yjrf"]
 [ext_resource type="StyleBox" uid="uid://boy06ynkqak3q" path="res://ui/Styles/buttons/Blue_Normal.tres" id="3_ttcs7"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
 [ext_resource type="LabelSettings" uid="uid://btv25lfeojoe4" path="res://ui/fonts/Fa_Button_Info_Blue.tres" id="4_ocyyk"]
 [ext_resource type="StyleBox" uid="uid://cx6iskaugv7ey" path="res://ui/Styles/buttons/Blue_Hovered.tres" id="4_wtlp0"]
 [ext_resource type="StyleBox" uid="uid://cp4wknax5vhvc" path="res://ui/Styles/buttons/Yellow_Normal.tres" id="5_dr7k0"]
@@ -11,7 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://cpdnjfuv3ffxb" path="res://ui/Styles/buttons/Tab_Normal_Notactivated.tres" id="7_p7c5t"]
 [ext_resource type="LabelSettings" uid="uid://d0avuqvpr5rxl" path="res://ui/fonts/Fa_Button_NormalTitle_Blue.tres" id="8_wtlp0"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="9_header_style"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="9_back_icon"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="9_back_icon"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
 font = ExtResource("3_vazir")

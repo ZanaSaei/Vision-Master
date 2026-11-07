@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://deve4kxamx2df"]
 
 [ext_resource type="Script" uid="uid://bohbhtc8jn1ln" path="res://scenes/saved_words/saved_words.gd" id="1_cfgum"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="2_bltao"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_6xmsu"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="4_back"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="2_bltao"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_6xmsu"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="4_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="5_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]

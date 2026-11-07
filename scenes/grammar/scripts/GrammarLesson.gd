@@ -240,7 +240,7 @@ func _build_top_bar(main_vbox: VBoxContainer) -> void:
 	main_vbox.add_child(top_bar)
 
 	var back_button: Button = GrammarTheme.make_header_icon_button(
-		"res://assets/images/ui/Back.png",
+		"res://ui/images/Back.png",
 		Callable(self, "_on_back_pressed")
 	)
 	back_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER

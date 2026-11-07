@@ -9,9 +9,9 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
 # ---------- Fonts ----------
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 var font_regular: FontFile
 var font_bold: FontFile

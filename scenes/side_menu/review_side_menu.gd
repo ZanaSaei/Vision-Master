@@ -13,8 +13,8 @@ signal word_selected(word_data)  # New signal for when a word is selected from s
 @onready var search_input: LineEdit = $MenuPanel/MarginContainer/VBoxContainer/SearchContainer/SearchInput
 @onready var clear_search_button: Button = $MenuPanel/MarginContainer/VBoxContainer/SearchContainer/ClearSearchButton
 
-var ENG_FONT : Font = load("res://assets/fonts/PlusJakartaSans-Medium.ttf")
-var FARSI_FONT : Font = load("res://assets/fonts/Vazirmatn-Regular.ttf")
+var ENG_FONT : Font = load("res://ui/fonts/PlusJakartaSans-Medium.ttf")
+var FARSI_FONT : Font = load("res://ui/fonts/Vazirmatn-Regular.ttf")
 
 # متغیری برای ذخیره انیمیشن فعلی تا تداخلی پیش نیاید
 var is_open := false

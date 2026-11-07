@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cc5bggnhxrx5e"]
 
 [ext_resource type="Script" uid="uid://ck675wn5jnu7w" path="res://scenes/book_menu/book_selection.gd" id="1_kdstj"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_380wp"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_380wp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kdstj"]
 font = ExtResource("2_380wp")

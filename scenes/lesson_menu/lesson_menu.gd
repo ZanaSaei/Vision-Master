@@ -184,13 +184,13 @@ func _build_ui() -> void:
 
 	_bg_blur = _make_background_still(
 		"BackgroundBlur",
-		"res://assets/images/ui/book_scene/Vision%d_blur.png" % _book
+		"res://ui/images/book_scene/Vision%d_blur.png" % _book
 	)
 	bg_layer.add_child(_bg_blur)
 
 	_bg_clear = _make_background_still(
 		"BackgroundClear",
-		"res://assets/images/ui/book_scene/Vision%d.png" % _book
+		"res://ui/images/book_scene/Vision%d.png" % _book
 	)
 	bg_layer.add_child(_bg_clear)
 

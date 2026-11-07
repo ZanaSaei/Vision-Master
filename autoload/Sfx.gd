@@ -1,7 +1,7 @@
 extends Node
 # ============================================================
 #  SFX — autoload singleton for short UI sound effects.
-#  Files live in res://assets/audio/ui/.
+#  Files live in res://ui/audio/.
 #  Call anywhere as: Sfx.click(), Sfx.correct(), Sfx.wrong(),
 #  Sfx.complete(), Sfx.reward(), or Sfx.play("file.wav").
 #
@@ -10,7 +10,7 @@ extends Node
 #  sounds don't cut each other off.
 # ============================================================
 
-const DIR := "res://assets/audio/ui/"
+const DIR := "res://ui/audio/"
 const MAX_PLAYERS := 8   # cap the pool so it can never grow unbounded
 
 var _players: Array[AudioStreamPlayer] = []

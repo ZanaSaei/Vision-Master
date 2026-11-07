@@ -24,11 +24,11 @@ const STYLEBOX_DIR := "res://resources/styleboxes/"
 ## state, so the glass never firms up or turns see-through as the card is used.
 const GLOSS_FACE_ALPHA := 0.88
 
-const FONT_VAZIR        := "res://assets/fonts/Vazirmatn-Regular.ttf"
-const FONT_JAKARTA      := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_JAKARTA_BOLD := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_NUNITO_BOLD  := "res://assets/fonts/Nunito-Bold.ttf"
-const FONT_JOSEFIN      := "res://assets/fonts/JosefinSans-Bold.ttf"
+const FONT_VAZIR        := "res://ui/fonts/Vazirmatn-Regular.ttf"
+const FONT_JAKARTA      := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_JAKARTA_BOLD := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_NUNITO_BOLD  := "res://ui/fonts/Nunito-Bold.ttf"
+const FONT_JOSEFIN      := "res://ui/fonts/JosefinSans-Bold.ttf"
 
 static var _font_cache: Dictionary = {}
 

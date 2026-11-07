@@ -34,9 +34,9 @@ const PRONUNCIATION_DATA_PATH := "res://data/v_pronunciation.json"
 # Global scale applied to every text size so fonts render larger.
 const FONT_SCALE := 1.15
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 # ---------- Accent / status colors ----------
 const ACCENT := Color("#0891B2")

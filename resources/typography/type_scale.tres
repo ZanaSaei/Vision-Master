@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="TypeScale" format=3]
 
-[ext_resource type="FontFile" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="1_j1ex5"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_yy3pd"]
-[ext_resource type="FontFile" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="3_vhwma"]
+[ext_resource type="FontFile" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="1_j1ex5"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_yy3pd"]
+[ext_resource type="FontFile" path="res://ui/fonts/PlusJakartaSans-Regular.ttf" id="3_vhwma"]
 [ext_resource type="Script" path="res://scripts/resources/type_scale.gd" id="4_nwaf5"]
 
 [resource]

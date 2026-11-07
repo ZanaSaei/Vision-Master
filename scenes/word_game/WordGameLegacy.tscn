@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/word_game.gd" id="1_script"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 [ext_resource type="Shader" uid="uid://dje0dgpfw45e5" path="res://scenes/shared/GradientCard.gdshader" id="5_shader"]
 [ext_resource type="Script" uid="uid://dqlylk0w3c2p8" path="res://ui/widgets/GradientCardRect.gd" id="6_cardrect"]
 

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://v1r2ad6yfiqs"]
 
 [ext_resource type="Script" uid="uid://deryoeahrd4v2" path="res://scenes/reading_strategy/reading_strategy.gd" id="1_7b0dw"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_xivrk"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_xff7t"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_xivrk"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_xff7t"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]

@@ -33,9 +33,9 @@ const TEXTURE_DIR := "res://resources/textures/"
 const MOTION_DIR := "res://resources/motion/"
 const TYPOGRAPHY_DIR := "res://resources/typography/"
 
-const FONT_BODY := "res://assets/fonts/Vazirmatn-Regular.ttf"
-const FONT_DISPLAY := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_REGULAR := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BODY := "res://ui/fonts/Vazirmatn-Regular.ttf"
+const FONT_DISPLAY := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_REGULAR := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
 
 ## Written once per mode. The key is the file base name, the value is a Callable
 ## taking `dark` and returning the StyleBox.
@@ -381,8 +381,8 @@ func _ex_choice_button(t: Theme, name: String, accent: Color, font_size: int, ma
 
 
 func _write_exercise_variations(t: Theme) -> void:
-	const EX_FONT_REGULAR := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-	const EX_FONT_BOLD := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+	const EX_FONT_REGULAR := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+	const EX_FONT_BOLD := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
 	var accent: Color = _et.C_PRIMARY
 	var surface: Color = _pal("surface")
 	var surface_alt: Color = _pal("surface_alt")

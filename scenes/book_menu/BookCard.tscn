@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c57yyafyfu6rk"]
 
 [ext_resource type="Script" uid="uid://di330p5p0p4m6" path="res://scenes/book_menu/book_card.gd" id="1_168sl"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_3rmt2"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_mk5ey"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_3rmt2"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_mk5ey"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ujfs"]
 corner_radius_top_left = 25

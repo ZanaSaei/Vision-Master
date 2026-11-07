@@ -83,10 +83,10 @@ const MOTION_WIRED_META := "ui_motion_wired"
 ## Canonical icons per recognised header button. Keys are produced by
 ## `_button_kind()` from the button's own name.
 const ICONS := {
-	"back":        "res://assets/images/ui/Back.png",
-	"audio":       "res://assets/images/ui/audio_play.png",
-	"leitner":     "res://assets/images/ui/Leitner.png",
-	"translation": "res://assets/images/ui/Translate.png",
+	"back":        "res://ui/images/Back.png",
+	"audio":       "res://ui/images/audio_play.png",
+	"leitner":     "res://ui/images/Leitner.png",
+	"translation": "res://ui/images/Translate.png",
 }
 
 var _dark: bool = false
@@ -573,8 +573,8 @@ static func _apply_title_style(label: Label, accent: Color) -> void:
 
 ## Fonts the bar title can be set in. Loaded straight from res:// rather than
 ## through MenuStyle, so the engine keeps no autoload in its dependency graph.
-const FONT_VAZIR := "res://assets/fonts/Vazirmatn-Regular.ttf"
-const FONT_LATIN := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIR := "res://ui/fonts/Vazirmatn-Regular.ttf"
+const FONT_LATIN := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
 
 
 static func _title_font(text: String) -> Font:

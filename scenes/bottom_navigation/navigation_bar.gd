@@ -35,28 +35,28 @@ const ITEM_NAMES: Array[String] = [
 ]
 
 const NORMAL_ICONS: Array[Texture2D] = [
-	preload("res://assets/images/ui/nav_bar/home.svg"),
-	preload("res://assets/images/ui/nav_bar/book.svg"),
-	preload("res://assets/images/ui/nav_bar/game.svg"),
-	preload("res://assets/images/ui/nav_bar/exam.svg"),
-	preload("res://assets/images/ui/nav_bar/flashcard.svg"),
-	preload("res://assets/images/ui/nav_bar/menu.svg")
+	preload("res://ui/images/nav_bar/home.svg"),
+	preload("res://ui/images/nav_bar/book.svg"),
+	preload("res://ui/images/nav_bar/game.svg"),
+	preload("res://ui/images/nav_bar/exam.svg"),
+	preload("res://ui/images/nav_bar/flashcard.svg"),
+	preload("res://ui/images/nav_bar/menu.svg")
 ]
 
 const ACTIVE_ICONS: Array[Texture2D] = [
-	preload("res://assets/images/ui/nav_bar/home ac.svg"),
-	preload("res://assets/images/ui/nav_bar/book ac.svg"),
-	preload("res://assets/images/ui/nav_bar/game ac.svg"),
-	preload("res://assets/images/ui/nav_bar/exam ac.svg"),
-	preload("res://assets/images/ui/nav_bar/flashcard ac.svg"),
-	preload("res://assets/images/ui/nav_bar/menu ac.svg")
+	preload("res://ui/images/nav_bar/home ac.svg"),
+	preload("res://ui/images/nav_bar/book ac.svg"),
+	preload("res://ui/images/nav_bar/game ac.svg"),
+	preload("res://ui/images/nav_bar/exam ac.svg"),
+	preload("res://ui/images/nav_bar/flashcard ac.svg"),
+	preload("res://ui/images/nav_bar/menu ac.svg")
 ]
 
 const MENU_SUB_ICONS: Array[Texture2D] = [
-	preload("res://assets/images/ui/nav_bar/profile.svg"),
-	preload("res://assets/images/ui/nav_bar/buy.svg"),
-	preload("res://assets/images/ui/nav_bar/settings.svg"),
-	preload("res://assets/images/ui/nav_bar/about me.svg")
+	preload("res://ui/images/nav_bar/profile.svg"),
+	preload("res://ui/images/nav_bar/buy.svg"),
+	preload("res://ui/images/nav_bar/settings.svg"),
+	preload("res://ui/images/nav_bar/about me.svg")
 ]
 
 const ITEM_SCENES: Array[String] = [

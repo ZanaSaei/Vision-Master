@@ -3763,7 +3763,7 @@ static func apply_to_scene(_scene_root: Node) -> void:
 extends Node
 # ============================================================
 #  SFX — autoload singleton for short UI sound effects.
-#  Files live in res://assets/audio/ui/.
+#  Files live in res://ui/audio/.
 #  Call anywhere as: Sfx.click(), Sfx.correct(), Sfx.wrong(),
 #  Sfx.complete(), Sfx.reward(), or Sfx.play("file.wav").
 #
@@ -3772,7 +3772,7 @@ extends Node
 #  sounds don't cut each other off.
 # ============================================================
 
-const DIR := "res://assets/audio/ui/"
+const DIR := "res://ui/audio/"
 const MAX_PLAYERS := 8   # cap the pool so it can never grow unbounded
 
 var _players: Array[AudioStreamPlayer] = []
@@ -4319,10 +4319,10 @@ const MOTION_WIRED_META := "ui_motion_wired"
 ## Canonical icons per recognised header button. Keys are produced by
 ## `_button_kind()` from the button's own name.
 const ICONS := {
-	"back":        "res://assets/images/ui/Back.png",
-	"audio":       "res://assets/images/ui/audio_play.png",
-	"leitner":     "res://assets/images/ui/Leitner.png",
-	"translation": "res://assets/images/ui/Translate.png",
+	"back":        "res://ui/images/Back.png",
+	"audio":       "res://ui/images/audio_play.png",
+	"leitner":     "res://ui/images/Leitner.png",
+	"translation": "res://ui/images/Translate.png",
 }
 
 var _dark: bool = false
@@ -4809,8 +4809,8 @@ static func _apply_title_style(label: Label, accent: Color) -> void:
 
 ## Fonts the bar title can be set in. Loaded straight from res:// rather than
 ## through MenuStyle, so the engine keeps no autoload in its dependency graph.
-const FONT_VAZIR := "res://assets/fonts/Vazirmatn-Regular.ttf"
-const FONT_LATIN := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIR := "res://ui/fonts/Vazirmatn-Regular.ttf"
+const FONT_LATIN := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
 
 
 static func _title_font(text: String) -> Font:
@@ -7141,14 +7141,14 @@ fill_to = Vector2(1, 0.5)
 [gd_resource type="Theme" format=3]
 
 [ext_resource type="StyleBox" path="res://resources/styleboxes/card_lifted_light.tres" id="1_mmd2d"]
-[ext_resource type="FontFile" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="2_ufo87"]
+[ext_resource type="FontFile" path="res://ui/fonts/PlusJakartaSans-Regular.ttf" id="2_ufo87"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/button_disabled_light.tres" id="3_v31qs"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/button_focus_light.tres" id="4_hsjly"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/button_default_light.tres" id="5_h3png"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/button_pressed_light.tres" id="6_4n3jr"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/toggle_off_light.tres" id="7_oem7f"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/toggle_on_light.tres" id="8_jju2c"]
-[ext_resource type="FontFile" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="9_7qvp1"]
+[ext_resource type="FontFile" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="9_7qvp1"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/scrollbar_grabber_light.tres" id="10_vs18e"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/scrollbar_track.tres" id="11_lld5u"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/separator_light.tres" id="12_mmfxm"]
@@ -7161,7 +7161,7 @@ fill_to = Vector2(1, 0.5)
 [ext_resource type="StyleBox" path="res://resources/styleboxes/progress_fill_light.tres" id="19_a1rst"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/panel_transparent.tres" id="20_2wkg4"]
 [ext_resource type="StyleBox" path="res://resources/styleboxes/pill_accent_light.tres" id="21_i2q7v"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="22_vyxw8"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="22_vyxw8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgbed"]
 content_margin_left = 18.0
@@ -8234,7 +8234,7 @@ WordToggleCompact/styles/pressed = SubResource("StyleBoxFlat_kk8th")
 ```ini
 [gd_resource type="LabelSettings" format=3 uid="uid://b2tiexu8jgth0"]
 
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="1_4reby"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="1_4reby"]
 
 [resource]
 font = ExtResource("1_4reby")
@@ -8249,9 +8249,9 @@ font_color = Color(0, 0, 0, 1)
 ```ini
 [gd_resource type="Resource" script_class="TypeScale" format=3]
 
-[ext_resource type="FontFile" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="1_j1ex5"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_yy3pd"]
-[ext_resource type="FontFile" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="3_vhwma"]
+[ext_resource type="FontFile" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="1_j1ex5"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_yy3pd"]
+[ext_resource type="FontFile" path="res://ui/fonts/PlusJakartaSans-Regular.ttf" id="3_vhwma"]
 [ext_resource type="Script" path="res://scripts/resources/type_scale.gd" id="4_nwaf5"]
 
 [resource]
@@ -8423,8 +8423,8 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3 uid="uid://de083h1ig7hpl"]
 
 [ext_resource type="Script" uid="uid://ck2vut4ftdqmj" path="res://scenes/about_me/about_me.gd" id="1_aboutme"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
@@ -9050,9 +9050,9 @@ func _on_android_back_pressed() -> void:
 [gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/auth/auth.gd" id="1_auth"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="3_header_style"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_vazir"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_vazir"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
 font = ExtResource("4_vazir")
@@ -9636,7 +9636,7 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_MAIN_MENU   := "res://scenes/main_menu/MainMenu.tscn"
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
-const BACK_ICON         := "res://assets/images/ui/Back.png"
+const BACK_ICON         := "res://ui/images/Back.png"
 
 # Persian + English lesson titles per book.
 const LESSON_DATA := {
@@ -9914,15 +9914,15 @@ const BOOK_TITLES: Array[String] = [
 ]
 
 const BOOK_COVERS: Array[Texture2D] = [
-	preload("res://assets/images/ui/book_scene/Vision1.png"),
-	preload("res://assets/images/ui/book_scene/Vision2.png"),
-	preload("res://assets/images/ui/book_scene/Vision3.png")
+	preload("res://ui/images/book_scene/Vision1.png"),
+	preload("res://ui/images/book_scene/Vision2.png"),
+	preload("res://ui/images/book_scene/Vision3.png")
 ]
 
 const BOOK_BLURRED_BACKGROUNDS: Array[Texture2D] = [
-	preload("res://assets/images/ui/book_scene/Vision1_blur.png"),
-	preload("res://assets/images/ui/book_scene/Vision2_blur.png"),
-	preload("res://assets/images/ui/book_scene/Vision3_blur.png")
+	preload("res://ui/images/book_scene/Vision1_blur.png"),
+	preload("res://ui/images/book_scene/Vision2_blur.png"),
+	preload("res://ui/images/book_scene/Vision3_blur.png")
 ]
 
 
@@ -10543,8 +10543,8 @@ var selected_book_id: int = 0
 [gd_scene format=3 uid="uid://c57yyafyfu6rk"]
 
 [ext_resource type="Script" uid="uid://di330p5p0p4m6" path="res://scenes/book_menu/book_card.gd" id="1_168sl"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_3rmt2"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_mk5ey"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_3rmt2"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_mk5ey"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ujfs"]
 corner_radius_top_left = 25
@@ -10698,7 +10698,7 @@ script = ExtResource("1_mhme8")
 [gd_scene format=3 uid="uid://cc5bggnhxrx5e"]
 
 [ext_resource type="Script" uid="uid://ck675wn5jnu7w" path="res://scenes/book_menu/book_selection.gd" id="1_kdstj"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_380wp"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_380wp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kdstj"]
 font = ExtResource("2_380wp")
@@ -10802,28 +10802,28 @@ const ITEM_NAMES: Array[String] = [
 ]
 
 const NORMAL_ICONS: Array[Texture2D] = [
-	preload("res://assets/images/ui/nav_bar/home.svg"),
-	preload("res://assets/images/ui/nav_bar/book.svg"),
-	preload("res://assets/images/ui/nav_bar/game.svg"),
-	preload("res://assets/images/ui/nav_bar/exam.svg"),
-	preload("res://assets/images/ui/nav_bar/flashcard.svg"),
-	preload("res://assets/images/ui/nav_bar/menu.svg")
+	preload("res://ui/images/nav_bar/home.svg"),
+	preload("res://ui/images/nav_bar/book.svg"),
+	preload("res://ui/images/nav_bar/game.svg"),
+	preload("res://ui/images/nav_bar/exam.svg"),
+	preload("res://ui/images/nav_bar/flashcard.svg"),
+	preload("res://ui/images/nav_bar/menu.svg")
 ]
 
 const ACTIVE_ICONS: Array[Texture2D] = [
-	preload("res://assets/images/ui/nav_bar/home ac.svg"),
-	preload("res://assets/images/ui/nav_bar/book ac.svg"),
-	preload("res://assets/images/ui/nav_bar/game ac.svg"),
-	preload("res://assets/images/ui/nav_bar/exam ac.svg"),
-	preload("res://assets/images/ui/nav_bar/flashcard ac.svg"),
-	preload("res://assets/images/ui/nav_bar/menu ac.svg")
+	preload("res://ui/images/nav_bar/home ac.svg"),
+	preload("res://ui/images/nav_bar/book ac.svg"),
+	preload("res://ui/images/nav_bar/game ac.svg"),
+	preload("res://ui/images/nav_bar/exam ac.svg"),
+	preload("res://ui/images/nav_bar/flashcard ac.svg"),
+	preload("res://ui/images/nav_bar/menu ac.svg")
 ]
 
 const MENU_SUB_ICONS: Array[Texture2D] = [
-	preload("res://assets/images/ui/nav_bar/profile.svg"),
-	preload("res://assets/images/ui/nav_bar/buy.svg"),
-	preload("res://assets/images/ui/nav_bar/settings.svg"),
-	preload("res://assets/images/ui/nav_bar/about me.svg")
+	preload("res://ui/images/nav_bar/profile.svg"),
+	preload("res://ui/images/nav_bar/buy.svg"),
+	preload("res://ui/images/nav_bar/settings.svg"),
+	preload("res://ui/images/nav_bar/about me.svg")
 ]
 
 const ITEM_SCENES: Array[String] = [
@@ -11851,18 +11851,18 @@ func _refresh_after_resize() -> void:
 [gd_scene format=3 uid="uid://nxsbernnf8ky"]
 
 [ext_resource type="Shader" uid="uid://bfivrbsu1y22s" path="res://scenes/bottom_navigation/navigation_bar.gdshader" id="1_54rmf"]
-[ext_resource type="Texture2D" uid="uid://d13wev1rgx644" path="res://assets/images/ui/nav_bar/home.svg" id="1_sflyj"]
+[ext_resource type="Texture2D" uid="uid://d13wev1rgx644" path="res://ui/images/nav_bar/home.svg" id="1_sflyj"]
 [ext_resource type="Script" uid="uid://cptqetawym0sx" path="res://scenes/bottom_navigation/navigation_bar.gd" id="1_vog3g"]
 [ext_resource type="LabelSettings" uid="uid://b2tiexu8jgth0" path="res://resources/typography/Navigation_text.tres" id="2_54rmf"]
-[ext_resource type="Texture2D" uid="uid://c0nagyyy1q7n5" path="res://assets/images/ui/nav_bar/book.svg" id="3_vog3g"]
-[ext_resource type="Texture2D" uid="uid://b57kt83ic8wji" path="res://assets/images/ui/nav_bar/game.svg" id="4_wocfp"]
-[ext_resource type="Texture2D" uid="uid://ceu3plb3lmsb6" path="res://assets/images/ui/nav_bar/exam.svg" id="5_ncpsy"]
-[ext_resource type="Texture2D" uid="uid://bf8uvb4lmsub8" path="res://assets/images/ui/nav_bar/flashcard.svg" id="6_vmnu6"]
-[ext_resource type="Texture2D" uid="uid://c14ijjpf8uol0" path="res://assets/images/ui/nav_bar/menu.svg" id="7_54eih"]
-[ext_resource type="Texture2D" uid="uid://bdgw4pw08nj7v" path="res://assets/images/ui/nav_bar/profile.svg" id="8_profile"]
-[ext_resource type="Texture2D" uid="uid://du4dcek2s3jpg" path="res://assets/images/ui/nav_bar/buy.svg" id="9_buy"]
-[ext_resource type="Texture2D" uid="uid://c5iovoa4u5wuo" path="res://assets/images/ui/nav_bar/settings.svg" id="10_settings"]
-[ext_resource type="Texture2D" uid="uid://dpve1l4wsttkm" path="res://assets/images/ui/nav_bar/about me.svg" id="11_aboutme"]
+[ext_resource type="Texture2D" uid="uid://c0nagyyy1q7n5" path="res://ui/images/nav_bar/book.svg" id="3_vog3g"]
+[ext_resource type="Texture2D" uid="uid://b57kt83ic8wji" path="res://ui/images/nav_bar/game.svg" id="4_wocfp"]
+[ext_resource type="Texture2D" uid="uid://ceu3plb3lmsb6" path="res://ui/images/nav_bar/exam.svg" id="5_ncpsy"]
+[ext_resource type="Texture2D" uid="uid://bf8uvb4lmsub8" path="res://ui/images/nav_bar/flashcard.svg" id="6_vmnu6"]
+[ext_resource type="Texture2D" uid="uid://c14ijjpf8uol0" path="res://ui/images/nav_bar/menu.svg" id="7_54eih"]
+[ext_resource type="Texture2D" uid="uid://bdgw4pw08nj7v" path="res://ui/images/nav_bar/profile.svg" id="8_profile"]
+[ext_resource type="Texture2D" uid="uid://du4dcek2s3jpg" path="res://ui/images/nav_bar/buy.svg" id="9_buy"]
+[ext_resource type="Texture2D" uid="uid://c5iovoa4u5wuo" path="res://ui/images/nav_bar/settings.svg" id="10_settings"]
+[ext_resource type="Texture2D" uid="uid://dpve1l4wsttkm" path="res://ui/images/nav_bar/about me.svg" id="11_aboutme"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_54rmf"]
 shader = ExtResource("1_54rmf")
@@ -12290,11 +12290,11 @@ const SPEAKER_BG_COLORS := [
 ]
 
 # ---------- Font configuration ----------
-const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_JAKARTA_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_JAKARTA_ITALIC_PATH  := "res://assets/fonts/PlusJakartaSans-Italic.ttf"
-const FONT_JAKARTA_MEDIUM_PATH  := "res://assets/fonts/PlusJakartaSans-Medium.ttf"
-const FONT_VAZIRMATN            := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_JAKARTA_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_JAKARTA_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_JAKARTA_ITALIC_PATH  := "res://ui/fonts/PlusJakartaSans-Italic.ttf"
+const FONT_JAKARTA_MEDIUM_PATH  := "res://ui/fonts/PlusJakartaSans-Medium.ttf"
+const FONT_VAZIRMATN            := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 var font_regular: FontFile
 var font_bold: FontFile
@@ -12977,8 +12977,8 @@ func _on_android_back_pressed() -> void:
 
 [ext_resource type="Script" uid="uid://bmwx225q8jlsk" path="res://scenes/conversation/conversation.gd" id="1_swh16"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_08em2"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_khtvf"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_3afir"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_khtvf"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_3afir"]
 [ext_resource type="PackedScene" uid="uid://d077on3j3i6pd" path="res://scenes/shared/AudioPanel.tscn" id="5_3afir"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="5_jy5oa"]
 
@@ -13838,9 +13838,9 @@ func _on_android_back_pressed() -> void:
 [gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/exam/final_exam.gd" id="1_fe2"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="3_header_style"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_vazir"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_vazir"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
 font = ExtResource("4_vazir")
@@ -13896,10 +13896,10 @@ label_settings = SubResource("HeaderTitleSettings")
 ```ini
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
 
 [ext_resource type="Script" path="res://scenes/exam/final_exam_list.gd" id="1_fel"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
@@ -14017,8 +14017,8 @@ label_settings = SubResource("HeaderTitleSettings")
 [gd_scene load_steps=6 format=3 uid="uid://dfsxchwulflga"]
 
 [ext_resource type="Script" path="res://scenes/exam/final_exams.gd" id="1_fe"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
@@ -17067,7 +17067,7 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 	header_row.add_theme_constant_override("separation", 16)
 	header_margin.add_child(header_row)
 
-	var back_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Back.png", Callable(self, "_on_back_pressed"))
+	var back_button: Button = GrammarTheme.make_header_icon_button("res://ui/images/Back.png", Callable(self, "_on_back_pressed"))
 	header_row.add_child(back_button)
 
 	var font: Font = GrammarTheme.get_fa_bold()
@@ -17458,7 +17458,7 @@ func _build_header(main: VBoxContainer, data: Dictionary) -> void:
 	header_row.add_theme_constant_override("separation", 16)
 	header_margin.add_child(header_row)
 
-	var back_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Back.png", Callable(self, "_on_back_pressed"))
+	var back_button: Button = GrammarTheme.make_header_icon_button("res://ui/images/Back.png", Callable(self, "_on_back_pressed"))
 	header_row.add_child(back_button)
 
 	var font: Font = GrammarTheme.get_fa_bold()
@@ -17924,10 +17924,10 @@ func _build_ui() -> void:
 	header_row.add_theme_constant_override("separation", 16)
 	header_margin.add_child(header_row)
 
-	var back_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Back.png", Callable(self, "_on_back_pressed"))
+	var back_button: Button = GrammarTheme.make_header_icon_button("res://ui/images/Back.png", Callable(self, "_on_back_pressed"))
 	header_row.add_child(back_button)
 
-	var home_button: Button = GrammarTheme.make_header_icon_button("res://assets/images/ui/Main_Menu.png", Callable(self, "_on_main_menu_pressed"))
+	var home_button: Button = GrammarTheme.make_header_icon_button("res://ui/images/Main_Menu.png", Callable(self, "_on_main_menu_pressed"))
 	header_row.add_child(home_button)
 
 	var title_label: Label = Label.new()
@@ -18627,7 +18627,7 @@ func _build_top_bar(main_vbox: VBoxContainer) -> void:
 	main_vbox.add_child(top_bar)
 
 	var back_button: Button = GrammarTheme.make_header_icon_button(
-		"res://assets/images/ui/Back.png",
+		"res://ui/images/Back.png",
 		Callable(self, "_on_back_pressed")
 	)
 	back_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -19346,18 +19346,18 @@ const CONTENT_MARGIN := 50
 # ============================================================
 
 const FONT_FA_REGULAR_PATH := \
-	"res://assets/fonts/Vazirmatn-Regular.ttf"
+	"res://ui/fonts/Vazirmatn-Regular.ttf"
 
 const FONT_FA_BOLD_PATH := \
-	"res://assets/fonts/Vazirmatn-Regular.ttf"
+	"res://ui/fonts/Vazirmatn-Regular.ttf"
 	
 
 const FONT_EN_REGULAR_PATH := \
-	"res://assets/fonts/Nunito-Regular.ttf"
+	"res://ui/fonts/Nunito-Regular.ttf"
 	
 
 const FONT_EN_BOLD_PATH := \
-	"res://assets/fonts/Nunito-Bold.ttf"
+	"res://ui/fonts/Nunito-Bold.ttf"
 	
 
 static func get_fa_regular() -> Font:
@@ -19798,13 +19798,13 @@ func _build_ui() -> void:
 	header_margin.add_child(header_row)
 
 	var back_button: Button = GrammarTheme.make_header_icon_button(
-		"res://assets/images/ui/Back.png",
+		"res://ui/images/Back.png",
 		Callable(self, "_on_previous_pressed")
 	)
 	header_row.add_child(back_button)
 
 	var menu_button: Button = GrammarTheme.make_header_icon_button(
-		"res://assets/images/ui/Main_Menu.png",
+		"res://ui/images/Main_Menu.png",
 		Callable(self, "_on_main_menu_pressed")
 	)
 	header_row.add_child(menu_button)
@@ -20428,13 +20428,13 @@ func _build_ui() -> void:
 
 	_bg_blur = _make_background_still(
 		"BackgroundBlur",
-		"res://assets/images/ui/book_scene/Vision%d_blur.png" % _book
+		"res://ui/images/book_scene/Vision%d_blur.png" % _book
 	)
 	bg_layer.add_child(_bg_blur)
 
 	_bg_clear = _make_background_still(
 		"BackgroundClear",
-		"res://assets/images/ui/book_scene/Vision%d.png" % _book
+		"res://ui/images/book_scene/Vision%d.png" % _book
 	)
 	bg_layer.add_child(_bg_clear)
 
@@ -20669,9 +20669,9 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 # ---------- Dark theme ----------
 const APP_BG := Color("#0b1229")
@@ -21781,10 +21781,10 @@ func _on_android_back_pressed() -> void:
 ```ini
 [gd_scene format=3 uid="uid://dthv3gemvf4vq"]
 
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="1_fjmkr"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="1_fjmkr"]
 [ext_resource type="Script" uid="uid://bi8xddf2cm140" path="res://scenes/listening_speaking/listening_speaking.gd" id="1_yfu1x"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_mt8p7"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="2_yfu1x"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="2_yfu1x"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_l0xlq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
@@ -22203,8 +22203,8 @@ func _show_back_message() -> void:
 [gd_scene format=3 uid="uid://csjykfgswhgaf"]
 
 [ext_resource type="Script" uid="uid://dp1p468gjieln" path="res://scenes/main_menu/main_menu.gd" id="1_main"]
-[ext_resource type="Texture2D" uid="uid://go7l15igegw4" path="res://assets/images/brand/Logo_Transparent.webp" id="3_qq55g"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="Texture2D" uid="uid://go7l15igegw4" path="res://ui/brand/Logo_Transparent.webp" id="3_qq55g"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
 [ext_resource type="StyleBox" uid="uid://cp4wknax5vhvc" path="res://ui/Styles/buttons/Yellow_Normal.tres" id="5_arvcj"]
 [ext_resource type="LabelSettings" uid="uid://dv2tiiw6sx567" path="res://ui/fonts/Fa_Button_Title_Blue.tres" id="5_oitky"]
 [ext_resource type="LabelSettings" uid="uid://btv25lfeojoe4" path="res://ui/fonts/Fa_Button_Info_Blue.tres" id="5_pkvjm"]
@@ -22628,9 +22628,9 @@ const PRONUNCIATION_DATA_PATH := "res://data/v_pronunciation.json"
 # Global scale applied to every text size so fonts render larger.
 const FONT_SCALE := 1.15
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 # ---------- Accent / status colors ----------
 const ACCENT := Color("#0891B2")
@@ -23295,9 +23295,9 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3 uid="uid://chnhgo7f6vvb0"]
 
 [ext_resource type="Script" uid="uid://dqfglxa84pov2" path="res://scenes/pronunciation/pronunciation.gd" id="1_4tnhm"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_15k17"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_15k17"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_25c5q"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_bsisb"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_bsisb"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_25c5q"]
 [ext_resource type="PackedScene" uid="uid://d077on3j3i6pd" path="res://scenes/shared/AudioPanel.tscn" id="5_aud"]
 
@@ -23443,8 +23443,8 @@ func _on_android_back_pressed() -> void:
 [gd_scene load_steps=6 format=3 uid="uid://qvx0q2vcn6ni"]
 
 [ext_resource type="Script" path="res://scenes/purchase/purchase.gd" id="1_pu"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_vazir"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_vazir"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
@@ -23554,10 +23554,10 @@ const HIGHLIGHT_COLOR    := Color("#fbbf24")
 const BACKGROUND_OPACITY := 0.08
 
 # ---------- Font configuration ----------
-const FONT_JAKARTA_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_JAKARTA_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_JAKARTA_ITALIC_PATH  := "res://assets/fonts/PlusJakartaSans-Italic.ttf"
-const FONT_VAZIRMATN            := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_JAKARTA_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_JAKARTA_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_JAKARTA_ITALIC_PATH  := "res://ui/fonts/PlusJakartaSans-Italic.ttf"
+const FONT_VAZIRMATN            := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 var font_regular: FontFile
 var font_bold: FontFile
@@ -24659,8 +24659,8 @@ func _on_android_back_pressed() -> void:
 
 [ext_resource type="Script" uid="uid://u2x24fu82pmb" path="res://scenes/reading/reading.gd" id="1_oshe3"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_lki6g"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_wsob8"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_fd08m"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_wsob8"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_fd08m"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="5_553gl"]
 [ext_resource type="PackedScene" uid="uid://d077on3j3i6pd" path="res://scenes/shared/AudioPanel.tscn" id="6_bgd46"]
 
@@ -24779,9 +24779,9 @@ extends "res://autoload/BackButtonHandler.gd"
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
 # ---------- Fonts ----------
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 var font_regular: FontFile
 var font_bold: FontFile
@@ -25275,8 +25275,8 @@ func _on_back_button_pressed() -> void:
 [gd_scene format=3 uid="uid://v1r2ad6yfiqs"]
 
 [ext_resource type="Script" uid="uid://deryoeahrd4v2" path="res://scenes/reading_strategy/reading_strategy.gd" id="1_7b0dw"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_xivrk"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_xff7t"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_xivrk"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_xff7t"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
@@ -25868,11 +25868,11 @@ func _on_android_back_pressed() -> void:
 
 [ext_resource type="Script" uid="uid://bp02fo3um6w2u" path="res://scenes/review/word_review.gd" id="1_chjlt"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_hx4ce"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_o6c0r"]
-[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_gfdwm"]
-[ext_resource type="FontFile" uid="uid://drnivg6cxlyr2" path="res://assets/fonts/PlusJakartaSans-Italic.ttf" id="5_3kfk6"]
-[ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="6_y8wcc"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="7_y8wcc"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_o6c0r"]
+[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://ui/fonts/PlusJakartaSans-Medium.ttf" id="4_gfdwm"]
+[ext_resource type="FontFile" uid="uid://drnivg6cxlyr2" path="res://ui/fonts/PlusJakartaSans-Italic.ttf" id="5_3kfk6"]
+[ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://ui/fonts/PlusJakartaSans-Regular.ttf" id="6_y8wcc"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="7_y8wcc"]
 [ext_resource type="StyleBox" uid="uid://cra0kyhull2d5" path="res://resources/styleboxes/show_answer.tres" id="8_hx4ce"]
 [ext_resource type="PackedScene" uid="uid://c4kduxd61oyll" path="res://scenes/side_menu/ReviewSideMenu.tscn" id="8_y8wcc"]
 
@@ -26335,9 +26335,9 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3 uid="uid://deve4kxamx2df"]
 
 [ext_resource type="Script" uid="uid://bohbhtc8jn1ln" path="res://scenes/saved_words/saved_words.gd" id="1_cfgum"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="2_bltao"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_6xmsu"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="4_back"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="2_bltao"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_6xmsu"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="4_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="5_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
@@ -26680,7 +26680,7 @@ func _on_reset_pressed() -> void:
 # ══════════════════════════════════════════════════════════════
 const ACCENT    := Color(0.545098, 0.360784, 0.964706)
 const ACCENT_ON := Color(0.760784, 0.611765, 1)
-const FONT_PATH := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_PATH := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 
 func _build_confirm_dialog() -> void:
@@ -27157,8 +27157,8 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3 uid="uid://ba6b0wamf0nb7"]
 
 [ext_resource type="Script" uid="uid://bk10p2d4d2sci" path="res://scenes/settings/settings.gd" id="1_settings"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
@@ -27914,7 +27914,7 @@ func _format_time(seconds: float) -> String:
 class_name AudioSliderDot
 extends Control
 
-const GRABBER_TEXTURE: Texture2D = preload("res://assets/images/ui/audio_grabber.png")
+const GRABBER_TEXTURE: Texture2D = preload("res://ui/images/audio_grabber.png")
 const SHOW_DURATION: float = 0.18
 const HIDE_DURATION: float = 0.16
 
@@ -27982,10 +27982,10 @@ func _draw() -> void:
 [gd_scene format=3 uid="uid://d077on3j3i6pd"]
 
 [ext_resource type="Script" uid="uid://cuyy7b8mylefo" path="res://scenes/shared/audio_panel.gd" id="1_f8ndu"]
-[ext_resource type="Texture2D" uid="uid://dtkko2fhjaucm" path="res://assets/images/ui/Backward.png" id="2_bwd"]
-[ext_resource type="Texture2D" uid="uid://bgas441s5yqhc" path="res://assets/images/ui/Close.png" id="2_close"]
-[ext_resource type="Texture2D" uid="uid://b4g5s6mn47q2j" path="res://assets/images/ui/Forward.png" id="2_fwd"]
-[ext_resource type="Texture2D" uid="uid://cflx0rr1btx23" path="res://assets/images/ui/Play.png" id="2_play"]
+[ext_resource type="Texture2D" uid="uid://dtkko2fhjaucm" path="res://ui/images/Backward.png" id="2_bwd"]
+[ext_resource type="Texture2D" uid="uid://bgas441s5yqhc" path="res://ui/images/Close.png" id="2_close"]
+[ext_resource type="Texture2D" uid="uid://b4g5s6mn47q2j" path="res://ui/images/Forward.png" id="2_fwd"]
+[ext_resource type="Texture2D" uid="uid://cflx0rr1btx23" path="res://ui/images/Play.png" id="2_play"]
 
 [node name="AudioPanel" type="PanelContainer" unique_id=418187207]
 visible = false
@@ -28086,10 +28086,10 @@ var extra_label: Label
 var btn_save_word: Button
 var btn_close_popup: Button
 
-var font_regular = preload("res://assets/fonts/PlusJakartaSans-Regular.ttf")
-var font_bold = preload("res://assets/fonts/PlusJakartaSans-Bold.ttf")
-var font_italic = preload("res://assets/fonts/PlusJakartaSans-Italic.ttf")
-var font_farsi = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
+var font_regular = preload("res://ui/fonts/PlusJakartaSans-Regular.ttf")
+var font_bold = preload("res://ui/fonts/PlusJakartaSans-Bold.ttf")
+var font_italic = preload("res://ui/fonts/PlusJakartaSans-Italic.ttf")
+var font_farsi = preload("res://ui/fonts/Vazirmatn-Regular.ttf")
 
 var popup_style: StyleBoxFlat
 var close_style: StyleBoxFlat
@@ -32089,9 +32089,9 @@ static func _c_warning() -> Color:
 const CLOZE_OPT_FONT := 42            # matches the cloze passage text size
 const MIN_FONT := 28                   # nothing rendered smaller than this
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 const SAVE_PATH := "user://exercise_saves.json"
 
@@ -34500,7 +34500,7 @@ signal page_changed(index: int, page_id: String)
 # Colors are read from Global.get_theme_color(...) at build/rebuild time so
 # the component follows the app-wide light/dark theme. No hardcoded fallback
 # palette is kept here.
-const FONT_BOLD_PATH := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_BOLD_PATH := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
 
 var _accent: Color = Color("#22D3EE")
 var font_bold: FontFile
@@ -35580,8 +35580,8 @@ signal word_selected(word_data)  # New signal for when a word is selected from s
 @onready var search_input: LineEdit = $MenuPanel/MarginContainer/VBoxContainer/SearchContainer/SearchInput
 @onready var clear_search_button: Button = $MenuPanel/MarginContainer/VBoxContainer/SearchContainer/ClearSearchButton
 
-var ENG_FONT : Font = load("res://assets/fonts/PlusJakartaSans-Medium.ttf")
-var FARSI_FONT : Font = load("res://assets/fonts/Vazirmatn-Regular.ttf")
+var ENG_FONT : Font = load("res://ui/fonts/PlusJakartaSans-Medium.ttf")
+var FARSI_FONT : Font = load("res://ui/fonts/Vazirmatn-Regular.ttf")
 
 # متغیری برای ذخیره انیمیشن فعلی تا تداخلی پیش نیاید
 var is_open := false
@@ -36007,7 +36007,7 @@ func focus_search() -> void:
 [gd_scene format=3 uid="uid://c4kduxd61oyll"]
 
 [ext_resource type="Script" uid="uid://mtptybqk8sgw" path="res://scenes/side_menu/review_side_menu.gd" id="1_gd6gh"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_h4htg"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_h4htg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw4b"]
 bg_color = Color(0, 0.2901961, 0.2901961, 1)
@@ -36684,8 +36684,8 @@ func _update_button_minimum_size(btn: Button, content: Control) -> void:
 [gd_scene format=3 uid="uid://b2onop4jk0ebo"]
 
 [ext_resource type="Script" uid="uid://c2ko5qlahacvi" path="res://scenes/side_menu/side_menu.gd" id="1_6wynt"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_jtoru"]
-[ext_resource type="FontFile" uid="uid://g637eq3c7teb" path="res://assets/fonts/BebasNeue-Regular.ttf" id="3_121v0"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_jtoru"]
+[ext_resource type="FontFile" uid="uid://g637eq3c7teb" path="res://ui/fonts/BebasNeue-Regular.ttf" id="3_121v0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_121v0"]
 bg_color = Color(0, 0.2901961, 0.2901961, 1)
@@ -36968,9 +36968,9 @@ func _on_leitner_pressed() -> void:
 [ext_resource type="Script" uid="uid://ooowd4rdod73" path="res://scenes/vocabulary/flashcard_hub.gd" id="1_script"]
 [ext_resource type="StyleBox" uid="uid://boy06ynkqak3q" path="res://ui/Styles/buttons/Blue_Normal.tres" id="2_1131u"]
 [ext_resource type="StyleBox" uid="uid://cx6iskaugv7ey" path="res://ui/Styles/buttons/Blue_Hovered.tres" id="3_13px0"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 [ext_resource type="LabelSettings" uid="uid://dv2tiiw6sx567" path="res://ui/fonts/Fa_Button_Title_Blue.tres" id="5_13px0"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="7_back"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="7_back"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="8_header_style"]
 [ext_resource type="StyleBox" uid="uid://cp4wknax5vhvc" path="res://ui/Styles/buttons/Yellow_Normal.tres" id="9_yellow_normal"]
 [ext_resource type="StyleBox" uid="uid://c8m6mqu5l84iy" path="res://ui/Styles/buttons/Yellow_Hovered.tres" id="10_yellow_hovered"]
@@ -37262,16 +37262,16 @@ const SCENE_FLASHCARDS     := "res://scenes/vocabulary/VocabFlashcards.tscn"
 @onready var home_button: Button               = $HeaderBar/HeaderContent/HomeButton
 @onready var leitner_button: Button            = $HeaderBar/HeaderContent/LeitnerButton
 
-@onready var save_inactive = preload("res://assets/images/ui/save_button.png")
-@onready var save_active = preload("res://assets/images/ui/saved_button.png")
+@onready var save_inactive = preload("res://ui/images/save_button.png")
+@onready var save_active = preload("res://ui/images/saved_button.png")
 # SAVED mode shows a Remove glyph instead of the heart: on that screen the
 # button means "take this card out of my saved list", not "bookmark it".
-@onready var save_remove = preload("res://assets/images/ui/Remove.png")
+@onready var save_remove = preload("res://ui/images/Remove.png")
 
 
 @onready var bg_rect: ColorRect = $TextureRect
 
-@onready var FONT_FARSI : FontFile = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
+@onready var FONT_FARSI : FontFile = preload("res://ui/fonts/Vazirmatn-Regular.ttf")
 
 const FLIP_DURATION := 0.18
 
@@ -37627,8 +37627,8 @@ func _style_bottom_controls() -> void:
 	controls.add_theme_constant_override("separation", 68)
 
 	# Optimize the arrow icons so their edges render smoothly.
-	prev_button.icon = _optimize_icon(load("res://assets/images/ui/prev.png"))
-	next_button.icon = _optimize_icon(load("res://assets/images/ui/next.png"))
+	prev_button.icon = _optimize_icon(load("res://ui/images/prev.png"))
+	next_button.icon = _optimize_icon(load("res://ui/images/next.png"))
 
 	_style_nav_button(prev_button, _current_accent())
 	_style_nav_button(next_button, _current_accent())
@@ -38207,15 +38207,15 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3 uid="uid://diqt2ff8xvv3h"]
 
 [ext_resource type="Script" uid="uid://drvqgo4f36upv" path="res://scenes/vocabulary/vocab_flashcards.gd" id="1_tpk77"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_egq7b"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_egq7b"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_fdnt6"]
-[ext_resource type="Texture2D" uid="uid://ckihf4m1yrm16" path="res://assets/images/ui/prev.png" id="3_l3ryj"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_t0aqf"]
-[ext_resource type="Texture2D" uid="uid://dvhje7arnej0d" path="res://assets/images/ui/next.png" id="4_egq7b"]
-[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://assets/fonts/PlusJakartaSans-Medium.ttf" id="4_opycv"]
-[ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://assets/fonts/PlusJakartaSans-Regular.ttf" id="6_pjroj"]
-[ext_resource type="FontFile" uid="uid://cd8w2vgcrha3v" path="res://assets/fonts/PlayfairDisplaySC-Bold.ttf" id="7_yjxky"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="9_bd0ld"]
+[ext_resource type="Texture2D" uid="uid://ckihf4m1yrm16" path="res://ui/images/prev.png" id="3_l3ryj"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_t0aqf"]
+[ext_resource type="Texture2D" uid="uid://dvhje7arnej0d" path="res://ui/images/next.png" id="4_egq7b"]
+[ext_resource type="FontFile" uid="uid://deptghcayux75" path="res://ui/fonts/PlusJakartaSans-Medium.ttf" id="4_opycv"]
+[ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://ui/fonts/PlusJakartaSans-Regular.ttf" id="6_pjroj"]
+[ext_resource type="FontFile" uid="uid://cd8w2vgcrha3v" path="res://ui/fonts/PlayfairDisplaySC-Bold.ttf" id="7_yjxky"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="9_bd0ld"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttw17"]
 bg_color = Color(0.14509805, 0.3882353, 0.92156863, 0.39215687)
@@ -38823,9 +38823,9 @@ const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 # Global scale applied to every text size so fonts render larger.
 const FONT_SCALE := 1.25
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 # ---------- Dark theme ----------
 const APP_BG := Color("#0b1229")
@@ -39402,8 +39402,8 @@ func _on_android_back_pressed() -> void:
 
 [ext_resource type="Script" uid="uid://f31otdqpw66n" path="res://scenes/vocabulary_development/vocabulary_development.gd" id="1_bdns1"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_qkhlu"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_w8c8i"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_do64j"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_w8c8i"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_do64j"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_aklu6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
@@ -39504,9 +39504,9 @@ const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 # Global scale applied to every text size so fonts render larger.
 const FONT_SCALE := 1.25
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 # ---------- Dark theme ----------
 const APP_BG := Color("#0b1229")
@@ -40097,8 +40097,8 @@ func _stop_audio_panel() -> void:
 
 [ext_resource type="Script" uid="uid://gdc7dcva0377" path="res://scenes/what_you_learned/what_you_learned.gd" id="1_b2258"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_8v00s"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_d2pgb"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_7u1pp"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_d2pgb"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_7u1pp"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_a2esr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
@@ -40286,8 +40286,8 @@ func _on_android_back_pressed() -> void:
 ```ini
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="Texture2D" path="res://ui/images/Back.png" id="2_back"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
 
 [ext_resource type="Script" path="res://scenes/word_game/ChallengeLeaderboard.gd" id="1_script"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
@@ -40771,8 +40771,8 @@ func _on_android_back_pressed() -> void:
 
 [ext_resource type="Script" path="res://scenes/word_game/DailyWordGame.gd" id="1_script"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_header_style"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back_icon"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_vazir"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back_icon"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_vazir"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
 font = ExtResource("4_vazir")
@@ -40982,9 +40982,9 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/listening_game.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="Texture2D" path="res://ui/images/Back.png" id="2_back"]
 [ext_resource type="StyleBox" path="res://scenes/shared/HeaderBar.tres" id="3_header"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 
 [sub_resource type="LabelSettings" id="TitleSettings"]
 font = ExtResource("4_font")
@@ -41074,7 +41074,7 @@ extends "res://autoload/BackButtonHandler.gd"
 const HUB_SCENE := "res://scenes/word_game/WordGameHub.tscn"
 const OPTIONS_COUNT := 4
 const DATA_PATH := "res://data/extracted_words.json"
-const FONT: FontFile = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
+const FONT: FontFile = preload("res://ui/fonts/Vazirmatn-Regular.ttf")
 
 @onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
 @onready var title_label: Label = $HeaderBar/HeaderContent/HeaderTitle
@@ -41649,9 +41649,9 @@ static func _clean(value: String) -> String:
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/meaning_game.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="Texture2D" path="res://ui/images/Back.png" id="2_back"]
 [ext_resource type="StyleBox" path="res://scenes/shared/HeaderBar.tres" id="3_header"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 
 [sub_resource type="LabelSettings" id="TitleSettings"]
 font = ExtResource("4_font")
@@ -41709,9 +41709,9 @@ label_settings = SubResource("TitleSettings")
 [gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/meaning_quiz.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="Texture2D" path="res://ui/images/Back.png" id="2_back"]
 [ext_resource type="StyleBox" path="res://scenes/shared/HeaderBar.tres" id="3_header"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 
 [sub_resource type="LabelSettings" id="TitleSettings"]
 font = ExtResource("4_font")
@@ -42299,8 +42299,8 @@ func _on_android_back_pressed() -> void:
 
 [ext_resource type="Script" path="res://scenes/word_game/OfficialChallengeGame.gd" id="1_script"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_header_style"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="3_back_icon"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_vazir"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back_icon"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_vazir"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
 font = ExtResource("4_vazir")
@@ -42374,7 +42374,7 @@ func set_scores(game_score: int, lifetime_score: int, game_name: String = "ام�
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/ScorePanel.gd" id="1_script"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
 
 [sub_resource type="StyleBoxFlat" id="ScorePanelStyle"]
 bg_color = Color(0.17, 0.19, 0.23, 1)
@@ -45214,9 +45214,9 @@ func _update_title() -> void:
 [gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/scrambled/scrambled_words.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="Texture2D" path="res://ui/images/Back.png" id="2_back"]
 [ext_resource type="StyleBox" path="res://scenes/shared/HeaderBar.tres" id="3_header"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 
 [sub_resource type="LabelSettings" id="TitleSettings"]
 font = ExtResource("4_font")
@@ -47621,9 +47621,9 @@ func _on_android_back_pressed() -> void:
 [gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/word_game.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/images/ui/Back.png" id="2_back"]
+[ext_resource type="Texture2D" path="res://ui/images/Back.png" id="2_back"]
 [ext_resource type="StyleBox" path="res://scenes/shared/HeaderBar.tres" id="3_header"]
-[ext_resource type="FontFile" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 [ext_resource type="Shader" path="res://scenes/shared/GradientCard.gdshader" id="5_shader"]
 [ext_resource type="Script" path="res://ui/widgets/GradientCardRect.gd" id="6_cardrect"]
 
@@ -48124,7 +48124,7 @@ func _on_android_back_pressed() -> void:
 [ext_resource type="Script" uid="uid://f2ugyjkxregm" path="res://scenes/word_game/WordGameHub.gd" id="1_script"]
 [ext_resource type="LabelSettings" uid="uid://dv2tiiw6sx567" path="res://ui/fonts/Fa_Button_Title_Blue.tres" id="3_1yjrf"]
 [ext_resource type="StyleBox" uid="uid://boy06ynkqak3q" path="res://ui/Styles/buttons/Blue_Normal.tres" id="3_ttcs7"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
 [ext_resource type="LabelSettings" uid="uid://btv25lfeojoe4" path="res://ui/fonts/Fa_Button_Info_Blue.tres" id="4_ocyyk"]
 [ext_resource type="StyleBox" uid="uid://cx6iskaugv7ey" path="res://ui/Styles/buttons/Blue_Hovered.tres" id="4_wtlp0"]
 [ext_resource type="StyleBox" uid="uid://cp4wknax5vhvc" path="res://ui/Styles/buttons/Yellow_Normal.tres" id="5_dr7k0"]
@@ -48132,7 +48132,7 @@ func _on_android_back_pressed() -> void:
 [ext_resource type="StyleBox" uid="uid://cpdnjfuv3ffxb" path="res://ui/Styles/buttons/Tab_Normal_Notactivated.tres" id="7_p7c5t"]
 [ext_resource type="LabelSettings" uid="uid://d0avuqvpr5rxl" path="res://ui/fonts/Fa_Button_NormalTitle_Blue.tres" id="8_wtlp0"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="9_header_style"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="9_back_icon"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="9_back_icon"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
 font = ExtResource("3_vazir")
@@ -48411,8 +48411,8 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3 uid="uid://7q88x2dcuq8h"]
 
 [ext_resource type="Script" uid="uid://cjulurn60vnt7" path="res://scenes/word_game/WordGameLearning.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_back"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_back"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
@@ -48516,7 +48516,7 @@ label_settings = SubResource("HeaderTitleSettings")
 [gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/word_game/word_game.gd" id="1_script"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="4_font"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="4_font"]
 [ext_resource type="Shader" uid="uid://dje0dgpfw45e5" path="res://scenes/shared/GradientCard.gdshader" id="5_shader"]
 [ext_resource type="Script" uid="uid://dqlylk0w3c2p8" path="res://ui/widgets/GradientCardRect.gd" id="6_cardrect"]
 
@@ -50962,9 +50962,9 @@ extends "res://autoload/BackButtonHandler.gd"
 
 const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 var font_regular: FontFile
 var font_bold: FontFile
@@ -51457,9 +51457,9 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3 uid="uid://c2pfea6jx7nr6"]
 
 [ext_resource type="Script" uid="uid://c1ngji6rki4jt" path="res://scenes/workbook/workbook.gd" id="1_gxl1f"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_b4itg"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_b4itg"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_y31tq"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_5arbi"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_5arbi"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_ar1ge"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
@@ -51566,9 +51566,9 @@ const SCENE_LESSON_MENU := "res://scenes/lesson_menu/LessonMenu.tscn"
 # Global scale applied to every text size so fonts render larger.
 const FONT_SCALE := 1.25
 
-const FONT_REGULAR_PATH := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_BOLD_PATH    := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_VAZIRMATN    := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_VAZIRMATN    := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 # ---------- Dark theme ----------
 const APP_BG := Color("#0b1229")
@@ -52246,9 +52246,9 @@ func _on_android_back_pressed() -> void:
 [gd_scene format=3 uid="uid://dp71yxq7jf1v4"]
 
 [ext_resource type="Script" uid="uid://c1hxmyhh0yqw8" path="res://scenes/writing/writing.gd" id="1_62i1u"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://assets/images/ui/Back.png" id="2_1n4qn"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="2_1n4qn"]
 [ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="2_ms74k"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://assets/fonts/PlusJakartaSans-Bold.ttf" id="3_ms74k"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_ms74k"]
 [ext_resource type="Script" uid="uid://c80kxm3atqo2l" path="res://scenes/shared/PageView.gd" id="4_2thcc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_swh16"]
@@ -56456,8 +56456,8 @@ extends Node
 
 const Transitions := preload("res://autoload/TransitionManager.gd")
 
-const BLURRED_COVER := "res://assets/images/ui/book_scene/Vision1_blur.png"
-const CLEAR_COVER := "res://assets/images/ui/book_scene/Vision1.png"
+const BLURRED_COVER := "res://ui/images/book_scene/Vision1_blur.png"
+const CLEAR_COVER := "res://ui/images/book_scene/Vision1.png"
 
 
 func test_hold_paints_the_outgoing_still_beneath_every_scene() -> void:
@@ -57292,9 +57292,9 @@ const TEXTURE_DIR := "res://resources/textures/"
 const MOTION_DIR := "res://resources/motion/"
 const TYPOGRAPHY_DIR := "res://resources/typography/"
 
-const FONT_BODY := "res://assets/fonts/Vazirmatn-Regular.ttf"
-const FONT_DISPLAY := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_REGULAR := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_BODY := "res://ui/fonts/Vazirmatn-Regular.ttf"
+const FONT_DISPLAY := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_REGULAR := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
 
 ## Written once per mode. The key is the file base name, the value is a Callable
 ## taking `dark` and returning the StyleBox.
@@ -57640,8 +57640,8 @@ func _ex_choice_button(t: Theme, name: String, accent: Color, font_size: int, ma
 
 
 func _write_exercise_variations(t: Theme) -> void:
-	const EX_FONT_REGULAR := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-	const EX_FONT_BOLD := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
+	const EX_FONT_REGULAR := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+	const EX_FONT_BOLD := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
 	var accent: Color = _et.C_PRIMARY
 	var surface: Color = _pal("surface")
 	var surface_alt: Color = _pal("surface_alt")
@@ -57853,7 +57853,7 @@ func _write_type_scale() -> void:
 ```ini
 [gd_resource type="LabelSettings" format=3 uid="uid://btv25lfeojoe4"]
 
-[ext_resource type="FontFile" uid="uid://b3xpilak1a81t" path="res://assets/fonts/Vazirmatn-Light.ttf" id="1_bnik8"]
+[ext_resource type="FontFile" uid="uid://b3xpilak1a81t" path="res://ui/fonts/Vazirmatn-Light.ttf" id="1_bnik8"]
 
 [resource]
 font = ExtResource("1_bnik8")
@@ -57868,7 +57868,7 @@ font_color = Color(0, 0, 0.5686275, 1)
 ```ini
 [gd_resource type="LabelSettings" format=3 uid="uid://d0avuqvpr5rxl"]
 
-[ext_resource type="FontFile" uid="uid://dyt2kyuobu1pu" path="res://assets/fonts/Vazirmatn-Medium.ttf" id="1_6xc7a"]
+[ext_resource type="FontFile" uid="uid://dyt2kyuobu1pu" path="res://ui/fonts/Vazirmatn-Medium.ttf" id="1_6xc7a"]
 
 [resource]
 font = ExtResource("1_6xc7a")
@@ -57883,7 +57883,7 @@ font_color = Color(0, 0, 0.19215687, 1)
 ```ini
 [gd_resource type="LabelSettings" format=3 uid="uid://dv2tiiw6sx567"]
 
-[ext_resource type="FontFile" uid="uid://dq6ytga6c5qgh" path="res://assets/fonts/Vazirmatn-Bold.ttf" id="1_75du2"]
+[ext_resource type="FontFile" uid="uid://dq6ytga6c5qgh" path="res://ui/fonts/Vazirmatn-Bold.ttf" id="1_75du2"]
 
 [resource]
 font = ExtResource("1_75du2")
@@ -58498,11 +58498,11 @@ const STYLEBOX_DIR := "res://resources/styleboxes/"
 ## state, so the glass never firms up or turns see-through as the card is used.
 const GLOSS_FACE_ALPHA := 0.88
 
-const FONT_VAZIR        := "res://assets/fonts/Vazirmatn-Regular.ttf"
-const FONT_JAKARTA      := "res://assets/fonts/PlusJakartaSans-Regular.ttf"
-const FONT_JAKARTA_BOLD := "res://assets/fonts/PlusJakartaSans-Bold.ttf"
-const FONT_NUNITO_BOLD  := "res://assets/fonts/Nunito-Bold.ttf"
-const FONT_JOSEFIN      := "res://assets/fonts/JosefinSans-Bold.ttf"
+const FONT_VAZIR        := "res://ui/fonts/Vazirmatn-Regular.ttf"
+const FONT_JAKARTA      := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
+const FONT_JAKARTA_BOLD := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
+const FONT_NUNITO_BOLD  := "res://ui/fonts/Nunito-Bold.ttf"
+const FONT_JOSEFIN      := "res://ui/fonts/JosefinSans-Bold.ttf"
 
 static var _font_cache: Dictionary = {}
 

@@ -25,15 +25,15 @@ const BOOK_TITLES: Array[String] = [
 ]
 
 const BOOK_COVERS: Array[Texture2D] = [
-	preload("res://assets/images/ui/book_scene/Vision1.png"),
-	preload("res://assets/images/ui/book_scene/Vision2.png"),
-	preload("res://assets/images/ui/book_scene/Vision3.png")
+	preload("res://ui/images/book_scene/Vision1.png"),
+	preload("res://ui/images/book_scene/Vision2.png"),
+	preload("res://ui/images/book_scene/Vision3.png")
 ]
 
 const BOOK_BLURRED_BACKGROUNDS: Array[Texture2D] = [
-	preload("res://assets/images/ui/book_scene/Vision1_blur.png"),
-	preload("res://assets/images/ui/book_scene/Vision2_blur.png"),
-	preload("res://assets/images/ui/book_scene/Vision3_blur.png")
+	preload("res://ui/images/book_scene/Vision1_blur.png"),
+	preload("res://ui/images/book_scene/Vision2_blur.png"),
+	preload("res://ui/images/book_scene/Vision3_blur.png")
 ]
 
 

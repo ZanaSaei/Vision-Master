@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b2onop4jk0ebo"]
 
 [ext_resource type="Script" uid="uid://c2ko5qlahacvi" path="res://scenes/side_menu/side_menu.gd" id="1_6wynt"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://assets/fonts/Vazirmatn-Regular.ttf" id="2_jtoru"]
-[ext_resource type="FontFile" uid="uid://g637eq3c7teb" path="res://assets/fonts/BebasNeue-Regular.ttf" id="3_121v0"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_jtoru"]
+[ext_resource type="FontFile" uid="uid://g637eq3c7teb" path="res://ui/fonts/BebasNeue-Regular.ttf" id="3_121v0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_121v0"]
 bg_color = Color(0, 0.2901961, 0.2901961, 1)

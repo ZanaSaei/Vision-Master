@@ -237,7 +237,7 @@ func _on_reset_pressed() -> void:
 # ══════════════════════════════════════════════════════════════
 const ACCENT    := Color(0.545098, 0.360784, 0.964706)
 const ACCENT_ON := Color(0.760784, 0.611765, 1)
-const FONT_PATH := "res://assets/fonts/Vazirmatn-Regular.ttf"
+const FONT_PATH := "res://ui/fonts/Vazirmatn-Regular.ttf"
 
 
 func _build_confirm_dialog() -> void:

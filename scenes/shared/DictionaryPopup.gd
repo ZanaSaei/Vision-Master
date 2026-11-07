@@ -12,10 +12,10 @@ var extra_label: Label
 var btn_save_word: Button
 var btn_close_popup: Button
 
-var font_regular = preload("res://assets/fonts/PlusJakartaSans-Regular.ttf")
-var font_bold = preload("res://assets/fonts/PlusJakartaSans-Bold.ttf")
-var font_italic = preload("res://assets/fonts/PlusJakartaSans-Italic.ttf")
-var font_farsi = preload("res://assets/fonts/Vazirmatn-Regular.ttf")
+var font_regular = preload("res://ui/fonts/PlusJakartaSans-Regular.ttf")
+var font_bold = preload("res://ui/fonts/PlusJakartaSans-Bold.ttf")
+var font_italic = preload("res://ui/fonts/PlusJakartaSans-Italic.ttf")
+var font_farsi = preload("res://ui/fonts/Vazirmatn-Regular.ttf")
 
 var popup_style: StyleBoxFlat
 var close_style: StyleBoxFlat
