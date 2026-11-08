@@ -77,10 +77,14 @@ func _wire_screen(screen: Control) -> void:
 		screen.connect("home_requested", _show_lesson_select)
 	if screen.has_signal("replay_requested"):
 		screen.connect("replay_requested", _replay)
+	if screen.has_signal("next_lesson_requested"):
+		screen.connect("next_lesson_requested", _next_lesson)
 func _leave_game() -> void:
 	TransitionManager.change_scene(SCENE_LEARNING)
 func _leave_to_modes() -> void:
 	_show_lesson_select()
+func _next_lesson() -> void:
+	_start_learning(ScrambledGameManager.book, ScrambledGameManager.lesson + 1)
 func _replay() -> void:
 	if ScrambledGameManager.mode == ScrambledGameManager.Mode.COMPETITION:
 		_show_mode_select()

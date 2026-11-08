@@ -226,6 +226,11 @@ func _on_word_solved() -> void:
 	_board.play_solved_flourish()
 	_board.set_board_locked(true)
 	Sfx.correct()
+	var controller := ScrambledGameManager.controller
+	if controller != null and not controller.word.is_empty():
+		var g := get_node_or_null("/root/Global")
+		if g != null and g.has_method("play_word_audio"):
+			g.play_word_audio(controller.word.to_lower() + ".mp3", controller.word)
 	var entry := ScrambledGameManager.solve_current_word()
 	_praise.celebrate()
 	if ScrambledGameManager.is_competition():
@@ -263,6 +268,8 @@ func _on_hint_requested() -> void:
 	_hint_ready = true
 	ScrambledGameManager.mark_hint_used()
 	_actions.hide_hint()
+	_show_hint_card()
+	_refresh_chips()
 	Sfx.click()
 
 
@@ -286,7 +293,7 @@ func _show_hint_card() -> void:
 	if controller == null:
 		return
 	_instruction.visible = false
-	_hint_card.show_hint(controller.meaning, controller.meaning_fa, _worth_caption())
+	_hint_card.show_hint(controller.meaning, controller.meaning_fa, _worth_caption(), controller.word)
 
 
 ## What reading the meaning costs, said in the competition only: a lesson has

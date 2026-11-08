@@ -14,12 +14,15 @@ extends Control
 
 signal replay_requested()
 signal home_requested()
+signal next_lesson_requested()
 
+const CONFETTI_SCENE := preload("res://scenes/word_game/scrambled/ui/ConfettiBurst.tscn")
 const COLOR_SCORE := Color("#31C463")
 const COLOR_LEARNING := DesignTokens.ACCENT
 const COLOR_HINT := Color("#FFB703")
 const COLOR_RECORD := Color("#C77DFF")
 
+var _confetti: ScrambledConfettiBurst = null
 var _content: VBoxContainer = null
 var _score_label: Label = null
 var _shown_score := 0.0:
@@ -30,10 +33,16 @@ var _shown_score := 0.0:
 
 
 func _ready() -> void:
+	if CONFETTI_SCENE != null:
+		_confetti = CONFETTI_SCENE.instantiate() as ScrambledConfettiBurst
+		add_child(_confetti)
 	_build_ui()
 	_apply_theme()
 	Global.on_theme_changed(_on_theme_changed)
 	_play_score_animation()
+	if _confetti != null:
+		var vp_w: float = get_viewport_rect().size.x if is_inside_tree() else 1080.0
+		_confetti.burst(Vector2(vp_w * 0.5, 340.0))
 
 
 func screen_title() -> String:
@@ -123,7 +132,33 @@ func _fill_learning() -> void:
 		MenuStyle.persian_digits(str(lesson))]
 	if not lesson_title.is_empty():
 		subtitle += " · %s" % lesson_title
-	_content.add_child(_make_hero("📚", "تمرین کامل شد", subtitle, COLOR_LEARNING))
+
+	var hints := ScrambledGameManager.hints_used()
+	var stars := 3 if hints == 0 else (2 if hints <= 2 else 1)
+
+	var stars_row := HBoxContainer.new()
+	stars_row.name = "StarsRow"
+	stars_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	stars_row.add_theme_constant_override("separation", 16)
+	_content.add_child(stars_row)
+
+	for s in range(1, 4):
+		var star_lbl := Label.new()
+		star_lbl.text = "⭐" if s <= stars else "☆"
+		star_lbl.add_theme_font_size_override("font_size", 68)
+		star_lbl.add_theme_color_override("font_color", Color("#F59E0B") if s <= stars else Color("#CBD5E1"))
+		stars_row.add_child(star_lbl)
+		UiMotion.center_pivot(star_lbl)
+		star_lbl.scale = Vector2(0.4, 0.4)
+		var star_tw := create_tween()
+		star_tw.tween_interval(0.1 * float(s))
+		star_tw.tween_property(star_lbl, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	if stars == 3 and is_inside_tree() and get_tree() != null:
+		get_tree().create_timer(0.35).timeout.connect(func() -> void: Sfx.reward())
+
+	var headline := "تمرین کامل شد! 🏆" if stars == 3 else "تمرین به پایان رسید"
+	_content.add_child(_make_hero("📚", headline, subtitle, COLOR_LEARNING))
 	_content.add_child(_make_score_row(COLOR_LEARNING,
 		str(ScrambledData.word_count(book, lesson))))
 
@@ -342,6 +377,26 @@ func _make_action_row() -> HBoxContainer:
 	row.add_theme_constant_override("separation", 18)
 
 	var accent := COLOR_SCORE if ScrambledGameManager.is_competition() else COLOR_LEARNING
+
+	# Next Lesson button in learning mode if available
+	if not ScrambledGameManager.is_competition() and ScrambledData.has_lesson(ScrambledGameManager.book, ScrambledGameManager.lesson + 1):
+		var next_btn := Button.new()
+		next_btn.name = "NextLessonButton"
+		next_btn.text = "درس بعدی ❯"
+		next_btn.custom_minimum_size = Vector2(0, 132)
+		next_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		next_btn.add_theme_font_override("font", MenuStyle.vazir_bold())
+		next_btn.add_theme_font_size_override("font_size", 40)
+		next_btn.add_theme_color_override("font_color", Color.WHITE)
+		next_btn.add_theme_stylebox_override("normal", _filled_style(Color("#2563EB"), false))
+		next_btn.add_theme_stylebox_override("hover", _filled_style(Color("#1D4ED8"), true))
+		next_btn.add_theme_stylebox_override("pressed", _filled_style(Color("#1E40AF"), true))
+		next_btn.pressed.connect(func() -> void:
+			Sfx.click()
+			next_lesson_requested.emit())
+		MenuStyle.wire_microinteractions(next_btn)
+		row.add_child(next_btn)
+
 	var again := Button.new()
 	again.name = "ReplayButton"
 	again.text = "بازی دوباره"
@@ -471,15 +526,34 @@ func _make_word_row(entry: Dictionary, word_index: int) -> PanelContainer:
 	margin.add_theme_constant_override("margin_bottom", 10)
 	margin.add_child(row)
 	panel.add_child(margin)
+
+	var raw_word := str(entry.get("word", ""))
 	var word := Label.new()
 	word.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	word.text = "%s. %s" % [MenuStyle.persian_digits(str(word_index)), str(entry.get("word", ""))]
+	word.text = "%s. %s" % [MenuStyle.persian_digits(str(word_index)), raw_word]
 	word.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	word.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	word.add_theme_font_override("font", MenuStyle.nunito())
 	word.add_theme_font_size_override("font_size", 38)
 	word.add_theme_color_override("font_color", MenuStyle.text())
 	row.add_child(word)
+
+	if not raw_word.is_empty():
+		var spk := Button.new()
+		spk.text = "🔊"
+		spk.flat = true
+		spk.custom_minimum_size = Vector2(50, 50)
+		spk.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		spk.pressed.connect(func() -> void:
+			var g := get_node_or_null("/root/Global")
+			if g != null and g.has_method("play_word_audio"):
+				g.play_word_audio(raw_word.to_lower() + ".mp3", raw_word)
+			UiMotion.pop(spk, 1.2)
+			Sfx.click()
+		)
+		MenuStyle.wire_microinteractions(spk)
+		row.add_child(spk)
+
 	var metadata := HBoxContainer.new()
 	metadata.add_theme_constant_override("separation", 8)
 	metadata.size_flags_vertical = Control.SIZE_SHRINK_CENTER

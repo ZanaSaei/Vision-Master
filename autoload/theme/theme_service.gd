@@ -55,7 +55,8 @@ func get_theme_color(role: String) -> Color:
 
 
 func on_theme_changed(callback: Callable) -> void:
-	theme_changed.connect(callback)
+	if not theme_changed.is_connected(callback):
+		theme_changed.connect(callback)
 
 
 ## Base Theme for shared components (already applied to the tree root).

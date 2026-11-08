@@ -28,10 +28,57 @@ const ENTER_FADE_TIME := 0.22
 @onready var _persian: Label = $Column/Persian
 @onready var _worth: Label = $Column/Worth
 
+var _audio_btn: Button = null
+var _current_word: String = ""
+
 
 func _ready() -> void:
 	visible = false
 	resized.connect(func() -> void: pivot_offset = size * 0.5)
+	_setup_audio_button()
+
+
+func _setup_audio_button() -> void:
+	var col := get_node_or_null("Column") as VBoxContainer
+	if col == null:
+		return
+	_audio_btn = Button.new()
+	_audio_btn.name = "AudioButton"
+	_audio_btn.text = "🔊  شنیدن تلفظ"
+	_audio_btn.custom_minimum_size = Vector2(180, 50)
+	_audio_btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_audio_btn.add_theme_font_override("font", MenuStyle.vazir())
+	_audio_btn.add_theme_font_size_override("font_size", 24)
+	_audio_btn.add_theme_color_override("font_color", Color("#2563EB"))
+
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color("#EFF6FF")
+	sb.set_corner_radius_all(14)
+	sb.border_width_left = 1
+	sb.border_width_top = 1
+	sb.border_width_right = 1
+	sb.border_width_bottom = 1
+	sb.border_color = Color("#BFDBFE")
+	sb.content_margin_left = 16
+	sb.content_margin_right = 16
+	_audio_btn.add_theme_stylebox_override("normal", sb)
+
+	var sb_hover := sb.duplicate() as StyleBoxFlat
+	sb_hover.bg_color = Color("#DBEAFE")
+	_audio_btn.add_theme_stylebox_override("hover", sb_hover)
+	_audio_btn.add_theme_stylebox_override("pressed", sb_hover)
+	_audio_btn.add_theme_stylebox_override("focus", sb)
+
+	_audio_btn.pressed.connect(func() -> void:
+		if not _current_word.is_empty():
+			var g := get_node_or_null("/root/Global")
+			if g != null and g.has_method("play_word_audio"):
+				g.play_word_audio(_current_word.to_lower() + ".mp3", _current_word)
+			UiMotion.pop(_audio_btn, 1.15)
+			Sfx.click()
+	)
+	MenuStyle.wire_microinteractions(_audio_btn)
+	col.add_child(_audio_btn)
 
 
 func is_shown() -> bool:
@@ -40,7 +87,10 @@ func is_shown() -> bool:
 
 ## Deals the card in: the meaning first, the Persian one under it, and — in the
 ## competition — a line about what reading it costs.
-func show_hint(meaning: String, meaning_fa: String, worth_text: String) -> void:
+func show_hint(meaning: String, meaning_fa: String, worth_text: String, word_to_speak: String = "") -> void:
+	_current_word = word_to_speak
+	if _audio_btn != null:
+		_audio_btn.visible = not word_to_speak.is_empty()
 	_meaning.text = meaning if not meaning.is_empty() else "—"
 	_persian.text = meaning_fa
 	_persian.visible = not meaning_fa.is_empty()

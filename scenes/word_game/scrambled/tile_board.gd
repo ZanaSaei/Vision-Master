@@ -65,6 +65,7 @@ var _dealing := false
 var _deal_waiter: Tween = null
 var _track_style := StyleBoxFlat.new()
 var _ghost_style := StyleBoxFlat.new()
+var _selected_tile: ScrambledTile = null
 ## "instance_property" -> the tween currently driving it, so a new move can
 ## replace an old one instead of fighting it.
 var _moves: Dictionary = {}
@@ -99,6 +100,7 @@ func build(p_controller: ScrambledWordController, animate := true) -> void:
 		tile.drag_hovered.connect(_on_tile_drag_hovered)
 		tile.drop_requested.connect(_on_tile_drop_requested)
 		tile.drag_cancelled.connect(_on_tile_drag_cancelled)
+		tile.tile_tapped.connect(_on_tile_tapped)
 		_tiles.append(tile)
 		_order.append(i)
 	_display_order = _order.duplicate()
@@ -121,6 +123,7 @@ func build(p_controller: ScrambledWordController, animate := true) -> void:
 func clear() -> void:
 	_kill_tweens()
 	_held = null
+	_selected_tile = null
 	_preview_index = -1
 	_ghost_index = -1
 	_solved = false
@@ -274,6 +277,9 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 func _on_tile_drag_started(tile: ScrambledTile) -> void:
 	if _locked or _solved or _held != null:
 		return
+	if _selected_tile != null:
+		_selected_tile.set_selected(false)
+		_selected_tile = null
 	# A settle still in flight is committed right away: picking a letter up
 	# must never have to wait for an animation.
 	_finish_settle_now()
@@ -449,16 +455,102 @@ func play_solved_flourish() -> void:
 	queue_redraw()
 
 
-## Reveals a letter at the given index.
-func reveal_letter_at(index: int) -> void:
-	if index < 0 or index >= _tiles.size():
+## Tap-to-Swap: Tapping a tile selects it; tapping another tile swaps them.
+func _on_tile_tapped(tile: ScrambledTile) -> void:
+	if _locked or _solved or _held != null:
 		return
-	var tile := _tiles[_order[index]] as ScrambledTile
-	if tile != null:
-		# Optionally animate the reveal
-		tile.play_pop(0.0, 1.1)
-		# Perhaps lock it too?
-		tile.set_locked(true)
+
+	if _selected_tile == null:
+		_selected_tile = tile
+		tile.set_selected(true)
+		Sfx.click()
+	elif _selected_tile == tile:
+		tile.set_selected(false)
+		_selected_tile = null
+		Sfx.click()
+	else:
+		var tile_a := _selected_tile
+		var tile_b := tile
+		tile_a.set_selected(false)
+		_selected_tile = null
+
+		var idx_a := _order.find(tile_a.slot_id)
+		var idx_b := _order.find(tile_b.slot_id)
+		if idx_a == -1 or idx_b == -1:
+			return
+
+		_finish_settle_now()
+
+		# Swap in _order
+		_order[idx_a] = tile_b.slot_id
+		_order[idx_b] = tile_a.slot_id
+
+		# Animate both tiles to their new slots
+		_tween(tile_a, "position", _slot_position(idx_b), SHIFT_TIME, Tween.TRANS_BACK, Tween.EASE_OUT)
+		_tween(tile_b, "position", _slot_position(idx_a), SHIFT_TIME, Tween.TRANS_BACK, Tween.EASE_OUT)
+		tile_a.play_pop(0.0, 1.1)
+		tile_b.play_pop(0.0, 1.1)
+		Sfx.click()
+
+		_schedule_settle()
+
+
+## Reveals a letter at the given index by moving the correct letter into position.
+func reveal_letter_at(target_index: int) -> void:
+	if _controller == null or target_index < 0 or target_index >= _order.size():
+		return
+	if target_index >= _controller.target.size():
+		return
+
+	if _selected_tile != null:
+		_selected_tile.set_selected(false)
+		_selected_tile = null
+
+	var needed_letter: String = _controller.target[target_index]
+	var current_slot: int = _order[target_index]
+	var current_tile := _tiles[current_slot] as ScrambledTile
+
+	# If already holding the right letter, just pop and lock
+	if current_tile != null and current_tile.letter == needed_letter:
+		current_tile.play_pop(0.0, 1.2)
+		current_tile.set_locked(true)
+		_schedule_settle()
+		return
+
+	# Find a tile with needed_letter in another slot
+	var source_index := -1
+	# Prioritize a tile that is currently in a misplaced slot
+	for i in _order.size():
+		if i == target_index:
+			continue
+		var t := _tiles[_order[i]] as ScrambledTile
+		if t != null and t.letter == needed_letter:
+			if i >= _controller.target.size() or _controller.target[i] != needed_letter:
+				source_index = i
+				break
+
+	# Fallback: any matching tile not at target_index
+	if source_index == -1:
+		for i in _order.size():
+			if i != target_index and (_tiles[_order[i]] as ScrambledTile).letter == needed_letter:
+				source_index = i
+				break
+
+	if source_index != -1:
+		_finish_settle_now()
+		var temp_slot: int = _order[target_index]
+		_order[target_index] = _order[source_index]
+		_order[source_index] = temp_slot
+
+		var revealed_tile := _tiles[_order[target_index]] as ScrambledTile
+		var swapped_tile := _tiles[_order[source_index]] as ScrambledTile
+
+		_tween(revealed_tile, "position", _slot_position(target_index), SHIFT_TIME, Tween.TRANS_BACK, Tween.EASE_OUT)
+		_tween(swapped_tile, "position", _slot_position(source_index), SHIFT_TIME, Tween.TRANS_BACK, Tween.EASE_OUT)
+
+		revealed_tile.play_pop(0.0, 1.22)
+		revealed_tile.set_locked(true)
+		_schedule_settle()
 
 
 ## Ambers the tiles that sit in the wrong place. Only ever used when the word

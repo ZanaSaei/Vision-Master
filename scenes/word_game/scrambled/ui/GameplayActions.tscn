@@ -18,4 +18,4 @@ text = "💡  راهنما"
 custom_minimum_size = Vector2(200, 118)
 layout_mode = 2
 theme_type_variation = &"ScrambledRevealButton"
-text = "🔍 یک حرف"
+text = "🔍 راهنما"

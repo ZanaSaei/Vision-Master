@@ -34,6 +34,8 @@ signal drop_requested(tile: ScrambledTile, pointer_canvas: Vector2)
 ## The drag ended without a drop (finger off the row, gesture cancelled).
 ## The board puts the letter back where it came from.
 signal drag_cancelled(tile: ScrambledTile)
+## Tapped or clicked in place (for tap-to-swap mode).
+signal tile_tapped(tile: ScrambledTile)
 
 enum State { IDLE, DRAGGING, SOLVED, LOCKED }
 
@@ -83,6 +85,9 @@ var nudge := 0.0:
 		_refresh()
 
 var _hovered := false
+var _selected := false
+var _press_pos := Vector2.ZERO
+var _is_pressed := false
 var _style := StyleBoxFlat.new()
 ## Set when the board actually takes the letter. NOTIFICATION_DRAG_END fires
 ## for a completed drop too, and must not report it as a cancellation.
@@ -132,8 +137,52 @@ func set_locked(value: bool) -> void:
 		if state == State.DRAGGING:
 			return
 		state = State.LOCKED
+		if _selected:
+			set_selected(false)
 	elif state == State.LOCKED:
 		state = State.IDLE
+
+
+func is_locked() -> bool:
+	return state == State.LOCKED
+
+
+## Selects or deselects this tile for tap-to-swap mode.
+func set_selected(value: bool) -> void:
+	if _selected == value:
+		return
+	_selected = value
+	lift = 1.0 if value else 0.0
+	pivot_offset = size * 0.5
+	scale = Vector2(1.08, 1.08) if value else Vector2.ONE
+	_refresh()
+
+
+func is_selected() -> bool:
+	return _selected
+
+
+func _gui_input(event: InputEvent) -> void:
+	if state == State.LOCKED or state == State.SOLVED:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			_is_pressed = true
+			_press_pos = event.position
+		else:
+			if _is_pressed and state != State.DRAGGING:
+				if (event.position - _press_pos).length() < 30.0:
+					tile_tapped.emit(self)
+			_is_pressed = false
+	elif event is InputEventScreenTouch:
+		if event.pressed:
+			_is_pressed = true
+			_press_pos = event.position
+		else:
+			if _is_pressed and state != State.DRAGGING:
+				if (event.position - _press_pos).length() < 30.0:
+					tile_tapped.emit(self)
+			_is_pressed = false
 
 
 ## Pops the tile: the win wave, and the moment a word is dealt.
@@ -173,6 +222,8 @@ func global_pointer(local: Vector2) -> Vector2:
 func _get_drag_data(at_position: Vector2) -> Variant:
 	if state == State.LOCKED or state == State.SOLVED:
 		return null
+	if _selected:
+		set_selected(false)
 	_drop_accepted = false
 	_attach_preview()
 	state = State.DRAGGING
@@ -346,6 +397,13 @@ func _draw() -> void:
 
 	# 1. The dark outline: a solid block behind everything.
 	draw_style_box(_style, Rect2(Vector2.ZERO, size))
+	if _selected:
+		var sel := StyleBoxFlat.new()
+		sel.set_corner_radius_all(int(radius + 3.0))
+		sel.set_border_width_all(4)
+		sel.border_color = Color("#F59E0B")
+		sel.bg_color = Color(0, 0, 0, 0)
+		draw_style_box(sel, Rect2(-Vector2(3, 3), size + Vector2(6, 6)))
 	# 2. The extruded bottom edge: a darker slab of the same colour, drawn
 	#    over the outline and covered by the face, so only its bottom lip
 	#    shows — that lip is what makes the tile a chunky 3D block.
