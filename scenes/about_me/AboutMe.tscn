@@ -122,7 +122,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 200.0
+offset_top = 260.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -325,7 +325,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 0.0
-offset_bottom = 200.0
+offset_bottom = 240.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("4_header_style")

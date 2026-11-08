@@ -80,7 +80,7 @@ const CONTENT_FADE_TIME := 0.40
 # Same geometry as the main menu's header bar — full width, 200 px tall,
 # 35 px bottom shoulders, 60 px side padding — so the two menu screens line
 # up, and the cards start one gap below it.
-const HEADER_HEIGHT := 200.0
+const HEADER_HEIGHT := 240.0
 const HEADER_RADIUS := 35
 const HEADER_PAD_X := 60
 const HEADER_LABEL_HEIGHT := 70

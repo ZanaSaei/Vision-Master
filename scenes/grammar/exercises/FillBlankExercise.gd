@@ -96,23 +96,27 @@ func _build_ui() -> void:
 
 	input = LineEdit.new()
 
-	input.placeholder_text = (
-		"پاسخ خود را بنویس..."
-	)
+	input.placeholder_text = "پاسخ خود را بنویس ..."
 
 	input.custom_minimum_size = Vector2(
-		600,
-		70
+		860,
+		100
 	)
 
-	# Keep it a centered 1000-wide box instead of stretching edge-to-edge.
 	input.size_flags_horizontal = (
-		Control.SIZE_SHRINK_CENTER
+		Control.SIZE_EXPAND_FILL
 	)
 
 	input.alignment = (
 		HORIZONTAL_ALIGNMENT_CENTER
 	)
+
+	var fa_font := GrammarTheme.get_fa_regular()
+	if fa_font != null:
+		input.add_theme_font_override(
+			"font",
+			fa_font
+		)
 
 	input.add_theme_font_size_override(
 		"font_size",

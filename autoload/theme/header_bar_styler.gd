@@ -34,14 +34,16 @@ const BAR_STYLEBOX_PATH := "res://scenes/shared/HeaderBar.tres"
 const HEADER_BAR_NAMES := ["HeaderBar", "TopBar", "TopHeader", "TitleBar"]
 ## Height of the bar itself, in pixels — the main menu's header, which every
 ## screen in the app now follows.
-const BAR_HEIGHT := 200.0
+const BAR_HEIGHT := 240.0
 ## Radius of the bar's bottom shoulders. Mirrors HeaderBar.tres; asserted by
 ## the regression test so the resource cannot silently lose it.
 const BAR_RADIUS := 35
 ## Distance from the bar's left/right edge to the first item.
 const PAD_X := 60.0
-## Distance from the bar's top/bottom edge to the row (kept symmetric so the
-## items are exactly centred vertically).
+## Distance from the bar's top edge (safe area for camera notch/status bar).
+const PAD_TOP := 60.0
+## Distance from the bar's bottom edge to the row.
+const PAD_BOTTOM := 24.0
 const PAD_Y := 24.0
 ## Gap between two items in the header row.
 const ITEM_GAP := 16.0
@@ -243,8 +245,8 @@ static func normalize_geometry(header: Node, inner: MarginContainer) -> void:
 	if inner != null:
 		inner.add_theme_constant_override("margin_left", int(PAD_X))
 		inner.add_theme_constant_override("margin_right", int(PAD_X))
-		inner.add_theme_constant_override("margin_top", int(PAD_Y))
-		inner.add_theme_constant_override("margin_bottom", int(PAD_Y))
+		inner.add_theme_constant_override("margin_top", int(PAD_TOP))
+		inner.add_theme_constant_override("margin_bottom", int(PAD_BOTTOM))
 
 
 # ══════════════════════════════════════════════════════════════
@@ -481,8 +483,8 @@ func _bar_stylebox(owns_padding: bool) -> StyleBoxFlat:
 	bar.corner_radius_bottom_right = BAR_RADIUS
 	bar.content_margin_left = PAD_X if owns_padding else 0.0
 	bar.content_margin_right = PAD_X if owns_padding else 0.0
-	bar.content_margin_top = PAD_Y if owns_padding else 0.0
-	bar.content_margin_bottom = PAD_Y if owns_padding else 0.0
+	bar.content_margin_top = PAD_TOP if owns_padding else 0.0
+	bar.content_margin_bottom = PAD_BOTTOM if owns_padding else 0.0
 	return bar
 
 

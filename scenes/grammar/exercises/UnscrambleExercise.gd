@@ -49,6 +49,9 @@ func _build_ui() -> void:
 	top_bar.add_child(pill)
 
 	counter_label = Label.new()
+	counter_label.name = "CounterLabel"
+	counter_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	counter_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	counter_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	counter_label.add_theme_font_size_override("font_size", GrammarTheme.CAPTION_SIZE)
 	counter_label.add_theme_color_override("font_color", GrammarTheme.accent_color())
@@ -123,7 +126,8 @@ func _build_ui() -> void:
 	clear_button.text = "↺ پاک کردن"
 	clear_button.min_height = 112
 	clear_button.font_size = 34
-	clear_button.custom_minimum_size = Vector2(220, 112)
+	clear_button.no_clip = true
+	clear_button.custom_minimum_size = Vector2(280, 112)
 	clear_button.pressed.connect(retry_current)
 	action_row.add_child(clear_button)
 

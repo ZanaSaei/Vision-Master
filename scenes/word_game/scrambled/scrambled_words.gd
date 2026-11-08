@@ -4,6 +4,7 @@ const LESSON_SELECT_SCENE := preload("res://scenes/word_game/scrambled/LessonSel
 const GAMEPLAY_SCENE := preload("res://scenes/word_game/scrambled/Gameplay.tscn")
 const RESULTS_SCENE := preload("res://scenes/word_game/scrambled/Results.tscn")
 const SCENE_WORD_GAME := "res://scenes/word_game/WordGameHub.tscn"
+const SCENE_LEARNING := "res://scenes/word_game/WordGameLearning.tscn"
 const DEFAULT_TITLE := "بازی املا"
 @onready var _header: PanelContainer = $HeaderBar
 @onready var _back_button: Button = $HeaderBar/HeaderContent/BackButton
@@ -14,7 +15,7 @@ func _ready() -> void:
 	_back_button.pressed.connect(_on_back_pressed)
 	_apply_theme()
 	Global.on_theme_changed(_on_theme_changed)
-	_show_mode_select()
+	_show_lesson_select()
 func _on_theme_changed(_mode: int) -> void:
 	_apply_theme()
 func _apply_theme() -> void:
@@ -26,7 +27,7 @@ func _on_back_pressed() -> void:
 	if _screen != null and _screen.has_method("handle_back"):
 		_screen.call("handle_back")
 		return
-	TransitionManager.change_scene(SCENE_WORD_GAME)
+	TransitionManager.change_scene(SCENE_LEARNING)
 func _on_android_back_pressed() -> void:
 	_on_back_pressed()
 func _show_mode_select() -> void:
@@ -67,22 +68,19 @@ func _wire_screen(screen: Control) -> void:
 	if screen.has_signal("lesson_chosen"):
 		screen.connect("lesson_chosen", _start_learning)
 	if screen.has_signal("back_requested"):
-		screen.connect("back_requested", _show_mode_select)
+		screen.connect("back_requested", _leave_game)
 	if screen.has_signal("quit_requested"):
 		screen.connect("quit_requested", _leave_to_modes)
 	if screen.has_signal("session_finished"):
 		screen.connect("session_finished", _show_results)
 	if screen.has_signal("home_requested"):
-		screen.connect("home_requested", _show_mode_select)
+		screen.connect("home_requested", _show_lesson_select)
 	if screen.has_signal("replay_requested"):
 		screen.connect("replay_requested", _replay)
 func _leave_game() -> void:
-	TransitionManager.change_scene(SCENE_WORD_GAME)
+	TransitionManager.change_scene(SCENE_LEARNING)
 func _leave_to_modes() -> void:
-	if ScrambledGameManager.mode == ScrambledGameManager.Mode.LEARNING:
-		_show_lesson_select()
-	else:
-		_show_mode_select()
+	_show_lesson_select()
 func _replay() -> void:
 	if ScrambledGameManager.mode == ScrambledGameManager.Mode.COMPETITION:
 		_show_mode_select()

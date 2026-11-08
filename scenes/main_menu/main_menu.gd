@@ -61,14 +61,24 @@ func _setup_continue_button() -> void:
 
 func _refresh_continue_state() -> void:
 	var last: String = Global.get_last_scene()
+	var margin_node := _continue_button.get_node_or_null("Margin") as Control
+	var chevron := _continue_button.get_node_or_null("Margin/Row/ChevronLabel") as Control
 	if last.is_empty() or not ResourceLoader.exists(last):
 		_continue_button.disabled = true
-		_continue_sub.text = "هنوز چیزی را شروع نکرده‌ای؛ یک بازی روزانه انجام بده تا اینجا ادامه‌اش بدهی! 🌱"
+		_continue_sub.text = "هنوز بخشی را شروع نکرده‌اید؛ یک بازی روزانه یا درس را باز کنید 🌱"
 		_continue_button.tooltip_text = "اول یک بخش را باز کن تا ادامه‌اش اینجا باشد"
+		if chevron != null:
+			chevron.visible = false
+		if margin_node != null:
+			margin_node.modulate = Color(0.4, 0.4, 0.4, 0.7)
 	else:
 		_continue_button.disabled = false
 		_continue_sub.text = _continue_destination_label(last)
 		_continue_button.tooltip_text = "بازگشت به آخرین بخشی که باز کرده‌اید"
+		if chevron != null:
+			chevron.visible = true
+		if margin_node != null:
+			margin_node.modulate = Color(1, 1, 1, 1.0)
 
 
 func _continue_destination_label(scene_path: String) -> String:
@@ -298,38 +308,57 @@ func _on_android_back_pressed() -> void:
 func _show_back_message() -> void:
 	if not _back_message_nodes.is_empty():
 		return
+
+	# Navigation bar top is at offset_top = -144 from screen bottom.
+	# The user requested the toast to sit exactly 50 pixels above the navigation bar:
+	# -144 - 50 = -194.
+	var toast := PanelContainer.new()
+	toast.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	toast.anchor_left = 0.5
+	toast.anchor_right = 0.5
+	toast.anchor_top = 1.0
+	toast.anchor_bottom = 1.0
+	toast.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	toast.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	toast.offset_bottom = -194.0
+
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.12, 0.14, 0.18, 0.92)
+	style.set_corner_radius_all(24)
+	style.content_margin_left = 36.0
+	style.content_margin_right = 36.0
+	style.content_margin_top = 16.0
+	style.content_margin_bottom = 16.0
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.25)
+	style.shadow_size = 10
+	style.shadow_offset = Vector2(0, 4)
+	toast.add_theme_stylebox_override("panel", style)
+
 	var message := Label.new()
 	message.text = "برای خروج دوباره دکمه برگشت را بزنید"
 	message.add_theme_font_override("font", MenuStyle.vazir())
-	message.add_theme_font_size_override("font_size", 38)
+	message.add_theme_font_size_override("font_size", 30)
 	message.add_theme_color_override("font_color", Color.WHITE)
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	message.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	message.anchor_left = 0.0
-	message.anchor_top = 0.0
-	message.anchor_right = 1.0
-	message.anchor_bottom = 1.0
 	message.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(message)
-	var bg := ColorRect.new()
-	bg.color = MenuStyle.c("overlay")
-	bg.anchor_left = 0.0
-	bg.anchor_top = 0.0
-	bg.anchor_right = 1.0
-	bg.anchor_bottom = 1.0
-	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(bg)
-	move_child(bg, 0)
-	_back_message_nodes = [bg, message]
-	await get_tree().create_timer(1.5).timeout
-	if not is_inside_tree():
+	toast.add_child(message)
+
+	toast.modulate.a = 0.0
+	add_child(toast)
+	_back_message_nodes = [toast]
+
+	var in_tw := create_tween()
+	in_tw.tween_property(toast, "modulate:a", 1.0, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	await get_tree().create_timer(1.8).timeout
+	if not is_inside_tree() or toast == null or not is_instance_valid(toast):
+		_back_message_nodes.clear()
 		return
-	var tw := create_tween()
-	tw.parallel().tween_property(bg, "modulate:a", 0.0, 0.3)
-	tw.parallel().tween_property(message, "modulate:a", 0.0, 0.3)
-	await tw.finished
-	if not is_inside_tree():
-		return
-	bg.queue_free()
-	message.queue_free()
+
+	var out_tw := create_tween()
+	out_tw.tween_property(toast, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await out_tw.finished
+	if is_instance_valid(toast):
+		toast.queue_free()
 	_back_message_nodes.clear()

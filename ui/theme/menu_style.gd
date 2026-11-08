@@ -26,6 +26,7 @@ const MotionModule := preload("res://ui/motion/ui_motion.gd")
 
 # ── Font paths (kept for callers that need the raw resource path) ──
 const FONT_VAZIR        := ThemeModule.FONT_VAZIR
+const FONT_VAZIR_BOLD   := ThemeModule.FONT_VAZIR_BOLD
 const FONT_JAKARTA      := ThemeModule.FONT_JAKARTA
 const FONT_JAKARTA_BOLD := ThemeModule.FONT_JAKARTA_BOLD
 const FONT_NUNITO_BOLD  := ThemeModule.FONT_NUNITO_BOLD
@@ -41,6 +42,9 @@ static func font(path: String) -> Font:
 
 static func vazir() -> Font:
 	return ThemeModule.vazir()
+
+static func vazir_bold() -> Font:
+	return ThemeModule.vazir_bold()
 
 static func nunito() -> Font:
 	return ThemeModule.nunito()

@@ -1044,7 +1044,7 @@ var _order_drag_grab_offset := 0.0
 # some synthetic pipelines carries only a relative delta, so the cursor
 # position is accumulated from it when no absolute position is reported.
 var _order_drag_last_pos := Vector2.ZERO
-const _ORDER_DRAG_HOLD_MSEC := 300
+const _ORDER_DRAG_HOLD_MSEC := 120
 
 func _build_ordering() -> void:
 	var raw_items: Array = _exercise.get("items", [])
@@ -1294,9 +1294,9 @@ func _on_order_handle_input(event: InputEvent, handle: Control, list_vbox: VBoxC
 	if event is InputEventScreenTouch:
 		is_press = event.pressed
 		is_release = not event.pressed
-		event_pos = event.position
+		event_pos = handle.get_global_transform() * event.position
 	elif event is InputEventScreenDrag:
-		event_pos = event.position
+		event_pos = handle.get_global_transform() * event.position
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		is_press = event.pressed
 		is_release = not event.pressed
@@ -1377,6 +1377,7 @@ func _update_order_drag(event_pos: Vector2) -> void:
 		return
 
 	var grab_y := event_pos.y - _order_drag_grab_offset
+	var card_center_y := grab_y + card.size.y * 0.5
 	var target := _order_drag_pos
 	for i in count:
 		if i == _order_drag_pos:
@@ -1385,7 +1386,7 @@ func _update_order_drag(event_pos: Vector2) -> void:
 		if c == null:
 			continue
 		var r := c.get_global_rect()
-		if grab_y >= r.position.y and grab_y <= r.position.y + r.size.y:
+		if card_center_y >= r.position.y and card_center_y <= r.position.y + r.size.y:
 			target = i
 			break
 

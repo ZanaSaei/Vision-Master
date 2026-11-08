@@ -29,7 +29,7 @@ layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_constants/margin_left = 42
-theme_override_constants/margin_top = 236
+theme_override_constants/margin_top = 270
 theme_override_constants/margin_right = 42
 theme_override_constants/margin_bottom = 240
 
@@ -68,7 +68,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 0.0
-offset_bottom = 200.0
+offset_bottom = 240.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("4_header_style")

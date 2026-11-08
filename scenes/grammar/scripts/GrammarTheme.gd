@@ -481,6 +481,19 @@ static func style_primary_button(
 		primary_button_hover()
 	)
 
+	var disabled_primary := rounded_box(
+		disabled_color(),
+		18
+	)
+	disabled_primary.content_margin_left = 16
+	disabled_primary.content_margin_right = 16
+	disabled_primary.content_margin_top = 8
+	disabled_primary.content_margin_bottom = 8
+	button.add_theme_stylebox_override(
+		"disabled",
+		disabled_primary
+	)
+
 	button.add_theme_color_override(
 		"font_color",
 		Color.WHITE
@@ -549,6 +562,21 @@ static func style_secondary_button(
 		)
 	)
 
+	var disabled_secondary := rounded_box(
+		Global.get_theme_color("surface"),
+		18,
+		Global.get_theme_color("border"),
+		1
+	)
+	disabled_secondary.content_margin_left = 16
+	disabled_secondary.content_margin_right = 16
+	disabled_secondary.content_margin_top = 8
+	disabled_secondary.content_margin_bottom = 8
+	button.add_theme_stylebox_override(
+		"disabled",
+		disabled_secondary
+	)
+
 	button.add_theme_color_override(
 		"font_color",
 		Global.get_theme_color("text")
@@ -562,6 +590,11 @@ static func style_secondary_button(
 	button.add_theme_color_override(
 		"font_pressed_color",
 		accent_font_color()
+	)
+
+	button.add_theme_color_override(
+		"font_disabled_color",
+		text_muted_color()
 	)
 
 	button.add_theme_font_size_override(

@@ -262,7 +262,7 @@ func _build_confirm_dialog() -> void:
 	center_wrap.set_anchors_preset(Control.PRESET_FULL_RECT)
 	center_wrap.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	center_wrap.add_theme_constant_override("margin_left", 90)
-	center_wrap.add_theme_constant_override("margin_top", 240)
+	center_wrap.add_theme_constant_override("margin_top", 270)
 	center_wrap.add_theme_constant_override("margin_right", 90)
 	center_wrap.add_theme_constant_override("margin_bottom", 240)
 	_modal_root.add_child(center_wrap)

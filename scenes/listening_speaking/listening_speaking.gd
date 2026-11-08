@@ -60,6 +60,7 @@ var _current_turn: int = -1
 var _partner_mode: bool = false
 var _status_label: Label
 var _action_btn: Button
+var _stop_btn: Button
 var _tts_done_cb: Callable
 var _speaking_data: Dictionary = {}
 
@@ -276,8 +277,15 @@ func _build_partner_controls(page: VBoxContainer) -> void:
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	_action_btn = _make_button("🤝  تمرین با برنامه", SPEAK_ACCENT)
+	_action_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_action_btn.pressed.connect(_on_action_pressed)
 	box.add_child(_action_btn)
+
+	_stop_btn = _make_button("⏹  توقف تمرین", Color("#EF4444"))
+	_stop_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_stop_btn.visible = false
+	_stop_btn.pressed.connect(_on_stop_partner_pressed)
+	box.add_child(_stop_btn)
 
 	page.add_child(box)
 
@@ -419,8 +427,27 @@ func _start_partner() -> void:
 
 	_partner_mode = true
 	_current_turn = -1
+	if _stop_btn:
+		_stop_btn.visible = true
 
 	_advance_turn()
+
+func _on_stop_partner_pressed() -> void:
+	_stop_tts()
+	_unhighlight_all()
+	_partner_mode = false
+	_current_turn = -1
+	if is_instance_valid(_user_response_tween):
+		_user_response_tween.kill()
+		_user_response_tween = null
+	if _action_btn:
+		_action_btn.disabled = false
+		_action_btn.text = "🤝  تمرین با برنامه"
+	if _stop_btn:
+		_stop_btn.visible = false
+	if _stop_btn:
+		_stop_btn.visible = false
+	_set_status("تمرین متوقف شد. برای شروع دوباره روی «تمرین با برنامه» بزنید.")
 
 func _on_page_changed(_index: int, page_id: String) -> void:
 	# Re-tint the dark background to match the skill being practiced.
@@ -439,6 +466,8 @@ func _on_page_changed(_index: int, page_id: String) -> void:
 	if _action_btn:
 		_action_btn.disabled = false
 		_action_btn.text = "🤝  تمرین با برنامه"
+	if _stop_btn:
+		_stop_btn.visible = false
 
 	# Stop listening playback too.
 	_stop_all_listening_players()
@@ -455,6 +484,8 @@ func _finish_conversation() -> void:
 	if _action_btn:
 		_action_btn.disabled = false
 		_action_btn.text = "🤝  تمرین با برنامه"
+	if _stop_btn:
+		_stop_btn.visible = false
 
 	_set_status("🎉 آفرین! گفتگو به پایان رسید.")
 

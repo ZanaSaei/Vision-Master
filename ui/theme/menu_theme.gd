@@ -25,6 +25,7 @@ const STYLEBOX_DIR := "res://resources/styleboxes/"
 const GLOSS_FACE_ALPHA := 0.88
 
 const FONT_VAZIR        := "res://ui/fonts/Vazirmatn-Regular.ttf"
+const FONT_VAZIR_BOLD   := "res://ui/fonts/Vazirmatn-Bold.ttf"
 const FONT_JAKARTA      := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_JAKARTA_BOLD := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
 const FONT_NUNITO_BOLD  := "res://ui/fonts/Nunito-Bold.ttf"
@@ -44,6 +45,10 @@ static func font(path: String) -> Font:
 
 static func vazir() -> Font:
 	return font(FONT_VAZIR)
+
+
+static func vazir_bold() -> Font:
+	return font(FONT_VAZIR_BOLD)
 
 
 static func nunito() -> Font:

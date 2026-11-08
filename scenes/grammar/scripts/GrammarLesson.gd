@@ -194,8 +194,8 @@ func _build_ui() -> void:
 	hint_bulb.anchor_bottom = 1.0
 	hint_bulb.offset_left = 24
 	hint_bulb.offset_right = -24
-	hint_bulb.offset_top = -230
-	hint_bulb.offset_bottom = -6
+	hint_bulb.offset_top = -360
+	hint_bulb.offset_bottom = -140
 	hint_bulb.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	hint_bulb.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	add_child(hint_bulb)
@@ -215,6 +215,9 @@ func _constrain_scroll_content_width() -> void:
 func _fix_children_overflow(node: Node) -> void:
 	if node is Label:
 		var lbl := node as Label
+		if lbl.name.contains("Counter") or lbl.name.contains("Badge") or lbl.name.contains("Pill") or lbl.name.contains("XP") or lbl.name.contains("progress"):
+			lbl.autowrap_mode = TextServer.AUTOWRAP_OFF
+			return
 		# Enable word wrap on all multi-word labels inside the lesson card so they never push width out
 		if lbl.text.length() > 12:
 			lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

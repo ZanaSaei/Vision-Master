@@ -51,6 +51,9 @@ func _build_ui() -> void:
 	top_bar.add_child(pill)
 
 	counter_label = Label.new()
+	counter_label.name = "CounterLabel"
+	counter_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	counter_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	counter_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	counter_label.add_theme_font_size_override("font_size", GrammarTheme.CAPTION_SIZE)
 	counter_label.add_theme_color_override("font_color", GrammarTheme.accent_color())

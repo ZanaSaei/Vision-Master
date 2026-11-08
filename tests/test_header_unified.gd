@@ -13,7 +13,7 @@ extends Node
 
 ## Mirrors HeaderBarStyler and scenes/shared/HeaderBar.tres. Restated here on
 ## purpose: the test must fail if the shipped values drift, not follow them.
-const HEADER_HEIGHT := 200.0
+const HEADER_HEIGHT := 240.0
 const HEADER_RADIUS := 35
 const PAD_X := 60.0
 const BUTTON_SIZE := 96.0

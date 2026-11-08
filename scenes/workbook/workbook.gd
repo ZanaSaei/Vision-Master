@@ -339,8 +339,10 @@ func _split_paragraphs(text: String) -> Array:
 func _make_passage_en_label(text: String) -> Label:
 	var label := Label.new()
 	label.text = text
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	label.add_theme_font_size_override("font_size", 34)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_FILL
+	label.add_theme_constant_override("line_spacing", 14)
+	label.add_theme_font_size_override("font_size", 40)
 	label.add_theme_color_override("font_color", _palette(Color("#1E293B"), "text"))
 	if font_regular:
 		label.add_theme_font_override("font", font_regular)
@@ -352,11 +354,12 @@ func _make_passage_en_label(text: String) -> Label:
 func _make_passage_fa_label(text: String) -> Label:
 	var label := Label.new()
 	label.text = text
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD
-	label.add_theme_font_size_override("font_size", 32)
-	label.add_theme_color_override("font_color", _palette(Color("#64748B"), "text_dim"))
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.text_direction = Control.TEXT_DIRECTION_RTL
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_FILL
+	label.add_theme_constant_override("line_spacing", 14)
+	label.add_theme_font_size_override("font_size", 36)
+	label.add_theme_color_override("font_color", _palette(Color("#64748B"), "text_dim"))
 	if font_farsi:
 		label.add_theme_font_override("font", font_farsi)
 	label.visible = show_translation

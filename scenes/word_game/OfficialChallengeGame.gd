@@ -71,7 +71,7 @@ func _build_shell() -> void:
 	margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	margin.add_theme_constant_override("margin_left", 36)
 	margin.add_theme_constant_override("margin_right", 36)
-	margin.add_theme_constant_override("margin_top", 250)
+	margin.add_theme_constant_override("margin_top", 280)
 	margin.add_theme_constant_override("margin_bottom", 240)
 	scroll.add_child(margin)
 	_root = VBoxContainer.new()

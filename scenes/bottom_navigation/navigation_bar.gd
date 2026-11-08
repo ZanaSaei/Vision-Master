@@ -117,6 +117,7 @@ static var _last_primary_index: int = 0
 var is_initialized: bool = false
 var menu_panel_open: bool = false
 var _is_navigating: bool = false
+var _last_menu_toggle_time: int = 0
 var normal_icons: Array[TextureRect] = []
 var labels: Array[Label] = []
 var label_rest_positions: Array[Vector2] = []
@@ -341,20 +342,24 @@ func _input(event: InputEvent) -> void:
 	if not pressed:
 		return
 
+	# If the menu was just opened/toggled, ignore immediate duplicate touch/mouse emulation events
+	if Time.get_ticks_msec() - _last_menu_toggle_time < 300:
+		return
+
 	for sub_idx: int in range(menu_sub_items.size()):
 		var sub_item: Control = menu_sub_items[sub_idx]
-		if sub_item.get_global_rect().has_point(pos):
+		if sub_item.get_global_rect().grow(10.0).has_point(pos):
 			get_viewport().set_input_as_handled()
 			_on_menu_sub_item_activated(sub_idx)
 			return
 
-	if menu_panel.get_global_rect().has_point(pos):
+	if menu_panel.get_global_rect().grow(10.0).has_point(pos):
 		get_viewport().set_input_as_handled()
 		return
 
 	if items.get_child_count() == ITEM_COUNT:
 		var menu_btn: Control = items.get_child(ITEM_COUNT - 1) as Control
-		if menu_btn != null and menu_btn.get_global_rect().has_point(pos):
+		if menu_btn != null and menu_btn.get_global_rect().grow(16.0).has_point(pos):
 			return
 
 	_set_menu_panel_open(false, true)
@@ -823,6 +828,11 @@ func select_item(index: int) -> void:
 
 	# "منو" toggles the popup without becoming a selected destination.
 	if index == ITEM_COUNT - 1:
+		var now: int = Time.get_ticks_msec()
+		if now - _last_menu_toggle_time < 300:
+			return
+		_last_menu_toggle_time = now
+		Sfx.click()
 		_set_menu_panel_open(not menu_panel_open, true)
 		item_selected.emit(index)
 		return

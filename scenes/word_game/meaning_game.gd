@@ -1,23 +1,10 @@
-extends "res://autoload/BackButtonHandler.gd"
+extends Control
 # ============================================================
-# بازی معنی — Meaning Game
-# Quiz mode selection and two quiz modes.
+# بازی معنی — Meaning Game (host scene)
+#
+# The game itself lives in res://scenes/word_game/MeaningQuiz.tscn and is shown
+# here as the MeaningQuiz instance below. This scene exists only to keep the
+# hub's «بازی معنی» button path working: the game owns its own header bar and
+# its own back navigation, so this host deliberately adds nothing on top and
+# must NOT extend BackButtonHandler (that would handle the Android back twice).
 # ============================================================
-
-const SCENE_WORD_GAME := "res://scenes/word_game/WordGameHub.tscn"
-const SCENE_MEANING_QUIZ := "res://scenes/word_game/MeaningQuiz.tscn"
-
-@onready var back_button: Button = $HeaderBar/HeaderContent/BackButton
-
-
-func _ready() -> void:
-	back_button.pressed.connect(_on_back_button_pressed)
-	TransitionManager.change_scene(SCENE_MEANING_QUIZ)
-
-
-func _on_back_button_pressed() -> void:
-	TransitionManager.change_scene(SCENE_WORD_GAME)
-
-
-func _on_android_back_pressed() -> void:
-	_on_back_button_pressed()

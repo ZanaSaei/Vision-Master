@@ -104,11 +104,6 @@ func _build_ui() -> void:
 
 	_build_header(main, data)
 
-	var content_box := PanelContainer.new()
-	GrammarTheme.style_card(content_box)
-	content_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	main.add_child(content_box)
-
 	var page_host: Control = Control.new()
 	page_host.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	page_host.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -289,14 +284,17 @@ func _build_exam_content(
 
 	if _manual_writing_total <= 0:
 		return letter_index
+	var fa_font: Font = GrammarTheme.get_fa_regular()
 	var grading_note: Label = Label.new()
-	grading_note.text = "Writing score (self-assessment / teacher) — 0–%d" % _manual_writing_total
+	grading_note.text = "نمره بخش نوشتاری (خودارزیابی / دبیر) — از ۰ تا %d" % _manual_writing_total
 	grading_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	grading_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	grading_note.custom_minimum_size = Vector2(0, 64)
 	grading_note.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grading_note.add_theme_font_size_override("font_size", 24)
+	grading_note.add_theme_font_size_override("font_size", 26)
 	grading_note.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
+	if fa_font != null:
+		grading_note.add_theme_font_override("font", fa_font)
 	content.add_child(grading_note)
 
 	_writing_score_input = SpinBox.new()
@@ -310,21 +308,15 @@ func _build_exam_content(
 	content.add_child(_writing_score_input)
 
 	var score_hint: Label = Label.new()
-	score_hint.text = "Enter a manual score here. It is not included in the automatic result."
+	score_hint.text = "نمره خود در بخش نوشتاری را اینجا وارد کنید (این نمره در نمره آزمون تستی لحاظ نمی‌شود)."
 	score_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	score_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	score_hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	score_hint.add_theme_font_size_override("font_size", 21)
+	score_hint.add_theme_font_size_override("font_size", 24)
 	score_hint.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
+	if fa_font != null:
+		score_hint.add_theme_font_override("font", fa_font)
 	content.add_child(score_hint)
-
-	var score_notice: Label = Label.new()
-	score_notice.text = "Manual score is not included in the automatic result."
-	score_notice.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	score_notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	score_notice.add_theme_font_size_override("font_size", 21)
-	score_notice.add_theme_color_override("font_color", GrammarTheme.text_muted_color())
-	content.add_child(score_notice)
 	return letter_index
 
 

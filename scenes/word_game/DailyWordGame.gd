@@ -43,7 +43,7 @@ func _build_ui() -> void:
 	margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	margin.add_theme_constant_override("margin_left", 32)
 	margin.add_theme_constant_override("margin_right", 32)
-	margin.add_theme_constant_override("margin_top", 240)
+	margin.add_theme_constant_override("margin_top", 270)
 	margin.add_theme_constant_override("margin_bottom", 250)
 	scroll_page.add_child(margin)
 
