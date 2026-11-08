@@ -11,6 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://cpdnjfuv3ffxb" path="res://ui/Styles/buttons/Tab_Normal_Notactivated.tres" id="7_taboff"]
 [ext_resource type="StyleBox" uid="uid://c7cfbtsxrofc1" path="res://ui/Styles/buttons/Tab_Normal_Activated.tres" id="8_tabon"]
 [ext_resource type="StyleBox" uid="uid://boy06ynkqak3q" path="res://ui/Styles/buttons/Blue_Normal.tres" id="10_qq55g"]
+[ext_resource type="StyleBox" uid="uid://newuuid1234" path="res://ui/Styles/buttons/Yellow_Disabled.tres" id="11_disabledj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ujfs"]
 bg_color = Color(1, 1, 1, 1)
@@ -50,7 +51,7 @@ grow_vertical = 2
 script = ExtResource("1_main")
 
 [node name="HeaderBar" type="Control" parent="." unique_id=1467499448]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 240)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -105,7 +106,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 200
+theme_override_constants/margin_top = 240
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 72
 
@@ -166,6 +167,7 @@ tooltip_text = "بازگشت به آخرین بخشی که باز کرده‌ا�
 theme_override_styles/normal = ExtResource("5_arvcj")
 theme_override_styles/pressed = ExtResource("5_arvcj")
 theme_override_styles/hover = ExtResource("6_6k0m2")
+theme_override_styles/disabled = ExtResource("11_disabledj")
 
 [node name="Margin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/ContinueSlot/ContinueButton" unique_id=1245026461]
 layout_mode = 1

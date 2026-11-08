@@ -468,7 +468,10 @@ func reset_active_gesture() -> void:
 	# Called by PageView after it finishes a gesture that it consumed.
 	if _drag_source != null and is_instance_valid(_drag_source):
 		_drag_source.call_deferred("set_block_signals", false)
-	_restore_dragged_toggle()
+	# Deferred like the release handler's restore: if a release is still in
+	# flight toward the button, its own processing must see toggle_mode
+	# disabled so the consumed gesture can't select the option.
+	call_deferred("_restore_dragged_toggle")
 
 	_drag_source = null
 	_drag_active = false
@@ -598,11 +601,24 @@ func _on_scroll_child_gui_input(event: InputEvent, source: Control) -> void:
 		if source != null and is_instance_valid(source) and _drag_source == source:
 			if _drag_active or _hold_blocked:
 				# A drag/scroll gesture must NOT select or unselect a toggle
-				# option. The button's toggle_mode was disabled for the drag
-				# (see _disable_toggle_for_drag), so its release can't flip
-				# button_pressed; restore it here for the next interaction.
+				# option. Everything below survives the button's own release
+				# processing, which runs right AFTER this handler in the same
+				# event dispatch (the gui_input signal fires before the
+				# Control's internal handling):
+				#   * Signals are blocked NOW (not deferred), so the release
+				#     can neither emit `pressed` nor notify anything.
+				#   * toggle_mode stays disabled. BaseButton reads toggle_mode
+				#     at release time to decide whether to flip button_pressed,
+				#     so restoring it synchronously here (the old behavior)
+				#     re-armed it before the button processed the release and
+				#     the option was selected anyway — the "tap and hold
+				#     selects" bug.
+				# Both are undone deferred, once the event has fully
+				# propagated; the next press also re-arms them via the
+				# safety net at the top of the press branch.
+				source.set_block_signals(true)
 				source.call_deferred("set_block_signals", false)
-				_restore_dragged_toggle()
+				call_deferred("_restore_dragged_toggle")
 			elif _is_editable_control(source):
 				# Only a fast, clean tap opens the keyboard.
 				var duration := Time.get_ticks_msec() - _press_time_msec

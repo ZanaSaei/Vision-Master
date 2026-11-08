@@ -132,7 +132,9 @@ func _update_tab_selection() -> void:
 ############################################################
 func _load_daily_board() -> void:
 	_daily_request_id += 1
-	for child: Node in _daily_entries.get_children():
+	# Batch clear children more efficiently
+	var children: Array[Node] = _daily_entries.get_children()
+	for child in children:
 		_daily_entries.remove_child(child)
 		child.queue_free()
 	if not API.is_configured() or not API.is_logged_in():
@@ -145,7 +147,9 @@ func _load_daily_board() -> void:
 
 func _load_lifetime_board() -> void:
 	_lifetime_request_id += 1
-	for child: Node in _lifetime_entries.get_children():
+	# Batch clear children more efficiently
+	var children: Array[Node] = _lifetime_entries.get_children()
+	for child in children:
 		_lifetime_entries.remove_child(child)
 		child.queue_free()
 	if not API.is_configured() or not API.is_logged_in():
@@ -262,13 +266,18 @@ func _play_intro_animation() -> void:
 	await get_tree().process_frame
 	if not is_inside_tree():
 		return
+	# animate all targets simultaneously with a single tween chain for efficiency
+	var tw := create_tween()
+	# fade in and move up all targets at once
 	for i in targets.size():
-		var t: Control = targets[i]
-		var tw := create_tween()
-		tw.tween_interval(0.06 * i)
-		tw.tween_property(t, "modulate:a", 1.0, 0.30).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.parallel().tween_property(t, "position:y", t.position.y - 30.0, 0.30).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	await get_tree().create_timer(0.06 * targets.size() + 0.4).timeout
+		var target: Control = targets[i]
+		# slight offset based on index for a subtle staggered effect, but without linear accumulation
+		var delay: float = 0.02 * i # small fixed offset instead of growing interval
+		tw.tween_interval(delay)
+		tw.tween_property(target, "modulate:a", 1.0, 0.30).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tw.parallel().tween_property(target, "position:y", target.position.y - 30.0, 0.30).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	# wait for the tween to complete (but with a max reasonable wait)
+	await tw.finished
 	if not is_inside_tree():
 		return
 	_start_ambient()

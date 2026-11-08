@@ -362,7 +362,6 @@ horizontal_scroll_mode = 0
 [node name="CardMargin" type="MarginContainer" parent="MarginContainer/MainLayout/CardScrollContainer" unique_id=877321458]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 50
@@ -372,7 +371,6 @@ theme_override_constants/margin_bottom = 25
 custom_minimum_size = Vector2(0, 950)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_jl6ec")
 
 [node name="CardContent" type="MarginContainer" parent="MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel" unique_id=1839581439]

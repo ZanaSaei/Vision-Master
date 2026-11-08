@@ -14,6 +14,10 @@ const PARA_BORDER_COLOR  := Color("#22D3EE")
 const HIGHLIGHT_COLOR    := Color("#fbbf24")
 const BACKGROUND_OPACITY := 0.08
 
+# Persian translation colors
+const PERSIAN_COLOR_DARK  := Color("#38BDF8") # Sky cyan
+const PERSIAN_COLOR_LIGHT := Color("#0369A1") # Deep ocean blue
+
 # ---------- Font configuration ----------
 const FONT_JAKARTA_REGULAR_PATH := "res://ui/fonts/PlusJakartaSans-Regular.ttf"
 const FONT_JAKARTA_BOLD_PATH    := "res://ui/fonts/PlusJakartaSans-Bold.ttf"
@@ -38,6 +42,9 @@ const DEFAULT_THEME := { "accent": Color("#22D3EE"), "soft": Color("#1a2f5c"), "
 
 # Touch tracking variables for mobile scrolling & word tap detection
 var _touch_start_pos: Vector2 = Vector2.ZERO
+
+# Per-paragraph translation data (set by _build_single_reading_box)
+var paragraph_translation_data: Array = []
 var _is_drag_scrolling: bool = false
 var _touch_start_time: float = 0.0
 var _touch_max_distance: float = 0.0
@@ -239,7 +246,7 @@ func _build_reading_page(data: Dictionary) -> void:
 	reading_translation_label.name = "ReadingTranslationLabel"
 	reading_translation_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	reading_translation_label.add_theme_font_size_override("font_size", 45)
-	reading_translation_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	reading_translation_label.add_theme_color_override("font_color", _persian_text_color())
 	reading_translation_label.text_direction = Control.TEXT_DIRECTION_RTL
 	reading_translation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	reading_translation_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -396,6 +403,10 @@ func _load_fonts() -> void:
 # ============================================================
 # DATA LOADING & SINGLE-BOX TEXT BUILDING
 # ============================================================
+func _persian_text_color() -> Color:
+	return PERSIAN_COLOR_DARK if Global.theme_is_dark() else PERSIAN_COLOR_LIGHT
+
+
 func _build_reading(_book: int, _lesson: int, data: Dictionary) -> void:
 	all_sentences_sync.clear()
 	_sync_index = 0
@@ -433,7 +444,7 @@ func _build_reading(_book: int, _lesson: int, data: Dictionary) -> void:
 
 func _build_single_reading_box(paragraphs: Array) -> void:
 	raw_paragraphs_data.clear()
-	var fa_blocks: PackedStringArray = []
+	var paragraph_data: Array = [] # [{"en_bbcode": "...", "fa": "..."}, ...]
 	
 	for p_idx in range(paragraphs.size()):
 		var para_obj: Dictionary = paragraphs[p_idx] as Dictionary
@@ -446,26 +457,37 @@ func _build_single_reading_box(paragraphs: Array) -> void:
 		var block_idx: int = raw_paragraphs_data.size()
 		raw_paragraphs_data.append(sentences)
 		
+		# Build BBCode for English sentences in this paragraph
+		var para_bbcode := ""
+		for s_idx in range(sentences.size()):
+			var s: Dictionary = sentences[s_idx]
+			var en_text: String = s.get("en", "").strip_edges()
+			if en_text == "":
+				continue
+			var clickable_sentence := _format_clickable_text(en_text, current_highlighted_word)
+			if _last_active_sentence.has("block_idx") and _last_active_sentence["block_idx"] == block_idx and _last_active_sentence["sentence_idx"] == s_idx:
+				if Global.theme_is_dark():
+					para_bbcode += "[bgcolor=#fbbf24][color=#111111]" + clickable_sentence + "[/color][/bgcolor] "
+				else:
+					para_bbcode += "[bgcolor=#bfdbfe]" + clickable_sentence + "[/bgcolor] "
+			else:
+				para_bbcode += clickable_sentence + " "
+		para_bbcode = para_bbcode.strip_edges()
+		
+		# Build Farsi translation for this paragraph
 		var para_fa := ""
 		for s_idx in range(sentences.size()):
 			var sentence: Dictionary = sentences[s_idx]
 			var fa_str: String = sentence.get("fa", "").strip_edges()
 			if fa_str != "":
 				para_fa += fa_str + " "
-			if sentence.has("start") and sentence.has("end"):
-				all_sentences_sync.append({
-					"block_idx": block_idx,
-					"sentence_idx": s_idx,
-					"start": sentence.get("start", 0.0),
-					"end": sentence.get("end", 0.0)
-				})
 		para_fa = para_fa.strip_edges()
-		if para_fa != "":
-			fa_blocks.append(para_fa)
-			
-	if is_instance_valid(reading_translation_label):
-		reading_translation_label.text = "\n\n".join(fa_blocks)
 		
+		paragraph_data.push_back({"en_bbcode": para_bbcode, "fa": para_fa})
+		
+	# Store per-paragraph translation data for _refresh_all_text
+	paragraph_translation_data = paragraph_data
+	
 	_refresh_all_text()
 
 
@@ -496,6 +518,9 @@ func _make_reading_panel_style() -> StyleBoxFlat:
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
+		
+	var fa_col := _persian_text_color()
+	
 	if is_instance_valid(reading_title_label):
 		reading_title_label.add_theme_color_override("font_color", Global.get_theme_color("text"))
 	if is_instance_valid(author_label):
@@ -505,7 +530,11 @@ func _apply_theme() -> void:
 	if is_instance_valid(reading_rtl):
 		reading_rtl.add_theme_color_override("default_color", Global.get_theme_color("text"))
 	if is_instance_valid(reading_translation_label):
-		reading_translation_label.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+		reading_translation_label.add_theme_color_override("font_color", fa_col)
+	
+	for node in strategy_fa_nodes:
+		if is_instance_valid(node) and node is Label:
+			node.add_theme_color_override("font_color", fa_col)
 	
 	_refresh_all_text()
 
@@ -553,8 +582,11 @@ func _refresh_all_text() -> void:
 	if not is_instance_valid(reading_rtl):
 		return
 		
-	var paragraph_bbcodes: PackedStringArray = []
+	var fa_color_hex := "#" + _persian_text_color().to_html(false)
+	var display_texts: PackedStringArray = []
+	
 	for block_idx in range(raw_paragraphs_data.size()):
+		# Get the English BBCode for this paragraph
 		var sentences: Array = raw_paragraphs_data[block_idx]
 		var para_bbcode := ""
 		for s_idx in range(sentences.size()):
@@ -571,10 +603,26 @@ func _refresh_all_text() -> void:
 			else:
 				para_bbcode += clickable_sentence + " "
 		para_bbcode = para_bbcode.strip_edges()
-		if para_bbcode != "":
-			paragraph_bbcodes.append(para_bbcode)
+		
+		# Get the Farsi translation for this paragraph from stored data
+		var para_translation := ""
+		if show_translation and block_idx < paragraph_translation_data.size():
+			var pd: Dictionary = paragraph_translation_data[block_idx]
+			para_translation = pd.get("fa", "")
+		
+		# Combine: English BBCode, then formatted Persian translation with Vazirmatn on next line
+		if para_bbcode != "" or para_translation != "":
+			var combined := para_bbcode
+			if para_translation != "":
+				var fa_formatted := "[right][font=%s][font_size=45][color=%s]%s[/color][/font_size][/font][/right]" % [
+					FONT_VAZIRMATN,
+					fa_color_hex,
+					para_translation
+				]
+				combined += "\n" + fa_formatted
+			display_texts.append(combined)
 			
-	reading_rtl.text = "\n\n".join(paragraph_bbcodes)
+	reading_rtl.text = "\n\n".join(display_texts)
 
 
 # ============================================================
@@ -656,10 +704,8 @@ func _update_toggle_button_text() -> void:
 func _on_translation_toggle_pressed() -> void:
 	show_translation = !show_translation
 	_update_toggle_button_text()
+	_refresh_all_text()
 	
-	if is_instance_valid(reading_translation_label):
-		reading_translation_label.visible = show_translation
-			
 	for node in strategy_fa_nodes:
 		if is_instance_valid(node):
 			node.visible = show_translation
@@ -724,7 +770,7 @@ func _build_banner(strategy: Dictionary, th: Dictionary) -> void:
 		desc_fa.text = strategy["description"]["fa"]
 		desc_fa.autowrap_mode = TextServer.AUTOWRAP_WORD
 		desc_fa.add_theme_font_size_override("font_size", 34)
-		desc_fa.add_theme_color_override("font_color", Color(1, 1, 1, 0.8))
+		desc_fa.add_theme_color_override("font_color", _persian_text_color())
 		desc_fa.text_direction = Control.TEXT_DIRECTION_RTL
 		desc_fa.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		if font_farsi:
@@ -798,7 +844,7 @@ func _build_steps(strategy: Dictionary, th: Dictionary) -> void:
 		fa.text = steps[i]["fa"]
 		fa.autowrap_mode = TextServer.AUTOWRAP_WORD
 		fa.add_theme_font_size_override("font_size", 34)
-		fa.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+		fa.add_theme_color_override("font_color", _persian_text_color())
 		fa.text_direction = Control.TEXT_DIRECTION_RTL
 		fa.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		if font_farsi:
@@ -859,7 +905,7 @@ func _build_reference_materials(strategy: Dictionary, th: Dictionary) -> void:
 			var vb := VBoxContainer.new()
 			vb.add_theme_constant_override("separation", 6)
 			var en := _make_label(kq["en"], 36, Global.get_theme_color("text"), false)
-			var fa := _make_label(kq["fa"], 33, Global.get_theme_color("text_dim"), false)
+			var fa := _make_label(kq["fa"], 33, _persian_text_color(), false)
 			fa.text_direction = Control.TEXT_DIRECTION_RTL
 			fa.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 			if font_farsi:
@@ -910,7 +956,7 @@ func _make_insight_card(text: String, accent: Color) -> PanelContainer:
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	label.add_theme_font_size_override("font_size", 36)
-	label.add_theme_color_override("font_color", Global.get_theme_color("text"))
+	label.add_theme_color_override("font_color", _persian_text_color())
 	label.text_direction = Control.TEXT_DIRECTION_RTL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	if font_farsi:
@@ -959,9 +1005,11 @@ func _make_section_title(en: String, fa: String, accent: Color, rtl_primary := f
 	var sub := Label.new()
 	sub.text = fa if not rtl_primary else en
 	sub.add_theme_font_size_override("font_size", 32)
-	sub.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	sub.add_theme_color_override("font_color", _persian_text_color() if not rtl_primary else Global.get_theme_color("text_dim"))
 	if not rtl_primary and font_farsi:
 		sub.add_theme_font_override("font", font_farsi)
+	elif rtl_primary and font_regular:
+		sub.add_theme_font_override("font", font_regular)
 	sub.visible = show_translation
 	strategy_fa_nodes.append(sub)
 	row.add_child(sub)
@@ -1011,7 +1059,7 @@ func _make_chip(main: String, sub: String, accent: Color, _soft: Color) -> Panel
 	var s := Label.new()
 	s.text = sub
 	s.add_theme_font_size_override("font_size", 28)
-	s.add_theme_color_override("font_color", Global.get_theme_color("text_dim"))
+	s.add_theme_color_override("font_color", _persian_text_color())
 	s.text_direction = Control.TEXT_DIRECTION_RTL
 	s.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	if font_farsi:
