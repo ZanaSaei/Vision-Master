@@ -1,52 +1,112 @@
 extends "res://autoload/BackButtonHandler.gd"
 
 # ============================================================
-#  WORD REVIEW SCENE — Anki-style spaced repetition
-#  Replaces the old Quiz scene for reviewing saved words.
+#  WORD REVIEW SCENE — Enhanced Anki-Style Spaced Repetition (SRS)
+#  Modernized Leitner Review System for Vision Master
 #
-#  Flow per card:
-#    1. Show word only (Front)
-#    2. User taps "Show Answer" → reveals Back (meaning/example/etc.)
-#    3. User rates Again / Hard / Good / Easy
-#    4. Word is rescheduled via Global.review_word()
-#       "Again" comes back later in the SAME session.
-#       Hard/Good/Easy schedule it for a future day.
-#    5. Repeat until the due queue for today is empty.
+#  Features:
+#    * 3D-style smooth card flip animation with spring physics
+#    * Card slide & pop transitions on rating
+#    * Session progress bar & due / new card badges
+#    * Native audio & pronunciation player with auto-play toggle
+#    * Rich card layout: Persian & English definitions, examples,
+#      synonyms, antonyms, phonetics & part-of-speech badges
+#    * Interactive celebration summary on session completion
+#    * Helpful empty state with direct navigation to vocabularies
+#    * Full keyboard / hotkey shortcuts (Desktop & Tablet)
+#    * Complete Theme awareness (Dark & Light) via DesignTokens
 # ============================================================
 
 const SCENE_SAVED_WORDS := "res://scenes/saved_words/SavedWords.tscn"
+const SCENE_FLASHCARDS  := "res://scenes/vocabulary/FlashcardHub.tscn"
 
-@onready var back_button: Button           = $HeaderBar/MarginContainer/Header/BackButton
-@onready var due_counter: Label            = $HeaderBar/MarginContainer/Header/DueCounter
-@onready var review_side_menu              = $ReviewSideMenu
-@onready var open_list_menu_button: Button = $OpenListMenuButton
-@onready var background_color: ColorRect = $BackgroundColor
+# --- Header & Navigation ---
+@onready var back_button: Button            = $HeaderBar/MarginContainer/Header/BackButton
+@onready var due_counter: Label             = $HeaderBar/MarginContainer/Header/DueCounter
+@onready var auto_audio_toggle: Button      = $HeaderBar/MarginContainer/Header/AutoAudioToggle
+@onready var header_title: Label            = $HeaderBar/MarginContainer/Header/HeaderTitle
+@onready var background_color: ColorRect    = $BackgroundColor
 
-@onready var card_panel: PanelContainer    = $MarginContainer/MainLayout/CardMargin/CardPanel
-@onready var front: PanelContainer        = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/Front
-@onready var word_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/Front/WordLabel
+# --- Progress Bar & Stats ---
+@onready var progress_section: VBoxContainer   = $MarginContainer/MainLayout/ProgressSection
+@onready var progress_count_label: Label       = $MarginContainer/MainLayout/ProgressSection/ProgressHeader/ProgressCountLabel
+@onready var new_badge: Label                  = $MarginContainer/MainLayout/ProgressSection/ProgressHeader/BadgesContainer/NewBadge
+@onready var due_badge: Label                  = $MarginContainer/MainLayout/ProgressSection/ProgressHeader/BadgesContainer/DueBadge
+@onready var session_progress_bar: ProgressBar = $MarginContainer/MainLayout/ProgressSection/ProgressBar
 
-@onready var back: VBoxContainer           = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace
-@onready var type_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/BackWordLabel
-@onready var meaning_label: Label          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
-@onready var example_label: Label          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
-@onready var extra_label: Label            = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/Extra/ExtraRowContent/ExtraLabel
-@onready var phonetics_label: Label        = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/PhoneticsRow/PhoneticsRowContent/PhoneticsLabel
+# --- Card Structure ---
+@onready var card_panel: PanelContainer        = $MarginContainer/MainLayout/CardMargin/CardPanel
+@onready var stage_badge: Label                = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader/StageBadge
+@onready var word_type_badge: Label            = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader/WordTypeBadge
+@onready var audio_button: Button              = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader/AudioButton
+@onready var source_badge: Label               = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader/SourceBadge
 
-@onready var show_answer_button: Button    = $MarginContainer/MainLayout/Controls/ShowAnswerButton
-@onready var rating_buttons: HBoxContainer = $MarginContainer/MainLayout/Controls/RatingButtons
-@onready var again_button: Button          = $MarginContainer/MainLayout/Controls/RatingButtons/Again
-@onready var hard_button: Button           = $MarginContainer/MainLayout/Controls/RatingButtons/Hard
-@onready var good_button: Button           = $MarginContainer/MainLayout/Controls/RatingButtons/Good
-@onready var easy_button: Button           = $MarginContainer/MainLayout/Controls/RatingButtons/Easy
+# --- Front Face ---
+@onready var front: PanelContainer             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front
+@onready var word_label: Label                 = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front/FrontCenter/WordLabel
+@onready var phonetics_label: Label            = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front/FrontCenter/PhoneticsLabel
+@onready var tap_hint: Label                   = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front/FrontCenter/TapHint
 
+# --- Back Face ---
+@onready var back: ScrollContainer             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace
+@onready var back_word_label: Label            = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent/BackWordLabel
+@onready var back_phonetics_label: Label       = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent/BackPhoneticsLabel
+@onready var back_audio_button: Button         = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent/BackAudioButton
+@onready var meaning_fa_row: PanelContainer    = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningFaRow
+@onready var meaning_label: Label              = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
+@onready var meaning_en_row: PanelContainer    = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow
+@onready var meaning_en_label: Label           = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow/MeaningEnRowContent/MeaningEnLabel
+@onready var example_row: PanelContainer       = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/ExampleRow
+@onready var example_label: Label              = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/ExampleRow/ExampleRowContent/ExampleLabel
+@onready var tags_row: PanelContainer          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow
+@onready var synonyms_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow/TagsContent/SynonymsLabel
+@onready var antonyms_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow/TagsContent/AntonymsLabel
+@onready var flip_back_button: Button          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/FlipBackButton
 
+# --- Celebration Summary Card ---
+@onready var summary_card: PanelContainer                = $MarginContainer/MainLayout/CardMargin/SummaryCard
+@onready var total_reviewed_label: Label                 = $MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/TotalReviewedLabel
+@onready var retention_rate_label: Label                 = $MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/RetentionRateLabel
+@onready var stat_again: Label                           = $MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox/StatAgain
+@onready var stat_hard: Label                            = $MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox/StatHard
+@onready var stat_good: Label                            = $MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox/StatGood
+@onready var stat_easy: Label                            = $MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox/StatEasy
+@onready var summary_back_button: Button                 = $MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/SummaryActions/SummaryBackButton
+@onready var summary_review_again_button: Button         = $MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/SummaryActions/SummaryReviewAgainButton
+
+# --- Empty Card ---
+@onready var empty_card: PanelContainer                  = $MarginContainer/MainLayout/CardMargin/EmptyCard
+@onready var go_vocab_button: Button                     = $MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent/GoVocabButton
+
+# --- Bottom Controls ---
+@onready var controls: VBoxContainer           = $MarginContainer/MainLayout/Controls
+@onready var show_answer_button: Button        = $MarginContainer/MainLayout/Controls/ShowAnswerButton
+@onready var rating_buttons: HBoxContainer     = $MarginContainer/MainLayout/Controls/RatingButtons
+@onready var again_button: Button              = $MarginContainer/MainLayout/Controls/RatingButtons/Again
+@onready var hard_button: Button               = $MarginContainer/MainLayout/Controls/RatingButtons/Hard
+@onready var good_button: Button               = $MarginContainer/MainLayout/Controls/RatingButtons/Good
+@onready var easy_button: Button               = $MarginContainer/MainLayout/Controls/RatingButtons/Easy
+
+# --- Side Menu ---
+@onready var open_list_menu_button: Button     = $OpenListMenuButton
+@onready var review_side_menu                  = $ReviewSideMenu
+
+# --- State ---
 var review_queue: Array       = []
 var current_entry: Dictionary = {}
+var is_animating: bool        = false
+var is_card_flipped: bool     = false
+var auto_audio_enabled: bool  = true
+var _card_default_pos: Vector2 = Vector2.ZERO
 
-# How many times a single card may be pushed back into the queue within one
-# session. Without a cap, repeatedly answering "again" re-appended the card
-# forever and the session could never end.
+# Session Statistics
+var session_total_count: int      = 0
+var session_completed_count: int  = 0
+var stats_again: int              = 0
+var stats_hard: int               = 0
+var stats_good: int               = 0
+var stats_easy: int               = 0
+
 const MAX_SESSION_REQUEUES := 3
 var _session_requeues: Dictionary = {}
 
@@ -60,41 +120,144 @@ func _ready() -> void:
 	good_button.pressed.connect(_on_rate_pressed.bind("good"))
 	easy_button.pressed.connect(_on_rate_pressed.bind("easy"))
 	
-	# Connect the new word_selected signal
+	audio_button.pressed.connect(_play_current_audio)
+	back_audio_button.pressed.connect(_play_current_audio)
+	auto_audio_toggle.pressed.connect(_toggle_auto_audio)
+	flip_back_button.pressed.connect(func() -> void: _animate_flip(false))
+	
+	summary_back_button.pressed.connect(_on_back_button_pressed)
+	summary_review_again_button.pressed.connect(_restart_session_practice)
+	go_vocab_button.pressed.connect(_on_go_vocab_pressed)
+	
+	# Tap card to flip
+	front.gui_input.connect(_on_front_gui_input)
+
+	# Connect side menu
 	review_side_menu.word_selected.connect(_on_word_selected_from_menu)
-	
-	# متصل کردن دکمه باز کردن منو
 	review_side_menu.set_hamburger_button(open_list_menu_button)
-	open_list_menu_button.pivot_offset = open_list_menu_button.size / 2.0 
-	
+	open_list_menu_button.pivot_offset = open_list_menu_button.size / 2.0
 	open_list_menu_button.pressed.connect(review_side_menu.toggle)
-	
+
+	# Wire motion microinteractions
+	_wire_interactive_motion()
 	_style_rating_buttons()
 
 	Global.on_theme_changed(_on_theme_changed)
 	_apply_theme()
 
+	# Record default layout position
+	call_deferred("_cache_card_position")
+
+	# Initialize queue & session
+	_start_session()
+
+
+func _cache_card_position() -> void:
+	card_panel.pivot_offset = card_panel.size / 2.0
+	_card_default_pos = card_panel.position
+
+
+func _wire_interactive_motion() -> void:
+	for btn: Button in [show_answer_button, again_button, hard_button, good_button, easy_button,
+						audio_button, back_audio_button, summary_back_button, summary_review_again_button,
+						go_vocab_button, auto_audio_toggle, back_button]:
+		UiMotion.wire_microinteractions(btn)
+
+
+# ----------------------------------------------------------------
+#  KEYBOARD SHORTCUTS
+# ----------------------------------------------------------------
+func _unhandled_input(event: InputEvent) -> void:
+	if not (event is InputEventKey):
+		return
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return
+	var key: Key = key_event.keycode
+	
+	if key == KEY_ESCAPE:
+		_on_back_button_pressed()
+	elif key == KEY_SPACE or key == KEY_ENTER:
+		if not is_card_flipped and show_answer_button.visible and not is_animating:
+			_on_show_answer_pressed()
+	elif key == KEY_1:
+		if is_card_flipped and rating_buttons.visible and not is_animating:
+			_on_rate_pressed("again")
+	elif key == KEY_2:
+		if is_card_flipped and rating_buttons.visible and not is_animating:
+			_on_rate_pressed("hard")
+	elif key == KEY_3:
+		if is_card_flipped and rating_buttons.visible and not is_animating:
+			_on_rate_pressed("good")
+	elif key == KEY_4:
+		if is_card_flipped and rating_buttons.visible and not is_animating:
+			_on_rate_pressed("easy")
+	elif key == KEY_R or key == KEY_P:
+		_play_current_audio()
+
+
+# ----------------------------------------------------------------
+#  AUDIO & PRONUNCIATION
+# ----------------------------------------------------------------
+func _play_current_audio() -> void:
+	if current_entry.is_empty():
+		return
+	var audio_fn: String = str(current_entry.get("audio", ""))
+	var word_txt: String = str(current_entry.get("word", ""))
+	Global.play_word_audio(audio_fn, word_txt)
+	UiMotion.pop(audio_button, 1.15)
+	UiMotion.pop(back_audio_button, 1.15)
+
+
+func _toggle_auto_audio() -> void:
+	auto_audio_enabled = not auto_audio_enabled
+	auto_audio_toggle.text = "🔊" if auto_audio_enabled else "🔇"
+	Sfx.click()
+
+
+# ----------------------------------------------------------------
+#  SESSION & QUEUE INITIALIZATION
+# ----------------------------------------------------------------
+func _start_session() -> void:
 	review_queue = Global.get_due_words()
+	session_total_count = review_queue.size()
+	session_completed_count = 0
+	stats_again = 0
+	stats_hard = 0
+	stats_good = 0
+	stats_easy = 0
 	_load_next_card()
-	_populate_word_list()
 
-# Add this new function to handle word selection
+
+func _restart_session_practice() -> void:
+	Sfx.click()
+	review_queue = Global.get_review_words()
+	session_total_count = review_queue.size()
+	session_completed_count = 0
+	stats_again = 0
+	stats_hard = 0
+	stats_good = 0
+	stats_easy = 0
+	summary_card.visible = false
+	empty_card.visible = false
+	card_panel.visible = true
+	controls.visible = true
+	progress_section.visible = true
+	_load_next_card()
+
+
+# ----------------------------------------------------------------
+#  CARD NAVIGATION & WORD SELECTION FROM SIDE MENU
+# ----------------------------------------------------------------
 func _on_word_selected_from_menu(word_data: Dictionary) -> void:
-	"""Navigate to a specific word in the review queue"""
-	# Find the word in the queue
 	for i in range(review_queue.size()):
 		if _is_same_entry(review_queue[i], word_data):
-			# Reorder queue to put this word first
 			var temp = review_queue[i]
 			review_queue.remove_at(i)
 			review_queue.insert(0, temp)
 			_load_next_card()
 			return
 
-	# Not in the current queue (it may be scheduled for a future day, or the
-	# queue was capped at SRS_NEW_CARDS_PER_SESSION). Refresh from Global and
-	# try once more — the old code found the entry but never moved it to the
-	# front, so it silently displayed the first card instead of the chosen one.
 	review_queue = Global.get_due_words()
 	for i in range(review_queue.size()):
 		if _is_same_entry(review_queue[i], word_data):
@@ -103,7 +266,7 @@ func _on_word_selected_from_menu(word_data: Dictionary) -> void:
 			review_queue.insert(0, temp)
 			_load_next_card()
 			return
-	_update_due_counter()
+	_update_header_and_progress()
 
 
 func _is_same_entry(a: Dictionary, b: Dictionary) -> bool:
@@ -111,11 +274,8 @@ func _is_same_entry(a: Dictionary, b: Dictionary) -> bool:
 		and int(a.get("book", 0)) == int(b.get("book", 0)) \
 		and int(a.get("lesson", 0)) == int(b.get("lesson", 0))
 
-func _on_review_words_changed():
-	# This will be called every time a word is added or removed.
-	# Rebuild the queue, but keep studying the card that is currently on
-	# screen: re-deriving the queue and jumping to position 0 used to yank the
-	# student onto an unrelated card the moment they added or removed a word.
+
+func _on_review_words_changed() -> void:
 	var keep_key := _entry_key(current_entry) if not current_entry.is_empty() else ""
 	review_queue = Global.get_due_words()
 	if keep_key != "":
@@ -127,48 +287,382 @@ func _on_review_words_changed():
 				break
 	_load_next_card()
 
+
 func _populate_word_list() -> void:
 	_on_review_words_changed()
 
 
 func _on_review_menu_closed() -> void:
-	# گرفتن مجدد صف کلمات از گلوبال در صورتی که لیست تغییر کرده باشد
 	review_queue = Global.get_due_words()
 	_load_next_card()
 
+
 # ----------------------------------------------------------------
-#  VISUAL STYLING FOR RATING BUTTONS (Anki's standard color code)
+#  CARD LOADING & PRESENTATION
+# ----------------------------------------------------------------
+func _load_next_card() -> void:
+	_update_header_and_progress()
+
+	if review_queue.is_empty():
+		if Global.review_words.is_empty():
+			_show_no_words_saved()
+		else:
+			_show_all_done()
+		return
+
+	card_panel.visible = true
+	summary_card.visible = false
+	empty_card.visible = false
+	controls.visible = true
+	progress_section.visible = true
+
+	current_entry = review_queue[0]
+	var word_text: String = str(current_entry.get("word", ""))
+	word_label.text = word_text
+	back_word_label.text = word_text
+
+	# Phonetics
+	var phonetics_text: String = str(current_entry.get("phonetics", ""))
+	if phonetics_text == "":
+		phonetics_text = str(current_entry.get("pronunciation", ""))
+	if phonetics_text != "":
+		phonetics_label.text = phonetics_text
+		phonetics_label.visible = true
+		back_phonetics_label.text = "  " + phonetics_text
+		back_phonetics_label.visible = true
+	else:
+		phonetics_label.text = ""
+		phonetics_label.visible = false
+		back_phonetics_label.visible = false
+
+	# Word type
+	var wtype: String = str(current_entry.get("word_type", "")).strip_edges()
+	if wtype != "":
+		word_type_badge.text = wtype
+		word_type_badge.visible = true
+	else:
+		word_type_badge.visible = false
+
+	# Stage Badge
+	stage_badge.text = _get_state_badge(current_entry)
+
+	# Source (Vision book & lesson)
+	var book: int   = int(current_entry.get("book", 0))
+	var lesson: int = int(current_entry.get("lesson", 0))
+	if book > 0:
+		source_badge.text = "Vision %d • درس %d" % [book, lesson]
+		source_badge.visible = true
+	else:
+		source_badge.visible = false
+
+	# Persian Meaning
+	meaning_label.text = str(current_entry.get("meaning_fa", "")).strip_edges()
+
+	# English Meaning
+	var en_meaning: String = str(current_entry.get("meaning_en", "")).strip_edges()
+	if en_meaning != "":
+		meaning_en_label.text = en_meaning
+		meaning_en_row.visible = true
+	else:
+		meaning_en_row.visible = false
+
+	# Example Sentence
+	var ex_text: String = str(current_entry.get("example", "")).strip_edges()
+	if ex_text != "":
+		example_label.text = ex_text
+		example_row.visible = true
+	else:
+		example_row.visible = false
+
+	# Synonyms & Antonyms
+	var syn_text := _format_tags(current_entry.get("synonyms"))
+	var ant_text := _format_tags(current_entry.get("antonyms"))
+	if syn_text != "" or ant_text != "":
+		tags_row.visible = true
+		synonyms_label.text = "🔗 مترادف‌ها: " + syn_text if syn_text != "" else ""
+		synonyms_label.visible = (syn_text != "")
+		antonyms_label.text = "⚡ متضادها: " + ant_text if ant_text != "" else ""
+		antonyms_label.visible = (ant_text != "")
+	else:
+		tags_row.visible = false
+
+	# Reset faces
+	_show_front()
+
+	# Auto pronounce if enabled
+	if auto_audio_enabled:
+		_play_current_audio()
+
+
+func _format_tags(data: Variant) -> String:
+	if data is Array:
+		var items: Array[String] = []
+		for item in data:
+			items.append(str(item))
+		return ", ".join(items)
+	elif data is Dictionary:
+		var items: Array[String] = []
+		if data.has("en") and data["en"] is Array:
+			for item in data["en"]:
+				items.append(str(item))
+		if data.has("fa") and data["fa"] is Array:
+			for item in data["fa"]:
+				items.append(str(item))
+		return ", ".join(items)
+	elif data is String and data.strip_edges() != "":
+		return data.strip_edges()
+	return ""
+
+
+func _get_state_badge(entry: Dictionary) -> String:
+	Global._ensure_srs_fields(entry)
+	var due: int  = int(entry.get("srs_due", -1))
+	var reps: int = int(entry.get("srs_reps", 0))
+
+	if due == -1:
+		return "🆕 کلمه جدید"
+	elif reps < 2:
+		return "🔁 در حال یادگیری"
+	else:
+		return "🧠 مرور تثبیت"
+
+
+func _show_front() -> void:
+	is_card_flipped = false
+	front.visible = true
+	back.visible = false
+	show_answer_button.visible = true
+	rating_buttons.visible = false
+
+
+func _show_back() -> void:
+	is_card_flipped = true
+	front.visible = false
+	back.visible = true
+	show_answer_button.visible = false
+	rating_buttons.visible = true
+	rating_buttons.modulate = Color.WHITE
+	_update_rating_previews()
+
+
+func _on_front_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if not is_card_flipped and not is_animating:
+			_animate_flip(true)
+
+
+func _on_show_answer_pressed() -> void:
+	_animate_flip(true)
+
+
+func _animate_flip(to_back: bool) -> void:
+	if is_animating:
+		return
+	is_animating = true
+	card_panel.pivot_offset = card_panel.size / 2.0
+	Sfx.click()
+
+	var tw := create_tween()
+	tw.tween_property(card_panel, "scale:x", 0.0, 0.15).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	tw.tween_callback(func() -> void:
+		if to_back:
+			_show_back()
+		else:
+			_show_front()
+		card_panel.pivot_offset = card_panel.size / 2.0
+	)
+	tw.tween_property(card_panel, "scale:x", 1.0, 0.20).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_callback(func() -> void:
+		is_animating = false
+	)
+
+
+func _update_rating_previews() -> void:
+	var previews: Dictionary = Global.preview_intervals(current_entry)
+	again_button.text = "دوباره\n(%s)" % previews.get("again", "همین حالا")
+	hard_button.text  = "سخت\n(%s)"   % previews.get("hard", "امروز")
+	good_button.text  = "خوب\n(%s)"   % previews.get("good", "۱ روز")
+	easy_button.text  = "آسان\n(%s)"  % previews.get("easy", "۳ روز")
+
+
+# ----------------------------------------------------------------
+#  RATING & PROGRESSION LOGIC
+# ----------------------------------------------------------------
+func _on_rate_pressed(rating: String) -> void:
+	if current_entry.is_empty() or is_animating:
+		return
+	_animate_rate_and_next(rating)
+
+
+func _animate_rate_and_next(rating: String) -> void:
+	is_animating = true
+	card_panel.pivot_offset = card_panel.size / 2.0
+
+	# Audio cue per rating
+	match rating:
+		"again":
+			Sfx.wrong()
+			stats_again += 1
+		"hard":
+			Sfx.click()
+			stats_hard += 1
+		"good":
+			Sfx.correct()
+			stats_good += 1
+		"easy":
+			Sfx.reward()
+			stats_easy += 1
+
+	session_completed_count += 1
+
+	# Directional card slide
+	var target_offset: float = -260.0 if (rating == "again" or rating == "hard") else 260.0
+	var tw := create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(card_panel, "position:x", _card_default_pos.x + target_offset, 0.14) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tw.tween_property(card_panel, "modulate:a", 0.0, 0.14)
+
+	tw.chain().tween_callback(func() -> void:
+		_process_rating(rating)
+		card_panel.position.x = _card_default_pos.x
+		_load_next_card()
+		card_panel.modulate.a = 1.0
+		if not review_queue.is_empty():
+			UiMotion.pop_in(card_panel)
+		is_animating = false
+	)
+
+
+func _process_rating(rating: String) -> void:
+	var key := _entry_key(current_entry)
+	Global.review_word(
+		str(current_entry.get("word", "")),
+		int(current_entry.get("book", 0)),
+		int(current_entry.get("lesson", 0)),
+		rating
+	)
+
+	review_queue.pop_front()
+	_session_requeues.erase(key)
+
+	if rating == "again" and int(_session_requeues.get(key, 0)) < MAX_SESSION_REQUEUES:
+		_session_requeues[key] = int(_session_requeues.get(key, 0)) + 1
+		review_queue.append(current_entry.duplicate(true))
+
+
+func _entry_key(entry: Dictionary) -> String:
+	return "%s|%d|%d" % [
+		str(entry.get("word", "")),
+		int(entry.get("book", 0)),
+		int(entry.get("lesson", 0))
+	]
+
+
+func _update_header_and_progress() -> void:
+	var remaining: int = review_queue.size()
+	due_counter.text = "%s کلمه باقی مانده" % MenuStyle.persian_digits(str(remaining)) \
+		if remaining > 0 else "تمام شد ✅"
+
+	# Count breakdown in remaining queue
+	var new_count := 0
+	var due_count := 0
+	for item in review_queue:
+		if int(item.get("srs_due", -1)) == -1:
+			new_count += 1
+		else:
+			due_count += 1
+
+	new_badge.text = "🆕 %s جدید" % MenuStyle.persian_digits(str(new_count))
+	due_badge.text = "🔁 %s مرور" % MenuStyle.persian_digits(str(due_count))
+
+	var total: int = max(1, session_total_count)
+	var current_done: int = min(session_completed_count, total)
+	progress_count_label.text = "جلسه مرور: %s از %s" % [
+		MenuStyle.persian_digits(str(current_done)),
+		MenuStyle.persian_digits(str(total))
+	]
+	
+	var target_ratio: float = clampf(float(current_done) / float(total), 0.0, 1.0)
+	var tw := create_tween()
+	tw.tween_property(session_progress_bar, "value", target_ratio, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+
+# ----------------------------------------------------------------
+#  SESSION COMPLETION & EMPTY STATES
+# ----------------------------------------------------------------
+func _show_all_done() -> void:
+	card_panel.visible = false
+	empty_card.visible = false
+	summary_card.visible = true
+	controls.visible = false
+	progress_section.visible = false
+	due_counter.text = "تمام شد ✅"
+
+	total_reviewed_label.text = "کلمات مرور شده در این جلسه: %s کلمه" % MenuStyle.persian_digits(str(session_completed_count))
+	
+	var total_answers := stats_again + stats_hard + stats_good + stats_easy
+	var successful_answers := stats_good + stats_easy
+	var retention_pct: int = int(round(float(successful_answers) / float(max(1, total_answers)) * 100.0))
+	retention_rate_label.text = "میزان تسلط شما: %s٪" % MenuStyle.persian_digits(str(retention_pct))
+
+	stat_again.text = "🔴 دوباره: %s" % MenuStyle.persian_digits(str(stats_again))
+	stat_hard.text  = "🟠 سخت: %s"   % MenuStyle.persian_digits(str(stats_hard))
+	stat_good.text  = "🟢 خوب: %s"   % MenuStyle.persian_digits(str(stats_good))
+	stat_easy.text  = "🔵 آسان: %s"  % MenuStyle.persian_digits(str(stats_easy))
+
+	Sfx.complete()
+	UiMotion.pop_in(summary_card)
+
+
+func _show_no_words_saved() -> void:
+	card_panel.visible = false
+	summary_card.visible = false
+	empty_card.visible = true
+	controls.visible = false
+	progress_section.visible = false
+	due_counter.text = "لیست خالی است"
+	UiMotion.pop_in(empty_card)
+
+
+func _on_go_vocab_pressed() -> void:
+	TransitionManager.change_scene(SCENE_FLASHCARDS)
+
+
+# ----------------------------------------------------------------
+#  BUTTON STYLING (Modern Anki Color Palette)
 # ----------------------------------------------------------------
 func _style_rating_buttons() -> void:
 	_apply_button_color(again_button, Color("#EF4444"))  # red
 	_apply_button_color(hard_button,  Color("#F59E0B"))  # orange
-	_apply_button_color(good_button,  Color("#22C55E"))  # green
-	_apply_button_color(easy_button,  Color("#2563EB"))  # blue
+	_apply_button_color(good_button,  Color("#10B981"))  # emerald green
+	_apply_button_color(easy_button,  Color("#3B82F6"))  # blue
 
 	for btn in [again_button, hard_button, good_button, easy_button]:
-		btn.add_theme_color_override("font_color", Color("#FFFFFF"))
+		btn.add_theme_color_override("font_color", Color.WHITE)
 		btn.autowrap_mode = TextServer.AUTOWRAP_WORD
-		btn.custom_minimum_size = Vector2(200, 110)  # Ensure buttons have matching height
 
 
 func _apply_button_color(btn: Button, color: Color) -> void:
 	var style := StyleBoxFlat.new()
 	style.bg_color                   = color
-	style.corner_radius_top_left     = 14
-	style.corner_radius_top_right    = 14
-	style.corner_radius_bottom_left  = 14
-	style.corner_radius_bottom_right = 14
+	style.corner_radius_top_left     = 20
+	style.corner_radius_top_right    = 20
+	style.corner_radius_bottom_left  = 20
+	style.corner_radius_bottom_right = 20
+	style.shadow_color = Color(color.r, color.g, color.b, 0.35)
+	style.shadow_size = 12
+	style.shadow_offset = Vector2(0, 4)
 	btn.add_theme_stylebox_override("normal", style)
 	btn.add_theme_stylebox_override("pressed", style)
 
 	var hover := style.duplicate()
-	hover.bg_color = color.darkened(0.12)
+	hover.bg_color = color.lightened(0.12)
 	btn.add_theme_stylebox_override("hover", hover)
 
 
 # ----------------------------------------------------------------
-#  THEME AWARENESS — restyle cards, header, labels & buttons for
-#  Dark / Light without touching layout or logic.
+#  THEME AWARENESS
 # ----------------------------------------------------------------
 func _on_theme_changed(_mode: int) -> void:
 	_apply_theme()
@@ -177,314 +671,70 @@ func _on_theme_changed(_mode: int) -> void:
 func _apply_theme() -> void:
 	if not is_inside_tree():
 		return
-	_theme_walk(self)
+	var dark := Global.theme_is_dark()
+	background_color.color = _page_bg_color()
 
+	# Re-style card panel
+	var card_style := StyleBoxFlat.new()
+	card_style.set_corner_radius_all(28)
+	if dark:
+		card_style.bg_color = Color(0.15, 0.17, 0.22, 1)
+		card_style.border_color = Color(1, 1, 1, 0.08)
+		card_style.set_border_width_all(1)
+		card_style.shadow_color = Color(0, 0, 0, 0.5)
+	else:
+		card_style.bg_color = Color(1, 1, 1, 1)
+		card_style.border_color = Color(0, 0, 0, 0.06)
+		card_style.set_border_width_all(1)
+		card_style.shadow_color = Color(0, 0, 0, 0.08)
+	card_style.shadow_size = 20
+	card_style.shadow_offset = Vector2(0, 8)
+	card_panel.add_theme_stylebox_override("panel", card_style)
+	summary_card.add_theme_stylebox_override("panel", card_style)
+	empty_card.add_theme_stylebox_override("panel", card_style)
 
-func _theme_walk(node: Node) -> void:
-	# The side menu is its own theme-aware scene; don't restyle it here.
-	if node.name == "ReviewSideMenu":
-		return
-	if node is ColorRect and node.name == "BackgroundColor":
-		background_color.color = _page_bg_color()
-	elif node.name == "HeaderBar" and node is PanelContainer:
-		# Use the app's unified header styling so this scene matches every
-		# other scene's header (bar, buttons and labels). It styles the whole
-		# subtree, so don't recurse into it afterwards.
-		Global.style_header(node)
-		return
-	elif node is PanelContainer:
-		_restyle_panel(node)
-	elif node is Label:
-		_theme_label(node)
-	elif node is Button:
-		_theme_button(node)
-	for child in node.get_children():
-		_theme_walk(child)
+	# Style header
+	Global.style_header($HeaderBar)
+
+	# Side button style
+	var ham := StyleBoxFlat.new()
+	ham.set_corner_radius_all(30)
+	ham.expand_margin_left = 200
+	if dark:
+		ham.bg_color = Color(0.18, 0.24, 0.32, 0.95)
+		ham.border_color = Color(1, 1, 1, 0.10)
+	else:
+		ham.bg_color = Color(0.15, 0.22, 0.32, 0.95)
+		ham.border_color = Color(0, 0, 0, 0.10)
+	ham.set_border_width_all(1)
+	open_list_menu_button.add_theme_stylebox_override("normal", ham)
+	open_list_menu_button.add_theme_stylebox_override("pressed", ham)
+	open_list_menu_button.add_theme_stylebox_override("hover", ham)
+	open_list_menu_button.add_theme_color_override("font_color", Color.WHITE)
+
+	# Text colors
+	var txt_col: Color = Global.get_theme_color("text")
+	if dark:
+		word_label.add_theme_color_override("font_color", Color.WHITE)
+		back_word_label.add_theme_color_override("font_color", Color.WHITE)
+	else:
+		word_label.add_theme_color_override("font_color", txt_col)
+		back_word_label.add_theme_color_override("font_color", txt_col)
 
 
 func _page_bg_color() -> Color:
 	if Global.theme_is_dark():
-		return Color(0.10, 0.11, 0.20, 1)   # deep indigo
-	return Color(0.91, 0.92, 0.98, 1)      # soft lavender-blue
-
-
-func _card_color(dark: bool) -> Color:
-	if dark:
-		return Color(0.12, 0.35, 0.38, 1)  # deep teal
-	return Color(0.34, 0.80, 0.74, 1)      # fresh mint/teal
-
-
-func _row_colors(dark: bool) -> Dictionary:
-	if dark:
-		return {
-			"WordRow":      Color(0.12, 0.42, 0.30, 1),
-			"PhoneticsRow": Color(0.42, 0.40, 0.09, 1),
-			"MeaningFaRow": Color(0.32, 0.23, 0.52, 1),
-			"ExampleRow":   Color(0.48, 0.33, 0.07, 1),
-			"Extra":        Color(0.16, 0.33, 0.52, 1),
-		}
-	return {
-		"WordRow":      Color(0.84, 0.99, 0.90, 1),
-		"PhoneticsRow": Color(0.86, 0.95, 0.60, 1),
-		"MeaningFaRow": Color(0.93, 0.90, 1.00, 1),
-		"ExampleRow":   Color(1.00, 0.97, 0.76, 1),
-		"Extra":        Color(0.85, 0.92, 1.00, 1),
-	}
-
-
-# Give each panel a theme-appropriate, colourful look. The Front word face
-# is transparent (no border) so it no longer draws an odd rectangle inside
-# the card.
-func _restyle_panel(node: PanelContainer) -> void:
-	var n: String = node.name
-	var dark := Global.theme_is_dark()
-	var style := StyleBoxFlat.new()
-
-	# The main card — vibrant in both themes.
-	if n == "CardPanel":
-		style.set_corner_radius_all(28)
-		style.bg_color = _card_color(dark)
-		style.shadow_color = Color(0, 0, 0, 0.25)
-		style.shadow_size = 18
-		style.shadow_offset = Vector2(0, 8)
-		node.add_theme_stylebox_override("panel", style)
-		return
-
-	# Front word face — fully transparent, no border.
-	if n == "Front":
-		var clear := StyleBoxFlat.new()
-		clear.bg_color = Color(0, 0, 0, 0)
-		clear.set_border_width_all(0)
-		node.add_theme_stylebox_override("panel", clear)
-		return
-
-	# Back-face information rows — colourful chips.
-	var row_colors := _row_colors(dark)
-	if row_colors.has(n):
-		style.set_corner_radius_all(16)
-		style.bg_color = row_colors[n]
-		node.add_theme_stylebox_override("panel", style)
-		return
-
-	# Fallback for any other panel.
-	style.set_corner_radius_all(12)
-	style.bg_color = Color(1, 1, 1, 0.85) if not dark else Color(1, 1, 1, 0.06)
-	node.add_theme_stylebox_override("panel", style)
-
-
-func _theme_label(label: Label) -> void:
-	var n: String = label.name
-	# Icon chips keep their fixed black-on-color styling in both themes.
-	if n in ["PhonIcon", "FaIcon", "ExIcon", "ExtraIcon"]:
-		return
-	elif n == "WordLabel":
-		# The main word reads crisply in white with a soft shadow on the
-		# colourful card in both themes.
-		var ls: LabelSettings = label.label_settings
-		var white := Color(1, 1, 1, 1)
-		var shadow := Color(0, 0, 0, 0.40)
-		label.add_theme_color_override("font_color", white)
-		label.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0))
-		label.add_theme_constant_override("outline_size", 0)
-		label.add_theme_color_override("font_shadow_color", shadow)
-		label.add_theme_constant_override("shadow_offset_y", 5)
-		if ls:
-			ls.font_color = white
-			ls.outline_color = Color(1, 1, 1, 0)
-			ls.outline_size = 0
-			ls.shadow_color = shadow
-			ls.shadow_offset = Vector2(0, 5)
-	elif n in ["DueCounter", "BackWordLabel"]:
-		_set_label_color(label, Global.get_theme_color("text_dim"))
-	else:
-		_set_label_color(label, Global.get_theme_color("text"))
-
-
-# Sets both the theme override AND the LabelSettings font color, so the
-# hardcoded black label_settings from the scene never overrides the theme.
-func _set_label_color(label: Label, color: Color) -> void:
-	label.add_theme_color_override("font_color", color)
-	var ls: LabelSettings = label.label_settings
-	if ls:
-		ls.font_color = color
-
-
-func _theme_button(btn: Button) -> void:
-	if btn == back_button:
-		return  # flat icon button
-	elif btn == show_answer_button:
-		btn.add_theme_color_override("font_color", Global.get_theme_color("on_accent"))
-	elif btn in [again_button, hard_button, good_button, easy_button]:
-		btn.add_theme_color_override("font_color", Color.WHITE)
-	elif btn == open_list_menu_button:
-		var dark := Global.theme_is_dark()
-		var ham := StyleBoxFlat.new()
-		ham.set_corner_radius_all(30)
-		# Extend the pill far to the left so the handle sticks out past the
-		# left edge of the screen, like a tab of the side menu.
-		ham.expand_margin_left = 200
-		if dark:
-			ham.bg_color = Color(0, 0.29, 0.29, 1)
-			ham.border_color = Color(1, 1, 1, 0.10)
-		else:
-			ham.bg_color = Global.get_theme_color("surface")
-			ham.border_color = Color(0, 0, 0, 0.10)
-		ham.set_border_width_all(1)
-		open_list_menu_button.add_theme_stylebox_override("normal", ham)
-		open_list_menu_button.add_theme_stylebox_override("pressed", ham)
-		open_list_menu_button.add_theme_stylebox_override("hover", ham)
-		open_list_menu_button.add_theme_color_override("font_color", Global.get_theme_color("text"))
-	else:
-		btn.add_theme_color_override("font_color", Global.get_theme_color("text"))
+		return Color(0.10, 0.11, 0.16, 1)
+	return Color(0.95, 0.94, 0.92, 1)
 
 
 # ----------------------------------------------------------------
-#  CARD FLOW
+#  NAVIGATION
 # ----------------------------------------------------------------
-func _load_next_card() -> void:
-	_update_due_counter()
-	
-	if review_queue.is_empty():
-		if Global.review_words.is_empty():
-			_show_no_words_saved()
-		else:
-			_show_all_done()
-		return
-	
-	current_entry = review_queue[0]
-	word_label.text    = current_entry.get("word", "")
-	meaning_label.text = "%s\n%s" % [
-		current_entry.get("meaning_en", ""),
-		current_entry.get("meaning_fa", "")
-	]
-	example_label.text = current_entry.get("example", "")
-	
-	var phonetics_text: String = current_entry.get("phonetics", "")
-	if phonetics_text != "":
-		phonetics_label.text = phonetics_text
-		phonetics_label.visible = true
-	else:
-		phonetics_label.text = ""
-		phonetics_label.visible = false
-	
-	var book: int   = current_entry.get("book", 0)
-	var lesson: int = current_entry.get("lesson", 0)
-	extra_label.text = ("Vision %d — Lesson %d" % [book, lesson]) if book > 0 else ""
-	type_label.text = _get_state_badge(current_entry)
-	
-	_show_front()
-
-# Shows a badge describing where this word is in its learning journey
-func _get_state_badge(entry: Dictionary) -> String:
-	Global._ensure_srs_fields(entry)
-	var due: int  = entry.get("srs_due", -1)
-	var reps: int = entry.get("srs_reps", 0)
-
-	if due == -1:
-		return "🆕 کلمه جدید"
-	elif reps < 2:
-		return "🔁 در حال یادگیری"
-	else:
-		return "✅ مرور"
-
-
-func _show_front() -> void:
-	front.visible           = true
-	back.visible             = false
-	show_answer_button.visible = true
-	rating_buttons.visible     = false
-
-
-func _on_show_answer_pressed() -> void:
-	front.visible              = false
-	back.visible               = true
-	show_answer_button.visible = false
-	rating_buttons.visible     = true
-	
-	# Make sure rating buttons are properly positioned and visible
-	rating_buttons.show()
-	rating_buttons.modulate = Color(1, 1, 1, 1)
-	
-	_update_rating_previews()
-
-
-# Shows "in 1 day / 3 days / ..." on each rating button so the student
-# understands the consequence of each choice, just like real Anki.
-func _update_rating_previews() -> void:
-	var previews: Dictionary = Global.preview_intervals(current_entry)
-	again_button.text = "دوباره\n(%s)" % previews["again"]
-	hard_button.text  = "سخت\n(%s)"   % previews["hard"]
-	good_button.text  = "خوب\n(%s)"   % previews["good"]
-	easy_button.text  = "آسان\n(%s)"  % previews["easy"]
-
-
-func _on_rate_pressed(rating: String) -> void:
-	if current_entry.is_empty():
-		return
-	var key := _entry_key(current_entry)
-
-	Global.review_word(
-		current_entry.get("word", ""),
-		current_entry.get("book", 0),
-		current_entry.get("lesson", 0),
-		rating
-	)
-
-	review_queue.pop_front()
-	_session_requeues.erase(key)
-
-	# "Again" words come back later in the SAME session, not tomorrow — but
-	# only up to a limit, so a word the student keeps forgetting can never
-	# trap them in an endless loop.
-	if rating == "again" and int(_session_requeues.get(key, 0)) < MAX_SESSION_REQUEUES:
-		_session_requeues[key] = int(_session_requeues.get(key, 0)) + 1
-		# Re-queue a copy: the entry in Global has just been rescheduled, and
-		# the badge shown on the next visit must reflect the new state.
-		review_queue.append(current_entry.duplicate(true))
-
-	_load_next_card()
-
-
-## Stable per-card key, used to count how often a card was re-queued.
-func _entry_key(entry: Dictionary) -> String:
-	return "%s|%d|%d" % [
-		entry.get("word", ""),
-		int(entry.get("book", 0)),
-		int(entry.get("lesson", 0))
-	]
-
-
-func _update_due_counter() -> void:
-	var remaining := review_queue.size()
-	due_counter.text = "%s کلمه باقی مانده" % MenuStyle.persian_digits(str(remaining)) \
-		if remaining > 0 else "تمام شد ✅"
-
-
-# ----------------------------------------------------------------
-#  SESSION COMPLETE STATE
-# ----------------------------------------------------------------
-func _show_all_done() -> void:
-	word_label.text    = "🎉\nهمه‌ی کلمات مرور شده!\nفردا دوباره سر بزن."
-	front.visible               = true
-	back.visible                 = false
-	show_answer_button.visible   = false
-	rating_buttons.visible       = false
-
-	due_counter.text = "تمام شد ✅"
-
-func _show_no_words_saved() -> void:
-	word_label.text = "📭\nهیچ کلمه ای در لایتنر ذخیره نشده است."
-	front.visible               = true
-	back.visible                 = false
-	show_answer_button.visible   = false
-	rating_buttons.visible       = false
-	due_counter.text = "لیست خالی است"
-
 func _on_back_button_pressed() -> void:
-	# Return to whichever scene opened this review session
 	var target: String = str(AppRouter.get_arg("return_route", ""))
 	if target == "":
-		target = SCENE_SAVED_WORDS   # safe fallback if never set
+		target = SCENE_SAVED_WORDS
 	TransitionManager.change_scene(target)
 
 
