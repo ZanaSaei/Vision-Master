@@ -2,62 +2,78 @@
 
 [ext_resource type="Script" uid="uid://di330p5p0p4m6" path="res://scenes/book_menu/book_card.gd" id="1_168sl"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_3rmt2"]
-[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="3_mk5ey"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ujfs"]
-corner_radius_top_left = 25
-corner_radius_bottom_left = 25
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shadow"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 36
+shadow_offset = Vector2(0, 18)
 
-[sub_resource type="LabelSettings" id="LabelSettings_7ujfs"]
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
 font = ExtResource("2_3rmt2")
-font_size = 42
+font_size = 68
+font_color = Color(1, 1, 1, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 0.55)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_offset = Vector2(0, 5)
 
-[sub_resource type="LabelSettings" id="LabelSettings_3umrm"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+bg_color = Color(0.06, 0.08, 0.12, 0.85)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.35)
+
+[sub_resource type="LabelSettings" id="LabelSettings_grade"]
 font = ExtResource("2_3rmt2")
-font_size = 72
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ccj0"]
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_5ccj0"]
-font = ExtResource("3_mk5ey")
 font_size = 24
+font_color = Color(1, 1, 1, 0.95)
 
 [node name="BookCard" type="Control" unique_id=332278860]
-custom_minimum_size = Vector2(520, 800)
+custom_minimum_size = Vector2(640, 960)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -260.0
-offset_top = -400.0
-offset_right = 260.0
-offset_bottom = 400.0
+offset_left = -320.0
+offset_top = -480.0
+offset_right = 320.0
+offset_bottom = 480.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(320, 480)
+mouse_filter = 2
 script = ExtResource("1_168sl")
 
-[node name="CardOverlay" type="ColorRect" parent="." unique_id=438824932]
-custom_minimum_size = Vector2(460, 800)
+[node name="ShadowPanel" type="Panel" parent="." unique_id=1410000001]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 10.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0.02745098, 0.3647059, 0.19607843)
+theme_override_styles/panel = SubResource("StyleBoxFlat_shadow")
 
-[node name="Content" type="Control" parent="." unique_id=1686696288]
-custom_minimum_size = Vector2(460, 800)
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="ContentPanel" type="PanelContainer" parent="Content" unique_id=193494318]
+[node name="CardBackground" type="TextureRect" parent="." unique_id=2084064077]
+custom_minimum_size = Vector2(640, 960)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,65 +81,57 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7ujfs")
-
-[node name="CardBackground" type="TextureRect" parent="Content/ContentPanel" unique_id=2084064077]
-custom_minimum_size = Vector2(460, 800)
-layout_mode = 2
-mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="Content/ContentPanel" unique_id=1206441854]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_top = 33
-
-[node name="BookNumber" type="Label" parent="Content/ContentPanel/MarginContainer" unique_id=1855387787]
-custom_minimum_size = Vector2(396, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, 180)
-text = "کتاب اول"
-label_settings = SubResource("LabelSettings_7ujfs")
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="BookTitle" type="Label" parent="Content/ContentPanel/MarginContainer" unique_id=204124797]
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, -30)
-text = "ویژن ۱"
-label_settings = SubResource("LabelSettings_3umrm")
-horizontal_alignment = 1
-
-[node name="DecorativeShape" type="TextureRect" parent="Content/ContentPanel/MarginContainer" unique_id=1336714756]
-custom_minimum_size = Vector2(396, 300)
-layout_mode = 2
-mouse_filter = 2
-stretch_mode = 6
-
-[node name="BookTab" type="PanelContainer" parent="." unique_id=1776694306]
-custom_minimum_size = Vector2(60, 800)
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1410000004]
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-grow_horizontal = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -70.0
+offset_right = 300.0
+offset_bottom = 70.0
+grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5ccj0")
 
-[node name="TabLabel" type="Label" parent="BookTab" unique_id=1250081510]
+[node name="TitleLabel" type="Label" parent="CenterContainer" unique_id=204124797]
 layout_mode = 2
-size_flags_vertical = 1
-offset_transform_enabled = true
-offset_transform_rotation = 1.5707964
-text = "Vision 1"
-label_settings = SubResource("LabelSettings_5ccj0")
+mouse_filter = 2
+text = "ویژن ۱"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopBadge" type="PanelContainer" parent="." unique_id=1410000006]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 28.0
+offset_right = -28.0
+offset_bottom = 76.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="Margin" type="MarginContainer" parent="TopBadge" unique_id=1410000007]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 4
+
+[node name="GradeLabel" type="Label" parent="TopBadge/Margin" unique_id=1855387787]
+layout_mode = 2
+mouse_filter = 2
+text = "پایه دهم"
+label_settings = SubResource("LabelSettings_grade")
 horizontal_alignment = 1
 vertical_alignment = 1

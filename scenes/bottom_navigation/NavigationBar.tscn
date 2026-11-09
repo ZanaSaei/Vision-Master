@@ -18,26 +18,36 @@
 shader = ExtResource("1_54rmf")
 shader_parameter/bar_color = Color(1, 1, 1, 1)
 shader_parameter/cutout_center = Vector2(180, 0)
-shader_parameter/cutout_radius = 44.0
+shader_parameter/cutout_radius = 64.0
 shader_parameter/top_corner_radius = 24.0
 shader_parameter/bar_size = Vector2(360, 72)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ku3dv"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 27
-corner_radius_top_right = 27
-corner_radius_bottom_right = 27
-corner_radius_bottom_left = 27
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menupanel"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 57
+corner_radius_top_right = 57
+corner_radius_bottom_right = 57
+corner_radius_bottom_left = 57
+shadow_color = Color(0, 0, 0, 0.14)
+shadow_size = 18
+shadow_offset = Vector2(0, 4)
 
 [node name="NavigationBar" type="Control" unique_id=1620981374]
-custom_minimum_size = Vector2(0, 96)
+custom_minimum_size = Vector2(0, 116)
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -144.0
-offset_bottom = -48.0
+offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_vog3g")
@@ -49,7 +59,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 72.0
+offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
@@ -62,7 +72,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 
 [node name="Items" type="HBoxContainer" parent="MarginContainer" unique_id=432825537]
@@ -71,43 +81,44 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Home" type="Control" parent="MarginContainer/Items" unique_id=839815064]
-custom_minimum_size = Vector2(70, 70)
+custom_minimum_size = Vector2(70, 96)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ActiveIcon" type="TextureRect" parent="MarginContainer/Items/Home" unique_id=756598538]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 60.0
+offset_bottom = 56.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("1_sflyj")
+expand_mode = 2
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/Items/Home" unique_id=192614851]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 64.0
-offset_bottom = 90.0
+offset_top = 60.0
+offset_bottom = 96.0
 grow_horizontal = 2
 text = "خانه"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Books" type="Control" parent="MarginContainer/Items" unique_id=1959694762]
-custom_minimum_size = Vector2(70, 70)
+custom_minimum_size = Vector2(70, 96)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ActiveIcon" type="TextureRect" parent="MarginContainer/Items/Books" unique_id=1321500699]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 60.0
+offset_bottom = 56.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("3_vog3g")
@@ -118,24 +129,24 @@ stretch_mode = 5
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 64.0
-offset_bottom = 90.0
+offset_top = 60.0
+offset_bottom = 96.0
 grow_horizontal = 2
 text = "کتاب"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Games" type="Control" parent="MarginContainer/Items" unique_id=423623266]
-custom_minimum_size = Vector2(70, 70)
+custom_minimum_size = Vector2(70, 96)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ActiveIcon" type="TextureRect" parent="MarginContainer/Items/Games" unique_id=1690584307]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 60.0
+offset_bottom = 56.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("4_wocfp")
@@ -146,24 +157,24 @@ stretch_mode = 5
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 64.0
-offset_bottom = 90.0
+offset_top = 60.0
+offset_bottom = 96.0
 grow_horizontal = 2
 text = "بازی"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Exam" type="Control" parent="MarginContainer/Items" unique_id=1707272213]
-custom_minimum_size = Vector2(70, 70)
+custom_minimum_size = Vector2(70, 96)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ActiveIcon" type="TextureRect" parent="MarginContainer/Items/Exam" unique_id=716696093]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 60.0
+offset_bottom = 56.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("5_ncpsy")
@@ -174,24 +185,24 @@ stretch_mode = 5
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 64.0
-offset_bottom = 90.0
+offset_top = 60.0
+offset_bottom = 96.0
 grow_horizontal = 2
 text = "امتحان نهایی"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Flashcards" type="Control" parent="MarginContainer/Items" unique_id=1039648138]
-custom_minimum_size = Vector2(70, 70)
+custom_minimum_size = Vector2(70, 96)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ActiveIcon" type="TextureRect" parent="MarginContainer/Items/Flashcards" unique_id=921556525]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 60.0
+offset_bottom = 56.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("6_vmnu6")
@@ -202,24 +213,24 @@ stretch_mode = 5
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 64.0
-offset_bottom = 90.0
+offset_top = 60.0
+offset_bottom = 96.0
 grow_horizontal = 2
 text = "فلش کارت"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Menu" type="Control" parent="MarginContainer/Items" unique_id=1336864719]
-custom_minimum_size = Vector2(70, 70)
+custom_minimum_size = Vector2(70, 96)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ActiveIcon" type="TextureRect" parent="MarginContainer/Items/Menu" unique_id=1374595107]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 60.0
+offset_bottom = 56.0
 grow_horizontal = 2
 size_flags_vertical = 3
 texture = ExtResource("7_54eih")
@@ -230,104 +241,106 @@ stretch_mode = 5
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 64.0
-offset_bottom = 90.0
+offset_top = 60.0
+offset_bottom = 96.0
 grow_horizontal = 2
 text = "منو"
 label_settings = ExtResource("2_54rmf")
 horizontal_alignment = 1
 
 [node name="Selector" type="Control" parent="." unique_id=1621673232]
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(114, 114)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -72.0
+offset_top = -114.0
 grow_horizontal = 2
 grow_vertical = 0
-pivot_offset = Vector2(36, 36)
+pivot_offset = Vector2(57, 57)
 
 [node name="Circle" type="Panel" parent="Selector" unique_id=1220288273]
-custom_minimum_size = Vector2(54, 54)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -27.0
-offset_right = 27.0
-offset_bottom = 27.0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(27, 27)
+pivot_offset = Vector2(48, 48)
 theme_override_styles/panel = SubResource("StyleBoxFlat_ku3dv")
 
 [node name="ActiveIcon" type="TextureRect" parent="Selector" unique_id=1482668953]
-custom_minimum_size = Vector2(26, 26)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -13.0
-offset_top = -17.0
-offset_right = 13.0
-offset_bottom = 9.0
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 2
+stretch_mode = 5
 
 [node name="MenuPanel" type="Panel" parent="." unique_id=1928374651]
-custom_minimum_size = Vector2(66, 224)
+custom_minimum_size = Vector2(114, 370)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -102.0
-offset_top = -342.0
-offset_right = -36.0
-offset_bottom = -118.0
+offset_left = -160.0
+offset_top = -512.0
+offset_right = -46.0
+offset_bottom = -142.0
 grow_horizontal = 0
 grow_vertical = 0
-pivot_offset = Vector2(33, 224)
-theme_override_styles/panel = SubResource("StyleBoxFlat_ku3dv")
+pivot_offset = Vector2(57, 370)
+theme_override_styles/panel = SubResource("StyleBoxFlat_menupanel")
 
 [node name="MenuItems" type="VBoxContainer" parent="MenuPanel" unique_id=1928374652]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 10.0
-offset_bottom = -10.0
+offset_top = 18.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 6
 alignment = 1
 
 [node name="Profile" type="Control" parent="MenuPanel/MenuItems" unique_id=1928374653]
-custom_minimum_size = Vector2(54, 48)
+custom_minimum_size = Vector2(90, 78)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="MenuPanel/MenuItems/Profile" unique_id=1928374654]
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 14.0
-offset_bottom = 14.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -336,23 +349,23 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="Buy" type="Control" parent="MenuPanel/MenuItems" unique_id=1928374655]
-custom_minimum_size = Vector2(54, 48)
+custom_minimum_size = Vector2(90, 78)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="MenuPanel/MenuItems/Buy" unique_id=1928374656]
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 14.0
-offset_bottom = 14.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -361,23 +374,23 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="Settings" type="Control" parent="MenuPanel/MenuItems" unique_id=1928374657]
-custom_minimum_size = Vector2(54, 48)
+custom_minimum_size = Vector2(90, 78)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="MenuPanel/MenuItems/Settings" unique_id=1928374658]
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 14.0
-offset_bottom = 14.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -386,23 +399,23 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="AboutMe" type="Control" parent="MenuPanel/MenuItems" unique_id=1928374659]
-custom_minimum_size = Vector2(54, 48)
+custom_minimum_size = Vector2(90, 78)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="MenuPanel/MenuItems/AboutMe" unique_id=1928374660]
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 14.0
-offset_bottom = 14.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

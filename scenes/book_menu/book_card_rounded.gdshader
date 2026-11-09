@@ -1,35 +1,33 @@
 shader_type canvas_item;
 
-uniform float corner_radius : hint_range(0.0, 200.0) = 25.0;
-uniform vec2 rect_size = vec2(300.0, 400.0);
+uniform float corner_radius : hint_range(0.0, 100.0) = 26.0;
+uniform vec2 rect_size = vec2(640.0, 960.0);
+uniform float spine_width = 38.0;
 
 void fragment() {
 	vec4 base = texture(TEXTURE, UV) * COLOR;
-
 	vec2 p = UV * rect_size;
-	float r = corner_radius;
+	vec2 half_size = rect_size * 0.5;
+	vec2 d = abs(p - half_size) - (half_size - vec2(corner_radius));
+	float dist = length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0);
+	float mask = 1.0 - smoothstep(corner_radius - 1.5, corner_radius, dist);
 
-	// Is the pixel on the left strip (where the corners live)?
-	float on_left = step(p.x, r);
+	// Realistic book spine crease lighting on the right edge (Persian binding)
+	float x_from_right = rect_size.x - p.x;
+	float spine_light = 1.0;
+	if (x_from_right < spine_width) {
+		float t = x_from_right / spine_width;
+		spine_light = 0.85 + 0.15 * smoothstep(0.0, 1.0, t);
+	} else if (x_from_right < spine_width + 16.0) {
+		float t = (x_from_right - spine_width) / 16.0;
+		spine_light = 1.0 + 0.12 * sin(t * 3.14159265);
+	}
 
-	// Is the pixel in the straight vertical section of the left edge?
-	float in_middle =
-		step(r, p.y) * step(p.y, rect_size.y - r);
+	// Soft lighting vignette for tactile 3D cover feel
+	vec2 uv_vignette = UV * (1.0 - UV.yx);
+	float vig = clamp(uv_vignette.x * uv_vignette.y * 14.0, 0.0, 1.0);
+	float depth_shade = mix(0.92, 1.0, vig);
 
-	// Corner arcs.
-	float d_tl = distance(p, vec2(r, r));
-	float d_bl = distance(p, vec2(r, rect_size.y - r));
-
-	float in_tl =
-		(1.0 - step(r, p.y)) *
-		(1.0 - smoothstep(r - 1.5, r, d_tl));
-
-	float in_bl =
-		step(rect_size.y - r, p.y) *
-		(1.0 - smoothstep(r - 1.5, r, d_bl));
-
-	float corner_region = on_left * (1.0 - in_middle);
-	float mask = mix(1.0, in_tl + in_bl, corner_region);
-
-	COLOR = vec4(base.rgb, base.a * mask);
+	vec3 col = base.rgb * spine_light * depth_shade;
+	COLOR = vec4(col, base.a * mask);
 }

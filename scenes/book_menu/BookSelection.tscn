@@ -3,9 +3,21 @@
 [ext_resource type="Script" uid="uid://ck675wn5jnu7w" path="res://scenes/book_menu/book_selection.gd" id="1_kdstj"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_380wp"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_kdstj"]
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
 font = ExtResource("2_380wp")
-font_size = 45
+font_size = 46
+font_color = Color(1, 1, 1, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.65)
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sub"]
+font = ExtResource("2_380wp")
+font_size = 22
+font_color = Color(1, 1, 1, 0.82)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_offset = Vector2(0, 2)
 
 [node name="BookSelection" type="Control" unique_id=1108866151]
 layout_mode = 3
@@ -23,6 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
@@ -33,28 +46,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 6
 
-[node name="SelectionPrompt" type="Label" parent="." unique_id=1500000001]
-custom_minimum_size = Vector2(520, 48)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.097
-anchor_right = 0.5
-anchor_bottom = 0.097
-offset_left = -260.0
-offset_top = -24.160004
-offset_right = 260.0
-offset_bottom = 23.840057
-grow_horizontal = 2
-text = "کتاب مورد نظر را انتخاب کنید"
-label_settings = SubResource("LabelSettings_kdstj")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CardStack" type="Control" parent="." unique_id=1425483430]
+[node name="DarkDimmer" type="ColorRect" parent="." unique_id=1166541467]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,3 +58,79 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+color = Color(0, 0, 0, 0.22)
+
+[node name="Stage" type="Control" parent="." unique_id=1425483430]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="HeaderArea" type="VBoxContainer" parent="." unique_id=1500000001]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 48.0
+offset_bottom = 160.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="HeaderTitle" type="Label" parent="HeaderArea" unique_id=1500000002]
+layout_mode = 2
+mouse_filter = 2
+text = "کتاب‌های زبان انگلیسی"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeaderSubtitle" type="Label" parent="HeaderArea" unique_id=1500000003]
+layout_mode = 2
+mouse_filter = 2
+text = "کتاب مورد نظرتان را برای مطالعه انتخاب کنید"
+label_settings = SubResource("LabelSettings_sub")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomControls" type="VBoxContainer" parent="." unique_id=1500000004]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -490.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="GradeSwitcher" type="HBoxContainer" parent="BottomControls" unique_id=1500000005]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="ActionRow" type="CenterContainer" parent="BottomControls" unique_id=1500000006]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ActionButton" type="Button" parent="BottomControls/ActionRow" unique_id=1500000007]
+custom_minimum_size = Vector2(640, 88)
+layout_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+
+[node name="HintLabel" type="Label" parent="BottomControls" unique_id=1500000008]
+layout_mode = 2
+mouse_filter = 2
+text = "کتاب‌ها را ورق بزنید یا برای ورود لمس کنید ✨"
+label_settings = SubResource("LabelSettings_sub")
+horizontal_alignment = 1
+vertical_alignment = 1

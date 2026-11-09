@@ -320,7 +320,17 @@ static func layout_row(row: BoxContainer) -> void:
 	var side := maxf(_side_width(leading), _side_width(trailing))
 	var lead_wrap := _make_side(leading, LEADING_NAME, BoxContainer.ALIGNMENT_BEGIN, side)
 	var trail_wrap := _make_side(trailing, TRAILING_NAME, BoxContainer.ALIGNMENT_END, side)
-	_center_title(title)
+
+	var row_width := row.size.x
+	if row_width <= 0.0:
+		var vp := row.get_viewport()
+		if vp != null:
+			row_width = vp.get_visible_rect().size.x - 2.0 * PAD_X
+		else:
+			row_width = 1080.0 - 2.0 * PAD_X
+	var avail := row_width - 2.0 * side - 2.0 * ITEM_GAP
+	_center_title(title, avail)
+
 	row.add_child(lead_wrap)
 	_detach(title)
 	row.add_child(title)
@@ -372,13 +382,15 @@ static func _detach(node: Node) -> void:
 		parent.remove_child(node)
 
 
-static func _center_title(title: Node) -> void:
+static func _center_title(title: Node, available_width: float = 0.0) -> void:
 	if title is Label:
 		var direct := title as Label
 		direct.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		direct.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		direct.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		direct.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		if available_width > 0.0:
+			_fit_label_font(direct, available_width)
 		return
 	var el := title as Control
 	if el == null:
@@ -391,10 +403,27 @@ static func _center_title(title: Node) -> void:
 	nested.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	nested.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	nested.size_flags_horizontal = Control.SIZE_FILL
+	if available_width > 0.0:
+		_fit_label_font(nested, available_width)
 	if not (el is Container):
 		# A plain Control (title + spacer) has no minimum size of its own, so
 		# give it the label's so the centred slot keeps the right width.
 		el.custom_minimum_size.x = maxf(el.custom_minimum_size.x, nested.get_combined_minimum_size().x)
+
+
+static func _fit_label_font(label: Label, max_width: float) -> void:
+	if label == null or label.text.is_empty():
+		return
+	var font := _title_font(label.text)
+	if font == null:
+		return
+	var size := TITLE_FONT_SIZE
+	while size > 24:
+		var w := font.get_string_size(label.text, HORIZONTAL_ALIGNMENT_CENTER, -1, size).x
+		if w <= max_width:
+			break
+		size -= 2
+	label.add_theme_font_size_override("font_size", size)
 
 
 ## Moves the wrappers built by a previous pass back into the row so the next
@@ -419,12 +448,14 @@ static func _unwrap_row(row: BoxContainer) -> void:
 
 static func _side_width(items: Array[Node]) -> float:
 	var total := 0.0
+	var visible_count := 0
 	for item in items:
 		var c := item as Control
-		if c != null:
+		if c != null and c.visible:
 			total += c.get_combined_minimum_size().x
-	if items.size() > 1:
-		total += ITEM_GAP * float(items.size() - 1)
+			visible_count += 1
+	if visible_count > 1:
+		total += ITEM_GAP * float(visible_count - 1)
 	return total
 
 
@@ -556,6 +587,8 @@ static func style_title(label: Label) -> void:
 	if label == null:
 		return
 	_apply_title_style(label, DesignTokens.ACCENT)
+	if label.size.x > 0.0:
+		_fit_label_font(label, label.size.x)
 
 
 ## One type ramp for the words on the bar: Vazir for Persian, Jakarta for

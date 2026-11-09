@@ -148,7 +148,7 @@ func _style_rating_buttons() -> void:
 	for btn in [again_button, hard_button, good_button, easy_button]:
 		btn.add_theme_color_override("font_color", Color("#FFFFFF"))
 		btn.autowrap_mode = TextServer.AUTOWRAP_WORD
-		btn.custom_minimum_size = Vector2(200, 100)  # Ensure buttons have size
+		btn.custom_minimum_size = Vector2(200, 110)  # Ensure buttons have matching height
 
 
 func _apply_button_color(btn: Button, color: Color) -> void:

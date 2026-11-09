@@ -1,6 +1,5 @@
 extends Control
 
-
 # ============================================================
 # SCENES
 # ============================================================
@@ -13,6 +12,9 @@ const BOOK_CONTENTS_SCENE: PackedScene = preload(
 	"res://scenes/book_menu/BookMenu.tscn"
 )
 
+const GlossSheenScript: GDScript = preload(
+	"res://ui/widgets/gloss_sheen.gd"
+)
 
 # ============================================================
 # BOOK DATA
@@ -23,6 +25,20 @@ const BOOK_TITLES: Array[String] = [
 	"ویژن ۲",
 	"ویژن ۳"
 ]
+
+const BOOK_GRADES: Array[String] = [
+	"پایه دهم",
+	"پایه یازدهم",
+	"پایه دوازدهم"
+]
+
+const BOOK_ACCENTS: Array[Color] = [
+	Color("#3B82F6"), # Vision 1: cosmic blue
+	Color("#22C55E"), # Vision 2: lush green
+	Color("#EF4444")  # Vision 3: sunset red
+]
+
+const PERSIAN_DIGITS: Array[String] = ["۱", "۲", "۳"]
 
 const BOOK_COVERS: Array[Texture2D] = [
 	preload("res://ui/images/book_scene/Vision1.png"),
@@ -36,23 +52,8 @@ const BOOK_BLURRED_BACKGROUNDS: Array[Texture2D] = [
 	preload("res://ui/images/book_scene/Vision3_blur.png")
 ]
 
-
-# ============================================================
-# ANIMATION SETTINGS
-# ============================================================
-
-const STACK_X_OFFSET: float = 60.0
-const STACK_Y_OFFSET: float = 5.0
-
-const SWIPE_DURATION: float = 0.28
-const STACK_DURATION: float = 0.36
-const BACKGROUND_DURATION: float = 0.50
-const OPEN_DURATION: float = 0.30
-
-const NAV_HEIGHT: float = 150.0
-const TOP_SPACE: float = 80.0
-const SCREEN_MARGIN: float = 16.0
-
+const CARD_BASE_WIDTH: float = 640.0
+const CARD_BASE_HEIGHT: float = 960.0
 
 # ============================================================
 # SCENE REFERENCES
@@ -60,24 +61,32 @@ const SCREEN_MARGIN: float = 16.0
 
 @onready var background_a: TextureRect = $BackgroundA
 @onready var background_b: TextureRect = $BackgroundB
-@onready var card_stack: Control = $CardStack
-
+@onready var stage: Control = $Stage
+@onready var grade_switcher: HBoxContainer = $BottomControls/GradeSwitcher
+@onready var action_button: Button = $BottomControls/ActionRow/ActionButton
+@onready var hint_label: Label = $BottomControls/HintLabel
 
 # ============================================================
 # STATE
 # ============================================================
 
 var cards: Array[BookCard] = []
-var book_order: Array[int] = [0, 1, 2]
+var selected_index: int = 0
+var current_offset: float = 0.0
 
 var is_animating: bool = false
 var is_opening: bool = false
+var is_dragging: bool = false
 
-var background_tween: Tween
+var drag_start_x: float = 0.0
+var drag_last_x: float = 0.0
+var drag_start_offset: float = 0.0
+var drag_velocity_x: float = 0.0
+var total_drag_distance: float = 0.0
 
-# Flickering drag hint (created at runtime, no scene edits needed).
-var drag_hint_label: Label = null
-var drag_hint_tween: Tween = null
+var snap_tween: Tween = null
+var background_tween: Tween = null
+var capsule_buttons: Array[Button] = []
 
 
 # ============================================================
@@ -86,46 +95,24 @@ var drag_hint_tween: Tween = null
 
 func _ready() -> void:
 	_configure_backgrounds()
-	$SelectionPrompt.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var selected_id: int = clampi(
-		BookSession.selected_book_id,
-		0,
-		2
-	)
-
-	book_order = [
-		selected_id,
-		(selected_id + 1) % 3,
-		(selected_id + 2) % 3
-	]
+	selected_index = clampi(BookSession.selected_book_id, 0, 2)
+	current_offset = float(selected_index)
 
 	_create_cards()
-	_create_drag_hint()
+	_create_grade_switcher()
+	_setup_action_button()
 
-	if cards.size() != 3:
-		push_error("BookSelection: Failed to create all three cards.")
-		return
+	get_viewport().size_changed.connect(_on_viewport_resized)
 
-	get_viewport().size_changed.connect(_layout_cards)
+	_show_background(selected_index, false)
+	_layout_carousel(current_offset)
+	_update_ui_for_selection()
 
-	_layout_cards()
-	_update_card_input()
-	_update_drag_hint_visibility()
-
-	_show_background(book_order[0], false)
-
-
-# ============================================================
-# BACKGROUND SETUP
-# ============================================================
 
 func _configure_backgrounds() -> void:
-	for bg in [background_a, background_b]:
-		bg.set_anchors_and_offsets_preset(
-			Control.PRESET_FULL_RECT
-		)
-
+	for bg: TextureRect in [background_a, background_b]:
+		bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
@@ -134,391 +121,327 @@ func _configure_backgrounds() -> void:
 	background_b.modulate.a = 0.0
 
 
-# ============================================================
-# CREATE THE MANUALLY DESIGNED CARDS
-# ============================================================
-
 func _create_cards() -> void:
 	for book_id in range(3):
 		var card := BOOK_CARD_SCENE.instantiate() as BookCard
-
 		if card == null:
-			push_error(
-				"BookSelection: BookCard.tscn must use BookCard.gd."
-			)
+			push_error("BookSelection: Failed to instantiate BookCard.")
 			return
 
-		card.book_id = book_id
-
-		card_stack.add_child(card)
-
-		# Feed the per-book data so the labels reflect the book
-		# that the card is currently showing.
+		stage.add_child(card)
 		card.set_book_content(
 			book_id,
 			BOOK_TITLES[book_id],
 			BOOK_COVERS[book_id]
 		)
-
-		card.swipe_committed.connect(_on_swipe_committed)
-		card.swipe_cancelled.connect(_on_swipe_cancelled)
-		card.card_pressed.connect(_on_card_pressed)
-
 		cards.append(card)
 
 
-# ============================================================
-# DRAG HINT  ("کارت را بکشید")
-# ============================================================
-
-func _create_drag_hint() -> void:
-	drag_hint_label = Label.new()
-	drag_hint_label.text = "کارت را بکشید"
-
-	drag_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	drag_hint_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	drag_hint_label.text_direction = Control.TEXT_DIRECTION_RTL
-	drag_hint_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-	drag_hint_label.add_theme_font_size_override("font_size", 22)
-	drag_hint_label.add_theme_color_override(
-		"font_color", Color(1, 1, 1, 0.92)
-	)
-	drag_hint_label.add_theme_color_override(
-		"font_shadow_color", Color(0, 0, 0, 0.75)
-	)
-	drag_hint_label.add_theme_constant_override("shadow_offset_x", 1)
-	drag_hint_label.add_theme_constant_override("shadow_offset_y", 2)
-
-	# Draw above the card stack so it is always readable.
-	add_child(drag_hint_label)
-	move_child(drag_hint_label, get_child_count() - 1)
-
-	_start_drag_hint_flicker()
+func _create_grade_switcher() -> void:
+	for i in range(3):
+		var btn := Button.new()
+		btn.name = "GradeBtn_%d" % i
+		btn.text = BOOK_GRADES[i]
+		btn.focus_mode = Control.FOCUS_NONE
+		btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		btn.add_theme_font_override("font", MenuStyle.vazir())
+		btn.add_theme_font_size_override("font_size", 22)
+		btn.pressed.connect(_on_grade_capsule_pressed.bind(i))
+		MenuStyle.wire_microinteractions(btn)
+		grade_switcher.add_child(btn)
+		capsule_buttons.append(btn)
 
 
-func _start_drag_hint_flicker() -> void:
-	if drag_hint_label == null:
-		return
-
-	if drag_hint_tween != null and drag_hint_tween.is_valid():
-		drag_hint_tween.kill()
-
-	drag_hint_label.modulate.a = 1.0
-
-	drag_hint_tween = create_tween().set_loops()
-	drag_hint_tween.set_trans(Tween.TRANS_SINE)
-	drag_hint_tween.set_ease(Tween.EASE_IN_OUT)
-
-	drag_hint_tween.tween_property(
-		drag_hint_label, "modulate:a", 0.15, 0.75
-	)
-	drag_hint_tween.tween_property(
-		drag_hint_label, "modulate:a", 1.0, 0.75
-	)
+func _setup_action_button() -> void:
+	action_button.pressed.connect(_open_selected_book)
+	MenuStyle.wire_microinteractions(action_button)
 
 
-func _update_drag_hint_position() -> void:
-	if drag_hint_label == null or cards.is_empty():
-		return
-
-	var top_card: BookCard = cards[book_order[0]]
-
-	# Account for the scale/pivot so the label sits visually
-	# just below the top card.
-	var visual_pos: Vector2 = (
-		top_card.position
-		+ top_card.pivot_offset
-		- top_card.pivot_offset * top_card.scale
-	)
-	var visual_size: Vector2 = top_card.size * top_card.scale
-
-	drag_hint_label.position = Vector2(
-		visual_pos.x,
-		visual_pos.y + visual_size.y + 12.0
-	)
-	drag_hint_label.size = Vector2(visual_size.x, 40.0)
-
-
-func _update_drag_hint_visibility() -> void:
-	if drag_hint_label == null:
-		return
-
-	var should_show: bool = not is_animating and not is_opening
-
-	drag_hint_label.visible = should_show
-
-	if should_show:
-		if drag_hint_tween == null or not drag_hint_tween.is_valid():
-			_start_drag_hint_flicker()
-		elif not drag_hint_tween.is_running():
-			_start_drag_hint_flicker()
+func _on_viewport_resized() -> void:
+	_layout_carousel(current_offset)
 
 
 # ============================================================
-# RESPONSIVE CARD POSITIONING
+# CAROUSEL LAYOUT & INTERPOLATION
 # ============================================================
 
 func _get_card_base_scale() -> float:
-	if cards.is_empty():
+	var vp_size: Vector2 = get_viewport_rect().size
+	if vp_size.x <= 0.0 or vp_size.y <= 0.0:
 		return 1.0
 
-	var viewport_size: Vector2 = get_viewport_rect().size
-	var card_size: Vector2 = cards[0].size
+	var avail_w: float = vp_size.x - 48.0
+	var avail_h: float = vp_size.y - 480.0
 
-	if card_size.x <= 0.0 or card_size.y <= 0.0:
-		return 1.0
+	var sx: float = avail_w / CARD_BASE_WIDTH
+	var sy: float = avail_h / CARD_BASE_HEIGHT
 
-	var available_width: float = maxf(
-		1.0,
-		viewport_size.x
-			- SCREEN_MARGIN * 2.0
-			- STACK_X_OFFSET * 2.0
-	)
-
-	var available_height: float = maxf(
-		1.0,
-		viewport_size.y - NAV_HEIGHT - TOP_SPACE
-	)
-
-	var width_scale: float = available_width / card_size.x
-	var height_scale: float = available_height / card_size.y
-
-	return minf(1.0, minf(width_scale, height_scale))
+	return clampf(minf(sx, sy), 0.55, 1.05)
 
 
-func _get_stack_base_position() -> Vector2:
-	var viewport_size: Vector2 = get_viewport_rect().size
-	var card_size: Vector2 = cards[0].size
-
-	var base_x: float = (
-		viewport_size.x - card_size.x
-	) * 0.5 - STACK_X_OFFSET
-
-	var available_height: float = (
-		viewport_size.y - NAV_HEIGHT - TOP_SPACE
-	)
-
-	var base_y: float = TOP_SPACE + (
-		available_height - card_size.y
-	) * 0.5 - STACK_Y_OFFSET
-
-	return Vector2(base_x, base_y)
-
-
-func _layout_cards() -> void:
+func _layout_carousel(offset: float) -> void:
 	if cards.size() != 3:
 		return
 
-	var card_size: Vector2 = cards[0].size
-
-	if card_size.x <= 0.0 or card_size.y <= 0.0:
-		push_error(
-			"Set the BookCard root's actual Size in the Inspector."
-		)
-		return
-
-	var base_position: Vector2 = _get_stack_base_position()
+	var vp_size: Vector2 = get_viewport_rect().size
 	var base_scale: float = _get_card_base_scale()
 
-	for depth in range(book_order.size()):
-		var book_id: int = book_order[depth]
-		var card: BookCard = cards[book_id]
+	var center_x: float = vp_size.x * 0.5
+	var center_y: float = vp_size.y * 0.43
+	var card_size: Vector2 = Vector2(CARD_BASE_WIDTH, CARD_BASE_HEIGHT)
+	var spacing: float = card_size.x * base_scale * 0.88
 
-		card.pivot_offset = card.size * 0.5
+	for i in range(3):
+		var card: BookCard = cards[i]
+		var diff: float = float(i) - offset
+		var abs_diff: float = absf(diff)
 
-		card.position = base_position + Vector2(
-			depth * STACK_X_OFFSET,
-			depth * STACK_Y_OFFSET
-		)
+		card.pivot_offset = card_size * 0.5
 
-		card.scale = Vector2.ONE * (
-			base_scale * (1.0 - depth * 0.035)
-		)
+		var target_x: float = center_x + diff * spacing - card_size.x * 0.5
+		var target_y: float = center_y - card_size.y * 0.5 + abs_diff * 22.0 * base_scale
 
-		card.rotation = 0.0
-		card.z_index = 10 - depth
+		card.position = Vector2(target_x, target_y)
 
-	_update_card_input()
-	_update_drag_hint_position()
+		var scale_factor: float = lerpf(1.0, 0.78, clampf(abs_diff, 0.0, 1.0))
+		card.scale = Vector2.ONE * (base_scale * scale_factor)
+
+		# 3D perspective tilt
+		card.rotation = clampf(diff * -0.045, -0.15, 0.15)
+
+		# Alpha: active card is bright, peeking cards are slightly muted
+		card.modulate.a = lerpf(1.0, 0.50, clampf(abs_diff, 0.0, 1.0))
+
+		# Center card has priority
+		card.z_index = int(20.0 - abs_diff * 6.0)
 
 
-# ============================================================
-# INPUT MANAGEMENT
-# ============================================================
-
-func _update_card_input() -> void:
-	for depth in range(book_order.size()):
-		var book_id: int = book_order[depth]
-
-		cards[book_id].set_input_enabled(
-			depth == 0
-			and not is_animating
-			and not is_opening
-		)
+func _set_carousel_offset(val: float) -> void:
+	current_offset = val
+	_layout_carousel(current_offset)
 
 
 # ============================================================
-# SWIPE A CARD AWAY
+# INPUT & GESTURE HANDLING
 # ============================================================
 
-func _on_swipe_committed(
-	card: BookCard,
-	direction: int
-) -> void:
-	if is_animating or is_opening:
+func _gui_input(event: InputEvent) -> void:
+	if is_opening:
 		return
 
-	if book_order[0] != card.book_id:
+	if event is InputEventMouseButton:
+		var mouse_event: InputEventMouseButton = event as InputEventMouseButton
+		if mouse_event.button_index == MOUSE_BUTTON_LEFT:
+			if mouse_event.pressed:
+				_start_drag(mouse_event.position.x)
+			else:
+				_end_drag(mouse_event.position)
+			accept_event()
+
+	elif event is InputEventMouseMotion:
+		var motion_event: InputEventMouseMotion = event as InputEventMouseMotion
+		if is_dragging:
+			_update_drag(motion_event.position.x)
+			accept_event()
+
+	elif event is InputEventScreenTouch:
+		var touch_event: InputEventScreenTouch = event as InputEventScreenTouch
+		if touch_event.pressed:
+			_start_drag(touch_event.position.x)
+		else:
+			_end_drag(touch_event.position)
+		accept_event()
+
+	elif event is InputEventScreenDrag:
+		var drag_event: InputEventScreenDrag = event as InputEventScreenDrag
+		if is_dragging:
+			_update_drag(drag_event.position.x)
+			accept_event()
+
+
+func _start_drag(x_pos: float) -> void:
+	is_dragging = true
+	drag_start_x = x_pos
+	drag_last_x = x_pos
+	drag_start_offset = current_offset
+	drag_velocity_x = 0.0
+	total_drag_distance = 0.0
+
+	if snap_tween and snap_tween.is_valid():
+		snap_tween.kill()
+
+
+func _update_drag(x_pos: float) -> void:
+	var delta: float = x_pos - drag_last_x
+	drag_velocity_x = delta
+	drag_last_x = x_pos
+	total_drag_distance += absf(delta)
+
+	var vp_w: float = get_viewport_rect().size.x
+	var swipe_unit: float = maxf(1.0, vp_w * 0.55)
+	var offset_delta: float = (x_pos - drag_start_x) / swipe_unit
+
+	current_offset = clampf(drag_start_offset - offset_delta, -0.25, 2.25)
+	_layout_carousel(current_offset)
+
+
+func _end_drag(end_pos: Vector2) -> void:
+	if not is_dragging:
 		return
+	is_dragging = false
 
-	is_animating = true
-	_update_card_input()
-	_update_drag_hint_visibility()
+	# Tap detection
+	if total_drag_distance < 18.0:
+		var tapped_idx: int = _find_tapped_card_index(end_pos)
+		if tapped_idx != -1:
+			if tapped_idx == selected_index:
+				_open_selected_book()
+			else:
+				_animate_to_index(tapped_idx)
+			return
 
-	# Start the background crossfade as the swipe begins, not after the
-	# outgoing card has left the screen. This keeps both transitions in sync.
-	var next_book_id: int = book_order[1]
-	_show_background(next_book_id, true)
+	# Swipe detection with velocity momentum
+	var target_idx: int = selected_index
+	if absf(drag_velocity_x) > 10.0:
+		if drag_velocity_x > 0.0:
+			target_idx = clampi(int(floor(current_offset)), 0, 2)
+		else:
+			target_idx = clampi(int(ceil(current_offset)), 0, 2)
+	else:
+		target_idx = clampi(int(round(current_offset)), 0, 2)
 
-	var viewport_width: float = get_viewport_rect().size.x
+	_animate_to_index(target_idx)
 
-	var tween := create_tween()
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_IN)
 
-	tween.tween_property(
-		card,
-		"position:x",
-		card.position.x + direction * viewport_width * 1.25,
-		SWIPE_DURATION
+func _find_tapped_card_index(tap_pos: Vector2) -> int:
+	var order: Array[int] = [0, 1, 2]
+	order.sort_custom(func(a: int, b: int) -> bool:
+		return cards[a].z_index > cards[b].z_index
 	)
+	for idx: int in order:
+		var card: BookCard = cards[idx]
+		if card.get_global_rect().has_point(tap_pos):
+			return idx
+	return -1
 
-	tween.tween_property(
-		card,
-		"rotation",
-		direction * 0.18,
-		SWIPE_DURATION
-	)
 
-	tween.tween_property(
-		card,
-		"scale",
-		card.scale * 0.90,
-		SWIPE_DURATION
-	)
-
-	await tween.finished
-
-	if not is_inside_tree():
+func _on_grade_capsule_pressed(idx: int) -> void:
+	if is_opening or idx == selected_index:
 		return
+	_animate_to_index(idx)
 
-	var previous_front: int = book_order.pop_front()
-	book_order.append(previous_front)
 
-	await _animate_stack()
-
-	if background_tween != null and background_tween.is_running():
-		await background_tween.finished
-
-	if not is_inside_tree():
+func _animate_to_index(target_idx: int) -> void:
+	if is_opening:
 		return
+	target_idx = clampi(target_idx, 0, 2)
+	var changed: bool = (target_idx != selected_index)
+	selected_index = target_idx
 
-	is_animating = false
-	_update_card_input()
-	_update_drag_hint_position()
-	_update_drag_hint_visibility()
+	if snap_tween and snap_tween.is_valid():
+		snap_tween.kill()
 
-
-# ============================================================
-# CANCEL A SHORT DRAG
-# ============================================================
-
-func _on_swipe_cancelled(card: BookCard) -> void:
-	if is_animating or is_opening:
-		return
-
-	var tween := create_tween()
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_OUT)
-
-	tween.tween_property(
-		card,
-		"position",
-		card.start_position,
-		0.25
+	snap_tween = create_tween()
+	snap_tween.set_trans(Tween.TRANS_SPRING)
+	snap_tween.set_ease(Tween.EASE_OUT)
+	snap_tween.tween_method(
+		_set_carousel_offset,
+		current_offset,
+		float(target_idx),
+		0.42
 	)
 
-	tween.tween_property(
-		card,
-		"rotation",
-		0.0,
-		0.25
-	)
+	if changed:
+		Sfx.click()
+		_show_background(selected_index, true)
+
+	_update_ui_for_selection()
 
 
 # ============================================================
-# RESTACK CARDS SMOOTHLY
+# UI UPDATES (GRADE CAPSULES & ACTION BUTTON)
 # ============================================================
 
-func _animate_stack() -> void:
-	var base_position: Vector2 = _get_stack_base_position()
-	var base_scale: float = _get_card_base_scale()
+func _update_ui_for_selection() -> void:
+	_update_grade_switcher()
+	_update_action_button()
 
-	var tween := create_tween()
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_OUT)
 
-	for depth in range(book_order.size()):
-		var book_id: int = book_order[depth]
-		var card: BookCard = cards[book_id]
+func _update_grade_switcher() -> void:
+	var accent: Color = BOOK_ACCENTS[selected_index]
+	for i in range(capsule_buttons.size()):
+		var btn: Button = capsule_buttons[i]
+		var is_active: bool = (i == selected_index)
 
-		card.z_index = 10 - depth
+		var style := StyleBoxFlat.new()
+		style.set_corner_radius_all(22)
 
-		var target_position: Vector2 = base_position + Vector2(
-			depth * STACK_X_OFFSET,
-			depth * STACK_Y_OFFSET
-		)
+		if is_active:
+			style.bg_color = accent
+			style.set_border_width_all(1)
+			style.border_color = Color(1, 1, 1, 0.45)
+			style.shadow_size = 8
+			style.shadow_color = Color(0, 0, 0, 0.28)
+			style.shadow_offset = Vector2(0, 3)
+			btn.custom_minimum_size = Vector2(175, 54)
+			btn.add_theme_color_override("font_color", Color.WHITE)
+		else:
+			style.bg_color = Color(0.10, 0.12, 0.16, 0.70)
+			style.set_border_width_all(1)
+			style.border_color = Color(1, 1, 1, 0.18)
+			btn.custom_minimum_size = Vector2(140, 54)
+			btn.add_theme_color_override("font_color", Color(1, 1, 1, 0.72))
 
-		var target_scale: Vector2 = Vector2.ONE * (
-			base_scale * (1.0 - depth * 0.035)
-		)
+		btn.add_theme_stylebox_override("normal", style)
+		var hover_style: StyleBoxFlat = style.duplicate() as StyleBoxFlat
+		hover_style.bg_color = style.bg_color.lightened(0.10)
+		btn.add_theme_stylebox_override("hover", hover_style)
+		btn.add_theme_stylebox_override("pressed", style)
+		btn.add_theme_stylebox_override("focus", hover_style)
 
-		tween.tween_property(
-			card,
-			"position",
-			target_position,
-			STACK_DURATION
-		)
 
-		tween.tween_property(
-			card,
-			"scale",
-			target_scale,
-			STACK_DURATION
-		)
+func _update_action_button() -> void:
+	var accent: Color = BOOK_ACCENTS[selected_index]
+	var grade: String = BOOK_GRADES[selected_index]
+	action_button.text = "ورود به کتاب %s (%s)  ←" % [BOOK_TITLES[selected_index], grade]
+	action_button.add_theme_font_override("font", MenuStyle.vazir())
+	action_button.add_theme_font_size_override("font_size", 30)
+	action_button.add_theme_color_override("font_color", Color.WHITE)
+	action_button.add_theme_color_override("font_hover_color", Color.WHITE)
+	action_button.add_theme_color_override("font_pressed_color", Color(0.92, 0.92, 0.92, 1.0))
+	action_button.add_theme_color_override("font_focus_color", Color.WHITE)
 
-		tween.tween_property(
-			card,
-			"rotation",
-			0.0,
-			STACK_DURATION
-		)
+	var radius: int = 26
+	var style := StyleBoxFlat.new()
+	style.bg_color = accent
+	style.set_corner_radius_all(radius)
+	style.set_border_width_all(1)
+	style.border_color = Color(1, 1, 1, 0.35)
+	style.shadow_size = 14
+	style.shadow_color = Color(accent.r * 0.3, accent.g * 0.3, accent.b * 0.3, 0.50)
+	style.shadow_offset = Vector2(0, 6)
 
-	await tween.finished
+	var hover := style.duplicate() as StyleBoxFlat
+	hover.bg_color = accent.lightened(0.08)
+	hover.shadow_size = 18
+
+	var pressed := style.duplicate() as StyleBoxFlat
+	pressed.bg_color = accent.darkened(0.08)
+	pressed.shadow_size = 6
+
+	action_button.add_theme_stylebox_override("normal", style)
+	action_button.add_theme_stylebox_override("hover", hover)
+	action_button.add_theme_stylebox_override("pressed", pressed)
+	action_button.add_theme_stylebox_override("focus", hover)
+
+	GlossSheenScript.attach(action_button, accent, float(radius))
 
 
 # ============================================================
-# SMOOTH FULL-SCREEN BACKGROUND CROSSFADE
+# BACKGROUND CROSSFADE
 # ============================================================
 
-func _show_background(
-	book_id: int,
-	animate: bool
-) -> void:
+func _show_background(book_id: int, animate: bool) -> void:
 	if background_tween != null and background_tween.is_running():
 		background_tween.kill()
 
@@ -538,30 +461,17 @@ func _show_background(
 	background_tween.set_trans(Tween.TRANS_SINE)
 	background_tween.set_ease(Tween.EASE_IN_OUT)
 
-	# Crossfade both layers together. Fading only the incoming layer over the
-	# old one makes the change feel abrupt when the covers differ strongly.
-	background_tween.tween_property(
-		background_b,
-		"modulate:a",
-		1.0,
-		BACKGROUND_DURATION
-	)
-	background_tween.tween_property(
-		background_a,
-		"modulate:a",
-		0.0,
-		BACKGROUND_DURATION
-	)
+	background_tween.tween_property(background_b, "modulate:a", 1.0, 0.38)
+	background_tween.tween_property(background_a, "modulate:a", 0.0, 0.38)
 
 	await background_tween.finished
 
 	if not is_inside_tree():
 		return
 
-	var previous_background: TextureRect = background_a
+	var prev: TextureRect = background_a
 	background_a = background_b
-	background_b = previous_background
-
+	background_b = prev
 	background_a.modulate.a = 1.0
 	background_b.modulate.a = 0.0
 
@@ -570,66 +480,43 @@ func _show_background(
 # OPEN THE SELECTED BOOK
 # ============================================================
 
-func _on_card_pressed(card: BookCard) -> void:
-	if is_animating or is_opening:
+func _open_selected_book() -> void:
+	if is_opening:
 		return
-
-	if book_order[0] != card.book_id:
-		return
-
 	is_opening = true
-	is_animating = true
-	_update_card_input()
-	_update_drag_hint_visibility()
+	Sfx.click()
 
-	BookSession.selected_book_id = card.book_id
+	BookSession.selected_book_id = selected_index
+	Global.current_book = selected_index + 1
 
-	Global.current_book = card.book_id + 1
-
-	var viewport_width: float = get_viewport_rect().size.x
+	var target_card: BookCard = cards[selected_index]
 
 	var tween := create_tween()
 	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_IN)
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.set_ease(Tween.EASE_OUT)
 
-	for depth in range(book_order.size()):
-		var book_id: int = book_order[depth]
-		var current_card: BookCard = cards[book_id]
+	# Grand entrance: Center book expands smoothly
+	tween.tween_property(target_card, "scale", target_card.scale * 1.15, 0.35)
+	tween.tween_property(target_card, "modulate:a", 0.0, 0.35)
 
-		var direction: float = (
-			-1.0 if depth % 2 == 0 else 1.0
-		)
+	# Side cards and UI fade out rapidly
+	for i in range(3):
+		if i != selected_index:
+			tween.tween_property(cards[i], "modulate:a", 0.0, 0.20)
 
-		var duration: float = (
-			OPEN_DURATION + float(depth) * 0.06
-		)
-
-		tween.tween_property(
-			current_card,
-			"position:x",
-			current_card.position.x
-				+ direction * viewport_width * 1.2,
-			duration
-		)
-
-		tween.tween_property(
-			current_card,
-			"modulate:a",
-			0.0,
-			duration
-		)
+	var header_area := get_node_or_null("HeaderArea") as Control
+	if header_area:
+		tween.tween_property(header_area, "modulate:a", 0.0, 0.20)
+	var bottom_controls := get_node_or_null("BottomControls") as Control
+	if bottom_controls:
+		tween.tween_property(bottom_controls, "modulate:a", 0.0, 0.20)
 
 	await tween.finished
 
 	if not is_inside_tree():
 		return
 
-	# Hand the screen over while the blurred cover stays exactly where it is.
-	# The unblur belongs to the lesson menu: it opens on this same still and
-	# sharpens it while its own content fades in. Doing the unblur here as well
-	# would go blur -> sharp -> (rebuild) -> sharp-with-no-content, which is the
-	# "splash of an empty screen" this replaces.
 	TransitionManager.handover_scene(
-		BOOK_CONTENTS_SCENE, BOOK_BLURRED_BACKGROUNDS[card.book_id]
+		BOOK_CONTENTS_SCENE, BOOK_BLURRED_BACKGROUNDS[selected_index]
 	)

@@ -61,23 +61,23 @@ const SCENE_FLASHCARDS     := "res://scenes/vocabulary/VocabFlashcards.tscn"
 @onready var lesson_title: Label               = $HeaderBar/HeaderContent/HeaderSpacer/LessonTitle
 
 @onready var progress_dots: HBoxContainer      = $MarginContainer/MainLayout/ProgressBackground/ProgressDotsContainer
-@onready var card_panel: PanelContainer        = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel
+@onready var card_panel: PanelContainer        = $MarginContainer/MainLayout/CardMargin/CardPanel
 
-@onready var front_face: CenterContainer       = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace
-@onready var front_word_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/FrontFace/WordLabel
+@onready var front_face: CenterContainer       = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/FrontFace
+@onready var front_word_label: Label           = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/FrontFace/WordLabel
 
-@onready var back_face: VBoxContainer          = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace
-@onready var back_word_label: Label            = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/BackWordLabel
-@onready var meaning_en_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent/MeaningEnLabel
-@onready var meaning_fa_label: Label           = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
-@onready var example_label: Label              = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
-@onready var phonetics_label: Label             = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/PhoneticsLabel
+@onready var back_face: VBoxContainer          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace
+@onready var back_word_label: Label            = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/BackWordLabel
+@onready var meaning_en_label: Label           = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/MeaningEnRow/MeaningEnRowContent/MeaningEnLabel
+@onready var meaning_fa_label: Label           = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/MeaningFaRow/MeaningFaRowContent/MeaningFaLabel
+@onready var example_label: Label              = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/ExampleRow/ExampleRowContent/ExampleLabel
+@onready var phonetics_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/WordRow/WordRowContent/PhoneticsLabel
 
 # Synonyms and Antonyms nodes
-@onready var synonyms_panel: PanelContainer    = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel
-@onready var synonyms_label: Label             = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel/SynonymsContainer/SynonymsLabel
-@onready var antonyms_panel: PanelContainer    = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel
-@onready var antonyms_label: Label             = $MarginContainer/MainLayout/CardScrollContainer/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel/AntonymsContainer/AntonymsLabel
+@onready var synonyms_panel: PanelContainer    = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel
+@onready var synonyms_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/SynonymsPanel/SynonymsContainer/SynonymsLabel
+@onready var antonyms_panel: PanelContainer    = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel
+@onready var antonyms_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/BackFace/AntonymsPanel/AntonymsContainer/AntonymsLabel
 
 @onready var prev_button: Button               = $MarginContainer/MainLayout/PanelContainer/BottomControls/PrevButton
 @onready var save_button: Button               = $MarginContainer/MainLayout/PanelContainer/BottomControls/SaveButton
@@ -194,6 +194,8 @@ func _ready() -> void:
 	back_nav_button.pivot_offset = back_nav_button.size / 2.0
 	next_button.pivot_offset = next_button.size / 2.0
 	prev_button.pivot_offset = prev_button.size / 2.0
+	card_panel.pivot_offset = card_panel.size / 2.0
+	card_panel.resized.connect(func(): card_panel.pivot_offset = card_panel.size / 2.0)
 
 	# Theme awareness: restyle for Dark / Light and follow live toggles.
 	Global.on_theme_changed(_on_theme_changed)
@@ -770,11 +772,14 @@ func _play_flip(landing_on_back: bool) -> void:
 	if is_animating or is_sliding:
 		return
 	is_animating = true
-	card_panel.pivot_offset = Vector2(card_panel.size.x / 2.0, card_panel.size.y / 2.0)
+	card_panel.pivot_offset = card_panel.size / 2.0
 
 	var tween := create_tween()
 	tween.tween_property(card_panel, "scale:x", 0.0, FLIP_DURATION).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_callback(func(): _show_face(landing_on_back))
+	tween.tween_callback(func():
+		_show_face(landing_on_back)
+		card_panel.pivot_offset = card_panel.size / 2.0
+	)
 	tween.tween_property(card_panel, "scale:x", 1.0, FLIP_DURATION).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(func(): is_animating = false)
 

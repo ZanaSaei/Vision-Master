@@ -180,30 +180,30 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 280.0
-offset_bottom = -94.0
+offset_top = 270.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 70
+theme_override_constants/margin_left = 68
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 70
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_right = 68
+theme_override_constants/margin_bottom = 30
 
 [node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=759159105]
 layout_mode = 2
-theme_override_constants/separation = 90
+theme_override_constants/separation = 24
 
 [node name="CardMargin" type="MarginContainer" parent="MarginContainer/MainLayout" unique_id=1502555184]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="CardPanel" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin" unique_id=1616552339]
-custom_minimum_size = Vector2(0, 950)
+custom_minimum_size = Vector2(0, 1260)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -355,48 +355,61 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Controls" type="VBoxContainer" parent="MarginContainer/MainLayout" unique_id=99393038]
+custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
-theme_override_constants/separation = -115
+theme_override_constants/separation = 0
 
 [node name="ShowAnswerButton" type="Button" parent="MarginContainer/MainLayout/Controls" unique_id=772991822]
+custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = ExtResource("8_hx4ce")
 theme_override_styles/pressed = ExtResource("8_hx4ce")
 theme_override_styles/hover = ExtResource("8_hx4ce")
 text = "معنی کلمه"
 
 [node name="RatingButtons" type="HBoxContainer" parent="MarginContainer/MainLayout/Controls" unique_id=865619281]
+custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
-theme_override_constants/separation = 34
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="Again" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1274358560]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 110)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("7_y8wcc")
 theme_override_font_sizes/font_size = 29
 text = "دوباره"
 autowrap_trim_flags = 0
 
 [node name="Hard" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1417025778]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 110)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("7_y8wcc")
 theme_override_font_sizes/font_size = 29
 text = "سخت"
 
 [node name="Good" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=2141645236]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 110)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("7_y8wcc")
 theme_override_font_sizes/font_size = 29
 text = "متوسط"
 
 [node name="Easy" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1046753146]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 110)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("7_y8wcc")
 theme_override_font_sizes/font_size = 29
 text = "آسان"

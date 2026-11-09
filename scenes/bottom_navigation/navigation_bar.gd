@@ -7,23 +7,26 @@ signal menu_item_selected(menu_index: int)
 
 const ITEM_COUNT: int = 6
 const MENU_ITEM_COUNT: int = 4
-const SELECTOR_SIZE: float = 90.0
-const ACTIVE_ICON_SIZE: float = 55.0
-const NORMAL_ICON_SIZE: float = 40.0
-const CUTOUT_RADIUS: float = 50.0
-const NORMAL_ICON_TOUCH_RADIUS: float = 38.0
+const SELECTOR_SIZE: float = 114.0
+const ACTIVE_ICON_SIZE: float = 70.0
+const NORMAL_ICON_SIZE: float = 52.0
+const CUTOUT_RADIUS: float = 64.0
+const NORMAL_ICON_TOUCH_RADIUS: float = 48.0
 const ICON_CLEAR_FADE_DURATION: float = 0.72
 const ICON_LIFT_DISTANCE: float = 14.0
-const SELECTED_LABEL_DROP: float = 5.0
+const SELECTED_LABEL_DROP: float = 4.0
 
 const MOVE_DURATION: float = 0.42
 const TRAVEL_ARC_HEIGHT: float = 12.0
 const ICON_FADE_OUT: float = 0.20
 const ICON_FADE_IN: float = 0.28
 
-const MENU_PANEL_WIDTH: float = 66.0
-const MENU_PANEL_HEIGHT: float = 224.0
+const MENU_PANEL_WIDTH: float = 114.0
+const MENU_PANEL_HEIGHT: float = 370.0
 const MENU_PANEL_BOTTOM_GAP: float = 46.0
+const MENU_ICON_SIZE: float = 52.0
+const MENU_HIGHLIGHT_SIZE: float = 72.0
+const MENU_HIGHLIGHT_CORNER_RADIUS: int = 22
 
 const ITEM_NAMES: Array[String] = [
 	"خانه",
@@ -543,11 +546,11 @@ func _configure_menu_panel() -> void:
 
 	var panel_style := StyleBoxFlat.new()
 	panel_style.bg_color = Color.WHITE
-	panel_style.set_corner_radius_all(33)
+	panel_style.set_corner_radius_all(int(MENU_PANEL_WIDTH * 0.5))
 	panel_style.set_border_width_all(0)
 	panel_style.border_color = Color.WHITE
 	panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.14)
-	panel_style.shadow_size = 14
+	panel_style.shadow_size = 18
 	panel_style.shadow_offset = Vector2(0.0, 4.0)
 	menu_panel.add_theme_stylebox_override("panel", panel_style)
 
@@ -564,15 +567,15 @@ func _configure_menu_panel() -> void:
 		var highlight: Panel = Panel.new()
 		highlight.name = "ActiveHighlight"
 		highlight.set_anchors_preset(Control.PRESET_CENTER)
-		highlight.offset_left = -20.0
-		highlight.offset_top = -20.0
-		highlight.offset_right = 20.0
-		highlight.offset_bottom = 20.0
+		highlight.offset_left = -MENU_HIGHLIGHT_SIZE * 0.5
+		highlight.offset_top = -MENU_HIGHLIGHT_SIZE * 0.5
+		highlight.offset_right = MENU_HIGHLIGHT_SIZE * 0.5
+		highlight.offset_bottom = MENU_HIGHLIGHT_SIZE * 0.5
 		highlight.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		highlight.visible = false
 		var highlight_style: StyleBoxFlat = StyleBoxFlat.new()
 		highlight_style.bg_color = Color("#E7F2FF")
-		highlight_style.set_corner_radius_all(14)
+		highlight_style.set_corner_radius_all(MENU_HIGHLIGHT_CORNER_RADIUS)
 		highlight_style.set_border_width_all(0)
 		highlight.add_theme_stylebox_override("panel", highlight_style)
 		sub_item.add_child(highlight)
@@ -583,6 +586,12 @@ func _configure_menu_panel() -> void:
 		if icon_node != null:
 			icon_node.texture = MENU_SUB_ICONS[i]
 			icon_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			icon_node.custom_minimum_size = Vector2(MENU_ICON_SIZE, MENU_ICON_SIZE)
+			icon_node.size = Vector2(MENU_ICON_SIZE, MENU_ICON_SIZE)
+			icon_node.offset_left = -MENU_ICON_SIZE * 0.5
+			icon_node.offset_top = -MENU_ICON_SIZE * 0.5
+			icon_node.offset_right = MENU_ICON_SIZE * 0.5
+			icon_node.offset_bottom = MENU_ICON_SIZE * 0.5
 		if not sub_item.gui_input.is_connected(_on_menu_sub_item_gui_input):
 			sub_item.gui_input.connect(_on_menu_sub_item_gui_input.bind(i))
 		menu_sub_items.append(sub_item)
@@ -603,8 +612,11 @@ func _get_menu_panel_position() -> Vector2:
 	var item_center_local: Vector2 = (
 		get_global_transform().affine_inverse() * item_center_global
 	)
+	var target_x: float = item_center_local.x - MENU_PANEL_WIDTH * 0.5
+	if size.x > MENU_PANEL_WIDTH:
+		target_x = clampf(target_x, 10.0, size.x - MENU_PANEL_WIDTH - 10.0)
 	return Vector2(
-		item_center_local.x - MENU_PANEL_WIDTH * 0.5,
+		target_x,
 		-MENU_PANEL_HEIGHT - MENU_PANEL_BOTTOM_GAP
 	)
 
@@ -733,9 +745,10 @@ func _configure_items() -> void:
 		normal_icon.position = Vector2.ZERO
 
 		label.add_theme_color_override("font_color", label_color)
-		label.add_theme_font_size_override("font_size", 26)
+		label.add_theme_font_size_override("font_size", 28)
 		if label.label_settings != null:
 			label.label_settings.font_color = label_color
+			label.label_settings.font_size = 28
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		label.set_anchors_preset(Control.PRESET_TOP_LEFT)
 		label.size = Vector2(item.size.x, 36.0)
@@ -773,11 +786,11 @@ func _capture_item_rest_positions() -> void:
 		var label: Label = labels[index]
 		icon_rest_positions[index] = Vector2(
 			(item.size.x - icon.size.x) * 0.5,
-			0.0
+			4.0
 		)
 		label_rest_positions[index] = Vector2(
 			(item.size.x - label.size.x) * 0.5,
-			item.size.y - label.size.y - 5.0
+			item.size.y - label.size.y - 4.0
 		)
 		icon.position = icon_rest_positions[index]
 		label.position = label_rest_positions[index]
