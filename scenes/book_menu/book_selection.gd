@@ -10,7 +10,7 @@ const BOOK_CARD_SCENE: PackedScene = preload(
 )
 
 const BOOK_CONTENTS_SCENE: PackedScene = preload(
-	"res://scenes/lesson_menu/LessonMenu.tscn"
+	"res://scenes/book_menu/BookMenu.tscn"
 )
 
 
@@ -585,7 +585,6 @@ func _on_card_pressed(card: BookCard) -> void:
 	BookSession.selected_book_id = card.book_id
 
 	Global.current_book = card.book_id + 1
-	Global.current_lesson = 1
 
 	var viewport_width: float = get_viewport_rect().size.x
 

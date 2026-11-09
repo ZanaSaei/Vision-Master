@@ -10,7 +10,7 @@ extends "res://autoload/BackButtonHandler.gd"
 # screen's top label and sits over the scrolling cards.
 ############################################################
 
-const SCENE_BOOK_MENU          := "res://scenes/book_menu/BookSelection.tscn"
+const SCENE_BOOK_MENU          := "res://scenes/book_menu/BookMenu.tscn"
 const SCENE_VOCAB              := "res://scenes/vocabulary/VocabFlashcards.tscn"
 const SCENE_CONVERSATION       := "res://scenes/conversation/Conversation.tscn"
 const SCENE_READING            := "res://scenes/reading/Reading.tscn"
@@ -21,6 +21,7 @@ const SCENE_PRONUNCIATION      := "res://scenes/pronunciation/Pronunciation.tscn
 const SCENE_WRITING            := "res://scenes/writing/Writing.tscn"
 const SCENE_WHAT_YOU_LEARNED   := "res://scenes/what_you_learned/WhatYouLearned.tscn"
 const SCENE_WORKBOOK           := "res://scenes/workbook/Workbook.tscn"
+const GlossSheenScript         := preload("res://ui/widgets/gloss_sheen.gd")
 
 const PERSIAN_DIGITS := ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۱۰"]
 
@@ -220,6 +221,22 @@ func _build_ui() -> void:
 	_col.add_theme_constant_override("separation", 18)
 	outer.add_child(_col)
 
+	var lesson_title_fa: String = _get_lesson_title()
+	var digit_str: String = PERSIAN_DIGITS[_lesson - 1] if _lesson - 1 < PERSIAN_DIGITS.size() else str(_lesson)
+	var book_digit: String = PERSIAN_DIGITS[_book - 1] if _book - 1 < PERSIAN_DIGITS.size() else str(_book)
+	var lesson_chip := Button.new()
+	lesson_chip.name = "LessonIndicator"
+	lesson_chip.text = "ویژن %s • درس %s: %s  (تغییر درس ↩)" % [book_digit, digit_str, lesson_title_fa]
+	lesson_chip.custom_minimum_size = Vector2(0, 68)
+	lesson_chip.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	var book_accent: Color = BOOK_COLORS.get(_book, MenuStyle.accent())
+	lesson_chip.add_theme_font_override("font", MenuStyle.vazir())
+	lesson_chip.add_theme_font_size_override("font_size", 28)
+	_style_lesson_indicator(lesson_chip, book_accent)
+	lesson_chip.pressed.connect(_on_android_back_pressed)
+	MenuStyle.wire_microinteractions(lesson_chip)
+	_col.add_child(lesson_chip)
+
 	var sections: Array = SECTIONS_VISION_1 if _book == 1 else SECTIONS_VISION_2_3
 	for i in sections.size():
 		var sec: Array = sections[i]
@@ -322,6 +339,10 @@ func _apply_theme() -> void:
 	if _subtitle_badge:
 		_subtitle_badge.add_theme_stylebox_override("normal", MenuStyle.icon_chip(book_accent, 26))
 		_subtitle_badge.add_theme_color_override("font_color", MenuStyle.pill_text(book_accent))
+	if _col:
+		var indicator := _col.get_node_or_null("LessonIndicator") as Button
+		if indicator:
+			_style_lesson_indicator(indicator, book_accent)
 	for i in _card_buttons.size():
 		var btn: Button = _card_buttons[i]
 		var accent: Color = _card_accents[i]
@@ -334,6 +355,44 @@ func _apply_theme() -> void:
 		var sl: Label = btn.get_node_or_null("Margin/Row/TextColumn/SubLabel") as Label
 		if sl:
 			sl.add_theme_color_override("font_color", MenuStyle.subtitle_color())
+
+
+func _style_lesson_indicator(btn: Button, accent_col: Color) -> void:
+	var bg_col: Color = MenuStyle.pill_text(accent_col)
+	btn.add_theme_color_override("font_color", Color.WHITE)
+	btn.add_theme_color_override("font_hover_color", Color.WHITE)
+	btn.add_theme_color_override("font_pressed_color", Color(0.92, 0.92, 0.92, 1.0))
+	btn.add_theme_color_override("font_focus_color", Color.WHITE)
+
+	var radius: int = 20
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = bg_col
+	normal.corner_radius_top_left = radius
+	normal.corner_radius_top_right = radius
+	normal.corner_radius_bottom_left = radius
+	normal.corner_radius_bottom_right = radius
+	normal.set_border_width_all(1)
+	normal.border_color = Color(1, 1, 1, 0.30)
+	normal.shadow_size = 4
+	normal.shadow_color = Color(0, 0, 0, 0.12)
+	normal.shadow_offset = Vector2(0, 2)
+
+	var hover := normal.duplicate() as StyleBoxFlat
+	hover.bg_color = bg_col.lightened(0.08)
+	hover.border_color = Color(1, 1, 1, 0.45)
+	hover.shadow_size = 6
+
+	var pressed := normal.duplicate() as StyleBoxFlat
+	pressed.bg_color = bg_col.darkened(0.08)
+	pressed.border_color = Color(1, 1, 1, 0.20)
+	pressed.shadow_size = 2
+
+	btn.add_theme_stylebox_override("normal", normal)
+	btn.add_theme_stylebox_override("hover", hover)
+	btn.add_theme_stylebox_override("pressed", pressed)
+	btn.add_theme_stylebox_override("focus", hover)
+
+	GlossSheenScript.attach(btn, bg_col, float(radius))
 
 
 ############################################################

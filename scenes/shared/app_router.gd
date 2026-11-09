@@ -18,7 +18,8 @@ class_name AppRouter
 
 const ROUTES := {
 	"main_menu":      "res://scenes/main_menu/MainMenu.tscn",
-	"book_menu":      "res://scenes/book_menu/BookSelection.tscn",
+	"book_selection": "res://scenes/book_menu/BookSelection.tscn",
+	"book_menu":      "res://scenes/book_menu/BookMenu.tscn",
 	"lesson_menu":    "res://scenes/lesson_menu/LessonMenu.tscn",
 	"flashcards":     "res://scenes/vocabulary/VocabFlashcards.tscn",
 	"flashcard_hub":  "res://scenes/vocabulary/FlashcardHub.tscn",

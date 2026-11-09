@@ -29,7 +29,6 @@ func _ready() -> void:
 	flashcard_button.pressed.connect(_on_flashcard_pressed)
 	leitner_button.pressed.connect(_on_leitner_pressed)
 	_wire_button_animations()
-	# Remove initial entrance animation - buttons appear instantly at full opacity
 	flashcard_button.modulate = Color.WHITE
 	leitner_button.modulate = Color.WHITE
 
@@ -45,7 +44,6 @@ func _wire_button_animations() -> void:
 		btn.mouse_exited.connect(_on_mode_button_exited.bind(btn))
 		btn.button_down.connect(_animate_mode_button.bind(btn, Vector2(0.97, 0.97)))
 		btn.button_up.connect(_on_mode_button_up.bind(btn))
-	_play_entrance_animation()
 
 
 func _update_mode_button_pivot(btn: Button) -> void:
@@ -75,26 +73,6 @@ func _animate_mode_button(btn: Button, target_scale: Vector2) -> void:
 	var tween: Tween = btn.create_tween()
 	btn.set_meta("flashcard_hub_scale_tween", tween)
 	tween.tween_property(btn, "scale", target_scale, 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
-
-func _play_entrance_animation() -> void:
-	var buttons: Array[Button] = [flashcard_button, leitner_button]
-	for btn: Button in buttons:
-		btn.modulate.a = 0.0
-		btn.position.y += 40.0
-
-	await get_tree().process_frame
-	if not is_inside_tree():
-		return
-
-	for i: int in buttons.size():
-		var btn: Button = buttons[i]
-		var tw: Tween = create_tween()
-		tw.tween_interval(0.08 * i)
-		tw.tween_property(btn, "modulate:a", 1.0, 0.32) \
-			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.parallel().tween_property(btn, "position:y", btn.position.y - 40.0, 0.32) \
-			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 
 ############################################################

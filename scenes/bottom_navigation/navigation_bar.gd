@@ -81,6 +81,7 @@ const MENU_SUB_SCENES: Array[String] = [
 const BAR_SCENES: Array[String] = [
 	"res://scenes/main_menu/MainMenu.tscn",
 	"res://scenes/book_menu/BookSelection.tscn",
+	"res://scenes/book_menu/BookMenu.tscn",
 	"res://scenes/lesson_menu/LessonMenu.tscn",
 	"res://scenes/word_game/WordGameHub.tscn",
 	"res://scenes/word_game/WordGameLearning.tscn",

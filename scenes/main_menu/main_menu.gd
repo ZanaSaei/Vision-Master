@@ -83,7 +83,8 @@ func _refresh_continue_state() -> void:
 
 func _continue_destination_label(scene_path: String) -> String:
 	var scene_names: Dictionary = {
-		"res://scenes/lesson_menu/LessonMenu.tscn": "بازگشت به فهرست درس‌ها",
+		"res://scenes/lesson_menu/LessonMenu.tscn": "بازگشت به فهرست بخش‌ها",
+		"res://scenes/book_menu/BookMenu.tscn": "بازگشت به فهرست درس‌ها",
 		"res://scenes/grammar/GrammarHub.tscn": "بازگشت به دستور زبان",
 		"res://scenes/grammar/GrammarUnits.tscn": "ادامه تمرین دستور زبان",
 		"res://scenes/grammar/GrammarLesson.tscn": "ادامه درس دستور زبان",
