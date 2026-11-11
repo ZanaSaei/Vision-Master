@@ -57,8 +57,15 @@ func _ready() -> void:
 	assert(new_tile1.letter == letter0_before, "Tile 1 should now hold letter %s" % letter0_before)
 	print("PASS  Tap-to-Swap: Tiles swapped positions smoothly (New order: %s)" % board.current_text())
 
-	# 2. Test reveal_letter_at logic fix
-	# Currently board has C, T, A. Target is C, A, T.
+	# 2. Test vibrate_hint_pair (letters do NOT move)
+	var text_before_vibrate := board.current_text()
+	var vibrated := board.vibrate_hint_pair()
+	assert(vibrated, "vibrate_hint_pair should return true on unsolved board")
+	assert(board.current_text() == text_before_vibrate, "vibrate_hint_pair must NOT move the letters (stays %s)" % text_before_vibrate)
+	print("PASS  Blue Hint: Two letters vibrated without moving any tiles")
+
+	# Test reveal_letter_at logic
+	# Currently board has CTA. Target is CAT.
 	# Position 1 currently has 'T', but needs 'A'!
 	board.reveal_letter_at(1)
 	var tile_at_1: ScrambledTile = board._tiles[board._order[1]] as ScrambledTile
@@ -72,7 +79,38 @@ func _ready() -> void:
 
 	board.queue_free()
 
-	# 3. Test HintCard audio button & Gameplay hint request
+	# 3. Test GameplayActions mode switching & blue/yellow button behavior
+	var actions := load("res://scenes/word_game/scrambled/ui/GameplayActions.tscn").instantiate() as ScrambledGameplayActions
+	add_child(actions)
+	actions._ready()
+
+	# In learning mode: blue button shown initially, yellow button hidden
+	actions.setup_mode(false)
+	assert(actions._reveal.visible == true, "Blue button must be visible initially in learning mode")
+	assert(actions._hint.visible == false, "Yellow button must be hidden initially in learning mode")
+	print("PASS  Learning Mode: Blue button visible, yellow button hidden initially")
+
+	# When timer finishes: reveal_hint() is called, blue button removed, yellow button shown
+	actions.reveal_hint()
+	assert(actions._reveal.visible == false, "Blue button must be removed when yellow button reveals")
+	assert(actions._hint.visible == true, "Yellow button must be visible after reveal_hint")
+	print("PASS  Learning Mode: Blue button removed and replaced by yellow button after timer")
+
+	# In competition / daily challenge mode: blue button removed entirely, only yellow button shown
+	actions.setup_mode(true)
+	assert(actions._reveal.visible == false, "Blue button must be removed entirely in daily challenge")
+	assert(actions._hint.visible == true, "Yellow button must be shown immediately in daily challenge")
+	print("PASS  Daily Challenge: Blue button removed entirely, only yellow button shown")
+	actions.queue_free()
+
+	# 4. Test pressing yellow button makes score half in daily challenge
+	var points_unhinted := ScrambledScoreManager.points_for(5.0, false)
+	var points_hinted := ScrambledScoreManager.points_for(5.0, true)
+	assert(points_unhinted == 100, "Unhinted points at 5s should be 100")
+	assert(points_hinted == 50, "Hinted points should be half (50)")
+	print("PASS  Daily Challenge: Pressing yellow button made score half (%d -> %d)" % [points_unhinted, points_hinted])
+
+	# 5. Test HintCard audio button & Gameplay hint request
 	var hint_card := load("res://scenes/word_game/scrambled/ui/HintCard.tscn").instantiate() as ScrambledHintCard
 	add_child(hint_card)
 	hint_card.show_hint("A feline pet", "گربه", "", "cat")

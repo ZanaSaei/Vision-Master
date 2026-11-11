@@ -145,7 +145,7 @@ func _create_grade_switcher() -> void:
 		btn.focus_mode = Control.FOCUS_NONE
 		btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		btn.add_theme_font_override("font", MenuStyle.vazir())
-		btn.add_theme_font_size_override("font_size", 22)
+		btn.add_theme_font_size_override("font_size", 28)
 		btn.pressed.connect(_on_grade_capsule_pressed.bind(i))
 		MenuStyle.wire_microinteractions(btn)
 		grade_switcher.add_child(btn)
@@ -187,7 +187,7 @@ func _layout_carousel(offset: float) -> void:
 	var base_scale: float = _get_card_base_scale()
 
 	var center_x: float = vp_size.x * 0.5
-	var center_y: float = vp_size.y * 0.43
+	var center_y: float = vp_size.y * 0.44
 	var card_size: Vector2 = Vector2(CARD_BASE_WIDTH, CARD_BASE_HEIGHT)
 	var spacing: float = card_size.x * base_scale * 0.88
 
@@ -374,22 +374,24 @@ func _update_grade_switcher() -> void:
 		var is_active: bool = (i == selected_index)
 
 		var style := StyleBoxFlat.new()
-		style.set_corner_radius_all(22)
+		style.set_corner_radius_all(28)
 
 		if is_active:
 			style.bg_color = accent
 			style.set_border_width_all(1)
 			style.border_color = Color(1, 1, 1, 0.45)
-			style.shadow_size = 8
-			style.shadow_color = Color(0, 0, 0, 0.28)
+			style.shadow_size = 10
+			style.shadow_color = Color(0, 0, 0, 0.32)
 			style.shadow_offset = Vector2(0, 3)
-			btn.custom_minimum_size = Vector2(175, 54)
+			btn.custom_minimum_size = Vector2(210, 68)
+			btn.add_theme_font_size_override("font_size", 30)
 			btn.add_theme_color_override("font_color", Color.WHITE)
 		else:
 			style.bg_color = Color(0.10, 0.12, 0.16, 0.70)
 			style.set_border_width_all(1)
 			style.border_color = Color(1, 1, 1, 0.18)
-			btn.custom_minimum_size = Vector2(140, 54)
+			btn.custom_minimum_size = Vector2(170, 68)
+			btn.add_theme_font_size_override("font_size", 26)
 			btn.add_theme_color_override("font_color", Color(1, 1, 1, 0.72))
 
 		btn.add_theme_stylebox_override("normal", style)
@@ -404,26 +406,27 @@ func _update_action_button() -> void:
 	var accent: Color = BOOK_ACCENTS[selected_index]
 	var grade: String = BOOK_GRADES[selected_index]
 	action_button.text = "ورود به کتاب %s (%s)  ←" % [BOOK_TITLES[selected_index], grade]
+	action_button.custom_minimum_size = Vector2(720, 104)
 	action_button.add_theme_font_override("font", MenuStyle.vazir())
-	action_button.add_theme_font_size_override("font_size", 30)
+	action_button.add_theme_font_size_override("font_size", 36)
 	action_button.add_theme_color_override("font_color", Color.WHITE)
 	action_button.add_theme_color_override("font_hover_color", Color.WHITE)
 	action_button.add_theme_color_override("font_pressed_color", Color(0.92, 0.92, 0.92, 1.0))
 	action_button.add_theme_color_override("font_focus_color", Color.WHITE)
 
-	var radius: int = 26
+	var radius: int = 32
 	var style := StyleBoxFlat.new()
 	style.bg_color = accent
 	style.set_corner_radius_all(radius)
 	style.set_border_width_all(1)
 	style.border_color = Color(1, 1, 1, 0.35)
-	style.shadow_size = 14
+	style.shadow_size = 16
 	style.shadow_color = Color(accent.r * 0.3, accent.g * 0.3, accent.b * 0.3, 0.50)
 	style.shadow_offset = Vector2(0, 6)
 
 	var hover := style.duplicate() as StyleBoxFlat
 	hover.bg_color = accent.lightened(0.08)
-	hover.shadow_size = 18
+	hover.shadow_size = 20
 
 	var pressed := style.duplicate() as StyleBoxFlat
 	pressed.bg_color = accent.darkened(0.08)

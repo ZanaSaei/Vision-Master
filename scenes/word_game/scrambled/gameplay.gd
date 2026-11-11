@@ -156,11 +156,12 @@ func _start_word(animate: bool) -> void:
 	_solved = false
 	_playing = true
 	_hint_shown = false
-	_hint_ready = false
+	var is_comp := ScrambledGameManager.is_competition()
+	_hint_ready = is_comp
 	_elapsed = 0.0
 	_last_worth = -1
 	_hint_card.hide_hint()
-	_actions.hide_hint()
+	_actions.setup_mode(is_comp)
 	_praise.clear()
 	_instruction.visible = true
 	_instruction.modulate.a = 1.0
@@ -223,6 +224,7 @@ func _on_arrangement_settled(solved: bool) -> void:
 func _on_word_solved() -> void:
 	_solved = true
 	_playing = false
+	_actions.hide_all()
 	_board.play_solved_flourish()
 	_board.set_board_locked(true)
 	Sfx.correct()
@@ -273,17 +275,14 @@ func _on_hint_requested() -> void:
 	Sfx.click()
 
 
-## One letter of the answer is placed for the player — and because that is
-## already a real concession, the meaning comes with it, plus an updated worth.
+## Blue button requested: vibrates the two letters that need to be swapped,
+## without moving any letters.
 func _on_reveal_letter_requested() -> void:
-	if _hint_shown or _solved:
+	if _solved or _closing:
 		return
-	var index := ScrambledGameManager.reveal_letter(_board.tiles_letters())
-	if index >= 0:
-		_board.reveal_letter_at(index)
+	var vibrated := _board.vibrate_hint_pair()
+	if vibrated:
 		Sfx.click()
-	_show_hint_card()
-	_refresh_chips()
 
 
 ## The meaning card takes the place of the how-to line: the English meaning

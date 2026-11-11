@@ -25,6 +25,8 @@ var _access_token: String = ""
 var _refresh_token: String = ""
 var _phone: String = ""
 var _user_id: String = ""
+var _username: String = ""
+var _grade: int = 0
 var _subscription: Dictionary = {}
 var _expiry_unix: int = 0
 
@@ -67,6 +69,14 @@ func get_user_id() -> String:
 	return _user_id
 
 
+func get_username() -> String:
+	return _username
+
+
+func get_grade() -> int:
+	return _grade
+
+
 func get_subscription() -> Dictionary:
 	return _subscription.duplicate(true)
 
@@ -76,9 +86,13 @@ func get_subscription() -> Dictionary:
 # ------------------------------------------------------------
 
 ## Ask the server to text a one-time code to `phone`.
+## optional intent: "signup", "reset", or ""
 ## callback(ok: bool, error: String, retry_after: int)
-func request_otp(phone: String, callback: Callable) -> void:
-	_post("/auth/request-otp", {"phone": phone}, false,
+func request_otp(phone: String, callback: Callable, intent: String = "") -> void:
+	var payload := {"phone": phone}
+	if intent != "":
+		payload["intent"] = intent
+	_post("/auth/request-otp", payload, false,
 		func(result: int, code: int, body: Dictionary) -> void:
 			if _ok(result, code):
 				callback.call(true, "", 0)
@@ -87,22 +101,102 @@ func request_otp(phone: String, callback: Callable) -> void:
 	)
 
 
-## Verify the code and log in. callback(ok: bool, error: String)
+## Verify OTP for signup. Returns signup_token needed for completing registration.
+## callback(ok: bool, signup_token: String, error: String)
+func verify_otp_for_signup(phone: String, code: String, callback: Callable) -> void:
+	_post("/auth/verify-otp", {"phone": phone, "code": code, "intent": "signup"}, false,
+		func(result: int, http_code: int, body: Dictionary) -> void:
+			if not _ok(result, http_code):
+				callback.call(false, "", _error_of(body, http_code))
+				return
+			callback.call(true, str(body.get("signup_token", "")), "")
+	)
+
+
+## Complete registration with username, password, and grade.
+## callback(ok: bool, error: String)
+func register_user(signup_token: String, username: String, password: String, grade: int, callback: Callable) -> void:
+	_post("/auth/register", {
+		"signup_token": signup_token,
+		"username": username,
+		"password": password,
+		"grade": grade,
+	}, false,
+		func(result: int, http_code: int, body: Dictionary) -> void:
+			if not _ok(result, http_code):
+				callback.call(false, _error_of(body, http_code))
+				return
+			_apply_auth_success(body)
+			callback.call(true, "")
+	)
+
+
+## Sign in with username and password.
+## callback(ok: bool, error: String)
+func login_with_password(username: String, password: String, callback: Callable) -> void:
+	_post("/auth/login", {"username": username, "password": password}, false,
+		func(result: int, http_code: int, body: Dictionary) -> void:
+			if not _ok(result, http_code):
+				callback.call(false, _error_of(body, http_code))
+				return
+			_apply_auth_success(body)
+			callback.call(true, "")
+	)
+
+
+## Verify OTP for password reset. Returns reset_token.
+## callback(ok: bool, reset_token: String, error: String)
+func verify_otp_for_reset(phone: String, code: String, callback: Callable) -> void:
+	_post("/auth/verify-otp", {"phone": phone, "code": code, "intent": "reset"}, false,
+		func(result: int, http_code: int, body: Dictionary) -> void:
+			if not _ok(result, http_code):
+				callback.call(false, "", _error_of(body, http_code))
+				return
+			callback.call(true, str(body.get("reset_token", "")), "")
+	)
+
+
+## Reset password with reset_token and new_password. Logs user in.
+## callback(ok: bool, error: String)
+func reset_password(reset_token: String, new_password: String, callback: Callable) -> void:
+	_post("/auth/reset-password", {"reset_token": reset_token, "new_password": new_password}, false,
+		func(result: int, http_code: int, body: Dictionary) -> void:
+			if not _ok(result, http_code):
+				callback.call(false, _error_of(body, http_code))
+				return
+			_apply_auth_success(body)
+			callback.call(true, "")
+	)
+
+
+## Verify the code and log in (legacy direct OTP). callback(ok: bool, error: String)
 func verify_otp(phone: String, code: String, callback: Callable) -> void:
 	_post("/auth/verify-otp", {"phone": phone, "code": code}, false,
 		func(result: int, http_code: int, body: Dictionary) -> void:
 			if not _ok(result, http_code):
 				callback.call(false, _error_of(body, http_code))
 				return
-			_store_tokens(body)
-			_phone = str(body.get("phone", phone))
-			_user_id = str(body.get("user_id", ""))
-			_subscription = body.get("subscription", {})
-			_save_auth()
-			logged_in.emit({"phone": _phone, "user_id": _user_id, "subscription": _subscription})
-			subscription_updated.emit(_subscription)
+			_apply_auth_success(body)
 			callback.call(true, "")
 	)
+
+
+func _apply_auth_success(body: Dictionary) -> void:
+	_store_tokens(body)
+	_phone = str(body.get("phone", _phone))
+	_user_id = str(body.get("user_id", ""))
+	_username = str(body.get("username", ""))
+	_grade = int(body.get("grade", 0))
+	_subscription = body.get("subscription", {})
+	_save_auth()
+	logged_in.emit({
+		"phone": _phone,
+		"user_id": _user_id,
+		"username": _username,
+		"grade": _grade,
+		"subscription": _subscription,
+	})
+	subscription_updated.emit(_subscription)
 
 
 ## Log out locally and best-effort revoke the refresh token on the server.
@@ -114,6 +208,8 @@ func logout() -> void:
 	_refresh_token = ""
 	_phone = ""
 	_user_id = ""
+	_username = ""
+	_grade = 0
 	_subscription = {}
 	_expiry_unix = 0
 	_clear_auth()
@@ -167,6 +263,8 @@ func fetch_me(callback: Callable) -> void:
 			if _ok(result, code):
 				_phone = str(body.get("phone", _phone))
 				_user_id = str(body.get("user_id", _user_id))
+				_username = str(body.get("username", _username))
+				_grade = int(body.get("grade", _grade))
 				_subscription = body.get("subscription", _subscription)
 				_save_auth()
 				subscription_updated.emit(_subscription)
@@ -405,6 +503,8 @@ func _save_auth() -> void:
 		"expiry_unix": _expiry_unix,
 		"phone": _phone,
 		"user_id": _user_id,
+		"username": _username,
+		"grade": _grade,
 		"subscription": _subscription,
 	}
 	var file := FileAccess.open(AUTH_PATH, FileAccess.WRITE)
@@ -432,6 +532,8 @@ func _load_auth() -> void:
 	_expiry_unix = int(data.get("expiry_unix", 0))
 	_phone = str(data.get("phone", ""))
 	_user_id = str(data.get("user_id", ""))
+	_username = str(data.get("username", ""))
+	_grade = int(data.get("grade", 0))
 	_subscription = data.get("subscription", {})
 
 

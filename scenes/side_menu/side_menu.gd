@@ -187,7 +187,13 @@ func _apply_theme() -> void:
 	overlay.color = overlay_col
 
 	# Header / footer text.
-	user_name_label.text = "سلام! 👋"
+	if API.is_logged_in():
+		var display_name := API.get_username()
+		if display_name == "":
+			display_name = MenuStyle.persian_digits(API.get_phone())
+		user_name_label.text = "سلام، %s! 👋" % display_name
+	else:
+		user_name_label.text = "سلام! 👋"
 	welcome_label.text = "چطور میتوانم کمکت کنم؟"
 	for l in [user_name_label, version_label]:
 		if l.label_settings != null:

@@ -37,6 +37,9 @@ const DRAG_ROTATION_FACTOR := 0.02  # How much the card tilts while dragging
 const SLIDE_DURATION       := 0.2
 const SNAP_DURATION        := 0.15
 
+# ---------- Card layout constants ----------
+const CARD_HEIGHT          := 1200.0
+
 # ---------- Dot constants ----------
 const DOT_ACTIVE_W    := 24
 const DOT_INACTIVE_W  := 14
@@ -194,6 +197,7 @@ func _ready() -> void:
 	back_nav_button.pivot_offset = back_nav_button.size / 2.0
 	next_button.pivot_offset = next_button.size / 2.0
 	prev_button.pivot_offset = prev_button.size / 2.0
+	card_panel.custom_minimum_size.y = CARD_HEIGHT
 	card_panel.pivot_offset = card_panel.size / 2.0
 	card_panel.resized.connect(func(): card_panel.pivot_offset = card_panel.size / 2.0)
 

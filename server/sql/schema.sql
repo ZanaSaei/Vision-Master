@@ -3,10 +3,15 @@
 CREATE TABLE IF NOT EXISTS users (
     id                      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     phone                   TEXT UNIQUE NOT NULL,
+    username                TEXT UNIQUE,
+    password_hash           TEXT,
+    grade                   INTEGER,
     subscription_tier       TEXT NOT NULL DEFAULT 'free',
     subscription_expires_at TIMESTAMPTZ,
     created_at              TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS users_username_lower_idx ON users (LOWER(username));
 
 -- One active OTP row per phone. Codes are stored hashed.
 CREATE TABLE IF NOT EXISTS otp_codes (

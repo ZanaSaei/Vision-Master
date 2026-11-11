@@ -70,6 +70,78 @@ function requireAuth(req, res, next) {
   }
 }
 
+/** Hash a plaintext password with scrypt and a random 16-byte salt. */
+function hashPassword(password) {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const derivedKey = crypto.scryptSync(password, salt, 64);
+  return `${salt}:${derivedKey.toString('hex')}`;
+}
+
+/** Verify a password against stored 'salt:hex' format using timing-safe comparison. */
+function verifyPassword(password, storedHash) {
+  if (!storedHash || typeof storedHash !== 'string' || !storedHash.includes(':')) {
+    return false;
+  }
+  const [salt, key] = storedHash.split(':');
+  if (!salt || !key) return false;
+  try {
+    const keyBuffer = Buffer.from(key, 'hex');
+    const derivedKey = crypto.scryptSync(password, salt, keyBuffer.length);
+    return crypto.timingSafeEqual(keyBuffer, derivedKey);
+  } catch {
+    return false;
+  }
+}
+
+/** Short-lived JWT granted after phone OTP verification to complete registration. */
+function signSignupToken(phone) {
+  const secret = process.env.JWT_SECRET || 'dev_secret';
+  return jwt.sign({ sub: phone, purpose: 'signup' }, secret, { expiresIn: '15m' });
+}
+
+function verifySignupToken(token) {
+  if (!token) return null;
+  const secret = process.env.JWT_SECRET || 'dev_secret';
+  try {
+    const payload = jwt.verify(token, secret);
+    if (payload.purpose !== 'signup') return null;
+    return payload.sub;
+  } catch {
+    return null;
+  }
+}
+
+/** Short-lived JWT granted after phone OTP verification to set a new password. */
+function signResetToken(phone) {
+  const secret = process.env.JWT_SECRET || 'dev_secret';
+  return jwt.sign({ sub: phone, purpose: 'password_reset' }, secret, { expiresIn: '15m' });
+}
+
+function verifyResetToken(token) {
+  if (!token) return null;
+  const secret = process.env.JWT_SECRET || 'dev_secret';
+  try {
+    const payload = jwt.verify(token, secret);
+    if (payload.purpose !== 'password_reset') return null;
+    return payload.sub;
+  } catch {
+    return null;
+  }
+}
+
+/** Validates username: 3-30 characters, alphanumeric and underscore. */
+function validateUsername(username) {
+  if (typeof username !== 'string') return false;
+  const trimmed = username.trim();
+  return /^[a-zA-Z0-9_]{3,30}$/.test(trimmed);
+}
+
+/** Validates school grade (10, 11, or 12). */
+function validateGrade(grade) {
+  const num = parseInt(grade, 10);
+  return [10, 11, 12].includes(num);
+}
+
 module.exports = {
   ACCESS_TTL,
   REFRESH_TTL,
@@ -80,4 +152,12 @@ module.exports = {
   signAccessToken,
   issueTokens,
   requireAuth,
+  hashPassword,
+  verifyPassword,
+  signSignupToken,
+  verifySignupToken,
+  signResetToken,
+  verifyResetToken,
+  validateUsername,
+  validateGrade,
 };

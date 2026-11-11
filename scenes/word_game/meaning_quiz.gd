@@ -83,6 +83,7 @@ var _streak_label: Label = null
 var _streak_pill: PanelContainer = null
 var _score_label: Label = null
 var _score_pill: PanelContainer = null
+var _current_hint_box: VBoxContainer = null
 
 
 func _ready() -> void:
@@ -568,6 +569,7 @@ func _show_question() -> void:
 		return
 
 	_clear_content()
+	_current_hint_box = null
 	_made_mistake_on_current = false
 	_busy = false
 
@@ -806,22 +808,32 @@ func _create_question_card(q: Dictionary) -> PanelContainer:
 		word_lbl.add_theme_color_override("font_color", Color("#1E293B"))
 	col.add_child(word_lbl)
 
+	# Hint container for phonetics and pronunciation button (initially hidden until a wrong answer is chosen)
+	var hint_box := VBoxContainer.new()
+	hint_box.name = "HintBox"
+	hint_box.alignment = BoxContainer.ALIGNMENT_CENTER
+	hint_box.add_theme_constant_override("separation", 10)
+	hint_box.visible = false
+	hint_box.modulate.a = 0.0
+
 	# Phonetics row (if available)
 	var phonetics := str(q.get("phonetics", "")).strip_edges()
 	if not phonetics.is_empty():
 		var phon_lbl := Label.new()
+		phon_lbl.name = "PhoneticsLabel"
 		phon_lbl.text = phonetics
 		phon_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		phon_lbl.add_theme_font_override("font", MenuStyle.nunito())
 		phon_lbl.add_theme_font_size_override("font_size", 28)
 		phon_lbl.add_theme_color_override("font_color", Color("#94A3B8"))
-		col.add_child(phon_lbl)
+		hint_box.add_child(phon_lbl)
 
 	# Interactive Pronunciation Button (Speaker 🔊)
 	var raw_word := str(q.get("raw_word", ""))
 	var audio_file := str(q.get("audio", ""))
 	if not raw_word.is_empty():
 		var speaker_btn := Button.new()
+		speaker_btn.name = "SpeakerButton"
 		speaker_btn.text = "🔊  پخش تلفظ"
 		speaker_btn.custom_minimum_size = Vector2(200, 56)
 		speaker_btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -851,7 +863,10 @@ func _create_question_card(q: Dictionary) -> PanelContainer:
 			Global.play_word_audio(audio_file, raw_word)
 			UiMotion.pop(speaker_btn, 1.15))
 		UiMotion.wire_microinteractions(speaker_btn)
-		col.add_child(speaker_btn)
+		hint_box.add_child(speaker_btn)
+
+	col.add_child(hint_box)
+	_current_hint_box = hint_box
 
 	return card
 
@@ -998,6 +1013,21 @@ func _on_option_selected(button: Button, selected_option: String, q: Dictionary)
 		button.add_theme_stylebox_override("pressed", wrong_sb)
 		button.disabled = true
 		button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+		# Reveal phonetic and pronunciation button as a hint
+		_show_hint_on_wrong_answer()
+
+
+func _show_hint_on_wrong_answer() -> void:
+	if _current_hint_box != null and is_instance_valid(_current_hint_box):
+		if not _current_hint_box.visible:
+			_current_hint_box.visible = true
+			_current_hint_box.modulate.a = 0.0
+			_current_hint_box.pivot_offset = _current_hint_box.size * 0.5
+			var tw := create_tween()
+			tw.tween_property(_current_hint_box, "modulate:a", 1.0, 0.28).set_trans(Tween.TRANS_SINE)
+			tw.parallel().tween_property(_current_hint_box, "scale", Vector2.ONE, 0.28) \
+				.from(Vector2(0.92, 0.92)).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
 func _float_points(pts: int, origin_pos: Vector2) -> void:

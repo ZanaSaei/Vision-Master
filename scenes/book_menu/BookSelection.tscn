@@ -19,6 +19,14 @@ shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.6)
 shadow_offset = Vector2(0, 2)
 
+[sub_resource type="LabelSettings" id="LabelSettings_hint"]
+font = ExtResource("2_380wp")
+font_size = 28
+font_color = Color(1, 1, 1, 0.88)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.65)
+shadow_offset = Vector2(0, 2)
+
 [node name="BookSelection" type="Control" unique_id=1108866151]
 layout_mode = 3
 anchors_preset = 15
@@ -73,8 +81,8 @@ mouse_filter = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 48.0
-offset_bottom = 160.0
+offset_top = 168.0
+offset_bottom = 280.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/separation = 6
@@ -102,12 +110,12 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -490.0
+offset_top = -510.0
 offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="GradeSwitcher" type="HBoxContainer" parent="BottomControls" unique_id=1500000005]
@@ -122,7 +130,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="ActionButton" type="Button" parent="BottomControls/ActionRow" unique_id=1500000007]
-custom_minimum_size = Vector2(640, 88)
+custom_minimum_size = Vector2(720, 104)
 layout_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 2
@@ -131,6 +139,6 @@ mouse_default_cursor_shape = 2
 layout_mode = 2
 mouse_filter = 2
 text = "کتاب‌ها را ورق بزنید یا برای ورود لمس کنید ✨"
-label_settings = SubResource("LabelSettings_sub")
+label_settings = SubResource("LabelSettings_hint")
 horizontal_alignment = 1
 vertical_alignment = 1

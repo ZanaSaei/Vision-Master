@@ -1,112 +1,258 @@
 [gd_scene format=3 uid="uid://ba6b0wamf0nb7"]
 
 [ext_resource type="Script" uid="uid://bk10p2d4d2sci" path="res://scenes/settings/settings.gd" id="1_settings"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back"]
-[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font_regular"]
+[ext_resource type="FontFile" uid="uid://dq6ytga6c5qgh" path="res://ui/fonts/Vazirmatn-Bold.ttf" id="3_font_bold"]
+[ext_resource type="FontFile" uid="uid://dyt2kyuobu1pu" path="res://ui/fonts/Vazirmatn-Medium.ttf" id="4_font_medium"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="5_back"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="6_header_style"]
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
-font = ExtResource("2_font")
-font_size = 45
-
-[sub_resource type="StyleBoxFlat" id="btn_pressed"]
-content_margin_left = 26.0
-content_margin_top = 20.0
-content_margin_right = 26.0
-content_margin_bottom = 20.0
-bg_color = Color(0.545098, 0.360784, 0.964706, 0.42)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.760784, 0.611765, 1, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
-
-[sub_resource type="StyleBoxFlat" id="btn_hover"]
-content_margin_left = 26.0
-content_margin_top = 20.0
-content_margin_right = 26.0
-content_margin_bottom = 20.0
-bg_color = Color(0.545098, 0.360784, 0.964706, 0.3)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.654902, 0.482353, 0.980392, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+font = ExtResource("3_font_bold")
+font_size = 44
+font_color = Color(0.184314, 0.172549, 0.152941, 1)
 
 [sub_resource type="StyleBoxFlat" id="card_style"]
-content_margin_left = 44.0
-content_margin_top = 38.0
-content_margin_right = 44.0
-content_margin_bottom = 38.0
-bg_color = Color(1, 1, 1, 0.06)
+content_margin_left = 36.0
+content_margin_top = 36.0
+content_margin_right = 36.0
+content_margin_bottom = 36.0
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(1, 1, 1, 0.1)
-corner_radius_top_left = 26
-corner_radius_top_right = 26
-corner_radius_bottom_right = 26
-corner_radius_bottom_left = 26
+border_color = Color(0.235294, 0.196078, 0.117647, 0.12)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0, 0, 0, 0.07)
+shadow_size = 14
+shadow_offset = Vector2(0, 6)
 
-[sub_resource type="StyleBoxFlat" id="btn_style"]
+[sub_resource type="StyleBoxFlat" id="chip_style"]
 content_margin_left = 26.0
-content_margin_top = 20.0
+content_margin_top = 22.0
 content_margin_right = 26.0
-content_margin_bottom = 20.0
-bg_color = Color(1, 1, 1, 0.09)
+content_margin_bottom = 22.0
+bg_color = Color(0.968627, 0.956863, 0.937255, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(1, 1, 1, 0.14)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+border_color = Color(0.235294, 0.196078, 0.117647, 0.09)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="sep_line"]
-bg_color = Color(1, 1, 1, 0.1)
-
-[sub_resource type="StyleBoxFlat" id="danger_style"]
-content_margin_left = 26.0
-content_margin_top = 20.0
-content_margin_right = 26.0
-content_margin_bottom = 20.0
-bg_color = Color(0.85, 0.16, 0.22, 0.22)
+[sub_resource type="StyleBoxFlat" id="icon_chip_style"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.184314, 0.435294, 0.847059, 0.12)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.95, 0.35, 0.42, 0.7)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+border_color = Color(0.184314, 0.435294, 0.847059, 0.35)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id="danger_hover"]
+[sub_resource type="StyleBoxFlat" id="pill_badge_style"]
+content_margin_left = 20.0
+content_margin_top = 6.0
+content_margin_right = 20.0
+content_margin_bottom = 6.0
+bg_color = Color(0.184314, 0.435294, 0.847059, 0.12)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.184314, 0.435294, 0.847059, 0.4)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="btn_primary_normal"]
 content_margin_left = 26.0
 content_margin_top = 20.0
 content_margin_right = 26.0
 content_margin_bottom = 20.0
-bg_color = Color(0.85, 0.16, 0.22, 0.38)
+bg_color = Color(0.184314, 0.435294, 0.847059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.298039, 0.552941, 0.964706, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.184314, 0.435294, 0.847059, 0.35)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="btn_primary_hover"]
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+bg_color = Color(0.247059, 0.505882, 0.917647, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(1, 0.5, 0.55, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+border_color = Color(0.447059, 0.678431, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.184314, 0.435294, 0.847059, 0.45)
+shadow_size = 14
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="btn_primary_pressed"]
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+bg_color = Color(0.133333, 0.345098, 0.690196, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.235294, 0.454902, 0.823529, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="btn_secondary_normal"]
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+bg_color = Color(0.968627, 0.956863, 0.937255, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.235294, 0.196078, 0.117647, 0.14)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.04)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="btn_secondary_hover"]
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.184314, 0.435294, 0.847059, 0.4)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.08)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="btn_secondary_pressed"]
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+bg_color = Color(0.921569, 0.901961, 0.870588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.235294, 0.196078, 0.117647, 0.22)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="btn_danger_normal"]
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+bg_color = Color(0.752941, 0.223529, 0.168627, 0.10)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.752941, 0.223529, 0.168627, 0.35)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="btn_danger_hover"]
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+bg_color = Color(0.752941, 0.223529, 0.168627, 0.18)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85098, 0.266667, 0.207843, 0.7)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="btn_danger_pressed"]
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+bg_color = Color(0.752941, 0.223529, 0.168627, 0.28)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.752941, 0.223529, 0.168627, 0.8)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="progress_track_style"]
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.878431, 0.854902, 0.811765, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="progress_fill_style"]
+bg_color = Color(0.184314, 0.435294, 0.847059, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="sep_line"]
+bg_color = Color(0.235294, 0.196078, 0.117647, 0.08)
 
 [node name="Settings" type="Control" unique_id=1906407232]
 layout_mode = 3
@@ -124,29 +270,227 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.012, 0.018, 0.055, 0.88)
+color = Color(0.937255, 0.921569, 0.882353, 1)
 
 [node name="Scroll" type="ScrollContainer" parent="." unique_id=1664808613]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 260.0
+offset_top = 220.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
 
 [node name="Margin" type="MarginContainer" parent="Scroll" unique_id=731332921]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 36
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 180
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 220
 
 [node name="Layout" type="VBoxContainer" parent="Scroll/Margin" unique_id=253511967]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 30
+theme_override_constants/separation = 28
+
+[node name="AccountCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=310000001]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("card_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/AccountCard" unique_id=310000002]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="HeaderRow" type="HBoxContainer" parent="Scroll/Margin/Layout/AccountCard/VBox" unique_id=310000003]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Scroll/Margin/Layout/AccountCard/VBox/HeaderRow" unique_id=310000004]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("icon_chip_style")
+
+[node name="IconLabel" type="Label" parent="Scroll/Margin/Layout/AccountCard/VBox/HeaderRow/IconChip" unique_id=310000005]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_regular")
+theme_override_font_sizes/font_size = 28
+text = "👤"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Scroll/Margin/Layout/AccountCard/VBox/HeaderRow" unique_id=310000006]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 38
+text = "حساب کاربری"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Scroll/Margin/Layout/AccountCard/VBox/HeaderRow" unique_id=310000007]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Badge" type="Label" parent="Scroll/Margin/Layout/AccountCard/VBox/HeaderRow" unique_id=310000008]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("pill_badge_style")
+text = "مهمان"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusBox" type="PanelContainer" parent="Scroll/Margin/Layout/AccountCard/VBox" unique_id=310000009]
+layout_mode = 2
+theme_override_styles/panel = SubResource("chip_style")
+
+[node name="AccountStatus" type="Label" parent="Scroll/Margin/Layout/AccountCard/VBox/StatusBox" unique_id=310000010]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.22, 0.19, 1)
+theme_override_fonts/font = ExtResource("4_font_medium")
+theme_override_font_sizes/font_size = 30
+text = "برای همگام‌سازی پیشرفت و دانلود محتوا با شماره موبایل وارد شوید."
+autowrap_mode = 3
+
+[node name="AccountLoginButton" type="Button" parent="Scroll/Margin/Layout/AccountCard/VBox" unique_id=310000011]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_primary_normal")
+theme_override_styles/hover = SubResource("btn_primary_hover")
+theme_override_styles/pressed = SubResource("btn_primary_pressed")
+text = "ورود / ثبت‌نام"
+
+[node name="AccountLogoutButton" type="Button" parent="Scroll/Margin/Layout/AccountCard/VBox" unique_id=310000012]
+visible = false
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.22, 0.19, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_secondary_normal")
+theme_override_styles/hover = SubResource("btn_secondary_hover")
+theme_override_styles/pressed = SubResource("btn_secondary_pressed")
+text = "خروج از حساب کاربری"
+
+[node name="DownloadsCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=320000001]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("card_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/DownloadsCard" unique_id=320000002]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="HeaderRow" type="HBoxContainer" parent="Scroll/Margin/Layout/DownloadsCard/VBox" unique_id=320000003]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Scroll/Margin/Layout/DownloadsCard/VBox/HeaderRow" unique_id=320000004]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("icon_chip_style")
+
+[node name="IconLabel" type="Label" parent="Scroll/Margin/Layout/DownloadsCard/VBox/HeaderRow/IconChip" unique_id=320000005]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_regular")
+theme_override_font_sizes/font_size = 28
+text = "📥"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Scroll/Margin/Layout/DownloadsCard/VBox/HeaderRow" unique_id=320000006]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 38
+text = "دانلود محتوا"
+vertical_alignment = 1
+
+[node name="InfoBox" type="PanelContainer" parent="Scroll/Margin/Layout/DownloadsCard/VBox" unique_id=320000007]
+layout_mode = 2
+theme_override_styles/panel = SubResource("chip_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/DownloadsCard/VBox/InfoBox" unique_id=320000008]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="DownloadInfo" type="Label" parent="Scroll/Margin/Layout/DownloadsCard/VBox/InfoBox/VBox" unique_id=320000009]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.22, 0.19, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 30
+text = "حجم دانلودشده: ۰ کیلوبایت"
+
+[node name="DownloadHint" type="Label" parent="Scroll/Margin/Layout/DownloadsCard/VBox/InfoBox/VBox" unique_id=320000010]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.45, 0.40, 1)
+theme_override_fonts/font = ExtResource("2_font_regular")
+theme_override_font_sizes/font_size = 26
+text = "فایل‌های صوتی و تصویری دروس برای استفاده آفلاین"
+autowrap_mode = 3
+
+[node name="DownloadProgressBar" type="ProgressBar" parent="Scroll/Margin/Layout/DownloadsCard/VBox/InfoBox/VBox" unique_id=320000011]
+visible = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("progress_track_style")
+theme_override_styles/fill = SubResource("progress_fill_style")
+max_value = 1.0
+show_percentage = false
+
+[node name="DownloadProgressLabel" type="Label" parent="Scroll/Margin/Layout/DownloadsCard/VBox/InfoBox/VBox" unique_id=320000012]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("4_font_medium")
+theme_override_font_sizes/font_size = 26
+text = "در حال آماده‌سازی دانلود…"
+autowrap_mode = 3
+
+[node name="DownloadButton" type="Button" parent="Scroll/Margin/Layout/DownloadsCard/VBox" unique_id=320000013]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_primary_normal")
+theme_override_styles/hover = SubResource("btn_primary_hover")
+theme_override_styles/pressed = SubResource("btn_primary_pressed")
+text = "دانلود همه محتوا"
+
+[node name="CancelDownloadButton" type="Button" parent="Scroll/Margin/Layout/DownloadsCard/VBox" unique_id=320000014]
+visible = false
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.22, 0.17, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_danger_normal")
+theme_override_styles/hover = SubResource("btn_danger_hover")
+theme_override_styles/pressed = SubResource("btn_danger_pressed")
+text = "لغو دانلود"
+
+[node name="ClearContentButton" type="Button" parent="Scroll/Margin/Layout/DownloadsCard/VBox" unique_id=320000015]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.22, 0.19, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("btn_secondary_normal")
+theme_override_styles/hover = SubResource("btn_secondary_hover")
+theme_override_styles/pressed = SubResource("btn_secondary_pressed")
+text = "پاک کردن محتوای دانلودشده"
 
 [node name="SoundCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=183150020]
 layout_mode = 2
@@ -155,35 +499,63 @@ theme_override_styles/panel = SubResource("card_style")
 
 [node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/SoundCard" unique_id=1610048559]
 layout_mode = 2
-theme_override_constants/separation = 26
+theme_override_constants/separation = 22
 
-[node name="SoundTitle" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox" unique_id=108599930]
+[node name="HeaderRow" type="HBoxContainer" parent="Scroll/Margin/Layout/SoundCard/VBox" unique_id=330000001]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.760784, 0.611765, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 42
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Scroll/Margin/Layout/SoundCard/VBox/HeaderRow" unique_id=330000002]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("icon_chip_style")
+
+[node name="IconLabel" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox/HeaderRow/IconChip" unique_id=330000003]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_regular")
+theme_override_font_sizes/font_size = 28
+text = "🔊"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundTitle" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox/HeaderRow" unique_id=108599930]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 38
 text = "صدا و گفتار"
+vertical_alignment = 1
 
 [node name="SoundRow" type="HBoxContainer" parent="Scroll/Margin/Layout/SoundCard/VBox" unique_id=1528130129]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 20
 
-[node name="SoundLabel" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox/SoundRow" unique_id=179604444]
+[node name="TextCol" type="VBoxContainer" parent="Scroll/Margin/Layout/SoundCard/VBox/SoundRow" unique_id=330000004]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 36
+theme_override_constants/separation = 4
+
+[node name="SoundLabel" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox/SoundRow/TextCol" unique_id=179604444]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.152941, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 32
 text = "افکت‌های صوتی"
-vertical_alignment = 1
+
+[node name="SoundDesc" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox/SoundRow/TextCol" unique_id=330000005]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.45, 0.40, 1)
+theme_override_fonts/font = ExtResource("2_font_regular")
+theme_override_font_sizes/font_size = 26
+text = "صدای کلیک، پاسخ صحیح و بازخورد تعاملی"
 
 [node name="SoundToggle" type="Button" parent="Scroll/Margin/Layout/SoundCard/VBox/SoundRow" unique_id=991730093]
 custom_minimum_size = Vector2(210, 84)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_font_bold")
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("btn_style")
 text = "روشن"
 
 [node name="Sep" type="HSeparator" parent="Scroll/Margin/Layout/SoundCard/VBox" unique_id=857229820]
@@ -192,25 +564,49 @@ theme_override_styles/separator = SubResource("sep_line")
 
 [node name="TtsRow" type="HBoxContainer" parent="Scroll/Margin/Layout/SoundCard/VBox" unique_id=680528694]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 20
 
-[node name="TtsLabel" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox/TtsRow" unique_id=1196315494]
+[node name="TextCol" type="VBoxContainer" parent="Scroll/Margin/Layout/SoundCard/VBox/TtsRow" unique_id=330000006]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 36
+theme_override_constants/separation = 4
+
+[node name="TtsLabel" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox/TtsRow/TextCol" unique_id=1196315494]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.152941, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 32
 text = "تلفظ انگلیسی (متن به گفتار)"
-vertical_alignment = 1
+
+[node name="TtsDesc" type="Label" parent="Scroll/Margin/Layout/SoundCard/VBox/TtsRow/TextCol" unique_id=330000007]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.45, 0.40, 1)
+theme_override_fonts/font = ExtResource("2_font_regular")
+theme_override_font_sizes/font_size = 26
+text = "پخش تلفظ خودکار یا لمسی لغات انگلیسی"
 
 [node name="TtsToggle" type="Button" parent="Scroll/Margin/Layout/SoundCard/VBox/TtsRow" unique_id=1107598915]
 custom_minimum_size = Vector2(210, 84)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_font_bold")
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("btn_style")
 text = "روشن"
+
+[node name="Sep2" type="HSeparator" parent="Scroll/Margin/Layout/SoundCard/VBox" unique_id=330000008]
+layout_mode = 2
+theme_override_styles/separator = SubResource("sep_line")
+
+[node name="TestTtsButton" type="Button" parent="Scroll/Margin/Layout/SoundCard/VBox" unique_id=330000009]
+custom_minimum_size = Vector2(0, 84)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("4_font_medium")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("btn_secondary_normal")
+theme_override_styles/hover = SubResource("btn_secondary_hover")
+theme_override_styles/pressed = SubResource("btn_secondary_pressed")
+text = "🔊 آزمایش تلفظ صوتی (Hello)"
 
 [node name="DataCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=1418657074]
 layout_mode = 2
@@ -219,52 +615,99 @@ theme_override_styles/panel = SubResource("card_style")
 
 [node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/DataCard" unique_id=1827099096]
 layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="HeaderRow" type="HBoxContainer" parent="Scroll/Margin/Layout/DataCard/VBox" unique_id=340000001]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Scroll/Margin/Layout/DataCard/VBox/HeaderRow" unique_id=340000002]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("icon_chip_style")
+
+[node name="IconLabel" type="Label" parent="Scroll/Margin/Layout/DataCard/VBox/HeaderRow/IconChip" unique_id=340000003]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_regular")
+theme_override_font_sizes/font_size = 28
+text = "🗄️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DataTitle" type="Label" parent="Scroll/Margin/Layout/DataCard/VBox/HeaderRow" unique_id=764691546]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 38
+text = "مدیریت داده‌ها"
+vertical_alignment = 1
+
+[node name="StatsBox" type="PanelContainer" parent="Scroll/Margin/Layout/DataCard/VBox" unique_id=340000004]
+layout_mode = 2
+theme_override_styles/panel = SubResource("chip_style")
+
+[node name="HBox" type="HBoxContainer" parent="Scroll/Margin/Layout/DataCard/VBox/StatsBox" unique_id=340000005]
+layout_mode = 2
+alignment = 1
 theme_override_constants/separation = 24
 
-[node name="DataTitle" type="Label" parent="Scroll/Margin/Layout/DataCard/VBox" unique_id=764691546]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.760784, 0.611765, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 42
-text = "داده‌ها"
-
-[node name="ClearSavedButton" type="Button" parent="Scroll/Margin/Layout/DataCard/VBox" unique_id=1042664381]
-custom_minimum_size = Vector2(0, 96)
+[node name="SavedWordsStat" type="Label" parent="Scroll/Margin/Layout/DataCard/VBox/StatsBox/HBox" unique_id=340000006]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/normal = SubResource("btn_style")
-theme_override_styles/pressed = SubResource("btn_pressed")
-theme_override_styles/hover = SubResource("btn_hover")
-theme_override_styles/focus = SubResource("btn_style")
+theme_override_colors/font_color = Color(0.24, 0.22, 0.19, 1)
+theme_override_fonts/font = ExtResource("4_font_medium")
+theme_override_font_sizes/font_size = 28
+text = "فلش‌کارت‌ها: ۰ لغت"
+horizontal_alignment = 1
+
+[node name="VSep" type="VSeparator" parent="Scroll/Margin/Layout/DataCard/VBox/StatsBox/HBox" unique_id=340000007]
+layout_mode = 2
+theme_override_styles/separator = SubResource("sep_line")
+
+[node name="ReviewWordsStat" type="Label" parent="Scroll/Margin/Layout/DataCard/VBox/StatsBox/HBox" unique_id=340000008]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.24, 0.22, 0.19, 1)
+theme_override_fonts/font = ExtResource("4_font_medium")
+theme_override_font_sizes/font_size = 28
+text = "مرور لایتنر: ۰ لغت"
+horizontal_alignment = 1
+
+[node name="ClearSavedButton" type="Button" parent="Scroll/Margin/Layout/DataCard/VBox" unique_id=1042664381]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("btn_secondary_normal")
+theme_override_styles/hover = SubResource("btn_secondary_hover")
+theme_override_styles/pressed = SubResource("btn_secondary_pressed")
 text = "پاک کردن فلش‌کارت‌ها"
 
 [node name="ClearReviewButton" type="Button" parent="Scroll/Margin/Layout/DataCard/VBox" unique_id=198568632]
-custom_minimum_size = Vector2(0, 96)
+custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/normal = SubResource("btn_style")
-theme_override_styles/pressed = SubResource("btn_pressed")
-theme_override_styles/hover = SubResource("btn_hover")
-theme_override_styles/focus = SubResource("btn_style")
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("btn_secondary_normal")
+theme_override_styles/hover = SubResource("btn_secondary_hover")
+theme_override_styles/pressed = SubResource("btn_secondary_pressed")
 text = "پاک کردن نوبت مرور (لایتنر)"
 
 [node name="ResetButton" type="Button" parent="Scroll/Margin/Layout/DataCard/VBox" unique_id=514398955]
-custom_minimum_size = Vector2(0, 96)
+custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 0.55, 0.6, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/normal = SubResource("danger_style")
-theme_override_styles/pressed = SubResource("danger_style")
-theme_override_styles/hover = SubResource("danger_hover")
-theme_override_styles/focus = SubResource("danger_style")
+theme_override_colors/font_color = Color(0.75, 0.22, 0.17, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("btn_danger_normal")
+theme_override_styles/hover = SubResource("btn_danger_hover")
+theme_override_styles/pressed = SubResource("btn_danger_pressed")
 text = "بازنشانی کامل همه پیشرفت"
 
 [node name="AboutCard" type="PanelContainer" parent="Scroll/Margin/Layout" unique_id=1095400496]
@@ -276,75 +719,121 @@ theme_override_styles/panel = SubResource("card_style")
 layout_mode = 2
 theme_override_constants/separation = 22
 
-[node name="AboutTitle" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox" unique_id=1624602479]
+[node name="HeaderRow" type="HBoxContainer" parent="Scroll/Margin/Layout/AboutCard/VBox" unique_id=350000001]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.760784, 0.611765, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 42
+theme_override_constants/separation = 16
+
+[node name="IconChip" type="PanelContainer" parent="Scroll/Margin/Layout/AboutCard/VBox/HeaderRow" unique_id=350000002]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("icon_chip_style")
+
+[node name="IconLabel" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/HeaderRow/IconChip" unique_id=350000003]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font_regular")
+theme_override_font_sizes/font_size = 28
+text = "ℹ️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AboutTitle" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/HeaderRow" unique_id=1624602479]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 38
 text = "درباره برنامه"
+vertical_alignment = 1
 
-[node name="VersionRow" type="HBoxContainer" parent="Scroll/Margin/Layout/AboutCard/VBox" unique_id=513732936]
+[node name="InfoBox" type="PanelContainer" parent="Scroll/Margin/Layout/AboutCard/VBox" unique_id=350000004]
+layout_mode = 2
+theme_override_styles/panel = SubResource("chip_style")
+
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox" unique_id=350000005]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VersionRow" type="HBoxContainer" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox" unique_id=513732936]
 layout_mode = 2
 
-[node name="VersionName" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/VersionRow" unique_id=1467554580]
+[node name="VersionName" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox/VersionRow" unique_id=1467554580]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.82, 0.82, 0.82, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.48, 0.45, 0.40, 1)
+theme_override_fonts/font = ExtResource("4_font_medium")
+theme_override_font_sizes/font_size = 30
 text = "نسخه برنامه"
 
-[node name="VersionValue" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/VersionRow" unique_id=1065539706]
+[node name="VersionValue" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox/VersionRow" unique_id=1065539706]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 28
 text = "1.0.0"
 
-[node name="DevRow" type="HBoxContainer" parent="Scroll/Margin/Layout/AboutCard/VBox" unique_id=169695726]
+[node name="Sep1" type="HSeparator" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox" unique_id=350000006]
+layout_mode = 2
+theme_override_styles/separator = SubResource("sep_line")
+
+[node name="DevRow" type="HBoxContainer" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox" unique_id=169695726]
 layout_mode = 2
 
-[node name="DevName" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/DevRow" unique_id=399181696]
+[node name="DevName" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox/DevRow" unique_id=399181696]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.82, 0.82, 0.82, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.48, 0.45, 0.40, 1)
+theme_override_fonts/font = ExtResource("4_font_medium")
+theme_override_font_sizes/font_size = 30
 text = "توسعه‌دهنده"
 
-[node name="DevValue" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/DevRow" unique_id=36387906]
+[node name="DevValue" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox/DevRow" unique_id=36387906]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.152941, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 30
 text = "MrSaei"
 
-[node name="SubRow" type="HBoxContainer" parent="Scroll/Margin/Layout/AboutCard/VBox" unique_id=1566576879]
+[node name="Sep2" type="HSeparator" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox" unique_id=350000007]
+layout_mode = 2
+theme_override_styles/separator = SubResource("sep_line")
+
+[node name="SubRow" type="HBoxContainer" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox" unique_id=1566576879]
 layout_mode = 2
 
-[node name="SubName" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/SubRow" unique_id=1481026450]
+[node name="SubName" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox/SubRow" unique_id=1481026450]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.82, 0.82, 0.82, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.48, 0.45, 0.40, 1)
+theme_override_fonts/font = ExtResource("4_font_medium")
+theme_override_font_sizes/font_size = 30
 text = "وضعیت اشتراک"
 
-[node name="SubValue" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/SubRow" unique_id=1975169771]
+[node name="SubValue" type="Label" parent="Scroll/Margin/Layout/AboutCard/VBox/InfoBox/VBox/SubRow" unique_id=1975169771]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 28
 text = "نسخه رایگان"
+
+[node name="AboutDevButton" type="Button" parent="Scroll/Margin/Layout/AboutCard/VBox" unique_id=350000008]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.22, 0.19, 1)
+theme_override_fonts/font = ExtResource("3_font_bold")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("btn_secondary_normal")
+theme_override_styles/hover = SubResource("btn_secondary_hover")
+theme_override_styles/pressed = SubResource("btn_secondary_pressed")
+text = "صفحه سازنده و راه‌های ارتباطی"
+
 [node name="HeaderBar" type="PanelContainer" parent="." unique_id=1204458812]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 0.0
-offset_bottom = 240.0
+offset_bottom = 220.0
 grow_horizontal = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("4_header_style")
+theme_override_styles/panel = ExtResource("6_header_style")
 
 [node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=1904458813]
 layout_mode = 2
@@ -354,19 +843,11 @@ theme_override_constants/separation = 45
 
 [node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1604458814]
 layout_mode = 2
-icon = ExtResource("3_back")
+icon = ExtResource("5_back")
 flat = true
 icon_alignment = 1
-
-[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=1304458815]
-custom_minimum_size = Vector2(72, 72)
-layout_mode = 2
-theme_override_font_sizes/font_size = 44
-text = "🏠"
-flat = true
 
 [node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=1704458816]
 layout_mode = 2
 text = "تنظیمات"
 label_settings = SubResource("HeaderTitleSettings")
-

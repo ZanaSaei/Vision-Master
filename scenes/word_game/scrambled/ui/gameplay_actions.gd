@@ -40,8 +40,28 @@ func _ready() -> void:
 	MenuStyle.wire_microinteractions(_reveal)
 
 
-## The word has been going long enough: the hint button arrives on its own.
+## Sets up the action buttons according to the game mode.
+## In daily competition: remove blue button entirely and show only the yellow button.
+## In learning mode: show blue button initially, yellow button hidden until timer is over.
+func setup_mode(is_competition: bool) -> void:
+	if is_competition:
+		_reveal.visible = false
+		_hint.visible = true
+		_hint.scale = Vector2.ONE
+		_hint.rotation = 0.0
+	else:
+		_reveal.visible = true
+		_reveal.scale = Vector2.ONE
+		_reveal.rotation = 0.0
+		_hint.visible = false
+		_hint.scale = Vector2(HINT_ARRIVE_FROM, HINT_ARRIVE_FROM)
+		_hint.rotation = 0.0
+
+
+## The word has been going long enough: the yellow hint button arrives on its own,
+## and the blue reveal button is removed.
 func reveal_hint() -> void:
+	_reveal.visible = false
 	_hint.pivot_offset = _hint.size * 0.5
 	_hint.scale = Vector2(HINT_ARRIVE_FROM, HINT_ARRIVE_FROM)
 	_hint.visible = true
@@ -59,5 +79,12 @@ func reveal_hint() -> void:
 ## The hint has been taken: the button has done its job and steps aside.
 func hide_hint() -> void:
 	_hint.visible = false
+	_reveal.visible = false
 	_hint.scale = Vector2(HINT_ARRIVE_FROM, HINT_ARRIVE_FROM)
 	_hint.rotation = 0.0
+
+
+## Hides all buttons (e.g. when word is solved).
+func hide_all() -> void:
+	_hint.visible = false
+	_reveal.visible = false

@@ -64,6 +64,10 @@ func _initialize() -> void:
 
 	# 5. Simulate a wrong answer on Question 1
 	var q1: Dictionary = questions[1]
+	var hint_box_before: Control = quiz.get("_current_hint_box") as Control
+	assert(hint_box_before == null or not hint_box_before.visible, "Hint box must not be visible before a wrong answer")
+	print("✓ Phonetics and pronunciation button are hidden before wrong answer")
+
 	var wrong_ans := ""
 	for opt in q1["options"]:
 		if str(opt) != str(q1["correct_answer"]):
@@ -74,6 +78,10 @@ func _initialize() -> void:
 	quiz.add_child(dummy_btn_wrong)
 	quiz._busy = false # reset busy for the test
 	quiz._on_option_selected(dummy_btn_wrong, wrong_ans, q1)
+
+	var hint_box_after: Control = quiz.get("_current_hint_box") as Control
+	assert(hint_box_after != null and hint_box_after.visible, "Hint box must be visible after a wrong answer")
+	print("✓ Phonetics and pronunciation button revealed as hint on wrong answer")
 
 	var streak_after_wrong: int = int(quiz.get("_streak"))
 	assert(streak_after_wrong == 0, "Streak must reset to 0 on wrong answer")

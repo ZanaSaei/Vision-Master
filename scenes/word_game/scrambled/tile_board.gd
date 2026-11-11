@@ -564,6 +564,68 @@ func play_near_miss_nudge() -> void:
 			tile.play_nudge()
 
 
+## Vibrates the two letters that need to be swapped, without moving them.
+## Returns true if a pair of letters was found and vibrated.
+func vibrate_hint_pair() -> bool:
+	if _controller == null:
+		return false
+	var current := tiles_letters()
+	if _controller.is_solved(current):
+		return false
+
+	var pair := _find_hint_swap_pair(current)
+	if pair.size() < 2:
+		return false
+
+	var idx_a: int = pair[0]
+	var idx_b: int = pair[1]
+
+	var tile_a := _tiles[_order[idx_a]] as ScrambledTile
+	var tile_b := _tiles[_order[idx_b]] as ScrambledTile
+	if tile_a != null:
+		tile_a.play_vibrate(_slot_position(idx_a))
+	if tile_b != null:
+		tile_b.play_vibrate(_slot_position(idx_b))
+	return true
+
+
+func _find_hint_swap_pair(current: Array) -> Array[int]:
+	if _controller == null:
+		return []
+	var target := _controller.target
+	var n := mini(current.size(), target.size())
+
+	# 1. Search for a direct mutual swap (i and j where swapping fixes both)
+	for i in n:
+		if str(current[i]).to_upper() == target[i]:
+			continue
+		for j in range(i + 1, n):
+			if str(current[j]).to_upper() == target[j]:
+				continue
+			if str(current[i]).to_upper() == target[j] and str(current[j]).to_upper() == target[i]:
+				return [i, j]
+
+	# 2. Find first misplaced slot i, and find where target[i] is located
+	for i in n:
+		if str(current[i]).to_upper() != target[i]:
+			var needed: String = target[i]
+			# Prefer a position j that is also misplaced
+			for j in n:
+				if j != i and str(current[j]).to_upper() == needed and str(current[j]).to_upper() != target[j]:
+					return [i, j]
+			# Fallback: any position j with the needed letter
+			for j in n:
+				if j != i and str(current[j]).to_upper() == needed:
+					return [i, j]
+
+	# 3. Fallback to any two misplaced letters
+	var misplaced_indices := _controller.misplaced(current)
+	if misplaced_indices.size() >= 2:
+		return [int(misplaced_indices[0]), int(misplaced_indices[1])]
+
+	return []
+
+
 ## --------------------------------------------------------------- drawing --
 func _update_ghost_style() -> void:
 	_ghost_style.bg_color = ScrambledTheme.ghost_color(_ghost_pulse)

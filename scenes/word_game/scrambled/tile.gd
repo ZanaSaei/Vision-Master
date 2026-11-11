@@ -208,6 +208,29 @@ func play_nudge() -> void:
 	wobble.tween_property(self, "rotation", 0.0, 0.10).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
+## Vibrates/shakes the tile in place with an amber flash and tactile feedback.
+## Used for the blue hint button to signal which two letters need attention.
+func play_vibrate(base_pos: Vector2 = position) -> void:
+	pivot_offset = size * 0.5
+	var tw := create_tween()
+	tw.tween_property(self, "nudge", 1.0, 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tw.tween_property(self, "nudge", 0.0, 0.32).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	var shake := create_tween()
+	for _i in range(3):
+		shake.tween_property(self, "position:x", base_pos.x - 7.0, 0.04).set_trans(Tween.TRANS_SINE)
+		shake.tween_property(self, "position:x", base_pos.x + 7.0, 0.04).set_trans(Tween.TRANS_SINE)
+	shake.tween_property(self, "position:x", base_pos.x, 0.04).set_trans(Tween.TRANS_SINE)
+
+	var wobble := create_tween()
+	wobble.tween_property(self, "rotation", 0.06, 0.06).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	wobble.tween_property(self, "rotation", -0.06, 0.08).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	wobble.tween_property(self, "rotation", 0.0, 0.06).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	if Input.has_method("vibrate_handheld"):
+		Input.vibrate_handheld(80)
+
+
 ## Resizes a pointer position into the shared canvas space: the positions the
 ## drag protocol hands us are local to whichever node received the event, and
 ## the tile may be scaled or mid-tween at that moment.
