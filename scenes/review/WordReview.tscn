@@ -8,70 +8,105 @@
 [ext_resource type="FontFile" uid="uid://di7ydbq6u6a2s" path="res://ui/fonts/PlusJakartaSans-Regular.ttf" id="6_y8wcc"]
 [ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="7_y8wcc"]
 [ext_resource type="FontFile" uid="uid://dq6ytga6c5qgh" path="res://ui/fonts/Vazirmatn-Bold.ttf" id="8_vzbold"]
-[ext_resource type="PackedScene" uid="uid://c4kduxd61oyll" path="res://scenes/side_menu/ReviewSideMenu.tscn" id="8_y8wcc"]
+[ext_resource type="FontFile" uid="uid://ry2noj0tf42q" path="res://ui/fonts/PlusJakartaSans-Bold.ttf" id="9_pjbold"]
+[ext_resource type="FontFile" uid="uid://dyt2kyuobu1pu" path="res://ui/fonts/Vazirmatn-Medium.ttf" id="10_vzmed"]
+[ext_resource type="PackedScene" uid="uid://c4kduxd61oyll" path="res://scenes/side_menu/ReviewSideMenu.tscn" id="11_y8wcc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_headertitle"]
 font = ExtResource("8_vzbold")
-font_size = 42
-font_color = Color(0.18, 0.17, 0.15, 1)
+font_size = 40
+font_color = Color(0.12, 0.14, 0.2, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_duecounter"]
-font = ExtResource("7_y8wcc")
-font_size = 32
-font_color = Color(0.4, 0.38, 0.35, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_bg"]
-bg_color = Color(0.88, 0.86, 0.82, 0.6)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_fill"]
-bg_color = Color(0.18, 0.44, 0.85, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_main"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 28
-corner_radius_top_right = 28
-corner_radius_bottom_right = 28
-corner_radius_bottom_left = 28
-shadow_color = Color(0, 0, 0, 0.12)
-shadow_size = 20
-shadow_offset = Vector2(0, 8)
+font = ExtResource("10_vzmed")
+font_size = 28
+font_color = Color(0.4, 0.44, 0.52, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pill"]
-bg_color = Color(0.18, 0.44, 0.85, 0.12)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.18, 0.44, 0.85, 0.1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 expand_margin_left = 12.0
 expand_margin_top = 4.0
 expand_margin_right = 12.0
 expand_margin_bottom = 4.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_bg"]
+bg_color = Color(0.88, 0.89, 0.92, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_fill"]
+bg_color = Color(0.18, 0.44, 0.85, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_main"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.06)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0, 0, 0, 0.08)
+shadow_size = 18
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utnya"]
+bg_color = Color(0.7137255, 0.90588236, 0.6, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="LabelSettings" id="LabelSettings_front_word"]
-font = ExtResource("8_vzbold")
-font_size = 76
-font_color = Color(0.12, 0.12, 0.14, 1)
+font = ExtResource("9_pjbold")
+font_size = 72
+font_color = Color(0.1, 0.12, 0.18, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_phonetics"]
 font = ExtResource("5_3kfk6")
-font_size = 44
-font_color = Color(0.42, 0.45, 0.52, 1)
+font_size = 40
+font_color = Color(0.42, 0.46, 0.54, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_taphint"]
-font = ExtResource("7_y8wcc")
-font_size = 30
-font_color = Color(0.55, 0.55, 0.58, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_word_row"]
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
+bg_color = Color(0.96, 0.975, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.86, 0.89, 0.95, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_fa"]
-bg_color = Color(0.93, 0.95, 0.99, 1)
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
+bg_color = Color(0.94, 0.96, 0.99, 1)
+border_width_right = 4
+border_color = Color(0.24, 0.44, 0.84, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
@@ -83,11 +118,17 @@ expand_margin_bottom = 16.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_meaning_fa"]
 font = ExtResource("8_vzbold")
-font_size = 46
-font_color = Color(0.12, 0.22, 0.45, 1)
+font_size = 40
+font_color = Color(0.1, 0.18, 0.36, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_en"]
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
 bg_color = Color(0.96, 0.97, 0.98, 1)
+border_width_left = 4
+border_color = Color(0.4, 0.5, 0.65, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
@@ -98,18 +139,22 @@ expand_margin_right = 16.0
 expand_margin_bottom = 16.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_meaning_en"]
-font = ExtResource("4_gfdwm")
-font_size = 36
-font_color = Color(0.25, 0.28, 0.35, 1)
+font = ExtResource("6_y8wcc")
+font_size = 32
+font_color = Color(0.2, 0.24, 0.3, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_ex"]
-bg_color = Color(0.99, 0.98, 0.93, 1)
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
+bg_color = Color(0.99, 0.98, 0.94, 1)
+border_width_left = 4
+border_color = Color(0.92, 0.7, 0.2, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
-border_width_left = 5
-border_color = Color(0.92, 0.72, 0.22, 1)
 expand_margin_left = 16.0
 expand_margin_top = 16.0
 expand_margin_right = 16.0
@@ -117,19 +162,44 @@ expand_margin_bottom = 16.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_example"]
 font = ExtResource("5_3kfk6")
-font_size = 36
-font_color = Color(0.28, 0.26, 0.20, 1)
+font_size = 32
+font_color = Color(0.25, 0.23, 0.18, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_tags"]
-bg_color = Color(0.95, 0.96, 0.95, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_syn"]
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
+bg_color = Color(0.94, 0.98, 0.96, 1)
+border_width_right = 4
+border_color = Color(0.12, 0.65, 0.48, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
-expand_margin_left = 16.0
-expand_margin_top = 16.0
-expand_margin_right = 16.0
-expand_margin_bottom = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_synonyms"]
+font = ExtResource("4_gfdwm")
+font_size = 32
+font_color = Color(0.12, 0.32, 0.24, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_ant"]
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
+bg_color = Color(0.99, 0.95, 0.95, 1)
+border_width_right = 4
+border_color = Color(0.88, 0.4, 0.4, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_antonyms"]
+font = ExtResource("4_gfdwm")
+font_size = 32
+font_color = Color(0.35, 0.18, 0.18, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_primary"]
 bg_color = Color(0.18, 0.44, 0.85, 1)
@@ -139,6 +209,26 @@ corner_radius_bottom_right = 22
 corner_radius_bottom_left = 22
 shadow_color = Color(0.18, 0.44, 0.85, 0.3)
 shadow_size = 14
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_primary_pressed"]
+bg_color = Color(0.14, 0.38, 0.78, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.18, 0.44, 0.85, 0.2)
+shadow_size = 8
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_primary_hover"]
+bg_color = Color(0.24, 0.5, 0.92, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.18, 0.44, 0.85, 0.4)
+shadow_size = 16
 shadow_offset = Vector2(0, 6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_side_btn"]
@@ -171,7 +261,7 @@ color = Color(0.95, 0.94, 0.92, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 240.0
+offset_bottom = 220.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("2_hx4ce")
 
@@ -193,82 +283,87 @@ icon = ExtResource("2_o6c0r")
 flat = true
 icon_alignment = 1
 
-[node name="HeaderTitle" type="Label" parent="HeaderBar/MarginContainer/Header"]
+[node name="HeaderTitle" type="Label" parent="HeaderBar/MarginContainer/Header" unique_id=919548773]
 layout_mode = 2
 text = "جعبه لایتنر"
 label_settings = SubResource("LabelSettings_headertitle")
 
-[node name="Spacer" type="Control" parent="HeaderBar/MarginContainer/Header"]
+[node name="Spacer" type="Control" parent="HeaderBar/MarginContainer/Header" unique_id=2002983516]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AutoAudioToggle" type="Button" parent="HeaderBar/MarginContainer/Header"]
-custom_minimum_size = Vector2(80, 72)
+[node name="AutoAudioToggle" type="Button" parent="HeaderBar/MarginContainer/Header" unique_id=1592182976]
+custom_minimum_size = Vector2(76, 72)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 38
+theme_override_font_sizes/font_size = 36
 text = "🔊"
 flat = true
 
 [node name="DueCounter" type="Label" parent="HeaderBar/MarginContainer/Header" unique_id=1268915219]
 layout_mode = 2
 text = "کلمات باقی مانده"
-horizontal_alignment = 2
 label_settings = SubResource("LabelSettings_duecounter")
+horizontal_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=925536739]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 250.0
-offset_bottom = -25.0
+offset_top = 230.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 55
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 55
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 20
 
 [node name="MainLayout" type="VBoxContainer" parent="MarginContainer" unique_id=759159105]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
-[node name="ProgressSection" type="VBoxContainer" parent="MarginContainer/MainLayout"]
+[node name="ProgressSection" type="VBoxContainer" parent="MarginContainer/MainLayout" unique_id=492058151]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ProgressHeader" type="HBoxContainer" parent="MarginContainer/MainLayout/ProgressSection"]
+[node name="ProgressHeader" type="HBoxContainer" parent="MarginContainer/MainLayout/ProgressSection" unique_id=2057116532]
 layout_mode = 2
 
-[node name="ProgressCountLabel" type="Label" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader"]
+[node name="ProgressCountLabel" type="Label" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader" unique_id=1491068566]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_colors/font_color = Color(0.35, 0.38, 0.45, 1)
+theme_override_fonts/font = ExtResource("10_vzmed")
 theme_override_font_sizes/font_size = 28
 text = "پیشرفت جلسه: ۰ از ۰"
 
-[node name="Spacer" type="Control" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader"]
+[node name="Spacer" type="Control" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader" unique_id=1806145901]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BadgesContainer" type="HBoxContainer" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader"]
+[node name="BadgesContainer" type="HBoxContainer" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader" unique_id=371885151]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="NewBadge" type="Label" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader/BadgesContainer"]
+[node name="NewBadge" type="Label" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader/BadgesContainer" unique_id=3002430]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_colors/font_color = Color(0.15, 0.4, 0.8, 1)
+theme_override_fonts/font = ExtResource("10_vzmed")
 theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_pill")
 text = "🆕 ۰ جدید"
 
-[node name="DueBadge" type="Label" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader/BadgesContainer"]
+[node name="DueBadge" type="Label" parent="MarginContainer/MainLayout/ProgressSection/ProgressHeader/BadgesContainer" unique_id=1065624694]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_colors/font_color = Color(0.85, 0.5, 0.1, 1)
+theme_override_fonts/font = ExtResource("10_vzmed")
 theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_pill")
 text = "🔁 ۰ مرور"
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/MainLayout/ProgressSection"]
-custom_minimum_size = Vector2(0, 16)
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/MainLayout/ProgressSection" unique_id=46611058]
+custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_progress_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_progress_fill")
@@ -279,68 +374,73 @@ show_percentage = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
 
 [node name="CardPanel" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin" unique_id=1616552339]
-custom_minimum_size = Vector2(0, 1150)
+custom_minimum_size = Vector2(0, 1200)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_card_main")
 
 [node name="CardContent" type="MarginContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel" unique_id=1184700437]
 layout_mode = 2
-theme_override_constants/margin_left = 36
-theme_override_constants/margin_top = 28
-theme_override_constants/margin_right = 36
-theme_override_constants/margin_bottom = 28
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
 
-[node name="CardVBox" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent"]
+[node name="CardVBox" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent" unique_id=470125525]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="CardHeader" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox"]
+[node name="CardHeader" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox" unique_id=244067991]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="StageBadge" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader"]
+[node name="StageBadge" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader" unique_id=1154296642]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("10_vzmed")
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_pill")
 text = "🆕 کلمه جدید"
 
-[node name="WordTypeBadge" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader"]
+[node name="WordTypeBadge" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader" unique_id=2119126919]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_y8wcc")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("9_pjbold")
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_pill")
 text = "verb"
 
-[node name="Spacer" type="Control" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader"]
+[node name="Spacer" type="Control" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader" unique_id=579756895]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AudioButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader"]
-custom_minimum_size = Vector2(64, 64)
+[node name="AudioButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader" unique_id=1646236881]
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 32
 text = "🔊"
 flat = true
 
-[node name="SourceBadge" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader"]
+[node name="SourceBadge" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/CardHeader" unique_id=1520261405]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("10_vzmed")
+theme_override_font_sizes/font_size = 24
 text = "Vision 1 • درس ۱"
 
 [node name="Front" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox" unique_id=1689842312]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_utnya")
 
-[node name="FrontCenter" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front"]
+[node name="FrontCenter" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front" unique_id=1720364924]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 24
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="WordLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front/FrontCenter" unique_id=1974911411]
@@ -358,26 +458,20 @@ label_settings = SubResource("LabelSettings_phonetics")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TapHint" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front/FrontCenter"]
-layout_mode = 2
-text = "👆 برای مشاهده پاسخ ضربه بزنید"
-label_settings = SubResource("LabelSettings_taphint")
-horizontal_alignment = 1
-
 [node name="BackFace" type="ScrollContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox" unique_id=176735963]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="BackScrollContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace"]
+[node name="BackScrollContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace" unique_id=1476089303]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
 [node name="WordRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent" unique_id=1439418085]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_word_row")
 
 [node name="WordRowContent" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow" unique_id=82509467]
 layout_mode = 2
@@ -385,22 +479,23 @@ alignment = 1
 
 [node name="BackWordLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent" unique_id=1685336828]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 54
+theme_override_colors/font_color = Color(0.1, 0.12, 0.18, 1)
+theme_override_fonts/font = ExtResource("9_pjbold")
+theme_override_font_sizes/font_size = 50
 text = "Endanger"
 horizontal_alignment = 1
 
-[node name="BackPhoneticsLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent"]
+[node name="BackPhoneticsLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent" unique_id=2014136857]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.46, 0.54, 1)
 theme_override_fonts/font = ExtResource("5_3kfk6")
-theme_override_font_sizes/font_size = 40
-theme_override_colors/font_color = Color(0.42, 0.45, 0.52, 1)
-text = " /ɪnˈdeɪn.dʒər/"
+theme_override_font_sizes/font_size = 36
+text = "  /ɪnˈdeɪn.dʒər/"
 
-[node name="BackAudioButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent"]
-custom_minimum_size = Vector2(56, 56)
+[node name="BackAudioButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent" unique_id=1116550523]
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 2
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "🔊"
 flat = true
 
@@ -410,15 +505,16 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_chip_fa")
 
 [node name="MeaningFaRowContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningFaRow" unique_id=750755820]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 6
 
-[node name="FaTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningFaRow/MeaningFaRowContent"]
+[node name="FaTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningFaRow/MeaningFaRowContent" unique_id=664292692]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.18, 0.35, 0.7, 1)
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 30
-theme_override_colors/font_color = Color(0.2, 0.35, 0.65, 1)
-text = "📖 معنی فارسی"
+theme_override_font_sizes/font_size = 26
+text = "معنی فارسی"
 horizontal_alignment = 2
+text_direction = 2
 
 [node name="MeaningFaLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningFaRow/MeaningFaRowContent" unique_id=1350444316]
 layout_mode = 2
@@ -426,27 +522,30 @@ text = "به خطر انداختن، در معرض خطر قرار دادن"
 label_settings = SubResource("LabelSettings_meaning_fa")
 horizontal_alignment = 2
 autowrap_mode = 2
+text_direction = 2
 
-[node name="MeaningEnRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent"]
+[node name="MeaningEnRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent" unique_id=644519938]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_chip_en")
 
-[node name="MeaningEnRowContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow"]
+[node name="MeaningEnRowContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow" unique_id=1681889188]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 6
 
-[node name="EnTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow/MeaningEnRowContent"]
+[node name="EnTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow/MeaningEnRowContent" unique_id=1184945280]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_gfdwm")
-theme_override_font_sizes/font_size = 28
-theme_override_colors/font_color = Color(0.35, 0.4, 0.5, 1)
-text = "💡 English Definition"
+theme_override_colors/font_color = Color(0.35, 0.42, 0.52, 1)
+theme_override_fonts/font = ExtResource("9_pjbold")
+theme_override_font_sizes/font_size = 24
+text = "English Definition"
+text_direction = 1
 
-[node name="MeaningEnLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow/MeaningEnRowContent"]
+[node name="MeaningEnLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow/MeaningEnRowContent" unique_id=2075982063]
 layout_mode = 2
 text = "To put someone or something at risk or in danger of being harmed."
 label_settings = SubResource("LabelSettings_meaning_en")
 autowrap_mode = 2
+text_direction = 1
 
 [node name="ExampleRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent" unique_id=1348854631]
 layout_mode = 2
@@ -454,271 +553,303 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_chip_ex")
 
 [node name="ExampleRowContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/ExampleRow" unique_id=800062758]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 6
 
-[node name="ExTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/ExampleRow/ExampleRowContent"]
+[node name="ExTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/ExampleRow/ExampleRowContent" unique_id=1444157240]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_gfdwm")
-theme_override_font_sizes/font_size = 28
-theme_override_colors/font_color = Color(0.65, 0.50, 0.15, 1)
-text = "💬 Example Sentence"
+theme_override_colors/font_color = Color(0.68, 0.5, 0.1, 1)
+theme_override_fonts/font = ExtResource("9_pjbold")
+theme_override_font_sizes/font_size = 24
+text = "Example Sentence"
+text_direction = 1
 
 [node name="ExampleLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/ExampleRow/ExampleRowContent" unique_id=1115920128]
 layout_mode = 2
 text = "Pollution endangers the lives of many sea animals."
 label_settings = SubResource("LabelSettings_example")
 autowrap_mode = 2
+text_direction = 1
 
-[node name="TagsRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent"]
+[node name="SynonymsRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent" unique_id=987123456]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_chip_tags")
+theme_override_styles/panel = SubResource("StyleBoxFlat_chip_syn")
 
-[node name="TagsContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow"]
+[node name="SynonymsRowContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/SynonymsRow" unique_id=749939645]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 6
 
-[node name="SynonymsLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow/TagsContent"]
+[node name="SynTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/SynonymsRow/SynonymsRowContent" unique_id=1731047502]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 30
-text = "🔗 مترادف: threaten, imperil"
+theme_override_colors/font_color = Color(0.1, 0.52, 0.38, 1)
+theme_override_fonts/font = ExtResource("8_vzbold")
+theme_override_font_sizes/font_size = 26
+text = "مترادف"
+horizontal_alignment = 2
+text_direction = 2
+
+[node name="SynonymsLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/SynonymsRow/SynonymsRowContent" unique_id=123987654]
+layout_mode = 2
+text = "threaten, imperil"
+label_settings = SubResource("LabelSettings_synonyms")
 autowrap_mode = 2
+text_direction = 1
 
-[node name="AntonymsLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow/TagsContent"]
+[node name="AntonymsRow" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent" unique_id=13709835]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 30
-text = "⚡ متضاد: protect, shield"
+theme_override_styles/panel = SubResource("StyleBoxFlat_chip_ant")
+
+[node name="AntonymsRowContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/AntonymsRow" unique_id=780136672]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="AntTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/AntonymsRow/AntonymsRowContent" unique_id=2028801229]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.28, 0.28, 1)
+theme_override_fonts/font = ExtResource("8_vzbold")
+theme_override_font_sizes/font_size = 26
+text = "متضاد"
+horizontal_alignment = 2
+text_direction = 2
+
+[node name="AntonymsLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/AntonymsRow/AntonymsRowContent" unique_id=1744090181]
+layout_mode = 2
+text = "protect, shield"
+label_settings = SubResource("LabelSettings_antonyms")
 autowrap_mode = 2
+text_direction = 1
 
-[node name="FlipBackButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 30
-theme_override_colors/font_color = Color(0.35, 0.38, 0.45, 1)
-text = "↩️ بازگشت به روی کارت"
-flat = true
-
-[node name="SummaryCard" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin"]
+[node name="SummaryCard" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin" unique_id=144043074]
 visible = false
+custom_minimum_size = Vector2(0, 840)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_card_main")
 
-[node name="SummaryContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard"]
+[node name="SummaryContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard" unique_id=488899992]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 28
+theme_override_constants/separation = 24
 alignment = 1
 
-[node name="TrophyIcon" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent"]
+[node name="TrophyIcon" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent" unique_id=1426927354]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 80
 text = "🎉"
 horizontal_alignment = 1
 
-[node name="SummaryTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent"]
+[node name="SummaryTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent" unique_id=1725363088]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 42
 text = "آفرین! تمام کلمات امروز مرور شدند"
 horizontal_alignment = 1
 
-[node name="SummarySubtitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent"]
+[node name="SummarySubtitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent" unique_id=773345127]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 32
 theme_override_colors/font_color = Color(0.45, 0.45, 0.48, 1)
+theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_font_sizes/font_size = 28
 text = "کلمات بر اساس میزان یادگیری برای روزهای آینده زمان‌بندی شدند."
 horizontal_alignment = 1
 
-[node name="StatsPanel" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent"]
+[node name="StatsPanel" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent" unique_id=1650212412]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_chip_fa")
 
-[node name="StatsVBox" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel"]
+[node name="StatsVBox" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel" unique_id=737829561]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 14
 
-[node name="TotalReviewedLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox"]
+[node name="TotalReviewedLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox" unique_id=411584023]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 38
+theme_override_font_sizes/font_size = 32
 text = "کلمات مرور شده در این جلسه: ۰"
 horizontal_alignment = 1
 
-[node name="RetentionRateLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox"]
+[node name="RetentionRateLabel" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox" unique_id=1561422403]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 32
 theme_override_colors/font_color = Color(0.15, 0.55, 0.35, 1)
+theme_override_fonts/font = ExtResource("8_vzbold")
+theme_override_font_sizes/font_size = 28
 text = "میزان تسلط: ۱۰۰٪"
 horizontal_alignment = 1
 
-[node name="BreakdownHBox" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox"]
+[node name="BreakdownHBox" type="HBoxContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox" unique_id=60592193]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 14
 alignment = 1
 
-[node name="StatAgain" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox"]
+[node name="StatAgain" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox" unique_id=960843897]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 28
 theme_override_colors/font_color = Color(0.85, 0.25, 0.2, 1)
+theme_override_fonts/font = ExtResource("10_vzmed")
+theme_override_font_sizes/font_size = 26
 text = "دوباره: ۰"
 
-[node name="StatHard" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox"]
+[node name="StatHard" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox" unique_id=730306341]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 28
 theme_override_colors/font_color = Color(0.85, 0.55, 0.1, 1)
+theme_override_fonts/font = ExtResource("10_vzmed")
+theme_override_font_sizes/font_size = 26
 text = "سخت: ۰"
 
-[node name="StatGood" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox"]
+[node name="StatGood" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox" unique_id=99926892]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 28
 theme_override_colors/font_color = Color(0.15, 0.65, 0.3, 1)
+theme_override_fonts/font = ExtResource("10_vzmed")
+theme_override_font_sizes/font_size = 26
 text = "خوب: ۰"
 
-[node name="StatEasy" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox"]
+[node name="StatEasy" type="Label" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/StatsPanel/StatsVBox/BreakdownHBox" unique_id=1370391468]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 28
 theme_override_colors/font_color = Color(0.18, 0.44, 0.85, 1)
+theme_override_fonts/font = ExtResource("10_vzmed")
+theme_override_font_sizes/font_size = 26
 text = "آسان: ۰"
 
-[node name="SummaryActions" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent"]
+[node name="SummaryActions" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent" unique_id=131047406]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 14
 
-[node name="SummaryBackButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/SummaryActions"]
-custom_minimum_size = Vector2(0, 96)
+[node name="SummaryBackButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/SummaryActions" unique_id=1672708953]
+custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 38
+theme_override_font_sizes/font_size = 34
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_primary")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_primary_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_primary_hover")
 text = "بازگشت"
 
-[node name="SummaryReviewAgainButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/SummaryActions"]
-custom_minimum_size = Vector2(0, 84)
+[node name="SummaryReviewAgainButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/SummaryCard/SummaryContent/SummaryActions" unique_id=207481433]
+custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("10_vzmed")
+theme_override_font_sizes/font_size = 28
 text = "مرور مجدد همه کلمات (تمرین)"
 flat = true
 
-[node name="EmptyCard" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin"]
+[node name="EmptyCard" type="PanelContainer" parent="MarginContainer/MainLayout/CardMargin" unique_id=710382478]
 visible = false
+custom_minimum_size = Vector2(0, 840)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_card_main")
 
-[node name="EmptyContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/EmptyCard"]
+[node name="EmptyContent" type="VBoxContainer" parent="MarginContainer/MainLayout/CardMargin/EmptyCard" unique_id=1668661900]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 26
+theme_override_constants/separation = 24
 alignment = 1
 
-[node name="EmptyIcon" type="Label" parent="MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent"]
+[node name="EmptyIcon" type="Label" parent="MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent" unique_id=1869376054]
 layout_mode = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 80
 text = "📭"
 horizontal_alignment = 1
 
-[node name="EmptyTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent"]
+[node name="EmptyTitle" type="Label" parent="MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent" unique_id=139649703]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 46
+theme_override_font_sizes/font_size = 42
 text = "جعبه لایتنر شما خالی است"
 horizontal_alignment = 1
 
-[node name="EmptyDesc" type="Label" parent="MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent"]
+[node name="EmptyDesc" type="Label" parent="MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent" unique_id=951796715]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("7_y8wcc")
-theme_override_font_sizes/font_size = 32
 theme_override_colors/font_color = Color(0.45, 0.45, 0.48, 1)
+theme_override_fonts/font = ExtResource("7_y8wcc")
+theme_override_font_sizes/font_size = 28
 text = "هنوز کلمه‌ای برای مرور ذخیره نشده است.
 از بخش واژگان دروس، کلمات را به لایتنر اضافه کنید."
 horizontal_alignment = 1
 
-[node name="GoVocabButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent"]
-custom_minimum_size = Vector2(0, 96)
+[node name="GoVocabButton" type="Button" parent="MarginContainer/MainLayout/CardMargin/EmptyCard/EmptyContent" unique_id=323565787]
+custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 34
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_primary")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_primary_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_primary_hover")
 text = "مشاهده واژگان و درس‌ها"
 
 [node name="Controls" type="VBoxContainer" parent="MarginContainer/MainLayout" unique_id=99393038]
-custom_minimum_size = Vector2(0, 110)
+custom_minimum_size = Vector2(0, 104)
 layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="ShowAnswerButton" type="Button" parent="MarginContainer/MainLayout/Controls" unique_id=772991822]
-custom_minimum_size = Vector2(0, 110)
+custom_minimum_size = Vector2(0, 104)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 44
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_primary")
-text = "معنی کلمه / نمایش پاسخ 👁️"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_primary_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_primary_hover")
+text = "نمایش پاسخ 👁️"
 
 [node name="RatingButtons" type="HBoxContainer" parent="MarginContainer/MainLayout/Controls" unique_id=865619281]
 visible = false
-custom_minimum_size = Vector2(0, 110)
+custom_minimum_size = Vector2(0, 104)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 14
 alignment = 1
 
 [node name="Again" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1274358560]
-custom_minimum_size = Vector2(180, 110)
+custom_minimum_size = Vector2(170, 104)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 28
 text = "دوباره
 (همین حالا)"
 autowrap_trim_flags = 0
 
 [node name="Hard" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1417025778]
-custom_minimum_size = Vector2(180, 110)
+custom_minimum_size = Vector2(170, 104)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 28
 text = "سخت
 (امروز)"
 
 [node name="Good" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=2141645236]
-custom_minimum_size = Vector2(180, 110)
+custom_minimum_size = Vector2(170, 104)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 28
 text = "خوب
 (۱ روز)"
 
 [node name="Easy" type="Button" parent="MarginContainer/MainLayout/Controls/RatingButtons" unique_id=1046753146]
-custom_minimum_size = Vector2(180, 110)
+custom_minimum_size = Vector2(170, 104)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("8_vzbold")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 28
 text = "آسان
 (۳ روز)"
 
 [node name="OpenListMenuButton" type="Button" parent="." unique_id=2028908847]
 layout_mode = 0
 offset_left = 3.0
-offset_top = 907.0
+offset_top = 880.0
 offset_right = 116.0
-offset_bottom = 1082.0
-theme_override_font_sizes/font_size = 90
+offset_bottom = 1050.0
+theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxFlat_side_btn")
 text = "☰"
 
-[node name="ReviewSideMenu" parent="." unique_id=996475540 instance=ExtResource("8_y8wcc")]
+[node name="ReviewSideMenu" parent="." unique_id=996475540 instance=ExtResource("11_y8wcc")]

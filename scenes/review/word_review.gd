@@ -5,8 +5,8 @@ extends "res://autoload/BackButtonHandler.gd"
 #  Modernized Leitner Review System for Vision Master
 #
 #  Features:
-#    * 3D-style smooth card flip animation with spring physics
-#    * Card slide & pop transitions on rating
+#    * Smooth card flip animation with spring physics
+#    * Directional slide transitions on rating
 #    * Session progress bar & due / new card badges
 #    * Native audio & pronunciation player with auto-play toggle
 #    * Rich card layout: Persian & English definitions, examples,
@@ -45,10 +45,10 @@ const SCENE_FLASHCARDS  := "res://scenes/vocabulary/FlashcardHub.tscn"
 @onready var front: PanelContainer             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front
 @onready var word_label: Label                 = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front/FrontCenter/WordLabel
 @onready var phonetics_label: Label            = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front/FrontCenter/PhoneticsLabel
-@onready var tap_hint: Label                   = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/Front/FrontCenter/TapHint
 
 # --- Back Face ---
 @onready var back: ScrollContainer             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace
+@onready var word_row: PanelContainer          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow
 @onready var back_word_label: Label            = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent/BackWordLabel
 @onready var back_phonetics_label: Label       = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent/BackPhoneticsLabel
 @onready var back_audio_button: Button         = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/WordRow/WordRowContent/BackAudioButton
@@ -58,10 +58,10 @@ const SCENE_FLASHCARDS  := "res://scenes/vocabulary/FlashcardHub.tscn"
 @onready var meaning_en_label: Label           = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/MeaningEnRow/MeaningEnRowContent/MeaningEnLabel
 @onready var example_row: PanelContainer       = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/ExampleRow
 @onready var example_label: Label              = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/ExampleRow/ExampleRowContent/ExampleLabel
-@onready var tags_row: PanelContainer          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow
-@onready var synonyms_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow/TagsContent/SynonymsLabel
-@onready var antonyms_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/TagsRow/TagsContent/AntonymsLabel
-@onready var flip_back_button: Button          = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/FlipBackButton
+@onready var synonyms_row: PanelContainer      = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/SynonymsRow
+@onready var synonyms_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/SynonymsRow/SynonymsRowContent/SynonymsLabel
+@onready var antonyms_row: PanelContainer      = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/AntonymsRow
+@onready var antonyms_label: Label             = $MarginContainer/MainLayout/CardMargin/CardPanel/CardContent/CardVBox/BackFace/BackScrollContent/AntonymsRow/AntonymsRowContent/AntonymsLabel
 
 # --- Celebration Summary Card ---
 @onready var summary_card: PanelContainer                = $MarginContainer/MainLayout/CardMargin/SummaryCard
@@ -123,20 +123,22 @@ func _ready() -> void:
 	audio_button.pressed.connect(_play_current_audio)
 	back_audio_button.pressed.connect(_play_current_audio)
 	auto_audio_toggle.pressed.connect(_toggle_auto_audio)
-	flip_back_button.pressed.connect(func() -> void: _animate_flip(false))
 	
 	summary_back_button.pressed.connect(_on_back_button_pressed)
 	summary_review_again_button.pressed.connect(_restart_session_practice)
 	go_vocab_button.pressed.connect(_on_go_vocab_pressed)
-	
-	# Tap card to flip
-	front.gui_input.connect(_on_front_gui_input)
 
 	# Connect side menu
 	review_side_menu.word_selected.connect(_on_word_selected_from_menu)
 	review_side_menu.set_hamburger_button(open_list_menu_button)
 	open_list_menu_button.pivot_offset = open_list_menu_button.size / 2.0
 	open_list_menu_button.pressed.connect(review_side_menu.toggle)
+
+	# Keep pivot centered on card resize
+	card_panel.resized.connect(func() -> void:
+		card_panel.pivot_offset = card_panel.size / 2.0
+		_card_default_pos = card_panel.position
+	)
 
 	# Wire motion microinteractions
 	_wire_interactive_motion()
@@ -374,19 +376,23 @@ func _load_next_card() -> void:
 	else:
 		example_row.visible = false
 
-	# Synonyms & Antonyms
-	var syn_text := _format_tags(current_entry.get("synonyms"))
-	var ant_text := _format_tags(current_entry.get("antonyms"))
-	if syn_text != "" or ant_text != "":
-		tags_row.visible = true
-		synonyms_label.text = "🔗 مترادف‌ها: " + syn_text if syn_text != "" else ""
-		synonyms_label.visible = (syn_text != "")
-		antonyms_label.text = "⚡ متضادها: " + ant_text if ant_text != "" else ""
-		antonyms_label.visible = (ant_text != "")
+	# Synonyms (English only, no Farsi synonyms, no colon)
+	var syn_text := _format_english_tags(current_entry.get("synonyms"))
+	if syn_text != "":
+		synonyms_row.visible = true
+		synonyms_label.text = syn_text
 	else:
-		tags_row.visible = false
+		synonyms_row.visible = false
 
-	# Reset faces
+	# Antonyms (English only, if available, no colon)
+	var ant_text := _format_english_tags(current_entry.get("antonyms"))
+	if ant_text != "":
+		antonyms_row.visible = true
+		antonyms_label.text = ant_text
+	else:
+		antonyms_row.visible = false
+
+	# Reset to front
 	_show_front()
 
 	# Auto pronounce if enabled
@@ -394,24 +400,40 @@ func _load_next_card() -> void:
 		_play_current_audio()
 
 
-func _format_tags(data: Variant) -> String:
-	if data is Array:
-		var items: Array[String] = []
+func _format_english_tags(data: Variant) -> String:
+	var items: Array[String] = []
+	if data is Dictionary:
+		# Only extract "en" synonyms, skip "fa" completely
+		if data.has("en"):
+			var en_val = data["en"]
+			if en_val is Array:
+				for item in en_val:
+					var s: String = str(item).strip_edges()
+					if s != "" and not _contains_persian(s):
+						items.append(s)
+			elif en_val is String and en_val.strip_edges() != "":
+				var s: String = str(en_val).strip_edges()
+				if not _contains_persian(s):
+					items.append(s)
+	elif data is Array:
 		for item in data:
-			items.append(str(item))
-		return ", ".join(items)
-	elif data is Dictionary:
-		var items: Array[String] = []
-		if data.has("en") and data["en"] is Array:
-			for item in data["en"]:
-				items.append(str(item))
-		if data.has("fa") and data["fa"] is Array:
-			for item in data["fa"]:
-				items.append(str(item))
-		return ", ".join(items)
+			var s: String = str(item).strip_edges()
+			if s != "" and not _contains_persian(s):
+				items.append(s)
 	elif data is String and data.strip_edges() != "":
-		return data.strip_edges()
-	return ""
+		var s: String = data.strip_edges()
+		if not _contains_persian(s):
+			items.append(s)
+	return ", ".join(items)
+
+
+func _contains_persian(text: String) -> bool:
+	for i in range(text.length()):
+		var code := text.unicode_at(i)
+		# Arabic & Persian Unicode blocks
+		if (code >= 0x0600 and code <= 0x06FF) or (code >= 0xFB50 and code <= 0xFDFF) or (code >= 0xFE70 and code <= 0xFEFF):
+			return true
+	return false
 
 
 func _get_state_badge(entry: Dictionary) -> String:
@@ -443,12 +465,6 @@ func _show_back() -> void:
 	rating_buttons.visible = true
 	rating_buttons.modulate = Color.WHITE
 	_update_rating_previews()
-
-
-func _on_front_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if not is_card_flipped and not is_animating:
-			_animate_flip(true)
 
 
 func _on_show_answer_pressed() -> void:
@@ -578,7 +594,7 @@ func _update_header_and_progress() -> void:
 
 	var total: int = max(1, session_total_count)
 	var current_done: int = min(session_completed_count, total)
-	progress_count_label.text = "جلسه مرور: %s از %s" % [
+	progress_count_label.text = "پیشرفت جلسه: %s از %s" % [
 		MenuStyle.persian_digits(str(current_done)),
 		MenuStyle.persian_digits(str(total))
 	]
@@ -676,7 +692,7 @@ func _apply_theme() -> void:
 
 	# Re-style card panel
 	var card_style := StyleBoxFlat.new()
-	card_style.set_corner_radius_all(28)
+	card_style.set_corner_radius_all(26)
 	if dark:
 		card_style.bg_color = Color(0.15, 0.17, 0.22, 1)
 		card_style.border_color = Color(1, 1, 1, 0.08)
@@ -687,11 +703,28 @@ func _apply_theme() -> void:
 		card_style.border_color = Color(0, 0, 0, 0.06)
 		card_style.set_border_width_all(1)
 		card_style.shadow_color = Color(0, 0, 0, 0.08)
-	card_style.shadow_size = 20
-	card_style.shadow_offset = Vector2(0, 8)
+	card_style.shadow_size = 18
+	card_style.shadow_offset = Vector2(0, 6)
 	card_panel.add_theme_stylebox_override("panel", card_style)
 	summary_card.add_theme_stylebox_override("panel", card_style)
 	empty_card.add_theme_stylebox_override("panel", card_style)
+
+	# Style WordRow panel
+	var wr_style := StyleBoxFlat.new()
+	wr_style.set_corner_radius_all(20)
+	wr_style.content_margin_left = 22.0
+	wr_style.content_margin_top = 16.0
+	wr_style.content_margin_right = 22.0
+	wr_style.content_margin_bottom = 16.0
+	if dark:
+		wr_style.bg_color = Color(0.18, 0.20, 0.26, 1)
+		wr_style.border_color = Color(1, 1, 1, 0.08)
+		wr_style.set_border_width_all(1)
+	else:
+		wr_style.bg_color = Color(0.96, 0.975, 1.0, 1)
+		wr_style.border_color = Color(0.86, 0.89, 0.95, 1)
+		wr_style.set_border_width_all(1)
+	word_row.add_theme_stylebox_override("panel", wr_style)
 
 	# Style header
 	Global.style_header($HeaderBar)
