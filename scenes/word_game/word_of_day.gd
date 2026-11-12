@@ -14,8 +14,18 @@ const SCENE_WORD_GAME := "res://scenes/word_game/WordGameHub.tscn"
 @onready var game_content: Node = $Game
 
 
-func _on_android_back_pressed() -> void:
+func _ready() -> void:
+	var back_btn: Button = get_node_or_null("BackButton") as Button
+	if back_btn != null:
+		back_btn.pressed.connect(_go_back)
+
+func _go_back() -> void:
 	if game_content != null and game_content.has_method("close_panels") \
 			and bool(game_content.call("close_panels")):
 		return
-	TransitionManager.change_scene(SCENE_WORD_GAME)
+	var return_target: String = DailyChallengeState.return_scene if DailyChallengeState.return_scene != "" else SCENE_WORD_GAME
+	DailyChallengeState.return_scene = ""
+	TransitionManager.change_scene(return_target)
+
+func _on_android_back_pressed() -> void:
+	_go_back()

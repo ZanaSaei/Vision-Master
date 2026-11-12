@@ -2,7 +2,7 @@ class_name MeaningQuizDaily
 extends RefCounted
 
 const DATA_PATH := "res://data/extracted_words.json"
-const DAILY_QUESTION_COUNT := 10
+const DAILY_QUESTION_COUNT := 5
 const SECONDS_PER_DAY := 86400
 
 

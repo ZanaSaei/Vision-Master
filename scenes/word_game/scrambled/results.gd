@@ -408,7 +408,7 @@ func _make_action_row() -> HBoxContainer:
 	again.add_theme_stylebox_override("normal", _filled_style(accent, false))
 	again.add_theme_stylebox_override("hover", _filled_style(accent, true))
 	again.add_theme_stylebox_override("pressed", _filled_style(accent, true))
-	if ScrambledGameManager.is_competition() and ScrambledScoreManager.today_played():
+	if ScrambledGameManager.is_competition() and (ScrambledScoreManager.today_played() or DailyChallengeState.return_scene != ""):
 		again.text = "چالش امروز انجام شد"
 		again.disabled = true
 		again.modulate = Color(0.68, 0.70, 0.74, 0.72)
@@ -421,7 +421,7 @@ func _make_action_row() -> HBoxContainer:
 
 	var home := Button.new()
 	home.name = "HomeButton"
-	home.text = "بازگشت به منو"
+	home.text = "بازگشت به تقویم چالش" if DailyChallengeState.return_scene != "" else "بازگشت به منو"
 	home.custom_minimum_size = Vector2(0, 132)
 	home.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	home.add_theme_font_override("font", MenuStyle.vazir())

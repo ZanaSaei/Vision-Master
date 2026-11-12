@@ -56,6 +56,7 @@ const PRAISE_LINES := [
 @onready var background: ColorRect = $Background
 
 var _mode: String = "" # "book_select", "quiz", "result"
+var _is_daily_challenge: bool = false
 var _book: int = 1
 var _lesson: int = 1
 var _questions: Array[Dictionary] = []
@@ -100,14 +101,20 @@ func _ready() -> void:
 		_confetti = CONFETTI_SCENE.instantiate() as ScrambledConfettiBurst
 		add_child(_confetti)
 
-	_show_book_select()
+	if DailyChallengeState.selected_game == "wordef":
+		_start_daily_challenge(DailyChallengeState.selected_date)
+	else:
+		_show_book_select()
 
 
 func _on_back_pressed() -> void:
-	if _mode == "quiz" or _mode == "result":
+	if not _is_daily_challenge and (_mode == "quiz" or _mode == "result"):
 		_show_book_select()
 		return
-	TransitionManager.change_scene_now(LEARNING_SCENE)
+	var return_target: String = DailyChallengeState.return_scene if DailyChallengeState.return_scene != "" else LEARNING_SCENE
+	DailyChallengeState.return_scene = ""
+	DailyChallengeState.selected_game = ""
+	TransitionManager.change_scene_now(return_target)
 
 
 func _on_android_back_pressed() -> void:
@@ -385,7 +392,54 @@ func _make_lesson_button(lesson_data: Dictionary) -> Button:
 #  GAME ENGINE & QUESTION GENERATION
 # ══════════════════════════════════════════════════════════════
 
+func _start_daily_challenge(date_key: String = "") -> void:
+	_is_daily_challenge = true
+	_book = 1
+	_lesson = 1
+	_score = 0
+	_streak = 0
+	_max_streak = 0
+	_correct_first_try = 0
+	_question_index = 0
+	_start_time = int(Time.get_unix_time_from_system())
+	_busy = false
+
+	var all_words := _load_all_project_words()
+	if all_words.size() < OPTIONS_COUNT:
+		_show_message("واژگان کافی برای چالش روزانه یافت نشد.")
+		return
+
+	# Pick 5 words across all books in the project, deterministically seeded by date
+	var pool := all_words.duplicate()
+	var rng := RandomNumberGenerator.new()
+	if not date_key.is_empty():
+		rng.seed = hash("wordef_" + date_key)
+	else:
+		rng.randomize()
+
+	for i in range(pool.size() - 1, 0, -1):
+		var j := rng.randi_range(0, i)
+		var tmp: Dictionary = pool[i]
+		pool[i] = pool[j]
+		pool[j] = tmp
+
+	var picked_words: Array[Dictionary] = []
+	for i in mini(5, pool.size()):
+		picked_words.append(pool[i])
+
+	_questions = _build_quiz_questions_from_pool(picked_words, all_words)
+	if _questions.is_empty():
+		_show_message("خطا در ساخت پرسش‌های چالش روزانه.")
+		return
+	if _questions.size() > 5:
+		_questions = _questions.slice(0, 5)
+
+	_mode = "quiz"
+	_show_question()
+
+
 func _start_learning(book: int, lesson: int) -> void:
+	_is_daily_challenge = false
 	_book = book
 	_lesson = lesson
 	_score = 0
@@ -411,12 +465,15 @@ func _start_learning(book: int, lesson: int) -> void:
 
 
 func _build_quiz_questions(lesson_words: Array[Dictionary], book: int) -> Array[Dictionary]:
-	var result: Array[Dictionary] = []
-
 	# Build a distractor bank from this lesson + whole book
 	var pool_words := _load_book_words(book)
 	if pool_words.size() < OPTIONS_COUNT:
 		pool_words = lesson_words
+	return _build_quiz_questions_from_pool(lesson_words, pool_words)
+
+
+func _build_quiz_questions_from_pool(lesson_words: Array[Dictionary], pool_words: Array[Dictionary]) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
 
 	var all_persian_meanings: Array[String] = []
 	var all_english_words: Array[String] = []
@@ -574,10 +631,16 @@ func _show_question() -> void:
 	_busy = false
 
 	var q: Dictionary = _questions[_question_index]
-	title_label.text = "درس %s · واژهٔ %s" % [
-		MenuStyle.persian_digits(str(_lesson)),
-		MenuStyle.persian_digits(str(_question_index + 1))
-	]
+	if _is_daily_challenge:
+		title_label.text = "چالش روزانه · پرسش %s از %s" % [
+			MenuStyle.persian_digits(str(_question_index + 1)),
+			MenuStyle.persian_digits(str(_questions.size()))
+		]
+	else:
+		title_label.text = "درس %s · واژهٔ %s" % [
+			MenuStyle.persian_digits(str(_lesson)),
+			MenuStyle.persian_digits(str(_question_index + 1))
+		]
 
 	# 1. Top HUD
 	_hud_container = _create_hud()
@@ -1102,6 +1165,10 @@ func _show_result() -> void:
 	var total_q := maxi(1, _questions.size())
 	var accuracy := int(round(float(_correct_first_try) / float(total_q) * 100.0))
 	var stars := 3 if accuracy >= 90 else (2 if accuracy >= 70 else (1 if accuracy >= 40 else 0))
+
+	if _is_daily_challenge and DailyChallengeMock.is_active():
+		var daily_pts: int = clampi(accuracy, 20, 100)
+		DailyChallengeMock.complete_game(DailyChallengeState.selected_date, "wordef", daily_pts)
 	var elapsed := maxi(1, int(Time.get_unix_time_from_system()) - _start_time)
 	var minutes := int(elapsed / 60.0)
 	var seconds := elapsed % 60
@@ -1226,6 +1293,37 @@ func _show_result() -> void:
 	card_col.add_child(time_lbl)
 
 	# ── Action Buttons ──
+	if _is_daily_challenge:
+		var back_cal_btn := Button.new()
+		back_cal_btn.text = "بازگشت به تقویم چالش 🗓️"
+		back_cal_btn.custom_minimum_size = Vector2(0, 114)
+		back_cal_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		back_cal_btn.add_theme_font_override("font", MenuStyle.vazir_bold())
+		back_cal_btn.add_theme_font_size_override("font_size", 34)
+		back_cal_btn.add_theme_color_override("font_color", Color.WHITE)
+
+		var c_sb := StyleBoxFlat.new()
+		c_sb.bg_color = Color("#2563EB")
+		c_sb.set_corner_radius_all(24)
+		c_sb.shadow_color = Color(37.0 / 255.0, 99.0 / 255.0, 235.0 / 255.0, 0.3)
+		c_sb.shadow_size = 10
+		c_sb.shadow_offset = Vector2(0, 4)
+		back_cal_btn.add_theme_stylebox_override("normal", c_sb)
+		var c_hover := c_sb.duplicate() as StyleBoxFlat
+		c_hover.bg_color = Color("#1D4ED8")
+		back_cal_btn.add_theme_stylebox_override("hover", c_hover)
+		var c_press := c_sb.duplicate() as StyleBoxFlat
+		c_press.bg_color = Color("#1E40AF")
+		back_cal_btn.add_theme_stylebox_override("pressed", c_press)
+		back_cal_btn.add_theme_stylebox_override("focus", c_sb)
+
+		back_cal_btn.pressed.connect(func() -> void:
+			Sfx.click()
+			_on_back_pressed())
+		UiMotion.wire_microinteractions(back_cal_btn)
+		col.add_child(back_cal_btn)
+		return
+
 	if _has_next_lesson(_book, _lesson):
 		var next_btn := Button.new()
 		next_btn.text = "درس بعدی ❯"
@@ -1414,6 +1512,29 @@ func _load_book_words(book: int) -> Array[Dictionary]:
 							if not str(entry.get("word", "")).is_empty() and not str(entry.get("meaning_fa", "")).is_empty():
 								result.append(entry.duplicate())
 	return result
+
+
+func _load_all_project_words() -> Array[Dictionary]:
+	var all: Array[Dictionary] = []
+	var seen: Dictionary = {}
+	for b in [1, 2, 3]:
+		var book_words := _load_book_words(b)
+		for entry: Dictionary in book_words:
+			var w: String = str(entry.get("word", "")).strip_edges().to_lower()
+			if not w.is_empty() and not seen.has(w):
+				seen[w] = true
+				all.append(entry)
+	var fallback_all: Array = ScrambledData.all_words()
+	for raw: Variant in fallback_all:
+		if not raw is Dictionary:
+			continue
+		var entry: Dictionary = raw
+		var w: String = str(entry.get("word", "")).strip_edges()
+		var fa: String = str(entry.get("meaning_fa", entry.get("meaning", ""))).strip_edges()
+		if not w.is_empty() and not fa.is_empty() and not seen.has(w.to_lower()):
+			seen[w.to_lower()] = true
+			all.append({"word": w, "meaning_fa": fa})
+	return all
 
 
 func _make_label(text: String, font_size: int, centered: bool) -> Label:

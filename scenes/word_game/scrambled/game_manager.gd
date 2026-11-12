@@ -65,6 +65,18 @@ static func start_competition() -> bool:
 	return _start(Mode.COMPETITION, words, int(first.get("book", 1)), int(first.get("lesson", 1)))
 
 
+static func start_daily_challenge(date_key: String = "") -> bool:
+	var words: Array = []
+	if not date_key.is_empty():
+		words = ScrambledDailyPicker.pick_for_day(abs(date_key.hash()))
+	else:
+		words = ScrambledDailyPicker.pick()
+	var first: Dictionary = {}
+	if not words.is_empty() and words[0] is Dictionary:
+		first = words[0]
+	return _start(Mode.COMPETITION, words, int(first.get("book", 1)), int(first.get("lesson", 1)))
+
+
 static func _start(p_mode: Mode, words: Array, p_book: int, p_lesson: int) -> bool:
 	if words.is_empty():
 		state = State.IDLE

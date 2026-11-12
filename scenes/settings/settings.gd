@@ -782,7 +782,7 @@ func _show_toast(text: String) -> void:
 	panel.add_theme_stylebox_override("panel", style)
 
 	var hbox := HBoxContainer.new()
-	hbox.theme_override_constants_separation = 16
+	hbox.add_theme_constant_override(&"separation", 16)
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 
 	var icon_label := Label.new()

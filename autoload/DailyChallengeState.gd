@@ -10,6 +10,7 @@ static var current_attempt_started_at: String = ""
 static var current_public_content: Dictionary = {}
 static var current_attempt_state: Dictionary = {}
 static var current_attempt_status: String = ""
+static var return_scene: String = ""
 
 const STATE_PATH: String = "user://daily_challenge_state.cfg"
 

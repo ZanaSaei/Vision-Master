@@ -33,6 +33,7 @@ var _expiry_unix: int = 0
 # Guards against firing several refreshes at once (e.g. many queued downloads
 # all receiving 401 at the same time).
 var _refresh_in_flight: bool = false
+var _challenge_mock_handler: Callable = Callable()
 
 
 func _ready() -> void:
@@ -49,12 +50,21 @@ func _ready() -> void:
 # STATE
 # ------------------------------------------------------------
 
+func set_challenge_mock_handler(handler: Callable) -> void:
+	_challenge_mock_handler = handler
+
+func clear_challenge_mock_handler() -> void:
+	_challenge_mock_handler = Callable()
+
+func has_challenge_mock_handler() -> bool:
+	return _challenge_mock_handler.is_valid()
+
 func is_configured() -> bool:
-	return _base_url != ""
+	return _base_url != "" or _challenge_mock_handler.is_valid()
 
 
 func is_logged_in() -> bool:
-	return _access_token != "" or _refresh_token != ""
+	return _access_token != "" or _refresh_token != "" or _challenge_mock_handler.is_valid()
 
 
 func get_access_token() -> String:
@@ -66,11 +76,19 @@ func get_phone() -> String:
 
 
 func get_user_id() -> String:
-	return _user_id
+	if _user_id != "":
+		return _user_id
+	if _challenge_mock_handler.is_valid():
+		return "user_demo_101"
+	return ""
 
 
 func get_username() -> String:
-	return _username
+	if _username != "":
+		return _username
+	if _challenge_mock_handler.is_valid():
+		return "علی رضایی"
+	return ""
 
 
 func get_grade() -> int:
@@ -403,6 +421,11 @@ func _token_valid() -> bool:
 
 
 func _authed_get(path: String, callback: Callable) -> void:
+	if _challenge_mock_handler.is_valid() and path.begins_with("/challenge"):
+		if _challenge_mock_handler.call("GET", path, {}, func(ok: bool, data: Dictionary) -> void:
+			callback.call(HTTPRequest.RESULT_SUCCESS if ok else HTTPRequest.RESULT_CANT_CONNECT, 200 if ok else 400, data)
+		):
+			return
 	_with_token(func(header: PackedStringArray) -> void:
 		_request(HTTPClient.METHOD_GET, path, null, header, true, callback))
 
@@ -413,6 +436,11 @@ func _authed_put(path: String, body: Dictionary, callback: Callable) -> void:
 
 
 func _authed_post(path: String, body: Dictionary, callback: Callable) -> void:
+	if _challenge_mock_handler.is_valid() and path.begins_with("/challenge"):
+		if _challenge_mock_handler.call("POST", path, body, func(ok: bool, data: Dictionary) -> void:
+			callback.call(HTTPRequest.RESULT_SUCCESS if ok else HTTPRequest.RESULT_CANT_CONNECT, 200 if ok else 400, data)
+		):
+			return
 	_with_token(func(header: PackedStringArray) -> void:
 		_request(HTTPClient.METHOD_POST, path, body, header, true, callback))
 

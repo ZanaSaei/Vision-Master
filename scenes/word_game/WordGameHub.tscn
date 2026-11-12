@@ -1,20 +1,376 @@
 [gd_scene format=3 uid="uid://bkfllarndb2kx"]
 
 [ext_resource type="Script" uid="uid://f2ugyjkxregm" path="res://scenes/word_game/WordGameHub.gd" id="1_script"]
-[ext_resource type="LabelSettings" uid="uid://dv2tiiw6sx567" path="res://ui/fonts/Fa_Button_Title_Blue.tres" id="3_1yjrf"]
-[ext_resource type="StyleBox" uid="uid://boy06ynkqak3q" path="res://ui/Styles/buttons/Blue_Normal.tres" id="3_ttcs7"]
-[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="3_vazir"]
-[ext_resource type="LabelSettings" uid="uid://btv25lfeojoe4" path="res://ui/fonts/Fa_Button_Info_Blue.tres" id="4_ocyyk"]
-[ext_resource type="StyleBox" uid="uid://cx6iskaugv7ey" path="res://ui/Styles/buttons/Blue_Hovered.tres" id="4_wtlp0"]
-[ext_resource type="StyleBox" uid="uid://cp4wknax5vhvc" path="res://ui/Styles/buttons/Yellow_Normal.tres" id="5_dr7k0"]
-[ext_resource type="StyleBox" uid="uid://c8m6mqu5l84iy" path="res://ui/Styles/buttons/Yellow_Hovered.tres" id="6_ttcs7"]
-[ext_resource type="StyleBox" uid="uid://cpdnjfuv3ffxb" path="res://ui/Styles/buttons/Tab_Normal_Notactivated.tres" id="7_p7c5t"]
-[ext_resource type="LabelSettings" uid="uid://d0avuqvpr5rxl" path="res://ui/fonts/Fa_Button_NormalTitle_Blue.tres" id="8_wtlp0"]
-[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="9_header_style"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="9_back_icon"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_vazir"]
+[ext_resource type="FontFile" uid="uid://dyt2kyuobu1pu" path="res://ui/fonts/Vazirmatn-Medium.ttf" id="3_vazir_med"]
+[ext_resource type="FontFile" uid="uid://dq6ytga6c5qgh" path="res://ui/fonts/Vazirmatn-Bold.ttf" id="4_vazir_bold"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="5_header_style"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="6_back_icon"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hero_normal"]
+bg_color = Color(0.184314, 0.435294, 0.847059, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.619608, 0.980392, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0.184314, 0.435294, 0.847059, 0.32)
+shadow_size = 22
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hero_hover"]
+bg_color = Color(0.239216, 0.498039, 0.917647, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.490196, 0.721569, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0.184314, 0.435294, 0.847059, 0.44)
+shadow_size = 28
+shadow_offset = Vector2(0, 12)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hero_pressed"]
+bg_color = Color(0.133333, 0.32549, 0.623529, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.298039, 0.552941, 0.964706, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0.133333, 0.32549, 0.623529, 0.3)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hero_badge"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.18)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.3)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hero_chip"]
+bg_color = Color(1, 1, 1, 0.2)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.36)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_normal"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.235294, 0.196078, 0.117647, 0.12)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0, 0, 0, 0.07)
+shadow_size = 16
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_hover"]
+bg_color = Color(1, 0.996078, 0.980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.486275, 0.227451, 0.929412, 0.38)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0.486275, 0.227451, 0.929412, 0.14)
+shadow_size = 22
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_pressed"]
+bg_color = Color(0.960784, 0.945098, 0.909804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.486275, 0.227451, 0.929412, 0.45)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0, 0, 0, 0.05)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_purple_pill"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.486275, 0.227451, 0.929412, 0.1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.486275, 0.227451, 0.929412, 0.28)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_purple"]
+bg_color = Color(0.486275, 0.227451, 0.929412, 0.12)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.486275, 0.227451, 0.929412, 0.32)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stat_hover"]
+bg_color = Color(1, 0.996078, 0.980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.184314, 0.435294, 0.847059, 0.36)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.184314, 0.435294, 0.847059, 0.14)
+shadow_size = 20
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_blue"]
+bg_color = Color(0.184314, 0.435294, 0.847059, 0.12)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.184314, 0.435294, 0.847059, 0.32)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_gold"]
+bg_color = Color(0.658824, 0.486275, 0.141176, 0.14)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.658824, 0.486275, 0.141176, 0.36)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_board_card"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.235294, 0.196078, 0.117647, 0.12)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0, 0, 0, 0.08)
+shadow_size = 18
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rank_pill"]
+content_margin_left = 16.0
+content_margin_top = 5.0
+content_margin_right = 16.0
+content_margin_bottom = 5.0
+bg_color = Color(0.658824, 0.486275, 0.141176, 0.13)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.658824, 0.486275, 0.141176, 0.38)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seg_track"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.921569, 0.898039, 0.847059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.235294, 0.196078, 0.117647, 0.09)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seg_inactive"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seg_inactive_hover"]
+bg_color = Color(1, 1, 1, 0.45)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seg_active"]
+bg_color = Color(0.184314, 0.435294, 0.847059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.298039, 0.552941, 0.964706, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.184314, 0.435294, 0.847059, 0.3)
+shadow_size = 10
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_status_banner"]
+content_margin_left = 22.0
+content_margin_top = 18.0
+content_margin_right = 22.0
+content_margin_bottom = 18.0
+bg_color = Color(0.980392, 0.968627, 0.941176, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.658824, 0.486275, 0.141176, 0.25)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_action_pill_normal"]
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+bg_color = Color(0.184314, 0.435294, 0.847059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.298039, 0.552941, 0.964706, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.184314, 0.435294, 0.847059, 0.28)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_action_pill_hover"]
+content_margin_left = 28.0
+content_margin_top = 12.0
+content_margin_right = 28.0
+content_margin_bottom = 12.0
+bg_color = Color(0.247059, 0.505882, 0.917647, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.490196, 0.721569, 1, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.184314, 0.435294, 0.847059, 0.36)
+shadow_size = 12
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghost_btn_normal"]
+content_margin_left = 24.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+bg_color = Color(0.184314, 0.435294, 0.847059, 0.08)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.184314, 0.435294, 0.847059, 0.22)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghost_btn_hover"]
+content_margin_left = 24.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+bg_color = Color(0.184314, 0.435294, 0.847059, 0.16)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.184314, 0.435294, 0.847059, 0.38)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tip_card"]
+bg_color = Color(1, 0.992157, 0.964706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.658824, 0.486275, 0.141176, 0.38)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.06)
+shadow_size = 12
+shadow_offset = Vector2(0, 4)
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
-font = ExtResource("3_vazir")
+font = ExtResource("2_vazir")
 font_size = 45
 
 [node name="WordGameHub" type="Control" unique_id=757437532]
@@ -26,190 +382,664 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Scroll" type="ScrollContainer" parent="." unique_id=1863716374]
-layout_mode = 0
+[node name="RootScroll" type="ScrollContainer" parent="." unique_id=1863716374]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+horizontal_scroll_mode = 0
+
+[node name="OuterMargin" type="MarginContainer" parent="RootScroll" unique_id=1852628925]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="MainMargin" type="MarginContainer" parent="Scroll" unique_id=1852628925]
-layout_mode = 2
-size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/margin_left = 36
-theme_override_constants/margin_top = 270
+theme_override_constants/margin_top = 268
 theme_override_constants/margin_right = 36
-theme_override_constants/margin_bottom = 240
+theme_override_constants/margin_bottom = 200
 
-[node name="MainColumn" type="VBoxContainer" parent="Scroll/MainMargin" unique_id=1276624173]
+[node name="MainColumn" type="VBoxContainer" parent="RootScroll/OuterMargin" unique_id=1276624173]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 20
+mouse_filter = 2
+theme_override_constants/separation = 24
 
-[node name="Subtitle" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=308971966]
+[node name="SectionHeading" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=308971966]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vazir")
-theme_override_font_sizes/font_size = 30
-text = "روش بازی را انتخاب کنید:"
-label_settings = ExtResource("8_wtlp0")
-horizontal_alignment = 1
+mouse_filter = 2
+theme_override_constants/separation = 6
 
-[node name="ModeButtons" type="HBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=1602772560]
+[node name="TitleLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/SectionHeading" unique_id=210000001]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.14902, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 36
+text = "حالت بازی را انتخاب کنید"
+horizontal_alignment = 2
+
+[node name="SubtitleLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/SectionHeading" unique_id=210000002]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.431373, 0.415686, 0.380392, 1)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 26
+text = "رقابت رسمی روزانه برای ثبت امتیاز یا تمرین آزاد بدون محدودیت"
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="DailyButton" type="Button" parent="RootScroll/OuterMargin/MainColumn" unique_id=1455998737]
+custom_minimum_size = Vector2(0, 236)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 18
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+tooltip_text = "ورود به چالش‌های روزانه با امتیاز رسمی"
+theme_override_styles/normal = SubResource("StyleBoxFlat_hero_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hero_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hero_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hero_hover")
 
-[node name="LearningButton" type="Button" parent="Scroll/MainMargin/MainColumn/ModeButtons" unique_id=1823623472]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.037244946, 0.03783645, 0.45377022, 1)
-theme_override_fonts/font = ExtResource("3_vazir")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/normal = ExtResource("3_ttcs7")
-theme_override_styles/pressed = ExtResource("3_ttcs7")
-theme_override_styles/hover = ExtResource("4_wtlp0")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/MainMargin/MainColumn/ModeButtons/LearningButton" unique_id=1317248847]
+[node name="Margin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/DailyButton" unique_id=567321539]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 22
 
-[node name="Title" type="Label" parent="Scroll/MainMargin/MainColumn/ModeButtons/LearningButton/VBoxContainer" unique_id=1934354619]
+[node name="Row" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin" unique_id=210000010]
 layout_mode = 2
-text = "یادگیری"
-label_settings = ExtResource("3_1yjrf")
+mouse_filter = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="ChevronLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row" unique_id=210000011]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.88)
+theme_override_font_sizes/font_size = 50
+text = "❮"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="info" type="Label" parent="Scroll/MainMargin/MainColumn/ModeButtons/LearningButton/VBoxContainer" unique_id=1638369851]
+[node name="TextColumn" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row" unique_id=210000012]
 layout_mode = 2
-text = "تمرین بدون رقابت"
-label_settings = ExtResource("4_ocyyk")
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TopTagRow" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row/TextColumn" unique_id=210000013]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="ContextBadge" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row/TextColumn/TopTagRow" unique_id=210000014]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hero_badge")
+
+[node name="BadgeLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row/TextColumn/TopTagRow/ContextBadge" unique_id=210000015]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.96)
+theme_override_fonts/font = ExtResource("3_vazir_med")
+theme_override_font_sizes/font_size = 24
+text = "امتیاز رسمی · ۳ بازی روزانه 🏆"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DailyButton" type="Button" parent="Scroll/MainMargin/MainColumn/ModeButtons" unique_id=1455998737]
-custom_minimum_size = Vector2(0, 190)
+[node name="TitleLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row/TextColumn" unique_id=560495540]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.03529412, 0.039215688, 0.45490196, 1)
-theme_override_fonts/font = ExtResource("3_vazir")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/normal = ExtResource("5_dr7k0")
-theme_override_styles/pressed = ExtResource("5_dr7k0")
-theme_override_styles/hover = ExtResource("6_ttcs7")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Scroll/MainMargin/MainColumn/ModeButtons/DailyButton" unique_id=567321539]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Title" type="Label" parent="Scroll/MainMargin/MainColumn/ModeButtons/DailyButton/VBoxContainer" unique_id=560495540]
-layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 44
 text = "چالش روزانه"
-label_settings = ExtResource("3_1yjrf")
+horizontal_alignment = 2
+
+[node name="SubLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row/TextColumn" unique_id=2085366600]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 27
+text = "رقابت در Wordle، Wordef و Unscramble و ثبت امتیاز در رتبه‌بندی"
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="IconChip" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row" unique_id=210000016]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hero_chip")
+
+[node name="IconLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/DailyButton/Margin/Row/IconChip" unique_id=210000017]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 58
+text = "🔥"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="info" type="Label" parent="Scroll/MainMargin/MainColumn/ModeButtons/DailyButton/VBoxContainer" unique_id=2085366600]
+[node name="LearningButton" type="Button" parent="RootScroll/OuterMargin/MainColumn" unique_id=1823623472]
+custom_minimum_size = Vector2(0, 198)
 layout_mode = 2
-text = "برای امتیاز رسمی"
-label_settings = ExtResource("4_ocyyk")
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+tooltip_text = "تمرین آزاد واژگان بدون محدودیت روزانه"
+theme_override_styles/normal = SubResource("StyleBoxFlat_card_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_card_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_card_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_card_hover")
+
+[node name="Margin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/LearningButton" unique_id=1317248847]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin" unique_id=210000020]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ChevronLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row" unique_id=210000021]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.486275, 0.227451, 0.929412, 0.88)
+theme_override_font_sizes/font_size = 48
+text = "❮"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LeaderboardTitle" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=1792258045]
+[node name="TextColumn" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row" unique_id=210000022]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_vazir")
-theme_override_font_sizes/font_size = 40
-text = "جدول رتبه‌بندی ⬇️"
-label_settings = ExtResource("3_1yjrf")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
 
-[node name="Tabs" type="HBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=744202285]
+[node name="TopTagRow" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row/TextColumn" unique_id=210000023]
 layout_mode = 2
-layout_direction = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="PracticeBadge" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row/TextColumn/TopTagRow" unique_id=210000024]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_purple_pill")
+
+[node name="BadgeLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row/TextColumn/TopTagRow/PracticeBadge" unique_id=210000025]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.486275, 0.227451, 0.929412, 1)
+theme_override_fonts/font = ExtResource("3_vazir_med")
+theme_override_font_sizes/font_size = 23
+text = "تمرین آزاد · بدون رقابت"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row/TextColumn" unique_id=1934354619]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.14902, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 38
+text = "یادگیری و تمرین"
+horizontal_alignment = 2
+
+[node name="SubLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row/TextColumn" unique_id=1638369851]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.431373, 0.415686, 0.380392, 1)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 26
+text = "تمرین نامحدود معنی، مترادف، متضاد و املا در Wordef و Unscramble"
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="IconChip" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row" unique_id=210000026]
+custom_minimum_size = Vector2(116, 116)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chip_purple")
+
+[node name="IconLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/LearningButton/Margin/Row/IconChip" unique_id=210000027]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 54
+text = "🎮"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsBento" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=210000030]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="DailyBoardButton" type="Button" parent="Scroll/MainMargin/MainColumn/Tabs" unique_id=73248624]
-custom_minimum_size = Vector2(0, 82)
+[node name="LifetimeStatCard" type="Button" parent="RootScroll/OuterMargin/MainColumn/StatsBento" unique_id=210000031]
+custom_minimum_size = Vector2(0, 188)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_vazir")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("7_p7c5t")
-toggle_mode = true
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+tooltip_text = "نمایش جدول امتیاز کل"
+theme_override_styles/normal = SubResource("StyleBoxFlat_card_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_card_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_stat_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_stat_hover")
 
-[node name="Label" type="Label" parent="Scroll/MainMargin/MainColumn/Tabs/DailyBoardButton" unique_id=1208301017]
+[node name="Margin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/StatsBento/LifetimeStatCard" unique_id=210000032]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -65.5
-offset_top = -24.0
-offset_right = 65.5
-offset_bottom = 24.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "امتیاز امروز"
-label_settings = ExtResource("8_wtlp0")
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 18
+
+[node name="VBox" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/StatsBento/LifetimeStatCard/Margin" unique_id=210000033]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TopRow" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/StatsBento/LifetimeStatCard/Margin/VBox" unique_id=210000034]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Chip" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/StatsBento/LifetimeStatCard/Margin/VBox/TopRow" unique_id=210000035]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chip_blue")
+
+[node name="Emoji" type="Label" parent="RootScroll/OuterMargin/MainColumn/StatsBento/LifetimeStatCard/Margin/VBox/TopRow/Chip" unique_id=210000036]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 32
+text = "🏆"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LifetimeButton" type="Button" parent="Scroll/MainMargin/MainColumn/Tabs" unique_id=160102682]
-custom_minimum_size = Vector2(0, 82)
+[node name="ValueLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/StatsBento/LifetimeStatCard/Margin/VBox/TopRow" unique_id=210000037]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_vazir")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("7_p7c5t")
-toggle_mode = true
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 38
+text = "—"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="NormalTitle" type="Label" parent="Scroll/MainMargin/MainColumn/Tabs/LifetimeButton" unique_id=2023035834]
+[node name="TitleLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/StatsBento/LifetimeStatCard/Margin/VBox" unique_id=210000038]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.14902, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 29
+text = "جایگاه کل"
+horizontal_alignment = 2
+
+[node name="SubLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/StatsBento/LifetimeStatCard/Margin/VBox" unique_id=210000039]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.431373, 0.415686, 0.380392, 1)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 24
+text = "مجموع امتیازهای رسمی"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="TodayStatCard" type="Button" parent="RootScroll/OuterMargin/MainColumn/StatsBento" unique_id=210000040]
+custom_minimum_size = Vector2(0, 188)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+tooltip_text = "نمایش جدول امتیاز امروز"
+theme_override_styles/normal = SubResource("StyleBoxFlat_card_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_card_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_stat_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_stat_hover")
+
+[node name="Margin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/StatsBento/TodayStatCard" unique_id=210000041]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -13.0
-offset_right = 20.0
-offset_bottom = 13.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "امتیاز کل"
-label_settings = ExtResource("8_wtlp0")
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 18
+
+[node name="VBox" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/StatsBento/TodayStatCard/Margin" unique_id=210000042]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TopRow" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/StatsBento/TodayStatCard/Margin/VBox" unique_id=210000043]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Chip" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/StatsBento/TodayStatCard/Margin/VBox/TopRow" unique_id=210000044]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chip_gold")
+
+[node name="Emoji" type="Label" parent="RootScroll/OuterMargin/MainColumn/StatsBento/TodayStatCard/Margin/VBox/TopRow/Chip" unique_id=210000045]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 32
+text = "⭐"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Status" type="Label" parent="Scroll/MainMargin/MainColumn" unique_id=1313806602]
-custom_minimum_size = Vector2(700, 0)
+[node name="ValueLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/StatsBento/TodayStatCard/Margin/VBox/TopRow" unique_id=210000046]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_vazir")
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.658824, 0.486275, 0.141176, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 38
+text = "—"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/StatsBento/TodayStatCard/Margin/VBox" unique_id=210000047]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.14902, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 29
+text = "عملکرد امروز"
+horizontal_alignment = 2
+
+[node name="SubLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/StatsBento/TodayStatCard/Margin/VBox" unique_id=210000048]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.431373, 0.415686, 0.380392, 1)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 24
+text = "رتبه و امتیاز چالش امروز"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="LeaderboardCard" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=210000050]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board_card")
+
+[node name="BoardMargin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard" unique_id=210000051]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 26
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_bottom = 26
+
+[node name="BoardVBox" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin" unique_id=210000052]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 18
+
+[node name="BoardHeader" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox" unique_id=210000053]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="RankPill" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/BoardHeader" unique_id=210000054]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rank_pill")
+
+[node name="RankPillLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/BoardHeader/RankPill" unique_id=210000055]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.658824, 0.486275, 0.141176, 1)
+theme_override_fonts/font = ExtResource("3_vazir_med")
 theme_override_font_sizes/font_size = 26
+text = "برترین‌ها 🏆"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeaderboardTitle" type="Label" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/BoardHeader" unique_id=1792258045]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.14902, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 38
+text = "جدول رتبه‌بندی"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SegmentedTrack" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox" unique_id=210000056]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_seg_track")
+
+[node name="Tabs" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/SegmentedTrack" unique_id=744202285]
+layout_mode = 2
+layout_direction = 3
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="DailyBoardButton" type="Button" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/SegmentedTrack/Tabs" unique_id=73248624]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.431373, 0.415686, 0.380392, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.184314, 0.172549, 0.14902, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_seg_inactive")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_seg_active")
+theme_override_styles/hover = SubResource("StyleBoxFlat_seg_inactive_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_seg_active")
+theme_override_styles/focus = SubResource("StyleBoxFlat_seg_inactive")
+toggle_mode = true
+button_pressed = true
+text = "امتیاز امروز"
+
+[node name="LifetimeButton" type="Button" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/SegmentedTrack/Tabs" unique_id=160102682]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.431373, 0.415686, 0.380392, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.184314, 0.172549, 0.14902, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_seg_inactive")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_seg_active")
+theme_override_styles/hover = SubResource("StyleBoxFlat_seg_inactive_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_seg_active")
+theme_override_styles/focus = SubResource("StyleBoxFlat_seg_inactive")
+toggle_mode = true
+text = "امتیاز کل"
+
+[node name="StatusBanner" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox" unique_id=210000057]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_status_banner")
+
+[node name="StatusVBox" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/StatusBanner" unique_id=210000058]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Status" type="Label" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/StatusBanner/StatusVBox" unique_id=1313806602]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.321569, 0.301961, 0.258824, 1)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 28
+text = "در حال دریافت رتبه‌بندی…"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Entries" type="VBoxContainer" parent="Scroll/MainMargin/MainColumn" unique_id=1993428948]
+[node name="BoardActionButton" type="Button" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox/StatusBanner/StatusVBox" unique_id=210000059]
+visible = false
+custom_minimum_size = Vector2(360, 74)
 layout_mode = 2
-theme_override_constants/separation = 12
+size_flags_horizontal = 4
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_action_pill_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_action_pill_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_action_pill_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_action_pill_hover")
+text = "ورود به حساب کاربری"
 
-[node name="HeaderBar" type="PanelContainer" parent="."]
+[node name="DailyEntries" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox" unique_id=1993428948]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="LifetimeEntries" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox" unique_id=210000060]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="ShowMoreButton" type="Button" parent="RootScroll/OuterMargin/MainColumn/LeaderboardCard/BoardMargin/BoardVBox" unique_id=210000061]
+visible = false
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_colors/font_pressed_color = Color(0.133333, 0.32549, 0.623529, 1)
+theme_override_colors/font_hover_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_vazir_med")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_ghost_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ghost_btn_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ghost_btn_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ghost_btn_hover")
+text = "نمایش همه رتبه‌ها ▾"
+
+[node name="TipCard" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=210000070]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tip_card")
+
+[node name="TipMargin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/TipCard" unique_id=210000071]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 18
+
+[node name="TipRow" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin" unique_id=210000072]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TipTextCol" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow" unique_id=210000073]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="TipHeading" type="Label" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow/TipTextCol" unique_id=210000074]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.658824, 0.486275, 0.141176, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 29
+text = "نکته بازی و رقابت"
+horizontal_alignment = 2
+
+[node name="TipBody" type="Label" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow/TipTextCol" unique_id=210000075]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.321569, 0.301961, 0.258824, 1)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 27
+text = "در چالش روزانه، امتیاز هر بازی روزانه به‌صورت رسمی ثبت می‌شود؛ برای تمرین نامحدود از بخش «یادگیری و تمرین» استفاده کنید."
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="TipChip" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow" unique_id=210000076]
+custom_minimum_size = Vector2(82, 82)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chip_gold")
+
+[node name="TipEmoji" type="Label" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow/TipChip" unique_id=210000077]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 38
+text = "💡"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=210000080]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -217,28 +1047,28 @@ offset_top = 0.0
 offset_bottom = 240.0
 grow_horizontal = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("9_header_style")
+theme_override_styles/panel = ExtResource("5_header_style")
 
-[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar"]
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=210000081]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 45
 
-[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent"]
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=210000082]
 layout_mode = 2
-icon = ExtResource("9_back_icon")
+icon = ExtResource("6_back_icon")
 flat = true
 icon_alignment = 1
 
-[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=210000083]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
 text = "🏠"
 flat = true
 
-[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent"]
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=210000084]
 layout_mode = 2
 text = "بازی با کلمات"
 label_settings = SubResource("HeaderTitleSettings")

@@ -466,8 +466,9 @@ func _abandon_attempt(dialog: ConfirmationDialog) -> void:
 	)
 
 func _return_to_calendar() -> void:
+	var target: String = DailyChallengeStateStore.return_scene if DailyChallengeStateStore.return_scene != "" else HUB_SCENE
 	DailyChallengeStateStore.clear_attempt()
-	TransitionManager.change_scene(HUB_SCENE)
+	TransitionManager.change_scene(target)
 
 func _show_fatal(message: String) -> void:
 	var label: Label = _label(message, 30, true)

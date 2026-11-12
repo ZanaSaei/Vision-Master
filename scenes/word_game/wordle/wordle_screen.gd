@@ -403,6 +403,9 @@ func _reveal_row(result: Dictionary) -> void:
 	# guess (which filed a mid-game guess as a loss and then blocked the real
 	# result, since recording is idempotent per puzzle) and never on restore.
 	WordleStats.record_result(won, game.attempts_used(), game.puzzle_id)
+	if DailyChallengeState.selected_game == "wordle" and DailyChallengeMock.is_active():
+		var pts: int = maxi(40, 110 - game.attempts_used() * 10) if won else 20
+		DailyChallengeMock.complete_game(DailyChallengeState.selected_date, "wordle", pts)
 
 	# Let the player look at the finished row before the card covers it.
 	await get_tree().create_timer(end_panel_delay).timeout

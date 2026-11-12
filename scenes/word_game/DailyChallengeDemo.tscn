@@ -1,0 +1,144 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/word_game/DailyChallengeDemo.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+
+[node name="DailyChallengeDemo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="SceneContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FloatingToolbar" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ToggleBtn" type="Button" parent="FloatingToolbar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -460.0
+offset_top = -72.0
+offset_right = -20.0
+offset_bottom = -8.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+text = "🛠️ ابزارهای تست و دمو (بستن)"
+
+[node name="Panel" type="PanelContainer" parent="FloatingToolbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 0.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="FloatingToolbar/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="FloatingToolbar/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HeaderLabel" type="Label" parent="FloatingToolbar/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+text = "پنل دمو: شبیه‌ساز کاربر متصل، تقویم جلالی و اجرای زنده بازی‌ها"
+horizontal_alignment = 1
+
+[node name="Row1" type="HBoxContainer" parent="FloatingToolbar/Panel/Margin/VBox"]
+layout_mode = 2
+layout_direction = 2
+theme_override_constants/separation = 12
+
+[node name="OnlineBtn" type="Button" parent="FloatingToolbar/Panel/Margin/VBox/Row1"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "🟢 آنلاین (وارد شده)"
+
+[node name="OfflineBtn" type="Button" parent="FloatingToolbar/Panel/Margin/VBox/Row1"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "🔴 شبیه‌سازی آفلاین"
+
+[node name="ResetBtn" type="Button" parent="FloatingToolbar/Panel/Margin/VBox/Row1"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "🔄 بازیابی روز امروز"
+
+[node name="Row2" type="HBoxContainer" parent="FloatingToolbar/Panel/Margin/VBox"]
+layout_mode = 2
+layout_direction = 2
+theme_override_constants/separation = 12
+
+[node name="PlayWordleBtn" type="Button" parent="FloatingToolbar/Panel/Margin/VBox/Row2"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "🟩 اجرای Wordle"
+
+[node name="PlayWordefBtn" type="Button" parent="FloatingToolbar/Panel/Margin/VBox/Row2"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "📖 اجرای Wordef"
+
+[node name="PlayUnscrambleBtn" type="Button" parent="FloatingToolbar/Panel/Margin/VBox/Row2"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "🔤 اجرای Unscramble"
+
+[node name="BackHubBtn" type="Button" parent="FloatingToolbar/Panel/Margin/VBox/Row2"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "🏠 هاب بازی‌ها"
