@@ -1,16 +1,87 @@
-[gd_scene load_steps=6 format=3]
-
-[ext_resource type="FontFile" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_font"]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/exam/final_exam_list.gd" id="1_fel"]
-[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="3_back"]
-[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="4_header_style"]
+[ext_resource type="FontFile" uid="uid://c21bk2e7vh4wu" path="res://ui/fonts/Vazirmatn-Regular.ttf" id="2_vazir"]
+[ext_resource type="FontFile" uid="uid://dyt2kyuobu1pu" path="res://ui/fonts/Vazirmatn-Medium.ttf" id="3_vazir_med"]
+[ext_resource type="FontFile" uid="uid://dq6ytga6c5qgh" path="res://ui/fonts/Vazirmatn-Bold.ttf" id="4_vazir_bold"]
+[ext_resource type="Texture2D" uid="uid://bmgjy6yti5sut" path="res://ui/images/Back.png" id="5_back"]
+[ext_resource type="StyleBox" uid="uid://bjh6phxjxpytp" path="res://scenes/shared/HeaderBar.tres" id="6_header_style"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_normal"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.235294, 0.196078, 0.117647, 0.12)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0, 0, 0, 0.07)
+shadow_size = 16
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blue_pill"]
+content_margin_left = 16.0
+content_margin_top = 5.0
+content_margin_right = 16.0
+content_margin_bottom = 5.0
+bg_color = Color(0.184314, 0.435294, 0.847059, 0.1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.184314, 0.435294, 0.847059, 0.28)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_blue"]
+bg_color = Color(0.184314, 0.435294, 0.847059, 0.12)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.184314, 0.435294, 0.847059, 0.32)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chip_gold"]
+bg_color = Color(0.658824, 0.486275, 0.141176, 0.14)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.658824, 0.486275, 0.141176, 0.36)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tip_card"]
+bg_color = Color(1, 0.992157, 0.964706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.658824, 0.486275, 0.141176, 0.38)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.06)
+shadow_size = 12
+shadow_offset = Vector2(0, 4)
 
 [sub_resource type="LabelSettings" id="HeaderTitleSettings"]
-font = ExtResource("2_font")
+font = ExtResource("2_vazir")
 font_size = 45
 
-[node name="FinalExamList" type="Control"]
+[node name="FinalExamList" type="Control" unique_id=240000001]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,66 +90,202 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fel")
 
-[node name="RootMargin" type="MarginContainer" parent="."]
+[node name="RootScroll" type="ScrollContainer" parent="." unique_id=240000002]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 0
-theme_override_constants/margin_left = 48
-theme_override_constants/margin_top = 270
-theme_override_constants/margin_right = 48
-theme_override_constants/margin_bottom = 188
-
-[node name="MainColumn" type="VBoxContainer" parent="RootMargin"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 24
-
-[node name="ContentMargin" type="MarginContainer" parent="RootMargin/MainColumn"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 28
-theme_override_constants/margin_top = 28
-theme_override_constants/margin_right = 28
-theme_override_constants/margin_bottom = 28
-
-[node name="ContentScroll" type="ScrollContainer" parent="RootMargin/MainColumn/ContentMargin"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+mouse_filter = 1
 horizontal_scroll_mode = 0
 
-[node name="Content" type="VBoxContainer" parent="RootMargin/MainColumn/ContentMargin/ContentScroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 22
-
-[node name="EmptyMessage" type="Label" parent="RootMargin/MainColumn/ContentMargin/ContentScroll/Content"]
-visible = false
-layout_mode = 2
-autowrap_mode = 3
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 32
-text = "برای این پایه هنوز امتحانی اضافه نشده است."
-horizontal_alignment = 1
-
-[node name="DynamicContent" type="VBoxContainer" parent="RootMargin/MainColumn/ContentMargin/ContentScroll/Content"]
+[node name="OuterMargin" type="MarginContainer" parent="RootScroll" unique_id=240000003]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 268
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 200
+
+[node name="MainColumn" type="VBoxContainer" parent="RootScroll/OuterMargin" unique_id=240000004]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_constants/separation = 22
 
-[node name="BottomSpacer" type="Control" parent="RootMargin/MainColumn/ContentMargin/ContentScroll/Content"]
-custom_minimum_size = Vector2(0, 24)
+[node name="GradeSummaryCard" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=240000005]
 layout_mode = 2
-[node name="HeaderBar" type="PanelContainer" parent="."]
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_normal")
+
+[node name="Margin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard" unique_id=240000006]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Row" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard/Margin" unique_id=240000007]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="CountPill" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard/Margin/Row" unique_id=240000008]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_blue_pill")
+
+[node name="CountLabel" type="Label" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard/Margin/Row/CountPill" unique_id=240000009]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184314, 0.435294, 0.847059, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 25
+text = "۰ آزمون"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextCol" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard/Margin/Row" unique_id=240000010]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="GradeTitle" type="Label" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard/Margin/Row/TextCol" unique_id=240000011]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.184314, 0.172549, 0.14902, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 33
+text = "آزمون‌های رسمی پایه"
+horizontal_alignment = 2
+
+[node name="GradeSub" type="Label" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard/Margin/Row/TextCol" unique_id=240000012]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.431373, 0.415686, 0.380392, 1)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 24
+text = "مرتب‌شده از جدیدترین به قدیمی‌ترین"
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="GradeChip" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard/Margin/Row" unique_id=240000013]
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chip_blue")
+
+[node name="Emoji" type="Label" parent="RootScroll/OuterMargin/MainColumn/GradeSummaryCard/Margin/Row/GradeChip" unique_id=240000014]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 44
+text = "🎓"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmptyCard" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=240000020]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_normal")
+
+[node name="Margin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/EmptyCard" unique_id=240000021]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 36
+
+[node name="EmptyMessage" type="Label" parent="RootScroll/OuterMargin/MainColumn/EmptyCard/Margin" unique_id=240000022]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.431373, 0.415686, 0.380392, 1)
+theme_override_fonts/font = ExtResource("3_vazir_med")
+theme_override_font_sizes/font_size = 30
+text = "برای این پایه هنوز امتحانی اضافه نشده است."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DynamicContent" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=240000030]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="TipCard" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn" unique_id=240000040]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tip_card")
+
+[node name="TipMargin" type="MarginContainer" parent="RootScroll/OuterMargin/MainColumn/TipCard" unique_id=240000041]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 18
+
+[node name="TipRow" type="HBoxContainer" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin" unique_id=240000042]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TipTextCol" type="VBoxContainer" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow" unique_id=240000043]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="TipHeading" type="Label" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow/TipTextCol" unique_id=240000044]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.658824, 0.486275, 0.141176, 1)
+theme_override_fonts/font = ExtResource("4_vazir_bold")
+theme_override_font_sizes/font_size = 29
+text = "نکته پیش از شروع آزمون"
+horizontal_alignment = 2
+
+[node name="TipBody" type="Label" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow/TipTextCol" unique_id=240000045]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.321569, 0.301961, 0.258824, 1)
+theme_override_fonts/font = ExtResource("2_vazir")
+theme_override_font_sizes/font_size = 27
+text = "پخش‌کنندهٔ فایل صوتی بخش شنیداری در بالای صفحهٔ آزمون قرار دارد؛ پس از پاسخ‌دادن می‌توانید نمرهٔ خود را از ۴۰ مشاهده کنید."
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="TipChip" type="PanelContainer" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow" unique_id=240000046]
+custom_minimum_size = Vector2(82, 82)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_chip_gold")
+
+[node name="TipEmoji" type="Label" parent="RootScroll/OuterMargin/MainColumn/TipCard/TipMargin/TipRow/TipChip" unique_id=240000047]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 38
+text = "🎧"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeaderBar" type="PanelContainer" parent="." unique_id=240000050]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -86,29 +293,28 @@ offset_top = 0.0
 offset_bottom = 240.0
 grow_horizontal = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("4_header_style")
+theme_override_styles/panel = ExtResource("6_header_style")
 
-[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar"]
+[node name="HeaderContent" type="HBoxContainer" parent="HeaderBar" unique_id=240000051]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 45
 
-[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent"]
+[node name="BackButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=240000052]
 layout_mode = 2
-icon = ExtResource("3_back")
+icon = ExtResource("5_back")
 flat = true
 icon_alignment = 1
 
-[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent"]
+[node name="HomeButton" type="Button" parent="HeaderBar/HeaderContent" unique_id=240000053]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
 text = "🏠"
 flat = true
 
-[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent"]
+[node name="HeaderTitle" type="Label" parent="HeaderBar/HeaderContent" unique_id=240000054]
 layout_mode = 2
 text = "امتحانات نهایی"
 label_settings = SubResource("HeaderTitleSettings")
-
