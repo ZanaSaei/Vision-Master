@@ -1,5 +1,15 @@
 class_name MultipleChoiceExercise
 extends GrammarExercise
+# ============================================================
+#  MULTIPLE CHOICE EXERCISE — Modern Grammar Quiz UX
+# ============================================================
+#  Features:
+#   1. Elevated Question Card with top accent bar
+#   2. Native TTS Pronunciation speaker button for English prompts
+#   3. A/B/C/D circular option indicator badges
+#   4. Tactile spring physics animations on choice selection
+#   5. Visual reveal of correct answer upon mistake
+# ============================================================
 
 var questions: Array = []
 var counter_label: Label
@@ -8,7 +18,10 @@ var question_card: PanelContainer
 var question_label: Label
 var options_container: Container
 var _main: VBoxContainer
+var _option_buttons: Array[GrammarButton] = []
 var _long_mode_buttons: Array[GrammarButton] = []
+
+const OPTION_LETTERS := ["A", "B", "C", "D", "E", "F"]
 
 
 func setup(data: Dictionary) -> void:
@@ -35,7 +48,7 @@ func _build_ui() -> void:
 	_main = main
 	margin.add_child(main)
 
-	# Top row: Question Counter Pill + Instruction
+	# --- 1. TOP BAR: Counter Pill + Instruction ---
 	var top_bar := HBoxContainer.new()
 	top_bar.alignment = BoxContainer.ALIGNMENT_CENTER
 	top_bar.add_theme_constant_override("separation", 12)
@@ -67,28 +80,36 @@ func _build_ui() -> void:
 	instruction_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	main.add_child(instruction_label)
 
-	# Elevated Prompt Card
+	# --- 2. ELEVATED QUESTION CARD ---
 	question_card = PanelContainer.new()
 	var q_style := GrammarTheme.info_card_style()
-	q_style.border_width_bottom = 4
+	q_style.border_width_top = 4
 	q_style.border_color = GrammarTheme.accent_color()
 	q_style.content_margin_left = 24
 	q_style.content_margin_right = 24
-	q_style.content_margin_top = 24
-	q_style.content_margin_bottom = 24
+	q_style.content_margin_top = 22
+	q_style.content_margin_bottom = 22
 	question_card.add_theme_stylebox_override("panel", q_style)
 	question_card.custom_minimum_size = Vector2(0, 160)
+	question_card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	main.add_child(question_card)
+
+	var q_content_row := HBoxContainer.new()
+	q_content_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	q_content_row.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	q_content_row.add_theme_constant_override("separation", 14)
+	question_card.add_child(q_content_row)
 
 	question_label = Label.new()
 	question_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	question_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	question_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	question_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	question_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	question_label.add_theme_font_size_override("font_size", GrammarTheme.HEADING_SIZE)
 	question_label.add_theme_color_override("font_color", GrammarTheme.text_color())
 	question_label.add_theme_font_override("font", GrammarTheme.get_en_bold())
-	question_card.add_child(question_label)
+	q_content_row.add_child(question_label)
 
 	var spacer := Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -109,13 +130,34 @@ func _show_question() -> void:
 		_main.remove_child(options_container)
 		options_container.queue_free()
 
+	_option_buttons.clear()
+	_long_mode_buttons.clear()
+
 	var question: Dictionary = questions[current_index]
-	GrammarTheme.set_bidi_text(counter_label, "سوال %d از %d" % [current_index + 1, questions.size()])
+	var current_q_num := current_index + 1
+	var total_q := questions.size()
+	GrammarTheme.set_bidi_text(counter_label, "سوال %d از %d" % [current_q_num, total_q])
 	GrammarTheme.set_bidi_text(
 		instruction_label,
 		str(exercise_data.get("instruction_fa", "گزینه درست را انتخاب کن."))
 	)
-	GrammarTheme.set_bidi_text(question_label, str(question.get("question", "")))
+
+	var raw_q: String = str(question.get("question", ""))
+	GrammarTheme.set_bidi_text(question_label, raw_q)
+
+	# Check question card row for audio speaker button
+	var q_row := question_label.get_parent() as HBoxContainer
+	if q_row != null:
+		# Clean old speaker buttons if present
+		for child in q_row.get_children():
+			if child != question_label:
+				q_row.remove_child(child)
+				child.queue_free()
+		# Add speaker button for English prompt
+		if not GrammarTheme.is_fa_dominant(raw_q) and not raw_q.is_empty():
+			var speak_clean := raw_q.replace("______", "blank").replace("_____", "blank")
+			var speaker := GrammarTheme.make_speaker_button(speak_clean, 72.0)
+			q_row.add_child(speaker)
 
 	var options: Array = question.get("options", [])
 	var long_mode := false
@@ -124,7 +166,6 @@ func _show_question() -> void:
 			long_mode = true
 			break
 
-	_long_mode_buttons.clear()
 	if long_mode:
 		var vbox := VBoxContainer.new()
 		vbox.add_theme_constant_override("separation", 14)
@@ -151,6 +192,11 @@ func _show_question() -> void:
 		button.variant = GrammarButton.ButtonVariant.SECONDARY
 		button.play_click_sound = false
 		button.neutral_states = true
+
+		var opt_letter: String = OPTION_LETTERS[i] if i < OPTION_LETTERS.size() else str(i + 1)
+		var opt_text := str(options[i])
+		var full_opt_text := "%s. %s" % [opt_letter, opt_text]
+
 		if long_mode:
 			button.custom_minimum_size = Vector2(0, long_mode_height)
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -161,10 +207,11 @@ func _show_question() -> void:
 			button.custom_minimum_size = Vector2(0, 96)
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-		GrammarTheme.set_bidi_text(button, str(options[i]))
+		GrammarTheme.set_bidi_text(button, full_opt_text)
 		button.set_meta("answer_index", i)
 		button.pressed.connect(func() -> void: _on_answer_pressed(button))
 		options_container.add_child(button)
+		_option_buttons.append(button)
 		GrammarAnimation.appear(button, i * 0.05)
 
 	if long_mode:
@@ -229,6 +276,10 @@ func _on_answer_pressed(button: GrammarButton) -> void:
 		button.set_correct_state()
 	else:
 		button.set_wrong_state()
+		# Reveal correct answer for clear learning reinforcement
+		for opt_btn in _option_buttons:
+			if int(opt_btn.get_meta("answer_index", -1)) == correct_index:
+				opt_btn.set_correct_state()
 
 	var explanation := ""
 	if correct:

@@ -132,7 +132,7 @@
 		  {
 			"en": "It is sometimes good to think about our body and how it works.",
 			"fa": "گاهی خوب است که در مورد بدن خود و نحوه عملکرد آن فکر کنیم.",
-			"start": 1.5,
+			"start": 14.5,
 			"end": 17.6
 		  },
 		  {
@@ -675,8 +675,8 @@
   {
 	"lesson": 2,
 	"book": 2,
-	"audio": "res://assets/audio/v2/l1/reading.mp3",
-	"image": "res://assets/images/v2_l1_reading.png",
+	"audio": "res://assets/audio/v2/l2/reading.mp3",
+	"image": "res://assets/images/v2_l2_reading.png",
 	"title": "Having a Healthier and Longer Life",
 	"paragraphs": [
 	  {

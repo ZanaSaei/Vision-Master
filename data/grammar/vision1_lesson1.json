@@ -1335,8 +1335,7 @@
 									"."
 								],
 								"answer": "She is going to travel next week .",
-								"hint_fa": "ساختار درست:\n
-								Subject(فاعل) + be + going to + base verb(ساده فعل) + زمان قید "
+								"hint_fa": "ساختار درست از چپ به راست:\nSubject(فاعل) + be + going to + base verb(فعل ساده) + قید زمان"
 							}
 						]
 					},
@@ -1348,11 +1347,11 @@
 						"items": [
 							{
 								"left": "Will",
-								"right": "قول و تصمیمات لحظه ای"
+								"right": "قول و تصمیمات لحظه‌ای"
 							},
 							{
 								"left": "Be going to",
-								"right": "برنامه ها و پیشبینی با مدرک"
+								"right": "برنامه‌ها و پیش‌بینی با مدرک"
 							}
 						]
 					}

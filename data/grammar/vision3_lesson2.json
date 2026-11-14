@@ -2,19 +2,19 @@
 	"lesson": {
 		"id": "vision3_lesson2_relative_clauses",
 		"book": "Vision 3",
-		"lesson_number": 2.0,
+		"lesson_number": 2,
 		"title_en": "Relative Clauses",
 		"title_fa": "جملات وصفی",
 		"icon": "🔍",
 		"theme_color": "#0EA5E9",
-		"xp_per_unit": 10.0,
+		"xp_per_unit": 10,
 		"units": [
 			{
 				"id": "unit1",
 				"type": "group",
 				"title_fa": "who برای اشخاص (فاعل جمله وصفی)",
 				"title_en": "Who for People (Subject)",
-				"activity_count": 9.0,
+				"activity_count": 9,
 				"activities": [
 					{
 						"id": "unit1_learn1",
@@ -99,14 +99,14 @@
 						"instruction_fa": "کدام کلمه جمله‌ی وصفی درباره‌ی یک شخص در نقش فاعل را شروع می‌کند؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which word is used for people as the subject of an adjective clause?",
 								"options": [
 									"which",
 									"who",
 									"whom",
 									"whose"
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "کدام کلمه برای اشخاص و به‌عنوان فاعل جمله‌ی وصفی به کار می‌رود؟",
 								"explanation_fa": "آفرین! who درست است.",
 								"wrong_explanation_fa": "برای اشخاص در نقش فاعل جمله‌ی وصفی از who استفاده می‌کنیم."
@@ -181,7 +181,7 @@
 									"whom",
 									"what"
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "به شخص بودن The doctor و نقش آن در جمله‌ی وصفی دقت کن.",
 								"explanation_fa": "آفرین! who درست است.",
 								"wrong_explanation_fa": "برای اشخاص در نقش فاعل جمله‌ی وصفی از who استفاده می‌کنیم."
@@ -195,7 +195,7 @@
 				"type": "group",
 				"title_fa": "whom برای اشخاص (مفعول جمله وصفی)",
 				"title_en": "Whom for People (Object)",
-				"activity_count": 8.0,
+				"activity_count": 8,
 				"activities": [
 					{
 						"id": "unit2_learn1",
@@ -286,7 +286,7 @@
 									"فعل جمله وصفی",
 									"هیچ‌کدام"
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "جمله‌ی وصفی you met her است؛ her مفعول است.",
 								"explanation_fa": "آفرین! the woman مفعول جمله‌ی وصفی است.",
 								"wrong_explanation_fa": "در جمله‌ی you met her، the woman همان her است و مفعول محسوب می‌شود."
@@ -325,14 +325,14 @@
 						"instruction_fa": "کدام جمله از who به‌درستی در نقش فاعل استفاده کرده؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "In which sentence does 'who' act as the subject of the clause?",
 								"options": [
 									"The man who plays golf lives at No. 10.",
 									"The man who I called is my teacher.",
 									"The man plays golf who lives.",
 									"The man who's plays golf."
 								],
-								"correct": 0.0,
+								"correct": 0,
 								"hint_fa": "در کدام جمله who خودش فاعل فعل بعدی است؟",
 								"explanation_fa": "آفرین! در این جمله who فاعل فعل plays است.",
 								"wrong_explanation_fa": "وقتی who مستقیم قبل از فعل بیاید، فاعل جمله‌ی وصفی است."
@@ -361,7 +361,7 @@
 				"type": "group",
 				"title_fa": "which برای اشیا و حیوانات",
 				"title_en": "Which for Things and Animals",
-				"activity_count": 8.0,
+				"activity_count": 8,
 				"activities": [
 					{
 						"id": "unit3_learn1",
@@ -468,7 +468,7 @@
 									"which",
 									"whose"
 								],
-								"correct": 2.0,
+								"correct": 2,
 								"hint_fa": "واژه‌ی book یک شیء است.",
 								"explanation_fa": "آفرین! which درست است.",
 								"wrong_explanation_fa": "برای اشیا از which استفاده می‌کنیم."
@@ -513,7 +513,7 @@
 									"which",
 									"whose"
 								],
-								"correct": 2.0,
+								"correct": 2,
 								"hint_fa": "واژه‌ی dog یک حیوان است.",
 								"explanation_fa": "آفرین! which درست است.",
 								"wrong_explanation_fa": "برای حیوانات از which استفاده می‌کنیم."
@@ -527,7 +527,7 @@
 				"type": "group",
 				"title_fa": "that به‌جای who یا which",
 				"title_en": "That instead of Who/Which",
-				"activity_count": 7.0,
+				"activity_count": 7,
 				"activities": [
 					{
 						"id": "unit4_learn1",
@@ -611,14 +611,14 @@
 						"instruction_fa": "کدام کلمه می‌تواند هم جایگزین who و هم which در جمله‌ی وصفی باشد؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which relative pronoun can refer to both people and things?",
 								"options": [
 									"whom",
 									"whose",
 									"that",
 									"what"
 								],
-								"correct": 2.0,
+								"correct": 2,
 								"hint_fa": "این کلمه هم برای اشخاص و هم برای اشیا و حیوانات به کار می‌رود.",
 								"explanation_fa": "آفرین! that درست است.",
 								"wrong_explanation_fa": "that می‌تواند جایگزین who یا which شود."
@@ -656,14 +656,14 @@
 						"instruction_fa": "کدام جمله از نظر گرامری درست است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which sentence correctly uses a relative pronoun for a thing?",
 								"options": [
 									"The book that I bought is interesting.",
 									"The book whom I bought is interesting.",
 									"The book who I bought is interesting.",
 									"The book whose I bought is interesting."
 								],
-								"correct": 0.0,
+								"correct": 0,
 								"hint_fa": "واژه‌ی book یک شیء است؛ کدام ضمیر برای اشیا مناسب است؟",
 								"explanation_fa": "آفرین! that برای اشیا درست است.",
 								"wrong_explanation_fa": "برای اشیا از that یا which استفاده می‌کنیم، نه who یا whom."
@@ -677,7 +677,7 @@
 				"type": "group",
 				"title_fa": "شرطی نوع دوم: ساختار پایه",
 				"title_en": "Conditional Type II: Basic Structure",
-				"activity_count": 9.0,
+				"activity_count": 9,
 				"activities": [
 					{
 						"id": "unit5_learn1",
@@ -760,7 +760,7 @@
 									"can",
 									"do"
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "این یک جمله‌ی شرطی نوع دوم است؛ در جمله‌ی نتیجه چه فعلی می‌آید؟",
 								"explanation_fa": "آفرین! would درست است.",
 								"wrong_explanation_fa": "در جمله‌ی نتیجه‌ی شرطی نوع دوم از would استفاده می‌کنیم."
@@ -833,14 +833,14 @@
 						"instruction_fa": "جمله‌ی درستِ شرطی نوع دوم را انتخاب کن.",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which sentence correctly uses Conditional Type II?",
 								"options": [
 									"If it gets warmer, they will travel to the north.",
 									"If it got warmer, they would travel to the north.",
 									"If it will get warmer, they would travel to the north.",
 									"If it got warmer, they will travel to the north."
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "بعد از if گذشته‌ی ساده و در جمله‌ی نتیجه would می‌آید.",
 								"explanation_fa": "آفرین! این جمله ساختار شرطی نوع دوم را درست رعایت کرده.",
 								"wrong_explanation_fa": "شرطی نوع دوم: If + گذشته ساده، would + شکل ساده فعل."
@@ -854,7 +854,7 @@
 				"type": "group",
 				"title_fa": "شرطی نوع دوم: were و could",
 				"title_en": "Conditional Type II: Were and Could",
-				"activity_count": 8.0,
+				"activity_count": 8,
 				"activities": [
 					{
 						"id": "unit6_learn1",
@@ -955,7 +955,7 @@
 									"do",
 									"is"
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "این جمله یک توانایی فرضی را نشان می‌دهد.",
 								"explanation_fa": "آفرین! could درست است.",
 								"wrong_explanation_fa": "برای توانایی فرضی در شرطی نوع دوم از could استفاده می‌کنیم."
@@ -993,14 +993,14 @@
 						"instruction_fa": "کدام جمله از نظر گرامری درست است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Choose the correct Conditional Type II sentence:",
 								"options": [
 									"If I was you, I would buy a house.",
 									"If I were you, I would buy a house.",
 									"If I am you, I would buy a house.",
 									"If I were you, I will buy a house."
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "در شرطی نوع دوم از were با تمام فاعل‌ها استفاده می‌کنیم و در جمله‌ی نتیجه would می‌آید.",
 								"explanation_fa": "آفرین! این جمله ساختار شرطی نوع دوم را درست رعایت کرده.",
 								"wrong_explanation_fa": "شرطی نوع دوم: If + فاعل + were، فاعل + would + شکل ساده فعل."

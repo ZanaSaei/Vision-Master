@@ -1,5 +1,14 @@
 class_name UnscrambleExercise
 extends GrammarExercise
+# ============================================================
+#  UNSCRAMBLE EXERCISE — Modern Sentence Building Canvas UX
+# ============================================================
+#  Features:
+#   1. Recessed Sentence Tray with slot indicators & placeholder
+#   2. TTS Speaker Button to pronounce the assembled sentence
+#   3. Spring-physics responsive word chips with smooth return
+#   4. High-craft action buttons with tactile states
+# ============================================================
 
 var counter_label: Label
 var answer_card: PanelContainer
@@ -8,7 +17,9 @@ var answer_container: HFlowContainer
 var words_container: HFlowContainer
 var clear_button: GrammarButton
 var check_button: GrammarButton
+var speaker_button: Button
 var selected_words: Array[String] = []
+var _assembled_sentence: String = ""
 
 var _blanks_mode := false
 var _blank_words: Array[String] = []
@@ -28,15 +39,22 @@ func _build_ui() -> void:
 	for child in get_children():
 		child.queue_free()
 
-	var root := VBoxContainer.new()
-	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	root.add_theme_constant_override("separation", 18)
-	root.alignment = BoxContainer.ALIGNMENT_CENTER
-	add_child(root)
+	var margin := MarginContainer.new()
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	margin.add_theme_constant_override("margin_left", 20)
+	margin.add_theme_constant_override("margin_right", 20)
+	margin.add_theme_constant_override("margin_top", 16)
+	margin.add_theme_constant_override("margin_bottom", 16)
+	add_child(margin)
 
-	# Counter Pill
+	var root := VBoxContainer.new()
+	root.add_theme_constant_override("separation", 18)
+	margin.add_child(root)
+
+	# --- 1. TOP BAR: Counter Pill + Instruction ---
 	var top_bar := HBoxContainer.new()
 	top_bar.alignment = BoxContainer.ALIGNMENT_CENTER
+	top_bar.add_theme_constant_override("separation", 12)
 	root.add_child(top_bar)
 
 	var pill := PanelContainer.new()
@@ -58,8 +76,10 @@ func _build_ui() -> void:
 	pill.add_child(counter_label)
 
 	var instruction := Label.new()
-	instruction.text = GrammarTheme.bidi_fix(str(exercise_data.get("instruction_fa", "کلمات را مرتب کن.")))
-	instruction.text_direction = Control.TEXT_DIRECTION_RTL
+	GrammarTheme.set_bidi_text(
+		instruction,
+		str(exercise_data.get("instruction_fa", "کلمات زیر را به ترتیب لمس کن تا جمله ساخته شود."))
+	)
 	instruction.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	instruction.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -68,26 +88,49 @@ func _build_ui() -> void:
 	instruction.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	root.add_child(instruction)
 
-	# Dedicated Answer Tray Card
+	# --- 2. DEDICATED ANSWER TRAY CARD ---
 	answer_card = PanelContainer.new()
-	var tray_style := GrammarTheme.info_card_style()
-	tray_style.border_width_bottom = 3
-	tray_style.border_color = GrammarTheme.accent_color()
+	var tray_style := GrammarTheme.rounded_box(Global.get_theme_color("surface_alt"), 22, GrammarTheme.accent_color(), 2)
 	tray_style.content_margin_left = 20
 	tray_style.content_margin_right = 20
-	tray_style.content_margin_top = 20
-	tray_style.content_margin_bottom = 20
+	tray_style.content_margin_top = 18
+	tray_style.content_margin_bottom = 18
+	tray_style.shadow_color = Color(0.0, 0.0, 0.0, 0.16)
+	tray_style.shadow_size = 8
+	tray_style.shadow_offset = Vector2(0, 3)
 	answer_card.add_theme_stylebox_override("panel", tray_style)
-	answer_card.custom_minimum_size = Vector2(0, 145)
+	answer_card.custom_minimum_size = Vector2(0, 160)
 	answer_card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	root.add_child(answer_card)
 
 	var tray_stack := VBoxContainer.new()
 	tray_stack.alignment = BoxContainer.ALIGNMENT_CENTER
+	tray_stack.add_theme_constant_override("separation", 10)
 	answer_card.add_child(tray_stack)
 
+	# Tray Header with Speaker Button
+	var tray_header := HBoxContainer.new()
+	tray_header.alignment = BoxContainer.ALIGNMENT_CENTER
+	tray_header.add_theme_constant_override("separation", 10)
+	tray_stack.add_child(tray_header)
+
+	var tray_badge := Label.new()
+	tray_badge.text = "📥 جایگاه جمله ساخته‌شده:"
+	tray_badge.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	tray_badge.add_theme_font_size_override("font_size", 24)
+	tray_badge.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
+	tray_header.add_child(tray_badge)
+
+	speaker_button = GrammarTheme.make_speaker_button("", 60.0)
+	speaker_button.visible = false
+	speaker_button.pressed.connect(func() -> void:
+		if is_instance_valid(Global) and not _assembled_sentence.is_empty():
+			Global.speak_word(_assembled_sentence)
+	)
+	tray_header.add_child(speaker_button)
+
 	placeholder_label = Label.new()
-	GrammarTheme.set_bidi_text(placeholder_label, "کلمات پایین را به ترتیب لمس کنید تا جمله ساخته شود...")
+	GrammarTheme.set_bidi_text(placeholder_label, "کلمات پایین را لمس کنید تا در این بخش قرار گیرند...")
 	placeholder_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	placeholder_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	placeholder_label.add_theme_font_size_override("font_size", 28)
@@ -102,20 +145,20 @@ func _build_ui() -> void:
 	answer_container.add_theme_constant_override("v_separation", 10)
 	tray_stack.add_child(answer_container)
 
-	# Word Bank Area
+	# --- 3. WORD BANK AREA ---
 	words_container = HFlowContainer.new()
 	words_container.alignment = FlowContainer.ALIGNMENT_CENTER
 	words_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	words_container.custom_minimum_size = Vector2(0, 120)
-	words_container.add_theme_constant_override("h_separation", 10)
-	words_container.add_theme_constant_override("v_separation", 10)
+	words_container.custom_minimum_size = Vector2(0, 130)
+	words_container.add_theme_constant_override("h_separation", 12)
+	words_container.add_theme_constant_override("v_separation", 12)
 	root.add_child(words_container)
 
 	var spacer := Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_child(spacer)
 
-	# Action Row: Clear Button + Check Button
+	# --- 4. ACTION ROW: CLEAR & CHECK BUTTONS ---
 	var action_row := HBoxContainer.new()
 	action_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	action_row.add_theme_constant_override("separation", 14)
@@ -124,17 +167,17 @@ func _build_ui() -> void:
 	clear_button = GrammarButton.new()
 	clear_button.variant = GrammarButton.ButtonVariant.SECONDARY
 	clear_button.text = "↺ پاک کردن"
-	clear_button.min_height = 112
-	clear_button.font_size = 34
+	clear_button.min_height = 104
+	clear_button.font_size = 36
 	clear_button.no_clip = true
-	clear_button.custom_minimum_size = Vector2(280, 112)
+	clear_button.custom_minimum_size = Vector2(280, 104)
 	clear_button.pressed.connect(retry_current)
 	action_row.add_child(clear_button)
 
 	check_button = GrammarButton.new()
 	check_button.variant = GrammarButton.ButtonVariant.PRIMARY
-	check_button.text = "✓ بررسی"
-	check_button.min_height = 112
+	check_button.text = "✓ بررسی پاسخ"
+	check_button.min_height = 104
 	check_button.font_size = 44
 	check_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	check_button.pressed.connect(_check_answer)
@@ -153,11 +196,15 @@ func _update_tray_state() -> void:
 				all_filled = false
 		clear_button.disabled = not any_filled
 		check_button.disabled = not all_filled
+		speaker_button.visible = all_filled
 	else:
 		var empty := selected_words.is_empty()
 		placeholder_label.visible = empty
 		clear_button.disabled = empty
 		check_button.disabled = empty
+		speaker_button.visible = not empty
+		if not empty:
+			_assembled_sentence = " ".join(selected_words)
 
 
 func _show_item() -> void:
@@ -228,9 +275,9 @@ func _measure_uniform_word_width(words: Array) -> int:
 			widest,
 			GrammarTheme.measure_text(font, s, GrammarTheme.BUTTON_FONT_SIZE, -1.0, HORIZONTAL_ALIGNMENT_LEFT).x
 		)
-	var width := int(ceil(widest + 38.0))
-	if width < 88:
-		width = 88
+	var width := int(ceil(widest + 42.0))
+	if width < 96:
+		width = 96
 	return width
 
 
@@ -247,7 +294,7 @@ func _show_sentence_item(item: Dictionary) -> void:
 		button.neutral_states = true
 		button.text = word
 		button.custom_minimum_size = Vector2(_word_button_width, 0)
-		button.min_height = 68
+		button.min_height = 72
 		button.no_clip = true
 		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		button.add_theme_font_size_override("font_size", GrammarTheme.BUTTON_FONT_SIZE)
@@ -275,8 +322,8 @@ func _show_blanks_item(item: Dictionary) -> void:
 			blank.play_click_sound = false
 			blank.neutral_states = true
 			blank.text = "(%d)" % (i + 1)
-			blank.custom_minimum_size = Vector2(72, 0)
-			blank.min_height = 58
+			blank.custom_minimum_size = Vector2(80, 0)
+			blank.min_height = 64
 			blank.no_clip = true
 			blank.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 			blank.add_theme_font_size_override("font_size", GrammarTheme.BODY_LARGE_SIZE)
@@ -299,7 +346,7 @@ func _show_blanks_item(item: Dictionary) -> void:
 		btn.neutral_states = true
 		btn.text = word
 		btn.custom_minimum_size = Vector2(_word_button_width, 0)
-		btn.min_height = 68
+		btn.min_height = 72
 		btn.no_clip = true
 		btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		btn.add_theme_font_size_override("font_size", GrammarTheme.BUTTON_FONT_SIZE)
@@ -359,7 +406,7 @@ func _select_word(button: GrammarButton, word: String) -> void:
 	answer_button.neutral_states = true
 	answer_button.text = word
 	answer_button.custom_minimum_size = Vector2(_word_button_width, 0)
-	answer_button.min_height = 64
+	answer_button.min_height = 68
 	answer_button.no_clip = true
 	answer_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	answer_button.set_selected_state()
@@ -402,10 +449,10 @@ func _check_answer() -> void:
 	answered = true
 	if correct:
 		GrammarAnimation.correct(answer_card)
-		submit_result(true, "عالی! جمله کاملاً درست است.")
+		submit_result(true, "عالی! جمله کاملاً درست و معنادار است.")
 	else:
 		GrammarAnimation.wrong(answer_card)
-		submit_result(false, "ترتیب کلمات هنوز درست نیست. دوباره امتحان کن.")
+		submit_result(false, "ترتیب کلمات هنوز درست نیست. کلمات را دوباره بررسی کن.")
 
 
 func _check_blanks_answer(item: Dictionary) -> bool:
@@ -438,7 +485,7 @@ func get_current_hint() -> String:
 	if hint.is_empty():
 		hint = str(item.get("fa", ""))
 	if hint.is_empty():
-		hint = "کلمات را طوری مرتب کن که یک جملهٔ درست و معنادار بسازی."
+		hint = "کلمات را طوری مرتب کن که یک جمله درست و معنادار بسازی."
 	return hint
 
 

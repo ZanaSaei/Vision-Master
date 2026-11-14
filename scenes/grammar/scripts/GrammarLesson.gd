@@ -405,14 +405,14 @@ func _show_learning_unit(unit: Dictionary) -> void:
 	LearningUnitView.render(content_container, unit)
 
 	var next_button := Button.new()
-	GrammarTheme.set_bidi_text(next_button, "متوجه شدم، ادامه  🚀")
-	next_button.custom_minimum_size = Vector2(0, 96)
+	GrammarTheme.set_bidi_text(next_button, "متوجه شدم، بریم تمرین  🚀")
+	next_button.custom_minimum_size = Vector2(0, 104)
 	next_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	next_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	next_button.pressed.connect(_on_learning_continue)
 	_style_modern_cta_button(next_button)
 	content_container.add_child(next_button)
-	GrammarAnimation.appear(next_button, 0.15)
+	GrammarAnimation.appear(next_button, 0.20)
 
 
 func _show_exercise(unit: Dictionary) -> void:
@@ -599,14 +599,14 @@ func _on_android_back_pressed() -> void:
 
 func _make_card_style(radius: int, border_width: int) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(1.0, 1.0, 1.0, 0.98)
+	style.bg_color = Global.get_theme_color("surface")
 	style.set_corner_radius_all(radius)
 	style.border_width_left = border_width
 	style.border_width_top = border_width
 	style.border_width_right = border_width
 	style.border_width_bottom = border_width + 1
-	style.border_color = Color(0.85, 0.88, 0.92, 0.8)
-	style.shadow_color = Color(0.06, 0.09, 0.16, 0.08)
+	style.border_color = Global.get_theme_color("border")
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.18)
 	style.shadow_size = 14
 	style.shadow_offset = Vector2(0, 4)
 	return style
@@ -614,25 +614,25 @@ func _make_card_style(radius: int, border_width: int) -> StyleBoxFlat:
 
 func _make_xp_pill_style() -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#FEF3C7")
+	style.bg_color = Global.get_theme_color("surface_alt")
 	style.set_corner_radius_all(18)
 	style.set_border_width_all(1)
-	style.border_color = Color("#F59E0B")
+	style.border_color = GrammarTheme.xp_color()
 	return style
 
 
 func _make_step_pill_style() -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(_accent.r, _accent.g, _accent.b, 0.10)
+	style.bg_color = Color(_accent.r, _accent.g, _accent.b, 0.12)
 	style.set_corner_radius_all(16)
 	style.set_border_width_all(1)
-	style.border_color = Color(_accent.r, _accent.g, _accent.b, 0.25)
+	style.border_color = Color(_accent.r, _accent.g, _accent.b, 0.35)
 	return style
 
 
 func _make_progress_track_style() -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color("#EEF2F6")
+	style.bg_color = Global.get_theme_color("surface_sunken")
 	style.set_corner_radius_all(10)
 	return style
 

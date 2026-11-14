@@ -17,10 +17,19 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 func _gui_input(event: InputEvent) -> void:
+	var is_tap := false
+	var tap_pos := Vector2.ZERO
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		is_tap = true
+		tap_pos = event.position
+	elif event is InputEventScreenTouch and event.pressed:
+		is_tap = true
+		tap_pos = event.position
+
+	if is_tap:
 		var norm := Vector2(
-			event.position.x / maxf(size.x, 1.0),
-			event.position.y / maxf(size.y, 1.0)
+			tap_pos.x / maxf(size.x, 1.0),
+			tap_pos.y / maxf(size.y, 1.0)
 		)
 		var hit := ""
 		for i in hotspots.size():
@@ -58,14 +67,20 @@ func _draw() -> void:
 		var label := str(hs.get("label", id))
 		if label != "":
 			var center := _polygon_center(poly)
+			var font := ThemeDB.fallback_font
+			var font_size := 26
+			var str_size := font.get_string_size(label, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
+			var pill_rect := Rect2(center.x - str_size.x * 0.5 - 8, center.y - str_size.y * 0.5 - 4, str_size.x + 16, str_size.y + 8)
+			draw_rect(pill_rect, Color(1.0, 1.0, 1.0, 0.88), true, -1.0)
+			draw_rect(pill_rect, line, false, 1.5)
 			draw_string(
-				ThemeDB.fallback_font,
-				center,
+				font,
+				Vector2(center.x - str_size.x * 0.5, center.y + str_size.y * 0.3),
 				label,
-				HORIZONTAL_ALIGNMENT_LEFT,
+				HORIZONTAL_ALIGNMENT_CENTER,
 				-1,
-				18,
-				Color(0.1, 0.1, 0.1, 0.9)
+				font_size,
+				Color(0.1, 0.1, 0.1, 0.95)
 			)
 
 func _hotspot_id(hs: Dictionary, index: int) -> String:

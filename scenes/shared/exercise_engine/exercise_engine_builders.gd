@@ -30,8 +30,10 @@ func _is_item_correct(item: Dictionary, user_answer: Variant) -> bool:
 
 # ---------- build() dispatcher ----------
 func build(exercise: Dictionary, _increment_group := true) -> void:
+	_ensure_fonts()
 	_exercise = exercise
 	_items.clear()
+	_fa_labels.clear()
 	_is_graded = false
 	_note_label = null
 	_score_banner = null
@@ -561,13 +563,9 @@ func _build_multiple_choice() -> void:
 			option_btns.append(b)
 			item_vbox.add_child(b)
 
-		var answer: Variant = _normalize_answer_index(item.get("answer", -1))
-		if answer is String:
-			answer = _find_option_index(options, answer)
-		# Build answer_display with the actual word/text instead of index.
-		var answer_display := ""
-		if answer is int and answer >= 0 and answer < options.size():
-			answer_display = _get_option_text(options[answer])
+		var resolved := _resolve_choice_answer(options, item.get("answer", -1))
+		var answer_val = resolved.accepted_indices if (resolved.accepted_indices as Array).size() > 1 else resolved.index
+		var answer_display: String = str(resolved.text)
 
 		_items.append({
 			"type": "multiple_choice",
@@ -577,7 +575,7 @@ func _build_multiple_choice() -> void:
 						return idx
 				return -1,
 			"reset": func(): _clear_select_buttons(option_btns),
-			"answer": answer,
+			"answer": answer_val,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -642,14 +640,8 @@ func _build_matching() -> void:
 		var ob := _make_option_dropdown(option_texts)
 		item_vbox.add_child(ob)
 
-		var answer: Variant = item.get("answer", "")
-		if answer is int and answer >= 0 and answer < option_texts.size():
-			answer = option_texts[answer]
-		elif answer is String:
-			for opt in options:
-				if opt is Dictionary and str(opt.get("id", "")) == str(answer):
-					answer = _get_option_text(opt)
-					break
+		var resolved := _resolve_dropdown_answer(options, item.get("answer", ""))
+		var answer: String = str(resolved.text)
 
 		_items.append({
 			"type": "matching",
@@ -885,15 +877,22 @@ func _cloze_blank_bbcode(idx: int) -> String:
 	else:
 		var chosen: String = str(_cloze_choices[idx])
 		display = (chosen if chosen != "" else _cloze_placeholder(idx)) + "  →  " + _cloze_correct[idx]
-	var color := "#22D3EE"
+	var color_hex: String = C_PRIMARY.to_html(false)
+	var bg_hex := "2F6FD824"
 	if _cloze_graded_all:
-		color = "#34D399" if _cloze_graded[idx] else "#F87171"
+		if _cloze_graded[idx]:
+			color_hex = _c_success().to_html(false)
+			bg_hex = "2E8B5724"
+		else:
+			color_hex = _c_error().to_html(false)
+			bg_hex = "C0392B24"
 	# Replace inner spaces with non-breaking spaces so the whole slot is kept
 	# together on one line instead of the RichTextLabel wrapping mid-blank.
 	var inline := _cloze_escape(display).replace(" ", "\u00A0")
-	return "[url=clz:%d][bgcolor=#22D3EE26][color=%s]%s[/color][/bgcolor][/url]" % [
+	return "[url=clz:%d][bgcolor=#%s][color=#%s][b]%s[/b][/color][/bgcolor][/url]" % [
 		idx,
-		color,
+		bg_hex,
+		color_hex,
 		inline,
 	]
 
@@ -920,6 +919,8 @@ func _on_cloze_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if _cloze_rtl != null:
 			_cloze_click_global = _cloze_rtl.get_global_rect().position + (event as InputEventMouseButton).position
+	elif event is InputEventScreenTouch and event.pressed:
+		_cloze_click_global = event.position
 
 
 func _show_cloze_popup(idx: int) -> void:
@@ -953,8 +954,11 @@ func _show_cloze_popup(idx: int) -> void:
 		var row := Button.new()
 		row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.custom_minimum_size.y = CLOZE_OPT_FONT + 54
-		row.text = ("✓  " if is_sel else "") + str(opts[oi])
+		var opt_text := str(opts[oi])
+		row.text = ("✓  " if is_sel else "") + GrammarTheme.bidi_fix(opt_text)
+		row.text_direction = Control.TEXT_DIRECTION_RTL if _is_fa_dominant(opt_text) else Control.TEXT_DIRECTION_LTR
 		row.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		row.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		row.add_theme_font_size_override("font_size", CLOZE_OPT_FONT)
 		if _font_regular:
 			row.add_theme_font_override("font", _font_regular)
@@ -986,6 +990,10 @@ func _show_cloze_popup(idx: int) -> void:
 		scroll.custom_minimum_size = Vector2(w, h)
 	var x := clampi(int(anchor.x - w / 2.0), 8, int(vp_size.x) - w - 8)
 	var y := clampi(int(anchor.y + 24), 8, int(vp_size.y) - h - 8)
+	if anchor.y + 24 + h > vp_size.y - 16:
+		var y_above := int(anchor.y - h - 16)
+		if y_above >= 8:
+			y = y_above
 	_cloze_popup.popup(Rect2i(x, y, w, h))
 
 
@@ -1177,13 +1185,21 @@ func _make_order_card(pos: int, idx: int, item_texts: Array, list_vbox: VBoxCont
 	txt.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	row.add_child(txt)
 
-	# Reorder controls. All arrows share the same big size and enabled look.
+	# Reorder controls. Arrows disabled when out of range (top cannot move up, bottom cannot move down).
 	var up := _make_order_arrow_button("↑")
-	up.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, -1))
+	if pos == 0:
+		up.disabled = true
+		up.modulate.a = 0.35
+	else:
+		up.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, -1))
 	row.add_child(up)
 
 	var down := _make_order_arrow_button("↓")
-	down.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, 1))
+	if pos == current_order.size() - 1:
+		down.disabled = true
+		down.modulate.a = 0.35
+	else:
+		down.pressed.connect(_on_order_move.bind(list_vbox, current_order, item_texts, pos, 1))
 	row.add_child(down)
 
 	return card
@@ -1208,12 +1224,19 @@ func _flash_order_row(list_vbox: VBoxContainer, pos: int) -> void:
 	if card == null:
 		return
 	card.pivot_offset = card.size * 0.5
+	if not card.resized.is_connected(_center_card_pivot.bind(card)):
+		card.resized.connect(_center_card_pivot.bind(card))
 	card.modulate = Color(1.0, 0.93, 0.62, 1.0)
 	card.scale = Vector2(1.02, 1.02)
 	var tw := card.create_tween().set_parallel(true)
 	tw.set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
 	tw.tween_property(card, "modulate", Color.WHITE, 0.35)
 	tw.tween_property(card, "scale", Vector2.ONE, 0.22)
+
+
+func _center_card_pivot(card: Control) -> void:
+	if card != null and is_instance_valid(card):
+		card.pivot_offset = card.size * 0.5
 
 
 # ---------- ordering card / arrow / handle styling ----------
@@ -1479,6 +1502,8 @@ func _finish_order_drag() -> void:
 	var card := _order_drag_card
 	var placeholder := _order_drag_placeholder
 	var final_pos := _order_drag_pos
+	var final_order := _order_drag_current_order.duplicate()
+	var final_items := _order_drag_item_texts.duplicate()
 
 	if card != null and is_instance_valid(card) and placeholder != null and is_instance_valid(placeholder):
 		if _order_drag_tween and _order_drag_tween.is_valid():
@@ -1491,7 +1516,7 @@ func _finish_order_drag() -> void:
 		await _order_drag_tween.finished
 
 	if list != null and is_instance_valid(list) and list.is_inside_tree():
-		_rebuild_ordering_list(list, _order_drag_current_order, _order_drag_item_texts)
+		_rebuild_ordering_list(list, final_order, final_items)
 		_flash_order_row(list, final_pos)
 
 	_clear_order_drag_state()
@@ -1593,14 +1618,8 @@ func _build_categorize() -> void:
 		var ob := _make_option_dropdown(category_texts, "Category")
 		item_vbox.add_child(ob)
 
-		var answer: Variant = item.get("answer", "")
-		if answer is int and answer >= 0 and answer < category_texts.size():
-			answer = category_texts[answer]
-		elif answer is String:
-			for cat in categories:
-				if cat is Dictionary and str(cat.get("id", "")) == str(answer):
-					answer = _get_option_text(cat)
-					break
+		var resolved := _resolve_dropdown_answer(categories, item.get("answer", ""))
+		var answer: String = str(resolved.text)
 
 		_items.append({
 			"type": "categorize",
@@ -1675,6 +1694,7 @@ func _build_open_ended() -> void:
 		# Connect text_changed to reset Save button state
 		te.text_changed.connect(_on_open_ended_text_changed)
 
+		var check_boxes: Array = []
 		var rubric: Array = item.get("rubric", _exercise.get("rubric", []))
 		for r in rubric:
 			var cb := CheckBox.new()
@@ -1685,6 +1705,8 @@ func _build_open_ended() -> void:
 				cb.add_theme_font_override("font", _font_regular)
 			item_vbox.add_child(cb)
 			_register_scroll_control(cb)
+			cb.toggled.connect(func(_val: bool) -> void: _on_open_ended_text_changed())
+			check_boxes.append(cb)
 
 		var default_self_check := str(_exercise.get("type", "")) == "pronunciation"
 		var self_check := bool(item.get("self_check", _exercise.get("self_check", default_self_check)))
@@ -1698,6 +1720,8 @@ func _build_open_ended() -> void:
 				done_check.add_theme_font_override("font", _font_regular)
 			item_vbox.add_child(done_check)
 			_register_scroll_control(done_check)
+			done_check.toggled.connect(func(_val: bool) -> void: _on_open_ended_text_changed())
+			check_boxes.append(done_check)
 
 		var sample_text := _get_en_text(item.get("sample_answer", ""))
 		var sample: Label = null
@@ -1710,6 +1734,7 @@ func _build_open_ended() -> void:
 		_items.append({
 			"sample_label": sample,
 			"text_edit": te,
+			"check_boxes": check_boxes,
 			"save_key": save_key,
 		})
 
@@ -1744,14 +1769,8 @@ func _build_word_bank() -> void:
 		var ob := _make_option_dropdown(bank_texts, _t("choose_a_word"))
 		item_vbox.add_child(ob)
 
-		var answer: Variant = item.get("answer", "")
-		if answer is int and answer >= 0 and answer < bank_texts.size():
-			answer = bank_texts[answer]
-		elif answer is String:
-			for w in bank:
-				if w is Dictionary and str(w.get("id", "")) == str(answer):
-					answer = _get_option_text(w)
-					break
+		var resolved := _resolve_dropdown_answer(bank, item.get("answer", ""))
+		var answer: String = str(resolved.text)
 
 		_items.append({
 			"type": "word_bank",
@@ -2029,32 +2048,35 @@ func _build_table_fill_advanced() -> void:
 				var ctype := str(cell.get("type", cell.get("editor", "label")))
 				match ctype:
 					"line", "fill_blank", "text":
-						var le := _make_line_edit(str(cell.get("placeholder", "...")))
+						var ph_line := _get_en_text(cell.get("placeholder", "..."))
+						var le := _make_line_edit(ph_line)
 						cell_box.add_child(le)
-						_items.append({
-							"type": "fill_blank",
-							"get": func(): return le.text,
-							"reset": func(): le.text = "",
-							"answer": cell.get("answer", []),
-							"feedback": _make_feedback(cell_box),
-							"explanation_en": _get_en_text(cell.get("explanation", "")),
-							"explanation_fa": _get_fa_text(cell.get("explanation", "")),
-						})
+						if cell.has("answer"):
+							_items.append({
+								"type": "fill_blank",
+								"get": func(): return le.text,
+								"reset": func(): le.text = "",
+								"answer": cell.get("answer", []),
+								"feedback": _make_feedback(cell_box),
+								"explanation_en": _get_en_text(cell.get("explanation", "")),
+								"explanation_fa": _get_fa_text(cell.get("explanation", "")),
+							})
+						else:
+							_items.append({
+								"type": "open_ended_cell",
+								"get": func(): return le.text,
+								"reset": func(): le.text = "",
+							})
 					"dropdown", "select":
 						var options: Array = cell.get("options", [])
 						var option_texts: Array = []
 						for opt in options:
 							option_texts.append(_get_option_text(opt))
-						var ob := _make_option_dropdown(option_texts, str(cell.get("placeholder", _t("choose"))))
+						var ph_dd := _get_en_text(cell.get("placeholder", _t("choose")))
+						var ob := _make_option_dropdown(option_texts, ph_dd)
 						cell_box.add_child(ob)
-						var ans: Variant = cell.get("answer", "")
-						if ans is int and ans >= 0 and ans < option_texts.size():
-							ans = option_texts[ans]
-						elif ans is String:
-							for opt in options:
-								if opt is Dictionary and str(opt.get("id", "")) == str(ans):
-									ans = _get_option_text(opt)
-									break
+						var resolved := _resolve_dropdown_answer(options, cell.get("answer", ""))
+						var ans: String = str(resolved.text)
 						_items.append({
 							"type": "dropdown",
 							"get": func():
@@ -2119,7 +2141,7 @@ func _build_table_fill_advanced() -> void:
 					"textarea", "multiline":
 						var te := TextEdit.new()
 						te.mouse_filter = Control.MOUSE_FILTER_PASS
-						te.placeholder_text = str(cell.get("placeholder", _t("type_your_answer")))
+						te.placeholder_text = _get_en_text(cell.get("placeholder", _t("type_your_answer")))
 						# Free-form box: starts tall and grows with each typed line so the
 						# user can write as many words as they want, one per line.
 						const _TEXTAREA_BASE := 170.0
@@ -2159,9 +2181,11 @@ func _build_table_fill_advanced() -> void:
 						_items.append({
 							"type": "textarea",
 							"get": func(): return te.text,
-							"reset": func(): te.text = "",
+							"reset": func():
+								te.text = ""
+								te.custom_minimum_size = Vector2(0, _TEXTAREA_BASE),
 							"answer": cell.get("answer", []),
-							"placeholder": str(cell.get("placeholder", "")),
+							"placeholder": _get_en_text(cell.get("placeholder", "")),
 							"feedback": _make_feedback(cell_box),
 							"explanation_en": _get_en_text(cell.get("explanation", "")),
 							"explanation_fa": _get_fa_text(cell.get("explanation", "")),
@@ -2429,6 +2453,17 @@ func _build_transformation() -> void:
 		})
 
 
+# Safely highlights target words or phrases without corrupting substrings of other words.
+func _highlight_target_word(sentence: String, target: String, bbcode_prefix: String, bbcode_suffix: String) -> String:
+	if target == "":
+		return sentence
+	var rx := RegEx.new()
+	var escaped := RegEx.create_from_string(r"[.*+?^${}()|[\]\\]").sub(target, r"\$0", true)
+	if rx.compile(r"\b" + escaped + r"\b") == OK:
+		return rx.sub(sentence, bbcode_prefix + "$0" + bbcode_suffix, true)
+	return sentence.replace(target, bbcode_prefix + target + bbcode_suffix)
+
+
 # ------------------------------------------------------------
 # ERROR CORRECTION
 # ------------------------------------------------------------
@@ -2456,7 +2491,7 @@ func _build_error_correction() -> void:
 
 		var marked := sentence_text
 		if wrong != "":
-			marked = sentence_text.replace(wrong, "[color=#DC2626][u]" + wrong + "[/u][/color]")
+			marked = _highlight_target_word(sentence_text, wrong, "[color=#DC2626][u]", "[/u][/color]")
 		rtl.text = marked
 		item_vbox.add_child(rtl)
 
@@ -2498,14 +2533,8 @@ func _build_word_building() -> void:
 		var ob := _make_option_dropdown(option_texts)
 		row.add_child(ob)
 
-		var answer: Variant = item.get("answer", "")
-		if answer is int and answer >= 0 and answer < option_texts.size():
-			answer = option_texts[answer]
-		elif answer is String:
-			for opt in options:
-				if opt is Dictionary and str(opt.get("id", "")) == str(answer):
-					answer = _get_option_text(opt)
-					break
+		var resolved := _resolve_dropdown_answer(options, item.get("answer", ""))
+		var answer: String = str(resolved.text)
 
 		_items.append({
 			"type": "word_building",
@@ -2794,6 +2823,11 @@ func _style_word_search_word_button(btn: Button, state: String) -> void:
 			bg = _c_error()
 			border = _c_error()
 			font_color = Color("#2b0505")
+		"missed":
+			# Missed correct word after checking - amber border to reveal answer.
+			bg = _c_surface_alt()
+			border = _c_warning()
+			font_color = _c_warning()
 		_:
 			# Idle / unselected.
 			bg = _c_surface()
@@ -2843,9 +2877,10 @@ func _grade_word_search() -> void:
 
 			if is_selected:
 				correct_selected += 1
-
-			# All correct words become green.
-			_style_word_search_word_button(btn, "correct")
+				_style_word_search_word_button(btn, "correct")
+			else:
+				# Missed correct word.
+				_style_word_search_word_button(btn, "missed")
 		else:
 			if is_selected:
 				wrong_selected += 1
@@ -2856,6 +2891,8 @@ func _grade_word_search() -> void:
 				_style_word_search_word_button(btn, "idle")
 
 	_is_graded = true
+
+	var net_score := maxi(0, correct_selected - wrong_selected)
 
 	if _score_banner:
 		_score_banner.visible = true
@@ -2892,7 +2929,7 @@ func _grade_word_search() -> void:
 
 	exercise_checked.emit(
 		str(_exercise.get("exercise_id", "")),
-		correct_selected,
+		net_score,
 		correct_total
 	)
 
@@ -3028,13 +3065,9 @@ func _build_odd_one_out() -> void:
 			option_btns.append(b)
 			grid.add_child(b)
 
-		var answer: Variant = _normalize_answer_index(item.get("answer", -1))
-		if answer is String:
-			answer = _find_option_index(word_texts, answer)
-		# Build answer_display with the actual word instead of index.
-		var answer_display := ""
-		if answer is int and answer >= 0 and answer < word_texts.size():
-			answer_display = str(word_texts[answer])
+		var resolved := _resolve_choice_answer(word_texts, item.get("answer", -1))
+		var answer_val = resolved.accepted_indices if (resolved.accepted_indices as Array).size() > 1 else resolved.index
+		var answer_display: String = str(resolved.text)
 
 		_items.append({
 			"type": "odd_one_out",
@@ -3044,7 +3077,7 @@ func _build_odd_one_out() -> void:
 						return i
 				return -1,
 			"reset": func(): _clear_select_buttons(option_btns),
-			"answer": answer,
+			"answer": answer_val,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -3097,14 +3130,10 @@ func _build_grammar_choice() -> void:
 			option_btns.append(b)
 			grid.add_child(b)
 
-		var answer: Variant = item.get("answer", -1)
-		if answer is String:
-			answer = _find_option_index(options, answer)
-		# Store the correct option's text so feedback shows the actual word,
-		# not the numeric option index.
-		var answer_display := ""
-		if answer is int and answer >= 0 and answer < option_texts.size():
-			answer_display = str(option_texts[answer])
+		var resolved := _resolve_choice_answer(options, item.get("answer", -1))
+		var answer_val = resolved.accepted_indices if (resolved.accepted_indices as Array).size() > 1 else resolved.index
+		var answer_display: String = str(resolved.text)
+
 		_items.append({
 			"type": "grammar_choice",
 			"get": func():
@@ -3113,7 +3142,7 @@ func _build_grammar_choice() -> void:
 						return i
 				return -1,
 			"reset": func(): _clear_select_buttons(option_btns),
-			"answer": answer,
+			"answer": answer_val,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -3179,7 +3208,7 @@ func _build_grammar_identification() -> void:
 
 		var highlighted := text_val
 		if target != "":
-			highlighted = text_val.replace(target, "[color=#DC2626][u]" + target + "[/u][/color]")
+			highlighted = _highlight_target_word(text_val, target, "[color=#DC2626][u]", "[/u][/color]")
 		rtl.text = highlighted
 		item_vbox.add_child(rtl)
 
@@ -3198,13 +3227,10 @@ func _build_grammar_identification() -> void:
 			option_btns.append(b)
 			item_vbox.add_child(b)
 
-		var answer: Variant = item.get("answer", -1)
-		if answer is String:
-			answer = _find_option_index(options, answer)
-		# Store the correct option's text so feedback shows the actual word.
-		var answer_display := ""
-		if answer is int and answer >= 0 and answer < option_texts.size():
-			answer_display = str(option_texts[answer])
+		var resolved := _resolve_choice_answer(options, item.get("answer", -1))
+		var answer_val = resolved.accepted_indices if (resolved.accepted_indices as Array).size() > 1 else resolved.index
+		var answer_display: String = str(resolved.text)
+
 		_items.append({
 			"type": "grammar_identification",
 			"get": func():
@@ -3213,7 +3239,7 @@ func _build_grammar_identification() -> void:
 						return i
 				return -1,
 			"reset": func(): _clear_select_buttons(option_btns),
-			"answer": answer,
+			"answer": answer_val,
 			"answer_display": answer_display,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
@@ -3315,18 +3341,8 @@ func _build_token_label() -> void:
 			var word_label := _make_label(token_text, 36, _c_text(), true)
 			token_box.add_child(word_label)
 
-			var ob := OptionButton.new()
-			ob.mouse_filter = Control.MOUSE_FILTER_PASS
-			ob.add_item("—")
-			for lname in label_names:
-				ob.add_item(lname)
-			ob.selected = 0
-			ob.add_theme_font_size_override("font_size", 32)
-			ob.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			if _font_regular:
-				ob.add_theme_font_override("font", _font_regular)
+			var ob := _make_option_dropdown(label_names, "—")
 			token_box.add_child(ob)
-			_register_scroll_control(ob)
 
 			var fb := _make_feedback(token_box)
 			var ids := label_ids.duplicate()
@@ -3336,7 +3352,7 @@ func _build_token_label() -> void:
 					if ob.selected > 0 and ob.selected - 1 < ids.size():
 						return ids[ob.selected - 1]
 					return "",
-				"reset": func(): ob.selected = 0,
+				"reset": func(): ob.reset(),
 				"answer": ans,
 				"answer_display": ans_display,
 				"feedback": fb,
@@ -3368,13 +3384,9 @@ func _build_image_choice() -> void:
 		option_btns.append(b)
 		flow.add_child(b)
 
-	var answer: Variant = _exercise.get("answer", -1)
-	if answer is String:
-		answer = _find_option_index(options, answer)
-	# Store the correct option's text so feedback shows the actual word.
-	var answer_display := ""
-	if answer is int and answer >= 0 and answer < options.size():
-		answer_display = _get_option_text(options[answer])
+	var resolved := _resolve_choice_answer(options, _exercise.get("answer", -1))
+	var answer_val = resolved.accepted_indices if (resolved.accepted_indices as Array).size() > 1 else resolved.index
+	var answer_display: String = str(resolved.text)
 	var fb := _make_feedback(_active_vbox)
 	_items.append({
 		"type": "image_choice",
@@ -3384,7 +3396,7 @@ func _build_image_choice() -> void:
 					return i
 			return -1,
 		"reset": func(): _clear_select_buttons(option_btns),
-		"answer": answer,
+		"answer": answer_val,
 		"answer_display": answer_display,
 		"feedback": fb,
 		"explanation_en": _get_en_text(_exercise.get("explanation", "")),
@@ -3418,13 +3430,9 @@ func _build_image_match() -> void:
 			option_btns.append(b)
 			flow.add_child(b)
 
-		var answer: Variant = item.get("answer", -1)
-		if answer is String:
-			answer = _find_option_index(options, answer)
-		# Store the correct option's text so feedback shows the actual word.
-		var answer_display := ""
-		if answer is int and answer >= 0 and answer < options.size():
-			answer_display = _get_option_text(options[answer])
+		var res_item := _resolve_choice_answer(options, item.get("answer", -1))
+		var item_ans = res_item.accepted_indices if (res_item.accepted_indices as Array).size() > 1 else res_item.index
+		var item_ans_display: String = str(res_item.text)
 		_items.append({
 			"type": "image_match",
 			"get": func():
@@ -3433,8 +3441,8 @@ func _build_image_match() -> void:
 						return i
 				return -1,
 			"reset": func(): _clear_select_buttons(option_btns),
-			"answer": answer,
-			"answer_display": answer_display,
+			"answer": item_ans,
+			"answer_display": item_ans_display,
 			"feedback": _make_feedback(item_vbox),
 			"explanation_en": _get_en_text(item.get("explanation", "")),
 			"explanation_fa": _get_fa_text(item.get("explanation", "")),

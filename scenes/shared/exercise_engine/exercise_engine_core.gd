@@ -279,24 +279,32 @@ var _audio_panel: Node = null
 var _audio_panel_owned := false
 @warning_ignore_restore("unused_private_class_variable")
 
-func _ready() -> void:
+func _init() -> void:
+	_ensure_fonts()
+
+func _ensure_fonts() -> void:
+	if _font_regular != null and _font_bold != null and _font_farsi != null:
+		return
 	if _shared_font_regular == null:
-		var regular := load(FONT_REGULAR_PATH)
+		var regular: Resource = load(FONT_REGULAR_PATH)
 		if regular is FontFile:
 			_shared_font_regular = regular
 	_font_regular = _shared_font_regular
 
 	if _shared_font_bold == null:
-		var bold := load(FONT_BOLD_PATH)
+		var bold: Resource = load(FONT_BOLD_PATH)
 		if bold is FontFile:
 			_shared_font_bold = bold
 	_font_bold = _shared_font_bold
 
 	if _shared_font_farsi == null:
-		var farsi := load(FONT_VAZIRMATN)
+		var farsi: Resource = load(FONT_VAZIRMATN)
 		if farsi is FontFile:
 			_shared_font_farsi = farsi
 	_font_farsi = _shared_font_farsi
+
+func _ready() -> void:
+	_ensure_fonts()
 
 	# _process is only needed while a press is being tracked for the
 	# hold-to-cancel behaviour; it is toggled on press and off on release.
@@ -461,6 +469,7 @@ func cancel_active_gesture() -> void:
 			focused.release_focus()
 
 	_hide_virtual_keyboard()
+	set_process(false)
 	_on_gesture_cancelled_by_page()
 
 
@@ -476,6 +485,7 @@ func reset_active_gesture() -> void:
 	_drag_source = null
 	_drag_active = false
 	_hold_blocked = false
+	set_process(false)
 	_on_gesture_cancelled_by_page()
 
 
@@ -1129,11 +1139,20 @@ func _save_open_ended_answers() -> void:
 		saves[ex_id] = {}
 	for i in _items.size():
 		var item: Dictionary = _items[i]
+		var key := str(item.get("save_key", str(i)))
+		var item_data: Dictionary = {}
 		if item.has("text_edit") and item["text_edit"] != null:
 			var te: TextEdit = item["text_edit"]
 			if is_instance_valid(te):
-				var key := str(item.get("save_key", str(i)))
-				saves[ex_id][key] = te.text
+				item_data["text"] = te.text
+		if item.has("check_boxes") and item["check_boxes"] is Array:
+			var cb_states: Array = []
+			for cb in item["check_boxes"]:
+				if is_instance_valid(cb) and cb is CheckBox:
+					cb_states.append((cb as CheckBox).button_pressed)
+			item_data["checks"] = cb_states
+		if not item_data.is_empty():
+			saves[ex_id][key] = item_data
 	_write_saves(saves)
 
 
@@ -1147,15 +1166,32 @@ func _load_open_ended_answers() -> void:
 	var ex_saves: Dictionary = saves[ex_id]
 	for i in _items.size():
 		var item: Dictionary = _items[i]
+		var key := str(item.get("save_key", str(i)))
+		# Fall back to the old positional key so answers saved by a
+		# previous version of the app before this fix aren't lost.
+		if not ex_saves.has(key) and ex_saves.has(str(i)):
+			key = str(i)
+		if not ex_saves.has(key):
+			continue
+		var val = ex_saves[key]
+		var text_val := ""
+		var checks_val: Array = []
+		if val is Dictionary:
+			text_val = str((val as Dictionary).get("text", ""))
+			checks_val = (val as Dictionary).get("checks", [])
+		elif val is String:
+			text_val = val
+
 		if item.has("text_edit") and item["text_edit"] != null:
 			var te: TextEdit = item["text_edit"]
-			var key := str(item.get("save_key", str(i)))
-			# Fall back to the old positional key so answers saved by a
-			# previous version of the app before this fix aren't lost.
-			if not ex_saves.has(key) and ex_saves.has(str(i)):
-				key = str(i)
-			if is_instance_valid(te) and ex_saves.has(key):
-				te.text = str(ex_saves[key])
+			if is_instance_valid(te):
+				te.text = text_val
+		if item.has("check_boxes") and item["check_boxes"] is Array:
+			var cbs: Array = item["check_boxes"]
+			for c_idx in mini(cbs.size(), checks_val.size()):
+				var cb = cbs[c_idx]
+				if is_instance_valid(cb) and cb is CheckBox:
+					(cb as CheckBox).button_pressed = bool(checks_val[c_idx])
 
 
 # ---------- normalization helper (used by graders + text helpers) ----------
@@ -1168,3 +1204,12 @@ func _normalize(s: String) -> String:
 	while s.contains("  "):
 		s = s.replace("  ", " ")
 	return s.strip_edges()
+
+
+# Sequence-aware whole-word/phrase containment helper.
+# Prevents substring false positives (e.g. "cat" inside "catch", or "no" inside "now").
+func _contains_word_or_phrase(text_norm: String, phrase: String) -> bool:
+	var q := _normalize(phrase)
+	if q == "":
+		return false
+	return (" " + text_norm + " ").contains(" " + q + " ")

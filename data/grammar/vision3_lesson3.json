@@ -2,19 +2,19 @@
 	"lesson": {
 		"id": "vision3_lesson3_passive_modals_past_perfect",
 		"book": "Vision 3",
-		"lesson_number": 3.0,
+		"lesson_number": 3,
 		"title_en": "Passive Voice with Modals & Past Perfect",
 		"title_fa": "مجهول با مدال و ماضی بعید",
 		"icon": "🌱",
 		"theme_color": "#22C55E",
-		"xp_per_unit": 10.0,
+		"xp_per_unit": 10,
 		"units": [
 			{
 				"id": "unit1",
 				"type": "group",
 				"title_fa": "مجهول با مدال: ساختار پایه",
 				"title_en": "Passive with Modals: Basic Structure",
-				"activity_count": 10.0,
+				"activity_count": 10,
 				"activities": [
 					{
 						"id": "unit1_learn1",
@@ -124,7 +124,7 @@
 									"been",
 									"being"
 								],
-								"correct": 0.0,
+								"correct": 0,
 								"hint_fa": "بعد از مدال may در مجهول، چه کلمه‌ای می‌آید؟",
 								"explanation_fa": "آفرین! be درست است.",
 								"wrong_explanation_fa": "ساختار مجهول با مدال: مدال + be + قسمت سوم فعل."
@@ -195,7 +195,7 @@
 									"Wind can being changed into electricity.",
 									"Wind can be change into electricity."
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "کدام جمله ساختار مدال + be + قسمت سوم فعل دارد؟",
 								"explanation_fa": "آفرین! این جمله ساختار درستی دارد.",
 								"wrong_explanation_fa": "ساختار درست: مدال + be + قسمت سوم فعل."
@@ -209,7 +209,7 @@
 				"type": "group",
 				"title_fa": "مجهول با مدال: should و must",
 				"title_en": "Passive with Should and Must",
-				"activity_count": 8.0,
+				"activity_count": 8,
 				"activities": [
 					{
 						"id": "unit2_learn1",
@@ -350,7 +350,7 @@
 									"A fish salad may be made.",
 									"Wind can be changed into electricity."
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "کدام مدال الزام قوی‌تری نسبت به بقیه نشان می‌دهد؟",
 								"explanation_fa": "آفرین! must الزام قوی است.",
 								"wrong_explanation_fa": "must الزام قوی‌تری نسبت به should، may یا can نشان می‌دهد."
@@ -364,7 +364,7 @@
 				"type": "group",
 				"title_fa": "مجهول با مدال: may و can",
 				"title_en": "Passive with May and Can",
-				"activity_count": 8.0,
+				"activity_count": 8,
 				"activities": [
 					{
 						"id": "unit3_learn1",
@@ -502,7 +502,7 @@
 									"Wind can be changed into electricity.",
 									"The parents should be called."
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "کدام مدال مفهوم احتمال را می‌رساند؟",
 								"explanation_fa": "آفرین! may برای بیان احتمال به کار می‌رود.",
 								"wrong_explanation_fa": "must الزام، should توصیه، can توانایی و may احتمال را نشان می‌دهد."
@@ -516,7 +516,7 @@
 				"type": "group",
 				"title_fa": "ماضی بعید: ساختار پایه",
 				"title_en": "Past Perfect: Basic Structure",
-				"activity_count": 9.0,
+				"activity_count": 9,
 				"activities": [
 					{
 						"id": "unit4_learn1",
@@ -602,7 +602,7 @@
 									"Did",
 									"Do"
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "برای سؤالی کردن ماضی بعید، کدام فعل کمکی به ابتدای جمله می‌آید؟",
 								"explanation_fa": "آفرین! Had درست است.",
 								"wrong_explanation_fa": "سؤالی ماضی بعید: Had + فاعل + قسمت سوم فعل؟"
@@ -677,7 +677,7 @@
 									"She had seen a bear.",
 									"She sees a bear."
 								],
-								"correct": 2.0,
+								"correct": 2,
 								"hint_fa": "ماضی بعید با کدام ساختار ساخته می‌شود؟",
 								"explanation_fa": "آفرین! She had seen a bear ماضی بعید است.",
 								"wrong_explanation_fa": "ماضی بعید: had + قسمت سوم فعل."
@@ -691,7 +691,7 @@
 				"type": "group",
 				"title_fa": "ماضی بعید با before و after",
 				"title_en": "Past Perfect with Before and After",
-				"activity_count": 9.0,
+				"activity_count": 9,
 				"activities": [
 					{
 						"id": "unit5_learn1",
@@ -786,14 +786,14 @@
 						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which sentence correctly uses the past perfect tense with 'before'?",
 								"options": [
 									"Before he moved to China, Joe studied Chinese.",
 									"Before he moved to China, Joe had studied Chinese.",
 									"Before he had moved to China, Joe studied Chinese.",
 									"Before he had moved to China, Joe had studied Chinese."
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "کاری که زودتر اتفاق افتاده یعنی مطالعه کردن باید در زمان ماضی بعید باشد.",
 								"explanation_fa": "آفرین! این جمله ترتیب زمانی درستی دارد.",
 								"wrong_explanation_fa": "کار اول یعنی زودتر، ماضی بعید و کار دوم یعنی دیرتر و بعد از before، گذشته‌ی ساده است."
@@ -853,7 +853,7 @@
 									"Before I left, I locked the door had.",
 									"Before I had left, I had locked the door."
 								],
-								"correct": 0.0,
+								"correct": 0,
 								"hint_fa": "کار اول یعنی قفل کردن در باید ماضی بعید و کار دوم یعنی رفتن گذشته‌ی ساده باشد.",
 								"explanation_fa": "آفرین! این جمله ترتیب زمانی درستی دارد.",
 								"wrong_explanation_fa": "کار زودتر انجام‌شده ماضی بعید و کار دیرتر گذشته‌ی ساده می‌شود."
@@ -867,7 +867,7 @@
 				"type": "group",
 				"title_fa": "ماضی بعید با already و when",
 				"title_en": "Past Perfect with Already and When",
-				"activity_count": 8.0,
+				"activity_count": 8,
 				"activities": [
 					{
 						"id": "unit6_learn1",
@@ -938,14 +938,14 @@
 						"instruction_fa": "گزینه‌ی درست را انتخاب کن.",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which sentence correctly uses the past perfect tense with 'when'?",
 								"options": [
 									"When I arrived, my grandparents already went home.",
 									"When I arrived, my grandparents had already gone home.",
 									"When I had arrived, my grandparents already went home.",
 									"When I arrived, my grandparents have already gone home."
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "لحظه‌ی مرجع یعنی arrived گذشته‌ی ساده و کار قبلی یعنی gone home ماضی بعید است.",
 								"explanation_fa": "آفرین! این جمله ترتیب زمانی درستی دارد.",
 								"wrong_explanation_fa": "با when، لحظه‌ی مرجع گذشته‌ی ساده و کار انجام‌شده‌ی قبلی ماضی بعید است."
@@ -1008,7 +1008,7 @@
 									"When she had called, I already left.",
 									"When she called, I have already left."
 								],
-								"correct": 1.0,
+								"correct": 1,
 								"hint_fa": "لحظه‌ی مرجع یعنی called گذشته‌ی ساده و کار قبلی یعنی left ماضی بعید است.",
 								"explanation_fa": "آفرین! این جمله ترتیب زمانی درستی دارد.",
 								"wrong_explanation_fa": "با when، لحظه‌ی مرجع گذشته‌ی ساده و کار انجام‌شده‌ی قبلی ماضی بعید است."

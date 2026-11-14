@@ -110,9 +110,12 @@ func _open_popup() -> void:
 		)
 	# Keep the popup inside the visible screen.
 	var vp_w := 1280.0
+	var vp_h := 720.0
 	var vp := get_viewport()
 	if vp != null:
-		vp_w = vp.get_visible_rect().size.x
+		var vp_rect := vp.get_visible_rect()
+		vp_w = vp_rect.size.x
+		vp_h = vp_rect.size.y
 	var max_w := minf(float(_MAX_W), vp_w - 24.0)
 	var w := clampi(int(maxf(btn_rect.size.x, longest + 70.0)), _MIN_W, int(max_w))
 	var wrap_w := float(w - 16 - 10 - _PAD_L - _PAD_R)
@@ -121,8 +124,16 @@ func _open_popup() -> void:
 	var h := mini(content_h, _MAX_H)
 	_scroll.custom_minimum_size = Vector2(w - 16, h - 16)
 	var x := clampi(int(btn_rect.position.x), 8, int(vp_w - w - 8))
+	var y := int(btn_rect.end.y + 8)
+	if y + h > int(vp_h - 16):
+		# Open above button if opening below would exceed bottom edge
+		var y_above := int(btn_rect.position.y - h - 8)
+		if y_above >= 8:
+			y = y_above
+		else:
+			y = clampi(y, 8, int(vp_h - h - 8))
 	_popup.popup(Rect2i(
-		Vector2i(x, int(btn_rect.end.y + 8)),
+		Vector2i(x, y),
 		Vector2i(w, h)
 	))
 
@@ -206,11 +217,12 @@ func _populate(wrap_w: float) -> void:
 
 func _on_about_to_popup() -> void:
 	var tw := create_tween().set_parallel(true)
+	tw.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	var rows := _list.get_children()
 	for i in rows.size():
 		var r: Control = rows[i]
 		r.modulate.a = 0.0
-		tw.tween_property(r, "modulate:a", 1.0, 0.12).set_delay(i * 0.02)
+		tw.tween_property(r, "modulate:a", 1.0, 0.16).set_delay(i * 0.02)
 
 func _on_row_pressed(index: int) -> void:
 	selected = index

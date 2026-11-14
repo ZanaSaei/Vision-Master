@@ -48,10 +48,13 @@ func _grade_all() -> void:
 	if str(_exercise.get("type", "")) in ["word_search", "word_find"]:
 		_grade_word_search()
 		return
+	if str(_exercise.get("type", "")) in ["text_highlight", "text_highlight_multi"]:
+		_grade_text_highlight()
+		return
 	var correct := 0
 	var total := 0
 	for item in _items:
-		if not item.has("get"):
+		if not item.has("get") or str(item.get("type", "")) == "open_ended_cell":
 			continue
 		total += 1
 		var user_answer = item["get"].call()
@@ -66,15 +69,24 @@ func _grade_all() -> void:
 		fb.visible = true
 		# Prefer the human-readable answer text. Fall back to the formatted
 		# raw answer only when no display text exists.
-		# Prefer the human-readable answer text; fall back to the raw
-		# answer only when no display text exists.
 		var answer_text: String = str(item.get("answer_display", ""))
 		if answer_text == "":
 			answer_text = _format_answer(item.get("answer"))
 		var item_type := str(item.get("type", ""))
-		# If the user left a text field empty, show the Farsi "Empty" label.
+		# Universal empty check: if the user left an input blank or unselected,
+		# show the Farsi "Empty" label in warning color.
 		var user_str := str(user_answer).strip_edges()
-		if user_str == "" and item_type in ["fill_blank", "chart_fill", "transformation", "letter_scramble", "error_correction", "passive_transformation", "question_formation"]:
+		var is_empty := false
+		if user_answer == null:
+			is_empty = true
+		elif user_str == "":
+			is_empty = true
+		elif user_answer is int and user_answer == -1 and item_type in ["multiple_choice", "odd_one_out", "grammar_choice", "grammar_identification", "image_choice", "image_match"]:
+			is_empty = true
+		elif user_answer is Array and (user_answer as Array).is_empty():
+			is_empty = true
+
+		if is_empty and item_type != "checkbox":
 			fb.text = _t_fa("empty")
 			fb.set_meta("text_fa", fb.text)
 			fb.add_theme_color_override("font_color", _c_warning())
@@ -125,6 +137,66 @@ func _grade_all() -> void:
 		_check_btn.text = _t("try_again")
 		_apply_fa_meta(_check_btn, "try_again")
 	exercise_checked.emit(str(_exercise.get("exercise_id", "")), correct, total)
+
+
+func _grade_text_highlight() -> void:
+	var target_count := 0
+	var correct_selected := 0
+	var wrong_selected := 0
+
+	for item in _items:
+		if not item.has("get"):
+			continue
+		var is_target: bool = bool(item.get("answer", false))
+		var is_selected: bool = bool(item["get"].call())
+		var fb: Label = item.get("feedback", null)
+
+		if is_target:
+			target_count += 1
+			if is_selected:
+				correct_selected += 1
+				if fb != null:
+					fb.text = "✓"
+					fb.add_theme_color_override("font_color", _c_success())
+					fb.visible = true
+			else:
+				if fb != null:
+					fb.text = "✗"
+					fb.add_theme_color_override("font_color", _c_warning())
+					fb.visible = true
+		else:
+			if is_selected:
+				wrong_selected += 1
+				if fb != null:
+					fb.text = "✗"
+					fb.add_theme_color_override("font_color", _c_error())
+					fb.visible = true
+			else:
+				if fb != null:
+					fb.visible = false
+
+	_is_graded = true
+	var total := maxi(1, target_count)
+	var net_score := maxi(0, correct_selected - wrong_selected)
+
+	if _score_banner:
+		_score_banner.visible = true
+		if net_score == total and wrong_selected == 0:
+			_score_banner.text = _t_fa("excellent_score") % [net_score, total]
+			_score_banner.set_meta("text_fa", _score_banner.text)
+			_score_banner.add_theme_color_override("font_color", _c_success())
+		else:
+			_score_banner.text = _t_fa("got_score") % [net_score, total]
+			_score_banner.set_meta("text_fa", _score_banner.text)
+			_score_banner.add_theme_color_override("font_color", C_PRIMARY if net_score > 0 else _c_error())
+
+	if _note_label:
+		_note_label.visible = true
+	if _check_btn:
+		_check_btn.text = _t("try_again")
+		_apply_fa_meta(_check_btn, "try_again")
+
+	exercise_checked.emit(str(_exercise.get("exercise_id", "")), net_score, total)
 
 func _is_item_correct(item: Dictionary, user_answer: Variant) -> bool:
 	var item_type := str(item.get("type", ""))
@@ -179,12 +251,12 @@ func _is_item_correct(item: Dictionary, user_answer: Variant) -> bool:
 	if not required.is_empty():
 		var req_ok := true
 		for w in required:
-			if not norm.contains(_normalize(str(w))):
+			if not _contains_word_or_phrase(norm, str(w)):
 				req_ok = false
 				break
 		if req_ok:
 			for w in item.get("forbidden_words", []):
-				if norm.contains(_normalize(str(w))):
+				if _contains_word_or_phrase(norm, str(w)):
 					req_ok = false
 					break
 		if req_ok:

@@ -755,11 +755,11 @@
   },
   "statistics": {
 	"total_lessons": 10,
-	"total_exercises": 28,
+	"total_exercises": 27,
 	"exercise_types": {
-	  "fill_blank": 16,
-	  "multiple_choice": 7,
-	  "categorize": 5,
+	  "fill_blank": 13,
+	  "multiple_choice": 6,
+	  "categorize": 4,
 	  "ordering": 2,
 	  "open_ended": 2
 	},

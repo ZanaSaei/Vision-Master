@@ -6,16 +6,18 @@
 class_name ExerciseTheme
 
 # ---------- Theme ----------
-const C_PRIMARY := Color("#4C8DF6")   # Design blue — primary action, check buttons
-const C_SUCCESS := Color("#5FBF7F")   # Design green
-const C_ERROR   := Color("#E06C75")   # Design red
-const C_TEXT    := Color("#E7E5E0")   # Design light type
-const C_MUTED   := Color("#A6A49D")   # Design muted
-const C_TINT    := Color("#24272D")   # Design page (fallback bg)
-const C_WARNING := Color("#E0B96B")   # Design amber
-const C_INFO    := Color("#7FB2FF")   # Design bright blue
-const C_PURPLE  := Color("#A98BB8")   # Mauve (audio button)
-const C_ORANGE  := Color("#D97A6C")   # Coral (sample answer button)
+const C_PRIMARY := Color("#2F6FD8")   # DesignTokens.ACCENT — primary action, check buttons
+const C_SUCCESS := Color("#2E8B57")   # DesignTokens.SUCCESS
+const C_ERROR   := Color("#C0392B")   # DesignTokens.ERROR
+const C_TEXT    := Color("#2F2C26")   # Design light type (dark ink)
+const C_MUTED   := Color("#6E6A61")   # Design muted text
+const C_SURFACE := Color("#FFFFFF")   # Design surface
+const C_TINT    := Color("#FAF7F0")   # Design surface_alt (fallback bg)
+const C_BORDER  := Color(0.235, 0.196, 0.118, 0.14) # Design border
+const C_WARNING := Color("#B8860B")   # Design warning
+const C_INFO    := Color("#2F6FD8")   # Design bright blue
+const C_PURPLE  := Color("#7D52A0")   # Mauve (audio button)
+const C_ORANGE  := Color("#C86040")   # Coral (sample answer button)
 
 # ---------- Theme-aware color helpers ----------
 # All UI chrome colors are resolved from the active Dark/Light palette
@@ -30,7 +32,7 @@ static func _global() -> Object:
 
 static func _c_surface() -> Color:
 	var g: Object = _global()
-	return g.call("get_theme_color", "surface") if g != null else C_TINT
+	return g.call("get_theme_color", "surface") if g != null else C_SURFACE
 
 static func _c_surface_alt() -> Color:
 	var g: Object = _global()
@@ -38,7 +40,7 @@ static func _c_surface_alt() -> Color:
 
 static func _c_border() -> Color:
 	var g: Object = _global()
-	return g.call("get_theme_color", "border") if g != null else C_MUTED
+	return g.call("get_theme_color", "border") if g != null else C_BORDER
 
 static func _c_text() -> Color:
 	var g: Object = _global()

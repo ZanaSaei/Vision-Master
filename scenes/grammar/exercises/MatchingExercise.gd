@@ -1,5 +1,15 @@
 class_name MatchingExercise
 extends GrammarExercise
+# ============================================================
+#  MATCHING EXERCISE — Modern Interactive Pair Matching UX
+# ============================================================
+#  Features:
+#   1. Clean 2-column layout with column headers
+#   2. Audio TTS pronunciation for English phrases
+#   3. Active selection glow and center-pivot spring animations
+#   4. Sparkle burst and checkmark celebration on pair match
+#   5. Dynamic height equalization for aligned rows
+# ============================================================
 
 var root: VBoxContainer
 var counter_label: Label
@@ -33,18 +43,18 @@ func _get_item_count() -> int:
 func _get_base_button_height() -> int:
 	var n := _get_item_count()
 	if n >= 7:
-		return 52
+		return 68
 	elif n >= 5:
-		return 58
+		return 76
 	else:
-		return 66
+		return 86
 
 
 func _get_button_font_size() -> int:
 	var n := _get_item_count()
 	if n >= 7:
-		return 22
-	return GrammarTheme.BUTTON_FONT_SIZE_MATCHING
+		return 24
+	return GrammarTheme.BUTTON_FONT_SIZE_MATCHING + 4
 
 
 func _get_separation() -> int:
@@ -63,13 +73,14 @@ func _build_ui() -> void:
 
 	root = VBoxContainer.new()
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	root.add_theme_constant_override("separation", 12)
+	root.add_theme_constant_override("separation", 14)
 	root.alignment = BoxContainer.ALIGNMENT_BEGIN
 	add_child(root)
 
-	# Matched Pairs Counter Pill
+	# --- 1. TOP BAR: Matched Pairs Counter Pill + Instruction ---
 	var top_bar := HBoxContainer.new()
 	top_bar.alignment = BoxContainer.ALIGNMENT_CENTER
+	top_bar.add_theme_constant_override("separation", 12)
 	root.add_child(top_bar)
 
 	var pill := PanelContainer.new()
@@ -93,7 +104,7 @@ func _build_ui() -> void:
 	var instruction := Label.new()
 	GrammarTheme.set_bidi_text(
 		instruction,
-		str(exercise_data.get("instruction_fa", "جفت‌های درست را پیدا کن."))
+		str(exercise_data.get("instruction_fa", "جفت‌های مرتبط را انتخاب و متصل کن."))
 	)
 	instruction.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -103,10 +114,34 @@ func _build_ui() -> void:
 	instruction.add_theme_font_override("font", GrammarTheme.get_fa_bold())
 	root.add_child(instruction)
 
+	# --- 2. MATCHING COLUMNS WITH HEADERS ---
+	var columns_header := HBoxContainer.new()
+	columns_header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	columns_header.add_theme_constant_override("separation", 16)
+	root.add_child(columns_header)
+
+	var col1_label := Label.new()
+	col1_label.text = "عبارت‌ها"
+	col1_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col1_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	col1_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	col1_label.add_theme_font_size_override("font_size", 24)
+	col1_label.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
+	columns_header.add_child(col1_label)
+
+	var col2_label := Label.new()
+	col2_label.text = "معادل‌ها"
+	col2_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	col2_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	col2_label.add_theme_font_override("font", GrammarTheme.get_fa_bold())
+	col2_label.add_theme_font_size_override("font_size", 24)
+	col2_label.add_theme_color_override("font_color", GrammarTheme.text_secondary_color())
+	columns_header.add_child(col2_label)
+
 	var sep := _get_separation()
 	var columns := HBoxContainer.new()
 	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	columns.add_theme_constant_override("separation", 14)
+	columns.add_theme_constant_override("separation", 16)
 	root.add_child(columns)
 
 	left_container = VBoxContainer.new()
@@ -122,7 +157,7 @@ func _build_ui() -> void:
 
 func _update_counter() -> void:
 	if counter_label != null:
-		GrammarTheme.set_bidi_text(counter_label, "🔗 جفت‌های پیدا شده: %d از %d" % [matched, left_buttons.size()])
+		GrammarTheme.set_bidi_text(counter_label, "🔗 جفت‌های متصل: %d از %d" % [matched, left_buttons.size()])
 
 
 func _create_items() -> void:
@@ -169,6 +204,7 @@ func _create_button(text_value: String, is_left: bool, base_height: int, font_si
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button.no_clip = true
 	button.set_meta("is_left", is_left)
+	button.set_meta("raw_text", text_value)
 	button.pressed.connect(func() -> void: _select(button, is_left))
 	return button
 
@@ -223,7 +259,6 @@ func _update_total_size() -> void:
 
 	root.queue_sort()
 	var req_h: float = root.get_combined_minimum_size().y
-	# Ensure parent ScrollContainer has enough scroll range with bottom breathing space
 	custom_minimum_size.y = req_h + 32.0
 
 	var avail_h: float = size.y
@@ -242,6 +277,11 @@ func _select(button: GrammarButton, is_left: bool) -> void:
 	Sfx.click()
 	GrammarAnimation.press(button)
 
+	# Pronounce English text via TTS on tap
+	var raw: String = str(button.get_meta("raw_text", ""))
+	if not GrammarTheme.is_fa_dominant(raw) and not raw.is_empty() and is_instance_valid(Global):
+		Global.speak_word(raw)
+
 	if is_left:
 		if selected_left != null and selected_left != button:
 			selected_left.clear_selected_state()
@@ -258,33 +298,38 @@ func _select(button: GrammarButton, is_left: bool) -> void:
 
 
 func _check_pair() -> void:
-	var left_value := str(selected_left.get_meta("match_value", ""))
-	var right_value := str(selected_right.get_meta("match_value", ""))
+	var left_btn := selected_left
+	var right_btn := selected_right
+	var left_value := str(left_btn.get_meta("match_value", ""))
+	var right_value := str(right_btn.get_meta("match_value", ""))
 	var correct := (left_value == right_value)
 
+	selected_left = null
+	selected_right = null
+
 	if correct:
-		selected_left.set_correct_state()
-		selected_right.set_correct_state()
-		selected_left.clear_selected_state()
-		selected_right.clear_selected_state()
+		left_btn.clear_selected_state()
+		right_btn.clear_selected_state()
+		left_btn.set_correct_state()
+		right_btn.set_correct_state()
+
+		GrammarAnimation.spawn_sparkle_burst(left_btn)
+		GrammarAnimation.spawn_sparkle_burst(right_btn)
+
 		matched += 1
 		_update_counter()
 		GrammarAnimation.small_pop(counter_label)
-		selected_left = null
-		selected_right = null
 
 		if matched >= left_buttons.size():
-			submit_result(true, "عالی! همه‌ی جفت‌ها را پیدا کردی.")
+			submit_result(true, "عالی! همه‌ی جفت‌ها را به درستی پیدا کردی.")
 		else:
 			Sfx.correct()
 	else:
 		Sfx.wrong()
-		selected_left.clear_selected_state()
-		selected_right.clear_selected_state()
-		GrammarAnimation.wrong(selected_left)
-		GrammarAnimation.wrong(selected_right)
-		selected_left = null
-		selected_right = null
+		left_btn.clear_selected_state()
+		right_btn.clear_selected_state()
+		GrammarAnimation.wrong(left_btn)
+		GrammarAnimation.wrong(right_btn)
 
 
 func continue_to_next() -> void:

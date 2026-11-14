@@ -371,13 +371,13 @@
 			"exercise_id": "v3_l3_rc_references",
 			"type": "matching",
 			"instruction": "Read the Reading. Find what these words refer to.",
-			"options": ["energy", "fossil fuels", "other types of energy resources", "big shiny panels", "fossil fuels "],
+			"options": ["energy", "fossil fuels", "other types of energy resources", "big shiny panels"],
 			"items": [
 			  {"text": "it (paragraph 1, line 1)", "answer": "energy"},
 			  {"text": "them (paragraph 2, line 3)", "answer": "fossil fuels"},
 			  {"text": "them (paragraph 3, line 2)", "answer": "other types of energy resources"},
 			  {"text": "these (paragraph 5, line 5)", "answer": "big shiny panels"},
-			  {"text": "they (paragraph 6, line 3)", "answer": "fossil fuels "}
+			  {"text": "they (paragraph 6, line 3)", "answer": "fossil fuels"}
 			]
 		  }
 		]

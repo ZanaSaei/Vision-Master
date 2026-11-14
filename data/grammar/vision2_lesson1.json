@@ -42,7 +42,7 @@
 						"instruction_fa": "کدام شکل برای اسم قابل شمارش مفرد درست است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which is the correct singular form for a car?",
 								"options": [
 									"car",
 									"a car",
@@ -217,7 +217,7 @@
 						"instruction_fa": "کدام گزینه شکل جمع صحیح 'bird' است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "What is the correct plural form of 'bird'?",
 								"options": [
 									"bird",
 									"birds",
@@ -284,7 +284,7 @@
 						"instruction_fa": "کدام یک از این‌ها غیرقابل شمارش است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which of the following is an uncountable noun?",
 								"options": [
 									"book",
 									"car",
@@ -374,7 +374,7 @@
 						"instruction_fa": "کدام اسم را نمی‌توان مستقیم شمرد؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which of the following is an uncountable noun?",
 								"options": [
 									"book",
 									"traffic",
@@ -425,7 +425,7 @@
 						"instruction_fa": "کدام گزینه یک اسم غیرقابل شمارش است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which of the following cannot be counted?",
 								"options": [
 									"book",
 									"pencil",
@@ -649,7 +649,7 @@
 						"instruction_fa": "کدام سؤال درست است برای پرسیدن مقدار آب؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which question correctly asks about the amount of water?",
 								"options": [
 									"How many water?",
 									"How much water?",
@@ -866,7 +866,7 @@
 						"instruction_fa": "کدام جمله درست است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which sentence is grammatically correct?",
 								"options": [
 									"There is lots of information.",
 									"There are lots of informations.",
@@ -1085,7 +1085,7 @@
 						"instruction_fa": "کدام گزینه معنای 'مقدار کم اما کافی' را می‌رساند؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which word means 'a small amount, but enough'?",
 								"options": [
 									"few",
 									"a few",
@@ -1322,7 +1322,7 @@
 						"instruction_fa": "واحد مناسب برای 'bread' کدام است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which measure word is used for bread?",
 								"options": [
 									"a bottle of",
 									"a loaf of",
@@ -1343,7 +1343,7 @@
 						"instruction_fa": "واحد مناسب برای 'tea' کدام است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "Which measure word is used for tea?",
 								"options": [
 									"a bag of",
 									"a cup of",
@@ -1391,7 +1391,7 @@
 						"instruction_fa": "فاعل جمله‌ی 'Mahan is sleeping' کدام است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "In the sentence 'Mahan is sleeping', which word is the Subject?",
 								"options": [
 									"Mahan",
 									"is",
@@ -1445,7 +1445,7 @@
 						"instruction_fa": "مفعول جمله‌ی 'Mina speaks English' کدام است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "In the sentence 'Mina speaks English', which word is the Object?",
 								"options": [
 									"Mina",
 									"speaks",
@@ -1481,7 +1481,7 @@
 						"instruction_fa": "فاعل جمله‌ی 'The apple fell down' کدام است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "In the sentence 'The apple fell down', which phrase is the Subject?",
 								"options": [
 									"The apple",
 									"fell",
@@ -1517,7 +1517,7 @@
 						"instruction_fa": "مفعول جمله‌ی 'Children should not eat junk food' کدام است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "In the sentence 'Children should not eat junk food', which phrase is the Object?",
 								"options": [
 									"Children",
 									"should not eat",
@@ -1568,7 +1568,7 @@
 						"instruction_fa": "در جمله‌ی 'Mahdi visited his doctor'، فاعل کدام است؟",
 						"questions": [
 							{
-								"question": "",
+								"question": "In the sentence 'Mahdi visited his doctor', which word is the Subject?",
 								"options": [
 									"Mahdi",
 									"visited",

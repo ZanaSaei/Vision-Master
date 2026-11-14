@@ -677,3 +677,122 @@ static func make_header_icon_button(
 # right — so the grammar screens never drift from the rest of the app.
 static func unify_header_row(row: HBoxContainer) -> void:
 	ThemeService.layout_header_row(row)
+
+
+# ============================================================
+# MODERN UI / UX ENHANCEMENT FACTORIES
+# ============================================================
+
+# Generates an interactive audio speaker button for pronouncing English text
+static func make_speaker_button(text_to_speak: String, size: float = 76.0) -> Button:
+	var button := Button.new()
+	button.flat = true
+	button.expand_icon = true
+	button.custom_minimum_size = Vector2(size, size)
+	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	button.focus_mode = Control.FOCUS_NONE
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	button.add_theme_constant_override("icon_max_width", int(size * 0.56))
+	button.add_theme_constant_override("icon_max_height", int(size * 0.56))
+	button.pivot_offset = Vector2(size * 0.5, size * 0.5)
+
+	var accent: Color = accent_color()
+	var normal_box := rounded_box(accent_soft_color(), int(size * 0.5), accent, 1)
+	normal_box.shadow_color = Color(0.0, 0.0, 0.0, 0.12)
+	normal_box.shadow_size = 4
+	normal_box.shadow_offset = Vector2(0, 2)
+
+	var hover_box := rounded_box(Color(accent.r, accent.g, accent.b, 0.24), int(size * 0.5), accent_bright_color(), 2)
+	var pressed_box := rounded_box(accent_color(), int(size * 0.5), accent_bright_color(), 2)
+
+	button.add_theme_stylebox_override("normal", normal_box)
+	button.add_theme_stylebox_override("hover", hover_box)
+	button.add_theme_stylebox_override("pressed", pressed_box)
+	button.add_theme_stylebox_override("focus", hover_box)
+
+	var icon_tex := load("res://ui/images/audio_play.png") as Texture2D
+	if icon_tex != null:
+		button.icon = icon_tex
+	else:
+		button.text = "🔊"
+
+	button.pressed.connect(func() -> void:
+		if is_instance_valid(Global):
+			Global.speak_word(text_to_speak)
+		GrammarAnimation.small_pop(button)
+	)
+	return button
+
+
+# Creates a styled badge/pill container
+static func make_badge(
+	text: String,
+	bg_color: Color,
+	text_color: Color,
+	font_size: int = 24,
+	border_color: Color = Color.TRANSPARENT,
+	border_width: int = 0
+) -> PanelContainer:
+	var panel := PanelContainer.new()
+	var style := rounded_box(bg_color, 16, border_color, border_width)
+	style.content_margin_left = 14
+	style.content_margin_right = 14
+	style.content_margin_top = 6
+	style.content_margin_bottom = 6
+	panel.add_theme_stylebox_override("panel", style)
+
+	var label := Label.new()
+	set_bidi_text(label, text)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_font_override("font", get_fa_bold())
+	label.add_theme_font_size_override("font_size", font_size)
+	label.add_theme_color_override("font_color", text_color)
+	panel.add_child(label)
+	return panel
+
+
+# Elevated container style for grammar formulas
+static func formula_card_style() -> StyleBoxFlat:
+	var style := rounded_box(
+		Global.get_theme_color("surface_alt"),
+		24,
+		accent_color(),
+		2
+	)
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.18)
+	style.shadow_size = 10
+	style.shadow_offset = Vector2(0, 4)
+	return style
+
+
+# Bottom sheet style for the modern non-blocking feedback panel
+static func bottom_sheet_style(accent_border_color: Color = Color.TRANSPARENT) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Global.get_theme_color("surface")
+	style.corner_radius_top_left = 32
+	style.corner_radius_top_right = 32
+	style.corner_radius_bottom_left = 0
+	style.corner_radius_bottom_right = 0
+	if accent_border_color != Color.TRANSPARENT:
+		style.border_width_top = 4
+		style.border_color = accent_border_color
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.32)
+	style.shadow_size = 20
+	style.shadow_offset = Vector2(0, -6)
+	return style
+
+
+# Choice card style for interactive answers and True/False cards
+static func choice_card_style(
+	border_color: Color,
+	bg_color: Color,
+	radius: int = 22,
+	border_width: int = 2
+) -> StyleBoxFlat:
+	var style := rounded_box(bg_color, radius, border_color, border_width)
+	style.shadow_color = Color(0.0, 0.0, 0.0, 0.16)
+	style.shadow_size = 8
+	style.shadow_offset = Vector2(0, 3)
+	return style
+
